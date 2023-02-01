@@ -1,3 +1,4 @@
+import React from 'react';
 import { Button } from 'ui';
 import styles from '../styles/pages/home.module.scss';
 
@@ -10,6 +11,8 @@ export default function Web() {
       document.documentElement.setAttribute('data-theme', 'dark');
     }
   }
+
+  const buttonRef = React.useRef();
   return (
     <div className={styles.container}>
       <div className={styles.box}>
@@ -26,7 +29,9 @@ export default function Web() {
         </Button>
         <Button size="small">Small</Button>
 
-        <Button fluid>Fluid</Button>
+        <Button ref={buttonRef} fluid>
+          Fluid
+        </Button>
       </div>
 
       <div className={styles.box}>

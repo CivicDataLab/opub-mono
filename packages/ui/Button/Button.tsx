@@ -19,16 +19,11 @@ type AnchorProps = React.AnchorHTMLAttributes<HTMLAnchorElement> &
     href?: string;
   };
 
-type Overload = {
-  (props: ButtonProps): JSX.Element;
-  (props: AnchorProps): JSX.Element;
-};
-
 // Guard to check if href exists in props
 const hasHref = (props: ButtonProps | AnchorProps): props is AnchorProps =>
   'href' in props;
 
-export const Button: Overload = (props: ButtonProps | AnchorProps) => {
+const Button = (props: ButtonProps | AnchorProps, ref: any) => {
   const {
     variant = 'primary',
     size = 'small',
@@ -47,8 +42,10 @@ export const Button: Overload = (props: ButtonProps | AnchorProps) => {
   const Tag: any = hasHref(props) ? 'a' : 'button';
 
   return (
-    <Tag className={themeClass} {...rest}>
-      {children}
+    <Tag ref={ref} className={themeClass} {...rest}>
+      <>{children}</>
     </Tag>
   );
 };
+
+export default React.forwardRef(Button);
