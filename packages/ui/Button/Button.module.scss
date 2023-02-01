@@ -15,9 +15,9 @@
   }
   &-disabled,
   &[disabled] {
-    background-color: var(--color-gray-05-on-dark);
+    background-color: var(--color-gray-03);
     color: var(--text-medium);
-    border-color: var(--color-gray-05-on-dark);
+    border-color: var(--color-gray-03);
     cursor: auto;
   }
 
