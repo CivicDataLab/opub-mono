@@ -13,6 +13,7 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "devDependencies": {
+    "classnames": "^2.3.2",
     "eslint-config-custom": "*",
     "prettier": "latest",
     "sass": "^1.58.0",

@@ -1,7 +1,37 @@
-.base {
-  background-color: var(--primary-color);
-  color: var(--bg-color);
-  border: 1px solid var(--primary-color);
+.btn {
+  border: 1px solid;
   border-radius: 4px;
-  padding: 6px 8px;
+  cursor: pointer;
+
+  &-primary {
+    background-color: var(--color-primary-00);
+    color: var(--text-high-on-dark);
+    border-color: var(--color-primary-00);
+  }
+  &-secondary {
+    background-color: var(--color-secondary-00);
+    color: var(--text-high-on-dark);
+    border-color: var(--color-secondary-00);
+  }
+  &-disabled,
+  &[disabled] {
+    background-color: var(--color-gray-05-on-dark);
+    color: var(--text-medium);
+    border-color: var(--color-gray-05-on-dark);
+    cursor: auto;
+  }
+
+  &-small {
+    padding: 8px 16px;
+    font-size: 0.875rem;
+  }
+
+  &-large {
+    padding: 12px 24px;
+    font-size: 1rem;
+  }
+
+  &-fluid {
+    width: 100%;
+  }
 }
