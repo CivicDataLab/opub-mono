@@ -28,6 +28,12 @@ export default function Web() {
 
         <Button fluid>Fluid</Button>
       </div>
+
+      <div className={styles.box}>
+        <Button variant="primary" href="#">
+          Link
+        </Button>
+      </div>
     </div>
   );
 }
