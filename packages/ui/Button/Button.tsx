@@ -43,7 +43,7 @@ const Button = (props: ButtonProps | AnchorProps, ref: any) => {
 
   return (
     <Tag ref={ref} className={themeClass} {...rest}>
-      <>{children}</>
+      {children}
     </Tag>
   );
 };
