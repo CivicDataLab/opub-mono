@@ -1,3 +1,5 @@
+import { Star } from '@opub-icons/ui';
+import { ArrowRight } from '@opub-icons/workflow';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 
 import { Button } from 'ui';
@@ -49,4 +51,17 @@ export const Link = Template.bind({});
 Link.args = {
   href: '#',
   children: 'Link',
+};
+
+export const IconBefore = Template.bind({});
+IconBefore.args = {
+  children: 'Button',
+  iconBefore: <ArrowRight width={14} />,
+};
+
+export const IconAfter = Template.bind({});
+IconAfter.args = {
+  children: 'Button',
+  iconAfter: <ArrowRight />,
+  size: 'large',
 };
