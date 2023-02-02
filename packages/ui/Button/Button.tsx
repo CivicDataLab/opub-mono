@@ -58,7 +58,7 @@ const Button = (props: ButtonProps | AnchorProps, ref: any) => {
   const Tag: any = hasHref(props) ? 'a' : 'button';
 
   return (
-    <Tag ref={ref} className={themeClass} {...rest}>
+    <Tag ref={ref} className={`btn-${variant} ${themeClass}`} {...rest}>
       {iconBefore ? iconBefore : null}
       {children}
       {iconAfter ? iconAfter : null}
