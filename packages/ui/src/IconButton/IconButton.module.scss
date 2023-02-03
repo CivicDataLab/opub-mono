@@ -33,17 +33,7 @@
     font-size: 1rem;
   }
 
-  &-fluid {
-    width: 100%;
-  }
-
   &-isLink {
     text-decoration: transparent;
-  }
-
-  &-hasIcon {
-    display: flex;
-    align-items: center;
-    gap: 8px;
   }
 }
