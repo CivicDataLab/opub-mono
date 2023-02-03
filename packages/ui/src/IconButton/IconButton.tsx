@@ -1,5 +1,5 @@
 import * as React from 'react';
-import styles from './Button.module.scss';
+import styles from './IconButton.module.scss';
 import cx from 'classnames';
 
 type BaseProps = {
@@ -9,17 +9,11 @@ type BaseProps = {
   // Size of button
   size?: 'small' | 'large';
 
-  // Should the button fill the container
-  fluid?: boolean;
-
   // Content of the Button
   children: React.ReactNode;
 
-  // Icon to add before button text
-  iconBefore?: React.ReactNode;
-
-  // Icon to add after button text
-  iconAfter?: React.ReactNode;
+  // Icon to add to the button
+  icon: React.ReactNode;
 };
 
 type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
@@ -36,34 +30,29 @@ type AnchorProps = React.AnchorHTMLAttributes<HTMLAnchorElement> &
 const hasHref = (props: ButtonProps | AnchorProps): props is AnchorProps =>
   'href' in props;
 
-const Button = (props: ButtonProps | AnchorProps, ref: any) => {
+const IconButton = (props: ButtonProps | AnchorProps, ref: any) => {
   const {
     variant = 'primary',
     size = 'small',
-    fluid = false,
     children,
-    iconBefore,
-    iconAfter,
+    icon,
     ...rest
   } = props;
 
   const themeClass = cx(styles.btn, {
     [styles[`btn-${variant}`]]: variant,
-    [styles[`btn-fluid`]]: fluid,
     [styles[`btn-${size}`]]: size,
     [styles[`btn-isLink`]]: hasHref(props),
-    [styles[`btn-hasIcon`]]: iconBefore || iconAfter,
   });
 
   const Tag: any = hasHref(props) ? 'a' : 'button';
 
   return (
     <Tag ref={ref} className={`btn-${variant} ${themeClass}`} {...rest}>
-      {iconBefore ? iconBefore : null}
-      {children}
-      {iconAfter ? iconAfter : null}
+      {icon}
+      <span className="sr-only">{children}</span>
     </Tag>
   );
 };
 
-export default React.forwardRef(Button);
+export default React.forwardRef(IconButton);

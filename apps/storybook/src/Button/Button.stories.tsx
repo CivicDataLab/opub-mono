@@ -45,7 +45,7 @@ Disabled.args = {
 
 export const Link = Template.bind({});
 Link.args = {
-  href: '#',
+  href: '/#',
   children: 'Link',
 };
 
