@@ -10,14 +10,17 @@ export default {
   argTypes: {
     variant: {
       options: ['primary', 'secondary', 'disabled'],
-      control: { type: 'radio' },
+      control: { type: 'select' },
+      description: 'Type of button',
     },
     size: {
       options: ['large', 'small'],
-      control: { type: 'radio' },
+      control: { type: 'select' },
+      description: 'Size of the button',
     },
     children: {
       control: 'text',
+      description: 'Hidden text content for the button',
     },
   },
 } as ComponentMeta<typeof Button>;
