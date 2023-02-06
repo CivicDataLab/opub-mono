@@ -30,29 +30,31 @@ type AnchorProps = React.AnchorHTMLAttributes<HTMLAnchorElement> &
 const hasHref = (props: ButtonProps | AnchorProps): props is AnchorProps =>
   'href' in props;
 
-const IconButton = (props: ButtonProps | AnchorProps, ref: any) => {
-  const {
-    variant = 'primary',
-    size = 'small',
-    children,
-    icon,
-    ...rest
-  } = props;
+const IconButton = React.forwardRef(
+  (props: ButtonProps | AnchorProps, ref: any) => {
+    const {
+      variant = 'primary',
+      size = 'small',
+      children,
+      icon,
+      ...rest
+    } = props;
 
-  const themeClass = cx(styles.btn, {
-    [styles[`btn-${variant}`]]: variant,
-    [styles[`btn-${size}`]]: size,
-    [styles[`btn-isLink`]]: hasHref(props),
-  });
+    const themeClass = cx(styles.btn, {
+      [styles[`btn-${variant}`]]: variant,
+      [styles[`btn-${size}`]]: size,
+      [styles[`btn-isLink`]]: hasHref(props),
+    });
 
-  const Tag: any = hasHref(props) ? 'a' : 'button';
+    const Tag: any = hasHref(props) ? 'a' : 'button';
 
-  return (
-    <Tag ref={ref} className={`btn-${variant} ${themeClass}`} {...rest}>
-      {icon}
-      <span className="sr-only">{children}</span>
-    </Tag>
-  );
-};
+    return (
+      <Tag ref={ref} className={`btn-${variant} ${themeClass}`} {...rest}>
+        {icon}
+        <span className="sr-only">{children}</span>
+      </Tag>
+    );
+  }
+);
 
-export default React.forwardRef(IconButton);
+export { IconButton };

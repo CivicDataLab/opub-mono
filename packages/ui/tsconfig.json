@@ -1,11 +1,23 @@
 {
   "extends": "tsconfig/react-library.json",
-  "include": ["."],
   "compilerOptions": {
+    "target": "ESNext",
+    "useDefineForClassFields": true,
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "allowJs": false,
+    "allowSyntheticDefaultImports": true,
+    "module": "ESNext",
+    "resolveJsonModule": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "types": ["vitest/globals"],
     "baseUrl": ".",
     "paths": {
       "@ui/*": ["./src/*"]
     }
   },
-  "exclude": ["dist", "build", "node_modules"]
+
+  "exclude": ["dist", "build", "node_modules"],
+  "include": [".", "./src", "./.storybook"],
+  "references": [{ "path": "./tsconfig.node.json" }]
 }
