@@ -1,0 +1,39 @@
+.btn {
+  border: 1px solid;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-flex;
+  justify-content: center;
+
+  &-primary {
+    background-color: var(--color-primary-00);
+    color: var(--text-high-on-dark);
+    border-color: var(--color-primary-00);
+  }
+  &-secondary {
+    background-color: var(--color-secondary-00);
+    color: var(--text-high-on-dark);
+    border-color: var(--color-secondary-00);
+  }
+  &-disabled,
+  &[disabled] {
+    background-color: var(--color-gray-03);
+    color: var(--text-medium);
+    border-color: var(--color-gray-03);
+    cursor: auto;
+  }
+
+  &-small {
+    padding: 8px 16px;
+    font-size: 0.875rem;
+  }
+
+  &-large {
+    padding: 12px 24px;
+    font-size: 1rem;
+  }
+
+  &-isLink {
+    text-decoration: transparent;
+  }
+}
