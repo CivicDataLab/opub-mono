@@ -1,6 +1,6 @@
 # OPub Mono
 
-An open-source Data Publishing Platform
+A platform to speed up the development of open data dashboards.
 
 ## What's inside?
 
