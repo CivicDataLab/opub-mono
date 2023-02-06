@@ -13,8 +13,6 @@ This repo built using turborepo uses [Yarn](https://classic.yarnpkg.com/) as a p
 - `eslint-config-custom`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
 - `tsconfig`: `tsconfig.json`s used throughout the monorepo
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
-
 ### Utilities
 
 This turborepo has some additional tools already setup for you:
@@ -51,4 +49,4 @@ yarn global add git+https://github.com/CivicDataLab/new-component.git
 new-component ComponentName
 ```
 
-This will create a new component directory in `packages/ui/src` with required files and code.
+This will create a new component directory in `packages/ui/src` with required files for component, test, storybook.
