@@ -49,4 +49,4 @@ yarn global add git+https://github.com/CivicDataLab/new-component.git
 new-component ComponentName
 ```
 
-This will create a new component directory in `packages/ui/src` with required files for component, test, storybook.
+This will create a new component directory in `packages/ui/src` with required files for component, test, storybook and styling.
