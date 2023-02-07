@@ -1,6 +1,6 @@
 # OPub Mono
 
-A platform to speed up the development of open data dashboards.
+A WIP platform to speed up the development of open data dashboards.
 
 ## What's inside?
 
