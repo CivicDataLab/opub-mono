@@ -21,11 +21,11 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-aria": "^3.22.0",
+    "react-dom": "^18.2.0",
+    "react-hook-form": "^7.43.1"
   },
   "devDependencies": {
-    "eslint-config-custom": "*",
-    "tsconfig": "*",
     "@babel/core": "^7.20.12",
     "@storybook/addon-actions": "^6.5.16",
     "@storybook/addon-essentials": "^6.5.16",
@@ -39,8 +39,10 @@
     "@types/react-test-renderer": "^18.0.0",
     "@vitejs/plugin-react": "^3.0.0",
     "babel-loader": "^8.3.0",
+    "eslint-config-custom": "*",
     "happy-dom": "^8.2.2",
     "react-test-renderer": "^18.2.0",
+    "tsconfig": "*",
     "typescript": "^4.9.3",
     "vite": "^4.0.0",
     "vitest": "^0.28.3"

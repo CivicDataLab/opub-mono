@@ -1,10 +1,9 @@
 import { ArrowRight } from '@opub-icons/workflow';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-
 import { IconButton } from './IconButton';
 
 export default {
-  title: 'Components/IconRight',
+  title: 'Components/IconButton',
   component: IconButton,
 
   argTypes: {
