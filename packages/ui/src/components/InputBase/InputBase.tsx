@@ -10,9 +10,7 @@ export interface TextFieldProps extends SpectrumTextFieldProps {
   iconStart?: React.ReactNode;
   iconEnd?: React.ReactNode;
   maxLength?: number;
-  minLength?: number;
   showLimit?: boolean;
-  externalHelpLink?: string;
 }
 
 const InputBase = (props: TextFieldProps) => {
@@ -21,11 +19,12 @@ const InputBase = (props: TextFieldProps) => {
   let inputRef = React.useRef<HTMLInputElement>(null);
   let { labelProps, inputProps, descriptionProps, errorMessageProps } =
     useTextField(props, inputRef);
-  let inputValue: any = inputProps.value;
 
   const themeClass = cx(styles.input, {
     [styles[`input--${props.validationState}`]]: props.validationState,
     [styles[`input--disabled`]]: props.isDisabled,
+    [styles[`input__iconStart`]]: props.iconStart,
+    [styles[`input__iconEnd`]]: props.iconEnd,
   });
 
   return (
@@ -44,12 +43,19 @@ const InputBase = (props: TextFieldProps) => {
           </span>
         )}
       </label>
-      <input
-        {...inputProps}
-        ref={inputRef}
-        required={props.isRequired || false}
-        maxLength={props.maxLength || 200}
-      />
+      <div>
+        {props.iconStart && props.iconStart}
+        <input
+          {...inputProps}
+          ref={inputRef}
+          required={props.isRequired || false}
+          maxLength={props.maxLength || 200}
+        />
+        {props.iconEnd && props.iconEnd}
+      </div>
+      <span className={styles.description} {...descriptionProps}>
+        {props.description}
+      </span>
     </div>
   );
 };

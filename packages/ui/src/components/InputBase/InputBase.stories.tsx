@@ -1,4 +1,5 @@
-import { Meta, StoryFn } from '@storybook/react';
+import { ChevronDown, Circle } from '@opub-icons/workflow';
+import { Meta } from '@storybook/react';
 import { InputBase } from './InputBase';
 
 export default {
@@ -27,22 +28,73 @@ export const Required = {
 };
 
 export const Variations = () => {
+  const variants = [
+    {
+      label: 'Default',
+    },
+    {
+      label: 'Placeholder',
+      placeholder: 'Placeholder Text',
+    },
+    {
+      validationState: 'valid',
+      label: 'Valid',
+    },
+    {
+      validationState: 'invalid',
+      label: 'Invalid',
+    },
+    {
+      isDisabled: true,
+      label: 'Disabled',
+    },
+  ];
   return (
-    <div style={{ display: 'flex', gap: '16px' }}>
-      <InputBase isDisabled />
-      <InputBase validationState="invalid" />
-    </div>
+    <>
+      <h4 style={{ marginTop: '0' }}>Default</h4>
+      <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
+        {variants.map((story: any, index) => (
+          <InputBase key={index} {...story} />
+        ))}
+      </div>
+
+      <hr style={{ marginTop: '20px' }} />
+      <h4 style={{ marginBottom: '8px' }}>With Captions</h4>
+      <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
+        {variants.map((story: any, index) => (
+          <InputBase key={index} {...story} description="Caption" />
+        ))}
+      </div>
+    </>
   );
 };
 
-export const Disabled = {
+export const ReadOnly = {
   args: {
-    isDisabled: true,
+    label: 'Label',
+    defaultValue: 'abc@email.com',
+    isReadOnly: true,
   },
 };
 
-export const Error = {
-  args: {
-    validationState: 'invalid',
-  },
+export const WithIcon = () => {
+  const variants = [
+    {
+      label: 'Icon Start',
+      iconStart: <Circle />,
+    },
+    {
+      label: 'Icon End',
+      iconEnd: <ChevronDown />,
+    },
+  ];
+  return (
+    <>
+      <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
+        {variants.map((story: any, index) => (
+          <InputBase key={index} {...story} />
+        ))}
+      </div>
+    </>
+  );
 };

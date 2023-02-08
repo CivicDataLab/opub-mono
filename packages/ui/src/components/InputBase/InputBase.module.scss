@@ -7,9 +7,11 @@
     border: 1px solid var(--color-gray-02);
     border-radius: var(--radius-small);
     background-color: var(--color-background-light);
-    padding: var(--spacing-large) var(--spacing-x-large);
+    // padding: var(--spacing-large) var(--spacing-x-large);
     letter-spacing: var(--letter-spacing-dense);
     font-weight: var(--font-normal);
+    height: 46px;
+    padding: 0 16px;
 
     &:hover {
       border-color: var(--color-gray-03);
@@ -33,6 +35,10 @@
         outline: none;
         border-color: var(--color-error);
       }
+    }
+
+    .label {
+      color: var(--color-error);
     }
   }
 
@@ -59,6 +65,38 @@
       }
     }
   }
+
+  &__iconStart {
+    > div {
+      position: relative;
+
+      svg {
+        position: absolute;
+        top: 15px;
+        left: 16px;
+      }
+    }
+
+    input {
+      padding-left: 50px;
+    }
+  }
+
+  &__iconEnd {
+    > div {
+      position: relative;
+
+      svg {
+        position: absolute;
+        top: 15px;
+        right: 16px;
+      }
+    }
+
+    input {
+      padding-right: 50px;
+    }
+  }
 }
 
 .label {
@@ -74,4 +112,10 @@
   line-height: 1.3;
   color: var(--text-light);
   font-weight: var(--font-normal);
+}
+
+.description {
+  font-size: 0.875rem;
+  line-height: 1.4;
+  color: var(--text-medium);
 }
