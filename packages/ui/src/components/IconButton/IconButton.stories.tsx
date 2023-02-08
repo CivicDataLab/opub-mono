@@ -1,9 +1,8 @@
 import { ArrowRight } from '@opub-icons/workflow';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import { IconButton } from './IconButton';
 
 export default {
-  title: 'Components/IconButton',
   component: IconButton,
 
   argTypes: {
@@ -27,21 +26,20 @@ export default {
       control: { type: 'none' },
     },
   },
-} as ComponentMeta<typeof IconButton>;
+} as Meta<typeof IconButton>;
 
-const Template: ComponentStory<typeof IconButton> = (props) => (
-  <IconButton {...props} />
-);
-export const Primary = Template.bind({});
-Primary.args = {
-  variant: 'primary',
-  children: 'Button',
-  icon: <ArrowRight />,
+export const Primary = {
+  args: {
+    variant: 'primary',
+    children: 'Button',
+    icon: <ArrowRight />,
+  },
 };
 
-export const Link = Template.bind({});
-Link.args = {
-  href: '/#',
-  children: 'Link',
-  icon: <ArrowRight />,
+export const Link = {
+  args: {
+    href: '/#',
+    children: 'Link',
+    icon: <ArrowRight />,
+  },
 };
