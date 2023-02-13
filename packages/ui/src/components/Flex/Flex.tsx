@@ -7,7 +7,6 @@ import {
   useStyleProps,
 } from '@react-spectrum/utils';
 import { DOMProps, DOMRef, FlexStyleProps } from '@react-types/shared';
-import cx from 'classnames';
 import React from 'react';
 import styles from './Flex.module.scss';
 

@@ -1,35 +1,47 @@
 import cx from 'classnames';
-import React from 'react';
+import React, { InputHTMLAttributes } from 'react';
 import styles from './InputBase.module.scss';
-
-import { SpectrumTextFieldProps } from '@react-types/textfield';
-import { useTextField } from 'react-aria';
-
-export interface TextFieldProps extends SpectrumTextFieldProps {
+export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   indicator?: true | false | 'label' | 'icon';
   iconStart?: React.ReactNode;
   iconEnd?: React.ReactNode;
   maxLength?: number;
-  showLimit?: boolean;
+  className?: string;
+  isRequired?: boolean;
+  label: string;
+  validationState?: 'valid' | 'invalid';
+  isDisabled?: boolean;
+  description?: string;
+  errorMessage?: string | null;
 }
 
-const InputBase = (props: TextFieldProps) => {
-  let { label, isRequired, indicator = isRequired, showLimit = true } = props;
-
-  let inputRef = React.useRef<HTMLInputElement>(null);
-  let { labelProps, inputProps, descriptionProps, errorMessageProps } =
-    useTextField(props, inputRef);
+const InputBase = (props: InputProps) => {
+  let {
+    label,
+    isRequired,
+    indicator = isRequired,
+    iconStart,
+    iconEnd,
+    maxLength,
+    className,
+    validationState,
+    isDisabled,
+    description,
+    errorMessage,
+    ...inputProps
+  } = props;
 
   const themeClass = cx(styles.input, {
-    [styles[`input--${props.validationState}`]]: props.validationState,
-    [styles[`input--disabled`]]: props.isDisabled,
-    [styles[`input__iconStart`]]: props.iconStart,
-    [styles[`input__iconEnd`]]: props.iconEnd,
+    [styles[`input--${validationState}`]]: validationState,
+    [styles[`input--invalid`]]: errorMessage,
+    [styles[`input--disabled`]]: isDisabled,
+    [styles[`input__iconStart`]]: iconStart,
+    [styles[`input__iconEnd`]]: iconEnd,
   });
 
   return (
-    <div className={`opub-InputBase ${themeClass}`}>
-      <label className={styles.label} {...labelProps}>
+    <div className={`${className ? className : ''} ${themeClass}`}>
+      <label className={styles.label}>
         {label}
         {indicator && (
           <span className={styles.indicator}>
@@ -44,18 +56,18 @@ const InputBase = (props: TextFieldProps) => {
         )}
       </label>
       <div>
-        {props.iconStart && props.iconStart}
+        {iconStart && iconStart}
         <input
           {...inputProps}
-          ref={inputRef}
-          required={props.isRequired || false}
-          maxLength={props.maxLength || 200}
+          required={isRequired || false}
+          maxLength={maxLength || 200}
         />
-        {props.iconEnd && props.iconEnd}
+        {iconEnd && iconEnd}
       </div>
-      <span className={styles.description} {...descriptionProps}>
-        {props.description}
-      </span>
+      <span className={styles.description}>{description}</span>
+      {errorMessage ? (
+        <span className={styles.error}>{errorMessage}</span>
+      ) : null}
     </div>
   );
 };

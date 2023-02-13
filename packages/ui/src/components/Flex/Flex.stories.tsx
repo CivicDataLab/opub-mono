@@ -2,11 +2,10 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { Flex } from './Flex';
 
 export default {
-  title: 'Components/Flex',
   component: Flex,
   argTypes: {
     children: {
-      control: null,
+      control: 'null',
       description: 'Children for Flex container',
     },
   },
