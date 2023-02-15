@@ -48,7 +48,3 @@ export const FormBase = {
     validationSchema: schema,
   },
 };
-
-export const FormWrapper = (children: any) => (
-  <Form initialValues={{}}>{children}</Form>
-);

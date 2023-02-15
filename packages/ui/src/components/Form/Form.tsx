@@ -10,7 +10,7 @@ type Props = {
   initialValues: any;
 };
 
-const Form = React.forwardRef((props: Props, ref: any) => {
+const Form = (props: Props) => {
   const { validationSchema, formSubmit, children } = props;
 
   const themeClass = cx(styles.base, {});
@@ -27,6 +27,6 @@ const Form = React.forwardRef((props: Props, ref: any) => {
       {() => <FormikForm className={themeClass}>{children}</FormikForm>}
     </Formik>
   );
-});
+};
 
 export { Form };

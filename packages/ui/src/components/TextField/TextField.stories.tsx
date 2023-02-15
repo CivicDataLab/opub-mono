@@ -1,6 +1,5 @@
 import { Meta } from '@storybook/react';
 import { Form } from '../Form';
-import { FormBase, FormWrapper } from '../Form/Form.stories';
 import { TextField } from './TextField';
 
 export default {

@@ -1,30 +1,18 @@
-const {
-  mergeConfig
-} = require('vite');
 module.exports = {
   stories: ['../src'],
-  addons: ['@storybook/addon-links', '@storybook/addon-essentials', '@storybook/addon-interactions'],
+  addons: [
+    '@storybook/addon-links',
+    '@storybook/addon-essentials',
+    '@storybook/addon-interactions',
+  ],
   framework: {
     name: '@storybook/react-vite',
-    options: {}
+    options: {},
   },
   features: {
-    storyStoreV7: true
-  }
-  // async viteFinal(config, { configType }) {
-  //   return mergeConfig(config, {
-  //     optimizeDeps: {
-  //       include: [
-  //         '@storybook/addon-links',
-  //         '@storybook/addon-essentials',
-  //         '@storybook/addon-interactions',
-  //       ],
-  //     },
-  //   });
-  // },
-  ,
-
+    storyStoreV7: true,
+  },
   docs: {
-    autodocs: true
-  }
+    autodocs: true,
+  },
 };
