@@ -1,4 +1,5 @@
 import { Meta } from '@storybook/react';
+import { Form } from '../Form';
 import { TextArea } from './TextArea';
 
 export default {
@@ -12,8 +13,8 @@ export default {
   },
 } as Meta<typeof TextArea>;
 
-export const Primary = {
-  args: {
-    label: 'TextArea',
-  },
-};
+export const Primary = ({ ...props }) => (
+  <Form initialValues={{}}>
+    <TextArea name="name" label="label" {...props} />
+  </Form>
+);

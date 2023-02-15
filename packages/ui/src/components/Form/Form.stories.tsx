@@ -29,7 +29,7 @@ export default {
   },
 } as Meta<typeof Form>;
 
-export const Primary = {
+export const FormBase = {
   args: {
     children: (
       <>
@@ -48,3 +48,7 @@ export const Primary = {
     validationSchema: schema,
   },
 };
+
+export const FormWrapper = (children: any) => (
+  <Form initialValues={{}}>{children}</Form>
+);

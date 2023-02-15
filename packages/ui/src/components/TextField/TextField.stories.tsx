@@ -1,4 +1,6 @@
 import { Meta } from '@storybook/react';
+import { Form } from '../Form';
+import { FormBase, FormWrapper } from '../Form/Form.stories';
 import { TextField } from './TextField';
 
 export default {
@@ -13,8 +15,8 @@ export default {
   },
 } as Meta<typeof TextField>;
 
-export const Primary = {
-  args: {
-    label: 'Label Text',
-  },
-};
+export const Primary = ({ ...props }) => (
+  <Form initialValues={{}}>
+    <TextField name="name" label="label" {...props} />
+  </Form>
+);
