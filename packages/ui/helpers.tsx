@@ -1,4 +1,4 @@
-import { Flex } from '@ui/components';
+import { Flex } from './src/components';
 import React from 'react';
 
 export function PropsVariationSection({
@@ -6,7 +6,7 @@ export function PropsVariationSection({
   common = {},
   xAxis = {},
   yAxis = {},
-}) {
+}: any) {
   return (
     <table
       style={{
@@ -32,7 +32,7 @@ export function PropsVariationSection({
         </tr>
       </thead>
       <tbody>
-        {Object.entries(yAxis).map(([yVariation, yProps], y) => (
+        {Object.entries(yAxis).map(([yVariation, yProps]: any, y) => (
           <tr key={y}>
             <th
               style={{
@@ -42,7 +42,7 @@ export function PropsVariationSection({
             >
               {yVariation}
             </th>
-            {Object.values(xAxis).map((xProps, x) => (
+            {Object.values(xAxis).map((xProps: any, x) => (
               <td
                 key={x}
                 style={{ paddingBlock: '8px', paddingInline: '16px' }}
