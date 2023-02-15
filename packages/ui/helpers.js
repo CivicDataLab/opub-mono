@@ -1,3 +1,4 @@
+import { Flex } from '@ui/components';
 import React from 'react';
 
 export function PropsVariationSection({
@@ -8,15 +9,23 @@ export function PropsVariationSection({
 }) {
   return (
     <table
-      marginBlock="x16"
-      marginInline="auto"
-      style={{ borderCollapse: 'collapse' }}
+      style={{
+        borderCollapse: 'collapse',
+        marginBlock: '16px',
+        marginInline: 'auto',
+      }}
     >
       <thead>
         <tr>
           <th />
           {Object.keys(xAxis).map((xVariation, key) => (
-            <th key={key} color="hint" fontScale="c1">
+            <th
+              key={key}
+              style={{
+                fontWeight: 'normal',
+                fontSize: '0.875rem',
+              }}
+            >
               {xVariation}
             </th>
           ))}
@@ -25,14 +34,22 @@ export function PropsVariationSection({
       <tbody>
         {Object.entries(yAxis).map(([yVariation, yProps], y) => (
           <tr key={y}>
-            <th color="hint" fontScale="c1">
+            <th
+              style={{
+                fontWeight: 'normal',
+                fontSize: '0.875rem',
+              }}
+            >
               {yVariation}
             </th>
             {Object.values(xAxis).map((xProps, x) => (
-              <td key={x} margin="none" paddingBlock="x8" paddingInline="x16">
-                <div display="flex" alignItems="center" justifyContent="center">
+              <td
+                key={x}
+                style={{ paddingBlock: '8px', paddingInline: '16px' }}
+              >
+                <Flex alignItems="center" justifyContent="center">
                   <Component {...common} {...xProps} {...yProps} />
-                </div>
+                </Flex>
               </td>
             ))}
           </tr>

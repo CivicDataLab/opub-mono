@@ -1,3 +1,5 @@
+const { mergeConfig } = require('vite');
+
 module.exports = {
   stories: ['../src'],
   addons: [
@@ -11,5 +13,16 @@ module.exports = {
   },
   features: {
     storyStoreV7: true,
+  },
+  async viteFinal(config, { configType }) {
+    return mergeConfig(config, {
+      optimizeDeps: {
+        include: [
+          '@storybook/addon-links',
+          '@storybook/addon-essentials',
+          '@storybook/addon-interactions',
+        ],
+      },
+    });
   },
 };

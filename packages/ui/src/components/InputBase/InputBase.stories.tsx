@@ -1,5 +1,6 @@
 import { ChevronDown, Circle } from '@opub-icons/workflow';
 import { Meta } from '@storybook/react';
+import { PropsVariationSection } from 'helpers';
 import { InputBase } from './InputBase';
 
 export default {
@@ -107,3 +108,27 @@ export const WithIcon = () => {
     </>
   );
 };
+
+export const States = () => (
+  <PropsVariationSection
+    component={InputBase}
+    common={{ onChange: () => {} }}
+    xAxis={{
+      default: {},
+      'with placeholder': { placeholder: 'Placeholder' },
+      'with value': { defaultValue: 'Value' },
+      // 'with icon': { addon: <Icon name='edit' size='x20' />, value: 'Value' },
+    }}
+    yAxis={{
+      default: {},
+      hover: { className: 'hover' },
+      // active: { className: 'active' },
+      // focus: { className: 'focus' },
+      // disabled: { disabled: true },
+      // errored: { error: 'Error' },
+      // 'errored + hover': { className: 'hover', error: 'Error' },
+      // 'errored + active': { className: 'active', error: 'Error' },
+      // 'errored + focus': { className: 'focus', error: 'Error' },
+    }}
+  />
+);
