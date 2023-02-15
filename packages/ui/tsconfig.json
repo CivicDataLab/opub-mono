@@ -13,7 +13,8 @@
     "types": ["vitest/globals"],
     "baseUrl": ".",
     "paths": {
-      "@ui/*": ["./src/*"]
+      "@ui/*": ["./src/*"],
+      "@utils/*": ["./utils/*"]
     }
   },
 

@@ -1,4 +1,4 @@
-import { Flex } from './src/components';
+import { Flex } from '@ui/components';
 import React from 'react';
 
 export function PropsVariationSection({

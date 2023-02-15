@@ -1,6 +1,6 @@
 import { ChevronDown, Circle } from '@opub-icons/workflow';
 import { Meta } from '@storybook/react';
-import { PropsVariationSection } from 'helpers';
+import { PropsVariationSection } from '@utils/helpers';
 import { InputBase } from './InputBase';
 
 export default {

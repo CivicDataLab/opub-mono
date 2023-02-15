@@ -1,0 +1,84 @@
+🔎 checking possible migrations..
+
+⚠️  failed to check fix nodejs-requirement
+
+Error: ❌ Unable to determine storybook version.
+🤔 Are you running automigrate from your project directory?
+    at Object.check (/Users/pixeled/.npm/_npx/eb8bf615e50a412a/node_modules/@storybook/cli/dist/generate.js:291:733)
+    at automigrate (/Users/pixeled/.npm/_npx/eb8bf615e50a412a/node_modules/@storybook/cli/dist/generate.js:345:751)
+    at doUpgrade (/Users/pixeled/.npm/_npx/eb8bf615e50a412a/node_modules/@storybook/cli/dist/generate.js:422:2889)
+    at async withTelemetry (/Users/pixeled/.npm/_npx/eb8bf615e50a412a/node_modules/@storybook/core-server/dist/index.js:33:5571)
+    at async upgrade (/Users/pixeled/.npm/_npx/eb8bf615e50a412a/node_modules/@storybook/cli/dist/generate.js:422:3177)
+Unable to find storybook main.js config, skipping
+Unable to find storybook main.js config
+
+⚠️  failed to check fix storybook-binary
+
+Error: ❌ Unable to determine storybook version.
+🤔 Are you running automigrate from your project directory?
+    at Object.check (/Users/pixeled/.npm/_npx/eb8bf615e50a412a/node_modules/@storybook/cli/dist/generate.js:146:975)
+    at automigrate (/Users/pixeled/.npm/_npx/eb8bf615e50a412a/node_modules/@storybook/cli/dist/generate.js:345:751)
+    at async doUpgrade (/Users/pixeled/.npm/_npx/eb8bf615e50a412a/node_modules/@storybook/cli/dist/generate.js:422:2883)
+    at async withTelemetry (/Users/pixeled/.npm/_npx/eb8bf615e50a412a/node_modules/@storybook/core-server/dist/index.js:33:5571)
+    at async upgrade (/Users/pixeled/.npm/_npx/eb8bf615e50a412a/node_modules/@storybook/cli/dist/generate.js:422:3177)
+
+⚠️  failed to check fix sb-scripts
+
+Error: ❌ Unable to determine storybook version.
+🤔 Are you running automigrate from your project directory?
+    at Object.check (/Users/pixeled/.npm/_npx/eb8bf615e50a412a/node_modules/@storybook/cli/dist/generate.js:132:2122)
+    at automigrate (/Users/pixeled/.npm/_npx/eb8bf615e50a412a/node_modules/@storybook/cli/dist/generate.js:345:751)
+    at async doUpgrade (/Users/pixeled/.npm/_npx/eb8bf615e50a412a/node_modules/@storybook/cli/dist/generate.js:422:2883)
+    at async withTelemetry (/Users/pixeled/.npm/_npx/eb8bf615e50a412a/node_modules/@storybook/core-server/dist/index.js:33:5571)
+    at async upgrade (/Users/pixeled/.npm/_npx/eb8bf615e50a412a/node_modules/@storybook/cli/dist/generate.js:422:3177)
+Unable to find storybook main.js config, skipping
+Unable to find storybook main.js config, skipping
+Unable to find storybook main.js config, skipping
+
+⚠️  failed to check fix missing-babelrc
+
+Error: ❌ Unable to determine storybook version.
+🤔 Are you running automigrate from your project directory?
+    at Object.check (/Users/pixeled/.npm/_npx/eb8bf615e50a412a/node_modules/@storybook/cli/dist/generate.js:301:809)
+    at automigrate (/Users/pixeled/.npm/_npx/eb8bf615e50a412a/node_modules/@storybook/cli/dist/generate.js:345:751)
+    at async doUpgrade (/Users/pixeled/.npm/_npx/eb8bf615e50a412a/node_modules/@storybook/cli/dist/generate.js:422:2883)
+    at async withTelemetry (/Users/pixeled/.npm/_npx/eb8bf615e50a412a/node_modules/@storybook/core-server/dist/index.js:33:5571)
+    at async upgrade (/Users/pixeled/.npm/_npx/eb8bf615e50a412a/node_modules/@storybook/cli/dist/generate.js:422:3177)
+
+╭ Migration check ran with failures ──────────────────────────────────────────────────────────────────────────────────────────────────╮
+│                                                                                                                                     │
+│                                                                                                                                     │
+│   Failed migrations:                                                                                                                │
+│                                                                                                                                     │
+│   nodejs-requirement:                                                                                                               │
+│   ❌ Unable to determine storybook version.                                                                                         │
+│   🤔 Are you running automigrate from your project directory?                                                                       │
+│                                                                                                                                     │
+│   storybook-binary:                                                                                                                 │
+│   ❌ Unable to determine storybook version.                                                                                         │
+│   🤔 Are you running automigrate from your project directory?                                                                       │
+│                                                                                                                                     │
+│   sb-scripts:                                                                                                                       │
+│   ❌ Unable to determine storybook version.                                                                                         │
+│   🤔 Are you running automigrate from your project directory?                                                                       │
+│                                                                                                                                     │
+│   missing-babelrc:                                                                                                                  │
+│   ❌ Unable to determine storybook version.                                                                                         │
+│   🤔 Are you running automigrate from your project directory?                                                                       │
+│                                                                                                                                     │
+│                                                                                                                                     │
+│   You can find the full logs in /Users/pixeled/dev/opub-mono/migration-storybook.log                                                │
+│                                                                                                                                     │
+│   ─────────────────────────────────────────────────                                                                                 │
+│                                                                                                                                     │
+│   If you'd like to run the migrations again, you can do so by running 'npx storybook@next automigrate'                              │
+│                                                                                                                                     │
+│   The automigrations try to migrate common patterns in your project, but might not contain everything needed to migrate to the      │
+│   latest version of Storybook.                                                                                                      │
+│                                                                                                                                     │
+│   Please check the changelog and migration guide for manual migrations and more information:                                        │
+│   https://storybook.js.org/migration-guides/7.0                                                                                     │
+│   And reach out on Discord if you need help: https://discord.gg/storybook                                                           │
+│                                                                                                                                     │
+╰─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
