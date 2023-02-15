@@ -13,6 +13,9 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   isDisabled?: boolean;
   description?: string;
   errorMessage?: string | null;
+  as?: 'input' | 'textarea';
+  rows?: number;
+  fluid?: boolean;
 }
 
 const InputBase = (props: InputProps) => {
@@ -28,20 +31,27 @@ const InputBase = (props: InputProps) => {
     isDisabled,
     description,
     errorMessage,
+    as = 'input',
+    fluid = false,
     ...inputProps
   } = props;
+  console.log(fluid);
 
   const themeClass = cx(styles.input, {
     [styles[`input--${validationState}`]]: validationState,
     [styles[`input--invalid`]]: errorMessage,
     [styles[`input--disabled`]]: isDisabled,
+    [styles[`input--fluid`]]: fluid,
     [styles[`input__iconStart`]]: iconStart,
     [styles[`input__iconEnd`]]: iconEnd,
   });
 
+  const InputComp: any = as;
+  const id = React.useId();
+
   return (
     <div className={`${className ? className : ''} ${themeClass}`}>
-      <label className={styles.label}>
+      <label className={styles.label} htmlFor={id}>
         {label}
         {indicator && (
           <span className={styles.indicator}>
@@ -57,10 +67,11 @@ const InputBase = (props: InputProps) => {
       </label>
       <div>
         {iconStart && iconStart}
-        <input
+        <InputComp
+          id={id}
           {...inputProps}
           required={isRequired || false}
-          maxLength={maxLength || 200}
+          maxLength={maxLength || null}
         />
         {iconEnd && iconEnd}
       </div>

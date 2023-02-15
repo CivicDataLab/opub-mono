@@ -3,6 +3,7 @@ html {
     Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   color: var(--text-high);
   line-height: 150%;
+  box-sizing: border-box;
 }
 
 .sr-only:not(:where(:focus, :active, :focus-within)) {
