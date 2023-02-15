@@ -1,5 +1,5 @@
 import { ArrowRight } from '@opub-icons/workflow';
-import { Meta, StoryFn } from '@storybook/react';
+import { Meta } from '@storybook/react';
 
 import { Button } from './Button';
 

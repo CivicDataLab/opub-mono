@@ -1,4 +1,4 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { Meta } from '@storybook/react';
 import { Flex } from './Flex';
 
 export default {
@@ -9,22 +9,22 @@ export default {
       description: 'Children for Flex container',
     },
   },
-} as ComponentMeta<typeof Flex>;
+} as Meta<typeof Flex>;
 
-const Template: ComponentStory<typeof Flex> = (props) => <Flex {...props} />;
-export const Primary = Template.bind({});
-Primary.args = {
-  wrap: 'wrap',
-  gap: 12,
+export const Primary = {
+  args: {
+    wrap: 'wrap',
+    gap: 12,
 
-  children: (
-    <>
-      <div
-        style={{ backgroundColor: 'red', width: '150px', height: '150px' }}
-      />
-      <div
-        style={{ backgroundColor: 'blue', width: '150px', height: '150px' }}
-      />
-    </>
-  ),
+    children: (
+      <>
+        <div
+          style={{ backgroundColor: 'red', width: '150px', height: '150px' }}
+        />
+        <div
+          style={{ backgroundColor: 'blue', width: '150px', height: '150px' }}
+        />
+      </>
+    ),
+  },
 };

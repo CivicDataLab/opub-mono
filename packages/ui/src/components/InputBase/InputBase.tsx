@@ -16,6 +16,7 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   as?: 'input' | 'textarea';
   rows?: number;
   fluid?: boolean;
+  isReadOnly?: boolean;
 }
 
 const InputBase = (props: InputProps) => {
@@ -33,13 +34,13 @@ const InputBase = (props: InputProps) => {
     errorMessage,
     as = 'input',
     fluid = false,
+    isReadOnly = false,
     ...inputProps
   } = props;
-  console.log(fluid);
 
   const themeClass = cx(styles.input, {
-    [styles[`input--${validationState}`]]: validationState,
     [styles[`input--invalid`]]: errorMessage,
+    [styles[`input--${validationState}`]]: validationState,
     [styles[`input--disabled`]]: isDisabled,
     [styles[`input--fluid`]]: fluid,
     [styles[`input__iconStart`]]: iconStart,
@@ -72,6 +73,7 @@ const InputBase = (props: InputProps) => {
           {...inputProps}
           required={isRequired || false}
           maxLength={maxLength || null}
+          readOnly={isReadOnly}
         />
         {iconEnd && iconEnd}
       </div>
@@ -83,5 +85,4 @@ const InputBase = (props: InputProps) => {
   );
 };
 
-const _InputBase = React.forwardRef(InputBase);
-export { _InputBase as InputBase };
+export { InputBase };

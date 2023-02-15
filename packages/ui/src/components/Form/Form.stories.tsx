@@ -1,44 +1,50 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { TextField } from '../TextField';
+import { Meta } from '@storybook/react';
 import * as yup from 'yup';
-import { Form } from './Form';
-import { TextArea } from '../TextArea';
 import { Button } from '../Button';
 import { Flex } from '../Flex';
+import { TextArea } from '../TextArea';
+import { TextField } from '../TextField';
+import { Form } from './Form';
 
 const schema = yup.object().shape({
-  // name: yup.string().required('Name is Required'),
-  // desc: yup.string().required('Name is Required'),
+  name: yup.string().required('Name is Required'),
 });
 
 export default {
-  title: 'Components/Form',
   component: Form,
 
   argTypes: {
     children: {
-      control: 'text',
-      description: 'description text',
+      control: 'null',
+      description: 'Form Field elements',
+    },
+    validationSchema: {
+      control: 'null',
+      description: 'Schema for validation',
+    },
+    formSubmit: {
+      control: 'null',
+      description: 'Callback function triggered when the form is submitted',
     },
   },
-} as ComponentMeta<typeof Form>;
+} as Meta<typeof Form>;
 
-const Template: ComponentStory<typeof Form> = (props) => <Form {...props} />;
-export const Primary = Template.bind({});
-Primary.args = {
-  children: (
-    <>
-      <Flex gap={16}>
-        <TextField name="name" label="First Name" />
-        <TextField name="lastName" label="Last Name" />
-      </Flex>
-      <TextArea name="desc" label="Hobbies" rows={6} fluid />
-      <Button type="submit">Submit</Button>
-    </>
-  ),
-  formSubmit(val: any) {
-    console.log('eee', val);
+export const Primary = {
+  args: {
+    children: (
+      <>
+        <Flex gap={16}>
+          <TextField name="name" label="First Name" />
+          <TextField name="lastName" label="Last Name" />
+        </Flex>
+        <TextArea name="desc" label="Hobbies" rows={6} fluid />
+        <Button type="submit">Submit</Button>
+      </>
+    ),
+    formSubmit(val: any) {
+      console.log(val);
+    },
+    initialValues: { name: '', lastName: '', desc: '' },
+    validationSchema: schema,
   },
-  initialValues: { name: '', desc: '' },
-  schema: schema,
 };

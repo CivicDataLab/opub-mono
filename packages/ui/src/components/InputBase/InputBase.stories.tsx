@@ -69,6 +69,15 @@ export const Variations = () => {
   );
 };
 
+export const ErrorMessage = {
+  args: {
+    label: 'With Error',
+    defaultValue: 'abc@email.co',
+    errorMessage: 'Wrong Email',
+    isReadOnly: true,
+  },
+};
+
 export const ReadOnly = {
   args: {
     label: 'Label',
