@@ -11,4 +11,8 @@
   > *:not(button) {
     width: 100%;
   }
+
+  > button {
+    margin-top: 12px;
+  }
 }

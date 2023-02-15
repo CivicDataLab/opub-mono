@@ -4,6 +4,7 @@ import * as yup from 'yup';
 import { Form } from './Form';
 import { TextArea } from '../TextArea';
 import { Button } from '../Button';
+import { Flex } from '../Flex';
 
 const schema = yup.object().shape({
   // name: yup.string().required('Name is Required'),
@@ -27,8 +28,11 @@ export const Primary = Template.bind({});
 Primary.args = {
   children: (
     <>
-      <TextField name="name" label="Name" />
-      <TextArea name="desc" label="Desc" rows={6} fluid />
+      <Flex gap={16}>
+        <TextField name="name" label="First Name" />
+        <TextField name="lastName" label="Last Name" />
+      </Flex>
+      <TextArea name="desc" label="Hobbies" rows={6} fluid />
       <Button type="submit">Submit</Button>
     </>
   ),

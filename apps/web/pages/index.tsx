@@ -6,6 +6,7 @@ import styles from '../styles/pages/home.module.scss';
 export default function Web() {
   return (
     <div className={styles.container}>
+      <h1>Components</h1>
       <div className={styles.box}>
         <Button variant="primary" onClick={switchTheme}>
           Primary
