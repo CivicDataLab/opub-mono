@@ -1,5 +1,6 @@
 import cx from 'classnames';
 import React, { InputHTMLAttributes } from 'react';
+import { Label } from '../Label';
 import styles from './InputBase.module.scss';
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   indicator?: true | false | 'label' | 'icon';
@@ -52,7 +53,7 @@ const InputBase = (props: InputProps) => {
 
   return (
     <div className={`${className ? className : ''} ${themeClass}`}>
-      <label className={styles.label} htmlFor={id}>
+      <Label className={styles.label} htmlFor={id}>
         {label}
         {indicator && (
           <span className={styles.indicator}>
@@ -65,7 +66,7 @@ const InputBase = (props: InputProps) => {
             )}
           </span>
         )}
-      </label>
+      </Label>
       <div>
         {iconStart && iconStart}
         <InputComp
