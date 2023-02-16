@@ -30,7 +30,7 @@ const InputBase = (props: InputProps) => {
     maxLength,
     className,
     validationState,
-    isDisabled,
+    isDisabled = false,
     description,
     errorMessage,
     as = 'input',
@@ -72,6 +72,7 @@ const InputBase = (props: InputProps) => {
         <InputComp
           id={id}
           {...inputProps}
+          disabled={isDisabled}
           required={isRequired || false}
           maxLength={maxLength || null}
           readOnly={isReadOnly}
