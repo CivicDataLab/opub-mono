@@ -1,4 +1,5 @@
 import { Meta } from '@storybook/react';
+import { Form } from '../Form';
 import { Checkbox } from './Checkbox';
 
 export default {
@@ -12,8 +13,10 @@ export default {
   },
 } as Meta<typeof Checkbox>;
 
-export const Primary = {
-  args: {
-    children: 'Checkbox',
-  },
-};
+export const Primary = ({ children = 'label', ...props }) => (
+  <Form initialValues={{}}>
+    <Checkbox name="name" {...props}>
+      {children}
+    </Checkbox>
+  </Form>
+);
