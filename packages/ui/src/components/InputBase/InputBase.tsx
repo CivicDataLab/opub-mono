@@ -53,7 +53,11 @@ const InputBase = (props: InputProps) => {
 
   return (
     <div className={`${className ? className : ''} ${themeClass}`}>
-      <Label className={styles.label} htmlFor={id}>
+      <Label
+        className={styles.label}
+        htmlFor={id}
+        error={errorMessage || validationState === 'invalid' ? true : false}
+      >
         {label}
         {indicator && (
           <span className={styles.indicator}>
