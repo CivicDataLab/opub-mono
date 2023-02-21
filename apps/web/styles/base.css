@@ -1,4 +1,5 @@
 @import 'reset.css';
+@import 'tokens.css';
 
 :root {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
@@ -16,4 +17,18 @@
   position: absolute;
   white-space: nowrap;
   width: 1px;
+}
+
+*:focus {
+  outline: 2px solid var(--focused-default);
+  outline-offset: 2px;
+}
+
+button:focus:not(:focus-visible) {
+  outline: none;
+}
+
+button:focus-visible {
+  outline: 2px solid var(--focused-default);
+  outline-offset: 2px;
 }
