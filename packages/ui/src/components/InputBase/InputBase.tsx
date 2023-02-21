@@ -20,7 +20,7 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   isReadOnly?: boolean;
 }
 
-const InputBase = (props: InputProps) => {
+const InputBase = React.forwardRef((props: InputProps, ref) => {
   let {
     label,
     isRequired,
@@ -80,6 +80,7 @@ const InputBase = (props: InputProps) => {
           required={isRequired || false}
           maxLength={maxLength || null}
           readOnly={isReadOnly}
+          ref={ref}
         />
         {iconEnd && iconEnd}
       </div>
@@ -89,6 +90,6 @@ const InputBase = (props: InputProps) => {
       ) : null}
     </div>
   );
-};
+});
 
 export { InputBase };

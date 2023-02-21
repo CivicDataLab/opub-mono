@@ -15,6 +15,6 @@ export default {
 
 export const Primary = ({ ...props }) => (
   <Form initialValues={{}}>
-    <TextArea name="name" label="label" {...props} />
+    <TextArea name="name" label="label" rows={4} {...props} />
   </Form>
 );
