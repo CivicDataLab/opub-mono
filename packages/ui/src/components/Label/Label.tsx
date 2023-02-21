@@ -1,7 +1,7 @@
 import * as LabelRadix from '@radix-ui/react-label';
 import cx from 'classnames';
 import React from 'react';
-import styles from './label.module.scss';
+import styles from './Label.module.scss';
 
 type LabelProps = React.ComponentProps<typeof LabelRadix.Root> & {
   error?: boolean;
@@ -20,6 +20,7 @@ const Label = React.forwardRef<
         [styles['error']]: error,
       })}
     >
+      sadasd
       {children}
     </LabelRadix.Root>
   );
