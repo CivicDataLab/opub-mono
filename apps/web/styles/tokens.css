@@ -122,10 +122,11 @@
   --shadow-from-dim-light: #00000033;
   --shadow-from-ambient-light: #1718180d;
   --shadow-from-direct-light: #00000026;
-  --other-backdrop: #00000080;
-  --other-overlay: #ffffff80;
-  --other-divider: #e1e3e5;
-  --border-shadow-border-shadow: #aeb4b9;
+  --backdrop: #00000080;
+  --overlay: #ffffff80;
+  --divider: #e1e3e5;
+  --divider-dark: #454749;
+  --border-shadow: #aeb4b9;
   --border-shadow-subdued: #babfc4;
   --surface-attention-default: #ffea8a;
 }
@@ -152,16 +153,172 @@
   --sf-mono-regular: SF Mono;
 }
 
-/* SpacePatterns */
+/* Font Styles */
 :root {
-  --none: 0px;
-  --xx-small: 2px;
-  --x-small: 4px;
-  --small: 8px;
-  --regular: 16px;
-  --large: 32px;
-  --x-large: 64px;
-  --xx-large: 128px;
+  --font-size-700: 2.5rem; /* 40px */
+  --font-size-600: 2rem; /* 32px */
+  --font-size-500: 1.75rem; /* 28px */
+  --font-size-400: 1.5rem; /* 24px */
+  --font-size-300: 1.25rem; /* 20px */
+  --font-size-200: 1rem; /* 26px */
+  --font-size-100: 0.875rem; /* 14px */
+  --font-size-75: 0.75rem; /* 12px */
+
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --font-line-height-1: 1rem;
+  --font-line-height-2: 1.25rem;
+  --font-line-height-3: 1.5rem;
+  --font-line-height-4: 1.75rem;
+  --font-line-height-5: 2rem;
+  --font-line-height-6: 2.5rem;
+  --font-line-height-7: 3rem;
+}
+
+/* Shape */
+:root {
+  --border-radius-05: 0.125rem;
+  --border-radius-1: 0.25rem;
+  --border-radius-2: 0.5rem;
+  --border-radius-3: 0.75rem;
+  --border-radius-4: 1rem;
+  --border-radius-5: 1.25rem;
+  --border-radius-6: 1.875rem;
+
+  --border-radius-full: 624.9375rem;
+  --border-radius-base: 0.1875rem;
+  --border-radius-large: 0.375rem;
+  --border-radius-half: 50%;
+
+  --border-width-1: 0.0625rem;
+  --border-width-2: 0.125rem;
+  --border-width-3: 0.1875rem;
+  --border-width-4: 0.25rem;
+  --border-width-5: 0.3125rem;
+
+  --border-base: var(--border-width-1) solid var(--border-subdued);
+  --border-dark: var(--border-width-1) solid var(--border-default);
+  --border-transparent: var(--border-width-1) solid transparent;
+  --border-divider: var(--border-width-1) solid var(--divider);
+  --border-divider-on-dark: var(--border-width-1) solid var(--divider-dark);
+}
+
+/* Space Patterns */
+:root {
+  --space-0: 0px;
+  --space-05: 2px;
+  --space-1: 4px;
+  --space-025: 1px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+  --space-28: 112px;
+  --space-32: 128px;
+}
+
+/* Z Index */
+:root {
+  --z-1: 100;
+  --z-2: 400;
+  --z-3: 510;
+  --z-4: 512;
+  --z-5: 513;
+  --z-6: 514;
+  --z-7: 515;
+  --z-8: 516;
+  --z-9: 517;
+  --z-10: 518;
+  --z-11: 519;
+  --z-12: 520;
+
+  --z-index-1: 100;
+  --z-index-2: 400;
+  --z-index-3: 510;
+  --z-index-4: 512;
+  --z-index-5: 513;
+  --z-index-6: 514;
+  --z-index-7: 515;
+  --z-index-8: 516;
+  --z-index-9: 517;
+  --z-index-10: 518;
+  --z-index-11: 519;
+  --z-index-12: 520;
+}
+
+/* Motion */
+@keyframes keyframes-bounce {
+  from,
+  65%,
+  85% {
+    transform: scale(1);
+  }
+  75% {
+    transform: scale(0.85);
+  }
+  82.5% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes fade-in {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes keyframes-pulse {
+  from,
+  75% {
+    transform: scale(0.85);
+    opacity: 1;
+  }
+  to {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+}
+
+@keyframes keyframes-spin {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+:root {
+  --duration-0: 0ms;
+  --duration-50: 50ms;
+  --duration-100: 100ms;
+  --duration-150: 150ms;
+  --duration-200: 200ms;
+  --duration-250: 250ms;
+  --duration-300: 300ms;
+  --duration-350: 350ms;
+  --duration-400: 400ms;
+  --duration-450: 450ms;
+  --duration-500: 500ms;
+  --duration-5000: 5000ms;
+
+  --ease: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --ease-in: cubic-bezier(0.42, 0, 1, 1);
+  --ease-out: cubic-bezier(0, 0, 0.58, 1);
+  --ease-in-out: cubic-bezier(0.42, 0, 0.58, 1);
+  --linear: cubic-bezier(0, 0, 1, 1);
+
+  --keyframes-bounce: keyframes-bounce;
+  --keyframes-fade-in: keyframes-fade-in;
+  --keyframes-pulse: keyframes-pulse;
+  --keyframes-spin: keyframes-spin;
 }
 
 /* text styles*/

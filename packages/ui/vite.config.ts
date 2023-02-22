@@ -17,4 +17,14 @@ export default defineConfig({
       { find: '@ui', replacement: path.resolve(__dirname, '/src') },
     ],
   },
+  css: {
+    postcss: null,
+    preprocessorOptions: {
+      scss: {
+        additionalData: `
+                @import "${path.resolve(__dirname, '/styles/breakpoints')}";
+            `,
+      },
+    },
+  },
 });

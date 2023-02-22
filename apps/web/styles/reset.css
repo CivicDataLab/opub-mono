@@ -83,7 +83,6 @@ video {
   padding: 0;
   border: 0;
   font-size: 100%;
-  /* font: inherit; */
   vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
@@ -121,6 +120,22 @@ q:after {
 table {
   border-collapse: collapse;
   border-spacing: 0;
+}
+
+html {
+  /* Load system fonts */
+  font-family: -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI,
+    Roboto, Helvetica Neue, sans-serif;
+
+  /* Make type rendering look crisper */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Deactivate auto-enlargement of small text in Safari */
+  text-size-adjust: 100%;
+
+  /* Enable kerning and optional ligatures */
+  text-rendering: optimizeLegibility;
 }
 
 input,
