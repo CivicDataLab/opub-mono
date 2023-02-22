@@ -125,7 +125,7 @@
   --backdrop: #00000080;
   --overlay: #ffffff80;
   --divider: #e1e3e5;
-  --divider-dark: #454749;
+  --divider-dark: rgb(69, 71, 74);
   --border-shadow: #aeb4b9;
   --border-shadow-subdued: #babfc4;
   --surface-attention-default: #ffea8a;
@@ -133,13 +133,18 @@
 
 /* Shadows */
 :root {
-  --shadow-inset-button-pressed: inset 0px 1px 0px 0px #0000000d;
+  --shadow-inset-button-pressed: inset 0px 1px 0px 0px #00000026;
   --shadow-button: 0px 1px 0px 0px #0000000d;
-  --shadow-card: 0px 0px 5px 0px #0000000d, 0px 1px 2px 0px #00000026;
+  --shadow-card: 0px 0px 5px 0px #1718180d, 0px 1px 2px 0px #00000026;
   --shadow-popover: 0px 3px 6px -3px #17181814, 0px 8px 20px -4px #1718181f;
   --shadow-modal: 0px 0px 1px 0px #00000033, 0px 26px 80px 0px #00000033;
   --shadow-base: 0px 1px 3px 0px #3f3f4426, 0px 0px 0px 1px #3f3f440d;
   --shadow-deep: 0px 0px 0px 1px #062c521a, 0px 2px 16px 0px #212b3614;
+  --shadow-inset-button: inset 0px -1px 0px 0px #00000033;
+  --shadow-layer: 0px 2px 16px 0px #202a3614, 0px 31px 41px 0px #202a3533;
+  --shadow-top-bar: 0px 2px 2px -1px #00000026;
+  --shadow-faint: 0px 1px 0px 0px #161d250d;
+  --shadow-transparent: 0px 0px 0px 0px #00000000;
 }
 
 /* fonts */
@@ -180,24 +185,24 @@
 
 /* Shape */
 :root {
-  --border-radius-05: 0.125rem;
-  --border-radius-1: 0.25rem;
-  --border-radius-2: 0.5rem;
-  --border-radius-3: 0.75rem;
-  --border-radius-4: 1rem;
-  --border-radius-5: 1.25rem;
-  --border-radius-6: 1.875rem;
+  --border-radius-05: 2px;
+  --border-radius-1: 4px;
+  --border-radius-2: 8px;
+  --border-radius-3: 12px;
+  --border-radius-4: 16px;
+  --border-radius-5: 20px;
+  --border-radius-6: 30px;
 
-  --border-radius-full: 624.9375rem;
-  --border-radius-base: 0.1875rem;
-  --border-radius-large: 0.375rem;
+  --border-radius-full: 9999px;
+  --border-radius-base: 3px;
+  --border-radius-large: 6px;
   --border-radius-half: 50%;
 
-  --border-width-1: 0.0625rem;
-  --border-width-2: 0.125rem;
-  --border-width-3: 0.1875rem;
-  --border-width-4: 0.25rem;
-  --border-width-5: 0.3125rem;
+  --border-width-1: 1px;
+  --border-width-2: 2px;
+  --border-width-3: 3px;
+  --border-width-4: 4px;
+  --border-width-5: 5px;
 
   --border-base: var(--border-width-1) solid var(--border-subdued);
   --border-dark: var(--border-width-1) solid var(--border-default);
