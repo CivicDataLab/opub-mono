@@ -1,10 +1,10 @@
-import * as React from 'react';
-import styles from './Button.module.scss';
-import cx from 'classnames';
-import { MouseUpBlurHandler, handleMouseUpByBlurring } from '@ui/utils/focus';
-import { UnstyledButton, UnstyledButtonProps } from './BaseButton';
-import { Spinner } from '../Spinner';
 import { variationName } from '@ui/utils/css';
+import { MouseUpBlurHandler, handleMouseUpByBlurring } from '@ui/utils/focus';
+import cx from 'classnames';
+import * as React from 'react';
+import { Spinner } from '../Spinner';
+import { UnstyledButton, UnstyledButtonProps } from './BaseButton';
+import styles from './Button.module.scss';
 
 export interface ButtonProps extends UnstyledButtonProps {
   // Type of button

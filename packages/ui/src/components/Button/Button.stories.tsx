@@ -59,39 +59,3 @@ export const States = () => (
     }}
   />
 );
-
-export const Secondary = {
-  args: {
-    children: 'Secondary',
-    variant: 'secondary',
-  },
-};
-
-export const Disabled = {
-  args: {
-    children: 'Disabled',
-    variant: 'disabled',
-  },
-};
-
-export const Link = {
-  args: {
-    href: '/#',
-    children: 'Link',
-  },
-};
-
-export const IconBefore = {
-  args: {
-    children: 'Button',
-    iconBefore: <ArrowRight width={14} />,
-  },
-};
-
-export const IconAfter = {
-  args: {
-    children: 'Button',
-    iconAfter: <ArrowRight />,
-    size: 'large',
-  },
-};
