@@ -171,7 +171,12 @@ const Button = React.forwardRef(
     };
 
     return (
-      <UnstyledButton {...commonProps} {...linkProps} {...actionProps}>
+      <UnstyledButton
+        {...commonProps}
+        {...linkProps}
+        {...actionProps}
+        ref={ref}
+      >
         <span className={styles.Content}>
           {spinnerSVGMarkup}
           {/* {iconMarkup} */}

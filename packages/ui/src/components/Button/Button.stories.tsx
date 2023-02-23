@@ -18,13 +18,13 @@ export default {
       control: { type: 'select' },
       description: 'Changes the size of the button',
     },
-    children: {
-      control: 'text',
-      description: 'Content of the Button',
-    },
     fullWidth: {
       control: 'boolean',
       description: 'Allows the button to grow to the width of its container',
+    },
+    children: {
+      control: 'text',
+      description: 'Content of the Button',
     },
   },
 } as Meta<typeof Button>;
@@ -56,6 +56,7 @@ export const States = () => (
       'slim + full width': { size: 'slim', fullWidth: true },
       loading: { loading: true },
       disabled: { disabled: true },
+      pressed: { pressed: true },
     }}
   />
 );
