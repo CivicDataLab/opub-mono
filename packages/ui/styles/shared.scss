@@ -1,0 +1,109 @@
+$default-browser-font-size: 16px;
+$base-font-size: 16px;
+
+@function rem($value) {
+  $unit: unit($value);
+
+  @if $value == 0 {
+    @return 0;
+  } @else if $unit == 'rem' {
+    @return $value;
+  } @else if $unit == 'px' {
+    @return $value / $base-font-size * 1rem;
+  } @else if $unit == 'em' {
+    @return $unit / 1em * 1rem;
+  } @else {
+    @error 'Value must be in px, em, or rem.';
+  }
+}
+
+@mixin recolor-icon(
+  $fill-color: null,
+  $secondary-color: null,
+  $filter-color: null
+) {
+  svg {
+    fill: $fill-color;
+    color: $secondary-color;
+  }
+
+  img {
+    filter: $filter-color;
+  }
+}
+
+@mixin high-contrast-button-outline($outline: var(--border-width-2) dotted) {
+  @media (-ms-high-contrast: active) {
+    outline: $outline;
+  }
+}
+
+@mixin high-contrast-outline($border-width: border-width()) {
+  outline: $border-width solid transparent;
+  @content;
+}
+
+$border-width-data: (
+  base: rem(1px),
+  thick: rem(2px),
+  thicker: rem(3px),
+);
+
+/// Returns the width of the specified border type.
+/// @param {String} $variant [base] - The border variant key.
+/// @return {Number} The width for the border.
+
+@function border-width($variant: base) {
+  $fetched-value: map-get($border-width-data, $variant);
+
+  @if type-of($fetched-value) == number {
+    @return $fetched-value;
+  } @else {
+    @error 'Border width variant `#{$variant}` not found. Available variants: #{available-names($border-width-data)}';
+  }
+}
+
+@mixin focus-ring($size: 'base', $border-width: 0, $style: 'base') {
+  $stroke: rem(2px);
+  $offset: if(
+    $border-width == 0,
+    rem(1px),
+    calc(#{$border-width} + #{rem(1px)})
+  );
+  $border-radius: if(
+    $size == 'wide',
+    var(--border-radius-2),
+    var(--border-radius-1)
+  );
+  $negative-offset: calc(-1 * #{$offset});
+
+  @if $style == 'base' {
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      z-index: 1;
+      top: $negative-offset;
+      right: $negative-offset;
+      bottom: $negative-offset;
+      left: $negative-offset;
+      display: block;
+      pointer-events: none;
+      box-shadow: 0 0 0 $negative-offset var(--focused-default);
+      transition: box-shadow duration(fast) var(--ease);
+      border-radius: calc(#{$border-radius} + #{rem(1px)});
+    }
+  } @else if $style == 'focused' {
+    &::after {
+      box-shadow: 0 0 0 $stroke var(--focused-default);
+      @include high-contrast-outline();
+    }
+  }
+}
+
+@mixin no-focus-ring {
+  &::after {
+    content: none;
+  }
+}

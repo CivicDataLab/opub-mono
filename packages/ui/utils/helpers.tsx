@@ -45,7 +45,11 @@ export function PropsVariationSection({
             {Object.values(xAxis).map((xProps: any, x) => (
               <td
                 key={x}
-                style={{ paddingBlock: '8px', paddingInline: '16px' }}
+                style={{
+                  paddingBlock: '8px',
+                  paddingInline: '16px',
+                  minWidth: 140,
+                }}
               >
                 <Flex alignItems="center" justifyContent="center">
                   <Component {...common} {...xProps} {...yProps} />

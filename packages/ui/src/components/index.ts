@@ -7,3 +7,4 @@ export { TextField } from './TextField';
 export { TextArea } from './TextArea';
 export { Label } from "./Label";
 export { Checkbox } from "./Checkbox";
+export { Spinner } from "./Spinner";
