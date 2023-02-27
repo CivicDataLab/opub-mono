@@ -4,29 +4,33 @@ import { Meta } from '@storybook/react';
 import { Button } from './Button';
 import { PropsVariationSection } from '@utils/helpers';
 
+/**
+ * Primary UI component for user interface
+ */
 export default {
   component: Button,
+  tags: ['autodocs'],
 
-  argTypes: {
-    variant: {
-      options: ['primary', 'destructive', 'outline', 'plain'],
-      control: { type: 'select' },
-      description: 'Type of button',
-    },
-    size: {
-      options: ['slim', 'medium', 'large'],
-      control: { type: 'select' },
-      description: 'Changes the size of the button',
-    },
-    fullWidth: {
-      control: 'boolean',
-      description: 'Allows the button to grow to the width of its container',
-    },
-    children: {
-      control: 'text',
-      description: 'Content of the Button',
-    },
-  },
+  // argTypes: {
+  //   variant: {
+  //     options: ['primary', 'destructive', 'outline', 'plain'],
+  //     control: { type: 'select' },
+  //     description: 'Type of button',
+  //   },
+  //   size: {
+  //     options: ['slim', 'medium', 'large'],
+  //     control: { type: 'select' },
+  //     description: 'Changes the size of the button',
+  //   },
+  //   fullWidth: {
+  //     control: 'boolean',
+  //     description: 'Allows the button to grow to the width of its container',
+  //   },
+  //   children: {
+  //     control: 'text',
+  //     description: 'Content of the Button',
+  //   },
+  // },
 } as Meta<typeof Button>;
 
 export const Primary = {

@@ -64,10 +64,6 @@ type ActionButtonProps = Pick<
 
 const DEFAULT_SIZE = 'medium';
 
-// Guard to check if href exists in props
-// const hasHref = (props: ButtonProps): props is AnchorProps =>
-//   'href' in props;
-
 const Button = React.forwardRef(
   (
     {
