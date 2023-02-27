@@ -82,18 +82,18 @@
 @mixin button-filled() {
   @include focus-ring($border-width: 0);
 
-  background: var(--pc-button-color);
+  background: var(--button-color);
   border-width: 0;
   border-color: transparent;
   box-shadow: var(--shadow-button), var(--shadows-inset-button);
 
-  color: var(--pc-button-text);
+  color: var(--button-text);
 
   &:hover {
-    background: var(--pc-button-color-hover);
+    background: var(--button-color-hover);
     border-color: transparent;
 
-    color: var(--pc-button-text);
+    color: var(--button-text);
   }
 
   &:focus {
@@ -102,28 +102,28 @@
   }
 
   &:active {
-    background: var(--pc-button-color-active);
+    background: var(--button-color-active);
     border-color: transparent;
     box-shadow: var(--shadow-button), var(--shadows-inset-button);
   }
 
   &.pressed {
-    color: var(--pc-button-text);
+    color: var(--button-text);
 
-    background: var(--pc-button-color-depressed);
+    background: var(--button-color-depressed);
     border-color: transparent;
     box-shadow: var(--shadow-button), var(--shadows-inset-button);
 
     &:hover,
     &:focus {
-      background: var(--pc-button-color-depressed);
+      background: var(--button-color-depressed);
       box-shadow: var(--shadow-button), var(--shadows-inset-button);
     }
   }
 }
 
 @mixin button-outline($outline-color, $background-color: transparent) {
-  background: transparent;
+  background: $background-color;
   border: var(--border-width-1) solid var(--border-default);
   box-shadow: none;
   color: var(--text-default);
@@ -154,11 +154,11 @@
   }
 
   &.pressed {
-    background: var(--action-secondary-pressed);
+    background: var(--action-secondary-depressed);
     border: var(--border-width-1) solid var(--border-depressed);
     box-shadow: none;
 
-    color: var(--pc-button-text);
+    color: var(--text-on-primary);
   }
 
   &.disabled {
@@ -225,27 +225,27 @@
 }
 
 .Button {
-  --pc-button-slim-min-height: var(--font-line-height-4);
-  --pc-button-large-min-height: 44px;
-  --pc-button-vertical-padding: calc(
+  --button-slim-min-height: var(--font-line-height-4);
+  --button-large-min-height: 44px;
+  --button-vertical-padding: calc(
     (36px - var(--font-line-height-2) - var(--space-05)) / 2
   );
-  --pc-button-slim-vertical-padding: calc(
+  --button-slim-vertical-padding: calc(
     (
-        var(--pc-button-slim-min-height) - var(--font-line-height-2) -
+        var(--button-slim-min-height) - var(--font-line-height-2) -
           var(--space-05)
       ) / 2
   );
-  --pc-button-large-vertical-padding: calc(
+  --button-large-vertical-padding: calc(
     (
-        var(--pc-button-large-min-height) - var(--font-line-height-2) -
+        var(--button-large-min-height) - var(--font-line-height-2) -
           var(--space-05)
       ) / 2
   );
-  --pc-button-spinner-size: 20px;
-  --pc-button-segment: 10;
-  --pc-button-focused: 20;
-  --pc-button-disclosure-icon-offset: -6px;
+  --button-spinner-size: 20px;
+  --button-segment: 10;
+  --button-focused: 20;
+  --button-disclosure-icon-offset: -6px;
 
   @include button-base;
 
@@ -254,7 +254,7 @@
   }
 
   &.connectedDisclosure {
-    z-index: var(--pc-button-segment);
+    z-index: var(--button-segment);
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
 
@@ -264,7 +264,7 @@
     }
 
     &:focus {
-      z-index: var(--pc-button-focused);
+      z-index: var(--button-focused);
     }
   }
 }
@@ -335,9 +335,10 @@
 
 .Icon {
   margin-left: calc(-1 * (var(--space-1)));
+  line-height: 0;
 
   &:last-child {
-    margin-right: var(--pc-button-disclosure-icon-offset);
+    margin-right: var(--button-disclosure-icon-offset);
     margin-left: var(--space-1);
   }
 
@@ -358,8 +359,8 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  margin-top: calc(-1 * (var(--pc-button-spinner-size) / 2));
-  margin-left: calc(-1 * (var(--pc-button-spinner-size) / 2));
+  margin-top: calc(-1 * (var(--button-spinner-size) / 2));
+  margin-left: calc(-1 * (var(--button-spinner-size) / 2));
 }
 
 .primary,
@@ -375,11 +376,11 @@
 }
 
 .primary {
-  --pc-button-color: var(--action-primary-default);
-  --pc-button-text: var(--text-on-primary);
-  --pc-button-color-hover: var(--action-primary-hovered);
-  --pc-button-color-active: var(--action-primary-pressed);
-  --pc-button-color-depressed: var(--action-primary-depressed);
+  --button-color: var(--action-primary-default);
+  --button-text: var(--text-on-primary);
+  --button-color-hover: var(--action-primary-hovered);
+  --button-color-active: var(--action-primary-pressed);
+  --button-color-depressed: var(--action-primary-depressed);
 
   @include recolor-icon(var(--icon-on-primary));
 
@@ -389,11 +390,11 @@
 }
 
 .destructive {
-  --pc-button-color: var(--action-critical-default);
-  --pc-button-text: var(--text-on-critical);
-  --pc-button-color-hover: var(--action-critical-hovered);
-  --pc-button-color-active: var(--action-critical-pressed);
-  --pc-button-color-depressed: var(--action-critical-depressed);
+  --button-color: var(--action-critical-default);
+  --button-text: var(--text-on-critical);
+  --button-color-hover: var(--action-critical-hovered);
+  --button-color-active: var(--action-critical-pressed);
+  --button-color-depressed: var(--action-critical-depressed);
 
   @include recolor-icon(var(--icon-on-critical));
 
@@ -437,7 +438,7 @@
 .plain {
   @include recolor-icon(var(--interactive-default));
 
-  margin: calc(-1 * var(--pc-button-vertical-padding)) calc(-1 * var(--space-2));
+  margin: calc(-1 * var(--button-vertical-padding)) calc(-1 * var(--space-2));
   padding-left: var(--space-2);
   padding-right: var(--space-2);
   background: transparent;
@@ -527,13 +528,13 @@
   }
 
   &.sizeSlim {
-    margin-top: calc(-1 * var(--pc-button-slim-vertical-padding));
+    margin-top: calc(-1 * var(--button-slim-vertical-padding));
 
-    margin-bottom: calc(-1 * var(--pc-button-slim-vertical-padding));
+    margin-bottom: calc(-1 * var(--button-slim-vertical-padding));
   }
 
   &.sizeLarge {
-    margin: calc(-1 * var(--pc-button-large-vertical-padding))
+    margin: calc(-1 * var(--button-large-vertical-padding))
       calc(-1 * var(--space-5));
   }
 
@@ -571,11 +572,6 @@
       @include recolor-icon(var(--action-critical-disabled));
     }
   }
-
-  .Icon {
-    margin-left: 0;
-    margin-right: 0;
-  }
 }
 
 .fullWidth {
@@ -610,17 +606,17 @@
 }
 
 .sizeSlim {
-  min-height: var(--pc-button-slim-min-height);
+  min-height: var(--button-slim-min-height);
 
-  padding: var(--pc-button-slim-vertical-padding) var(--space-3);
+  padding: var(--button-slim-vertical-padding) var(--space-3);
 }
 
 .sizeLarge {
-  min-height: var(--pc-button-large-min-height);
+  min-height: var(--button-large-min-height);
 
-  min-width: var(--pc-button-large-min-height);
+  min-width: var(--button-large-min-height);
 
-  padding: var(--pc-button-large-vertical-padding) var(--space-6);
+  padding: var(--button-large-vertical-padding) var(--space-6);
 
   .Content {
     font-size: var(--font-size-200);
@@ -704,13 +700,21 @@
     }
 
     &.pressed {
-      background: transparent;
+      background: var(--action-critical-default);
       box-shadow: none;
-      color: currentColor;
+      color: var(--text-on-primary);
 
-      &::before {
-        opacity: 0.2;
+      &:hover,
+      &:focus,
+      &:active {
+        background: var(--action-critical-default);
+        box-shadow: none;
+        color: var(--text-on-primary);
       }
+
+      // &::before {
+      //   opacity: 0.2;
+      // }
     }
 
     &:hover,
@@ -748,7 +752,7 @@
 }
 
 .ConnectedDisclosure {
-  z-index: var(--pc-button-segment);
+  z-index: var(--button-segment);
   margin-left: calc(-1 * var(--space-025));
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
@@ -757,7 +761,7 @@
 
   &:focus,
   &:active {
-    z-index: var(--pc-button-focused);
+    z-index: var(--button-focused);
   }
 
   &.primary,
@@ -818,4 +822,9 @@
   .Button {
     @include button-full-width;
   }
+}
+
+.Placeholder {
+  padding-bottom: 100%;
+  background: currentColor;
 }

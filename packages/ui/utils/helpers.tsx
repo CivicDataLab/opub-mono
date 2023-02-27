@@ -6,6 +6,7 @@ export function PropsVariationSection({
   common = {},
   xAxis = {},
   yAxis = {},
+  color,
 }: any) {
   return (
     <table
@@ -38,6 +39,7 @@ export function PropsVariationSection({
               style={{
                 fontWeight: 'normal',
                 fontSize: '0.875rem',
+                textAlign: 'start',
               }}
             >
               {yVariation}
@@ -51,7 +53,13 @@ export function PropsVariationSection({
                   minWidth: 140,
                 }}
               >
-                <Flex alignItems="center" justifyContent="center">
+                <Flex
+                  alignItems="center"
+                  justifyContent="center"
+                  UNSAFE_style={{
+                    color: color ? color : null,
+                  }}
+                >
                   <Component {...common} {...xProps} {...yProps} />
                 </Flex>
               </td>

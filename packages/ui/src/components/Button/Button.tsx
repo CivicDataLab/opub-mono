@@ -5,27 +5,48 @@ import * as React from 'react';
 import { Spinner } from '../Spinner';
 import { UnstyledButton, UnstyledButtonProps } from './BaseButton';
 import styles from './Button.module.scss';
+import { ConnectedDisclosure } from '@ui/types';
+import { ChevronDown, ChevronUp, ChevronUpDown } from '@opub-icons/workflow';
 
 export interface ButtonProps extends UnstyledButtonProps {
-  // Type of button
-  variant?: 'primary' | 'destructive' | 'outline' | 'plain';
+  /** Provides extra visual weight and identifies the primary action in a set of buttons */
+  primary?: boolean;
+  /** Indicates a dangerous or potentially negative action */
+  destructive?: boolean;
+  /** Gives the button a subtle alternative to the default button styling, appropriate for certain backdrops */
+  outline?: boolean;
+  /** Renders a button that looks like a link */
+  plain?: boolean;
+
   /**
    * Changes the size of the button, giving it more or less padding
    * @default 'medium'
    */
   size?: 'slim' | 'medium' | 'large';
+
   /** Allows the button to grow to the width of its container */
   fullWidth?: boolean;
+
   // Content of the Button
   children: string | string[];
+
+  /** Makes `plain` and `outline` Button colors (text, borders, icons) the same as the current text color. Also adds an underline to `plain` Buttons */
+  monochrome?: boolean;
+
   /** Removes underline from button text (including on interaction) when `monochrome` and `plain` are true */
   removeUnderline?: boolean;
 
-  // Icon to add before button text
-  iconBefore?: React.ReactNode;
+  /** Icon to display to the left of the button content */
+  icon?: React.ReactElement;
 
-  // Icon to add after button text
-  iconAfter?: React.ReactNode;
+  /** Displays the button with a disclosure icon. Defaults to `down` when set to true */
+  disclosure?: 'down' | 'up' | 'select' | boolean;
+
+  /** Disclosure button connected right of the button. Toggles a popover action list. */
+  connectedDisclosure?: ConnectedDisclosure;
+
+  /** Changes the inner text alignment of the button */
+  textAlign?: 'left' | 'right' | 'center' | 'start' | 'end';
 }
 
 interface CommonButtonProps
@@ -69,7 +90,10 @@ const Button = React.forwardRef(
     {
       id,
       children,
-      variant,
+      primary,
+      destructive,
+      outline,
+      plain,
       url,
       disabled,
       external,
@@ -95,8 +119,10 @@ const Button = React.forwardRef(
       size = DEFAULT_SIZE,
       textAlign,
       fullWidth,
-      dataPrimaryLink,
       icon,
+      monochrome,
+      disclosure,
+      connectedDisclosure,
     }: ButtonProps,
     ref: any
   ) => {
@@ -104,10 +130,11 @@ const Button = React.forwardRef(
 
     const className = cx(
       styles.Button,
-      variant === 'primary' && styles.primary,
-      variant === 'destructive' && styles.destructive,
-      variant === 'outline' && styles.outline,
-      variant === 'plain' && styles.plain,
+      primary && styles.primary,
+      destructive && styles.destructive,
+      outline && styles.outline,
+      plain && styles.plain,
+      monochrome && styles.monochrome,
       size && size !== DEFAULT_SIZE && styles[variationName('size', size)],
       textAlign && styles[variationName('textAlign', textAlign)],
       fullWidth && styles.fullWidth,
@@ -115,7 +142,9 @@ const Button = React.forwardRef(
       removeUnderline && styles.removeUnderline,
       pressed && !disabled && !url && styles.pressed,
       isDisabled && styles.disabled,
-      loading && styles.loading
+      loading && styles.loading,
+      textAlign && styles[variationName('textAlign', textAlign)],
+      connectedDisclosure && styles.connectedDisclosure
     );
 
     const childMarkup = children ? (
@@ -134,6 +163,22 @@ const Button = React.forwardRef(
       </span>
     ) : null;
 
+    const iconMarkup = icon ? (
+      <span className={cx(styles.Icon, loading && styles.hidden)}>{icon}</span>
+    ) : null;
+
+    const disclosureMarkup = disclosure ? (
+      <span className={styles.Icon}>
+        <div className={cx(styles.DisclosureIcon, loading && styles.hidden)}>
+          {loading ? (
+            <div className={styles.Placeholder} />
+          ) : (
+            getDisclosureIconSource(disclosure)
+          )}
+        </div>
+      </span>
+    ) : null;
+
     const commonProps: CommonButtonProps = {
       id,
       className,
@@ -146,7 +191,6 @@ const Button = React.forwardRef(
       onMouseUp: handleMouseUpByBlurring,
       onMouseEnter,
       onTouchStart,
-      'data-primary-link': dataPrimaryLink,
     };
     const linkProps: LinkButtonProps = {
       url,
@@ -175,9 +219,9 @@ const Button = React.forwardRef(
       >
         <span className={styles.Content}>
           {spinnerSVGMarkup}
-          {/* {iconMarkup} */}
+          {iconMarkup}
           {childMarkup}
-          {/* {disclosureMarkup} */}
+          {disclosureMarkup}
         </span>
       </UnstyledButton>
     );
@@ -185,3 +229,13 @@ const Button = React.forwardRef(
 );
 
 export { Button };
+
+function getDisclosureIconSource(
+  disclosure: NonNullable<ButtonProps['disclosure']>
+) {
+  if (disclosure === 'select') {
+    return <ChevronUpDown size={14} />;
+  }
+
+  return disclosure === 'up' ? <ChevronUp /> : <ChevronDown />;
+}
