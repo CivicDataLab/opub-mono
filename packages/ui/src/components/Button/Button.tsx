@@ -85,148 +85,138 @@ type ActionButtonProps = Pick<
 
 const DEFAULT_SIZE = 'medium';
 
-const Button = React.forwardRef(
-  (
-    {
-      id,
-      children,
-      primary,
-      destructive,
-      outline,
-      plain,
-      url,
-      disabled,
-      external,
-      download,
-      submit,
-      loading,
-      pressed,
-      accessibilityLabel,
-      role,
-      ariaControls,
-      ariaExpanded,
-      ariaDescribedBy,
-      ariaChecked,
-      onClick,
-      onFocus,
-      onBlur,
-      onKeyDown,
-      onKeyUp,
-      onMouseEnter,
-      onTouchStart,
-      onPointerDown,
-      removeUnderline,
-      size = DEFAULT_SIZE,
-      textAlign,
-      fullWidth,
-      icon,
-      monochrome,
-      disclosure,
-      connectedDisclosure,
-    }: ButtonProps,
-    ref: any
-  ) => {
-    const isDisabled = disabled || loading;
+const Button = ({
+  id,
+  children,
+  primary,
+  destructive,
+  outline,
+  plain,
+  url,
+  disabled,
+  external,
+  download,
+  submit,
+  loading,
+  pressed,
+  accessibilityLabel,
+  role,
+  ariaControls,
+  ariaExpanded,
+  ariaDescribedBy,
+  ariaChecked,
+  onClick,
+  onFocus,
+  onBlur,
+  onKeyDown,
+  onKeyUp,
+  onMouseEnter,
+  onTouchStart,
+  onPointerDown,
+  removeUnderline,
+  size = DEFAULT_SIZE,
+  textAlign,
+  fullWidth,
+  icon,
+  monochrome,
+  disclosure,
+  connectedDisclosure,
+}: ButtonProps) => {
+  const isDisabled = disabled || loading;
 
-    const className = cx(
-      styles.Button,
-      primary && styles.primary,
-      destructive && styles.destructive,
-      outline && styles.outline,
-      plain && styles.plain,
-      monochrome && styles.monochrome,
-      size && size !== DEFAULT_SIZE && styles[variationName('size', size)],
-      textAlign && styles[variationName('textAlign', textAlign)],
-      fullWidth && styles.fullWidth,
-      icon && children == null && styles.iconOnly,
-      removeUnderline && styles.removeUnderline,
-      pressed && !disabled && !url && styles.pressed,
-      isDisabled && styles.disabled,
-      loading && styles.loading,
-      textAlign && styles[variationName('textAlign', textAlign)],
-      connectedDisclosure && styles.connectedDisclosure
-    );
+  const className = cx(
+    styles.Button,
+    primary && styles.primary,
+    destructive && styles.destructive,
+    outline && styles.outline,
+    plain && styles.plain,
+    monochrome && styles.monochrome,
+    size && size !== DEFAULT_SIZE && styles[variationName('size', size)],
+    textAlign && styles[variationName('textAlign', textAlign)],
+    fullWidth && styles.fullWidth,
+    icon && children == null && styles.iconOnly,
+    removeUnderline && styles.removeUnderline,
+    pressed && !disabled && !url && styles.pressed,
+    isDisabled && styles.disabled,
+    loading && styles.loading,
+    textAlign && styles[variationName('textAlign', textAlign)],
+    connectedDisclosure && styles.connectedDisclosure
+  );
 
-    const childMarkup = children ? (
-      <span
-        className={cx(styles.Text, removeUnderline && styles.removeUnderline)}
-        // Fixes Safari bug that doesn't re-render button text to correct color
-        key={disabled ? 'text-disabled' : 'text'}
-      >
-        {children}
+  const childMarkup = children ? (
+    <span
+      className={cx(styles.Text, removeUnderline && styles.removeUnderline)}
+      // Fixes Safari bug that doesn't re-render button text to correct color
+      key={disabled ? 'text-disabled' : 'text'}
+    >
+      {children}
+    </span>
+  ) : null;
+
+  const spinnerSVGMarkup = loading ? (
+    <span className={styles.Spinner}>
+      <Spinner size="small" accessibilityLabel={'Loading'} />
+    </span>
+  ) : null;
+
+  const iconMarkup = icon ? (
+    <span className={cx(styles.Icon, loading && styles.hidden)}>{icon}</span>
+  ) : null;
+
+  const disclosureMarkup = disclosure ? (
+    <span className={styles.Icon}>
+      <div className={cx(styles.DisclosureIcon, loading && styles.hidden)}>
+        {loading ? (
+          <div className={styles.Placeholder} />
+        ) : (
+          getDisclosureIconSource(disclosure)
+        )}
+      </div>
+    </span>
+  ) : null;
+
+  const commonProps: CommonButtonProps = {
+    id,
+    className,
+    accessibilityLabel,
+    ariaDescribedBy,
+    role,
+    onClick,
+    onFocus,
+    onBlur,
+    onMouseUp: handleMouseUpByBlurring,
+    onMouseEnter,
+    onTouchStart,
+  };
+  const linkProps: LinkButtonProps = {
+    url,
+    external,
+    download,
+  };
+  const actionProps: ActionButtonProps = {
+    submit,
+    disabled: isDisabled,
+    loading,
+    ariaControls,
+    ariaExpanded,
+    ariaChecked,
+    pressed,
+    onKeyDown,
+    onKeyUp,
+    onPointerDown,
+  };
+
+  return (
+    <UnstyledButton {...commonProps} {...linkProps} {...actionProps}>
+      <span className={styles.Content}>
+        {spinnerSVGMarkup}
+        {iconMarkup}
+        {childMarkup}
+        {disclosureMarkup}
       </span>
-    ) : null;
-
-    const spinnerSVGMarkup = loading ? (
-      <span className={styles.Spinner}>
-        <Spinner size="small" accessibilityLabel={'Loading'} />
-      </span>
-    ) : null;
-
-    const iconMarkup = icon ? (
-      <span className={cx(styles.Icon, loading && styles.hidden)}>{icon}</span>
-    ) : null;
-
-    const disclosureMarkup = disclosure ? (
-      <span className={styles.Icon}>
-        <div className={cx(styles.DisclosureIcon, loading && styles.hidden)}>
-          {loading ? (
-            <div className={styles.Placeholder} />
-          ) : (
-            getDisclosureIconSource(disclosure)
-          )}
-        </div>
-      </span>
-    ) : null;
-
-    const commonProps: CommonButtonProps = {
-      id,
-      className,
-      accessibilityLabel,
-      ariaDescribedBy,
-      role,
-      onClick,
-      onFocus,
-      onBlur,
-      onMouseUp: handleMouseUpByBlurring,
-      onMouseEnter,
-      onTouchStart,
-    };
-    const linkProps: LinkButtonProps = {
-      url,
-      external,
-      download,
-    };
-    const actionProps: ActionButtonProps = {
-      submit,
-      disabled: isDisabled,
-      loading,
-      ariaControls,
-      ariaExpanded,
-      ariaChecked,
-      pressed,
-      onKeyDown,
-      onKeyUp,
-      onPointerDown,
-    };
-
-    return (
-      <UnstyledButton
-        {...commonProps}
-        {...linkProps}
-        {...actionProps}
-        ref={ref}
-      >
-        <span className={styles.Content}>
-          {spinnerSVGMarkup}
-          {iconMarkup}
-          {childMarkup}
-          {disclosureMarkup}
-        </span>
-      </UnstyledButton>
-    );
-  }
-);
+    </UnstyledButton>
+  );
+};
 
 export { Button };
 
