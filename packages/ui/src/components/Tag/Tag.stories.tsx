@@ -4,6 +4,7 @@ import { PropsVariationSection } from '@utils/helpers';
 import { Light } from '@opub-icons/workflow';
 import { Flex } from '../Flex';
 
+/* A tag labels UI objects for quick recognition and navigation. */
 export default {
   component: Tag,
 
