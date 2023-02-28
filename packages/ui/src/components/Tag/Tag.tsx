@@ -17,6 +17,8 @@ export interface NonMutuallyExclusiveProps {
   accessibilityLabel?: string;
   /** Url to navigate to when tag is clicked or keypressed. */
   url?: string;
+  /** Url to navigate to when tag is clicked or keypressed. */
+  color?: 'standard' | 'one' | 'two' | 'three' | 'four' | 'five';
 }
 
 export type TagProps = NonMutuallyExclusiveProps &
@@ -32,6 +34,7 @@ export function Tag({
   onRemove,
   accessibilityLabel,
   url,
+  color = 'standard',
 }: TagProps) {
   const segmented = onRemove && url;
   const className = cx(
@@ -91,7 +94,14 @@ export function Tag({
     );
 
   return (
-    <span className={className}>
+    <span
+      className={className}
+      style={{
+        /* @ts-ignore */
+        '--background': `var(--tag-bg-${color})`,
+        '--text': `var(--tag-fg-${color})`,
+      }}
+    >
       {tagContent}
       {removeButton}
     </span>

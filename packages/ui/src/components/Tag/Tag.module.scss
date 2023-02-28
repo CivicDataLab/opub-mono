@@ -4,15 +4,31 @@ $height: 20px;
 $button-size: 20px;
 
 .Tag {
+  --tag-bg-standard: var(--surface-neutral-default);
+  --tag-fg-standard: var(--text-default);
+  --tag-bg-one: var(--decorative-surface-one);
+  --tag-fg-one: var(--decorative-text-one);
+  --tag-bg-two: var(--decorative-surface-two);
+  --tag-fg-two: var(--decorative-text-two);
+  --tag-bg-three: var(--decorative-surface-three);
+  --tag-fg-three: var(--decorative-text-three);
+  --tag-bg-four: var(--decorative-surface-four);
+  --tag-fg-four: var(--decorative-text-four);
+  --tag-bg-five: var(--decorative-surface-five);
+  --tag-fg-five: var(--decorative-text-five);
+
+  --background: var(--tag-bg-standard);
+  --text: var(--tag-fg-standard);
+
   display: inline-flex;
   max-width: 100%;
 
   align-items: center;
   min-height: 28px;
   padding: 0 var(--space-2);
-  background-color: var(--surface-neutral-default);
+  background-color: var(--background);
   border-radius: var(--border-radius-1);
-  color: var(--text-default);
+  color: var(--text);
 
   &.disabled {
     @include recolor-icon(var(--icon-disabled));
@@ -25,7 +41,7 @@ $button-size: 20px;
     @include unstyled-button;
     cursor: pointer;
     padding: var(--space-1) var(--space-2);
-    background-color: var(--surface-neutral);
+    background-color: var(--background);
     outline: var(--border-width-1) solid transparent;
 
     font-size: 13px;
@@ -127,7 +143,7 @@ $button-size: 20px;
 
 .Link {
   display: inline-grid;
-  color: var(--text-default);
+  color: var(--text);
   outline: none;
   border-radius: var(--border-radius-1);
   text-decoration: none;
