@@ -15,8 +15,8 @@ export default {
 export const Default = {
   args: {
     children: 'Button',
-    parameters: { pseudo: { focus: true } },
   },
+  parameters: { pseudo: { focus: true } },
 };
 
 export const Basic = () => (
