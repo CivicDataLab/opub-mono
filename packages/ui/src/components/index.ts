@@ -7,6 +7,6 @@ export { TextArea } from './TextArea';
 export { Label } from './Label';
 export { Checkbox } from './Checkbox';
 export { Spinner } from './Spinner';
-export { Tag } from './Tag';
+export { Tag } from './Tag/Tag';
 export { View } from './View';
 export { Link } from './Link';
