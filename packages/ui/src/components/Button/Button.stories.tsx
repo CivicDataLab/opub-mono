@@ -6,6 +6,8 @@ import { Button } from './Button';
 
 /**
  * Primary UI component for user interface
+ *
+ * Reference: https://polaris.shopify.com/components/actions/button
  */
 export default {
   component: Button,

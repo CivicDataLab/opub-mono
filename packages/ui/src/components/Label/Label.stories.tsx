@@ -3,6 +3,8 @@ import { Label } from './Label';
 
 /**
  * Renders an accessible label associated with controls.
+ *
+ * Reference: https://www.radix-ui.com/docs/primitives/components/label
  */
 export default {
   component: Label,

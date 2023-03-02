@@ -6,6 +6,8 @@ import { PropsVariationSection } from '@ui/utils/helpers';
 
 /**
  * Tags represent a set of interactive keywords that help label, organize, and categorize objects
+ *
+ * Reference: https://polaris.shopify.com/components/selection-and-input/tag
  */
 export default {
   component: Tag,
