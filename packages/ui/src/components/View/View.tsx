@@ -10,7 +10,9 @@ import { DOMRef } from '@react-types/shared';
 import { ViewProps } from '@ui/types/view';
 import { ReactElement, forwardRef } from 'react';
 
-function View(props: ViewProps, ref: DOMRef) {
+export interface Props extends ViewProps {}
+
+function View(props: Props, ref: DOMRef) {
   props = useSlotProps(props);
   let { elementType: ElementType = 'div', children, ...otherProps } = props;
   let { styleProps } = useStyleProps(props, viewStyleProps);

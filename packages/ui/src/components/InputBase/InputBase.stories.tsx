@@ -3,6 +3,9 @@ import { Meta } from '@storybook/react';
 import { InputBase } from './InputBase';
 import { PropsVariationSection } from '@ui/utils/helpers';
 
+/**
+ * A base component for Input related components.
+ */
 export default {
   component: InputBase,
 

@@ -1,6 +1,9 @@
 import { Meta } from '@storybook/react';
 import { Label } from './Label';
 
+/**
+ * Renders an accessible label associated with controls.
+ */
 export default {
   component: Label,
 
