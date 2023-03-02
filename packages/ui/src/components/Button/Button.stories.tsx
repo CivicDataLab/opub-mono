@@ -1,5 +1,5 @@
 import { SortOrderDown } from '@opub-icons/workflow';
-import { Meta } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 import { PropsVariationSection } from '@ui/utils/helpers';
 import { Flex } from '../Flex';
 import { Button } from './Button';
@@ -9,12 +9,14 @@ import { Button } from './Button';
  *
  * Reference: https://polaris.shopify.com/components/actions/button
  */
-export default {
+const meta = {
   component: Button,
-  tags: ['autodocs'],
-} as Meta<typeof Button>;
+} satisfies Meta<typeof Button>;
 
-export const Default = {
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const Default: Story = {
   args: {
     children: 'Button',
   },

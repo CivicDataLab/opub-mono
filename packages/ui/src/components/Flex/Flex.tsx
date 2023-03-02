@@ -6,7 +6,9 @@ import {
   useDOMRef,
   useStyleProps,
 } from '@react-spectrum/utils';
-import { DOMProps, DOMRef, FlexStyleProps } from '@ui/types/shared';
+import { DOMProps } from '@ui/types/shared/dom';
+import { DOMRef } from '@ui/types/shared/refs';
+import { FlexStyleProps } from '@ui/types/shared/style';
 import React from 'react';
 import styles from './Flex.module.scss';
 

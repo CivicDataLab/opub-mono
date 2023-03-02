@@ -1,10 +1,12 @@
 import { useField } from 'formik';
 import React from 'react';
-import { InputBase, InputProps } from '../InputBase';
+import { InputBase } from '../InputBase';
+import { InputProps } from '@ui/types/input';
 
 export interface FromikTextAreaProps extends InputProps {
   name: string;
   onFieldChange?: any;
+  height?: number;
 }
 
 export const TextArea = ({ name, label, ...props }: FromikTextAreaProps) => {

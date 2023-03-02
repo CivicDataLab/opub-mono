@@ -4,12 +4,12 @@ import { Checkbox } from './Checkbox';
 
 /**
  * A control that allows the user to toggle between checked and not checked.
- * 
+ *
  * Reference: https://www.radix-ui.com/docs/primitives/components/checkbox
  */
 export default {
   component: Checkbox,
-  tags: ['autodocs'],
+
   argTypes: {
     children: {
       control: 'text',
