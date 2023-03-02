@@ -1,26 +1,10 @@
+import { InputProps } from '@ui/types/Input';
 import cx from 'classnames';
-import React, { InputHTMLAttributes } from 'react';
+import React from 'react';
 import { Label } from '../Label';
 import styles from './InputBase.module.scss';
-export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  indicator?: true | false | 'label' | 'icon';
-  iconStart?: React.ReactNode;
-  iconEnd?: React.ReactNode;
-  maxLength?: number;
-  className?: string;
-  isRequired?: boolean;
-  label: string;
-  validationState?: 'valid' | 'invalid';
-  isDisabled?: boolean;
-  description?: string;
-  errorMessage?: string | null;
-  as?: 'input' | 'textarea';
-  rows?: number;
-  fluid?: boolean;
-  isReadOnly?: boolean;
-}
 
-const InputBase = React.forwardRef((props: InputProps, ref) => {
+export const InputBase = React.forwardRef((props: InputProps, ref) => {
   let {
     label,
     isRequired,
@@ -91,5 +75,3 @@ const InputBase = React.forwardRef((props: InputProps, ref) => {
     </div>
   );
 });
-
-export { InputBase };
