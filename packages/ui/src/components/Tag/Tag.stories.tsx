@@ -1,8 +1,8 @@
 import { Meta } from '@storybook/react';
 import { Tag } from './Tag';
-import { PropsVariationSection } from '@utils/helpers';
 import { Light } from '@opub-icons/workflow';
 import { Flex } from '../Flex';
+import { PropsVariationSection } from '@ui/utils/helpers';
 
 /* A tag labels UI objects for quick recognition and navigation. */
 export default {

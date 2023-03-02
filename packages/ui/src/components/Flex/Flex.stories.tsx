@@ -3,12 +3,12 @@ import { Flex } from './Flex';
 
 export default {
   component: Flex,
-  argTypes: {
-    children: {
-      control: 'null',
-      description: 'Children for Flex container',
-    },
-  },
+  // argTypes: {
+  //   children: {
+  //     control: 'null',
+  //     description: 'Children for Flex container',
+  //   },
+  // },
 } as Meta<typeof Flex>;
 
 export const Primary = {
