@@ -1,17 +1,19 @@
 import { CheckmarkSize200 } from '@opub-icons/ui';
 import * as CheckboxRadix from '@radix-ui/react-checkbox';
-import { useField } from 'formik';
+import { FieldHookConfig, useField } from 'formik';
 import React from 'react';
 import { Flex } from '../Flex';
 import { Label } from '../Label';
 import styles from './Checkbox.module.scss';
+import { CheckboxProps } from '@ui/types/checkbox';
 
-export interface CheckboxProps
-  extends React.ComponentProps<typeof CheckboxRadix.Root> {
-  name: string;
+export interface CheckboxRadixProps
+  extends Omit<React.ComponentProps<typeof CheckboxRadix.Root>, 'name'>,
+    CheckboxProps {
+  name: string | FieldHookConfig<any>;
 }
 
-const Checkbox = ({ children, name, ...props }: CheckboxProps) => {
+const Checkbox = ({ children, name, ...props }: CheckboxRadixProps) => {
   const [field, meta, helpers] = useField(name);
   const id = React.useId();
 

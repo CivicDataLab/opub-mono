@@ -1,15 +1,13 @@
 import * as LabelRadix from '@radix-ui/react-label';
+import { LabelProps } from '@radix-ui/react-label/dist/index';
 import cx from 'classnames';
-import React from 'react';
 import styles from './Label.module.scss';
 
-export interface LabelInterface {
+export interface LabelInterface extends LabelProps {
   error?: boolean;
 }
-export type LabelProps = React.ComponentProps<typeof LabelRadix.Root> &
-  LabelInterface;
 
-export function Label({ children, ...props }: LabelProps) {
+export function Label({ children, ...props }: LabelInterface) {
   const { error = false, ...otherProps } = props;
 
   return (
