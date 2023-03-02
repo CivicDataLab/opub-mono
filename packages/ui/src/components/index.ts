@@ -9,3 +9,5 @@ export { Label } from "./Label";
 export { Checkbox } from "./Checkbox";
 export { Spinner } from "./Spinner";
 export { Tag } from "./Tag";
+export { View } from "./View";
+export { Link } from "./Link";

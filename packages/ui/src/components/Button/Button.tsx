@@ -1,3 +1,5 @@
+import { ChevronDown, ChevronUp, ChevronUpDown } from '@opub-icons/workflow';
+import { ConnectedDisclosure } from '@ui/types/button';
 import { variationName } from '@ui/utils/css';
 import { MouseUpBlurHandler, handleMouseUpByBlurring } from '@ui/utils/focus';
 import cx from 'classnames';
@@ -5,8 +7,6 @@ import * as React from 'react';
 import { Spinner } from '../Spinner';
 import { UnstyledButton, UnstyledButtonProps } from './BaseButton';
 import styles from './Button.module.scss';
-import { ConnectedDisclosure } from '@ui/types';
-import { ChevronDown, ChevronUp, ChevronUpDown } from '@opub-icons/workflow';
 
 export interface ButtonProps extends UnstyledButtonProps {
   /** Provides extra visual weight and identifies the primary action in a set of buttons */

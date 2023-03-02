@@ -1,9 +1,8 @@
 import { SortOrderDown } from '@opub-icons/workflow';
 import { Meta } from '@storybook/react';
-
-import { PropsVariationSection } from '@utils/helpers';
-import { Button } from './Button';
+import { PropsVariationSection } from '@ui/utils/helpers';
 import { Flex } from '../Flex';
+import { Button } from './Button';
 
 /**
  * Primary UI component for user interface

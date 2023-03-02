@@ -1,5 +1,4 @@
 import { Flex } from '@ui/components';
-import React from 'react';
 
 export function PropsVariationSection({
   component: Component,

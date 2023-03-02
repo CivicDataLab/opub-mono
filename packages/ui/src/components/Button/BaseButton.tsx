@@ -1,10 +1,8 @@
-import React from 'react';
-
-import type { BaseButtonProps } from '../../types';
+import { BaseButtonProps } from '@ui/types/button';
 import { handleMouseUpByBlurring } from '@ui/utils/focus';
-import { useDisableClick } from '@ui/use-disable-interaction';
+import { useDisableClick } from '@ui/utils/hooks';
+import React from 'react';
 import { UnstyledLink } from '../Link/BaseLink';
-
 export interface UnstyledButtonProps extends BaseButtonProps {
   /** The content to display inside the button */
   children?: React.ReactNode;

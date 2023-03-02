@@ -1,7 +1,8 @@
 import { forwardRef, memo } from 'react';
 
-import { LinkLikeComponentProps, useLink } from '@ui/utils/link';
 import { unstyled } from '../shared';
+import { LinkLikeComponentProps } from '@ui/types/link';
+import { useLink } from './helpers';
 
 export interface UnstyledLinkProps extends LinkLikeComponentProps {}
 
