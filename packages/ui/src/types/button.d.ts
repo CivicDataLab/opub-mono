@@ -1,6 +1,6 @@
 import { JSXElementConstructor, ReactNode } from 'react';
 
-export interface BaseButtonProps {
+interface BaseButtonProps {
   /** A unique identifier for the button */
   id?: string;
   /** A destination to link to, rendered in the href attribute of a link */
@@ -96,7 +96,7 @@ export interface ActionListItemDescriptor
   role?: string;
 }
 
-export interface ConnectedDisclosure {
+interface ConnectedDisclosure {
   /** Visually hidden label for the connected disclosure button.
    * @default 'Related actions'
    */

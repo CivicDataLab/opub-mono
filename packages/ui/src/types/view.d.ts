@@ -1,4 +1,5 @@
-import { DOMProps, ViewStyleProps } from '../shared';
+import { DOMProps } from './shared/dom';
+import { ViewStyleProps } from './shared/style';
 
 export interface ViewProps extends ViewStyleProps, DOMProps {
   /**

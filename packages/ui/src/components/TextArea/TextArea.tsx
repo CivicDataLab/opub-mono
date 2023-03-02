@@ -1,7 +1,7 @@
-import { InputProps } from '@ui/types/Input';
 import { useField } from 'formik';
 import React from 'react';
 import { InputBase } from '../InputBase';
+import { InputProps } from '@ui/types/input';
 
 export interface FromikTextAreaProps extends InputProps {
   name: string;

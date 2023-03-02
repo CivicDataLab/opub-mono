@@ -1,6 +1,6 @@
 import { useField } from 'formik';
 import { InputBase } from '../InputBase';
-import { InputProps } from './types';
+import { InputProps } from '@ui/types/input';
 
 export interface FromikTextFieldProps extends InputProps {
   name: string;

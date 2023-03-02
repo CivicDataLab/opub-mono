@@ -1,4 +1,4 @@
-import { InputProps } from '@ui/types/Input';
+import { InputProps } from '@ui/types/input';
 import cx from 'classnames';
 import React from 'react';
 import { Label } from '../Label';
