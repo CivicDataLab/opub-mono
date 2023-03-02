@@ -3,14 +3,13 @@ import cx from 'classnames';
 import React from 'react';
 import styles from './Label.module.scss';
 
-type LabelProps = React.ComponentProps<typeof LabelRadix.Root> & {
+export interface LabelInterface {
   error?: boolean;
-};
+}
+export type LabelProps = React.ComponentProps<typeof LabelRadix.Root> &
+  LabelInterface;
 
-const Label = React.forwardRef<
-  React.ElementRef<typeof LabelRadix.Root>,
-  LabelProps
->(({ children, ...props }: LabelProps) => {
+export function Label({ children, ...props }: LabelProps) {
   const { error = false, ...otherProps } = props;
 
   return (
@@ -23,6 +22,4 @@ const Label = React.forwardRef<
       {children}
     </LabelRadix.Root>
   );
-});
-
-export { Label };
+}
