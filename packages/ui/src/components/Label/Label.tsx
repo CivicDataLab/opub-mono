@@ -20,7 +20,6 @@ const Label = React.forwardRef<
         [styles['error']]: error,
       })}
     >
-      sadasd
       {children}
     </LabelRadix.Root>
   );

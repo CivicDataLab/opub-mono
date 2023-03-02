@@ -3,6 +3,7 @@ import { Meta } from '@storybook/react';
 
 import { PropsVariationSection } from '@utils/helpers';
 import { Button } from './Button';
+import { Flex } from '../Flex';
 
 /**
  * Primary UI component for user interface
@@ -217,4 +218,24 @@ export const PlainDisclosure = () => (
       'medium + disclosure + false': { size: 'medium', disclosure: 'up' },
     }}
   />
+);
+
+export const PseudoStates = () => (
+  <Flex gap={12} className="story-grid pseudo">
+    <div style={{ outline: 'none' }}>
+      <Button>Normal</Button>
+    </div>
+    <div style={{ outline: 'none' }} className="pseudo-hover">
+      <Button>Hover</Button>
+    </div>
+    <div style={{ outline: 'none' }} className="pseudo-focus-visible">
+      <Button>Focus</Button>
+    </div>
+    <div
+      style={{ outline: 'none' }}
+      className="pseudo-hover pseudo-focus-visible"
+    >
+      <Button>Hover Focus</Button>
+    </div>
+  </Flex>
 );

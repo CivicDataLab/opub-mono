@@ -13,6 +13,8 @@ import styles from './Flex.module.scss';
 export interface FlexProps extends DOMProps, FlexStyleProps {
   /** Children of the flex container. */
   children: React.ReactNode;
+  /** Class names of the flex container. */
+  className?: string;
 }
 
 const flexStyleProps: StyleHandlers = {
@@ -37,7 +39,9 @@ const Flex = React.forwardRef(
     return (
       <div
         {...filterDOMProps(otherProps)}
-        className={classNames(styles, 'flex', styleProps.className)}
+        className={
+          props.className + classNames(styles, 'flex', styleProps.className)
+        }
         style={{ display: 'flex', gap: otherProps.gap || '0px', ...style }}
         ref={domRef}
       >

@@ -19,10 +19,18 @@ export const Primary = {
     children: (
       <>
         <div
-          style={{ backgroundColor: 'red', width: '150px', height: '150px' }}
+          style={{
+            backgroundColor: 'var(--decorative-surface-one)',
+            width: '150px',
+            height: '150px',
+          }}
         />
         <div
-          style={{ backgroundColor: 'blue', width: '150px', height: '150px' }}
+          style={{
+            backgroundColor: 'var(--decorative-surface-three)',
+            width: '150px',
+            height: '150px',
+          }}
         />
       </>
     ),

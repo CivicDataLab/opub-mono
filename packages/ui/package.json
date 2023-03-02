@@ -15,7 +15,8 @@
     "build-storybook": "storybook build",
     "test": "vitest",
     "coverage": "vitest run --coverage",
-    "lint": "TIMING=1 eslint \"**/*.ts*\""
+    "lint": "TIMING=1 eslint \"**/*.ts*\"",
+    "chromatic": "npx chromatic --exit-once-uploaded --project-token=795f989bc619"
   },
   "dependencies": {
     "@hookform/resolvers": "^2.9.11",
@@ -47,6 +48,7 @@
     "@types/react-test-renderer": "^18.0.0",
     "@vitejs/plugin-react": "^3.0.0",
     "babel-loader": "^8.3.0",
+    "chromatic": "^6.17.1",
     "eslint-config-custom": "*",
     "happy-dom": "^8.2.2",
     "react-test-renderer": "^18.2.0",
@@ -56,5 +58,7 @@
     "typescript": "^4.9.3",
     "vite": "^4.0.0",
     "vitest": "^0.28.3"
-  }
+  },
+  "readme": "ERROR: No README data found!",
+  "_id": "ui@0.0.0"
 }
