@@ -1,12 +1,12 @@
 import { useField } from 'formik';
 import { InputBase, InputProps } from '../InputBase';
 
-type FromikTextFieldProps = {
+export interface FromikTextFieldProps extends InputProps {
   name: string;
   onFieldChange?: any;
-} & InputProps;
+}
 
-export const TextField = ({ name, label, ...props }: FromikTextFieldProps) => {
+const TextField = ({ name, label, ...props }: FromikTextFieldProps) => {
   const [field, meta, helpers] = useField(name);
 
   function handleChange(e: any) {
@@ -24,3 +24,5 @@ export const TextField = ({ name, label, ...props }: FromikTextFieldProps) => {
     </>
   );
 };
+
+export { TextField };

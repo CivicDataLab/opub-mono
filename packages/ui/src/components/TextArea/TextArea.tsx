@@ -2,10 +2,10 @@ import { useField } from 'formik';
 import React from 'react';
 import { InputBase, InputProps } from '../InputBase';
 
-type FromikTextAreaProps = {
+export interface FromikTextAreaProps extends InputProps {
   name: string;
   onFieldChange?: any;
-} & InputProps;
+}
 
 export const TextArea = ({ name, label, ...props }: FromikTextAreaProps) => {
   const [field, meta, helpers] = useField(name);

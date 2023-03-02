@@ -6,14 +6,12 @@ import { Flex } from '../Flex';
 import { Label } from '../Label';
 import styles from './Checkbox.module.scss';
 
-type CheckboxProps = React.ComponentProps<typeof CheckboxRadix.Root> & {
+export interface CheckboxProps
+  extends React.ComponentProps<typeof CheckboxRadix.Root> {
   name: string;
-};
+}
 
-const Checkbox = React.forwardRef<
-  React.ElementRef<typeof CheckboxRadix.Root>,
-  CheckboxProps
->(({ children, name, ...props }: CheckboxProps) => {
+const Checkbox = ({ children, name, ...props }: CheckboxProps) => {
   const [field, meta, helpers] = useField(name);
   const id = React.useId();
 
@@ -27,6 +25,6 @@ const Checkbox = React.forwardRef<
       <Label htmlFor={id}>{children}</Label>
     </Flex>
   );
-});
+};
 
 export { Checkbox };

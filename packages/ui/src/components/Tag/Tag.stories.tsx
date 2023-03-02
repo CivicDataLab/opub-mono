@@ -1,10 +1,14 @@
 import { Meta } from '@storybook/react';
 import { Tag } from './Tag';
-import { PropsVariationSection } from '@utils/helpers';
 import { Light } from '@opub-icons/workflow';
 import { Flex } from '../Flex';
+import { PropsVariationSection } from '@ui/utils/helpers';
 
-/* A tag labels UI objects for quick recognition and navigation. */
+/**
+ * Tags represent a set of interactive keywords that help label, organize, and categorize objects
+ *
+ * Reference: https://polaris.shopify.com/components/selection-and-input/tag
+ */
 export default {
   component: Tag,
 

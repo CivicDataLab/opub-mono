@@ -2,16 +2,11 @@ import { Meta } from '@storybook/react';
 import { Form } from '../Form';
 import { TextField } from './TextField';
 
+/**
+ * TextFields are text inputs that allow users to input custom text entries with a keyboard. Various decorations can be displayed around the field to communicate the entry requirements.
+ */
 export default {
   component: TextField,
-
-  argTypes: {
-    validationState: {
-      options: ['valid', 'invalid'],
-      control: { type: 'select' },
-      description: 'whether the state is `valid` or `invalid`',
-    },
-  },
 } as Meta<typeof TextField>;
 
 export const Primary = ({ ...props }) => (

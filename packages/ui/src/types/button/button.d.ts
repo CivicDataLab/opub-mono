@@ -1,3 +1,5 @@
+import { JSXElementConstructor, ReactNode } from 'react';
+
 export interface BaseButtonProps {
   /** A unique identifier for the button */
   id?: string;

@@ -19,7 +19,7 @@ export default function Web() {
         <Button variant="primary" size="large">
           Large
         </Button>
-        <Button size="small">Small</Button>
+        <Button size="slim">Small</Button>
 
         <Button fluid>Fluid</Button>
       </div>
