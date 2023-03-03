@@ -11,30 +11,24 @@ import { PropsVariationSection } from '@ui/utils/helpers';
  */
 export default {
   component: Tag,
+} satisfies Meta<typeof Tag>;
 
-  argTypes: {
-    children: {
-      control: 'text',
-      description: 'description text',
-    },
-  },
-} as Meta<typeof Tag>;
+export const Default = () => <Tag>tag</Tag>;
 
-export const Primary = {
-  args: {
-    children: 'Tag',
-  },
-};
-
-export const LongName = {
-  args: {
-    onRemove: () => {
-      console.log('Remove triggered');
-    },
-    children:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at ipsum quam. Aliquam fermentum bibendum vestibulum. Vestibulum condimentum luctus metus, sed sagittis magna pellentesque eget. Duis dapibus pretium nisi, et venenatis tortor dignissim ut. Quisque eget lacus ac ex eleifend ultrices. Phasellus facilisis ex sit amet leo elementum condimentum. Ut vel maximus felis. Etiam eget diam eu eros blandit interdum. Sed eu metus sed justo aliquam iaculis ac sit amet ex. Curabitur justo magna, porttitor non pulvinar eu, malesuada at leo. Cras mollis consectetur eros, quis maximus lorem dignissim at. Proin in rhoncus massa. Vivamus lectus nunc, fringilla euismod risus commodo, mattis blandit nulla.',
-  },
-};
+export const LongName = () => (
+  <Tag onRemove={() => console.log('Remove triggered')}>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at ipsum
+    quam. Aliquam fermentum bibendum vestibulum. Vestibulum condimentum luctus
+    metus, sed sagittis magna pellentesque eget. Duis dapibus pretium nisi, et
+    venenatis tortor dignissim ut. Quisque eget lacus ac ex eleifend ultrices.
+    Phasellus facilisis ex sit amet leo elementum condimentum. Ut vel maximus
+    felis. Etiam eget diam eu eros blandit interdum. Sed eu metus sed justo
+    aliquam iaculis ac sit amet ex. Curabitur justo magna, porttitor non
+    pulvinar eu, malesuada at leo. Cras mollis consectetur eros, quis maximus
+    lorem dignissim at. Proin in rhoncus massa. Vivamus lectus nunc, fringilla
+    euismod risus commodo, mattis blandit nulla.
+  </Tag>
+);
 
 export const Colors = () => (
   <PropsVariationSection
