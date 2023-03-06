@@ -1,6 +1,6 @@
 import { switchTheme } from '@/utils/helpers';
 import React from 'react';
-import { Button, Flex, Tag } from 'ui';
+import { Button, Checkbox, Flex, Tag } from 'ui';
 import styles from '../styles/pages/home.module.scss';
 import { PropsVariationSection } from '@/../../packages/ui/src/utils/helpers';
 import { Light } from '@opub-icons/workflow';
@@ -70,6 +70,22 @@ export default function Web() {
           }}
         />
       </div>
+      <h2>Checkbox</h2>
+      <PropsVariationSection
+        withFormik
+        component={Checkbox}
+        common={{ children: 'Label' }}
+        xAxis={{
+          default: {},
+          disabled: { disabled: true },
+          error: { error: true },
+        }}
+        yAxis={{
+          Unchecked: {},
+          Checked: { checked: true },
+          Indeterminate: { checked: 'indeterminate' },
+        }}
+      />
     </div>
   );
 }
