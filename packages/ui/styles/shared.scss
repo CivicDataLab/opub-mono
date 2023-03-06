@@ -107,3 +107,78 @@ $border-width-data: (
     content: none;
   }
 }
+
+@mixin visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  clip-path: inset(50%) !important;
+  border: 0 !important;
+  white-space: nowrap !important;
+}
+
+@mixin control-backdrop($style: base) {
+  --control-border-width: var(--border-width-2);
+  @if $style == base {
+    position: relative;
+    border: var(--control-border-width) solid var(--border-default);
+    background-color: var(--surface-default);
+    border-radius: var(--border-radius-1);
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: calc(-1 * var(--control-border-width));
+      right: calc(-1 * var(--control-border-width));
+      bottom: calc(-1 * var(--control-border-width));
+      left: calc(-1 * var(--control-border-width));
+      border-radius: var(--border-radius-1);
+      background-color: var(--interactive-default);
+      opacity: 0;
+      transform: scale(0.25);
+      transition: opacity duration(fast) var(--ease),
+        transform duration(fast) var(--ease);
+    }
+
+    &.hover,
+    &:hover {
+      cursor: pointer;
+      border-color: var(--border-hovered);
+    }
+  } @else if $style == active {
+    border-color: var(--interactive-default);
+
+    &::before {
+      opacity: 1;
+      transform: scale(1);
+      @media (-ms-high-contrast: active) {
+        border: 2px solid ms-high-contrast-color('text');
+      }
+    }
+  } @else if $style == disabled {
+    border-color: var(--border-disabled);
+
+    &::before {
+      background-color: var(--action-secondary-disabled);
+    }
+
+    &:hover {
+      cursor: default;
+    }
+  } @else if $style == error {
+    border-color: var(--border-critical);
+    background-color: var(--surface-critical);
+
+    &.hover,
+    &:hover {
+      border-color: var(--border-critical);
+    }
+
+    &::before {
+      background-color: var(--border-critical);
+    }
+  }
+}

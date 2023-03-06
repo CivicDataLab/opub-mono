@@ -1,10 +1,10 @@
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
-import { Tag } from "./Tag";
+import { Checkbox } from "./Checkbox";
 
-describe("Tag Tests", () => {
+describe("Checkbox Tests", () => {
   beforeEach(() => {
-    render(<Tag>Component</Tag>);
+    render(<Checkbox>Component</Checkbox>);
   });
 
   test("should show Component text all the time", () => {

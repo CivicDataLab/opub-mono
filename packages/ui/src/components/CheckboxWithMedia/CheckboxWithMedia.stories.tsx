@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { Form } from '../Form';
-import { Checkbox } from './Checkbox';
+import { CheckboxWithMedia } from './Checkbox';
 import { PropsVariationSection } from '@ui/utils/helpers';
 
 /**
@@ -9,23 +9,15 @@ import { PropsVariationSection } from '@ui/utils/helpers';
  * Reference: https://www.radix-ui.com/docs/primitives/components/checkbox
  */
 const meta = {
-  component: Checkbox,
-} satisfies Meta<typeof Checkbox>;
+  component: CheckboxWithMedia,
+} satisfies Meta<typeof CheckboxWithMedia>;
 
 export default meta;
-
-export const Default = ({ children = 'label', ...props }: any) => (
-  <Form initialValues={{}}>
-    <Checkbox name="name" {...props}>
-      {children}
-    </Checkbox>
-  </Form>
-);
 
 export const States = () => (
   <PropsVariationSection
     withFormik
-    component={Checkbox}
+    component={CheckboxWithMedia}
     common={{ children: 'Label' }}
     xAxis={{
       default: {},

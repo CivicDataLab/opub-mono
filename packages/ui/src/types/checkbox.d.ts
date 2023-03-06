@@ -1,9 +1,22 @@
-type CheckedState = boolean | 'indeterminate';
+import type { Root } from '@radix-ui/react-checkbox';
+import type { Error } from './shared/form';
 
-export interface CheckboxProps
+type CheckedState = boolean | 'indeterminate';
+export interface CheckboxRadixProps
   extends Omit<'button', 'checked' | 'defaultChecked'> {
+  /** Checkbox is selected. `indeterminate` shows a horizontal line in the checkbox */
   checked?: CheckedState;
+  /** Checkbox is selected by default but may be uncontrolled */
   defaultChecked?: CheckedState;
+  /** Whether the field is required */
   required?: boolean;
+  /** Callback when checkbox is toggled */
   onCheckedChange?(checked: CheckedState): void;
+}
+
+export interface CheckboxProps extends Omit<Root, 'name'>, CheckboxRadixProps {
+  /** Name for form input */
+  name: string;
+  /** Display an error message */
+  error?: Error | boolean;
 }

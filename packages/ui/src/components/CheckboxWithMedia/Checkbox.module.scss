@@ -11,9 +11,10 @@
   cursor: pointer;
 
   --gap: 8px;
-  // @media #{$breakpoints-md-down} {
-  //   --gap: 9px;
-  // }
+
+  @media #{$breakpoints-md-down} {
+    --gap: 9px;
+  }
 
   label {
     padding-inline-start: var(--gap);

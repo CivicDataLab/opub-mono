@@ -7,7 +7,7 @@ import React from 'react';
 import { Label } from '../Label';
 import styles from './Checkbox.module.scss';
 
-const Checkbox = ({ children, name, ...props }: CheckboxProps) => {
+const CheckboxWithMedia = ({ children, name, ...props }: CheckboxProps) => {
   const [field, meta, helpers] = useField(name);
   const id = React.useId();
   const isIndeterminate = props.checked === 'indeterminate';
@@ -44,4 +44,4 @@ const Checkbox = ({ children, name, ...props }: CheckboxProps) => {
   );
 };
 
-export { Checkbox };
+export { CheckboxWithMedia };
