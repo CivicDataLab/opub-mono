@@ -4,7 +4,7 @@ import { InputProps } from '@ui/types/input';
 
 export interface FromikTextFieldProps extends InputProps {
   name: string;
-  onFieldChange?: any;
+  onFieldChange?(e: any): void;
 }
 
 export const TextField = ({ name, label, ...props }: FromikTextFieldProps) => {

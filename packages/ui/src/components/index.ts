@@ -10,3 +10,4 @@ export { Tag } from './Tag';
 export { TextArea } from './TextArea';
 export { TextField } from './TextField';
 export { View } from './View';
+export { Divider } from "./Divider";

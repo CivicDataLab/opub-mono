@@ -5,7 +5,7 @@ import { InputProps } from '@ui/types/input';
 
 export interface FromikTextAreaProps extends InputProps {
   name: string;
-  onFieldChange?: any;
+  onFieldChange?(e: any): void;
   height?: number;
 }
 
