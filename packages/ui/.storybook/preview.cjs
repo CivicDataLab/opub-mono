@@ -4,7 +4,7 @@ import '../../../apps/web/styles/breakpoints.scss';
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
-  expanded: true,
+  // expanded: true,
   controls: {
     matchers: {
       color: /(background|color)$/i,

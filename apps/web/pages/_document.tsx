@@ -16,7 +16,6 @@ export default class MyDocument extends Document {
             rel="stylesheet"
             crossOrigin="anonymous"
           />
-          <title>OPub Mono</title>
         </Head>
         <body>
           <script>0</script>

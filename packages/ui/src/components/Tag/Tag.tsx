@@ -1,31 +1,9 @@
 import { CrossSize200 } from '@opub-icons/ui';
+import { TagProps } from '@ui/types/tag';
 import { handleMouseUpByBlurring } from '@ui/utils/focus';
+import { isMockFunction } from '@ui/utils/helpers';
 import cx from 'classnames';
-import React from 'react';
 import styles from './Tag.module.scss';
-
-export interface NonMutuallyExclusiveProps {
-  /** Content to display in the tag */
-  children?: React.ReactNode;
-  /** Disables the tag  */
-  disabled?: boolean;
-  /** Callback when tag is clicked or keypressed. Renders without remove button or url when set. */
-  onClick?(): void;
-  /** Callback when remove button is clicked or keypressed. */
-  onRemove?(): void;
-  /** A string to use when tag has more than textual content */
-  accessibilityLabel?: string;
-  /** Url to navigate to when tag is clicked or keypressed. */
-  url?: string;
-  /** Url to navigate to when tag is clicked or keypressed. */
-  color?: 'standard' | 'one' | 'two' | 'three' | 'four' | 'five';
-}
-
-export type TagProps = NonMutuallyExclusiveProps &
-  (
-    | { onClick?(): void; onRemove?: undefined; url?: undefined }
-    | { onClick?: undefined; onRemove?(): void; url?: string }
-  );
 
 export function Tag({
   children,
@@ -40,13 +18,13 @@ export function Tag({
   const className = cx(
     styles.Tag,
     disabled && styles.disabled,
-    onClick && styles.clickable,
-    onRemove && styles.removable,
+    onClick && !isMockFunction(onClick) && styles.clickable,
+    onRemove && !isMockFunction(onRemove) && styles.removable,
     url && !disabled && styles.linkable,
     segmented && styles.segmented
   );
 
-  if (onClick) {
+  if (onClick && !isMockFunction(onClick)) {
     return (
       <button
         type="button"
@@ -67,18 +45,19 @@ export function Tag({
 
   const ariaLabel = accessibilityLabel;
 
-  const removeButton = onRemove ? (
-    <button
-      type="button"
-      aria-label={ariaLabel}
-      className={cx(styles.Button, segmented && styles.segmented)}
-      onClick={onRemove}
-      onMouseUp={handleMouseUpByBlurring}
-      disabled={disabled}
-    >
-      <CrossSize200 />
-    </button>
-  ) : null;
+  const removeButton =
+    onRemove && !isMockFunction(onRemove) ? (
+      <button
+        type="button"
+        aria-label={ariaLabel}
+        className={cx(styles.Button, segmented && styles.segmented)}
+        onClick={onRemove}
+        onMouseUp={handleMouseUpByBlurring}
+        disabled={disabled}
+      >
+        <CrossSize200 />
+      </button>
+    ) : null;
 
   const tagContent =
     url && !disabled ? (

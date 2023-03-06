@@ -13,8 +13,9 @@ export default defineConfig({
   },
   resolve: {
     alias: [
-      { find: '@utils', replacement: path.resolve(__dirname, '/utils') },
+      { find: '@utils', replacement: path.resolve(__dirname, '/src/utils') },
       { find: '@ui', replacement: path.resolve(__dirname, '/src') },
+      { find: '@types', replacement: path.resolve(__dirname, '/src/types') },
     ],
   },
   css: {

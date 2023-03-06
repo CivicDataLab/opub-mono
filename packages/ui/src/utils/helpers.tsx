@@ -69,3 +69,8 @@ export function PropsVariationSection({
     </table>
   );
 }
+
+// _isMockFunction
+export function isMockFunction(func: any) {
+  return func._isMockFunction;
+}
