@@ -1,31 +1,46 @@
-import { CheckmarkSize200 } from '@opub-icons/ui';
+import { CheckmarkSize100, DashSize100 } from '@opub-icons/ui';
 import * as CheckboxRadix from '@radix-ui/react-checkbox';
-import { FieldHookConfig, useField } from 'formik';
+import { CheckboxProps } from '@ui/types/checkbox';
+import cx from 'classnames';
+import { useField } from 'formik';
 import React from 'react';
-import { Flex } from '../Flex';
 import { Label } from '../Label';
 import styles from './Checkbox.module.scss';
-import { CheckboxProps } from '@ui/types/checkbox';
 
-export interface CheckboxRadixProps
-  extends Omit<React.ComponentProps<typeof CheckboxRadix.Root>, 'name'>,
-    CheckboxProps {
-  name: string | FieldHookConfig<any>;
-}
-
-const Checkbox = ({ children, name, ...props }: CheckboxRadixProps) => {
+const Checkbox = ({ children, name, ...props }: CheckboxProps) => {
   const [field, meta, helpers] = useField(name);
   const id = React.useId();
+  const isIndeterminate = props.checked === 'indeterminate';
+
+  const wrapperClassName = cx(styles.Checkbox, props.error && styles.error);
+  const inputClassName = cx(
+    styles.Input,
+    isIndeterminate && styles['Input-indeterminate'],
+    props.error && styles.Error,
+    props.disabled && styles.Disabled
+  );
+
+  const IconSource = isIndeterminate ? DashSize100 : CheckmarkSize100;
 
   return (
-    <Flex gap={8} alignItems="center">
-      <CheckboxRadix.Root {...field} {...props} className={styles.base} id={id}>
-        <CheckboxRadix.Indicator className={styles.indicator}>
-          <CheckmarkSize200 />
-        </CheckboxRadix.Indicator>
+    <div className={wrapperClassName}>
+      <CheckboxRadix.Root
+        {...field}
+        {...props}
+        className={inputClassName}
+        id={id}
+      >
+        <span className={styles.Indicator}>
+          <CheckboxRadix.Indicator>
+            <IconSource />
+          </CheckboxRadix.Indicator>
+        </span>
       </CheckboxRadix.Root>
-      <Label htmlFor={id}>{children}</Label>
-    </Flex>
+
+      <Label disabled={!!props.disabled} htmlFor={id}>
+        {children}
+      </Label>
+    </div>
   );
 };
 

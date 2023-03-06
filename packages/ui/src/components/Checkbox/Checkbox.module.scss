@@ -1,24 +1,133 @@
-.base {
-  background-color: white;
-  width: 25px;
-  height: 25px;
-  border-radius: 4px;
-  border: 1px solid rgb(229, 222, 251);
+@import '../../../styles/common';
+
+.Checkbox {
+  position: relative;
+  margin: var(--space-025);
+  width: fit-content;
+
   display: flex;
+  // justify-content: flex-start;
   align-items: center;
-  justify-content: center;
-  box-shadow: 0 2px 10px hsl(0 0% 0% / 0.141);
-  line-height: 0;
+  padding: var(--space-1) 0;
+  cursor: pointer;
 
-  &:hover {
-    background-color: hsl(252 96.9% 97.4%);
-  }
+  --gap: 8px;
+  // @media #{$breakpoints-md-down} {
+  //   --gap: 9px;
+  // }
 
-  &:focus-visible {
-    box-shadow: 0 0 0 2px black;
+  label {
+    padding-inline-start: var(--gap);
   }
 }
 
-.indicator {
-  color: hsl(250 43% 48%);
+.Input {
+  --size: 20px;
+  cursor: pointer;
+
+  // @media #{$breakpoints-md-down} {
+  //   --size: 22px;
+  // }
+
+  background-color: var(--surface-default);
+  width: var(--size);
+  height: var(--size);
+  min-width: var(--size);
+  min-height: var(--size);
+  border-radius: 4px;
+  border: var(--border-width-2) solid var(--border-default);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 0;
+  position: relative;
+
+  &:hover {
+    border-color: var(--border-hovered);
+  }
+
+  // &:focus-visible {
+  //   @include focus-ring($border-width: var(--border-width-5));
+  // }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: calc(var(--border-width-2) * -1);
+    right: calc(var(--border-width-2) * -1);
+    bottom: calc(var(--border-width-2) * -1);
+    left: calc(var(--border-width-2) * -1);
+    border-radius: var(--border-radius-1);
+    background-color: var(--interactive-default);
+    opacity: 0;
+    transform: scale(0.25);
+    transition: opacity var(--duration-100) var(--ease),
+      transform var(--duration-100) var(--ease);
+  }
+
+  &[data-state='checked'],
+  &[data-state='indeterminate'] {
+    .Indicator {
+      transition: opacity var(--duration-150) var(--ease),
+        transform var(--duration-150) var(--ease);
+      transform: translate3d(-50%, -50%, 0) scale(1);
+      opacity: 1;
+    }
+
+    &::before {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    &.Disabled {
+      &::before {
+        background-color: var(--interactive-disabled);
+      }
+    }
+  }
+}
+
+.Indicator {
+  @include recolor-icon(var(--icon-on-interactive));
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform-origin: 50% 50%;
+  pointer-events: none;
+
+  transform: translate3d(-50%, -50%, 0) scale(0.25);
+  opacity: 0;
+  transition: opacity var(--duration-100) var(--ease),
+    transform var(--duration-100) var(--ease);
+
+  // @media (-ms-high-contrast: active) {
+  //   fill: windowText;
+  // }
+}
+
+.Error {
+  background-color: var(--surface-critical-subdued);
+  border-color: var(--interactive-critical);
+
+  &:hover {
+    border-color: var(--interactive-critical);
+  }
+
+  &::before {
+    background-color: var(--interactive-critical);
+  }
+}
+
+.Disabled {
+  background-color: var(--surface-subdued);
+  border-color: var(--border-disabled);
+
+  &:hover {
+    border-color: var(--border-disabled);
+  }
+
+  &::before {
+    background-color: var(--surface-subdued);
+  }
 }

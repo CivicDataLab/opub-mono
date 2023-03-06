@@ -1,7 +1,6 @@
 import { CrossSize200 } from '@opub-icons/ui';
 import { TagProps } from '@ui/types/tag';
 import { handleMouseUpByBlurring } from '@ui/utils/focus';
-import { isMockFunction } from '@ui/utils/helpers';
 import cx from 'classnames';
 import styles from './Tag.module.scss';
 
@@ -18,13 +17,13 @@ export function Tag({
   const className = cx(
     styles.Tag,
     disabled && styles.disabled,
-    onClick && !isMockFunction(onClick) && styles.clickable,
-    onRemove && !isMockFunction(onRemove) && styles.removable,
+    onClick && styles.clickable,
+    onRemove && styles.removable,
     url && !disabled && styles.linkable,
     segmented && styles.segmented
   );
 
-  if (onClick && !isMockFunction(onClick)) {
+  if (onClick) {
     return (
       <button
         type="button"
@@ -45,19 +44,18 @@ export function Tag({
 
   const ariaLabel = accessibilityLabel;
 
-  const removeButton =
-    onRemove && !isMockFunction(onRemove) ? (
-      <button
-        type="button"
-        aria-label={ariaLabel}
-        className={cx(styles.Button, segmented && styles.segmented)}
-        onClick={onRemove}
-        onMouseUp={handleMouseUpByBlurring}
-        disabled={disabled}
-      >
-        <CrossSize200 />
-      </button>
-    ) : null;
+  const removeButton = onRemove ? (
+    <button
+      type="button"
+      aria-label={ariaLabel}
+      className={cx(styles.Button, segmented && styles.segmented)}
+      onClick={onRemove}
+      onMouseUp={handleMouseUpByBlurring}
+      disabled={disabled}
+    >
+      <CrossSize200 />
+    </button>
+  ) : null;
 
   const tagContent =
     url && !disabled ? (

@@ -1,4 +1,4 @@
-import { Flex } from '@ui/components';
+import { Flex, Form } from '@ui/components';
 
 export function PropsVariationSection({
   component: Component,
@@ -6,6 +6,7 @@ export function PropsVariationSection({
   xAxis = {},
   yAxis = {},
   color,
+  withFormik = false,
 }: any) {
   return (
     <table
@@ -59,7 +60,13 @@ export function PropsVariationSection({
                     color: color ? color : null,
                   }}
                 >
-                  <Component {...common} {...xProps} {...yProps} />
+                  {withFormik ? (
+                    <Form initialValues={{}}>
+                      <Component {...common} {...xProps} {...yProps} />
+                    </Form>
+                  ) : (
+                    <Component {...common} {...xProps} {...yProps} />
+                  )}
                 </Flex>
               </td>
             ))}
@@ -73,4 +80,10 @@ export function PropsVariationSection({
 // _isMockFunction
 export function isMockFunction(func: any) {
   return func._isMockFunction;
+}
+
+export function stopPropagation(
+  event: React.MouseEvent | React.KeyboardEvent | React.FormEvent
+) {
+  event.stopPropagation();
 }

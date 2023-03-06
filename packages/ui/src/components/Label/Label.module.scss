@@ -1,11 +1,15 @@
 .base {
-  font-weight: var(--font-bold);
-  font-size: 0.875rem;
-  line-height: 1.4;
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-100);
+  line-height: var(--font-line-height-2);
   display: block;
   width: 100%;
 }
 
 .error {
   color: var(--color-error);
+}
+
+.disabled {
+  color: var(--text-disabled);
 }

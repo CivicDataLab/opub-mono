@@ -4,17 +4,19 @@ import cx from 'classnames';
 import styles from './Label.module.scss';
 
 export interface LabelInterface extends LabelProps {
+  disabled?: boolean;
   error?: boolean;
 }
 
 export function Label({ children, ...props }: LabelInterface) {
-  const { error = false, ...otherProps } = props;
+  const { error = false, disabled = false, ...otherProps } = props;
 
   return (
     <LabelRadix.Root
       {...otherProps}
       className={cx(styles.base, {
         [styles['error']]: error,
+        [styles['disabled']]: disabled,
       })}
     >
       {children}
