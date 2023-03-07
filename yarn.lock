@@ -1505,10 +1505,10 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@opub-icons/ui@^0.9.5":
-  version "0.9.5"
-  resolved "https://registry.yarnpkg.com/@opub-icons/ui/-/ui-0.9.5.tgz#04891a02c769adb96bcd7592486668108da60334"
-  integrity sha512-WmG/xSDnnV8wVdiQhvm4Tyb0l9bIJUJd8iEoWfeRivCy1fR5haQkABuK0dMpVPpfpTnzXKBIUO5wltkHI/SFhQ==
+"@opub-icons/ui@^0.9.51":
+  version "0.9.51"
+  resolved "https://registry.yarnpkg.com/@opub-icons/ui/-/ui-0.9.51.tgz#d949ae7f5badf8629e82ac16e236a0e5146e96b3"
+  integrity sha512-7kXwEyYSLSlwOcFEysqnT2twwom9wD90nPxZ/D8IraArBe3iDhuWzQtbTTLjJv6ZpzUhmj3ZPUPLdAB/oORhdA==
 
 "@opub-icons/workflow@^0.9.4":
   version "0.9.4"
@@ -8315,6 +8315,11 @@ react-fast-compare@^2.0.1:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/react-fast-compare/-/react-fast-compare-2.0.4.tgz#e84b4d455b0fec113e0402c329352715196f81f9"
   integrity sha512-suNP+J1VU1MWFKcyt7RtjiSWUjvidmQSlqu+eHslq+342xCbGTYmC0mEhPCOHxlW0CywylOC1u2DFAT+bv4dBw==
+
+react-hook-form@^7.43.5:
+  version "7.43.5"
+  resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.43.5.tgz#b320405594f1506d8d57b954383166d4ff563778"
+  integrity sha512-YcaXhuFHoOPipu5pC7ckxrLrialiOcU91pKu8P+isAcXZyMgByUK9PkI9j5fENO4+6XU5PwWXRGMIFlk9u9UBQ==
 
 react-inspector@^6.0.0:
   version "6.0.1"

@@ -2,6 +2,7 @@ import { Meta, StoryObj } from '@storybook/react';
 import { Form } from '../Form';
 import { Checkbox } from './Checkbox';
 import { PropsVariationSection } from '@ui/utils/helpers';
+import { Button } from '../Button';
 
 /**
  * A control that allows the user to toggle between checked and not checked.
@@ -63,4 +64,18 @@ export const WithText = () => (
       },
     }}
   />
+);
+
+export const CheckboxGroup = () => (
+  <Form initialValues={{ name: [] }}>
+    <Checkbox name="name[0]" value="abc">
+      ABC
+    </Checkbox>
+    <Checkbox name="name[1]" value="def">
+      DEF
+    </Checkbox>
+    <Button submit size="slim">
+      Submit
+    </Button>
+  </Form>
 );

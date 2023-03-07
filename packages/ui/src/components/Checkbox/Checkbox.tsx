@@ -2,16 +2,17 @@ import { CheckmarkSize100, DashSize100 } from '@opub-icons/ui';
 import * as CheckboxRadix from '@radix-ui/react-checkbox';
 import { CheckboxProps } from '@ui/types/checkbox';
 import cx from 'classnames';
-import { useField } from 'formik';
+// import { useField } from 'formik';
 import React from 'react';
 import { Label } from '../Label';
 import styles from './Checkbox.module.scss';
 import { Text } from '../Text';
 import { InlineError } from '../InlineError';
+import { useForm, Controller } from 'react-hook-form';
 
 const Checkbox = ({ children, name, ...props }: CheckboxProps) => {
   const { error, helpText, ...otherProps } = props;
-  const [field, meta, helpers] = useField(name);
+  // const [field, meta, helpers] = useField(name);
   const id = React.useId();
   const isIndeterminate = props.checked === 'indeterminate';
 
@@ -23,21 +24,33 @@ const Checkbox = ({ children, name, ...props }: CheckboxProps) => {
   );
 
   const IconSource = isIndeterminate ? DashSize100 : CheckmarkSize100;
+  // console.log(field, meta, helpers);
 
   const checkboxMarkup = (
     <div className={wrapperClassName}>
-      <CheckboxRadix.Root
-        {...field}
-        {...otherProps}
-        className={inputClassName}
-        id={id}
-      >
-        <span className={styles.Indicator}>
-          <CheckboxRadix.Indicator>
-            <IconSource />
-          </CheckboxRadix.Indicator>
-        </span>
-      </CheckboxRadix.Root>
+      <Controller
+        name={name}
+        {...props}
+        render={({ field }) => (
+          <CheckboxRadix.Root
+            {...otherProps}
+            className={inputClassName}
+            id={id}
+            {...field}
+            value={props.value}
+            checked={field.value === props.value}
+            onCheckedChange={(checked) => {
+              field.onChange(checked ? props.value : undefined);
+            }}
+          >
+            <span className={styles.Indicator}>
+              <CheckboxRadix.Indicator>
+                <IconSource />
+              </CheckboxRadix.Indicator>
+            </span>
+          </CheckboxRadix.Root>
+        )}
+      />
 
       <Label disabled={!!props.disabled} htmlFor={id}>
         {children}

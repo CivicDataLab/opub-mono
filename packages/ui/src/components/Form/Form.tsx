@@ -1,6 +1,6 @@
 import cx from 'classnames';
-import { Form as FormikForm, Formik } from 'formik';
 import React from 'react';
+import { useForm } from 'react-hook-form';
 import styles from './Form.module.scss';
 
 type Props = {
@@ -12,20 +12,25 @@ type Props = {
 
 const Form = (props: Props) => {
   const { validationSchema, formSubmit, children } = props;
-
+  const { handleSubmit, control } = useForm();
   const themeClass = cx(styles.base, {});
 
+  const childrenWithProps = React.Children.map(children, (child) => {
+    if (React.isValidElement(child)) {
+      /* @ts-ignore */
+      return React.cloneElement(child, { control: control });
+    }
+    return child;
+  });
   return (
-    <Formik
-      initialValues={props.initialValues}
-      validationSchema={validationSchema || {}}
-      onSubmit={(values, actions) => {
-        formSubmit(values);
-        actions.setSubmitting(false);
-      }}
+    <form
+      onSubmit={handleSubmit((data) => {
+        console.log(data);
+        formSubmit && formSubmit(data);
+      })}
     >
-      {() => <FormikForm className={themeClass}>{children}</FormikForm>}
-    </Formik>
+      {childrenWithProps}
+    </form>
   );
 };
 
