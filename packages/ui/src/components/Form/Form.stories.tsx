@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 import * as yup from 'yup';
 import { Button } from '../Button';
 import { Flex } from '../Flex';
@@ -13,7 +13,7 @@ const schema = yup.object().shape({
 /**
  * A control that allows the user to toggle between checked and not checked.
  */
-export default {
+const meta = {
   component: Form,
 
   argTypes: {
@@ -30,24 +30,20 @@ export default {
       description: 'Callback function triggered when the form is submitted',
     },
   },
-} as Meta<typeof Form>;
+} satisfies Meta<typeof Form>;
+export default meta;
+type Story = StoryObj<typeof meta>;
 
-export const FormBase = {
-  args: {
-    children: (
-      <>
-        <Flex gap={16}>
-          <TextField name="name" label="First Name" />
-          <TextField name="lastName" label="Last Name" />
-        </Flex>
-        <TextArea name="desc" label="Hobbies" rows={6} fluid />
-        <Button type="submit">Submit</Button>
-      </>
-    ),
-    formSubmit(val: any) {
-      console.log(val);
-    },
-    initialValues: { name: '', lastName: '', desc: '' },
-    validationSchema: schema,
-  },
-};
+export const FormBase = () => (
+  <Form
+    defaultValues={{ name: '', lastName: '', desc: '' }}
+    formSubmit={(e) => console.log(e)}
+    validationSchema={schema}
+  >
+    <TextField name="name" label="First Name" />
+    <TextField name="lastName" label="Last Name" />
+
+    <TextArea name="desc" label="Hobbies" rows={6} fluid />
+    <Button type="submit">Submit</Button>
+  </Form>
+);
