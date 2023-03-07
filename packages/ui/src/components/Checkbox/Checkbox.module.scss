@@ -45,10 +45,6 @@
     border-color: var(--border-hovered);
   }
 
-  // &:focus-visible {
-  //   @include focus-ring($border-width: var(--border-width-5));
-  // }
-
   &::before {
     content: '';
     position: absolute;
@@ -129,4 +125,16 @@
   &::before {
     background-color: var(--surface-subdued);
   }
+}
+
+.HelpText {
+  margin-bottom: var(--space-1);
+}
+
+.Descriptions {
+  --choice-size: 20px;
+  @media #{$breakpoints-md-down} {
+    --choice-size: 22px;
+  }
+  padding-left: calc(var(--space-2) + var(--choice-size));
 }

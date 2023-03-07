@@ -1,0 +1,14 @@
+@import '../../../styles/common';
+
+.InlineError {
+  display: flex;
+  color: var(--text-critical);
+  fill: var(--icon-critical);
+  font-size: var(--font-size-100);
+}
+
+.Icon {
+  fill: currentColor;
+  margin-left: calc(-1 * var(--space-05));
+  margin-right: calc(var(--space-05) + var(--space-1));
+}

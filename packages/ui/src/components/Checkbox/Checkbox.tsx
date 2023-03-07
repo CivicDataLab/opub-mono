@@ -6,6 +6,8 @@ import { useField } from 'formik';
 import React from 'react';
 import { Label } from '../Label';
 import styles from './Checkbox.module.scss';
+import { Text } from '../Text';
+import { InlineError } from '../InlineError';
 
 const Checkbox = ({ children, name, ...props }: CheckboxProps) => {
   const { error, helpText, ...otherProps } = props;
@@ -44,14 +46,16 @@ const Checkbox = ({ children, name, ...props }: CheckboxProps) => {
   );
 
   const helpTextMarkup = helpText ? (
-    <div className={styles.HelpText}>
-      <span>{helpText}</span>
+    <div className={styles.HelpText} id={`${id}HelpText`}>
+      <Text as="span" variant="bodyMd" color="subdued">
+        {helpText}
+      </Text>
     </div>
   ) : null;
 
   const errorMarkup = error && typeof error !== 'boolean' && (
-    <div className={styles.Error}>
-      <span>{error}</span>
+    <div className={styles.ErrorMessage}>
+      <InlineError message={error} fieldID={id} />
     </div>
   );
 

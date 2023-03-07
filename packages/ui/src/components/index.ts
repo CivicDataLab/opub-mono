@@ -12,3 +12,4 @@ export { TextField } from './TextField';
 export { View } from './View';
 export { Divider } from './Divider';
 export { Text } from "./Text";
+export { InlineError } from "./InlineError";
