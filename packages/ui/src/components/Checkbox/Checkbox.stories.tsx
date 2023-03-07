@@ -50,7 +50,6 @@ export const WithText = () => (
       Type: {},
     }}
     yAxis={{
-      // 'Without Text': {},
       'Help Text': {
         helpText: 'Lorem ipsum dolor sit.',
       },

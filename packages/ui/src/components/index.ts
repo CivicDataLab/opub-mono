@@ -11,3 +11,4 @@ export { TextArea } from './TextArea';
 export { TextField } from './TextField';
 export { View } from './View';
 export { Divider } from './Divider';
+export { Text } from "./Text";
