@@ -7,7 +7,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 type Props = {
   children: React.ReactNode;
   validationSchema?: any;
-  formSubmit?: any;
+  formSubmit?(e: any): void;
   defaultValues?: any;
 };
 
@@ -26,8 +26,10 @@ const Form = (props: Props) => {
 
   const childrenWithProps = React.Children.map(children, (child) => {
     if (React.isValidElement(child)) {
-      /* @ts-ignore */
-      return React.cloneElement(child, { control: control });
+      return React.cloneElement(child, {
+        /* @ts-ignore */
+        control,
+      });
     }
     return child;
   });

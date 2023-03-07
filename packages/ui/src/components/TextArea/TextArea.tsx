@@ -1,16 +1,19 @@
-import { useField } from 'formik';
-import React from 'react';
-import { InputBase } from '../InputBase';
 import { InputProps } from '@ui/types/input';
+import React from 'react';
+import { Controller, useWatch } from 'react-hook-form';
+import { InputBase } from '../InputBase';
 
-export interface FromikTextAreaProps extends InputProps {
+export interface TextAreaProps extends InputProps {
   name: string;
   onFieldChange?(e: any): void;
   height?: number;
+  control?: any;
 }
 
-export const TextArea = ({ name, label, ...props }: FromikTextAreaProps) => {
-  const [field, meta, helpers] = useField(name);
+export const TextArea = (props: TextAreaProps) => {
+  const { name, label, control, ...otherProps } = props;
+  const value = useWatch({ control, name });
+
   const textAreaRef = React.useRef<HTMLTextAreaElement>(null);
 
   // 'Inspired' from react spectrum. Auto resize textarea height
@@ -43,17 +46,23 @@ export const TextArea = ({ name, label, ...props }: FromikTextAreaProps) => {
     if (textAreaRef.current) {
       onHeightChange();
     }
-  }, [onHeightChange, meta.value, textAreaRef]);
+  }, [onHeightChange, textAreaRef, value]);
 
   return (
     <>
-      <InputBase
-        label={label}
-        errorMessage={meta.touched ? meta.error : null}
-        as="textarea"
-        {...field}
-        {...props}
-        ref={textAreaRef}
+      <Controller
+        control={control}
+        name={name}
+        {...otherProps}
+        render={({ field }) => (
+          <InputBase
+            as="textarea"
+            label={label}
+            // errorMessage={meta.touched ? meta.error : null}
+            {...field}
+            ref={textAreaRef}
+          />
+        )}
       />
     </>
   );
