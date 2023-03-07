@@ -1,6 +1,6 @@
 import cx from 'classnames';
 import React from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, FormProvider } from 'react-hook-form';
 import styles from './Form.module.scss';
 import { yupResolver } from '@hookform/resolvers/yup';
 
@@ -21,27 +21,20 @@ const Form = (props: Props) => {
     ? { ...options, resolver: yupResolver(validationSchema) }
     : { ...options };
 
-  const { handleSubmit, control } = useForm(formOptions);
+  const methods = useForm(formOptions);
   const themeClass = cx(styles.base, {});
 
-  const childrenWithProps = React.Children.map(children, (child) => {
-    if (React.isValidElement(child)) {
-      return React.cloneElement(child, {
-        /* @ts-ignore */
-        control,
-      });
-    }
-    return child;
-  });
   return (
-    <form
-      className={themeClass}
-      onSubmit={handleSubmit((data) => {
-        formSubmit && formSubmit(data);
-      })}
-    >
-      {childrenWithProps}
-    </form>
+    <FormProvider {...methods}>
+      <form
+        className={themeClass}
+        onSubmit={methods.handleSubmit((data) => {
+          formSubmit && formSubmit(data);
+        })}
+      >
+        {children}
+      </form>
+    </FormProvider>
   );
 };
 

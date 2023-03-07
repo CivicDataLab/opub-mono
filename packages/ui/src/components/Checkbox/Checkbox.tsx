@@ -3,14 +3,15 @@ import * as CheckboxRadix from '@radix-ui/react-checkbox';
 import { CheckboxProps } from '@ui/types/checkbox';
 import cx from 'classnames';
 import React from 'react';
-import { Controller } from 'react-hook-form';
+import { Controller, useFormContext } from 'react-hook-form';
 import { InlineError } from '../InlineError';
 import { Label } from '../Label';
 import { Text } from '../Text';
 import styles from './Checkbox.module.scss';
 
 const Checkbox = ({ children, name, ...props }: CheckboxProps) => {
-  const { error, helpText, control, ...otherProps } = props;
+  const { control } = useFormContext();
+  const { error, helpText, ...otherProps } = props;
 
   const id = React.useId();
   const isIndeterminate = props.checked === 'indeterminate';

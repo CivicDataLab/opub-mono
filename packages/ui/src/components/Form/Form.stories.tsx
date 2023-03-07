@@ -40,8 +40,10 @@ export const FormBase = () => (
     formSubmit={(e) => console.log(e)}
     validationSchema={schema}
   >
-    <TextField name="name" label="First Name" />
-    <TextField name="lastName" label="Last Name" />
+    <Flex gap={16}>
+      <TextField name="name" label="First Name" />
+      <TextField name="lastName" label="Last Name" />
+    </Flex>
 
     <TextArea name="desc" label="Hobbies" rows={6} fluid />
     <Button type="submit">Submit</Button>
