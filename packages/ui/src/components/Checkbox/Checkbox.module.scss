@@ -11,9 +11,9 @@
   cursor: pointer;
 
   --gap: 8px;
-  // @media #{$breakpoints-md-down} {
-  //   --gap: 9px;
-  // }
+  @media #{$breakpoints-md-down} {
+    --gap: 9px;
+  }
 
   label {
     padding-inline-start: var(--gap);
@@ -24,9 +24,9 @@
   --size: 20px;
   cursor: pointer;
 
-  // @media #{$breakpoints-md-down} {
-  //   --size: 22px;
-  // }
+  @media #{$breakpoints-md-down} {
+    --size: 22px;
+  }
 
   background-color: var(--surface-default);
   width: var(--size);
@@ -100,9 +100,9 @@
   transition: opacity var(--duration-100) var(--ease),
     transform var(--duration-100) var(--ease);
 
-  // @media (-ms-high-contrast: active) {
-  //   fill: windowText;
-  // }
+  @media (-ms-high-contrast: active) {
+    fill: windowText;
+  }
 }
 
 .Error {
