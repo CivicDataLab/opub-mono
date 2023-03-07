@@ -16,8 +16,8 @@ const meta = {
 export default meta;
 
 export const Default = ({ children = 'label', ...props }: any) => (
-  <Form initialValues={{}}>
-    <Checkbox name="name" {...props}>
+  <Form defaultValues={{}}>
+    <Checkbox name="name1" {...props}>
       {children}
     </Checkbox>
   </Form>
@@ -67,7 +67,7 @@ export const WithText = () => (
 );
 
 export const CheckboxGroup = () => (
-  <Form initialValues={{ name: [] }}>
+  <Form defaultValues={{ name: [] }} formSubmit={(e: any) => console.log(e)}>
     <Checkbox name="name[0]" value="abc">
       ABC
     </Checkbox>

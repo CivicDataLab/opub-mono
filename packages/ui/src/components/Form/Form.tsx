@@ -2,17 +2,26 @@ import cx from 'classnames';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import styles from './Form.module.scss';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 type Props = {
   children: React.ReactNode;
   validationSchema?: any;
   formSubmit?: any;
-  initialValues: any;
+  defaultValues: any;
 };
 
 const Form = (props: Props) => {
-  const { validationSchema, formSubmit, children } = props;
-  const { handleSubmit, control } = useForm();
+  const { validationSchema, defaultValues = {}, formSubmit, children } = props;
+
+  const options = {
+    defaultValues: defaultValues,
+  };
+  const formOptions = validationSchema
+    ? { ...options, resolver: yupResolver(validationSchema) }
+    : { ...options };
+
+  const { handleSubmit, control } = useForm(formOptions);
   const themeClass = cx(styles.base, {});
 
   const childrenWithProps = React.Children.map(children, (child) => {
@@ -24,8 +33,8 @@ const Form = (props: Props) => {
   });
   return (
     <form
+      className={themeClass}
       onSubmit={handleSubmit((data) => {
-        console.log(data);
         formSubmit && formSubmit(data);
       })}
     >

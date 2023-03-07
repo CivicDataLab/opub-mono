@@ -2,17 +2,16 @@ import { CheckmarkSize100, DashSize100 } from '@opub-icons/ui';
 import * as CheckboxRadix from '@radix-ui/react-checkbox';
 import { CheckboxProps } from '@ui/types/checkbox';
 import cx from 'classnames';
-// import { useField } from 'formik';
 import React from 'react';
-import { Label } from '../Label';
-import styles from './Checkbox.module.scss';
-import { Text } from '../Text';
+import { Controller } from 'react-hook-form';
 import { InlineError } from '../InlineError';
-import { useForm, Controller } from 'react-hook-form';
+import { Label } from '../Label';
+import { Text } from '../Text';
+import styles from './Checkbox.module.scss';
 
 const Checkbox = ({ children, name, ...props }: CheckboxProps) => {
-  const { error, helpText, ...otherProps } = props;
-  // const [field, meta, helpers] = useField(name);
+  const { error, helpText, isMulti, control, ...otherProps } = props;
+
   const id = React.useId();
   const isIndeterminate = props.checked === 'indeterminate';
 
@@ -24,23 +23,24 @@ const Checkbox = ({ children, name, ...props }: CheckboxProps) => {
   );
 
   const IconSource = isIndeterminate ? DashSize100 : CheckmarkSize100;
-  // console.log(field, meta, helpers);
 
   const checkboxMarkup = (
     <div className={wrapperClassName}>
       <Controller
+        control={control}
         name={name}
-        {...props}
+        {...otherProps}
         render={({ field }) => (
           <CheckboxRadix.Root
-            {...otherProps}
+            {...field}
             className={inputClassName}
             id={id}
-            {...field}
-            value={props.value}
-            checked={field.value === props.value}
+            value={props.value || null}
+            checked={props.value ? field.value === props.value : field.value}
             onCheckedChange={(checked) => {
-              field.onChange(checked ? props.value : undefined);
+              props.value
+                ? field.onChange(checked ? props.value : undefined)
+                : field.onChange(checked);
             }}
           >
             <span className={styles.Indicator}>

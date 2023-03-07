@@ -21,4 +21,6 @@ export interface CheckboxProps extends Omit<Root, 'name'>, CheckboxRadixProps {
   error?: Error | boolean;
   /** Additional text to aide in use */
   helpText?: React.ReactNode;
+  /** Is teh checkbox part of a group. Will output value instead of boolean */
+  isMulti?: boolean;
 }
