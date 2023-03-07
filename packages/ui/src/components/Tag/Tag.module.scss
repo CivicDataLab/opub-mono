@@ -67,10 +67,10 @@ $button-size: 20px;
       color: var(--text-disabled);
     }
 
-    // @media #{$breakpoints-sm-up} {
-    //   padding: var(--space-05) var(--space-2);
-    //   font-size: var(--font-size-75);
-    // }
+    @media #{$breakpoints-sm-up} {
+      padding: var(--space-05) var(--space-2);
+      font-size: var(--font-size-75);
+    }
   }
 
   &.removable {
@@ -81,10 +81,10 @@ $button-size: 20px;
     padding: 0;
   }
 
-  // @media #{$breakpoints-xl-up} {
-  //   min-height: 24px;
-  //   display: none;
-  // }
+  @media #{$breakpoints-xl-up} {
+    min-height: 24px;
+    display: none;
+  }
 }
 
 .TagText {
@@ -97,10 +97,10 @@ $button-size: 20px;
   white-space: nowrap;
   vertical-align: middle;
 
-  // @media #{$breakpoints-sm-up} {
-  //   font-size: var(--font-size-75);
-  //   padding: var(--space-05) 0;
-  // }
+  @media #{$breakpoints-sm-up} {
+    font-size: var(--font-size-75);
+    padding: var(--space-05) 0;
+  }
 }
 
 .Button {
@@ -157,11 +157,11 @@ $button-size: 20px;
     padding-top: var(--space-1);
     padding-bottom: var(--space-1);
 
-    // @media #{$breakpoints-sm-up} {
-    //   font-size: var(--font-size-75);
-    //   padding-top: var(--space-05);
-    //   padding-bottom: var(--space-05);
-    // }
+    @media #{$breakpoints-sm-up} {
+      font-size: var(--font-size-75);
+      padding-top: var(--space-05);
+      padding-bottom: var(--space-05);
+    }
   }
 
   @include focus-ring;

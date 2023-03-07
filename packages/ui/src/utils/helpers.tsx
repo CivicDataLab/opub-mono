@@ -53,13 +53,7 @@ export function PropsVariationSection({
                   minWidth: 140,
                 }}
               >
-                <Flex
-                  alignItems="center"
-                  justifyContent="center"
-                  UNSAFE_style={{
-                    color: color ? color : null,
-                  }}
-                >
+                <div>
                   {withFormik ? (
                     <Form initialValues={{}}>
                       <Component {...common} {...xProps} {...yProps} />
@@ -67,7 +61,7 @@ export function PropsVariationSection({
                   ) : (
                     <Component {...common} {...xProps} {...yProps} />
                   )}
-                </Flex>
+                </div>
               </td>
             ))}
           </tr>

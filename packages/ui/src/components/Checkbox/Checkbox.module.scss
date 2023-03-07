@@ -11,9 +11,9 @@
   cursor: pointer;
 
   --gap: 8px;
-  // @media #{$breakpoints-md-down} {
-  //   --gap: 9px;
-  // }
+  @media #{$breakpoints-md-down} {
+    --gap: 9px;
+  }
 
   label {
     padding-inline-start: var(--gap);
@@ -24,9 +24,9 @@
   --size: 20px;
   cursor: pointer;
 
-  // @media #{$breakpoints-md-down} {
-  //   --size: 22px;
-  // }
+  @media #{$breakpoints-md-down} {
+    --size: 22px;
+  }
 
   background-color: var(--surface-default);
   width: var(--size);
@@ -44,10 +44,6 @@
   &:hover {
     border-color: var(--border-hovered);
   }
-
-  // &:focus-visible {
-  //   @include focus-ring($border-width: var(--border-width-5));
-  // }
 
   &::before {
     content: '';
@@ -100,9 +96,9 @@
   transition: opacity var(--duration-100) var(--ease),
     transform var(--duration-100) var(--ease);
 
-  // @media (-ms-high-contrast: active) {
-  //   fill: windowText;
-  // }
+  @media (-ms-high-contrast: active) {
+    fill: windowText;
+  }
 }
 
 .Error {
@@ -129,4 +125,16 @@
   &::before {
     background-color: var(--surface-subdued);
   }
+}
+
+.HelpText {
+  margin-bottom: var(--space-1);
+}
+
+.Descriptions {
+  --choice-size: 20px;
+  @media #{$breakpoints-md-down} {
+    --choice-size: 22px;
+  }
+  padding-left: calc(var(--space-2) + var(--choice-size));
 }

@@ -1,0 +1,161 @@
+@import '../../../styles/common';
+
+.root {
+  margin: 0;
+  text-align: inherit;
+  color: var(--text-default);
+}
+
+.block {
+  display: block;
+}
+
+.truncate {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.visuallyHidden {
+  @include visually-hidden;
+}
+
+.start {
+  text-align: start;
+}
+
+.center {
+  text-align: center;
+}
+
+.end {
+  text-align: end;
+}
+
+.justify {
+  text-align: justify;
+}
+
+.success {
+  color: var(--text-success);
+}
+
+.critical {
+  color: var(--text-critical);
+}
+
+.warning {
+  color: var(--text-warning);
+}
+
+.subdued {
+  color: var(--text-subdued);
+}
+
+.text-inverse {
+  color: var(--text-on-dark);
+}
+
+.regular {
+  font-weight: var(--font-weight-regular);
+}
+
+.medium {
+  font-weight: var(--font-weight-medium);
+}
+
+.semibold {
+  font-weight: var(--font-weight-semibold);
+}
+
+.bold {
+  font-weight: var(--font-weight-bold);
+}
+
+.headingXs {
+  font-size: var(--font-size-75);
+  line-height: var(--font-line-height-1);
+}
+
+.headingSm {
+  font-size: var(--font-size-100);
+  line-height: var(--font-line-height-2);
+}
+
+.headingMd {
+  font-size: var(--font-size-200);
+  line-height: var(--font-line-height-3);
+}
+
+.headingLg {
+  font-size: var(--font-size-200);
+  line-height: var(--font-line-height-2);
+
+  @media #{$breakpoints-md-up} {
+    font-size: var(--font-size-300);
+    line-height: var(--font-line-height-3);
+  }
+}
+
+.headingXl {
+  font-size: var(--font-size-300);
+  line-height: var(--font-line-height-3);
+
+  @media #{$breakpoints-md-up} {
+    font-size: var(--font-size-400);
+    line-height: var(--font-line-height-4);
+  }
+}
+
+.heading2xl {
+  font-size: var(--font-size-300);
+  line-height: var(--font-line-height-3);
+
+  @media #{$breakpoints-md-up} {
+    font-size: var(--font-size-500);
+    line-height: var(--font-line-height-5);
+  }
+}
+
+.heading3xl {
+  font-size: var(--font-size-400);
+  line-height: var(--font-line-height-4);
+
+  @media #{$breakpoints-md-up} {
+    font-size: var(--font-size-600);
+    line-height: var(--font-line-height-6);
+  }
+}
+
+.heading4xl {
+  font-size: var(--font-size-600);
+  line-height: var(--font-line-height-6);
+
+  @media #{$breakpoints-md-up} {
+    font-size: var(--font-size-700);
+    line-height: var(--font-line-height-7);
+  }
+}
+
+.bodySm {
+  font-size: var(--font-size-75);
+  line-height: var(--font-line-height-1);
+}
+
+.bodyMd {
+  font-size: var(--font-size-100);
+  line-height: var(--font-line-height-2);
+}
+
+.bodyLg {
+  font-size: var(--font-size-200);
+  line-height: var(--font-line-height-2);
+}
+
+.break {
+  overflow-wrap: break-word;
+}
+
+.numeric {
+  font-variant-numeric: tabular-nums lining-nums;
+}

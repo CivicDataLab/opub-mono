@@ -12,11 +12,7 @@ export default defineConfig({
     environment: 'happy-dom',
   },
   resolve: {
-    alias: [
-      { find: '@utils', replacement: path.resolve(__dirname, '/src/utils') },
-      { find: '@ui', replacement: path.resolve(__dirname, '/src') },
-      { find: '@types', replacement: path.resolve(__dirname, '/src/types') },
-    ],
+    alias: [{ find: '@ui', replacement: path.resolve(__dirname, '/src') }],
   },
   css: {
     postcss: null,

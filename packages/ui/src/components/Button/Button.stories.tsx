@@ -223,22 +223,22 @@ export const PlainDisclosure = () => (
   />
 );
 
-export const PseudoStates = () => (
-  <Flex gap={12} className="story-grid pseudo">
-    <div style={{ outline: 'none' }}>
-      <Button>Normal</Button>
-    </div>
-    <div style={{ outline: 'none' }} className="pseudo-hover">
-      <Button>Hover</Button>
-    </div>
-    <div style={{ outline: 'none' }} className="pseudo-focus-visible">
-      <Button>Focus</Button>
-    </div>
-    <div
-      style={{ outline: 'none' }}
-      className="pseudo-hover pseudo-focus-visible"
-    >
-      <Button>Hover Focus</Button>
-    </div>
-  </Flex>
-);
+// export const PseudoStates = () => (
+//   <Flex gap={12} className="story-grid pseudo">
+//     <div style={{ outline: 'none' }}>
+//       <Button>Normal</Button>
+//     </div>
+//     <div style={{ outline: 'none' }} className="pseudo-hover">
+//       <Button>Hover</Button>
+//     </div>
+//     <div style={{ outline: 'none' }} className="pseudo-focus-visible">
+//       <Button>Focus</Button>
+//     </div>
+//     <div
+//       style={{ outline: 'none' }}
+//       className="pseudo-hover pseudo-focus-visible"
+//     >
+//       <Button>Hover Focus</Button>
+//     </div>
+//   </Flex>
+// );

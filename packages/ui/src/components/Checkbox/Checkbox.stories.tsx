@@ -26,7 +26,7 @@ export const States = () => (
   <PropsVariationSection
     withFormik
     component={Checkbox}
-    common={{ children: 'Label' }}
+    common={{ children: 'Label', value: 'abc' }}
     xAxis={{
       default: {},
       disabled: { disabled: true },
@@ -35,7 +35,32 @@ export const States = () => (
     yAxis={{
       Unchecked: {},
       Checked: { checked: true },
+      'Defualt Checked': { defaultChecked: true },
       Indeterminate: { checked: 'indeterminate' },
+    }}
+  />
+);
+
+export const WithText = () => (
+  <PropsVariationSection
+    withFormik
+    component={Checkbox}
+    common={{ children: 'Label', value: 'abc' }}
+    xAxis={{
+      Type: {},
+    }}
+    yAxis={{
+      'Help Text': {
+        helpText: 'Lorem ipsum dolor sit.',
+      },
+      'Error Text': {
+        error: 'Error Lorem ipsum dolor sit.',
+      },
+
+      'Both Error & Help Text': {
+        error: 'Error Lorem ipsum dolor sit.',
+        helpText: 'Lorem ipsum dolor sit.',
+      },
     }}
   />
 );

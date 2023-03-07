@@ -6,27 +6,29 @@ import { useField } from 'formik';
 import React from 'react';
 import { Label } from '../Label';
 import styles from './Checkbox.module.scss';
+import { Text } from '../Text';
+import { InlineError } from '../InlineError';
 
 const Checkbox = ({ children, name, ...props }: CheckboxProps) => {
+  const { error, helpText, ...otherProps } = props;
   const [field, meta, helpers] = useField(name);
   const id = React.useId();
   const isIndeterminate = props.checked === 'indeterminate';
 
-  const wrapperClassName = cx(styles.Checkbox, props.error && styles.error);
+  const wrapperClassName = cx(styles.Checkbox, error && styles.error);
   const inputClassName = cx(
     styles.Input,
-    isIndeterminate && styles['Input-indeterminate'],
-    props.error && styles.Error,
+    error && styles.Error,
     props.disabled && styles.Disabled
   );
 
   const IconSource = isIndeterminate ? DashSize100 : CheckmarkSize100;
 
-  return (
+  const checkboxMarkup = (
     <div className={wrapperClassName}>
       <CheckboxRadix.Root
         {...field}
-        {...props}
+        {...otherProps}
         className={inputClassName}
         id={id}
       >
@@ -41,6 +43,37 @@ const Checkbox = ({ children, name, ...props }: CheckboxProps) => {
         {children}
       </Label>
     </div>
+  );
+
+  const helpTextMarkup = helpText ? (
+    <div className={styles.HelpText} id={`${id}HelpText`}>
+      <Text as="span" variant="bodyMd" color="subdued">
+        {helpText}
+      </Text>
+    </div>
+  ) : null;
+
+  const errorMarkup = error && typeof error !== 'boolean' && (
+    <div className={styles.ErrorMessage}>
+      <InlineError message={error} fieldID={id} />
+    </div>
+  );
+
+  const descriptionMarkup =
+    helpTextMarkup || errorMarkup ? (
+      <div className={styles.Descriptions}>
+        {errorMarkup}
+        {helpTextMarkup}
+      </div>
+    ) : null;
+
+  return descriptionMarkup ? (
+    <div>
+      {checkboxMarkup}
+      {descriptionMarkup}
+    </div>
+  ) : (
+    checkboxMarkup
   );
 };
 

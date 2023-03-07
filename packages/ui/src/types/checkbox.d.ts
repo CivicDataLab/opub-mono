@@ -19,4 +19,6 @@ export interface CheckboxProps extends Omit<Root, 'name'>, CheckboxRadixProps {
   name: string;
   /** Display an error message */
   error?: Error | boolean;
+  /** Additional text to aide in use */
+  helpText?: React.ReactNode;
 }

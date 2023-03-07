@@ -1,4 +1,3 @@
-export type Error =
-  | string
-  | React.ReactElement
-  | (string | React.ReactElement)[];
+import { ReactElement } from 'react';
+
+export type Error = string | ReactElement | (string | ReactElement)[];
