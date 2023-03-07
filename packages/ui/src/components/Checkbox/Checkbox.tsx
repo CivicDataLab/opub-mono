@@ -10,7 +10,7 @@ import { Text } from '../Text';
 import styles from './Checkbox.module.scss';
 
 const Checkbox = ({ children, name, ...props }: CheckboxProps) => {
-  const { error, helpText, isMulti, control, ...otherProps } = props;
+  const { error, helpText, control, ...otherProps } = props;
 
   const id = React.useId();
   const isIndeterminate = props.checked === 'indeterminate';
@@ -35,7 +35,7 @@ const Checkbox = ({ children, name, ...props }: CheckboxProps) => {
             {...field}
             className={inputClassName}
             id={id}
-            value={props.value || null}
+            value={props.value || undefined}
             checked={props.value ? field.value === props.value : field.value}
             onCheckedChange={(checked) => {
               props.value

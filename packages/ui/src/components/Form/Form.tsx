@@ -8,7 +8,7 @@ type Props = {
   children: React.ReactNode;
   validationSchema?: any;
   formSubmit?: any;
-  defaultValues: any;
+  defaultValues?: any;
 };
 
 const Form = (props: Props) => {
