@@ -1,18 +1,18 @@
 import { InputProps } from '@ui/types/input';
 import React from 'react';
-import { Controller, useWatch } from 'react-hook-form';
+import { Controller, useFormContext } from 'react-hook-form';
 import { InputBase } from '../InputBase';
 
 export interface TextAreaProps extends InputProps {
   name: string;
   onFieldChange?(e: any): void;
   height?: number;
-  control?: any;
 }
 
 export const TextArea = (props: TextAreaProps) => {
-  const { name, label, control, ...otherProps } = props;
-  const value = useWatch({ control, name });
+  const { name, label, ...otherProps } = props;
+  const { control, watch } = useFormContext();
+  const value = watch(name);
 
   const textAreaRef = React.useRef<HTMLTextAreaElement>(null);
 

@@ -1,16 +1,15 @@
-import { useField } from 'formik';
-import { InputBase } from '../InputBase';
 import { InputProps } from '@ui/types/input';
-import { Controller } from 'react-hook-form';
+import { Controller, useFormContext } from 'react-hook-form';
+import { InputBase } from '../InputBase';
 
 export interface TextFieldProps extends InputProps {
   name: string;
   onFieldChange?(e: any): void;
-  control?: any;
 }
 
 export const TextField = (props: TextFieldProps) => {
-  const { name, label, control, ...otherProps } = props;
+  const { control } = useFormContext();
+  const { name, label, ...otherProps } = props;
   function handleChange(e: any) {
     props.onFieldChange && props.onFieldChange(e);
   }

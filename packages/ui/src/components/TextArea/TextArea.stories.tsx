@@ -9,8 +9,8 @@ export default {
   component: TextArea,
 } as Meta<typeof TextArea>;
 
-export const Primary = ({ ...props }) => (
-  <Form defaultValues={{ name: 'abc' }}>
-    <TextArea name="name" label="label" rows={4} {...props} />
+export const Primary = () => (
+  <Form>
+    <TextArea name="name" label="label" rows={4} />
   </Form>
 );
