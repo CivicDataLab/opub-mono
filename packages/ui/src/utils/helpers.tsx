@@ -55,7 +55,7 @@ export function PropsVariationSection({
               >
                 <div>
                   {withFormik ? (
-                    <Form initialValues={{}}>
+                    <Form>
                       <Component {...common} {...xProps} {...yProps} />
                     </Form>
                   ) : (

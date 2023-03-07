@@ -2,6 +2,7 @@ import { Meta, StoryObj } from '@storybook/react';
 import { Form } from '../Form';
 import { Checkbox } from './Checkbox';
 import { PropsVariationSection } from '@ui/utils/helpers';
+import { Button } from '../Button';
 
 /**
  * A control that allows the user to toggle between checked and not checked.
@@ -15,8 +16,8 @@ const meta = {
 export default meta;
 
 export const Default = ({ children = 'label', ...props }: any) => (
-  <Form initialValues={{}}>
-    <Checkbox name="name" {...props}>
+  <Form defaultValues={{}}>
+    <Checkbox name="name1" {...props}>
       {children}
     </Checkbox>
   </Form>
@@ -26,7 +27,7 @@ export const States = () => (
   <PropsVariationSection
     withFormik
     component={Checkbox}
-    common={{ children: 'Label', value: 'abc' }}
+    common={{ children: 'Label', name: 'abc' }}
     xAxis={{
       default: {},
       disabled: { disabled: true },
@@ -45,7 +46,7 @@ export const WithText = () => (
   <PropsVariationSection
     withFormik
     component={Checkbox}
-    common={{ children: 'Label', value: 'abc' }}
+    common={{ children: 'Label', name: 'abc' }}
     xAxis={{
       Type: {},
     }}
@@ -57,10 +58,24 @@ export const WithText = () => (
         error: 'Error Lorem ipsum dolor sit.',
       },
 
-      'Both Error & Help Text': {
+      'Error & Help Text': {
         error: 'Error Lorem ipsum dolor sit.',
         helpText: 'Lorem ipsum dolor sit.',
       },
     }}
   />
+);
+
+export const CheckboxGroup = () => (
+  <Form formSubmit={(e: any) => console.log(e)}>
+    <Checkbox name="name[0]" value="abc">
+      ABC
+    </Checkbox>
+    <Checkbox name="name[1]" value="def">
+      DEF
+    </Checkbox>
+    <Button submit size="slim">
+      Submit
+    </Button>
+  </Form>
 );

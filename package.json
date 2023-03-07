@@ -25,7 +25,7 @@
     "node": ">=14.0.0"
   },
   "dependencies": {
-    "@opub-icons/ui": "^0.9.5",
+    "@opub-icons/ui": "^0.9.51",
     "@opub-icons/workflow": "^0.9.4"
   },
   "packageManager": "yarn@1.22.17"

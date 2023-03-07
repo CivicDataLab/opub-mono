@@ -10,7 +10,7 @@ export default {
 } as Meta<typeof TextArea>;
 
 export const Primary = ({ ...props }) => (
-  <Form initialValues={{}}>
+  <Form defaultValues={{ name: 'abc' }}>
     <TextArea name="name" label="label" rows={4} {...props} />
   </Form>
 );

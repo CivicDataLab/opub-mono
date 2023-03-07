@@ -3,7 +3,7 @@ import type { Error } from './shared/form';
 
 type CheckedState = boolean | 'indeterminate';
 export interface CheckboxRadixProps
-  extends Omit<'button', 'checked' | 'defaultChecked'> {
+  extends Omit<typeof button, 'checked' | 'defaultChecked'> {
   /** Checkbox is selected. `indeterminate` shows a horizontal line in the checkbox */
   checked?: CheckedState;
   /** Checkbox is selected by default but may be uncontrolled */

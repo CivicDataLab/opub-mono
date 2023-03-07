@@ -592,7 +592,7 @@
     padding-right: var(--space-1);
   }
 
-  .Icon:first-child {
+  .Icon:first-of-type {
     margin-left: 0;
   }
 
@@ -786,8 +786,8 @@
     border-radius: 0;
   }
 
-  > :first-child .Button,
-  > :first-child .Button::after {
+  > :first-of-type .Button,
+  > :first-of-type .Button::after {
     border-radius: 0;
     border-top-left-radius: var(--border-radius-1);
     border-bottom-left-radius: var(--border-radius-1);
@@ -800,15 +800,15 @@
     border-bottom-right-radius: var(--border-radius-1);
   }
 
-  > :last-child:first-child .Button,
-  > :last-child:first-child .Button::after {
+  > :last-child:first-of-type .Button,
+  > :last-child:first-of-type .Button::after {
     border-radius: var(--border-radius-1);
   }
 }
 
 [data-buttongroup-connected-top='true'] {
-  > :first-child .Button,
-  > :first-child .Button::after {
+  > :first-of-type .Button,
+  > :first-of-type .Button::after {
     border-top-left-radius: 0;
   }
 
