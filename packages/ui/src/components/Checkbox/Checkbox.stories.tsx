@@ -14,14 +14,19 @@ const meta = {
 } satisfies Meta<typeof Checkbox>;
 
 export default meta;
+type Story = StoryObj<typeof meta>;
 
-export const Default = ({ children = 'label', ...props }: any) => (
-  <Form defaultValues={{}}>
-    <Checkbox name="name1" {...props}>
-      {children}
-    </Checkbox>
-  </Form>
-);
+export const Default: Story = {
+  render: (args) => (
+    <Form defaultValues={{ checkbox: true }}>
+      <Checkbox {...args} />
+    </Form>
+  ),
+  args: {
+    name: 'checkbox',
+    children: 'Label',
+  },
+};
 
 export const States = () => (
   <PropsVariationSection
@@ -46,7 +51,7 @@ export const WithText = () => (
   <PropsVariationSection
     withFormik
     component={Checkbox}
-    common={{ children: 'Label', name: 'abc' }}
+    common={{ children: 'Label', name: 'withText' }}
     xAxis={{
       Type: {},
     }}
@@ -64,18 +69,4 @@ export const WithText = () => (
       },
     }}
   />
-);
-
-export const CheckboxGroup = () => (
-  <Form formSubmit={(e: any) => console.log(e)}>
-    <Checkbox name="name[0]" value="abc">
-      ABC
-    </Checkbox>
-    <Checkbox name="name[1]" value="def">
-      DEF
-    </Checkbox>
-    <Button submit size="slim">
-      Submit
-    </Button>
-  </Form>
 );

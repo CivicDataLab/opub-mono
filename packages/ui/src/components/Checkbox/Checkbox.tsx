@@ -31,26 +31,33 @@ const Checkbox = ({ children, name, ...props }: CheckboxProps) => {
         control={control}
         name={name}
         {...otherProps}
-        render={({ field }) => (
-          <CheckboxRadix.Root
-            {...field}
-            className={inputClassName}
-            id={id}
-            value={props.value || undefined}
-            checked={props.value ? field.value === props.value : field.value}
-            onCheckedChange={(checked) => {
-              props.value
-                ? field.onChange(checked ? props.value : undefined)
-                : field.onChange(checked);
-            }}
-          >
-            <span className={styles.Indicator}>
-              <CheckboxRadix.Indicator>
-                <IconSource />
-              </CheckboxRadix.Indicator>
-            </span>
-          </CheckboxRadix.Root>
-        )}
+        render={({ field }) => {
+          return (
+            <CheckboxRadix.Root
+              {...field}
+              {...otherProps}
+              className={inputClassName}
+              id={id}
+              checked={
+                props.value
+                  ? field.value === props.value
+                  : props.checked || field.value
+              }
+              onCheckedChange={(checked) => {
+                field.onChange(checked ? props.value : undefined);
+                props.value
+                  ? field.onChange(checked ? props.value : undefined)
+                  : field.onChange(checked);
+              }}
+            >
+              <span className={styles.Indicator}>
+                <CheckboxRadix.Indicator>
+                  <IconSource />
+                </CheckboxRadix.Indicator>
+              </span>
+            </CheckboxRadix.Root>
+          );
+        }}
       />
 
       <Label disabled={!!props.disabled} htmlFor={id}>
