@@ -4,19 +4,16 @@ import { CheckboxProps } from '@ui/types/checkbox';
 import cx from 'classnames';
 import React from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
-import { InlineError } from '../InlineError';
-import { Label } from '../Label';
-import { Text } from '../Text';
+import { Choice } from '../Choice';
 import styles from './Checkbox.module.scss';
 
 const Checkbox = ({ children, name, ...props }: CheckboxProps) => {
   const { control } = useFormContext();
-  const { error, helpText, ...otherProps } = props;
+  const { error, helpText, labelHidden, ...otherProps } = props;
 
   const id = React.useId();
   const isIndeterminate = props.checked === 'indeterminate';
 
-  const wrapperClassName = cx(styles.Checkbox, error && styles.error);
   const inputClassName = cx(
     styles.Input,
     error && styles.Error,
@@ -26,7 +23,14 @@ const Checkbox = ({ children, name, ...props }: CheckboxProps) => {
   const IconSource = isIndeterminate ? DashSize100 : CheckmarkSize100;
 
   const checkboxMarkup = (
-    <div className={wrapperClassName}>
+    <Choice
+      id={id}
+      label={children}
+      labelHidden={labelHidden}
+      helpText={helpText}
+      error={error}
+      disabled={props.disabled}
+    >
       <Controller
         control={control}
         name={name}
@@ -59,43 +63,10 @@ const Checkbox = ({ children, name, ...props }: CheckboxProps) => {
           );
         }}
       />
-
-      <Label disabled={!!props.disabled} htmlFor={id}>
-        {children}
-      </Label>
-    </div>
+    </Choice>
   );
 
-  const helpTextMarkup = helpText ? (
-    <div className={styles.HelpText} id={`${id}HelpText`}>
-      <Text as="span" variant="bodyMd" color="subdued">
-        {helpText}
-      </Text>
-    </div>
-  ) : null;
-
-  const errorMarkup = error && typeof error !== 'boolean' && (
-    <div className={styles.ErrorMessage}>
-      <InlineError message={error} fieldID={id} />
-    </div>
-  );
-
-  const descriptionMarkup =
-    helpTextMarkup || errorMarkup ? (
-      <div className={styles.Descriptions}>
-        {errorMarkup}
-        {helpTextMarkup}
-      </div>
-    ) : null;
-
-  return descriptionMarkup ? (
-    <div>
-      {checkboxMarkup}
-      {descriptionMarkup}
-    </div>
-  ) : (
-    checkboxMarkup
-  );
+  return checkboxMarkup;
 };
 
 export { Checkbox };

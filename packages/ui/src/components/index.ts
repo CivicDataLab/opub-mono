@@ -14,3 +14,5 @@ export { Divider } from './Divider';
 export { Text } from './Text';
 export { InlineError } from './InlineError';
 export { ChoiceList } from './ChoiceList';
+export { RadioButton } from "./RadioButton";
+export { Choice } from "./Choice";
