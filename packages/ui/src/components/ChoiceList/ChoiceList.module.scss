@@ -1,0 +1,37 @@
+@import '../../../styles/common';
+
+.ChoiceList {
+  > legend {
+    padding-block-end: var(--space-4);
+  }
+
+  > ul {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    width: 100%;
+  }
+
+  @media #{$breakpoints-md-up} {
+    > legend {
+      padding-block-end: var(--space-1);
+    }
+
+    > ul {
+      gap: var(--space-0);
+    }
+  }
+}
+
+.ChoiceChildren {
+  padding-left: calc(var(--space-2) + 20px);
+}
+
+.ChoiceError {
+  padding-block-end: var(--space-2);
+  padding-block-start: var(--space-4);
+
+  @media #{$breakpoints-md-up} {
+    padding-block-start: var(--space-1);
+  }
+}

@@ -12,10 +12,10 @@ type Props = {
 };
 
 const Form = (props: Props) => {
-  const { validationSchema, defaultValues = {}, formSubmit, children } = props;
+  const { validationSchema, defaultValues, formSubmit, children } = props;
 
   const options = {
-    defaultValues: defaultValues,
+    defaultValues,
   };
   const formOptions = validationSchema
     ? { ...options, resolver: yupResolver(validationSchema) }
