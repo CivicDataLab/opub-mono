@@ -1,29 +1,27 @@
 .input {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-small);
+  gap: var(--space-1);
 
   input,
   textarea {
-    border: 1px solid var(--color-gray-02);
-    border-radius: var(--radius-small);
-    background-color: var(--color-background-light);
-    letter-spacing: var(--letter-spacing-dense);
-    font-weight: var(--font-normal);
-    padding: 0 16px;
+    border: 1px solid var(--border-shadow);
+    border-top-color: var(--border-hovered);
+    border-radius: var(--border-radius-1);
+    background-color: var(--surface-default);
 
-    &:hover {
-      border-color: var(--color-gray-03);
-    }
+    font-weight: var(--font-weight-regular);
+    padding: var(--space-2) var(--space-3);
+
+    // &:hover {
+    //   border-color: var(--border-hovered);
+    // }
 
     &:focus-visible {
-      outline: 1px solid var(--color-primary-01);
-      border-color: transparent;
+      outline: 2px solid var(--focused-default);
+      border-color: var(--border-subdued);
+      // border-color: transparent;
     }
-  }
-
-  input {
-    height: 46px;
   }
 
   textarea {
@@ -36,15 +34,11 @@
   &--invalid {
     input,
     textarea {
-      border-color: var(--color-error);
-
-      &:hover {
-        border-color: var(--color-error);
-      }
+      border-color: var(--interactive-critical);
+      background-color: var(--surface-critical-subdued);
 
       &:focus-visible {
-        outline: none;
-        border-color: var(--color-error);
+        border-color: var(--interactive-critical);
       }
     }
   }
@@ -52,15 +46,11 @@
   &--valid {
     input,
     textarea {
-      border-color: var(--color-success);
+      background-color: var(--surface-success-subdued);
+      border-color: var(--border-success-default);
 
       &:hover {
-        border-color: var(--color-success);
-      }
-
-      &:focus-visible {
-        outline: none;
-        border-color: var(--color-success);
+        border-color: var(--border-success-default);
       }
     }
   }
@@ -68,9 +58,10 @@
   &--disabled {
     input,
     textarea {
-      background-color: var(--color-gray-02);
+      border-color: var(--border-disabled);
+      background-color: var(--surface-disabled);
       &:hover {
-        border-color: var(--color-gray-02);
+        border-color: var(--border-disabled);
       }
     }
   }
@@ -91,8 +82,9 @@
 
       svg {
         position: absolute;
-        top: 15px;
-        left: 16px;
+        top: 8px;
+        left: 12px;
+        fill: var(--icon-default);
       }
     }
 
@@ -108,8 +100,9 @@
 
       svg {
         position: absolute;
-        top: 15px;
-        right: 16px;
+        top: 8px;
+        right: 12px;
+        fill: var(--icon-default);
       }
     }
 
@@ -123,18 +116,18 @@
 .indicator {
   font-size: 0.75rem;
   line-height: 1.3;
-  color: var(--text-light);
-  font-weight: var(--font-normal);
+  color: var(--text-subdued);
+  font-weight: var(--font-weight-regular);
 }
 
 .description {
   font-size: 0.875rem;
   line-height: 1.4;
-  color: var(--text-medium);
+  color: var(--text-subdued);
 }
 
 .error {
   font-size: 0.875rem;
   line-height: 1.4;
-  color: var(--color-error);
+  color: var(--text-critical);
 }
