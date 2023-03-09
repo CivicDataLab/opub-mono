@@ -1,0 +1,13 @@
+@import '../../../styles/common';
+
+.InlineError {
+  display: flex;
+  color: var(--text-color);
+  fill: var(--icon-color);
+  font-size: var(--font-size-100);
+}
+
+.Icon {
+  fill: currentColor;
+  margin-right: calc(var(--space-05) + var(--space-1));
+}
