@@ -12,7 +12,7 @@ const Text = ({
   id,
   numeric = false,
   truncate = false,
-  variant,
+  variant = 'bodyMd',
   visuallyHidden = false,
 }: TextProps) => {
   const Component = as || (visuallyHidden ? 'span' : 'p');

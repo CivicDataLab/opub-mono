@@ -1,0 +1,340 @@
+@import '../../../styles/common';
+
+$textfield-backdrop-offset: calc(-1 * var(--space-05));
+$spinner-icon-size: 12px;
+
+.TextField {
+  --opub-text-field-contents: 20;
+  --opub-text-field-backdrop: 10;
+
+  @include text-style-input;
+
+  position: relative;
+
+  display: flex;
+
+  align-items: center;
+  color: var(--text);
+  cursor: text;
+
+  svg {
+    fill: var(--icon-default);
+  }
+}
+
+.multiline {
+  padding: 0;
+  flex-wrap: wrap;
+
+  > .Input {
+    overflow: auto;
+    padding-left: var(--space-3);
+    padding-right: var(--space-3);
+    resize: none;
+  }
+}
+
+.hasValue {
+  color: var(--text);
+}
+
+.focus > .Input,
+.focus > .VerticalContent,
+.Input:focus-visible {
+  outline: none;
+
+  ~ .Backdrop {
+    @include focus-ring($style: 'focused');
+  }
+}
+
+.error {
+  > .Input ~ .Backdrop {
+    background-color: var(--surface-critical-subdued);
+    border-color: var(--border-critical-default);
+
+    &::after {
+      border-color: var(--focused-default);
+    }
+  }
+}
+
+.readOnly > .Backdrop {
+  background-color: var(--action-secondary-disabled);
+}
+
+.disabled {
+  color: var(--text-disabled);
+  cursor: initial;
+
+  > .Backdrop {
+    background-color: var(--surface-disabled);
+    border-color: var(--border-subdued);
+    border-top-color: var(--border-disabled);
+  }
+
+  svg {
+    fill: var(--icon-disabled);
+  }
+}
+
+.Input {
+  font-size: var(--font-size-200);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--font-line-height-2);
+
+  text-transform: initial;
+  letter-spacing: initial;
+  position: relative;
+  z-index: var(--opub-text-field-contents);
+  display: block;
+  flex: 1 1 0%;
+  width: 100%;
+  min-width: 0;
+  min-height: 1.5rem;
+  margin: 0;
+  padding: calc((2.25rem - var(--font-line-height-3) - var(--space-05)) / 2)
+    var(--space-3);
+  background: none;
+  border: var(--border-transparent);
+  appearance: none;
+  caret-color: var(--text-default);
+  color: var(--text-default);
+
+  @media #{$breakpoints-md-up} {
+    font-size: var(--font-size-100);
+    line-height: var(--font-line-height-2);
+  }
+
+  .Prefix + & {
+    padding-left: 0;
+  }
+
+  &:disabled {
+    opacity: 1;
+    background: none;
+    color: var(--text-disabled);
+    -webkit-text-fill-color: var(--text-disabled);
+  }
+
+  &:invalid {
+    box-shadow: none;
+  }
+
+  &::placeholder {
+    color: var(--text-subdued);
+  }
+
+  &[type='number'] {
+    appearance: textfield;
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      appearance: none;
+      margin: 0;
+    }
+  }
+
+  &:-webkit-autofill {
+    border-radius: var(--border-radius-1);
+  }
+
+  &.suggestion {
+    &::selection {
+      color: var(--text-disabled);
+      background: transparent;
+    }
+  }
+}
+
+.Input-hasClearButton {
+  &[type='search'] {
+    &::-webkit-search-cancel-button {
+      appearance: none;
+    }
+  }
+}
+
+.Input-suffixed {
+  padding-right: 0;
+}
+
+.Input-alignRight {
+  text-align: right;
+}
+
+.Input-alignLeft {
+  text-align: left;
+}
+
+.Input-alignCenter {
+  text-align: center;
+}
+
+.Backdrop {
+  @include focus-ring($border-width: 1px);
+
+  position: absolute;
+
+  z-index: var(--opub-text-field-backdrop);
+
+  top: 0;
+
+  right: 0;
+
+  bottom: 0;
+
+  left: 0;
+  background-color: var(--surface-default);
+  border: var(--border-width-1) solid var(--border-shadow);
+
+  border-top-color: #898f94;
+  border-radius: var(--border-radius-1);
+  pointer-events: none;
+}
+
+.Prefix,
+.Suffix {
+  position: relative;
+
+  z-index: var(--opub-text-field-contents);
+
+  flex: 0 0 auto;
+  color: var(--text-subdued);
+  user-select: none;
+}
+
+.Prefix {
+  margin-left: var(--space-3);
+  margin-right: var(--space-2);
+}
+
+.Suffix {
+  margin-left: var(--space-1);
+  margin-right: var(--space-3);
+}
+
+.VerticalContent {
+  position: relative;
+
+  z-index: var(--opub-text-field-contents);
+  color: var(--text-subdued);
+  padding: var(--space-2) var(--space-2) 0 var(--space-2);
+  max-height: 140px;
+  overflow: scroll;
+  border: var(--border-transparent);
+
+  width: 100%;
+
+  > .Input {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  @media #{$breakpoints-sm-up} {
+    max-height: 328px;
+  }
+}
+
+.CharacterCount {
+  color: var(--text-subdued);
+
+  z-index: var(--opub-text-field-contents);
+  margin: 0 var(--space-3) 0 var(--space-1);
+  pointer-events: none;
+  text-align: right;
+}
+
+.AlignFieldBottom {
+  align-self: flex-end;
+
+  width: 100%;
+  padding-bottom: var(--space-2);
+}
+
+.ClearButton {
+  @include focus-ring;
+
+  @include unstyled-button;
+
+  z-index: var(--opub-text-field-contents);
+  margin: 0 var(--space-3) 0 var(--space-1);
+
+  &:focus-visible:enabled {
+    @include focus-ring($style: 'focused');
+  }
+
+  &:disabled {
+    cursor: default;
+  }
+}
+
+.Spinner {
+  --opub-text-field-spinner-offset-large: calc(2px + var(--border-width-1));
+  z-index: var(--opub-text-field-contents);
+  margin: var(--opub-text-field-spinner-offset-large);
+  color: var(--icon-default);
+
+  display: flex;
+  align-self: stretch;
+  flex-direction: column;
+
+  width: 22px;
+  cursor: pointer;
+}
+
+.Resizer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 0;
+  visibility: hidden;
+  overflow: hidden;
+}
+
+.DummyInput {
+  @include text-style-input;
+
+  padding: control-vertical-padding() var(--space-3);
+
+  @include text-breakword;
+  white-space: pre-wrap;
+}
+
+.Segment {
+  --opub-text-field-spinner-border-radius: calc(var(--border-radius-1) - 2px);
+  background: var(--surface-neutral-default);
+  border-radius: var(--opub-text-field-spinner-border-radius);
+  display: flex;
+  flex: 1 1 0%;
+  justify-content: center;
+  align-items: center;
+  appearance: none;
+  border: none;
+
+  &:focus {
+    outline: none;
+  }
+
+  &:active {
+    background: var(--surface-neutral-pressed);
+  }
+
+  &:first-of-type {
+    border-top-right-radius: var(--opub-text-field-spinner-border-radius);
+    margin-bottom: var(--space-05);
+  }
+
+  &:last-child {
+    border-bottom-right-radius: var(--opub-text-field-spinner-border-radius);
+  }
+
+  &:not(:first-of-type) {
+    margin-top: 0;
+  }
+}
+
+.monospaced {
+  font-family: var(--font-family-mono);
+}

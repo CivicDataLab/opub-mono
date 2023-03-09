@@ -16,3 +16,5 @@ export { Text } from './Text';
 export { TextArea } from './TextArea';
 export { TextField } from './TextField';
 export { View } from './View';
+export { Labelled } from "./Labelled";
+export { Connected } from "./Connected";

@@ -1,0 +1,26 @@
+.Connected {
+  --opub-connected-item: 10;
+  --opub-connected-primary: 20;
+  --opub-connected-focused: 30;
+  position: relative;
+  display: flex;
+}
+
+.Item {
+  position: relative;
+  z-index: var(--opub-connected-item);
+  flex: 0 0 auto;
+
+  &:not(:first-child) {
+    margin-left: var(--space-1);
+  }
+}
+
+.Item-primary {
+  z-index: var(--opub-connected-primary);
+  flex: 1 1 auto;
+}
+
+.Item-focused {
+  z-index: var(--opub-connected-focused);
+}

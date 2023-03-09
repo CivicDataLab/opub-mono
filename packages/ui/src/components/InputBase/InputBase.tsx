@@ -1,6 +1,7 @@
 import { InputProps } from '@ui/types/input';
 import cx from 'classnames';
 import React from 'react';
+import { InlineMessage } from '../InlineMessage';
 import { Label } from '../Label';
 import styles from './InputBase.module.scss';
 
@@ -15,7 +16,7 @@ export const InputBase = React.forwardRef((props: InputProps, ref) => {
     className,
     validationState,
     isDisabled = false,
-    description,
+    helpText,
     errorMessage,
     as = 'input',
     fluid = false,
@@ -68,9 +69,9 @@ export const InputBase = React.forwardRef((props: InputProps, ref) => {
         />
         {iconEnd && iconEnd}
       </div>
-      <span className={styles.description}>{description}</span>
+      <span className={styles.helpText}>{helpText}</span>
       {errorMessage ? (
-        <span className={styles.error}>{errorMessage}</span>
+        <InlineMessage message={errorMessage} fieldID={id} />
       ) : null}
     </div>
   );

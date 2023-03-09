@@ -64,7 +64,7 @@ export interface TextProps {
   /** Truncate text overflow with ellipsis */
   truncate?: boolean;
   /** Typographic style of text */
-  variant: Variant;
+  variant?: Variant;
   /** Visually hide the text */
   visuallyHidden?: boolean;
 }

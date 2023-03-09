@@ -1,0 +1,27 @@
+@import '../../../styles/common';
+
+.hidden > .LabelWrapper {
+  @include visually-hidden;
+}
+
+.LabelWrapper {
+  @include text-breakword;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: var(--space-1);
+}
+
+.HelpText {
+  margin-top: var(--space-1);
+}
+
+.Error {
+  @include text-breakword;
+  margin-top: var(--space-1);
+}
+
+.Action {
+  flex: 0 0 auto;
+}
