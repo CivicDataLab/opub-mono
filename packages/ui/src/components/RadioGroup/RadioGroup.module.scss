@@ -1,9 +1,15 @@
 @import '../../../styles/common';
 
 .RadioGroupRoot {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  legend {
+    padding-block-end: var(--space-4);
+  }
+
+  @media #{$breakpoints-md-up} {
+    legend {
+      padding-block-end: var(--space-1);
+    }
+  }
 }
 
 .RadioItem {

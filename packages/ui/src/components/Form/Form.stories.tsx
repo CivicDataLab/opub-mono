@@ -67,7 +67,7 @@ export const FormBase = () => (
       ]}
     />
     <Divider borderStyle="divider" />
-    <RadioGroup name="radio-item" title="Dietery preference">
+    <RadioGroup name="radio-item" title="Dietary preference">
       <RadioItem value="veg">Vegetarian </RadioItem>
       <RadioItem value="non-veg">Non vegetarian egetarian </RadioItem>
     </RadioGroup>

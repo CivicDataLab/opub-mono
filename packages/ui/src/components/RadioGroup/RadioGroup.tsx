@@ -54,6 +54,7 @@ const RadioGroup = ({
           <RadioRadix.Root
             {...field}
             {...otherProps}
+            className={styles.RadioGroupRoot}
             onValueChange={(val) => {
               field.onChange(val);
             }}
