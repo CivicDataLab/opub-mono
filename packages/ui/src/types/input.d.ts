@@ -8,7 +8,7 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
   validationState?: 'valid' | 'invalid';
   isDisabled?: boolean;
-  description?: string;
+  helpText?: string;
   errorMessage?: string | null;
   as?: 'input' | 'textarea';
   rows?: number;

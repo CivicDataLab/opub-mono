@@ -150,13 +150,8 @@
 
 /* fonts */
 :root {
-  --primary-font: SF Pro Display;
-  --secondary-font: SF Pro Display;
-  --sf-pro-display-regular: SF Pro Display;
-  --sf-pro-text-500: SF Pro Text;
-  --sf-pro-text-600: SF Pro Text;
-  --sf-pro-text-regular: SF Pro Text;
-  --sf-mono-regular: SF Mono;
+  --primary-font: 'Inter', sans-serif;
+  --font-family-mono: 'Space Mono', monospace;
 }
 
 /* Font Styles */

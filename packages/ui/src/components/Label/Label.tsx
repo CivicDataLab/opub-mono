@@ -6,10 +6,21 @@ import styles from './Label.module.scss';
 export interface LabelInterface extends LabelProps {
   disabled?: boolean;
   error?: boolean;
+  /** Visual required indicator for the label */
+  requiredIndicator?: boolean;
 }
 
-export function Label({ children, ...props }: LabelInterface) {
-  const { error = false, disabled = false, ...otherProps } = props;
+export function Label({
+  children,
+
+  ...props
+}: LabelInterface) {
+  const {
+    error = false,
+    disabled = false,
+    requiredIndicator,
+    ...otherProps
+  } = props;
 
   return (
     <LabelRadix.Root
@@ -17,6 +28,7 @@ export function Label({ children, ...props }: LabelInterface) {
       className={cx(styles.base, {
         [styles['error']]: error,
         [styles['disabled']]: disabled,
+        [styles['RequiredIndicator']]: requiredIndicator,
       })}
     >
       {children}

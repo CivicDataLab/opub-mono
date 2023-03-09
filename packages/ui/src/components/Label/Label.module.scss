@@ -4,6 +4,7 @@
   line-height: var(--font-line-height-2);
   display: block;
   width: 100%;
+  width: fit-content;
 }
 
 .error {
@@ -12,4 +13,10 @@
 
 .disabled {
   color: var(--text-disabled);
+}
+
+.RequiredIndicator::after {
+  content: '*';
+  color: var(--text-critical);
+  margin-left: var(--space-1);
 }

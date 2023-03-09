@@ -106,3 +106,12 @@ interface ConnectedDisclosure {
   /** List of actions */
   actions: ActionListItemDescriptor[];
 }
+
+export interface ComplexAction
+  extends Action,
+    DisableableAction,
+    DestructableAction,
+    IconableAction,
+    OutlineableAction,
+    LoadableAction,
+    PlainAction {}

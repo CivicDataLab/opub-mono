@@ -182,3 +182,49 @@ $border-width-data: (
     }
   }
 }
+
+$typography-condensed: em(640px);
+
+@mixin breakpoint-after($breakpoint, $inclusive: true) {
+  @media (min-width: #{breakpoint($breakpoint, if($inclusive, 0, 1px))}) {
+    @content;
+  }
+}
+
+@mixin when-typography-not-condensed {
+  @include breakpoint-after($typography-condensed) {
+    @content;
+  }
+}
+
+@mixin text-style-input {
+  font-size: var(--font-size-200);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--font-line-height-3);
+  border: none;
+
+  text-transform: initial;
+  letter-spacing: initial;
+
+  @include when-typography-not-condensed {
+    font-size: var(--font-size-100);
+  }
+}
+
+@mixin text-breakword {
+  word-wrap: break-word;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+@function control-height() {
+  @return rem(36px);
+}
+
+@function control-slim-height() {
+  @return rem(28px);
+}
+
+@function control-vertical-padding() {
+  @return (control-height() - line-height(input) - rem(2px)) / 2;
+}
