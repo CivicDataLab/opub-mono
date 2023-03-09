@@ -2,8 +2,7 @@ import { ChoiceListProps } from '@ui/types/choicelist';
 import cx from 'classnames';
 import { useId } from 'react';
 import { Checkbox } from '../Checkbox';
-import { InlineError } from '../InlineError';
-import { errorTextID } from '../InlineError/InlineError';
+import { InlineMessage } from '../InlineMessage';
 import { Text } from '../Text';
 import styles from './CheckboxGroup.module.scss';
 
@@ -56,7 +55,7 @@ export function CheckboxGroup({
 
   const errorMarkup = error && (
     <div className={styles.ChoiceError}>
-      <InlineError message={error} fieldID={finalName} />
+      <InlineMessage message={error} fieldID={finalName} />
     </div>
   );
 

@@ -1,5 +1,5 @@
 import cx from 'classnames';
-import { InlineError } from '../InlineError';
+import { InlineMessage } from '../InlineMessage';
 import { Label } from '../Label';
 import { Text } from '../Text';
 import styles from './Choice.module.scss';
@@ -51,7 +51,7 @@ export const Choice = ({ children, label, id, ...props }: ChoiceProps) => {
 
   const errorMarkup = error && typeof error !== 'boolean' && (
     <div className={styles.ErrorMessage}>
-      <InlineError message={error} fieldID={id} />
+      <InlineMessage message={error} fieldID={id} />
     </div>
   );
 

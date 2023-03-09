@@ -5,7 +5,7 @@ import cx from 'classnames';
 import React from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import { Choice } from '../Choice';
-import { InlineError } from '../InlineError';
+import { InlineMessage } from '../InlineMessage';
 import styles from './RadioGroup.module.scss';
 
 type RadixProps = React.ComponentProps<typeof RadioRadix.Root> & {
@@ -24,7 +24,7 @@ const RadioGroup = ({ name, children, error, ...otherProps }: RadixProps) => {
 
   const errorMarkup = error && (
     <div className={styles.RadioError}>
-      <InlineError message={error} fieldID={finalId} />
+      <InlineMessage message={error} fieldID={finalId} />
     </div>
   );
   return (
