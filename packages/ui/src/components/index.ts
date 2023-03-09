@@ -13,6 +13,6 @@ export { View } from './View';
 export { Divider } from './Divider';
 export { Text } from './Text';
 export { InlineError } from './InlineError';
-export { ChoiceList } from './ChoiceList';
+export { CheckboxGroup } from './CheckboxGroup';
 export { RadioItem, RadioGroup } from './RadioButton';
 export { Choice } from './Choice';

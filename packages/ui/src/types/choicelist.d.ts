@@ -22,12 +22,8 @@ export interface ChoiceListProps {
   title: React.ReactNode;
   /** Collection of choices */
   choices: Choice[];
-  /** Collection of selected choices */
-  selected: string[];
   /** Name for form input */
   name?: string;
-  /** Allow merchants to select multiple options at once */
-  allowMultiple?: boolean;
   /** Toggles display of the title */
   titleHidden?: boolean;
   /** Display an error message */
