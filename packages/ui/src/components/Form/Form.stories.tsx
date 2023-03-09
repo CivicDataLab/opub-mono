@@ -1,17 +1,21 @@
 import { Meta, StoryObj } from '@storybook/react';
 import * as yup from 'yup';
 import { Button } from '../Button';
+import { Checkbox } from '../Checkbox';
+import { CheckboxGroup } from '../CheckboxGroup';
+import { Divider } from '../Divider';
 import { Flex } from '../Flex';
+import { RadioGroup, RadioItem } from '../RadioGroup';
 import { TextArea } from '../TextArea';
 import { TextField } from '../TextField';
 import { Form } from './Form';
 
 const schema = yup.object().shape({
-  name: yup.string().required('Name is Required'),
+  // name: yup.string().required('Name is Required'),
 });
 
 /**
- * A control that allows the user to toggle between checked and not checked.
+ * A wrapper component that handles the submission of forms.
  */
 const meta = {
   component: Form,
@@ -32,11 +36,10 @@ const meta = {
   },
 } satisfies Meta<typeof Form>;
 export default meta;
-type Story = StoryObj<typeof meta>;
 
 export const FormBase = () => (
   <Form
-    defaultValues={{ name: '', lastName: '', desc: '' }}
+    // defaultValues={{ name: '', lastName: '', desc: '' }}
     formSubmit={(e) => console.log(e)}
     validationSchema={schema}
   >
@@ -46,6 +49,28 @@ export const FormBase = () => (
     </Flex>
 
     <TextArea name="desc" label="Hobbies" rows={6} fluid />
-    <Button type="submit">Submit</Button>
+    <Divider borderStyle="divider" />
+    <Checkbox name="checkbox-single">Single Checkbox</Checkbox>
+    <CheckboxGroup
+      title="Multi Checkbox"
+      name="multi-checkbox"
+      choices={[
+        {
+          label: 'I have read agreement to terms and conditions',
+          value: 'terms',
+          helpText: 'Reduces the number of fields required to signup.',
+        },
+        {
+          label: 'I would like to receive weekly newsletter',
+          value: 'newsletter',
+        },
+      ]}
+    />
+    <Divider borderStyle="divider" />
+    <RadioGroup name="radio-item" title="Dietery preference">
+      <RadioItem value="veg">Vegetarian </RadioItem>
+      <RadioItem value="non-veg">Non vegetarian egetarian </RadioItem>
+    </RadioGroup>
+    <Button submit>Submit</Button>
   </Form>
 );
