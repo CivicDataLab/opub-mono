@@ -63,7 +63,7 @@ const RadioItem = ({ children, name, ...props }: Props) => {
         disabled={disabled}
         required={required}
       >
-        <RadioRadix.Indicator className={styles.RadioIndicator} />
+        <RadioRadix.Indicator forceMount className={styles.RadioIndicator} />
       </RadioRadix.Item>
     </Choice>
   );
