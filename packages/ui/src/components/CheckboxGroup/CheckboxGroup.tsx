@@ -36,13 +36,6 @@ export function CheckboxGroup({
       describedByError,
     } = choice;
 
-    // const isSelected = choiceIsSelected(choice, selected);
-    // const renderedChildren = choice.renderChildren ? (
-    //   <div className={styles.ChoiceChildren}>
-    //     <div>{choice.renderChildren(isSelected)}</div>
-    //   </div>
-    // ) : null;
-
     return (
       <li key={value}>
         <Checkbox

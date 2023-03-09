@@ -1,4 +1,4 @@
-import { AlertSmall } from '@opub-icons/ui';
+import { AlertCircle } from '@opub-icons/workflow';
 import type { Error } from '@ui/types/shared/form';
 import styles from './InlineError.module.scss';
 
@@ -17,7 +17,7 @@ function InlineError({ message, fieldID }: InlineErrorProps) {
   return (
     <div id={errorTextID(fieldID)} className={styles.InlineError}>
       <div className={styles.Icon}>
-        <AlertSmall />
+        <AlertCircle size={14} />
       </div>
       {message}
     </div>

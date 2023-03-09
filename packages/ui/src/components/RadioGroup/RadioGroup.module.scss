@@ -83,3 +83,12 @@
     background-color: var(--surface-subdued);
   }
 }
+
+.RadioError {
+  padding-block-end: var(--space-2);
+  padding-block-start: var(--space-4);
+
+  @media #{$breakpoints-md-up} {
+    padding-block-start: var(--space-1);
+  }
+}

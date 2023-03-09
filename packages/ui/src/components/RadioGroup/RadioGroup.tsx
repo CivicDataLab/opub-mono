@@ -1,21 +1,32 @@
 import * as RadioRadix from '@radix-ui/react-radio-group';
-import { RadioButtonProps } from '@ui/types/radiobutton';
+import { RadioGroupProps } from '@ui/types/radiogroup';
+import type { Error } from '@ui/types/shared/form';
 import cx from 'classnames';
 import React from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import { Choice } from '../Choice';
-import styles from './RadioButton.module.scss';
+import { InlineError } from '../InlineError';
+import styles from './RadioGroup.module.scss';
 
 type RadixProps = React.ComponentProps<typeof RadioRadix.Root> & {
   name: string;
+  /** Display an error message */
+  error?: Error;
 };
-interface Props extends RadixProps, RadioButtonProps {
+interface Props extends RadixProps, RadioGroupProps {
   value: string;
 }
 
-const RadioGroup = ({ name, children, ...otherProps }: RadixProps) => {
+const RadioGroup = ({ name, children, error, ...otherProps }: RadixProps) => {
   const { control } = useFormContext();
+  const randomId = React.useId();
+  const finalId = otherProps.id || randomId;
 
+  const errorMarkup = error && (
+    <div className={styles.RadioError}>
+      <InlineError message={error} fieldID={finalId} />
+    </div>
+  );
   return (
     <Controller
       control={control}
@@ -31,6 +42,7 @@ const RadioGroup = ({ name, children, ...otherProps }: RadixProps) => {
             }}
           >
             {children}
+            {errorMarkup}
           </RadioRadix.Root>
         );
       }}
@@ -39,10 +51,8 @@ const RadioGroup = ({ name, children, ...otherProps }: RadixProps) => {
 };
 
 const RadioItem = ({ children, name, ...props }: Props) => {
-  const { helpText, value, disabled, id, required } = props;
-
-  const randomId = React.useId();
-  const finalId = id || randomId;
+  const { helpText, value, disabled, required } = props;
+  const id = React.useId();
 
   const inputClassName = cx(
     styles.RadioItem,
@@ -50,16 +60,11 @@ const RadioItem = ({ children, name, ...props }: Props) => {
   );
 
   const checkboxMarkup = (
-    <Choice
-      id={finalId}
-      label={children}
-      helpText={helpText}
-      disabled={disabled}
-    >
+    <Choice label={children} helpText={helpText} disabled={disabled} id={id}>
       <RadioRadix.Item
+        id={id}
         value={value}
         className={inputClassName}
-        id={finalId}
         disabled={disabled}
         required={required}
       >

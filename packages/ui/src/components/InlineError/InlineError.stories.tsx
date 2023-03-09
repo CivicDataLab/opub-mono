@@ -3,8 +3,6 @@ import { InlineError } from './InlineError';
 
 /**
  * InlineError Description
- *
- * Reference: #
  */
 const meta = {
   component: InlineError,
@@ -13,8 +11,9 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-// export const Default: Story = {
-//   args: {
-//     children: 'InlineError',
-//   },
-// };
+export const Default: Story = {
+  args: {
+    message: 'InlineError',
+    fieldID: '123',
+  },
+};
