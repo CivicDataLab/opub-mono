@@ -14,7 +14,7 @@ export interface InlineMessageProps {
   /** Unique identifier of the invalid form field that the message describes */
   fieldID: string;
   /** State of the message. Defaut is error */
-  state?: 'success' | 'error' | 'warning' | 'info';
+  appearance?: 'success' | 'error' | 'warning' | 'info';
 }
 
 const stateColor = {
@@ -34,20 +34,20 @@ const stateIcon = {
 function InlineMessage({
   message,
   fieldID,
-  state = 'error',
+  appearance = 'error',
 }: InlineMessageProps) {
   if (!message) {
     return null;
   }
-  const Icon = stateIcon[state] || AlertCircle;
+  const Icon = stateIcon[appearance] || AlertCircle;
   return (
     <div
-      id={errorTextID(fieldID)}
+      id={`${fieldID}-${appearance}`}
       className={styles.InlineError}
       style={{
         // @ts-ignore
-        '--text-color': `var(--text-${stateColor[state]})`,
-        '--icon-color': `var(--icon-${stateColor[state]})`,
+        '--text-color': `var(--text-${stateColor[appearance]})`,
+        '--icon-color': `var(--icon-${stateColor[appearance]})`,
       }}
     >
       <div className={styles.Icon}>
@@ -56,10 +56,6 @@ function InlineMessage({
       {message}
     </div>
   );
-}
-
-export function errorTextID(id: string) {
-  return `${id}Error`;
 }
 
 export { InlineMessage };

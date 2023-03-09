@@ -45,7 +45,7 @@ export function CheckboxGroup({
           disabled={choiceDisabled || disabled}
           helpText={helpText}
           ariaDescribedBy={
-            error && describedByError ? errorTextID(finalName) : null
+            error && describedByError ? `${finalName}-error` : null
           }
         >
           {label}

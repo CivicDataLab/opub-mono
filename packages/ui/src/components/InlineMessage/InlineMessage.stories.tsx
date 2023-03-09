@@ -3,9 +3,7 @@ import { PropsVariationSection } from '@ui/utils/helpers';
 import { InlineMessage } from './InlineMessage';
 
 /**
- * InlineMessage Description
- *
- * Reference: #
+ * An inline message lets users know when important information is available
  */
 const meta = {
   component: InlineMessage,
@@ -30,22 +28,22 @@ export const States = () => (
     }}
     yAxis={{
       error: {
-        state: 'error',
+        appearance: 'error',
         message: 'An error occured while uploading',
         fieldID: 'error',
       },
       success: {
-        state: 'success',
+        appearance: 'success',
         message: 'Files have been uploaded',
         fieldID: 'success',
       },
       warning: {
-        state: 'warning',
+        appearance: 'warning',
         message: 'Your bill may increase',
         fieldID: 'warning',
       },
       info: {
-        state: 'info',
+        appearance: 'info',
         message: 'Verifying your status...',
         fieldID: 'info',
       },
