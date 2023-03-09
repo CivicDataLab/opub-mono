@@ -1,6 +1,6 @@
-import { Meta, StoryObj } from '@storybook/react';
-import { RadioGroup, RadioItem } from './RadioButton';
+import { Meta } from '@storybook/react';
 import { Form } from '../Form';
+import { RadioGroup, RadioItem } from './RadioGroup';
 
 /**
  * A set of checkable buttons—known as radio buttons—where no more than one of the buttons can be checked at a time.
@@ -15,7 +15,7 @@ export default meta;
 
 export const Default = () => (
   <Form>
-    <RadioGroup name="radio1">
+    <RadioGroup name="radio1" defaultValue="12">
       <RadioItem name="radio1" value="12">
         Radio 1
       </RadioItem>
@@ -42,7 +42,7 @@ export const HelpText = () => (
 export const Disabled = () => (
   <Form>
     <RadioGroup name="radio1">
-      <RadioItem name="radio1" value="12" disabled>
+      <RadioItem name="radio1" value="12">
         Radio 1
       </RadioItem>
       <RadioItem name="radio1" value="23" disabled>
@@ -50,6 +50,19 @@ export const Disabled = () => (
       </RadioItem>
       <RadioItem name="radio1" value="11">
         Radio 3
+      </RadioItem>
+    </RadioGroup>
+  </Form>
+);
+
+export const Error = () => (
+  <Form>
+    <RadioGroup name="radio1" error="oops">
+      <RadioItem name="radio1" value="12">
+        Radio 1
+      </RadioItem>
+      <RadioItem name="radio1" value="23" helpText="This is a help text">
+        Radio 2
       </RadioItem>
     </RadioGroup>
   </Form>

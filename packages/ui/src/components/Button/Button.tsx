@@ -120,6 +120,7 @@ const Button = ({
   icon,
   monochrome,
   disclosure,
+  type,
   connectedDisclosure,
 }: ButtonProps) => {
   const isDisabled = disabled || loading;

@@ -1,0 +1,100 @@
+@import '../../../styles/common';
+
+.RadioGroupRoot {
+  legend {
+    padding-block-end: var(--space-4);
+  }
+
+  @media #{$breakpoints-md-up} {
+    legend {
+      padding-block-end: var(--space-1);
+    }
+  }
+}
+
+.RadioItem {
+  --choice-size: 20px;
+  @media #{$breakpoints-md-down} {
+    --choice-size: 18px;
+  }
+
+  background-color: var(--surface-default);
+  width: var(--choice-size);
+  height: var(--choice-size);
+  min-width: var(--choice-size);
+  min-height: var(--choice-size);
+  border-radius: 100%;
+  border: var(--border-width-2) solid var(--border-default);
+  transition: border-color var(--duration-150) var(--ease);
+
+  &:hover {
+    border-color: var(--border-hovered);
+  }
+
+  &[data-state='checked'] {
+    border-color: var(--interactive-default);
+  }
+}
+
+.RadioIndicator {
+  --icon-size: 8px;
+
+  @media #{$breakpoints-md-down} {
+    --icon-size: 10px;
+  }
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  position: relative;
+
+  transform: translate3d(0, 0, 0) scale(0.25);
+  opacity: 0;
+  transition: opacity var(--duration-150) var(--ease),
+    transform var(--duration-150) var(--ease);
+
+  &::after {
+    content: '';
+    display: block;
+    width: var(--icon-size);
+    height: var(--icon-size);
+
+    min-width: var(--icon-size);
+    min-height: var(--icon-size);
+    border-radius: 50%;
+    background-color: var(--interactive-default);
+
+    @media (-ms-high-contrast: active) {
+      fill: windowText;
+    }
+  }
+
+  &[data-state='checked'] {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 1;
+  }
+}
+
+.Disabled {
+  background-color: var(--surface-subdued);
+  border-color: var(--border-disabled);
+
+  &:hover {
+    border-color: var(--border-disabled);
+  }
+
+  &::before {
+    background-color: var(--surface-subdued);
+  }
+}
+
+.RadioError {
+  padding-block-end: var(--space-2);
+  padding-block-start: var(--space-4);
+
+  @media #{$breakpoints-md-up} {
+    padding-block-start: var(--space-1);
+  }
+}
