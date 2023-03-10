@@ -1,30 +1,27 @@
-import { InputProps } from '@ui/types/input';
+import { TextFieldProps } from '@ui/types/input';
 import { Controller, useFormContext } from 'react-hook-form';
-import { InputBase } from '../InputBase';
+import { Input } from '../Input';
 
-export interface TextFieldProps extends InputProps {
+export type Props = TextFieldProps & {
   name: string;
   onFieldChange?(e: any): void;
-}
+};
 
-export const TextField = (props: TextFieldProps) => {
+export const TextField = (props: Props) => {
   const { control } = useFormContext();
-  const { name, label, ...otherProps } = props;
-  function handleChange(e: any) {
-    props.onFieldChange && props.onFieldChange(e);
-  }
-
   return (
     <>
       <Controller
         control={control}
-        name={name}
-        {...otherProps}
+        {...props}
         render={({ field }) => (
-          <InputBase
-            label={label}
-            // errorMessage={meta.touched ? meta.error : null}
+          <Input
+            {...props}
             {...field}
+            onChange={(e, id) => {
+              field.onChange(e);
+              props.onChange && props.onChange(e, id);
+            }}
           />
         )}
       />

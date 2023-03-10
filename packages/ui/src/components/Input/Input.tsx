@@ -23,7 +23,7 @@ export function Input({
   suffix,
   verticalContent,
   placeholder,
-  value,
+  value = '',
   helpText,
   label,
   labelAction,
@@ -101,7 +101,6 @@ export function Input({
       return;
     }
 
-    // @ts-ignore
     input.setSelectionRange(value.length, suggestion.length);
   }, [focus, value, type, suggestion]);
 
@@ -136,7 +135,6 @@ export function Input({
 
   let characterCountMarkup = null;
   if (showCharacterCount) {
-    // @ts-ignore
     const characterCount = normalizedValue.length;
     const characterCountLabel = 'character count'; //TODO: add count logic
 
@@ -321,7 +319,7 @@ export function Input({
     readOnly,
     role,
     autoFocus,
-    value: suggestion || value ? normalizedValue : null,
+    value: normalizedValue,
     placeholder,
     style,
     autoComplete,
