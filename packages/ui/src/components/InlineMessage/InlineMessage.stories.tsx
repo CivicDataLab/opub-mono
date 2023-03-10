@@ -14,7 +14,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    message: 'InlineError',
+    message: 'This is an inline message',
     fieldID: '123',
   },
 };

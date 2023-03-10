@@ -1,11 +1,6 @@
-import {
-  Alert,
-  AlertCircle,
-  AlertCircleFilled,
-  CheckmarkCircle,
-  Info,
-} from '@opub-icons/workflow';
 import type { Error } from '@ui/types/shared/form';
+import { stateIcon } from '@ui/utils/icons';
+import React from 'react';
 import styles from './InlineMessage.module.scss';
 
 export interface InlineMessageProps {
@@ -24,13 +19,6 @@ const stateColor = {
   info: 'highlight',
 };
 
-const stateIcon = {
-  success: CheckmarkCircle,
-  error: AlertCircleFilled,
-  warning: Alert,
-  info: Info,
-};
-
 function InlineMessage({
   message,
   fieldID,
@@ -39,16 +27,17 @@ function InlineMessage({
   if (!message) {
     return null;
   }
-  const Icon = stateIcon[appearance] || AlertCircle;
+  const Icon = stateIcon[appearance];
   return (
     <div
       id={`${fieldID}-${appearance}`}
       className={styles.InlineError}
-      style={{
-        // @ts-ignore
-        '--text-color': `var(--text-${stateColor[appearance]})`,
-        '--icon-color': `var(--icon-${stateColor[appearance]})`,
-      }}
+      style={
+        {
+          '--text-color': `var(--text-${stateColor[appearance]})`,
+          '--icon-color': `var(--icon-${stateColor[appearance]})`,
+        } as React.CSSProperties
+      }
     >
       <div className={styles.Icon}>
         <Icon size={14} />
