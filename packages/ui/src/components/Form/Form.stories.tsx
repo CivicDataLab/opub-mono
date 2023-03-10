@@ -6,7 +6,6 @@ import { CheckboxGroup } from '../CheckboxGroup';
 import { Divider } from '../Divider';
 import { Flex } from '../Flex';
 import { RadioGroup, RadioItem } from '../RadioGroup';
-import { TextArea } from '../TextArea';
 import { TextField } from '../TextField';
 import { Form } from './Form';
 
@@ -48,7 +47,7 @@ export const FormBase = () => (
       <TextField name="lastName" label="Last Name" />
     </Flex>
 
-    <TextArea name="desc" label="Hobbies" rows={6} fluid />
+    <TextField multiline={4} name="desc" label="Hobbies" />
     <Divider borderStyle="divider" />
     <Checkbox name="checkbox-single">Single Checkbox</Checkbox>
     <CheckboxGroup
