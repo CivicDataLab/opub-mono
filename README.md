@@ -27,7 +27,7 @@ To build all apps and packages, run the following command:
 
 ```
 cd opub-mono
-yarn run build
+yarn build
 ```
 
 ### Develop
@@ -36,7 +36,16 @@ To develop all apps and packages, run the following command:
 
 ```
 cd opub-mono
-yarn run dev
+yarn dev
+```
+
+### Develop Only Specific Package
+
+To develop only package, let's say UI, run the following command:
+
+```
+cd opub-mono
+yarn dev --filter ui
 ```
 
 ### New Component
