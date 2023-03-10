@@ -7,7 +7,9 @@ import { Tag } from '../Tag';
 import { Input } from './Input';
 
 /**
- * Input Element
+ * A text field is an input field that merchants can type into. It has a range of options and supports several text formats including numbers.
+ *
+ * Reference: https://polaris.shopify.com/components/selection-and-input/text-field
  */
 const meta = {
   component: Input,
@@ -30,12 +32,23 @@ export const Number: Story = {
   },
 };
 
-export const Multiline: Story = {
-  args: {
-    label: 'Multiline',
-    multiline: 3,
-  },
-};
+export function Multiline() {
+  const [value, setValue] = useState('This is first line\nWell this is second');
+
+  const handleChange = useCallback(
+    (newValue: React.SetStateAction<string>) => setValue(newValue),
+    []
+  );
+
+  return (
+    <Input
+      label="Address"
+      value={value}
+      onChange={handleChange}
+      multiline={4}
+    />
+  );
+}
 
 export const HiddenLabel: Story = {
   args: {
