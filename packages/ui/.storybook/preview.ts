@@ -3,6 +3,7 @@ import '../../../apps/web/styles/base.css';
 import '../../../apps/web/styles/breakpoints.scss';
 import '@storybook/addon-actions';
 import '@storybook/addon-console';
+// import { Preview } from '@storybook/react';
 
 export const parameters = {
   // actions: { argTypesRegex: '^on[A-Z].*' },
@@ -14,3 +15,8 @@ export const parameters = {
     },
   },
 };
+
+const preview = {
+  parameters,
+};
+export default preview;

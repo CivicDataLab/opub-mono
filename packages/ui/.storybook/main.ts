@@ -1,4 +1,6 @@
-module.exports = {
+import { StorybookConfig } from '@storybook/react-vite';
+
+const config: StorybookConfig = {
   stories: ['../src'],
   addons: [
     '@storybook/addon-links',
@@ -14,3 +16,5 @@ module.exports = {
     autodocs: true,
   },
 };
+
+export default config;
