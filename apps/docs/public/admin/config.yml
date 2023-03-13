@@ -5,19 +5,24 @@ backend:
 media_folder: public/img
 public_folder: img
 collections:
+  - name: 'components'
+    label: 'Components'
+    folder: 'apps/docs/pages/components'
+    create: true
+    fields:
+      - { label: 'Title', name: 'title', widget: 'string' }
+      - { label: 'Publish Date', name: 'date', widget: 'datetime' }
+      - {
+          label: 'Featured Image',
+          name: 'thumbnail',
+          widget: 'image',
+          required: false,
+        }
+      - { label: 'Body', name: 'body', widget: 'markdown' }
+
   - name: 'pages'
     label: 'Pages'
     files:
-      - label: 'Components'
-        name: 'components'
-        folder: 'apps/docs/pages/components'
-        create: true
-        fields:
-          - { label: 'Title', name: 'title', widget: 'string' }
-          - { label: 'Publish Date', name: 'date', widget: 'datetime' }
-          - { label: 'Featured Image', name: 'thumbnail', widget: 'image' }
-          - { label: 'Body', name: 'body', widget: 'markdown' }
-
       - label: 'Page'
         name: 'page'
         file: 'apps/docs/pages/text.md'
