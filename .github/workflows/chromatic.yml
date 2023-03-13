@@ -2,6 +2,8 @@ name: 'Chromatic'
 on:
   push:
     branches: ['main']
+    paths:
+      - 'packages/ui'
 
 jobs:
   chromatic-deployment:
