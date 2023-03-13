@@ -1,12 +1,12 @@
 {
   "name": "ui",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
   "main": "./index.tsx",
   "types": "./index.tsx",
   "license": "MIT",
   "engines": {
-    "node": "16"
+    "node": ">=16 <=18"
   },
   "scripts": {
     "dev": "storybook dev -p 6006",
