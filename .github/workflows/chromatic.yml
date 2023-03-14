@@ -1,10 +1,10 @@
 name: 'Chromatic'
 on:
   push:
-    branches: ['main']
     paths:
-      - 'packages/opub-ui'
-
+      - 'packages/opub-ui/**'
+    branches:
+      - main
 jobs:
   chromatic-deployment:
     runs-on: ubuntu-latest
