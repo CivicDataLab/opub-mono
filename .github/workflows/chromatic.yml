@@ -3,7 +3,7 @@ on:
   push:
     branches: ['main']
     paths:
-      - 'packages/ui'
+      - 'packages/opub-ui'
 
 jobs:
   chromatic-deployment:
@@ -25,6 +25,6 @@ jobs:
         uses: chromaui/action@v1
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
-          workingDir: packages/ui
+          workingDir: packages/opub-ui
           onlyChanged: true
           externals: packages/(icons/icons|tokens/src)/**

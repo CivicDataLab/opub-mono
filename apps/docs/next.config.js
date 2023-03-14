@@ -12,7 +12,7 @@ const nextConfig = {
     includePaths: [path.join(__dirname, 'styles')],
   },
   reactStrictMode: true,
-  transpilePackages: ['ui'],
+  transpilePackages: ['opub-ui'],
 };
 
 module.exports = withNextra(nextConfig);
