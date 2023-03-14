@@ -13,6 +13,6 @@ export { Spinner } from './Spinner';
 export { Tag } from './Tag';
 export { Text } from './Text';
 export { TextField } from './TextField';
-export { View } from './View';
 export { Labelled } from './Labelled';
 export { Connected } from './Connected';
+export { Popover } from "./Popover";
