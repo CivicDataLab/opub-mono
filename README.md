@@ -9,7 +9,7 @@ This repo built using turborepo uses [Yarn](https://classic.yarnpkg.com/) as a p
 ### Apps and Packages
 
 - `web`: another [Next.js](https://nextjs.org/) app
-- `ui`: a stub React component library shared by both `web` and `docs` applications
+- `opub-ui`: a stub React component library shared by both `web` and `docs` applications
 - `eslint-config-custom`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
 - `tsconfig`: `tsconfig.json`s used throughout the monorepo
 
@@ -45,7 +45,7 @@ To develop only package, let's say UI, run the following command:
 
 ```
 cd opub-mono
-yarn dev --filter ui
+yarn dev --filter opub-ui
 ```
 
 ### New Component
@@ -58,4 +58,4 @@ yarn global add git+https://github.com/CivicDataLab/new-component.git
 new-component ComponentName
 ```
 
-This will create a new component directory in `packages/ui/src` with required files for component, test, storybook and styling.
+This will create a new component directory in `packages/opub-ui/src` with required files for component, test, storybook and styling.
