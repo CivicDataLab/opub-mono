@@ -90,13 +90,13 @@ $border-width-data: (
       left: $negative-offset;
       display: block;
       pointer-events: none;
-      box-shadow: 0 0 0 $negative-offset var(--focused-default);
+      box-shadow: 0 0 0 $negative-offset var(--focused);
       transition: box-shadow duration(fast) var(--ease);
       border-radius: calc(#{$border-radius} + #{rem(1px)});
     }
   } @else if $style == 'focused' {
     &::after {
-      box-shadow: 0 0 0 $stroke var(--focused-default);
+      box-shadow: 0 0 0 $stroke var(--focused);
       @include high-contrast-outline();
     }
   }
@@ -124,8 +124,8 @@ $border-width-data: (
   --control-border-width: var(--border-width-2);
   @if $style == base {
     position: relative;
-    border: var(--control-border-width) solid var(--border-default);
-    background-color: var(--surface-default);
+    border: var(--control-border-width) solid var(--border);
+    background-color: var(--surface);
     border-radius: var(--border-radius-1);
 
     &::before {
@@ -136,7 +136,7 @@ $border-width-data: (
       bottom: calc(-1 * var(--control-border-width));
       left: calc(-1 * var(--control-border-width));
       border-radius: var(--border-radius-1);
-      background-color: var(--interactive-default);
+      background-color: var(--interactive);
       opacity: 0;
       transform: scale(0.25);
       transition: opacity duration(fast) var(--ease),
@@ -149,7 +149,7 @@ $border-width-data: (
       border-color: var(--border-hovered);
     }
   } @else if $style == active {
-    border-color: var(--interactive-default);
+    border-color: var(--interactive);
 
     &::before {
       opacity: 1;

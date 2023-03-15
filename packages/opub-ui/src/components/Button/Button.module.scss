@@ -5,7 +5,7 @@
     (36px - var(--font-line-height-2) - var(--space-05)) / 2
   );
 
-  @include recolor-icon(var(--icon-default));
+  @include recolor-icon(var(--icon));
 
   @include focus-ring($border-width: var(--border-width-1));
 
@@ -20,10 +20,10 @@
   min-width: 36px;
   margin: 0;
   padding: $vertical-padding var(--space-4);
-  background: var(--surface-default);
+  background: var(--surface);
   box-shadow: var(--shadow-button);
   border-radius: var(--border-radius-1);
-  color: var(--text-default);
+  color: var(--text);
   border: var(--border-width-1) solid var(--border-neutral-subdued);
   border-top-color: var(--border-subdued);
   border-bottom-color: var(--border-shadow-subdued);
@@ -124,9 +124,9 @@
 
 @mixin button-outline($outline-color, $background-color: transparent) {
   background: $background-color;
-  border: var(--border-width-1) solid var(--border-default);
+  border: var(--border-width-1) solid var(--border);
   box-shadow: none;
-  color: var(--text-default);
+  color: var(--text);
 
   @include focus-ring($border-width: 1px);
 
@@ -137,7 +137,7 @@
   }
 
   &:focus-visible {
-    border: var(--border-width-1) solid var(--border-default);
+    border: var(--border-width-1) solid var(--border);
     box-shadow: none;
 
     @include focus-ring($style: 'focused');
@@ -376,7 +376,7 @@
 }
 
 .primary {
-  --button-color: var(--action-primary-default);
+  --button-color: var(--action-primary);
   --button-text: var(--text-on-primary);
   --button-color-hover: var(--action-primary-hovered);
   --button-color-active: var(--action-primary-pressed);
@@ -390,7 +390,7 @@
 }
 
 .destructive {
-  --button-color: var(--action-critical-default);
+  --button-color: var(--action-critical);
   --button-text: var(--text-on-critical);
   --button-color-hover: var(--action-critical-hovered);
   --button-color-active: var(--action-critical-pressed);
@@ -436,7 +436,7 @@
 }
 
 .plain {
-  @include recolor-icon(var(--interactive-default));
+  @include recolor-icon(var(--interactive));
 
   margin: calc(-1 * var(--button-vertical-padding)) calc(-1 * var(--space-2));
   padding-left: var(--space-2);
@@ -444,7 +444,7 @@
   background: transparent;
   border: 0;
   box-shadow: none;
-  color: var(--interactive-default);
+  color: var(--interactive);
 
   > .Content {
     font-weight: var(--font-weight-regular);
@@ -557,7 +557,7 @@
   }
 
   &.destructive.iconOnly {
-    @include recolor-icon(var(--action-critical-default));
+    @include recolor-icon(var(--action-critical));
 
     &:hover {
       @include recolor-icon(var(--action-critical-hovered));
@@ -700,14 +700,14 @@
     }
 
     &.pressed {
-      background: var(--action-critical-default);
+      background: var(--action-critical);
       box-shadow: none;
       color: var(--text-on-primary);
 
       &:hover,
       &:focus,
       &:active {
-        background: var(--action-critical-default);
+        background: var(--action-critical);
         box-shadow: none;
         color: var(--text-on-primary);
       }

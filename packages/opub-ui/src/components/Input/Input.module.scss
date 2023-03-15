@@ -18,7 +18,7 @@ $spinner-icon-size: 12px;
   cursor: text;
 
   svg {
-    fill: var(--icon-default);
+    fill: var(--icon);
   }
 }
 
@@ -51,10 +51,10 @@ $spinner-icon-size: 12px;
 .error {
   > .Input ~ .Backdrop {
     background-color: var(--surface-critical-subdued);
-    border-color: var(--border-critical-default);
+    border-color: var(--border-critical);
 
     &::after {
-      border-color: var(--focused-default);
+      border-color: var(--focused);
     }
   }
 }
@@ -98,8 +98,8 @@ $spinner-icon-size: 12px;
   background: none;
   border: var(--border-transparent);
   appearance: none;
-  caret-color: var(--text-default);
-  color: var(--text-default);
+  caret-color: var(--text);
+  color: var(--text);
 
   @media #{$breakpoints-md-up} {
     font-size: var(--font-size-100);
@@ -185,7 +185,7 @@ $spinner-icon-size: 12px;
   bottom: 0;
 
   left: 0;
-  background-color: var(--surface-default);
+  background-color: var(--surface);
   border: var(--border-width-1) solid var(--border-shadow);
 
   border-top-color: #898f94;
@@ -273,7 +273,7 @@ $spinner-icon-size: 12px;
   --opub-text-field-spinner-offset-large: calc(2px + var(--border-width-1));
   z-index: var(--opub-text-field-contents);
   margin: var(--opub-text-field-spinner-offset-large);
-  color: var(--icon-default);
+  color: var(--icon);
 
   display: flex;
   align-self: stretch;
@@ -304,7 +304,7 @@ $spinner-icon-size: 12px;
 
 .Segment {
   --opub-text-field-spinner-border-radius: calc(var(--border-radius-1) - 2px);
-  background: var(--surface-neutral-default);
+  background: var(--surface-neutral);
   border-radius: var(--opub-text-field-spinner-border-radius);
   display: flex;
   flex: 1 1 0%;

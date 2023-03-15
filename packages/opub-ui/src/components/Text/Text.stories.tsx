@@ -110,9 +110,7 @@ export const WithColor = () => (
       Use in combination with a symbol showing a decreasing value to indicate a
       downward trend.
     </Text>
-    <div
-      style={{ backgroundColor: 'var(--text-default)', width: 'fit-content' }}
-    >
+    <div style={{ backgroundColor: 'var(--text)', width: 'fit-content' }}>
       <Text as="p" variant="bodyMd" color="text-inverse">
         Use in situations where background is dark.
       </Text>

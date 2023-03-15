@@ -86,7 +86,7 @@
 
   --color-canvas-subtle: #f6f8fa;
   --color-link: var(--color-primary-01);
-  --border-default: var(--color-gray-02);
+  --border: var(--color-gray-02);
 
   --form-bg: var(--color-background-light);
   --form-active: var(--color-primary-01);

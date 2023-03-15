@@ -18,13 +18,13 @@
     --choice-size: 18px;
   }
 
-  background-color: var(--surface-default);
+  background-color: var(--surface);
   width: var(--choice-size);
   height: var(--choice-size);
   min-width: var(--choice-size);
   min-height: var(--choice-size);
   border-radius: 100%;
-  border: var(--border-width-2) solid var(--border-default);
+  border: var(--border-width-2) solid var(--border);
   transition: border-color var(--duration-150) var(--ease);
 
   &:hover {
@@ -32,7 +32,7 @@
   }
 
   &[data-state='checked'] {
-    border-color: var(--interactive-default);
+    border-color: var(--interactive);
   }
 }
 
@@ -64,7 +64,7 @@
     min-width: var(--icon-size);
     min-height: var(--icon-size);
     border-radius: 50%;
-    background-color: var(--interactive-default);
+    background-color: var(--interactive);
 
     @media (-ms-high-contrast: active) {
       fill: windowText;
