@@ -13,6 +13,7 @@ export interface NonMutuallyExclusiveProps {
   url?: string;
   /** Url to navigate to when tag is clicked or keypressed. */
   color?: 'standard' | 'one' | 'two' | 'three' | 'four' | 'five';
+  tabIndex?: number;
 }
 
 export type TagProps = NonMutuallyExclusiveProps &

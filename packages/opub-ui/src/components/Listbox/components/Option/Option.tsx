@@ -29,6 +29,7 @@ export const Option = memo(function Option({
   disabled = false,
   accessibilityLabel,
   divider,
+  ...others
 }: OptionProps) {
   const { onOptionSelect } = useListbox();
   const isAction = useContext(ActionContext);
@@ -104,6 +105,7 @@ export const Option = memo(function Option({
       onClick={disabled ? undefined : handleOptionSelect}
       onKeyDown={disabled ? undefined : handleOptionSelect}
       onMouseDown={handleMouseDown}
+      {...others}
     >
       {contentMarkup}
     </li>

@@ -1,194 +1,190 @@
-import styles from './Combobox.module.scss';
 import cx from 'classnames';
+import { useCombobox, useMultipleSelection } from 'downshift';
+import React from 'react';
+import { Flex } from '../Flex';
+import { Input } from '../Input';
+import { Label } from '../Label';
+import { Tag } from '../Tag';
+import styles from './Combobox.module.scss';
 
-import React, { useState, useCallback, useMemo, Children, useRef } from 'react';
+function comboboxFilter(
+  selectedItems: string | any[],
+  inputValue: string,
+  items: any[]
+) {
+  const lowerCasedInputValue = inputValue.toLowerCase();
 
-// import { Popover, PopoverPublicAPI } from '../Popover';
-// import type { PopoverProps } from '../Popover';
-import type { TextFieldProps } from '@ui/types/input';
-import type { ListboxProps } from '../Listbox';
-import {
-  ComboboxTextFieldContext,
-  ComboboxTextFieldType,
-  ComboboxListboxContext,
-  ComboboxListboxType,
-  ComboboxListboxOptionType,
-  ComboboxListboxOptionContext,
-} from './utils';
-
-import { TextField } from './components';
-import { Popover } from '../Popover';
-import { Content, Trigger } from '../Popover/Popover';
-
-export interface ComboboxProps {
-  /** The text field component to activate the Popover */
-  activator: React.ReactElement<TextFieldProps>;
-  /** Allows more than one option to be selected */
-  allowMultiple?: boolean;
-  /** The content to display inside the popover */
-  children?: React.ReactElement<ListboxProps> | null;
-  /** The preferred direction to open the popover */
-  preferredPosition?: 'above' | 'below' | 'mostSpace';
-  /** Whether or not more options are available to lazy load when the bottom of the listbox reached. Use the hasMoreResults boolean provided by the GraphQL API of the paginated data. */
-  willLoadMoreOptions?: boolean;
-  /** Height to set on the Popover Pane. */
-  height?: string;
-  /** Callback fired when the bottom of the lisbox is reached. Use to lazy load when listbox option data is paginated. */
-  onScrolledToBottom?(): void;
-  /** Callback fired when the popover closes */
-  onClose?(): void;
-}
-export interface PopoverPublicAPI {
-  forceUpdatePosition(): void;
+  return items.filter(function filterBook(item) {
+    return (
+      !selectedItems.includes(item) &&
+      item.label.toLowerCase().includes(lowerCasedInputValue)
+    );
+  });
 }
 
-export function Combobox({
-  activator,
-  allowMultiple,
-  children,
-  preferredPosition = 'below',
-  willLoadMoreOptions,
-  height,
-  onScrolledToBottom,
-  onClose,
-}: ComboboxProps) {
-  const [popoverActive, setPopoverActive] = useState(false);
-  const [activeOptionId, setActiveOptionId] = useState<string>();
-  const [textFieldLabelId, setTextFieldLabelId] = useState<string>();
-  const [listboxId, setListboxId] = useState<string>();
-  const [textFieldFocused, setTextFieldFocused] = useState<boolean>(false);
-  const shouldOpen = Boolean(!popoverActive && Children.count(children) > 0);
-  const ref = useRef<PopoverPublicAPI | null>(null);
+interface Props {
+  allItems: {
+    label: string;
+    value: string;
+  }[];
 
-  const handleClose = useCallback(() => {
-    setPopoverActive(false);
-    onClose?.();
+  initialSelectedItems: {
+    label: string;
+    value: string;
+  }[];
 
-    setActiveOptionId(undefined);
-  }, [onClose]);
+  label?: string;
+}
 
-  const handleOpen = useCallback(() => {
-    setPopoverActive(true);
-    setActiveOptionId(undefined);
-  }, []);
+export function Combobox({ allItems, initialSelectedItems, label }: Props) {
+  const [inputValue, setInputValue] = React.useState<any>('');
+  const [selectedItems, setSelectedItems] =
+    React.useState<any>(initialSelectedItems);
 
-  const onOptionSelected = useCallback(() => {
-    if (!allowMultiple) {
-      handleClose();
-      setActiveOptionId(undefined);
-      return;
-    }
-
-    ref.current?.forceUpdatePosition();
-  }, [allowMultiple, handleClose]);
-
-  const handleFocus = useCallback(() => {
-    if (shouldOpen) {
-      handleOpen();
-    }
-  }, [shouldOpen, handleOpen]);
-
-  const handleChange = useCallback(() => {
-    if (shouldOpen) {
-      handleOpen();
-    }
-  }, [shouldOpen, handleOpen]);
-
-  const handleBlur = useCallback(() => {
-    if (popoverActive) {
-      handleClose();
-    }
-  }, [popoverActive, handleClose]);
-
-  const textFieldContextValue: ComboboxTextFieldType = useMemo(
-    () => ({
-      activeOptionId,
-      expanded: popoverActive,
-      listboxId,
-      setTextFieldFocused,
-      setTextFieldLabelId,
-      onTextFieldFocus: handleFocus,
-      onTextFieldChange: handleChange,
-      onTextFieldBlur: handleBlur,
-    }),
-    [
-      activeOptionId,
-      popoverActive,
-      listboxId,
-      setTextFieldFocused,
-      setTextFieldLabelId,
-      handleFocus,
-      handleChange,
-      handleBlur,
-    ]
+  const items: {
+    label: string;
+    value: string;
+  }[] = React.useMemo(
+    () => comboboxFilter(selectedItems, inputValue, allItems),
+    [selectedItems, inputValue, allItems]
   );
 
-  const listboxOptionContextValue: ComboboxListboxOptionType = useMemo(
-    () => ({
-      allowMultiple,
-    }),
-    [allowMultiple]
-  );
+  const { getSelectedItemProps, getDropdownProps, removeSelectedItem } =
+    useMultipleSelection({
+      selectedItems,
+      onStateChange({ selectedItems, type }) {
+        switch (type) {
+          case useMultipleSelection.stateChangeTypes
+            .SelectedItemKeyDownBackspace:
+          case useMultipleSelection.stateChangeTypes.SelectedItemKeyDownDelete:
+          case useMultipleSelection.stateChangeTypes.DropdownKeyDownBackspace:
+          case useMultipleSelection.stateChangeTypes.FunctionRemoveSelectedItem:
+            setSelectedItems(selectedItems);
+            break;
+          default:
+            break;
+        }
+      },
+    });
 
-  const listboxContextValue: ComboboxListboxType = useMemo(
-    () => ({
-      listboxId,
-      textFieldLabelId,
-      textFieldFocused,
-      willLoadMoreOptions,
-      onOptionSelected,
-      setActiveOptionId,
-      setListboxId,
-      onKeyToBottom: onScrolledToBottom,
-    }),
-    [
-      listboxId,
-      textFieldLabelId,
-      textFieldFocused,
-      willLoadMoreOptions,
-      onOptionSelected,
-      setActiveOptionId,
-      setListboxId,
-      onScrolledToBottom,
-    ]
-  );
-  console.log(popoverActive + ' 1111');
+  const {
+    isOpen,
+    getToggleButtonProps,
+    getLabelProps,
+    getMenuProps,
+    getInputProps,
+    highlightedIndex,
+    getItemProps,
+    selectedItem,
+  } = useCombobox({
+    items,
+    itemToString(item: any) {
+      return item ? item.label : '';
+    },
+    defaultHighlightedIndex: 0, // after selection, highlight the first item.
+    selectedItem: null,
+    stateReducer(state, actionAndChanges) {
+      const { changes, type } = actionAndChanges;
+
+      switch (type) {
+        case useCombobox.stateChangeTypes.InputKeyDownEnter:
+        case useCombobox.stateChangeTypes.ItemClick:
+          return {
+            ...changes,
+            isOpen: true, // keep the menu open after selection.
+            highlightedIndex: 0, // with the first option highlighted.
+          };
+        default:
+          return changes;
+      }
+    },
+    onStateChange({
+      inputValue: newInputValue,
+      type,
+      selectedItem: newSelectedItem,
+    }) {
+      switch (type) {
+        case useCombobox.stateChangeTypes.InputKeyDownEnter:
+        case useCombobox.stateChangeTypes.ItemClick:
+        case useCombobox.stateChangeTypes.InputBlur:
+          if (newSelectedItem) {
+            setSelectedItems([...selectedItems, newSelectedItem]);
+          }
+          break;
+
+        case useCombobox.stateChangeTypes.InputChange:
+          setInputValue(newInputValue);
+
+          break;
+        default:
+          break;
+      }
+    },
+  });
+
+  const verticalContentMarkup =
+    selectedItems.length > 0 ? (
+      <Flex gap={4}>
+        {selectedItems.map((tag: any, index: number) => (
+          <Tag
+            key={tag.value}
+            {...getSelectedItemProps({
+              selectedItem: tag,
+              index,
+            })}
+            onRemove={() => {
+              removeSelectedItem(tag);
+            }}
+          >
+            {tag.label}
+          </Tag>
+        ))}
+      </Flex>
+    ) : null;
 
   return (
-    <Popover
-      // ref={ref}
-      open={popoverActive}
-      // activator={
-      //   <ComboboxTextFieldContext.Provider value={textFieldContextValue}>
-      //     {activator}
-      //   </ComboboxTextFieldContext.Provider>
-      // }
-      // autofocusTarget="none"
-      // preventFocusOnClose
-      // fullWidth
-      // preferInputActivator={false}
-      // preferredPosition={preferredPosition}
-      onOpenChange={popoverActive ? handleOpen : handleClose}
-    >
-      <Trigger>
-        <ComboboxTextFieldContext.Provider value={textFieldContextValue}>
-          {activator}
-        </ComboboxTextFieldContext.Provider>
-      </Trigger>
+    <div>
+      <div>
+        <Label {...getLabelProps()}>{label}</Label>
+        <div>
+          <div>
+            {verticalContentMarkup}
+            <input
+              placeholder="Best book ever"
+              className="w-full"
+              {...getInputProps(getDropdownProps({ preventKeyAction: isOpen }))}
+            />
+            {/* <Input
+              placeholder="Best book ever"
+              verticalContent={verticalContentMarkup}
+              label=""
+              {...getInputProps(
+                getDropdownProps({
+                  preventKeyAction: isOpen,
+                  // refKey: 'inputRef',
+                })
+              )}
+            /> */}
+          </div>
+        </div>
+      </div>
 
-      <Content>
-        {Children.count(children) > 0 ? (
-          <ComboboxListboxContext.Provider value={listboxContextValue}>
-            <ComboboxListboxOptionContext.Provider
-              value={listboxOptionContextValue}
+      <ul {...getMenuProps()}>
+        {isOpen &&
+          items.map((item: any, index: number) => (
+            <li
+              className={cx(
+                styles.Item,
+                highlightedIndex === index && styles['Item--Highlighted'],
+                selectedItem === item && styles['Item--Selected']
+              )}
+              key={`${item.value}${index}`}
+              {...getItemProps({ item, index })}
             >
-              <div className={styles.Listbox}>{children}</div>
-            </ComboboxListboxOptionContext.Provider>
-          </ComboboxListboxContext.Provider>
-        ) : null}
-      </Content>
-    </Popover>
+              <span>{item.label}</span>
+            </li>
+          ))}
+      </ul>
+    </div>
   );
 }
-
-Combobox.TextField = TextField;

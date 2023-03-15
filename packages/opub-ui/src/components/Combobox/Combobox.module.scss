@@ -1,5 +1,17 @@
 @import '../../../styles/common';
 
 .Combobox {
-    border: 1px solid black;
+  border: 1px solid black;
+}
+
+.Item {
+  padding: 4px 6px;
+
+  &--Highlighted {
+    background-color: var(--surface-highlight);
+  }
+
+  &--Selected {
+    font-weight: var(--font-weight-bold);
+  }
 }

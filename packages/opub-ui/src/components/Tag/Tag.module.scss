@@ -17,8 +17,8 @@ $button-size: 20px;
   --tag-bg-five: var(--decorative-surface-five);
   --tag-fg-five: var(--decorative-text-five);
 
-  --background: var(--tag-bg-standard);
-  --text: var(--tag-fg-standard);
+  --background-color: var(--tag-bg-standard);
+  --text-color: var(--tag-fg-standard);
 
   display: inline-flex;
   max-width: 100%;
@@ -26,9 +26,9 @@ $button-size: 20px;
   align-items: center;
   min-height: 28px;
   padding: 0 var(--space-2);
-  background-color: var(--background);
+  background-color: var(--background-color);
   border-radius: var(--border-radius-1);
-  color: var(--text);
+  color: var(--text-color);
 
   &.disabled {
     @include recolor-icon(var(--icon-disabled));
@@ -41,8 +41,9 @@ $button-size: 20px;
     @include unstyled-button;
     cursor: pointer;
     padding: var(--space-1) var(--space-2);
-    background-color: var(--background);
+    background-color: var(--background-color);
     outline: var(--border-width-1) solid transparent;
+    color: var(--text-color);
 
     font-size: 13px;
     line-height: var(--font-line-height-2);
@@ -113,6 +114,7 @@ $button-size: 20px;
   width: $button-size;
   margin: 0 var(--space-1);
   border-radius: var(--border-radius-full);
+  line-height: 0;
 
   &:hover {
     background: var(--surface-neutral-hovered);
