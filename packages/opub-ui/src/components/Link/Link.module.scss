@@ -10,7 +10,7 @@
   border: 0;
   font-size: inherit;
   font-weight: inherit;
-  color: var(--interactive-default);
+  color: var(--interactive);
   text-decoration: underline;
   cursor: pointer;
 
@@ -20,7 +20,7 @@
   }
 
   &:focus:not(:active) {
-    outline: var(--focused-default) auto var(--border-width-1);
+    outline: var(--focused) auto var(--border-width-1);
   }
 
   &:active {

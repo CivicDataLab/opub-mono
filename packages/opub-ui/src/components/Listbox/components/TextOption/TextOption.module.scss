@@ -43,7 +43,7 @@
     left: calc(-1 * var(--space-1));
     height: 100%;
     width: var(--border-radius-1);
-    background-color: var(--interactive-default);
+    background-color: var(--interactive);
     border-top-right-radius: var(--border-radius-1);
     border-bottom-right-radius: var(--border-radius-1);
     transform: translateX(-100%);
@@ -63,7 +63,7 @@ li:first-of-type > .TextOption {
 // Focused by click
 [data-focused] .TextOption:not(.disabled) {
   outline: none;
-  background-color: var(--surface-selected-default);
+  background-color: var(--surface-selected);
   transition: background-color var(--duration-400);
 }
 
