@@ -228,3 +228,59 @@ $typography-condensed: em(640px);
 @function control-vertical-padding() {
   @return (control-height() - line-height(input) - rem(2px)) / 2;
 }
+
+@mixin responsive-props($componentName, $componentProp, $declarationProp) {
+  --op-#{$componentName}-#{$componentProp}-xs: initial;
+  --op-#{$componentName}-#{$componentProp}-sm: initial;
+  --op-#{$componentName}-#{$componentProp}-md: initial;
+  --op-#{$componentName}-#{$componentProp}-lg: initial;
+  --op-#{$componentName}-#{$componentProp}-xl: initial;
+
+  #{$declarationProp}: var(--op-#{$componentName}-#{$componentProp}-xs);
+
+  @media #{$breakpoints-sm-up} {
+    #{$declarationProp}: var(
+      --op-#{$componentName}-#{$componentProp}-sm,
+      var(--op-#{$componentName}-#{$componentProp}-xs)
+    );
+  }
+
+  @media #{$breakpoints-md-up} {
+    #{$declarationProp}: var(
+      --op-#{$componentName}-#{$componentProp}-md,
+      var(
+        --op-#{$componentName}-#{$componentProp}-sm,
+        var(--op-#{$componentName}-#{$componentProp}-xs)
+      )
+    );
+  }
+
+  @media #{$breakpoints-lg-up} {
+    #{$declarationProp}: var(
+      --op-#{$componentName}-#{$componentProp}-lg,
+      var(
+        --op-#{$componentName}-#{$componentProp}-md,
+        var(
+          --op-#{$componentName}-#{$componentProp}-sm,
+          var(--op-#{$componentName}-#{$componentProp}-xs)
+        )
+      )
+    );
+  }
+
+  @media #{$breakpoints-xl-up} {
+    #{$declarationProp}: var(
+      --op-#{$componentName}-#{$componentProp}-xl,
+      var(
+        --op-#{$componentName}-#{$componentProp}-lg,
+        var(
+          --op-#{$componentName}-#{$componentProp}-md,
+          var(
+            --op-#{$componentName}-#{$componentProp}-sm,
+            var(--op-#{$componentName}-#{$componentProp}-xs)
+          )
+        )
+      )
+    );
+  }
+}
