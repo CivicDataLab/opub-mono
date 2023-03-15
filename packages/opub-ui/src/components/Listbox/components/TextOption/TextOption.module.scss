@@ -1,0 +1,77 @@
+@import '../../../../../styles/common';
+
+.TextOption {
+  margin: var(--space-1) var(--space-2) 0;
+  flex: 1;
+  border-radius: var(--border-radius-1);
+  padding: var(--space-2) var(--space-2);
+  cursor: pointer;
+  display: flex;
+  @include focus-ring;
+
+  &.allowMultiple {
+    margin: var(--space-1) var(--space-2) 0;
+    padding: var(--space-1) var(--space-2);
+  }
+
+  &.isAction {
+    margin-top: 0;
+    padding: var(--space-2);
+  }
+
+  &:hover {
+    background-color: var(--surface-hovered);
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:active {
+    background-color: var(--surface-pressed);
+  }
+
+  &.selected {
+    background-color: var(--surface-selected);
+  }
+
+  &.selected::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: calc(-1 * var(--space-1));
+    height: 100%;
+    width: var(--border-radius-1);
+    background-color: var(--interactive-default);
+    border-top-right-radius: var(--border-radius-1);
+    border-bottom-right-radius: var(--border-radius-1);
+    transform: translateX(-100%);
+  }
+
+  &.disabled {
+    background-color: var(--surface-disabled);
+    color: var(--text-disabled);
+    cursor: default;
+  }
+}
+
+li:first-of-type > .TextOption {
+  margin-top: 0;
+}
+
+// Focused by click
+[data-focused] .TextOption:not(.disabled) {
+  outline: none;
+  background-color: var(--surface-selected-default);
+  transition: background-color var(--duration-400);
+}
+
+.Content {
+  flex: 1 1 auto;
+  display: flex;
+}
+
+.Checkbox {
+  pointer-events: none;
+}

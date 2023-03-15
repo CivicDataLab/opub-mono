@@ -8,8 +8,8 @@ import { Content, Popover, Trigger } from './Popover';
  * Reference: https://www.radix-ui.com/docs/primitives/components/popover
  */
 const meta = {
-  component: Popover,
-} satisfies Meta<typeof Popover>;
+  component: Content,
+} satisfies Meta<typeof Content>;
 
 export default meta;
 

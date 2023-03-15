@@ -1,0 +1,16 @@
+@import '../../../../../styles/common';
+
+.Action {
+  display: flex;
+  flex: 1;
+}
+
+.ActionDivider {
+  margin-bottom: var(--space-1);
+}
+
+.Icon {
+  padding-right: var(--space-2);
+  fill: var(--icon-subdued);
+  color: var(--icon-subdued);
+}

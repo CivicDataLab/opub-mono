@@ -8,15 +8,13 @@ export interface Props extends Radix.PopoverProps {
 export interface RadixButtonProps extends Radix.PopoverTriggerProps {}
 
 export const Popover = Radix.Root;
-export const Trigger = React.forwardRef(
-  ({ children, ...props }: RadixButtonProps, forwardedRef) => {
-    return (
-      <Radix.Trigger {...props} asChild>
-        {children}
-      </Radix.Trigger>
-    );
-  }
-);
+export const Trigger = ({ children, ...props }: RadixButtonProps) => {
+  return (
+    <Radix.Trigger {...props} asChild>
+      {children}
+    </Radix.Trigger>
+  );
+};
 
 export const Content = React.forwardRef(
   (
