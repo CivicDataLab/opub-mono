@@ -10,11 +10,7 @@ export interface LabelInterface extends LabelProps {
   requiredIndicator?: boolean;
 }
 
-export function Label({
-  children,
-
-  ...props
-}: LabelInterface) {
+export function Label({ children, ...props }: LabelInterface) {
   const {
     error = false,
     disabled = false,
