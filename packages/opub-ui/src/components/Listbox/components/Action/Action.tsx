@@ -4,7 +4,7 @@ import { Option, OptionProps } from '../Option';
 import { TextOption } from '../TextOption';
 import cx from 'classnames';
 
-import styles from './Action.scss';
+import styles from './Action.module.scss';
 import { ActionContext } from '../../utils';
 
 interface ActionProps extends OptionProps {

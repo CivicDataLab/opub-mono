@@ -1,4 +1,5 @@
 import { Flex, Form } from '@ui/components';
+import React from 'react';
 
 export function PropsVariationSection({
   component: Component,
@@ -81,3 +82,36 @@ export function stopPropagation(
 ) {
   event.stopPropagation();
 }
+
+export function mergeRefs<T = any>(
+  refs: Array<React.MutableRefObject<T> | React.LegacyRef<T>>
+): React.RefCallback<T> {
+  return (value) => {
+    refs.forEach((ref) => {
+      if (typeof ref === 'function') {
+        ref(value);
+      } else if (ref != null) {
+        (ref as React.MutableRefObject<T | null>).current = value;
+      }
+    });
+  };
+}
+
+export const useForwardRef = <T,>(
+  ref: React.ForwardedRef<T>,
+  initialValue: any = null
+) => {
+  const targetRef = React.useRef<T>(initialValue);
+
+  React.useEffect(() => {
+    if (!ref) return;
+
+    if (typeof ref === 'function') {
+      ref(targetRef.current);
+    } else {
+      ref.current = targetRef.current;
+    }
+  }, [ref]);
+
+  return targetRef;
+};

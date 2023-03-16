@@ -7,6 +7,11 @@
   color: var(--text-high);
   line-height: 150%;
   box-sizing: border-box;
+  color: var(--text);
+}
+
+body {
+  line-height: 1.55;
 }
 
 .sr-only:not(:where(:focus, :active, :focus-within)) {

@@ -69,7 +69,7 @@ const OPTION_VALUE_ATTRIBUTE = 'data-listbox-option-value';
 const OPTION_ACTION_ATTRIBUTE = 'data-listbox-option-action';
 const OPTION_FOCUS_ATTRIBUTE = 'data-focused';
 
-export function Listbox({
+export const Listbox = ({
   children,
   autoSelection = AutoSelection.FirstSelected,
   enableKeyboardControl,
@@ -77,7 +77,7 @@ export function Listbox({
   customListId,
   onSelect,
   onActiveOptionChange,
-}: ListboxProps) {
+}: ListboxProps) => {
   const [loading, setLoading] = useState<string>();
   const [activeOption, setActiveOption] = useState<NavigableOption>();
   const [lazyLoading, setLazyLoading] = useState(false);
@@ -513,7 +513,7 @@ export function Listbox({
       </ListboxContext.Provider>
     </>
   );
-}
+};
 
 Listbox.Option = Option;
 Listbox.TextOption = TextOption;

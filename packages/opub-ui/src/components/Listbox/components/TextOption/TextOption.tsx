@@ -3,7 +3,7 @@ import { ComboboxListboxOptionContext } from '@ui/components/Combobox/utils';
 import cx from 'classnames';
 import React, { memo, useContext, useId } from 'react';
 import { ActionContext } from '../../utils';
-import styles from './TextOption.scss';
+import styles from './TextOption.module.scss';
 
 export interface TextOptionProps {
   children: React.ReactNode;

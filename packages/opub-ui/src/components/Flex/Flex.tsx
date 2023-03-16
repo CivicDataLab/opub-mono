@@ -42,7 +42,9 @@ const Flex = React.forwardRef(
       <div
         {...filterDOMProps(otherProps)}
         className={
-          props.className + classNames(styles, 'flex', styleProps.className)
+          props.className
+            ? props.className
+            : '' + classNames(styles, 'flex', styleProps.className)
         }
         style={{ display: 'flex', gap: otherProps.gap || '0px', ...style }}
         ref={domRef}
