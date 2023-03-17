@@ -1,4 +1,6 @@
 import { StorybookConfig } from '@storybook/react-vite';
+const turbosnap = require('vite-plugin-turbosnap');
+const { mergeConfig } = require('vite');
 
 const config: StorybookConfig = {
   stories: ['../src'],
@@ -14,6 +16,14 @@ const config: StorybookConfig = {
   },
   docs: {
     autodocs: true,
+  },
+  async viteFinal(config, { configType }) {
+    return mergeConfig(config, {
+      plugins:
+        configType === 'PRODUCTION'
+          ? [turbosnap({ rootDir: config.root ?? process.cwd() })]
+          : [],
+    });
   },
 };
 
