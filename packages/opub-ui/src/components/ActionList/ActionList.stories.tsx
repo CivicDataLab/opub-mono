@@ -53,7 +53,7 @@ export const WithSuffix: Story = {
         active: true,
         content: 'Import file',
         icon: <Import />,
-        suffix: <Checkmark />,
+        suffix: <Checkmark size={14} />,
       },
       { content: 'Export file', icon: <Export /> },
     ],

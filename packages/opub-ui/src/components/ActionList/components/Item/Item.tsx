@@ -66,10 +66,9 @@ export function Item({
   const textMarkup = <span className={styles.Text}>{contentMarkup}</span>;
 
   const contentElement = (
-    <Flex alignItems="center" gap={4}>
+    <Flex alignItems="center" gap="var(--space-4)">
       {prefixMarkup}
       {textMarkup}
-
       {suffixMarkup}
     </Flex>
   );
