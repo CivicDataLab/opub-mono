@@ -1,4 +1,3 @@
-import { ChevronDown, ChevronUp } from '@opub-icons/workflow';
 import { Meta, StoryObj } from '@storybook/react';
 import { useCallback, useState } from 'react';
 import { Select } from './Select';
@@ -83,38 +82,38 @@ export function Disabled({ ...props }) {
     />
   );
 }
+// TODO: Using prefix crashes the brwser
+// export function Prefix({ ...props }) {
+//   const [selected, setSelected] = useState('Decrease');
 
-export function Prefix({ ...props }) {
-  const [selected, setSelected] = useState('enabled');
+//   const handleSelectChange = useCallback(
+//     (value: string) => setSelected(value),
+//     []
+//   );
 
-  const handleSelectChange = useCallback(
-    (value: string) => setSelected(value),
-    []
-  );
+//   const options = [
+//     {
+//       label: 'Increase',
+//       value: 'Increase',
+//       prefix: <ChevronUp />,
+//     },
+//     {
+//       label: 'Decrease',
+//       value: 'Decrease',
+//       prefix: <ChevronDown />,
+//     },
+//   ];
 
-  const options = [
-    {
-      label: 'Increase',
-      value: 'Increase',
-      prefix: <ChevronUp />,
-    },
-    {
-      label: 'Decrease',
-      value: 'Decrease',
-      prefix: <ChevronDown />,
-    },
-  ];
-
-  return (
-    <Select
-      label="Permission"
-      options={options}
-      onChange={handleSelectChange}
-      value={selected}
-      {...props}
-    />
-  );
-}
+//   return (
+//     <Select
+//       label="Permission"
+//       options={options}
+//       onChange={handleSelectChange}
+//       value={selected}
+//       {...props}
+//     />
+//   );
+// }
 
 export function Error({ ...props }) {
   const [selected, setSelected] = useState('');

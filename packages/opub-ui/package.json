@@ -62,6 +62,7 @@
     "tsconfig": "*",
     "typescript": "^4.9.3",
     "vite": "^4.1.4",
+    "vite-plugin-turbosnap": "^1.0.1",
     "vitest": "^0.28.3"
   },
   "_id": "opub-ui@0.0.1"

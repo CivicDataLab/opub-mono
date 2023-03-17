@@ -1,8 +1,14 @@
 import * as Radix from '@radix-ui/react-popover';
 import React from 'react';
-
+import styles from './Popover.module.scss';
 export interface Props extends Radix.PopoverProps {
+  children?: React.ReactNode;
+  open?: boolean;
+  defaultOpen?: boolean;
+  onOpenChange?: (open: boolean) => void;
+  modal?: boolean;
   isPortal?: boolean;
+  isArrow?: boolean;
 }
 
 export interface RadixButtonProps extends Radix.PopoverTriggerProps {}
@@ -18,16 +24,21 @@ export const Trigger = ({ children, ...props }: RadixButtonProps) => {
 
 export const Content = React.forwardRef(
   (
-    { children, isPortal = true, ...props }: Props,
+    { children, isPortal = true, isArrow = false, ...props }: Props,
     forwardedRef: React.Ref<HTMLDivElement>
   ) => {
     const PortalDom = isPortal ? Radix.Portal : React.Fragment;
 
     return (
       <PortalDom>
-        <Radix.Content sideOffset={5} {...props} ref={forwardedRef}>
+        <Radix.Content
+          className={styles.Content}
+          sideOffset={5}
+          {...props}
+          ref={forwardedRef}
+        >
           {children}
-          <Radix.Arrow />
+          {isArrow && <Radix.Arrow />}
         </Radix.Content>
       </PortalDom>
     );
