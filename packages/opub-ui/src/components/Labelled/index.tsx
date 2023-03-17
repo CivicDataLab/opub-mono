@@ -1,1 +1,1 @@
-export { Labelled } from "./Labelled";
+export * from './Labelled';
