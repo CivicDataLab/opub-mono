@@ -1,21 +1,17 @@
-import styles from './ActionList.module.scss';
-import cx from 'classnames';
-
-import React, { useRef } from 'react';
-
-import { KeypressListener } from '../KeypressListener';
-import { Box } from '../Box';
+import { useRef } from 'react';
 import type {
   ActionListItemDescriptor,
   ActionListSection,
 } from '@ui/types/actionlist';
-import { Item, ItemProps } from './components/Item';
-import { Section } from './components/Section';
 import { Key } from '@ui/types/shared/key';
 import {
   wrapFocusNextFocusableMenuItem,
   wrapFocusPreviousFocusableMenuItem,
 } from '@ui/utils/focus';
+import { Box } from '../Box';
+import { KeypressListener } from '../KeypressListener';
+import { Item, ItemProps } from './components/Item';
+import { Section } from './components/Section';
 
 export interface ActionListProps {
   /** Collection of actions for list */
