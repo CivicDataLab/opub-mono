@@ -1,0 +1,121 @@
+@import '../../../styles/common';
+
+.Item {
+  --op-action-list-image-size: 20px;
+  --op-action-list-item-min-height: var(--space-10);
+  --op-action-list-item-vertical-padding: calc(
+    (var(--op-action-list-item-min-height) - var(--font-line-height-2)) / 2
+  );
+  @include unstyled-button;
+  @include focus-ring;
+  display: block;
+  width: 100%;
+  min-height: var(--op-action-list-item-min-height);
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+  padding: var(--op-action-list-item-vertical-padding) var(--space-2);
+  border-radius: var(--border-radius-1);
+  border-top: var(--border-width-1) solid transparent;
+  color: inherit;
+  @media (forced-colors: active) {
+    border: var(--border-width-1) solid transparent;
+  }
+
+  &:hover {
+    background-color: var(--surface-hovered);
+    text-decoration: none;
+    outline: var(--border-width-3) solid transparent;
+  }
+
+  &:active {
+    background-color: var(--surface-pressed);
+
+    svg {
+      fill: var(--interactive);
+    }
+  }
+
+  &:focus-visible:not(:active) {
+    @include focus-ring($style: 'focused');
+    outline: var(--border-width-3) solid transparent;
+  }
+
+  &:visited {
+    color: inherit;
+  }
+
+  &.active {
+    background-color: var(--surface-selected);
+
+    svg {
+      fill: var(--interactive);
+    }
+
+    &::before {
+      @include list-selected-indicator;
+    }
+  }
+
+  &.destructive {
+    color: var(--interactive-critical);
+
+    svg {
+      fill: var(--icon-critical);
+    }
+
+    &:hover {
+      background-color: var(--surface-critical-subdued-hovered);
+    }
+
+    &:active,
+    &.active {
+      background-color: var(--surface-critical-subdued-pressed);
+    }
+  }
+
+  &.disabled {
+    background-image: none;
+    color: var(--text-disabled);
+
+    .Prefix svg,
+    .Suffix svg {
+      fill: var(--icon-disabled);
+    }
+  }
+}
+
+.Prefix {
+  display: flex;
+  flex: 0 0 auto;
+  justify-content: center;
+  align-items: center;
+  height: var(--op-action-list-image-size);
+  width: var(--op-action-list-image-size);
+  border-radius: var(--border-radius-1);
+
+  // We need the negative margin to ensure that the image does not set
+  // the minimum height of the action item.
+  margin: calc(-0.5 * var(--op-action-list-image-size)) 0
+    calc(-0.5 * var(--op-action-list-image-size)) 0;
+  background-size: cover;
+  background-position: center center;
+
+  svg {
+    fill: var(--icon);
+  }
+}
+
+.Suffix svg {
+  fill: var(--icon);
+}
+
+.SuffixWrapper {
+  line-height: 0;
+}
+
+.Text {
+  min-width: 0;
+  max-width: 100%;
+  flex: 1 1 auto;
+}

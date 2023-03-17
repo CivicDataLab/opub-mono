@@ -1,5 +1,14 @@
 @import '../../../styles/common';
 
-.Popover {
-  // border: 1px solid black;
+$visible-portion-of-arrow: 5px;
+$content-max-height: 500px;
+$content-max-width: 400px;
+$vertical-motion-offset: -5px;
+
+.Content {
+  max-width: calc(100vw - var(--space-8));
+  margin: $visible-portion-of-arrow var(--space-2) var(--space-4);
+  box-shadow: var(--shadow-xl);
+  border-radius: var(--border-radius-2);
+  background-color: var(--surface);
 }

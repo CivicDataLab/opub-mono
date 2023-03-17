@@ -284,3 +284,16 @@ $typography-condensed: em(640px);
     );
   }
 }
+
+@mixin list-selected-indicator {
+  content: '';
+  background-color: var(--interactive);
+  position: absolute;
+  top: 0;
+  left: calc(-1 * var(--space-2));
+  height: 100%;
+  display: block;
+  width: var(--border-width-3);
+  border-top-right-radius: var(--border-radius-1);
+  border-bottom-right-radius: var(--border-radius-1);
+}

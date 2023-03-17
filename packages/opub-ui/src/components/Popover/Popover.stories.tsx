@@ -13,13 +13,13 @@ const meta = {
 
 export default meta;
 
-export const Default = () => {
+export const Default = ({ ...args }) => {
   return (
     <Popover>
       <Trigger>
-        <Button>trigger</Button>
+        <Button disclosure>Different channels</Button>
       </Trigger>
-      <Content>
+      <Content {...args}>
         <span>ABC</span>
       </Content>
     </Popover>
