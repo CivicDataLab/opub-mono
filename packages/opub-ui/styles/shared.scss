@@ -226,7 +226,7 @@ $typography-condensed: em(640px);
 }
 
 @function control-vertical-padding() {
-  @return (control-height() - line-height(input) - rem(2px)) / 2;
+  @return calc((control-height() - var(--font-line-height-3) - rem(2px)) / 2);
 }
 
 @mixin responsive-props($componentName, $componentProp, $declarationProp) {

@@ -1,10 +1,10 @@
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
-import { Listbox } from "./Listbox";
+import { Select } from "./Select";
 
-describe("Listbox Tests", () => {
+describe("Select Tests", () => {
   beforeEach(() => {
-    render(<Listbox>Component</Listbox>);
+    render(<Select>Component</Select>);
   });
 
   test("should show Component text all the time", () => {

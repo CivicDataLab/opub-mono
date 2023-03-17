@@ -1,0 +1,199 @@
+@import '../../../styles/common';
+
+.Select {
+  --op-select-backdrop: 10;
+  --op-select-content: 20;
+  --op-select-input: 30;
+  position: relative;
+
+  // IE 11 fix to remove default dropdown arrow
+  select::-ms-expand {
+    display: none;
+  }
+}
+
+.disabled {
+  .Content {
+    color: var(--text-disabled);
+  }
+
+  .InlineLabel {
+    color: inherit;
+  }
+
+  .Icon svg {
+    fill: var(--icon-disabled);
+  }
+
+  .Backdrop {
+    border-color: var(--border-disabled);
+
+    &::before {
+      background-color: var(--action-secondary-disabled);
+    }
+
+    &:hover {
+      cursor: default;
+    }
+  }
+}
+
+.Content {
+  @include text-style-input;
+  position: relative;
+  z-index: var(--op-select-content);
+  display: flex;
+  align-items: center;
+  width: 100%;
+  font-size: var(--font-size-100);
+  min-height: control-height();
+  box-sizing: border-box;
+  padding: calc(control-vertical-padding()) var(--space-2)
+    calc(control-vertical-padding()) var(--space-3);
+
+  @media #{$breakpoints-md-down} {
+    div > span {
+      font-size: var(--font-size-200);
+      line-height: var(--font-line-height-2);
+    }
+  }
+}
+
+.SelectedOption {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.Prefix {
+  padding-right: var(--space-2);
+  line-height: 0;
+}
+
+.Icon {
+  line-height: 0;
+  padding: 1px;
+
+  svg {
+    fill: var(--icon);
+  }
+}
+
+.Input {
+  // Even though the input is invisible, text styles apply to the options menu
+  font-size: var(--font-size-200);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--font-line-height-2);
+  text-transform: initial;
+  letter-spacing: initial;
+  position: absolute;
+  text-rendering: auto;
+  top: 0;
+  left: 0;
+  z-index: var(--op-select-input);
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  appearance: none;
+  border: none;
+
+  @media #{$breakpoints-md-up} {
+    font-size: var(--font-size-100);
+    line-height: var(--font-line-height-2);
+  }
+}
+
+.Backdrop {
+  z-index: var(--op-select-backdrop);
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border: var(--border-width-1) solid var(--border-shadow);
+  border-radius: var(--border-radius-1);
+  background-color: var(--surface);
+  box-shadow: var(--shadow-sm);
+  @include focus-ring($border-width: 1px);
+  position: absolute;
+}
+
+.error {
+  .Backdrop {
+    border-color: var(--border-critical);
+    background-color: var(--surface-critical-subdued);
+    &.hover,
+    &:hover {
+      border-color: var(--border-critical);
+    }
+  }
+
+  // Need to override the higher specificity of the sibling selector
+  // so that errors still have red borders.
+  .Input:focus-visible ~ .Backdrop {
+    @include focus-ring($style: 'focused');
+  }
+}
+
+.Input:focus-visible {
+  ~ .Backdrop {
+    @include focus-ring($style: 'focused');
+  }
+}
+
+@media (-ms-high-contrast: active) {
+  .Content {
+    color: windowText;
+    -ms-high-contrast-adjust: none;
+  }
+
+  .InlineLabel {
+    color: inherit;
+
+    &::after {
+      content: ':';
+    }
+  }
+
+  .SelectedOption {
+    color: inherit;
+  }
+
+  .Icon svg {
+    fill: buttonText;
+  }
+
+  .Backdrop {
+    &::after {
+      // Remove the dotted focus outline from the control-backdrop mixin.
+      display: none;
+    }
+  }
+
+  .Input:focus {
+    ~ .Content {
+      color: highlightText;
+    }
+
+    ~ .Backdrop {
+      // Align with the native styling for this element, which differs from
+      // what the control-backdrop mixin provides.
+      background-color: highlight;
+    }
+  }
+
+  .disabled {
+    .Content {
+      color: grayText;
+    }
+
+    .Icon {
+      opacity: 1;
+
+      svg {
+        fill: grayText;
+      }
+    }
+  }
+}

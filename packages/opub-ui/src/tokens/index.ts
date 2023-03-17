@@ -21,6 +21,8 @@ export type {
   DepthShadowAlias,
 } from './depth';
 
+export type { ShadowTokenGroup, ShadowTokenName, ShadowAlias } from './shadow';
+
 export type {
   ShapeTokenGroup,
   ShapeTokenName,
