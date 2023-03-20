@@ -1,0 +1,44 @@
+@import '../../../styles/common';
+
+.Switch {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.SwitchRoot {
+  all: unset;
+
+  width: 40px;
+  height: 24px;
+  background-color: var(--interactive-disabled);
+  border-radius: 9999px;
+  position: relative;
+
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  @include focus-ring;
+
+  &[data-state='checked'] {
+    background-color: var(--focused);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--focused);
+    outline-offset: 2px;
+  }
+}
+
+.SwitchThumb {
+  display: block;
+  width: 16px;
+  height: 16px;
+  background-color: var(--surface);
+  border-radius: 9999px;
+  transition: transform var(--ease-in) var(--duration-100);
+  transform: translateX(4px);
+  will-change: transform;
+
+  &[data-state='checked'] {
+    transform: translateX(20px);
+  }
+}
