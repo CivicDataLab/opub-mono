@@ -2,7 +2,7 @@
 :root {
   --background: #f6f6f7;
   --background-invert: #202123;
-  --backgrounvd-hoered: #f1f2f3;
+  --background-hovered: #f1f2f3;
   --background-pressed: #edeeef;
   --background-selected: #edeeef;
   --surface: #ffffff;
@@ -91,6 +91,7 @@
   --border-highlight-subdued: #98c6cd;
   --border-neutral-subdued: #babfc3;
   --focused: #458fff;
+  --focused-alpha: #458fff82;
   --action-secondary: #ffffff;
   --action-secondary-hovered: #f6f6f7;
   --action-secondary-pressed: #f1f2f3;
