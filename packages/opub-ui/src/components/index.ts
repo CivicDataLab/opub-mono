@@ -21,3 +21,4 @@ export { TextField } from './TextField';
 export { Select } from "./Select";
 export { ActionList } from "./ActionList";
 export { Switch } from "./Switch";
+export { Tooltip } from "./Tooltip";
