@@ -173,24 +173,18 @@ $spinner-icon-size: 12px;
 
 .Backdrop {
   @include focus-ring($border-width: 1px);
-
   position: absolute;
-
   z-index: var(--opub-text-field-backdrop);
-
+  pointer-events: none;
   top: 0;
-
   right: 0;
-
   bottom: 0;
-
   left: 0;
+
   background-color: var(--surface);
   border: var(--border-width-1) solid var(--border-shadow);
-
   border-top-color: #898f94;
   border-radius: var(--border-radius-1);
-  pointer-events: none;
 }
 
 .Prefix,
