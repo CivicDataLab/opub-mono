@@ -73,15 +73,19 @@ type Content = {
   alignOffset?: number;
 };
 
-export type TooltipProps = Provider &
-  Root &
+export type TooltipProps = Root &
   Content & {
     /** The element that will activate to tooltip */
     children: React.ReactNode;
     /** The content to display within the tooltip */
     content: React.ReactNode;
-    /** Whether to render a dotted underline underneath the tooltip's activator */
-    hasUnderline?: boolean;
+
     /** Width of content */
     width?: 'default' | 'wide';
   };
+
+export type TooltipProviderProps = Provider & {
+  children: React.ReactNode;
+  /** Whether to render a dotted underline underneath the tooltip's activator */
+  hasUnderline?: boolean;
+};
