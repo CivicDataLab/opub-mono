@@ -1,0 +1,74 @@
+@import '../../../../../styles/common';
+
+.FileUpload {
+  padding: var(--space-4);
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.large {
+  padding: var(--space-8);
+}
+
+.small {
+  padding: var(--space-3);
+}
+
+.FileUpload img {
+  vertical-align: bottom;
+}
+
+.Action {
+  @include focus-ring;
+  display: inline-flex;
+  flex: 0 0 auto;
+  border: none;
+  border-radius: var(--border-radius-1);
+  padding: var(--space-1) var(--space-2);
+  margin: 0;
+  text-decoration: none;
+  color: var(--interactive-hovered);
+  background: var(--surface-selected-pressed);
+  font-size: var(--font-size-75);
+  font-weight: var(--font-weight-semibold);
+  line-height: 1;
+  cursor: pointer;
+  text-align: center;
+  appearance: none;
+
+  &:hover {
+    color: var(--interactive-pressed);
+  }
+
+  &.disabled {
+    @include base-button-disabled;
+    cursor: not-allowed;
+    box-shadow: none;
+  }
+}
+
+.ActionTitle {
+  color: var(--interactive);
+  text-decoration: none;
+
+  &:not(.ActionTitle-disabled) {
+    cursor: pointer;
+
+    &:hover,
+    &:active {
+      color: var(--interactive-pressed);
+      text-decoration: underline;
+    }
+  }
+}
+
+.ActionTitle-focused {
+  text-decoration: underline;
+}
+
+.ActionTitle-disabled {
+  color: var(--interactive-disabled);
+}
