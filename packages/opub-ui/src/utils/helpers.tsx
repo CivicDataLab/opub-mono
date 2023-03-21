@@ -121,3 +121,8 @@ export function clamp(number: number, min: number, max: number) {
   if (number > max) return max;
   return number;
 }
+
+export function capitalize(word = '') {
+  const wordLower = word.toLowerCase();
+  return wordLower.charAt(0).toUpperCase() + wordLower.slice(1);
+}

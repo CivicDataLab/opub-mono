@@ -23,3 +23,5 @@ export { ActionList } from "./ActionList";
 export { Switch } from "./Switch";
 export { Tooltip } from "./Tooltip";
 export { RangeSlider } from "./RangeSlider";
+export { DropZone } from "./DropZone";
+export { Thumbnail } from "./Thumbnail";

@@ -10,9 +10,16 @@
   color: var(--text);
 }
 
+*,
+::after,
+::before {
+  box-sizing: border-box;
+}
+
 body {
   line-height: 1.55;
   font-size: var(--font-size-100);
+  box-sizing: border-box;
 }
 
 .sr-only:not(:where(:focus, :active, :focus-within)) {
