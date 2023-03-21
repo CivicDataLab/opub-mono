@@ -22,3 +22,5 @@ export { Select } from "./Select";
 export { ActionList } from "./ActionList";
 export { Switch } from "./Switch";
 export { Badge } from "./Badge";
+export { Tooltip } from "./Tooltip";
+export { RangeSlider } from "./RangeSlider";

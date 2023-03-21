@@ -1,0 +1,173 @@
+@import '../../../styles/common';
+
+.Root {
+  position: relative;
+  display: flex;
+  align-items: center;
+  user-select: none;
+  touch-action: none;
+  width: 100%;
+  height: 20px;
+  cursor: pointer;
+
+  &[data-orientation='vertical'] {
+    flex-direction: column;
+    width: 20px;
+    height: 100%;
+  }
+}
+
+.Track {
+  --op-range-slider-input: 10;
+  --op-range-slider-output: 20;
+  --op-range-slider-track-height: 4px;
+  --op-track-dashed-border-radius: var(--border-radius-1);
+  $dashedTrackColor: var(--border);
+
+  position: relative;
+  flex-grow: 1;
+
+  height: var(--op-range-slider-track-height);
+  width: 100%;
+  background-image: linear-gradient(
+    to right,
+    $dashedTrackColor,
+    $dashedTrackColor 50%,
+    transparent 50%,
+    transparent 100%
+  );
+  background-size: var(--op-range-slider-track-height)
+    var(--op-range-slider-track-height);
+  border-radius: var(--op-track-dashed-border-radius);
+  border-right: var(--op-track-dashed-border-radius) $dashedTrackColor solid;
+
+  &[data-orientation='vertical'] {
+    width: 3px;
+  }
+
+  &[data-disabled] {
+    opacity: 0.8;
+  }
+}
+
+.Range {
+  position: absolute;
+  background-color: var(--interactive);
+  border-radius: 9999px;
+  height: 100%;
+
+  &[data-orientation='vertical'] {
+    width: 100%;
+  }
+
+  &[data-disabled] {
+    cursor: auto;
+    background-image: none;
+    background-color: var(--border-disabled);
+  }
+}
+
+.Thumb {
+  --op-range-slider-thumb-size: 16px;
+
+  cursor: grab;
+  display: block;
+  width: var(--op-range-slider-thumb-size);
+  height: var(--op-range-slider-thumb-size);
+
+  border: var(--border-transparent);
+  border-radius: var(--border-radius-full);
+  background: linear-gradient(var(--interactive), var(--interactive));
+  box-shadow: 0 0 0 0 var(--focused);
+  appearance: none;
+  transition: box-shadow var(--duration-100) var(--ease);
+  transition-property: border-color, box-shadow, transform;
+  transition-duration: var(--duration-200);
+  transition-timing-function: var(--ease);
+
+  &:focus-visible {
+    transform: scale(1.2);
+  }
+
+  &[data-disabled] {
+    cursor: not-allowed;
+    border-color: var(--border-disabled);
+    background: var(--border-disabled);
+  }
+}
+
+.Prefix {
+  flex: 0 0 auto;
+  margin-right: var(--space-2);
+}
+
+.Suffix {
+  flex: 0 0 auto;
+  margin-left: var(--space-2);
+}
+
+$range-output-size: 32px;
+$range-output-translate-x: calc(
+  -50% + var(--op-range-slider-output-factor) * var(--op-range-slider-thumb-size)
+);
+
+.Output {
+  --op-range-slider-thumb-size: 16px;
+  --op-range-slider-output-spacing: var(--space-4);
+  z-index: var(--op-range-slider-output);
+  bottom: var(--op-range-slider-thumb-size);
+
+  transform: var(--radix-slider-thumb-transform);
+  position: absolute;
+  left: calc(50% + 0px);
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition-property: opacity, visibility, bottom;
+  transition-duration: var(--duration-200);
+  transition-timing-function: var(--ease);
+
+  .Root:has(:focus-within) & {
+    $range-thumb-size-difference: 24px - 16px;
+    opacity: 1;
+    visibility: visible;
+
+    bottom: calc(
+      var(--op-range-slider-thumb-size) + #{$range-thumb-size-difference}
+    );
+  }
+}
+
+.OutputBubble {
+  position: relative;
+  display: flex;
+  box-shadow: var(--shadow-xl);
+  padding: 0 var(--space-2);
+  min-width: $range-output-size;
+  height: $range-output-size;
+  background-color: var(--surface);
+  border-radius: var(--border-radius-1);
+  transition-property: transform;
+  transition-duration: var(--duration-200);
+  transition-timing-function: var(--ease);
+  outline: var(--border-width-1) solid transparent;
+
+  .Input:hover + .Output &,
+  .Input:active + .Output &,
+  .Input:focus + .Output & {
+    transform: translateY(calc(-1 * var(--op-range-slider-output-spacing)));
+
+    @media #{$breakpoints-md-up} {
+      transform: translateY(
+        calc(-1 * (var(--op-range-slider-output-spacing) * 0.4))
+      );
+    }
+  }
+
+  > :first-child {
+    display: block;
+    flex: 1 1 auto;
+    margin: auto;
+  }
+}
