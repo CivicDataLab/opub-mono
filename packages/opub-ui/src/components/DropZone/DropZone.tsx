@@ -375,6 +375,7 @@ export const DropZone: React.FunctionComponent<DropZoneProps> & {
   useEffect(() => {
     if (openFileDialog) triggerFileDialog();
   }, [openFileDialog, triggerFileDialog]);
+  console.log(allowMultiple, '----');
 
   return (
     <DropZoneContext.Provider value={context}>
