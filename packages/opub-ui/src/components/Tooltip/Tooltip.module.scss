@@ -22,6 +22,7 @@
   --op-tooltip-overlay-offset: var(--space-3);
   --op-tooltip-border-radius: var(--border-radius-1);
 
+  max-height: var(--radix-tooltip-content-available-height);
   box-shadow: var(--shadow-xl), var(--shadow-lg);
   border-radius: var(--op-tooltip-border-radius);
   background-color: var(--surface);
@@ -37,7 +38,7 @@
   max-width: 200px;
   font-size: var(--font-size-100);
 
-  animation-duration: var(--duration-50);
+  animation-duration: var(--duration-100);
   animation-timing-function: var(--ease-in);
   will-change: transform, opacity;
 
