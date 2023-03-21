@@ -22,6 +22,11 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
+  render: ({ ...args }) => (
+    <Provider>
+      <Tooltip {...args} />
+    </Provider>
+  ),
   args: {
     children: (
       <Text fontWeight="bold" as="span">
@@ -33,6 +38,11 @@ export const Default: Story = {
 };
 
 export const Underline: Story = {
+  render: ({ ...args }) => (
+    <Provider hasUnderline>
+      <Tooltip {...args} />
+    </Provider>
+  ),
   args: {
     children: (
       <Text fontWeight="bold" as="span">
@@ -40,11 +50,10 @@ export const Underline: Story = {
       </Text>
     ),
     content: 'Tooltip content',
-    // hasUnderline: true,
   },
 };
 
-export const WithButton: Story = {
+export const Multiple: Story = {
   render: ({ ...args }) => (
     <Provider>
       <Flex gap={4}>
