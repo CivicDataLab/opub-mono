@@ -94,7 +94,17 @@ export function ActionList({
         />
         <KeypressListener
           keyEvent="keydown"
+          keyCode={Key.RightArrow}
+          handler={handleFocusNextItem}
+        />
+        <KeypressListener
+          keyEvent="keydown"
           keyCode={Key.UpArrow}
+          handler={handleFocusPreviousItem}
+        />
+        <KeypressListener
+          keyEvent="keydown"
+          keyCode={Key.LeftArrow}
           handler={handleFocusPreviousItem}
         />
       </>
