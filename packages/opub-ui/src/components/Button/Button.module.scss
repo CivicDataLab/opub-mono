@@ -70,15 +70,6 @@
   }
 }
 
-@mixin base-button-disabled {
-  @include recolor-icon(var(--icon-disabled));
-  transition: none;
-  box-shadow: none;
-  border-color: var(--border-disabled);
-  background: var(--surface-disabled);
-  color: var(--text-disabled);
-}
-
 @mixin button-filled() {
   @include focus-ring($border-width: 0);
 

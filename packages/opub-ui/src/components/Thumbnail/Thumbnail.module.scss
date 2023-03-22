@@ -1,0 +1,61 @@
+@import '../../../styles/common';
+
+.Thumbnail {
+  --op-thumbnail-extra-small-size: 24px;
+  --op-thumbnail-small-size: 40px;
+  --op-thumbnail-medium-size: 60px;
+  --op-thumbnail-large-size: 80px;
+
+  position: relative;
+  display: block;
+  overflow: hidden;
+  background: var(--surface);
+
+  min-width: var(--op-thumbnail-extra-small-size);
+  max-width: 100%;
+  border-radius: var(--border-radius-1);
+  border: var(--border-divider);
+
+  &::after {
+    content: '';
+    display: block;
+
+    padding-bottom: 100%;
+  }
+}
+
+.sizeExtraSmall {
+  width: var(--op-thumbnail-extra-small-size);
+}
+
+.sizeSmall {
+  width: var(--op-thumbnail-small-size);
+}
+
+.sizeMedium {
+  width: var(--op-thumbnail-medium-size);
+}
+
+.sizeLarge {
+  width: var(--op-thumbnail-large-size);
+}
+
+.transparent {
+  background: transparent;
+}
+
+.Thumbnail > * {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  max-width: 100%;
+  max-height: 100%;
+  color: var(--icon-subdued);
+
+  svg {
+    fill: currentColor;
+  }
+}

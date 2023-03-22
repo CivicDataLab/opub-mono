@@ -1,0 +1,1 @@
+export { SkeletonThumbnail } from './SkeletonThumbnail';

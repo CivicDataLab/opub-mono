@@ -21,6 +21,13 @@ export type {
   DepthShadowAlias,
 } from './depth';
 
+export type {
+  MotionTokenGroup,
+  MotionTokenName,
+  MotionDurationScale,
+  MotionKeyframesAlias,
+} from './motion';
+
 export type { ShadowTokenGroup, ShadowTokenName, ShadowAlias } from './shadow';
 
 export type {

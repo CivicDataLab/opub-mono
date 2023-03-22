@@ -297,3 +297,12 @@ $typography-condensed: em(640px);
   border-top-right-radius: var(--border-radius-1);
   border-bottom-right-radius: var(--border-radius-1);
 }
+
+@mixin base-button-disabled {
+  @include recolor-icon(var(--icon-disabled));
+  transition: none;
+  box-shadow: none;
+  border-color: var(--border-disabled);
+  background: var(--surface-disabled);
+  color: var(--text-disabled);
+}

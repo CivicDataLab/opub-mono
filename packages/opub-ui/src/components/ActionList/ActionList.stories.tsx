@@ -1,4 +1,4 @@
-import { Checkmark, Delete, Edit, Export, Import } from '@opub-icons/workflow';
+import { Checkmark, Export, Import } from '@opub-icons/workflow';
 import { Meta, StoryObj } from '@storybook/react';
 import { Button } from '../Button';
 import { Content, Popover, Trigger } from '../Popover';
@@ -31,95 +31,6 @@ export const Default: Story = {
   },
   args: {
     actionRole: 'menuitem',
-    items: [
-      {
-        content: 'Import file',
-        onAction: () => console.log('Imported action'),
-      },
-      {
-        content: 'Export file',
-        onAction: () => console.log('Exported action'),
-      },
-    ],
-  },
-};
-
-export const WithSuffix: Story = {
-  ...Default,
-  args: {
-    actionRole: 'menuitem',
-    items: [
-      {
-        active: true,
-        content: 'Import file',
-        icon: <Import />,
-        suffix: <Checkmark size={14} />,
-      },
-      { content: 'Export file', icon: <Export /> },
-    ],
-  },
-};
-
-export const WithSections: Story = {
-  ...Default,
-  args: {
-    actionRole: 'menuitem',
-    sections: [
-      {
-        title: 'File options',
-        items: [
-          { content: 'Import file', icon: <Import /> },
-          { content: 'Export file', icon: <Export /> },
-        ],
-      },
-      {
-        title: 'Bulk actions',
-        items: [
-          { content: 'Edit', icon: <Edit /> },
-          { content: 'Delete', icon: <Delete /> },
-        ],
-      },
-    ],
-  },
-};
-
-export const DestructiveItem: Story = {
-  ...Default,
-  args: {
-    actionRole: 'menuitem',
-    items: [
-      {
-        active: true,
-        content: 'Import file',
-        icon: <Import />,
-      },
-      { content: 'Export file', icon: <Export /> },
-      {
-        destructive: true,
-        content: 'Delete file',
-        icon: <Delete />,
-      },
-    ],
-  },
-};
-
-export const HelpText: Story = {
-  ...Default,
-  args: {
-    actionRole: 'menuitem',
-    sections: [
-      {
-        items: [
-          {
-            content: 'Blog posts',
-            helpText: 'Manage your blog articles',
-          },
-          {
-            content: 'Blogs',
-            helpText: 'Manage blogs published to your Online Store',
-          },
-        ],
-      },
-    ],
+    items: [{ content: 'Create Organisation' }, { content: 'Create Dataset' }],
   },
 };

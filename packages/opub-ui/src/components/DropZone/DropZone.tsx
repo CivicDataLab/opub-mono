@@ -1,0 +1,423 @@
+import styles from './DropZone.module.scss';
+import cx from 'classnames';
+import React, {
+  useState,
+  useRef,
+  useCallback,
+  FunctionComponent,
+  useMemo,
+  useEffect,
+} from 'react';
+import { Text } from '../Text';
+import { Labelled, LabelledProps } from '../Labelled';
+
+import { FileUpload } from './components';
+import { DropZoneContext } from './context';
+import {
+  DropZoneEvent,
+  fileAccepted,
+  getDataTransferFiles,
+  defaultAllowMultiple,
+} from './utils';
+import { useEventListener } from '@ui/utils/hooks/use-event-listener';
+import { Flex } from '../Flex';
+import { debounce } from '@ui/utils/debounce';
+import { variationName } from '@ui/utils/css';
+import { isServer } from '@ui/utils/target';
+import { useComponentDidMount } from '@ui/utils/hooks/use-component-did-mount';
+import { useToggle } from '@ui/utils/hooks/use-toggle';
+import { AlertCircleFilled, UploadToCloud } from '@opub-icons/workflow';
+
+export type DropZoneFileType = 'file' | 'image' | 'video';
+
+export interface DropZoneProps {
+  /** Label for the file input */
+  label?: React.ReactNode;
+  /** Adds an action to the label */
+  labelAction?: LabelledProps['action'];
+  /** Visually hide the label */
+  labelHidden?: boolean;
+  /** ID for file input */
+  id?: string;
+  /** Allowed file types */
+  accept?: string;
+  /**
+   * Whether is a file or an image
+   * @default 'file'
+   */
+  type?: DropZoneFileType;
+  /** Sets an active state */
+  active?: boolean;
+  /** Sets an error state */
+  error?: boolean;
+  /**
+   * Displays an outline border
+   * @default true
+   */
+  outline?: boolean;
+  /**
+   * Displays an overlay on hover
+   * @default true
+   */
+  overlay?: boolean;
+  /** Text that appears in the overlay */
+  overlayText?: string;
+  /** Text that appears in the overlay when set in error state */
+  errorOverlayText?: string;
+  /**
+   * Allows multiple files to be uploaded at once
+   * @default true
+   */
+  allowMultiple?: boolean;
+  /** Sets a disabled state */
+  disabled?: boolean;
+  /** The child elements to render in the dropzone. */
+  children?: string | React.ReactNode;
+  /** Allows a file to be dropped anywhere on the page */
+  dropOnPage?: boolean;
+  /** Sets the default file dialog state */
+  openFileDialog?: boolean;
+  /** Allows child content to adjust height */
+  variableHeight?: boolean;
+  /** Adds custom validations */
+  customValidator?(file: File): boolean;
+  /** Callback triggered on click */
+  onClick?(event: React.MouseEvent<HTMLElement>): void;
+  /** Callback triggered on any file drop */
+  onDrop?(files: File[], acceptedFiles: File[], rejectedFiles: File[]): void;
+  /** Callback triggered when at least one of the files dropped was accepted */
+  onDropAccepted?(acceptedFiles: File[]): void;
+  /** Callback triggered when at least one of the files dropped was rejected */
+  onDropRejected?(rejectedFiles: File[]): void;
+  /** Callback triggered when one or more files are dragging over the drag area */
+  onDragOver?(): void;
+  /** Callback triggered when one or more files entered the drag area */
+  onDragEnter?(): void;
+  /** Callback triggered when one or more files left the drag area */
+  onDragLeave?(): void;
+  /** Callback triggered when the file dialog is canceled */
+  onFileDialogClose?(): void;
+}
+
+// TypeScript can't generate types that correctly infer the typing of
+// subcomponents so explicitly state the subcomponents in the type definition.
+// Letting this be implicit works in this project but fails in projects that use
+// generated *.d.ts files.
+
+export const DropZone: React.FunctionComponent<DropZoneProps> & {
+  FileUpload: typeof FileUpload;
+} = function DropZone({
+  dropOnPage,
+  label,
+  labelAction,
+  labelHidden,
+  children,
+  disabled = false,
+  outline = true,
+  accept,
+  active,
+  overlay = true,
+  allowMultiple = defaultAllowMultiple,
+  overlayText,
+  errorOverlayText,
+  id: idProp,
+  type = 'file',
+  onClick,
+  error,
+  openFileDialog,
+  variableHeight,
+  onFileDialogClose,
+  customValidator,
+  onDrop,
+  onDropAccepted,
+  onDropRejected,
+  onDragEnter,
+  onDragOver,
+  onDragLeave,
+}: DropZoneProps) {
+  const node = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const dragTargets = useRef<EventTarget[]>([]);
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const adjustSize = useCallback(
+    debounce(
+      () => {
+        if (!node.current) {
+          return;
+        }
+        if (variableHeight) {
+          setMeasuring(false);
+          return;
+        }
+
+        let size = 'large';
+        const width = node.current.getBoundingClientRect().width;
+
+        if (width < 100) {
+          size = 'small';
+        } else if (width < 160) {
+          size = 'medium';
+        }
+
+        setSize(size);
+        measuring && setMeasuring(false);
+      },
+      50,
+      { trailing: true }
+    ),
+    []
+  );
+
+  const [dragging, setDragging] = useState(false);
+  const [internalError, setInternalError] = useState(false);
+  const {
+    value: focused,
+    setTrue: handleFocus,
+    setFalse: handleBlur,
+  } = useToggle(false);
+  const [size, setSize] = useState('large');
+  const [measuring, setMeasuring] = useState(true);
+
+  const getValidatedFiles = useCallback(
+    (files: File[] | DataTransferItem[]) => {
+      const acceptedFiles: File[] = [];
+      const rejectedFiles: File[] = [];
+
+      Array.from(files as File[]).forEach((file: File) => {
+        !fileAccepted(file, accept) ||
+        (customValidator && !customValidator(file))
+          ? rejectedFiles.push(file)
+          : acceptedFiles.push(file);
+      });
+
+      if (!allowMultiple) {
+        acceptedFiles.splice(1, acceptedFiles.length);
+        rejectedFiles.push(...acceptedFiles.slice(1));
+      }
+
+      return { files, acceptedFiles, rejectedFiles };
+    },
+    [accept, allowMultiple, customValidator]
+  );
+
+  const handleDrop = useCallback(
+    (event: DropZoneEvent) => {
+      stopEvent(event);
+      if (disabled) return;
+
+      const fileList = getDataTransferFiles(event);
+
+      const { files, acceptedFiles, rejectedFiles } =
+        getValidatedFiles(fileList);
+
+      dragTargets.current = [];
+
+      setDragging(false);
+      setInternalError(rejectedFiles.length > 0);
+
+      onDrop && onDrop(files as File[], acceptedFiles, rejectedFiles);
+      onDropAccepted && acceptedFiles.length && onDropAccepted(acceptedFiles);
+      onDropRejected && rejectedFiles.length && onDropRejected(rejectedFiles);
+
+      if (!(event.target && 'value' in event.target)) return;
+
+      event.target.value = '';
+    },
+    [disabled, getValidatedFiles, onDrop, onDropAccepted, onDropRejected]
+  );
+
+  const handleDragEnter = useCallback(
+    (event: DropZoneEvent) => {
+      stopEvent(event);
+      if (disabled) return;
+
+      const fileList = getDataTransferFiles(event);
+
+      if (event.target && !dragTargets.current.includes(event.target)) {
+        dragTargets.current.push(event.target);
+      }
+
+      if (dragging) return;
+
+      const { rejectedFiles } = getValidatedFiles(fileList);
+
+      setDragging(true);
+      setInternalError(rejectedFiles.length > 0);
+
+      onDragEnter && onDragEnter();
+    },
+    [disabled, dragging, getValidatedFiles, onDragEnter]
+  );
+
+  const handleDragOver = useCallback(
+    (event: DropZoneEvent) => {
+      stopEvent(event);
+      if (disabled) return;
+      onDragOver && onDragOver();
+    },
+    [disabled, onDragOver]
+  );
+
+  const handleDragLeave = useCallback(
+    (event: DropZoneEvent) => {
+      event.preventDefault();
+
+      if (disabled) return;
+
+      dragTargets.current = dragTargets.current.filter((el: any) => {
+        const compareNode = dropOnPage && !isServer ? document : node.current;
+
+        return el !== event.target && compareNode && compareNode.contains(el);
+      });
+
+      if (dragTargets.current.length > 0) return;
+
+      setDragging(false);
+      setInternalError(false);
+
+      onDragLeave && onDragLeave();
+    },
+    [dropOnPage, disabled, onDragLeave]
+  );
+
+  const dropNode = dropOnPage && !isServer ? document : node.current;
+
+  useEventListener('drop', handleDrop, dropNode);
+  useEventListener('dragover', handleDragOver, dropNode);
+  useEventListener('dragenter', handleDragEnter, dropNode);
+  useEventListener('dragleave', handleDragLeave, dropNode);
+  useEventListener('resize', adjustSize, isServer ? null : window);
+
+  useComponentDidMount(() => {
+    adjustSize();
+  });
+
+  const id = React.useId();
+
+  const overlayTextWithDefault = overlayText || 'Add files';
+  const errorOverlayTextWithDefault = errorOverlayText || '';
+
+  const labelValue = label;
+  const labelHiddenValue = label ? labelHidden : true;
+
+  const classes = cx(
+    styles.DropZone,
+    outline && styles.hasOutline,
+    focused && styles.focused,
+    (active || dragging) && styles.isDragging,
+    disabled && styles.isDisabled,
+    (internalError || error) && styles.hasError,
+    !variableHeight && styles[variationName('size', size)],
+    measuring && styles.measuring
+  );
+
+  const dragOverlay =
+    (active || dragging) &&
+    !internalError &&
+    !error &&
+    overlay &&
+    overlayMarkup(UploadToCloud, 'interactive', overlayTextWithDefault);
+
+  const dragErrorOverlay =
+    dragging &&
+    (internalError || error) &&
+    overlayMarkup(AlertCircleFilled, 'critical', errorOverlayTextWithDefault);
+
+  const context = useMemo(
+    () => ({
+      disabled,
+      focused,
+      size,
+      type: type || 'file',
+      measuring,
+      allowMultiple,
+    }),
+    [disabled, focused, measuring, size, type, allowMultiple]
+  );
+
+  const open = useCallback(() => {
+    if (!inputRef.current) return;
+    inputRef.current.click();
+  }, [inputRef]);
+
+  const triggerFileDialog = useCallback(() => {
+    open();
+    onFileDialogClose?.();
+  }, [open, onFileDialogClose]);
+
+  function overlayMarkup(
+    icon: FunctionComponent,
+    color: 'critical' | 'interactive',
+    text: string
+  ) {
+    const Icon = icon;
+    return (
+      <div className={styles.Overlay}>
+        <Flex gap="2" direction="column" alignItems="center">
+          {size === 'small' && <Icon />}
+          {(size === 'medium' || size === 'large') && (
+            <Text variant="bodySm" as="p" fontWeight="bold">
+              {text}
+            </Text>
+          )}
+        </Flex>
+      </div>
+    );
+  }
+
+  function handleClick(event: React.MouseEvent<HTMLElement>) {
+    if (disabled) return;
+
+    return onClick ? onClick(event) : open();
+  }
+
+  useEffect(() => {
+    if (openFileDialog) triggerFileDialog();
+  }, [openFileDialog, triggerFileDialog]);
+  console.log(allowMultiple, '----');
+
+  return (
+    <DropZoneContext.Provider value={context}>
+      <Labelled
+        id={id}
+        label={labelValue}
+        action={labelAction}
+        labelHidden={labelHiddenValue}
+      >
+        <div
+          ref={node}
+          className={classes}
+          aria-disabled={disabled}
+          onClick={handleClick}
+          onDragStart={stopEvent}
+        >
+          {dragOverlay}
+          {dragErrorOverlay}
+          <Text variant="bodySm" as="span" visuallyHidden>
+            <input
+              id={id}
+              accept={accept}
+              disabled={disabled}
+              multiple={allowMultiple}
+              onChange={handleDrop}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
+              type="file"
+              ref={inputRef}
+              autoComplete="off"
+            />
+          </Text>
+          <div className={styles.Container}>{children}</div>
+        </div>
+      </Labelled>
+    </DropZoneContext.Provider>
+  );
+};
+
+function stopEvent(event: DropZoneEvent | React.DragEvent<HTMLDivElement>) {
+  event.preventDefault();
+  event.stopPropagation();
+}
+
+DropZone.FileUpload = FileUpload;
