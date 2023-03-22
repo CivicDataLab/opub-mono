@@ -1,0 +1,36 @@
+@import '../../../styles/common';
+
+.SkeletonThumbnail {
+  --op-skeleton-thumbnail-extra-small-size: 24px;
+  --op-skeleton-thumbnail-small-size: 40px;
+  --op-skeleton-thumbnail-medium-size: 60px;
+  --op-skeleton-thumbnail-large-size: 80px;
+
+  display: flex;
+  background-color: var(--surface-neutral);
+  border-radius: var(--border-radius-1);
+
+  @media screen and (-ms-high-contrast: active) {
+    background-color: grayText;
+  }
+}
+
+.sizeExtraSmall {
+  height: var(--op-skeleton-thumbnail-extra-small-size);
+  width: var(--op-skeleton-thumbnail-extra-small-size);
+}
+
+.sizeSmall {
+  height: var(--op-skeleton-thumbnail-small-size);
+  width: var(--op-skeleton-thumbnail-small-size);
+}
+
+.sizeMedium {
+  height: var(--op-skeleton-thumbnail-medium-size);
+  width: var(--op-skeleton-thumbnail-medium-size);
+}
+
+.sizeLarge {
+  height: var(--op-skeleton-thumbnail-large-size);
+  width: var(--op-skeleton-thumbnail-large-size);
+}

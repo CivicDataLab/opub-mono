@@ -1,0 +1,1 @@
+export { SkeletonTabs } from './SkeletonTabs';
