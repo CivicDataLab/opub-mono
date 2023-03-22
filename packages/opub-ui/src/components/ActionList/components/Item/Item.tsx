@@ -73,7 +73,7 @@ export function Item({
     </Flex>
   );
 
-  const scrollMarkup = active ? <ScrollTo /> : null;
+  // const scrollMarkup = active ? <ScrollTo /> : null;
 
   const control = url ? (
     <UnstyledLink
@@ -105,7 +105,7 @@ export function Item({
 
   return (
     <>
-      {scrollMarkup}
+      {/* {scrollMarkup} */}
       {control}
     </>
   );

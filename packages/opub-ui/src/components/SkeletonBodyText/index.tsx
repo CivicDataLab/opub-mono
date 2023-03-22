@@ -1,0 +1,1 @@
+export { SkeletonBodyText } from './SkeletonBodyText';

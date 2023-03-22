@@ -1,0 +1,33 @@
+.Tabs {
+  display: flex;
+  width: 100%;
+  border-bottom: var(--border-divider);
+}
+
+.Tab {
+  position: relative;
+  padding: calc(var(--space-5) + var(--space-05)) var(--space-4);
+
+  &:first-child::before {
+    background-color: var(--border-hovered);
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: var(--space-3);
+    right: var(--space-3);
+    height: var(--border-width-3);
+    border-top-left-radius: var(--border-radius-1);
+    border-top-right-radius: var(--border-radius-1);
+  }
+}
+
+.Tab-short {
+  width: 80px;
+}
+
+.Tab-long {
+  width: 100px;
+}
