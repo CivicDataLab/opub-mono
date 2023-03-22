@@ -14,6 +14,9 @@ export interface BadgeProps {
   /** Icon to display to the left of the badge’s content. */
   icon?:React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
 
+  /** Background color for the badge. */
+  color?: string;
+  
   /**Pass a custom accessibilityLabel.*/
   statusAndProgressLabelOverride?:string
 }
