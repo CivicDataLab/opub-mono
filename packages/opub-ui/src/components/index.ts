@@ -25,3 +25,4 @@ export { Tooltip } from "./Tooltip";
 export { RangeSlider } from "./RangeSlider";
 export { DropZone } from "./DropZone";
 export { Thumbnail } from "./Thumbnail";
+export { ProgressBar } from "./ProgressBar";
