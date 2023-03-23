@@ -14,6 +14,7 @@ import { forwardRef, HTMLAttributes, useEffect, useState } from 'react';
 import styles from '../Combobox.module.scss';
 import { Combobox } from './Atoms';
 import { Portal } from 'ariakit/portal';
+import { ScrollArea } from '@ui/components/ScrollArea';
 
 export type ComboboxProps = ComboboxSingleProps & {
   defaultValues?: string[];
@@ -88,13 +89,15 @@ export const MultiSelect = forwardRef<HTMLInputElement, ComboboxProps>(
                 typeahead={false}
                 {...popoverProps}
               >
-                {matches.length ? (
-                  matches.map((value) => (
-                    <ComboboxMultipleItem key={value} value={value} />
-                  ))
-                ) : (
-                  <div className={styles.NoResult}>No results found</div>
-                )}
+                <>
+                  {matches.length ? (
+                    matches.map((value) => (
+                      <ComboboxMultipleItem key={value} value={value} />
+                    ))
+                  ) : (
+                    <div className={styles.NoResult}>No results found</div>
+                  )}
+                </>
               </SelectList>
             )}
           </ComboboxPopover>

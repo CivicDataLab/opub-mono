@@ -4,7 +4,7 @@ import styles from './Text.module.scss';
 
 const Text = ({
   alignment,
-  as,
+  as = 'span',
   breakWord,
   children,
   color,
