@@ -1,3 +1,7 @@
+import { Box } from '@ui/components/Box';
+import { Flex } from '@ui/components/Flex';
+import { Tag } from '@ui/components/Tag';
+import { Text } from '@ui/components/Text';
 import { ComboboxSingleProps } from '@ui/types/combobox';
 import {
   ComboboxItem,
@@ -7,7 +11,7 @@ import {
 import { Portal } from 'ariakit/portal';
 import { SelectItem, SelectList, useSelectState } from 'ariakit/select';
 import cx from 'classnames';
-import { forwardRef, HTMLAttributes, useEffect, useState } from 'react';
+import { forwardRef, HTMLAttributes, useEffect, useRef, useState } from 'react';
 import itemStyles from '../../ActionList/ActionList.module.scss';
 import styles from '../Combobox.module.scss';
 import { Combobox } from './Atoms';
@@ -32,6 +36,7 @@ export const MultiSelect = forwardRef<HTMLInputElement, ComboboxProps>(
       defaultList,
       list,
       onFilter,
+      verticalContent,
       ...comboboxProps
     } = props;
 
@@ -46,7 +51,7 @@ export const MultiSelect = forwardRef<HTMLInputElement, ComboboxProps>(
       // this behavior and put DOM focus on the items.
       virtualFocus: false,
       sameWidth: true,
-      gutter: 8,
+      gutter: verticalContent ? 18 : 8,
       defaultValue,
       value,
       setValue: onChange,
@@ -70,9 +75,37 @@ export const MultiSelect = forwardRef<HTMLInputElement, ComboboxProps>(
       combobox.setValue('');
     }, [select.value, combobox.setValue]);
 
+    function removeTag(value: string) {
+      const finalArr = select.value.filter((v) => v !== value);
+      select.setValue(finalArr);
+    }
+
+    const tags = verticalContent ? (
+      values.length > 0 ? (
+        <Flex gap={4}>
+          {values.map((tag) => (
+            <Tag onRemove={removeTag} value={tag} key={tag}>
+              {tag}
+            </Tag>
+          ))}
+        </Flex>
+      ) : (
+        <Box minHeight="28px">
+          <Text variant="bodySm" color="subdued">
+            No Tags selected
+          </Text>
+        </Box>
+      )
+    ) : null;
+
     return (
       <div className="opub-combobox-multi">
-        <Combobox combobox={combobox} ref={ref} {...comboboxProps} />
+        <Combobox
+          combobox={combobox}
+          ref={ref}
+          verticalContent={tags}
+          {...comboboxProps}
+        />
 
         <Portal>
           <ComboboxPopover state={combobox} className={styles.Popover}>

@@ -72,3 +72,19 @@ export const Multi: Story = {
     defaultValues: ['Banana'],
   },
 };
+
+export const VerticalContent: Story = {
+  render: ({ ...args }) => {
+    return (
+      <ComboboxMulti defaultList={options} defaultValues="Banana" {...args} />
+    );
+  },
+
+  args: {
+    label: 'Your favorite food',
+    placeholder: 'e.g., Apple, Burger',
+    defaultList: options,
+    defaultValues: ['Banana'],
+    verticalContent: true,
+  },
+};
