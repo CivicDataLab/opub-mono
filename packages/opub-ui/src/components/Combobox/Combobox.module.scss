@@ -11,103 +11,56 @@
   }
 }
 
-.List {
-  box-shadow: var(--shadow-xl);
-  border-radius: var(--border-radius-2);
-  background-color: var(--surface);
-  // position: absolute;
-  max-width: calc(100vw - var(--space-8));
-  // transform-origin: var(--radix-popover-content-transform-origin);
-  // animation: scaleIn 100ms ease-out;
+.Label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
 
-  &--open {
-    padding: var(--space-2);
+.Popover {
+  position: relative;
+  z-index: 50;
+  display: flex;
+  max-height: min(var(--popover-available-height, 300px), 300px);
+  flex-direction: column;
+  overflow: auto;
+  overscroll-behavior: contain;
+  border-radius: 0.5rem;
+  border-width: 1px;
+  border-style: solid;
+  border-color: hsl(204 20% 88%);
+  background-color: hsl(204 20% 100%);
+  padding: 0.5rem;
+  color: hsl(204 10% 10%);
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  filter: drop-shadow(0 10px 8px rgb(0 0 0 / 0.04))
+    drop-shadow(0 4px 3px rgb(0 0 0 / 0.1));
+}
+
+.ComboboxItem {
+  display: flex;
+  cursor: default;
+  scroll-margin: 0.5rem;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 0.25rem;
+  padding: 0.5rem;
+  outline: none !important;
+
+  &:hover {
+    background-color: hsl(204 100% 80% / 0.4);
+  }
+
+  &[data-active-item] {
+    background-color: hsl(204 100% 40%);
+    color: hsl(204 20% 100%);
   }
 }
 
-.Item {
-  --op-action-list-image-size: 20px;
-  --op-action-list-item-min-height: var(--space-10);
-  --op-action-list-item-vertical-padding: calc(
-    (var(--op-action-list-item-min-height) - var(--font-line-height-2)) / 2
-  );
-  @include unstyled-button;
-  @include focus-ring;
-  display: block;
-  // width: 100%;
-  // min-height: var(--op-action-list-item-min-height);
-  text-align: left;
-  text-decoration: none;
-  cursor: pointer;
-  padding: var(--op-action-list-item-vertical-padding) var(--space-2);
-  border-radius: var(--border-radius-1);
-  border-top: var(--border-width-1) solid transparent;
-  color: inherit;
-  font-size: var(--font-size-100);
-
-  @media (forced-colors: active) {
-    border: var(--border-width-1) solid transparent;
-  }
-
-  &:hover {
-    background-color: var(--surface-hovered);
-    text-decoration: none;
-    outline: var(--border-width-3) solid transparent;
-  }
-
-  &:active {
-    background-color: var(--surface-pressed);
-
-    svg {
-      fill: var(--interactive);
-    }
-  }
-
-  &:focus-visible:not(:active) {
-    @include focus-ring($style: 'focused');
-    outline: var(--border-width-3) solid transparent;
-  }
-
-  &:visited {
-    color: inherit;
-  }
-
-  &.active {
-    background-color: var(--surface-selected);
-
-    svg {
-      fill: var(--interactive);
-    }
-
-    &::before {
-      @include list-selected-indicator;
-    }
-  }
-
-  &.destructive {
-    color: var(--interactive-critical);
-
-    svg {
-      fill: var(--icon-critical);
-    }
-
-    &:hover {
-      background-color: var(--surface-critical-subdued-hovered);
-    }
-
-    &:active,
-    &.active {
-      background-color: var(--surface-critical-subdued-pressed);
-    }
-  }
-
-  &.disabled {
-    background-image: none;
-    color: var(--text-disabled);
-
-    .Prefix svg,
-    .Suffix svg {
-      fill: var(--icon-disabled);
-    }
-  }
+.NoResults {
+  gap: 0.5rem;
+  padding: 0.5rem;
+  text-align: center;
+  width: 100%;
 }

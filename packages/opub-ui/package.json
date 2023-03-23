@@ -34,6 +34,7 @@
     "@react-spectrum/utils": "^3.8.1",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
+    "ariakit": "^2.0.0-next.43",
     "downshift": "^7.4.1",
     "react": "^18.2.0",
     "react-aria": "^3.22.0",

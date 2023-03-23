@@ -1,5 +1,4 @@
 import { CloseCircle } from '@opub-icons/workflow';
-import { mergeRefs } from '@react-aria/utils';
 import { TextFieldProps } from '@ui/types/input';
 import { Key } from '@ui/types/shared/key';
 import { variationName } from '@ui/utils/css';

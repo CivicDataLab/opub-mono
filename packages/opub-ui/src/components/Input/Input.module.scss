@@ -10,9 +10,7 @@ $spinner-icon-size: 12px;
   @include text-style-input;
 
   position: relative;
-
   display: flex;
-
   align-items: center;
   color: var(--text);
   cursor: text;

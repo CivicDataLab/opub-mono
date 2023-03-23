@@ -1,12 +1,10 @@
 import { Meta, StoryObj } from '@storybook/react';
-import { useMemo } from 'react';
-import { Box } from '../Box';
-import { Combobox } from './Combobox';
+import { Combobox, ComboboxMulti } from './Combobox';
 
 /**
  * Combobox is an accessible autocomplete input that enables users to filter a list of options and select one or more values.
  *
- * Reference: https://www.downshift-js.com/use-combobox
+ * Reference: https://ariakit.org/examples/combobox-multiple
  */
 const meta = {
   component: Combobox,
@@ -16,34 +14,61 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 const options = [
-  { value: 'rustic', label: 'Rustic' },
-  { value: 'antique', label: 'Antique' },
-  { value: 'vinyl', label: 'Vinyl' },
-  { value: 'vintage', label: 'Vintage' },
-  { value: 'refurbished', label: 'Refurbished' },
+  'Apple',
+  'Banana',
+  'Broccoli',
+  'Burger',
+  'Cake',
+  'Candy',
+  'Carrot',
+  'Cherry',
+  'Chocolate',
+  'Cookie',
+  'Cucumber',
+  'Donut',
+  'Fish',
+  'Fries',
+  'Grape',
+  'Green apple',
+  'Hot dog',
+  'Ice cream',
+  'Kiwi',
+  'Lemon',
+  'Lollipop',
+  'Onion',
+  'Orange',
+  'Pasta',
+  'Pineapple',
+  'Pizza',
+  'Potato',
+  'Salad',
+  'Sandwich',
+  'Steak',
+  'Strawberry',
+  'Tomato',
+  'Watermelon',
 ];
 
 export const Default: Story = {
+  args: {
+    label: 'Your favorite food',
+    placeholder: 'e.g., Apple, Burger',
+    defaultList: options,
+    defaultValue: 'Banana',
+  },
+};
+
+export const Multi: Story = {
   render: ({ ...args }) => {
     return (
-      <Box maxWidth="480px">
-        <Combobox {...args} />
-      </Box>
+      <ComboboxMulti defaultList={options} defaultValues="Banana" {...args} />
     );
   },
 
   args: {
-    label: 'Pick a category',
-    allItems: options,
-  },
-};
-
-export const MultiSelect: Story = {
-  ...Default,
-  args: {
-    label: 'Pick a category',
-    allItems: options,
-    allowMultiple: true,
-    initialSelectedItems: [options[0]],
+    label: 'Your favorite food',
+    placeholder: 'e.g., Apple, Burger',
+    defaultList: options,
+    defaultValues: ['Banana'],
   },
 };
