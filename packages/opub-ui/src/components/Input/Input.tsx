@@ -468,9 +468,9 @@ export const Input = React.forwardRef(
     }
 
     function handleKeyPress(event: React.KeyboardEvent) {
-      const { key, which } = event;
+      const { key, code } = event;
       const numbersSpec = /[\d.eE+-]$/;
-      if (type !== 'number' || which === Key.Enter || numbersSpec.test(key)) {
+      if (type !== 'number' || code === Key.Enter || numbersSpec.test(key)) {
         return;
       }
 
