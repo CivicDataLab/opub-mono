@@ -90,7 +90,7 @@ export function ActionList({
         />
         <KeypressListener
           keyEvent="keydown"
-          keyCode={Key.ArrowDown}
+          keyCode={Key.ArrowUp}
           handler={(e: KeyboardEvent) =>
             handleFocusChange(e, wrapFocusPreviousFocusableMenuItem)
           }

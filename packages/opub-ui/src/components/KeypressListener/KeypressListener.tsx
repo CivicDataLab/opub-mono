@@ -33,6 +33,7 @@ export function KeypressListener({
     const { handler, keyCode } = tracked.current;
     if (event.code === keyCode) {
       handler(event);
+      event.preventDefault();
     }
   }, []);
 
