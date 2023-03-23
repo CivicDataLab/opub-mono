@@ -15,6 +15,7 @@ export const Tag = React.forwardRef(
       accessibilityLabel,
       url,
       color = 'standard',
+      value = '',
       ...other
     }: TagProps,
     ref: React.LegacyRef<HTMLSpanElement>
@@ -55,7 +56,7 @@ export const Tag = React.forwardRef(
         type="button"
         aria-label={ariaLabel}
         className={cx(styles.Button, segmented && styles.segmented)}
-        onClick={onRemove}
+        onClick={() => onRemove(value)}
         onMouseUp={handleMouseUpByBlurring}
         disabled={disabled}
       >

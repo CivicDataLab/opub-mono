@@ -48,7 +48,7 @@ export interface TextProps {
   /** Adjust horizontal alignment of text */
   alignment?: Alignment;
   /** The element type */
-  as: Element;
+  as?: Element;
   /** Prevent text from overflowing */
   breakWord?: boolean;
   /** Text to display */

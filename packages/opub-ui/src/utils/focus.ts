@@ -46,6 +46,16 @@ export function wrapFocusNextFocusableMenuItem(
   }
 }
 
+export function focusFirstFocusableMenuItem(parentElement: HTMLElement) {
+  const allFocusableChildren = getMenuFocusableDescendants(parentElement);
+  allFocusableChildren[0].focus();
+}
+
+export function focusLastFocusableMenuItem(parentElement: HTMLElement) {
+  const allFocusableChildren = getMenuFocusableDescendants(parentElement);
+  allFocusableChildren[allFocusableChildren.length - 1].focus();
+}
+
 function getMenuFocusableDescendants(
   element: HTMLElement
 ): NodeListOf<HTMLElement> {

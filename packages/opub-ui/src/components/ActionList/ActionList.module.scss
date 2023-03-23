@@ -47,7 +47,8 @@
     color: inherit;
   }
 
-  &.active {
+  &.active,
+  &[aria-selected='true'] {
     background-color: var(--surface-selected);
 
     svg {

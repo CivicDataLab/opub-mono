@@ -1,41 +1,56 @@
-import styles from '../Combobox.module.scss';
+import { Labelled } from '@ui/components/Labelled';
+import { ComboboxSingleProps } from '@ui/types/combobox';
+import { Combobox as ComboboxComponent } from 'ariakit/combobox';
 import cx from 'classnames';
+import React, { useId, useRef } from 'react';
 import inputStyles from '../../Input/Input.module.scss';
 
-export const List = ({
-  getMenuProps,
-  getItemProps,
-  isOpen,
-  items,
-  selectedItem,
-}: any) => {
-  return (
-    <ul
-      {...getMenuProps()}
-      className={cx(styles.List, isOpen && styles['List--open'])}
-    >
-      {isOpen &&
-        items.map((item: any, index: number) => (
-          <li key={`${item.value}${index}`} {...getItemProps({ item, index })}>
-            <div
-              className={cx(
-                styles.Item,
-                selectedItem === item && styles.active
-              )}
-            >
-              <span>{item.label}</span>
-            </div>
-          </li>
-        ))}
-    </ul>
-  );
-};
+export const Combobox = React.forwardRef<HTMLInputElement, ComboboxSingleProps>(
+  (props: ComboboxSingleProps, ref) => {
+    const { label, id, combobox, verticalContent, ...comboboxProps } = props;
+    const verticalContentRef = useRef<HTMLDivElement>(null);
 
-export const Input = ({ getInputProps, ...props }: any) => {
-  return (
-    <div className={inputStyles.TextField}>
-      <input {...getInputProps()} {...props} className={inputStyles.Input} />
-      <div className={inputStyles.Backdrop} />
-    </div>
-  );
-};
+    const rId = useId();
+    const finalId = id || rId;
+
+    const element = (
+      <ComboboxComponent
+        state={combobox}
+        id={finalId}
+        ref={ref}
+        className={cx(inputStyles.Input)}
+        {...comboboxProps}
+      />
+    );
+    const backdropMarkup = <div className={cx(inputStyles.Backdrop)} />;
+
+    const finalContent = verticalContent ? (
+      <div
+        className={inputStyles.VerticalContent}
+        // id={`${final}-VerticalContent`}
+        ref={verticalContentRef}
+        // onClick={handleClickChild}
+      >
+        {verticalContent}
+        {element}
+      </div>
+    ) : (
+      element
+    );
+
+    const textField = (
+      <div className={cx(inputStyles.TextField)}>
+        {finalContent}
+        {backdropMarkup}
+      </div>
+    );
+
+    return label ? (
+      <Labelled id={finalId} label={label}>
+        {textField}
+      </Labelled>
+    ) : (
+      textField
+    );
+  }
+);

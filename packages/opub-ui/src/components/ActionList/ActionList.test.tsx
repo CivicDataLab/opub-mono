@@ -1,13 +1,21 @@
-import "@testing-library/jest-dom";
-import { render, screen } from "@testing-library/react";
-import { ActionList } from "./ActionList";
+import '@testing-library/jest-dom';
+import { render, screen } from '@testing-library/react';
+import { ActionList } from './ActionList';
 
-describe("ActionList Tests", () => {
+describe('ActionList Tests', () => {
   beforeEach(() => {
-    render(<ActionList>Component</ActionList>);
+    render(
+      <ActionList
+        actionRole="menuitem"
+        items={[
+          { content: 'Create Organisation' },
+          { content: 'Create Dataset' },
+        ]}
+      />
+    );
   });
 
-  test("should show Component text all the time", () => {
-    expect(screen.getByText(/Component/i)).toBeInTheDocument();
+  test('should show action list', () => {
+    expect(screen.getByText(/Action List/i)).toBeInTheDocument();
   });
 });
