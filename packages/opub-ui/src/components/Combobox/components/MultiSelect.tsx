@@ -5,13 +5,10 @@ import {
   useComboboxState,
 } from 'ariakit/combobox';
 import { Portal } from 'ariakit/portal';
-import {
-  SelectItem,
-  SelectItemCheck,
-  SelectList,
-  useSelectState,
-} from 'ariakit/select';
+import { SelectItem, SelectList, useSelectState } from 'ariakit/select';
+import cx from 'classnames';
 import { forwardRef, HTMLAttributes, useEffect, useState } from 'react';
+import itemStyles from '../../ActionList/ActionList.module.scss';
 import styles from '../Combobox.module.scss';
 import { Combobox } from './Atoms';
 
@@ -112,20 +109,20 @@ export const ComboboxMultipleItem = forwardRef<
   HTMLDivElement,
   ComboboxMultipleItemProps
 >(({ value, ...props }, ref) => {
+  const className = cx(
+    itemStyles.Item
+    // props.disabled && styles.disabled,
+  );
+
   return (
     <SelectItem
       ref={ref}
       value={value}
       shouldRegisterItem={false}
-      className={styles.ComboboxItem}
+      className={className}
       {...props}
     >
-      {(itemProps) => (
-        <ComboboxItem {...itemProps}>
-          <SelectItemCheck />
-          {value}
-        </ComboboxItem>
-      )}
+      {(itemProps) => <ComboboxItem {...itemProps}>{value}</ComboboxItem>}
     </SelectItem>
   );
 });

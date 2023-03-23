@@ -12,47 +12,30 @@
 }
 
 .Popover {
+  --combobox-popover-height: 300px;
+  --popover-padding: var(--space-2);
   position: relative;
   z-index: 50;
   display: flex;
-  max-height: min(var(--popover-available-height, 300px), 300px);
+  gap: var(--space-05);
+  max-height: min(
+    var(--popover-available-height, 300px),
+    var(--combobox-popover-height)
+  );
   flex-direction: column;
   overflow: auto;
-  overscroll-behavior: contain;
-  border-radius: 0.5rem;
-  border-width: 1px;
-  border-style: solid;
-  border-color: hsl(204 20% 88%);
-  background-color: hsl(204 20% 100%);
-  padding: 0.5rem;
-  color: hsl(204 10% 10%);
-  outline: 2px solid transparent;
-  outline-offset: 2px;
-  filter: drop-shadow(0 10px 8px rgb(0 0 0 / 0.04))
-    drop-shadow(0 4px 3px rgb(0 0 0 / 0.1));
+  padding: var(--popover-padding);
+
+  max-width: calc(100vw - var(--space-8));
+  box-shadow: var(--shadow-xl);
+  border-radius: var(--border-radius-2);
+  background-color: var(--surface);
+
+  transform-origin: 50% 0px;
+  animation: scaleIn 100ms ease-out;
 }
 
-.ComboboxItem {
-  display: flex;
-  cursor: default;
-  scroll-margin: 0.5rem;
-  align-items: center;
-  gap: 0.5rem;
-  border-radius: 0.25rem;
-  padding: 0.5rem;
-  outline: none !important;
-
-  &:hover {
-    background-color: hsl(204 100% 80% / 0.4);
-  }
-
-  &[data-active-item] {
-    background-color: hsl(204 100% 40%);
-    color: hsl(204 20% 100%);
-  }
-}
-
-.NoResults {
+.NoResult {
   gap: 0.5rem;
   padding: 0.5rem;
   text-align: center;
