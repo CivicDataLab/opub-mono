@@ -10,9 +10,10 @@ import {
   SelectList,
   useSelectState,
 } from 'ariakit/select';
-import { forwardRef, HTMLAttributes, useEffect, useId, useState } from 'react';
+import { forwardRef, HTMLAttributes, useEffect, useState } from 'react';
 import styles from '../Combobox.module.scss';
 import { Combobox } from './Atoms';
+import { Portal } from 'ariakit/portal';
 
 export type ComboboxProps = ComboboxSingleProps & {
   defaultValues?: string[];
@@ -76,26 +77,28 @@ export const MultiSelect = forwardRef<HTMLInputElement, ComboboxProps>(
       <div className="opub-combobox-multi">
         <Combobox combobox={combobox} ref={ref} {...comboboxProps} />
 
-        <ComboboxPopover state={combobox} className={styles.Popover}>
-          {(popoverProps) => (
-            <SelectList
-              state={select}
-              // Disable the composite & typeahead behavior on the select list since combobox
-              // will handle it.
-              composite={false}
-              typeahead={false}
-              {...popoverProps}
-            >
-              {matches.length ? (
-                matches.map((value) => (
-                  <ComboboxMultipleItem key={value} value={value} />
-                ))
-              ) : (
-                <div className={styles.NoResult}>No results found</div>
-              )}
-            </SelectList>
-          )}
-        </ComboboxPopover>
+        <Portal>
+          <ComboboxPopover state={combobox} className={styles.Popover}>
+            {(popoverProps) => (
+              <SelectList
+                state={select}
+                // Disable the composite & typeahead behavior on the select list since combobox
+                // will handle it.
+                composite={false}
+                typeahead={false}
+                {...popoverProps}
+              >
+                {matches.length ? (
+                  matches.map((value) => (
+                    <ComboboxMultipleItem key={value} value={value} />
+                  ))
+                ) : (
+                  <div className={styles.NoResult}>No results found</div>
+                )}
+              </SelectList>
+            )}
+          </ComboboxPopover>
+        </Portal>
       </div>
     );
   }

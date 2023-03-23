@@ -6,7 +6,6 @@ import React, { useId } from 'react';
 import inputStyles from '../../Input/Input.module.scss';
 
 export const Combobox = React.forwardRef<HTMLInputElement, ComboboxSingleProps>(
-  // @ts-ignore
   (props: ComboboxSingleProps, ref) => {
     const { label, id, combobox, ...comboboxProps } = props;
     const rId = useId();

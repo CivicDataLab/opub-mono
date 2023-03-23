@@ -7,6 +7,7 @@ import {
 import { forwardRef, useEffect } from 'react';
 import styles from '../Combobox.module.scss';
 import { Combobox } from './Atoms';
+import { Portal } from 'ariakit/portal';
 
 export const SingleSelect = forwardRef<HTMLInputElement, ComboboxSingleProps>(
   (props: ComboboxSingleProps, ref) => {
@@ -29,19 +30,21 @@ export const SingleSelect = forwardRef<HTMLInputElement, ComboboxSingleProps>(
       <div className="opub-combobox-multi">
         <Combobox combobox={combobox} ref={ref} {...comboboxProps} />
 
-        <ComboboxPopover state={combobox} className={styles.Popover}>
-          {combobox.matches.length ? (
-            combobox.matches.map((value) => (
-              <ComboboxItem
-                key={value}
-                value={value}
-                className={styles.ComboboxItem}
-              />
-            ))
-          ) : (
-            <div className={styles.NoResult}>No results found</div>
-          )}
-        </ComboboxPopover>
+        <Portal>
+          <ComboboxPopover state={combobox} className={styles.Popover}>
+            {combobox.matches.length ? (
+              combobox.matches.map((value) => (
+                <ComboboxItem
+                  key={value}
+                  value={value}
+                  className={styles.ComboboxItem}
+                />
+              ))
+            ) : (
+              <div className={styles.NoResult}>No results found</div>
+            )}
+          </ComboboxPopover>
+        </Portal>
       </div>
     );
   }
