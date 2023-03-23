@@ -4,9 +4,9 @@ import { Text } from '../Text';
 import { ScrollArea } from './ScrollArea';
 
 /**
- * ScrollArea Description
+ * Augments native scroll functionality for custom, cross-browser styling.
  *
- * Reference: #
+ * Reference: https://www.radix-ui.com/docs/primitives/components/scroll-area
  */
 const meta = {
   component: ScrollArea,
