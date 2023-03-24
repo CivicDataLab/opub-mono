@@ -26,7 +26,8 @@
   },
   "dependencies": {
     "@opub-icons/ui": "^0.9.51",
-    "@opub-icons/workflow": "^0.9.4"
+    "@opub-icons/workflow": "^0.9.4",
+    "@radix-ui/react-toast": "^1.1.3"
   },
   "packageManager": "yarn@1.22.17"
 }

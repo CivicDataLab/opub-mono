@@ -3,6 +3,7 @@ import {
   AlertCircleFilled,
   CheckmarkCircle,
   Info,
+  Close,
 } from '@opub-icons/workflow';
 
 const handler = {
@@ -16,6 +17,7 @@ export const icons = {
   error: AlertCircleFilled,
   warning: Alert,
   info: Info,
+  close:Close,
 };
 
 export const stateIcon = new Proxy(icons, handler);
