@@ -31,8 +31,9 @@ export function KeypressListener({
 
   const handleKeyEvent = useCallback((event: KeyboardEvent) => {
     const { handler, keyCode } = tracked.current;
-    if (event.keyCode === keyCode) {
+    if (event.code === keyCode) {
       handler(event);
+      event.preventDefault();
     }
   }, []);
 

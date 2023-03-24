@@ -1,13 +1,12 @@
-import React from 'react';
-import cx from 'classnames';
-import { Text } from '../../../Text';
-import styles from '../../ActionList.module.scss';
-import { Box } from '../../../Box';
-import type { ActionListItemDescriptor } from '@ui/types/actionlist';
 import { Flex } from '@ui/components/Flex';
 import { UnstyledLink } from '@ui/components/Link/BaseLink';
+import type { ActionListItemDescriptor } from '@ui/types/actionlist';
 import { handleMouseUpByBlurring } from '@ui/utils/focus';
-import { ScrollTo } from '../ScrollTo';
+import cx from 'classnames';
+import React from 'react';
+import { Box } from '../../../Box';
+import { Text } from '../../../Text';
+import styles from '../../ActionList.module.scss';
 
 export type ItemProps = ActionListItemDescriptor;
 

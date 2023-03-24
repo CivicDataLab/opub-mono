@@ -1,0 +1,35 @@
+@import '../../../../../styles/common';
+
+.CloseButton {
+  @include unstyled-button;
+  @include focus-ring;
+  margin-left: var(--space-5);
+  margin-right: calc(-1 * var(--space-2));
+  padding: var(--space-2);
+  border-radius: var(--border-radius-2);
+  line-height: 0;
+
+  svg {
+    fill: var(--icon);
+  }
+  &:hover {
+    background: var(--surface-hovered);
+
+    svg {
+      fill: var(--icon-hovered);
+    }
+  }
+
+  &:active,
+  &.pressed {
+    background: var(--surface-pressed);
+  }
+
+  &:focus-visible:not(:active) {
+    @include focus-ring($style: 'focused');
+  }
+
+  &.titleHidden {
+    margin: var(--space-2);
+  }
+}

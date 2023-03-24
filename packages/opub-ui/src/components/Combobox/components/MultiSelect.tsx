@@ -1,165 +1,161 @@
+import { Box } from '@ui/components/Box';
+import { Flex } from '@ui/components/Flex';
+import { Tag } from '@ui/components/Tag';
+import { Text } from '@ui/components/Text';
+import { ComboboxSingleProps } from '@ui/types/combobox';
+import {
+  ComboboxItem,
+  ComboboxPopover,
+  useComboboxState,
+} from 'ariakit/combobox';
+import { Portal } from 'ariakit/portal';
+import { SelectItem, SelectList, useSelectState } from 'ariakit/select';
 import cx from 'classnames';
-import { useCombobox, useMultipleSelection } from 'downshift';
-import React from 'react';
-import { Flex } from '../../Flex';
-import { Label } from '../../Label';
-import { Tag } from '../../Tag';
-import { ComboboxProps } from '../Combobox';
+import { forwardRef, HTMLAttributes, useEffect, useRef, useState } from 'react';
+import itemStyles from '../../ActionList/ActionList.module.scss';
 import styles from '../Combobox.module.scss';
-import { Input, List } from './Atoms';
-import { Portal } from 'react-portal';
+import { Combobox } from './Atoms';
 
-function comboboxFilter(
-  selectedItems: string | any[],
-  inputValue: string,
-  items: any[]
-) {
-  const lowerCasedInputValue = inputValue.toLowerCase();
+export type ComboboxProps = ComboboxSingleProps & {
+  defaultValues?: string[];
+  values?: string[];
+  onValuesChange?: (values: string[]) => void;
+};
 
-  return items.filter(function filter(item) {
-    return (
-      !selectedItems.includes(item) &&
-      item.label.toLowerCase().includes(lowerCasedInputValue)
-    );
-  });
-}
+export const MultiSelect = forwardRef<HTMLInputElement, ComboboxProps>(
+  (props: ComboboxProps, ref) => {
+    const [matches, setMatches] = useState<string[]>([]);
+    const [values, setValues] = useState<string[]>(['Banana']);
 
-export function MultiSelect({
-  allItems,
-  initialSelectedItems,
-  label,
-}: Omit<ComboboxProps, 'allowMultiple'>) {
-  const [inputValue, setInputValue] = React.useState<any>('');
-  const [selectedItems, setSelectedItems] =
-    React.useState<any>(initialSelectedItems);
+    const {
+      defaultValue,
+      value,
+      onChange,
+      defaultValues,
+      onValuesChange,
+      defaultList,
+      list,
+      onFilter,
+      verticalContent,
+      ...comboboxProps
+    } = props;
 
-  const items: {
-    label: string;
-    value: string;
-  }[] = React.useMemo(
-    () => comboboxFilter(selectedItems, inputValue, allItems),
-    [selectedItems, inputValue, allItems]
-  );
+    function handleValuesChange(values: string[]) {
+      setValues(values);
+      onValuesChange?.(values);
+    }
 
-  const { getSelectedItemProps, getDropdownProps, removeSelectedItem } =
-    useMultipleSelection({
-      selectedItems,
-      onStateChange({ selectedItems, type }) {
-        switch (type) {
-          case useMultipleSelection.stateChangeTypes
-            .SelectedItemKeyDownBackspace:
-          case useMultipleSelection.stateChangeTypes.SelectedItemKeyDownDelete:
-          case useMultipleSelection.stateChangeTypes.DropdownKeyDownBackspace:
-          case useMultipleSelection.stateChangeTypes.FunctionRemoveSelectedItem:
-            setSelectedItems(selectedItems);
-            break;
-          default:
-            break;
-        }
-      },
+    const combobox = useComboboxState({
+      // VoiceOver has issues with multi-selectable comboboxes where the DOM focus
+      // is on the combobox input, so we set `virtualFocus` to `false` to disable
+      // this behavior and put DOM focus on the items.
+      virtualFocus: false,
+      sameWidth: true,
+      gutter: 8,
+      defaultValue,
+      value,
+      setValue: onChange,
+      defaultList,
+      list,
+    });
+    const select = useSelectState({
+      ...combobox,
+      defaultValue: defaultValues,
+      value: values,
+      setValue: handleValuesChange,
     });
 
-  const {
-    isOpen,
-    getToggleButtonProps,
-    getLabelProps,
-    getMenuProps,
-    getInputProps,
-    highlightedIndex,
-    getItemProps,
-    selectedItem,
-  } = useCombobox({
-    items,
-    itemToString(item: any) {
-      return item ? item.label : '';
-    },
-    defaultHighlightedIndex: 0, // after selection, highlight the first item.
-    selectedItem: null,
-    stateReducer(state, actionAndChanges) {
-      const { changes, type } = actionAndChanges;
+    useEffect(() => {
+      setMatches(combobox.matches);
+      onFilter?.(combobox.matches);
+    }, [combobox.matches]);
 
-      switch (type) {
-        case useCombobox.stateChangeTypes.InputKeyDownEnter:
-        case useCombobox.stateChangeTypes.ItemClick:
-          return {
-            ...changes,
-            isOpen: true, // keep the menu open after selection.
-            highlightedIndex: 0, // with the first option highlighted.
-          };
-        default:
-          return changes;
-      }
-    },
-    onStateChange({
-      inputValue: newInputValue,
-      type,
-      selectedItem: newSelectedItem,
-    }) {
-      switch (type) {
-        case useCombobox.stateChangeTypes.InputKeyDownEnter:
-        case useCombobox.stateChangeTypes.ItemClick:
-        case useCombobox.stateChangeTypes.InputBlur:
-          if (newSelectedItem) {
-            setSelectedItems([...selectedItems, newSelectedItem]);
-          }
-          break;
+    // Reset the combobox value whenever an item is checked or unchecked.
+    useEffect(() => {
+      combobox.setValue('');
+    }, [select.value, combobox.setValue]);
 
-        case useCombobox.stateChangeTypes.InputChange:
-          setInputValue(newInputValue);
+    function removeTag(value: string) {
+      const finalArr = select.value.filter((v) => v !== value);
+      select.setValue(finalArr);
+    }
 
-          break;
-        default:
-          break;
-      }
-    },
-  });
-
-  const verticalContentMarkup =
-    selectedItems.length > 0 ? (
-      <Flex gap={4}>
-        {selectedItems.map((tag: any, index: number) => (
-          <Tag
-            key={tag.value}
-            {...getSelectedItemProps({
-              selectedItem: tag,
-              index,
-            })}
-            onRemove={() => {
-              removeSelectedItem(tag);
-            }}
-          >
-            {tag.label}
-          </Tag>
-        ))}
-      </Flex>
+    const tags = verticalContent ? (
+      values.length > 0 ? (
+        <Flex gap={4}>
+          {values.map((tag) => (
+            <Tag onRemove={removeTag} value={tag} key={tag}>
+              {tag}
+            </Tag>
+          ))}
+        </Flex>
+      ) : (
+        <Box minHeight="28px">
+          <Text variant="bodySm" color="subdued">
+            No Tags selected
+          </Text>
+        </Box>
+      )
     ) : null;
 
-  return (
-    <div>
-      <div>
-        <Label {...getLabelProps()}>{label}</Label>
-        <div>
-          <div>
-            {verticalContentMarkup}
-            <Input
-              placeholder="Best book ever"
-              className="w-full"
-              getInputProps={getInputProps}
-            />
-          </div>
-        </div>
-      </div>
-
-      <Portal>
-        <List
-          getMenuProps={getMenuProps}
-          getItemProps={getItemProps}
-          isOpen={isOpen}
-          items={items}
-          highlightedIndex={highlightedIndex}
-          selectedItem={selectedItem}
+    return (
+      <div className="opub-combobox-multi">
+        <Combobox
+          combobox={combobox}
+          ref={ref}
+          verticalContent={tags}
+          {...comboboxProps}
         />
-      </Portal>
-    </div>
+
+        <Portal>
+          <ComboboxPopover state={combobox} className={styles.Popover}>
+            {(popoverProps) => (
+              <SelectList
+                state={select}
+                // Disable the composite & typeahead behavior on the select list since combobox
+                // will handle it.
+                composite={false}
+                typeahead={false}
+                {...popoverProps}
+              >
+                {matches.length ? (
+                  matches.map((value) => (
+                    <ComboboxMultipleItem key={value} value={value} />
+                  ))
+                ) : (
+                  <div className={styles.NoResult}>No results found</div>
+                )}
+              </SelectList>
+            )}
+          </ComboboxPopover>
+        </Portal>
+      </div>
+    );
+  }
+);
+
+export type ComboboxMultipleItemProps = HTMLAttributes<HTMLDivElement> & {
+  value?: string;
+};
+
+export const ComboboxMultipleItem = forwardRef<
+  HTMLDivElement,
+  ComboboxMultipleItemProps
+>(({ value, ...props }, ref) => {
+  const className = cx(
+    itemStyles.Item
+    // props.disabled && styles.disabled,
   );
-}
+
+  return (
+    <SelectItem
+      ref={ref}
+      value={value}
+      shouldRegisterItem={false}
+      className={className}
+      {...props}
+    >
+      {(itemProps) => <ComboboxItem {...itemProps}>{value}</ComboboxItem>}
+    </SelectItem>
+  );
+});

@@ -1,0 +1,195 @@
+@import '../../../styles/common';
+
+$vertical-spacing: 60px;
+$height-limit: 600px;
+$xsmall-width: 380px;
+$small-width: 620px;
+$large-width: 980px;
+
+.Container {
+  position: fixed;
+  z-index: var(--z-index-11);
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  pointer-events: none;
+
+  @media #{$breakpoints-md-up} {
+    justify-content: center;
+  }
+}
+
+@keyframes overlayShow {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes overlayHide {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes contentShow {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -40%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+@keyframes contentShowMobile {
+  from {
+    opacity: 0;
+    transform: translate(0, 10%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes contentHide {
+  from {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+  to {
+    opacity: 0;
+    transform: translate(-50%, -40%);
+  }
+}
+
+@keyframes contentHideMobile {
+  from {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+  to {
+    opacity: 0;
+    transform: translate(0, 10%);
+  }
+}
+
+.Overlay {
+  background-color: var(--backdrop);
+  position: fixed;
+  inset: 0;
+  will-change: transform, opacity;
+
+  &[data-state='open'] {
+    animation: overlayShow var(--duration-100) var(--ease);
+  }
+
+  &[data-state='closed'] {
+    animation: overlayHide var(--duration-100) var(--ease);
+  }
+}
+
+.Dialog {
+  --content-bg: var(--surface);
+  background-color: var(--content-bg);
+  box-shadow: var(--shadow-2xl);
+  width: 100%;
+  max-height: calc(100vh - #{$vertical-spacing});
+
+  position: fixed;
+  bottom: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  will-change: transform, opacity;
+
+  &[data-state='open'] {
+    animation: contentShow var(--duration-200) var(--ease);
+
+    @media #{$breakpoints-md-down} {
+      animation-name: contentShowMobile;
+    }
+  }
+
+  &[data-state='closed'] {
+    animation: contentHide var(--duration-200) var(--ease);
+
+    @media #{$breakpoints-md-down} {
+      animation-name: contentHideMobile;
+    }
+  }
+
+  @media (forced-colors: active) {
+    border: var(--border-width-1) solid transparent;
+  }
+
+  @media #{$breakpoints-md-down} {
+    max-height: 100%;
+    transform: translate(0, 0);
+    left: 0;
+    bottom: 0;
+  }
+
+  @media #{$breakpoints-md-up} {
+    max-width: $small-width;
+    border-radius: var(--border-radius-2);
+  }
+
+  &.limitHeight {
+    @media #{$breakpoints-md-up} {
+      @media (min-height: calc((($height-limit + $vertical-spacing) / 16px) * 1em)) {
+        max-height: $height-limit;
+        bottom: 0;
+      }
+      .Content {
+        max-height: calc($height-limit - 130px);
+      }
+    }
+  }
+
+  &.sizeSmall {
+    @media #{$breakpoints-md-up} {
+      max-width: calc(100% - var(--space-16));
+    }
+
+    @media #{$breakpoints-sm-up} {
+      max-width: $xsmall-width;
+    }
+  }
+
+  &.sizeLarge {
+    @media #{$breakpoints-md-up} {
+      max-width: calc(100% - var(--space-16));
+    }
+
+    @media #{$breakpoints-lg-up} {
+      max-width: $large-width;
+    }
+  }
+
+  &.fullScreen {
+    height: 100%;
+    @media #{$breakpoints-md-up} {
+      height: unset;
+    }
+  }
+}
+
+.Content {
+  overflow: auto;
+  padding: var(--space-5);
+
+  @media #{$breakpoints-md-down} {
+    max-height: 70vh;
+  }
+}

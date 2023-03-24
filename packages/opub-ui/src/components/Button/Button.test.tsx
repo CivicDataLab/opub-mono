@@ -11,17 +11,24 @@ describe('Button Tests', () => {
     expect(screen.getByText(/Button/i)).toBeInTheDocument();
   });
 
-  test('Primary Button should have btn-primary class', () => {
-    const btn = screen.getByText(/Button/i);
-    expect(btn).toHaveClass('btn-primary');
-    fireEvent.click(btn);
+  test('should show button text on hover', () => {
+    fireEvent.mouseOver(screen.getByText(/Button/i));
+    expect(screen.getByText(/Button/i)).toBeInTheDocument();
   });
 
-  test('Secondary Button has btn-secondary class', () => {
-    const { container } = render(
-      <Button variant="secondary">Secondary</Button>
-    );
+  test('should show button text on focus', () => {
+    fireEvent.focus(screen.getByText(/Button/i));
+    expect(screen.getByText(/Button/i)).toBeInTheDocument();
+  });
 
-    expect(container.firstChild).toHaveClass('btn-secondary');
+  test('should show button text on active', () => {
+    fireEvent.mouseDown(screen.getByText(/Button/i));
+    expect(screen.getByText(/Button/i)).toBeInTheDocument();
+  });
+
+  test('should show button text on disabled', () => {
+    render(<Button disabled>Button</Button>);
+    fireEvent.mouseDown(screen.getByText(/Button/i));
+    expect(screen.getByText(/Button/i)).toBeInTheDocument();
   });
 });

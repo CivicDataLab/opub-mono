@@ -1,65 +1,60 @@
-import { Label } from '@ui/components/Label';
+import { ComboboxSingleProps } from '@ui/types/combobox';
+import {
+  ComboboxItem,
+  ComboboxPopover,
+  useComboboxState,
+} from 'ariakit/combobox';
+import { Portal } from 'ariakit/portal';
 import cx from 'classnames';
-import { useCombobox } from 'downshift';
-import React from 'react';
-import { ComboboxProps } from '../Combobox';
+import React, { forwardRef, useEffect } from 'react';
+import itemStyles from '../../ActionList/ActionList.module.scss';
 import styles from '../Combobox.module.scss';
-import { Input, List } from './Atoms';
+import { Combobox } from './Atoms';
 
-function comboboxFilter(inputValue: string) {
-  const lowerCasedInputValue = inputValue.toLowerCase();
-  return function filter(item: { label: string }) {
-    return (
-      !inputValue || item.label.toLowerCase().includes(lowerCasedInputValue)
+export const SingleSelect = forwardRef<HTMLInputElement, ComboboxSingleProps>(
+  (props: ComboboxSingleProps, ref) => {
+    const { onChange, defaultValue, defaultList, onFilter, ...comboboxProps } =
+      props;
+
+    const combobox = useComboboxState({
+      sameWidth: true,
+      gutter: 8,
+      defaultValue,
+      setValue: onChange,
+      defaultList,
+    });
+
+    useEffect(() => {
+      onFilter?.(combobox.matches);
+    }, [combobox.matches]);
+
+    const className = cx(
+      itemStyles.Item
+      // props.disabled && styles.disabled,
     );
-  };
-}
 
-export function SingleSelect({
-  allItems,
-  label,
-}: Omit<ComboboxProps, 'allowMultiple' | 'initialSelectedItems'>) {
-  const [items, setItems] = React.useState(allItems);
-  const {
-    isOpen,
-    getToggleButtonProps,
-    getLabelProps,
-    getMenuProps,
-    getInputProps,
-    highlightedIndex,
-    getItemProps,
-    selectedItem,
-  } = useCombobox({
-    onInputValueChange({ inputValue }: any) {
-      setItems(allItems.filter(comboboxFilter(inputValue)));
-    },
-    items,
-    itemToString(item) {
-      return item ? item.label : '';
-    },
-  });
+    return (
+      <div className="opub-combobox-multi">
+        <Combobox combobox={combobox} ref={ref} {...comboboxProps} />
 
-  return (
-    <div>
-      <div>
-        {label && <Label {...getLabelProps()}>{label}</Label>}
-        <div>
-          <Input
-            placeholder="Best book ever"
-            className="w-full"
-            getInputProps={getInputProps}
-          />
-        </div>
+        <Portal>
+          <ComboboxPopover
+            state={combobox}
+            className={styles.Popover}
+            style={
+              { '--popover-padding': 'var(--space-1)' } as React.CSSProperties
+            }
+          >
+            {combobox.matches.length ? (
+              combobox.matches.map((value) => (
+                <ComboboxItem key={value} value={value} className={className} />
+              ))
+            ) : (
+              <div className={styles.NoResult}>No results found</div>
+            )}
+          </ComboboxPopover>
+        </Portal>
       </div>
-
-      <List
-        getMenuProps={getMenuProps}
-        getItemProps={getItemProps}
-        isOpen={isOpen}
-        items={items}
-        highlightedIndex={highlightedIndex}
-        selectedItem={selectedItem}
-      />
-    </div>
-  );
-}
+    );
+  }
+);

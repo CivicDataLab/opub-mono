@@ -1,1 +1,1 @@
-export { Combobox } from "./Combobox";
+export { Combobox, ComboboxMulti } from './Combobox';

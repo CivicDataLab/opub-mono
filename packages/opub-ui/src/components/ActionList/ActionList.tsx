@@ -1,4 +1,3 @@
-import { useRef } from 'react';
 import type {
   ActionListItemDescriptor,
   ActionListSection,
@@ -8,6 +7,7 @@ import {
   wrapFocusNextFocusableMenuItem,
   wrapFocusPreviousFocusableMenuItem,
 } from '@ui/utils/focus';
+import { useRef } from 'react';
 import { Box } from '../Box';
 import { KeypressListener } from '../KeypressListener';
 import { Item, ItemProps } from './components/Item';
@@ -60,26 +60,13 @@ export function ActionList({
     ) : null;
   });
 
-  const handleFocusPreviousItem = (evt: KeyboardEvent) => {
-    evt.preventDefault();
+  const handleFocusChange = (
+    evt: KeyboardEvent,
+    focusFn: (a: any, b: any) => void
+  ) => {
     if (actionListRef.current && evt.target) {
       if (actionListRef.current.contains(evt.target as HTMLElement)) {
-        wrapFocusPreviousFocusableMenuItem(
-          actionListRef.current,
-          evt.target as HTMLElement
-        );
-      }
-    }
-  };
-
-  const handleFocusNextItem = (evt: KeyboardEvent) => {
-    evt.preventDefault();
-    if (actionListRef.current && evt.target) {
-      if (actionListRef.current.contains(evt.target as HTMLElement)) {
-        wrapFocusNextFocusableMenuItem(
-          actionListRef.current,
-          evt.target as HTMLElement
-        );
+        focusFn(actionListRef.current, evt.target as HTMLElement);
       }
     }
   };
@@ -89,23 +76,31 @@ export function ActionList({
       <>
         <KeypressListener
           keyEvent="keydown"
-          keyCode={Key.DownArrow}
-          handler={handleFocusNextItem}
+          keyCode={Key.ArrowDown}
+          handler={(e: KeyboardEvent) =>
+            handleFocusChange(e, wrapFocusNextFocusableMenuItem)
+          }
         />
         <KeypressListener
           keyEvent="keydown"
-          keyCode={Key.RightArrow}
-          handler={handleFocusNextItem}
+          keyCode={Key.ArrowRight}
+          handler={(e: KeyboardEvent) =>
+            handleFocusChange(e, wrapFocusNextFocusableMenuItem)
+          }
         />
         <KeypressListener
           keyEvent="keydown"
-          keyCode={Key.UpArrow}
-          handler={handleFocusPreviousItem}
+          keyCode={Key.ArrowUp}
+          handler={(e: KeyboardEvent) =>
+            handleFocusChange(e, wrapFocusPreviousFocusableMenuItem)
+          }
         />
         <KeypressListener
           keyEvent="keydown"
-          keyCode={Key.LeftArrow}
-          handler={handleFocusPreviousItem}
+          keyCode={Key.ArrowLeft}
+          handler={(e: KeyboardEvent) =>
+            handleFocusChange(e, wrapFocusPreviousFocusableMenuItem)
+          }
         />
       </>
     ) : null;

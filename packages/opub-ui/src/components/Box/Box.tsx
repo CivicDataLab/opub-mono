@@ -110,6 +110,12 @@ export const Box = forwardRef<HTMLElement, BoxProps>(
       '--op-box-overflow-y': overflowY,
       ...getResponsiveProps(
         'box',
+        'padding',
+        'space',
+        paddingBlockEnd || padding
+      ),
+      ...getResponsiveProps(
+        'box',
         'padding-block-end',
         'space',
         paddingBlockEnd || padding

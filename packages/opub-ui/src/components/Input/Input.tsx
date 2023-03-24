@@ -1,5 +1,4 @@
 import { CloseCircle } from '@opub-icons/workflow';
-import { mergeRefs } from '@react-aria/utils';
 import { TextFieldProps } from '@ui/types/input';
 import { Key } from '@ui/types/shared/key';
 import { variationName } from '@ui/utils/css';
@@ -468,9 +467,9 @@ export const Input = React.forwardRef(
     }
 
     function handleKeyPress(event: React.KeyboardEvent) {
-      const { key, which } = event;
+      const { key, code } = event;
       const numbersSpec = /[\d.eE+-]$/;
-      if (type !== 'number' || which === Key.Enter || numbersSpec.test(key)) {
+      if (type !== 'number' || code === Key.Enter || numbersSpec.test(key)) {
         return;
       }
 
