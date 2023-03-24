@@ -2,10 +2,9 @@ import { Meta, StoryObj } from '@storybook/react';
 import { Badge } from './Badge';
 
 /**
- * Badge Description
- *
- * Reference: #
+ * Badges are used to inform merchants of the status of an object or of an action that’s been taken.
  */
+
 const meta = {
   component: Badge,
 } satisfies Meta<typeof Badge>;
