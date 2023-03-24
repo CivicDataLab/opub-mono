@@ -1,35 +1,67 @@
 import React, { forwardRef } from 'react';
 import styles from './Badge.module.scss';
-import cx from 'classnames';
 import { BadgeProps } from '@ui/types/badge';
-import { Complete, Incomplete, Partial } from './icons';
-
-const progressIcons = {
-  incomplete: <Incomplete />,
-  partiallyComplete: <Partial />,
-  complete: <Complete />,
-  default: null,
-};
+import { Text } from '../Text';
+import { Pip } from './components/Pip';
+import cx from 'classnames';
 
 export const Badge = ({
   progress = 'default',
+  status,
   children,
-  icon: IconComponent,
-  color = 'default',
+  icon,
   statusAndProgressLabelOverride,
 }: BadgeProps) => {
 
-  const icon = progressIcons[progress];
-  const iconMarkup = IconComponent ? <IconComponent /> : icon;
+  const accessibilityLabel = statusAndProgressLabelOverride;
 
-  const style = {
-    backgroundColor: color === 'default' ? '#E4E5E7' : color,
-  } as React.CSSProperties;
+  let accessibilityMarkup = Boolean(accessibilityLabel) && (
+    <Text as="span" visuallyHidden>
+      {accessibilityLabel}
+    </Text>
+  );
 
+  if (progress && !icon) {
+    accessibilityMarkup = (
+      <span className={styles.PipContainer}>
+        <Pip
+          progress={progress}
+          status={status}
+          accessibilityLabelOverride={accessibilityLabel}
+        />
+      </span>
+    );
+  }
+
+  function variationName(name: string, value: string) {
+    return `${name}${value.charAt(0).toUpperCase()}${value.slice(1)}`;
+  }
+  
+  const className = cx(
+    styles.Badge,
+    status && styles[variationName('status', status)],
+  );
+  
   return (
-    <span className={styles.Badge} style={style} aria-label={statusAndProgressLabelOverride}>
-      <span> {iconMarkup} </span>
-      {children}
+    <span
+      className={className}
+      aria-label={statusAndProgressLabelOverride}
+    >
+      {accessibilityMarkup}
+      {icon && (
+        <span className={styles.Icon}>
+          {icon}
+        </span>
+      )}
+      {children && (
+        <Text
+          as="span"
+          variant="bodySm"
+          fontWeight={status === 'new' ? 'medium' : undefined}
+        >
+          {children}
+        </Text>
+      )}
     </span>
   );
 };
