@@ -36,3 +36,4 @@ export { Text } from './Text';
 export { TextField } from './TextField';
 export { Thumbnail } from './Thumbnail';
 export { Tooltip } from './Tooltip';
+export { Tabs } from "./Tabs";

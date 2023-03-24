@@ -1,0 +1,138 @@
+@import '../../../styles/common';
+
+$item-min-height: 16px;
+$item-min-width: 50px;
+$item-vertical-padding: $item-min-height * 0.5;
+
+.Tabs {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.fitted {
+  flex-wrap: nowrap;
+
+  .TabContainer {
+    flex: 1 1 100%;
+  }
+
+  .Title {
+    width: 100%;
+    padding: var(--space-2) var(--space-4);
+  }
+}
+
+.fillSpace {
+  .TabContainer {
+    flex: 1 1 auto;
+  }
+}
+
+.TabContainer {
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+.Tab {
+  @include unstyled-button;
+  color: var(--text-subdued);
+  color: var(--text);
+  position: relative;
+  justify-content: center;
+  width: 100%;
+  min-width: 100%;
+  margin-top: var(--space-025);
+  margin-bottom: calc(-1 * var(--space-025));
+  padding: var(--space-2) var(--space-1);
+  outline: none;
+  text-align: center;
+  white-space: nowrap;
+  text-decoration: none;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: none;
+
+    .Title {
+      font-weight: var(--font-weight-regular);
+      color: var(--text);
+      background-color: transparent;
+
+      &::before {
+        background-color: var(--border-hovered);
+      }
+    }
+  }
+
+  &:active {
+    .Title {
+      background-color: transparent;
+
+      &::before {
+        background: var(--surface-primary-selected-pressed);
+      }
+    }
+  }
+
+  &:focus-visible {
+    .Title {
+      font-weight: var(--font-weight-regular);
+      color: var(--text);
+    }
+
+    &:not(:active) {
+      .Title {
+        @include focus-ring($style: 'focused');
+      }
+    }
+  }
+
+  &:visited {
+    color: inherit;
+  }
+
+  &[data-state='active'] {
+    font-weight: var(--font-weight-regular);
+    color: var(--text);
+
+    &:focus .Title {
+      outline: var(--border-width-3) solid transparent;
+      &::before {
+        background: var(--action-primary);
+      }
+    }
+
+    .Title {
+      outline: var(--border-width-3) solid transparent;
+      color: var(--text);
+
+      &::before {
+        background: var(--action-primary);
+      }
+    }
+  }
+}
+
+.Title {
+  @include focus-ring;
+  border-radius: var(--border-radius-1);
+  display: block;
+  padding: var(--space-2) var(--space-4);
+  min-width: $item-min-width;
+  color: var(--text-subdued);
+
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: calc(-1 * var(--space-2));
+    left: 0;
+    right: 0;
+    height: var(--border-width-3);
+    border-top-left-radius: var(--border-radius-1);
+    border-top-right-radius: var(--border-radius-1);
+  }
+}
