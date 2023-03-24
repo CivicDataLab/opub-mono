@@ -72,7 +72,7 @@ const Toast = ({
           )}
         </ToastRadix.Title>
         {toastDescription && (
-          <ToastRadix.Description asChild>
+          <ToastRadix.Description className={styles.ToastDescription} asChild>
             {toastDescription}
           </ToastRadix.Description>
         )}

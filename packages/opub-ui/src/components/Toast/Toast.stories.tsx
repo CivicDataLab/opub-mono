@@ -15,7 +15,7 @@ const meta = {
 export default meta;
 
 export const Default = () => {
-const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false);
 
   return (
     <Toast
@@ -27,34 +27,78 @@ const [open, setOpen] = useState(false);
     />
   );
 };
+export const ToastDescription = () => {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <Toast
+      swipeDirection="right"
+      toastOpen={open}
+      toastTitle={'Message Sent'}
+      toastDescription={<p>Lorem ipsum Lorem ipsum dolor sit amet </p>}
+      trigger={
+        <Button onClick={() => setOpen(!open)}>
+          Trigger Toast Description
+        </Button>
+      }
+      toggleToastCallback={setOpen}
+    />
+  );
+};
+
+export const ToastWithActionDescription = () => {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <Toast
+      swipeDirection="right"
+      toastOpen={open}
+      toastTitle={'Message Sent'}
+      toastDescription={<p>Lorem ipsum Lorem ipsum dolor sit amet </p>}
+      trigger={
+        <Button onClick={() => setOpen(!open)}>
+          Trigger Toast Action Description
+        </Button>
+      }
+      toggleToastCallback={setOpen}
+      altText="Undo action"
+      toastActionText={'Undo'}
+      actionCallback={() => alert('clicked')}
+    />
+  );
+};
 
 export const WithAction = () => {
   const [open, setOpen] = useState(false);
-  
-    return (
-      <Toast
-        swipeDirection="right"
-        toastOpen={open}
-        toastTitle={'Message Sent'}
-        trigger={<Button onClick={() => setOpen(!open)}>Trigger Action Toast</Button>}
-        toggleToastCallback={setOpen}
-        altText="Undo action"
-        toastActionText={'Undo'}
-        actionCallback={() => alert('clicked')}
-      />
-    );
-  };
+
+  return (
+    <Toast
+      swipeDirection="right"
+      toastOpen={open}
+      toastTitle={'Message Sent'}
+      trigger={
+        <Button onClick={() => setOpen(!open)}>Trigger Action Toast</Button>
+      }
+      toggleToastCallback={setOpen}
+      altText="Undo action"
+      toastActionText={'Undo'}
+      actionCallback={() => alert('clicked')}
+    />
+  );
+};
 
 export const Error = () => {
-const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false);
   return (
     <Toast
       swipeDirection="right"
       toastOpen={open}
       toastTitle={'Server Error'}
-      trigger={<Button onClick={() => setOpen(!open)}>Trigger Error Toast</Button>}
+      trigger={
+        <Button onClick={() => setOpen(!open)}>Trigger Error Toast</Button>
+      }
       toggleToastCallback={setOpen}
-      variant='error'
+      variant="error"
     />
   );
 };
