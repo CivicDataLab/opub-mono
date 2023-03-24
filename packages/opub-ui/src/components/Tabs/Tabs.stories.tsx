@@ -15,14 +15,14 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  render: () => {
+  render: ({ ...args }) => {
     return (
       <>
-        <Tabs defaultValue="1">
+        <Tabs defaultValue="1" {...args}>
           <TabList>
-            <Tab value="1">Tab 1</Tab>
-            <Tab value="2">Tab 2</Tab>
-            <Tab value="3">Tab 3</Tab>
+            <Tab value="1">Tab Name 1</Tab>
+            <Tab value="2">Tab Name 2</Tab>
+            <Tab value="3">Tab Name 3</Tab>
           </TabList>
           <TabPanel value="1">
             <Box padding="5">1</Box>
