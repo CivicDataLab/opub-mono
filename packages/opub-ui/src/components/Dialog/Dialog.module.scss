@@ -44,44 +44,22 @@ $large-width: 980px;
 @keyframes contentShow {
   from {
     opacity: 0;
-    transform: translate(-50%, -40%);
+    transform: var(--show-from);
   }
   to {
     opacity: 1;
-    transform: translate(-50%, -50%);
-  }
-}
-
-@keyframes contentShowMobile {
-  from {
-    opacity: 0;
-    transform: translate(0, 10%);
-  }
-  to {
-    opacity: 1;
-    transform: translate(0, 0);
+    transform: var(--show-to);
   }
 }
 
 @keyframes contentHide {
   from {
     opacity: 1;
-    transform: translate(-50%, -50%);
+    transform: var(--hide-from);
   }
   to {
     opacity: 0;
-    transform: translate(-50%, -40%);
-  }
-}
-
-@keyframes contentHideMobile {
-  from {
-    opacity: 1;
-    transform: translate(0, 0);
-  }
-  to {
-    opacity: 0;
-    transform: translate(0, 10%);
+    transform: var(--hide-to);
   }
 }
 
@@ -102,6 +80,11 @@ $large-width: 980px;
 
 .Dialog {
   --content-bg: var(--surface);
+  --show-from: translate(-50%, -40%);
+  --show-to: translate(-50%, -50%);
+  --hide-from: translate(-50%, -50%);
+  --hide-to: translate(-50%, -40%);
+
   background-color: var(--content-bg);
   box-shadow: var(--shadow-2xl);
   width: 100%;
@@ -117,7 +100,8 @@ $large-width: 980px;
     animation: contentShow var(--duration-200) var(--ease);
 
     @media #{$breakpoints-md-down} {
-      animation-name: contentShowMobile;
+      --show-from: translate(0, 10%);
+      --show-to: translate(0, 0);
     }
   }
 
@@ -125,7 +109,8 @@ $large-width: 980px;
     animation: contentHide var(--duration-200) var(--ease);
 
     @media #{$breakpoints-md-down} {
-      animation-name: contentHideMobile;
+      --hide-from: translate(0, 0);
+      --hide-to: translate(0, 10%);
     }
   }
 
