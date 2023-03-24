@@ -34,3 +34,4 @@ export { Thumbnail } from './Thumbnail';
 export { Tooltip } from './Tooltip';
 export { Dialog } from "./Dialog";
 export { Icon } from "./Icon";
+export { AlertDialog } from "./AlertDialog";

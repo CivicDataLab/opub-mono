@@ -1,21 +1,22 @@
-import * as DialogRadix from '@radix-ui/react-dialog';
+import * as AlertDialog from '@radix-ui/react-alert-dialog';
 import cx from 'classnames';
 import React, { forwardRef, Ref } from 'react';
-import { Footer, FooterProps, Header } from './components';
-import styles from './Dialog.module.scss';
+import { Footer, FooterProps } from '../Dialog/components';
+import styles from '../Dialog/Dialog.module.scss';
+import { Header } from './components';
 
-const Dialog = DialogRadix.Root;
+const Dialog = AlertDialog.Root;
 
-interface TriggerProps extends DialogRadix.DialogTriggerProps {}
+interface TriggerProps extends AlertDialog.DialogTriggerProps {}
 const Trigger = forwardRef(
   (
     { children, ...props }: TriggerProps,
     ref: Ref<HTMLButtonElement> | undefined
   ) => {
     return (
-      <DialogRadix.Trigger {...props} asChild ref={ref}>
+      <AlertDialog.Trigger {...props} asChild ref={ref}>
         {children}
-      </DialogRadix.Trigger>
+      </AlertDialog.Trigger>
     );
   }
 );
@@ -44,7 +45,7 @@ type ContentProps = {
   limitHeight?: boolean;
   /** Sets modal to the height of the viewport on small screens */
   fullScreen?: boolean;
-} & DialogRadix.DialogContentProps &
+} & AlertDialog.DialogContentProps &
   FooterProps;
 
 const Content = forwardRef((props: ContentProps, ref: any) => {
@@ -76,11 +77,11 @@ const Content = forwardRef((props: ContentProps, ref: any) => {
 
   return (
     <div className={`opub-Dialog`}>
-      <DialogRadix.Portal>
-        <DialogRadix.Overlay className={styles.Overlay} />
-        <DialogRadix.Content ref={ref} className={classname} {...others}>
+      <AlertDialog.Portal>
+        <AlertDialog.Overlay className={styles.Overlay} />
+        <AlertDialog.Content ref={ref} className={classname} {...others}>
           <div className="sr-only">
-            <DialogRadix.Title>{title}</DialogRadix.Title>
+            <AlertDialog.Title>{title}</AlertDialog.Title>
           </div>
           <Header id={finalId} titleHidden={titleHidden} children={title} />
           <div className={styles.Content}>{children}</div>
@@ -89,8 +90,8 @@ const Content = forwardRef((props: ContentProps, ref: any) => {
             primaryAction={primaryAction}
             secondaryActions={secondaryActions}
           />
-        </DialogRadix.Content>
-      </DialogRadix.Portal>
+        </AlertDialog.Content>
+      </AlertDialog.Portal>
     </div>
   );
 });
