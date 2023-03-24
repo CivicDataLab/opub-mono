@@ -25,12 +25,7 @@ export const Combobox = React.forwardRef<HTMLInputElement, ComboboxSingleProps>(
     const backdropMarkup = <div className={cx(inputStyles.Backdrop)} />;
 
     const finalContent = verticalContent ? (
-      <div
-        className={inputStyles.VerticalContent}
-        // id={`${final}-VerticalContent`}
-        ref={verticalContentRef}
-        // onClick={handleClickChild}
-      >
+      <div className={inputStyles.VerticalContent} ref={verticalContentRef}>
         {verticalContent}
         {element}
       </div>

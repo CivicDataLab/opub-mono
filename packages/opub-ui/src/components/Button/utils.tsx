@@ -14,3 +14,23 @@ export function buttonFrom(
     </Button>
   );
 }
+
+export function buttonsFrom(
+  action: ComplexAction,
+  overrides?: Partial<ButtonProps>
+): React.ReactElement<ButtonProps>;
+export function buttonsFrom(
+  actions: ComplexAction[],
+  overrides?: Partial<ButtonProps>
+): React.ReactElement<ButtonProps>[];
+export function buttonsFrom(
+  actions: ComplexAction[] | ComplexAction,
+  overrides: Partial<ButtonProps> = {}
+) {
+  if (Array.isArray(actions)) {
+    return actions.map((action, index) => buttonFrom(action, overrides, index));
+  } else {
+    const action = actions;
+    return buttonFrom(action, overrides);
+  }
+}
