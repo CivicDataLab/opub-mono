@@ -11,9 +11,9 @@ export interface Props extends Radix.PopoverProps {
   isArrow?: boolean;
 }
 
-export interface RadixButtonProps extends Radix.PopoverTriggerProps {}
-
 export const Popover = Radix.Root;
+
+export interface RadixButtonProps extends Radix.PopoverTriggerProps {}
 export const Trigger = ({ children, ...props }: RadixButtonProps) => {
   return (
     <Radix.Trigger {...props} asChild>

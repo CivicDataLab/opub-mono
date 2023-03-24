@@ -51,7 +51,7 @@ export const MultiSelect = forwardRef<HTMLInputElement, ComboboxProps>(
       // this behavior and put DOM focus on the items.
       virtualFocus: false,
       sameWidth: true,
-      gutter: verticalContent ? 18 : 8,
+      gutter: 8,
       defaultValue,
       value,
       setValue: onChange,
