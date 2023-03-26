@@ -4,9 +4,9 @@ import { Button } from '../Button';
 import { useState } from 'react';
 
 /**
- * Toast Description
+ * Toast Description A succinct message that is displayed temporarily.
  *
- * Reference: #
+ * Reference: https://www.radix-ui.com/docs/primitives/components/toast
  */
 const meta = {
   component: Toast,
