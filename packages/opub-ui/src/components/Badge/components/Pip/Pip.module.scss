@@ -1,0 +1,66 @@
+.Pip {
+  --pc-pip-size: var(--space-2);
+  --pc-pip-color: var(--icon);
+  display: inline-block;
+  color: var(--pc-pip-color);
+  height: var(--pc-pip-size);
+  width: var(--pc-pip-size);
+  border: var(--border-width-2) solid var(--pc-pip-color);
+  border-radius: var(--border-radius-full);
+  flex-shrink: 0;
+}
+
+.statusInfo {
+  --pc-pip-color: var(--icon-highlight);
+}
+
+.statusSuccess {
+  --pc-pip-color: var(--icon-success);
+}
+
+.statusNew {
+  --pc-pip-color: var(--icon);
+}
+
+.statusAttention {
+  --pc-pip-color: var(--icon-attention);
+}
+
+.statusWarning {
+  --pc-pip-color: var(--icon-warning);
+}
+
+.statusCritical {
+  --pc-pip-color: var(--icon-critical);
+}
+
+.progressDefault {
+  display: none;
+}
+
+.progressIncomplete {
+  background: transparent;
+}
+
+.progressPartiallyComplete {
+  background: linear-gradient(
+    to top,
+    currentColor,
+    currentColor 50%,
+    transparent 50%,
+    transparent
+  );
+
+  @media print {
+    background: none;
+    box-shadow: 0 -102px 0 -100px currentColor inset;
+  }
+}
+
+.progressComplete {
+  background: currentColor;
+  @media print {
+    background: none;
+    box-shadow: 0 0 0 100px currentColor inset;
+  }
+}
