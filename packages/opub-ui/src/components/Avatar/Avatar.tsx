@@ -1,20 +1,34 @@
-import React, { forwardRef } from 'react';
+import React from 'react';
 import * as AvatarRadix from '@radix-ui/react-avatar';
 import styles from './Avatar.module.scss';
+import cx from 'classnames';
 
 type Props = {
-  children: React.ReactNode;
+  label?: Boolean;
+  size: any;
+  type: any;
+  image?: any;
+  name?: any;
 };
 
-const Avatar = forwardRef((props: Props, ref: any) => {
+const Avatar = ({ label, size, type, image, name }: Props) => {
+  const ProfileName =
+    name &&
+    name
+      .split(' ')
+      .map((item: any) => item[0])
+      .join('')
+      .toUpperCase();
+  const className = cx(styles.Avatar);
+
   return (
-    <div className={`opub-Avatar ${styles.Avatar}`} ref={ref} {...props}>
+    <>
       <AvatarRadix.Root>
-        <AvatarRadix.Image />
-        <AvatarRadix.Fallback />
+        {image && <AvatarRadix.Image></AvatarRadix.Image>}
+        {!image && <AvatarRadix.Fallback>{ProfileName}</AvatarRadix.Fallback>}
       </AvatarRadix.Root>
-    </div>
+    </>
   );
-});
+};
 
 export { Avatar };
