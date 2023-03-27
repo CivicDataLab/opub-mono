@@ -1,6 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { createColumnHelper } from '@tanstack/react-table';
-import React, { useCallback, useState } from 'react';
+import { useState } from 'react';
+import { Link } from '../Link';
 import { DataTable } from './DataTable';
 
 /**
@@ -16,7 +17,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 type Person = {
-  firstName: string;
+  firstName: any;
   lastName: string;
   age: number;
   visits: number;
@@ -26,7 +27,11 @@ type Person = {
 
 const tableData: Person[] = [
   {
-    firstName: 'Tanner',
+    firstName: (
+      <Link url="#" removeUnderline>
+        Goodman
+      </Link>
+    ),
     lastName: 'Linsley',
     age: 24,
     visits: 100,
@@ -65,13 +70,11 @@ const columnHelper = createColumnHelper<Person>();
 const columns = [
   columnHelper.accessor('firstName', {
     cell: (info) => info.getValue(),
-    header: () => <>First Name</>,
-    enableSorting: true,
+    header: () => 'First Name',
   }),
   columnHelper.accessor((row) => row.lastName, {
     id: 'lastName',
     header: 'Last Name',
-    enableSorting: false,
   }),
   columnHelper.accessor('age', {
     header: () => 'Age',
@@ -85,7 +88,6 @@ const columns = [
   }),
   columnHelper.accessor('status', {
     header: 'Status',
-    enableSorting: false,
   }),
 ];
 
@@ -152,36 +154,44 @@ export const Truncate: Story = {
   },
 };
 
-function sortCurrency(
-  rows: any,
-  index: number,
-  direction: 'ascending' | 'descending'
-) {
-  return [...rows].sort((rowA, rowB) => {
-    const amountA = parseFloat((rowA[index] || 0).toString().substring(1));
-    const amountB = parseFloat((rowB[index] || 0).toString().substring(1));
-
-    return direction === 'descending' ? amountB - amountA : amountA - amountB;
-  });
-}
+const columnsSort = [
+  columnHelper.accessor('firstName', {
+    cell: (info) => info.getValue(),
+    header: () => <>First Name</>,
+    enableSorting: true,
+  }),
+  columnHelper.accessor((row) => row.lastName, {
+    id: 'lastName',
+    header: 'Last Name',
+    enableSorting: false,
+  }),
+  columnHelper.accessor('age', {
+    header: () => 'Age',
+    cell: (info) => info.renderValue(),
+  }),
+  columnHelper.accessor('visits', {
+    header: 'Visits',
+  }),
+  columnHelper.accessor('progress', {
+    header: 'Profile Progress',
+  }),
+  columnHelper.accessor('status', {
+    header: 'Status',
+    enableSorting: false,
+  }),
+];
 
 export const Sortable: Story = {
   render: ({ ...args }) => {
     const [sortedRows, setSortedRows] = useState<any>(null);
 
-    const handleSort = useCallback(
-      (index: number, direction: 'ascending' | 'descending') =>
-        setSortedRows(sortCurrency(tableData, index, direction)),
-      [tableData]
-    );
-
     return (
       <DataTable
         {...args}
-        sortable={[false, true, false, false, true]}
-        defaultSortDirection="descending"
+        sortable={true}
+        defaultSortDirection="desc"
         initialSortColumnIndex={4}
-        onSort={handleSort}
+        // onSort={handleSort}
         rows={sortedRows || tableData}
       />
     );
@@ -190,6 +200,6 @@ export const Sortable: Story = {
   args: {
     columnContentTypes: columnContentTypes,
     rows: tableData,
-    columns: columns,
+    columns: columnsSort,
   },
 };

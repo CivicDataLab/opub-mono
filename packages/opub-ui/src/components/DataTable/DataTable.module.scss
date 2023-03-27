@@ -67,6 +67,11 @@
 .Cell-sortable {
   padding: 0;
 
+  button {
+    padding: var(--space-2);
+    margin: var(--space-2);
+  }
+
   .IncreasedTableDensity & {
     padding: var(--space-2) var(--space-3);
 

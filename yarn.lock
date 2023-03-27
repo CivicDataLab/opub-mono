@@ -3157,6 +3157,11 @@
   resolved "https://registry.npmjs.org/@rushstack/eslint-patch/-/eslint-patch-1.2.0.tgz"
   integrity sha512-sXo/qW2/pAcmT43VoRKOJbDOfV3cYpq3szSVfIThQXNt+E4DfKj361vaAt3c88U5tPUxzEswam7GW48PJqtKAg==
 
+"@shopify/polaris-icons@^6.12.0":
+  version "6.12.0"
+  resolved "https://registry.yarnpkg.com/@shopify/polaris-icons/-/polaris-icons-6.12.0.tgz#e6a4866e326e4a6fae082d9d7fbfcf5080934500"
+  integrity sha512-KRIC5OUxLjJifqt//fslbRhfTrzBdnYH5sEuJ39fAHwnGQY+o9JnrZyJ2OIiTTRU9OQBgkhMwr1OaisJHMyWcA==
+
 "@sinclair/typebox@^0.25.16":
   version "0.25.24"
   resolved "https://registry.npmjs.org/@sinclair/typebox/-/typebox-0.25.24.tgz"

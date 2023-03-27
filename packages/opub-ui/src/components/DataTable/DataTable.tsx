@@ -5,14 +5,12 @@ import styles from './DataTable.module.scss';
 import {
   flexRender,
   getCoreRowModel,
-  useReactTable,
   getSortedRowModel,
   SortingState,
+  useReactTable,
 } from '@tanstack/react-table';
 import type { DataTableProps } from '@ui/types/datatable';
-import { Tooltip } from '../Tooltip';
-import { TooltipProvider } from '@radix-ui/react-tooltip';
-import { Button } from '../Button';
+import { Cell, HeaderCell } from './components';
 
 const DataTable = (props: DataTableProps) => {
   const {
@@ -23,8 +21,8 @@ const DataTable = (props: DataTableProps) => {
     increasedTableDensity = false,
     hasZebraStripingOnData = false,
     truncate = false,
-    sortable,
-    defaultSortDirection = 'ascending',
+    sortable = false,
+    defaultSortDirection = 'asc',
     initialSortColumnIndex: sortedColumnIndex,
     onSort,
     ...others
@@ -63,41 +61,36 @@ const DataTable = (props: DataTableProps) => {
                 className={cx(tableRowClassname, styles.TableHeaderRow)}
                 key={headerGroup.id}
               >
-                {headerGroup.headers.map((header, index) => (
-                  <th
-                    className={cx(
-                      styles.Cell,
-                      styles['Cell-header'],
-                      columnTypes[index] === 'numeric' && styles['Cell-numeric']
-                    )}
-                    key={header.id}
-                  >
-                    {header.isPlaceholder ? null : header.column.getCanSort() ? (
-                      <Button
-                        plain
-                        onClick={header.column.getToggleSortingHandler()}
-                      >
-                        {flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
-                        {header.column.getCanSort() &&
-                          ({
-                            asc: ' 🔼',
-                            desc: ' 🔽',
-                          }[header.column.getIsSorted() as string] ??
-                            null)}
-                      </Button>
-                    ) : (
-                      <div>
-                        {flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
-                      </div>
-                    )}
-                  </th>
-                ))}
+                {headerGroup.headers.map((header, index) => {
+                  const text = flexRender(
+                    header.column.columnDef.header,
+                    header.getContext()
+                  );
+                  const sortable = header.column.getCanSort();
+                  const isSorted = header.column.getIsSorted();
+
+                  return (
+                    <HeaderCell
+                      className={cx(
+                        styles.Cell,
+                        styles['Cell-header'],
+                        columnTypes[index] === 'numeric' &&
+                          styles['Cell-numeric'],
+                        isSorted && styles['Cell-sorted'],
+                        sortable && styles['Cell-sortable'],
+                        header &&
+                          columnTypes[index] === 'text' &&
+                          styles['Heading-left']
+                      )}
+                      key={header.id}
+                      header={header}
+                      sortable={sortable}
+                      text={text}
+                      columnType={columnTypes[index]}
+                      defaultSortDirection={defaultSortDirection}
+                    />
+                  );
+                })}
               </tr>
             ))}
           </thead>
@@ -113,7 +106,7 @@ const DataTable = (props: DataTableProps) => {
                     cell.getContext()
                   );
                   return (
-                    <td
+                    <Cell
                       className={cx(
                         styles.Cell,
                         columnTypes[index] === 'numeric' &&
@@ -122,15 +115,11 @@ const DataTable = (props: DataTableProps) => {
                         index === 0 && truncate && styles['Cell-truncated']
                       )}
                       key={cell.id}
-                    >
-                      {truncate && index === 0 ? (
-                        <TruncatedText className={styles.TooltipContent}>
-                          {text}
-                        </TruncatedText>
-                      ) : (
-                        text
-                      )}
-                    </td>
+                      text={text}
+                      cell={cell}
+                      index={index}
+                      truncate={truncate}
+                    />
                   );
                 })}
               </tr>
@@ -159,34 +148,3 @@ const DataTable = (props: DataTableProps) => {
 };
 
 export { DataTable };
-
-const TruncatedText = ({
-  children,
-  className = '',
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) => {
-  const textRef = React.useRef<any | null>(null);
-  const { current } = textRef;
-  const [, forceUpdate] = React.useReducer((x) => x + 1, 0);
-  React.useEffect(() => {
-    forceUpdate();
-  }, [children]);
-
-  const text = (
-    <span ref={textRef} className={className}>
-      {children}
-    </span>
-  );
-
-  return current?.scrollWidth > current?.offsetWidth ? (
-    <TooltipProvider>
-      <Tooltip delayDuration={0} content={textRef.current.innerText}>
-        {text}
-      </Tooltip>
-    </TooltipProvider>
-  ) : (
-    text
-  );
-};

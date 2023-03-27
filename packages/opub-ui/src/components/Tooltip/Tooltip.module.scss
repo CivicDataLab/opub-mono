@@ -1,11 +1,8 @@
 @import '../../../styles/common';
 
-.Wrapper {
-  width: fit-content;
-}
-
 .HasUnderline {
   border-bottom: var(--border-width-2) dotted var(--border-subdued);
+  width: fit-content;
 }
 
 .Trigger {

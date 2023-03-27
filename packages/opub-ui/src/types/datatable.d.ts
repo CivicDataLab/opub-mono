@@ -1,4 +1,4 @@
-export type SortDirection = 'ascending' | 'descending' | 'none';
+export type SortDirection = 'asc' | 'desc' | 'none';
 export type VerticalAlign = 'top' | 'bottom' | 'middle' | 'baseline';
 export type ColumnContentType = 'text' | 'numeric';
 
@@ -39,7 +39,7 @@ export interface DataTableProps {
   /** Increased density */
   increasedTableDensity?: boolean;
   /** List of booleans, which maps to whether sorting is enabled or not for each column. Defaults to false for all columns.  */
-  sortable?: boolean[];
+  sortable?: boolean;
   /**
    * The direction to sort the table rows on first click or keypress of a sortable column heading. Defaults to ascending.
    */
