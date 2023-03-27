@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { Button } from '../Button';
-import { Dialog, Content, Trigger } from './AlertDialog';
+import { Dialog } from './AlertDialog';
 
 /**
  * A modal dialog that interrupts the user with important content and expects a response.
@@ -8,8 +8,8 @@ import { Dialog, Content, Trigger } from './AlertDialog';
  * Reference: https://www.radix-ui.com/docs/primitives/components/alert-dialog
  */
 const meta = {
-  component: Content,
-} satisfies Meta<typeof Content>;
+  component: Dialog.Content,
+} satisfies Meta<typeof Dialog.Content>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -18,10 +18,10 @@ export const Default: Story = {
   render: ({ ...args }) => {
     return (
       <Dialog>
-        <Trigger>
+        <Dialog.Trigger>
           <Button>Discard Changes</Button>
-        </Trigger>
-        <Content {...args} />
+        </Dialog.Trigger>
+        <Dialog.Content {...args} />
       </Dialog>
     );
   },

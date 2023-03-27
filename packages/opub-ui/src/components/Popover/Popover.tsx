@@ -11,10 +11,17 @@ export interface Props extends Radix.PopoverProps {
   isArrow?: boolean;
 }
 
-export const Popover = Radix.Root;
+interface DialogProps extends Radix.PopoverProps {
+  Trigger?: Radix.PopoverTriggerProps;
+  Content?: Props;
+}
+
+const Popover = ({ children, ...props }: DialogProps) => {
+  return <Radix.Root {...props}>{children}</Radix.Root>;
+};
 
 export interface RadixButtonProps extends Radix.PopoverTriggerProps {}
-export const Trigger = ({ children, ...props }: RadixButtonProps) => {
+const Trigger = ({ children, ...props }: RadixButtonProps) => {
   return (
     <Radix.Trigger {...props} asChild>
       {children}
@@ -22,7 +29,7 @@ export const Trigger = ({ children, ...props }: RadixButtonProps) => {
   );
 };
 
-export const Content = React.forwardRef(
+const Content = React.forwardRef(
   (
     { children, isPortal = true, isArrow = false, ...props }: Props,
     forwardedRef: React.Ref<HTMLDivElement>
@@ -44,3 +51,8 @@ export const Content = React.forwardRef(
     );
   }
 );
+
+Popover.Trigger = Trigger;
+Popover.Content = Content;
+
+export { Popover };

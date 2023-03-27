@@ -5,7 +5,14 @@ import { Footer, FooterProps } from '../Dialog/components';
 import styles from '../Dialog/Dialog.module.scss';
 import { Header } from './components';
 
-const Dialog = AlertDialog.Root;
+interface DialogProps extends AlertDialog.DialogProps {
+  Trigger?: AlertDialog.DialogTriggerProps;
+  Content?: ContentProps;
+}
+
+const Dialog = ({ children, ...props }: DialogProps) => {
+  return <AlertDialog.Root {...props}>{children}</AlertDialog.Root>;
+};
 
 interface TriggerProps extends AlertDialog.DialogTriggerProps {}
 const Trigger = forwardRef(
@@ -21,7 +28,7 @@ const Trigger = forwardRef(
   }
 );
 
-type ContentProps = {
+export type ContentProps = {
   /** The content to display inside modal */
   children: React.ReactNode;
   /** Inner content of the footer */
@@ -96,4 +103,7 @@ const Content = forwardRef((props: ContentProps, ref: any) => {
   );
 });
 
-export { Dialog, Trigger, Content };
+Dialog.Trigger = Trigger;
+Dialog.Content = Content;
+
+export { Dialog };
