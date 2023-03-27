@@ -58,8 +58,8 @@ const Tooltip = (props: TooltipProps) => {
       delayDuration={delayDuration}
       disableHoverableContent={disableHoverableContent}
     >
-      <TooltipRadix.Trigger className={styles.Trigger}>
-        <>{children}</>
+      <TooltipRadix.Trigger className={styles.Trigger} asChild>
+        <span>{children}</span>
       </TooltipRadix.Trigger>
 
       <TooltipRadix.Portal>

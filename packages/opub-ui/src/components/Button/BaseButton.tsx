@@ -1,4 +1,4 @@
-import { BaseButtonProps } from '@ui/types/button';
+import type { BaseButtonProps } from '@ui/types/button';
 import { handleMouseUpByBlurring } from '@ui/utils/focus';
 import { useDisableClick } from '@ui/utils/hooks';
 import React, { LegacyRef } from 'react';
