@@ -46,7 +46,7 @@ export function Icon({
   accessibilityLabel,
 }: IconProps) {
   let sourceType: 'function' | 'placeholder' | 'external';
-  if (typeof source === 'function') {
+  if (typeof source === 'function' || typeof source === 'object') {
     sourceType = 'function';
   } else if (source === 'placeholder') {
     sourceType = 'placeholder';
