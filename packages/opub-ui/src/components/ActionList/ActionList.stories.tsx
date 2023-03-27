@@ -1,7 +1,6 @@
-import { Checkmark, Export, Import } from '@opub-icons/workflow';
 import { Meta, StoryObj } from '@storybook/react';
 import { Button } from '../Button';
-import { Content, Popover, Trigger } from '../Popover';
+import { Popover } from '../Popover';
 import { ActionList } from './ActionList';
 
 /**
@@ -20,12 +19,12 @@ export const Default: Story = {
   render: ({ ...args }) => {
     return (
       <Popover>
-        <Trigger>
+        <Popover.Trigger>
           <Button disclosure>More actions</Button>
-        </Trigger>
-        <Content>
+        </Popover.Trigger>
+        <Popover.Content>
           <ActionList {...args} />
-        </Content>
+        </Popover.Content>
       </Popover>
     );
   },

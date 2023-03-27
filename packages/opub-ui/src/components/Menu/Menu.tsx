@@ -1,7 +1,7 @@
 import React from 'react';
 import { ActionList } from '../ActionList';
 import type { ActionListProps } from '../ActionList/ActionList';
-import { Content, Popover, Trigger } from '../Popover';
+import { Popover } from '../Popover';
 
 type Props = {
   trigger: React.ReactNode;
@@ -13,12 +13,14 @@ const Menu = (props: Props) => {
 
   return (
     <Popover open={isOpen} onOpenChange={(e) => setIsOpen(e)}>
-      <Trigger onKeyDown={(e) => e.code === 'ArrowDown' && setIsOpen(true)}>
+      <Popover.Trigger
+        onKeyDown={(e) => e.code === 'ArrowDown' && setIsOpen(true)}
+      >
         {trigger}
-      </Trigger>
-      <Content>
+      </Popover.Trigger>
+      <Popover.Content>
         <ActionList actionRole="menuitem" {...others} />
-      </Content>
+      </Popover.Content>
     </Popover>
   );
 };

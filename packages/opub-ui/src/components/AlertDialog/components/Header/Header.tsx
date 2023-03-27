@@ -1,9 +1,9 @@
 import { AlertDialogCancel } from '@radix-ui/react-alert-dialog';
+import { Box } from '@ui/components/Box';
 import { CloseButton } from '@ui/components/Dialog/components';
 import { Flex } from '@ui/components/Flex';
+import { Text } from '@ui/components/Text';
 import React from 'react';
-import { Box } from '../../../Box';
-import { Text } from '../../../Text';
 
 export interface HeaderProps {
   id: string;

@@ -4,7 +4,7 @@ import { Button } from '../Button';
 import { Form } from '../Form';
 import { Select } from '../Select';
 import { TextField } from '../TextField';
-import { Content, Popover, Trigger } from './Popover';
+import { Popover } from './Popover';
 
 /**
  * Popovers are small overlays that open on demand
@@ -12,13 +12,13 @@ import { Content, Popover, Trigger } from './Popover';
  * Reference: https://www.radix-ui.com/docs/primitives/components/popover
  */
 const meta = {
-  component: Content,
+  component: Popover.Content,
   argTypes: {
     children: {
       control: 'null',
     },
   },
-} satisfies Meta<typeof Content>;
+} satisfies Meta<typeof Popover.Content>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -27,10 +27,10 @@ export const Default: Story = {
   render: ({ ...args }) => {
     return (
       <Popover>
-        <Trigger>
+        <Popover.Trigger>
           <Button disclosure>More actions</Button>
-        </Trigger>
-        <Content {...args} />
+        </Popover.Trigger>
+        <Popover.Content {...args} />
       </Popover>
     );
   },

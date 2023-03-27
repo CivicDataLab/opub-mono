@@ -1,4 +1,4 @@
-import { LinkLikeComponentProps } from '@ui/types/link';
+import type { LinkLikeComponentProps } from '@ui/types/link';
 import { forwardRef, memo } from 'react';
 import { useLink } from './helpers';
 

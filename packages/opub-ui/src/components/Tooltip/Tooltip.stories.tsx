@@ -2,7 +2,7 @@ import { Meta, StoryObj } from '@storybook/react';
 import { Button } from '../Button';
 import { Flex } from '../Flex';
 import { Text } from '../Text';
-import { Provider, Tooltip } from './Tooltip';
+import { Tooltip } from './Tooltip';
 
 /**
  * A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it
@@ -23,9 +23,9 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   render: ({ ...args }) => (
-    <Provider>
+    <Tooltip.Provider>
       <Tooltip {...args} />
-    </Provider>
+    </Tooltip.Provider>
   ),
   args: {
     children: (
@@ -39,9 +39,9 @@ export const Default: Story = {
 
 export const Underline: Story = {
   render: ({ ...args }) => (
-    <Provider hasUnderline>
+    <Tooltip.Provider hasUnderline>
       <Tooltip {...args} />
-    </Provider>
+    </Tooltip.Provider>
   ),
   args: {
     children: (
@@ -55,12 +55,12 @@ export const Underline: Story = {
 
 export const Multiple: Story = {
   render: ({ ...args }) => (
-    <Provider>
+    <Tooltip.Provider>
       <Flex gap={4}>
         <Tooltip {...args} />
         <Tooltip {...args} />
       </Flex>
-    </Provider>
+    </Tooltip.Provider>
   ),
   args: {
     children: <Button size="slim">Trigger</Button>,
