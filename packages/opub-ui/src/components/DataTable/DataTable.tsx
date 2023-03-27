@@ -25,6 +25,7 @@ const DataTable = (props: DataTableProps) => {
     defaultSortDirection = 'asc',
     initialSortColumnIndex: sortedColumnIndex,
     onSort,
+    stickyHeader = false,
     ...others
   } = props;
   const [data, setData] = React.useState(() => [...rows]);
@@ -78,9 +79,7 @@ const DataTable = (props: DataTableProps) => {
                           styles['Cell-numeric'],
                         isSorted && styles['Cell-sorted'],
                         sortable && styles['Cell-sortable'],
-                        header &&
-                          columnTypes[index] === 'text' &&
-                          styles['Heading-left']
+                        stickyHeader && styles['Header-Sticky']
                       )}
                       key={header.id}
                       header={header}
