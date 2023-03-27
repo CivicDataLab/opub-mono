@@ -4,7 +4,14 @@ import React, { forwardRef, Ref } from 'react';
 import { Footer, FooterProps, Header } from './components';
 import styles from './Dialog.module.scss';
 
-const Dialog = DialogRadix.Root;
+interface DialogProps extends DialogRadix.DialogProps {
+  Trigger?: DialogRadix.DialogTriggerProps;
+  Content?: ContentProps;
+}
+
+const Dialog = ({ children, ...props }: DialogProps) => {
+  return <DialogRadix.Root {...props}>{children}</DialogRadix.Root>;
+};
 
 interface TriggerProps extends DialogRadix.DialogTriggerProps {}
 const Trigger = forwardRef(
@@ -95,4 +102,7 @@ const Content = forwardRef((props: ContentProps, ref: any) => {
   );
 });
 
-export { Dialog, Trigger, Content };
+Dialog.Trigger = Trigger;
+Dialog.Content = Content;
+
+export { Dialog };

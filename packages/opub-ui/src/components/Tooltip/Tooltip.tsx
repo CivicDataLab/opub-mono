@@ -81,4 +81,6 @@ const Tooltip = (props: TooltipProps) => {
   );
 };
 
-export { Tooltip, Provider };
+Tooltip.Provider = Provider;
+
+export { Tooltip };

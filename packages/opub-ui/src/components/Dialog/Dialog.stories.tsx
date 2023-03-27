@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { Button } from '../Button';
-import { Dialog, Trigger, Content } from './Dialog';
+import { Dialog } from './Dialog';
 
 /**
  * A window overlaid on either the primary window or another dialog window, rendering the content underneath inert.
@@ -8,8 +8,8 @@ import { Dialog, Trigger, Content } from './Dialog';
  * Reference: https://www.radix-ui.com/docs/primitives/components/dialog
  */
 const meta = {
-  component: Content,
-} satisfies Meta<typeof Content>;
+  component: Dialog.Content,
+} satisfies Meta<typeof Dialog.Content>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -18,10 +18,10 @@ export const Default: Story = {
   render: ({ ...args }) => {
     return (
       <Dialog>
-        <Trigger>
+        <Dialog.Trigger>
           <Button>Open Dialog</Button>
-        </Trigger>
-        <Content {...args} />
+        </Dialog.Trigger>
+        <Dialog.Content {...args} />
       </Dialog>
     );
   },
