@@ -1,5 +1,5 @@
 import { CrossSize200 } from '@opub-icons/ui';
-import { TagProps } from '@ui/types/tag';
+import type { TagProps } from '@ui/types/tag';
 import { handleMouseUpByBlurring } from '@ui/utils/focus';
 import cx from 'classnames';
 import React from 'react';

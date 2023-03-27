@@ -33,6 +33,9 @@ export interface DataTableProps {
   hasZebraStripingOnData?: boolean;
   /** Table row has hover state. Defaults to true. */
   hoverable?: boolean;
+  /** Truncate content in first column instead of wrapping.
+   */
+  truncate?: boolean;
   /** Increased density */
   increasedTableDensity?: boolean;
   /** List of booleans, which maps to whether sorting is enabled or not for each column. Defaults to false for all columns.  */
@@ -47,7 +50,4 @@ export interface DataTableProps {
   initialSortColumnIndex?: number;
   /** Callback fired on click or keypress of a sortable column heading. */
   onSort?(headingIndex: number, direction: SortDirection): void;
-  /** Truncate content in first column instead of wrapping.
-   */
-  truncate?: boolean;
 }

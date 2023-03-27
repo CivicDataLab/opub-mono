@@ -6,10 +6,13 @@ import {
   flexRender,
   getCoreRowModel,
   useReactTable,
+  getSortedRowModel,
+  SortingState,
 } from '@tanstack/react-table';
 import type { DataTableProps } from '@ui/types/datatable';
 import { Tooltip } from '../Tooltip';
 import { TooltipProvider } from '@radix-ui/react-tooltip';
+import { Button } from '../Button';
 
 const DataTable = (props: DataTableProps) => {
   const {
@@ -20,14 +23,24 @@ const DataTable = (props: DataTableProps) => {
     increasedTableDensity = false,
     hasZebraStripingOnData = false,
     truncate = false,
+    sortable,
+    defaultSortDirection = 'ascending',
+    initialSortColumnIndex: sortedColumnIndex,
+    onSort,
     ...others
   } = props;
   const [data, setData] = React.useState(() => [...rows]);
+  const [sorting, setSorting] = React.useState<SortingState>([]);
 
   const table = useReactTable({
     data,
     columns,
+    state: {
+      sorting,
+    },
+    onSortingChange: setSorting,
     getCoreRowModel: getCoreRowModel(),
+    getSortedRowModel: getSortedRowModel(),
   });
 
   const rowCountIsEven = data.length % 2 === 0;
@@ -59,12 +72,30 @@ const DataTable = (props: DataTableProps) => {
                     )}
                     key={header.id}
                   >
-                    {header.isPlaceholder
-                      ? null
-                      : flexRender(
+                    {header.isPlaceholder ? null : header.column.getCanSort() ? (
+                      <Button
+                        plain
+                        onClick={header.column.getToggleSortingHandler()}
+                      >
+                        {flexRender(
                           header.column.columnDef.header,
                           header.getContext()
                         )}
+                        {header.column.getCanSort() &&
+                          ({
+                            asc: ' 🔼',
+                            desc: ' 🔽',
+                          }[header.column.getIsSorted() as string] ??
+                            null)}
+                      </Button>
+                    ) : (
+                      <div>
+                        {flexRender(
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
+                      </div>
+                    )}
                   </th>
                 ))}
               </tr>

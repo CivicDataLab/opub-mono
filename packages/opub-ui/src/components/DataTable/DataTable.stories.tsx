@@ -1,11 +1,12 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { createColumnHelper } from '@tanstack/react-table';
+import React, { useCallback, useState } from 'react';
 import { DataTable } from './DataTable';
 
 /**
  * Data tables are used to organize and display all information from a data set.
  *
- * Reference: #
+ * Reference: https://tanstack.com/table/v8/docs/guide/introduction
  */
 const meta = {
   component: DataTable,
@@ -65,10 +66,12 @@ const columns = [
   columnHelper.accessor('firstName', {
     cell: (info) => info.getValue(),
     header: () => <>First Name</>,
+    enableSorting: true,
   }),
   columnHelper.accessor((row) => row.lastName, {
     id: 'lastName',
     header: 'Last Name',
+    enableSorting: false,
   }),
   columnHelper.accessor('age', {
     header: () => 'Age',
@@ -82,6 +85,7 @@ const columns = [
   }),
   columnHelper.accessor('status', {
     header: 'Status',
+    enableSorting: false,
   }),
 ];
 
@@ -145,5 +149,47 @@ export const Truncate: Story = {
     rows: truncateData,
     columns: columns,
     truncate: true,
+  },
+};
+
+function sortCurrency(
+  rows: any,
+  index: number,
+  direction: 'ascending' | 'descending'
+) {
+  return [...rows].sort((rowA, rowB) => {
+    const amountA = parseFloat((rowA[index] || 0).toString().substring(1));
+    const amountB = parseFloat((rowB[index] || 0).toString().substring(1));
+
+    return direction === 'descending' ? amountB - amountA : amountA - amountB;
+  });
+}
+
+export const Sortable: Story = {
+  render: ({ ...args }) => {
+    const [sortedRows, setSortedRows] = useState<any>(null);
+
+    const handleSort = useCallback(
+      (index: number, direction: 'ascending' | 'descending') =>
+        setSortedRows(sortCurrency(tableData, index, direction)),
+      [tableData]
+    );
+
+    return (
+      <DataTable
+        {...args}
+        sortable={[false, true, false, false, true]}
+        defaultSortDirection="descending"
+        initialSortColumnIndex={4}
+        onSort={handleSort}
+        rows={sortedRows || tableData}
+      />
+    );
+  },
+
+  args: {
+    columnContentTypes: columnContentTypes,
+    rows: tableData,
+    columns: columns,
   },
 };
