@@ -57,4 +57,5 @@ export interface DataTableProps {
 export type IndexTableProps = DataTableProps & {
   onRowSelectionChange?(selectedRows): void;
   defaultSelectedRows?: any;
+  hasMoreItems?: boolean;
 };

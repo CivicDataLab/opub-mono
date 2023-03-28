@@ -14,7 +14,9 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 import type { IndexTableProps } from '@ui/types/datatable';
+import { Button } from '../Button';
 import { UncontrolledCheckbox } from '../Checkbox/Checkbox';
+import { Text } from '../Text';
 import { Cell, HeaderCell, Row } from './components';
 
 const IndexTable = (props: IndexTableProps) => {
@@ -33,6 +35,7 @@ const IndexTable = (props: IndexTableProps) => {
     stickyHeader = false,
     onRowSelectionChange,
     defaultSelectedRows,
+    hasMoreItems,
     ...others
   } = props;
   const [data, setData] = React.useState(() => [...rows]);
@@ -76,12 +79,45 @@ const IndexTable = (props: IndexTableProps) => {
   );
 
   const tableRowClassname = cx(styles.TableRow, hoverable && styles.Hoverable);
+  const selectedCount = Object.keys(rowSelection).length;
 
   return (
     <div className={`opub-DataTable ${themeClass}`} {...others}>
       <div className={styles.ScrollContainer}>
         <table className={styles.Table}>
-          <thead>
+          <div
+            className={cx(
+              styles.SelectedWrapper,
+              selectedCount > 0 && styles.ItemsSelected
+            )}
+          >
+            <div
+              className={cx(
+                styles.Cell,
+                styles['Cell-header'],
+                styles.Checkbox,
+                stickyHeader && styles['Header-Sticky']
+              )}
+            >
+              <UncontrolledCheckbox
+                name={`headerGroup-selected`}
+                checked={
+                  table.getIsAllPageRowsSelected()
+                    ? true
+                    : table.getIsSomePageRowsSelected()
+                    ? 'indeterminate'
+                    : false
+                }
+                onCheckedChange={() => table.toggleAllPageRowsSelected()}
+              />
+            </div>
+            <ItemSelectedText
+              totalCount={data.length}
+              selectedCount={selectedCount}
+              table={table}
+            />
+          </div>
+          <thead className={cx(selectedCount > 0 && styles.ItemsSelected)}>
             {table.getHeaderGroups().map((headerGroup) => (
               <tr
                 className={cx(tableRowClassname, styles.TableHeaderRow)}
@@ -91,7 +127,8 @@ const IndexTable = (props: IndexTableProps) => {
                   className={cx(
                     styles.Cell,
                     styles['Cell-header'],
-                    styles.Checkbox
+                    styles.Checkbox,
+                    stickyHeader && styles['Header-Sticky']
                   )}
                 >
                   <UncontrolledCheckbox
@@ -197,3 +234,45 @@ const IndexTable = (props: IndexTableProps) => {
 
 export { IndexTable, createColumnHelper };
 export type { ColumnDef };
+
+const ItemSelectedText = ({
+  selectedCount,
+  totalCount,
+  table,
+}: {
+  selectedCount: number;
+  totalCount: number;
+  table: ReturnType<typeof useReactTable>;
+}) => {
+  console.log(selectedCount, totalCount);
+
+  return (
+    <div className={cx(styles.Cell, styles['Cell-header'])}>
+      {selectedCount < totalCount ? (
+        <>
+          <Text variant="bodySm" fontWeight="medium">
+            {selectedCount} item{selectedCount > 1 ? 's' : ''} selected
+          </Text>
+          <button
+            onClick={() => table.toggleAllPageRowsSelected()}
+            className={styles.SelectAllButton}
+          >
+            Select all {totalCount} items
+          </button>
+        </>
+      ) : (
+        <>
+          <Text variant="bodySm" fontWeight="medium">
+            All {totalCount} items selected
+          </Text>
+          <button
+            onClick={() => table.resetRowSelection()}
+            className={styles.SelectAllButton}
+          >
+            Undo
+          </button>
+        </>
+      )}
+    </div>
+  );
+};
