@@ -23,6 +23,8 @@
 }
 
 .TableHeaderRow {
+  background-color: var(--surface-subdued);
+
   .Header-Sticky {
     position: sticky;
     top: 0;
@@ -47,7 +49,7 @@
 
     &.TableHeaderRow {
       &:hover {
-        background-color: initial;
+        background-color: var(--surface-subdued);
       }
     }
   }
@@ -172,6 +174,10 @@
     .Icon {
       opacity: 1;
     }
+
+    span {
+      color: var(--interactive-hovered);
+    }
   }
 
   &:focus-visible:not(:active) {
@@ -264,6 +270,11 @@
     margin: 0;
     --gap: 0px;
     padding: 0;
+
+    .TableHeaderRow & {
+      margin-bottom: -5px;
+      display: block;
+    }
   }
 
   button {

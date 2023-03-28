@@ -13,11 +13,11 @@ import {
   SortingState,
   useReactTable,
 } from '@tanstack/react-table';
-import type { DataTableProps } from '@ui/types/datatable';
+import type { IndexTableProps } from '@ui/types/datatable';
 import { UncontrolledCheckbox } from '../Checkbox/Checkbox';
 import { Cell, HeaderCell, Row } from './components';
 
-const IndexTable = (props: DataTableProps) => {
+const IndexTable = (props: IndexTableProps) => {
   const {
     rows,
     columns,
@@ -31,11 +31,22 @@ const IndexTable = (props: DataTableProps) => {
     initialSortColumnIndex: sortedColumnIndex,
     onSort,
     stickyHeader = false,
+    onRowSelectionChange,
+    defaultSelectedRows,
     ...others
   } = props;
   const [data, setData] = React.useState(() => [...rows]);
   const [sorting, setSorting] = React.useState<SortingState>([]);
-  const [rowSelection, setRowSelection] = React.useState({});
+  const [rowSelection, setRowSelection] = React.useState(
+    defaultSelectedRows || {}
+  );
+
+  // trigger when row selection changes
+  React.useEffect(() => {
+    if (onRowSelectionChange) {
+      onRowSelectionChange(rowSelection);
+    }
+  }, [rowSelection]);
 
   const table = useReactTable({
     data,
@@ -46,7 +57,7 @@ const IndexTable = (props: DataTableProps) => {
     },
     onSortingChange: setSorting,
     getCoreRowModel: getCoreRowModel(),
-    getSortedRowModel: getSortedRowModel(),
+    getSortedRowModel: sortable ? getSortedRowModel() : undefined,
     getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     onRowSelectionChange: setRowSelection,
@@ -98,7 +109,7 @@ const IndexTable = (props: DataTableProps) => {
                     header.column.columnDef.header,
                     header.getContext()
                   );
-                  const sortable = header.column.getCanSort();
+                  const isSortable = header.column.getCanSort() && sortable;
                   const isSorted = header.column.getIsSorted();
 
                   return (
@@ -108,13 +119,13 @@ const IndexTable = (props: DataTableProps) => {
                         styles['Cell-header'],
                         columnTypes[index] === 'numeric' &&
                           styles['Cell-numeric'],
-                        isSorted && styles['Cell-sorted'],
-                        sortable && styles['Cell-sortable'],
+                        isSortable && isSorted && styles['Cell-sorted'],
+                        isSortable && styles['Cell-sortable'],
                         stickyHeader && styles['Header-Sticky']
                       )}
                       key={header.id}
                       header={header}
-                      sortable={sortable}
+                      sortable={isSortable}
                       text={text}
                       columnType={columnTypes[index]}
                       defaultSortDirection={defaultSortDirection}
