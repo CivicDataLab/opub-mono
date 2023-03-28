@@ -75,8 +75,6 @@ export const HeaderCell = ({
   defaultSortDirection,
   ...rest
 }: HeaderProps) => {
-  console.log(sortable);
-
   return (
     <th className={className} {...rest}>
       {header.isPlaceholder ? null : header.column.getCanSort() && sortable ? (

@@ -310,8 +310,6 @@ export const Suggestions = () => {
   const [suggestion, setSuggestion] = useState('');
   const handleSuggestion = useCallback(
     (nextValue: string) => {
-      console.log(nextValue);
-
       const nextSuggestion = suggestions.find((suggestion) =>
         suggestion.toLowerCase().startsWith(nextValue.toLowerCase())
       );
