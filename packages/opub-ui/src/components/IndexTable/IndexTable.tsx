@@ -44,7 +44,9 @@ const IndexTable = (props: IndexTableProps) => {
   // trigger when row selection changes
   React.useEffect(() => {
     if (onRowSelectionChange) {
-      onRowSelectionChange(rowSelection);
+      onRowSelectionChange(
+        table.getSelectedRowModel().flatRows.map((row) => row.original)
+      );
     }
   }, [rowSelection]);
 
