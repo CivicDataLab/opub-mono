@@ -39,7 +39,7 @@ const DataTable = (props: DataTableProps) => {
     },
     onSortingChange: setSorting,
     getCoreRowModel: getCoreRowModel(),
-    getSortedRowModel: getSortedRowModel(),
+    getSortedRowModel: sortable ? getSortedRowModel() : undefined,
   });
 
   const rowCountIsEven = data.length % 2 === 0;
@@ -67,7 +67,7 @@ const DataTable = (props: DataTableProps) => {
                     header.column.columnDef.header,
                     header.getContext()
                   );
-                  const sortable = header.column.getCanSort();
+                  const isSortable = header.column.getCanSort() && sortable;
                   const isSorted = header.column.getIsSorted();
 
                   return (
@@ -77,13 +77,13 @@ const DataTable = (props: DataTableProps) => {
                         styles['Cell-header'],
                         columnTypes[index] === 'numeric' &&
                           styles['Cell-numeric'],
-                        isSorted && styles['Cell-sorted'],
-                        sortable && styles['Cell-sortable'],
+                        isSortable && isSorted && styles['Cell-sorted'],
+                        isSortable && styles['Cell-sortable'],
                         stickyHeader && styles['Header-Sticky']
                       )}
                       key={header.id}
                       header={header}
-                      sortable={sortable}
+                      sortable={isSortable}
                       text={text}
                       columnType={columnTypes[index]}
                       defaultSortDirection={defaultSortDirection}
