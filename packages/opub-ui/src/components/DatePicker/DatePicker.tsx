@@ -33,7 +33,7 @@ const DatePicker = forwardRef((props: Props) => {
   return (
     <div className={`opub-DatePicker ${themeClass}`}>
       <Labelled label={props.label} {...labelProps}>
-        <div {...groupProps} ref={ref} className={styles.Wrapper}>
+        <div ref={ref} className={styles.Wrapper}>
           <DateField {...fieldProps} />
           <Popover
             onOpenChange={() => (!state.isOpen ? state.open() : state.close())}
@@ -44,7 +44,6 @@ const DatePicker = forwardRef((props: Props) => {
               <Button
                 icon={<Icon source={CalendarMinor} />}
                 size="slim"
-                // plain
                 {...buttonProps}
                 onClick={() => (!state.isOpen ? state.open() : state.close())}
               />

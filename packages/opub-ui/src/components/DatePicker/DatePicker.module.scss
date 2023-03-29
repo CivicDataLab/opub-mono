@@ -1,9 +1,15 @@
 @import '../../../styles/common';
 
 .DatePickerTrigger {
+  width: fit-content;
 }
 
 .Wrapper {
   display: flex;
   gap: var(--space-1);
+  width: fit-content;
+
+  label {
+    width: fit-content;
+  }
 }
