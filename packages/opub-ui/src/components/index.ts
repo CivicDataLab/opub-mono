@@ -40,3 +40,6 @@ export { TextField } from './TextField';
 export { Thumbnail } from './Thumbnail';
 export { Toast } from './Toast';
 export { Tooltip } from './Tooltip';
+export { DateField } from "./DateField";
+export { Calendar } from "./Calendar";
+export { DatePicker } from "./DatePicker";

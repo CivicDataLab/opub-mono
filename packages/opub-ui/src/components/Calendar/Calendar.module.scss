@@ -1,0 +1,74 @@
+@import '../../../styles/common';
+
+.Calendar {
+  max-width: 290px;
+  padding: var(--space-5);
+  background-color: var(--surface);
+  box-shadow: var(--shadow-popover);
+  border-radius: var(--border-radius-2);
+
+  table {
+    width: 100%;
+  }
+}
+
+.Header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+  margin: 0 8px;
+
+  button {
+    transition: background-color var(--duration-100) var(--ease-in-out);
+    &:hover {
+      background-color: var(--surface-hovered);
+    }
+
+    &:active {
+      background-color: var(--surface-pressed) !important;
+    }
+  }
+}
+
+.Cell {
+  cursor: default;
+  text-align: center;
+  border-radius: var(--border-radius-1);
+  padding: var(--space-1) var(--space-2);
+  transition: background-color var(--duration-100) var(--ease-in-out);
+
+  &:hover {
+    background-color: var(--surface-hovered);
+  }
+
+  &.Selected {
+    background-color: var(--interactive);
+
+    > span {
+      color: var(--text-on-interactive);
+    }
+  }
+
+  &.Unavailable {
+    background-color: var(--surface-critical);
+
+    > span {
+      color: var(--text-on-critical);
+    }
+  }
+
+  &.Disabled {
+    background-color: var(--surface-disabled);
+
+    > span {
+      color: var(--text-subdued);
+    }
+  }
+}
+
+.Weeks {
+  > th {
+    padding: var(--space-2);
+  }
+}
