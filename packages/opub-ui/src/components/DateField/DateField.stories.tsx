@@ -1,5 +1,4 @@
 import { Meta, StoryObj } from '@storybook/react';
-import { I18nProvider } from 'react-aria';
 import { DateField } from './DateField';
 
 /**

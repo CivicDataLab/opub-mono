@@ -7,7 +7,6 @@ import {
   useDateField,
   useDateSegment,
   useLocale,
-  I18nProvider,
 } from 'react-aria';
 import {
   DateFieldState,
@@ -15,9 +14,9 @@ import {
   DateSegment,
   useDateFieldState,
 } from 'react-stately';
-import styles from './DateField.module.scss';
 import inputStyles from '../Input/Input.module.scss';
 import { Labelled } from '../Labelled';
+import styles from './DateField.module.scss';
 
 type Props = {} & (DateFieldStateOptions | AriaDateFieldProps<DateValue>);
 
