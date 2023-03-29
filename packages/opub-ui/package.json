@@ -47,6 +47,7 @@
     "react-dom": "^18.2.0",
     "react-hook-form": "7.20.0",
     "react-portal": "^4.2.2",
+    "react-stately": "^3.21.0",
     "yup": "^1.0.0"
   },
   "devDependencies": {

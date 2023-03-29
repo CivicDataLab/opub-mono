@@ -1,0 +1,41 @@
+@import '../../../styles/common';
+
+.DateField {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.Field {
+  display: inline-flex;
+  padding: 2px 4px;
+  border-radius: 2px;
+  border: var(--border-base);
+  background-color: var(--background);
+
+  &:focus-within {
+    border-color: var(--focused);
+  }
+
+  ::-moz-selection,
+  ::selection {
+    background: transparent;
+  }
+}
+
+.Segment {
+  padding: 0 2px;
+  font-variant-numeric: tabular-nums;
+  text-align: end;
+
+  &.Placeholder {
+    color: var(--text-subdued);
+  }
+
+  &:focus {
+    color: var(--text-on-dark);
+    background: var(--interactive);
+    outline: none;
+    border-radius: 2px;
+  }
+}
