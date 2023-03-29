@@ -11,7 +11,7 @@ import styles from './Labelled.module.scss';
 
 export interface LabelledProps {
   /** A unique identifier for the label */
-  id: LabelProps['id'];
+  id?: LabelProps['id'];
   /** Text for the label */
   label: React.ReactNode;
   /** Error to display beneath the label */
