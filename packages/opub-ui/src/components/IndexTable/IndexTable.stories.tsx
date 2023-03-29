@@ -233,3 +233,26 @@ export const Sortable: Story = {
     columns: columnsSort,
   },
 };
+
+export const SelectionAcrossPages: Story = {
+  render: ({ ...args }) => {
+    const [sortedRows, setSortedRows] = useState<any>(null);
+
+    return (
+      <IndexTable
+        {...args}
+        sortable={true}
+        defaultSortDirection="desc"
+        initialSortColumnIndex={4}
+        rows={sortedRows || tableData}
+      />
+    );
+  },
+
+  args: {
+    columnContentTypes: columnContentTypes,
+    rows: tableData,
+    columns: columnsSort,
+    hasMoreItems: true,
+  },
+};

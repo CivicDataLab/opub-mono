@@ -55,7 +55,10 @@ export interface DataTableProps {
 }
 
 export type IndexTableProps = DataTableProps & {
+  /** Callback function to run on row selection  */
   onRowSelectionChange?(selectedRows): void;
+  /** Default selected rows  */
   defaultSelectedRows?: any;
+  /** Whether to enable the selection/deselection across page  */
   hasMoreItems?: boolean;
 };

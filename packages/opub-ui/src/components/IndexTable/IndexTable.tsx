@@ -14,7 +14,6 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 import type { IndexTableProps } from '@ui/types/datatable';
-import { Button } from '../Button';
 import { UncontrolledCheckbox } from '../Checkbox/Checkbox';
 import { Text } from '../Text';
 import { Cell, HeaderCell, Row } from './components';
@@ -35,7 +34,7 @@ const IndexTable = (props: IndexTableProps) => {
     stickyHeader = false,
     onRowSelectionChange,
     defaultSelectedRows,
-    hasMoreItems,
+    hasMoreItems = false,
     ...others
   } = props;
   const [data, setData] = React.useState(() => [...rows]);
@@ -85,39 +84,45 @@ const IndexTable = (props: IndexTableProps) => {
     <div className={`opub-DataTable ${themeClass}`} {...others}>
       <div className={styles.ScrollContainer}>
         <table className={styles.Table}>
-          <div
-            className={cx(
-              styles.SelectedWrapper,
-              selectedCount > 0 && styles.ItemsSelected
-            )}
-          >
+          {hasMoreItems && (
             <div
               className={cx(
-                styles.Cell,
-                styles['Cell-header'],
-                styles.Checkbox,
-                stickyHeader && styles['Header-Sticky']
+                styles.SelectedWrapper,
+                selectedCount > 0 && styles.ItemsSelected
               )}
             >
-              <UncontrolledCheckbox
-                name={`headerGroup-selected`}
-                checked={
-                  table.getIsAllPageRowsSelected()
-                    ? true
-                    : table.getIsSomePageRowsSelected()
-                    ? 'indeterminate'
-                    : false
-                }
-                onCheckedChange={() => table.toggleAllPageRowsSelected()}
+              <div
+                className={cx(
+                  styles.Cell,
+                  styles['Cell-header'],
+                  styles.Checkbox,
+                  stickyHeader && styles['Header-Sticky']
+                )}
+              >
+                <UncontrolledCheckbox
+                  name={`headerGroup-selected`}
+                  checked={
+                    table.getIsAllPageRowsSelected()
+                      ? true
+                      : table.getIsSomePageRowsSelected()
+                      ? 'indeterminate'
+                      : false
+                  }
+                  onCheckedChange={() => table.toggleAllPageRowsSelected()}
+                />
+              </div>
+              <ItemSelectedText
+                totalCount={data.length}
+                selectedCount={selectedCount}
+                table={table}
               />
             </div>
-            <ItemSelectedText
-              totalCount={data.length}
-              selectedCount={selectedCount}
-              table={table}
-            />
-          </div>
-          <thead className={cx(selectedCount > 0 && styles.ItemsSelected)}>
+          )}
+          <thead
+            className={cx(
+              hasMoreItems && selectedCount > 0 && styles.ItemsSelected
+            )}
+          >
             {table.getHeaderGroups().map((headerGroup) => (
               <tr
                 className={cx(tableRowClassname, styles.TableHeaderRow)}
