@@ -2,7 +2,9 @@ import { Meta, StoryObj } from '@storybook/react';
 import { Badge } from './Badge';
 
 /**
- * Badges are used to inform merchants of the status of an object or of an action that’s been taken.
+ * Badges are used to inform user of the status of an object or of an action that’s been taken.
+ * 
+ *  Reference: https://polaris.shopify.com/components/feedback-indicators/badge
  */
 
 const meta = {

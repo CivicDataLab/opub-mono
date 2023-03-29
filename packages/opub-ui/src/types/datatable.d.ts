@@ -53,3 +53,12 @@ export interface DataTableProps {
   /** Header becomes sticky and pins to top of table when scrolling  */
   stickyHeader?: boolean;
 }
+
+export type IndexTableProps = DataTableProps & {
+  /** Callback function to run on row selection  */
+  onRowSelectionChange?(selectedRows): void;
+  /** Default selected rows  */
+  defaultSelectedRows?: any;
+  /** Whether to enable the selection/deselection across page  */
+  hasMoreItems?: boolean;
+};
