@@ -4,38 +4,42 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-}
 
-.Field {
-  display: inline-flex;
-  padding: 2px 4px;
-  border-radius: 2px;
-  border: var(--border-base);
-  background-color: var(--background);
+  .Field {
+    display: inline-flex;
+    align-items: center;
+    min-width: 160px;
 
-  &:focus-within {
-    border-color: var(--focused);
-  }
+    ::-moz-selection,
+    ::selection {
+      background: transparent;
+    }
 
-  ::-moz-selection,
-  ::selection {
-    background: transparent;
+    &:focus-within {
+      & + div {
+        outline: 2px solid var(--focused);
+        outline-offset: 2px;
+      }
+    }
   }
 }
 
 .Segment {
-  padding: 0 2px;
+  padding: var(--space-0) var(--space-05);
   font-variant-numeric: tabular-nums;
-  text-align: end;
+  text-align: right;
+  font-size: var(--font-size-100);
+  color: var(--text);
 
   &.Placeholder {
     color: var(--text-subdued);
+    font-style: italic;
   }
 
   &:focus {
     color: var(--text-on-dark);
     background: var(--interactive);
+
     outline: none;
-    border-radius: 2px;
   }
 }
