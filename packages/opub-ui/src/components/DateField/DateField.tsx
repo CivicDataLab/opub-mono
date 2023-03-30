@@ -1,5 +1,6 @@
 import { createCalendar } from '@internationalized/date';
 import { DatePickerBase, DateValue } from '@react-types/datepicker';
+import { DateTimeProps } from '@ui/types/datetime';
 import cx from 'classnames';
 import React from 'react';
 import {
@@ -21,10 +22,23 @@ import styles from './DateField.module.scss';
 type Props = {
   isRange?: boolean;
   trim?: boolean;
-} & (DateFieldStateOptions | AriaDateFieldProps<DateValue>);
+  isPicker?: boolean;
+} & DateTimeProps &
+  (DateFieldStateOptions | AriaDateFieldProps<DateValue>);
 
 function DateField(props: Props) {
-  const { trim, isRange, ...others } = props;
+  const {
+    trim,
+    isRange,
+    helpText,
+    label,
+    labelAction,
+    labelHidden,
+    requiredIndicator,
+    errorMessage,
+    isPicker,
+    ...others
+  } = props;
   let { locale } = useLocale();
   let state = useDateFieldState({
     ...others,
@@ -56,9 +70,20 @@ function DateField(props: Props) {
       </div>
     </div>
   );
+  if (isPicker) {
+    return inputMarkup;
+  }
 
   return (
-    <Labelled label={props.label} {...labelProps}>
+    <Labelled
+      error={state.validationState === 'invalid' && errorMessage}
+      label={label}
+      helpText={helpText}
+      labelHidden={labelHidden}
+      action={labelAction}
+      requiredIndicator={requiredIndicator}
+      {...labelProps}
+    >
       {inputMarkup}
     </Labelled>
   );

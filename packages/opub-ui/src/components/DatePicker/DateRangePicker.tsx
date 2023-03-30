@@ -1,23 +1,35 @@
+import { DateValue } from '@react-types/calendar';
+import { CalendarMinor } from '@shopify/polaris-icons';
+import { DateTimeProps } from '@ui/types/datetime';
 import cx from 'classnames';
 import React, { forwardRef } from 'react';
 import { AriaDateRangePickerProps, useDateRangePicker } from 'react-aria';
 import { DateRangePickerState, useDateRangePickerState } from 'react-stately';
-import styles from './DatePicker.module.scss';
-import { DateValue } from '@react-types/calendar';
-import { CalendarMinor } from '@shopify/polaris-icons';
 import { Button } from '../Button';
 import { RangeCalendar } from '../Calendar';
 import { DateField } from '../DateField';
 import { Icon } from '../Icon';
+import inputStyles from '../Input/Input.module.scss';
 import { Labelled } from '../Labelled';
 import { Popover } from '../Popover';
-import inputStyles from '../Input/Input.module.scss';
+import styles from './DatePicker.module.scss';
 
 type Props = {
   label: string;
-} & (DateRangePickerState | AriaDateRangePickerProps<DateValue>);
+} & Omit<DateTimeProps, 'label'> &
+  (DateRangePickerState | AriaDateRangePickerProps<DateValue>);
 
 const DateRangePicker = forwardRef((props: Props) => {
+  const {
+    helpText,
+    label,
+    labelAction,
+    labelHidden,
+    requiredIndicator,
+    errorMessage,
+    ...others
+  } = props;
+
   let state = useDateRangePickerState(props);
   let ref = React.useRef(null);
   let {
@@ -33,12 +45,20 @@ const DateRangePicker = forwardRef((props: Props) => {
 
   return (
     <div className={`opub-DatePicker ${themeClass}`}>
-      <Labelled label={props.label} {...labelProps}>
+      <Labelled
+        error={state.validationState === 'invalid' && errorMessage}
+        label={label}
+        helpText={helpText}
+        labelHidden={labelHidden}
+        action={labelAction}
+        requiredIndicator={requiredIndicator}
+        {...labelProps}
+      >
         <div ref={ref} className={styles.Wrapper}>
           <div className={cx(styles.Field, inputStyles.TextField)}>
-            <DateField trim isRange {...startFieldProps} />
+            <DateField isPicker trim isRange {...startFieldProps} />
             <span>{'-'}</span>
-            <DateField trim isRange {...endFieldProps} />
+            <DateField isPicker trim isRange {...endFieldProps} />
             <div className={inputStyles.Backdrop} />
           </div>
 

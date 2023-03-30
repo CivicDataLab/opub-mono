@@ -3,14 +3,24 @@ import React from 'react';
 import { AriaTimeFieldProps, useLocale, useTimeField } from 'react-aria';
 import { TimeFieldStateOptions, useTimeFieldState } from 'react-stately';
 import { DateFieldSegment } from '../DateField';
-import { Labelled } from '../Labelled';
+import { Labelled, LabelledProps } from '../Labelled';
 import cx from 'classnames';
 import inputStyles from '../Input/Input.module.scss';
 import styles from './TimeField.module.scss';
+import { DateTimeProps } from '@ui/types/datetime';
 
-type Props = {} & (TimeFieldStateOptions | AriaTimeFieldProps<TimeValue>);
+type Props = {} & DateTimeProps &
+  (TimeFieldStateOptions | AriaTimeFieldProps<TimeValue>);
 
 function TimeField(props: Props) {
+  const {
+    helpText,
+    label,
+    labelAction,
+    labelHidden,
+    requiredIndicator,
+    errorMessage,
+  } = props;
   let { locale } = useLocale();
   let state = useTimeFieldState({
     ...props,
@@ -21,7 +31,15 @@ function TimeField(props: Props) {
   let { labelProps, fieldProps } = useTimeField(props, state, ref);
 
   return (
-    <Labelled label={props.label} {...labelProps}>
+    <Labelled
+      error={state.validationState === 'invalid' && errorMessage}
+      label={label}
+      helpText={helpText}
+      labelHidden={labelHidden}
+      action={labelAction}
+      requiredIndicator={requiredIndicator}
+      {...labelProps}
+    >
       <div className={styles.TimeField}>
         <div className={inputStyles.TextField}>
           <div

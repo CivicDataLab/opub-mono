@@ -1,3 +1,4 @@
+import { getLocalTimeZone, today, parseDate } from '@internationalized/date';
 import { Meta, StoryObj } from '@storybook/react';
 import { DatePicker } from './DatePicker';
 import { DateRangePicker } from './DateRangePicker';
@@ -29,5 +30,18 @@ export const Range: StoryRange = {
   render: ({ ...args }) => <DateRangePicker {...args} />,
   args: {
     label: 'Date Range Picker',
+  },
+};
+
+export const DisabledDates: StoryRange = {
+  ...Range,
+  args: {
+    label: 'Date Picker',
+    minValue: today(getLocalTimeZone()),
+    defaultValue: {
+      start: parseDate('2022-02-03'),
+      end: parseDate('2022-05-03'),
+    },
+    errorMessage: 'Date must be in the future',
   },
 };
