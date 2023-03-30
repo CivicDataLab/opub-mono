@@ -5,5 +5,5 @@ module.exports = {
     includePaths: [path.join(__dirname, 'styles')],
   },
   reactStrictMode: true,
-  transpilePackages: ['opub-ui'],
+  transpilePackages: ['@opub-cdl/ui'],
 };

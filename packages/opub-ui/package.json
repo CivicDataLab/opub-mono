@@ -1,15 +1,32 @@
 {
-  "name": "opub-ui",
+  "name": "@opub-cdl/ui",
+  "description": "OPub UI Library",
   "version": "0.0.1",
+  "private": false,
+  "license": "MIT",
+  "author": "CivicDataLab <tech@civicdatalab.in>",
+  "homepage": "https://github.com/CivicDataLab/opub-mono",
+  "repository": "https://github.com/CivicDataLab/opub-mono",
+  "bugs": {
+    "url": "https://github.com/CivicDataLab/opub-mono/issues"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
+  "keywords": [
+    "civicdatalab",
+    "opub",
+    "ui library",
+    "react",
+    "components",
+    "component library"
+  ],
   "type": "module",
   "main": "./index.tsx",
   "types": "./index.tsx",
-  "license": "MIT",
   "engines": {
     "node": ">=16 <=18"
-  },
-  "author": {
-    "name": "CivicDataLab"
   },
   "scripts": {
     "dev": "storybook dev -p 6006",
@@ -20,6 +37,10 @@
     "coverage": "vitest run --coverage",
     "lint": "TIMING=1 eslint \"**/*.ts*\"",
     "chromatic": "npx chromatic --exit-once-uploaded --project-token=795f989bc619"
+  },
+  "peerDependencies": {
+    "react": "^16.14.0 || ^17.0.0 || ^18.0.0",
+    "react-dom": "^16.14.0 || ^17.0.0 || ^18.0.0"
   },
   "dependencies": {
     "@hookform/resolvers": "^2.9.11",
@@ -41,14 +62,11 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "ariakit": "^2.0.0-next.43",
-    "downshift": "^7.4.1",
     "react": "^18.2.0",
     "react-aria": "^3.22.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "7.20.0",
-    "react-portal": "^4.2.2",
-    "react-stately": "^3.21.0",
-    "yup": "^1.0.0"
+    "react-stately": "^3.21.0"
   },
   "devDependencies": {
     "@storybook/addon-actions": "^6.5.16",
@@ -80,5 +98,5 @@
     "vite-plugin-turbosnap": "^1.0.1",
     "vitest": "^0.28.3"
   },
-  "_id": "opub-ui@0.0.1"
+  "_id": "@opub-cdl/ui@0.0.1"
 }
