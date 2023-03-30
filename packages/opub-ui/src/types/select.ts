@@ -1,7 +1,7 @@
 import { LabelledProps } from '../components/Labelled';
 import type { Error } from './shared/form';
 
-interface StrictOption {
+export interface StrictOption {
   /** Machine value of the option; this is the value passed to `onChange` */
   value: string;
   /** Human-readable text for the option */
@@ -12,11 +12,11 @@ interface StrictOption {
   prefix?: React.ReactNode;
 }
 
-interface HideableStrictOption extends StrictOption {
+export interface HideableStrictOption extends StrictOption {
   hidden?: boolean;
 }
 
-interface StrictGroup {
+export interface StrictGroup {
   /** Title for the group */
   title: string;
   /** List of options */

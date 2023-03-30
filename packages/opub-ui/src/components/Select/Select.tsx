@@ -1,11 +1,6 @@
-import React, { forwardRef, LegacyRef, useId } from 'react';
-import styles from './Select.module.scss';
 import { ChevronUpDown } from '@opub-icons/workflow';
-import type { Error } from '../../types/shared/form';
 import cx from 'classnames';
-import { Box } from '../Box';
-import { helpTextID, Labelled, LabelledProps } from '../Labelled';
-import { Text } from '../Text';
+import React, { forwardRef, LegacyRef, useId } from 'react';
 import {
   HideableStrictOption,
   SelectGroup,
@@ -14,6 +9,10 @@ import {
   StrictGroup,
   StrictOption,
 } from '../../types/select';
+import { Box } from '../Box';
+import { helpTextID, Labelled } from '../Labelled';
+import { Text } from '../Text';
+import styles from './Select.module.scss';
 
 const PLACEHOLDER_VALUE = '';
 

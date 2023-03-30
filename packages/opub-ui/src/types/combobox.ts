@@ -1,4 +1,3 @@
-import { SetState } from 'ariakit-utils/types';
 import React from 'react';
 
 type ComboboxState = {
@@ -12,7 +11,7 @@ type ComboboxState = {
    * const combobox = useComboboxState();
    * combobox.setValue("new value");
    */
-  setValue: SetState<ComboboxState['value']>;
+  setValue: any;
   /**
    * The value of the current active item when `moveType` is `keyboard`. This
    * is not updated when `moveType` is `mouse`.
@@ -23,11 +22,11 @@ type ComboboxState = {
    * which can be used to render the combobox items.
    * @default []
    */
-  list: string[];
+  list: any;
   /**
    * Sets the `list` state.
    */
-  setList: SetState<ComboboxState['list']>;
+  setList: any;
   /**
    * Maximum number of `matches`. If it's set to `false`, there will be no
    * limit.
@@ -88,12 +87,16 @@ export type ComboboxSingleProps = Omit<
    *   const combobox = useComboboxState({ value, setValue: onChange });
    * }
    */
-  setValue?: (value: ComboboxState['value']) => void;
+  setValue?: any;
   /**
    * Function that will be called when setting the combobox `list` state.
    * @example
    * const [list, setList] = useState([]);
    * useComboboxState({ list, setList });
    */
-  setList?: (list: ComboboxState['list']) => void;
+  setList?: any;
+
+  verticalContent?: React.ReactNode;
+  combobox?: any;
+  onFilter?: any;
 };

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { ComboboxSingleProps } from '../../../types/combobox';
 import {
   ComboboxItem,

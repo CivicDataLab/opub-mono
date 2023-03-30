@@ -14,7 +14,7 @@ export type {
   DestructableAction,
   DisableableAction,
 } from './button';
-export type { CheckboxProps, CheckboxRadixProps } from './checkbox';
+export type { CheckboxProps } from './checkbox';
 export type { Choice, ChoiceListProps } from './choicelist';
 export type { ComboboxSingleProps } from './combobox';
 export type {
