@@ -10,7 +10,7 @@
     "resolveJsonModule": true,
     "types": ["vitest/globals"],
     "baseUrl": ".",
-    "jsx": "react",
+    "jsx": "react-jsx",
     "declaration": true,
     "declarationDir": "types",
     "sourceMap": true,
