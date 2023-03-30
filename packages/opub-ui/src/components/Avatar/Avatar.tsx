@@ -19,11 +19,11 @@ const Avatar = ({ label, size, type, image, name }: Props) => {
       .map((item: any) => item[0])
       .join('')
       .toUpperCase();
-  const className = cx(styles.Avatar);
+  const className = cx(styles.Avatar, size === 'Large' && styles.AvatarLarge);
 
   return (
     <>
-      <AvatarRadix.Root>
+      <AvatarRadix.Root className={className}>
         {image && <AvatarRadix.Image></AvatarRadix.Image>}
         {!image && <AvatarRadix.Fallback>{ProfileName}</AvatarRadix.Fallback>}
       </AvatarRadix.Root>
