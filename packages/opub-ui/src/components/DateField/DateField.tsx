@@ -18,18 +18,22 @@ import inputStyles from '../Input/Input.module.scss';
 import { Labelled } from '../Labelled';
 import styles from './DateField.module.scss';
 
-type Props = {} & (DateFieldStateOptions | AriaDateFieldProps<DateValue>);
+type Props = {
+  isRange?: boolean;
+  trim?: boolean;
+} & (DateFieldStateOptions | AriaDateFieldProps<DateValue>);
 
 function DateField(props: Props) {
-  let { locale = 'indian' } = useLocale();
+  const { trim, isRange, ...others } = props;
+  let { locale } = useLocale();
   let state = useDateFieldState({
-    ...props,
+    ...others,
     locale,
     createCalendar,
   });
 
   let ref = React.useRef(null);
-  let { labelProps, fieldProps } = useDateField(props, state, ref);
+  let { labelProps, fieldProps } = useDateField(others, state, ref);
 
   const themeClass = cx(styles.DateField, {});
   const inputMarkup = (
@@ -38,16 +42,17 @@ function DateField(props: Props) {
         <div
           {...fieldProps}
           ref={ref}
-          className={cx(styles.Field, inputStyles.Input)}
+          className={cx(
+            styles.InputField,
+            inputStyles.Input,
+            trim && styles.Trim
+          )}
         >
           {state.segments.map((segment, i) => (
             <DateFieldSegment key={i} segment={segment} state={state} />
           ))}
-          {state.validationState === 'invalid' && (
-            <span aria-hidden="true">🚫</span>
-          )}
         </div>
-        <div className={inputStyles.Backdrop} />
+        {!isRange && <div className={inputStyles.Backdrop} />}
       </div>
     </div>
   );

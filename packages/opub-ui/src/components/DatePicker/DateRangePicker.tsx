@@ -1,39 +1,47 @@
-import { DateValue } from '@react-types/calendar';
-import { CalendarMinor } from '@shopify/polaris-icons';
 import cx from 'classnames';
 import React, { forwardRef } from 'react';
-import { AriaDatePickerProps, useDatePicker } from 'react-aria';
-import { DatePickerState, useDatePickerState } from 'react-stately';
+import { AriaDateRangePickerProps, useDateRangePicker } from 'react-aria';
+import { DateRangePickerState, useDateRangePickerState } from 'react-stately';
+import styles from './DatePicker.module.scss';
+import { DateValue } from '@react-types/calendar';
+import { CalendarMinor } from '@shopify/polaris-icons';
 import { Button } from '../Button';
-import { Calendar } from '../Calendar';
+import { RangeCalendar } from '../Calendar';
 import { DateField } from '../DateField';
 import { Icon } from '../Icon';
 import { Labelled } from '../Labelled';
 import { Popover } from '../Popover';
-import styles from './DatePicker.module.scss';
+import inputStyles from '../Input/Input.module.scss';
 
 type Props = {
   label: string;
-} & (DatePickerState | AriaDatePickerProps<DateValue>);
+} & (DateRangePickerState | AriaDateRangePickerProps<DateValue>);
 
-const DatePicker = forwardRef((props: Props) => {
-  let state = useDatePickerState(props);
+const DateRangePicker = forwardRef((props: Props) => {
+  let state = useDateRangePickerState(props);
   let ref = React.useRef(null);
   let {
-    groupProps,
     labelProps,
-    fieldProps,
+    groupProps,
+    startFieldProps,
+    endFieldProps,
     buttonProps,
     dialogProps,
     calendarProps,
-  } = useDatePicker(props, state, ref);
+  } = useDateRangePicker(props, state, ref);
   const themeClass = cx(styles.DatePicker, {});
 
   return (
     <div className={`opub-DatePicker ${themeClass}`}>
       <Labelled label={props.label} {...labelProps}>
         <div ref={ref} className={styles.Wrapper}>
-          <DateField {...fieldProps} />
+          <div className={cx(styles.Field, inputStyles.TextField)}>
+            <DateField trim isRange {...startFieldProps} />
+            <span>{'-'}</span>
+            <DateField trim isRange {...endFieldProps} />
+            <div className={inputStyles.Backdrop} />
+          </div>
+
           <Popover
             onOpenChange={() => (!state.isOpen ? state.open() : state.close())}
             open={state.isOpen}
@@ -48,7 +56,7 @@ const DatePicker = forwardRef((props: Props) => {
               />
             </Popover.Trigger>
             <Popover.Content>
-              <Calendar {...calendarProps} />
+              <RangeCalendar {...calendarProps} />
             </Popover.Content>
           </Popover>
         </div>
@@ -57,4 +65,4 @@ const DatePicker = forwardRef((props: Props) => {
   );
 });
 
-export { DatePicker };
+export { DateRangePicker };
