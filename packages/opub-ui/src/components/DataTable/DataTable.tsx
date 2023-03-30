@@ -9,7 +9,7 @@ import {
   SortingState,
   useReactTable,
 } from '@tanstack/react-table';
-import type { DataTableProps } from '@ui/types/datatable';
+import type { DataTableProps } from '../../types/datatable';
 import { Cell, HeaderCell } from './components';
 
 const DataTable = (props: DataTableProps) => {

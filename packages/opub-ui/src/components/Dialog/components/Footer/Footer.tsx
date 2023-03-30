@@ -1,7 +1,7 @@
-import { Box } from '@ui/components/Box';
-import { buttonsFrom } from '@ui/components/Button/utils';
-import { Flex } from '@ui/components/Flex';
-import { ComplexAction } from '@ui/types/button';
+import { Box } from '@ui/Box';
+import { buttonsFrom } from '@ui/Button/utils';
+import { Flex } from '@ui/Flex';
+import { ComplexAction } from '../../../../types/button';
 import React from 'react';
 
 export interface FooterProps {

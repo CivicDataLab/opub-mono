@@ -1,4 +1,4 @@
-import { variationName } from '@ui/utils/css';
+import { variationName } from '../../utils/css';
 import cx from 'classnames';
 import styles from './SkeletonDisplayText.module.scss';
 type Size = 'small' | 'medium' | 'large' | 'extraLarge';

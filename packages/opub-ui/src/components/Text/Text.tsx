@@ -1,4 +1,4 @@
-import { TextProps, VariantFontWeightMapping } from '@ui/types/text';
+import { TextProps, VariantFontWeightMapping } from '../../types/text';
 import cx from 'classnames';
 import styles from './Text.module.scss';
 

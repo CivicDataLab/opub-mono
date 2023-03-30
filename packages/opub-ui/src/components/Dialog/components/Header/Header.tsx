@@ -1,5 +1,5 @@
 import { DialogClose } from '@radix-ui/react-dialog';
-import { Flex } from '@ui/components/Flex';
+import { Flex } from '@ui/Flex';
 import React from 'react';
 import { Box } from '../../../Box';
 import { Text } from '../../../Text';

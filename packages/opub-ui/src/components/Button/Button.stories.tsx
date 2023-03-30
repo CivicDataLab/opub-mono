@@ -1,6 +1,6 @@
 import { SortOrderDown } from '@opub-icons/workflow';
 import { Meta, StoryObj } from '@storybook/react';
-import { PropsVariationSection } from '@ui/utils/helpers';
+import { PropsVariationSection } from '../../utils/helpers';
 import { Flex } from '../Flex';
 import { Button } from './Button';
 

@@ -1,4 +1,4 @@
-import { ChoiceListProps } from '@ui/types/choicelist';
+import { ChoiceListProps } from '../../types/choicelist';
 import cx from 'classnames';
 import { useId } from 'react';
 import { Checkbox } from '../Checkbox';

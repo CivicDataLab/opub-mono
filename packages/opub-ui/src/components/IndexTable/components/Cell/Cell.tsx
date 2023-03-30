@@ -2,10 +2,10 @@ import {
   SortAscendingMajor,
   SortDescendingMajor,
 } from '@shopify/polaris-icons';
-import { Icon } from '@ui/components/Icon';
-import { Text } from '@ui/components/Text';
-import { Tooltip } from '@ui/components/Tooltip';
-import { SortDirection } from '@ui/types/datatable';
+import { Icon } from '@ui/Icon';
+import { Text } from '@ui/Text';
+import { Tooltip } from '@ui/Tooltip';
+import { SortDirection } from '../../../../types/datatable';
 import cx from 'classnames';
 import React from 'react';
 import styles from '../../IndexTable.module.scss';

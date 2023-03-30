@@ -1,5 +1,5 @@
-import { Labelled } from '@ui/components/Labelled';
-import { ComboboxSingleProps } from '@ui/types/combobox';
+import { Labelled } from '@ui/Labelled';
+import { ComboboxSingleProps } from '../../../types/combobox';
 import { Combobox as ComboboxComponent } from 'ariakit/combobox';
 import cx from 'classnames';
 import React, { useId, useRef } from 'react';

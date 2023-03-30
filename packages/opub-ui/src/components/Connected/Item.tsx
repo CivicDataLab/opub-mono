@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Connected.module.scss';
 import cx from 'classnames';
-import { useToggle } from '@ui/utils/hooks/use-toggle';
+import { useToggle } from '../../utils/hooks/use-toggle';
 
 type ItemPosition = 'left' | 'right' | 'primary';
 

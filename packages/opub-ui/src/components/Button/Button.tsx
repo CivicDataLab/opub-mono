@@ -1,7 +1,7 @@
 import { ChevronDown, ChevronUp, ChevronUpDown } from '@opub-icons/workflow';
-import { ConnectedDisclosure } from '@ui/types/button';
-import { variationName } from '@ui/utils/css';
-import { MouseUpBlurHandler, handleMouseUpByBlurring } from '@ui/utils/focus';
+import { ConnectedDisclosure } from '../../types/button';
+import { variationName } from '../../utils/css';
+import { MouseUpBlurHandler, handleMouseUpByBlurring } from '../../utils/focus';
 import cx from 'classnames';
 import * as React from 'react';
 import { Spinner } from '../Spinner';

@@ -13,7 +13,7 @@ import {
   SortingState,
   useReactTable,
 } from '@tanstack/react-table';
-import type { IndexTableProps } from '@ui/types/datatable';
+import type { IndexTableProps } from '../../types/datatable';
 import { UncontrolledCheckbox } from '../Checkbox/Checkbox';
 import { Text } from '../Text';
 import { Cell, HeaderCell, Row } from './components';

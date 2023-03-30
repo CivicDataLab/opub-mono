@@ -1,9 +1,9 @@
 import { CloseCircle } from '@opub-icons/workflow';
-import { TextFieldProps } from '@ui/types/input';
-import { Key } from '@ui/types/shared/key';
-import { variationName } from '@ui/utils/css';
-import { useForwardRef } from '@ui/utils/helpers';
-import { useIsAfterInitialMount } from '@ui/utils/hooks';
+import { TextFieldProps } from '../../types/input';
+import { Key } from '../../types/shared/key';
+import { variationName } from '../../utils/css';
+import { useForwardRef } from '../../utils/helpers';
+import { useIsAfterInitialMount } from '../../utils/hooks';
 import cx from 'classnames';
 import React, {
   createElement,

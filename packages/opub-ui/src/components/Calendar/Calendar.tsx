@@ -2,7 +2,7 @@ import { createCalendar } from '@internationalized/date';
 import { createDOMRef } from '@react-spectrum/utils';
 import { AriaCalendarProps, DateValue } from '@react-types/calendar';
 import { ArrowLeftMinor, ArrowRightMinor } from '@shopify/polaris-icons';
-import { FocusableRef } from '@ui/types/shared/refs';
+import { FocusableRef } from '../../types/shared/refs';
 import cx from 'classnames';
 import React, { forwardRef, useImperativeHandle } from 'react';
 import { useCalendar, useLocale } from 'react-aria';

@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { Form } from '../Form';
 import { Checkbox } from './Checkbox';
-import { PropsVariationSection } from '@ui/utils/helpers';
+import { PropsVariationSection } from '../../utils/helpers';
 import { Button } from '../Button';
 
 /**

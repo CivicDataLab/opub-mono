@@ -24,12 +24,14 @@ export default [
     plugins: [
       resolve(),
       commonjs(),
-      scss(),
+      scss({ output: false }),
       typescript({ tsconfig: './tsconfig.json' }),
       alias({
         entries: {
-          '@ui/*': './src/*',
-          '@utils/*': './utils/*',
+          '@ui/*': './src/components/*',
+          '@utils/*': './src/utils/*',
+          '@types/*': './src/types/*',
+          '@tokens/*': './src/tokens/*',
         },
       }),
       svgr(),

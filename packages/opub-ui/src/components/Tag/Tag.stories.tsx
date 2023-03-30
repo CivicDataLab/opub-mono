@@ -2,7 +2,7 @@ import { Meta, StoryObj } from '@storybook/react';
 import { Tag } from './Tag';
 import { Light } from '@opub-icons/workflow';
 import { Flex } from '../Flex';
-import { PropsVariationSection } from '@ui/utils/helpers';
+import { PropsVariationSection } from '../../utils/helpers';
 
 /**
  * Tag represent a set of interactive keywords that help label, organize, and categorize objects

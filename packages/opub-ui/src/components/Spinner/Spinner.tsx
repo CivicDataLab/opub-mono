@@ -1,7 +1,7 @@
 import cx from 'classnames';
 
-import { variationName } from '@ui/utils/css';
-import { useIsAfterInitialMount } from '@ui/utils/hooks/use-is-after-initial-mount';
+import { variationName } from '../../utils/css';
+import { useIsAfterInitialMount } from '../../utils/hooks/use-is-after-initial-mount';
 import styles from './Spinner.module.scss';
 
 type Size = 'small' | 'large';

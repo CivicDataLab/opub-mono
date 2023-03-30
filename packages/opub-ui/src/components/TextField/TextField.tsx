@@ -1,4 +1,4 @@
-import { TextFieldProps } from '@ui/types/input';
+import { TextFieldProps } from '../../types/input';
 import { Controller, useFormContext } from 'react-hook-form';
 import { Input } from '../Input';
 

@@ -1,7 +1,7 @@
-import { Flex } from '@ui/components/Flex';
-import { UnstyledLink } from '@ui/components/Link/BaseLink';
-import type { ActionListItemDescriptor } from '@ui/types/actionlist';
-import { handleMouseUpByBlurring } from '@ui/utils/focus';
+import { Flex } from '@ui/Flex';
+import { UnstyledLink } from '@ui/Link/BaseLink';
+import type { ActionListItemDescriptor } from '../../../../types/actionlist';
+import { handleMouseUpByBlurring } from '../../../../utils/focus';
 import cx from 'classnames';
 import React from 'react';
 import { Box } from '../../../Box';

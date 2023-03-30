@@ -7,7 +7,7 @@ import { Labelled, LabelledProps } from '../Labelled';
 import cx from 'classnames';
 import inputStyles from '../Input/Input.module.scss';
 import styles from './TimeField.module.scss';
-import { DateTimeProps } from '@ui/types/datetime';
+import { DateTimeProps } from '../../types/datetime';
 
 type Props = {} & DateTimeProps &
   (TimeFieldStateOptions | AriaTimeFieldProps<TimeValue>);

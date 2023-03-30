@@ -1,6 +1,6 @@
 import { LabelProps } from '@radix-ui/react-label';
-import { Action } from '@ui/types/button';
-import type { Error } from '@ui/types/shared/form';
+import { Action } from '../../types/button';
+import type { Error } from '../../types/shared/form';
 import cx from 'classnames';
 import React from 'react';
 import { buttonFrom } from '../Button/utils';

@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react';
-import { PropsVariationSection } from '@ui/utils/helpers';
+import { PropsVariationSection } from '../../utils/helpers';
 import { InlineMessage } from './InlineMessage';
 
 /**

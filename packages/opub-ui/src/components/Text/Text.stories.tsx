@@ -1,7 +1,6 @@
 import { Meta } from '@storybook/react';
 import { Flex } from '../Flex';
 import { Text } from './Text';
-import { View } from '../View';
 
 /**
  * Typography helps establish hierarchy and communicate important content by creating clear visual patterns.

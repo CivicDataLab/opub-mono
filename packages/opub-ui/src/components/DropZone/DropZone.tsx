@@ -19,13 +19,13 @@ import {
   getDataTransferFiles,
   defaultAllowMultiple,
 } from './utils';
-import { useEventListener } from '@ui/utils/hooks/use-event-listener';
+import { useEventListener } from '../../utils/hooks/use-event-listener';
 import { Flex } from '../Flex';
-import { debounce } from '@ui/utils/debounce';
-import { variationName } from '@ui/utils/css';
-import { isServer } from '@ui/utils/target';
-import { useComponentDidMount } from '@ui/utils/hooks/use-component-did-mount';
-import { useToggle } from '@ui/utils/hooks/use-toggle';
+import { debounce } from '../../utils/debounce';
+import { variationName } from '../../utils/css';
+import { isServer } from '../../utils/target';
+import { useComponentDidMount } from '../../utils/hooks/use-component-did-mount';
+import { useToggle } from '../../utils/hooks/use-toggle';
 import { AlertCircleFilled, UploadToCloud } from '@opub-icons/workflow';
 
 export type DropZoneFileType = 'file' | 'image' | 'video';

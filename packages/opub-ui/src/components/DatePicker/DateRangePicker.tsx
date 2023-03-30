@@ -1,6 +1,6 @@
 import { DateValue } from '@react-types/calendar';
 import { CalendarMinor } from '@shopify/polaris-icons';
-import { DateTimeProps } from '@ui/types/datetime';
+import { DateTimeProps } from '../../types/datetime';
 import cx from 'classnames';
 import React, { forwardRef } from 'react';
 import { AriaDateRangePickerProps, useDateRangePicker } from 'react-aria';

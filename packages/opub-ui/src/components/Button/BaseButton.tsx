@@ -1,6 +1,6 @@
-import type { BaseButtonProps } from '@ui/types/button';
-import { handleMouseUpByBlurring } from '@ui/utils/focus';
-import { useDisableClick } from '@ui/utils/hooks';
+import type { BaseButtonProps } from '../../types/button';
+import { handleMouseUpByBlurring } from '../../utils/focus';
+import { useDisableClick } from '../../utils/hooks';
 import React, { LegacyRef } from 'react';
 import { UnstyledLink } from '../Link/BaseLink';
 export interface UnstyledButtonProps extends BaseButtonProps {

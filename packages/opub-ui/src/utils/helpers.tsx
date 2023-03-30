@@ -1,4 +1,4 @@
-import { Flex, Form } from '@ui/components';
+import { Form } from '../components/Form/Form';
 import React from 'react';
 
 export function PropsVariationSection({

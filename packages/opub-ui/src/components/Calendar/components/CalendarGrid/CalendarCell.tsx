@@ -1,5 +1,5 @@
 import { CalendarDate, isSameDay, isToday } from '@internationalized/date';
-import { Text } from '@ui/components/Text';
+import { Text } from '@ui/Text';
 import cx from 'classnames';
 import React from 'react';
 import { AriaCalendarCellProps, useCalendarCell } from 'react-aria';

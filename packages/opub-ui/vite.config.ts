@@ -15,7 +15,6 @@ export default defineConfig({
     alias: [{ find: '@ui', replacement: path.resolve(__dirname, '/src') }],
   },
   css: {
-    postcss: null,
     preprocessorOptions: {
       scss: {
         additionalData: `

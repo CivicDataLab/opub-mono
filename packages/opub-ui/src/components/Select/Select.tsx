@@ -1,7 +1,7 @@
 import React, { forwardRef, LegacyRef, useId } from 'react';
 import styles from './Select.module.scss';
 import { ChevronUpDown } from '@opub-icons/workflow';
-import type { Error } from '@ui/types/shared/form';
+import type { Error } from '../../types/shared/form';
 import cx from 'classnames';
 import { Box } from '../Box';
 import { helpTextID, Labelled, LabelledProps } from '../Labelled';
@@ -13,7 +13,7 @@ import {
   SelectProps,
   StrictGroup,
   StrictOption,
-} from '@ui/types/select';
+} from '../../types/select';
 
 const PLACEHOLDER_VALUE = '';
 

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import styles from './Divider.module.scss';
-import { DividerProps } from '@ui/types/divider';
+import { DividerProps } from '../../types/divider';
 
 export const Divider = ({ borderStyle = 'divider' }: DividerProps) => {
   const style = {

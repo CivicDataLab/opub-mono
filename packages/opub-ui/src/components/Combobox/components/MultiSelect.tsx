@@ -1,8 +1,8 @@
-import { Box } from '@ui/components/Box';
-import { Flex } from '@ui/components/Flex';
-import { Tag } from '@ui/components/Tag';
-import { Text } from '@ui/components/Text';
-import { ComboboxSingleProps } from '@ui/types/combobox';
+import { Box } from '@ui/Box';
+import { Flex } from '@ui/Flex';
+import { Tag } from '@ui/Tag';
+import { Text } from '@ui/Text';
+import { ComboboxSingleProps } from '../../../types/combobox';
 import {
   ComboboxItem,
   ComboboxPopover,

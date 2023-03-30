@@ -1,6 +1,6 @@
 import { createCalendar } from '@internationalized/date';
 import { DatePickerBase, DateValue } from '@react-types/datepicker';
-import { DateTimeProps } from '@ui/types/datetime';
+import { DateTimeProps } from '../../types/datetime';
 import cx from 'classnames';
 import React from 'react';
 import {

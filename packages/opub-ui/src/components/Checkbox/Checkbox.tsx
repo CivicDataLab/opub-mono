@@ -1,6 +1,6 @@
 import { CheckmarkSize100, DashSize100 } from '@opub-icons/ui';
 import * as CheckboxRadix from '@radix-ui/react-checkbox';
-import { CheckboxProps } from '@ui/types/checkbox';
+import { CheckboxProps } from '../../types/checkbox';
 import cx from 'classnames';
 import React from 'react';
 import { Controller, useFormContext } from 'react-hook-form';

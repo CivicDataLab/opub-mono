@@ -18,8 +18,10 @@
     "moduleResolution": "node",
     "emitDeclarationOnly": true,
     "paths": {
-      "@ui/*": ["./src/*"],
-      "@utils/*": ["./utils/*"]
+      "@ui/*": ["./src/components/*"],
+      "@utils/*": ["./src/utils/*"],
+      "@types/*": ["./src/types/*"],
+      "@tokens/*": ["./src/tokens/*"]
     }
   },
 

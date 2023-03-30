@@ -1,5 +1,5 @@
-import type { Error } from '@ui/types/shared/form';
-import { stateIcon } from '@ui/utils/icons';
+import type { Error } from '../../types/shared/form';
+import { stateIcon } from '../../utils/icons';
 import React from 'react';
 import styles from './InlineMessage.module.scss';
 

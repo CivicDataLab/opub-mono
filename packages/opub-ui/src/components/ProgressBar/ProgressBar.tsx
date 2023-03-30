@@ -1,7 +1,7 @@
 import * as Progress from '@radix-ui/react-progress';
-import { motion } from '@ui/tokens/motion';
-import { ProgressBarProps } from '@ui/types/progressbar';
-import { variationName } from '@ui/utils/css';
+import { motion } from '../../tokens/motion';
+import { ProgressBarProps } from '../../types/progressbar';
+import { variationName } from '../../utils/css';
 import cx from 'classnames';
 import React, { forwardRef, Ref } from 'react';
 import styles from './ProgressBar.module.scss';
