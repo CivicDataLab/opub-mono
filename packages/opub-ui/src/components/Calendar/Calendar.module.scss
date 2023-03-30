@@ -82,6 +82,10 @@
         color: var(--text-on-interactive);
       }
     }
+
+    &.SelectionStart.SelectionEnd {
+      border-radius: var(--border-radius-6);
+    }
   }
 
   &.Unavailable {
@@ -94,6 +98,11 @@
     > span {
       color: var(--text-disabled);
     }
+  }
+
+  &.Today {
+    border-radius: var(--border-radius-half);
+    background-color: var(--surface-pressed);
   }
 }
 
