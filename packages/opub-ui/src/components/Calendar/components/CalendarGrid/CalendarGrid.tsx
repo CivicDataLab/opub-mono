@@ -1,10 +1,9 @@
-import { AriaCalendarGridProps, useCalendarGrid, useLocale } from 'react-aria';
 import { getWeeksInMonth } from '@internationalized/date';
-import { CalendarCell } from './CalendarCell';
-import { CalendarState, RangeCalendarState } from 'react-stately';
-import cx from 'classnames';
-import styles from '../../Calendar.module.scss';
 import { Text } from '@ui/components/Text';
+import { AriaCalendarGridProps, useCalendarGrid, useLocale } from 'react-aria';
+import { CalendarState, RangeCalendarState } from 'react-stately';
+import styles from '../../Calendar.module.scss';
+import { CalendarCell } from './CalendarCell';
 
 interface CalendarGridProps extends AriaCalendarGridProps {
   state: CalendarState | RangeCalendarState;
@@ -17,7 +16,6 @@ export function CalendarGrid({ state, ...props }: CalendarGridProps) {
   // Get the number of weeks in the month so we can render the proper number of rows.
   let weeksInMonth = getWeeksInMonth(state.visibleRange.start, locale);
 
-  const classname = cx(styles.Calendar, {});
   return (
     <table {...gridProps}>
       <thead {...headerProps}>

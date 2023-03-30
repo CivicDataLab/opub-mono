@@ -20,7 +20,17 @@
   margin: 0 8px;
 
   button {
+    @include unstyled-button;
+    @include focus-ring;
+    &:focus-visible:not(:active) {
+      @include focus-ring($style: 'focused');
+      outline: var(--border-width-3) solid transparent;
+    }
+
+    border-radius: var(--border-radius-1);
+    padding: var(--space-05) var(--space-1);
     transition: background-color var(--duration-100) var(--ease-in-out);
+
     &:hover {
       background-color: var(--surface-hovered);
     }
@@ -38,7 +48,7 @@
   padding: var(--space-1) var(--space-2);
   transition: background-color var(--duration-100) var(--ease-in-out);
 
-  &:hover {
+  &:hover:not(.Disabled, .Selected, .Unavailable) {
     background-color: var(--surface-hovered);
   }
 
@@ -48,22 +58,51 @@
     > span {
       color: var(--text-on-interactive);
     }
+
+    &.HighlightedRange {
+      background-color: var(--surface-selected);
+
+      > span {
+        color: var(--text);
+      }
+    }
+
+    &.SelectionStart {
+      border-radius: var(--border-radius-6) 0px 0px var(--border-radius-6);
+      background-color: var(--interactive);
+      > span {
+        color: var(--text-on-interactive);
+      }
+    }
+
+    &.SelectionEnd {
+      border-radius: 0px var(--border-radius-6) var(--border-radius-6) 0px;
+      background-color: var(--interactive);
+      > span {
+        color: var(--text-on-interactive);
+      }
+    }
+
+    &.SelectionStart.SelectionEnd {
+      border-radius: var(--border-radius-6);
+    }
   }
 
   &.Unavailable {
-    background-color: var(--surface-critical);
-
     > span {
-      color: var(--text-on-critical);
+      color: var(--text-critical);
     }
   }
 
   &.Disabled {
-    background-color: var(--surface-disabled);
-
     > span {
-      color: var(--text-subdued);
+      color: var(--text-disabled);
     }
+  }
+
+  &.Today {
+    border-radius: var(--border-radius-half);
+    background-color: var(--surface-pressed);
   }
 }
 

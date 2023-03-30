@@ -1,9 +1,33 @@
 @import '../../../styles/common';
 
 .DatePickerTrigger {
+  width: fit-content;
 }
 
 .Wrapper {
-  display: flex;
+  display: inline-flex;
   gap: var(--space-1);
+  width: fit-content;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+
+  label {
+    width: fit-content;
+  }
+}
+
+.Field {
+  flex-wrap: wrap;
+  width: fit-content;
+  padding: var(--space-1);
+  min-width: 230px;
+
+  > span {
+    color: var(--text);
+    z-index: var(--z-1);
+    padding-inline: var(--space-05);
+  }
+  @media #{$breakpoints-sm-down} {
+    min-width: 0;
+  }
 }
