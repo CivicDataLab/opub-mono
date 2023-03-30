@@ -1,4 +1,4 @@
-export interface NonMutuallyExclusiveProps {
+interface NonMutuallyExclusiveProps {
   /** Content to display in the tag */
   children?: React.ReactNode;
   /** Disables the tag  */

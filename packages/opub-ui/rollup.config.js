@@ -29,9 +29,6 @@ export default [
       alias({
         entries: {
           '@ui/*': './src/components/*',
-          '@utils/*': './src/utils/*',
-          '@types/*': './src/types/*',
-          '@tokens/*': './src/tokens/*',
         },
       }),
       svgr(),

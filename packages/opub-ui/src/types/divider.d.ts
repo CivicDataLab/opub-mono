@@ -1,4 +1,4 @@
-export type BorderTokenAlias =
+type BorderTokenAlias =
   | 'base'
   | 'dark'
   | 'divider'

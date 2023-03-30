@@ -76,7 +76,7 @@ export interface DestructableAction extends Action {
   destructive?: boolean;
 }
 
-export interface ActionListItemDescriptor
+export interface ActionButtonListItemDescriptor
   extends DisableableAction,
     DestructableAction {
   /** Visually hidden text for screen readers */

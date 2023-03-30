@@ -1,13 +1,10 @@
-import type {
-  ActionListItemDescriptor,
-  ActionListSection,
-} from '../../types/actionlist';
-import { Key } from '../../types/shared/key';
+import { useRef } from 'react';
+import type { ActionListItemDescriptor, ActionListSection } from 'src/types';
+import { Key } from '../../types';
 import {
   wrapFocusNextFocusableMenuItem,
   wrapFocusPreviousFocusableMenuItem,
 } from '../../utils/focus';
-import { useRef } from 'react';
 import { Box } from '../Box';
 import { KeypressListener } from '../KeypressListener';
 import { Item, ItemProps } from './components/Item';
