@@ -69,7 +69,7 @@ interface DatePickerSegmentProps extends DatePickerBase<DateValue> {
   state: DateFieldState;
 }
 
-function DateFieldSegment({ segment, state }: DatePickerSegmentProps) {
+export function DateFieldSegment({ segment, state }: DatePickerSegmentProps) {
   let ref = React.useRef(null);
   let { segmentProps } = useDateSegment(segment, state, ref);
   const classname = cx(
