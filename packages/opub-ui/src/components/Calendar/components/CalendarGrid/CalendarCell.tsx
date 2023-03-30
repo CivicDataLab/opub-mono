@@ -1,17 +1,17 @@
-import React from 'react';
-import { useCalendarCell, AriaCalendarCellProps } from 'react-aria';
-import { CalendarState, RangeCalendarState } from 'react-stately';
-import { CalendarDate } from '@internationalized/date';
-import cx from 'classnames';
-import styles from '../../Calendar.module.scss';
+import { CalendarDate, isSameDay, isToday } from '@internationalized/date';
 import { Text } from '@ui/components/Text';
+import cx from 'classnames';
+import React from 'react';
+import { AriaCalendarCellProps, useCalendarCell } from 'react-aria';
+import { CalendarState, RangeCalendarState } from 'react-stately';
+import styles from '../../Calendar.module.scss';
 
 interface CalendarCellProps extends AriaCalendarCellProps {
   state: CalendarState | RangeCalendarState;
   date: CalendarDate;
 }
 
-export function CalendarCell({ state, date, ...props }: CalendarCellProps) {
+export function CalendarCell({ state, date }: CalendarCellProps) {
   let ref = React.useRef(null);
   let {
     cellProps,
@@ -20,14 +20,25 @@ export function CalendarCell({ state, date, ...props }: CalendarCellProps) {
     isOutsideVisibleRange,
     isDisabled,
     isUnavailable,
+    isInvalid,
     formattedDate,
   } = useCalendarCell({ date }, state, ref);
 
+  let highlightedRange = 'highlightedRange' in state && state.highlightedRange;
+  let isSelectionStart =
+    isSelected && highlightedRange && isSameDay(date, highlightedRange.start);
+  let isSelectionEnd =
+    isSelected && highlightedRange && isSameDay(date, highlightedRange.end);
+
   const classname = cx(
     styles.Cell,
+    isToday(date, state.timeZone) && styles.Today,
     isSelected && styles.Selected,
-    isDisabled && styles.Disabled,
-    isUnavailable && styles.Unavailable
+    isDisabled && !isInvalid && styles.Disabled,
+    isUnavailable && styles.Unavailable,
+    isSelectionStart && styles.SelectionStart,
+    isSelectionEnd && styles.SelectionEnd,
+    highlightedRange && styles.HighlightedRange
   );
 
   return (

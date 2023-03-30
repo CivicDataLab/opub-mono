@@ -1,17 +1,16 @@
-import React, { forwardRef } from 'react';
-import styles from './DatePicker.module.scss';
+import { DateValue } from '@react-types/calendar';
+import { CalendarMinor } from '@shopify/polaris-icons';
 import cx from 'classnames';
+import React, { forwardRef } from 'react';
 import { AriaDatePickerProps, useDatePicker } from 'react-aria';
 import { DatePickerState, useDatePickerState } from 'react-stately';
-// import {Button, Calendar, DateField, Dialog, Popover} from 'your-component-library';
-import { DateValue } from '@react-types/calendar';
 import { Button } from '../Button';
-import { DateField } from '../DateField';
 import { Calendar } from '../Calendar';
-import { Popover } from '../Popover';
-import { Labelled } from '../Labelled';
-import { CalendarMajor, CalendarMinor } from '@shopify/polaris-icons';
+import { DateField } from '../DateField';
 import { Icon } from '../Icon';
+import { Labelled } from '../Labelled';
+import { Popover } from '../Popover';
+import styles from './DatePicker.module.scss';
 
 type Props = {
   label: string;
@@ -33,8 +32,8 @@ const DatePicker = forwardRef((props: Props) => {
   return (
     <div className={`opub-DatePicker ${themeClass}`}>
       <Labelled label={props.label} {...labelProps}>
-        <div {...groupProps} ref={ref} className={styles.Wrapper}>
-          <DateField {...fieldProps} />
+        <div ref={ref} className={styles.Wrapper}>
+          <DateField isPicker {...fieldProps} />
           <Popover
             onOpenChange={() => (!state.isOpen ? state.open() : state.close())}
             open={state.isOpen}
@@ -44,7 +43,6 @@ const DatePicker = forwardRef((props: Props) => {
               <Button
                 icon={<Icon source={CalendarMinor} />}
                 size="slim"
-                // plain
                 {...buttonProps}
                 onClick={() => (!state.isOpen ? state.open() : state.close())}
               />

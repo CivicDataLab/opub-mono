@@ -1,5 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { DateField } from './DateField';
+import { now, getLocalTimeZone } from '@internationalized/date';
 
 /**
  * DateFields allow users to enter and edit date and time values using a keyboard
@@ -14,10 +15,14 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  render: ({ ...args }) => {
-    return <DateField {...args} />;
-  },
   args: {
-    label: 'DateField',
+    label: 'Date Field',
+  },
+};
+
+export const DateTime: Story = {
+  args: {
+    label: 'Date and Time',
+    placeholderValue: now(getLocalTimeZone()),
   },
 };
