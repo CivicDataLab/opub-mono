@@ -143,21 +143,9 @@ export interface StyleProps {
   isHidden?: Responsive<boolean>;
 }
 
-type BackgroundColor = BackgroundColorValue;
-type BorderColor = BorderColorValue;
-
 // These support more properties than specific Spectrum components
 // but still based on spectrum global/alias variables.
 export interface ViewStyleProps extends StyleProps {
-  /**
-   * The Spectrum color token version number.
-   * @default 5
-   */
-  colorVersion?: C;
-
-  /** The background color for the element. */
-  backgroundColor?: Responsive<BackgroundColor[C]>;
-
   /** The width of the element's border on all four sides. See [MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/border-width). */
   borderWidth?: Responsive<BorderSizeValue>;
   /** The width of the border on the logical start side, depending on the layout direction. See [MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-start-width). */
@@ -174,23 +162,6 @@ export interface ViewStyleProps extends StyleProps {
   borderXWidth?: Responsive<BorderSizeValue>;
   /** The width of the top and bottom borders. See [MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/border-width). */
   borderYWidth?: Responsive<BorderSizeValue>;
-
-  /** The color of the element's border on all four sides. See [MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/border-color). */
-  borderColor?: Responsive<BorderColor[C]>;
-  /** The color of the border on the logical start side, depending on the layout direction. See [MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-start-color). */
-  borderStartColor?: Responsive<BorderColor[C]>;
-  /** The color of the border on the logical end side, depending on the layout direction. See [MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-end-color). */
-  borderEndColor?: Responsive<BorderColor[C]>;
-  // borderLeftColor?: BorderColorValue,
-  // borderRightColor?: BorderColorValue,
-  /** The color of the top border. See [MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-color). */
-  borderTopColor?: Responsive<BorderColor[C]>;
-  /** The color of the bottom border. See [MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-color). */
-  borderBottomColor?: Responsive<BorderColor[C]>;
-  /** The color of the left and right borders. See [MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/border-color). */
-  borderXColor?: Responsive<BorderColor[C]>;
-  /** The color of the top and bottom borders. See [MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/border-width). */
-  borderYColor?: Responsive<BorderColor[C]>;
 
   /** The border radius on all four sides of the element. See [MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/border-radius). */
   borderRadius?: Responsive<BorderRadiusValue>;

@@ -1,6 +1,6 @@
-import { JSXElementConstructor, ReactNode } from 'react';
+import { ActionListItemDescriptor } from './actionlist';
 
-interface BaseButtonProps {
+export interface BaseButtonProps {
   /** A unique identifier for the button */
   id?: string;
   /** A destination to link to, rendered in the href attribute of a link */
@@ -96,7 +96,7 @@ export interface ActionButtonListItemDescriptor
   role?: string;
 }
 
-interface ConnectedDisclosure {
+export interface ConnectedDisclosure {
   /** Visually hidden label for the connected disclosure button.
    * @default 'Related actions'
    */
@@ -110,8 +110,4 @@ interface ConnectedDisclosure {
 export interface ComplexAction
   extends Action,
     DisableableAction,
-    DestructableAction,
-    IconableAction,
-    OutlineableAction,
-    LoadableAction,
-    PlainAction {}
+    DestructableAction {}

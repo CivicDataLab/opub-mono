@@ -7,9 +7,9 @@ import {
   DepthShadowAlias,
   ShapeBorderWidthScale,
   SpacingSpaceScale,
-} from '@ui/tokens';
+} from '../tokens';
 
-import { ResponsiveProp } from '../../utils/css';
+import { ResponsiveProp } from '../utils/css';
 
 type Element = 'div' | 'span' | 'section' | 'legend' | 'ul' | 'li';
 

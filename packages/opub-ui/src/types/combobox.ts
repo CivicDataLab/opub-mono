@@ -1,4 +1,5 @@
 import { SetState } from 'ariakit-utils/types';
+import React from 'react';
 
 type ComboboxState = {
   /**
@@ -47,7 +48,7 @@ type ComboboxState = {
 };
 
 export type ComboboxSingleProps = Omit<
-  InputHTMLAttributes<HTMLInputElement>,
+  React.InputHTMLAttributes<HTMLInputElement>,
   'autoComplete'
 > & {
   // label for the combobox

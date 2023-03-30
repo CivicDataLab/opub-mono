@@ -1,8 +1,11 @@
+import { LabelledProps } from '../components/Labelled';
+import React from 'react';
+
 export interface DateTimeProps {
   /** Additional hint text to display */
   helpText?: React.ReactNode;
   /** Additional error text to display */
-  errorMessage?: ReactNode;
+  errorMessage?: React.ReactNode;
   /** Label for the input */
   label?: React.ReactNode;
   /** Adds an action to the label */

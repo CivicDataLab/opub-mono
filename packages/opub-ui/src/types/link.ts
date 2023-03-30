@@ -1,3 +1,5 @@
+import React from 'react';
+
 export interface LinkLikeComponentProps
   extends React.HTMLProps<HTMLAnchorElement> {
   /** The url to link to */
