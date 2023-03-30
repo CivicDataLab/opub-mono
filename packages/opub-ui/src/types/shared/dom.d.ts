@@ -1,5 +1,4 @@
 /*
- * Copyright 2020 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License. You may obtain a copy
  * of the License at http://www.apache.org/licenses/LICENSE-2.0
@@ -18,29 +17,29 @@ import {
   CSSProperties,
   FormEventHandler,
   DOMAttributes as ReactDOMAttributes,
-  ReactEventHandler
+  ReactEventHandler,
 } from 'react';
 
 export interface AriaLabelingProps {
   /**
    * Defines a string value that labels the current element.
    */
-  'aria-label'?: string,
+  'aria-label'?: string;
 
   /**
    * Identifies the element (or elements) that labels the current element.
    */
-  'aria-labelledby'?: string,
+  'aria-labelledby'?: string;
 
   /**
    * Identifies the element (or elements) that describes the object.
    */
-  'aria-describedby'?: string,
+  'aria-describedby'?: string;
 
   /**
    * Identifies the element (or elements) that provide a detailed, extended description for the object.
    */
-  'aria-details'?: string
+  'aria-details'?: string;
 }
 
 export interface AriaValidationProps {
@@ -48,7 +47,7 @@ export interface AriaValidationProps {
   /**
    * Identifies the element that provides an error message for the object.
    */
-  'aria-errormessage'?: string
+  'aria-errormessage'?: string;
 }
 
 // A set of common DOM props that are allowed on any component
@@ -57,7 +56,7 @@ export interface DOMProps {
   /**
    * The element's unique identifier. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id).
    */
-  id?: string
+  id?: string;
 }
 
 export interface FocusableDOMProps extends DOMProps {
@@ -67,58 +66,57 @@ export interface FocusableDOMProps extends DOMProps {
    * be avoided except in rare scenarios where an alternative means of accessing
    * the element or its functionality via the keyboard is available.
    */
-  excludeFromTabOrder?: boolean
+  excludeFromTabOrder?: boolean;
 }
-
 
 export interface TextInputDOMEvents {
   // Clipboard events
   /**
    * Handler that is called when the user copies text. See [MDN](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/oncopy).
    */
-   onCopy?: ClipboardEventHandler<HTMLInputElement>,
+  onCopy?: ClipboardEventHandler<HTMLInputElement>;
 
-   /**
-    * Handler that is called when the user cuts text. See [MDN](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/oncut).
-    */
-   onCut?: ClipboardEventHandler<HTMLInputElement>,
+  /**
+   * Handler that is called when the user cuts text. See [MDN](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/oncut).
+   */
+  onCut?: ClipboardEventHandler<HTMLInputElement>;
 
-   /**
-    * Handler that is called when the user pastes text. See [MDN](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/onpaste).
-    */
-   onPaste?: ClipboardEventHandler<HTMLInputElement>,
+  /**
+   * Handler that is called when the user pastes text. See [MDN](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/onpaste).
+   */
+  onPaste?: ClipboardEventHandler<HTMLInputElement>;
 
-   // Composition events
-   /**
-    * Handler that is called when a text composition system starts a new text composition session. See [MDN](https://developer.mozilla.org/en-US/docs/Web/API/Element/compositionstart_event).
-    */
-   onCompositionStart?: CompositionEventHandler<HTMLInputElement>,
+  // Composition events
+  /**
+   * Handler that is called when a text composition system starts a new text composition session. See [MDN](https://developer.mozilla.org/en-US/docs/Web/API/Element/compositionstart_event).
+   */
+  onCompositionStart?: CompositionEventHandler<HTMLInputElement>;
 
-   /**
-    * Handler that is called when a text composition system completes or cancels the current text composition session. See [MDN](https://developer.mozilla.org/en-US/docs/Web/API/Element/compositionend_event).
-    */
-   onCompositionEnd?: CompositionEventHandler<HTMLInputElement>,
+  /**
+   * Handler that is called when a text composition system completes or cancels the current text composition session. See [MDN](https://developer.mozilla.org/en-US/docs/Web/API/Element/compositionend_event).
+   */
+  onCompositionEnd?: CompositionEventHandler<HTMLInputElement>;
 
-   /**
-    * Handler that is called when a new character is received in the current text composition session. See [MDN](https://developer.mozilla.org/en-US/docs/Web/API/Element/compositionupdate_event).
-    */
-   onCompositionUpdate?: CompositionEventHandler<HTMLInputElement>,
+  /**
+   * Handler that is called when a new character is received in the current text composition session. See [MDN](https://developer.mozilla.org/en-US/docs/Web/API/Element/compositionupdate_event).
+   */
+  onCompositionUpdate?: CompositionEventHandler<HTMLInputElement>;
 
-   // Selection events
-   /**
-    * Handler that is called when text in the input is selected. See [MDN](https://developer.mozilla.org/en-US/docs/Web/API/Element/select_event).
-    */
-   onSelect?: ReactEventHandler<HTMLInputElement>,
+  // Selection events
+  /**
+   * Handler that is called when text in the input is selected. See [MDN](https://developer.mozilla.org/en-US/docs/Web/API/Element/select_event).
+   */
+  onSelect?: ReactEventHandler<HTMLInputElement>;
 
-   // Input events
-   /**
-    * Handler that is called when the input value is about to be modified. See [MDN](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/beforeinput_event).
-    */
-   onBeforeInput?: FormEventHandler<HTMLInputElement>,
-   /**
-    * Handler that is called when the input value is modified. See [MDN](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/input_event).
-    */
-   onInput?: FormEventHandler<HTMLInputElement>
+  // Input events
+  /**
+   * Handler that is called when the input value is about to be modified. See [MDN](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/beforeinput_event).
+   */
+  onBeforeInput?: FormEventHandler<HTMLInputElement>;
+  /**
+   * Handler that is called when the input value is modified. See [MDN](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/input_event).
+   */
+  onInput?: FormEventHandler<HTMLInputElement>;
 }
 
 // DOM props that apply to all text inputs
@@ -127,52 +125,69 @@ export interface TextInputDOMProps extends DOMProps, TextInputDOMEvents {
   /**
    * Describes the type of autocomplete functionality the input should provide if any. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#htmlattrdefautocomplete).
    */
-  autoComplete?: string,
+  autoComplete?: string;
 
   /**
    * The maximum number of characters supported by the input. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#htmlattrdefmaxlength).
    */
-  maxLength?: number,
+  maxLength?: number;
 
   /**
    * The minimum number of characters required by the input. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#htmlattrdefminlength).
    */
-  minLength?: number,
+  minLength?: number;
 
   /**
    * The name of the input element, used when submitting an HTML form. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#htmlattrdefname).
    */
-  name?: string,
+  name?: string;
 
   /**
    * Regex pattern that the value of the input must match to be valid. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#htmlattrdefpattern).
    */
-  pattern?: string,
+  pattern?: string;
 
   /**
    * Content that appears in the input when it is empty. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#htmlattrdefplaceholder).
    */
-  placeholder?: string,
+  placeholder?: string;
 
   /**
    * The type of input to render. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#htmlattrdeftype).
    */
-  type?: 'text' | 'search' | 'url' | 'tel' | 'email' | 'password' | (string & {}),
+  type?:
+    | 'text'
+    | 'search'
+    | 'url'
+    | 'tel'
+    | 'email'
+    | 'password'
+    | (string & {});
 
   /**
    * Hints at the type of data that might be entered by the user while editing the element or its contents. See [MDN](https://html.spec.whatwg.org/multipage/interaction.html#input-modalities:-the-inputmode-attribute).
    */
-  inputMode?: 'none' | 'text' | 'tel' | 'url' | 'email' | 'numeric' | 'decimal' | 'search'
+  inputMode?:
+    | 'none'
+    | 'text'
+    | 'tel'
+    | 'url'
+    | 'email'
+    | 'numeric'
+    | 'decimal'
+    | 'search';
 }
 
 /** Any focusable element, including both HTML and SVG elements. */
 export interface FocusableElement extends Element, HTMLOrSVGElement {}
 
 /** All DOM attributes supported across both HTML and SVG elements. */
-export interface DOMAttributes<T = FocusableElement> extends AriaAttributes, ReactDOMAttributes<T> {
-  id?: string | undefined,
-  role?: AriaRole | undefined,
-  tabIndex?: number | undefined,
-  style?: CSSProperties | undefined,
-  className?: string | undefined
+export interface DOMAttributes<T = FocusableElement>
+  extends AriaAttributes,
+    ReactDOMAttributes<T> {
+  id?: string | undefined;
+  role?: AriaRole | undefined;
+  tabIndex?: number | undefined;
+  style?: CSSProperties | undefined;
+  className?: string | undefined;
 }

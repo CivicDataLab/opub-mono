@@ -23,20 +23,26 @@
     "component library"
   ],
   "type": "module",
-  "main": "./index.tsx",
-  "types": "./index.tsx",
+  "sideEffects": false,
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "files": [
+    "dist"
+  ],
+  "types": "dist/index.d.ts",
   "engines": {
     "node": ">=16 <=18"
   },
   "scripts": {
     "dev": "storybook dev -p 6006",
-    "build": "storybook build",
+    "build": "rollup -c",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "storybook build",
     "test": "vitest",
     "coverage": "vitest run --coverage",
-    "lint": "TIMING=1 eslint \"**/*.ts*\"",
-    "chromatic": "npx chromatic --exit-once-uploaded --project-token=795f989bc619"
+    "lint": "eslint \"src/**/*.ts*\"",
+    "chromatic": "npx chromatic --exit-once-uploaded --project-token=795f989bc619",
+    "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
   },
   "peerDependencies": {
     "react": "^16.14.0 || ^17.0.0 || ^18.0.0",
@@ -69,6 +75,10 @@
     "react-stately": "^3.21.0"
   },
   "devDependencies": {
+    "@rollup/plugin-alias": "^4.0.3",
+    "@rollup/plugin-commonjs": "^24.0.1",
+    "@rollup/plugin-node-resolve": "^15.0.1",
+    "@rollup/plugin-typescript": "^11.0.0",
     "@storybook/addon-actions": "^6.5.16",
     "@storybook/addon-console": "^1.2.3",
     "@storybook/addon-essentials": "7.0.0-beta.47",
@@ -79,6 +89,7 @@
     "@storybook/react-vite": "7.0.0-beta.47",
     "@storybook/testing-library": "^0.0.14-next.1",
     "@storybook/theming": "^7.0.0-beta.47",
+    "@svgr/rollup": "^7.0.0",
     "@types/react": "^18.0.26",
     "@types/react-dom": "^18.0.9",
     "@types/react-portal": "^4.0.4",
@@ -90,6 +101,9 @@
     "eslint-config-custom": "*",
     "happy-dom": "^8.2.2",
     "react-test-renderer": "^18.2.0",
+    "rollup": "^3.20.2",
+    "rollup-plugin-dts": "^5.3.0",
+    "rollup-plugin-scss": "^4.0.0",
     "storybook": "7.0.0-beta.47",
     "storybook-addon-pseudo-states": "^2.0.0-next.0",
     "tsconfig": "*",
