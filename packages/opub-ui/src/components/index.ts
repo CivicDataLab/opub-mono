@@ -43,3 +43,4 @@ export { Tooltip } from './Tooltip';
 export { DateField } from "./DateField";
 export { Calendar } from "./Calendar";
 export { DatePicker } from "./DatePicker";
+export { DateRangePicker } from "./DateRangePicker";
