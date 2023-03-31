@@ -1,7 +1,7 @@
 {
   "name": "@opub-cdl/ui",
   "description": "OPub UI Library",
-  "version": "0.0.59",
+  "version": "0.0.65",
   "private": false,
   "license": "MIT",
   "author": "CivicDataLab <tech@civicdatalab.in>",
@@ -10,6 +10,7 @@
   "bugs": {
     "url": "https://github.com/CivicDataLab/opub-mono/issues"
   },
+  "type": "module",
   "publishConfig": {
     "access": "public"
   },
@@ -23,8 +24,7 @@
     "React Component Library"
   ],
   "sideEffects": false,
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
+  "main": "dist/index.js",
   "files": [
     "dist",
     "README.md"

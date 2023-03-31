@@ -64,8 +64,8 @@ const input = [
 const getOutput = (format = 'esm') => {
   if (format === 'esm') {
     return {
-      dir: path.dirname(pkg.module),
-      format,
+      dir: 'dist',
+      format: 'esm',
       preserveModules: true,
       preserveModulesRoot: 'src',
       sourcemap: true,
@@ -111,7 +111,7 @@ const getPlugins = (format = 'esm') => {
       ? {
           tsconfig: './tsconfig.json',
           declaration: true,
-          declarationDir: path.dirname(pkg.module),
+          declarationDir: 'dist',
           ...defaultTs,
         }
       : {
@@ -142,22 +142,12 @@ const rollup = (_args) => {
     ...Object.keys(pkg.peerDependencies || {}),
   ];
 
-  return [
-    // cjs configuration
-    {
-      input: './src/index.ts',
-      output: getOutput('cjs'),
-      plugins: getPlugins('cjs'),
-      external,
-    },
-    // esm configuration
-    {
-      input,
-      output: getOutput('esm'),
-      plugins: getPlugins('esm'),
-      external,
-    },
-  ];
+  return {
+    input,
+    output: getOutput('esm'),
+    plugins: getPlugins('esm'),
+    external,
+  };
 };
 
 export default rollup;

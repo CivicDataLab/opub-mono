@@ -1,9 +1,10 @@
-import { CrossSize200 } from '@opub-icons/ui';
 import type { TagProps } from '../../types/tag';
 import { handleMouseUpByBlurring } from '../../utils/focus';
 import cx from 'classnames';
 import React from 'react';
 import styles from './Tag.module.scss';
+import { CancelSmallMinor } from '@shopify/polaris-icons';
+import { Icon } from '../Icon';
 
 export const Tag = React.forwardRef(
   (
@@ -60,7 +61,7 @@ export const Tag = React.forwardRef(
         onMouseUp={handleMouseUpByBlurring}
         disabled={disabled}
       >
-        <CrossSize200 />
+        <Icon source={CancelSmallMinor} />
       </button>
     ) : null;
 

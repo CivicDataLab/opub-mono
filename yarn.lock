@@ -2133,16 +2133,6 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@opub-icons/ui@^0.9.51":
-  version "0.9.51"
-  resolved "https://registry.yarnpkg.com/@opub-icons/ui/-/ui-0.9.51.tgz#d949ae7f5badf8629e82ac16e236a0e5146e96b3"
-  integrity sha512-7kXwEyYSLSlwOcFEysqnT2twwom9wD90nPxZ/D8IraArBe3iDhuWzQtbTTLjJv6ZpzUhmj3ZPUPLdAB/oORhdA==
-
-"@opub-icons/workflow@^0.9.4":
-  version "0.9.4"
-  resolved "https://registry.yarnpkg.com/@opub-icons/workflow/-/workflow-0.9.4.tgz#0b4901d0996cd22df3c89bc9a4f1eec6285d10a2"
-  integrity sha512-pCxZvcK4Uxg/BZdscUpIBEZUiD5htWV/7nSAl37ezceea5gPnE2bEoExWQVxpFi6H376JK8OwUuIKX8Hi7VsmQ==
-
 "@pkgr/utils@^2.3.1":
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/@pkgr/utils/-/utils-2.3.1.tgz#0a9b06ffddee364d6642b3cd562ca76f55b34a03"

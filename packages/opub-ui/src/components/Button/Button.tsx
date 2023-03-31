@@ -1,9 +1,14 @@
-import { ChevronDown, ChevronUp, ChevronUpDown } from '@opub-icons/workflow';
+import {
+  CaretDownMinor,
+  CaretUpMinor,
+  SelectMinor,
+} from '@shopify/polaris-icons';
+import cx from 'classnames';
+import { Icon } from '../Icon';
+import * as React from 'react';
 import { ConnectedDisclosure } from '../../types/button';
 import { variationName } from '../../utils/css';
-import { MouseUpBlurHandler, handleMouseUpByBlurring } from '../../utils/focus';
-import cx from 'classnames';
-import * as React from 'react';
+import { handleMouseUpByBlurring, MouseUpBlurHandler } from '../../utils/focus';
 import { Spinner } from '../Spinner';
 import { UnstyledButton, UnstyledButtonProps } from './BaseButton';
 import styles from './Button.module.scss';
@@ -179,7 +184,11 @@ const Button = React.forwardRef(
           {loading ? (
             <div className={styles.Placeholder} />
           ) : (
-            getDisclosureIconSource(disclosure)
+            <Icon
+              source={
+                loading ? 'placeholder' : getDisclosureIconSource(disclosure)
+              }
+            />
           )}
         </div>
       </span>
@@ -241,8 +250,8 @@ function getDisclosureIconSource(
   disclosure: NonNullable<ButtonProps['disclosure']>
 ) {
   if (disclosure === 'select') {
-    return <ChevronUpDown size={14} />;
+    return SelectMinor;
   }
 
-  return disclosure === 'up' ? <ChevronUp /> : <ChevronDown />;
+  return disclosure === 'up' ? CaretUpMinor : CaretDownMinor;
 }

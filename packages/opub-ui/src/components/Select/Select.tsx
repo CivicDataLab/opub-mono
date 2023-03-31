@@ -1,4 +1,4 @@
-import { ChevronUpDown } from '@opub-icons/workflow';
+import { SelectMinor } from '@shopify/polaris-icons';
 import cx from 'classnames';
 import React, { forwardRef, LegacyRef, useId } from 'react';
 import {
@@ -10,6 +10,7 @@ import {
   StrictOption,
 } from '../../types/select';
 import { Box } from '../Box';
+import { Icon } from '../Icon';
 import { helpTextID, Labelled } from '../Labelled';
 import { Text } from '../Text';
 import styles from './Select.module.scss';
@@ -95,7 +96,7 @@ export const Select = forwardRef(
         {prefixMarkup}
         <span className={styles.SelectedOption}>{selectedOption.label}</span>
         <span className={styles.Icon}>
-          <ChevronUpDown />
+          <Icon source={SelectMinor} />
         </span>
       </div>
     );

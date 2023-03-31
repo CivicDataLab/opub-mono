@@ -26,7 +26,8 @@ import { variationName } from '../../utils/css';
 import { isServer } from '../../utils/target';
 import { useComponentDidMount } from '../../utils/hooks/use-component-did-mount';
 import { useToggle } from '../../utils/hooks/use-toggle';
-import { AlertCircleFilled, UploadToCloud } from '@opub-icons/workflow';
+import { UploadMajor, CircleAlertMajor } from '@shopify/polaris-icons';
+import { Icon } from '../Icon';
 
 export type DropZoneFileType = 'file' | 'image' | 'video';
 
@@ -317,12 +318,12 @@ export const DropZone: React.FunctionComponent<DropZoneProps> & {
     !internalError &&
     !error &&
     overlay &&
-    overlayMarkup(UploadToCloud, 'interactive', overlayTextWithDefault);
+    overlayMarkup(UploadMajor, 'interactive', overlayTextWithDefault);
 
   const dragErrorOverlay =
     dragging &&
     (internalError || error) &&
-    overlayMarkup(AlertCircleFilled, 'critical', errorOverlayTextWithDefault);
+    overlayMarkup(CircleAlertMajor, 'critical', errorOverlayTextWithDefault);
 
   const context = useMemo(
     () => ({
@@ -351,11 +352,10 @@ export const DropZone: React.FunctionComponent<DropZoneProps> & {
     color: 'critical' | 'interactive',
     text: string
   ) {
-    const Icon = icon;
     return (
       <div className={styles.Overlay}>
         <Flex gap="2" direction="column" alignItems="center">
-          {size === 'small' && <Icon />}
+          {size === 'small' && <Icon source={icon} color={color} />}
           {(size === 'medium' || size === 'large') && (
             <Text variant="bodySm" as="p" fontWeight="bold">
               {text}
