@@ -1,7 +1,7 @@
 {
   "name": "@opub-cdl/ui",
   "description": "OPub UI Library",
-  "version": "0.0.55",
+  "version": "0.0.59",
   "private": false,
   "license": "MIT",
   "author": "CivicDataLab <tech@civicdatalab.in>",
@@ -22,9 +22,9 @@
     "component library",
     "React Component Library"
   ],
-  "type": "module",
   "sideEffects": false,
-  "main": "dist/index.js",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
   "files": [
     "dist",
     "README.md"
@@ -36,7 +36,6 @@
   "scripts": {
     "dev": "storybook dev -p 6006",
     "build": "rollup -c",
-    "postbuild": "node scripts/resolveTsPaths",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "storybook build",
     "test": "vitest",
@@ -76,7 +75,7 @@
     "@rollup/plugin-alias": "^4.0.3",
     "@rollup/plugin-commonjs": "^24.0.1",
     "@rollup/plugin-node-resolve": "^15.0.1",
-    "@rollup/plugin-typescript": "^11.0.0",
+    "@rollup/plugin-typescript": "8.3.3",
     "@storybook/addon-actions": "^6.5.16",
     "@storybook/addon-console": "^1.2.3",
     "@storybook/addon-essentials": "7.0.0-beta.47",

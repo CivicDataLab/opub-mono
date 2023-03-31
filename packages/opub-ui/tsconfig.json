@@ -13,7 +13,9 @@
     "esModuleInterop": true,
     "baseUrl": "src/",
     "skipLibCheck": true,
-    "rootDir": "."
+    "rootDir": ".",
+    "declarationMap": false,
+    "declaration": false
   },
   "exclude": [
     "dist",

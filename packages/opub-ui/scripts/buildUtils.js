@@ -1,4 +1,4 @@
-const fs = require('fs');
+import fs from 'fs';
 
 export const getFiles = (entry, extensions = [], excludeExtensions = []) => {
   let fileNames = [];
