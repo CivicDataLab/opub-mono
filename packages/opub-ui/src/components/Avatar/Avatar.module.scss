@@ -15,6 +15,10 @@
     font-size: 20px;
     line-height: 28px;
   }
+  img {
+    width: 24px;
+    height: 28px;
+  }
 }
 .AvatarLarge {
   display: flex;
@@ -29,5 +33,77 @@
     padding: 9px;
     font-size: 24px;
     line-height: 28px;
+  }
+  img {
+    width: 37px;
+    height: 42px;
+  }
+}
+
+.AvatarSmall {
+  display: flex;
+  height: 32px;
+  width: 32px;
+  border-radius: 50%;
+  background-color: var(--decorative-surface-three);
+  justify-content: center;
+  align-items: center;
+  span {
+    display: flex;
+    padding: 4.8px 1.8px;
+    font-size: 14px;
+    line-height: 28px;
+  }
+  img {
+    width: 20px;
+    height: 22px;
+  }
+}
+
+.AvatarExtraSmall {
+  display: flex;
+  height: 24px;
+  width: 24px;
+  border-radius: 50%;
+  background-color: var(--decorative-surface-four);
+  justify-content: center;
+  align-items: center;
+  span {
+    display: flex;
+    padding: 2px;
+    font-size: 12px;
+    line-height: 28px;
+  }
+  img {
+    width: 14px;
+    height: 16px;
+  }
+}
+
+.AvatarProfileMedium {
+  img {
+    height: 40px;
+    width: 40px;
+  }
+}
+
+.AvatarProfileLarge {
+  img {
+    height: 60px;
+    width: 60px;
+  }
+}
+
+.AvatarProfileSmall {
+  img {
+    height: 32px;
+    width: 32px;
+  }
+}
+
+.AvatarProfileExtraSmall {
+  img {
+    height: 24px;
+    width: 24px;
   }
 }
