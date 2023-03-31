@@ -12,7 +12,7 @@ $body-text-last-line-width: 80%;
     background-color: grayText;
   }
 
-  &:last-child:not(:first-child) {
+  &:last-child:not(:first-of-type) {
     width: $body-text-last-line-width;
   }
 

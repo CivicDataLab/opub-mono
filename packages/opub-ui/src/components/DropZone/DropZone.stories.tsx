@@ -1,6 +1,6 @@
 import { Asset } from '@opub-icons/workflow';
 import { Meta, StoryObj } from '@storybook/react';
-import { useCallback, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Button } from '../Button';
 import { Flex } from '../Flex';
 import { Text } from '../Text';

@@ -1,12 +1,9 @@
 import { filterDOMProps } from '@react-aria/utils';
-import Utils from '@react-spectrum/utils';
+import cx from 'classnames';
+import React, { LegacyRef } from 'react';
 import { DOMProps } from '../../types/shared/dom';
-import { DOMRef } from '../../types/shared/refs';
 import { FlexStyleProps } from '../../types/shared/style';
-import React from 'react';
 import styles from './Flex.module.scss';
-import clsx from 'classnames';
-
 export interface FlexProps extends DOMProps, FlexStyleProps {
   /** Children of the flex container. */
   children: React.ReactNode;
@@ -14,8 +11,8 @@ export interface FlexProps extends DOMProps, FlexStyleProps {
   className?: string;
 }
 
-const flexStyleProps: Utils.StyleHandlers = {
-  direction: ['flexDirection', Utils.passthroughStyle],
+const flexStyleProps: any = {
+  direction: ['flexDirection', (e: string) => e],
   wrap: ['flexWrap', flexWrapValue],
   justifyContent: ['justifyContent', flexAlignValue],
   alignItems: ['alignItems', flexAlignValue],
@@ -23,29 +20,19 @@ const flexStyleProps: Utils.StyleHandlers = {
 };
 
 const Flex = React.forwardRef(
-  (props: FlexProps, ref: DOMRef<HTMLDivElement>) => {
+  (props: FlexProps, ref: LegacyRef<HTMLDivElement>) => {
     let { children, ...otherProps }: any = props;
-    let { styleProps } = Utils.useStyleProps(otherProps);
-    let { styleProps: flexStyle } = Utils.useStyleProps(
-      otherProps,
-      flexStyleProps
-    );
-    let domRef = Utils.useDOMRef(ref);
+    let { styleProps: flexStyle } = useStyleProps(otherProps, flexStyleProps);
 
     let style = {
-      ...styleProps.style,
-      ...flexStyle.style,
+      ...flexStyle,
     };
     return (
       <div
         {...filterDOMProps(otherProps)}
-        className={
-          props.className
-            ? props.className
-            : '' + clsx(styles, 'flex', styleProps.className)
-        }
+        className={props.className ? props.className : '' + cx(styles, 'flex')}
         style={{ display: 'flex', gap: otherProps.gap || '0px', ...style }}
-        ref={domRef}
+        ref={ref}
       >
         {children}
       </div>
@@ -80,4 +67,21 @@ function flexWrapValue(value: any) {
   }
 
   return value;
+}
+
+function useStyleProps(otherProps: any, flexStyleProps: any) {
+  const styleProps: any = {};
+  Object.keys(otherProps).map((styleKey) => {
+    if (flexStyleProps[styleKey]) {
+      styleProps[flexStyleProps[styleKey][0]] = flexStyleProps[styleKey][1](
+        otherProps[styleKey]
+      );
+    } else {
+      styleProps[styleKey] = otherProps[styleKey];
+    }
+  });
+
+  return {
+    styleProps,
+  };
 }
