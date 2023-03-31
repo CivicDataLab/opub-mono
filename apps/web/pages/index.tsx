@@ -1,8 +1,8 @@
 import { switchTheme } from '@/utils/helpers';
 import React from 'react';
-import { Button, Checkbox, Flex, Tag } from '@ui';
+import { Button, Checkbox, Flex, Tag } from '@opub-cdl/ui';
 import styles from '../styles/pages/home.module.scss';
-import { PropsVariationSection } from '../../utils/helpers';
+import { PropsVariationSection } from '../utils/helpers';
 import { Light } from '@opub-icons/workflow';
 
 export default function Web() {
