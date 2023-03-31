@@ -1,4 +1,3 @@
-import { filterDOMProps } from '@react-aria/utils';
 import cx from 'classnames';
 import React, { LegacyRef } from 'react';
 import { DOMProps } from '../../types/shared/dom';
@@ -85,3 +84,30 @@ function useStyleProps(otherProps: any, flexStyleProps: any) {
     styleProps,
   };
 }
+
+function filterDOMProps(props: any, opts: any = {}) {
+  let { labelable: labelable, propNames: propNames } = opts;
+  let filteredProps: any = {};
+  for (const prop in props)
+    if (
+      Object.prototype.hasOwnProperty.call(props, prop) &&
+      (DOMPropNames.has(prop) ||
+        (labelable && labelablePropNames.has(prop)) ||
+        (propNames === null || propNames === void 0
+          ? void 0
+          : propNames.has(prop)) ||
+        propRe.test(prop))
+    )
+      filteredProps[prop] = props[prop];
+  return filteredProps;
+}
+
+const DOMPropNames = new Set(['id']);
+
+const labelablePropNames = new Set([
+  'aria-label',
+  'aria-labelledby',
+  'aria-describedby',
+  'aria-details',
+]);
+const propRe = /^(data-.*)$/;
