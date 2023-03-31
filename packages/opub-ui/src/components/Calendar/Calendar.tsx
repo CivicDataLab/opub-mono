@@ -1,5 +1,5 @@
 import { createCalendar } from '@internationalized/date';
-import { createDOMRef } from '@react-spectrum/utils';
+import Utils from '@react-spectrum/utils';
 import { AriaCalendarProps, DateValue } from '@react-types/calendar';
 import { ArrowLeftMinor, ArrowRightMinor } from '@shopify/polaris-icons';
 import { FocusableRef } from '../../types/shared/refs';
@@ -32,7 +32,7 @@ const Calendar = forwardRef((props: Props, ref: FocusableRef<HTMLElement>) => {
 
   let domRef = React.useRef(null);
   useImperativeHandle(ref, () => ({
-    ...createDOMRef(domRef),
+    ...Utils.createDOMRef(domRef),
     focus() {
       state.setFocused(true);
     },

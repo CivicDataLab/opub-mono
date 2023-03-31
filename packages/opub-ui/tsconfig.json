@@ -13,13 +13,7 @@
     "esModuleInterop": true,
     "baseUrl": "src/",
     "skipLibCheck": true,
-    "rootDir": ".",
-    "paths": {
-      "tokens/*": ["tokens/*"],
-      "components/*": ["components/*"],
-      "hooks/*": ["hooks/*"],
-      "utils/*": ["utils/*"]
-    }
+    "rootDir": "."
   },
   "exclude": [
     "dist",

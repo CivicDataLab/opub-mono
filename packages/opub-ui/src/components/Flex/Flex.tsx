@@ -1,16 +1,11 @@
 import { filterDOMProps } from '@react-aria/utils';
-import {
-  classNames,
-  passthroughStyle,
-  StyleHandlers,
-  useDOMRef,
-  useStyleProps,
-} from '@react-spectrum/utils';
+import Utils from '@react-spectrum/utils';
 import { DOMProps } from '../../types/shared/dom';
 import { DOMRef } from '../../types/shared/refs';
 import { FlexStyleProps } from '../../types/shared/style';
 import React from 'react';
 import styles from './Flex.module.scss';
+import clsx from 'classnames';
 
 export interface FlexProps extends DOMProps, FlexStyleProps {
   /** Children of the flex container. */
@@ -19,8 +14,8 @@ export interface FlexProps extends DOMProps, FlexStyleProps {
   className?: string;
 }
 
-const flexStyleProps: StyleHandlers = {
-  direction: ['flexDirection', passthroughStyle],
+const flexStyleProps: Utils.StyleHandlers = {
+  direction: ['flexDirection', Utils.passthroughStyle],
   wrap: ['flexWrap', flexWrapValue],
   justifyContent: ['justifyContent', flexAlignValue],
   alignItems: ['alignItems', flexAlignValue],
@@ -30,9 +25,12 @@ const flexStyleProps: StyleHandlers = {
 const Flex = React.forwardRef(
   (props: FlexProps, ref: DOMRef<HTMLDivElement>) => {
     let { children, ...otherProps }: any = props;
-    let { styleProps } = useStyleProps(otherProps);
-    let { styleProps: flexStyle } = useStyleProps(otherProps, flexStyleProps);
-    let domRef = useDOMRef(ref);
+    let { styleProps } = Utils.useStyleProps(otherProps);
+    let { styleProps: flexStyle } = Utils.useStyleProps(
+      otherProps,
+      flexStyleProps
+    );
+    let domRef = Utils.useDOMRef(ref);
 
     let style = {
       ...styleProps.style,
@@ -44,7 +42,7 @@ const Flex = React.forwardRef(
         className={
           props.className
             ? props.className
-            : '' + classNames(styles, 'flex', styleProps.className)
+            : '' + clsx(styles, 'flex', styleProps.className)
         }
         style={{ display: 'flex', gap: otherProps.gap || '0px', ...style }}
         ref={domRef}
