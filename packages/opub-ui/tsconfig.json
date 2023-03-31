@@ -27,6 +27,5 @@
     "node_modules",
     "./src/components/**/*.stories.tsx"
   ],
-  "types": ["typePatches"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "types": ["typePatches"]
 }

@@ -9,7 +9,7 @@ import fs from 'fs';
 
 const resolveTsPaths = ({
   outputTarget = './dist',
-  paths = ['common', 'components', 'hooks', 'styles', 'utils'],
+  paths = ['types', 'components', 'hooks', 'utils'],
 } = {}) => {
   const resolveFilesInDir = (level = 0, root = outputTarget) => {
     const dirs = fs.readdirSync(root);

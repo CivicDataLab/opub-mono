@@ -6,7 +6,7 @@ import svgr from '@svgr/rollup';
 import peerDeps from 'rollup-plugin-peer-deps-external';
 import scss from 'rollup-plugin-scss';
 import { terser } from 'rollup-plugin-terser';
-import visualizer from 'rollup-plugin-visualizer';
+import { visualizer } from 'rollup-plugin-visualizer';
 import postcss from 'rollup-plugin-postcss';
 import fs from 'fs';
 
@@ -72,6 +72,29 @@ export default {
       tsconfig: './tsconfig.json',
       declaration: true,
       declarationDir: 'dist',
+      exclude: [
+        'node_modules',
+        'build',
+        'dist',
+        'scripts',
+        'acceptance-tests',
+        'webpack',
+        '.storybook',
+        'jest',
+        'src/stories/**',
+        '**/*.stories.js',
+        '**/*.stories.jsx',
+        '**/*.stories.ts',
+        '**/*.stories.tsx',
+        '**/*.test.js',
+        '**/*.test.jsx',
+        '**/*.test.ts',
+        '**/*.test.tsx',
+      ],
+      compilerOptions: {
+        rootDir: 'src',
+        skipLibCheck: false,
+      },
     }),
     svgr(),
     postcss({
@@ -80,10 +103,10 @@ export default {
       use: ['sass'],
     }),
     terser(),
-    // visualizer({
-    //   filename: 'bundle-analysis.html',
-    //   open: true,
-    // }),
+    visualizer({
+      filename: 'bundle-analysis.html',
+      open: true,
+    }),
   ],
 };
 

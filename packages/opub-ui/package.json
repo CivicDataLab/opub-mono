@@ -1,7 +1,7 @@
 {
   "name": "@opub-cdl/ui",
   "description": "OPub UI Library",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "private": false,
   "license": "MIT",
   "author": "CivicDataLab <tech@civicdatalab.in>",
@@ -23,9 +23,7 @@
     "React Component Library"
   ],
   "type": "module",
-  "sideEffects": [
-    "**/*.module.scss"
-  ],
+  "sideEffects": false,
   "main": "dist/index.js",
   "files": [
     "dist",
@@ -49,8 +47,8 @@
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
   },
   "peerDependencies": {
-    "react": "^16.14.0 || ^17.0.0 || ^18.0.0",
-    "react-dom": "^16.14.0 || ^17.0.0 || ^18.0.0"
+    "react": "^16.14.0 || ^17.0.0 || ^18.2.0",
+    "react-dom": "^16.14.0 || ^17.0.0 || ^18.2.0"
   },
   "dependencies": {
     "@hookform/resolvers": "^2.9.11",
