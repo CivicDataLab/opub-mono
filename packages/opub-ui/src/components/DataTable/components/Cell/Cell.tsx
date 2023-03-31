@@ -2,8 +2,8 @@ import {
   SortAscendingMajor,
   SortDescendingMajor,
 } from '@shopify/polaris-icons';
-import { Icon } from '@ui/Icon';
-import { Tooltip } from '@ui/Tooltip';
+import { Icon } from '../../../Icon';
+import { Tooltip } from '../../../Tooltip';
 import { SortDirection } from '../../../../types/datatable';
 import cx from 'classnames';
 import React from 'react';

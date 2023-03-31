@@ -1,5 +1,5 @@
-import { Box } from '@ui/Box';
-import { Text } from '@ui/Text';
+import { Box } from '../../../Box';
+import { Text } from '../../../Text';
 import type {
   ActionListItemDescriptor,
   ActionListSection,

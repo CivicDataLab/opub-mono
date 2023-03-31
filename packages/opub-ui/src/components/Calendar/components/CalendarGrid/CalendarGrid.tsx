@@ -1,5 +1,5 @@
 import { getWeeksInMonth } from '@internationalized/date';
-import { Text } from '@ui/Text';
+import { Text } from '../../../Text';
 import { AriaCalendarGridProps, useCalendarGrid, useLocale } from 'react-aria';
 import { CalendarState, RangeCalendarState } from 'react-stately';
 import styles from '../../Calendar.module.scss';

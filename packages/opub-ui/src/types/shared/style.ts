@@ -9,14 +9,12 @@
  * governing permissions and limitations under the License.
  */
 
+import { CSSProperties } from 'react';
 import {
-  BackgroundColorValue,
-  BorderColorValue,
   BorderRadiusValue,
   BorderSizeValue,
-  DimensionValue,
+  DimensionValue
 } from './dna';
-import { CSSProperties } from 'react';
 
 type ResponsiveProp<T> = {
   base?: T;

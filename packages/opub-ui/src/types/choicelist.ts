@@ -1,6 +1,6 @@
 import { Error } from './shared/form';
 
-export interface Choice {
+export interface ChoiceProps {
   /** Value of the choice */
   value: string;
   /** Label for the choice */
@@ -21,7 +21,7 @@ export interface ChoiceListProps {
   /** Label for list of choices */
   title: React.ReactNode;
   /** Collection of choices */
-  choices: Choice[];
+  choices: ChoiceProps[];
   /** Name for form input */
   name?: string;
   /** Toggles display of the title */

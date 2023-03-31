@@ -4,25 +4,29 @@
     "target": "ESNext",
     "useDefineForClassFields": true,
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
-    "allowJs": false,
-    "allowSyntheticDefaultImports": true,
     "module": "ESNext",
     "resolveJsonModule": true,
     "types": ["vitest/globals"],
-    "baseUrl": ".",
     "jsx": "react-jsx",
-    "declaration": true,
-    "declarationDir": "types",
     "sourceMap": true,
-    "outDir": "dist",
     "moduleResolution": "node",
-    "emitDeclarationOnly": true,
+    "esModuleInterop": true,
+    "baseUrl": "src/",
+    "skipLibCheck": true,
+    "rootDir": ".",
     "paths": {
-      "@ui/*": ["./src/components/*"]
+      "tokens/*": ["tokens/*"],
+      "components/*": ["components/*"],
+      "hooks/*": ["hooks/*"],
+      "utils/*": ["utils/*"]
     }
   },
-
-  "exclude": ["dist", "build", "node_modules"],
-  "include": [".", "./src", "./.storybook"],
+  "exclude": [
+    "dist",
+    "build",
+    "node_modules",
+    "./src/components/**/*.stories.tsx"
+  ],
+  "types": ["typePatches"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

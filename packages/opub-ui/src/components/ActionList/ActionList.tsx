@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import type { ActionListItemDescriptor, ActionListSection } from 'src/types';
+import type { ActionListItemDescriptor, ActionListSection } from '../../types';
 import { Key } from '../../types';
 import {
   wrapFocusNextFocusableMenuItem,

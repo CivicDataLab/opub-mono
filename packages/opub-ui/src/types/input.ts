@@ -1,4 +1,4 @@
-import { LabelledProps } from '@ui/Labelled/Labelled';
+import { LabelledProps } from './shared/form';
 import { Error } from './shared/form';
 
 type Type =

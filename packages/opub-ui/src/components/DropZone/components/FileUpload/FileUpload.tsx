@@ -3,8 +3,8 @@ import { useContext } from 'react';
 import { DropZoneContext } from '../../context';
 import { uploadArrow } from '../../images';
 
-import { Flex } from '@ui/Flex';
-import { Text } from '@ui/Text';
+import { Flex } from '../../../Flex';
+import { Text } from '../../../Text';
 import styles from './FileUpload.module.scss';
 
 export interface FileUploadProps {

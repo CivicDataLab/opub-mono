@@ -1,5 +1,3 @@
-import type { Error } from './shared/form';
-
 export interface RadioGroupProps {
   /** Name for form input */
   name: string;

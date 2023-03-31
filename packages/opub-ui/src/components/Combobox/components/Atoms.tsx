@@ -1,4 +1,4 @@
-import { Labelled } from '@ui/Labelled';
+import { Labelled } from '../../Labelled';
 import { ComboboxSingleProps } from '../../../types/combobox';
 import { Combobox as ComboboxComponent } from 'ariakit/combobox';
 import cx from 'classnames';

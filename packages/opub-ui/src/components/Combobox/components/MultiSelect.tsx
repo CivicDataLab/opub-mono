@@ -1,8 +1,8 @@
 // @ts-nocheck
-import { Box } from '@ui/Box';
-import { Flex } from '@ui/Flex';
-import { Tag } from '@ui/Tag';
-import { Text } from '@ui/Text';
+import { Box } from '../../Box';
+import { Flex } from '../../Flex';
+import { Tag } from '../../Tag';
+import { Text } from '../../Text';
 import {
   ComboboxItem,
   ComboboxPopover,

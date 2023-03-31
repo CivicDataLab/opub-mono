@@ -1,5 +1,5 @@
-import { Flex } from '@ui/Flex';
-import { UnstyledLink } from '@ui/Link/BaseLink';
+import { Flex } from '../../../Flex';
+import { UnstyledLink } from '../../../Link/BaseLink';
 import type { ActionListItemDescriptor } from '../../../../types/actionlist';
 import { handleMouseUpByBlurring } from '../../../../utils/focus';
 import cx from 'classnames';

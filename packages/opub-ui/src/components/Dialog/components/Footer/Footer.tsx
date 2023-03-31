@@ -1,6 +1,6 @@
-import { Box } from '@ui/Box';
-import { buttonsFrom } from '@ui/Button/utils';
-import { Flex } from '@ui/Flex';
+import { Box } from '../../../Box';
+import { buttonsFrom } from '../../../Button/utils';
+import { Flex } from '../../../Flex';
 import { ComplexAction } from '../../../../types/button';
 import React from 'react';
 

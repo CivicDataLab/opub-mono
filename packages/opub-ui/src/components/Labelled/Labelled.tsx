@@ -1,4 +1,3 @@
-import { LabelProps } from '@radix-ui/react-label';
 import { Action } from '../../types/button';
 import type { Error } from '../../types/shared/form';
 import cx from 'classnames';
@@ -11,7 +10,7 @@ import styles from './Labelled.module.scss';
 
 export interface LabelledProps {
   /** A unique identifier for the label */
-  id?: LabelProps['id'];
+  id?: string;
   /** Text for the label */
   label: React.ReactNode;
   /** Error to display beneath the label */
