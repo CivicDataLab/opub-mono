@@ -4,6 +4,6 @@ module.exports = {
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],
   },
-  reactStrictMode: true,
+  reactStrictMode: false,
   transpilePackages: ['@opub-cdl/ui'],
 };

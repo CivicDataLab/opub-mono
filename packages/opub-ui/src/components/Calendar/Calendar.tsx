@@ -26,6 +26,16 @@ const Calendar = forwardRef(
 
     let { calendarProps, prevButtonProps, nextButtonProps, title } =
       useCalendar(props, state);
+    const {
+      onPress: onPressPrev,
+      isDisabled: disabledPrev,
+      ...othersPrev
+    } = prevButtonProps;
+    const {
+      onPress: onPressNext,
+      isDisabled: disabledNext,
+      ...othersNext
+    } = nextButtonProps;
 
     const themeClass = cx(styles.Calendar, {});
     return (
@@ -37,13 +47,14 @@ const Calendar = forwardRef(
         <div className={styles.Header}>
           <button
             onClick={() => state.focusPreviousPage()}
-            {...prevButtonProps}
+            disabled={disabledPrev}
+            {...othersPrev}
           >
             <Icon source={ArrowLeftMinor} color="base" />
           </button>
 
           <Text variant="bodyMd">{title}</Text>
-          <button onClick={() => state.focusNextPage()} {...nextButtonProps}>
+          <button onClick={() => state.focusNextPage()} disabled={disabledNext}  {...othersNext}>
             <Icon source={ArrowRightMinor} color="base" />
           </button>
         </div>

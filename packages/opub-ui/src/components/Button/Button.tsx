@@ -4,11 +4,11 @@ import {
   SelectMinor,
 } from '@shopify/polaris-icons';
 import cx from 'classnames';
-import { Icon } from '../Icon';
 import * as React from 'react';
 import { ConnectedDisclosure } from '../../types/button';
 import { variationName } from '../../utils/css';
 import { handleMouseUpByBlurring, MouseUpBlurHandler } from '../../utils/focus';
+import { Icon } from '../Icon';
 import { Spinner } from '../Spinner';
 import { UnstyledButton, UnstyledButtonProps } from './BaseButton';
 import styles from './Button.module.scss';

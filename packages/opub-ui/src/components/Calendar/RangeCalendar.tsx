@@ -32,15 +32,35 @@ function RangeCalendar(props: Props) {
   let { calendarProps, prevButtonProps, nextButtonProps, title } =
     useRangeCalendar(props, state, ref);
 
+  const {
+    onPress: onPressPrev,
+    isDisabled: disabledPrev,
+    ...othersPrev
+  } = prevButtonProps;
+  const {
+    onPress: onPressNext,
+    isDisabled: disabledNext,
+    ...othersNext
+  } = nextButtonProps;
+
   return (
     <div {...calendarProps} ref={ref} className={`opub-Calendar ${themeClass}`}>
       <div className={styles.Header}>
-        <button onClick={() => state.focusPreviousPage()} {...prevButtonProps}>
-          <Icon source={ArrowLeftMinor} />
+        <button
+          onClick={() => state.focusPreviousPage()}
+          disabled={disabledPrev}
+          {...othersPrev}
+        >
+          <Icon source={ArrowLeftMinor} color="base" />
         </button>
+
         <Text variant="bodyMd">{title}</Text>
-        <button onClick={() => state.focusNextPage()} {...nextButtonProps}>
-          <Icon source={ArrowRightMinor} />
+        <button
+          onClick={() => state.focusNextPage()}
+          disabled={disabledNext}
+          {...othersNext}
+        >
+          <Icon source={ArrowRightMinor} color="base" />
         </button>
       </div>
       <CalendarGrid state={state} />

@@ -1,14 +1,14 @@
 import { switchTheme } from '@/utils/helpers';
 import React from 'react';
-import { Button, Checkbox, Flex, Tag } from '@opub-cdl/ui';
+import { Button, Calendar, Checkbox, Flex, Tag } from '@opub-cdl/ui';
 import styles from '../styles/pages/home.module.scss';
 import { PropsVariationSection } from '../utils/helpers';
-import { Light } from '@opub-icons/workflow';
 
 export default function Web() {
   return (
     <div className={styles.container}>
       <h1>Components</h1>
+
       <div className={styles.box}>
         <Button primary onClick={switchTheme}>
           Primary
@@ -29,6 +29,7 @@ export default function Web() {
           Link
         </Button>
       </div>
+      <Calendar />
       <h2>Tags</h2>
       <div className={styles.box}>
         <PropsVariationSection
@@ -40,7 +41,6 @@ export default function Web() {
             'custom children': {
               children: (
                 <Flex alignItems="center" gap={4}>
-                  <Light size={14} />
                   <span>Sun is up</span>
                 </Flex>
               ),

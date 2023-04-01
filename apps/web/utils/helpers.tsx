@@ -1,4 +1,4 @@
-import { Form } from "@opub-icons/workflow";
+import { Form } from '@/../../packages/opub-ui/dist';
 
 /**
  * Toggles the theme of the page between light and dark.
