@@ -1,10 +1,8 @@
 import { createCalendar } from '@internationalized/date';
-import { createDOMRef } from '@react-spectrum/utils/dist/types';
 import { AriaCalendarProps, DateValue } from '@react-types/calendar';
 import { ArrowLeftMinor, ArrowRightMinor } from '@shopify/polaris-icons';
-import { FocusableRef } from '../../types/shared/refs';
 import cx from 'classnames';
-import React, { forwardRef, LegacyRef, useImperativeHandle } from 'react';
+import { forwardRef, LegacyRef } from 'react';
 import { useCalendar, useLocale } from 'react-aria';
 import { CalendarStateOptions, useCalendarState } from 'react-stately';
 import { Icon } from '../Icon';

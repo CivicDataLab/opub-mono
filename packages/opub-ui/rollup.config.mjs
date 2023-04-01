@@ -3,6 +3,7 @@ import resolve from '@rollup/plugin-node-resolve';
 import typescript from '@rollup/plugin-typescript';
 import svgr from '@svgr/rollup';
 import fs, { readFileSync } from 'fs';
+import copy from 'rollup-plugin-copy';
 import peerDeps from 'rollup-plugin-peer-deps-external';
 import postcss from 'rollup-plugin-postcss';
 import { terser } from 'rollup-plugin-terser';
@@ -122,6 +123,9 @@ const getPlugins = (format = 'esm') => {
     peerDeps(),
     resolve({ extensions }),
     commonjs(),
+    copy({
+      targets: [{ src: 'assets', dest: 'dist' }],
+    }),
     typescript(typeScriptOptions),
     svgr(),
     postcss({
