@@ -1,7 +1,7 @@
-import { SortOrderDown } from '@opub-icons/workflow';
+import { SortMinor } from '@shopify/polaris-icons';
 import { Meta, StoryObj } from '@storybook/react';
+import React from 'react';
 import { PropsVariationSection } from '../../utils/helpers';
-import { Flex } from '../Flex';
 import { Button } from './Button';
 
 /**
@@ -23,36 +23,39 @@ export const Default: Story = {
   parameters: { pseudo: { focus: true } },
 };
 
-export const Basic = () => (
-  <PropsVariationSection
-    component={Button}
-    common={{ onChange: () => {}, children: 'Button' }}
-    xAxis={{
-      default: {},
-      disabled: { disabled: true },
-      pressed: { pressed: true },
-    }}
-    yAxis={{
-      large: { size: 'large' },
-      medium: {},
-      slim: { size: 'slim' },
+export const Basic = () => {
+  <Button>Test</Button>;
+  return (
+    <PropsVariationSection
+      component={Button}
+      common={{ onChange: () => {}, children: 'Button' }}
+      xAxis={{
+        default: {},
+        disabled: { disabled: true },
+        pressed: { pressed: true },
+      }}
+      yAxis={{
+        large: { size: 'large' },
+        medium: {},
+        slim: { size: 'slim' },
 
-      'large + full width': { size: 'large', fullWidth: true },
-      'medium + full width': { fullWidth: true },
-      'slim + full width': { size: 'slim', fullWidth: true },
+        'large + full width': { size: 'large', fullWidth: true },
+        'medium + full width': { fullWidth: true },
+        'slim + full width': { size: 'slim', fullWidth: true },
 
-      'large + with disclosure': { size: 'large', disclosure: 'select' },
-      'medium + with disclosure': { disclosure: 'select' },
-      'slim + with disclosure': { size: 'slim', disclosure: 'select' },
+        'large + with disclosure': { size: 'large', disclosure: 'select' },
+        'medium + with disclosure': { disclosure: 'select' },
+        'slim + with disclosure': { size: 'slim', disclosure: 'select' },
 
-      'large + with icon': { size: 'large', icon: <SortOrderDown /> },
-      'medium + with icon': { icon: <SortOrderDown /> },
-      'slim + with icon': { size: 'slim', icon: <SortOrderDown /> },
+        'large + with icon': { size: 'large', icon: <SortMinor /> },
+        'medium + with icon': { icon: <SortMinor /> },
+        'slim + with icon': { size: 'slim', icon: <SortMinor /> },
 
-      loading: { loading: true },
-    }}
-  />
-);
+        loading: { loading: true },
+      }}
+    />
+  );
+};
 
 export const Primary = () => (
   <PropsVariationSection
@@ -107,9 +110,9 @@ export const Outline = () => (
       medium: {},
       slim: { size: 'slim' },
 
-      'large + with icon': { size: 'large', icon: <SortOrderDown /> },
-      'medium + with icon': { icon: <SortOrderDown /> },
-      'slim + with icon': { size: 'slim', icon: <SortOrderDown /> },
+      'large + with icon': { size: 'large', icon: <SortMinor /> },
+      'medium + with icon': { icon: <SortMinor /> },
+      'slim + with icon': { size: 'slim', icon: <SortMinor /> },
     }}
   />
 );

@@ -8,7 +8,6 @@ export interface UnstyledButtonProps extends BaseButtonProps {
   children?: React.ReactNode;
   /** A custom class name to apply styles to button */
   className?: string;
-  [key: string]: any;
 }
 
 export const UnstyledButton = React.forwardRef(

@@ -54,9 +54,7 @@ export interface NonMutualButtonProps {
   textAlign?: 'left' | 'right' | 'center' | 'start' | 'end';
 }
 
-export interface ButtonProps
-  extends Omit<UnstyledButtonProps, 'children'>,
-    NonMutualButtonProps {}
+export type ButtonProps = {} & NonMutualButtonProps & UnstyledButtonProps;
 
 interface CommonButtonProps
   extends Pick<
@@ -70,7 +68,6 @@ interface CommonButtonProps
     | 'onBlur'
     | 'onMouseEnter'
     | 'onTouchStart'
-    | 'ref'
   > {
   className: UnstyledButtonProps['className'];
   onMouseUp: MouseUpBlurHandler;
@@ -135,7 +132,7 @@ const Button = React.forwardRef(
       connectedDisclosure,
       ...otherProps
     }: ButtonProps,
-    ref
+    ref: React.Ref<HTMLButtonElement>
   ) => {
     const isDisabled = disabled || loading;
 
@@ -206,7 +203,6 @@ const Button = React.forwardRef(
       onMouseUp: handleMouseUpByBlurring,
       onMouseEnter,
       onTouchStart,
-      ref,
     };
     const linkProps: LinkButtonProps = {
       url,
@@ -232,6 +228,7 @@ const Button = React.forwardRef(
         {...linkProps}
         {...actionProps}
         {...otherProps}
+        ref={ref}
       >
         <span className={styles.Content}>
           {spinnerSVGMarkup}

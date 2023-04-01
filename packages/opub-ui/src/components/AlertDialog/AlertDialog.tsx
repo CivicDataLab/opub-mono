@@ -1,29 +1,29 @@
-import * as AlertDialog from '@radix-ui/react-alert-dialog';
+import * as AlertDialogRadix from '@radix-ui/react-alert-dialog';
 import cx from 'classnames';
 import React, { forwardRef, Ref } from 'react';
 import { Footer, FooterProps } from '../Dialog/components';
 import styles from '../Dialog/Dialog.module.scss';
 import { Header } from './components';
 
-interface DialogProps extends AlertDialog.DialogProps {
-  Trigger?: AlertDialog.DialogTriggerProps;
+interface DialogProps extends AlertDialogRadix.DialogProps {
+  Trigger?: AlertDialogRadix.DialogTriggerProps;
   Content?: ContentProps;
 }
 
-const Dialog = ({ children, ...props }: DialogProps) => {
-  return <AlertDialog.Root {...props}>{children}</AlertDialog.Root>;
+const AlertDialog = ({ children, ...props }: DialogProps) => {
+  return <AlertDialogRadix.Root {...props}>{children}</AlertDialogRadix.Root>;
 };
 
-interface TriggerProps extends AlertDialog.DialogTriggerProps {}
+interface TriggerProps extends AlertDialogRadix.DialogTriggerProps {}
 const Trigger = forwardRef(
   (
     { children, ...props }: TriggerProps,
     ref: Ref<HTMLButtonElement> | undefined
   ) => {
     return (
-      <AlertDialog.Trigger {...props} asChild ref={ref}>
+      <AlertDialogRadix.Trigger {...props} asChild ref={ref}>
         {children}
-      </AlertDialog.Trigger>
+      </AlertDialogRadix.Trigger>
     );
   }
 );
@@ -52,7 +52,7 @@ export type ContentProps = {
   limitHeight?: boolean;
   /** Sets modal to the height of the viewport on small screens */
   fullScreen?: boolean;
-} & AlertDialog.DialogContentProps &
+} & AlertDialogRadix.DialogContentProps &
   FooterProps;
 
 const Content = forwardRef((props: ContentProps, ref: any) => {
@@ -83,12 +83,12 @@ const Content = forwardRef((props: ContentProps, ref: any) => {
   );
 
   return (
-    <div className={`opub-Dialog`}>
-      <AlertDialog.Portal>
-        <AlertDialog.Overlay className={styles.Overlay} />
-        <AlertDialog.Content ref={ref} className={classname} {...others}>
+    <div className={`opub-AlertDialog`}>
+      <AlertDialogRadix.Portal>
+        <AlertDialogRadix.Overlay className={styles.Overlay} />
+        <AlertDialogRadix.Content ref={ref} className={classname} {...others}>
           <div className="sr-only">
-            <AlertDialog.Title>{title}</AlertDialog.Title>
+            <AlertDialogRadix.Title>{title}</AlertDialogRadix.Title>
           </div>
           <Header id={finalId} titleHidden={titleHidden} children={title} />
           <div className={styles.Content}>{children}</div>
@@ -97,13 +97,13 @@ const Content = forwardRef((props: ContentProps, ref: any) => {
             primaryAction={primaryAction}
             secondaryActions={secondaryActions}
           />
-        </AlertDialog.Content>
-      </AlertDialog.Portal>
+        </AlertDialogRadix.Content>
+      </AlertDialogRadix.Portal>
     </div>
   );
 });
 
-Dialog.Trigger = Trigger;
-Dialog.Content = Content;
+AlertDialog.Trigger = Trigger;
+AlertDialog.Content = Content;
 
-export { Dialog };
+export { AlertDialog };
