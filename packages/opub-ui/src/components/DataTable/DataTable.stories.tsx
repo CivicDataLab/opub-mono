@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { createColumnHelper } from '@tanstack/react-table';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from '../Link';
 import { DataTable } from './DataTable';
 

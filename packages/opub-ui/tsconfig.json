@@ -17,11 +17,7 @@
     "declarationMap": false,
     "declaration": false
   },
-  "exclude": [
-    "dist",
-    "build",
-    "node_modules",
-    "./src/components/**/*.stories.tsx"
-  ],
+  "exclude": ["dist", "build", "node_modules"],
+  "include": [".", "./src", "./.storybook", "**/*.tsx"],
   "types": ["typePatches"]
 }
