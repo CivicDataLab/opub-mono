@@ -1,6 +1,6 @@
 import { switchTheme } from '@/utils/helpers';
 import React from 'react';
-import { Button, Calendar, Checkbox, Flex, Tag } from '@opub-cdl/ui';
+import { Button, Calendar, Checkbox, Flex, Tag } from '@opub-cdl/ui/src';
 import styles from '../styles/pages/home.module.scss';
 import { PropsVariationSection } from '../utils/helpers';
 

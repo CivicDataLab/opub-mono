@@ -3,6 +3,7 @@ import 'styles/theme.css';
 import 'styles/breakpoints.scss';
 import 'styles/base.css';
 import React from 'react';
+import { SSRProvider } from 'react-aria';
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   React.useEffect(() => {
@@ -12,5 +13,9 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     }
   }, []);
 
-  return <Component {...pageProps} />;
+  return (
+    <SSRProvider>
+      <Component {...pageProps} />;
+    </SSRProvider>
+  );
 }
