@@ -340,10 +340,11 @@
   --keyframes-spin: keyframes-spin;
 }
 
-:root {
+body {
   color: var(--text);
   line-height: 150%;
   box-sizing: border-box;
+  font-family: var(--primary-font);
   --outline: 2px solid var(--focused);
   --outline-offset: 2px;
 }

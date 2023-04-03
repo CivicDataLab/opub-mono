@@ -1,7 +1,7 @@
 import type { AppProps } from 'next/app';
-import 'styles/theme.css';
-import 'styles/breakpoints.scss';
-import 'styles/base.css';
+// import 'styles/breakpoints.scss';
+// import 'styles/base.css';
+import '@opub-cdl/ui/dist/assets/tokens.css'
 import React from 'react';
 import { SSRProvider } from 'react-aria';
 

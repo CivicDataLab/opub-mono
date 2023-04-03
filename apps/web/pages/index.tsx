@@ -9,7 +9,7 @@ import {
   Tag,
   Text,
   UncontrolledCheckbox,
-} from '@opub-cdl/ui';
+} from '@opub-cdl/ui/src';
 import styles from '../styles/pages/home.module.scss';
 import { PropsVariationSection } from '../utils/helpers';
 
