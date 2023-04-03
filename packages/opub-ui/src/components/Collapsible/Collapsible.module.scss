@@ -1,0 +1,48 @@
+@import '../../../styles/common';
+
+/* reset */
+.button {
+  all: unset;
+}
+
+.CollapsibleRoot {
+  width: 300px;
+}
+
+.IconButton {
+  font-family: inherit;
+  border-radius: 100%;
+  height: 25px;
+  width: 25px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: hsl(250, 95.0%, 76.8%);
+  box-shadow: 0 2px 10px hsla(0, 0%, 0%, 0.141);
+}
+.IconButton[data-state='closed'] {
+  background-color: white;
+}
+.IconButton[data-state='open'] {
+  background-color: hsl(253, 37.0%, 18.4%);
+}
+.IconButton:hover {
+  background-color: hsl(253, 37.0%, 18.4%);
+}
+.IconButton:focus {
+  box-shadow: 0 0 0 2px black;
+}
+
+.Text {
+  color: hsl(250, 95.0%, 76.8%);
+  font-size: 15px;
+  line-height: 25px;
+}
+
+.Repository {
+  background-color: white;
+  border-radius: 4px;
+  margin: 10px 0;
+  padding: 10px;
+  box-shadow: 0 2px 10px hsla(0, 0%, 0%, 0.141);
+}
