@@ -1,8 +1,8 @@
 import { AppsMinor } from '@shopify/polaris-icons';
 import { Meta, StoryObj } from '@storybook/react';
-import { Icon } from 'components/Icon';
 import { PropsVariationSection } from '../../utils/helpers';
 import { Flex } from '../Flex';
+import { Icon } from '../Icon';
 import { Tag } from './Tag';
 
 /**

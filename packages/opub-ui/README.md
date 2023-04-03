@@ -39,8 +39,11 @@ import { SSRProvider } from 'react-aria';
 3. Once you complete the initial setup, you can import components into your project as needed:
 
 ```js
-import { Badge, Button, Menu } from '@shopify/polaris';
+import { Badge, Button, Menu } from 'opub-cdl/ui';
 ```
+
+> There is an issue with NextJs [explained here](https://github.com/vercel/next.js/issues/39375). Until that is fixed, you will need to import like this:
+> `import { Badge, Button, Menu } from 'opub-cdl/ui/dist';`
 
 ## Components
 
