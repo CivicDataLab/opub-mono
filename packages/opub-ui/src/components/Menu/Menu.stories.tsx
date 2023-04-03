@@ -1,7 +1,13 @@
+import {
+  CircleTickMinor,
+  DeleteMinor,
+  EditMinor,
+  ExportMinor,
+  ImportMinor,
+} from '@shopify/polaris-icons';
 import { Meta, StoryObj } from '@storybook/react';
 import { Button } from '../Button';
 import { Menu } from './Menu';
-import { Checkmark, Delete, Edit, Export, Import } from '@opub-icons/workflow';
 
 /**
  * A wrapper around Popover and ActionList Components
@@ -37,10 +43,10 @@ export const WithSuffix: Story = {
       {
         active: true,
         content: 'Import file',
-        icon: <Import />,
-        suffix: <Checkmark size={14} />,
+        icon: <ImportMinor />,
+        suffix: <CircleTickMinor />,
       },
-      { content: 'Export file', icon: <Export /> },
+      { content: 'Export file', icon: <ExportMinor /> },
     ],
   },
 };
@@ -53,15 +59,15 @@ export const WithSections: Story = {
       {
         title: 'File options',
         items: [
-          { content: 'Import file', icon: <Import /> },
-          { content: 'Export file', icon: <Export /> },
+          { content: 'Import file', icon: <ImportMinor /> },
+          { content: 'Export file', icon: <ExportMinor /> },
         ],
       },
       {
         title: 'Bulk actions',
         items: [
-          { content: 'Edit', icon: <Edit /> },
-          { content: 'Delete', icon: <Delete /> },
+          { content: 'Edit', icon: <EditMinor /> },
+          { content: 'Delete', icon: <DeleteMinor /> },
         ],
       },
     ],
@@ -76,13 +82,13 @@ export const DestructiveItem: Story = {
       {
         active: true,
         content: 'Import file',
-        icon: <Import />,
+        icon: <ImportMinor />,
       },
-      { content: 'Export file', icon: <Export /> },
+      { content: 'Export file', icon: <ExportMinor /> },
       {
         destructive: true,
         content: 'Delete file',
-        icon: <Delete />,
+        icon: <DeleteMinor />,
       },
     ],
   },

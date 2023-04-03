@@ -1,4 +1,4 @@
-import { AddCircle } from '@opub-icons/workflow';
+import { AddCodeMajor } from '@shopify/polaris-icons';
 import { Meta, StoryObj } from '@storybook/react';
 import { Icon } from './Icon';
 
@@ -16,7 +16,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    source: AddCircle,
+    source: AddCodeMajor,
     color: 'base',
   },
 };
