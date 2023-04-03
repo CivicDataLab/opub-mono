@@ -69,7 +69,6 @@ export const Multi: Story = {
     label: 'Your favorite food',
     placeholder: 'e.g., Apple, Burger',
     defaultList: options,
-    defaultValues: ['Banana'],
   },
 };
 
@@ -84,7 +83,6 @@ export const VerticalContent: Story = {
     label: 'Your favorite food',
     placeholder: 'e.g., Apple, Burger',
     defaultList: options,
-    defaultValues: ['Banana'],
     verticalContent: true,
   },
 };

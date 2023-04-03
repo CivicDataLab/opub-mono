@@ -1,9 +1,9 @@
 import React, { createElement, forwardRef } from 'react';
 
-import { BoxProps } from '@ui/types/box';
+import { BoxProps } from '../../types/box';
 import cx from 'classnames';
 import { getResponsiveProps, sanitizeCustomProperties } from '../../utils/css';
-import styles from './Box.module.scss';
+import boxStyles from './Box.module.scss';
 
 export const Box = forwardRef<HTMLElement, BoxProps>(
   (
@@ -158,10 +158,10 @@ export const Box = forwardRef<HTMLElement, BoxProps>(
     } as React.CSSProperties;
 
     const className = cx(
-      styles.Box,
-      visuallyHidden && styles.visuallyHidden,
-      printHidden && styles.printHidden,
-      as === 'ul' && styles.listReset
+      boxStyles.Box,
+      visuallyHidden && boxStyles.visuallyHidden,
+      printHidden && boxStyles.printHidden,
+      as === 'ul' && boxStyles.ListReset
     );
 
     return createElement(

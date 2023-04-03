@@ -1,5 +1,5 @@
 import * as TooltipRadix from '@radix-ui/react-tooltip';
-import { TooltipProps, TooltipProviderProps } from '@ui/types/tooltip';
+import { TooltipProps, TooltipProviderProps } from '../../types/tooltip';
 import cx from 'classnames';
 import { forwardRef, LegacyRef } from 'react';
 import styles from './Tooltip.module.scss';

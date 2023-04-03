@@ -2,6 +2,7 @@ import { Meta, StoryObj } from '@storybook/react';
 import { CheckboxGroup } from './CheckboxGroup';
 import { Form } from '../Form';
 import { Button } from '../Button';
+import React from 'react';
 
 /**
  * A CheckboxGroup lets you create a list of grouped checkboxes.

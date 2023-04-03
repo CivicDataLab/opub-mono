@@ -52,9 +52,14 @@
     background-color: var(--surface-hovered);
   }
 
+  &.Today {
+    border-radius: var(--border-radius-half);
+    background-color: var(--surface-pressed);
+  }
+
   &.Selected {
     background-color: var(--interactive);
-
+    border-radius: var(--border-radius-1);
     > span {
       color: var(--text-on-interactive);
     }
@@ -98,11 +103,6 @@
     > span {
       color: var(--text-disabled);
     }
-  }
-
-  &.Today {
-    border-radius: var(--border-radius-half);
-    background-color: var(--surface-pressed);
   }
 }
 

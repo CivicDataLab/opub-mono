@@ -1,5 +1,6 @@
-import { CrossSize400 } from '@opub-icons/ui';
+import { MobileCancelMajor } from '@shopify/polaris-icons';
 import cx from 'classnames';
+import { Icon } from '../../../Icon';
 import styles from './CloseButton.module.scss';
 
 export interface CloseButtonProps {
@@ -17,7 +18,7 @@ export function CloseButton({
       className={cx(styles.CloseButton, titleHidden && styles.titleHidden)}
       aria-label="Close dialog"
     >
-      <CrossSize400 />
+      <Icon source={MobileCancelMajor} color="base" />
     </button>
   );
 }

@@ -1,12 +1,13 @@
 /// <reference types="vitest" />
 
-import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import * as path from 'path';
+import { defineConfig } from 'vite';
+import tsConfigPaths from 'vite-tsconfig-paths';
 
 // https://vitejs.dev/config/
-export default defineConfig({
-  plugins: [react()],
+export default defineConfig((configEnv) => ({
+  plugins: [react(),  tsConfigPaths(),],
   test: {
     globals: true,
     environment: 'happy-dom',
@@ -15,7 +16,6 @@ export default defineConfig({
     alias: [{ find: '@ui', replacement: path.resolve(__dirname, '/src') }],
   },
   css: {
-    postcss: null,
     preprocessorOptions: {
       scss: {
         additionalData: `
@@ -24,4 +24,4 @@ export default defineConfig({
       },
     },
   },
-});
+}));

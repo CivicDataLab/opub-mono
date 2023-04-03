@@ -1,8 +1,9 @@
+import { AppsMinor } from '@shopify/polaris-icons';
 import { Meta, StoryObj } from '@storybook/react';
-import { Tag } from './Tag';
-import { Light } from '@opub-icons/workflow';
+import { Icon } from 'components/Icon';
+import { PropsVariationSection } from '../../utils/helpers';
 import { Flex } from '../Flex';
-import { PropsVariationSection } from '@ui/utils/helpers';
+import { Tag } from './Tag';
 
 /**
  * Tag represent a set of interactive keywords that help label, organize, and categorize objects
@@ -70,7 +71,7 @@ export const States = () => (
       'custom children': {
         children: (
           <Flex alignItems="center" gap={4}>
-            <Light size={14} />
+            <Icon source={AppsMinor} />
             <span>Sun is up</span>
           </Flex>
         ),

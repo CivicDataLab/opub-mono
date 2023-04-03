@@ -132,7 +132,7 @@
     .IncreasedTableDensity & {
       padding: var(--space-2) var(--space-3);
 
-      &:first-child {
+      &:first-of-type {
         padding-left: var(--space-3);
       }
 

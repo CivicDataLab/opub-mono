@@ -1,25 +1,9 @@
 .container {
-  width: 100vw;
-  height: 100vh;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
 
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 16px;
-}
-
-.box {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 16px;
-
-  background-color: var(--color-primary-06);
-
-  min-width: 256px;
-  padding: 32px;
-
-  border-radius: 2px;
+  width: calc(100vw - 20px);
+  max-width: 1246px;
 }

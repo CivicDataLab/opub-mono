@@ -2,7 +2,7 @@ import React from 'react';
 import { Text } from '../Text';
 import cx from 'classnames';
 import styles from './Icon.module.scss';
-import { variationName } from '@ui/utils/css';
+import { variationName } from '../../utils/css';
 
 type Color =
   | 'base'

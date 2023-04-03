@@ -1,5 +1,6 @@
 import { isWeekend } from '@internationalized/date';
 import { Meta, StoryObj } from '@storybook/react';
+import React from 'react';
 import { useLocale } from 'react-aria';
 import { Calendar } from './Calendar';
 import { RangeCalendar } from './RangeCalendar';

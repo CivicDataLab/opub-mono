@@ -1,8 +1,8 @@
-import { Box } from '@ui/components/Box';
-import { Flex } from '@ui/components/Flex';
-import { Tag } from '@ui/components/Tag';
-import { Text } from '@ui/components/Text';
-import { ComboboxSingleProps } from '@ui/types/combobox';
+// @ts-nocheck
+import { Box } from '../../Box';
+import { Flex } from '../../Flex';
+import { Tag } from '../../Tag';
+import { Text } from '../../Text';
 import {
   ComboboxItem,
   ComboboxPopover,
@@ -11,15 +11,16 @@ import {
 import { Portal } from 'ariakit/portal';
 import { SelectItem, SelectList, useSelectState } from 'ariakit/select';
 import cx from 'classnames';
-import { forwardRef, HTMLAttributes, useEffect, useRef, useState } from 'react';
+import { forwardRef, HTMLAttributes, useEffect, useState } from 'react';
+import { ComboboxSingleProps } from '../../../types/combobox';
 import itemStyles from '../../ActionList/ActionList.module.scss';
 import styles from '../Combobox.module.scss';
 import { Combobox } from './Atoms';
 
 export type ComboboxProps = ComboboxSingleProps & {
-  defaultValues?: string[];
-  values?: string[];
-  onValuesChange?: (values: string[]) => void;
+  defaultValues?: string | string[];
+  values?: any;
+  onValuesChange?: any;
 };
 
 export const MultiSelect = forwardRef<HTMLInputElement, ComboboxProps>(

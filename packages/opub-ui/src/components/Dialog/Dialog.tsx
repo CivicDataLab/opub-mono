@@ -82,23 +82,21 @@ const Content = forwardRef((props: ContentProps, ref: any) => {
   );
 
   return (
-    <div className={`opub-Dialog`}>
-      <DialogRadix.Portal>
-        <DialogRadix.Overlay className={styles.Overlay} />
-        <DialogRadix.Content ref={ref} className={classname} {...others}>
-          <div className="sr-only">
-            <DialogRadix.Title>{title}</DialogRadix.Title>
-          </div>
-          <Header id={finalId} titleHidden={titleHidden} children={title} />
-          <div className={styles.Content}>{children}</div>
-          <Footer
-            children={footer}
-            primaryAction={primaryAction}
-            secondaryActions={secondaryActions}
-          />
-        </DialogRadix.Content>
-      </DialogRadix.Portal>
-    </div>
+    <DialogRadix.Portal>
+      <DialogRadix.Overlay className={styles.Overlay} />
+      <DialogRadix.Content ref={ref} className={classname} {...others}>
+        <div className="sr-only">
+          <DialogRadix.Title>{title}</DialogRadix.Title>
+        </div>
+        <Header id={finalId} titleHidden={titleHidden} children={title} />
+        <div className={styles.Content}>{children}</div>
+        <Footer
+          children={footer}
+          primaryAction={primaryAction}
+          secondaryActions={secondaryActions}
+        />
+      </DialogRadix.Content>
+    </DialogRadix.Portal>
   );
 });
 

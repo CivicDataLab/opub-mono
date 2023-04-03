@@ -1,5 +1,4 @@
-import { Meta, StoryObj } from '@storybook/react';
-import * as yup from 'yup';
+import { Meta } from '@storybook/react';
 import { Button } from '../Button';
 import { Checkbox } from '../Checkbox';
 import { CheckboxGroup } from '../CheckboxGroup';
@@ -8,10 +7,6 @@ import { Flex } from '../Flex';
 import { RadioGroup, RadioItem } from '../RadioGroup';
 import { TextField } from '../TextField';
 import { Form } from './Form';
-
-const schema = yup.object().shape({
-  // name: yup.string().required('Name is Required'),
-});
 
 /**
  * A wrapper component that handles the submission of forms.
@@ -40,7 +35,7 @@ export const FormBase = () => (
   <Form
     // defaultValues={{ name: '', lastName: '', desc: '' }}
     formSubmit={(e) => console.log(e)}
-    validationSchema={schema}
+    // validationSchema={schema}
   >
     <Flex gap={16}>
       <TextField name="name" label="First Name" />

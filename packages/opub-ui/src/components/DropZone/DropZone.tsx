@@ -19,14 +19,15 @@ import {
   getDataTransferFiles,
   defaultAllowMultiple,
 } from './utils';
-import { useEventListener } from '@ui/utils/hooks/use-event-listener';
+import { useEventListener } from '../../utils/hooks/use-event-listener';
 import { Flex } from '../Flex';
-import { debounce } from '@ui/utils/debounce';
-import { variationName } from '@ui/utils/css';
-import { isServer } from '@ui/utils/target';
-import { useComponentDidMount } from '@ui/utils/hooks/use-component-did-mount';
-import { useToggle } from '@ui/utils/hooks/use-toggle';
-import { AlertCircleFilled, UploadToCloud } from '@opub-icons/workflow';
+import { debounce } from '../../utils/debounce';
+import { variationName } from '../../utils/css';
+import { isServer } from '../../utils/target';
+import { useComponentDidMount } from '../../utils/hooks/use-component-did-mount';
+import { useToggle } from '../../utils/hooks/use-toggle';
+import { UploadMajor, CircleAlertMajor } from '@shopify/polaris-icons';
+import { Icon } from '../Icon';
 
 export type DropZoneFileType = 'file' | 'image' | 'video';
 
@@ -98,11 +99,6 @@ export interface DropZoneProps {
   /** Callback triggered when the file dialog is canceled */
   onFileDialogClose?(): void;
 }
-
-// TypeScript can't generate types that correctly infer the typing of
-// subcomponents so explicitly state the subcomponents in the type definition.
-// Letting this be implicit works in this project but fails in projects that use
-// generated *.d.ts files.
 
 export const DropZone: React.FunctionComponent<DropZoneProps> & {
   FileUpload: typeof FileUpload;
@@ -317,12 +313,12 @@ export const DropZone: React.FunctionComponent<DropZoneProps> & {
     !internalError &&
     !error &&
     overlay &&
-    overlayMarkup(UploadToCloud, 'interactive', overlayTextWithDefault);
+    overlayMarkup(UploadMajor, 'interactive', overlayTextWithDefault);
 
   const dragErrorOverlay =
     dragging &&
     (internalError || error) &&
-    overlayMarkup(AlertCircleFilled, 'critical', errorOverlayTextWithDefault);
+    overlayMarkup(CircleAlertMajor, 'critical', errorOverlayTextWithDefault);
 
   const context = useMemo(
     () => ({
@@ -351,11 +347,10 @@ export const DropZone: React.FunctionComponent<DropZoneProps> & {
     color: 'critical' | 'interactive',
     text: string
   ) {
-    const Icon = icon;
     return (
       <div className={styles.Overlay}>
         <Flex gap="2" direction="column" alignItems="center">
-          {size === 'small' && <Icon />}
+          {size === 'small' && <Icon source={icon} color={color} />}
           {(size === 'medium' || size === 'large') && (
             <Text variant="bodySm" as="p" fontWeight="bold">
               {text}

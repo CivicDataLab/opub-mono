@@ -1,11 +1,6 @@
-import React, { forwardRef, LegacyRef, useId } from 'react';
-import styles from './Select.module.scss';
-import { ChevronUpDown } from '@opub-icons/workflow';
-import type { Error } from '@ui/types/shared/form';
+import { SelectMinor } from '@shopify/polaris-icons';
 import cx from 'classnames';
-import { Box } from '../Box';
-import { helpTextID, Labelled, LabelledProps } from '../Labelled';
-import { Text } from '../Text';
+import React, { forwardRef, LegacyRef, useId } from 'react';
 import {
   HideableStrictOption,
   SelectGroup,
@@ -13,7 +8,12 @@ import {
   SelectProps,
   StrictGroup,
   StrictOption,
-} from '@ui/types/select';
+} from '../../types/select';
+import { Box } from '../Box';
+import { Icon } from '../Icon';
+import { helpTextID, Labelled } from '../Labelled';
+import { Text } from '../Text';
+import styles from './Select.module.scss';
 
 const PLACEHOLDER_VALUE = '';
 
@@ -96,7 +96,7 @@ export const Select = forwardRef(
         {prefixMarkup}
         <span className={styles.SelectedOption}>{selectedOption.label}</span>
         <span className={styles.Icon}>
-          <ChevronUpDown />
+          <Icon source={SelectMinor} />
         </span>
       </div>
     );

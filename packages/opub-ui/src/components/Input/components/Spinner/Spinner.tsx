@@ -1,4 +1,5 @@
-import { ChevronDown, ChevronUp } from '@opub-icons/workflow';
+import { CaretDownMinor, CaretUpMinor } from '@shopify/polaris-icons';
+import { Icon } from '../../../Icon';
 import React from 'react';
 import styles from '../../Input.module.scss';
 
@@ -35,7 +36,9 @@ export const Spinner = React.forwardRef<HTMLDivElement, SpinnerProps>(
           onMouseUp={onMouseUp}
           onBlur={onBlur}
         >
-          <ChevronUp size={12} />
+          <div className={styles.SpinnerIcon}>
+            <Icon source={CaretUpMinor} />
+          </div>
         </button>
         <button
           className={styles.Segment}
@@ -45,7 +48,9 @@ export const Spinner = React.forwardRef<HTMLDivElement, SpinnerProps>(
           onMouseUp={onMouseUp}
           onBlur={onBlur}
         >
-          <ChevronDown size={12} />
+          <div className={styles.SpinnerIcon}>
+            <Icon source={CaretDownMinor} />
+          </div>
         </button>
       </div>
     );

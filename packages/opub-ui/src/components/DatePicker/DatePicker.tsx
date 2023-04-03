@@ -16,7 +16,7 @@ type Props = {
   label: string;
 } & (DatePickerState | AriaDatePickerProps<DateValue>);
 
-const DatePicker = forwardRef((props: Props) => {
+const DatePicker = (props: Props) => {
   let state = useDatePickerState(props);
   let ref = React.useRef(null);
   let {
@@ -55,6 +55,6 @@ const DatePicker = forwardRef((props: Props) => {
       </Labelled>
     </div>
   );
-});
+};
 
 export { DatePicker };

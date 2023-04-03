@@ -1,11 +1,12 @@
-import { CheckmarkSize100, DashSize100 } from '@opub-icons/ui';
 import * as CheckboxRadix from '@radix-ui/react-checkbox';
-import { CheckboxProps } from '@ui/types/checkbox';
+import { CheckboxProps } from '../../types/checkbox';
 import cx from 'classnames';
 import React from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import { Choice } from '../Choice';
 import styles from './Checkbox.module.scss';
+import { MinusMinor, TickSmallMinor } from '@shopify/polaris-icons';
+import { Icon } from '../Icon';
 
 const Checkbox = ({ children, name, ...props }: CheckboxProps) => {
   const { control } = useFormContext();
@@ -20,7 +21,7 @@ const Checkbox = ({ children, name, ...props }: CheckboxProps) => {
     props.disabled && styles.Disabled
   );
 
-  const IconSource = isIndeterminate ? DashSize100 : CheckmarkSize100;
+  const iconSource = isIndeterminate ? MinusMinor : TickSmallMinor;
 
   const checkboxMarkup = (
     <Choice
@@ -56,7 +57,7 @@ const Checkbox = ({ children, name, ...props }: CheckboxProps) => {
             >
               <span className={styles.Indicator}>
                 <CheckboxRadix.Indicator>
-                  <IconSource />
+                  <Icon source={iconSource} />
                 </CheckboxRadix.Indicator>
               </span>
             </CheckboxRadix.Root>
@@ -87,7 +88,7 @@ export const UncontrolledCheckbox = ({
     props.disabled && styles.Disabled
   );
 
-  const IconSource = isIndeterminate ? DashSize100 : CheckmarkSize100;
+  const iconSource = isIndeterminate ? MinusMinor : TickSmallMinor;
 
   const checkboxMarkup = (
     <Choice
@@ -101,7 +102,7 @@ export const UncontrolledCheckbox = ({
       <CheckboxRadix.Root {...otherProps} className={inputClassName} id={id}>
         <span className={styles.Indicator}>
           <CheckboxRadix.Indicator>
-            <IconSource />
+            <Icon source={iconSource} />{' '}
           </CheckboxRadix.Indicator>
         </span>
       </CheckboxRadix.Root>

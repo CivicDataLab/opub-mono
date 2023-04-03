@@ -1,5 +1,5 @@
-import { TextProps, VariantFontWeightMapping } from '@ui/types/text';
 import cx from 'classnames';
+import { TextProps, VariantFontWeightMapping } from '../../types/text';
 import styles from './Text.module.scss';
 
 const Text = ({

@@ -1,13 +1,13 @@
-import "@testing-library/jest-dom";
-import { render, screen } from "@testing-library/react";
-import { Checkbox } from "./Checkbox";
+import '@testing-library/jest-dom';
+import { render, screen } from '@testing-library/react';
+import { Checkbox } from './Checkbox';
 
-describe("Checkbox Tests", () => {
+describe('Checkbox Tests', () => {
   beforeEach(() => {
-    render(<Checkbox>Component</Checkbox>);
+    render(<Checkbox name="1">Component</Checkbox>);
   });
 
-  test("should show Component text all the time", () => {
+  test('should show Component text all the time', () => {
     expect(screen.getByText(/Component/i)).toBeInTheDocument();
   });
 });

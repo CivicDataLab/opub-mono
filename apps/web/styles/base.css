@@ -2,9 +2,9 @@
 @import 'tokens.css';
 
 :root {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-    Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-  color: var(--text-high);
+  font-family: var(--primary-font), -apple-system, BlinkMacSystemFont, Segoe UI,
+    Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
+    sans-serif;
   line-height: 150%;
   box-sizing: border-box;
   color: var(--text);

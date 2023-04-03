@@ -1,5 +1,5 @@
 import * as RadioRadix from '@radix-ui/react-radio-group';
-import type { Error } from '@ui/types/shared/form';
+import type { Error } from '../../types/shared/form';
 import cx from 'classnames';
 import React from 'react';
 import { Controller, useFormContext } from 'react-hook-form';

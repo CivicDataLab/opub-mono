@@ -1,4 +1,4 @@
-import type { ComplexAction } from '@ui/types/button';
+import type { ComplexAction } from '../../types/button';
 import { Button } from './Button';
 import type { ButtonProps } from './Button';
 

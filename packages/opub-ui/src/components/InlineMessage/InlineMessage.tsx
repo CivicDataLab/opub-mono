@@ -1,7 +1,8 @@
-import type { Error } from '@ui/types/shared/form';
-import { stateIcon } from '@ui/utils/icons';
+import type { Error } from '../../types/shared/form';
+import { stateIcon } from '../../utils/icons';
 import React from 'react';
 import styles from './InlineMessage.module.scss';
+import { Icon } from '../Icon';
 
 export interface InlineMessageProps {
   /** Content briefly explaining how to resolve the invalid form field input. */
@@ -27,7 +28,7 @@ function InlineMessage({
   if (!message) {
     return null;
   }
-  const Icon = stateIcon[appearance];
+  const icon = stateIcon[appearance];
   return (
     <div
       id={`${fieldID}-${appearance}`}
@@ -40,7 +41,7 @@ function InlineMessage({
       }
     >
       <div className={styles.Icon}>
-        <Icon size={14} />
+        <Icon source={icon} />
       </div>
       {message}
     </div>

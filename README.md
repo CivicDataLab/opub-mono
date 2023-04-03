@@ -45,7 +45,7 @@ To develop only package, let's say UI, run the following command:
 
 ```
 cd opub-mono
-yarn dev --filter opub-ui
+yarn dev --filter @opub-cdl/ui
 ```
 
 ### New Component

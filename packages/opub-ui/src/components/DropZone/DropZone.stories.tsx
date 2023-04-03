@@ -1,6 +1,6 @@
-import { Asset } from '@opub-icons/workflow';
+import { FileMinor } from '@shopify/polaris-icons';
 import { Meta, StoryObj } from '@storybook/react';
-import { useCallback, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Button } from '../Button';
 import { Flex } from '../Flex';
 import { Text } from '../Text';
@@ -44,7 +44,7 @@ export const Default: Story = {
                 source={
                   validImageTypes.includes(file.type)
                     ? window.URL.createObjectURL(file)
-                    : Asset
+                    : FileMinor
                 }
               />
 
@@ -98,7 +98,7 @@ export const SingleUpload: Story = {
           source={
             validImageTypes.includes(file.type)
               ? window.URL.createObjectURL(file)
-              : Asset
+              : FileMinor
           }
         />
 
@@ -177,7 +177,7 @@ export const CustomHint: Story = {
                 source={
                   validImageTypes.includes(file.type)
                     ? window.URL.createObjectURL(file)
-                    : Asset
+                    : FileMinor
                 }
               />
 
@@ -236,7 +236,7 @@ export const CustomTrigger: Story = {
                 source={
                   validImageTypes.includes(file.type)
                     ? window.URL.createObjectURL(file)
-                    : Asset
+                    : FileMinor
                 }
               />
 

@@ -1,4 +1,5 @@
-import { ComboboxSingleProps } from '@ui/types/combobox';
+// @ts-nocheck
+import { ComboboxSingleProps } from '../../../types/combobox';
 import {
   ComboboxItem,
   ComboboxPopover,

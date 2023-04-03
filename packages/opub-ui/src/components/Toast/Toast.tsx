@@ -3,7 +3,7 @@ import styles from './Toast.module.scss';
 import cx from 'classnames';
 import * as ToastRadix from '@radix-ui/react-toast';
 import { Button } from '../Button';
-import { stateIcon } from '@ui/utils/icons';
+import { stateIcon } from '../../utils/icons';
 
 type RadixMainProps = React.ComponentProps<typeof ToastRadix.Provider> & {
   trigger: ReactNode;

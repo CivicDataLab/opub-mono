@@ -1,4 +1,4 @@
-import { BreakpointsAlias } from '@ui/tokens/breakpoints';
+import { BreakpointsAlias } from '../tokens/breakpoints';
 
 export function variationName(name: string, value: string) {
   return `${name}${value.charAt(0).toUpperCase()}${value.slice(1)}`;

@@ -1,6 +1,6 @@
 import { DateValue } from '@react-types/calendar';
 import { CalendarMinor } from '@shopify/polaris-icons';
-import { DateTimeProps } from '@ui/types/datetime';
+import { DateTimeProps } from '../../types/datetime';
 import cx from 'classnames';
 import React, { forwardRef } from 'react';
 import { AriaDateRangePickerProps, useDateRangePicker } from 'react-aria';
@@ -19,7 +19,7 @@ type Props = {
 } & Omit<DateTimeProps, 'label'> &
   (DateRangePickerState | AriaDateRangePickerProps<DateValue>);
 
-const DateRangePicker = forwardRef((props: Props) => {
+const DateRangePicker = (props: Props) => {
   const {
     helpText,
     label,
@@ -83,6 +83,6 @@ const DateRangePicker = forwardRef((props: Props) => {
       </Labelled>
     </div>
   );
-});
+};
 
 export { DateRangePicker };

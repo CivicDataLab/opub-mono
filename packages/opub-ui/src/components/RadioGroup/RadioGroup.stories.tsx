@@ -16,12 +16,8 @@ export default meta;
 export const Default = () => (
   <Form>
     <RadioGroup name="radio1" defaultValue="12">
-      <RadioItem name="radio1" value="12">
-        Radio 1
-      </RadioItem>
-      <RadioItem name="radio1" value="23">
-        Radio 2
-      </RadioItem>
+      <RadioItem value="12">Radio 1</RadioItem>
+      <RadioItem value="23">Radio 2</RadioItem>
     </RadioGroup>
   </Form>
 );
@@ -29,10 +25,10 @@ export const Default = () => (
 export const HelpText = () => (
   <Form>
     <RadioGroup name="radio1">
-      <RadioItem name="radio1" value="12" helpText="This is a help text">
+      <RadioItem value="12" helpText="This is a help text">
         Radio 1
       </RadioItem>
-      <RadioItem name="radio1" value="23" helpText="This is a help text">
+      <RadioItem value="23" helpText="This is a help text">
         Radio 2
       </RadioItem>
     </RadioGroup>
@@ -42,15 +38,11 @@ export const HelpText = () => (
 export const Disabled = () => (
   <Form>
     <RadioGroup name="radio1">
-      <RadioItem name="radio1" value="12">
-        Radio 1
-      </RadioItem>
-      <RadioItem name="radio1" value="23" disabled>
+      <RadioItem value="12">Radio 1</RadioItem>
+      <RadioItem value="23" disabled>
         Radio 2
       </RadioItem>
-      <RadioItem name="radio1" value="11">
-        Radio 3
-      </RadioItem>
+      <RadioItem value="11">Radio 3</RadioItem>
     </RadioGroup>
   </Form>
 );
@@ -58,10 +50,8 @@ export const Disabled = () => (
 export const Error = () => (
   <Form>
     <RadioGroup name="radio1" error="oops">
-      <RadioItem name="radio1" value="12">
-        Radio 1
-      </RadioItem>
-      <RadioItem name="radio1" value="23" helpText="This is a help text">
+      <RadioItem value="12">Radio 1</RadioItem>
+      <RadioItem value="23" helpText="This is a help text">
         Radio 2
       </RadioItem>
     </RadioGroup>

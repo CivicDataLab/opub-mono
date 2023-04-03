@@ -1,12 +1,11 @@
-import React, { forwardRef } from 'react';
-import styles from './RangeSlider.module.scss';
-import cx from 'classnames';
 import * as Slider from '@radix-ui/react-slider';
-import { Labelled } from '../Labelled';
-import type { Action } from '@ui/types/button';
-import type { Error } from '@ui/types/shared/form';
+import cx from 'classnames';
+import React, { forwardRef } from 'react';
+import type { Action } from '../../types/button';
+import type { Error } from '../../types/shared/form';
 import { Flex } from '../Flex';
-import { Text } from '../Text';
+import { Labelled } from '../Labelled';
+import styles from './RangeSlider.module.scss';
 
 type Props = {
   /** Label for the range input */

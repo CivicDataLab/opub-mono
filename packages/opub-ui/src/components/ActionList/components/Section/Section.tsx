@@ -1,9 +1,9 @@
-import { Box } from '@ui/components/Box';
-import { Text } from '@ui/components/Text';
+import { Box } from '../../../Box';
+import { Text } from '../../../Text';
 import type {
   ActionListItemDescriptor,
   ActionListSection,
-} from '@ui/types/actionlist';
+} from '../../../../types/actionlist';
 import { Item } from '../Item';
 
 export interface SectionProps {

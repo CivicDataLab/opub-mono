@@ -1,9 +1,14 @@
-import { ChevronDown, ChevronUp, ChevronUpDown } from '@opub-icons/workflow';
-import { ConnectedDisclosure } from '@ui/types/button';
-import { variationName } from '@ui/utils/css';
-import { MouseUpBlurHandler, handleMouseUpByBlurring } from '@ui/utils/focus';
+import {
+  CaretDownMinor,
+  CaretUpMinor,
+  SelectMinor,
+} from '@shopify/polaris-icons';
 import cx from 'classnames';
 import * as React from 'react';
+import { ConnectedDisclosure } from '../../types/button';
+import { variationName } from '../../utils/css';
+import { handleMouseUpByBlurring, MouseUpBlurHandler } from '../../utils/focus';
+import { Icon } from '../Icon';
 import { Spinner } from '../Spinner';
 import { UnstyledButton, UnstyledButtonProps } from './BaseButton';
 import styles from './Button.module.scss';
@@ -27,9 +32,6 @@ export interface NonMutualButtonProps {
   /** Allows the button to grow to the width of its container */
   fullWidth?: boolean;
 
-  // Content of the Button
-  children: string | string[];
-
   /** Makes `plain` and `outline` Button colors (text, borders, icons) the same as the current text color. Also adds an underline to `plain` Buttons */
   monochrome?: boolean;
 
@@ -49,9 +51,7 @@ export interface NonMutualButtonProps {
   textAlign?: 'left' | 'right' | 'center' | 'start' | 'end';
 }
 
-export interface ButtonProps
-  extends Omit<UnstyledButtonProps, 'children'>,
-    NonMutualButtonProps {}
+export type ButtonProps = {} & NonMutualButtonProps & UnstyledButtonProps;
 
 interface CommonButtonProps
   extends Pick<
@@ -65,7 +65,6 @@ interface CommonButtonProps
     | 'onBlur'
     | 'onMouseEnter'
     | 'onTouchStart'
-    | 'ref'
   > {
   className: UnstyledButtonProps['className'];
   onMouseUp: MouseUpBlurHandler;
@@ -130,7 +129,7 @@ const Button = React.forwardRef(
       connectedDisclosure,
       ...otherProps
     }: ButtonProps,
-    ref
+    ref: React.Ref<HTMLButtonElement>
   ) => {
     const isDisabled = disabled || loading;
 
@@ -179,7 +178,11 @@ const Button = React.forwardRef(
           {loading ? (
             <div className={styles.Placeholder} />
           ) : (
-            getDisclosureIconSource(disclosure)
+            <Icon
+              source={
+                loading ? 'placeholder' : getDisclosureIconSource(disclosure)
+              }
+            />
           )}
         </div>
       </span>
@@ -197,7 +200,6 @@ const Button = React.forwardRef(
       onMouseUp: handleMouseUpByBlurring,
       onMouseEnter,
       onTouchStart,
-      ref,
     };
     const linkProps: LinkButtonProps = {
       url,
@@ -223,6 +225,7 @@ const Button = React.forwardRef(
         {...linkProps}
         {...actionProps}
         {...otherProps}
+        ref={ref}
       >
         <span className={styles.Content}>
           {spinnerSVGMarkup}
@@ -241,8 +244,8 @@ function getDisclosureIconSource(
   disclosure: NonNullable<ButtonProps['disclosure']>
 ) {
   if (disclosure === 'select') {
-    return <ChevronUpDown size={14} />;
+    return SelectMinor;
   }
 
-  return disclosure === 'up' ? <ChevronUp /> : <ChevronDown />;
+  return disclosure === 'up' ? CaretUpMinor : CaretDownMinor;
 }

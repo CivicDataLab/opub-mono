@@ -1,8 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react';
+import { PropsVariationSection } from '../../utils/helpers';
 import { Form } from '../Form';
 import { Checkbox } from './Checkbox';
-import { PropsVariationSection } from '@ui/utils/helpers';
-import { Button } from '../Button';
 
 /**
  * A control that allows the user to toggle between checked and not checked.

@@ -1,25 +1,53 @@
 {
-  "name": "opub-ui",
-  "version": "0.0.1",
-  "type": "module",
-  "main": "./index.tsx",
-  "types": "./index.tsx",
+  "name": "@opub-cdl/ui",
+  "description": "OPub UI Library",
+  "version": "0.0.68",
+  "private": false,
   "license": "MIT",
+  "author": "CivicDataLab <tech@civicdatalab.in>",
+  "homepage": "https://github.com/CivicDataLab/opub-mono",
+  "repository": "https://github.com/CivicDataLab/opub-mono",
+  "bugs": {
+    "url": "https://github.com/CivicDataLab/opub-mono/issues"
+  },
+  "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "civicdatalab",
+    "opub",
+    "ui library",
+    "react",
+    "components",
+    "component library",
+    "React Component Library"
+  ],
+  "sideEffects": false,
+  "main": "dist/index.js",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "outputDir": "./dist",
   "engines": {
     "node": ">=16 <=18"
   },
-  "author": {
-    "name": "CivicDataLab"
-  },
   "scripts": {
     "dev": "storybook dev -p 6006",
-    "build": "storybook build",
+    "build": "rollup -c",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "storybook build",
     "test": "vitest",
     "coverage": "vitest run --coverage",
-    "lint": "TIMING=1 eslint \"**/*.ts*\"",
-    "chromatic": "npx chromatic --exit-once-uploaded --project-token=795f989bc619"
+    "lint": "eslint 'src/**/*.{js,jsx,ts,tsx}'",
+    "lint:fix": "eslint --fix 'src/**/*.{jsx,ts,tsx}'",
+    "chromatic": "npx chromatic --exit-once-uploaded --project-token=795f989bc619",
+    "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
+  },
+  "peerDependencies": {
+    "react": "^16.14.0 || ^17.0.0 || ^18.2.0",
+    "react-dom": "^16.14.0 || ^17.0.0 || ^18.2.0"
   },
   "dependencies": {
     "@hookform/resolvers": "^2.9.11",
@@ -35,22 +63,17 @@
     "@radix-ui/react-switch": "^1.0.2",
     "@radix-ui/react-tabs": "^1.0.3",
     "@radix-ui/react-tooltip": "^1.0.5",
-    "@react-spectrum/utils": "^3.8.1",
     "@shopify/polaris-icons": "^6.12.0",
     "@tanstack/react-table": "^8.8.4",
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
     "ariakit": "^2.0.0-next.43",
-    "downshift": "^7.4.1",
-    "react": "^18.2.0",
     "react-aria": "^3.22.0",
-    "react-dom": "^18.2.0",
     "react-hook-form": "7.20.0",
-    "react-portal": "^4.2.2",
-    "react-stately": "^3.21.0",
-    "yup": "^1.0.0"
+    "react-stately": "^3.21.0"
   },
   "devDependencies": {
+    "@rollup/plugin-commonjs": "^24.0.1",
+    "@rollup/plugin-node-resolve": "^15.0.1",
+    "@rollup/plugin-typescript": "8.3.3",
     "@storybook/addon-actions": "^6.5.16",
     "@storybook/addon-console": "^1.2.3",
     "@storybook/addon-essentials": "7.0.0-beta.47",
@@ -61,6 +84,9 @@
     "@storybook/react-vite": "7.0.0-beta.47",
     "@storybook/testing-library": "^0.0.14-next.1",
     "@storybook/theming": "^7.0.0-beta.47",
+    "@svgr/rollup": "^7.0.0",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
     "@types/react": "^18.0.26",
     "@types/react-dom": "^18.0.9",
     "@types/react-portal": "^4.0.4",
@@ -69,16 +95,25 @@
     "@vitejs/plugin-react": "^3.1.0",
     "babel-loader": "^8.3.0",
     "chromatic": "^6.17.1",
+    "esbuild": "^0.17.15",
     "eslint-config-custom": "*",
     "happy-dom": "^8.2.2",
+    "lint-staged": "^13.2.0",
     "react-test-renderer": "^18.2.0",
+    "rollup": "^3.20.2",
+    "rollup-plugin-copy": "^3.4.0",
+    "rollup-plugin-esbuild": "^5.0.0",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-postcss": "^4.0.2",
+    "rollup-plugin-terser": "^7.0.2",
+    "rollup-plugin-visualizer": "^5.9.0",
     "storybook": "7.0.0-beta.47",
     "storybook-addon-pseudo-states": "^2.0.0-next.0",
     "tsconfig": "*",
     "typescript": "^4.9.3",
     "vite": "^4.1.4",
     "vite-plugin-turbosnap": "^1.0.1",
+    "vite-tsconfig-paths": "^4.0.7",
     "vitest": "^0.28.3"
-  },
-  "_id": "opub-ui@0.0.1"
+  }
 }

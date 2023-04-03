@@ -1,9 +1,4 @@
-import { CloseCircle } from '@opub-icons/workflow';
-import { TextFieldProps } from '@ui/types/input';
-import { Key } from '@ui/types/shared/key';
-import { variationName } from '@ui/utils/css';
-import { useForwardRef } from '@ui/utils/helpers';
-import { useIsAfterInitialMount } from '@ui/utils/hooks';
+import { CircleCancelMinor } from '@shopify/polaris-icons';
 import cx from 'classnames';
 import React, {
   createElement,
@@ -13,7 +8,13 @@ import React, {
   useRef,
   useState,
 } from 'react';
+import { TextFieldProps } from '../../types/input';
+import { Key } from '../../types/shared/key';
+import { variationName } from '../../utils/css';
+import { useForwardRef } from '../../utils/helpers';
+import { useIsAfterInitialMount } from '../../utils/hooks';
 import { Connected } from '../Connected';
+import { Icon } from '../Icon';
 import { Labelled } from '../Labelled';
 import { Text } from '../Text';
 import { Resizer, Spinner, SpinnerProps } from './components';
@@ -179,7 +180,7 @@ export const Input = React.forwardRef(
           <Text as="span" visuallyHidden>
             clear input
           </Text>
-          <CloseCircle size={14} />
+          <Icon source={CircleCancelMinor} color="base" />
         </button>
       ) : null;
 

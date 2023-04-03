@@ -1,4 +1,4 @@
-import { UncontrolledCheckbox } from '@ui/components/Checkbox';
+import { UncontrolledCheckbox } from '../../../Checkbox';
 import cx from 'classnames';
 import React from 'react';
 import styles from '../../IndexTable.module.scss';

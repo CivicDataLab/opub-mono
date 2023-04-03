@@ -1,4 +1,4 @@
-import { GraphSunburst } from '@opub-icons/workflow';
+import { CalendarMinor, GrammarMajor } from '@shopify/polaris-icons';
 import { Meta, StoryObj } from '@storybook/react';
 import { Thumbnail } from './Thumbnail';
 
@@ -47,6 +47,6 @@ export const SVG: Story = {
   args: {
     ...Default.args,
     size: 'small',
-    source: GraphSunburst,
+    source: CalendarMinor,
   },
 };

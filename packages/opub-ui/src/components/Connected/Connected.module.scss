@@ -11,7 +11,7 @@
   z-index: var(--opub-connected-item);
   flex: 0 0 auto;
 
-  &:not(:first-child) {
+  &:not(:first-of-type) {
     margin-left: var(--space-1);
   }
 }
