@@ -36,7 +36,9 @@ export const Spinner = React.forwardRef<HTMLDivElement, SpinnerProps>(
           onMouseUp={onMouseUp}
           onBlur={onBlur}
         >
-          <Icon source={CaretUpMinor} />
+          <div className={styles.SpinnerIcon}>
+            <Icon source={CaretUpMinor} />
+          </div>
         </button>
         <button
           className={styles.Segment}
@@ -46,7 +48,9 @@ export const Spinner = React.forwardRef<HTMLDivElement, SpinnerProps>(
           onMouseUp={onMouseUp}
           onBlur={onBlur}
         >
-          <Icon source={CaretDownMinor} />
+          <div className={styles.SpinnerIcon}>
+            <Icon source={CaretDownMinor} />
+          </div>
         </button>
       </div>
     );

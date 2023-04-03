@@ -11,9 +11,6 @@
   cursor: pointer;
 
   --gap: 8px;
-  @media #{$breakpoints-md-down} {
-    --gap: 9px;
-  }
 
   label {
     padding-inline-start: var(--gap);
@@ -21,12 +18,9 @@
 }
 
 .Input {
-  --size: 20px;
+  all: unset;
+  --size: 16px;
   cursor: pointer;
-
-  @media #{$breakpoints-md-down} {
-    --size: 22px;
-  }
 
   background-color: var(--surface);
   width: var(--size);
@@ -133,8 +127,5 @@
 
 .Descriptions {
   --choice-size: 20px;
-  @media #{$breakpoints-md-down} {
-    --choice-size: 22px;
-  }
   padding-left: calc(var(--space-2) + var(--choice-size));
 }

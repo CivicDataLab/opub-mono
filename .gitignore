@@ -37,3 +37,4 @@ yarn-error.log*
 storybook-static
 
 .rollup.cache
+bundle-analysis.html

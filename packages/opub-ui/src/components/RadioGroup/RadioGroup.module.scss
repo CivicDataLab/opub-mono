@@ -13,16 +13,15 @@
 }
 
 .RadioItem {
-  --choice-size: 20px;
-  @media #{$breakpoints-md-down} {
-    --choice-size: 18px;
-  }
+  all: unset;
+  --choice-size: 16px;
 
+  position: relative;
   background-color: var(--surface);
   width: var(--choice-size);
   height: var(--choice-size);
-  min-width: var(--choice-size);
-  min-height: var(--choice-size);
+  max-width: var(--choice-size);
+  max-height: var(--choice-size);
   border-radius: 100%;
   border: var(--border-width-2) solid var(--border);
   transition: border-color var(--duration-150) var(--ease);
@@ -38,10 +37,6 @@
 
 .RadioIndicator {
   --icon-size: 8px;
-
-  @media #{$breakpoints-md-down} {
-    --icon-size: 10px;
-  }
 
   display: flex;
   align-items: center;

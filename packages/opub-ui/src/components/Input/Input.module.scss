@@ -89,7 +89,7 @@ $spinner-icon-size: 12px;
   flex: 1 1 0%;
   width: 100%;
   min-width: 0;
-  min-height: 1.5rem;
+  min-height: 2.25rem;
   margin: 0;
   padding: calc((2.25rem - var(--font-line-height-3) - var(--space-05)) / 2)
     var(--space-3);
@@ -263,20 +263,6 @@ $spinner-icon-size: 12px;
   }
 }
 
-.Spinner {
-  --opub-text-field-spinner-offset-large: calc(2px + var(--border-width-1));
-  z-index: var(--opub-text-field-contents);
-  margin: var(--opub-text-field-spinner-offset-large);
-  color: var(--icon);
-
-  display: flex;
-  align-self: stretch;
-  flex-direction: column;
-
-  width: 22px;
-  cursor: pointer;
-}
-
 .Resizer {
   position: absolute;
   bottom: 0;
@@ -306,6 +292,7 @@ $spinner-icon-size: 12px;
   align-items: center;
   appearance: none;
   border: none;
+  cursor: pointer;
 
   &:focus {
     outline: none;
@@ -326,6 +313,28 @@ $spinner-icon-size: 12px;
 
   &:not(:first-of-type) {
     margin-top: 0;
+  }
+}
+
+.Spinner {
+  --opub-text-field-spinner-offset-large: calc(2px + var(--border-width-1));
+  z-index: var(--opub-text-field-contents);
+  margin: var(--opub-text-field-spinner-offset-large);
+  color: var(--icon);
+
+  display: flex;
+  align-self: stretch;
+  flex-direction: column;
+
+  width: 22px;
+}
+
+.SpinnerIcon {
+  height: 0.75rem;
+  width: 0.75rem;
+
+  svg {
+    pointer-events: none;
   }
 }
 
