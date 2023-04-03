@@ -32,9 +32,6 @@ export interface NonMutualButtonProps {
   /** Allows the button to grow to the width of its container */
   fullWidth?: boolean;
 
-  // Content of the Button
-  children: string | string[];
-
   /** Makes `plain` and `outline` Button colors (text, borders, icons) the same as the current text color. Also adds an underline to `plain` Buttons */
   monochrome?: boolean;
 

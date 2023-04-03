@@ -1,3 +1,4 @@
+import { FocusEvent } from 'react';
 import { ActionListItemDescriptor } from './actionlist';
 
 export interface BaseButtonProps {
@@ -32,9 +33,9 @@ export interface BaseButtonProps {
   /** Callback when clicked */
   onClick?(): void;
   /** Callback when button becomes focussed */
-  onFocus?(): void;
+  onFocus?(e: FocusEvent<Element, Element>): void;
   /** Callback when focus leaves button */
-  onBlur?(): void;
+  onBlur?(e: FocusEvent<Element, Element>): void;
   /** Callback when a keyup event is registered on the button */
   onKeyUp?(event: React.KeyboardEvent<HTMLButtonElement>): void;
   /** Callback when a keydown event is registered on the button */

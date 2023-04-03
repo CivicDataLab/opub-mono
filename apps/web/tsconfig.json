@@ -2,11 +2,7 @@
   "extends": "tsconfig/nextjs.json",
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "*.ts"],
   "compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["./*"],
-      "@ui/*": ["../../packages/opub-ui/src/*"]
-    }
+    "baseUrl": "."
   },
 
   "exclude": ["node_modules"]

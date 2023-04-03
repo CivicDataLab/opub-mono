@@ -5,7 +5,7 @@ import React, { LegacyRef } from 'react';
 import { UnstyledLink } from '../Link/BaseLink';
 export interface UnstyledButtonProps extends BaseButtonProps {
   /** The content to display inside the button */
-  children?: React.ReactNode;
+  children?: string | string[] | undefined | React.ReactNode;
   /** A custom class name to apply styles to button */
   className?: string;
 }

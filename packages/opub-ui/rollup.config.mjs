@@ -126,13 +126,13 @@ const getPlugins = (format = 'esm') => {
     copy({
       targets: [{ src: 'assets', dest: 'dist' }],
     }),
-    typescript(typeScriptOptions),
     svgr(),
     postcss({
       extract: false,
       modules: true,
       use: ['sass'],
     }),
+    typescript(typeScriptOptions),
     terser(),
     visualizer({
       filename: 'bundle-analysis.html',

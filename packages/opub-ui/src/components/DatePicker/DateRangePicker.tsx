@@ -19,7 +19,7 @@ type Props = {
 } & Omit<DateTimeProps, 'label'> &
   (DateRangePickerState | AriaDateRangePickerProps<DateValue>);
 
-const DateRangePicker = forwardRef((props: Props) => {
+const DateRangePicker = (props: Props) => {
   const {
     helpText,
     label,
@@ -83,6 +83,6 @@ const DateRangePicker = forwardRef((props: Props) => {
       </Labelled>
     </div>
   );
-});
+};
 
 export { DateRangePicker };

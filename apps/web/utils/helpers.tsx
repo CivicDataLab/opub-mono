@@ -1,4 +1,4 @@
-import { Form } from '@/../../packages/opub-ui/dist';
+import { Form } from '@opub-cdl/ui/src';
 
 /**
  * Toggles the theme of the page between light and dark.
