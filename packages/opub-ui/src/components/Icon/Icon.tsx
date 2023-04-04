@@ -54,29 +54,6 @@ export function Icon({
     sourceType = 'external';
   }
 
-  if (
-    color &&
-    sourceType === 'external' &&
-    process.env.NODE_ENV === 'development'
-  ) {
-    // eslint-disable-next-line no-console
-    console.warn(
-      'Recoloring external SVGs is not supported. Set the intended color on your SVG instead.'
-    );
-  }
-
-  if (
-    backdrop &&
-    color &&
-    !COLORS_WITH_BACKDROPS.includes(color) &&
-    process.env.NODE_ENV === 'development'
-  ) {
-    // eslint-disable-next-line no-console
-    console.warn(
-      `The ${color} variant does not have a supported backdrop color`
-    );
-  }
-
   const className = cx(
     styles.Icon,
     color && styles[variationName('color', color)],

@@ -4,6 +4,7 @@ import cx from 'classnames';
 import * as ToastRadix from '@radix-ui/react-toast';
 import { Button } from '../Button';
 import { stateIcon } from '../../utils/icons';
+import { Icon } from '../Icon';
 
 type RadixMainProps = React.ComponentProps<typeof ToastRadix.Provider> & {
   trigger: ReactNode;
@@ -40,8 +41,6 @@ const Toast = ({
   variant,
   ...otherProps
 }: RadixProps) => {
-  const CloseIcon = stateIcon['close'];
-  const ErrorIcon = stateIcon[variant];
   const RootStyles = cx(
     styles.ToastRoot,
     variant === 'error' && styles.ToastError,
@@ -64,7 +63,7 @@ const Toast = ({
         <ToastRadix.Title className={styles.ToastTitle}>
           {variant === 'error' ? (
             <div className={styles.ErrorIconArea}>
-              <ErrorIcon />
+              <Icon source={stateIcon[variant]} color="base" />
               {toastTitle}
             </div>
           ) : (
@@ -77,16 +76,12 @@ const Toast = ({
           </ToastRadix.Description>
         )}
         {toastActionText && (
-          <ToastRadix.Action
-            className={styles.ToastAction}
-            // asChild
-            altText={altText}
-          >
+          <ToastRadix.Action className={styles.ToastAction} altText={altText}>
             {toastActionText}
           </ToastRadix.Action>
         )}
         <ToastRadix.Close className={CloseButtonStyles}>
-          <CloseIcon />
+          <Icon source={stateIcon['close']} />
         </ToastRadix.Close>
       </ToastRadix.Root>
 

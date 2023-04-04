@@ -60,7 +60,6 @@ export function FileUpload(props: FileUploadProps) {
       );
       break;
     case 'small':
-      // eslint-disable-next-line @next/next/no-img-element
       viewMarkup = <img width="20" src={uploadArrow} alt="" />;
       break;
   }

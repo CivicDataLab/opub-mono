@@ -12,26 +12,26 @@
     "dev": "turbo run dev",
     "lint": "turbo run lint",
     "lint:fix": "turbo run lint:fix",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "format": "prettier --write",
     "test": "turbo run test --filter @opub-cdl/ui",
     "test:watch": "turbo run test:watch",
     "prepare": "husky install"
   },
   "devDependencies": {
     "@changesets/cli": "^2.26.1",
+    "@typescript-eslint/eslint-plugin": "^5.57.1",
+    "@typescript-eslint/parser": "^5.57.1",
     "classnames": "^2.3.2",
     "eslint-config-custom": "*",
     "husky": "^8.0.3",
+    "lint-staged": "^13.2.0",
     "prettier": "^2.8.4",
     "sass": "^1.58.3",
     "tsup": "^6.7.0",
-    "turbo": "^1.7.4"
+    "turbo": "^1.8.8"
   },
   "engines": {
     "node": ">=14.0.0"
-  },
-  "dependencies": {
-    "@radix-ui/react-toast": "^1.1.3"
   },
   "packageManager": "yarn@1.22.17",
   "husky": {
@@ -40,9 +40,9 @@
     }
   },
   "lint-staged": {
-    "src/**/*.{js,jsx,ts,tsx}": [
-      "yarn  eslint",
-      "yarn  format"
+    "*.{js,jsx,ts,tsx}": [
+      "yarn format"
     ]
-  }
+  },
+  "dependencies": {}
 }
