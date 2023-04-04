@@ -1,12 +1,13 @@
 import {
-  CircleTickMinor,
   DeleteMinor,
   EditMinor,
   ExportMinor,
   ImportMinor,
+  TickMinor,
 } from '@shopify/polaris-icons';
 import { Meta, StoryObj } from '@storybook/react';
 import { Button } from '../Button';
+import { Icon } from '../Icon';
 import { Menu } from './Menu';
 
 /**
@@ -44,7 +45,7 @@ export const WithSuffix: Story = {
         active: true,
         content: 'Import file',
         icon: <ImportMinor />,
-        suffix: <CircleTickMinor />,
+        suffix: <Icon source={TickMinor} />,
       },
       { content: 'Export file', icon: <ExportMinor /> },
     ],

@@ -1,7 +1,6 @@
-import '../../../apps/web/styles/breakpoints.scss';
 import '@storybook/addon-actions';
 import '@storybook/addon-console';
-import '../assets/tokens.css';
+import '../assets/styles.scss';
 
 export const parameters = {
   controls: {
