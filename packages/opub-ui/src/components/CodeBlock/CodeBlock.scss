@@ -1,0 +1,136 @@
+// module sass file is not working for dangerouslySetInnerHTML content
+.OPub-CodeBlock {
+  --colors-violet2: hsl(255 30.3% 12.9%);
+  --colors-violet11: hsl(250 95% 76.8%);
+  --colors-blue10: hsl(209 100% 60.6%);
+  --colors-pink11: hsl(325 90% 66.4%);
+  --colors-mauve9: hsl(252 4% 45.2%);
+  --colors-mauveA8: hsl(249 98.1% 95.2% / 0.273);
+  --colors-slate10: hsl(206 5.2% 49.5%);
+  --colors-indigo5: hsl(227 50% 24.1%);
+
+  --background: var(--colors-violet2);
+  --text: var(--colors-violet11);
+  --syntax1: var(--colors-blue10);
+  --syntax2: var(--colors-pink11);
+  --syntax3: var(--colors-blue10);
+  --syntax4: var(--colors-blue10);
+  --comment: var(--colors-mauve9);
+  --fadedLines: var(--colors-mauveA8);
+  --comment: var(--colors-slate10);
+  --removed: var(--text-subdued);
+  --added: var(--text-success);
+  --line-number: var(--colors-indigo5);
+
+  box-sizing: border-box;
+  border-radius: var(--border-radius-2);
+  padding: var(--space-4) 0;
+  overflow: auto;
+  font-family: var(--font-family-mono) monospace;
+  font-size: var(--font-size-100);
+  line-height: var(--font-line-height-2);
+  white-space: pre;
+  position: relative;
+  background-color: var(--background);
+  color: var(--text);
+  padding-bottom: var(--space-20);
+
+  code {
+    display: block;
+    padding: 0;
+    margin: 0;
+
+    .token.parameter {
+      color: var(--text);
+    }
+
+    .token.tag,
+    .token.class-name,
+    .token.selector,
+    .token.selector .class,
+    .token.function {
+      color: var(--syntax1);
+    }
+    .token.attr-value,
+    .token.class,
+    .token.string,
+    .token.number,
+    .token.unit,
+    .token.color {
+      color: var(--syntax2);
+    }
+
+    .token.attr-name,
+    .token.keyword,
+    .token.rule,
+    .token.operator,
+    .token.pseudo-class,
+    .token.important {
+      color: var(--syntax3);
+    }
+
+    .token.punctuation,
+    .token.module,
+    .token.property {
+      color: var(--syntax4);
+    }
+
+    .token.comment {
+      color: var(--comment);
+    }
+
+    .token.atapply .token:not(.rule):not(.important) {
+      color: inherit;
+    }
+
+    .language-shell .token:not(.comment) {
+      color: inherit;
+    }
+
+    .language-css .token.function {
+      color: inherit;
+    }
+
+    .token.deleted:not(.prefix),
+    .token.inserted:not(.prefix) {
+      display: block;
+      padding-inline: var(--space-4);
+      margin-inline: -20px;
+    }
+
+    .token.deleted:not(.prefix) {
+      color: var(--removed);
+    }
+
+    .token.inserted:not(.prefix) {
+      color: var(--added);
+    }
+
+    .token.deleted.prefix .token.inserted.prefix {
+      user-select: none;
+    }
+
+    // Line numbers
+    &[data-line-numbers='true'] {
+      .highlight-line {
+        position: relative;
+        padding-left: var(--space-2);
+
+        &::before {
+          content: attr(data-line);
+          position: absolute;
+          left: -5;
+          top: 0;
+          color: var(--line-number);
+        }
+      }
+      [data-invert-line-highlight='true'] {
+        .highlight-line {
+          &::before {
+            left: 10;
+          }
+        }
+      }
+    }
+  }
+}
