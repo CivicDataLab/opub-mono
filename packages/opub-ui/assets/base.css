@@ -1,0 +1,38 @@
+body {
+  color: var(--text);
+  line-height: 150%;
+  box-sizing: border-box;
+  font-family: var(--primary-font);
+  --outline: 2px solid var(--focused);
+  --outline-offset: 2px;
+}
+
+*,
+::after,
+::before {
+  box-sizing: border-box;
+}
+
+*:focus {
+  outline: var(--outline);
+  outline-offset: var(--outline-offset);
+}
+
+*:focus:not(:focus-visible) {
+  outline: none;
+}
+
+*:focus-visible {
+  outline: var(--outline);
+  outline-offset: var(--outline-offset);
+}
+
+.sr-only:not(:where(:focus, :active, :focus-within)) {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}

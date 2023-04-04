@@ -1,5 +1,5 @@
 import type { AppProps } from 'next/app';
-import '@opub-cdl/ui/dist/assets/tokens.css';
+import '@opub-cdl/ui/dist/assets/styles.scss';
 import React from 'react';
 import { SSRProvider } from 'react-aria';
 
