@@ -7,7 +7,7 @@ import tsConfigPaths from 'vite-tsconfig-paths';
 
 // https://vitejs.dev/config/
 export default defineConfig((configEnv) => ({
-  plugins: [react(),  tsConfigPaths(),],
+  plugins: [react(), tsConfigPaths()],
   test: {
     globals: true,
     environment: 'happy-dom',

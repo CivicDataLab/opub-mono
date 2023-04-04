@@ -1,1 +1,1 @@
-export { Thumbnail } from "./Thumbnail";
+export { Thumbnail } from './Thumbnail';

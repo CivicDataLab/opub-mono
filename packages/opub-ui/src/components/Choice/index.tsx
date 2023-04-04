@@ -1,1 +1,1 @@
-export { Choice } from "./Choice";
+export { Choice } from './Choice';

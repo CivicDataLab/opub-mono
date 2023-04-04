@@ -1,1 +1,1 @@
-export { Pip } from "./Pip";
+export { Pip } from './Pip';

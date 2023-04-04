@@ -10,11 +10,7 @@
  */
 
 import { CSSProperties } from 'react';
-import {
-  BorderRadiusValue,
-  BorderSizeValue,
-  DimensionValue
-} from './dna';
+import { BorderRadiusValue, BorderSizeValue, DimensionValue } from './dna';
 
 type ResponsiveProp<T> = {
   base?: T;

@@ -1,1 +1,1 @@
-export { InlineMessage } from "./InlineMessage";
+export { InlineMessage } from './InlineMessage';

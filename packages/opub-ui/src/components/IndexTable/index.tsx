@@ -1,1 +1,1 @@
-export { IndexTable } from "./IndexTable";
+export { IndexTable } from './IndexTable';
