@@ -20,7 +20,18 @@ export const Default: Story = {
   args: {
     children: 'Button',
   },
-  parameters: { pseudo: { focus: true } },
+};
+
+export const Disclosure: Story = {
+  args: {
+    children: 'Button',
+    connectedDisclosure: {
+      actions: [
+        { content: 'Create Organisation' },
+        { content: 'Create Dataset' },
+      ],
+    },
+  },
 };
 
 export const Basic = () => {

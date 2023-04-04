@@ -62,9 +62,9 @@ const getPlugins = () => {
     }),
     typescript(typeScriptOptions),
     terser(),
-    visualizer({
-      filename: 'bundle-analysis.html',
-    }),
+    // visualizer({
+    //   filename: 'bundle-analysis.html',
+    // }),
   ];
 };
 

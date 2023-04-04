@@ -1,0 +1,32 @@
+$item-min-size: 220px;
+
+.FormLayout {
+  margin-top: calc(-1 * var(--space-4));
+  margin-left: calc(-1 * var(--space-5));
+}
+
+.Title {
+  margin-bottom: calc(-1 * var(--space-2));
+  padding: var(--space-4) var(--space-5) 0;
+}
+
+.Items {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.Item {
+  flex: 1 1 $item-min-size;
+  margin-top: var(--space-4);
+  margin-left: var(--space-5);
+  max-width: calc(100% - var(--space-5));
+
+  .grouped & {
+    min-width: $item-min-size;
+  }
+
+  .condensed & {
+    flex-basis: calc(0.5 * $item-min-size);
+    min-width: calc(0.5 * $item-min-size);
+  }
+}

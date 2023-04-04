@@ -1,5 +1,4 @@
 @import 'reset.css';
-@import 'tokens.css';
 
 :root {
   font-family: var(--primary-font), -apple-system, BlinkMacSystemFont, Segoe UI,

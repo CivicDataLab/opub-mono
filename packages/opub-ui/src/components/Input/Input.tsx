@@ -142,7 +142,9 @@ export const Input = React.forwardRef(
     let characterCountMarkup = null;
     if (showCharacterCount) {
       const characterCount = normalizedValue.length;
-      const characterCountLabel = 'character count'; //TODO: add count logic
+      const characterCountLabel = maxLength
+        ? `${characterCount} of ${maxLength} characters used`
+        : `${characterCount} characters`;
 
       const characterCountClassName = cx(
         styles.CharacterCount,

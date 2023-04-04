@@ -11,10 +11,11 @@
     "test:watch": "jest --watch"
   },
   "dependencies": {
+    "@opub-cdl/ui": "*",
+    "@shopify/polaris-icons": "^6.12.0",
     "next": "^13.1.1",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "@opub-cdl/ui": "*"
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",

@@ -5,15 +5,39 @@ import {
   Calendar,
   Divider,
   Flex,
+  Icon,
   RangeCalendar,
+  Select,
   Tag,
   Text,
   UncontrolledCheckbox,
 } from '@opub-cdl/ui/src';
 import styles from '../styles/pages/home.module.scss';
 import { PropsVariationSection } from '../utils/helpers';
+import React from 'react';
+import { ChevronDownMinor, ChevronUpMinor } from '@shopify/polaris-icons';
 
 export default function Web() {
+  const [selected, setSelected] = React.useState('Decrease');
+
+  const handleSelectChange = React.useCallback(
+    (value: string) => setSelected(value),
+    []
+  );
+
+  const options = [
+    {
+      label: 'Increase',
+      value: 'Increase',
+      prefix: <Icon source={ChevronUpMinor} />,
+    },
+    {
+      label: 'Decrease',
+      value: 'Decrease',
+      prefix: <Icon source={ChevronDownMinor} />,
+    },
+  ];
+
   return (
     <div className={styles.container}>
       <Text variant="heading2xl" as="h1">
@@ -94,6 +118,15 @@ export default function Web() {
             Checked: { checked: true },
             Indeterminate: { checked: 'indeterminate' },
           }}
+        />
+      </Spacer>
+
+      <Spacer heading="Select">
+        <Select
+          label="Permission"
+          options={options}
+          onChange={handleSelectChange}
+          value={selected}
         />
       </Spacer>
     </div>

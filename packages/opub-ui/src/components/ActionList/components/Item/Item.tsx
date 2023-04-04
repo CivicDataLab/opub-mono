@@ -57,9 +57,7 @@ export function Item({
   );
 
   const suffixMarkup = suffix && (
-    <div className={styles.SuffixWrapper}>
-      <span className={styles.Suffix}>{suffix}</span>
-    </div>
+    <span className={cx(styles.Suffix, styles.Prefix)}>{suffix}</span>
   );
 
   const textMarkup = <span className={styles.Text}>{contentMarkup}</span>;

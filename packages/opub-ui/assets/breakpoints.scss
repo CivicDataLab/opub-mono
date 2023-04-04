@@ -1,0 +1,19 @@
+$breakpoints-xs-up: '(min-width: 0em)';
+$breakpoints-xs-down: '(max-width: -0.0025em)';
+$breakpoints-xs-only: '(min-width: 0em) and (max-width: 30.6225em)';
+
+$breakpoints-sm-up: '(min-width: 30.625em)';
+$breakpoints-sm-down: '(max-width: 30.6225em)';
+$breakpoints-sm-only: '(min-width: 30.625em) and (max-width: 47.9975em)';
+
+$breakpoints-md-up: '(min-width: 48em)';
+$breakpoints-md-down: '(max-width: 47.9975em)';
+$breakpoints-md-only: '(min-width: 48em) and (max-width: 64.9975em)';
+
+$breakpoints-lg-up: '(min-width: 65em)';
+$breakpoints-lg-down: '(max-width: 64.9975em)';
+$breakpoints-lg-only: '(min-width: 65em) and (max-width: 89.9975em)';
+
+$breakpoints-xl-up: '(min-width: 90em)';
+$breakpoints-xl-down: '(max-width: 89.9975em)';
+$breakpoints-xl-only: '(min-width: 90em)';

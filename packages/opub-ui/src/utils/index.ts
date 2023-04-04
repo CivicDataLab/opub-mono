@@ -5,3 +5,4 @@ export * from './helpers';
 export * from './icons';
 export * from './target';
 export * from './hooks';
+export * from './component';
