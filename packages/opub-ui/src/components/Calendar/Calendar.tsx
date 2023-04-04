@@ -54,7 +54,11 @@ const Calendar = forwardRef(
           </button>
 
           <Text variant="bodyMd">{title}</Text>
-          <button onClick={() => state.focusNextPage()} disabled={disabledNext}  {...othersNext}>
+          <button
+            onClick={() => state.focusNextPage()}
+            disabled={disabledNext}
+            {...othersNext}
+          >
             <Icon source={ArrowRightMinor} color="base" />
           </button>
         </div>

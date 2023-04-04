@@ -3,7 +3,7 @@ import { Badge } from './Badge';
 
 /**
  * Badges are used to inform user of the status of an object or of an action that’s been taken.
- * 
+ *
  *  Reference: https://polaris.shopify.com/components/feedback-indicators/badge
  */
 
@@ -18,7 +18,7 @@ export const Default: Story = {
   args: {
     children: 'Default',
     progress: 'default',
-    status:'new'
+    status: 'new',
   },
 };
 
@@ -26,7 +26,7 @@ export const Complete: Story = {
   args: {
     children: 'Complete',
     progress: 'complete',
-    status:'info'
+    status: 'info',
   },
 };
 
@@ -34,7 +34,7 @@ export const Partiallycomplete: Story = {
   args: {
     children: 'Partially complete',
     progress: 'partiallyComplete',
-    status:'info'
+    status: 'info',
   },
 };
 
@@ -42,6 +42,6 @@ export const Incomplete: Story = {
   args: {
     children: 'Incomplete',
     progress: 'incomplete',
-    status:'info'
+    status: 'info',
   },
 };
