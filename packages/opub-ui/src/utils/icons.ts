@@ -1,6 +1,6 @@
 import {
   AlertMinor,
-  CircleCancelMinor,
+  CancelSmallMinor,
   CircleTickMinor,
   InfoMinor,
   RiskMinor,
@@ -17,7 +17,7 @@ export const icons = {
   error: AlertMinor,
   warning: RiskMinor,
   info: InfoMinor,
-  close: CircleCancelMinor,
+  close: CancelSmallMinor,
 };
 
 export const stateIcon = new Proxy(icons, handler);

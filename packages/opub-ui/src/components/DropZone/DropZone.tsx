@@ -135,7 +135,6 @@ export const DropZone: React.FunctionComponent<DropZoneProps> & {
   const inputRef = useRef<HTMLInputElement>(null);
   const dragTargets = useRef<EventTarget[]>([]);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const adjustSize = useCallback(
     debounce(
       () => {

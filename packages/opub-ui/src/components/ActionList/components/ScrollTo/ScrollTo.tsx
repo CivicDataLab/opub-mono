@@ -15,6 +15,5 @@ export function ScrollTo() {
   }, [scrollToPosition]);
 
   const id = useId();
-  // eslint-disable-next-line jsx-a11y/anchor-is-valid
   return <a id={id} ref={anchorNode} />;
 }

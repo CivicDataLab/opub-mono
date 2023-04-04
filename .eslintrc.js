@@ -7,8 +7,10 @@ module.exports = {
       rootDir: ['apps/*/'],
     },
   },
+  parser: '@typescript-eslint/parser',
+  plugins: ['@typescript-eslint'],
   parserOptions: {
     sourceType: 'module',
-    ecmaVersion: 2015,
+    ecmaVersion: 12,
   },
 };
