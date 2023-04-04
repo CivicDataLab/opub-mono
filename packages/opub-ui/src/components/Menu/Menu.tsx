@@ -2,14 +2,16 @@ import React from 'react';
 import { ActionList } from '../ActionList';
 import type { ActionListProps } from '../ActionList/ActionList';
 import { Popover } from '../Popover';
+import { PopoverProps } from '../Popover/Popover';
 
 type Props = {
   trigger: React.ReactNode;
-} & ActionListProps;
+} & ActionListProps &
+  PopoverProps;
 
 const Menu = (props: Props) => {
   const [isOpen, setIsOpen] = React.useState<boolean>(false);
-  const { trigger, ...others } = props;
+  const { trigger, side, align, ...others } = props;
 
   return (
     <Popover open={isOpen} onOpenChange={(e) => setIsOpen(e)}>
@@ -18,7 +20,7 @@ const Menu = (props: Props) => {
       >
         {trigger}
       </Popover.Trigger>
-      <Popover.Content>
+      <Popover.Content side={side} align={align}>
         <ActionList actionRole="menuitem" {...others} />
       </Popover.Content>
     </Popover>

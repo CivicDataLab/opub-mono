@@ -6,9 +6,13 @@ import {
 import cx from 'classnames';
 import * as React from 'react';
 import { ConnectedDisclosure } from '../../types/button';
+import { useDisableClick } from '../../utils';
 import { variationName } from '../../utils/css';
 import { handleMouseUpByBlurring, MouseUpBlurHandler } from '../../utils/focus';
+import { ActionList } from '../ActionList';
 import { Icon } from '../Icon';
+import { Menu } from '../Menu';
+import { Popover } from '../Popover';
 import { Spinner } from '../Spinner';
 import { UnstyledButton, UnstyledButtonProps } from './BaseButton';
 import styles from './Button.module.scss';
@@ -188,6 +192,61 @@ const Button = React.forwardRef(
       </span>
     ) : null;
 
+    const [disclosureActive, setDisclosureActive] = React.useState(false);
+    const toggleDisclosureActive = React.useCallback(() => {
+      setDisclosureActive((disclosureActive) => !disclosureActive);
+    }, []);
+
+    const handleClick = useDisableClick(disabled, toggleDisclosureActive);
+
+    let connectedDisclosureMarkup;
+
+    if (connectedDisclosure) {
+      const connectedDisclosureClassName = cx(
+        styles.Button,
+        primary && styles.primary,
+        outline && styles.outline,
+        size && size !== DEFAULT_SIZE && styles[variationName('size', size)],
+        textAlign && styles[variationName('textAlign', textAlign)],
+        destructive && styles.destructive,
+        connectedDisclosure.disabled && styles.disabled,
+        styles.iconOnly,
+        styles.ConnectedDisclosure,
+        monochrome && styles.monochrome
+      );
+
+      const defaultLabel = 'Related actions';
+
+      const { disabled, accessibilityLabel: disclosureLabel = defaultLabel } =
+        connectedDisclosure;
+
+      const connectedDisclosureActivator = (
+        <button
+          type="button"
+          className={connectedDisclosureClassName}
+          aria-disabled={disabled}
+          aria-label={disclosureLabel}
+          aria-describedby={ariaDescribedBy}
+          aria-checked={ariaChecked}
+          onClick={handleClick}
+          onMouseUp={handleMouseUpByBlurring}
+          tabIndex={disabled ? -1 : undefined}
+        >
+          <span className={styles.Icon}>
+            <Icon source={CaretDownMinor} />
+          </span>
+        </button>
+      );
+
+      connectedDisclosureMarkup = (
+        <Menu
+          align="end"
+          trigger={connectedDisclosureActivator}
+          items={connectedDisclosure.actions}
+        />
+      );
+    }
+
     const commonProps: CommonButtonProps = {
       id,
       className,
@@ -219,7 +278,7 @@ const Button = React.forwardRef(
       onPointerDown,
     };
 
-    return (
+    const buttonMarkup = (
       <UnstyledButton
         {...commonProps}
         {...linkProps}
@@ -234,6 +293,15 @@ const Button = React.forwardRef(
           {disclosureMarkup}
         </span>
       </UnstyledButton>
+    );
+
+    return connectedDisclosureMarkup ? (
+      <div className={styles.ConnectedDisclosureWrapper}>
+        {buttonMarkup}
+        {connectedDisclosureMarkup}
+      </div>
+    ) : (
+      buttonMarkup
     );
   }
 );

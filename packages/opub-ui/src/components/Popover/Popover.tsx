@@ -1,7 +1,7 @@
 import * as Radix from '@radix-ui/react-popover';
 import React from 'react';
 import styles from './Popover.module.scss';
-export interface Props extends Radix.PopoverProps {
+export interface PopoverProps extends Radix.PopoverContentProps {
   children?: React.ReactNode;
   open?: boolean;
   defaultOpen?: boolean;
@@ -13,7 +13,7 @@ export interface Props extends Radix.PopoverProps {
 
 interface DialogProps extends Radix.PopoverProps {
   Trigger?: Radix.PopoverTriggerProps;
-  Content?: Props;
+  Content?: PopoverProps;
 }
 
 const Popover = ({ children, ...props }: DialogProps) => {
@@ -31,7 +31,7 @@ const Trigger = ({ children, ...props }: RadixButtonProps) => {
 
 const Content = React.forwardRef(
   (
-    { children, isPortal = true, isArrow = false, ...props }: Props,
+    { children, isPortal = true, isArrow = false, ...props }: PopoverProps,
     forwardedRef: React.Ref<HTMLDivElement>
   ) => {
     const PortalDom = isPortal ? Radix.Portal : React.Fragment;
