@@ -12,7 +12,7 @@
     "dev": "turbo run dev",
     "lint": "turbo run lint",
     "lint:fix": "turbo run lint:fix",
-    "format": "prettier",
+    "format": "prettier --write \"**/*.{ts,tsx,md,scss}\"",
     "test": "turbo run test --filter @opub-cdl/ui",
     "test:watch": "turbo run test:watch",
     "prepare": "husky install"
@@ -41,8 +41,7 @@
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,scss}": [
-      "eslint",
-      "prettier --write"
+      "yarn format"
     ]
   },
   "dependencies": {}

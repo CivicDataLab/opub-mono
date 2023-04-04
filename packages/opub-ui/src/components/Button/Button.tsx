@@ -88,12 +88,11 @@ type ActionButtonProps = Pick<
 >;
 
 const DEFAULT_SIZE = 'medium';
-// console.log();
 
 const Button = React.forwardRef(
   (
     {
-      i,
+      id,
       children,
       primary,
       destructive,
