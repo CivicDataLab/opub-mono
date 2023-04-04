@@ -13,7 +13,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <SSRProvider>
-      <Component {...pageProps} />;
+      <Component {...pageProps} />
     </SSRProvider>
   );
 }
