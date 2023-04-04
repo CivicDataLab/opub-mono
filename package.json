@@ -22,6 +22,7 @@
     "classnames": "^2.3.2",
     "eslint-config-custom": "*",
     "husky": "^8.0.3",
+    "lint-staged": "^13.2.0",
     "prettier": "^2.8.4",
     "sass": "^1.58.3",
     "tsup": "^6.7.0",
@@ -30,9 +31,6 @@
   "engines": {
     "node": ">=14.0.0"
   },
-  "dependencies": {
-    "@radix-ui/react-toast": "^1.1.3"
-  },
   "packageManager": "yarn@1.22.17",
   "husky": {
     "hooks": {
@@ -40,9 +38,10 @@
     }
   },
   "lint-staged": {
-    "src/**/*.{js,jsx,ts,tsx}": [
-      "yarn  eslint",
-      "yarn  format"
+    "**/*.{js,jsx,ts,tsx}": [
+      "yarn eslint",
+      "yarn format"
     ]
-  }
+  },
+  "dependencies": {}
 }
