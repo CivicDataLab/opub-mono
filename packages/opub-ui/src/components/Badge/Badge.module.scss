@@ -1,51 +1,51 @@
 @import '../../../styles/common';
 
 .Badge {
-    border-radius: var(--border-radius-3);
-    font-weight: 400;
-    font-size: var(--space-3);
-    padding: var(--space-05) var(--space-2);
-    background-color: var(--surface-neutral);
-    color: var(--text);
-  
-    @media print {
-      border: solid var(--border-width-1) var(--border);
-    }
-  }
-  
-  .statusSuccess {
-    background-color: var(--surface-success);
-  }
-  
-  .statusInfo {
-    background-color: var(--surface-highlight);
-  }
-  
-  .statusAttention {
-    background-color: var(--surface-attention);
-  }
-  
-  .statusWarning {
-    background-color: var(--surface-warning);
-  }
-  
-  .statusCritical {
-    background-color: var(--surface-critical);
-  }
-  
-  .statusNew {
-    border: none;
-  }
+  border-radius: var(--border-radius-3);
+  font-weight: 400;
+  font-size: var(--space-3);
+  padding: var(--space-05) var(--space-2);
+  background-color: var(--surface-neutral);
+  color: var(--text);
 
-  .Icon {
-    margin-left: calc(-1 * (var(--space-1)));
-  
-    + *:not(.Icon) {
-      margin-left: var(--space-1);
-    }
+  @media print {
+    border: solid var(--border-width-1) var(--border);
   }
+}
 
-  .PipContainer {
-    margin-left: calc(-1 * var(--space-05));
-    margin-right: var(--space-1);
+.statusSuccess {
+  background-color: var(--surface-success);
+}
+
+.statusInfo {
+  background-color: var(--surface-highlight);
+}
+
+.statusAttention {
+  background-color: var(--surface-attention);
+}
+
+.statusWarning {
+  background-color: var(--surface-warning);
+}
+
+.statusCritical {
+  background-color: var(--surface-critical);
+}
+
+.statusNew {
+  border: none;
+}
+
+.Icon {
+  margin-left: calc(-1 * (var(--space-1)));
+
+  + *:not(.Icon) {
+    margin-left: var(--space-1);
   }
+}
+
+.PipContainer {
+  margin-left: calc(-1 * var(--space-05));
+  margin-right: var(--space-1);
+}
