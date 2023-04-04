@@ -5,8 +5,7 @@
   "pipeline": {
     "build": {
       "dependsOn": ["^build"],
-      "outputs": ["dist/**", ".next/**", "storybook-static/**"],
-      "env": ["NODE_ENV"]
+      "outputs": ["dist/**", ".next/**", "storybook-static/**"]
     },
     "postbuild": {
       "dependsOn": ["^build"]

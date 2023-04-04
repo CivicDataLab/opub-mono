@@ -232,6 +232,7 @@ $spinner-icon-size: 12px;
 
 .CharacterCount {
   color: var(--text-subdued);
+  font-size: var(--font-size-100);
 
   z-index: var(--opub-text-field-contents);
   margin: 0 var(--space-3) 0 var(--space-1);
