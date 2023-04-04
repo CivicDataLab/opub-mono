@@ -41,6 +41,10 @@
     }
   }
 
+  &:visited {
+    color: var(--interactive-pressed);
+  }
+
   @media print {
     text-decoration-color: var(--border-neutral-subdued);
   }

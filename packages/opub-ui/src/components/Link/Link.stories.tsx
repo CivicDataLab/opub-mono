@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 import { Link } from './Link';
 
 /**
@@ -6,13 +6,35 @@ import { Link } from './Link';
  *
  * Reference: https://polaris.shopify.com/components/navigation/link
  */
-export default {
+const meta = {
   component: Link,
-} as Meta<typeof Link>;
+} satisfies Meta<typeof Link>;
 
-export const Primary = {
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const Primary: Story = {
   args: {
-    children: 'Link',
-    url: '#',
+    children: 'Link to google',
+    url: 'https://google.com',
+    external: true,
+  },
+};
+
+export const Multiple: Story = {
+  render: ({ ...args }) => {
+    return (
+      <>
+        <Link url="https://google.com" {...args}>
+          Link 1
+        </Link>{' '}
+        <Link url="https://yahoo.com" {...args}>
+          Link 2
+        </Link>
+      </>
+    );
+  },
+  args: {
+    external: true,
   },
 };
