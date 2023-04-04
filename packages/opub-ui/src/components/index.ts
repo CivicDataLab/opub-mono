@@ -46,3 +46,4 @@ export { Thumbnail } from './Thumbnail';
 export { TimeField } from './TimeField';
 export { Toast } from './Toast';
 export { Tooltip } from './Tooltip';
+export { ButtonGroup } from './ButtonGroup';
