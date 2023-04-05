@@ -28,7 +28,11 @@ type Props = {
   prefix?: React.ReactNode;
   /** Element to display after the input */
   suffix?: React.ReactNode;
-} & Omit<Slider.SliderProps, 'prefix'>;
+  /** Callback when the range value change */
+  onChange?(selected: number[], name: string | undefined): void;
+  /** Callback when the range value change ends */
+  onChangeEnd?(selected: number[], name: string | undefined): void;
+} & Omit<Slider.SliderProps, 'prefix' | 'onChange'>;
 
 const RangeSlider = forwardRef((props: Props, ref: any) => {
   const themeClass = cx(styles.RangeSlider, {});
@@ -44,6 +48,9 @@ const RangeSlider = forwardRef((props: Props, ref: any) => {
     output,
     defaultValue,
     minStepsBetweenThumbs = 1,
+    onChange,
+    onChangeEnd,
+    name,
     ...others
   } = props;
 
@@ -51,7 +58,6 @@ const RangeSlider = forwardRef((props: Props, ref: any) => {
   const finalID = id || randomId;
 
   const prefixMarkup = prefix && <div className={styles.Prefix}>{prefix}</div>;
-
   const suffixMarkup = suffix && (
     <div
       style={{
@@ -92,6 +98,9 @@ const RangeSlider = forwardRef((props: Props, ref: any) => {
             defaultValue={defaultValue}
             aria-label={String(label)}
             minStepsBetweenThumbs={minStepsBetweenThumbs}
+            name={name}
+            onValueChange={(val) => onChange && onChange(val, name)}
+            onValueCommit={(val) => onChangeEnd && onChangeEnd(val, name)}
             {...others}
           >
             <Slider.Track className={styles.Track}>

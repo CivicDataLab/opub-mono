@@ -18,6 +18,9 @@ export const Default: Story = {
   args: {
     label: 'Range Slider',
     defaultValue: [20],
+    name: 'range',
+    onChange: (val, name) => console.log(val, name),
+    onChangeEnd: (val, name) => console.log(val, name),
   },
 };
 
