@@ -1,0 +1,70 @@
+@import '../../../styles/common';
+
+/* reset */
+.button {
+  all: unset;
+}
+
+.CollapsibleRoot {
+  max-width: calc(100vw - var(--space-8));
+}
+
+.IconButton {
+  font-family: inherit;
+  border-radius: 100%;
+  height: var(--space-6);
+  width: var(--space-6);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--interactive);
+  box-shadow: var(--shadow-md);
+  margin-left: var(--space-4);
+}
+.IconButton[data-state='closed'] {
+  background-color: var(--surface);
+}
+.IconButton[data-state='open'] {
+  background-color: var(--surface-dark);
+}
+.IconButton:hover {
+  background-color: var(--action-secondary-hovered);
+}
+.IconButton:focus {
+  box-shadow: var(--shadow-xs);
+}
+
+.Container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.Text {
+  color: var(--surface-dark);
+  font-size: var(--space-4);
+  line-height: var(--space-6);
+}
+
+.Repository {
+  background-color: var(--surface);
+  border-radius: var(--border-radius-1);
+  margin: var(--space-3) 0;
+  padding: var(--space-3);
+  box-shadow: var(--shadow-lg);
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.Content {
+  animation: scaleIn 100ms var(--ease-in-out);
+}

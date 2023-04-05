@@ -49,3 +49,4 @@ export { Tooltip } from './Tooltip';
 export { ButtonGroup } from './ButtonGroup';
 export { CodeBlock } from './CodeBlock';
 export { Code } from './Code';
+export { Collapsible } from './Collapsible';

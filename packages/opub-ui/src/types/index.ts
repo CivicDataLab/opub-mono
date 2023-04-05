@@ -47,3 +47,4 @@ export type { TagProps } from './tag';
 export type { TextProps, VariantFontWeightMapping } from './text';
 export type { TooltipProps, TooltipProviderProps } from './tooltip';
 export type { ViewProps } from './view';
+export type { CollapsibleProps } from './collapsible';
