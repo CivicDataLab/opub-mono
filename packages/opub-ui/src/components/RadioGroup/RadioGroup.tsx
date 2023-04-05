@@ -7,14 +7,16 @@ import { InlineMessage } from '../InlineMessage';
 import { Text } from '../Text';
 import styles from './RadioGroup.module.scss';
 
-type RadixProps = React.ComponentProps<typeof RadioRadix.Root> & {
+type RadixProps = Omit<RadioRadix.RadioGroupProps, 'onChange'> & {
   name: string;
   /** Display an error message */
   error?: Error;
   /** Toggles display of the title */
   titleHidden?: boolean;
+  /** Callback when the selected choices change */
+  onChange?(selected: string, name: string | undefined): void;
 };
-interface Props extends React.ComponentProps<typeof RadioRadix.Item> {
+interface Props extends RadioRadix.RadioGroupItemProps {
   value: string;
   /** Additional text to aide in use */
   helpText?: React.ReactNode;
@@ -26,6 +28,7 @@ const RadioGroup = ({
   error,
   titleHidden,
   title,
+  onChange,
   ...otherProps
 }: RadixProps) => {
   const randomId = React.useId();
@@ -43,7 +46,11 @@ const RadioGroup = ({
     </div>
   );
   return (
-    <RadioRadix.Root {...otherProps} className={styles.RadioGroupRoot}>
+    <RadioRadix.Root
+      {...otherProps}
+      onValueChange={(value) => onChange && onChange(value, name)}
+      className={styles.RadioGroupRoot}
+    >
       {titleMarkup}
       {children}
       {errorMarkup}

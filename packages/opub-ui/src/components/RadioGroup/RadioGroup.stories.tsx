@@ -13,7 +13,13 @@ const meta = {
 export default meta;
 
 export const Default = () => (
-  <RadioGroup name="radio1" defaultValue="12">
+  <RadioGroup
+    onChange={(val, name) => {
+      console.log(val, name);
+    }}
+    name="radio1"
+    defaultValue="12"
+  >
     <RadioItem value="12">Radio 1</RadioItem>
     <RadioItem value="23">Radio 2</RadioItem>
   </RadioGroup>
