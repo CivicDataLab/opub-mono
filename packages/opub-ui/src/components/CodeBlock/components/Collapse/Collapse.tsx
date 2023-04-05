@@ -1,6 +1,4 @@
-import * as Collapsible from '@radix-ui/react-collapsible';
 import React from 'react';
-import { Button } from '../../../Button';
 import styles from '../../CodeBlock.module.scss';
 
 interface Props {
