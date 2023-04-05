@@ -10,11 +10,8 @@
   @include focus-ring($border-width: var(--border-width-1));
 
   position: relative;
-
   display: inline-flex;
-
   align-items: center;
-
   justify-content: center;
   min-height: 36px;
   min-width: 36px;

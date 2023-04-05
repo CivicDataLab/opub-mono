@@ -1,0 +1,30 @@
+.CodeBlock {
+  --ds-text: #172b4d;
+  --ds-text-subtlest: #626f86;
+  --ds-text-subtle: #44546f;
+  --ds-background-neutral: #091e420f;
+  --ds-border-focused: #388bff;
+  --ds-text-accent-blue: #0055cc;
+  --ds-text-accent-teal: #206b74;
+  --ds-text-accent-yellow: #7f5f01;
+  --ds-text-accent-purple: #5e4db2;
+  --ds-text-accent-green: #216e4e;
+  --code-bg: var(--background);
+
+  @media (prefers-color-scheme: dark) {
+    --ds-text: #c7d1db;
+    --ds-text-subtlest: #8696a7;
+    --ds-text-subtle: #9fadbc;
+    --ds-background-neutral: #a1bdd914;
+    --ds-border-focused: #85b8ff;
+    --ds-text-accent-yellow: #f5cd47;
+    --ds-text-accent-green: #7ee2b8;
+    --ds-text-accent-teal: #8bdbe5;
+    --ds-text-accent-blue: #85b8ff;
+    --ds-text-accent-purple: #b8acf6;
+    --code-bg: var(--background-invert);
+  }
+
+  background-color: var(--code-bg);
+  border-radius: var(--border-radius-1);
+}
