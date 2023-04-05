@@ -16,8 +16,12 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export function Default() {
-  return (
-      <Collapsible/>
-  );
-}
+export const Default: Story = {
+  args: {
+    collapsibleHeading: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus at laoreet arcu. Sed rutrum sapien nec ipsum aliquet, ut facilisis sapien facilisis. Morbi et mauris sed nisl accumsan ultrices in id mauris.',
+    collapsibleContent: [
+      'My dummy first collapsible string',
+      'My dummy second collapsible string'
+    ]
+  },
+};
