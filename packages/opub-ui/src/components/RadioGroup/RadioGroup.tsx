@@ -1,8 +1,7 @@
 import * as RadioRadix from '@radix-ui/react-radio-group';
-import type { Error } from '../../types/shared/form';
 import cx from 'classnames';
 import React from 'react';
-import { Controller, useFormContext } from 'react-hook-form';
+import type { Error } from '../../types/shared/form';
 import { Choice } from '../Choice';
 import { InlineMessage } from '../InlineMessage';
 import { Text } from '../Text';
@@ -29,7 +28,6 @@ const RadioGroup = ({
   title,
   ...otherProps
 }: RadixProps) => {
-  const { control } = useFormContext();
   const randomId = React.useId();
   const finalId = otherProps.id || randomId;
 
@@ -45,27 +43,11 @@ const RadioGroup = ({
     </div>
   );
   return (
-    <Controller
-      control={control}
-      name={name}
-      {...otherProps}
-      render={({ field }) => {
-        return (
-          <RadioRadix.Root
-            {...field}
-            {...otherProps}
-            className={styles.RadioGroupRoot}
-            onValueChange={(val) => {
-              field.onChange(val);
-            }}
-          >
-            {titleMarkup}
-            {children}
-            {errorMarkup}
-          </RadioRadix.Root>
-        );
-      }}
-    />
+    <RadioRadix.Root {...otherProps} className={styles.RadioGroupRoot}>
+      {titleMarkup}
+      {children}
+      {errorMarkup}
+    </RadioRadix.Root>
   );
 };
 

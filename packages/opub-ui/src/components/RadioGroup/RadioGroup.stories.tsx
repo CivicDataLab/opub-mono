@@ -1,5 +1,4 @@
 import { Meta } from '@storybook/react';
-import { Form } from '../Form';
 import { RadioGroup, RadioItem } from './RadioGroup';
 
 /**
@@ -14,46 +13,38 @@ const meta = {
 export default meta;
 
 export const Default = () => (
-  <Form>
-    <RadioGroup name="radio1" defaultValue="12">
-      <RadioItem value="12">Radio 1</RadioItem>
-      <RadioItem value="23">Radio 2</RadioItem>
-    </RadioGroup>
-  </Form>
+  <RadioGroup name="radio1" defaultValue="12">
+    <RadioItem value="12">Radio 1</RadioItem>
+    <RadioItem value="23">Radio 2</RadioItem>
+  </RadioGroup>
 );
 
 export const HelpText = () => (
-  <Form>
-    <RadioGroup name="radio1">
-      <RadioItem value="12" helpText="This is a help text">
-        Radio 1
-      </RadioItem>
-      <RadioItem value="23" helpText="This is a help text">
-        Radio 2
-      </RadioItem>
-    </RadioGroup>
-  </Form>
+  <RadioGroup name="radio1">
+    <RadioItem value="12" helpText="This is a help text">
+      Radio 1
+    </RadioItem>
+    <RadioItem value="23" helpText="This is a help text">
+      Radio 2
+    </RadioItem>
+  </RadioGroup>
 );
 
 export const Disabled = () => (
-  <Form>
-    <RadioGroup name="radio1">
-      <RadioItem value="12">Radio 1</RadioItem>
-      <RadioItem value="23" disabled>
-        Radio 2
-      </RadioItem>
-      <RadioItem value="11">Radio 3</RadioItem>
-    </RadioGroup>
-  </Form>
+  <RadioGroup name="radio1">
+    <RadioItem value="12">Radio 1</RadioItem>
+    <RadioItem value="23" disabled>
+      Radio 2
+    </RadioItem>
+    <RadioItem value="11">Radio 3</RadioItem>
+  </RadioGroup>
 );
 
 export const Error = () => (
-  <Form>
-    <RadioGroup name="radio1" error="oops">
-      <RadioItem value="12">Radio 1</RadioItem>
-      <RadioItem value="23" helpText="This is a help text">
-        Radio 2
-      </RadioItem>
-    </RadioGroup>
-  </Form>
+  <RadioGroup name="radio1" error="oops">
+    <RadioItem value="12">Radio 1</RadioItem>
+    <RadioItem value="23" helpText="This is a help text">
+      Radio 2
+    </RadioItem>
+  </RadioGroup>
 );

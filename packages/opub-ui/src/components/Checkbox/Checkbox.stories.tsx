@@ -16,11 +16,6 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  render: (args) => (
-    <Form defaultValues={{ checkbox: true }}>
-      <Checkbox {...args} />
-    </Form>
-  ),
   args: {
     name: 'checkbox',
     children: 'Label',
@@ -29,7 +24,6 @@ export const Default: Story = {
 
 export const States = () => (
   <PropsVariationSection
-    withFormik
     component={Checkbox}
     common={{ children: 'Label', name: 'abc' }}
     xAxis={{
@@ -48,7 +42,6 @@ export const States = () => (
 
 export const WithText = () => (
   <PropsVariationSection
-    withFormik
     component={Checkbox}
     common={{ children: 'Label', name: 'withText' }}
     xAxis={{

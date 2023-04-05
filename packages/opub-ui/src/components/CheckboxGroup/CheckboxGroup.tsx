@@ -1,6 +1,6 @@
-import { ChoiceListProps } from '../../types/choicelist';
 import cx from 'classnames';
-import { useId } from 'react';
+import React, { useId } from 'react';
+import { CheckboxGroupProps } from '../../types/choicelist';
 import { Checkbox } from '../Checkbox';
 import { InlineMessage } from '../InlineMessage';
 import { Text } from '../Text';
@@ -9,23 +9,47 @@ import styles from './CheckboxGroup.module.scss';
 export function CheckboxGroup({
   title,
   titleHidden = false,
-  choices,
+  options,
   error,
   disabled = false,
   name: nameProp,
-}: ChoiceListProps) {
+  defaultValue,
+  onChange,
+}: CheckboxGroupProps) {
+  const [selected, setSelected] = React.useState(defaultValue || []);
+
   const name = useId();
   const finalName = nameProp || name;
 
-  const wrapperClassName = cx(styles.CheckboxGroup);
+  React.useEffect(() => {
+    if (onChange) {
+      onChange(selected, nameProp);
+    }
+  }, [selected]);
 
+  function handleClick(checked: boolean | string, value: string) {
+    const nextArr = [...selected];
+    if (checked === true) {
+      nextArr.push(value);
+      setSelected(nextArr);
+      return;
+    }
+
+    const index = nextArr.indexOf(value);
+    if (index > -1) {
+      nextArr.splice(index, 1);
+      setSelected(nextArr);
+    }
+  }
+
+  const wrapperClassName = cx(styles.CheckboxGroup);
   const titleMarkup = title ? (
     <Text variant="bodyMd" as="legend" visuallyHidden={titleHidden}>
       {title}
     </Text>
   ) : null;
 
-  const choicesMarkup = choices.map((choice, index) => {
+  const choicesMarkup = options.map((option, index) => {
     const {
       value,
       id,
@@ -33,7 +57,7 @@ export function CheckboxGroup({
       helpText,
       disabled: choiceDisabled,
       describedByError,
-    } = choice;
+    } = option;
 
     return (
       <li key={value}>
@@ -41,6 +65,8 @@ export function CheckboxGroup({
           name={`${finalName}[${index}]`}
           value={value}
           id={id}
+          defaultChecked={selected.includes(value)}
+          onCheckedChange={(e) => handleClick(e, value)}
           disabled={choiceDisabled || disabled}
           helpText={helpText}
           ariaDescribedBy={
