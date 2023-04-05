@@ -8,7 +8,7 @@ import { Icon } from '../Icon';
 import styles from './Checkbox.module.scss';
 
 const Checkbox = ({ children, name, ...props }: CheckboxProps) => {
-  const { error, helpText, labelHidden, ...otherProps } = props;
+  const { error, helpText, labelHidden, onChange, ...otherProps } = props;
 
   const id = React.useId();
   const isIndeterminate = props.checked === 'indeterminate';
@@ -30,7 +30,12 @@ const Checkbox = ({ children, name, ...props }: CheckboxProps) => {
       error={error}
       disabled={props.disabled}
     >
-      <CheckboxRadix.Root {...otherProps} className={inputClassName} id={id}>
+      <CheckboxRadix.Root
+        {...otherProps}
+        onCheckedChange={(selected) => onChange && onChange(selected, name)}
+        className={inputClassName}
+        id={id}
+      >
         <span className={styles.Indicator}>
           <CheckboxRadix.Indicator>
             <Icon source={iconSource} />
@@ -44,43 +49,3 @@ const Checkbox = ({ children, name, ...props }: CheckboxProps) => {
 };
 
 export { Checkbox };
-
-export const UncontrolledCheckbox = ({
-  children,
-  name,
-  ...props
-}: CheckboxProps) => {
-  const { error, helpText, labelHidden, ...otherProps } = props;
-
-  const id = React.useId();
-  const isIndeterminate = props.checked === 'indeterminate';
-
-  const inputClassName = cx(
-    styles.Input,
-    error && styles.Error,
-    props.disabled && styles.Disabled
-  );
-
-  const iconSource = isIndeterminate ? MinusMinor : TickSmallMinor;
-
-  const checkboxMarkup = (
-    <Choice
-      id={id}
-      label={children}
-      labelHidden={labelHidden}
-      helpText={helpText}
-      error={error}
-      disabled={props.disabled}
-    >
-      <CheckboxRadix.Root {...otherProps} className={inputClassName} id={id}>
-        <span className={styles.Indicator}>
-          <CheckboxRadix.Indicator>
-            <Icon source={iconSource} />{' '}
-          </CheckboxRadix.Indicator>
-        </span>
-      </CheckboxRadix.Root>
-    </Choice>
-  );
-
-  return checkboxMarkup;
-};

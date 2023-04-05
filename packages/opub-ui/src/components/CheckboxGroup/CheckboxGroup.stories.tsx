@@ -4,7 +4,7 @@ import { FormLayout } from '../FormLayout';
 import { CheckboxGroup } from './CheckboxGroup';
 
 /**
- * A CheckboxGroup lets you create a list of grouped checkboxes.
+ * A Checkbox Group lets you create a list of grouped checkboxes.
  */
 const meta = {
   component: CheckboxGroup,

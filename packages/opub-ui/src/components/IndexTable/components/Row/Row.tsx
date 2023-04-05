@@ -1,4 +1,4 @@
-import { UncontrolledCheckbox } from '../../../Checkbox';
+import { Checkbox } from '../../../Checkbox';
 import cx from 'classnames';
 import React from 'react';
 import styles from '../../IndexTable.module.scss';
@@ -32,7 +32,7 @@ export const Row = ({ children, row, classname, ...props }: Props) => {
       className={classname}
     >
       <td className={cx(styles.Cell, styles.Checkbox)}>
-        <UncontrolledCheckbox
+        <Checkbox
           checked={selected}
           onCheckedChange={handleSelection}
           name={row.id}

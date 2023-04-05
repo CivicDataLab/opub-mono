@@ -1,6 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { PropsVariationSection } from '../../utils/helpers';
-import { Form } from '../Form';
 import { Checkbox } from './Checkbox';
 
 /**
@@ -19,6 +18,7 @@ export const Default: Story = {
   args: {
     name: 'checkbox',
     children: 'Label',
+    onChange: (e, name) => console.log(e, name),
   },
 };
 
