@@ -1,8 +1,8 @@
-import React from 'react';
-import { Text } from '../Text';
 import cx from 'classnames';
-import styles from './Icon.module.scss';
+import React from 'react';
 import { variationName } from '../../utils/css';
+import { Text } from '../Text';
+import styles from './Icon.module.scss';
 
 type Color =
   | 'base'
@@ -14,14 +14,6 @@ type Color =
   | 'success'
   | 'primary'
   | 'magic';
-
-const COLORS_WITH_BACKDROPS = [
-  'base',
-  'critical',
-  'highlight',
-  'success',
-  'warning',
-];
 
 export type IconSource =
   | React.FunctionComponent<React.SVGProps<SVGSVGElement>>

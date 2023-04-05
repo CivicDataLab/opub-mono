@@ -44,13 +44,15 @@ const Tooltip = (props: TooltipProps) => {
     onEscapeKeyDown,
     onPointerDownOutside,
     side = 'bottom',
-    sideOffset = 4,
     align,
     alignOffset,
     width = 'default',
+    solo = true,
+    hideArrow = false,
+    sideOffset = hideArrow ? 2 : 4,
   } = props;
 
-  return (
+  const tooltipMarkup = (
     <TooltipRadix.Root
       open={open}
       defaultOpen={defaultOpen}
@@ -74,11 +76,17 @@ const Tooltip = (props: TooltipProps) => {
           aria-label={ariaLabel}
         >
           {content}
-          <TooltipRadix.Arrow className={styles.Arrow} />
+          {!hideArrow && <TooltipRadix.Arrow className={styles.Arrow} />}
         </TooltipRadix.Content>
       </TooltipRadix.Portal>
     </TooltipRadix.Root>
   );
+
+  if (solo) {
+    return <TooltipRadix.Provider>{tooltipMarkup}</TooltipRadix.Provider>;
+  }
+
+  return tooltipMarkup;
 };
 
 Tooltip.Provider = Provider;

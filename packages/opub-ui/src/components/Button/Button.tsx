@@ -9,10 +9,8 @@ import { ConnectedDisclosure } from '../../types/button';
 import { useDisableClick } from '../../utils';
 import { variationName } from '../../utils/css';
 import { handleMouseUpByBlurring, MouseUpBlurHandler } from '../../utils/focus';
-import { ActionList } from '../ActionList';
 import { Icon } from '../Icon';
 import { Menu } from '../Menu';
-import { Popover } from '../Popover';
 import { Spinner } from '../Spinner';
 import { UnstyledButton, UnstyledButtonProps } from './BaseButton';
 import styles from './Button.module.scss';
@@ -131,6 +129,7 @@ const Button = React.forwardRef(
       monochrome,
       disclosure,
       connectedDisclosure,
+      className: classes,
       ...otherProps
     }: ButtonProps,
     ref: React.Ref<HTMLButtonElement>
@@ -153,7 +152,8 @@ const Button = React.forwardRef(
       isDisabled && styles.disabled,
       loading && styles.loading,
       textAlign && styles[variationName('textAlign', textAlign)],
-      connectedDisclosure && styles.connectedDisclosure
+      connectedDisclosure && styles.connectedDisclosure,
+      classes && classes
     );
 
     const childMarkup = children ? (
