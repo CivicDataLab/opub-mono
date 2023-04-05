@@ -133,8 +133,9 @@ export default function Web() {
 
       <Spacer heading="Code Block">
         <CodeBlock
+          shouldWrapLongLines
           language="js"
-          value={`function createStyleObject(classNames, style) {
+          text={`function createStyleObject(classNames, style) {
       return classNames.reduce((styleObject, className) => {
         return {...styleObject, ...style[className]};
       }, {});

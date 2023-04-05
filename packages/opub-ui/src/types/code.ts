@@ -44,4 +44,6 @@ export type CodeBlockProps = {
   showLineNumbers?: boolean;
   // Sets whether long lines will create a horizontally scrolling container
   shouldWrapLongLines?: boolean;
+  // Whether to a collapsable button for the code block
+  collapse?: boolean;
 } & CBProps;
