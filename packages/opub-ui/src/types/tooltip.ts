@@ -90,4 +90,8 @@ export type TooltipProps = Root &
     width?: 'default' | 'wide';
 
     Provider?: TooltipProviderProps;
+    // Set to false if using a provider to set multiple tooltips
+    solo?: boolean;
+    // Hide Arrow
+    hideArrow?: boolean;
   };
