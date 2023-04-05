@@ -9,10 +9,9 @@ import { ConnectedDisclosure } from '../../types/button';
 import { useDisableClick } from '../../utils';
 import { variationName } from '../../utils/css';
 import { handleMouseUpByBlurring, MouseUpBlurHandler } from '../../utils/focus';
-import { ActionList } from '../ActionList';
 import { Icon } from '../Icon';
+import { IconSource } from '../Icon/Icon';
 import { Menu } from '../Menu';
-import { Popover } from '../Popover';
 import { Spinner } from '../Spinner';
 import { UnstyledButton, UnstyledButtonProps } from './BaseButton';
 import styles from './Button.module.scss';
@@ -43,7 +42,7 @@ export interface NonMutualButtonProps {
   removeUnderline?: boolean;
 
   /** Icon to display to the left of the button content */
-  icon?: React.ReactElement;
+  icon?: React.ReactNode;
 
   /** Displays the button with a disclosure icon. Defaults to `down` when set to true */
   disclosure?: 'down' | 'up' | 'select' | boolean;
@@ -131,6 +130,7 @@ const Button = React.forwardRef(
       monochrome,
       disclosure,
       connectedDisclosure,
+      className: classes,
       ...otherProps
     }: ButtonProps,
     ref: React.Ref<HTMLButtonElement>
@@ -153,7 +153,8 @@ const Button = React.forwardRef(
       isDisabled && styles.disabled,
       loading && styles.loading,
       textAlign && styles[variationName('textAlign', textAlign)],
-      connectedDisclosure && styles.connectedDisclosure
+      connectedDisclosure && styles.connectedDisclosure,
+      classes && classes
     );
 
     const childMarkup = children ? (
@@ -192,15 +193,7 @@ const Button = React.forwardRef(
       </span>
     ) : null;
 
-    const [disclosureActive, setDisclosureActive] = React.useState(false);
-    const toggleDisclosureActive = React.useCallback(() => {
-      setDisclosureActive((disclosureActive) => !disclosureActive);
-    }, []);
-
-    const handleClick = useDisableClick(disabled, toggleDisclosureActive);
-
     let connectedDisclosureMarkup;
-
     if (connectedDisclosure) {
       const connectedDisclosureClassName = cx(
         styles.Button,
@@ -216,7 +209,6 @@ const Button = React.forwardRef(
       );
 
       const defaultLabel = 'Related actions';
-
       const { disabled, accessibilityLabel: disclosureLabel = defaultLabel } =
         connectedDisclosure;
 
@@ -228,7 +220,6 @@ const Button = React.forwardRef(
           aria-label={disclosureLabel}
           aria-describedby={ariaDescribedBy}
           aria-checked={ariaChecked}
-          onClick={handleClick}
           onMouseUp={handleMouseUpByBlurring}
           tabIndex={disabled ? -1 : undefined}
         >
@@ -241,6 +232,7 @@ const Button = React.forwardRef(
       connectedDisclosureMarkup = (
         <Menu
           align="end"
+          alignOffset={-10}
           trigger={connectedDisclosureActivator}
           items={connectedDisclosure.actions}
         />

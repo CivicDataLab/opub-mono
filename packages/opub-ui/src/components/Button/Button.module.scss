@@ -10,11 +10,8 @@
   @include focus-ring($border-width: var(--border-width-1));
 
   position: relative;
-
   display: inline-flex;
-
   align-items: center;
-
   justify-content: center;
   min-height: 36px;
   min-width: 36px;
@@ -327,6 +324,7 @@
 .Icon {
   margin-left: calc(-1 * (var(--space-1)));
   line-height: 0;
+  width: 20px;
 
   &:last-child {
     margin-right: var(--button-disclosure-icon-offset);
@@ -598,15 +596,16 @@
 
 .sizeSlim {
   min-height: var(--button-slim-min-height);
-
   padding: var(--button-slim-vertical-padding) var(--space-3);
+
+  .Icon {
+    width: 16px;
+  }
 }
 
 .sizeLarge {
   min-height: var(--button-large-min-height);
-
   min-width: var(--button-large-min-height);
-
   padding: var(--button-large-vertical-padding) var(--space-6);
 
   .Content {

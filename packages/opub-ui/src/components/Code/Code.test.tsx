@@ -1,10 +1,10 @@
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
-import { CodeBlock } from './CodeBlock';
+import { Code } from './Code';
 
-describe('CodeBlock Tests', () => {
+describe('Code Tests', () => {
   beforeEach(() => {
-    render(<CodeBlock>Component</CodeBlock>);
+    render(<Code>Component</Code>);
   });
 
   test('should show Component text all the time', () => {
