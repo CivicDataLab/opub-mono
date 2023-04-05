@@ -3,23 +3,31 @@
   border-radius: var(--border-radius-1);
   position: relative;
 
-  & {
-    .Copy {
-      position: absolute;
-      right: var(--space-2);
-      top: var(--space-2);
-      color: var(--background);
+  .Copy {
+    position: absolute;
+    right: var(--space-2);
+    top: var(--space-2);
+    color: var(--background);
+    opacity: 0;
+    transition: opacity var(--duration-100) var(--ease-in);
 
-      button {
+    button {
+      svg {
+        fill: var(--surface-depressed);
+      }
+      &:hover,
+      &:focus {
         svg {
-          fill: var(--surface-depressed);
-        }
-        &:hover {
-          svg {
-            fill: var(--surface);
-          }
+          fill: var(--surface);
         }
       }
+    }
+  }
+
+  &:hover,
+  &:focus-within {
+    .Copy {
+      opacity: 1;
     }
   }
 
