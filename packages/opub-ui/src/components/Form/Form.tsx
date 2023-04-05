@@ -1,35 +1,23 @@
-import cx from 'classnames';
 import React from 'react';
-import { useForm, FormProvider } from 'react-hook-form';
-import styles from './Form.module.scss';
-import { yupResolver } from '@hookform/resolvers/yup';
+import { SubmitHandler, useForm, FormProvider } from 'react-hook-form';
+import { Input } from './components/TextField';
 
 type Props = {
   children: React.ReactNode;
-  validationSchema?: any;
-  formSubmit?(e: any): void;
-  defaultValues?: any;
+  onSubmit?: SubmitHandler<any>;
+  formOptions?: any;
 };
 
 const Form = (props: Props) => {
-  const { validationSchema, defaultValues, formSubmit, children } = props;
-
-  const options = {
-    defaultValues,
-  };
-  const formOptions = validationSchema
-    ? { ...options, resolver: yupResolver(validationSchema) }
-    : { ...options };
-
+  const { formOptions = {}, onSubmit = () => {}, children, ...others } = props;
   const methods = useForm(formOptions);
-  const themeClass = cx(styles.base, {});
 
   return (
     <FormProvider {...methods}>
       <form
-        className={themeClass}
+        {...others}
         onSubmit={methods.handleSubmit((data) => {
-          formSubmit && formSubmit(data);
+          onSubmit && onSubmit(data);
         })}
       >
         {children}
@@ -37,5 +25,7 @@ const Form = (props: Props) => {
     </FormProvider>
   );
 };
+
+Form.Input = Input;
 
 export { Form };
