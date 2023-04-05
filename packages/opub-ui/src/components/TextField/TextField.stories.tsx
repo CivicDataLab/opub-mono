@@ -20,6 +20,7 @@ export const Default: Story = {
   args: {
     name: 'name',
     label: 'Text Field',
+    onChange: (text, name) => console.log(text, name),
   },
 };
 

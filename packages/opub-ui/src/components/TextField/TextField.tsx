@@ -14,7 +14,7 @@ export const TextField = (props: Props) => {
       {...props}
       onChange={(e, id) => {
         setValue(e);
-        props.onChange && props.onChange(e, id);
+        props.onChange && props.onChange(e, props.name);
       }}
       value={props.value || value}
     />
