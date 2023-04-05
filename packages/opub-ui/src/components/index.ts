@@ -4,7 +4,7 @@ export { Badge } from './Badge';
 export { Box } from './Box';
 export { Button } from './Button';
 export { Calendar, RangeCalendar } from './Calendar';
-export { Checkbox, UncontrolledCheckbox } from './Checkbox';
+export { Checkbox } from './Checkbox';
 export { CheckboxGroup } from './CheckboxGroup';
 export { Choice } from './Choice';
 export { Combobox, ComboboxMulti } from './Combobox';

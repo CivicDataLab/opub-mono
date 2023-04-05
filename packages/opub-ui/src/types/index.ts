@@ -15,7 +15,7 @@ export type {
   DisableableAction,
 } from './button';
 export type { CheckboxProps } from './checkbox';
-export type { ChoiceListProps, ChoiceProps } from './choicelist';
+export type { CheckboxGroupProps, ChoiceProps } from './choicelist';
 export type { CodeBlockProps } from './code';
 export type { ComboboxSingleProps } from './combobox';
 export type {

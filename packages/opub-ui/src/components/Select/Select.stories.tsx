@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/react';
+import { Meta } from '@storybook/react';
 import { useCallback, useState } from 'react';
 import { Select } from './Select';
 
@@ -12,16 +12,8 @@ const meta = {
 } satisfies Meta<typeof Select>;
 
 export default meta;
-type Story = StoryObj<typeof meta>;
 
 export function Default({ ...props }) {
-  const [selected, setSelected] = useState('today');
-
-  const handleSelectChange = useCallback(
-    (value: string) => setSelected(value),
-    []
-  );
-
   const options = [
     { label: 'Today', value: 'today' },
     { label: 'Yesterday', value: 'yesterday' },
@@ -32,8 +24,9 @@ export function Default({ ...props }) {
     <Select
       label="Date range"
       options={options}
-      onChange={handleSelectChange}
-      value={selected}
+      defaultValue={'yesterday'}
+      onChange={(val, name) => console.log(val, name)}
+      name="select-1"
       {...props}
     />
   );

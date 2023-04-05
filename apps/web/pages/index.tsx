@@ -11,7 +11,7 @@ import {
   Select,
   Tag,
   Text,
-  UncontrolledCheckbox,
+  Checkbox,
 } from '@opub-cdl/ui/src';
 import styles from '../styles/pages/home.module.scss';
 import { PropsVariationSection } from '../utils/helpers';
@@ -107,7 +107,7 @@ export default function Web() {
       <Spacer heading="Checkbox">
         <PropsVariationSection
           withFormik
-          component={UncontrolledCheckbox}
+          component={Checkbox}
           common={{ children: 'Label' }}
           xAxis={{
             default: {},

@@ -1,16 +1,14 @@
 import * as CheckboxRadix from '@radix-ui/react-checkbox';
-import { CheckboxProps } from '../../types/checkbox';
+import { MinusMinor, TickSmallMinor } from '@shopify/polaris-icons';
 import cx from 'classnames';
 import React from 'react';
-import { Controller, useFormContext } from 'react-hook-form';
+import { CheckboxProps } from '../../types/checkbox';
 import { Choice } from '../Choice';
-import styles from './Checkbox.module.scss';
-import { MinusMinor, TickSmallMinor } from '@shopify/polaris-icons';
 import { Icon } from '../Icon';
+import styles from './Checkbox.module.scss';
 
 const Checkbox = ({ children, name, ...props }: CheckboxProps) => {
-  const { control } = useFormContext();
-  const { error, helpText, labelHidden, ...otherProps } = props;
+  const { error, helpText, labelHidden, onChange, ...otherProps } = props;
 
   const id = React.useId();
   const isIndeterminate = props.checked === 'indeterminate';
@@ -32,77 +30,15 @@ const Checkbox = ({ children, name, ...props }: CheckboxProps) => {
       error={error}
       disabled={props.disabled}
     >
-      <Controller
-        control={control}
-        name={name}
+      <CheckboxRadix.Root
         {...otherProps}
-        render={({ field }) => {
-          return (
-            <CheckboxRadix.Root
-              {...field}
-              {...otherProps}
-              className={inputClassName}
-              id={id}
-              checked={
-                props.value
-                  ? field.value === props.value
-                  : props.checked || field.value
-              }
-              onCheckedChange={(checked) => {
-                field.onChange(checked ? props.value : undefined);
-                props.value
-                  ? field.onChange(checked ? props.value : undefined)
-                  : field.onChange(checked);
-              }}
-            >
-              <span className={styles.Indicator}>
-                <CheckboxRadix.Indicator>
-                  <Icon source={iconSource} />
-                </CheckboxRadix.Indicator>
-              </span>
-            </CheckboxRadix.Root>
-          );
-        }}
-      />
-    </Choice>
-  );
-
-  return checkboxMarkup;
-};
-
-export { Checkbox };
-
-export const UncontrolledCheckbox = ({
-  children,
-  name,
-  ...props
-}: CheckboxProps) => {
-  const { error, helpText, labelHidden, ...otherProps } = props;
-
-  const id = React.useId();
-  const isIndeterminate = props.checked === 'indeterminate';
-
-  const inputClassName = cx(
-    styles.Input,
-    error && styles.Error,
-    props.disabled && styles.Disabled
-  );
-
-  const iconSource = isIndeterminate ? MinusMinor : TickSmallMinor;
-
-  const checkboxMarkup = (
-    <Choice
-      id={id}
-      label={children}
-      labelHidden={labelHidden}
-      helpText={helpText}
-      error={error}
-      disabled={props.disabled}
-    >
-      <CheckboxRadix.Root {...otherProps} className={inputClassName} id={id}>
+        onCheckedChange={(selected) => onChange && onChange(selected, name)}
+        className={inputClassName}
+        id={id}
+      >
         <span className={styles.Indicator}>
           <CheckboxRadix.Indicator>
-            <Icon source={iconSource} />{' '}
+            <Icon source={iconSource} />
           </CheckboxRadix.Indicator>
         </span>
       </CheckboxRadix.Root>
@@ -111,3 +47,5 @@ export const UncontrolledCheckbox = ({
 
   return checkboxMarkup;
 };
+
+export { Checkbox };

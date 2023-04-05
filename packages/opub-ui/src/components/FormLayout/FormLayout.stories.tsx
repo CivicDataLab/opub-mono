@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react';
-import { Form } from '../Form';
+import { Button } from '../Button';
 import { TextField } from '../TextField';
 import { FormLayout } from './FormLayout';
 
@@ -18,7 +18,12 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   render: () => {
     return (
-      <Form>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          console.log(e);
+        }}
+      >
         <FormLayout>
           <TextField
             name="name1"
@@ -33,8 +38,9 @@ export const Default: Story = {
             onChange={() => {}}
             autoComplete="email"
           />
+          <Button submit>Submit</Button>
         </FormLayout>
-      </Form>
+      </form>
     );
   },
   args: {},
@@ -43,7 +49,12 @@ export const Default: Story = {
 export const Group: Story = {
   render: () => {
     return (
-      <Form>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          console.log(e);
+        }}
+      >
         <FormLayout>
           <FormLayout.Group>
             <TextField
@@ -62,7 +73,7 @@ export const Group: Story = {
             />
           </FormLayout.Group>
         </FormLayout>
-      </Form>
+      </form>
     );
   },
   args: {},
@@ -71,7 +82,12 @@ export const Group: Story = {
 export const Condensed: Story = {
   render: () => {
     return (
-      <Form>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          console.log(e);
+        }}
+      >
         <FormLayout>
           <FormLayout.Group condensed>
             <TextField
@@ -100,7 +116,7 @@ export const Condensed: Story = {
             />
           </FormLayout.Group>
         </FormLayout>
-      </Form>
+      </form>
     );
   },
   args: {},

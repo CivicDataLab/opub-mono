@@ -57,8 +57,10 @@ interface NonMutuallyExclusiveProps {
   verticalContent?: React.ReactNode;
   /** Hint text to display */
   placeholder?: string;
-  /** Initial value for the input */
+  /** value for the input */
   value?: string;
+  /** Defualt value for the input */
+  defaultValue?: string;
   /** Additional hint text to display */
   helpText?: React.ReactNode;
   /** Label for the input */

@@ -35,10 +35,18 @@ export const Select = forwardRef(
       onChange,
       onFocus,
       onBlur,
+      defaultValue,
       requiredIndicator,
     }: SelectProps,
     ref: LegacyRef<HTMLSelectElement>
   ) => {
+    const [selected, setSelected] = React.useState(value || defaultValue || '');
+
+    const handleSelectChange = React.useCallback(
+      (value: string) => setSelected(value),
+      []
+    );
+
     const randomId = useId();
     const id = idProp || randomId;
     const labelHidden = labelInline ? true : labelHiddenProp;
@@ -49,10 +57,10 @@ export const Select = forwardRef(
       disabled && styles.disabled
     );
 
-    const handleChange = onChange
-      ? (event: React.ChangeEvent<HTMLSelectElement>) =>
-          onChange(event.currentTarget.value, id)
-      : undefined;
+    const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+      handleSelectChange(event.currentTarget.value);
+      onChange && onChange(event.currentTarget.value, name);
+    };
 
     const describedBy: string[] = [];
     if (helpText) {
@@ -84,7 +92,7 @@ export const Select = forwardRef(
       </Box>
     );
 
-    const selectedOption = getSelectedOption(normalizedOptions, value);
+    const selectedOption = getSelectedOption(normalizedOptions, selected);
 
     const prefixMarkup = selectedOption.prefix && (
       <div className={styles.Prefix}>{selectedOption.prefix}</div>
@@ -117,7 +125,7 @@ export const Select = forwardRef(
           <select
             id={id}
             name={name}
-            value={value}
+            value={selected}
             className={styles.Input}
             disabled={disabled}
             onFocus={onFocus}
@@ -184,10 +192,10 @@ function normalizeOption(
  */
 function getSelectedOption(
   options: (HideableStrictOption | StrictGroup)[],
-  value: string
+  selected: string
 ): HideableStrictOption {
   const flatOptions = flattenOptions(options);
-  let selectedOption = flatOptions.find((option) => value === option.value);
+  let selectedOption = flatOptions.find((option) => selected === option.value);
 
   if (selectedOption === undefined) {
     // Get the first visible option (not the hidden placeholder)

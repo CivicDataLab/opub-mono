@@ -53,10 +53,12 @@ export interface SelectProps {
   name?: string;
   /** Value for form input */
   value?: string;
+  /** Default Select Item for select input */
+  defaultValue?: string;
   /** Display an error state */
   error?: Error | boolean;
   /** Callback when selection is changed */
-  onChange?(selected: string, id: string): void;
+  onChange?(selected: string, name?: string): void;
   /** Callback when select is focused */
   onFocus?(): void;
   /** Callback when focus is removed */

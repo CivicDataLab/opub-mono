@@ -1,13 +1,10 @@
 import { Meta, StoryObj } from '@storybook/react';
-import { CheckboxGroup } from './CheckboxGroup';
-import { Form } from '../Form';
 import { Button } from '../Button';
-import React from 'react';
+import { FormLayout } from '../FormLayout';
+import { CheckboxGroup } from './CheckboxGroup';
 
 /**
- * A CheckboxGroup lets you create a list of grouped checkboxes.
- *
- * Reference: https://polaris.shopify.com/components/selection-and-input/choice-list
+ * A Checkbox Group lets you create a list of grouped checkboxes.
  */
 const meta = {
   component: CheckboxGroup,
@@ -18,17 +15,17 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   render: (args) => (
-    <Form formSubmit={(e) => console.log(e)}>
+    <FormLayout>
       <CheckboxGroup {...args} />
       <Button size="slim" submit>
         Submit
       </Button>
-    </Form>
+    </FormLayout>
   ),
   args: {
     title: 'Terms and Conditions',
     name: 'checkbox',
-    choices: [
+    options: [
       {
         label: 'I have read agreement to terms and conditions',
         value: 'terms',
@@ -44,27 +41,23 @@ export const Default: Story = {
 
 export const Selected: Story = {
   render: (args) => (
-    <Form
-      formSubmit={(e) => console.log(e)}
-      defaultValues={{ checkbox: ['terms'] }}
-    >
+    <FormLayout>
       <CheckboxGroup {...args} />
       <Button size="slim" submit>
         Submit
       </Button>
-    </Form>
+    </FormLayout>
   ),
   args: {
     ...Default.args,
+    defaultValue: ['newsletter'],
+    onChange(selected, name) {
+      console.log(selected, name);
+    },
   },
 };
 
 export const Error: Story = {
-  render: (args) => (
-    <Form>
-      <CheckboxGroup {...args} />
-    </Form>
-  ),
   args: {
     ...Default.args,
     error: 'It broke, lol',
