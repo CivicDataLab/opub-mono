@@ -25,11 +25,9 @@
   background-color: var(--surface);
 }
 .IconButton[data-state='open'] {
-  background-color: var(--surface-dark);
-}
-.IconButton:hover {
   background-color: var(--action-secondary-hovered);
 }
+
 .IconButton:focus {
   box-shadow: var(--shadow-xs);
 }

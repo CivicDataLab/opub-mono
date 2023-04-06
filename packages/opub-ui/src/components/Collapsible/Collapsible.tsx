@@ -1,9 +1,9 @@
 import React from 'react';
-import { RowSpacingIcon, Cross2Icon } from '@radix-ui/react-icons';
 import styles from './Collapsible.module.scss';
 import cx from 'classnames';
 import { CollapsibleProps } from '../../types/collapsible';
 import * as CollapsibleDemo from '@radix-ui/react-collapsible';
+import { MobilePlusMajor, MinusMinor } from '@shopify/polaris-icons';
 
 export const Collapsible = ({
   collapsibleHeading,
@@ -23,7 +23,7 @@ export const Collapsible = ({
         <span className={styles.Text}>{collapsibleHeading}</span>
         <CollapsibleDemo.Trigger asChild>
           <button className={styles.IconButton}>
-            {open ? <Cross2Icon /> : <RowSpacingIcon />}
+            {open ? <MinusMinor /> : <MobilePlusMajor />}
           </button>
         </CollapsibleDemo.Trigger>
       </div>
