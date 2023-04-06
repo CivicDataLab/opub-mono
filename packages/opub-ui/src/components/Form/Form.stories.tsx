@@ -69,7 +69,7 @@ export const FormBase = () => {
             title="Pick your Poison"
             options={checkboxOptions}
           />
-          <Form.RadioGroup name="radio">
+          <Form.RadioGroup name="radio" title="Select an item">
             <Form.RadioItem value="1">Item 1</Form.RadioItem>
             <Form.RadioItem value="2">Item 2</Form.RadioItem>
             <Form.RadioItem value="3">Item 3</Form.RadioItem>

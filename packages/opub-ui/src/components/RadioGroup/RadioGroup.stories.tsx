@@ -19,6 +19,7 @@ export const Default = () => (
     }}
     name="radio1"
     defaultValue="12"
+    title="Select an item"
   >
     <RadioItem value="12">Radio 1</RadioItem>
     <RadioItem value="23">Radio 2</RadioItem>

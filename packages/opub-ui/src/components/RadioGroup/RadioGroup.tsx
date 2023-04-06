@@ -51,14 +51,16 @@ const RadioGroup = React.forwardRef(
     );
     return (
       <RadioRadix.Root
+        onValueChange={(value) => onChange && onChange(value, name)}
         ref={ref}
         {...otherProps}
-        onValueChange={(value) => onChange && onChange(value, name)}
-        className={styles.RadioGroupRoot}
+        asChild
       >
-        {titleMarkup}
-        {children}
-        {errorMarkup}
+        <fieldset className={styles.RadioGroupRoot}>
+          {titleMarkup}
+          {children}
+          {errorMarkup}
+        </fieldset>
       </RadioRadix.Root>
     );
   }
