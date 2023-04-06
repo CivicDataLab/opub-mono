@@ -249,8 +249,6 @@ const ItemSelectedText = ({
   totalCount: number;
   table: ReturnType<typeof useReactTable>;
 }) => {
-  console.log(selectedCount, totalCount);
-
   return (
     <div className={cx(styles.Cell, styles['Cell-header'])}>
       {selectedCount < totalCount ? (

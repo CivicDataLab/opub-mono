@@ -9,7 +9,7 @@ import styles from './Checkbox.module.scss';
 
 const Checkbox = forwardRef(
   (
-    { children, name, ...props }: CheckboxProps,
+    { children, name, ariaDescribedBy, ...props }: CheckboxProps,
     ref: React.Ref<HTMLButtonElement>
   ) => {
     const { error, helpText, labelHidden, onChange, ...otherProps } = props;
@@ -35,6 +35,7 @@ const Checkbox = forwardRef(
         disabled={props.disabled}
       >
         <CheckboxRadix.Root
+          aria-describedby={ariaDescribedBy}
           {...otherProps}
           ref={ref}
           onCheckedChange={(selected) => onChange && onChange(selected, name)}

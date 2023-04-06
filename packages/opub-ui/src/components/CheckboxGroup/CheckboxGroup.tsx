@@ -60,17 +60,17 @@ export function CheckboxGroup({
     } = option;
 
     return (
-      <li key={value}>
+      <li key={value + index}>
         <Checkbox
           name={`${finalName}[${index}]`}
           value={value}
           id={id}
           defaultChecked={selected.includes(value)}
-          onCheckedChange={(e) => handleClick(e, value)}
+          onChange={(e) => handleClick(e, value)}
           disabled={choiceDisabled || disabled}
           helpText={helpText}
           ariaDescribedBy={
-            error && describedByError ? `${finalName}-error` : null
+            error && describedByError ? `${finalName}-error` : undefined
           }
         >
           {label}
