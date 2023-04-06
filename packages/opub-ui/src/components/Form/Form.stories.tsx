@@ -34,13 +34,14 @@ export const FormBase = () => {
         <FormLayout>
           <Form.Input name="text" label="Name" />
           <Form.Select name="select" label="Select Period" options={options} />
+          <Form.RangeSlider name="range" label="Budget" prefix={<p>$</p>} />
           <Button submit>Submit</Button>
         </FormLayout>
       </Form>
       <br />
       <Text>Output:</Text>
       <br />
-      <code>{JSON.stringify(values)}</code>
+      <pre>{JSON.stringify(values, null, 2)}</pre>
     </>
   );
 };

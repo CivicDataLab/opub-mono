@@ -1,6 +1,6 @@
 import React from 'react';
 import { SubmitHandler, useForm, FormProvider } from 'react-hook-form';
-import { Input, Select } from './components';
+import { Input, Select, RangeSlider } from './components';
 
 type Props = {
   children: React.ReactNode;
@@ -28,5 +28,6 @@ const Form = (props: Props) => {
 
 Form.Input = Input;
 Form.Select = Select;
+Form.RangeSlider = RangeSlider;
 
 export { Form };
