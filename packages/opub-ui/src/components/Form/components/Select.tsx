@@ -18,6 +18,7 @@ const Select = ({ ...props }: Props) => {
           placeholder="Select an Option"
           {...field}
           {...props}
+          value={field.value}
           onChange={(val, name) => {
             props.onChange && props.onChange(val, name);
             field.onChange(val);
