@@ -6,7 +6,6 @@ export type SpacingSpaceScale =
   | '05'
   | '1'
   | '2'
-  | '205'
   | '3'
   | '4'
   | '5'
@@ -43,9 +42,6 @@ export const spacing: {
   },
   'space-2': {
     value: '8px',
-  },
-  'space-205': {
-    value: '10px',
   },
   'space-3': {
     value: '12px',

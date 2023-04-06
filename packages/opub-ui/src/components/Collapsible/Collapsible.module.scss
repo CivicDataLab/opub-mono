@@ -25,7 +25,7 @@
   background-color: var(--surface);
 }
 .IconButton[data-state='open'] {
-  background-color: var(--action-secondary-hovered);
+  background-color: var(--surface);
 }
 
 .IconButton:focus {
@@ -39,7 +39,7 @@
 }
 
 .Text {
-  color: var(--surface-dark);
+  color: var(--background-invert);
   font-size: var(--space-4);
   line-height: var(--space-6);
 }
