@@ -1,6 +1,8 @@
 import { Meta } from '@storybook/react';
+import React from 'react';
 import { Button } from '../Button';
 import { FormLayout } from '../FormLayout';
+import { Text } from '../Text';
 import { Form } from './Form';
 
 /**
@@ -18,11 +20,27 @@ const meta = {
 } satisfies Meta<typeof Form>;
 export default meta;
 
-export const FormBase = () => (
-  <Form onSubmit={(e) => console.log(e)}>
-    <FormLayout>
-      <Form.Input name="text" label="Text" />
-      <Button submit>Submit</Button>
-    </FormLayout>
-  </Form>
-);
+const options = [
+  { label: 'Today', value: 'today' },
+  { label: 'Yesterday', value: 'yesterday' },
+  { label: 'Last 7 days', value: 'lastWeek' },
+];
+
+export const FormBase = () => {
+  const [values, setValues] = React.useState({});
+  return (
+    <>
+      <Form onSubmit={(e) => setValues(e)}>
+        <FormLayout>
+          <Form.Input name="text" label="Name" />
+          <Form.Select name="select" label="Select Period" options={options} />
+          <Button submit>Submit</Button>
+        </FormLayout>
+      </Form>
+      <br />
+      <Text>Output:</Text>
+      <br />
+      <code>{JSON.stringify(values)}</code>
+    </>
+  );
+};

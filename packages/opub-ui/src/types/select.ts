@@ -32,7 +32,7 @@ export interface SelectGroup {
 
 export interface SelectProps {
   /** List of options or option groups to choose from */
-  options?: (SelectOption | SelectGroup)[];
+  options: (SelectOption | SelectGroup)[];
   /** Label for the select */
   label: React.ReactNode;
   /** Adds an action to the label */

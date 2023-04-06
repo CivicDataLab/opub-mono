@@ -1,6 +1,6 @@
 import React from 'react';
 import { SubmitHandler, useForm, FormProvider } from 'react-hook-form';
-import { Input } from './components/TextField';
+import { Input, Select } from './components';
 
 type Props = {
   children: React.ReactNode;
@@ -27,5 +27,6 @@ const Form = (props: Props) => {
 };
 
 Form.Input = Input;
+Form.Select = Select;
 
 export { Form };
