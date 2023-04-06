@@ -6,17 +6,20 @@ export type Props = TextFieldProps & {
   name: string;
 };
 
-export const TextField = (props: Props) => {
-  const [value, setValue] = React.useState(props.defaultValue || '');
+export const TextField = React.forwardRef(
+  (props: Props, ref: React.Ref<HTMLInputElement | null>) => {
+    const [value, setValue] = React.useState(props.defaultValue || '');
 
-  return (
-    <Input
-      {...props}
-      onChange={(e, id) => {
-        setValue(e);
-        props.onChange && props.onChange(e, props.name);
-      }}
-      value={props.value || value}
-    />
-  );
-};
+    return (
+      <Input
+        {...props}
+        ref={ref}
+        onChange={(e, id) => {
+          setValue(e);
+          props.onChange && props.onChange(e, props.name);
+        }}
+        value={props.value || value}
+      />
+    );
+  }
+);

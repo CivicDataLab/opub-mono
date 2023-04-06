@@ -41,7 +41,6 @@ export const UnavailableDates: Story = {
 
 export const CalendarRange: RangeStory = {
   render: ({ ...args }) => {
-    let { locale } = useLocale();
     return <RangeCalendar {...args} />;
   },
   args: {},

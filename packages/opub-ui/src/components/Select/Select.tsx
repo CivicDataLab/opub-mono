@@ -42,6 +42,10 @@ export const Select = forwardRef(
   ) => {
     const [selected, setSelected] = React.useState(value || defaultValue || '');
 
+    React.useEffect(() => {
+      handleSelectChange(value);
+    }, [value]);
+
     const handleSelectChange = React.useCallback(
       (value: string) => setSelected(value),
       []
@@ -58,7 +62,7 @@ export const Select = forwardRef(
     );
 
     const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-      handleSelectChange(event.currentTarget.value);
+      !value && handleSelectChange(event.currentTarget.value);
       onChange && onChange(event.currentTarget.value, name);
     };
 

@@ -1,6 +1,9 @@
-import { createCalendar } from '@internationalized/date';
-import { DatePickerBase, DateValue } from '@react-types/datepicker';
-import { DateTimeProps } from '../../types/datetime';
+import { GregorianCalendar } from '@internationalized/date';
+import {
+  AriaDatePickerProps,
+  DatePickerBase,
+  DateValue,
+} from '@react-types/datepicker';
 import cx from 'classnames';
 import React from 'react';
 import {
@@ -15,18 +18,28 @@ import {
   DateSegment,
   useDateFieldState,
 } from 'react-stately';
+import { DateTimeProps } from '../../types/datetime';
 import inputStyles from '../Input/Input.module.scss';
 import { Labelled } from '../Labelled';
 import styles from './DateField.module.scss';
 
-type Props = {
+function createCalendar(identifier: any) {
+  switch (identifier) {
+    case 'gregory':
+      return new GregorianCalendar();
+    default:
+      throw new Error(`Unsupported calendar ${identifier}`);
+  }
+}
+
+export type DatFieldProps = {
   isRange?: boolean;
   trim?: boolean;
   isPicker?: boolean;
 } & DateTimeProps &
   (DateFieldStateOptions | AriaDateFieldProps<DateValue>);
 
-function DateField(props: Props) {
+function DateField(props: DatFieldProps) {
   const {
     trim,
     isRange,
@@ -109,4 +122,20 @@ export function DateFieldSegment({ segment, state }: DatePickerSegmentProps) {
   );
 }
 
-export { DateField };
+type RangeProps = {
+  startFieldProps: AriaDatePickerProps<DateValue>;
+  endFieldProps: AriaDatePickerProps<DateValue>;
+};
+
+const DateRangeField = ({ startFieldProps, endFieldProps }: RangeProps) => {
+  return (
+    <div className={cx(styles.RangeField, inputStyles.TextField)}>
+      <DateField isPicker trim isRange {...startFieldProps} />
+      <span>{'-'}</span>
+      <DateField isPicker trim isRange {...endFieldProps} />
+      <div className={inputStyles.Backdrop} />
+    </div>
+  );
+};
+
+export { DateField, DateRangeField };

@@ -14,7 +14,7 @@ export interface CheckboxProps extends Omit<Props, 'onChange'> {
   // Should the label be hidden
   labelHidden?: boolean;
   // id for aria description
-  ariaDescribedBy?: string | null;
+  ariaDescribedBy?: string;
   /** Callback when the checked state change */
   onChange?(selected: boolean | string, name: string | undefined): void;
 }

@@ -7,7 +7,7 @@ import { Flex } from '../Flex';
 import { Labelled } from '../Labelled';
 import styles from './RangeSlider.module.scss';
 
-type Props = {
+export type RangeSliderProps = {
   /** Label for the range input */
   label: React.ReactNode;
   /** Adds an action to the label */
@@ -34,7 +34,7 @@ type Props = {
   onChangeEnd?(selected: number[], name: string | undefined): void;
 } & Omit<Slider.SliderProps, 'prefix' | 'onChange'>;
 
-const RangeSlider = forwardRef((props: Props, ref: any) => {
+const RangeSlider = forwardRef((props: RangeSliderProps, ref: any) => {
   const themeClass = cx(styles.RangeSlider, {});
   const {
     id,

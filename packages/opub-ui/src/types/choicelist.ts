@@ -30,7 +30,9 @@ export interface CheckboxGroupProps {
   error?: Error;
   /** Disable all choices **/
   disabled?: boolean;
-  /** Disable all choices **/
+  /** Controlled Values **/
+  value?: string[];
+  /** Default Values **/
   defaultValue?: string[];
   /** Callback when the selected choices change */
   onChange?(selected: string[], name: string | undefined): void;
