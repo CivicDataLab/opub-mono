@@ -5,10 +5,11 @@ import { Link } from '../Link';
 import { Collapsible } from './Collapsible';
 
 /**
- * Collapsible Description
+ * The collapsible component is used to put long sections of information under a block that users can expand or collapse.
  *
- * Reference: #
+ * Reference: https://www.radix-ui.com/docs/primitives/components/collapsible
  */
+
 const meta = {
   component: Collapsible,
 } satisfies Meta<typeof Collapsible>;
