@@ -35,6 +35,11 @@ export const FormBase = () => {
           <Form.Input name="text" label="Name" />
           <Form.Select name="select" label="Select Period" options={options} />
           <Form.RangeSlider name="range" label="Budget" prefix={<p>$</p>} />
+          <Form.RadioGroup name="radio">
+            <Form.RadioItem value="1">Item 1</Form.RadioItem>
+            <Form.RadioItem value="2">Item 2</Form.RadioItem>
+            <Form.RadioItem value="3">Item 3</Form.RadioItem>
+          </Form.RadioGroup>
           <Button submit>Submit</Button>
         </FormLayout>
       </Form>
