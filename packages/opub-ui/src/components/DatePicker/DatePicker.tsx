@@ -1,7 +1,7 @@
 import { DateValue } from '@react-types/calendar';
 import { CalendarMinor } from '@shopify/polaris-icons';
 import cx from 'classnames';
-import React, { forwardRef } from 'react';
+import React from 'react';
 import { AriaDatePickerProps, useDatePicker } from 'react-aria';
 import { DatePickerState, useDatePickerState } from 'react-stately';
 import { Button } from '../Button';

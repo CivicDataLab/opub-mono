@@ -1,1 +1,1 @@
-export { DateField, DateFieldSegment } from './DateField';
+export { DateField, DateFieldSegment, DateRangeField } from './DateField';

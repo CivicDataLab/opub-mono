@@ -1,5 +1,9 @@
 import { createCalendar } from '@internationalized/date';
-import { DatePickerBase, DateValue } from '@react-types/datepicker';
+import {
+  AriaDatePickerProps,
+  DatePickerBase,
+  DateValue,
+} from '@react-types/datepicker';
 import { DateTimeProps } from '../../types/datetime';
 import cx from 'classnames';
 import React from 'react';
@@ -109,4 +113,20 @@ export function DateFieldSegment({ segment, state }: DatePickerSegmentProps) {
   );
 }
 
-export { DateField };
+type RangeProps = {
+  startFieldProps: AriaDatePickerProps<DateValue>;
+  endFieldProps: AriaDatePickerProps<DateValue>;
+};
+
+const DateRangeField = ({ startFieldProps, endFieldProps }: RangeProps) => {
+  return (
+    <div className={cx(styles.RangeField, inputStyles.TextField)}>
+      <DateField isPicker trim isRange {...startFieldProps} />
+      <span>{'-'}</span>
+      <DateField isPicker trim isRange {...endFieldProps} />
+      <div className={inputStyles.Backdrop} />
+    </div>
+  );
+};
+
+export { DateField, DateRangeField };
