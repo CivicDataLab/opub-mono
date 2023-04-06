@@ -42,11 +42,23 @@ const checkboxOptions = [
   },
 ];
 
+const defaultOptions = {
+  text: 'Excalibur',
+  select: 'yesterday',
+  range: [6],
+  checkbox: true,
+  'checkbox-group': ['angular', 'vue'],
+  radio: '1',
+};
+
 export const FormBase = () => {
-  const [values, setValues] = React.useState<any>({});
+  const [values, setValues] = React.useState<any>();
   return (
     <>
-      <Form onSubmit={(e) => setValues(e)}>
+      <Form
+        onSubmit={(e) => setValues(e)}
+        formOptions={{ defaultValues: defaultOptions }}
+      >
         <FormLayout>
           <Form.Input name="text" label="Name" />
           <Form.Select name="select" label="Select Period" options={options} />
@@ -71,7 +83,7 @@ export const FormBase = () => {
       <br />
       <Text>Output:</Text>
       <br />
-      <pre>{JSON.stringify(values, null, 2)}</pre>
+      <pre>{JSON.stringify(values || defaultOptions, null, 2)}</pre>
     </>
   );
 };

@@ -13,9 +13,12 @@ const Checkbox = ({ ...props }: CheckboxProps) => {
         <CheckboxBase
           {...field}
           {...props}
-          onChange={(val, name) => {
-            props.onChange && props.onChange(val, name);
-            field.onChange(val);
+          checked={props.checked || field.value}
+          onChange={(checked, name) => {
+            props.onChange && props.onChange(checked, name);
+            props.checked
+              ? field.onChange(checked ? props.checked : undefined)
+              : field.onChange(checked);
           }}
         />
       )}

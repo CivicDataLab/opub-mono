@@ -17,6 +17,7 @@ const CheckboxGroup = ({ ...props }: Props) => {
         <CheckboxGroupBase
           {...field}
           {...props}
+          defaultValue={props.defaultValue || field.value || []}
           onChange={(val, name) => {
             props.onChange && props.onChange(val, name);
             field.onChange(val);

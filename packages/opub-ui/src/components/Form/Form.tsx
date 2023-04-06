@@ -1,5 +1,10 @@
 import React from 'react';
-import { SubmitHandler, useForm, FormProvider } from 'react-hook-form';
+import {
+  SubmitHandler,
+  useForm,
+  FormProvider,
+  UseFormProps,
+} from 'react-hook-form';
 import {
   Input,
   Select,
@@ -13,7 +18,7 @@ import {
 type Props = {
   children: React.ReactNode;
   onSubmit?: SubmitHandler<any>;
-  formOptions?: any;
+  formOptions?: UseFormProps;
 };
 
 const Form = (props: Props) => {
