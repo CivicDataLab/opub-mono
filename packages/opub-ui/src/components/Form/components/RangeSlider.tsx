@@ -15,7 +15,16 @@ const RangeSlider = ({ ...props }: Props) => {
     <Controller
       {...props}
       control={control}
-      render={({ field }) => <RangeSliderBase {...field} {...props} />}
+      render={({ field }) => (
+        <RangeSliderBase
+          {...field}
+          {...props}
+          onChange={(val, name) => {
+            props.onChange && props.onChange(val, name);
+            field.onChange(val);
+          }}
+        />
+      )}
     />
   );
 };

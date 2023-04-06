@@ -6,6 +6,7 @@ import {
   RangeSlider,
   RadioGroup,
   RadioItem,
+  Checkbox,
 } from './components';
 
 type Props = {
@@ -37,5 +38,6 @@ Form.Select = Select;
 Form.RangeSlider = RangeSlider;
 Form.RadioGroup = RadioGroup;
 Form.RadioItem = RadioItem;
+Form.Checkbox = Checkbox;
 
 export { Form };

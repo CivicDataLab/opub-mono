@@ -8,7 +8,16 @@ const Input = ({ ...props }: TextfieldProps) => {
     <Controller
       {...props}
       control={control}
-      render={({ field }) => <TextField {...field} {...props} />}
+      render={({ field }) => (
+        <TextField
+          {...field}
+          {...props}
+          onChange={(val, name) => {
+            props.onChange && props.onChange(val, name);
+            field.onChange(val);
+          }}
+        />
+      )}
     />
   );
 };

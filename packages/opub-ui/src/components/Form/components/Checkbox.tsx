@@ -1,12 +1,8 @@
 import { Controller, useFormContext } from 'react-hook-form';
-import { SelectProps } from '../../../types';
-import { Select as SelectWrapper } from '../../Select';
+import { CheckboxProps } from '../../../types';
+import { Checkbox as CheckboxBase } from '../../Checkbox';
 
-type Props = {
-  name: string;
-} & Omit<SelectProps, 'name'>;
-
-const Select = ({ ...props }: Props) => {
+const Checkbox = ({ ...props }: CheckboxProps) => {
   const { control } = useFormContext();
 
   return (
@@ -14,8 +10,7 @@ const Select = ({ ...props }: Props) => {
       {...props}
       control={control}
       render={({ field }) => (
-        <SelectWrapper
-          placeholder="Select an Option"
+        <CheckboxBase
           {...field}
           {...props}
           onChange={(val, name) => {
@@ -28,4 +23,4 @@ const Select = ({ ...props }: Props) => {
   );
 };
 
-export { Select };
+export { Checkbox };
