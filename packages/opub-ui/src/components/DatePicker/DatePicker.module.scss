@@ -19,7 +19,7 @@
 .Field {
   flex-wrap: wrap;
   width: fit-content;
-  padding: var(--space-1);
+  padding: 0 var(--space-2);
   min-width: 230px;
 
   > span {

@@ -58,7 +58,7 @@
 
   &.Selected {
     background-color: var(--interactive);
-    border-radius: var(--border-radius-1);
+    border-radius: 0;
     > span {
       color: var(--text-on-interactive);
     }
