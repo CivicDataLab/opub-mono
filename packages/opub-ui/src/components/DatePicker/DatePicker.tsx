@@ -16,18 +16,18 @@ export type DatePickerProps = {
   label: string;
 } & (DatePickerState | AriaDatePickerProps<DateValue>);
 
-const DatePicker = (props: DatePickerProps) => {
+const DatePicker = React.forwardRef((props: DatePickerProps, ref: any) => {
   let state = useDatePickerState(props);
-  let ref = React.useRef(null);
-  let {
-    groupProps,
-    labelProps,
-    fieldProps,
-    buttonProps,
-    dialogProps,
-    calendarProps,
-  } = useDatePicker(props, state, ref);
+
+  let { labelProps, fieldProps, buttonProps, dialogProps, calendarProps } =
+    useDatePicker(props, state, ref);
   const themeClass = cx(styles.DatePicker, {});
+
+  const {
+    onPress: onPressPrev,
+    isDisabled: disabledPrev,
+    ...othersProps
+  } = buttonProps;
 
   return (
     <div className={`opub-DatePicker ${themeClass}`}>
@@ -43,7 +43,7 @@ const DatePicker = (props: DatePickerProps) => {
               <Button
                 icon={<Icon source={CalendarMinor} />}
                 size="slim"
-                {...buttonProps}
+                {...othersProps}
                 onClick={() => (!state.isOpen ? state.open() : state.close())}
               />
             </Popover.Trigger>
@@ -55,6 +55,6 @@ const DatePicker = (props: DatePickerProps) => {
       </Labelled>
     </div>
   );
-};
+});
 
 export { DatePicker };

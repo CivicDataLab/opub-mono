@@ -58,14 +58,13 @@
 
   &.Selected {
     background-color: var(--interactive);
-    border-radius: 0;
     > span {
       color: var(--text-on-interactive);
     }
 
     &.HighlightedRange {
       background-color: var(--surface-selected);
-
+      border-radius: 0;
       > span {
         color: var(--text);
       }

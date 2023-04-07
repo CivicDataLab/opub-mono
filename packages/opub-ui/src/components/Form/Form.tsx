@@ -8,13 +8,17 @@ import {
 import {
   Checkbox,
   CheckboxGroup,
+  DateField,
   DatePicker,
+  DateRangePicker,
   Input,
   RadioGroup,
   RadioItem,
   RangeSlider,
   Select,
-  DateField,
+  TimeField,
+  Combobox,
+  ComboboxMulti,
 } from './components';
 
 export type FormProps = {
@@ -34,6 +38,10 @@ export const Form: React.FunctionComponent<FormProps> & {
   CheckboxGroup: typeof CheckboxGroup;
   DateField: typeof DateField;
   DatePicker: typeof DatePicker;
+  DateRangePicker: typeof DateRangePicker;
+  TimeField: typeof TimeField;
+  Combobox: typeof Combobox;
+  ComboboxMulti: typeof ComboboxMulti;
 } = function (props: FormProps) {
   const [submitSuccess, setSubmitSuccess] = React.useState(false);
   const {
@@ -84,3 +92,7 @@ Form.Checkbox = Checkbox;
 Form.CheckboxGroup = CheckboxGroup;
 Form.DateField = DateField;
 Form.DatePicker = DatePicker;
+Form.DateRangePicker = DateRangePicker;
+Form.TimeField = TimeField;
+Form.Combobox = Combobox;
+Form.ComboboxMulti = ComboboxMulti;

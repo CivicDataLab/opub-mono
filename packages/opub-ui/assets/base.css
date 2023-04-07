@@ -44,3 +44,7 @@ body svg {
   white-space: nowrap;
   width: 1px;
 }
+
+[data-radix-popper-content-wrapper] {
+  z-index: var(--z-12) !important;
+}
