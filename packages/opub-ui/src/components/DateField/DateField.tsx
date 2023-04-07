@@ -53,6 +53,7 @@ function DateField(props: DatFieldProps) {
     ...others
   } = props;
   let { locale } = useLocale();
+
   let state = useDateFieldState({
     ...others,
     locale,

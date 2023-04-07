@@ -50,8 +50,8 @@ const defaultValBase = {
   checkbox: true,
   'checkbox-group': ['angular', 'vue'],
   radio: '1',
-  date: parseDate('2020-02-05'),
-  'date-picker': parseDate('1998-03-25'),
+  date: '2020-02-06',
+  'date-picker': '1998-03-25',
 };
 
 export const FormBase = ({ ...args }) => {
@@ -81,16 +81,8 @@ export const FormBase = ({ ...args }) => {
           </Form.RadioGroup>
 
           <FormLayout.Group>
-            <Form.DateField
-              name="date"
-              label="Choose Date"
-              // defaultValue={parseDate('2020-02-03')}
-            />
-            {/* <Form.DatePicker
-              name="date-picker"
-              label="Choose Date with Picker"
-              defaultValue={parseDate('1998-03-25')}
-            /> */}
+            <Form.DateField name="date" label="Choose Date" />
+            <Form.DatePicker name="date-picker" label="Choose Birthday" />
           </FormLayout.Group>
 
           <Button submit size="slim">
@@ -134,15 +126,18 @@ export const ResetOnSubmit = () => {
 };
 
 export const DateFieldOnly = () => {
+  const defVal = parseDate('2020-02-05');
+  // console.log(defVal, 'defVal');
+
   return (
     <Form
       formOptions={{
         defaultValues: {
-          date: parseDate('2020-02-05'),
+          date: defVal,
         },
       }}
     >
-      <Form.DateField label="Label" name="date" />
+      <Form.DateField label="Label" name="date" value={defVal} />
     </Form>
   );
 };

@@ -1,3 +1,4 @@
+import { parseDate } from '@internationalized/date';
 import { DateValue } from '@react-types/datepicker';
 import { Controller, useFormContext } from 'react-hook-form';
 import {
@@ -8,6 +9,7 @@ import {
 type FieldProps = {
   name: string;
   onChange?: (val: DateValue, name: string) => void;
+  defaultValue?: DateValue;
 } & DatePickerProps;
 
 const DatePicker = ({ ...props }: FieldProps) => {
@@ -17,14 +19,14 @@ const DatePicker = ({ ...props }: FieldProps) => {
     <Controller
       {...props}
       control={control}
-      // Excluding value prop since it's breaking the hook
-      render={({ field: { value, ...other } }) => (
+      render={({ field }) => (
         <DatePickerBase
-          {...other}
+          {...field}
           {...props}
+          value={parseDate(field.value) || props.value || props.defaultValue}
           onChange={(val) => {
             props.onChange && props.onChange(val, props.name);
-            other.onChange(val.toString());
+            field.onChange(val.toString());
           }}
         />
       )}
