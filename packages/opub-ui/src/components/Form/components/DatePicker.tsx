@@ -45,7 +45,7 @@ type RangeProps = {
   value?: RangeValue<DateValue>;
 } & RangePickerProps;
 
-const DateRangePicker = React.forwardRef(({ ...props }: RangeProps, ref) => {
+const DateRangePicker = ({ ...props }: RangeProps) => {
   const { control } = useFormContext();
 
   return (
@@ -76,6 +76,6 @@ const DateRangePicker = React.forwardRef(({ ...props }: RangeProps, ref) => {
       )}
     />
   );
-});
+};
 
 export { DatePicker, DateRangePicker };

@@ -10,7 +10,7 @@ type FieldProps = {
   value?: DateValue;
 } & DatFieldProps;
 
-const DateField = React.forwardRef(({ ...props }: FieldProps, ref: any) => {
+const DateField = ({ ...props }: FieldProps) => {
   const { control } = useFormContext();
 
   return (
@@ -32,6 +32,6 @@ const DateField = React.forwardRef(({ ...props }: FieldProps, ref: any) => {
       }}
     />
   );
-});
+};
 
 export { DateField };
