@@ -1,6 +1,5 @@
 import { parseDate } from '@internationalized/date';
 import { DateValue } from '@react-types/datepicker';
-import React from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import { DateField as DateFieldBase, DatFieldProps } from '../../DateField';
 

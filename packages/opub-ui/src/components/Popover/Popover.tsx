@@ -42,7 +42,7 @@ const Content = React.forwardRef(
     const PortalDom = isPortal ? Radix.Portal : React.Fragment;
 
     return (
-      <PortalDom>
+      <PortalDom className={styles.Portal}>
         <Radix.Content
           className={styles.Content}
           sideOffset={5}

@@ -17,6 +17,8 @@ import {
   RangeSlider,
   Select,
   TimeField,
+  Combobox,
+  ComboboxMulti,
 } from './components';
 
 export type FormProps = {
@@ -38,6 +40,8 @@ export const Form: React.FunctionComponent<FormProps> & {
   DatePicker: typeof DatePicker;
   DateRangePicker: typeof DateRangePicker;
   TimeField: typeof TimeField;
+  Combobox: typeof Combobox;
+  ComboboxMulti: typeof ComboboxMulti;
 } = function (props: FormProps) {
   const [submitSuccess, setSubmitSuccess] = React.useState(false);
   const {
@@ -90,3 +94,5 @@ Form.DateField = DateField;
 Form.DatePicker = DatePicker;
 Form.DateRangePicker = DateRangePicker;
 Form.TimeField = TimeField;
+Form.Combobox = Combobox;
+Form.ComboboxMulti = ComboboxMulti;

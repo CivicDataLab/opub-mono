@@ -1,5 +1,3 @@
-// @ts-nocheck
-import { ComboboxSingleProps } from '../../../types/combobox';
 import {
   ComboboxItem,
   ComboboxPopover,
@@ -8,6 +6,7 @@ import {
 import { Portal } from 'ariakit/portal';
 import cx from 'classnames';
 import React, { forwardRef, useEffect } from 'react';
+import { ComboboxSingleProps } from '../../../types/combobox';
 import itemStyles from '../../ActionList/ActionList.module.scss';
 import styles from '../Combobox.module.scss';
 import { Combobox } from './Atoms';
@@ -22,6 +21,7 @@ export const SingleSelect = forwardRef<HTMLInputElement, ComboboxSingleProps>(
       gutter: 8,
       defaultValue,
       setValue: onChange,
+      value: props.value,
       defaultList,
     });
 
@@ -29,16 +29,13 @@ export const SingleSelect = forwardRef<HTMLInputElement, ComboboxSingleProps>(
       onFilter?.(combobox.matches);
     }, [combobox.matches]);
 
-    const className = cx(
-      itemStyles.Item
-      // props.disabled && styles.disabled,
-    );
+    const className = cx(itemStyles.Item);
 
     return (
-      <div className="opub-combobox-multi">
+      <div className={styles.Wrapper}>
         <Combobox combobox={combobox} ref={ref} {...comboboxProps} />
 
-        <Portal>
+        <Portal style={{ zIndex: 'var(--z-1)' }}>
           <ComboboxPopover
             state={combobox}
             className={styles.Popover}

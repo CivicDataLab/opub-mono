@@ -99,4 +99,6 @@ export type ComboboxSingleProps = Omit<
   verticalContent?: React.ReactNode;
   combobox?: any;
   onFilter?: any;
+  onChange?: (value: string) => void;
+  value?: string;
 };

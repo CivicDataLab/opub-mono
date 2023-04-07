@@ -17,7 +17,6 @@ export default function Web() {
   const [values, setValues] = React.useState<any>();
 
   const defVal = '2020-02-03';
-  console.log(defVal, 'defVal');
 
   const defaultValBase = {
     text: 'Excalibur',

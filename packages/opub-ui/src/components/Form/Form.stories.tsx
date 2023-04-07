@@ -57,7 +57,45 @@ const defaultValBase = {
     end: '2020-02-10',
   },
   time: '04:45',
+  combobox: 'Apple',
+  comboboxMulti: ['Banana', 'Broccoli', 'Candy', 'Carrot'],
 };
+
+const comboboxOptions = [
+  'Apple',
+  'Banana',
+  'Broccoli',
+  'Burger',
+  'Cake',
+  'Candy',
+  'Carrot',
+  'Cherry',
+  'Chocolate',
+  'Cookie',
+  'Cucumber',
+  'Donut',
+  'Fish',
+  'Fries',
+  'Grape',
+  'Green apple',
+  'Hot dog',
+  'Ice cream',
+  'Kiwi',
+  'Lemon',
+  'Lollipop',
+  'Onion',
+  'Orange',
+  'Pasta',
+  'Pineapple',
+  'Pizza',
+  'Potato',
+  'Salad',
+  'Sandwich',
+  'Steak',
+  'Strawberry',
+  'Tomato',
+  'Watermelon',
+];
 
 export const FormBase = ({ ...args }) => {
   const [values, setValues] = React.useState<any>();
@@ -86,28 +124,27 @@ export const FormBase = ({ ...args }) => {
           </Form.RadioGroup>
 
           <FormLayout.Group>
-            <Form.DateField
-              onChange={(e) => console.log(e)}
-              name="date"
-              label="Choose Date"
-            />
-            <Form.DatePicker
-              onChange={(e) => console.log(e)}
-              name="date-picker"
-              label="Choose Birthday"
-            />
+            <Form.DateField name="date" label="Choose Date" />
+            <Form.DatePicker name="date-picker" label="Choose Birthday" />
 
-            <Form.TimeField
-              onChange={(e) => console.log(e)}
-              name="time"
-              label="Choose Range"
+            <Form.TimeField name="time" label="Choose Range" />
+          </FormLayout.Group>
+          <Form.DateRangePicker name="date-range" label="Choose Time" />
+          <FormLayout.Group>
+            <Form.Combobox
+              defaultList={comboboxOptions}
+              name="combobox"
+              placeholder="Type to see options"
+              label="Select Single Item"
+            />
+            <Form.ComboboxMulti
+              defaultList={comboboxOptions}
+              name="comboboxMulti"
+              label="Select Multiple Item"
+              placeholder="Type to see options"
+              verticalContent
             />
           </FormLayout.Group>
-          <Form.DateRangePicker
-            onChange={(e) => console.log(e)}
-            name="date-range"
-            label="Choose Time"
-          />
 
           <Button submit size="slim">
             Submit
@@ -151,7 +188,6 @@ export const ResetOnSubmit = () => {
 
 export const DateFieldOnly = () => {
   const defVal = parseDate('2020-02-05');
-  // console.log(defVal, 'defVal');
 
   return (
     <Form

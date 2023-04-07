@@ -13,6 +13,12 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+const metaMulti = {
+  component: ComboboxMulti,
+} satisfies Meta<typeof ComboboxMulti>;
+
+type StoryMulti = StoryObj<typeof metaMulti>;
+
 const options = [
   'Apple',
   'Banana',
@@ -58,10 +64,14 @@ export const Default: Story = {
   },
 };
 
-export const Multi: Story = {
+export const Multi: StoryMulti = {
   render: ({ ...args }) => {
     return (
-      <ComboboxMulti defaultList={options} defaultValues="Banana" {...args} />
+      <ComboboxMulti
+        defaultList={options}
+        defaultValues={['Banana']}
+        {...args}
+      />
     );
   },
 
@@ -72,10 +82,14 @@ export const Multi: Story = {
   },
 };
 
-export const VerticalContent: Story = {
+export const VerticalContent: StoryMulti = {
   render: ({ ...args }) => {
     return (
-      <ComboboxMulti defaultList={options} defaultValues="Banana" {...args} />
+      <ComboboxMulti
+        defaultList={options}
+        defaultValues={['Banana', 'Broccoli']}
+        {...args}
+      />
     );
   },
 
