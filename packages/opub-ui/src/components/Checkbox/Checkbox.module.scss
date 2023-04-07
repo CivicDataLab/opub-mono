@@ -35,6 +35,11 @@
   line-height: 0;
   position: relative;
 
+  &:focus-visible {
+    outline: var(--border-width-2) solid var(--focused);
+    outline-offset: 2px;
+  }
+
   &:hover {
     border-color: var(--border-hovered);
   }

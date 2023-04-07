@@ -1,6 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { PropsVariationSection } from '../../utils/helpers';
-import { Form } from '../Form';
 import { Checkbox } from './Checkbox';
 
 /**
@@ -16,20 +15,15 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  render: (args) => (
-    <Form defaultValues={{ checkbox: true }}>
-      <Checkbox {...args} />
-    </Form>
-  ),
   args: {
     name: 'checkbox',
     children: 'Label',
+    onChange: (e, name) => console.log(e, name),
   },
 };
 
 export const States = () => (
   <PropsVariationSection
-    withFormik
     component={Checkbox}
     common={{ children: 'Label', name: 'abc' }}
     xAxis={{
@@ -48,7 +42,6 @@ export const States = () => (
 
 export const WithText = () => (
   <PropsVariationSection
-    withFormik
     component={Checkbox}
     common={{ children: 'Label', name: 'withText' }}
     xAxis={{

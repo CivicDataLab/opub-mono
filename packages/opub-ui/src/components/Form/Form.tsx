@@ -1,35 +1,72 @@
-import cx from 'classnames';
 import React from 'react';
-import { useForm, FormProvider } from 'react-hook-form';
-import styles from './Form.module.scss';
-import { yupResolver } from '@hookform/resolvers/yup';
+import {
+  FormProvider,
+  SubmitHandler,
+  useForm,
+  UseFormProps,
+} from 'react-hook-form';
+import {
+  Checkbox,
+  CheckboxGroup,
+  DatePicker,
+  Input,
+  RadioGroup,
+  RadioItem,
+  RangeSlider,
+  Select,
+  DateField,
+} from './components';
 
-type Props = {
+export type FormProps = {
   children: React.ReactNode;
-  validationSchema?: any;
-  formSubmit?(e: any): void;
-  defaultValues?: any;
+  onSubmit?: SubmitHandler<any>;
+  formOptions?: UseFormProps;
+  resetValues?: any;
 };
 
-const Form = (props: Props) => {
-  const { validationSchema, defaultValues, formSubmit, children } = props;
-
-  const options = {
-    defaultValues,
-  };
-  const formOptions = validationSchema
-    ? { ...options, resolver: yupResolver(validationSchema) }
-    : { ...options };
-
+export const Form: React.FunctionComponent<FormProps> & {
+  Input: typeof Input;
+  Select: typeof Select;
+  RangeSlider: typeof RangeSlider;
+  RadioGroup: typeof RadioGroup;
+  RadioItem: typeof RadioItem;
+  Checkbox: typeof Checkbox;
+  CheckboxGroup: typeof CheckboxGroup;
+  DateField: typeof DateField;
+  DatePicker: typeof DatePicker;
+} = function (props: FormProps) {
+  const [submitSuccess, setSubmitSuccess] = React.useState(false);
+  const {
+    formOptions = {},
+    onSubmit = () => {},
+    children,
+    resetValues,
+    ...others
+  } = props;
   const methods = useForm(formOptions);
-  const themeClass = cx(styles.base, {});
+
+  React.useEffect(() => {
+    methods.reset(formOptions.defaultValues);
+  }, [formOptions.defaultValues]);
+
+  React.useEffect(() => {
+    resetValues && submitSuccess && methods.reset(resetValues);
+    const timeOut = setTimeout(() => {
+      setSubmitSuccess(false);
+    }, 10);
+
+    return () => {
+      clearTimeout(timeOut);
+    };
+  }, [submitSuccess]);
 
   return (
     <FormProvider {...methods}>
       <form
-        className={themeClass}
+        {...others}
         onSubmit={methods.handleSubmit((data) => {
-          formSubmit && formSubmit(data);
+          onSubmit && onSubmit(data);
+          setSubmitSuccess(true);
         })}
       >
         {children}
@@ -38,4 +75,12 @@ const Form = (props: Props) => {
   );
 };
 
-export { Form };
+Form.Input = Input;
+Form.Select = Select;
+Form.RangeSlider = RangeSlider;
+Form.RadioGroup = RadioGroup;
+Form.RadioItem = RadioItem;
+Form.Checkbox = Checkbox;
+Form.CheckboxGroup = CheckboxGroup;
+Form.DateField = DateField;
+Form.DatePicker = DatePicker;

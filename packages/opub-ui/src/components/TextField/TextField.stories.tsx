@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Button } from '../Button';
 import { Flex } from '../Flex';
 import { Form } from '../Form';
@@ -17,23 +17,14 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  render: (args) => (
-    <Form>
-      <TextField {...args} />
-    </Form>
-  ),
   args: {
     name: 'name',
     label: 'Text Field',
+    onChange: (text, name) => console.log(text, name),
   },
 };
 
 export const Number: Story = {
-  render: (args) => (
-    <Form>
-      <TextField {...args} />
-    </Form>
-  ),
   args: {
     label: 'Number',
     type: 'number',
@@ -42,28 +33,15 @@ export const Number: Story = {
 };
 
 export const Multi: Story = {
-  render: (args) => (
-    <Form
-      defaultValues={{
-        'multi-line': 'This is first line\nWell this is second',
-      }}
-    >
-      <TextField {...args} />
-    </Form>
-  ),
   args: {
     label: 'Multi Line',
     multiline: 4,
     name: 'multi-line',
+    defaultValue: 'This is first line\nWell this is second',
   },
 };
 
 export const HiddenLabel: Story = {
-  render: (args) => (
-    <Form>
-      <TextField {...args} />
-    </Form>
-  ),
   args: {
     label: 'No Label',
     labelHidden: true,
@@ -72,11 +50,6 @@ export const HiddenLabel: Story = {
 };
 
 export const LabelAction: Story = {
-  render: (args) => (
-    <Form>
-      <TextField {...args} />
-    </Form>
-  ),
   args: {
     label: 'With Action',
     labelAction: { content: 'Look Up Codes' },
@@ -85,11 +58,6 @@ export const LabelAction: Story = {
 };
 
 export const RightAligned: Story = {
-  render: (args) => (
-    <Form>
-      <TextField {...args} />
-    </Form>
-  ),
   args: {
     label: 'Right Aligned',
     align: 'right',
@@ -99,11 +67,6 @@ export const RightAligned: Story = {
 };
 
 export const HelpText: Story = {
-  render: (args) => (
-    <Form>
-      <TextField {...args} />
-    </Form>
-  ),
   args: {
     name: 'help',
     label: 'Help Text',
@@ -113,11 +76,6 @@ export const HelpText: Story = {
 };
 
 export const Prefix: Story = {
-  render: (args) => (
-    <Form>
-      <TextField {...args} />
-    </Form>
-  ),
   args: {
     label: 'Price',
     type: 'number',
@@ -137,11 +95,6 @@ const verticalContentMarkup =
   ) : null;
 
 export const VerticalContent: Story = {
-  render: (args) => (
-    <Form>
-      <TextField {...args} />
-    </Form>
-  ),
   args: {
     label: 'tags',
     placeholder: 'Search Tags',
@@ -151,11 +104,6 @@ export const VerticalContent: Story = {
 };
 
 export const ConnectedFields: Story = {
-  render: (args) => (
-    <Form>
-      <TextField {...args} />
-    </Form>
-  ),
   args: {
     label: 'Connected Field',
     connectedRight: <Button>Submit</Button>,
@@ -164,11 +112,6 @@ export const ConnectedFields: Story = {
 };
 
 export const Error: Story = {
-  render: (args) => (
-    <Form>
-      <TextField {...args} />
-    </Form>
-  ),
   args: {
     label: 'Name',
     error: 'Name is required',
@@ -177,11 +120,6 @@ export const Error: Story = {
 };
 
 export const Disabled: Story = {
-  render: (args) => (
-    <Form>
-      <TextField {...args} />
-    </Form>
-  ),
   args: {
     label: 'Name',
     disabled: true,
@@ -190,11 +128,6 @@ export const Disabled: Story = {
 };
 
 export const Count: Story = {
-  render: (args) => (
-    <Form>
-      <TextField {...args} />
-    </Form>
-  ),
   args: {
     label: 'Name',
     maxLength: 20,
@@ -204,11 +137,6 @@ export const Count: Story = {
 };
 
 export const ClearButton: Story = {
-  render: (args) => (
-    <Form>
-      <TextField {...args} />
-    </Form>
-  ),
   args: {
     label: 'Name',
     clearButton: true,
@@ -217,11 +145,6 @@ export const ClearButton: Story = {
 };
 
 export const MonoSpaced: Story = {
-  render: (args) => (
-    <Form>
-      <TextField {...args} />
-    </Form>
-  ),
   args: {
     label: 'Name',
     monospaced: true,
@@ -230,11 +153,6 @@ export const MonoSpaced: Story = {
 };
 
 export const SelectOnFocus: Story = {
-  render: (args) => (
-    <Form defaultValues={{}}>
-      <TextField {...args} />
-    </Form>
-  ),
   args: {
     label: 'Name',
     selectTextOnFocus: true,

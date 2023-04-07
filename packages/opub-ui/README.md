@@ -26,6 +26,8 @@ The following steps are required before you can start using components:
 import '@opub-cdl/ui/dist/assets/styles.scss';
 ```
 
+> You will need `sass` module if it's not already there.
+
 2. This step is for `SSR` apps. We use [React Aria](https://react-spectrum.adobe.com/react-aria/) for some components. To ensure it works correctly in Next.js, you must wrap the App with `SSRProvider`. [More Info](https://react-spectrum.adobe.com/react-aria/ssr.html)
 
 ```js
@@ -42,9 +44,9 @@ import { SSRProvider } from 'react-aria';
 import { Badge, Button, Menu } from 'opub-cdl/ui';
 ```
 
-> There is an issue with NextJs [explained here](https://github.com/vercel/next.js/issues/39375). Until that is fixed, you will need to import like this:
+> When using with NextJs you will need to transpile the packages [More Info](https://nextjs.org/docs/advanced-features/compiler#module-transpilation), add this inside `next.config.js` :
 >
-> `import { Badge, Button, Menu } from 'opub-cdl/ui/dist';`
+> `transpilePackages: ['@opub-cdl/ui']`
 
 ## Components
 

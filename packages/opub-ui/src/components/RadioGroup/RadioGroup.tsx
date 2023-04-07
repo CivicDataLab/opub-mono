@@ -1,75 +1,72 @@
 import * as RadioRadix from '@radix-ui/react-radio-group';
-import type { Error } from '../../types/shared/form';
 import cx from 'classnames';
 import React from 'react';
-import { Controller, useFormContext } from 'react-hook-form';
+import type { Error } from '../../types/shared/form';
 import { Choice } from '../Choice';
 import { InlineMessage } from '../InlineMessage';
 import { Text } from '../Text';
 import styles from './RadioGroup.module.scss';
 
-type RadixProps = React.ComponentProps<typeof RadioRadix.Root> & {
+export type RadioGroupProps = Omit<RadioRadix.RadioGroupProps, 'onChange'> & {
   name: string;
   /** Display an error message */
   error?: Error;
   /** Toggles display of the title */
   titleHidden?: boolean;
+  /** Callback when the selected choices change */
+  onChange?(selected: string, name: string | undefined): void;
 };
-interface Props extends React.ComponentProps<typeof RadioRadix.Item> {
+interface RadioItemProps extends RadioRadix.RadioGroupItemProps {
   value: string;
   /** Additional text to aide in use */
   helpText?: React.ReactNode;
 }
 
-const RadioGroup = ({
-  name,
-  children,
-  error,
-  titleHidden,
-  title,
-  ...otherProps
-}: RadixProps) => {
-  const { control } = useFormContext();
-  const randomId = React.useId();
-  const finalId = otherProps.id || randomId;
+const RadioGroup = React.forwardRef(
+  (
+    {
+      name,
+      children,
+      error,
+      titleHidden,
+      title,
+      onChange,
+      ...otherProps
+    }: RadioGroupProps,
+    ref: React.Ref<HTMLDivElement>
+  ) => {
+    const randomId = React.useId();
+    const finalId = otherProps.id || randomId;
 
-  const titleMarkup = title ? (
-    <Text variant="bodyMd" as="legend" visuallyHidden={titleHidden}>
-      {title}
-    </Text>
-  ) : null;
+    const titleMarkup = title ? (
+      <Text variant="bodyMd" as="legend" visuallyHidden={titleHidden}>
+        {title}
+      </Text>
+    ) : null;
 
-  const errorMarkup = error && (
-    <div className={styles.RadioError}>
-      <InlineMessage message={error} fieldID={finalId} />
-    </div>
-  );
-  return (
-    <Controller
-      control={control}
-      name={name}
-      {...otherProps}
-      render={({ field }) => {
-        return (
-          <RadioRadix.Root
-            {...field}
-            {...otherProps}
-            className={styles.RadioGroupRoot}
-            onValueChange={(val) => {
-              field.onChange(val);
-            }}
-          >
-            {titleMarkup}
-            {children}
-            {errorMarkup}
-          </RadioRadix.Root>
-        );
-      }}
-    />
-  );
-};
+    const errorMarkup = error && (
+      <div className={styles.RadioError}>
+        <InlineMessage message={error} fieldID={finalId} />
+      </div>
+    );
+    return (
+      <RadioRadix.Root
+        onValueChange={(value) => onChange && onChange(value, name)}
+        ref={ref}
+        {...otherProps}
+        asChild
+      >
+        <fieldset className={styles.RadioGroupRoot}>
+          {titleMarkup}
+          {children}
+          {errorMarkup}
+        </fieldset>
+      </RadioRadix.Root>
+    );
+  }
+);
 
-const RadioItem = ({ children, ...props }: Props) => {
+const RadioItem = ({ children, ...props }: RadioItemProps) => {
   const { helpText, value, disabled, required } = props;
   const id = React.useId();
 

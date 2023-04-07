@@ -17,11 +17,11 @@ export interface ChoiceProps {
   renderChildren?(isSelected: boolean): React.ReactNode | false;
 }
 
-export interface ChoiceListProps {
+export interface CheckboxGroupProps {
   /** Label for list of choices */
   title: React.ReactNode;
   /** Collection of choices */
-  choices: ChoiceProps[];
+  options: ChoiceProps[];
   /** Name for form input */
   name?: string;
   /** Toggles display of the title */
@@ -30,6 +30,10 @@ export interface ChoiceListProps {
   error?: Error;
   /** Disable all choices **/
   disabled?: boolean;
+  /** Controlled Values **/
+  value?: string[];
+  /** Default Values **/
+  defaultValue?: string[];
   /** Callback when the selected choices change */
-  onChange?(selected: string[], name: string): void;
+  onChange?(selected: string[], name: string | undefined): void;
 }

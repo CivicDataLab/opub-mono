@@ -14,7 +14,7 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 import type { IndexTableProps } from '../../types/datatable';
-import { UncontrolledCheckbox } from '../Checkbox/Checkbox';
+import { Checkbox } from '../Checkbox/Checkbox';
 import { Text } from '../Text';
 import { Cell, HeaderCell, Row } from './components';
 
@@ -99,7 +99,7 @@ const IndexTable = (props: IndexTableProps) => {
                   stickyHeader && styles['Header-Sticky']
                 )}
               >
-                <UncontrolledCheckbox
+                <Checkbox
                   name={`headerGroup-selected`}
                   checked={
                     table.getIsAllPageRowsSelected()
@@ -136,7 +136,7 @@ const IndexTable = (props: IndexTableProps) => {
                     stickyHeader && styles['Header-Sticky']
                   )}
                 >
-                  <UncontrolledCheckbox
+                  <Checkbox
                     name={headerGroup.id}
                     checked={
                       table.getIsAllPageRowsSelected()
@@ -249,8 +249,6 @@ const ItemSelectedText = ({
   totalCount: number;
   table: ReturnType<typeof useReactTable>;
 }) => {
-  console.log(selectedCount, totalCount);
-
   return (
     <div className={cx(styles.Cell, styles['Cell-header'])}>
       {selectedCount < totalCount ? (

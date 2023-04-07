@@ -33,6 +33,11 @@
   &[data-state='checked'] {
     border-color: var(--interactive);
   }
+
+  &:focus-visible {
+    outline: var(--border-width-2) solid var(--focused);
+    outline-offset: 2px;
+  }
 }
 
 .RadioIndicator {

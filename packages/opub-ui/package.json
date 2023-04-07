@@ -1,7 +1,7 @@
 {
   "name": "@opub-cdl/ui",
   "description": "OPub UI Library",
-  "version": "0.0.69",
+  "version": "0.0.72",
   "private": false,
   "license": "MIT",
   "author": "CivicDataLab <tech@civicdatalab.in>",
@@ -68,7 +68,7 @@
     "@shopify/polaris-icons": "^6.12.0",
     "@tanstack/react-table": "^8.8.4",
     "ariakit": "^2.0.0-next.43",
-    "react-aria": "^3.22.0",
+    "react-aria": "3.22.0",
     "react-hook-form": "7.20.0",
     "react-stately": "^3.21.0"
   },

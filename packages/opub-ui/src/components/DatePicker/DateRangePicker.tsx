@@ -1,15 +1,14 @@
 import { DateValue } from '@react-types/calendar';
 import { CalendarMinor } from '@shopify/polaris-icons';
-import { DateTimeProps } from '../../types/datetime';
 import cx from 'classnames';
-import React, { forwardRef } from 'react';
+import React from 'react';
 import { AriaDateRangePickerProps, useDateRangePicker } from 'react-aria';
 import { DateRangePickerState, useDateRangePickerState } from 'react-stately';
+import { DateTimeProps } from '../../types/datetime';
 import { Button } from '../Button';
 import { RangeCalendar } from '../Calendar';
-import { DateField } from '../DateField';
+import { DateRangeField } from '../DateField';
 import { Icon } from '../Icon';
-import inputStyles from '../Input/Input.module.scss';
 import { Labelled } from '../Labelled';
 import { Popover } from '../Popover';
 import styles from './DatePicker.module.scss';
@@ -27,7 +26,6 @@ const DateRangePicker = (props: Props) => {
     labelHidden,
     requiredIndicator,
     errorMessage,
-    ...others
   } = props;
 
   let state = useDateRangePickerState(props);
@@ -55,12 +53,10 @@ const DateRangePicker = (props: Props) => {
         {...labelProps}
       >
         <div ref={ref} className={styles.Wrapper}>
-          <div className={cx(styles.Field, inputStyles.TextField)}>
-            <DateField isPicker trim isRange {...startFieldProps} />
-            <span>{'-'}</span>
-            <DateField isPicker trim isRange {...endFieldProps} />
-            <div className={inputStyles.Backdrop} />
-          </div>
+          <DateRangeField
+            startFieldProps={startFieldProps}
+            endFieldProps={endFieldProps}
+          />
 
           <Popover
             onOpenChange={() => (!state.isOpen ? state.open() : state.close())}

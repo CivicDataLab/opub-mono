@@ -48,3 +48,20 @@
     outline: none;
   }
 }
+
+.RangeField {
+  flex-wrap: wrap;
+  width: fit-content;
+  padding: 0 var(--space-2);
+  min-width: 230px;
+
+  > span {
+    color: var(--text);
+    z-index: var(--z-1);
+    padding-inline: var(--space-05);
+  }
+
+  @media #{$breakpoints-sm-down} {
+    min-width: 0;
+  }
+}

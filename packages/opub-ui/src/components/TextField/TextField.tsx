@@ -1,30 +1,25 @@
+import React from 'react';
 import { TextFieldProps } from '../../types/input';
-import { Controller, useFormContext } from 'react-hook-form';
 import { Input } from '../Input';
 
 export type Props = TextFieldProps & {
   name: string;
-  onFieldChange?(e: any): void;
 };
 
-export const TextField = (props: Props) => {
-  const { control } = useFormContext();
-  return (
-    <>
-      <Controller
-        control={control}
+export const TextField = React.forwardRef(
+  (props: Props, ref: React.Ref<HTMLInputElement | null>) => {
+    const [value, setValue] = React.useState(props.defaultValue || '');
+
+    return (
+      <Input
         {...props}
-        render={({ field }) => (
-          <Input
-            {...props}
-            {...field}
-            onChange={(e, id) => {
-              field.onChange(e);
-              props.onChange && props.onChange(e, id);
-            }}
-          />
-        )}
+        ref={ref}
+        onChange={(e, id) => {
+          setValue(e);
+          props.onChange && props.onChange(e, props.name);
+        }}
+        value={props.value || value}
       />
-    </>
-  );
-};
+    );
+  }
+);

@@ -1,4 +1,4 @@
-import { createCalendar } from '@internationalized/date';
+import { GregorianCalendar } from '@internationalized/date';
 import { AriaRangeCalendarProps, DateValue } from '@react-types/calendar';
 import { ArrowLeftMinor, ArrowRightMinor } from '@shopify/polaris-icons';
 import cx from 'classnames';
@@ -12,6 +12,15 @@ import { Icon } from '../Icon';
 import { Text } from '../Text';
 import styles from './Calendar.module.scss';
 import { CalendarGrid } from './components/CalendarGrid';
+
+function createCalendar(identifier: any) {
+  switch (identifier) {
+    case 'gregory':
+      return new GregorianCalendar();
+    default:
+      throw new Error(`Unsupported calendar ${identifier}`);
+  }
+}
 
 type Props = {} & (
   | RangeCalendarStateOptions

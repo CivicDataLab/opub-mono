@@ -15,7 +15,7 @@ export type {
   DisableableAction,
 } from './button';
 export type { CheckboxProps } from './checkbox';
-export type { ChoiceListProps, ChoiceProps } from './choicelist';
+export type { CheckboxGroupProps, ChoiceProps } from './choicelist';
 export type { CodeBlockProps } from './code';
 export type { ComboboxSingleProps } from './combobox';
 export type {
@@ -47,3 +47,4 @@ export type { TagProps } from './tag';
 export type { TextProps, VariantFontWeightMapping } from './text';
 export type { TooltipProps, TooltipProviderProps } from './tooltip';
 export type { ViewProps } from './view';
+export type { CollapsibleProps } from './collapsible';

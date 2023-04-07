@@ -10,6 +10,11 @@
   select::-ms-expand {
     display: none;
   }
+
+  &:focus-within .Backdrop {
+    @include focus-ring($style: 'focused');
+    outline: var(--border-width-3) solid transparent;
+  }
 }
 
 .disabled {
