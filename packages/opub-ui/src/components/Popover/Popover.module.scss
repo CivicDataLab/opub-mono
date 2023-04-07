@@ -26,3 +26,7 @@ $vertical-motion-offset: -5px;
   transform-origin: var(--radix-popover-content-transform-origin);
   animation: scaleIn 100ms ease-out;
 }
+
+.Portal {
+  z-index: var(--z-10);
+}

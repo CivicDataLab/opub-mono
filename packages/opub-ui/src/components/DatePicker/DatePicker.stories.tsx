@@ -30,6 +30,7 @@ export const Range: StoryRange = {
   render: ({ ...args }) => <DateRangePicker {...args} />,
   args: {
     label: 'Date Range Picker',
+    onChange: (val) => console.log(val),
   },
 };
 

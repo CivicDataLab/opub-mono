@@ -9,10 +9,10 @@ import inputStyles from '../Input/Input.module.scss';
 import styles from './TimeField.module.scss';
 import { DateTimeProps } from '../../types/datetime';
 
-type Props = {} & DateTimeProps &
+export type TimeFieldProps = {} & DateTimeProps &
   (TimeFieldStateOptions | AriaTimeFieldProps<TimeValue>);
 
-function TimeField(props: Props) {
+const TimeField = React.forwardRef((props: TimeFieldProps, ref: any) => {
   const {
     helpText,
     label,
@@ -27,7 +27,6 @@ function TimeField(props: Props) {
     locale,
   });
 
-  let ref = React.useRef(null);
   let { labelProps, fieldProps } = useTimeField(props, state, ref);
 
   return (
@@ -56,6 +55,6 @@ function TimeField(props: Props) {
       </div>
     </Labelled>
   );
-}
+});
 
 export { TimeField };

@@ -1,10 +1,12 @@
+import { parseDate } from '@internationalized/date';
 import { DateValue } from '@react-types/datepicker';
 import { Controller, useFormContext } from 'react-hook-form';
 import { DateField as DateFieldBase, DatFieldProps } from '../../DateField';
 
 type FieldProps = {
   name: string;
-  onChange?: (val: DateValue, name: string) => void;
+  onChange?: (val: string, name: string) => void;
+  value?: DateValue;
 } & DatFieldProps;
 
 const DateField = ({ ...props }: FieldProps) => {
@@ -14,16 +16,19 @@ const DateField = ({ ...props }: FieldProps) => {
     <Controller
       {...props}
       control={control}
-      render={({ field }) => (
-        <DateFieldBase
-          {...field}
-          {...props}
-          onChange={(value: DateValue) => {
-            props.onChange && props.onChange(value, props.name);
-            field.onChange(value);
-          }}
-        />
-      )}
+      render={({ field }) => {
+        return (
+          <DateFieldBase
+            {...field}
+            {...props}
+            value={parseDate(field.value) || props.value || props.defaultValue}
+            onChange={(value: DateValue) => {
+              props.onChange && props.onChange(value.toString(), props.name);
+              field.onChange(value.toString());
+            }}
+          />
+        );
+      }}
     />
   );
 };

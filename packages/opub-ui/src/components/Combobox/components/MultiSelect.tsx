@@ -1,8 +1,3 @@
-// @ts-nocheck
-import { Box } from '../../Box';
-import { Flex } from '../../Flex';
-import { Tag } from '../../Tag';
-import { Text } from '../../Text';
 import {
   ComboboxItem,
   ComboboxPopover,
@@ -14,19 +9,26 @@ import cx from 'classnames';
 import { forwardRef, HTMLAttributes, useEffect, useState } from 'react';
 import { ComboboxSingleProps } from '../../../types/combobox';
 import itemStyles from '../../ActionList/ActionList.module.scss';
+import { Box } from '../../Box';
+import { Flex } from '../../Flex';
+import { Tag } from '../../Tag';
+import { Text } from '../../Text';
 import styles from '../Combobox.module.scss';
 import { Combobox } from './Atoms';
 
-export type ComboboxProps = ComboboxSingleProps & {
-  defaultValues?: string | string[];
-  values?: any;
+export type ComboboxMultiProps = ComboboxSingleProps & {
+  defaultValues?: string[] | (() => string[]);
+  values?: string[];
   onValuesChange?: any;
+  list?: string[];
 };
 
-export const MultiSelect = forwardRef<HTMLInputElement, ComboboxProps>(
-  (props: ComboboxProps, ref) => {
+export const MultiSelect = forwardRef<HTMLInputElement, ComboboxMultiProps>(
+  (props: ComboboxMultiProps, ref) => {
     const [matches, setMatches] = useState<string[]>([]);
-    const [values, setValues] = useState<string[]>(['Banana']);
+    const [values, setValues] = useState<any>(
+      props.values || props.defaultValues || []
+    );
 
     const {
       defaultValue,
@@ -41,7 +43,7 @@ export const MultiSelect = forwardRef<HTMLInputElement, ComboboxProps>(
       ...comboboxProps
     } = props;
 
-    function handleValuesChange(values: string[]) {
+    function handleValuesChange(values: any) {
       setValues(values);
       onValuesChange?.(values);
     }
@@ -54,14 +56,14 @@ export const MultiSelect = forwardRef<HTMLInputElement, ComboboxProps>(
       sameWidth: true,
       gutter: 8,
       defaultValue,
-      value,
       setValue: onChange,
       defaultList,
       list,
     });
-    const select = useSelectState({
+
+    const select: any = useSelectState({
       ...combobox,
-      defaultValue: defaultValues,
+      defaultValue: defaultValue,
       value: values,
       setValue: handleValuesChange,
     });
@@ -77,14 +79,14 @@ export const MultiSelect = forwardRef<HTMLInputElement, ComboboxProps>(
     }, [select.value, combobox.setValue]);
 
     function removeTag(value: string) {
-      const finalArr = select.value.filter((v) => v !== value);
+      const finalArr = select.value.filter((v: string) => v !== value);
       select.setValue(finalArr);
     }
 
     const tags = verticalContent ? (
       values.length > 0 ? (
-        <Flex gap={4}>
-          {values.map((tag) => (
+        <Flex gap={4} wrap>
+          {values.map((tag: string) => (
             <Tag onRemove={removeTag} value={tag} key={tag}>
               {tag}
             </Tag>
@@ -100,7 +102,7 @@ export const MultiSelect = forwardRef<HTMLInputElement, ComboboxProps>(
     ) : null;
 
     return (
-      <div className="opub-combobox-multi">
+      <div className={styles.Wrapper}>
         <Combobox
           combobox={combobox}
           ref={ref}
@@ -143,10 +145,7 @@ export const ComboboxMultipleItem = forwardRef<
   HTMLDivElement,
   ComboboxMultipleItemProps
 >(({ value, ...props }, ref) => {
-  const className = cx(
-    itemStyles.Item
-    // props.disabled && styles.disabled,
-  );
+  const className = cx(itemStyles.Item);
 
   return (
     <SelectItem
