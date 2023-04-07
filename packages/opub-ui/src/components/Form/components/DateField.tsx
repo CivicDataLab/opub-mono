@@ -5,7 +5,7 @@ import { parseDate } from '@internationalized/date';
 
 type FieldProps = {
   name: string;
-  onChange?: (val: DateValue, name: string) => void;
+  onChange?: (val: string, name: string) => void;
   value?: DateValue;
 } & DatFieldProps;
 
@@ -23,8 +23,8 @@ const DateField = ({ ...props }: FieldProps) => {
             {...props}
             value={parseDate(field.value) || props.value || props.defaultValue}
             onChange={(value: DateValue) => {
-              props.onChange && props.onChange(value, props.name);
-              field.onChange(value);
+              props.onChange && props.onChange(value.toString(), props.name);
+              field.onChange(value.toString());
             }}
           />
         );

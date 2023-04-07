@@ -13,12 +13,12 @@ import { Labelled } from '../Labelled';
 import { Popover } from '../Popover';
 import styles from './DatePicker.module.scss';
 
-type Props = {
+export type RangePickerProps = {
   label: string;
 } & Omit<DateTimeProps, 'label'> &
   (DateRangePickerState | AriaDateRangePickerProps<DateValue>);
 
-const DateRangePicker = (props: Props) => {
+const DateRangePicker = (props: RangePickerProps) => {
   const {
     helpText,
     label,

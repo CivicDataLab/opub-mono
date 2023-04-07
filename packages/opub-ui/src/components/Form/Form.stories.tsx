@@ -52,6 +52,10 @@ const defaultValBase = {
   radio: '1',
   date: '2020-02-06',
   'date-picker': '1998-03-25',
+  'date-range': {
+    start: '2020-02-06',
+    end: '2020-02-10',
+  },
 };
 
 export const FormBase = ({ ...args }) => {
@@ -81,8 +85,21 @@ export const FormBase = ({ ...args }) => {
           </Form.RadioGroup>
 
           <FormLayout.Group>
-            <Form.DateField name="date" label="Choose Date" />
-            <Form.DatePicker name="date-picker" label="Choose Birthday" />
+            <Form.DateField
+              onChange={(e) => console.log(e)}
+              name="date"
+              label="Choose Date"
+            />
+            <Form.DatePicker
+              onChange={(e) => console.log(e)}
+              name="date-picker"
+              label="Choose Birthday"
+            />
+            <Form.DateRangePicker
+              onChange={(e) => console.log(e)}
+              name="date-range"
+              label="Choose Range"
+            />
           </FormLayout.Group>
 
           <Button submit size="slim">
