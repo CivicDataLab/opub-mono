@@ -14,14 +14,13 @@ const DateField = ({ ...props }: FieldProps) => {
     <Controller
       {...props}
       control={control}
-      // Excluding value prop since it's breaking the hook
-      render={({ field: { value, ...other } }) => (
+      render={({ field }) => (
         <DateFieldBase
-          {...other}
+          {...field}
           {...props}
-          onChange={(val) => {
-            props.onChange && props.onChange(val, props.name);
-            other.onChange(val.toString());
+          onChange={(value: DateValue) => {
+            props.onChange && props.onChange(value, props.name);
+            field.onChange(value);
           }}
         />
       )}

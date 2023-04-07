@@ -1,29 +1,40 @@
 import React from 'react';
 import {
+  FormProvider,
   SubmitHandler,
   useForm,
-  FormProvider,
   UseFormProps,
 } from 'react-hook-form';
 import {
-  Input,
-  Select,
-  RangeSlider,
-  RadioGroup,
-  RadioItem,
   Checkbox,
   CheckboxGroup,
+  DatePicker,
+  Input,
+  RadioGroup,
+  RadioItem,
+  RangeSlider,
+  Select,
   DateField,
 } from './components';
 
-type Props = {
+export type FormProps = {
   children: React.ReactNode;
   onSubmit?: SubmitHandler<any>;
   formOptions?: UseFormProps;
-  [resetValues: string]: any;
+  resetValues?: any;
 };
 
-const Form = (props: Props) => {
+export const Form: React.FunctionComponent<FormProps> & {
+  Input: typeof Input;
+  Select: typeof Select;
+  RangeSlider: typeof RangeSlider;
+  RadioGroup: typeof RadioGroup;
+  RadioItem: typeof RadioItem;
+  Checkbox: typeof Checkbox;
+  CheckboxGroup: typeof CheckboxGroup;
+  DateField: typeof DateField;
+  DatePicker: typeof DatePicker;
+} = function (props: FormProps) {
   const [submitSuccess, setSubmitSuccess] = React.useState(false);
   const {
     formOptions = {},
@@ -72,5 +83,4 @@ Form.RadioItem = RadioItem;
 Form.Checkbox = Checkbox;
 Form.CheckboxGroup = CheckboxGroup;
 Form.DateField = DateField;
-
-export { Form };
+Form.DatePicker = DatePicker;

@@ -12,11 +12,11 @@ import { Labelled } from '../Labelled';
 import { Popover } from '../Popover';
 import styles from './DatePicker.module.scss';
 
-type Props = {
+export type DatePickerProps = {
   label: string;
 } & (DatePickerState | AriaDatePickerProps<DateValue>);
 
-const DatePicker = (props: Props) => {
+const DatePicker = (props: DatePickerProps) => {
   let state = useDatePickerState(props);
   let ref = React.useRef(null);
   let {
