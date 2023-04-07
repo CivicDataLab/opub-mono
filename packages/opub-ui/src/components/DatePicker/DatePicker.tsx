@@ -16,17 +16,11 @@ export type DatePickerProps = {
   label: string;
 } & (DatePickerState | AriaDatePickerProps<DateValue>);
 
-const DatePicker = (props: DatePickerProps) => {
+const DatePicker = React.forwardRef((props: DatePickerProps, ref: any) => {
   let state = useDatePickerState(props);
-  let ref = React.useRef(null);
-  let {
-    groupProps,
-    labelProps,
-    fieldProps,
-    buttonProps,
-    dialogProps,
-    calendarProps,
-  } = useDatePicker(props, state, ref);
+
+  let { labelProps, fieldProps, buttonProps, dialogProps, calendarProps } =
+    useDatePicker(props, state, ref);
   const themeClass = cx(styles.DatePicker, {});
 
   const {
@@ -61,6 +55,6 @@ const DatePicker = (props: DatePickerProps) => {
       </Labelled>
     </div>
   );
-};
+});
 
 export { DatePicker };

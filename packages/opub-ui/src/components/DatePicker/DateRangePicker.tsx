@@ -18,73 +18,76 @@ export type RangePickerProps = {
 } & Omit<DateTimeProps, 'label'> &
   (DateRangePickerState | AriaDateRangePickerProps<DateValue>);
 
-const DateRangePicker = (props: RangePickerProps) => {
-  const {
-    helpText,
-    label,
-    labelAction,
-    labelHidden,
-    requiredIndicator,
-    errorMessage,
-  } = props;
+const DateRangePicker = React.forwardRef(
+  (props: RangePickerProps, ref: any) => {
+    const {
+      helpText,
+      label,
+      labelAction,
+      labelHidden,
+      requiredIndicator,
+      errorMessage,
+    } = props;
 
-  let state = useDateRangePickerState(props);
-  let ref = React.useRef(null);
-  let {
-    labelProps,
-    groupProps,
-    startFieldProps,
-    endFieldProps,
-    buttonProps,
-    dialogProps,
-    calendarProps,
-  } = useDateRangePicker(props, state, ref);
-  const themeClass = cx(styles.DatePicker, {});
+    let state = useDateRangePickerState(props);
 
-  const {
-    onPress: onPressPrev,
-    isDisabled: disabledPrev,
-    ...othersProps
-  } = buttonProps;
+    let {
+      labelProps,
+      startFieldProps,
+      endFieldProps,
+      buttonProps,
+      dialogProps,
+      calendarProps,
+    } = useDateRangePicker(props, state, ref);
+    const themeClass = cx(styles.DatePicker, {});
 
-  return (
-    <div className={`opub-DatePicker ${themeClass}`}>
-      <Labelled
-        error={state.validationState === 'invalid' && errorMessage}
-        label={label}
-        helpText={helpText}
-        labelHidden={labelHidden}
-        action={labelAction}
-        requiredIndicator={requiredIndicator}
-        {...labelProps}
-      >
-        <div ref={ref} className={styles.Wrapper}>
-          <DateRangeField
-            startFieldProps={startFieldProps}
-            endFieldProps={endFieldProps}
-          />
+    const {
+      onPress: onPressPrev,
+      isDisabled: disabledPrev,
+      ...othersProps
+    } = buttonProps;
 
-          <Popover
-            onOpenChange={() => (!state.isOpen ? state.open() : state.close())}
-            open={state.isOpen}
-            {...dialogProps}
-          >
-            <Popover.Trigger>
-              <Button
-                icon={<Icon source={CalendarMinor} />}
-                size="slim"
-                {...othersProps}
-                onClick={() => (!state.isOpen ? state.open() : state.close())}
-              />
-            </Popover.Trigger>
-            <Popover.Content>
-              <RangeCalendar {...calendarProps} />
-            </Popover.Content>
-          </Popover>
-        </div>
-      </Labelled>
-    </div>
-  );
-};
+    return (
+      <div className={`opub-DatePicker ${themeClass}`}>
+        <Labelled
+          error={state.validationState === 'invalid' && errorMessage}
+          label={label}
+          helpText={helpText}
+          labelHidden={labelHidden}
+          action={labelAction}
+          requiredIndicator={requiredIndicator}
+          {...labelProps}
+        >
+          <div ref={ref} className={styles.Wrapper}>
+            <DateRangeField
+              startFieldProps={startFieldProps}
+              endFieldProps={endFieldProps}
+            />
+
+            <Popover
+              onOpenChange={() =>
+                !state.isOpen ? state.open() : state.close()
+              }
+              open={state.isOpen}
+              {...dialogProps}
+            >
+              <Popover.Trigger>
+                <Button
+                  icon={<Icon source={CalendarMinor} />}
+                  size="slim"
+                  {...othersProps}
+                  onClick={() => (!state.isOpen ? state.open() : state.close())}
+                />
+              </Popover.Trigger>
+              <Popover.Content>
+                <RangeCalendar {...calendarProps} />
+              </Popover.Content>
+            </Popover>
+          </div>
+        </Labelled>
+      </div>
+    );
+  }
+);
 
 export { DateRangePicker };

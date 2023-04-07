@@ -1,7 +1,8 @@
+import { parseDate } from '@internationalized/date';
 import { DateValue } from '@react-types/datepicker';
+import React from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import { DateField as DateFieldBase, DatFieldProps } from '../../DateField';
-import { parseDate } from '@internationalized/date';
 
 type FieldProps = {
   name: string;
@@ -9,7 +10,7 @@ type FieldProps = {
   value?: DateValue;
 } & DatFieldProps;
 
-const DateField = ({ ...props }: FieldProps) => {
+const DateField = React.forwardRef(({ ...props }: FieldProps, ref: any) => {
   const { control } = useFormContext();
 
   return (
@@ -31,6 +32,6 @@ const DateField = ({ ...props }: FieldProps) => {
       }}
     />
   );
-};
+});
 
 export { DateField };

@@ -1,6 +1,4 @@
-import { Time, parseTime } from '@internationalized/date';
-import { TimeValue } from '@react-types/datepicker';
-import React from 'react';
+import { parseTime } from '@internationalized/date';
 import { Controller, useFormContext } from 'react-hook-form';
 import { TimeField as TimeFieldBase, TimeFieldProps } from '../../TimeField';
 

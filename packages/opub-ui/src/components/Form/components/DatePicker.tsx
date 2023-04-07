@@ -1,6 +1,7 @@
 import { parseDate } from '@internationalized/date';
-import { AriaDateRangePickerProps, DateValue } from '@react-types/datepicker';
-import { DateRangePickerAria } from 'react-aria';
+import { DateValue } from '@react-types/datepicker';
+import { RangeValue } from '@react-types/shared';
+import React from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import {
   DatePicker as DatePickerBase,
@@ -8,7 +9,6 @@ import {
   DateRangePicker as DateRangePickerBase,
   RangePickerProps,
 } from '../../DatePicker';
-import { RangeValue } from '@react-types/shared';
 
 type PickerProps = {
   name: string;
@@ -45,7 +45,7 @@ type RangeProps = {
   value?: RangeValue<DateValue>;
 } & RangePickerProps;
 
-const DateRangePicker = ({ ...props }: RangeProps) => {
+const DateRangePicker = React.forwardRef(({ ...props }: RangeProps, ref) => {
   const { control } = useFormContext();
 
   return (
@@ -76,6 +76,6 @@ const DateRangePicker = ({ ...props }: RangeProps) => {
       )}
     />
   );
-};
+});
 
 export { DatePicker, DateRangePicker };
