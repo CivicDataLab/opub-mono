@@ -16,6 +16,7 @@ import {
   RadioItem,
   RangeSlider,
   Select,
+  TimeField,
 } from './components';
 
 export type FormProps = {
@@ -36,6 +37,7 @@ export const Form: React.FunctionComponent<FormProps> & {
   DateField: typeof DateField;
   DatePicker: typeof DatePicker;
   DateRangePicker: typeof DateRangePicker;
+  TimeField: typeof TimeField;
 } = function (props: FormProps) {
   const [submitSuccess, setSubmitSuccess] = React.useState(false);
   const {
@@ -87,3 +89,4 @@ Form.CheckboxGroup = CheckboxGroup;
 Form.DateField = DateField;
 Form.DatePicker = DatePicker;
 Form.DateRangePicker = DateRangePicker;
+Form.TimeField = TimeField;

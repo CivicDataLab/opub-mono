@@ -9,10 +9,10 @@ import inputStyles from '../Input/Input.module.scss';
 import styles from './TimeField.module.scss';
 import { DateTimeProps } from '../../types/datetime';
 
-type Props = {} & DateTimeProps &
+export type TimeFieldProps = {} & DateTimeProps &
   (TimeFieldStateOptions | AriaTimeFieldProps<TimeValue>);
 
-function TimeField(props: Props) {
+function TimeField(props: TimeFieldProps) {
   const {
     helpText,
     label,

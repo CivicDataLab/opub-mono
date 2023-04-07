@@ -1,4 +1,4 @@
-import { parseDate } from '@internationalized/date';
+import { parseDate, Time } from '@internationalized/date';
 import { Meta } from '@storybook/react';
 import React from 'react';
 import { Button } from '../Button';
@@ -56,6 +56,7 @@ const defaultValBase = {
     start: '2020-02-06',
     end: '2020-02-10',
   },
+  time: '04:45',
 };
 
 export const FormBase = ({ ...args }) => {
@@ -95,12 +96,18 @@ export const FormBase = ({ ...args }) => {
               name="date-picker"
               label="Choose Birthday"
             />
-            <Form.DateRangePicker
+
+            <Form.TimeField
               onChange={(e) => console.log(e)}
-              name="date-range"
+              name="time"
               label="Choose Range"
             />
           </FormLayout.Group>
+          <Form.DateRangePicker
+            onChange={(e) => console.log(e)}
+            name="date-range"
+            label="Choose Time"
+          />
 
           <Button submit size="slim">
             Submit

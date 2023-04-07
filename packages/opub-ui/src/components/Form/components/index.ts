@@ -5,3 +5,4 @@ export { Input } from './Input';
 export { RadioGroup, RadioItem } from './RadioGroup';
 export { RangeSlider } from './RangeSlider';
 export { Select } from './Select';
+export { TimeField } from './TimeField';

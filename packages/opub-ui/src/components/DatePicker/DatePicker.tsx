@@ -29,6 +29,12 @@ const DatePicker = (props: DatePickerProps) => {
   } = useDatePicker(props, state, ref);
   const themeClass = cx(styles.DatePicker, {});
 
+  const {
+    onPress: onPressPrev,
+    isDisabled: disabledPrev,
+    ...othersProps
+  } = buttonProps;
+
   return (
     <div className={`opub-DatePicker ${themeClass}`}>
       <Labelled label={props.label} {...labelProps}>
@@ -43,7 +49,7 @@ const DatePicker = (props: DatePickerProps) => {
               <Button
                 icon={<Icon source={CalendarMinor} />}
                 size="slim"
-                {...buttonProps}
+                {...othersProps}
                 onClick={() => (!state.isOpen ? state.open() : state.close())}
               />
             </Popover.Trigger>
