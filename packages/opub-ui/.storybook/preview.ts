@@ -1,6 +1,6 @@
 // import '@storybook/addon-actions';
 // import '@storybook/addon-console';
-import '../assets/styles.scss';
+import '../assets/styles.css';
 // import { themes } from '@storybook/theming';
 
 export const parameters = {

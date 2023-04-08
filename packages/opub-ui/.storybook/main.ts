@@ -2,7 +2,7 @@ import { StorybookConfig } from '@storybook/react-vite';
 const turbosnap = require('vite-plugin-turbosnap');
 const { mergeConfig } = require('vite');
 
-const config: StorybookConfig = {
+const config = {
   stories: ['../src'],
   addons: [
     '@storybook/addon-links',
@@ -15,6 +15,9 @@ const config: StorybookConfig = {
   },
   docs: {
     autodocs: true,
+  },
+  typescript: {
+    reactDocgen: 'react-docgen',
   },
   async viteFinal(config, { configType }) {
     return mergeConfig(config, {

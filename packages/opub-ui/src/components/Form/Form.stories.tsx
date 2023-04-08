@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 import { Button } from '../Button';
 import { FormLayout } from '../FormLayout';
@@ -8,7 +8,7 @@ import { Form } from './Form';
 /**
  * A wrapper component that handles the submission of forms.
  */
-export const meta = {
+const meta = {
   component: Form,
 
   argTypes: {
@@ -18,6 +18,7 @@ export const meta = {
     },
   },
 } satisfies Meta<typeof Form>;
+export default meta;
 
 const options = [
   { label: 'Today', value: 'today' },
