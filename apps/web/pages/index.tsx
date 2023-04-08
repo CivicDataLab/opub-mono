@@ -47,9 +47,7 @@ export default function Web() {
       </Text>
 
       <Spacer heading="Button">
-        <Button primary onClick={switchTheme}>
-          Primary
-        </Button>
+        <Button onClick={switchTheme}>Primary</Button>
         <Button destructive>Secondary</Button>
         <Button disabled>Disabled</Button>
         <Button size="large">Large</Button>
