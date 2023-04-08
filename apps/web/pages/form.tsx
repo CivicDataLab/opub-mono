@@ -8,7 +8,7 @@ import {
   FormLayout,
   Icon,
   Text,
-} from '@opub-cdl/ui/src';
+} from '@opub-cdl/ui';
 import { ChevronDownMinor, ChevronUpMinor } from '@shopify/polaris-icons';
 import React from 'react';
 import styles from '../styles/pages/home.module.scss';

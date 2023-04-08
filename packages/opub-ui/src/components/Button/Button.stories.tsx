@@ -1,6 +1,5 @@
 import { SortMinor } from '@shopify/polaris-icons';
 import { Meta, StoryObj } from '@storybook/react';
-import React from 'react';
 import { PropsVariationSection } from '../../utils/helpers';
 import { Button } from './Button';
 

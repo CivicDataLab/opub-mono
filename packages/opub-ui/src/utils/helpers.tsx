@@ -1,4 +1,3 @@
-import { Form } from '../components/Form/Form';
 import React from 'react';
 
 export function PropsVariationSection({
@@ -6,8 +5,6 @@ export function PropsVariationSection({
   common = {},
   xAxis = {},
   yAxis = {},
-  color,
-  withFormik = false,
 }: any) {
   return (
     <table
@@ -55,13 +52,7 @@ export function PropsVariationSection({
                 }}
               >
                 <div>
-                  {withFormik ? (
-                    <Form>
-                      <Component {...common} {...xProps} {...yProps} />
-                    </Form>
-                  ) : (
-                    <Component {...common} {...xProps} {...yProps} />
-                  )}
+                  <Component {...common} {...xProps} {...yProps} />
                 </div>
               </td>
             ))}
