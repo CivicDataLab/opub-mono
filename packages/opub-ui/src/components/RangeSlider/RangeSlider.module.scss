@@ -117,24 +117,19 @@ $range-output-translate-x: calc(
   z-index: var(--op-range-slider-output);
   bottom: var(--op-range-slider-thumb-size);
 
-  transform: var(--radix-slider-thumb-transform);
   position: absolute;
-  left: calc(50% + 0px);
-
   opacity: 0;
-  visibility: hidden;
   pointer-events: none;
   transition-property: opacity, visibility, bottom;
   transition-duration: var(--duration-200);
   transition-timing-function: var(--ease);
 
-  .Root:has(:focus-within) & {
+  .Root:hover & {
     $range-thumb-size-difference: 24px - 16px;
     opacity: 1;
-    visibility: visible;
 
     bottom: calc(
-      var(--op-range-slider-thumb-size) + #{$range-thumb-size-difference}
+      var(--op-range-slider-thumb-size) + #{$range-thumb-size-difference} + 4px
     );
   }
 }

@@ -1,7 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { ActionList } from '../ActionList';
 import { Button } from '../Button';
-import { Form } from '../Form';
 import { Select } from '../Select';
 import { TextField } from '../TextField';
 import { Popover } from './Popover';
@@ -51,11 +50,11 @@ export const WithForm: Story = {
   ...Default,
   args: {
     children: (
-      <Form>
+      <>
         <Select name="select" label="Show Users" options={['Tagged with']} />
         <TextField name="input" label="Tags" />
         <Button size="slim">Add filter</Button>
-      </Form>
+      </>
     ),
   },
 };

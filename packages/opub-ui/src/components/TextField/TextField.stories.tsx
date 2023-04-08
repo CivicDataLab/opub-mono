@@ -2,7 +2,6 @@ import { Meta, StoryObj } from '@storybook/react';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Button } from '../Button';
 import { Flex } from '../Flex';
-import { Form } from '../Form';
 import { Tag } from '../Tag';
 import { TextField } from './TextField';
 
@@ -257,14 +256,12 @@ export const Suggestions = () => {
 
   return (
     <div onKeyDown={handleKeyDown}>
-      <Form>
-        <TextField
-          name="suggestions"
-          label="State"
-          onChange={handleChange}
-          suggestion={suggestion}
-        />
-      </Form>
+      <TextField
+        name="suggestions"
+        label="State"
+        onChange={handleChange}
+        suggestion={suggestion}
+      />
     </div>
   );
 };

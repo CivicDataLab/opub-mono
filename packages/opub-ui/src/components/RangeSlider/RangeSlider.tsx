@@ -1,11 +1,13 @@
 import * as Slider from '@radix-ui/react-slider';
 import cx from 'classnames';
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useEffect } from 'react';
 import type { Action } from '../../types/button';
 import type { Error } from '../../types/shared/form';
 import { Flex } from '../Flex';
 import { Labelled } from '../Labelled';
+import { Text } from '../Text';
 import styles from './RangeSlider.module.scss';
+import { getThumbInBoundsOffset } from './utils';
 
 export type RangeSliderProps = {
   /** Label for the range input */
@@ -35,6 +37,10 @@ export type RangeSliderProps = {
 } & Omit<Slider.SliderProps, 'prefix' | 'onChange'>;
 
 const RangeSlider = forwardRef((props: RangeSliderProps, ref: any) => {
+  const [value, setValue] = React.useState(
+    props.value || props.defaultValue || [0]
+  );
+
   const themeClass = cx(styles.RangeSlider, {});
   const {
     id,
@@ -70,16 +76,53 @@ const RangeSlider = forwardRef((props: RangeSliderProps, ref: any) => {
     </div>
   );
 
-  // TODO: need to figure out the position to add this functionality
-  // const outputMarkup = !props.disabled && props.value && output && (
-  //   <output htmlFor={id} className={styles.Output}>
-  //     <div className={styles.OutputBubble}>
-  //       <Text as="span" variant="headingXs" alignment="center">
-  //         {props.value}
-  //       </Text>
-  //     </div>
-  //   </output>
-  // );
+  const tooltipRef1 = React.useRef<HTMLOutputElement>(null);
+  const tooltipRef2 = React.useRef<HTMLOutputElement>(null);
+
+  useEffect(() => {
+    const offset1 = getThumbInBoundsOffset(16, value[0]);
+    const offset2 = getThumbInBoundsOffset(16, value[1]);
+
+    if (tooltipRef1.current) {
+      tooltipRef1.current.style.left = `calc(${
+        value[0]
+      }% + ${offset1}px - ${16}px)`;
+    }
+    if (tooltipRef2.current) {
+      tooltipRef2.current.style.left = `calc(${
+        value[1]
+      }% + ${offset2}px - ${16}px)`;
+    }
+  }, [value]);
+
+  function onValChange(val: number[]) {
+    setValue(val);
+    onChange && onChange(val, name);
+  }
+
+  const outputMarup1 = !props.disabled && value && output && (
+    <output htmlFor={finalID} className={styles.Output} ref={tooltipRef1}>
+      <div className={styles.OutputBubble}>
+        <Text as="span" variant="headingXs" alignment="center">
+          {value[0]}
+        </Text>
+      </div>
+    </output>
+  );
+
+  const outputMarup2 = !props.disabled && value[1] && output && (
+    <output
+      htmlFor={finalID + '-2'}
+      className={styles.Output}
+      ref={tooltipRef2}
+    >
+      <div className={styles.OutputBubble}>
+        <Text as="span" variant="headingXs" alignment="center">
+          {value[1]}
+        </Text>
+      </div>
+    </output>
+  );
 
   return (
     <div className={`opub-RangeSlider ${themeClass}`} ref={ref}>
@@ -99,18 +142,21 @@ const RangeSlider = forwardRef((props: RangeSliderProps, ref: any) => {
             aria-label={String(label)}
             minStepsBetweenThumbs={minStepsBetweenThumbs}
             name={name}
-            onValueChange={(val) => onChange && onChange(val, name)}
+            onValueChange={onValChange}
             onValueCommit={(val) => onChangeEnd && onChangeEnd(val, name)}
             {...others}
           >
             <Slider.Track className={styles.Track}>
               <Slider.Range className={styles.Range} />
             </Slider.Track>
+            {outputMarup1}
             <Slider.Thumb id={finalID} className={styles.Thumb} />
-            {/* {outputMarkup} */}
 
-            {defaultValue && defaultValue[1] && (
-              <Slider.Thumb id={finalID} className={styles.Thumb} />
+            {value && value[1] && (
+              <>
+                {outputMarup2}
+                <Slider.Thumb id={finalID + '-2'} className={styles.Thumb} />
+              </>
             )}
           </Slider.Root>
           {suffixMarkup}

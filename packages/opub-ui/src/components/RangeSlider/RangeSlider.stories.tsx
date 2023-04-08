@@ -19,7 +19,7 @@ export const Default: Story = {
     label: 'Range Slider',
     defaultValue: [20],
     name: 'range',
-    onChange: (val, name) => console.log(val, name),
+    output: true,
     onChangeEnd: (val, name) => console.log(val, name),
   },
 };
@@ -67,5 +67,7 @@ export const DoubleThumb: Story = {
   args: {
     label: 'Double Slider',
     defaultValue: [20, 40],
+    output: true,
+    onChangeEnd: (val, name) => console.log(val, name),
   },
 };
