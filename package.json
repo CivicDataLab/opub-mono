@@ -15,7 +15,8 @@
     "test": "turbo run test --filter @opub-cdl/ui",
     "test:watch": "turbo run test:watch",
     "prepare": "husky install",
-    "clean": "rm -rf node_modules"
+    "clean": "rm -rf node_modules",
+    "new-component": "new-component"
   },
   "devDependencies": {
     "@changesets/cli": "^2.26.1",
@@ -25,6 +26,7 @@
     "eslint-config-custom": "*",
     "husky": "^8.0.3",
     "lint-staged": "^13.2.0",
+    "new-component-opub": "git+https://github.com/CivicDataLab/new-component.git",
     "prettier": "^2.8.4",
     "sass": "^1.58.3",
     "tsup": "^6.7.0",
