@@ -27,7 +27,11 @@ const DatePicker = ({ ...props }: PickerProps) => {
         <DatePickerBase
           {...field}
           {...props}
-          value={parseDate(field.value) || props.value || props.defaultValue}
+          value={
+            (field.value && parseDate(field.value)) ||
+            props.value ||
+            props.defaultValue
+          }
           onChange={(val) => {
             props.onChange && props.onChange(val.toString(), props.name);
             field.onChange(val.toString());

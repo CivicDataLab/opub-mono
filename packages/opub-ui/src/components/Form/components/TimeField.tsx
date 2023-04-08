@@ -19,7 +19,11 @@ const TimeField = ({ ...props }: FieldProps) => {
           <TimeFieldBase
             {...field}
             {...props}
-            value={parseTime(field.value) || props.value || props.defaultValue}
+            value={
+              (field.value && parseTime(field.value)) ||
+              props.value ||
+              props.defaultValue
+            }
             onChange={(value: any) => {
               props.onChange && props.onChange(value, props.name);
               field.onChange(value.toString());

@@ -163,7 +163,7 @@ export const FormBase = ({ ...args }) => {
 export const AsyncDefaultValues = () => {
   const [defaultVal, setDefaultVal] = React.useState({});
   React.useEffect(() => {
-    const defaultOptions = defaultValBase;
+    const defaultOptions = { ...defaultValBase };
     setDefaultVal(defaultOptions);
   }, []);
 
@@ -183,21 +183,5 @@ export const ResetOnSubmit = () => {
         date: '',
       }}
     />
-  );
-};
-
-export const DateFieldOnly = () => {
-  const defVal = parseDate('2020-02-05');
-
-  return (
-    <Form
-      formOptions={{
-        defaultValues: {
-          date: defVal,
-        },
-      }}
-    >
-      <Form.DateField label="Label" name="date" value={defVal} />
-    </Form>
   );
 };

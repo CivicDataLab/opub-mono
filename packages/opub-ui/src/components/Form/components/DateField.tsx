@@ -21,7 +21,11 @@ const DateField = ({ ...props }: FieldProps) => {
           <DateFieldBase
             {...field}
             {...props}
-            value={parseDate(field.value) || props.value || props.defaultValue}
+            value={
+              (field.value && parseDate(field.value)) ||
+              props.value ||
+              props.defaultValue
+            }
             onChange={(value: DateValue) => {
               props.onChange && props.onChange(value.toString(), props.name);
               field.onChange(value.toString());
