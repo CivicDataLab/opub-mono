@@ -1,4 +1,8 @@
 import * as RadioRadix from '@radix-ui/react-radio-group';
+import type {
+  RadioGroupProps,
+  RadioGroupItemProps,
+} from '@radix-ui/react-radio-group';
 import cx from 'classnames';
 import React from 'react';
 import type { Error } from '../../types/shared/form';
@@ -7,7 +11,7 @@ import { InlineMessage } from '../InlineMessage';
 import { Text } from '../Text';
 import styles from './RadioGroup.module.scss';
 
-export type RadioGroupProps = Omit<RadioRadix.RadioGroupProps, 'onChange'> & {
+export type RadioProps = Omit<RadioGroupProps, 'onChange'> & {
   name: string;
   /** Display an error message */
   error?: Error;
@@ -16,7 +20,7 @@ export type RadioGroupProps = Omit<RadioRadix.RadioGroupProps, 'onChange'> & {
   /** Callback when the selected choices change */
   onChange?(selected: string, name: string | undefined): void;
 };
-interface RadioItemProps extends RadioRadix.RadioGroupItemProps {
+export interface RadioItemProps extends RadioGroupItemProps {
   value: string;
   /** Additional text to aide in use */
   helpText?: React.ReactNode;
@@ -32,7 +36,7 @@ const RadioGroup = React.forwardRef(
       title,
       onChange,
       ...otherProps
-    }: RadioGroupProps,
+    }: RadioProps,
     ref: React.Ref<HTMLDivElement>
   ) => {
     const randomId = React.useId();

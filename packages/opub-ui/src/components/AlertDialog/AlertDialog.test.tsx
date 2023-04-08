@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
-import { Dialog as AlertDialog } from './AlertDialog';
+import { AlertDialog } from './AlertDialog';
 
 describe('AlertDialog Tests', () => {
   beforeEach(() => {

@@ -3,7 +3,8 @@ import {
   Button,
   Calendar,
   Checkbox,
-  // CodeBlock,
+  CodeBlock,
+  Combobox,
   Divider,
   Flex,
   Icon,
@@ -11,17 +12,12 @@ import {
   Select,
   Tag,
   Text,
-  Combobox,
 } from '@opub-cdl/ui';
 import { ChevronDownMinor, ChevronUpMinor } from '@shopify/polaris-icons';
-import dynamic from 'next/dynamic';
 import React from 'react';
 import { switchTheme } from 'utils/helpers';
 import styles from '../styles/pages/home.module.scss';
 import { PropsVariationSection } from '../utils/helpers';
-const CodeBlock = dynamic(() =>
-  import('@opub-cdl/ui').then((mod) => mod.CodeBlock)
-);
 
 export default function Web() {
   const [selected, setSelected] = React.useState('Decrease');

@@ -7,7 +7,7 @@ describe('CheckboxGroup Tests', () => {
     render(
       <CheckboxGroup
         title="Terms and Conditions"
-        choices={[
+        options={[
           {
             label: 'I have read agreement to terms and conditions',
             value: 'terms',

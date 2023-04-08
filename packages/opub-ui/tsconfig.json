@@ -11,12 +11,17 @@
     "sourceMap": true,
     "moduleResolution": "node",
     "esModuleInterop": true,
+    "strict": true,
+    "outDir": "dist",
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
-    "rootDir": ".",
+    "declaration": true,
+    "declarationDir": "dist/types",
     "declarationMap": false,
-    "declaration": false
+    "emitDeclarationOnly": true
   },
-  "exclude": ["dist", "build", "node_modules"],
+  "exclude": ["dist", "build", "node_modules", "vite.config.ts"],
   "include": [".", "./src", "./.storybook", "**/*.tsx"],
   "types": ["typePatches"]
 }

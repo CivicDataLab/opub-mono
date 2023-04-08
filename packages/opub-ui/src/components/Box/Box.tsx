@@ -1,7 +1,6 @@
-import React, { createElement, forwardRef } from 'react';
-
-import { BoxProps } from '../../types/box';
 import cx from 'classnames';
+import React, { createElement, forwardRef } from 'react';
+import { BoxProps } from '../../types/box';
 import { getResponsiveProps, sanitizeCustomProperties } from '../../utils/css';
 import boxStyles from './Box.module.scss';
 

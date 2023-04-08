@@ -12,9 +12,6 @@ export default defineConfig((configEnv) => ({
     globals: true,
     environment: 'happy-dom',
   },
-  resolve: {
-    alias: [{ find: '@ui', replacement: path.resolve(__dirname, '/src') }],
-  },
   css: {
     preprocessorOptions: {
       scss: {

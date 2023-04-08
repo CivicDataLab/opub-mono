@@ -1,72 +1,18 @@
 import commonjs from '@rollup/plugin-commonjs';
-import resolve from '@rollup/plugin-node-resolve';
+import { nodeResolve } from '@rollup/plugin-node-resolve';
 import typescript from '@rollup/plugin-typescript';
 import svgr from '@svgr/rollup';
 import { readFileSync } from 'fs';
+import path from 'path';
 import copy from 'rollup-plugin-copy';
-import peerDeps from 'rollup-plugin-peer-deps-external';
+import { externals } from 'rollup-plugin-node-externals';
 import postcss from 'rollup-plugin-postcss';
 import { terser } from 'rollup-plugin-terser';
-import { visualizer } from 'rollup-plugin-visualizer';
+// import { visualizer } from 'rollup-plugin-visualizer';
 
 const pkg = JSON.parse(
   readFileSync(new URL('./package.json', import.meta.url).pathname)
 );
-
-const extensions = ['.js', '.ts', '.jsx', '.tsx'];
-const getPlugins = () => {
-  const defaultTs = {
-    exclude: [
-      'node_modules',
-      'build',
-      'dist',
-      'scripts',
-      'acceptance-tests',
-      'webpack',
-      '.storybook',
-      'jest',
-      'src/stories/**',
-      '**/*.stories.js',
-      '**/*.stories.jsx',
-      '**/*.stories.ts',
-      '**/*.stories.tsx',
-      '**/*.test.js',
-      '**/*.test.jsx',
-      '**/*.test.ts',
-      '**/*.test.tsx',
-    ],
-    compilerOptions: {
-      rootDir: 'src',
-    },
-  };
-
-  const typeScriptOptions = {
-    tsconfig: './tsconfig.json',
-    declaration: true,
-    declarationDir: 'dist',
-    ...defaultTs,
-  };
-
-  return [
-    peerDeps(),
-    resolve({ extensions }),
-    commonjs(),
-    copy({
-      targets: [{ src: 'assets', dest: 'dist' }],
-    }),
-    svgr(),
-    postcss({
-      extract: false,
-      modules: true,
-      use: ['sass'],
-    }),
-    typescript(typeScriptOptions),
-    terser(),
-    // visualizer({
-    //   filename: 'bundle-analysis.html',
-    // }),
-  ];
-};
 
 const rollup = (_args) => {
   const external = [
@@ -86,6 +32,47 @@ const rollup = (_args) => {
     plugins: getPlugins(),
     external,
   };
+};
+
+const extensions = ['.js', '.ts', '.jsx', '.tsx'];
+const getPlugins = () => {
+  const typeScriptOptions = {
+    tsconfig: './tsconfig.json',
+
+    exclude: [
+      'node_modules',
+      'build',
+      'dist',
+      'scripts',
+      '.storybook',
+      '**/*.stories.tsx',
+      '**/*.test.tsx',
+    ],
+    compilerOptions: {
+      rootDir: 'src',
+    },
+  };
+
+  return [
+    postcss({
+      extract: true,
+      modules: true,
+      use: ['sass'],
+      extract: path.resolve('dist/assets/styles-bundled.css'),
+    }),
+    svgr(),
+    nodeResolve({ extensions }),
+    commonjs(),
+    externals({ deps: true, packagePath: './package.json' }),
+    copy({
+      targets: [{ src: 'assets', dest: 'dist' }],
+    }),
+    typescript(typeScriptOptions),
+    terser(),
+    // visualizer({
+    //   filename: 'bundle-analysis.html',
+    // }),
+  ];
 };
 
 export default rollup;

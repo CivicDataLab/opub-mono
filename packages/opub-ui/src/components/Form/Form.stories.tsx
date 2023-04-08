@@ -1,4 +1,3 @@
-import { parseDate, Time } from '@internationalized/date';
 import { Meta } from '@storybook/react';
 import React from 'react';
 import { Button } from '../Button';
@@ -9,7 +8,7 @@ import { Form } from './Form';
 /**
  * A wrapper component that handles the submission of forms.
  */
-const meta = {
+export const meta = {
   component: Form,
 
   argTypes: {
@@ -19,7 +18,6 @@ const meta = {
     },
   },
 } satisfies Meta<typeof Form>;
-export default meta;
 
 const options = [
   { label: 'Today', value: 'today' },

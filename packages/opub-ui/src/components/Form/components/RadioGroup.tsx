@@ -1,13 +1,13 @@
 import { Controller, useFormContext } from 'react-hook-form';
 import {
   RadioGroup as RadioGroupBase,
-  RadioGroupProps,
+  RadioProps,
   RadioItem,
 } from '../../RadioGroup';
 
-type Props = {
+export interface Props extends Omit<RadioProps, 'name'> {
   name: string;
-} & Omit<RadioGroupProps, 'name'>;
+}
 
 const RadioGroup = ({ ...props }: Props) => {
   const { control } = useFormContext();
