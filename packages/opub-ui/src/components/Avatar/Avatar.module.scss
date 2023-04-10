@@ -4,15 +4,15 @@
   display: flex;
   height: 40px;
   width: 40px;
-  border-radius: 50%;
-  background-color: var(--decorative-surface-one);
+  border-radius: var(--border-radius-half);
+  background-color: var(--decorative-surface-three);
   align-items: center;
   justify-content: center;
 
   span {
     display: flex;
     padding: 6px 3px;
-    font-size: 20px;
+    font-size: var(--font-size-300);
     line-height: 28px;
   }
   img {
@@ -24,14 +24,14 @@
   display: flex;
   height: 60px;
   width: 60px;
-  border-radius: 50%;
-  background-color: var(--decorative-surface-two);
+  border-radius: var(--border-radius-half);
+  background-color: var(--decorative-surface-four);
   justify-content: center;
   align-items: center;
   span {
     display: flex;
     padding: 9px;
-    font-size: 24px;
+    font-size: var(--font-size-400);
     line-height: 28px;
   }
   img {
@@ -44,14 +44,14 @@
   display: flex;
   height: 32px;
   width: 32px;
-  border-radius: 50%;
-  background-color: var(--decorative-surface-three);
+  border-radius: var(--border-radius-half);
+  background-color: var(--decorative-surface-two);
   justify-content: center;
   align-items: center;
   span {
     display: flex;
     padding: 4.8px 1.8px;
-    font-size: 14px;
+    font-size: var(--font-size-100);
     line-height: 28px;
   }
   img {
@@ -64,14 +64,14 @@
   display: flex;
   height: 24px;
   width: 24px;
-  border-radius: 50%;
-  background-color: var(--decorative-surface-four);
+  border-radius: var(--border-radius-half);
+  background-color: var(--decorative-surface-one);
   justify-content: center;
   align-items: center;
   span {
     display: flex;
     padding: 2px;
-    font-size: 12px;
+    font-size: var(--font-size-75);
     line-height: 28px;
   }
   img {
