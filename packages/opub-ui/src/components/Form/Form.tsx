@@ -5,21 +5,6 @@ import {
   useForm,
   UseFormProps,
 } from 'react-hook-form';
-import {
-  Checkbox,
-  CheckboxGroup,
-  DateField,
-  DatePicker,
-  DateRangePicker,
-  Input,
-  RadioGroup,
-  RadioItem,
-  RangeSlider,
-  Select,
-  TimeField,
-  Combobox,
-  ComboboxMulti,
-} from './components';
 
 export type FormProps = {
   children: React.ReactNode;
@@ -28,21 +13,9 @@ export type FormProps = {
   resetValues?: any;
 };
 
-export const Form: React.FunctionComponent<FormProps> & {
-  Input: typeof Input;
-  Select: typeof Select;
-  RangeSlider: typeof RangeSlider;
-  RadioGroup: typeof RadioGroup;
-  RadioItem: typeof RadioItem;
-  Checkbox: typeof Checkbox;
-  CheckboxGroup: typeof CheckboxGroup;
-  DateField: typeof DateField;
-  DatePicker: typeof DatePicker;
-  DateRangePicker: typeof DateRangePicker;
-  TimeField: typeof TimeField;
-  Combobox: typeof Combobox;
-  ComboboxMulti: typeof ComboboxMulti;
-} = function (props: FormProps) {
+export const Form: React.FunctionComponent<FormProps> = function (
+  props: FormProps
+) {
   const [submitSuccess, setSubmitSuccess] = React.useState(false);
   const {
     formOptions = {},
@@ -82,17 +55,3 @@ export const Form: React.FunctionComponent<FormProps> & {
     </FormProvider>
   );
 };
-
-Form.Input = Input;
-Form.Select = Select;
-Form.RangeSlider = RangeSlider;
-Form.RadioGroup = RadioGroup;
-Form.RadioItem = RadioItem;
-Form.Checkbox = Checkbox;
-Form.CheckboxGroup = CheckboxGroup;
-Form.DateField = DateField;
-Form.DatePicker = DatePicker;
-Form.DateRangePicker = DateRangePicker;
-Form.TimeField = TimeField;
-Form.Combobox = Combobox;
-Form.ComboboxMulti = ComboboxMulti;

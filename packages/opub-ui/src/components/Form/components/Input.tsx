@@ -2,24 +2,28 @@ import { TextField, TextfieldProps } from '../../TextField';
 import { Controller, useFormContext } from 'react-hook-form';
 
 const Input = ({ ...props }: TextfieldProps) => {
-  const { control } = useFormContext();
+  const method = useFormContext();
 
-  return (
-    <Controller
-      {...props}
-      control={control}
-      render={({ field }) => (
-        <TextField
-          {...field}
-          {...props}
-          onChange={(val, name) => {
-            props.onChange && props.onChange(val, name);
-            field.onChange(val);
-          }}
-        />
-      )}
-    />
-  );
+  if (method) {
+    return (
+      <Controller
+        {...props}
+        control={method.control}
+        render={({ field }) => (
+          <TextField
+            {...field}
+            {...props}
+            onChange={(val, name) => {
+              props.onChange && props.onChange(val, name);
+              field.onChange(val);
+            }}
+          />
+        )}
+      />
+    );
+  }
+
+  return <TextField {...props} />;
 };
 
 export { Input };

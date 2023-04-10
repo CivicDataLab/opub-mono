@@ -9,24 +9,28 @@ type Props = {
 } & Omit<RangeSliderProps, 'name'>;
 
 const RangeSlider = ({ ...props }: Props) => {
-  const { control } = useFormContext();
+  const method = useFormContext();
 
-  return (
-    <Controller
-      {...props}
-      control={control}
-      render={({ field }) => (
-        <RangeSliderBase
-          {...field}
-          {...props}
-          onChange={(val, name) => {
-            props.onChange && props.onChange(val, name);
-            field.onChange(val);
-          }}
-        />
-      )}
-    />
-  );
+  if (method) {
+    return (
+      <Controller
+        {...props}
+        control={method.control}
+        render={({ field }) => (
+          <RangeSliderBase
+            {...field}
+            {...props}
+            onChange={(val, name) => {
+              props.onChange && props.onChange(val, name);
+              field.onChange(val);
+            }}
+          />
+        )}
+      />
+    );
+  }
+
+  return <RangeSliderBase {...props} />;
 };
 
 export { RangeSlider };

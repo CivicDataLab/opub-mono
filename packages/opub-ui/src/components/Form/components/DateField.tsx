@@ -10,31 +10,35 @@ type FieldProps = {
 } & DatFieldProps;
 
 const DateField = ({ ...props }: FieldProps) => {
-  const { control } = useFormContext();
+  const method = useFormContext();
 
-  return (
-    <Controller
-      {...props}
-      control={control}
-      render={({ field }) => {
-        return (
-          <DateFieldBase
-            {...field}
-            {...props}
-            value={
-              (field.value && parseDate(field.value)) ||
-              props.value ||
-              props.defaultValue
-            }
-            onChange={(value: DateValue) => {
-              props.onChange && props.onChange(value.toString(), props.name);
-              field.onChange(value.toString());
-            }}
-          />
-        );
-      }}
-    />
-  );
+  if (method) {
+    return (
+      <Controller
+        {...props}
+        control={method.control}
+        render={({ field }) => {
+          return (
+            <DateFieldBase
+              {...field}
+              {...props}
+              value={
+                (field.value && parseDate(field.value)) ||
+                props.value ||
+                props.defaultValue
+              }
+              onChange={(value: DateValue) => {
+                props.onChange && props.onChange(value.toString(), props.name);
+                field.onChange(value.toString());
+              }}
+            />
+          );
+        }}
+      />
+    );
+  }
+
+  return <DateFieldBase {...props} />;
 };
 
 export { DateField };

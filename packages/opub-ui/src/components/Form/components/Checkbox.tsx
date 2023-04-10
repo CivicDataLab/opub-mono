@@ -4,27 +4,31 @@ import { Checkbox as CheckboxBase } from '../../Checkbox';
 import { CheckboxGroup as CheckboxGroupBase } from '../../CheckboxGroup';
 
 const Checkbox = ({ ...props }: CheckboxProps) => {
-  const { control } = useFormContext();
+  const method = useFormContext();
 
-  return (
-    <Controller
-      {...props}
-      control={control}
-      render={({ field }) => (
-        <CheckboxBase
-          {...field}
-          {...props}
-          checked={props.checked || field.value}
-          onChange={(checked, name) => {
-            props.onChange && props.onChange(checked, name);
-            props.checked
-              ? field.onChange(checked ? props.checked : undefined)
-              : field.onChange(checked);
-          }}
-        />
-      )}
-    />
-  );
+  if (method) {
+    return (
+      <Controller
+        {...props}
+        control={method.control}
+        render={({ field }) => (
+          <CheckboxBase
+            {...field}
+            {...props}
+            checked={props.checked || field.value}
+            onChange={(checked, name) => {
+              props.onChange && props.onChange(checked, name);
+              props.checked
+                ? field.onChange(checked ? props.checked : undefined)
+                : field.onChange(checked);
+            }}
+          />
+        )}
+      />
+    );
+  }
+
+  return <CheckboxBase {...props} />;
 };
 
 type GroupProps = {
@@ -32,25 +36,29 @@ type GroupProps = {
 } & Omit<CheckboxGroupProps, 'name'>;
 
 const CheckboxGroup = ({ ...props }: GroupProps) => {
-  const { control } = useFormContext();
+  const method = useFormContext();
 
-  return (
-    <Controller
-      {...props}
-      control={control}
-      render={({ field }) => (
-        <CheckboxGroupBase
-          {...field}
-          {...props}
-          value={props.defaultValue || field.value || []}
-          onChange={(val, name) => {
-            props.onChange && props.onChange(val, name);
-            field.onChange(val);
-          }}
-        />
-      )}
-    />
-  );
+  if (method) {
+    return (
+      <Controller
+        {...props}
+        control={method.control}
+        render={({ field }) => (
+          <CheckboxGroupBase
+            {...field}
+            {...props}
+            value={props.defaultValue || field.value || []}
+            onChange={(val, name) => {
+              props.onChange && props.onChange(val, name);
+              field.onChange(val);
+            }}
+          />
+        )}
+      />
+    );
+  }
+
+  return <CheckboxGroupBase {...props} />;
 };
 
 export { Checkbox, CheckboxGroup };

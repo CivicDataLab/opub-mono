@@ -127,11 +127,13 @@ export default function Web() {
           options={options}
           onChange={handleSelectChange}
           value={selected}
+          name="select"
         />
       </Spacer>
       <Spacer heading="Combo">
         <Combobox
           label="Combo"
+          name="combo"
           defaultList={['Apple', 'Banana', 'Broccoli', 'Burger']}
         />
       </Spacer>

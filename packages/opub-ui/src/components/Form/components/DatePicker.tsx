@@ -17,29 +17,33 @@ type PickerProps = {
 } & DatePickerProps;
 
 const DatePicker = ({ ...props }: PickerProps) => {
-  const { control } = useFormContext();
+  const method = useFormContext();
 
-  return (
-    <Controller
-      {...props}
-      control={control}
-      render={({ field }) => (
-        <DatePickerBase
-          {...field}
-          {...props}
-          value={
-            (field.value && parseDate(field.value)) ||
-            props.value ||
-            props.defaultValue
-          }
-          onChange={(val) => {
-            props.onChange && props.onChange(val.toString(), props.name);
-            field.onChange(val.toString());
-          }}
-        />
-      )}
-    />
-  );
+  if (method) {
+    return (
+      <Controller
+        {...props}
+        control={method.control}
+        render={({ field }) => (
+          <DatePickerBase
+            {...field}
+            {...props}
+            value={
+              (field.value && parseDate(field.value)) ||
+              props.value ||
+              props.defaultValue
+            }
+            onChange={(val) => {
+              props.onChange && props.onChange(val.toString(), props.name);
+              field.onChange(val.toString());
+            }}
+          />
+        )}
+      />
+    );
+  }
+
+  return <DatePickerBase {...props} />;
 };
 
 type RangeProps = {
@@ -50,34 +54,49 @@ type RangeProps = {
 } & RangePickerProps;
 
 const DateRangePicker = ({ ...props }: RangeProps) => {
-  const { control } = useFormContext();
+  const method = useFormContext();
+
+  if (method) {
+    return (
+      <Controller
+        {...props}
+        control={method.control}
+        render={({ field }) => (
+          <DateRangePickerBase
+            {...field}
+            {...props}
+            value={
+              field.value
+                ? {
+                    start: parseDate(field.value.start),
+                    end: parseDate(field.value.end),
+                  }
+                : props.defaultValue || props.value
+            }
+            onChange={(val: any) => {
+              const formatted = {
+                start: val.start.toString(),
+                end: val.end.toString(),
+              };
+              props.onChange && props.onChange(formatted, props.name);
+              field.onChange(formatted);
+            }}
+          />
+        )}
+      />
+    );
+  }
 
   return (
-    <Controller
+    <DateRangePickerBase
       {...props}
-      control={control}
-      render={({ field }) => (
-        <DateRangePickerBase
-          {...field}
-          {...props}
-          value={
-            field.value
-              ? {
-                  start: parseDate(field.value.start),
-                  end: parseDate(field.value.end),
-                }
-              : props.defaultValue || props.value
-          }
-          onChange={(val: any) => {
-            const formatted = {
-              start: val.start.toString(),
-              end: val.end.toString(),
-            };
-            props.onChange && props.onChange(formatted, props.name);
-            field.onChange(formatted);
-          }}
-        />
-      )}
+      onChange={(val: any) => {
+        const formatted = {
+          start: val.start.toString(),
+          end: val.end.toString(),
+        };
+        props.onChange && props.onChange(formatted, props.name);
+      }}
     />
   );
 };

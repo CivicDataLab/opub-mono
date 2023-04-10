@@ -8,14 +8,14 @@ type FieldProps = {
 } & TimeFieldProps;
 
 const TimeField = ({ ...props }: FieldProps) => {
-  const { control } = useFormContext();
+  const method = useFormContext();
 
-  return (
-    <Controller
-      {...props}
-      control={control}
-      render={({ field }) => {
-        return (
+  if (method) {
+    return (
+      <Controller
+        {...props}
+        control={method.control}
+        render={({ field }) => (
           <TimeFieldBase
             {...field}
             {...props}
@@ -29,7 +29,16 @@ const TimeField = ({ ...props }: FieldProps) => {
               field.onChange(value.toString());
             }}
           />
-        );
+        )}
+      />
+    );
+  }
+
+  return (
+    <TimeFieldBase
+      {...props}
+      onChange={(value: any) => {
+        props.onChange && props.onChange(value, props.name);
       }}
     />
   );

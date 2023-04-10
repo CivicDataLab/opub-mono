@@ -1,6 +1,6 @@
 import { Meta } from '@storybook/react';
 import { useCallback, useState } from 'react';
-import { Select } from './Select';
+import { Select } from '../Form/components/Select';
 
 /**
  * Select lets user choose one option from an options menu. Consider select when you have 4 or more options, to avoid cluttering the interface.
@@ -56,6 +56,7 @@ export function InlineLabel({ ...props }) {
       options={options}
       onChange={handleSelectChange}
       value={selected}
+      name="select-1"
       {...props}
     />
   );
@@ -65,6 +66,7 @@ export function Disabled({ ...props }) {
   return (
     <Select
       label="Date range"
+      name="select-1"
       disabled
       options={[
         { label: 'Today', value: 'today' },
@@ -119,6 +121,7 @@ export function Error({ ...props }) {
   return (
     <Select
       label="Province"
+      name="select-1"
       options={['Bangaluru']}
       value={selected}
       onChange={handleSelectChange}

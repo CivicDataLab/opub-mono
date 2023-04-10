@@ -1,4 +1,3 @@
-import React from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import { ComboboxSingleProps } from '../../../types';
 import {
@@ -13,24 +12,35 @@ type ComboboxProps = {
 } & Omit<ComboboxSingleProps, 'onChange'>;
 
 const Combobox = ({ ...props }: ComboboxProps) => {
-  const { control } = useFormContext();
+  const method = useFormContext();
+
+  if (method) {
+    return (
+      <Controller
+        {...props}
+        control={method.control}
+        render={({ field }) => {
+          return (
+            <ComboboxBase
+              {...field}
+              {...props}
+              value={field.value || props.value || props.defaultValue || ''}
+              onChange={(value: any) => {
+                props.onChange && props.onChange(String(value), props.name);
+                field.onChange(value);
+              }}
+            />
+          );
+        }}
+      />
+    );
+  }
 
   return (
-    <Controller
+    <ComboboxBase
       {...props}
-      control={control}
-      render={({ field }) => {
-        return (
-          <ComboboxBase
-            {...field}
-            {...props}
-            value={field.value || props.value || props.defaultValue || ''}
-            onChange={(value: any) => {
-              props.onChange && props.onChange(String(value), props.name);
-              field.onChange(value);
-            }}
-          />
-        );
+      onChange={(value: any) => {
+        props.onChange && props.onChange(String(value), props.name);
       }}
     />
   );
@@ -42,27 +52,37 @@ type Props = {
 } & Omit<ComboboxMultiProps, 'onChange'>;
 
 const ComboboxMulti = ({ ...props }: Props) => {
-  const { control, getValues } = useFormContext();
+  const method = useFormContext();
   const { onChange, ...rest } = props;
-  console.log(getValues(props.name));
+
+  if (method) {
+    return (
+      <Controller
+        {...props}
+        control={method.control}
+        // desctructure onChange from field to avoid conflict with onChange from props
+        render={({ field: { onChange: fieldChange, ...others } }) => {
+          return (
+            <ComboboxMultiBase
+              {...others}
+              {...rest}
+              values={others.value || props.values || props.defaultValues || []}
+              onValuesChange={(values: any) => {
+                onChange && onChange(values, props.name);
+                fieldChange(values);
+              }}
+            />
+          );
+        }}
+      />
+    );
+  }
 
   return (
-    <Controller
-      {...props}
-      control={control}
-      // desctructure onChange from field to avoid conflict with onChange from props
-      render={({ field: { onChange: fieldChange, ...others } }) => {
-        return (
-          <ComboboxMultiBase
-            {...others}
-            {...rest}
-            values={others.value || props.values || props.defaultValues || []}
-            onValuesChange={(values: any) => {
-              onChange && onChange(values, props.name);
-              fieldChange(values);
-            }}
-          />
-        );
+    <ComboboxMultiBase
+      {...rest}
+      onValuesChange={(values: any) => {
+        onChange && onChange(values, props.name);
       }}
     />
   );

@@ -7,26 +7,30 @@ type Props = {
 } & Omit<SelectProps, 'name'>;
 
 const Select = ({ ...props }: Props) => {
-  const { control } = useFormContext();
+  const method = useFormContext();
 
-  return (
-    <Controller
-      {...props}
-      control={control}
-      render={({ field }) => (
-        <SelectWrapper
-          placeholder="Select an Option"
-          {...field}
-          {...props}
-          value={field.value}
-          onChange={(val, name) => {
-            props.onChange && props.onChange(val, name);
-            field.onChange(val);
-          }}
-        />
-      )}
-    />
-  );
+  if (method) {
+    return (
+      <Controller
+        {...props}
+        control={method.control}
+        render={({ field }) => (
+          <SelectWrapper
+            placeholder="Select an Option"
+            {...field}
+            {...props}
+            value={field.value}
+            onChange={(val, name) => {
+              props.onChange && props.onChange(val, name);
+              field.onChange(val);
+            }}
+          />
+        )}
+      />
+    );
+  }
+
+  return <SelectWrapper {...props} />;
 };
 
 export { Select };

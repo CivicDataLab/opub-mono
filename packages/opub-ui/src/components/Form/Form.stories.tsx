@@ -1,8 +1,22 @@
-import { Meta, StoryObj } from '@storybook/react';
+import { Meta } from '@storybook/react';
 import React from 'react';
 import { Button } from '../Button';
 import { FormLayout } from '../FormLayout';
 import { Text } from '../Text';
+import {
+  Checkbox,
+  Input,
+  RangeSlider,
+  CheckboxGroup,
+  RadioGroup,
+  RadioItem,
+  DateField,
+  DatePicker,
+  TimeField,
+  DateRangePicker,
+  Combobox,
+  ComboboxMulti,
+} from './components';
 import { Form } from './Form';
 
 /**
@@ -107,36 +121,36 @@ export const FormBase = ({ ...args }) => {
         {...args}
       >
         <FormLayout>
-          <Form.Input name="text" label="Name" />
-          <Form.Select name="select" label="Select Period" options={options} />
-          <Form.RangeSlider name="range" label="Budget" prefix={<p>$</p>} />
-          <Form.Checkbox name="checkbox"> I agree to T&C</Form.Checkbox>
-          <Form.CheckboxGroup
+          <Input name="text" label="Name" />
+          {/* <Select name="select" label="Select Period" options={options} /> */}
+          <RangeSlider name="range" label="Budget" prefix={<p>$</p>} />
+          <Checkbox name="checkbox"> I agree to T&C</Checkbox>
+          <CheckboxGroup
             name="checkbox-group"
             title="Pick your Poison"
             options={checkboxOptions}
           />
-          <Form.RadioGroup name="radio" title="Select an item">
-            <Form.RadioItem value="1">Item 1</Form.RadioItem>
-            <Form.RadioItem value="2">Item 2</Form.RadioItem>
-            <Form.RadioItem value="3">Item 3</Form.RadioItem>
-          </Form.RadioGroup>
+          <RadioGroup name="radio" title="Select an item">
+            <RadioItem value="1">Item 1</RadioItem>
+            <RadioItem value="2">Item 2</RadioItem>
+            <RadioItem value="3">Item 3</RadioItem>
+          </RadioGroup>
 
           <FormLayout.Group>
-            <Form.DateField name="date" label="Choose Date" />
-            <Form.DatePicker name="date-picker" label="Choose Birthday" />
+            <DateField name="date" label="Choose Date" />
+            <DatePicker name="date-picker" label="Choose Birthday" />
 
-            <Form.TimeField name="time" label="Choose Range" />
+            <TimeField name="time" label="Choose Range" />
           </FormLayout.Group>
-          <Form.DateRangePicker name="date-range" label="Choose Time" />
+          <DateRangePicker name="date-range" label="Choose Time" />
           <FormLayout.Group>
-            <Form.Combobox
+            <Combobox
               defaultList={comboboxOptions}
               name="combobox"
               placeholder="Type to see options"
               label="Select Single Item"
             />
-            <Form.ComboboxMulti
+            <ComboboxMulti
               defaultList={comboboxOptions}
               name="comboboxMulti"
               label="Select Multiple Item"

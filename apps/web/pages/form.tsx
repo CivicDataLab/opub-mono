@@ -1,15 +1,16 @@
 import { parseDate } from '@internationalized/date';
 import {
-  Box,
-  Button,
-  Divider,
-  Flex,
+  Checkbox,
+  CheckboxGroup,
+  DateField,
+  DatePicker,
   Form,
-  FormLayout,
-  Icon,
-  Text,
+  Input,
+  RadioGroup,
+  RadioItem,
+  RangeSlider,
+  Select,
 } from '@opub-cdl/ui';
-import { ChevronDownMinor, ChevronUpMinor } from '@shopify/polaris-icons';
 import React from 'react';
 import styles from '../styles/pages/home.module.scss';
 
@@ -49,77 +50,73 @@ export default function Web() {
     {
       label: 'Increase',
       value: 'Increase',
-      prefix: <Icon source={ChevronUpMinor} />,
+      // prefix: <Icon source={ChevronUpMinor} />,
     },
     {
       label: 'Decrease',
       value: 'Decrease',
-      prefix: <Icon source={ChevronDownMinor} />,
+      // prefix: <Icon source={ChevronDownMinor} />,
     },
   ];
 
   return (
     <div className={styles.container}>
-      <Text variant="heading2xl" as="h1">
+      {/* <Text variant="heading2xl" as="h1">
         Form
-      </Text>
+      </Text> */}
 
-      <Spacer heading="Form">
-        <Form
-          onSubmit={(e: any) => setValues(e)}
-          formOptions={{ defaultValues: defaultValBase }}
-        >
-          <FormLayout>
-            <Form.Input name="text" label="Name" />
-            <Form.Select
-              name="select"
-              label="Select Period"
-              options={options}
-            />
-            <Form.RangeSlider name="range" label="Budget" prefix={<p>$</p>} />
-            <Form.Checkbox name="checkbox"> I agree to T&C</Form.Checkbox>
-            <Form.CheckboxGroup
-              name="checkbox-group"
-              title="Pick your Poison"
-              options={checkboxOptions}
-            />
-            <Form.RadioGroup name="radio" title="Select an item">
-              <Form.RadioItem value="1">Item 1</Form.RadioItem>
-              <Form.RadioItem value="2">Item 2</Form.RadioItem>
-              <Form.RadioItem value="3">Item 3</Form.RadioItem>
-            </Form.RadioGroup>
+      {/* <Spacer heading="Form"> */}
+      <Form
+        onSubmit={(e: any) => setValues(e)}
+        formOptions={{ defaultValues: defaultValBase }}
+      >
+        {/* <FormLayout> */}
+        <Input name="text" label="Name" />
+        <Select name="select" label="Select Period" options={options} />
+        <RangeSlider name="range" label="Budget" prefix={<p>$</p>} />
+        <Checkbox name="checkbox"> I agree to T&C</Checkbox>
+        <CheckboxGroup
+          name="checkbox-group"
+          title="Pick your Poison"
+          options={checkboxOptions}
+        />
+        <RadioGroup name="radio" title="Select an item">
+          <RadioItem value="1">Item 1</RadioItem>
+          <RadioItem value="2">Item 2</RadioItem>
+          <RadioItem value="3">Item 3</RadioItem>
+        </RadioGroup>
 
-            <FormLayout.Group>
-              <Form.DateField name="date" label="Choose Date" />
-              <Form.DatePicker
-                name="date-picker"
-                label="Choose Date with Picker"
-                defaultValue={parseDate('1998-03-25')}
-              />
-            </FormLayout.Group>
+        {/* <FormLayout.Group> */}
+        <DateField name="date" label="Choose Date" />
+        <DatePicker
+          name="date-picker"
+          label="Choose Date with Picker"
+          defaultValue={parseDate('1998-03-25')}
+        />
+        {/* </FormLayout.Group> */}
 
-            <Button submit size="slim">
+        {/* <Button submit size="slim">
               Submit
-            </Button>
-          </FormLayout>
-        </Form>
-      </Spacer>
+            </Button> */}
+        {/* </FormLayout> */}
+      </Form>
+      {/* </Spacer> */}
     </div>
   );
 }
 
-const Spacer = ({ children, heading, divider }: any) => {
-  return (
-    <Box paddingBlockStart="8" paddingBlockEnd="4" width="fit-content">
-      <Box paddingBlockEnd="2">
-        <Text variant="headingLg" as="h2">
-          {heading}
-        </Text>
-      </Box>
-      <Flex alignItems="start" gap={16} wrap="wrap">
-        {children}
-      </Flex>
-      {divider && <Divider borderStyle="divider" />}
-    </Box>
-  );
-};
+// const Spacer = ({ children, heading, divider }: any) => {
+//   return (
+//     <Box paddingBlockStart="8" paddingBlockEnd="4" width="fit-content">
+//       <Box paddingBlockEnd="2">
+//         <Text variant="headingLg" as="h2">
+//           {heading}
+//         </Text>
+//       </Box>
+//       <Flex alignItems="start" gap={16} wrap="wrap">
+//         {children}
+//       </Flex>
+//       {divider && <Divider borderStyle="divider" />}
+//     </Box>
+//   );
+// };
