@@ -1,4 +1,3 @@
-import React from 'react';
 import * as AvatarRadix from '@radix-ui/react-avatar';
 import styles from './Avatar.module.scss';
 import cx from 'classnames';
@@ -6,10 +5,20 @@ import { Flex } from '../Flex';
 
 type Props = {
   label?: Boolean;
-  size: any;
-  type: any;
-  image?: any;
-  name?: any;
+  size: string;
+  type: 'initials' | 'Profile_Customer';
+  image?: string;
+  name?: string;
+};
+
+interface stylesMap {
+  [key: string]: typeof styles;
+}
+
+const variantStyles: stylesMap = {
+  Large: styles.AvatarLarge,
+  Small: styles.AvatarSmall,
+  ExtraSmall: styles.AvatarExtraSmall,
 };
 
 const Avatar = ({ label, size, type, image, name }: Props) => {
@@ -22,9 +31,7 @@ const Avatar = ({ label, size, type, image, name }: Props) => {
       .toUpperCase();
   const className = cx(
     styles.Avatar,
-    size === 'Large' && styles.AvatarLarge,
-    size === 'Small' && styles.AvatarSmall,
-    size === 'ExtraSmall' && styles.AvatarExtraSmall,
+    variantStyles[size],
     size === 'Medium' &&
       type === 'Profile_Customer' &&
       styles.AvatarProfileMedium,
@@ -42,8 +49,11 @@ const Avatar = ({ label, size, type, image, name }: Props) => {
   return (
     <Flex gap={'8px'}>
       <AvatarRadix.Root className={className}>
-        {image && <AvatarRadix.Image src={image}></AvatarRadix.Image>}
-        {!image && <AvatarRadix.Fallback>{ProfileName}</AvatarRadix.Fallback>}
+        {image ? (
+          <AvatarRadix.Image src={image}></AvatarRadix.Image>
+        ) : (
+          <AvatarRadix.Fallback>{ProfileName}</AvatarRadix.Fallback>
+        )}
       </AvatarRadix.Root>
       {label && <Flex marginY={'auto'}>{name}</Flex>}
     </Flex>
