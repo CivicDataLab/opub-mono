@@ -1,0 +1,124 @@
+@import '../../../styles/common';
+
+$vertical-spacing: 60px;
+
+@keyframes slideIn {
+  from {
+    transform: var(--slide-in-from);
+  }
+  to {
+    transform: var(--slide-in-to);
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: var(--slide-out-from);
+  }
+  to {
+    transform: var(--slide-out-to);
+  }
+}
+
+.Sheet {
+  --sheet-bg: var(--surface, #ffffff);
+  --inlineWidth: 360px;
+  --blockHeight: 280px;
+
+  background-color: var(--sheet-bg);
+  inset: 0px;
+  will-change: transform, opacity;
+  appearance: none;
+  position: fixed;
+  z-index: var(--z-10);
+  overflow: auto;
+  inset: unset;
+
+  width: var(--width);
+  height: var(--height);
+
+  &[data-state='open'] {
+    animation: slideIn var(--duration-200) var(--ease);
+  }
+  &[data-state='closed'] {
+    animation: slideOut var(--duration-200) var(--ease);
+  }
+
+  &.left {
+    left: 0;
+    top: 0;
+
+    --slide-in-from: translateX(-100%);
+    --slide-in-to: translate3d(0, 0, 0);
+    --slide-out-from: translate3d(0, 0, 0);
+    --slide-out-to: translateX(-100%);
+  }
+
+  &.right {
+    right: 0;
+    top: 0;
+
+    --slide-in-from: translateX(100%);
+    --slide-in-to: translate3d(0, 0, 0);
+    --slide-out-from: translate3d(0, 0, 0);
+    --slide-out-to: translateX(100%);
+  }
+
+  &.top {
+    top: 0;
+    left: 0;
+
+    --slide-in-from: translateY(-100%);
+    --slide-in-to: translate3d(0, 0, 0);
+    --slide-out-from: translate3d(0, 0, 0);
+    --slide-out-to: translateY(-100%);
+  }
+
+  &.bottom {
+    bottom: 0;
+    left: 0;
+
+    --slide-in-from: translateY(100%);
+    --slide-in-to: translate3d(0, 0, 0);
+    --slide-out-from: translate3d(0, 0, 0);
+    --slide-out-to: translateY(100%);
+  }
+
+  &.left,
+  &.right {
+    width: var(--inlineWidth);
+    height: 100vh;
+
+    &.medium {
+      --inlineWidth: 420px;
+    }
+    &.wide {
+      --inlineWidth: 600px;
+    }
+    &.extended {
+      --inlineWidth: 95vw;
+    }
+    &.full {
+      --inlineWidth: 100vw;
+    }
+  }
+
+  &.top,
+  &.bottom {
+    width: 100vw;
+    height: var(--blockHeight);
+
+    &.medium {
+      --blockHeight: 360px;
+    }
+    &.wide {
+      --blockHeight: 480px;
+    }
+    &.extended {
+      --blockHeight: 90vh;
+    }
+    &.full {
+      --blockHeight: 100vh;
+    }
+  }
+}

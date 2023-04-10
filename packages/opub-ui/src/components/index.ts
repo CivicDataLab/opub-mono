@@ -42,6 +42,7 @@ export { Menu } from './Menu';
 export { Popover } from './Popover';
 export { ProgressBar } from './ProgressBar';
 export { ScrollArea } from './ScrollArea';
+export { Sheet } from './Sheet';
 export { SkeletonBodyText } from './SkeletonBodyText';
 export { SkeletonDisplayText } from './SkeletonDisplayText';
 export { SkeletonTabs } from './SkeletonTabs';
