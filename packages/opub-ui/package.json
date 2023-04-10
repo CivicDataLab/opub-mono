@@ -1,7 +1,7 @@
 {
   "name": "@opub-cdl/ui",
   "description": "OPub UI Library",
-  "version": "0.0.76",
+  "version": "0.0.77",
   "private": false,
   "license": "MIT",
   "author": "CivicDataLab <tech@civicdatalab.in>",
@@ -24,7 +24,7 @@
   ],
   "sideEffects": false,
   "main": "dist/index.js",
-  "types": "dist/types/index.d.ts",
+  "types": "dist/ts/index.d.ts",
   "files": [
     "dist",
     "README.md"
@@ -36,7 +36,7 @@
   "scripts": {
     "dev": "storybook dev -p 6006",
     "build": "run-s build:types build:js",
-    "build:types": "tsc -b",
+    "build:types": "tsc -b ./tsconfig.node.json",
     "build:js": "rollup -c",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "storybook build",

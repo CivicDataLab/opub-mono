@@ -17,7 +17,7 @@
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
     "declaration": true,
-    "declarationDir": "dist/types",
+    "declarationDir": "dist/ts",
     "declarationMap": false,
     "emitDeclarationOnly": true
   },
