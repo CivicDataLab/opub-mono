@@ -6,7 +6,6 @@ import {
   CodeBlock,
   Combobox,
   Divider,
-  Flex,
   Icon,
   RangeCalendar,
   Select,
@@ -72,9 +71,9 @@ export default function Web() {
             disabled: { disabled: true },
             'custom children': {
               children: (
-                <Flex alignItems="center" gap={4}>
+                <Box gap="1" flex alignItems="center">
                   <span>Sun is up</span>
-                </Flex>
+                </Box>
               ),
             },
           }}
@@ -197,9 +196,9 @@ const Spacer = ({ children, heading, divider }: any) => {
           {heading}
         </Text>
       </Box>
-      <Flex alignItems="start" gap={16} wrap="wrap">
+      <Box flex alignItems="start" gap="3" wrap="wrap">
         {children}
-      </Flex>
+      </Box>
       {divider && <Divider borderStyle="divider" />}
     </Box>
   );

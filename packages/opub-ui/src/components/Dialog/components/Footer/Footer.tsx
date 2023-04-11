@@ -1,8 +1,7 @@
+import React from 'react';
+import { ComplexAction } from '../../../../types/button';
 import { Box } from '../../../Box';
 import { buttonsFrom } from '../../../Button/utils';
-import { Flex } from '../../../Flex';
-import { ComplexAction } from '../../../../types/button';
-import React from 'react';
 
 export interface FooterProps {
   /** Primary action */
