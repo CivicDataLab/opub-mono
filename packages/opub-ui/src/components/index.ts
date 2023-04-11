@@ -14,7 +14,6 @@ export { DataTable } from './DataTable';
 export { Dialog } from './Dialog';
 export { Divider } from './Divider';
 export { DropZone } from './DropZone';
-export { Flex } from './Flex';
 export {
   Checkbox,
   CheckboxGroup,
