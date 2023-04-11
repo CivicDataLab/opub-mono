@@ -1,0 +1,65 @@
+@import '../../../styles/common';
+
+.Breadcrumbs {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 4rem;
+}
+
+.List {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+  margin-bottom: 1rem;
+  list-style: none;
+}
+
+.List > li {
+  display: inline-block;
+}
+
+.List > li + li:before {
+  content: '/';
+  padding: 0 0.5rem;
+}
+
+.List > .active {
+  color: #6c757d;
+}
+
+.ListItem {
+  display: flex;
+  align-items: center;
+
+  & + &::before {
+    content: '/';
+    padding: 0 0.5rem;
+  }
+}
+
+.Button {
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  border: 1px solid transparent;
+  padding: 0.3rem 0.1rem;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.ButtonLink {
+  color: #000;
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.ButtonLink:hover {
+  color: #0056b3;
+  text-decoration: underline;
+  background-color: transparent;
+  border-color: transparent;
+}

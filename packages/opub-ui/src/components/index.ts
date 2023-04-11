@@ -56,3 +56,4 @@ export { Thumbnail } from './Thumbnail';
 export { Toast } from './Toast';
 export { Tooltip } from './Tooltip';
 export { ComponentName } from './ComponentName';
+export { Breadcrumbs } from './Breadcrumbs';
