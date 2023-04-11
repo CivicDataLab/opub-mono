@@ -16,7 +16,7 @@
 }
 
 .List > li {
-  display: inline-block;
+  display: flex;
 }
 
 .List > li + li:before {
@@ -36,6 +36,11 @@
     content: '/';
     padding: 0 0.5rem;
   }
+}
+
+.CollapseItem {
+  display: flex;
+  align-items: center;
 }
 
 .Button {
@@ -62,4 +67,14 @@
   text-decoration: underline;
   background-color: transparent;
   border-color: transparent;
+}
+
+.CollapseToggle {
+  font-size: 14px;
+  color: #0079bf;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
 }
