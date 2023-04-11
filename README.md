@@ -48,12 +48,20 @@ yarn dev --filter @opub-cdl/ui
 
 > Currently this is not working for Linux distros
 
-To auto generate the boilerplate for new a component, install the `new-component` module globally
+This repo includes a `new-component` module to help create boilerplate for component creation.
 
 ```
-yarn global add git+https://github.com/CivicDataLab/new-component.git
-
-new-component ComponentName
+yarn run new-component Button
 ```
 
-This will create a new component directory in `packages/opub-ui/src` with required files for component, test, storybook and styling.
+This will create a new component directory in `packages/opub-ui/src` with required files and also export the component in the index.ts
+
+```
+components/
+┣ Button/
+┃ ┣ Button.module.scss/
+┃ ┣ Button.stories.tsx/
+┃ ┣ Button.test.tsx/
+┃ ┣ Button.tsx/
+┃ ┣ index.ts/
+```
