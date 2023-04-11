@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
+import { Box } from '../Box';
 import { Button } from '../Button';
-import { Flex } from '../Flex';
 import { Text } from '../Text';
 import { Tooltip } from './Tooltip';
 
@@ -56,10 +56,10 @@ export const Underline: Story = {
 export const Multiple: Story = {
   render: ({ ...args }) => (
     <Tooltip.Provider>
-      <Flex gap={4}>
+      <Box flex gap="1">
         <Tooltip {...args} />
         <Tooltip {...args} />
-      </Flex>
+      </Box>
     </Tooltip.Provider>
   ),
   args: {

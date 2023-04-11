@@ -1,4 +1,3 @@
-import { Flex } from '../../../Flex';
 import { UnstyledLink } from '../../../Link/BaseLink';
 import type { ActionListItemDescriptor } from '../../../../types/actionlist';
 import { handleMouseUpByBlurring } from '../../../../utils/focus';
@@ -63,11 +62,11 @@ export function Item({
   const textMarkup = <span className={styles.Text}>{contentMarkup}</span>;
 
   const contentElement = (
-    <Flex alignItems="center" gap="var(--space-4)">
+    <Box flex alignItems="center" gap="4">
       {prefixMarkup}
       {textMarkup}
       {suffixMarkup}
-    </Flex>
+    </Box>
   );
 
   // const scrollMarkup = active ? <ScrollTo /> : null;

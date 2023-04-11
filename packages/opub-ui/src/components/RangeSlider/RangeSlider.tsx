@@ -3,7 +3,7 @@ import cx from 'classnames';
 import React, { forwardRef, useEffect } from 'react';
 import type { Action } from '../../types/button';
 import type { Error } from '../../types/shared/form';
-import { Flex } from '../Flex';
+import { Box } from '../Box';
 import { Labelled } from '../Labelled';
 import { Text } from '../Text';
 import styles from './RangeSlider.module.scss';
@@ -134,7 +134,7 @@ const RangeSlider = forwardRef((props: RangeSliderProps, ref: any) => {
         labelHidden={labelHidden}
         helpText={helpText}
       >
-        <Flex alignItems="center">
+        <Box flex alignItems="center">
           {prefixMarkup}
           <Slider.Root
             className={styles.Root}
@@ -160,7 +160,7 @@ const RangeSlider = forwardRef((props: RangeSliderProps, ref: any) => {
             )}
           </Slider.Root>
           {suffixMarkup}
-        </Flex>
+        </Box>
       </Labelled>
     </div>
   );

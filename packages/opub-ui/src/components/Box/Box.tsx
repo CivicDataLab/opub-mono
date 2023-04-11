@@ -1,13 +1,14 @@
 import cx from 'classnames';
 import React, { createElement, forwardRef } from 'react';
-import { BoxProps } from '../../types/box';
+import { BoxProps, FlexStyleProps } from '../../types/box';
 import { getResponsiveProps, sanitizeCustomProperties } from '../../utils/css';
 import boxStyles from './Box.module.scss';
 
-export const Box = forwardRef<HTMLElement, BoxProps>(
+export const Box = forwardRef<HTMLElement, BoxProps & FlexStyleProps>(
   (
     {
       as = 'div',
+      display = 'block',
       background,
       border,
       borderBlockEnd,
@@ -51,6 +52,15 @@ export const Box = forwardRef<HTMLElement, BoxProps>(
       insetInlineEnd,
       zIndex,
       opacity,
+      flex,
+      direction,
+      wrap,
+      gap,
+      columnGap,
+      rowGap,
+      justifyContent,
+      alignItems,
+      alignContent,
       ...restProps
     },
     ref
@@ -154,6 +164,15 @@ export const Box = forwardRef<HTMLElement, BoxProps>(
         : undefined,
       zIndex,
       opacity,
+      display: flex ? `flex` : display,
+      flexDirection: direction ? direction : undefined,
+      flexWrap: wrap ? (wrap === true ? 'wrap' : wrap) : undefined,
+      gap: gap ? `var(--space-${gap})` : undefined,
+      rowGap: rowGap ? `var(--space-${rowGap})` : undefined,
+      columnGap: columnGap ? `var(--space-${columnGap})` : undefined,
+      justifyContent,
+      alignItems,
+      alignContent,
     } as React.CSSProperties;
 
     const className = cx(

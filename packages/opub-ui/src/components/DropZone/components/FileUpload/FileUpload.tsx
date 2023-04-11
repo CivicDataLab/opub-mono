@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import { DropZoneContext } from '../../context';
 import { uploadArrow } from '../../images';
 
-import { Flex } from '../../../Flex';
+import { Box } from '../../../Box';
 import { Text } from '../../../Text';
 import styles from './FileUpload.module.scss';
 
@@ -45,18 +45,18 @@ export function FileUpload(props: FileUploadProps) {
   switch (size) {
     case 'large':
       viewMarkup = (
-        <Flex direction="column" alignItems="center" gap={8}>
+        <Box flex gap="2" direction="column" alignItems="center">
           {actionMarkup}
           {actionHintMarkup}
-        </Flex>
+        </Box>
       );
       break;
     case 'medium':
       viewMarkup = (
-        <Flex direction="column" alignItems="center" gap={8}>
+        <Box flex gap="2" direction="column" alignItems="center">
           {actionMarkup}
           {actionHintMarkup}
-        </Flex>
+        </Box>
       );
       break;
     case 'small':

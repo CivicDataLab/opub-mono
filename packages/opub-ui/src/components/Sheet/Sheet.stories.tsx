@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
+import { Box } from '../Box';
 import { Button } from '../Button';
-import { Flex } from '../Flex';
 import { Sheet } from './Sheet';
 
 /**
@@ -18,9 +18,10 @@ export const Default: Story = {
   render: () => {
     const [open, setOpen] = React.useState(false);
     return (
-      <Flex
+      <Box
+        flex
         width="90vw"
-        height="90vh"
+        minHeight="90vh"
         alignItems="center"
         justifyContent="center"
       >
@@ -30,7 +31,7 @@ export const Default: Story = {
         <Sheet onOpenChange={() => setOpen((val) => !val)} isOpen={open}>
           Sheet
         </Sheet>
-      </Flex>
+      </Box>
     );
   },
   args: {},
@@ -50,25 +51,32 @@ export const Sides: Story = {
     }
 
     return (
-      <Flex
-        height="90vh"
+      <Box
+        flex
+        minHeight="90vh"
         alignItems="center"
         justifyContent="center"
-        gap={8}
+        gap="2"
         direction="column"
         wrap="wrap"
       >
         <Button primary onClick={() => handleOpenChange('top')}>
           From Top
         </Button>
-        <Flex width="100%" alignItems="center" justifyContent="center" gap={8}>
+        <Box
+          flex
+          gap="2"
+          width="100%"
+          alignItems="center"
+          justifyContent="center"
+        >
           <Button primary onClick={() => handleOpenChange('left')}>
             From Left
           </Button>
           <Button primary onClick={() => handleOpenChange('right')}>
             From Right
           </Button>
-        </Flex>
+        </Box>
 
         <Button primary onClick={() => handleOpenChange('bottom')}>
           From Bottom
@@ -80,7 +88,7 @@ export const Sides: Story = {
         >
           Sheet
         </Sheet>
-      </Flex>
+      </Box>
     );
   },
   args: {},
@@ -101,25 +109,32 @@ export const Sizes: Story = {
     }
 
     return (
-      <Flex
-        height="90vh"
+      <Box
+        flex
+        gap="2"
+        minHeight="90vh"
         alignItems="center"
         justifyContent="center"
-        gap={8}
         direction="column"
         wrap="wrap"
       >
         <Button primary onClick={() => handleOpenChange('top')}>
           From Top
         </Button>
-        <Flex width="100%" alignItems="center" justifyContent="center" gap={8}>
+        <Box
+          flex
+          gap="2"
+          width="100%"
+          alignItems="center"
+          justifyContent="center"
+        >
           <Button primary onClick={() => handleOpenChange('left')}>
             From Left
           </Button>
           <Button primary onClick={() => handleOpenChange('right')}>
             From Right
           </Button>
-        </Flex>
+        </Box>
 
         <Button primary onClick={() => handleOpenChange('bottom')}>
           From Bottom
@@ -130,23 +145,24 @@ export const Sizes: Story = {
           isOpen={open}
           size={size}
         >
-          <Flex
-            gap={8}
+          <Box
+            flex
+            gap="2"
             direction={side === 'left' || side === 'right' ? 'column' : 'row'}
             wrap="wrap"
             alignItems="center"
             justifyContent="center"
             width="100%"
-            height="100%"
+            minHeight="100%"
           >
             {sizeArr.map((size: any) => (
               <Button key={size} primary onClick={() => setSize(size)}>
                 {size}
               </Button>
             ))}
-          </Flex>
+          </Box>
         </Sheet>
-      </Flex>
+      </Box>
     );
   },
   args: {},

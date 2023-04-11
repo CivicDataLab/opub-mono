@@ -1,7 +1,7 @@
 import { AppsMinor } from '@shopify/polaris-icons';
 import { Meta, StoryObj } from '@storybook/react';
 import { PropsVariationSection } from '../../utils/helpers';
-import { Flex } from '../Flex';
+import { Box } from '../Box';
 import { Icon } from '../Icon';
 import { Tag } from './Tag';
 
@@ -70,10 +70,10 @@ export const States = () => (
       disabled: { disabled: true },
       'custom children': {
         children: (
-          <Flex alignItems="center" gap={4}>
+          <Box flex alignItems="center" gap="1">
             <Icon source={AppsMinor} />
             <span>Sun is up</span>
-          </Flex>
+          </Box>
         ),
       },
     }}

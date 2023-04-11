@@ -50,81 +50,58 @@
   --op-box-inset-inline-end: initial;
 
   inset-block-start: var(--op-box-inset-block-start);
-
   inset-block-end: var(--op-box-inset-block-end);
-
   inset-inline-start: var(--op-box-inset-inline-start);
-
   inset-inline-end: var(--op-box-inset-inline-end);
 
   background-color: var(--op-box-background);
-
   box-shadow: var(--op-box-shadow);
 
   border-radius: var(--op-box-border-radius);
-
   border-end-start-radius: var(
     --op-box-border-radius-end-start,
     var(--op-box-border-radius)
   );
-
   border-end-end-radius: var(
     --op-box-border-radius-end-end,
     var(--op-box-border-radius)
   );
-
   border-start-start-radius: var(
     --op-box-border-radius-start-start,
     var(--op-box-border-radius)
   );
-
   border-start-end-radius: var(
     --op-box-border-radius-start-end,
     var(--op-box-border-radius)
   );
-
   border-block-end: var(--op-box-border-block-end, var(--op-box-border));
-
   border-inline-start: var(--op-box-border-inline-start, var(--op-box-border));
-
   border-inline-end: var(--op-box-border-inline-end, var(--op-box-border));
-
   border-block-start: var(--op-box-border-block-start, var(--op-box-border));
-
   border-block-start-width: var(
     --op-box-border-block-start-width,
     var(--op-box-border-width)
   );
-
   border-block-end-width: var(
     --op-box-border-block-end-width,
     var(--op-box-border-width)
   );
-
   border-inline-start-width: var(
     --op-box-border-inline-start-width,
     var(--op-box-border-width)
   );
-
   border-inline-end-width: var(
     --op-box-border-inline-end-width,
     var(--op-box-border-width)
   );
 
   color: var(--op-box-color);
-
   min-height: var(--op-box-min-height);
-
   min-width: var(--op-box-min-width);
-
   max-width: var(--op-box-max-width);
-
   outline: var(--op-box-outline);
-
   overflow-x: var(--op-box-overflow-x);
-
   overflow-y: var(--op-box-overflow-y);
-
   width: var(--op-box-width);
   -webkit-overflow-scrolling: touch;
 }

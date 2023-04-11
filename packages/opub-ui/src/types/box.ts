@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   ColorsActionTokenAlias,
   ColorsBackdropTokenAlias,
@@ -173,4 +174,83 @@ export interface BoxProps extends React.AriaAttributes {
   visuallyHidden?: boolean;
   /** z-index of box */
   zIndex?: string;
+  /** Is it a flexbox */
+  flex?: boolean;
+}
+
+type GlobalProps = 'inherit' | 'initial' | 'revert' | 'revert-layer' | 'unset';
+type OverflowProps = 'safe center' | 'unsafe center';
+type BaselineProps = 'baseline' | 'first baseline' | 'last baseline';
+type CommonFlex = 'start' | 'flex-start' | 'end' | 'flex-end' | 'center';
+type Distributed =
+  | 'space-between'
+  | 'space-around'
+  | 'space-evenly'
+  | 'stretch';
+
+export interface BoxAlignmentStyleProps {
+  display?:
+    | 'block'
+    | 'inline'
+    | 'inline-block'
+    | 'flex'
+    | 'inline-flex'
+    | 'grid'
+    | 'inline-grid'
+    | 'flow-root'
+    | GlobalProps;
+  /**
+   * The distribution of space around items along the main axis. See [MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/justify-content).
+   * @default 'stretch'
+   */
+  justifyContent?:
+    | 'normal'
+    | 'left'
+    | 'right'
+    | Distributed
+    | CommonFlex
+    | OverflowProps
+    | GlobalProps;
+  /**
+   * The distribution of space around child items along the cross axis. See [MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/align-content).
+   * @default 'start'
+   */
+  alignContent?:
+    | 'normal'
+    | Distributed
+    | CommonFlex
+    | BaselineProps
+    | OverflowProps
+    | GlobalProps;
+  /**
+   * The alignment of children within their container. See [MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/align-items).
+   * @default 'stretch'
+   */
+  alignItems?:
+    | 'normal'
+    | 'stretch'
+    | 'self-start'
+    | 'self-end'
+    | CommonFlex
+    | GlobalProps
+    | BaselineProps;
+  /** The space to display between both rows and columns. See [MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/gap). */
+  gap?: Spacing;
+  /** The space to display between columns. See [MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/column-gap). */
+  columnGap?: Spacing;
+  /** The space to display between rows. See [MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/row-gap). */
+  rowGap?: Spacing;
+}
+
+export interface FlexStyleProps extends BoxAlignmentStyleProps {
+  /**
+   * The direction in which to layout children. See [MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/flex-direction).
+   * @default 'row'
+   */
+  direction?: 'row' | 'column' | 'row-reverse' | 'column-reverse';
+  /**
+   * Whether to wrap items onto multiple lines. See [MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/flex-wrap).
+   * @default false
+   */
+  wrap?: boolean | 'wrap' | 'nowrap' | 'wrap-reverse';
 }

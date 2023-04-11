@@ -15,6 +15,8 @@ export interface SheetProps extends Dialog.DialogProps {
   isOpen?: boolean;
   // the size of the sheet
   size?: 'narrow' | 'medium' | 'wide' | 'extended' | 'full';
+  // whether the sheet should act as a modal (prevents interaction with the rest of the page)
+  modal?: boolean;
 }
 
 const Sheet = forwardRef((props: SheetProps, ref: Ref<HTMLDivElement>) => {
@@ -30,7 +32,7 @@ const Sheet = forwardRef((props: SheetProps, ref: Ref<HTMLDivElement>) => {
 
   return (
     <div className={`opub-Sheet`} ref={ref}>
-      <Dialog.Root {...rest} open={isOpen}>
+      <Dialog.Root {...rest} open={isOpen} modal={false}>
         <Dialog.Portal>
           <Dialog.Overlay className={dialogStyles.Overlay} />
           <Dialog.Content className={themeClass}>

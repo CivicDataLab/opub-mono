@@ -24,35 +24,37 @@ export function Footer({
     (secondaryActions && buttonsFrom(secondaryActions)) || null;
   const actions =
     primaryActionButton || secondaryActionButtons ? (
-      <Flex
-        gap="var(--space-2)"
+      <Box
+        flex
+        gap="2"
         wrap="wrap"
         alignItems="center"
         justifyContent="space-between"
       >
         {secondaryActionButtons}
         {primaryActionButton}
-      </Flex>
+      </Box>
     ) : null;
 
   return (
-    <Flex gap="var(--space-4)" alignItems="center">
+    <Box flex gap="4" alignItems="center">
       <Box
         borderBlockStart="divider"
         minHeight="var(--space-16)"
         padding="4"
         width="100%"
       >
-        <Flex
+        <Box
+          flex
           wrap="wrap"
-          gap="var(--space-4)"
+          gap="4"
           alignItems="center"
           justifyContent="space-between"
         >
           <Box>{children}</Box>
           {actions}
-        </Flex>
+        </Box>
       </Box>
-    </Flex>
+    </Box>
   );
 }

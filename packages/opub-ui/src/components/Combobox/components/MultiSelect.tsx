@@ -10,7 +10,6 @@ import { forwardRef, HTMLAttributes, useEffect, useState } from 'react';
 import { ComboboxSingleProps } from '../../../types/combobox';
 import itemStyles from '../../ActionList/ActionList.module.scss';
 import { Box } from '../../Box';
-import { Flex } from '../../Flex';
 import { Tag } from '../../Tag';
 import { Text } from '../../Text';
 import styles from '../Combobox.module.scss';
@@ -85,13 +84,13 @@ export const MultiSelect = forwardRef<HTMLInputElement, ComboboxMultiProps>(
 
     const tags = verticalContent ? (
       values.length > 0 ? (
-        <Flex gap={4} wrap>
+        <Box flex gap="1" wrap>
           {values.map((tag: string) => (
             <Tag onRemove={removeTag} value={tag} key={tag}>
               {tag}
             </Tag>
           ))}
-        </Flex>
+        </Box>
       ) : (
         <Box minHeight="28px">
           <Text variant="bodySm" color="subdued">

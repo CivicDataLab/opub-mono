@@ -13,10 +13,6 @@ import { CSSProperties } from 'react';
 import { BorderRadiusValue, BorderSizeValue, DimensionValue } from './dna';
 
 type ResponsiveProp<T> = {
-  base?: T;
-  S?: T;
-  M?: T;
-  L?: T;
   [custom: string]: T | undefined;
 };
 type Responsive<T> = T | ResponsiveProp<T>;
@@ -35,9 +31,9 @@ export interface StyleProps {
   /** The margin for the logical end side of an element, depending on layout direction. See [MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/margin-inline-end). */
   marginEnd?: Responsive<DimensionValue>;
   // /** The margin for the left side of the element. See [MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/margin-left). Consider using `marginStart` instead for RTL support. */
-  // marginLeft?: Responsive<DimensionValue>,
+  marginLeft?: Responsive<DimensionValue>;
   // /** The margin for the right side of the element. See [MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/margin-left). Consider using `marginEnd` instead for RTL support. */
-  // marginRight?: Responsive<DimensionValue>,
+  marginRight?: Responsive<DimensionValue>;
   /** The margin for the top side of the element. See [MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/margin-top). */
   marginTop?: Responsive<DimensionValue>;
   /** The margin for the bottom side of the element. See [MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/margin-bottom). */
@@ -191,9 +187,6 @@ export interface ViewStyleProps extends StyleProps {
 
   /** Species what to do when the element's content is too long to fit its size. See [MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/overflow). */
   overflow?: Responsive<string>;
-  // ...
-  // shadows?
-  // transforms?
 }
 
 export interface BoxAlignmentStyleProps {
@@ -214,8 +207,6 @@ export interface BoxAlignmentStyleProps {
     | 'baseline'
     | 'first baseline'
     | 'last baseline'
-    | 'safe center'
-    | 'unsafe center'
   >;
   /**
    * The distribution of space around child items along the cross axis. See [MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/align-content).
@@ -233,7 +224,6 @@ export interface BoxAlignmentStyleProps {
     | 'first baseline'
     | 'last baseline'
     | 'safe center'
-    | 'unsafe center'
   >;
   /**
    * The alignment of children within their container. See [MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/align-items).
@@ -249,8 +239,6 @@ export interface BoxAlignmentStyleProps {
     | 'baseline'
     | 'first baseline'
     | 'last baseline'
-    | 'safe center'
-    | 'unsafe center'
   >;
   /** The space to display between both rows and columns. See [MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/gap). */
   gap?: Responsive<DimensionValue>;
@@ -301,10 +289,5 @@ export interface GridStyleProps extends BoxAlignmentStyleProps, StyleProps {
     | 'baseline'
     | 'first baseline'
     | 'last baseline'
-    | 'safe center'
-    | 'unsafe center'
-    | 'legacy right'
-    | 'legacy left'
-    | 'legacy center'
   >;
 }

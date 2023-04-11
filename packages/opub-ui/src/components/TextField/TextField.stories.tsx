@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { Box } from '../Box';
 import { Button } from '../Button';
-import { Flex } from '../Flex';
 import { Tag } from '../Tag';
 import { TextField } from './TextField';
 
@@ -86,11 +86,11 @@ export const Prefix: Story = {
 const tags = ['Rustic', 'Antique', 'Vinyl', 'Refurbished'];
 const verticalContentMarkup =
   tags.length > 0 ? (
-    <Flex gap={4}>
+    <Box flex gap="1">
       {tags.map((tag) => (
         <Tag key={tag}>{tag}</Tag>
       ))}
-    </Flex>
+    </Box>
   ) : null;
 
 export const VerticalContent: Story = {

@@ -1,33 +1,33 @@
-import styles from './DropZone.module.scss';
 import cx from 'classnames';
 import React, {
-  useState,
-  useRef,
-  useCallback,
   FunctionComponent,
-  useMemo,
+  useCallback,
   useEffect,
+  useMemo,
+  useRef,
+  useState,
 } from 'react';
-import { Text } from '../Text';
 import { Labelled, LabelledProps } from '../Labelled';
+import { Text } from '../Text';
+import styles from './DropZone.module.scss';
 
+import { CircleAlertMajor, UploadMajor } from '@shopify/polaris-icons';
+import { variationName } from '../../utils/css';
+import { debounce } from '../../utils/debounce';
+import { useComponentDidMount } from '../../utils/hooks/use-component-did-mount';
+import { useEventListener } from '../../utils/hooks/use-event-listener';
+import { useToggle } from '../../utils/hooks/use-toggle';
+import { isServer } from '../../utils/target';
+import { Box } from '../Box';
+import { Icon } from '../Icon';
 import { FileUpload } from './components';
 import { DropZoneContext } from './context';
 import {
+  defaultAllowMultiple,
   DropZoneEvent,
   fileAccepted,
   getDataTransferFiles,
-  defaultAllowMultiple,
 } from './utils';
-import { useEventListener } from '../../utils/hooks/use-event-listener';
-import { Flex } from '../Flex';
-import { debounce } from '../../utils/debounce';
-import { variationName } from '../../utils/css';
-import { isServer } from '../../utils/target';
-import { useComponentDidMount } from '../../utils/hooks/use-component-did-mount';
-import { useToggle } from '../../utils/hooks/use-toggle';
-import { UploadMajor, CircleAlertMajor } from '@shopify/polaris-icons';
-import { Icon } from '../Icon';
 
 export type DropZoneFileType = 'file' | 'image' | 'video';
 
@@ -348,14 +348,14 @@ export const DropZone: React.FunctionComponent<DropZoneProps> & {
   ) {
     return (
       <div className={styles.Overlay}>
-        <Flex gap="2" direction="column" alignItems="center">
+        <Box flex gap="1" direction="column" alignItems="center">
           {size === 'small' && <Icon source={icon} color={color} />}
           {(size === 'medium' || size === 'large') && (
             <Text variant="bodySm" as="p" fontWeight="bold">
               {text}
             </Text>
           )}
-        </Flex>
+        </Box>
       </div>
     );
   }

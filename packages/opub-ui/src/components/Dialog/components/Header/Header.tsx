@@ -15,9 +15,9 @@ export interface HeaderProps {
 export function Header({ id, children, titleHidden, onClose }: HeaderProps) {
   const titleHiddenMarkup = (
     <Box position="absolute" insetInlineEnd="0" zIndex="1">
-      <Flex gap="var(--space-4)" justifyContent="end" alignItems="center">
+      <Box flex gap="4" justifyContent="end" alignItems="center">
         <CloseButton titleHidden={titleHidden} onClick={onClose} />
-      </Flex>
+      </Box>
     </Box>
   );
   if (titleHidden || !children) {
@@ -32,18 +32,14 @@ export function Header({ id, children, titleHidden, onClose }: HeaderProps) {
       paddingInlineEnd="5"
       borderBlockEnd="divider"
     >
-      <Flex
-        gap="var(--space-4)"
-        alignItems="center"
-        justifyContent="space-between"
-      >
+      <Box flex gap="4" alignItems="center" justifyContent="space-between">
         <Text id={id} as="h2" variant="headingLg" breakWord>
           {children}
         </Text>
         <DialogClose asChild>
           <CloseButton titleHidden={titleHidden} onClick={onClose} />
         </DialogClose>
-      </Flex>
+      </Box>
     </Box>
   );
 }

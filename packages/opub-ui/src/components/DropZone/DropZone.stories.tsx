@@ -1,8 +1,8 @@
 import { FileMinor } from '@shopify/polaris-icons';
 import { Meta, StoryObj } from '@storybook/react';
-import React, { useCallback, useState } from 'react';
+import { useCallback, useState } from 'react';
+import { Box } from '../Box';
 import { Button } from '../Button';
-import { Flex } from '../Flex';
 import { Text } from '../Text';
 import { Thumbnail } from '../Thumbnail';
 import { DropZone } from './DropZone';
@@ -35,9 +35,9 @@ export const Default: Story = {
     const fileUpload = !files.length && <DropZone.FileUpload />;
     const uploadedFiles = files.length > 0 && (
       <div style={{ padding: '0' }}>
-        <Flex direction="column" gap={8}>
+        <Box flex gap="2" direction="column">
           {files.map((file, index) => (
-            <Flex alignItems="center" gap={8} key={index}>
+            <Box flex gap="2" alignItems="center" key={index}>
               <Thumbnail
                 size="small"
                 alt={file.name}
@@ -54,9 +54,9 @@ export const Default: Story = {
                   {file.size} bytes
                 </Text>
               </div>
-            </Flex>
+            </Box>
           ))}
-        </Flex>
+        </Box>
       </div>
     );
 
@@ -91,7 +91,7 @@ export const SingleUpload: Story = {
 
     const fileUpload = !file && <DropZone.FileUpload />;
     const uploadedFiles = file && (
-      <Flex alignItems="center" gap={8}>
+      <Box flex gap="2" alignItems="center">
         <Thumbnail
           size="small"
           alt={file.name}
@@ -108,7 +108,7 @@ export const SingleUpload: Story = {
             {file.size} bytes
           </Text>
         </div>
-      </Flex>
+      </Box>
     );
 
     return (
@@ -168,9 +168,9 @@ export const CustomHint: Story = {
     );
     const uploadedFiles = files.length > 0 && (
       <div style={{ padding: '0' }}>
-        <Flex direction="column" gap={8}>
+        <Box flex gap="2" direction="column">
           {files.map((file, index) => (
-            <Flex alignItems="center" gap={8} key={index}>
+            <Box flex gap="2" alignItems="center" key={index}>
               <Thumbnail
                 size="small"
                 alt={file.name}
@@ -187,9 +187,9 @@ export const CustomHint: Story = {
                   {file.size} bytes
                 </Text>
               </div>
-            </Flex>
+            </Box>
           ))}
-        </Flex>
+        </Box>
       </div>
     );
 
@@ -227,9 +227,9 @@ export const CustomTrigger: Story = {
     );
     const uploadedFiles = files.length > 0 && (
       <div style={{ padding: '0' }}>
-        <Flex direction="column" gap={8}>
+        <Box flex gap="2" direction="column">
           {files.map((file, index) => (
-            <Flex alignItems="center" gap={8} key={index}>
+            <Box flex gap="2" alignItems="center" key={index}>
               <Thumbnail
                 size="small"
                 alt={file.name}
@@ -246,14 +246,14 @@ export const CustomTrigger: Story = {
                   {file.size} bytes
                 </Text>
               </div>
-            </Flex>
+            </Box>
           ))}
-        </Flex>
+        </Box>
       </div>
     );
 
     return (
-      <Flex direction="column" alignItems="start" gap={8}>
+      <Box flex gap="2" direction="column" alignItems="start">
         <Button plain removeUnderline onClick={toggleOpenFileDialog}>
           Upload Image
         </Button>
@@ -265,7 +265,7 @@ export const CustomTrigger: Story = {
           {fileUpload}
           {uploadedFiles}
         </DropZone>
-      </Flex>
+      </Box>
     );
   },
   args: {

@@ -1,5 +1,5 @@
 import { Meta } from '@storybook/react';
-import { Flex } from '../Flex';
+import { Box } from '../Box';
 import { Text } from './Text';
 
 /**
@@ -14,7 +14,7 @@ const meta = {
 export default meta;
 
 export const Variants = () => (
-  <Flex direction="column" gap={8}>
+  <Box flex direction="column" gap="2">
     <Text as="h1" variant="heading4xl">
       Text with Heading4xl variant
     </Text>
@@ -48,11 +48,11 @@ export const Variants = () => (
     <Text as="p" variant="bodySm">
       Text with BodySm variant
     </Text>
-  </Flex>
+  </Box>
 );
 
 export const WithAlignment = () => (
-  <Flex direction="column" gap={8}>
+  <Box flex direction="column">
     <Text as="p" variant="bodyLg" alignment="start">
       Manage your Shopify store on-the-go with real-time notifications, access
       to your dashboard, and order management, all from your smartphone.
@@ -69,11 +69,11 @@ export const WithAlignment = () => (
       Manage your Shopify store on-the-go with real-time notifications, access
       to your dashboard, and order management, all from your smartphone.
     </Text>
-  </Flex>
+  </Box>
 );
 
 export const WithFontWeight = () => (
-  <Flex direction="column" gap={8}>
+  <Box flex direction="column">
     <Text as="p" variant="bodyMd" fontWeight="bold">
       Sales this year
     </Text>
@@ -86,11 +86,11 @@ export const WithFontWeight = () => (
     <Text as="p" variant="bodyMd" fontWeight="regular">
       Sales this year
     </Text>
-  </Flex>
+  </Box>
 );
 
 export const WithColor = () => (
-  <Flex direction="column" gap={8}>
+  <Box flex direction="column">
     <Text as="p" variant="bodyMd" color="subdued">
       Use to de-emphasize a piece of text that is less important to merchants
       than other nearby text. May also be used to indicate when normal content
@@ -114,7 +114,7 @@ export const WithColor = () => (
         Use in situations where background is dark.
       </Text>
     </div>
-  </Flex>
+  </Box>
 );
 
 export const WithTruncate = () => (

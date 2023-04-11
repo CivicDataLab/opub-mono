@@ -237,7 +237,7 @@ export const PlainDisclosure = () => (
 );
 
 // export const PseudoStates = () => (
-//   <Flex gap={12} className="story-grid pseudo">
+//   <Box flex gap="12" className="story-grid pseudo">
 //     <div style={{ outline: 'none' }}>
 //       <Button>Normal</Button>
 //     </div>
@@ -253,5 +253,5 @@ export const PlainDisclosure = () => (
 //     >
 //       <Button>Hover Focus</Button>
 //     </div>
-//   </Flex>
+//   </Box>
 // );
