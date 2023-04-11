@@ -6,16 +6,16 @@ $button-size: 20px;
 .Tag {
   --tag-bg-standard: var(--surface-neutral);
   --tag-fg-standard: var(--text);
-  --tag-bg-one: var(--decorative-surface-one);
-  --tag-fg-one: var(--decorative-text-one);
-  --tag-bg-two: var(--decorative-surface-two);
-  --tag-fg-two: var(--decorative-text-two);
-  --tag-bg-three: var(--decorative-surface-three);
-  --tag-fg-three: var(--decorative-text-three);
-  --tag-bg-four: var(--decorative-surface-four);
-  --tag-fg-four: var(--decorative-text-four);
-  --tag-bg-five: var(--decorative-surface-five);
-  --tag-fg-five: var(--decorative-text-five);
+  --tag-bg-one: var(--surface-decorative-one);
+  --tag-fg-one: var(--text-decorative-one);
+  --tag-bg-two: var(--surface-decorative-two);
+  --tag-fg-two: var(--text-decorative-two);
+  --tag-bg-three: var(--surface-decorative-three);
+  --tag-fg-three: var(--text-decorative-three);
+  --tag-bg-four: var(--surface-decorative-four);
+  --tag-fg-four: var(--text-decorative-four);
+  --tag-bg-five: var(--surface-decorative-five);
+  --tag-fg-five: var(--text-decorative-five);
 
   --background-color: var(--tag-bg-standard);
   --text-color: var(--tag-fg-standard);

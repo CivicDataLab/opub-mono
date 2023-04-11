@@ -66,7 +66,12 @@ export type ColorsSurfaceTokenAlias =
   | 'surface-warning'
   | 'surface-warning-subdued'
   | 'surface-warning-subdued-hovered'
-  | 'surface-warning-subdued-pressed';
+  | 'surface-warning-subdued-pressed'
+  | 'surface-decorative-one'
+  | 'surface-decorative-two'
+  | 'surface-decorative-three'
+  | 'surface-decorative-four'
+  | 'surface-decorative-five';
 
 export type ColorsBackdropTokenAlias = 'backdrop';
 
@@ -99,21 +104,6 @@ export type ColorsTokenName =
   | ColorsBackdropTokenAlias
   | ColorsOverlayTokenAlias
   | ColorsBorderTokenAlias
-  | 'decorative-five-icon'
-  | 'decorative-five-surface'
-  | 'decorative-five-text'
-  | 'decorative-four-icon'
-  | 'decorative-four-surface'
-  | 'decorative-four-text'
-  | 'decorative-one-icon'
-  | 'decorative-one-surface'
-  | 'decorative-one-text'
-  | 'decorative-three-icon'
-  | 'decorative-three-surface'
-  | 'decorative-three-text'
-  | 'decorative-two-icon'
-  | 'decorative-two-surface'
-  | 'decorative-two-text'
   | 'divider-dark'
   | 'divider'
   | 'focused'
@@ -132,6 +122,11 @@ export type ColorsTokenName =
   | 'icon-success'
   | 'icon-warning'
   | 'icon'
+  | 'icon-decorative-one'
+  | 'icon-decorative-two'
+  | 'icon-decorative-three'
+  | 'icon-decorative-four'
+  | 'icon-decorative-five'
   | 'interactive-critical-disabled'
   | 'interactive-critical-hovered'
   | 'interactive-critical-pressed'
@@ -158,7 +153,12 @@ export type ColorsTokenName =
   | 'text-subdued-on-dark'
   | 'text-subdued'
   | 'text-success'
-  | 'text-warning';
+  | 'text-warning'
+  | 'text-decorative-one'
+  | 'text-decorative-two'
+  | 'text-decorative-three'
+  | 'text-decorative-four'
+  | 'text-decorative-five';
 
 export type ColorsTokenGroup = {
   [TokenName in ColorsTokenName]: string;
@@ -742,72 +742,72 @@ export const colors: {
   'surface-attention': {
     value: 'rgba(255, 234, 138, 1)',
   },
-  'decorative-one-icon': {
+  'icon-decorative-one': {
     value: 'rgba(126, 87, 0, 1)',
     description:
       'For use as a decorative icon color that is applied on a decorative surface.',
   },
-  'decorative-one-surface': {
+  'surface-decorative-one': {
     value: 'rgba(255, 201, 107, 1)',
     description: 'For use as a decorative surface color.',
   },
-  'decorative-one-text': {
+  'text-decorative-one': {
     value: 'rgba(61, 40, 0, 1)',
     description:
       'For use as a decorative text color that is applied on a decorative surface.',
   },
-  'decorative-two-icon': {
+  'icon-decorative-two': {
     value: 'rgba(175, 41, 78, 1)',
     description:
       'For use as a decorative icon color that is applied on a decorative surface.',
   },
-  'decorative-two-surface': {
+  'surface-decorative-two': {
     value: 'rgba(255, 196, 176, 1)',
     description: 'For use as a decorative surface color.',
   },
-  'decorative-two-text': {
+  'text-decorative-two': {
     value: 'rgba(73, 11, 28, 1)',
     description:
       'For use as a decorative text color that is applied on a decorative surface.',
   },
-  'decorative-three-icon': {
+  'icon-decorative-three': {
     value: 'rgba(0, 109, 65, 1)',
     description:
       'For use as a decorative icon color that is applied on a decorative surface.',
   },
-  'decorative-three-surface': {
+  'surface-decorative-three': {
     value: 'rgba(146, 230, 181, 1)',
     description: 'For use as a decorative surface color.',
   },
-  'decorative-three-text': {
+  'text-decorative-three': {
     value: 'rgba(0, 47, 25, 1)',
     description:
       'For use as a decorative text color that is applied on a decorative surface.',
   },
-  'decorative-four-icon': {
+  'icon-decorative-four': {
     value: 'rgba(0, 106, 104, 1)',
     description:
       'For use as a decorative icon color that is applied on a decorative surface.',
   },
-  'decorative-four-surface': {
+  'surface-decorative-four': {
     value: 'rgba(145, 224, 214, 1)',
     description: 'For use as a decorative surface color.',
   },
-  'decorative-four-text': {
+  'text-decorative-four': {
     value: 'rgba(0, 45, 45, 1)',
     description:
       'For use as a decorative text color that is applied on a decorative surface.',
   },
-  'decorative-five-icon': {
+  'icon-decorative-five': {
     value: 'rgba(174, 43, 76, 1)',
     description:
       'For use as a decorative icon color that is applied on a decorative surface.',
   },
-  'decorative-five-surface': {
+  'surface-decorative-five': {
     value: 'rgba(253, 201, 208, 1)',
     description: 'For use as a decorative surface color.',
   },
-  'decorative-five-text': {
+  'text-decorative-five': {
     value: 'rgba(79, 14, 31, 1)',
     description:
       'For use as a decorative text color that is applied on a decorative surface.',

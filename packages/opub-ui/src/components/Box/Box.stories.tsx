@@ -25,6 +25,27 @@ export const Default: Story = {
   },
 };
 
+export const Flex: Story = {
+  args: {
+    flex: true,
+    gap: '2',
+    children: (
+      <>
+        <Box background="surface-decorative-one" padding="4" borderRadius="3">
+          <Text as="h2" variant="bodyMd" fontWeight="medium">
+            Content inside a box 1
+          </Text>
+        </Box>
+        <Box background="surface-decorative-two" padding="4" borderRadius="3">
+          <Text as="h2" variant="bodyMd" fontWeight="medium">
+            Content inside a box 2
+          </Text>
+        </Box>
+      </>
+    ),
+  },
+};
+
 export const BorderWidth: Story = {
   args: {
     ...Default.args,
