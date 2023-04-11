@@ -20,67 +20,29 @@ export const Basic = () => (
     component={Avatar}
     common={{}}
     xAxis={{
-      Default: {},
+      ExtraSmall: {
+        size: 'ExtraSmall',
+      },
+      Small: {
+        size: 'Small',
+      },
+      Medium: {
+        size: 'Medium',
+      },
+      Large: {
+        size: 'Large',
+      },
     }}
     yAxis={{
-      'Extra small + Initials': {
-        size: 'ExtraSmall',
+      ' Initials': {
         type: 'initials',
         name: 'Oluwayemisi Eun-Jung',
       },
-      'Small + Initials': {
-        size: 'Small',
-        type: 'initials',
-        name: 'Oluwayemisi Eun-Jung',
-      },
-      'Medium + Initials': {
-        size: 'Medium',
-        type: 'initials',
-        name: 'Oluwayemisi Eun-Jung',
-      },
-      'Large + Initials': {
-        size: 'Large',
-        type: 'initials',
-        name: 'Oluwayemisi Eun-Jung',
-      },
-      'Extra small + customer': {
-        size: 'ExtraSmall',
+      Customers: {
         type: 'customer',
         image: 'public/user.svg',
       },
-      'Small + customer': {
-        size: 'Small',
-        type: 'customer',
-        image: 'public/user.svg',
-      },
-      'Medium + customer': {
-        size: 'Medium',
-        type: 'customer',
-        image: 'public/user.svg',
-      },
-      'Large + customer': {
-        size: 'Large',
-        type: 'customer',
-        image: 'public/user.svg',
-      },
-      'ExtraSmall + Profile Picture + customer ': {
-        size: 'ExtraSmall',
-        type: 'Profile_Customer',
-        image: 'public/profile.svg',
-      },
-      'Small + Profile Picture + customer ': {
-        size: 'Small',
-        type: 'Profile_Customer',
-        image: 'public/profile.svg',
-      },
-
-      'Medium + Profile Picture + customer ': {
-        size: 'Medium',
-        type: 'Profile_Customer',
-        image: 'public/profile.svg',
-      },
-      'Large + Profile Picture + customer ': {
-        size: 'Large',
+      ' Profile Picture  ': {
         type: 'Profile_Customer',
         image: 'public/profile.svg',
       },
