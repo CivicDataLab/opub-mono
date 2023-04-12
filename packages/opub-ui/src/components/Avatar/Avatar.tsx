@@ -47,7 +47,7 @@ const Avatar = ({ label, size, type, image, name }: Props) => {
   );
 
   return (
-    <Box flex gap={'8'} justifyContent={'center'}>
+    <Box flex gap={'2'} justifyContent={'center'} alignItems="center">
       <AvatarRadix.Root className={className}>
         {image ? (
           <AvatarRadix.Image src={image}></AvatarRadix.Image>
