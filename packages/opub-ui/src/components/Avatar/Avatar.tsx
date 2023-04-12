@@ -1,7 +1,7 @@
 import * as AvatarRadix from '@radix-ui/react-avatar';
 import styles from './Avatar.module.scss';
 import cx from 'classnames';
-import { Flex } from '../Flex';
+import { Box } from '../Box';
 
 type Props = {
   label?: Boolean;
@@ -47,7 +47,7 @@ const Avatar = ({ label, size, type, image, name }: Props) => {
   );
 
   return (
-    <Flex gap={'8px'} justifyContent={'center'}>
+    <Box flex gap={'8'} justifyContent={'center'}>
       <AvatarRadix.Root className={className}>
         {image ? (
           <AvatarRadix.Image src={image}></AvatarRadix.Image>
@@ -55,8 +55,8 @@ const Avatar = ({ label, size, type, image, name }: Props) => {
           <AvatarRadix.Fallback>{ProfileName}</AvatarRadix.Fallback>
         )}
       </AvatarRadix.Root>
-      {label && <Flex marginY={'auto'}>{name}</Flex>}
-    </Flex>
+      {label && <Box flex>{name}</Box>}
+    </Box>
   );
 };
 
