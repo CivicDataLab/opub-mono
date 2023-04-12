@@ -30,5 +30,7 @@ export const MaxItems: Story = {
       console.log(crumb);
     },
     maxItems: 3,
+    itemsBeforeCollapse: 1,
+    itemsAfterCollapse: 1,
   },
 };

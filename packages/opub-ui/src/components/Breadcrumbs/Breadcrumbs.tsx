@@ -6,35 +6,59 @@ type Props = {
   crumbs: any;
   selected: (crumb: any) => void;
   maxItems?: number;
+  itemsBeforeCollapse?: number;
+  itemsAfterCollapse?: number;
 };
 
 const className = cx(styles.Breadcrumbs);
 
-const Breadcrumbs = ({ crumbs, selected, maxItems = 20 }: Props) => {
-  const [collapsed, setCollapsed] = React.useState(
-    maxItems > crumbs.length ? false : true
-  );
-  const visibleCrumbs = collapsed
-    ? maxItems == 1
-      ? [crumbs[0]]
-      : [crumbs[0], ...crumbs.slice(-maxItems + 1)]
+const Breadcrumbs = ({
+  crumbs,
+  selected,
+  maxItems = 20,
+  itemsBeforeCollapse,
+  itemsAfterCollapse,
+}: Props) => {
+  const [collapsed, setCollapsed] = React.useState(true);
+
+  React.useEffect(() => {
+    if (itemsBeforeCollapse && itemsAfterCollapse) {
+      const totalVisibleItems = itemsBeforeCollapse + itemsAfterCollapse;
+      setCollapsed(totalVisibleItems >= crumbs.length ? false : true);
+    }
+  }, [crumbs, itemsBeforeCollapse, itemsAfterCollapse]);
+
+  const visibleCrumbsBeforeCollapse = collapsed
+    ? [...crumbs.slice(0, itemsBeforeCollapse)]
     : crumbs;
+
+  const visibleCrumbsAfterCollapse = collapsed
+    ? itemsAfterCollapse
+      ? [...crumbs.slice(-itemsAfterCollapse)]
+      : []
+    : [];
+
+  const visibleCrumbs =
+    crumbs.length >
+    visibleCrumbsBeforeCollapse.length + visibleCrumbsAfterCollapse.length;
+
   const hasMoreCrumbs = crumbs.length > maxItems;
 
   return (
-    <nav className={className}>
+    <nav aria-label="Breadcrumb" className={className}>
       <ol className={styles.List}>
-        {visibleCrumbs.length > 0 && (
-          <li className={styles.ListItem}>
-            <button
-              className={`${styles.Button} ${styles.ButtonLink}`}
-              onClick={() => selected(visibleCrumbs[0])}
-            >
-              {visibleCrumbs[0]}
-            </button>
-          </li>
-        )}
-        {collapsed && hasMoreCrumbs && (
+        {visibleCrumbsBeforeCollapse.length > 0 &&
+          visibleCrumbsBeforeCollapse.map((crumb: any, index: any) => (
+            <li key={`crumb_item${index}`} className={styles.ListItem}>
+              <button
+                className={`${styles.Button} ${styles.ButtonLink}`}
+                onClick={() => selected(crumb)}
+              >
+                {crumb}
+              </button>
+            </li>
+          ))}
+        {visibleCrumbs && collapsed && hasMoreCrumbs && (
           <li className={styles.CollapseItem}>
             <span
               className={styles.CollapseToggle}
@@ -44,16 +68,17 @@ const Breadcrumbs = ({ crumbs, selected, maxItems = 20 }: Props) => {
             </span>
           </li>
         )}
-        {visibleCrumbs.slice(1).map((crumb: any, index: any) => (
-          <li key={`crumb_item${index}`} className={styles.ListItem}>
-            <button
-              className={`${styles.Button} ${styles.ButtonLink}`}
-              onClick={() => selected(crumb)}
-            >
-              {crumb}
-            </button>
-          </li>
-        ))}
+        {visibleCrumbsAfterCollapse.length > 0 &&
+          visibleCrumbsAfterCollapse.map((crumb: any, index: any) => (
+            <li key={`crumb_item${index}`} className={styles.ListItem}>
+              <button
+                className={`${styles.Button} ${styles.ButtonLink}`}
+                onClick={() => selected(crumb)}
+              >
+                {crumb}
+              </button>
+            </li>
+          ))}
       </ol>
     </nav>
   );
