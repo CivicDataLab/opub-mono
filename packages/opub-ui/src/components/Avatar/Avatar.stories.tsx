@@ -1,7 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { Avatar } from './Avatar';
-import { User } from '@opub-icons/workflow';
-import { PropsVariationSection } from '@ui/utils/helpers';
+import { PropsVariationSection } from '../../utils';
 
 /**
  * Avatars are used to show a thumbnail representation of an individual or business in the interface.
