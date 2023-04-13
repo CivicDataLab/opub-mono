@@ -21,6 +21,9 @@ const Breadcrumbs = ({
 
   React.useEffect(() => {
     if (itemsBeforeCollapse && itemsAfterCollapse) {
+      if (itemsBeforeCollapse && itemsBeforeCollapse < 1) {
+        throw new Error('itemsBeforeCollapse should be a positive number');
+      }
       const totalVisibleItems = itemsBeforeCollapse + itemsAfterCollapse;
       setCollapsed(totalVisibleItems >= crumbs.length ? false : true);
     }
