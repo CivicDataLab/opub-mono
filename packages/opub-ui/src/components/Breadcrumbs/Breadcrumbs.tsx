@@ -26,6 +26,8 @@ const Breadcrumbs = ({
       }
       const totalVisibleItems = itemsBeforeCollapse + itemsAfterCollapse;
       setCollapsed(totalVisibleItems >= crumbs.length ? false : true);
+    } else {
+      setCollapsed(false);
     }
   }, [crumbs, itemsBeforeCollapse, itemsAfterCollapse]);
 
