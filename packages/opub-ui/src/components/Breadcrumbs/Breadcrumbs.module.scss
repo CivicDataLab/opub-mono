@@ -4,14 +4,14 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
-  margin-top: 4rem;
+  margin-top: var(--space-1);
 }
 
 .List {
   display: flex;
   flex-wrap: wrap;
-  padding: 0;
-  margin-bottom: 1rem;
+  padding: var(--space-0);
+  margin-bottom: var(--space-1);
   list-style: none;
 }
 
@@ -21,11 +21,11 @@
 
 .List > li + li:before {
   content: '/';
-  padding: 0 0.5rem;
+  padding: var(--space-0) var(--space-05);
 }
 
 .List > .active {
-  color: #6c757d;
+  color: var(--focused);
 }
 
 .ListItem {
@@ -34,7 +34,7 @@
 
   & + &::before {
     content: '/';
-    padding: 0 0.5rem;
+    padding: var(--space-0) var(--space-05);
   }
 }
 
@@ -45,33 +45,30 @@
 
 .Button {
   display: inline-block;
-  font-weight: 400;
   text-align: center;
   white-space: nowrap;
   vertical-align: middle;
   cursor: pointer;
-  border: 1px solid transparent;
-  padding: 0.3rem 0.1rem;
-  font-size: 1rem;
-  line-height: 1.5;
+  border: var(--border-transparent);
+  font-size: var(--font-size-200);
 }
 
 .ButtonLink {
-  color: #000;
+  color: var(--text);
   background-color: transparent;
   border-color: transparent;
 }
 
 .ButtonLink:hover {
-  color: #0056b3;
+  color: var(--interactive-hovered);
   text-decoration: underline;
   background-color: transparent;
   border-color: transparent;
 }
 
 .CollapseToggle {
-  font-size: 14px;
-  color: #0079bf;
+  font-size: var(--font-size-100);
+  color: var(--interactive-hovered);
   cursor: pointer;
 
   &:hover {
