@@ -42,8 +42,8 @@
     }
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx,scss}": [
-      "eslint",
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --",
       "prettier --write"
     ]
   },
