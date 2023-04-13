@@ -5,7 +5,6 @@ import cx from 'classnames';
 type Props = {
   crumbs: any;
   selected: (crumb: any) => void;
-  maxItems?: number;
   itemsBeforeCollapse?: number;
   itemsAfterCollapse?: number;
 };
@@ -15,7 +14,6 @@ const className = cx(styles.Breadcrumbs);
 const Breadcrumbs = ({
   crumbs,
   selected,
-  maxItems = 20,
   itemsBeforeCollapse,
   itemsAfterCollapse,
 }: Props) => {
@@ -38,12 +36,6 @@ const Breadcrumbs = ({
       : []
     : [];
 
-  const visibleCrumbs =
-    crumbs.length >
-    visibleCrumbsBeforeCollapse.length + visibleCrumbsAfterCollapse.length;
-
-  const hasMoreCrumbs = crumbs.length > maxItems;
-
   return (
     <nav aria-label="Breadcrumb" className={className}>
       <ol className={styles.List}>
@@ -58,7 +50,7 @@ const Breadcrumbs = ({
               </button>
             </li>
           ))}
-        {visibleCrumbs && collapsed && hasMoreCrumbs && (
+        {collapsed && (
           <li className={styles.CollapseItem}>
             <span
               className={styles.CollapseToggle}
