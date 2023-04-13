@@ -7,10 +7,15 @@ module.exports = {
       rootDir: ['apps/*/'],
     },
   },
+  env: {
+    browser: true,
+    jest: true,
+    node: true,
+  },
   parser: '@typescript-eslint/parser',
   plugins: ['@typescript-eslint'],
   parserOptions: {
     sourceType: 'module',
-    ecmaVersion: 12,
+    ecmaVersion: 'es2022',
   },
 };

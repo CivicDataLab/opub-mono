@@ -42,8 +42,8 @@
     "build-storybook": "storybook build",
     "test": "vitest",
     "coverage": "vitest run --coverage",
-    "lint": "eslint 'src/**/*.{js,jsx,ts,tsx}'",
-    "lint:fix": "eslint --fix 'src/**/*.{jsx,ts,tsx}'",
+    "lint": "eslint --ext=tsx src",
+    "lint:fix": "eslint --ext=ts,tsx,js,jsx src --fix",
     "chromatic": "npx chromatic --exit-once-uploaded --project-token=795f989bc619",
     "clean": "rm -rf .turbo node_modules dist"
   },

@@ -1,7 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react';
-import { useState } from 'react';
-import { Link } from '../Link';
-import { IndexTable, createColumnHelper } from './IndexTable';
+import { createColumnHelper, IndexTable } from './IndexTable';
 
 /**
  * Data tables are used to organize and display all information from a data set.
@@ -213,8 +211,6 @@ const columnsSort = [
 
 export const Sortable: Story = {
   render: ({ ...args }) => {
-    const [sortedRows, setSortedRows] = useState<any>(null);
-
     return (
       <IndexTable
         {...args}
@@ -222,7 +218,7 @@ export const Sortable: Story = {
         defaultSortDirection="desc"
         initialSortColumnIndex={4}
         // onSort={handleSort}
-        rows={sortedRows || tableData}
+        rows={tableData}
       />
     );
   },
@@ -236,15 +232,13 @@ export const Sortable: Story = {
 
 export const SelectionAcrossPages: Story = {
   render: ({ ...args }) => {
-    const [sortedRows, setSortedRows] = useState<any>(null);
-
     return (
       <IndexTable
         {...args}
         sortable={true}
         defaultSortDirection="desc"
         initialSortColumnIndex={4}
-        rows={sortedRows || tableData}
+        rows={tableData}
       />
     );
   },

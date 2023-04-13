@@ -12,10 +12,6 @@ export type ResponsiveProp<T> =
       [Breakpoint in BreakpointsAlias]?: T;
     };
 
-// export function classNames(...classes: (string | Falsy)[]) {
-//   return classes.filter(Boolean).join(' ');
-// }
-
 export function sanitizeCustomProperties(
   styles: React.CSSProperties
 ): React.CSSProperties | undefined {
