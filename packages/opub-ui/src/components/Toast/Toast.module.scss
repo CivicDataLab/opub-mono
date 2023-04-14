@@ -1,9 +1,14 @@
+.ToastContainer{
+display: grid;
+gap:var(--space-3)
+}
+
 .ToastViewPort {
   position: fixed;
-  bottom: 0;
+  bottom:0;
   right: 0;
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   padding: var(--space-3);
   gap: 10px;
   min-width: 146px;
@@ -19,18 +24,18 @@
   border-radius: var(--border-radius-1);
   box-shadow: var(--shadow-popover);
   padding: var(--space-3);
-  display: grid;
-  grid-template-areas: 'title action close' '. . .';
-  grid-template-columns: auto max-content;
-  column-gap: var(--space-1);
+  display: flex;
+  width: 100%;
+  column-gap: var(--space-2);
+  justify-content: space-between;
   align-items: center;
 }
 
 .ToastRoot[data-state='open'] {
-  animation: var(--keyframes-fade-in) var(--duration-150) var(--ease-in);
+  animation: slideIn var(--duration-150) var(--ease-in);
 }
 .ToastRoot[data-state='closed'] {
-  animation: hide var(--duration-100) var(--ease-in);
+  animation: swipeOut var(--duration-100) var(--ease-in);
 }
 .ToastRoot[data-swipe='move'] {
   transform: translateX(var(--radix-toast-swipe-move-x));
@@ -41,11 +46,6 @@
 }
 .ToastRoot[data-swipe='end'] {
   animation: swipeOut var(--duration-100) var(--ease-out);
-}
-.ToastDescriptionArea {
-  grid-template-areas:
-    'title action close'
-    'description action close';
 }
 
 .ToastError {
@@ -63,7 +63,7 @@
 
 @keyframes slideIn {
   from {
-    transform: translateX(calc(100% + var(--viewport-padding)));
+    transform: translateX(calc(100% + var(--space-6)));
   }
   to {
     transform: translateX(0);
@@ -75,12 +75,11 @@
     transform: translateX(var(--radix-toast-swipe-end-x));
   }
   to {
-    transform: translateX(calc(100% + var(--viewport-padding)));
+    transform: translateX(calc(100% + var(--space-6)));
   }
 }
 
 .ToastTitle {
-  grid-area: title;
   font-weight: var(--font-weight-medium);
   color: var(--surface);
   font-size: var(--font-size-100);
@@ -97,7 +96,6 @@
 }
 
 .ToastDescription {
-  grid-area: description;
   margin: 0;
   color: var(--surface);
   font-size: var(--font-size-75);
@@ -105,7 +103,6 @@
 }
 
 .ToastAction {
-  grid-area: action;
   color: var(--surface);
   border: 0;
   background: transparent;
@@ -118,7 +115,6 @@
 }
 
 .ToastClose {
-  grid-area: close;
   border: 0;
   background: transparent;
   cursor: pointer;
