@@ -1,0 +1,77 @@
+@import '../../../styles/common';
+
+.Breadcrumbs {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: var(--space-1);
+}
+
+.List {
+  display: flex;
+  flex-wrap: wrap;
+  padding: var(--space-0);
+  margin-bottom: var(--space-1);
+  list-style: none;
+}
+
+.List > li {
+  display: flex;
+}
+
+.List > li + li:before {
+  content: '/';
+  padding: var(--space-0) var(--space-05);
+}
+
+.List > .active {
+  color: var(--focused);
+}
+
+.ListItem {
+  display: flex;
+  align-items: center;
+
+  & + &::before {
+    content: '/';
+    padding: var(--space-0) var(--space-05);
+  }
+}
+
+.CollapseItem {
+  display: flex;
+  align-items: center;
+}
+
+.Button {
+  display: inline-block;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  border: var(--border-transparent);
+  font-size: var(--font-size-200);
+}
+
+.ButtonLink {
+  color: var(--text);
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.ButtonLink:hover {
+  color: var(--interactive-hovered);
+  text-decoration: underline;
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.CollapseToggle {
+  font-size: var(--font-size-100);
+  color: var(--interactive-hovered);
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
