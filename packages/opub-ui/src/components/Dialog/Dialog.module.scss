@@ -100,7 +100,9 @@ $large-width: 980px;
 
   &[data-state='open'] {
     animation: contentShow var(--duration-200) var(--ease);
-
+    &.Instant {
+      animation-duration: 0;
+    }
     @media #{$breakpoints-md-down} {
       --show-from: translate(0, 10%);
       --show-to: translate(0, 0);
@@ -109,6 +111,9 @@ $large-width: 980px;
 
   &[data-state='closed'] {
     animation: contentHide var(--duration-200) var(--ease);
+    &.Instant {
+      animation-duration: 0;
+    }
 
     @media #{$breakpoints-md-down} {
       --hide-from: translate(0, 0);

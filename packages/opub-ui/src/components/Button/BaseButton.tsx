@@ -1,7 +1,7 @@
+import React, { LegacyRef } from 'react';
 import type { BaseButtonProps } from '../../types/button';
 import { handleMouseUpByBlurring } from '../../utils/focus';
 import { useDisableClick } from '../../utils/hooks';
-import React, { LegacyRef } from 'react';
 import { UnstyledLink } from '../Link/BaseLink';
 export interface UnstyledButtonProps extends BaseButtonProps {
   /** The content to display inside the button */
@@ -88,6 +88,7 @@ export const UnstyledButton = React.forwardRef(
           aria-expanded={ariaExpanded}
           aria-describedby={ariaDescribedBy}
           aria-pressed={pressed}
+          aria-checked={ariaChecked}
           onKeyDown={onKeyDown}
           onKeyUp={onKeyUp}
           onClick={handleClick}

@@ -116,7 +116,6 @@ export const DropZone: React.FunctionComponent<DropZoneProps> & {
   allowMultiple = defaultAllowMultiple,
   overlayText,
   errorOverlayText,
-  id: idProp,
   type = 'file',
   onClick,
   error,

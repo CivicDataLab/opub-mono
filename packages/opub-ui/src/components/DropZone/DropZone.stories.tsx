@@ -24,7 +24,7 @@ export const Default: Story = {
     const [files, setFiles] = useState<File[]>([]);
 
     const handleDropZoneDrop = useCallback(
-      (_dropFiles: File[], acceptedFiles: File[], _rejectedFiles: File[]) => {
+      (_dropFiles: File[], acceptedFiles: File[]) => {
         setFiles((files) => [...files, ...acceptedFiles]);
       },
       []
@@ -81,7 +81,7 @@ export const SingleUpload: Story = {
     const [file, setFile] = useState<File>();
 
     const handleDropZoneDrop = useCallback(
-      (_dropFiles: File[], acceptedFiles: File[], _rejectedFiles: File[]) => {
+      (_dropFiles: File[], acceptedFiles: File[]) => {
         setFile(acceptedFiles[0]);
       },
       []
@@ -155,7 +155,7 @@ export const CustomHint: Story = {
     const [files, setFiles] = useState<File[]>([]);
 
     const handleDropZoneDrop = useCallback(
-      (_dropFiles: File[], acceptedFiles: File[], _rejectedFiles: File[]) => {
+      (_dropFiles: File[], acceptedFiles: File[]) => {
         setFiles((files) => [...files, ...acceptedFiles]);
       },
       []
@@ -211,8 +211,7 @@ export const CustomTrigger: Story = {
     const [openFileDialog, setOpenFileDialog] = useState(false);
 
     const handleDropZoneDrop = useCallback(
-      (dropFiles: File[], _acceptedFiles: File[], _rejectedFiles: File[]) =>
-        setFiles((files) => [...files, ...dropFiles]),
+      (dropFiles: File[]) => setFiles((files) => [...files, ...dropFiles]),
       []
     );
     const toggleOpenFileDialog = useCallback(
@@ -261,6 +260,7 @@ export const CustomTrigger: Story = {
           openFileDialog={openFileDialog}
           onDrop={handleDropZoneDrop}
           onFileDialogClose={toggleOpenFileDialog}
+          {...args}
         >
           {fileUpload}
           {uploadedFiles}

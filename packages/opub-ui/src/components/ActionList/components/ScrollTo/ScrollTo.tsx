@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useId, useRef } from 'react';
+import { useContext, useEffect, useId, useRef } from 'react';
 
 import { ScrollableContext } from './context';
 

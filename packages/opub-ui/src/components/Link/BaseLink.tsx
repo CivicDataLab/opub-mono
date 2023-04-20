@@ -1,5 +1,5 @@
+import { memo } from 'react';
 import type { LinkLikeComponentProps } from '../../types/link';
-import { forwardRef, memo } from 'react';
 import { useLink } from './helpers';
 
 export interface UnstyledLinkProps extends LinkLikeComponentProps {}

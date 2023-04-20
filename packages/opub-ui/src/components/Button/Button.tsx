@@ -207,19 +207,21 @@ const Button = React.forwardRef(
       );
 
       const defaultLabel = 'Related actions';
-      const { disabled, accessibilityLabel: disclosureLabel = defaultLabel } =
-        connectedDisclosure;
+      const {
+        disabled: disclosureDisabled,
+        accessibilityLabel: disclosureLabel = defaultLabel,
+      } = connectedDisclosure;
 
       const connectedDisclosureActivator = (
         <button
           type="button"
           className={connectedDisclosureClassName}
-          aria-disabled={disabled}
+          aria-disabled={disclosureDisabled}
           aria-label={disclosureLabel}
           aria-describedby={ariaDescribedBy}
           aria-checked={ariaChecked}
           onMouseUp={handleMouseUpByBlurring}
-          tabIndex={disabled ? -1 : undefined}
+          tabIndex={disclosureDisabled ? -1 : undefined}
         >
           <span className={styles.Icon}>
             <Icon source={CaretDownMinor} />

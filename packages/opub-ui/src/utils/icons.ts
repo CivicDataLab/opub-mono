@@ -8,7 +8,9 @@ import {
 
 const handler = {
   get: function (target: any, name: any) {
-    return target.hasOwnProperty(name) ? target[name] : AlertMinor; // default value
+    return Object.prototype.hasOwnProperty.call(target, name)
+      ? target[name]
+      : AlertMinor; // default value
   },
 };
 

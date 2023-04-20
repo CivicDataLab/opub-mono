@@ -2,6 +2,9 @@
 
 A WIP (work in progress) platform to speed up the development of Open Data Dashboards, aimed at simplifying the process of creating and managing data visualizations, enabling users to easily analyze and present complex data in a user-friendly and accessible way.
 
+[Stroybook](https://main--64004009fa0a900a3197549c.chromatic.com/)<br>
+[Documentation](https://opub-docs.netlify.app)
+
 ## What's inside?
 
 This repository, built using [Turborepo](https://github.com/vercel/turbo), utilizes [Yarn](https://classic.yarnpkg.com/) as its package manager and contains the following packages and applications:
@@ -13,8 +16,6 @@ This repository, built using [Turborepo](https://github.com/vercel/turbo), utili
 - `packages/opub-ui`: a library of reusable React components used in both the web and docs applications.
 - `packages/eslint-config-custom`: `eslint` configurations for the eslint tool, including `eslint-config-next` and `eslint-config-prettier`.
 - `packages/tsconfig`: configuration files for [TypeScript](https://github.com/microsoft/TypeScript/) used throughout the repository.
-
-To view the Storybook for the component library, please click [here](https://main--64004009fa0a900a3197549c.chromatic.com/). The documentation site can be accessed at the following link: [Documentation](https://opub-docs.netlify.app/).
 
 ### Build
 
@@ -47,12 +48,20 @@ yarn dev --filter @opub-cdl/ui
 
 > Currently this is not working for Linux distros
 
-To auto generate the boilerplate for new a component, install the `new-component` module globally
+This repo includes a `new-component` module to help create boilerplate for component creation.
 
 ```
-yarn global add git+https://github.com/CivicDataLab/new-component.git
-
-new-component ComponentName
+yarn run new-component Button
 ```
 
-This will create a new component directory in `packages/opub-ui/src` with required files for component, test, storybook and styling.
+This will create a new component directory in `packages/opub-ui/src` with required files and also export the component in the index.ts
+
+```
+components/
+┣ Button/
+┃ ┣ Button.module.scss/
+┃ ┣ Button.stories.tsx/
+┃ ┣ Button.test.tsx/
+┃ ┣ Button.tsx/
+┃ ┣ index.ts/
+```

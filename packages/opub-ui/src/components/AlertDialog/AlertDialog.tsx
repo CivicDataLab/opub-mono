@@ -9,6 +9,7 @@ interface DialogProps extends AlertDialogRadix.DialogProps {
   Trigger?: AlertDialogRadix.DialogTriggerProps;
   Content?: ContentProps;
 }
+// console.log();
 
 const AlertDialog = ({ children, ...props }: DialogProps) => {
   return <AlertDialogRadix.Root {...props}>{children}</AlertDialogRadix.Root>;
@@ -72,14 +73,15 @@ const Content = forwardRef((props: ContentProps, ref: any) => {
     ...others
   } = props;
   const rId = React.useId();
-  const finalId = props.id || rId;
+  const finalId = id || rId;
 
   const classname = cx(
     styles.Dialog,
     small && styles.sizeSmall,
     large && styles.sizeLarge,
     limitHeight && styles.limitHeight,
-    fullScreen && styles.fullScreen
+    fullScreen && styles.fullScreen,
+    instant && styles.Instant
   );
 
   return (

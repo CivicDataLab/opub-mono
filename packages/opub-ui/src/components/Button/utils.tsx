@@ -9,20 +9,11 @@ export function buttonFrom(
 ) {
   return (
     <Button key={key} onClick={onAction} {...action} {...overrides}>
-      {/* @ts-ignore */}
       {content}
     </Button>
   );
 }
 
-export function buttonsFrom(
-  action: ComplexAction,
-  overrides?: Partial<ButtonProps>
-): React.ReactElement<ButtonProps>;
-export function buttonsFrom(
-  actions: ComplexAction[],
-  overrides?: Partial<ButtonProps>
-): React.ReactElement<ButtonProps>[];
 export function buttonsFrom(
   actions: ComplexAction[] | ComplexAction,
   overrides: Partial<ButtonProps> = {}

@@ -1,7 +1,8 @@
 import { Meta, StoryObj } from '@storybook/react';
-import { Toast } from './Toast';
+import { Toaster } from './Toaster';
 import { Button } from '../Button';
-import { useState } from 'react';
+import { useToast } from '@ui/utils/hooks/use-toast';
+import { ToastAction } from './Toast';
 
 /**
  * Toast Description A succinct message that is displayed temporarily.
@@ -9,96 +10,131 @@ import { useState } from 'react';
  * Reference: https://www.radix-ui.com/docs/primitives/components/toast
  */
 const meta = {
-  component: Toast,
-} satisfies Meta<typeof Toast>;
+  component: Toaster,
+} satisfies Meta<typeof Toaster>;
 
 export default meta;
 
 export const Default = () => {
-  const [open, setOpen] = useState(false);
+  const { toast } = useToast();
 
   return (
-    <Toast
-      swipeDirection="right"
-      toastOpen={open}
-      toastTitle={'Message Sent'}
-      trigger={<Button onClick={() => setOpen(!open)}>Trigger Toast</Button>}
-      toggleToastCallback={setOpen}
-    />
+    <>
+      <Toaster />
+      <Button
+        onClick={() => {
+          toast({
+            title: 'Message Sent',
+          });
+        }}
+      >
+        Trigger Toast
+      </Button>
+    </>
   );
 };
 export const ToastDescription = () => {
-  const [open, setOpen] = useState(false);
-
+  const { toast } = useToast();
   return (
-    <Toast
-      swipeDirection="right"
-      toastOpen={open}
-      toastTitle={'Message Sent'}
-      toastDescription={<p>Lorem ipsum Lorem ipsum dolor sit amet </p>}
-      trigger={
-        <Button onClick={() => setOpen(!open)}>
-          Trigger Toast Description
-        </Button>
-      }
-      toggleToastCallback={setOpen}
-    />
+    <>
+      <Toaster />
+      <Button
+        onClick={() => {
+          toast({
+            title: 'Message Sent',
+            description: 'Lorem ipsum Lorem ipsum dolor sit amet',
+          });
+        }}
+      >
+        Trigger Toast Description
+      </Button>
+    </>
   );
 };
 
 export const ToastWithActionDescription = () => {
-  const [open, setOpen] = useState(false);
-
+  const { toast } = useToast();
   return (
-    <Toast
-      swipeDirection="right"
-      toastOpen={open}
-      toastTitle={'Message Sent'}
-      toastDescription={<p>Lorem ipsum Lorem ipsum dolor sit amet </p>}
-      trigger={
-        <Button onClick={() => setOpen(!open)}>
-          Trigger Toast Action Description
-        </Button>
-      }
-      toggleToastCallback={setOpen}
-      altText="Undo action"
-      toastActionText={'Undo'}
-      actionCallback={() => alert('clicked')}
-    />
+    <>
+      <Toaster />
+      <Button
+        onClick={() => {
+          toast({
+            title: 'Message Sent',
+            description: 'Lorem ipsum Lorem ipsum dolor sit amet',
+            action: <ToastAction altText="Undo">Undo</ToastAction>,
+          });
+        }}
+      >
+        Trigger Toast Action Description
+      </Button>
+    </>
   );
 };
 
 export const WithAction = () => {
-  const [open, setOpen] = useState(false);
-
+  const { toast } = useToast();
   return (
-    <Toast
-      swipeDirection="right"
-      toastOpen={open}
-      toastTitle={'Message Sent'}
-      trigger={
-        <Button onClick={() => setOpen(!open)}>Trigger Action Toast</Button>
-      }
-      toggleToastCallback={setOpen}
-      altText="Undo action"
-      toastActionText={'Undo'}
-      actionCallback={() => alert('clicked')}
-    />
+    <>
+      <Toaster />
+      <Button
+        onClick={() => {
+          toast({
+            title: 'Message Sent',
+            action: <ToastAction altText="Undo">Undo</ToastAction>,
+          });
+        }}
+      >
+        Trigger Toast Action
+      </Button>
+    </>
   );
 };
 
 export const Error = () => {
-  const [open, setOpen] = useState(false);
+  const { toast } = useToast();
   return (
-    <Toast
-      swipeDirection="right"
-      toastOpen={open}
-      toastTitle={'Server Error'}
-      trigger={
-        <Button onClick={() => setOpen(!open)}>Trigger Error Toast</Button>
-      }
-      toggleToastCallback={setOpen}
-      variant="error"
-    />
+    <>
+      <Toaster />
+      <Button
+        onClick={() => {
+          toast({
+            title: 'Message Sent',
+            variant: 'error' ,
+          });
+        }}
+      >
+        Trigger Error Toast
+      </Button>
+    </>
+  );
+};
+
+export const MultiToastDefault = () => {
+  const { toast } = useToast();
+  return (
+    <>
+      <Toaster />
+      <Button
+        onClick={() => {
+          toast({
+            title: 'Message Sent',
+            variant: 'error' ,
+          });
+        }}
+      >
+        Trigger Toast 1
+      </Button>
+
+      <Button
+        onClick={() => {
+          toast({
+            title: 'Image uploaded',
+          });
+        }}
+      >
+        Trigger Toast 2
+      </Button>
+    </>
   );
 };

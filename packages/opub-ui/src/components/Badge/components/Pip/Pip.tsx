@@ -1,7 +1,6 @@
-import React from 'react';
 import cx from 'classnames';
-import { Text } from '../../../Text';
 import { Progress, Status } from '../../../../types/badge';
+import { Text } from '../../../Text';
 import styles from './Pip.module.scss';
 
 export interface PipProps {
