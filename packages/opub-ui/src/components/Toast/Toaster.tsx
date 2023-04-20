@@ -1,8 +1,6 @@
-'use client';
-
-import { useToast } from '@ui/utils/hooks/use-toast';
+// import { useToast } from '@ui/utils/hooks/use-toast';
 import styles from './Toast.module.scss';
-import { stateIcon } from '@ui/utils/icons';
+// import { stateIcon } from '@ui/utils/icons';
 
 import {
   Toast,
@@ -12,6 +10,8 @@ import {
   ToastTitle,
   ToastViewport,
 } from './Toast';
+import { useToast } from '../../utils/hooks/use-toast';
+import { stateIcon } from '../../utils';
 
 export function Toaster() {
   const { toasts } = useToast();
@@ -19,9 +19,9 @@ export function Toaster() {
 
   return (
     <ToastProvider>
-      {toasts.map(function ({ id, title, description, action , ...props }: any) {
+      {toasts.map(function ({ id, title, description, action, ...props }: any) {
         return (
-          <Toast key={id}  {...props}>
+          <Toast key={id} {...props}>
             <div className={styles.ToastContainer}>
               {title && (
                 <ToastTitle>
@@ -40,7 +40,7 @@ export function Toaster() {
               )}
             </div>
             {action}
-            <ToastClose {...props}/>
+            <ToastClose {...props} />
           </Toast>
         );
       })}
