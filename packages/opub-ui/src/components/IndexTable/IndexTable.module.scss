@@ -93,6 +93,10 @@
 
   .Cell {
     border-top: var(--border-divider);
+
+    &:nth-child(2) {
+      padding-left: 0;
+    }
   }
 
   &-selectable {
@@ -299,14 +303,11 @@
     margin: 0;
     --gap: 0px;
     padding: 0;
-
-    .TableHeaderRow & {
-      margin-bottom: -5px;
-      display: block;
-    }
+    margin-bottom: -6px;
+    display: block;
   }
 
   button {
-    --size: 18px;
+    --size: 16px;
   }
 }

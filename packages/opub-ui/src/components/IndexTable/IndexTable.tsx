@@ -108,7 +108,7 @@ const IndexTable = (props: IndexTableProps) => {
                       ? 'indeterminate'
                       : false
                   }
-                  onCheckedChange={() => table.toggleAllPageRowsSelected()}
+                  onChange={() => table.toggleAllPageRowsSelected()}
                 />
               </div>
               <ItemSelectedText
@@ -145,7 +145,7 @@ const IndexTable = (props: IndexTableProps) => {
                         ? 'indeterminate'
                         : false
                     }
-                    onCheckedChange={() => table.toggleAllPageRowsSelected()}
+                    onChange={() => table.toggleAllPageRowsSelected()}
                   />
                 </th>
                 {headerGroup.headers.map((header, index) => {
