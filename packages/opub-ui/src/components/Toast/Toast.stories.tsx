@@ -1,8 +1,8 @@
-import { Meta, StoryObj } from '@storybook/react';
-import { Toaster } from './Toaster';
+import { Meta } from '@storybook/react';
+import { useToast } from '../../utils/hooks/use-toast';
 import { Button } from '../Button';
-import { useToast } from '@ui/utils/hooks/use-toast';
 import { ToastAction } from './Toast';
+import { Toaster } from './Toaster';
 
 /**
  * Toast Description A succinct message that is displayed temporarily.
@@ -100,7 +100,7 @@ export const Error = () => {
         onClick={() => {
           toast({
             title: 'Message Sent',
-            variant: 'error' ,
+            variant: 'error',
           });
         }}
       >
@@ -119,7 +119,7 @@ export const MultiToastDefault = () => {
         onClick={() => {
           toast({
             title: 'Message Sent',
-            variant: 'error' ,
+            variant: 'error',
           });
         }}
       >
