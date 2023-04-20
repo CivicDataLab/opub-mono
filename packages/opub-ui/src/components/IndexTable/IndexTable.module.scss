@@ -136,6 +136,10 @@
     .IncreasedTableDensity & {
       padding: var(--space-2) var(--space-3);
 
+      &:nth-child(2) {
+        padding-left: 0;
+      }
+
       &:first-of-type {
         padding-left: var(--space-3);
       }
@@ -147,7 +151,6 @@
 
     .IncreasedTableDensity & .Heading-left {
       padding-right: 0;
-      padding-left: var(--space-1);
     }
   }
 }
