@@ -1,0 +1,109 @@
+@import '../../../styles/common';
+
+.Avatar {
+  display: flex;
+  height: 40px;
+  width: 40px;
+  border-radius: var(--border-radius-half);
+  background-color: var(--surface-decorative-three);
+  align-items: center;
+  justify-content: center;
+
+  span {
+    display: flex;
+    padding: 6px 3px;
+    font-size: var(--font-size-300);
+    line-height: 28px;
+  }
+  img {
+    width: 24px;
+    height: 28px;
+  }
+}
+.AvatarLarge {
+  display: flex;
+  height: 60px;
+  width: 60px;
+  border-radius: var(--border-radius-half);
+  background-color: var(--surface-decorative-four);
+  justify-content: center;
+  align-items: center;
+  span {
+    display: flex;
+    padding: 9px;
+    font-size: var(--font-size-400);
+    line-height: 28px;
+  }
+  img {
+    width: 37px;
+    height: 42px;
+  }
+}
+
+.AvatarSmall {
+  display: flex;
+  height: 32px;
+  width: 32px;
+  border-radius: var(--border-radius-half);
+  background-color: var(--surface-decorative-two);
+  justify-content: center;
+  align-items: center;
+  span {
+    display: flex;
+    padding: 4.8px 1.8px;
+    font-size: var(--font-size-100);
+    line-height: 28px;
+  }
+  img {
+    width: 20px;
+    height: 22px;
+  }
+}
+
+.AvatarExtraSmall {
+  display: flex;
+  height: 24px;
+  width: 24px;
+  border-radius: var(--border-radius-half);
+  background-color: var(--surface-decorative-one);
+  justify-content: center;
+  align-items: center;
+  span {
+    display: flex;
+    padding: 2px;
+    font-size: var(--font-size-75);
+    line-height: 28px;
+  }
+  img {
+    width: 14px;
+    height: 16px;
+  }
+}
+
+.AvatarProfileMedium {
+  img {
+    height: 40px;
+    width: 40px;
+  }
+}
+
+.AvatarProfileLarge {
+  img {
+    height: 60px;
+    width: 60px;
+  }
+}
+
+.AvatarProfileSmall {
+  img {
+    height: 32px;
+    width: 32px;
+  }
+}
+
+.AvatarProfileExtraSmall {
+  img {
+    height: 24px;
+    width: 24px;
+  }
+}
