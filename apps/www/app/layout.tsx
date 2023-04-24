@@ -1,9 +1,7 @@
+import { siteConfig } from "@/config/site"
+import Provider from "@/components/provider"
 import "@/styles/globals.css"
 import { Inter as FontSans } from "next/font/google"
-import { Toaster } from "@opub-cdl/ui/src"
-import { SSRProvider } from "react-aria"
-
-import { siteConfig } from "@/config/site"
 
 const fontSans = FontSans({ subsets: ["latin"] })
 
@@ -39,10 +37,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={fontSans.className}>
-        <>
-          {children}
-          <Toaster />
-        </>
+        <Provider>{children}</Provider>
       </body>
     </html>
   )
