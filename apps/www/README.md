@@ -1,36 +1,51 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# OPub Web
+
+A platform to speed up the development of Open Data Dashboards. Part of the [OPub project](https://github.com/CivicDataLab/opub-mono).
 
 ## Getting Started
 
-First, run the development server:
+To get started, you can clone the repository and run it locally using the following steps:
+
+1. Clone the repository:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+git clone https://github.com/CivicDataLab/opub-mono.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install dependencies
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+cd opub-mono
 
-[http://localhost:3000/api/hello](http://localhost:3000/api/hello) is an endpoint that uses [Route Handlers](https://beta.nextjs.org/docs/routing/route-handlers). This endpoint can be edited in `app/api/hello/route.ts`.
+yarn
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+3. Start the development server:
 
-## Learn More
+```bash
+turbo dev --filter www
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Documentation
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+OPub uses Next.js new `app` directory. For more information on how to use Next.js, refer to the [Next.js documentation](https://beta.nextjs.org/docs/getting-started).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Community
 
-## Deploy on Vercel
+We use Github Discussions to discuss ideas, proposals and questions about the project. You can [head over there](https://github.com/CivicDataLab/opub-mono/discussions) to interact with the community.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Our [Code of Conduct](../../CODE_OF_CONDUCT.md) applies to all community channels.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Contributing
+
+Contributions to the project are welcome! To contribute, simply fork the repository, make your changes, and submit a pull request.
+
+For more information on contributing to the project, refer to the [CONTRIBUTING.md](../../CONTRIBUTING.md) file.
+
+## License
+
+This project is licensed under the MIT license. For more information, refer to the [LICENSE](LICENSE) file.
+
+## Security
+
+If you believe you have found a security vulnerability in OPub, we encourage you to responsibly disclose this and not open a public issue. We will investigate all legitimate reports. Email `tech@civicdatalab.in` to disclose any security vulnerabilities.

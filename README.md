@@ -11,7 +11,7 @@ This repository, built using [Turborepo](https://github.com/vercel/turbo), utili
 
 ### Apps and Packages
 
-- `apps/web`: web application built using the [Next.js framework](https://github.com/vercel/next.js/)
+- `apps/www`: web application built using the [Next.js framework](https://github.com/vercel/next.js/)
 - `apps/docs`: documentation site built using [Nextra](https://github.com/shuding/nextra)
 - `packages/opub-ui`: a library of reusable React components used in both the web and docs applications.
 - `packages/eslint-config-custom`: `eslint` configurations for the eslint tool, including `eslint-config-next` and `eslint-config-prettier`.
