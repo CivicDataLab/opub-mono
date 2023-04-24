@@ -1,4 +1,5 @@
-import { useRef } from 'react';
+'use client';
+
 import type {
   ActionListItemDescriptor,
   ActionListSection,
@@ -12,6 +13,7 @@ import { Box } from '../Box';
 import { KeypressListener } from '../KeypressListener';
 import { Item, ItemProps } from './components/Item';
 import { Section } from './components/Section';
+import { useRef } from 'react';
 
 export interface ActionListProps {
   /** Collection of actions for list */

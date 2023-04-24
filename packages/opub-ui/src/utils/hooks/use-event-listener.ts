@@ -1,6 +1,7 @@
-import { useEffect, useRef, RefObject } from 'react';
+'use client';
 
 import { useIsomorphicLayoutEffect } from './use-isomorphic-layout-effect';
+import { useEffect, useRef, RefObject } from 'react';
 
 /**
  * Acceptable target elements for `useEventListener`.

@@ -1,6 +1,9 @@
+'use client';
+
+import styles from './Popover.module.scss';
 import * as Radix from '@radix-ui/react-popover';
 import React from 'react';
-import styles from './Popover.module.scss';
+
 export interface PopoverContentProps extends Radix.PopoverContentProps {
   children?: React.ReactNode;
   open?: boolean;

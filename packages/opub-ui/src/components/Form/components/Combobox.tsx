@@ -1,10 +1,12 @@
-import { Controller, useFormContext } from 'react-hook-form';
+'use client';
+
 import { ComboboxSingleProps } from '../../../types';
 import {
   Combobox as ComboboxBase,
   ComboboxMulti as ComboboxMultiBase,
 } from '../../Combobox';
 import { ComboboxMultiProps } from '../../Combobox/components/MultiSelect';
+import { Controller, useFormContext } from 'react-hook-form';
 
 type ComboboxProps = {
   name: string;

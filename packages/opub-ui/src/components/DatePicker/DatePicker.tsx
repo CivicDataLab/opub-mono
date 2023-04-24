@@ -1,9 +1,5 @@
-import { DateValue } from '@react-types/calendar';
-import { CalendarMinor } from '@shopify/polaris-icons';
-import cx from 'classnames';
-import React from 'react';
-import { AriaDatePickerProps, useDatePicker } from 'react-aria';
-import { DatePickerState, useDatePickerState } from 'react-stately';
+'use client';
+
 import { Button } from '../Button';
 import { Calendar } from '../Calendar';
 import { DateField } from '../DateField';
@@ -11,6 +7,12 @@ import { Icon } from '../Icon';
 import { Labelled } from '../Labelled';
 import { Popover } from '../Popover';
 import styles from './DatePicker.module.scss';
+import { DateValue } from '@react-types/calendar';
+import { CalendarMinor } from '@shopify/polaris-icons';
+import cx from 'classnames';
+import React from 'react';
+import { AriaDatePickerProps, useDatePicker } from 'react-aria';
+import { DatePickerState, useDatePickerState } from 'react-stately';
 
 export type DatePickerProps = {
   label: string;

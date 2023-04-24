@@ -1,6 +1,8 @@
-import { Controller, useFormContext } from 'react-hook-form';
+'use client';
+
 import { SelectProps } from '../../../types';
 import { Select as SelectWrapper } from '../../Select';
+import { Controller, useFormContext } from 'react-hook-form';
 
 type Props = {
   name: string;

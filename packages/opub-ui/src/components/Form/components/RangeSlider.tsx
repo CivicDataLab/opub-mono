@@ -1,8 +1,10 @@
-import { Controller, useFormContext } from 'react-hook-form';
+'use client';
+
 import {
   RangeSlider as RangeSliderBase,
   RangeSliderProps,
 } from '../../RangeSlider';
+import { Controller, useFormContext } from 'react-hook-form';
 
 type Props = {
   name: string;

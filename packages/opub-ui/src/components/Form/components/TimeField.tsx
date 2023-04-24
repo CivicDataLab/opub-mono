@@ -1,6 +1,8 @@
+'use client';
+
+import { TimeField as TimeFieldBase, TimeFieldProps } from '../../TimeField';
 import { parseTime } from '@internationalized/date';
 import { Controller, useFormContext } from 'react-hook-form';
-import { TimeField as TimeFieldBase, TimeFieldProps } from '../../TimeField';
 
 type FieldProps = {
   name: string;

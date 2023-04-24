@@ -1,3 +1,5 @@
+'use client';
+
 import React, { Children, isValidElement } from 'react';
 
 // Wraps `element` in `Component`, if it is not already an instance of

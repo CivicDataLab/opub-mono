@@ -1,9 +1,5 @@
-import { DateValue } from '@react-types/calendar';
-import { CalendarMinor } from '@shopify/polaris-icons';
-import cx from 'classnames';
-import React from 'react';
-import { AriaDateRangePickerProps, useDateRangePicker } from 'react-aria';
-import { DateRangePickerState, useDateRangePickerState } from 'react-stately';
+'use client';
+
 import { DateTimeProps } from '../../types/datetime';
 import { Button } from '../Button';
 import { RangeCalendar } from '../Calendar';
@@ -12,6 +8,12 @@ import { Icon } from '../Icon';
 import { Labelled } from '../Labelled';
 import { Popover } from '../Popover';
 import styles from './DatePicker.module.scss';
+import { DateValue } from '@react-types/calendar';
+import { CalendarMinor } from '@shopify/polaris-icons';
+import cx from 'classnames';
+import React from 'react';
+import { AriaDateRangePickerProps, useDateRangePicker } from 'react-aria';
+import { DateRangePickerState, useDateRangePickerState } from 'react-stately';
 
 export type RangePickerProps = {
   label: string;

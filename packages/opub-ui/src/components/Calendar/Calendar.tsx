@@ -1,3 +1,9 @@
+'use client';
+
+import { Icon } from '../Icon';
+import { Text } from '../Text';
+import styles from './Calendar.module.scss';
+import { CalendarGrid } from './components/CalendarGrid';
 import { GregorianCalendar } from '@internationalized/date';
 import { AriaCalendarProps, DateValue } from '@react-types/calendar';
 import { ArrowLeftMinor, ArrowRightMinor } from '@shopify/polaris-icons';
@@ -5,10 +11,6 @@ import cx from 'classnames';
 import { forwardRef, LegacyRef } from 'react';
 import { useCalendar, useLocale } from 'react-aria';
 import { CalendarStateOptions, useCalendarState } from 'react-stately';
-import { Icon } from '../Icon';
-import { Text } from '../Text';
-import styles from './Calendar.module.scss';
-import { CalendarGrid } from './components/CalendarGrid';
 
 function createCalendar(identifier: any) {
   switch (identifier) {

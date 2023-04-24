@@ -1,3 +1,12 @@
+'use client';
+
+import { ComboboxSingleProps } from '../../../types/combobox';
+import itemStyles from '../../ActionList/ActionList.module.scss';
+import { Box } from '../../Box';
+import { Tag } from '../../Tag';
+import { Text } from '../../Text';
+import styles from '../Combobox.module.scss';
+import { Combobox } from './Atoms';
 import {
   ComboboxItem,
   ComboboxPopover,
@@ -7,13 +16,6 @@ import { Portal } from 'ariakit/portal';
 import { SelectItem, SelectList, useSelectState } from 'ariakit/select';
 import cx from 'classnames';
 import { forwardRef, HTMLAttributes, useEffect, useState } from 'react';
-import { ComboboxSingleProps } from '../../../types/combobox';
-import itemStyles from '../../ActionList/ActionList.module.scss';
-import { Box } from '../../Box';
-import { Tag } from '../../Tag';
-import { Text } from '../../Text';
-import styles from '../Combobox.module.scss';
-import { Combobox } from './Atoms';
 
 export type ComboboxMultiProps = ComboboxSingleProps & {
   defaultValues?: string[] | (() => string[]);

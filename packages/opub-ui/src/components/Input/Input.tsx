@@ -1,3 +1,16 @@
+'use client';
+
+import { TextFieldProps } from '../../types/input';
+import { Key } from '../../types/shared/key';
+import { variationName } from '../../utils/css';
+import { useForwardRef } from '../../utils/helpers';
+import { useIsAfterInitialMount } from '../../utils/hooks';
+import { Connected } from '../Connected';
+import { Icon } from '../Icon';
+import { Labelled } from '../Labelled';
+import { Text } from '../Text';
+import styles from './Input.module.scss';
+import { Resizer, Spinner, SpinnerProps } from './components';
 import { CircleCancelMinor } from '@shopify/polaris-icons';
 import cx from 'classnames';
 import React, {
@@ -8,17 +21,6 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { TextFieldProps } from '../../types/input';
-import { Key } from '../../types/shared/key';
-import { variationName } from '../../utils/css';
-import { useForwardRef } from '../../utils/helpers';
-import { useIsAfterInitialMount } from '../../utils/hooks';
-import { Connected } from '../Connected';
-import { Icon } from '../Icon';
-import { Labelled } from '../Labelled';
-import { Text } from '../Text';
-import { Resizer, Spinner, SpinnerProps } from './components';
-import styles from './Input.module.scss';
 
 export const Input = React.forwardRef(
   (

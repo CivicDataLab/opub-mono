@@ -1,7 +1,10 @@
-import cx from 'classnames';
-import React from 'react';
-import styles from './IndexTable.module.scss';
+'use client';
 
+import type { IndexTableProps } from '../../types/datatable';
+import { Checkbox } from '../Checkbox/Checkbox';
+import { Text } from '../Text';
+import styles from './IndexTable.module.scss';
+import { Cell, HeaderCell, Row } from './components';
 import {
   ColumnDef,
   createColumnHelper,
@@ -13,10 +16,8 @@ import {
   SortingState,
   useReactTable,
 } from '@tanstack/react-table';
-import type { IndexTableProps } from '../../types/datatable';
-import { Checkbox } from '../Checkbox/Checkbox';
-import { Text } from '../Text';
-import { Cell, HeaderCell, Row } from './components';
+import cx from 'classnames';
+import React from 'react';
 
 const IndexTable = (props: IndexTableProps) => {
   const {

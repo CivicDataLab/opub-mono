@@ -1,7 +1,8 @@
-import cx from 'classnames';
-import React from 'react';
-import styles from './DataTable.module.scss';
+'use client';
 
+import type { DataTableProps } from '../../types/datatable';
+import styles from './DataTable.module.scss';
+import { Cell, HeaderCell } from './components';
 import {
   flexRender,
   getCoreRowModel,
@@ -9,8 +10,8 @@ import {
   SortingState,
   useReactTable,
 } from '@tanstack/react-table';
-import type { DataTableProps } from '../../types/datatable';
-import { Cell, HeaderCell } from './components';
+import cx from 'classnames';
+import React from 'react';
 
 const DataTable = (props: DataTableProps) => {
   const {

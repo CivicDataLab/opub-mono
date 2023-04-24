@@ -1,3 +1,9 @@
+'use client';
+
+import { DateTimeProps } from '../../types/datetime';
+import inputStyles from '../Input/Input.module.scss';
+import { Labelled } from '../Labelled';
+import styles from './DateField.module.scss';
 import { GregorianCalendar } from '@internationalized/date';
 import {
   AriaDatePickerProps,
@@ -18,10 +24,6 @@ import {
   DateSegment,
   useDateFieldState,
 } from 'react-stately';
-import { DateTimeProps } from '../../types/datetime';
-import inputStyles from '../Input/Input.module.scss';
-import { Labelled } from '../Labelled';
-import styles from './DateField.module.scss';
 
 function createCalendar(identifier: any) {
   switch (identifier) {

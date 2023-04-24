@@ -1,3 +1,9 @@
+'use client';
+
+import { ComboboxSingleProps } from '../../../types/combobox';
+import itemStyles from '../../ActionList/ActionList.module.scss';
+import styles from '../Combobox.module.scss';
+import { Combobox } from './Atoms';
 import {
   ComboboxItem,
   ComboboxPopover,
@@ -6,10 +12,6 @@ import {
 import { Portal } from 'ariakit/portal';
 import cx from 'classnames';
 import React, { forwardRef, useEffect } from 'react';
-import { ComboboxSingleProps } from '../../../types/combobox';
-import itemStyles from '../../ActionList/ActionList.module.scss';
-import styles from '../Combobox.module.scss';
-import { Combobox } from './Atoms';
 
 export const SingleSelect = forwardRef<HTMLInputElement, ComboboxSingleProps>(
   (props: ComboboxSingleProps, ref) => {
