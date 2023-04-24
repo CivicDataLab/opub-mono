@@ -1,5 +1,8 @@
+'use client';
+
 // import { useToast } from '@ui/utils/hooks/use-toast';
-import styles from './Toast.module.scss';
+import { stateIcon } from '../../utils';
+import { useToast } from '../../utils/hooks/use-toast';
 // import { stateIcon } from '@ui/utils/icons';
 
 import {
@@ -10,8 +13,7 @@ import {
   ToastTitle,
   ToastViewport,
 } from './Toast';
-import { useToast } from '../../utils/hooks/use-toast';
-import { stateIcon } from '../../utils';
+import styles from './Toast.module.scss';
 
 export function Toaster() {
   const { toasts } = useToast();

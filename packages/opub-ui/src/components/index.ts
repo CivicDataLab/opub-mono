@@ -53,7 +53,7 @@ export { Tag } from './Tag';
 export { Text } from './Text';
 export { TextField } from './TextField';
 export { Thumbnail } from './Thumbnail';
-export { Toast } from './Toast';
+export { Toast, Toaster } from './Toast';
 export { Tooltip } from './Tooltip';
 export { Breadcrumbs } from './Breadcrumbs';
 export { Avatar } from './Avatar';

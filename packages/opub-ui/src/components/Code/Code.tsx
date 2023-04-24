@@ -1,3 +1,5 @@
+'use client';
+
 import { Code as CodeWrapper } from '@atlaskit/code';
 import React, { forwardRef } from 'react';
 

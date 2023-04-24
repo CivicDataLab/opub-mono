@@ -1,6 +1,8 @@
-import { memo } from 'react';
+'use client';
+
 import type { LinkLikeComponentProps } from '../../types/link';
 import { useLink } from './helpers';
+import { memo } from 'react';
 
 export interface UnstyledLinkProps extends LinkLikeComponentProps {}
 

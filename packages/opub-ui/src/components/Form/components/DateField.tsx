@@ -1,7 +1,9 @@
+'use client';
+
+import { DateField as DateFieldBase, DatFieldProps } from '../../DateField';
 import { parseDate } from '@internationalized/date';
 import { DateValue } from '@react-types/datepicker';
 import { Controller, useFormContext } from 'react-hook-form';
-import { DateField as DateFieldBase, DatFieldProps } from '../../DateField';
 
 type FieldProps = {
   name: string;

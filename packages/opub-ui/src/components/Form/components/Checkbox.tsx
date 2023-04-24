@@ -1,7 +1,9 @@
-import { Controller, useFormContext } from 'react-hook-form';
+'use client';
+
 import { CheckboxGroupProps, CheckboxProps } from '../../../types';
 import { Checkbox as CheckboxBase } from '../../Checkbox';
 import { CheckboxGroup as CheckboxGroupBase } from '../../CheckboxGroup';
+import { Controller, useFormContext } from 'react-hook-form';
 
 const Checkbox = ({ ...props }: CheckboxProps) => {
   const method = useFormContext();

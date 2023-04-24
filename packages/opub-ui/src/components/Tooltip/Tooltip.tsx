@@ -1,8 +1,10 @@
-import * as TooltipRadix from '@radix-ui/react-tooltip';
+'use client';
+
 import { TooltipProps, TooltipProviderProps } from '../../types/tooltip';
+import styles from './Tooltip.module.scss';
+import * as TooltipRadix from '@radix-ui/react-tooltip';
 import cx from 'classnames';
 import { forwardRef, LegacyRef } from 'react';
-import styles from './Tooltip.module.scss';
 
 const Provider = forwardRef(
   (

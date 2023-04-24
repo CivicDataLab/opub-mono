@@ -1,3 +1,25 @@
+'use client';
+
+import { variationName } from '../../utils/css';
+import { debounce } from '../../utils/debounce';
+import { useComponentDidMount } from '../../utils/hooks/use-component-did-mount';
+import { useEventListener } from '../../utils/hooks/use-event-listener';
+import { useToggle } from '../../utils/hooks/use-toggle';
+import { isServer } from '../../utils/target';
+import { Box } from '../Box';
+import { Icon } from '../Icon';
+import { Labelled, LabelledProps } from '../Labelled';
+import { Text } from '../Text';
+import styles from './DropZone.module.scss';
+import { FileUpload } from './components';
+import { DropZoneContext } from './context';
+import {
+  defaultAllowMultiple,
+  DropZoneEvent,
+  fileAccepted,
+  getDataTransferFiles,
+} from './utils';
+import { CircleAlertMajor, UploadMajor } from '@shopify/polaris-icons';
 import cx from 'classnames';
 import React, {
   FunctionComponent,
@@ -7,27 +29,6 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { Labelled, LabelledProps } from '../Labelled';
-import { Text } from '../Text';
-import styles from './DropZone.module.scss';
-
-import { CircleAlertMajor, UploadMajor } from '@shopify/polaris-icons';
-import { variationName } from '../../utils/css';
-import { debounce } from '../../utils/debounce';
-import { useComponentDidMount } from '../../utils/hooks/use-component-did-mount';
-import { useEventListener } from '../../utils/hooks/use-event-listener';
-import { useToggle } from '../../utils/hooks/use-toggle';
-import { isServer } from '../../utils/target';
-import { Box } from '../Box';
-import { Icon } from '../Icon';
-import { FileUpload } from './components';
-import { DropZoneContext } from './context';
-import {
-  defaultAllowMultiple,
-  DropZoneEvent,
-  fileAccepted,
-  getDataTransferFiles,
-} from './utils';
 
 export type DropZoneFileType = 'file' | 'image' | 'video';
 
