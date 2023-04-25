@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@opub-cdl/ui": "*",
+    "@shopify/polaris-icons": "^6.14.0",
     "@types/node": "18.16.0",
     "@types/react": "18.0.38",
     "@types/react-dom": "18.0.11",
@@ -17,10 +19,10 @@
     "next": "13.2.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "typescript": "5.0.4",
-    "@opub-cdl/ui": "*"
+    "typescript": "5.0.4"
   },
   "devDependencies": {
-    "@ianvs/prettier-plugin-sort-imports": "^3.7.2"
+    "@ianvs/prettier-plugin-sort-imports": "^3.7.2",
+    "prettier": "^2.8.8"
   }
 }

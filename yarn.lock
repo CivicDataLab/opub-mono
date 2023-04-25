@@ -3904,7 +3904,7 @@
   resolved "https://registry.yarnpkg.com/@rushstack/eslint-patch/-/eslint-patch-1.2.0.tgz#8be36a1f66f3265389e90b5f9c9962146758f728"
   integrity sha512-sXo/qW2/pAcmT43VoRKOJbDOfV3cYpq3szSVfIThQXNt+E4DfKj361vaAt3c88U5tPUxzEswam7GW48PJqtKAg==
 
-"@shopify/polaris-icons@^6.12.0":
+"@shopify/polaris-icons@^6.12.0", "@shopify/polaris-icons@^6.14.0":
   version "6.14.0"
   resolved "https://registry.yarnpkg.com/@shopify/polaris-icons/-/polaris-icons-6.14.0.tgz#f58ec9cc98bc3221aa0d26fca438e4e5141f13cc"
   integrity sha512-cDWWfw961APGu/heupQj+qWJL+ks1d1Eip76CzpPccAqsfyqG9Nr8BEqJwBNkXvRZWAdhGl2WQULc+aj/6bksQ==
@@ -12656,7 +12656,7 @@ prettier@1.5.3:
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.5.3.tgz#59dadc683345ec6b88f88b94ed4ae7e1da394bfe"
   integrity sha512-KdBZ6wHad7bt3Ar+T7Hj/OGWCZn7HDPaGQH8jB178JKDJZX58PhDXxu0yjUd3obf3zahssvYc0ka45DYQ02cVg==
 
-prettier@^2.7.1, prettier@^2.8.0, prettier@^2.8.4:
+prettier@^2.7.1, prettier@^2.8.0, prettier@^2.8.4, prettier@^2.8.8:
   version "2.8.8"
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.8.8.tgz#e8c5d7e98a4305ffe3de2e1fc4aca1a71c28b1da"
   integrity sha512-tdN8qQGvNjw4CHbY+XXk0JgCXn9QiF21a55rBe5LJAU+kDyC4WQn4+awm2Xfk2lQMk5fKup9XgzTZtGkjBdP9Q==
