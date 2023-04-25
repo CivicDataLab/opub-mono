@@ -5,7 +5,7 @@ import cx from 'classnames';
 
 type Props = {
   showLabel?: Boolean;
-  size: 'extraSmall' | 'small' | 'medium' | 'large';
+  size: 'extraSmall' | 'small' | 'medium' | 'large' | 'default';
   type: 'initials' | 'showInitials';
   image?: string;
   name?: string;
@@ -19,6 +19,7 @@ const variantStyles: stylesMap = {
   large: styles.AvatarLarge,
   small: styles.AvatarSmall,
   extraSmall: styles.AvatarExtraSmall,
+  default: styles.AvatarSmall,
 };
 
 const Avatar = ({ showLabel, size, type, image, name }: Props) => {
@@ -32,6 +33,7 @@ const Avatar = ({ showLabel, size, type, image, name }: Props) => {
   const className = cx(
     styles.Avatar,
     variantStyles[size],
+    size === 'default' && type === 'showInitials' && styles.AvatarProfileSmall,
     size === 'medium' && type === 'showInitials' && styles.AvatarProfileMedium,
     size === 'large' && type === 'showInitials' && styles.AvatarProfileLarge,
     size === 'small' && type === 'showInitials' && styles.AvatarProfileSmall,
