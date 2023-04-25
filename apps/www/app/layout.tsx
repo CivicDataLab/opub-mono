@@ -1,14 +1,17 @@
-import { siteConfig } from "@/config/site"
-import Provider from "@/components/provider"
-import "@/styles/globals.css"
-import { Inter as FontSans } from "next/font/google"
+import { siteConfig } from "@/config/site";
+import Provider from "@/components/provider";
+import "@opub-cdl/ui/dist/assets/styles.css";
+// there is bug with nextjs app dir, hotfix for now
+import "@opub-cdl/ui/dist/assets/styles-bundled.css";
+import "@/styles/globals.css";
+import { Inter as FontSans } from "next/font/google";
 
-const fontSans = FontSans({ subsets: ["latin"] })
+const fontSans = FontSans({ subsets: ["latin"] });
 
 export const metadata = {
   title: {
     default: siteConfig.name,
-    template: `%s | ${siteConfig.name}`,
+    template: `%s | ${siteConfig.name}`
   },
   description: siteConfig.description,
   keywords: [
@@ -17,28 +20,30 @@ export const metadata = {
     "Server Components",
     "Radix UI",
     "OPub",
-    "Open Publishing",
+    "Open Publishing"
   ],
   authors: [
     {
       name: "CivicDataLab",
-      url: "https://civicdatalab.in/",
-    },
+      url: "https://civicdatalab.in/"
+    }
   ],
-  creator: "CivicDataLab",
-}
+  creator: "CivicDataLab"
+};
 // TODO - Add favicon and other social meta tags
 
 export default function RootLayout({
-  children,
+  children
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en">
       <body className={fontSans.className}>
-        <Provider>{children}</Provider>
+        <Provider>
+          {children}
+        </Provider>
       </body>
     </html>
-  )
+  );
 }
