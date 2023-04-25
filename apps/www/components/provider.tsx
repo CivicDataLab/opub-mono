@@ -7,7 +7,7 @@ export default function Provider({ children }: { children: React.ReactNode }) {
   return (
     <SSRProvider>
       {children}
-      <Toaster />
+      <Toaster />s
     </SSRProvider>
   );
 }

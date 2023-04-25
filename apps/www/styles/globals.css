@@ -1,4 +1,4 @@
-@import "@opub-cdl/ui/dist/assets/styles.css";
+@import "~@opub-cdl/ui/assets/styles.css";
 
 :root {
   --max-width: 1100px;
