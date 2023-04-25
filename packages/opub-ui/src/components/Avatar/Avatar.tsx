@@ -6,8 +6,8 @@ import cx from 'classnames';
 
 type Props = {
   showLabel?: Boolean;
-  size: 'extraSmall' | 'small' | 'medium' | 'large';
-  type: 'initials' | 'showInitials';
+  size?: 'extraSmall' | 'small' | 'medium' | 'large';
+  showInitials?: Boolean;
   image?: string;
   name?: string;
 };
@@ -22,7 +22,15 @@ const variantStyles: stylesMap = {
   extraSmall: styles.AvatarExtraSmall,
 };
 
-const Avatar = ({ showLabel, size, type, image, name }: Props) => {
+const DEFAULT_SIZE = 'small';
+
+const Avatar = ({
+  showLabel,
+  size = DEFAULT_SIZE,
+  showInitials,
+  image,
+  name,
+}: Props) => {
   const ProfileName =
     name &&
     name
@@ -33,12 +41,10 @@ const Avatar = ({ showLabel, size, type, image, name }: Props) => {
   const className = cx(
     styles.Avatar,
     variantStyles[size],
-    size === 'medium' && type === 'showInitials' && styles.AvatarProfileMedium,
-    size === 'large' && type === 'showInitials' && styles.AvatarProfileLarge,
-    size === 'small' && type === 'showInitials' && styles.AvatarProfileSmall,
-    size === 'extraSmall' &&
-      type === 'showInitials' &&
-      styles.AvatarProfileExtraSmall
+    size === 'medium' && showInitials && styles.AvatarProfileMedium,
+    size === 'large' && showInitials && styles.AvatarProfileLarge,
+    size === 'small' && showInitials && styles.AvatarProfileSmall,
+    size === 'extraSmall' && showInitials && styles.AvatarProfileExtraSmall
   );
 
   return (

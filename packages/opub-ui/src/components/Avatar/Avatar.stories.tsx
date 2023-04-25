@@ -34,15 +34,13 @@ export const Basic = () => (
     }}
     yAxis={{
       ' Initials': {
-        type: 'initials',
         name: 'Oluwayemisi Eun-Jung',
       },
       Customers: {
-        type: 'customer',
         image: 'public/user.svg',
       },
       ' Profile Picture  ': {
-        type: 'showInitials',
+        showInitials: true,
         image: 'public/profile.svg',
       },
     }}
@@ -52,7 +50,6 @@ export const Basic = () => (
 export const LabeledAvatar: Story = {
   args: {
     size: 'medium',
-    type: 'initials',
     name: 'Oluwayemisi Eun-Jung',
     showLabel: true,
   },
