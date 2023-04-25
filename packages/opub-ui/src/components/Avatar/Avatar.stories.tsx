@@ -1,6 +1,6 @@
-import { Meta, StoryObj } from '@storybook/react';
-import { Avatar } from './Avatar';
 import { PropsVariationSection } from '../../utils';
+import { Avatar } from './Avatar';
+import { Meta, StoryObj } from '@storybook/react';
 
 /**
  * Avatars are used to show a thumbnail representation of an individual or business in the interface.
@@ -20,16 +20,16 @@ export const Basic = () => (
     common={{}}
     xAxis={{
       ExtraSmall: {
-        size: 'ExtraSmall',
+        size: 'extraSmall',
       },
       Small: {
-        size: 'Small',
+        size: 'small',
       },
       Medium: {
-        size: 'Medium',
+        size: 'medium',
       },
       Large: {
-        size: 'Large',
+        size: 'large',
       },
     }}
     yAxis={{
@@ -42,7 +42,7 @@ export const Basic = () => (
         image: 'public/user.svg',
       },
       ' Profile Picture  ': {
-        type: 'Profile_Customer',
+        type: 'showInitials',
         image: 'public/profile.svg',
       },
     }}
@@ -51,9 +51,9 @@ export const Basic = () => (
 
 export const LabeledAvatar: Story = {
   args: {
-    size: 'Medium',
+    size: 'medium',
     type: 'initials',
     name: 'Oluwayemisi Eun-Jung',
-    label: true,
+    showLabel: true,
   },
 };

@@ -1,10 +1,10 @@
 import '@testing-library/jest-dom';
-import { render, screen } from '@testing-library/react';
 import { Avatar } from './Avatar';
+import { render, screen } from '@testing-library/react';
 
 describe('Avatar Tests', () => {
   beforeEach(() => {
-    render(<Avatar size={'Medium'} type={'initials'} />);
+    render(<Avatar size={'medium'} type={'initials'} />);
   });
 
   test('should show Component text all the time', () => {
