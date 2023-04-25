@@ -1,11 +1,12 @@
 import { Box } from '../Box';
+import { Text } from '../Text';
 import styles from './Avatar.module.scss';
 import * as AvatarRadix from '@radix-ui/react-avatar';
 import cx from 'classnames';
 
 type Props = {
   showLabel?: Boolean;
-  size: 'extraSmall' | 'small' | 'medium' | 'large' | 'default';
+  size: 'extraSmall' | 'small' | 'medium' | 'large';
   type: 'initials' | 'showInitials';
   image?: string;
   name?: string;
@@ -19,7 +20,6 @@ const variantStyles: stylesMap = {
   large: styles.AvatarLarge,
   small: styles.AvatarSmall,
   extraSmall: styles.AvatarExtraSmall,
-  default: styles.AvatarSmall,
 };
 
 const Avatar = ({ showLabel, size, type, image, name }: Props) => {
@@ -33,7 +33,6 @@ const Avatar = ({ showLabel, size, type, image, name }: Props) => {
   const className = cx(
     styles.Avatar,
     variantStyles[size],
-    size === 'default' && type === 'showInitials' && styles.AvatarProfileSmall,
     size === 'medium' && type === 'showInitials' && styles.AvatarProfileMedium,
     size === 'large' && type === 'showInitials' && styles.AvatarProfileLarge,
     size === 'small' && type === 'showInitials' && styles.AvatarProfileSmall,
@@ -51,7 +50,7 @@ const Avatar = ({ showLabel, size, type, image, name }: Props) => {
           <AvatarRadix.Fallback>{ProfileName}</AvatarRadix.Fallback>
         )}
       </AvatarRadix.Root>
-      {showLabel && <Box flex>{name}</Box>}
+      {showLabel && <Text>{name}</Text>}
     </Box>
   );
 };
