@@ -10,6 +10,8 @@
 
 .Container {
   height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .Header {
@@ -20,11 +22,28 @@
   position: relative;
 }
 
+.Search {
+  width: 100%;
+  max-width: 578px;
+
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
+}
+
+.User {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  flex-shrink: 0;
+}
+
 .Wrapper {
   display: grid;
   gap: var(--space-6);
   grid-template-columns: 240px 1fr;
-  height: calc(100% - 60px);
+  // height: calc(100% - 60px);
+  flex-grow: 1;
 }
 
 .Aside {
@@ -53,9 +72,14 @@
     width: 100%;
     margin-left: var(--space-2);
     border-radius: var(--space-1);
+    transition: background-color var(--duration-200) var(--ease-in-out);
 
     > span:last-child {
       flex-grow: 1;
+    }
+
+    &:hover {
+      background-color: var(--background-selected);
     }
   }
 
@@ -84,4 +108,10 @@
       background-color: var(--icon-interactive);
     }
   }
+}
+
+.DashboardPage {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }

@@ -15,7 +15,7 @@ export const dashboardConfig: DashboardConfig = {
   sidebarNav: [
     {
       title: "Dataset Management",
-      href: "/dashboard",
+      href: "/dashboard/dataset",
       icon: "dataset"
     },
     {

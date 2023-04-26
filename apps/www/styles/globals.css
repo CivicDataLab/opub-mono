@@ -58,6 +58,10 @@ body {
   background-color: var(--background);
 }
 
+body > div {
+  height: 100%;
+}
+
 a {
   color: inherit;
   text-decoration: none;
