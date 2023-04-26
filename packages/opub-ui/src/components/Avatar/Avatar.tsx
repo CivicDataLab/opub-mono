@@ -1,12 +1,13 @@
-import * as AvatarRadix from '@radix-ui/react-avatar';
-import styles from './Avatar.module.scss';
-import cx from 'classnames';
 import { Box } from '../Box';
+import { Text } from '../Text';
+import styles from './Avatar.module.scss';
+import * as AvatarRadix from '@radix-ui/react-avatar';
+import cx from 'classnames';
 
 type Props = {
-  label?: Boolean;
-  size: string;
-  type: 'initials' | 'Profile_Customer';
+  showLabel?: Boolean;
+  size?: 'extraSmall' | 'small' | 'medium' | 'large';
+  showInitials?: Boolean;
   image?: string;
   name?: string;
 };
@@ -16,12 +17,20 @@ interface stylesMap {
 }
 
 const variantStyles: stylesMap = {
-  Large: styles.AvatarLarge,
-  Small: styles.AvatarSmall,
-  ExtraSmall: styles.AvatarExtraSmall,
+  large: styles.AvatarLarge,
+  small: styles.AvatarSmall,
+  extraSmall: styles.AvatarExtraSmall,
 };
 
-const Avatar = ({ label, size, type, image, name }: Props) => {
+const DEFAULT_SIZE = 'small';
+
+const Avatar = ({
+  showLabel,
+  size = DEFAULT_SIZE,
+  showInitials,
+  image,
+  name,
+}: Props) => {
   const ProfileName =
     name &&
     name
@@ -32,18 +41,10 @@ const Avatar = ({ label, size, type, image, name }: Props) => {
   const className = cx(
     styles.Avatar,
     variantStyles[size],
-    size === 'Medium' &&
-      type === 'Profile_Customer' &&
-      styles.AvatarProfileMedium,
-    size === 'Large' &&
-      type === 'Profile_Customer' &&
-      styles.AvatarProfileLarge,
-    size === 'Small' &&
-      type === 'Profile_Customer' &&
-      styles.AvatarProfileSmall,
-    size === 'ExtraSmall' &&
-      type === 'Profile_Customer' &&
-      styles.AvatarProfileExtraSmall
+    size === 'medium' && showInitials && styles.AvatarProfileMedium,
+    size === 'large' && showInitials && styles.AvatarProfileLarge,
+    size === 'small' && showInitials && styles.AvatarProfileSmall,
+    size === 'extraSmall' && showInitials && styles.AvatarProfileExtraSmall
   );
 
   return (
@@ -55,7 +56,7 @@ const Avatar = ({ label, size, type, image, name }: Props) => {
           <AvatarRadix.Fallback>{ProfileName}</AvatarRadix.Fallback>
         )}
       </AvatarRadix.Root>
-      {label && <Box flex>{name}</Box>}
+      {showLabel && <Text>{name}</Text>}
     </Box>
   );
 };
