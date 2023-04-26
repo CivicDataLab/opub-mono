@@ -5,9 +5,10 @@ import {
   FolderMajor,
   InsertDynamicSourceMajor,
   NotificationMajor,
+  PackageMajor,
   SearchMinor,
-  SettingsMajor
-} from "@shopify/polaris-icons";
+  SettingsMajor,
+} from '@shopify/polaris-icons';
 
 export const Icons = {
   back: ChevronLeftMinor,
@@ -17,5 +18,6 @@ export const Icons = {
   settings: SettingsMajor,
   arrowRight: ArrowRightMinor,
   search: SearchMinor,
-  notification: NotificationMajor
+  notification: NotificationMajor,
+  package: PackageMajor,
 };

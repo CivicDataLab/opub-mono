@@ -1,5 +1,10 @@
-import styles from "./account.module.scss";
+import { InProgress } from '../components/in-progress';
+import styles from './account.module.scss';
 
 export default async function DashboardPage() {
-  return <div className={styles.Containers} />;
+  return (
+    <div className={styles.Container}>
+      <InProgress />
+    </div>
+  );
 }

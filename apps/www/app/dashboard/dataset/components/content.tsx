@@ -1,16 +1,12 @@
 'use client';
 
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { Box, Button, Icon, Text } from '@opub-cdl/ui';
+import { Box, Icon, Text } from '@opub-cdl/ui';
 
 import { LinkButton } from '@/components/Link';
 import { Icons } from '@/components/icons';
 import styles from '../dataset.module.scss';
 
 export function Content() {
-  const router = useRouter();
-
   return (
     <div className={styles.ContentWrapper}>
       <div className={styles.Content}>

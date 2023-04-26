@@ -42,7 +42,6 @@
   display: grid;
   gap: var(--space-6);
   grid-template-columns: 240px 1fr;
-  // height: calc(100% - 60px);
   flex-grow: 1;
 }
 
@@ -114,4 +113,18 @@
   display: flex;
   flex-direction: column;
   height: 100%;
+}
+
+.InProgress {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+
+  > span:first-child {
+    width: 72px;
+    height: 72px;
+  }
 }
