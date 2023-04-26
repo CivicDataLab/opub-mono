@@ -1,12 +1,8 @@
-import { Content } from "./components/content";
-import { Progress } from "./components/progress";
+import { redirect } from "next/navigation";
+
 import styles from "./dashboard.module.scss";
 
 export default async function DashboardPage() {
-  return (
-    <div className={styles.DashboardPage}>
-      <Progress />
-      <Content />
-    </div>
-  );
+  redirect("/dashboard/dataset");
+  return <div className={styles.DashboardPage} />;
 }

@@ -3,7 +3,7 @@
 import { Box, Button, Icon, Text } from "@opub-cdl/ui";
 import { InsertDynamicSourceMajor } from "@shopify/polaris-icons";
 
-import styles from "../dashboard.module.scss";
+import styles from "../dataset.module.scss";
 
 export function Content() {
   return (
