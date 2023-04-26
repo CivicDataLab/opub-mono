@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { Avatar, Box, Icon, Text, TextField } from "@opub-cdl/ui/src";
 import { NotificationMajor, SearchMinor } from "@shopify/polaris-icons";

@@ -10,6 +10,8 @@
 
 .Container {
   height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .Header {
@@ -40,7 +42,8 @@
   display: grid;
   gap: var(--space-6);
   grid-template-columns: 240px 1fr;
-  height: calc(100% - 60px);
+  // height: calc(100% - 60px);
+  flex-grow: 1;
 }
 
 .Aside {
@@ -99,5 +102,56 @@
     .Indicator {
       background-color: var(--icon-interactive);
     }
+  }
+}
+
+.DashboardPage {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.ProgressWrapper {
+  padding-right: var(--space-6);
+}
+
+.Progress {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  justify-content: space-between;
+  padding-block: var(--space-5);
+  border-bottom: var(--border-divider);
+
+  .ProgressNav {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+
+    > span:first-child {
+      width: 32px;
+      height: 32px;
+    }
+  }
+}
+
+.ContentWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  flex-grow: 1;
+}
+
+.Content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+
+  > span:first-child {
+    width: 72px;
+    height: 72px;
   }
 }

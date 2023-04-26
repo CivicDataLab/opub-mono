@@ -1,5 +1,3 @@
-"use client";
-
 import { notFound } from "next/navigation";
 
 import { dashboardConfig } from "@/config/dashboard";
@@ -11,7 +9,9 @@ interface DashboardLayoutProps {
   children?: React.ReactNode;
 }
 
-export default function DashboardLayout({ children }: DashboardLayoutProps) {
+export default async function DashboardLayout({
+  children
+}: DashboardLayoutProps) {
   const user = true; // await getCurrentUser()
 
   if (!user) {
