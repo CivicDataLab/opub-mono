@@ -20,6 +20,22 @@
   position: relative;
 }
 
+.Search {
+  width: 100%;
+  max-width: 578px;
+
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
+}
+
+.User {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  flex-shrink: 0;
+}
+
 .Wrapper {
   display: grid;
   gap: var(--space-6);

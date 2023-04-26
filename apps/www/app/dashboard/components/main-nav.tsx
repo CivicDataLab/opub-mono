@@ -1,20 +1,23 @@
 import Link from "next/link";
-import { Avatar, Box, Icon, Text, TextField } from "@opub-cdl/ui";
+import { Avatar, Box, Icon, Text, TextField } from "@opub-cdl/ui/src";
 import { NotificationMajor, SearchMinor } from "@shopify/polaris-icons";
 
 import { Icons } from "@/components/icons";
+import styles from "../dashboard.module.scss";
 
 export function MainNav() {
   return (
     <nav>
-      <Box flex justifyContent="space-between" gap="2" alignItems="center">
+      <Box flex justifyContent="space-between" gap="4" alignItems="center">
         <Link href="/">
           <Box flex alignItems="center" gap="2">
             <Icon source={Icons.logo} color="interactive" />
-            <Text variant="headingLg">OPub</Text>
+            <Text variant="headingLg" as="h1">
+              OPub
+            </Text>
           </Box>
         </Link>
-        <Box width="100%" maxWidth="578px">
+        <div className={styles.Search}>
           <TextField
             prefix={<Icon source={SearchMinor} />}
             placeholder="Search"
@@ -22,13 +25,18 @@ export function MainNav() {
             label="Search"
             labelHidden
           />
-        </Box>
-        <Box flex gap="4" alignItems="center">
+        </div>
+        <div className={styles.User}>
           <Icon color="base" source={NotificationMajor} />
           <div>
-            <Avatar label name="Xquenda Andreev" size="Small" type="initials" />
+            <Avatar
+              showInitials
+              showLabel
+              name="Xquenda Andreev"
+              size="small"
+            />
           </div>
-        </Box>
+        </div>
       </Box>
     </nav>
   );
