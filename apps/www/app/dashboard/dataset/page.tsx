@@ -1,21 +1,21 @@
-"use client";
+'use client';
 
-import { useRouter } from "next/navigation";
+import { useRouter } from 'next/navigation';
 
-import { Content } from "./components/content";
-import { Progress } from "./components/progress";
-import styles from "./dataset.module.scss";
+import { ActionBar } from './components/action-bar';
+import { Content } from './components/content';
+import styles from './dataset.module.scss';
 
 export default function DatasetPage() {
   const router = useRouter();
 
   return (
     <div className={styles.DatasetPage}>
-      <Progress
+      <ActionBar
         title="My Datasets"
         primaryAction={{
-          content: "Add New Dataset",
-          onAction: () => router.push("/dashboard/dataset/create")
+          content: 'Add New Dataset',
+          onAction: () => router.push('/dashboard/dataset/create'),
         }}
       />
       <Content />

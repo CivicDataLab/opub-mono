@@ -1,8 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Avatar, Box, Icon, Text, TextField } from "@opub-cdl/ui/src";
-import { NotificationMajor, SearchMinor } from "@shopify/polaris-icons";
+import { Avatar, Box, Icon, Text, TextField } from "@opub-cdl/ui";
 
 import { Icons } from "@/components/icons";
 import styles from "../dashboard.module.scss";
@@ -21,7 +20,7 @@ export function MainNav() {
         </Link>
         <div className={styles.Search}>
           <TextField
-            prefix={<Icon source={SearchMinor} />}
+            prefix={<Icon source={Icons.search} />}
             placeholder="Search"
             name="Search"
             label="Search"
@@ -29,7 +28,7 @@ export function MainNav() {
           />
         </div>
         <div className={styles.User}>
-          <Icon color="base" source={NotificationMajor} />
+          <Icon color="base" source={Icons.notification} />
           <div>
             <Avatar
               showInitials

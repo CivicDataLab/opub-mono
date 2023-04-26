@@ -1,22 +1,25 @@
-"use client";
+'use client';
 
-import { Progress } from "../components/progress";
-import styles from "./create.module.scss";
+import { useRouter } from 'next/navigation';
+
+import { ActionBar } from '../components/action-bar';
+import styles from './create.module.scss';
 
 export default function DatasetPage() {
+  const route = useRouter();
   return (
     <div className={styles.CreatetPage}>
-      <Progress
+      <ActionBar
         title="Add New Dataset"
         primaryAction={{
-          content: "Save & Next",
-          onAction: () => {}
+          content: 'Save & Next',
+          onAction: () => {},
         }}
         secondaryAction={{
-          content: "Cancel",
-          onAction: () => {}
+          content: 'Cancel',
+          onAction: () => route.push('/dashboard/dataset'),
         }}
-        previousPage="My Datasets"
+        previousPage={{ content: 'My Datasets', link: '/dashboard/dataset' }}
       />
       {/* <Content /> */}
     </div>

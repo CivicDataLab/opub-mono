@@ -52,7 +52,7 @@ export interface NonMutualButtonProps {
   textAlign?: "left" | "right" | "center" | "start" | "end";
 }
 
-export type ButtonProps = {} & NonMutualButtonProps & UnstyledButtonProps;
+export type ButtonProps = NonMutualButtonProps & UnstyledButtonProps;
 
 interface CommonButtonProps
   extends Pick<
@@ -91,8 +91,8 @@ type ActionButtonProps = Pick<
 const DEFAULT_SIZE = "medium";
 
 const Button = React.forwardRef(
-  (
-    {
+  (props: ButtonProps, ref: React.Ref<HTMLButtonElement>) => {
+    const {
       id,
       children,
       primary,
@@ -130,9 +130,7 @@ const Button = React.forwardRef(
       connectedDisclosure,
       className: classes,
       ...otherProps
-    }: ButtonProps,
-    ref: React.Ref<HTMLButtonElement>
-  ) => {
+    } = props;
     const isDisabled = disabled || loading;
 
     const className = cx(
