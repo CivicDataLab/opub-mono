@@ -21,11 +21,11 @@ export function DashboardNav({ items }: DashboardNavProps) {
 
   return (
     <nav>
-      {items.map((item, index) => {
+      {items.map(item => {
         const icon = Icons[item.icon || "arrowRight"];
         return (
           item.href &&
-          <Link key={index} href={item.disabled ? "/" : item.href}>
+          <Link key={item.href} href={item.disabled ? "/" : item.href}>
             <div
               className={cn(
                 styles.NavItem,

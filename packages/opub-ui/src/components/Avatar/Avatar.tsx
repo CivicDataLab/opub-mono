@@ -1,62 +1,60 @@
-import { Box } from '../Box';
-import { Text } from '../Text';
-import styles from './Avatar.module.scss';
-import * as AvatarRadix from '@radix-ui/react-avatar';
-import cx from 'classnames';
+import { Box } from "../Box";
+import { Text } from "../Text";
+import styles from "./Avatar.module.scss";
+import * as AvatarRadix from "@radix-ui/react-avatar";
+import cx from "classnames";
 
 type Props = {
-  showLabel?: Boolean;
-  size?: 'extraSmall' | 'small' | 'medium' | 'large';
-  showInitials?: Boolean;
+  showLabel?: boolean;
+  size?: "extraSmall" | "small" | "medium" | "large";
+  showInitials?: boolean;
   image?: string;
   name?: string;
 };
 
-interface stylesMap {
-  [key: string]: typeof styles;
+interface StylesMap {
+  [key: string]: string;
 }
 
-const variantStyles: stylesMap = {
+const variantStyles: StylesMap = {
   large: styles.AvatarLarge,
   small: styles.AvatarSmall,
-  extraSmall: styles.AvatarExtraSmall,
+  extraSmall: styles.AvatarExtraSmall
 };
 
-const DEFAULT_SIZE = 'small';
+const DEFAULT_SIZE = "small";
 
 const Avatar = ({
   showLabel,
   size = DEFAULT_SIZE,
   showInitials,
   image,
-  name,
+  name
 }: Props) => {
   const ProfileName =
-    name &&
-    name
-      .split(' ')
-      .map((item: any) => item[0])
-      .join('')
-      .toUpperCase();
+    name && name.split(" ").map((item: any) => item[0]).join("").toUpperCase();
   const className = cx(
     styles.Avatar,
     variantStyles[size],
-    size === 'medium' && showInitials && styles.AvatarProfileMedium,
-    size === 'large' && showInitials && styles.AvatarProfileLarge,
-    size === 'small' && showInitials && styles.AvatarProfileSmall,
-    size === 'extraSmall' && showInitials && styles.AvatarProfileExtraSmall
+    size === "medium" && showInitials && styles.AvatarProfileMedium,
+    size === "large" && showInitials && styles.AvatarProfileLarge,
+    size === "small" && showInitials && styles.AvatarProfileSmall,
+    size === "extraSmall" && showInitials && styles.AvatarProfileExtraSmall
   );
 
   return (
-    <Box flex gap={'2'} justifyContent={'center'} alignItems="center">
+    <Box flex gap={"2"} justifyContent={"center"} alignItems="center">
       <AvatarRadix.Root className={className}>
-        {image ? (
-          <AvatarRadix.Image src={image}></AvatarRadix.Image>
-        ) : (
-          <AvatarRadix.Fallback>{ProfileName}</AvatarRadix.Fallback>
-        )}
+        {image
+          ? <AvatarRadix.Image src={image} />
+          : <AvatarRadix.Fallback>
+              {ProfileName}
+            </AvatarRadix.Fallback>}
       </AvatarRadix.Root>
-      {showLabel && <Text>{name}</Text>}
+      {showLabel &&
+        <Text>
+          {name}
+        </Text>}
     </Box>
   );
 };
