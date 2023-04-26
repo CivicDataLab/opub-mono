@@ -2,8 +2,8 @@
 
 import { useRouter } from "next/navigation";
 import { Box, Button, Icon, Text } from "@opub-cdl/ui";
-import { InsertDynamicSourceMajor } from "@shopify/polaris-icons";
 
+import { Icons } from "@/components/icons";
 import styles from "../dataset.module.scss";
 
 export function Content() {
@@ -12,7 +12,7 @@ export function Content() {
   return (
     <div className={styles.ContentWrapper}>
       <div className={styles.Content}>
-        <Icon source={InsertDynamicSourceMajor} color="base" />
+        <Icon source={Icons.addDataset} color="base" />
         <Text variant="headingSm" color="subdued">
           You have not added any datasets yet.
         </Text>

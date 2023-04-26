@@ -1,8 +1,8 @@
 "use client";
 
 import { Box, Button, Icon, Text, Tooltip } from "@opub-cdl/ui";
-import { ChevronLeftMinor } from "@shopify/polaris-icons";
 
+import { Icons } from "@/components/icons";
 import styles from "../dataset.module.scss";
 
 interface Props {
@@ -21,7 +21,7 @@ interface Props {
 export function Progress(props: Props) {
   const backButton = (
     <button className={styles.BackButton}>
-      <Icon source={ChevronLeftMinor} color="base" />
+      <Icon source={Icons.back} color="base" />
       <Text visuallyHidden>Go back to previous page</Text>
     </button>
   );
