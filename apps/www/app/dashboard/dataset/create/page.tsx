@@ -1,9 +1,12 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
+
 import { ActionBar } from '../components/action-bar';
 import styles from './create.module.scss';
 
 export default function DatasetPage() {
+  const route = useRouter();
   return (
     <div className={styles.CreatetPage}>
       <ActionBar
@@ -14,7 +17,7 @@ export default function DatasetPage() {
         }}
         secondaryAction={{
           content: 'Cancel',
-          onAction: () => {},
+          onAction: () => route.push('/dashboard/dataset'),
         }}
         previousPage={{ content: 'My Datasets', link: '/dashboard/dataset' }}
       />
