@@ -29,7 +29,7 @@ export function DashboardNav({ items }: DashboardNavProps) {
             <div
               className={cn(
                 styles.NavItem,
-                path === item.href && styles["NavItem--active"],
+                path.includes(item.href) && styles["NavItem--active"],
                 item.disabled && styles["NavItem--disabled"]
               )}
             >

@@ -1,28 +1,56 @@
 "use client";
 
-import { Button, Icon, Text } from "@opub-cdl/ui";
+import { Box, Button, Icon, Text, Tooltip } from "@opub-cdl/ui";
 import { ChevronLeftMinor } from "@shopify/polaris-icons";
 
 import styles from "../dataset.module.scss";
 
 interface Props {
   title: string;
-  primaryAction(event: React.MouseEvent<HTMLButtonElement>): void;
-  secondaryAction?(event: React.MouseEvent<HTMLButtonElement>): void;
+  primaryAction: {
+    content: string;
+    onAction(): void;
+  };
+  secondaryAction?: {
+    content: string;
+    onAction(): void;
+  };
   previousPage?: string;
 }
 
 export function Progress(props: Props) {
+  const backButton = (
+    <button className={styles.BackButton}>
+      <Icon source={ChevronLeftMinor} color="base" />
+      <Text visuallyHidden>Go back to previous page</Text>
+    </button>
+  );
   return (
     <div className={styles.ProgressWrapper}>
       <div className={styles.Progress}>
         <div className={styles.ProgressNav}>
-          <Icon source={ChevronLeftMinor} color="base" />
+          {props.previousPage
+            ? <Tooltip
+                content={`Back to ${props.previousPage}`}
+                disableHoverableContent={!props.previousPage}
+                hideArrow
+                children={backButton}
+              />
+            : backButton}
+
           <Text variant="headingLg" as="h2">
-            My Datasets
+            {props.title}
           </Text>
         </div>
-        <Button primary>Add New Dataset</Button>
+        <Box flex alignItems="center" gap="5">
+          {props.secondaryAction &&
+            <Button plain onClick={props.secondaryAction.onAction}>
+              {props.secondaryAction.content}
+            </Button>}
+          <Button primary onClick={props.primaryAction.onAction}>
+            {props.primaryAction.content}
+          </Button>
+        </Box>
       </div>
     </div>
   );

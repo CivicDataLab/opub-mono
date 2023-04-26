@@ -1,11 +1,14 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { Box, Button, Icon, Text } from "@opub-cdl/ui";
 import { InsertDynamicSourceMajor } from "@shopify/polaris-icons";
 
 import styles from "../dataset.module.scss";
 
 export function Content() {
+  const router = useRouter();
+
   return (
     <div className={styles.ContentWrapper}>
       <div className={styles.Content}>
@@ -14,7 +17,12 @@ export function Content() {
           You have not added any datasets yet.
         </Text>
         <Box paddingBlockStart="4">
-          <Button primary>Add New Dataset</Button>
+          <Button
+            primary
+            onClick={() => router.push("/dashboard/dataset/create")}
+          >
+            Add New Dataset
+          </Button>
         </Box>
       </div>
     </div>

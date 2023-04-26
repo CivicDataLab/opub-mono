@@ -72,9 +72,14 @@
     width: 100%;
     margin-left: var(--space-2);
     border-radius: var(--space-1);
+    transition: background-color var(--duration-200) var(--ease-in-out);
 
     > span:last-child {
       flex-grow: 1;
+    }
+
+    &:hover {
+      background-color: var(--background-selected);
     }
   }
 

@@ -21,10 +21,27 @@
     align-items: center;
     gap: var(--space-4);
 
-    > span:first-child {
-      width: 32px;
-      height: 32px;
+    > span {
+      line-height: 0;
     }
+  }
+}
+
+.BackButton {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+
+  transition: background-color var(--duration-150) var(--ease);
+  border-radius: var(--border-radius-1);
+
+  &:hover {
+    background-color: var(--background-pressed);
+  }
+
+  > span:first-child {
+    width: 32px;
+    height: 32px;
   }
 }
 
