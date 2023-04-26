@@ -1,10 +1,12 @@
-"use client";
+'use client';
 
-import { useRouter } from "next/navigation";
-import { Box, Button, Icon, Text } from "@opub-cdl/ui";
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { Box, Button, Icon, Text } from '@opub-cdl/ui';
 
-import { Icons } from "@/components/icons";
-import styles from "../dataset.module.scss";
+import { LinkButton } from '@/components/Link';
+import { Icons } from '@/components/icons';
+import styles from '../dataset.module.scss';
 
 export function Content() {
   const router = useRouter();
@@ -17,12 +19,9 @@ export function Content() {
           You have not added any datasets yet.
         </Text>
         <Box paddingBlockStart="4">
-          <Button
-            primary
-            onClick={() => router.push("/dashboard/dataset/create")}
-          >
+          <LinkButton href="/dashboard/dataset/create" primary>
             Add New Dataset
-          </Button>
+          </LinkButton>
         </Box>
       </div>
     </div>

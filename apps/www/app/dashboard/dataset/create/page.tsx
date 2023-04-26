@@ -1,22 +1,22 @@
-"use client";
+'use client';
 
-import { Progress } from "../components/progress";
-import styles from "./create.module.scss";
+import { ActionBar } from '../components/action-bar';
+import styles from './create.module.scss';
 
 export default function DatasetPage() {
   return (
     <div className={styles.CreatetPage}>
-      <Progress
+      <ActionBar
         title="Add New Dataset"
         primaryAction={{
-          content: "Save & Next",
-          onAction: () => {}
+          content: 'Save & Next',
+          onAction: () => {},
         }}
         secondaryAction={{
-          content: "Cancel",
-          onAction: () => {}
+          content: 'Cancel',
+          onAction: () => {},
         }}
-        previousPage="My Datasets"
+        previousPage={{ content: 'My Datasets', link: '/dashboard/dataset' }}
       />
       {/* <Content /> */}
     </div>
