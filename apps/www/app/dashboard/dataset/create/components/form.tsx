@@ -1,6 +1,13 @@
-import { Box, Input } from '@opub-cdl/ui';
+import {
+  Box,
+  Checkbox,
+  Form,
+  Icon,
+  Input,
+  RadioGroup,
+  Text,
+} from '@opub-cdl/ui';
 import { IconSource } from '@opub-cdl/ui/dist/ts/components/Icon/Icon';
-import { Checkbox, Form, Icon, RadioGroup, Text } from '@opub-cdl/ui/src';
 
 import { Icons } from '@/components/icons';
 import { RadioCard } from '@/components/radio-card';
