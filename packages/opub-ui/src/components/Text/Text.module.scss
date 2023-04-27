@@ -36,6 +36,14 @@
   text-align: justify;
 }
 
+.default {
+  color: var(--text);
+}
+
+.disabled {
+  color: var(--text-disabled);
+}
+
 .success {
   color: var(--text-success);
 }

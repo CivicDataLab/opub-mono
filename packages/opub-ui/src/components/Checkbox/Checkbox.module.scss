@@ -10,7 +10,7 @@
   padding: var(--space-1) 0;
   cursor: pointer;
 
-  --gap: 8px;
+  --gap: var(--space-3);
 
   label {
     padding-inline-start: var(--gap);
@@ -34,6 +34,7 @@
   justify-content: center;
   line-height: 0;
   position: relative;
+  margin-top: var(--space-1);
 
   &:focus-visible {
     outline: var(--border-width-2) solid var(--focused);

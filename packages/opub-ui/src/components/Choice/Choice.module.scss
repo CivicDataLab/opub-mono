@@ -6,14 +6,10 @@
   width: fit-content;
 
   display: flex;
-  align-items: center;
   padding: var(--space-1) 0;
   cursor: pointer;
 
-  --gap: 8px;
-  @media #{$breakpoints-md-down} {
-    --gap: 9px;
-  }
+  --gap: var(--space-3);
 
   label {
     padding-inline-start: var(--gap);
