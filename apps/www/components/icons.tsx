@@ -4,6 +4,7 @@ import {
   DynamicSourceMajor,
   FolderMajor,
   InsertDynamicSourceMajor,
+  LinkMinor,
   NotificationMajor,
   PackageMajor,
   SearchMinor,
@@ -20,4 +21,5 @@ export const Icons = {
   search: SearchMinor,
   notification: NotificationMajor,
   package: PackageMajor,
+  link: LinkMinor,
 };

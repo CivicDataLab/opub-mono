@@ -3,6 +3,7 @@
 import { useRouter } from 'next/navigation';
 
 import { ActionBar } from '../components/action-bar';
+import { Content } from './components/content';
 import styles from './create.module.scss';
 
 export default function DatasetPage() {
@@ -21,7 +22,7 @@ export default function DatasetPage() {
         }}
         previousPage={{ content: 'My Datasets', link: '/dashboard/dataset' }}
       />
-      {/* <Content /> */}
+      <Content />
     </div>
   );
 }

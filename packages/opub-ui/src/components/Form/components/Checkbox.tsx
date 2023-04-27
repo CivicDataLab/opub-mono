@@ -20,8 +20,9 @@ const Checkbox = ({ ...props }: CheckboxProps) => {
             checked={props.checked || field.value}
             onChange={(checked, name) => {
               props.onChange && props.onChange(checked, name);
+              const checkedValue = checked ? props.checked : undefined;
               props.checked
-                ? field.onChange(checked ? props.checked : undefined)
+                ? field.onChange(checkedValue)
                 : field.onChange(checked);
             }}
           />
