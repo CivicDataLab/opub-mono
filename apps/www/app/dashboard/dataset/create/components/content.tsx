@@ -1,9 +1,5 @@
-import { CreateDataset } from './form';
+import { CreateDataset } from './new-dataset';
 
 export function Content() {
-  return (
-    <div>
-      <CreateDataset />
-    </div>
-  );
+  return <div>{<CreateDataset />}</div>;
 }

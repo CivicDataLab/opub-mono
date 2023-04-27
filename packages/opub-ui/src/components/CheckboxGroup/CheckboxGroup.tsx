@@ -1,10 +1,10 @@
-import cx from 'classnames';
-import React, { useId } from 'react';
 import { CheckboxGroupProps } from '../../types/choicelist';
 import { Checkbox } from '../Checkbox';
 import { InlineMessage } from '../InlineMessage';
 import { Text } from '../Text';
 import styles from './CheckboxGroup.module.scss';
+import cx from 'classnames';
+import React, { useId } from 'react';
 
 export const CheckboxGroup = React.forwardRef(
   (
@@ -69,7 +69,7 @@ export const CheckboxGroup = React.forwardRef(
       } = option;
 
       return (
-        <li key={value + index}>
+        <li key={value}>
           <Checkbox
             name={`${finalName}[${index}]`}
             value={value}

@@ -18,29 +18,42 @@ interface Props {
   };
   previousPage?: {
     content: string;
-    link: LinkProps['href'];
+    link?: LinkProps['href'];
+    action?: () => void;
   };
 }
 
 export function ActionBar(props: Props) {
-  const backButton = props.previousPage && (
+  console.log(props);
+
+  const backButton = props.previousPage && props.previousPage?.link && (
     <Link href={props.previousPage?.link} className={styles.BackButton}>
       <Icon source={Icons.back} color="base" />
       <Text visuallyHidden>Go back to {props.previousPage?.content} page</Text>
     </Link>
   );
+
+  const backButtonAction = props.previousPage && props.previousPage?.action && (
+    <button onClick={props.previousPage?.action} className={styles.BackButton}>
+      <Icon source={Icons.back} color="base" />
+      <Text visuallyHidden>Go back to {props.previousPage?.content} page</Text>
+    </button>
+  );
+
+  const btn = props.previousPage?.action ? backButtonAction : backButton;
+
   return (
     <div className={styles.ProgressWrapper}>
       <div className={styles.Progress}>
         <div className={styles.ProgressNav}>
-          {backButton && props.previousPage ? (
+          {btn && props.previousPage ? (
             <Tooltip
               content={`Back to ${props.previousPage?.content}`}
               hideArrow
-              children={backButton}
+              children={btn}
             />
           ) : (
-            backButton
+            btn
           )}
 
           <Text variant="headingLg" as="h2">
