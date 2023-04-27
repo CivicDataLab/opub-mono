@@ -1,3 +1,8 @@
+import type { Error } from '../../types/shared/form';
+import { Choice } from '../Choice';
+import { InlineMessage } from '../InlineMessage';
+import { Text } from '../Text';
+import styles from './RadioGroup.module.scss';
 import * as RadioRadix from '@radix-ui/react-radio-group';
 import type {
   RadioGroupProps,
@@ -5,11 +10,6 @@ import type {
 } from '@radix-ui/react-radio-group';
 import cx from 'classnames';
 import React from 'react';
-import type { Error } from '../../types/shared/form';
-import { Choice } from '../Choice';
-import { InlineMessage } from '../InlineMessage';
-import { Text } from '../Text';
-import styles from './RadioGroup.module.scss';
 
 export type RadioProps = Omit<RadioGroupProps, 'onChange'> & {
   name: string;
@@ -24,6 +24,8 @@ export interface RadioItemProps extends RadioGroupItemProps {
   value: string;
   /** Additional text to aide in use */
   helpText?: React.ReactNode;
+  /** add classname */
+  className?: string;
 }
 
 const RadioGroup = React.forwardRef(
@@ -70,7 +72,7 @@ const RadioGroup = React.forwardRef(
   }
 );
 
-const RadioItem = ({ children, ...props }: RadioItemProps) => {
+const RadioItem = ({ children, className, ...props }: RadioItemProps) => {
   const { helpText, value, disabled, required } = props;
   const id = React.useId();
 
@@ -80,7 +82,13 @@ const RadioItem = ({ children, ...props }: RadioItemProps) => {
   );
 
   const checkboxMarkup = (
-    <Choice label={children} helpText={helpText} disabled={disabled} id={id}>
+    <Choice
+      label={children}
+      helpText={helpText}
+      disabled={disabled}
+      id={id}
+      className={className}
+    >
       <RadioRadix.Item
         id={id}
         value={value}

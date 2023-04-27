@@ -1,8 +1,8 @@
-import cx from 'classnames';
 import { InlineMessage } from '../InlineMessage';
 import { Label } from '../Label';
 import { Text } from '../Text';
 import styles from './Choice.module.scss';
+import cx from 'classnames';
 
 export interface ChoiceProps {
   /** A unique identifier for the choice */
@@ -25,12 +25,24 @@ export interface ChoiceProps {
   onMouseOver?(): void;
   /** Callback when mouse out */
   onMouseOut?(): void;
+  /** add classname */
+  className?: string;
 }
 
-export const Choice = ({ children, label, id, ...props }: ChoiceProps) => {
+export const Choice = ({
+  children,
+  label,
+  id,
+  className,
+  ...props
+}: ChoiceProps) => {
   const { error, helpText } = props;
 
-  const wrapperClassName = cx(styles.Checkbox, error && styles.error);
+  const wrapperClassName = cx(
+    styles.Checkbox,
+    error && styles.error,
+    className
+  );
   const checkboxMarkup = (
     <div className={wrapperClassName}>
       {children}
