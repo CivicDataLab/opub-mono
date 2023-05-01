@@ -135,6 +135,9 @@ $spinner-icon-size: 12px;
 
   &:-webkit-autofill {
     border-radius: var(--border-radius-1);
+    border: var(--border-width-1) solid var(--border-shadow);
+    border-top-color: #898f94;
+    border-right-color: transparent;
   }
 
   &.suggestion {

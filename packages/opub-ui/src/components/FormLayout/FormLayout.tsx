@@ -1,8 +1,8 @@
-import React, { memo, Children } from 'react';
-import type { NamedExoticComponent } from 'react';
+import { isElementOfType, wrapWithComponent } from '../../utils';
 import styles from './FormLayout.module.scss';
 import { Group, Item } from './components';
-import { isElementOfType, wrapWithComponent } from '../../utils';
+import React, { memo, Children } from 'react';
+import type { NamedExoticComponent } from 'react';
 
 export interface FormLayoutProps {
   /** The content to display inside the layout. */
@@ -27,6 +27,6 @@ function wrapChildren(child: React.ReactElement, index: number) {
   if (isElementOfType(child, Group)) {
     return child;
   }
-  const props = { key: index };
+  const props = {};
   return wrapWithComponent(child, Item, props);
 }
