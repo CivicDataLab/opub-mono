@@ -26,9 +26,13 @@ export const Form: React.FunctionComponent<FormProps> = function (
     onSubmit = () => {},
     children,
     resetValues,
+    onChange,
     ...others
   } = props;
   const methods = useForm(formOptions);
+  const values = useWatch({
+    control: methods.control,
+  });
 
   React.useEffect(() => {
     methods.reset(formOptions.defaultValues);
@@ -46,8 +50,8 @@ export const Form: React.FunctionComponent<FormProps> = function (
   }, [submitSuccess]);
 
   React.useEffect(() => {
-    props.onChange && props.onChange(methods.watch());
-  }, [methods.watch()]);
+    onChange && onChange(values);
+  }, [values]);
 
   return (
     <FormProvider {...methods}>

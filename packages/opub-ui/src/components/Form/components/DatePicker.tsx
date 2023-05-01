@@ -9,7 +9,6 @@ import {
 import { parseDate } from '@internationalized/date';
 import { DateValue } from '@react-types/datepicker';
 import { RangeValue } from '@react-types/shared';
-import React from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 
 type PickerProps = {
