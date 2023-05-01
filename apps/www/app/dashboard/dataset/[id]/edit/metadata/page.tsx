@@ -3,9 +3,10 @@
 import { useRouter } from 'next/navigation';
 
 import { testDataset } from '@/config/dashboard';
-import { ActionBar } from '../../components/action-bar';
-import { EditDataset } from './components/EditDataset';
-import styles from './edit.module.scss';
+import { ActionBar } from '../../../components/action-bar';
+import { CreateDataset } from '../../../new/components/new-dataset';
+import { EditMetadata } from '../components/EditMetadata';
+import styles from '../edit.module.scss';
 
 export default function Page({ params }: { params: { id: string } }) {
   const router = useRouter();
@@ -20,19 +21,19 @@ export default function Page({ params }: { params: { id: string } }) {
         primaryAction={{
           content: 'Save & Next',
           onAction: () =>
-            router.push(`/dashboard/dataset/${params.id}/edit/metadata`),
+            router.push(`/dashboard/dataset/${params.id}/edit/distribution`),
         }}
         secondaryAction={{
           content: 'Cancel',
           onAction: () => router.push('/dashboard/dataset'),
         }}
       />
-      <EditDataset
+      <EditMetadata
         defaultVal={{
-          type: 'file',
-          name: data.name,
-          description: data.description,
-          terms: true,
+          source: '',
+          created: '',
+          frequency: '',
+          tags: [],
         }}
       />
     </div>

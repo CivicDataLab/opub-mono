@@ -1,3 +1,4 @@
+import { CreateDataset as Props } from '@/types';
 import {
   Box,
   Checkbox,
@@ -13,21 +14,14 @@ import { Icons } from '@/components/icons';
 import { RadioCard } from '@/components/radio-card';
 import styles from '../new.module.scss';
 
-type valueProps = {
-  type: string;
-  name: string;
-  description: string;
-  terms: boolean;
-};
-
-const defaultValBase: valueProps = {
+const defaultValBase: Props = {
   type: 'file',
   name: '',
   description: '',
   terms: false,
 };
 
-export function CreateDataset({ defaultVal }: { defaultVal?: valueProps }) {
+export function CreateDataset({ defaultVal }: { defaultVal?: Props }) {
   const defaultValue = defaultVal || defaultValBase;
   return (
     <Form

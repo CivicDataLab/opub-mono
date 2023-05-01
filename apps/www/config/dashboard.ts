@@ -26,7 +26,7 @@ export const dashboardConfig: DashboardConfig = {
   ],
 };
 
-type Dataset = {
+export type DatasetProp = {
   id: string;
   name: string;
   description: string;
@@ -38,7 +38,7 @@ type Dataset = {
   tags: string[];
 };
 
-export const testDataset: { [key: string]: Dataset } = {
+export const testDataset: { [key: string]: DatasetProp } = {
   '1': {
     id: '1',
     name: 'Test Dataset 1',
