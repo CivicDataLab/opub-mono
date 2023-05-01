@@ -1,5 +1,17 @@
-import styles from './loading.module.scss';
-
 export function Loading() {
-  return <div className={styles.Loading}>Loading</div>;
+  return (
+    <div
+      style={{
+        display: 'flex',
+        width: '100%',
+        height: '100%',
+        alignItems: 'center',
+        justifyContent: 'center',
+        fontSize: 'var(--font-size-600)',
+        fontWeight: 'var(--font-weight-medium)',
+      }}
+    >
+      Loading
+    </div>
+  );
 }

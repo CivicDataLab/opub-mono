@@ -25,7 +25,6 @@ const defaultValBase: Props = {
 
 export function CreateDataset({ defaultVal }: { defaultVal?: Props }) {
   const [val, setVal] = React.useState(defaultVal);
-  console.log('ran');
 
   const defaultValue = defaultVal || defaultValBase;
   return (
