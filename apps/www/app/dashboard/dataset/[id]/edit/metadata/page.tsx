@@ -34,6 +34,7 @@ export default function Page({ params }: { params: { id: string } }) {
           created: '',
           frequency: '',
           tags: [],
+          terms: false,
         }}
       />
     </div>

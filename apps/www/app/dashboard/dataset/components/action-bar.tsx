@@ -41,34 +41,32 @@ export function ActionBar(props: Props) {
   const btn = props.previousPage?.action ? backButtonAction : backButton;
 
   return (
-    <div className={styles.ProgressWrapper}>
-      <div className={styles.Progress}>
-        <div className={styles.ProgressNav}>
-          {btn && props.previousPage ? (
-            <Tooltip
-              content={`Back to ${props.previousPage?.content}`}
-              hideArrow
-              children={btn}
-            />
-          ) : (
-            btn
-          )}
+    <div className={styles.Progress}>
+      <div className={styles.ProgressNav}>
+        {btn && props.previousPage ? (
+          <Tooltip
+            content={`Back to ${props.previousPage?.content}`}
+            hideArrow
+            children={btn}
+          />
+        ) : (
+          btn
+        )}
 
-          <Text variant="headingLg" as="h2">
-            {props.title}
-          </Text>
-        </div>
-        <Box flex alignItems="center" gap="5">
-          {props.secondaryAction && (
-            <Button plain onClick={props.secondaryAction.onAction}>
-              {props.secondaryAction.content}
-            </Button>
-          )}
-          <Button primary onClick={props.primaryAction.onAction}>
-            {props.primaryAction.content}
-          </Button>
-        </Box>
+        <Text variant="headingLg" as="h2">
+          {props.title}
+        </Text>
       </div>
+      <Box flex alignItems="center" gap="5">
+        {props.secondaryAction && (
+          <Button plain onClick={props.secondaryAction.onAction}>
+            {props.secondaryAction.content}
+          </Button>
+        )}
+        <Button primary onClick={props.primaryAction.onAction}>
+          {props.primaryAction.content}
+        </Button>
+      </Box>
     </div>
   );
 }

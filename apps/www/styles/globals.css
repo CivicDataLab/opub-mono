@@ -58,7 +58,7 @@ body {
   background-color: var(--background);
 }
 
-body > div {
+body > .opub-Tooltip {
   height: 100%;
 }
 

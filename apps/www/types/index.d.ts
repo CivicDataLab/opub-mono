@@ -40,4 +40,5 @@ export type EditDatasetProps = {
   created: string;
   frequency: string;
   tags: string[];
+  terms: boolean;
 };

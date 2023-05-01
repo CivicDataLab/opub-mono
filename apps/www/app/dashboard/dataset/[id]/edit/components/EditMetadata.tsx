@@ -1,6 +1,9 @@
+import React from 'react';
 import { EditDatasetProps } from '@/types';
 import {
   Box,
+  Button,
+  Checkbox,
   ComboboxMulti,
   DatePicker,
   Form,
@@ -13,10 +16,13 @@ import {
 import styles from '../edit.module.scss';
 
 export function EditMetadata({ defaultVal }: { defaultVal: EditDatasetProps }) {
+  const [val, setVal] = React.useState(defaultVal);
+
   return (
     <Box paddingBlockStart="6" maxWidth="944px">
       <Form
         onSubmit={(e) => console.log(e)}
+        onChange={setVal}
         formOptions={{ defaultValues: defaultVal }}
       >
         <div className={styles.EditDataset}>
@@ -32,9 +38,6 @@ export function EditMetadata({ defaultVal }: { defaultVal: EditDatasetProps }) {
                   maxLength={30}
                   showCharacterCount
                 />
-                <DatePicker name="created" label="Date of Creation" />
-              </FormLayout.Group>
-              <FormLayout.Group>
                 <Select
                   name="frequency"
                   label="Update Frequency"
@@ -46,6 +49,10 @@ export function EditMetadata({ defaultVal }: { defaultVal: EditDatasetProps }) {
                   ]}
                   placeholder="Select an option"
                 />
+              </FormLayout.Group>
+
+              <DatePicker name="created" label="Date of Creation" />
+              <Box maxWidth="480px">
                 <ComboboxMulti
                   name="tags"
                   label="Tags"
@@ -60,7 +67,8 @@ export function EditMetadata({ defaultVal }: { defaultVal: EditDatasetProps }) {
                   ]}
                   verticalContent
                 />
-              </FormLayout.Group>
+              </Box>
+              <Button onClick={() => console.log(val)}>Submit</Button>
             </FormLayout>
           </Box>
         </div>

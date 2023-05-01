@@ -1,14 +1,15 @@
 import { CreateDataset as Props } from '@/types';
+import { IconSource } from '@opub-cdl/ui/dist/ts/components/Icon/Icon';
 import {
   Box,
   Checkbox,
   Form,
+  FormLayout,
   Icon,
   Input,
   RadioGroup,
   Text,
-} from '@opub-cdl/ui';
-import { IconSource } from '@opub-cdl/ui/dist/ts/components/Icon/Icon';
+} from '@opub-cdl/ui/src';
 
 import { Icons } from '@/components/icons';
 import { RadioCard } from '@/components/radio-card';
@@ -49,22 +50,24 @@ export function CreateDataset({ defaultVal }: { defaultVal?: Props }) {
         </RadioGroup>
         <Box paddingBlockStart="8" maxWidth="656px">
           <Text variant="headingMd">Dataset Details</Text>
-          <Box paddingBlockStart="3" flex direction="column" gap="4">
-            <Input
-              name="name"
-              label="Name of Dataset"
-              placeholder="example: Population of India"
-              maxLength={30}
-              showCharacterCount
-            />
-            <Input
-              name="description"
-              label="Description"
-              multiline={5}
-              placeholder="some information about this dataset."
-              maxLength={300}
-              showCharacterCount
-            />
+          <Box paddingBlockStart="3">
+            <FormLayout>
+              <Input
+                name="name"
+                label="Name of Dataset"
+                placeholder="example: Population of India"
+                maxLength={30}
+                showCharacterCount
+              />
+              <Input
+                name="description"
+                label="Description"
+                multiline={5}
+                placeholder="some information about this dataset."
+                maxLength={300}
+                showCharacterCount
+              />
+            </FormLayout>
           </Box>
 
           <Box paddingBlockStart="8">
