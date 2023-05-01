@@ -6,7 +6,7 @@ import { LinkButton } from '@/components/Link';
 import { Icons } from '@/components/icons';
 import styles from '../dataset.module.scss';
 
-export function Content() {
+export function Content({ data }: { data?: any }) {
   return (
     <div className={styles.ContentWrapper}>
       <div className={styles.Content}>
@@ -15,7 +15,7 @@ export function Content() {
           You have not added any datasets yet.
         </Text>
         <Box paddingBlockStart="4">
-          <LinkButton href="/dashboard/dataset/create" primary>
+          <LinkButton href="/dashboard/dataset/new" primary>
             Add New Dataset
           </LinkButton>
         </Box>

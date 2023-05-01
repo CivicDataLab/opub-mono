@@ -11,20 +11,28 @@ import { IconSource } from '@opub-cdl/ui/dist/ts/components/Icon/Icon';
 
 import { Icons } from '@/components/icons';
 import { RadioCard } from '@/components/radio-card';
-import styles from '../create.module.scss';
+import styles from '../new.module.scss';
 
-const defaultValBase = {
+type valueProps = {
+  type: string;
+  name: string;
+  description: string;
+  terms: boolean;
+};
+
+const defaultValBase: valueProps = {
   type: 'file',
   name: '',
   description: '',
   terms: false,
 };
 
-export function CreateDataset() {
+export function CreateDataset({ defaultVal }: { defaultVal?: valueProps }) {
+  const defaultValue = defaultVal || defaultValBase;
   return (
     <Form
       onSubmit={(e) => console.log(e)}
-      formOptions={{ defaultValues: defaultValBase }}
+      formOptions={{ defaultValues: defaultValue }}
     >
       <div className={styles.CreateDataset}>
         <Text variant="headingMd">Source Type</Text>

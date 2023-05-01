@@ -24,8 +24,6 @@ interface Props {
 }
 
 export function ActionBar(props: Props) {
-  console.log(props);
-
   const backButton = props.previousPage && props.previousPage?.link && (
     <Link href={props.previousPage?.link} className={styles.BackButton}>
       <Icon source={Icons.back} color="base" />
