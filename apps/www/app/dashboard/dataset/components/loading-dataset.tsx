@@ -3,7 +3,11 @@
 import { Loading } from '@/components/loading';
 import { ActionBar } from './action-bar';
 
-export default function DatasetLoading() {
+export default function DatasetLoading({
+  previousPage,
+}: {
+  previousPage?: boolean;
+}) {
   return (
     <>
       <ActionBar
@@ -16,10 +20,14 @@ export default function DatasetLoading() {
           content: 'Cancel',
           onAction: () => {},
         }}
-        previousPage={{
-          content: 'My Datasets',
-          link: '/dashboard/dataset',
-        }}
+        previousPage={
+          previousPage
+            ? {
+                content: 'My Datasets',
+                link: '#',
+              }
+            : undefined
+        }
       />
       <Loading />;
     </>

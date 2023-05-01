@@ -1,5 +1,5 @@
-import DatasetLoading from './dataset/components/loading-dataset';
+import { Loading } from '@/components/loading';
 
 export default function LoadingPage() {
-  return <DatasetLoading />;
+  return <Loading />;
 }
