@@ -1,6 +1,6 @@
 import React from 'react';
 import { EditDatasetProps } from '@/types';
-import { Box, Form, FormLayout, Input, Select, Text } from '@opub-cdl/ui/src';
+import { Box, Form, FormLayout, Input, Select, Text } from '@opub-cdl/ui';
 
 import styles from '../edit.module.scss';
 

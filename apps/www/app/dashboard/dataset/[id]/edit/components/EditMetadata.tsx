@@ -9,7 +9,7 @@ import {
   Input,
   Select,
   Text,
-} from '@opub-cdl/ui/src';
+} from '@opub-cdl/ui';
 
 import styles from '../edit.module.scss';
 
