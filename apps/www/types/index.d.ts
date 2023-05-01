@@ -1,4 +1,4 @@
-import { Icons } from "@/components/icons";
+import { Icons } from '@/components/icons';
 
 export type SiteConfig = {
   name: string;
@@ -25,4 +25,20 @@ export type SidebarNavItem = {
   | {
       href?: string;
       items: NavLink[];
-    });
+    }
+);
+
+export type CreateDataset = {
+  type: string;
+  name: string;
+  description: string;
+  terms: boolean;
+};
+
+export type EditDatasetProps = {
+  source: string;
+  created: string;
+  frequency: string;
+  tags: string[];
+  terms: boolean;
+};

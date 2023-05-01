@@ -1,7 +1,10 @@
+import React from 'react';
+import { CreateDataset as Props } from '@/types';
 import {
   Box,
   Checkbox,
   Form,
+  FormLayout,
   Icon,
   Input,
   RadioGroup,
@@ -11,20 +14,24 @@ import { IconSource } from '@opub-cdl/ui/dist/ts/components/Icon/Icon';
 
 import { Icons } from '@/components/icons';
 import { RadioCard } from '@/components/radio-card';
-import styles from '../create.module.scss';
+import styles from '../new.module.scss';
 
-const defaultValBase = {
+const defaultValBase: Props = {
   type: 'file',
   name: '',
   description: '',
   terms: false,
 };
 
-export function CreateDataset() {
+export function CreateDataset({ defaultVal }: { defaultVal?: Props }) {
+  const [val, setVal] = React.useState(defaultVal);
+
+  const defaultValue = defaultVal || defaultValBase;
   return (
     <Form
-      onSubmit={(e) => console.log(e)}
-      formOptions={{ defaultValues: defaultValBase }}
+      onSubmit={() => console.log(val)}
+      formOptions={{ defaultValues: defaultValue }}
+      onChange={setVal}
     >
       <div className={styles.CreateDataset}>
         <Text variant="headingMd">Source Type</Text>
@@ -47,22 +54,24 @@ export function CreateDataset() {
         </RadioGroup>
         <Box paddingBlockStart="8" maxWidth="656px">
           <Text variant="headingMd">Dataset Details</Text>
-          <Box paddingBlockStart="3" flex direction="column" gap="4">
-            <Input
-              name="name"
-              label="Name of Dataset"
-              placeholder="example: Population of India"
-              maxLength={30}
-              showCharacterCount
-            />
-            <Input
-              name="description"
-              label="Description"
-              multiline={5}
-              placeholder="some information about this dataset."
-              maxLength={300}
-              showCharacterCount
-            />
+          <Box paddingBlockStart="3">
+            <FormLayout>
+              <Input
+                name="name"
+                label="Name of Dataset"
+                placeholder="example: Population of India"
+                maxLength={30}
+                showCharacterCount
+              />
+              <Input
+                name="description"
+                label="Description"
+                multiline={5}
+                placeholder="some information about this dataset."
+                maxLength={300}
+                showCharacterCount
+              />
+            </FormLayout>
           </Box>
 
           <Box paddingBlockStart="8">

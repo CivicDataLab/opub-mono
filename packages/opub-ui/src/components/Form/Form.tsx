@@ -6,6 +6,7 @@ import {
   SubmitHandler,
   useForm,
   UseFormProps,
+  useWatch,
 } from 'react-hook-form';
 
 export type FormProps = {
@@ -13,6 +14,7 @@ export type FormProps = {
   onSubmit?: SubmitHandler<any>;
   formOptions?: UseFormProps;
   resetValues?: any;
+  onChange?: (handler: any) => void;
 };
 
 export const Form: React.FunctionComponent<FormProps> = function (
@@ -24,9 +26,13 @@ export const Form: React.FunctionComponent<FormProps> = function (
     onSubmit = () => {},
     children,
     resetValues,
+    onChange,
     ...others
   } = props;
   const methods = useForm(formOptions);
+  const values = useWatch({
+    control: methods.control,
+  });
 
   React.useEffect(() => {
     methods.reset(formOptions.defaultValues);
@@ -42,6 +48,10 @@ export const Form: React.FunctionComponent<FormProps> = function (
       clearTimeout(timeOut);
     };
   }, [submitSuccess]);
+
+  React.useEffect(() => {
+    onChange && onChange(values);
+  }, [values]);
 
   return (
     <FormProvider {...methods}>

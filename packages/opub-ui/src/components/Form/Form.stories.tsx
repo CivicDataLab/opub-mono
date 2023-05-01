@@ -1,8 +1,7 @@
-import { Meta } from '@storybook/react';
-import React from 'react';
 import { Button } from '../Button';
 import { FormLayout } from '../FormLayout';
 import { Text } from '../Text';
+import { Form } from './Form';
 import {
   Checkbox,
   Input,
@@ -17,7 +16,8 @@ import {
   Combobox,
   ComboboxMulti,
 } from './components';
-import { Form } from './Form';
+import { Meta } from '@storybook/react';
+import React from 'react';
 
 /**
  * A wrapper component that handles the submission of forms.

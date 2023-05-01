@@ -15,7 +15,7 @@ export default function DatasetPage() {
         title="My Datasets"
         primaryAction={{
           content: 'Add New Dataset',
-          onAction: () => router.push('/dashboard/dataset/create'),
+          onAction: () => router.push('/dashboard/dataset/new'),
         }}
       />
       <Content />
