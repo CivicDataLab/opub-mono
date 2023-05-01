@@ -1,7 +1,7 @@
-import Image from "next/image";
-import Link from "next/link";
+import Image from 'next/image';
+import Link from 'next/link';
 
-import styles from "./page.module.css";
+import styles from './page.module.css';
 
 export default function Home() {
   return (
@@ -11,7 +11,7 @@ export default function Home() {
           Get started by editing&nbsp;
           <code className={styles.code}>app/page.tsx</code>
         </p>
-        <Link href="/dashboard" className={styles.card}>
+        <Link href="/dashboard/dataset" className={styles.card}>
           <h2>Check out Dashboard</h2>
         </Link>
       </div>
