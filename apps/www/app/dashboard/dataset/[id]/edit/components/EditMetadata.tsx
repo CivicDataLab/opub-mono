@@ -2,8 +2,6 @@ import React from 'react';
 import { EditDatasetProps } from '@/types';
 import {
   Box,
-  Button,
-  Checkbox,
   ComboboxMulti,
   DatePicker,
   Form,
@@ -68,7 +66,6 @@ export function EditMetadata({ defaultVal }: { defaultVal: EditDatasetProps }) {
                   verticalContent
                 />
               </Box>
-              <Button onClick={() => console.log(val)}>Submit</Button>
             </FormLayout>
           </Box>
         </div>

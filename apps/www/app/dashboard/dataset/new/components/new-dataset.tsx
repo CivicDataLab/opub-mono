@@ -1,3 +1,4 @@
+import React from 'react';
 import { CreateDataset as Props } from '@/types';
 import { IconSource } from '@opub-cdl/ui/dist/ts/components/Icon/Icon';
 import {
@@ -23,11 +24,14 @@ const defaultValBase: Props = {
 };
 
 export function CreateDataset({ defaultVal }: { defaultVal?: Props }) {
+  const [val, setVal] = React.useState(defaultVal);
+
   const defaultValue = defaultVal || defaultValBase;
   return (
     <Form
-      onSubmit={(e) => console.log(e)}
+      onSubmit={() => console.log(val)}
       formOptions={{ defaultValues: defaultValue }}
+      onChange={setVal}
     >
       <div className={styles.CreateDataset}>
         <Text variant="headingMd">Source Type</Text>

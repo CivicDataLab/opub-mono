@@ -12,7 +12,6 @@ export default function Page({ params }: { params: { id: string } }) {
 
   // get demo data
   const data = testDataset[params.id];
-  console.log(data);
 
   return (
     <div className={styles.DatasetPage}>
@@ -20,7 +19,7 @@ export default function Page({ params }: { params: { id: string } }) {
         title={data.name}
         primaryAction={{
           content: 'Add New Dataset',
-          onAction: () => router.push('/dashboard/dataset/new'),
+          onAction: () => router.push(`/dashboard/dataset/${params.id}/edit`),
         }}
       />
       <InProgress />
