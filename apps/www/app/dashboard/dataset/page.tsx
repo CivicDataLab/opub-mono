@@ -5,7 +5,6 @@ import { useRouter } from 'next/navigation';
 
 import { ActionBar } from './components/action-bar';
 import { Content } from './components/content';
-import styles from './dataset.module.scss';
 
 export default function DatasetPage() {
   const router = useRouter();
@@ -15,7 +14,7 @@ export default function DatasetPage() {
   }, []);
 
   return (
-    <div className={styles.DatasetPage}>
+    <div className="flex flex-col h-full">
       <ActionBar
         title="My Datasets"
         primaryAction={{

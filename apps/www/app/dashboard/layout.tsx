@@ -3,7 +3,6 @@ import { notFound } from 'next/navigation';
 import { dashboardConfig } from '@/config/dashboard';
 import { DashboardNav } from './components/dashboard-nav';
 import { MainNav } from './components/main-nav';
-import styles from './dashboard.module.scss';
 
 interface DashboardLayoutProps {
   children?: React.ReactNode;
@@ -19,15 +18,15 @@ export default async function DashboardLayout({
   }
 
   return (
-    <div className={styles.Container}>
-      <header className={styles.Header}>
+    <div className="flex flex-col h-full">
+      <header className="py-3 px-4 shadow-deep bg-surfaceDefault z-2 relative">
         <MainNav />
       </header>
-      <div className={styles.Wrapper}>
-        <aside className={styles.Aside}>
+      <div className="grid gap-6 grid-cols-[240px_1fr] grow">
+        <aside className="pt-6 pr-2 bg-surfaceDefault z-1 shadow-inset">
           <DashboardNav items={dashboardConfig.sidebarNav} />
         </aside>
-        <main className={styles.Main}>{children}</main>
+        <main className="pr-6">{children}</main>
       </div>
     </div>
   );

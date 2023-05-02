@@ -2,6 +2,7 @@
 
 import Link, { LinkProps } from 'next/link';
 import { Box, Button, Icon, Text, Tooltip } from '@opub-cdl/ui';
+import { twMerge } from 'tailwind-merge';
 
 import { Icons } from '@/components/icons';
 import styles from '../dataset.module.scss';
@@ -26,14 +27,14 @@ interface Props {
 export function ActionBar(props: Props) {
   const backButton = props.previousPage && props.previousPage?.link && (
     <Link href={props.previousPage?.link} className={styles.BackButton}>
-      <Icon source={Icons.back} color="base" />
+      <Icon source={Icons.back} color="base" size="8" />
       <Text visuallyHidden>Go back to {props.previousPage?.content} page</Text>
     </Link>
   );
 
   const backButtonAction = props.previousPage && props.previousPage?.action && (
     <button onClick={props.previousPage?.action} className={styles.BackButton}>
-      <Icon source={Icons.back} color="base" />
+      <Icon source={Icons.back} color="base" size="8" />
       <Text visuallyHidden>Go back to {props.previousPage?.content} page</Text>
     </button>
   );
@@ -41,8 +42,8 @@ export function ActionBar(props: Props) {
   const btn = props.previousPage?.action ? backButtonAction : backButton;
 
   return (
-    <div className={styles.Progress}>
-      <div className={styles.ProgressNav}>
+    <div className="flex items-center gap-4 justify-between py-5 border-b border-divider border-solid">
+      <div className={twMerge(styles.ProgressNav, 'flex items-center gap-4')}>
         {btn && props.previousPage ? (
           <Tooltip
             content={`Back to ${props.previousPage?.content}`}
