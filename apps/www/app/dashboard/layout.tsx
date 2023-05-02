@@ -22,11 +22,11 @@ export default async function DashboardLayout({
       <header className="py-3 px-4 shadow-deep bg-surfaceDefault z-2 relative">
         <MainNav />
       </header>
-      <div className="grid gap-6 grid-cols-[240px_1fr] grow">
-        <aside className="pt-6 pr-2 bg-surfaceDefault z-1 shadow-inset">
+      <div className="grid gap-6 grid-cols-1 grow sm:grid-cols-[240px_1fr]">
+        <aside className="hidden pt-6 pr-2 bg-surfaceDefault z-1 shadow-inset sm:block">
           <DashboardNav items={dashboardConfig.sidebarNav} />
         </aside>
-        <main className="pr-6">{children}</main>
+        <main className="px-2 sm:pl-0 sm:px-6">{children}</main>
       </div>
     </div>
   );
