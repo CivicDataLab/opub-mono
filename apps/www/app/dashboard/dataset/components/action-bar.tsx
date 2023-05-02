@@ -42,8 +42,13 @@ export function ActionBar(props: Props) {
   const btn = props.previousPage?.action ? backButtonAction : backButton;
 
   return (
-    <div className="flex items-center gap-4 justify-between py-5 border-b border-divider border-solid">
-      <div className={twMerge(styles.ProgressNav, 'flex items-center gap-4')}>
+    <div className="flex flex-wrap items-center gap-4 justify-between py-5 border-b border-divider border-solid">
+      <div
+        className={twMerge(
+          styles.ProgressNav,
+          'flex items-center gap-1 sm:gap-4'
+        )}
+      >
         {btn && props.previousPage ? (
           <Tooltip
             content={`Back to ${props.previousPage?.content}`}
@@ -58,7 +63,7 @@ export function ActionBar(props: Props) {
           {props.title}
         </Text>
       </div>
-      <Box flex alignItems="center" gap="5">
+      <Box flex alignItems="center" gap="4">
         {props.secondaryAction && (
           <Button plain onClick={props.secondaryAction.onAction}>
             {props.secondaryAction.content}
