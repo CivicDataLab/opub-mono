@@ -1,8 +1,9 @@
-import cx from 'classnames';
-import React from 'react';
+import { SpacingSpaceScale } from '../../tokens';
 import { variationName } from '../../utils/css';
 import { Text } from '../Text';
 import styles from './Icon.module.scss';
+import cx from 'classnames';
+import React from 'react';
 
 type Color =
   | 'base'
@@ -29,6 +30,8 @@ export interface IconProps {
   backdrop?: boolean;
   /** Descriptive text to be read to screenreaders */
   accessibilityLabel?: string;
+  /** size of the icon, use space tokens  */
+  size?: SpacingSpaceScale;
 }
 
 export function Icon({
@@ -36,6 +39,7 @@ export function Icon({
   color,
   backdrop,
   accessibilityLabel,
+  size,
 }: IconProps) {
   let sourceType: 'function' | 'placeholder' | 'external';
   if (typeof source === 'function' || typeof source === 'object') {
@@ -74,7 +78,14 @@ export function Icon({
   };
 
   return (
-    <span className={className}>
+    <span
+      className={className}
+      style={
+        size
+          ? { height: `var(--space-${size})`, width: `var(--space-${size})` }
+          : {}
+      }
+    >
       <Text as="span" visuallyHidden>
         {accessibilityLabel}
       </Text>

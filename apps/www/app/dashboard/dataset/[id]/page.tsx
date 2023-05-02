@@ -18,7 +18,7 @@ export default function Page({ params }: { params: { id: string } }) {
   const data = testDataset[params.id];
 
   return (
-    <div className={styles.DatasetPage}>
+    <div className="flex flex-col h-full">
       <ActionBar
         title={data.name}
         primaryAction={{

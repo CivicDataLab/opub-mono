@@ -1,9 +1,7 @@
 import { siteConfig } from '@/config/site';
 import Provider from '@/components/provider';
-import '@opub-cdl/ui/dist/assets/styles.css';
-// there is bug with nextjs app dir, hotfix for now
-import '@opub-cdl/ui/dist/assets/styles-bundled.css';
 import '@/styles/globals.css';
+import '@opub-cdl/ui/dist/assets/styles.css';
 import { Inter as FontSans } from 'next/font/google';
 
 const fontSans = FontSans({ subsets: ['latin'] });

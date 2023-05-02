@@ -19,7 +19,7 @@ export function EditMetadata({ defaultVal }: { defaultVal: EditDatasetProps }) {
   return (
     <Box paddingBlockStart="6" maxWidth="944px">
       <Form
-        onSubmit={(e) => console.log(e)}
+        onSubmit={() => console.log(val)}
         onChange={setVal}
         formOptions={{ defaultValues: defaultVal }}
       >

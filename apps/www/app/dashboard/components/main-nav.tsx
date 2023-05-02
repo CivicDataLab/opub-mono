@@ -1,10 +1,9 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import { Avatar, Box, Icon, Text, TextField } from "@opub-cdl/ui";
+import Link from 'next/link';
+import { Avatar, Box, Icon, Text, TextField } from '@opub-cdl/ui';
 
-import { Icons } from "@/components/icons";
-import styles from "../dashboard.module.scss";
+import { Icons } from '@/components/icons';
 
 export function MainNav() {
   return (
@@ -18,7 +17,7 @@ export function MainNav() {
             </Text>
           </Box>
         </Link>
-        <div className={styles.Search}>
+        <div className="hidden w-full max-w-[578px] md:block">
           <TextField
             prefix={<Icon source={Icons.search} />}
             placeholder="Search"
@@ -27,7 +26,7 @@ export function MainNav() {
             labelHidden
           />
         </div>
-        <div className={styles.User}>
+        <div className="flex items-center shrink-0 gap-4">
           <Icon color="base" source={Icons.notification} />
           <div>
             <Avatar
