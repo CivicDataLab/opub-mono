@@ -1,4 +1,4 @@
-import NextLink, { LinkProps } from 'next/link';
+import NextLink from 'next/link';
 import { Button } from '@opub-cdl/ui';
 import { ButtonProps } from '@opub-cdl/ui/dist/ts/components/Button/Button';
 
