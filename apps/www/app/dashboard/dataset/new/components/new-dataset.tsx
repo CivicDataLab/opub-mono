@@ -1,7 +1,6 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import { CreateDataset as Props } from '@/types';
-import { IconSource } from '@opub-cdl/ui/dist/ts/components/Icon/Icon';
 import {
   Box,
   Checkbox,
@@ -12,6 +11,7 @@ import {
   RadioGroup,
   Text,
 } from '@opub-cdl/ui';
+import { IconSource } from '@opub-cdl/ui/dist/ts/components/Icon/Icon';
 
 import { Icons } from '@/components/icons';
 import { RadioCard } from '@/components/radio-card';
@@ -29,7 +29,7 @@ export function CreateDataset({
   submitRef,
 }: {
   defaultVal?: Props;
-  submitRef: React.RefObject<HTMLButtonElement>;
+  submitRef?: React.RefObject<HTMLButtonElement>;
 }) {
   const [val, setVal] = React.useState(defaultVal);
   const router = useRouter();
