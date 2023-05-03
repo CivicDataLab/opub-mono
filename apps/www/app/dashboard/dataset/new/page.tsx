@@ -14,6 +14,10 @@ export default function DatasetPage() {
     router.prefetch('/dashboard/dataset/1/edit/metadata');
   }, []);
 
+  function handleSubmit() {
+    router.push('/dashboard/dataset/1/edit/metadata');
+  }
+
   return (
     <div className={styles.CreatetPage}>
       <ActionBar

@@ -1,6 +1,6 @@
-import React from 'react';
 import { TextFieldProps } from '../../types/input';
 import { Input } from '../Input/Input';
+import React from 'react';
 
 export type Props = TextFieldProps & {
   name: string;
@@ -14,7 +14,7 @@ export const TextField = React.forwardRef(
       <Input
         {...props}
         ref={ref}
-        onChange={(e, id) => {
+        onChange={(e) => {
           setValue(e);
           props.onChange && props.onChange(e, props.name);
         }}

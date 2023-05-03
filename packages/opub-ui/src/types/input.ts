@@ -144,6 +144,8 @@ interface NonMutuallyExclusiveProps {
   onFocus?: (event?: React.FocusEvent) => void;
   /** Callback fired when input is blurred */
   onBlur?(event?: React.FocusEvent): void;
+  /** Whether the input is required */
+  required?: boolean;
 }
 
 export type MutuallyExclusiveSelectionProps =

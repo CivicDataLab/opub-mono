@@ -58,7 +58,7 @@ export function FileUpload(props: FileUploadProps) {
           alignItems="center"
           color="text-subdued"
         >
-          <Icon source={IconCloudUpload} size="12" />
+          <Icon source={IconCloudUpload} size={48} />
           {actionMarkup}
           {actionHintMarkup}
         </Box>

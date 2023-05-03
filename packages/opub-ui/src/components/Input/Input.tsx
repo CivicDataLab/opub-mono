@@ -72,6 +72,7 @@ export const Input = React.forwardRef(
       onChange,
       onFocus,
       onBlur,
+      required,
     }: TextFieldProps,
     ref: React.ForwardedRef<HTMLInputElement | null>
   ) => {
@@ -330,6 +331,7 @@ export const Input = React.forwardRef(
       name,
       id,
       disabled,
+      required,
       readOnly,
       role,
       autoFocus,
