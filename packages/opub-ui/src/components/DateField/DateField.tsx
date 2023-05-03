@@ -1,5 +1,6 @@
 'use client';
 
+import { Error } from '../../types';
 import { DateTimeProps } from '../../types/datetime';
 import inputStyles from '../Input/Input.module.scss';
 import { Labelled } from '../Labelled';
@@ -67,7 +68,9 @@ const DateField = (props: DatFieldProps) => {
   const themeClass = cx(styles.DateField, {});
   const inputMarkup = (
     <div className={`opub-DateField ${themeClass}`}>
-      <div className={inputStyles.TextField}>
+      <div
+        className={cx(inputStyles.TextField, errorMessage && inputStyles.error)}
+      >
         <div
           {...fieldProps}
           ref={ref}

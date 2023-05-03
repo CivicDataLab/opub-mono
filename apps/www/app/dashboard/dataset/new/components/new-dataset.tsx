@@ -1,4 +1,5 @@
 import React from 'react';
+import { useRouter } from 'next/navigation';
 import { CreateDataset as Props } from '@/types';
 import { IconSource } from '@opub-cdl/ui/dist/ts/components/Icon/Icon';
 import {
@@ -10,7 +11,7 @@ import {
   Input,
   RadioGroup,
   Text,
-} from '@opub-cdl/ui/src';
+} from '@opub-cdl/ui';
 
 import { Icons } from '@/components/icons';
 import { RadioCard } from '@/components/radio-card';
@@ -23,13 +24,22 @@ const defaultValBase: Props = {
   terms: false,
 };
 
-export function CreateDataset({ defaultVal }: { defaultVal?: Props }) {
+export function CreateDataset({
+  defaultVal,
+  submitRef,
+}: {
+  defaultVal?: Props;
+  submitRef: React.RefObject<HTMLButtonElement>;
+}) {
   const [val, setVal] = React.useState(defaultVal);
+  const router = useRouter();
 
   const defaultValue = defaultVal || defaultValBase;
   return (
     <Form
-      onSubmit={() => console.log(val)}
+      onSubmit={() => {
+        router.push('/dashboard/dataset/1/edit/metadata');
+      }}
       formOptions={{ defaultValues: defaultValue }}
       onChange={setVal}
     >
@@ -92,6 +102,9 @@ export function CreateDataset({ defaultVal }: { defaultVal?: Props }) {
           </Box>
         </Box>
       </div>
+      <button hidden ref={submitRef}>
+        submit form
+      </button>
     </Form>
   );
 }

@@ -15,3 +15,12 @@
     width: fit-content;
   }
 }
+
+.Error {
+  border-color: var(--border-critical);
+  background-color: var(--surface-critical-subdued);
+  &.hover,
+  &:hover {
+    border-color: var(--border-critical);
+  }
+}

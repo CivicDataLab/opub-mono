@@ -1,6 +1,6 @@
 'use client';
 
-import { ComboboxSingleProps } from '../../../types';
+import { ComboboxSingleProps, Error } from '../../../types';
 import {
   Combobox as ComboboxBase,
   ComboboxMulti as ComboboxMultiBase,
@@ -51,9 +51,11 @@ const Combobox = ({ ...props }: ComboboxProps) => {
 type Props = {
   name: string;
   onChange?: (val: string[], name: string) => void;
+  required?: boolean;
+  error?: Error | boolean;
 } & Omit<ComboboxMultiProps, 'onChange'>;
 
-const ComboboxMulti = ({ ...props }: Props) => {
+const ComboboxMulti = ({ required, error, ...props }: Props) => {
   const method = useFormContext();
   const { onChange, ...rest } = props;
 
@@ -62,12 +64,17 @@ const ComboboxMulti = ({ ...props }: Props) => {
       <Controller
         {...props}
         control={method.control}
+        rules={{ required: required }}
         // desctructure onChange from field to avoid conflict with onChange from props
-        render={({ field: { onChange: fieldChange, ...others } }) => {
+        render={({
+          field: { onChange: fieldChange, ...others },
+          fieldState,
+        }) => {
           return (
             <ComboboxMultiBase
               {...others}
               {...rest}
+              error={fieldState.invalid && error}
               values={others.value || props.values || props.defaultValues || []}
               onValuesChange={(values: any) => {
                 onChange && onChange(values, props.name);
