@@ -70,6 +70,7 @@
     "@radix-ui/react-toast": "^1.1.3",
     "@radix-ui/react-tooltip": "^1.0.5",
     "@shopify/polaris-icons": "^6.12.0",
+    "@tabler/icons-react": "^2.17.0",
     "@tanstack/react-table": "^8.8.4",
     "ariakit": "^2.0.0-next.43",
     "react-aria": "3.22.0",

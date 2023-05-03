@@ -57,11 +57,13 @@ export function Icon({
     backdrop && styles.hasBackdrop
   );
 
-  const SourceComponent = source;
+  const SourceComponent: any = source;
   const contentMarkup = {
     function: (
       <SourceComponent
         className={styles.Svg}
+        size={size ? `var(--space-${size})` : 20}
+        color={color ? `var(--icon-${color})` : 'currentColor'}
         focusable="false"
         aria-hidden="true"
       />
