@@ -1,6 +1,5 @@
 'use client';
 
-import { Error } from '../../types';
 import { DateTimeProps } from '../../types/datetime';
 import inputStyles from '../Input/Input.module.scss';
 import { Labelled } from '../Labelled';
