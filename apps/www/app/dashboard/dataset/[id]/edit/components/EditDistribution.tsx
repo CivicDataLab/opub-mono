@@ -9,7 +9,7 @@ import {
   Input,
   Text,
   Thumbnail,
-} from '@opub-cdl/ui/src';
+} from '@opub-cdl/ui';
 import { FileMinor } from '@shopify/polaris-icons';
 
 import styles from '../edit.module.scss';
