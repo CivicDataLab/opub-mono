@@ -1,7 +1,9 @@
 export { ActionList } from './ActionList';
 export { AlertDialog } from './AlertDialog';
+export { Avatar } from './Avatar';
 export { Badge } from './Badge';
 export { Box } from './Box';
+export { Breadcrumbs } from './Breadcrumbs';
 export { Button } from './Button';
 export { ButtonGroup } from './ButtonGroup';
 export { Calendar, RangeCalendar } from './Calendar';
@@ -13,7 +15,6 @@ export { Connected } from './Connected';
 export { DataTable } from './DataTable';
 export { Dialog } from './Dialog';
 export { Divider } from './Divider';
-export { DropZone } from './DropZone';
 export {
   Checkbox,
   CheckboxGroup,
@@ -22,6 +23,7 @@ export {
   DateField,
   DatePicker,
   DateRangePicker,
+  DropZone,
   Form,
   Input,
   RadioGroup,
@@ -55,5 +57,3 @@ export { TextField } from './TextField';
 export { Thumbnail } from './Thumbnail';
 export { Toast, Toaster } from './Toast';
 export { Tooltip } from './Tooltip';
-export { Breadcrumbs } from './Breadcrumbs';
-export { Avatar } from './Avatar';

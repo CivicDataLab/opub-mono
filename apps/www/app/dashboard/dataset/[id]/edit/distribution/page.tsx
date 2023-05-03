@@ -1,5 +1,6 @@
 'use client';
 
+import React from 'react';
 import { useRouter } from 'next/navigation';
 
 import { testDataset } from '@/config/dashboard';
@@ -9,6 +10,7 @@ import styles from '../edit.module.scss';
 
 export default function Page({ params }: { params: { id: string } }) {
   const router = useRouter();
+  const submitRef = React.useRef<HTMLButtonElement>(null);
 
   // get demo data
   const data = testDataset[params.id];
@@ -19,7 +21,9 @@ export default function Page({ params }: { params: { id: string } }) {
         title={data.name}
         primaryAction={{
           content: 'Save Dataset',
-          onAction: () => {},
+          onAction: () => {
+            submitRef.current?.click();
+          },
         }}
         secondaryAction={{
           content: 'Cancel',
@@ -27,12 +31,11 @@ export default function Page({ params }: { params: { id: string } }) {
         }}
       />
       <EditDistribution
+        submitRef={submitRef}
         defaultVal={{
-          source: '',
-          created: '',
-          frequency: '',
-          tags: [],
-          terms: false,
+          title: '',
+          description: '',
+          file: undefined,
         }}
       />
     </div>

@@ -57,6 +57,10 @@ $dropzone-stacking-order: (
   &:hover {
     outline: var(--border-width-1) solid transparent;
   }
+
+  &.error {
+    background-color: var(--surface-critical-subdued);
+  }
 }
 
 .hasOutline {
@@ -67,6 +71,11 @@ $dropzone-stacking-order: (
   }
 
   &:not(.isDisabled) {
+    &.error {
+      &::after {
+        border-color: var(--border-critical);
+      }
+    }
     &:hover {
       cursor: pointer;
       background-color: var(--surface-subdued);
@@ -74,15 +83,26 @@ $dropzone-stacking-order: (
       &::after {
         border-color: var(--interactive-hovered);
       }
+
+      &.error {
+        background-color: var(--surface-critical-subdued);
+
+        &::after {
+          border-color: var(--border-critical);
+        }
+      }
     }
   }
 
   &:not(.focused) {
     &::after {
       @include reset-after;
-
       @include set-border-radius;
       border-color: var(--border-neutral-subdued);
+
+      &.error {
+        border-color: var(--border-critical);
+      }
     }
   }
 }

@@ -42,3 +42,9 @@ export type EditDatasetProps = {
   tags: string[];
   terms: boolean;
 };
+
+export type EditDistributionProps = {
+  title: string;
+  description: string;
+  file: File[] | undefined;
+};

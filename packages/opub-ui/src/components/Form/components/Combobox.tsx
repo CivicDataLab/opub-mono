@@ -11,9 +11,11 @@ import { Controller, useFormContext } from 'react-hook-form';
 type ComboboxProps = {
   name: string;
   onChange?: (val: string, name: string) => void;
+  required?: boolean;
+  error?: Error | boolean;
 } & Omit<ComboboxSingleProps, 'onChange'>;
 
-const Combobox = ({ ...props }: ComboboxProps) => {
+const Combobox = ({ required, error, ...props }: ComboboxProps) => {
   const method = useFormContext();
 
   if (method) {
@@ -21,11 +23,13 @@ const Combobox = ({ ...props }: ComboboxProps) => {
       <Controller
         {...props}
         control={method.control}
-        render={({ field }) => {
+        rules={{ required: required }}
+        render={({ field, fieldState }) => {
           return (
             <ComboboxBase
               {...field}
               {...props}
+              error={fieldState.invalid && error}
               value={field.value || props.value || props.defaultValue || ''}
               onChange={(value: any) => {
                 props.onChange && props.onChange(String(value), props.name);
