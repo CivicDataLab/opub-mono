@@ -1,8 +1,10 @@
 'use client';
 
+import { Error, LabelledProps } from '../../../types';
 import { ComboboxSingleProps } from '../../../types/combobox';
 import itemStyles from '../../ActionList/ActionList.module.scss';
 import { Box } from '../../Box';
+import { InlineMessage } from '../../InlineMessage';
 import { Tag } from '../../Tag';
 import { Text } from '../../Text';
 import styles from '../Combobox.module.scss';
@@ -22,6 +24,15 @@ export type ComboboxMultiProps = ComboboxSingleProps & {
   values?: string[];
   onValuesChange?: any;
   list?: string[];
+  error?: Error | boolean;
+  /** Adds an action to the label */
+  labelAction?: LabelledProps['action'];
+  /** Visually hide the label */
+  labelHidden?: boolean;
+  /** Visual required indicator, add an asterisk to label */
+  requiredIndicator?: boolean;
+  /** Additional text to aide in use */
+  helpText?: React.ReactNode;
 };
 
 export const MultiSelect = forwardRef<HTMLInputElement, ComboboxMultiProps>(
@@ -41,6 +52,7 @@ export const MultiSelect = forwardRef<HTMLInputElement, ComboboxMultiProps>(
       list,
       onFilter,
       verticalContent,
+      error,
       ...comboboxProps
     } = props;
 
@@ -108,6 +120,7 @@ export const MultiSelect = forwardRef<HTMLInputElement, ComboboxMultiProps>(
           combobox={combobox}
           ref={ref}
           verticalContent={tags}
+          error={error}
           {...comboboxProps}
         />
 

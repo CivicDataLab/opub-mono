@@ -9,6 +9,7 @@ import styles from './new.module.scss';
 
 export default function DatasetPage() {
   const router = useRouter();
+  const submitRef = React.useRef<HTMLButtonElement>(null);
 
   React.useEffect(() => {
     router.prefetch('/dashboard/dataset/1/edit/metadata');
@@ -20,7 +21,7 @@ export default function DatasetPage() {
         title="Add New Dataset"
         primaryAction={{
           content: 'Save & Next',
-          onAction: () => router.push('/dashboard/dataset/1/edit/metadata'),
+          onAction: () => submitRef.current?.click(),
         }}
         secondaryAction={{
           content: 'Cancel',
@@ -32,7 +33,7 @@ export default function DatasetPage() {
         }}
       />
 
-      <CreateDataset />
+      <CreateDataset submitRef={submitRef} />
     </div>
   );
 }

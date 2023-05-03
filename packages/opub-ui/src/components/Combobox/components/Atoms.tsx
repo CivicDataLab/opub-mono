@@ -1,13 +1,14 @@
-import { Labelled } from '../../Labelled';
 import { ComboboxSingleProps } from '../../../types/combobox';
+import inputStyles from '../../Input/Input.module.scss';
+import { Labelled } from '../../Labelled';
 import { Combobox as ComboboxComponent } from 'ariakit/combobox';
 import cx from 'classnames';
 import React, { useId, useRef } from 'react';
-import inputStyles from '../../Input/Input.module.scss';
 
 export const Combobox = React.forwardRef<HTMLInputElement, ComboboxSingleProps>(
   (props: ComboboxSingleProps, ref) => {
-    const { label, id, combobox, verticalContent, ...comboboxProps } = props;
+    const { label, id, error, combobox, verticalContent, ...comboboxProps } =
+      props;
     const verticalContentRef = useRef<HTMLDivElement>(null);
 
     const rId = useId();
@@ -34,14 +35,14 @@ export const Combobox = React.forwardRef<HTMLInputElement, ComboboxSingleProps>(
     );
 
     const textField = (
-      <div className={cx(inputStyles.TextField)}>
+      <div className={cx(inputStyles.TextField, error && inputStyles.error)}>
         {finalContent}
         {backdropMarkup}
       </div>
     );
 
     return label ? (
-      <Labelled id={finalId} label={label}>
+      <Labelled error={error} id={finalId} label={label}>
         {textField}
       </Labelled>
     ) : (

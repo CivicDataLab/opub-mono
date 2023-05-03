@@ -1,3 +1,4 @@
+import { Error, LabelledProps } from './shared/form';
 import React from 'react';
 
 type ComboboxState = {
@@ -101,4 +102,13 @@ export type ComboboxSingleProps = Omit<
   onFilter?: any;
   onChange?: (value: string) => void;
   value?: string;
+  error?: Error | boolean;
+  /** Adds an action to the label */
+  labelAction?: LabelledProps['action'];
+  /** Visually hide the label */
+  labelHidden?: boolean;
+  /** Visual required indicator, add an asterisk to label */
+  requiredIndicator?: boolean;
+  /** Additional text to aide in use */
+  helpText?: React.ReactNode;
 };

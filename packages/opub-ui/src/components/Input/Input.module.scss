@@ -47,7 +47,7 @@ $spinner-icon-size: 12px;
 }
 
 .error {
-  > .Input ~ .Backdrop {
+  > .Backdrop {
     background-color: var(--surface-critical-subdued);
     border-color: var(--border-critical);
 

@@ -5,7 +5,7 @@ import { Checkbox as CheckboxBase } from '../../Checkbox';
 import { CheckboxGroup as CheckboxGroupBase } from '../../CheckboxGroup';
 import { Controller, useFormContext } from 'react-hook-form';
 
-const Checkbox = ({ ...props }: CheckboxProps) => {
+const Checkbox = ({ required, error, ...props }: CheckboxProps) => {
   const method = useFormContext();
 
   if (method) {
@@ -13,10 +13,12 @@ const Checkbox = ({ ...props }: CheckboxProps) => {
       <Controller
         {...props}
         control={method.control}
-        render={({ field }) => (
+        rules={{ required: required }}
+        render={({ field, fieldState }) => (
           <CheckboxBase
             {...field}
             {...props}
+            error={fieldState.invalid && error}
             checked={props.checked || field.value}
             onChange={(checked, name) => {
               props.onChange && props.onChange(checked, name);

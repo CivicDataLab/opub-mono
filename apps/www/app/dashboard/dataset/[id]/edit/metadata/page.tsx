@@ -10,6 +10,8 @@ import styles from '../edit.module.scss';
 
 export default function Page({ params }: { params: { id: string } }) {
   const router = useRouter();
+  const submitRef = React.useRef<HTMLButtonElement>(null);
+
   React.useEffect(() => {
     router.prefetch(`/dashboard/dataset/${params.id}/edit/distribution`);
   }, []);
@@ -23,8 +25,7 @@ export default function Page({ params }: { params: { id: string } }) {
         title={data.name}
         primaryAction={{
           content: 'Save & Next',
-          onAction: () =>
-            router.push(`/dashboard/dataset/${params.id}/edit/distribution`),
+          onAction: () => submitRef.current?.click(),
         }}
         secondaryAction={{
           content: 'Cancel',
@@ -32,6 +33,8 @@ export default function Page({ params }: { params: { id: string } }) {
         }}
       />
       <EditMetadata
+        submitRef={submitRef}
+        id={params.id}
         defaultVal={{
           source: '',
           created: '',

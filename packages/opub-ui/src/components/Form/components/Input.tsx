@@ -3,7 +3,7 @@
 import { TextField, TextfieldProps } from '../../TextField';
 import { Controller, useFormContext } from 'react-hook-form';
 
-const Input = ({ ...props }: TextfieldProps) => {
+const Input = ({ required, error, ...props }: TextfieldProps) => {
   const method = useFormContext();
 
   if (method) {
@@ -11,10 +11,12 @@ const Input = ({ ...props }: TextfieldProps) => {
       <Controller
         {...props}
         control={method.control}
-        render={({ field }) => (
+        rules={{ required: required }}
+        render={({ field, fieldState }) => (
           <TextField
             {...field}
             {...props}
+            error={fieldState.invalid && error}
             onChange={(val, name) => {
               props.onChange && props.onChange(val, name);
               field.onChange(val);

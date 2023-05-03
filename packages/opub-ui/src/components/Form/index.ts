@@ -12,6 +12,7 @@ export {
   RangeSlider,
   Select,
   TimeField,
+  DropZone,
 } from './components';
 export { Form } from './Form';
 export type { FormProps } from './Form';

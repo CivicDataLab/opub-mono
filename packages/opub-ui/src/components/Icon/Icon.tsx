@@ -31,7 +31,7 @@ export interface IconProps {
   /** Descriptive text to be read to screenreaders */
   accessibilityLabel?: string;
   /** size of the icon, use space tokens  */
-  size?: SpacingSpaceScale;
+  size?: SpacingSpaceScale | number;
 }
 
 export function Icon({
@@ -57,11 +57,19 @@ export function Icon({
     backdrop && styles.hasBackdrop
   );
 
-  const SourceComponent = source;
+  const SourceComponent: any = source;
+  const iconSize =
+    typeof size === 'number'
+      ? size
+      : typeof size === 'number'
+      ? `var(--space-${size})`
+      : 18;
   const contentMarkup = {
     function: (
       <SourceComponent
         className={styles.Svg}
+        size={iconSize}
+        color={color ? `var(--icon-${color})` : 'currentColor'}
         focusable="false"
         aria-hidden="true"
       />

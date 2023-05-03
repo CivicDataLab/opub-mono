@@ -1,9 +1,11 @@
 import React from 'react';
+import { useRouter } from 'next/navigation';
 import { EditDatasetProps } from '@/types';
 import {
   Box,
   ComboboxMulti,
   DatePicker,
+  Divider,
   Form,
   FormLayout,
   Input,
@@ -13,18 +15,37 @@ import {
 
 import styles from '../edit.module.scss';
 
-export function EditMetadata({ defaultVal }: { defaultVal: EditDatasetProps }) {
+export function EditMetadata({
+  id,
+  defaultVal,
+  submitRef,
+}: {
+  id: string;
+  defaultVal: EditDatasetProps;
+  submitRef: React.RefObject<HTMLButtonElement>;
+}) {
   const [val, setVal] = React.useState(defaultVal);
+  const router = useRouter();
 
   return (
     <Box paddingBlockStart="6" maxWidth="944px">
       <Form
-        onSubmit={() => console.log(val)}
-        onChange={setVal}
+        onSubmit={() => {
+          router.push(`/dashboard/dataset/${id}/edit/distribution`);
+        }}
         formOptions={{ defaultValues: defaultVal }}
+        onChange={setVal}
       >
         <div className={styles.EditDataset}>
-          <Text variant="headingMd">Add Metadata</Text>
+          <div className="flex flex-col gap-1">
+            <Text variant="headingMd">Add Metadata</Text>
+            <Text variant="bodyMd" color="subdued">
+              Source, Date of Creation, Update Frequency, etc.
+            </Text>
+          </div>
+          <div className="my-4">
+            <Divider />
+          </div>
 
           <Box paddingBlockStart="3">
             <FormLayout>
@@ -35,6 +56,9 @@ export function EditMetadata({ defaultVal }: { defaultVal: EditDatasetProps }) {
                   placeholder="example: https://data.gov.in"
                   maxLength={30}
                   showCharacterCount
+                  autoComplete="off"
+                  required
+                  error="This field is required"
                 />
                 <Select
                   name="frequency"
@@ -46,10 +70,17 @@ export function EditMetadata({ defaultVal }: { defaultVal: EditDatasetProps }) {
                     { label: 'Yearly', value: 'yearly' },
                   ]}
                   placeholder="Select an option"
+                  required
+                  error="This field is required"
                 />
               </FormLayout.Group>
 
-              <DatePicker name="created" label="Date of Creation" />
+              <DatePicker
+                name="created"
+                label="Date of Creation"
+                required
+                error="This field is required"
+              />
               <Box maxWidth="480px">
                 <ComboboxMulti
                   name="tags"
@@ -64,11 +95,16 @@ export function EditMetadata({ defaultVal }: { defaultVal: EditDatasetProps }) {
                     'Carrot',
                   ]}
                   verticalContent
+                  required
+                  error="This field is required"
                 />
               </Box>
             </FormLayout>
           </Box>
         </div>
+        <button hidden ref={submitRef}>
+          submit form
+        </button>
       </Form>
     </Box>
   );

@@ -15,9 +15,10 @@ type PickerProps = {
   name: string;
   onChange?: (val: string, name: string) => void;
   defaultValue?: DateValue;
+  required?: boolean;
 } & DatePickerProps;
 
-const DatePicker = ({ ...props }: PickerProps) => {
+const DatePicker = ({ required, error, ...props }: PickerProps) => {
   const method = useFormContext();
 
   if (method) {
@@ -25,18 +26,22 @@ const DatePicker = ({ ...props }: PickerProps) => {
       <Controller
         {...props}
         control={method.control}
-        render={({ field }) => (
+        rules={{ required: required }}
+        render={({ field, fieldState }) => (
           <DatePickerBase
             {...field}
             {...props}
+            error={fieldState.invalid && error}
             value={
               (field.value && parseDate(field.value)) ||
               props.value ||
               props.defaultValue
             }
             onChange={(val) => {
-              props.onChange && props.onChange(val.toString(), props.name);
-              field.onChange(val.toString());
+              if (val) {
+                props.onChange && props.onChange(val.toString(), props.name);
+                field.onChange(val.toString());
+              }
             }}
           />
         )}

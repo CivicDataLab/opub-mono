@@ -1,5 +1,7 @@
 import React from 'react';
+import { useRouter } from 'next/navigation';
 import { CreateDataset as Props } from '@/types';
+import { IconSource } from '@opub-cdl/ui/dist/ts/components/Icon/Icon';
 import {
   Box,
   Checkbox,
@@ -10,7 +12,6 @@ import {
   RadioGroup,
   Text,
 } from '@opub-cdl/ui';
-import { IconSource } from '@opub-cdl/ui/dist/ts/components/Icon/Icon';
 
 import { Icons } from '@/components/icons';
 import { RadioCard } from '@/components/radio-card';
@@ -23,13 +24,22 @@ const defaultValBase: Props = {
   terms: false,
 };
 
-export function CreateDataset({ defaultVal }: { defaultVal?: Props }) {
+export function CreateDataset({
+  defaultVal,
+  submitRef,
+}: {
+  defaultVal?: Props;
+  submitRef: React.RefObject<HTMLButtonElement>;
+}) {
   const [val, setVal] = React.useState(defaultVal);
+  const router = useRouter();
 
   const defaultValue = defaultVal || defaultValBase;
   return (
     <Form
-      onSubmit={() => console.log(val)}
+      onSubmit={() => {
+        router.push('/dashboard/dataset/1/edit/metadata');
+      }}
       formOptions={{ defaultValues: defaultValue }}
       onChange={setVal}
     >
@@ -62,6 +72,9 @@ export function CreateDataset({ defaultVal }: { defaultVal?: Props }) {
                 placeholder="example: Population of India"
                 maxLength={30}
                 showCharacterCount
+                autoComplete="off"
+                required
+                error="This field is required"
               />
               <Input
                 name="description"
@@ -70,6 +83,9 @@ export function CreateDataset({ defaultVal }: { defaultVal?: Props }) {
                 placeholder="some information about this dataset."
                 maxLength={300}
                 showCharacterCount
+                autoComplete="off"
+                required
+                error="This field is required"
               />
             </FormLayout>
           </Box>
@@ -77,7 +93,7 @@ export function CreateDataset({ defaultVal }: { defaultVal?: Props }) {
           <Box paddingBlockStart="8">
             <Text variant="headingMd">Terms & Conditions</Text>
             <Box paddingBlockStart="2">
-              <Checkbox name="terms">
+              <Checkbox name="terms" required error="This field is required">
                 I agree to the terms and conditions as set out by the user
                 agreement. I state that I have read and understood the terms and
                 conditions.
@@ -86,6 +102,9 @@ export function CreateDataset({ defaultVal }: { defaultVal?: Props }) {
           </Box>
         </Box>
       </div>
+      <button hidden ref={submitRef}>
+        submit form
+      </button>
     </Form>
   );
 }

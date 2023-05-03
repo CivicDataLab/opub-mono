@@ -23,6 +23,7 @@ import { CircleAlertMajor, UploadMajor } from '@shopify/polaris-icons';
 import cx from 'classnames';
 import React, {
   FunctionComponent,
+  RefAttributes,
   useCallback,
   useEffect,
   useMemo,
@@ -99,38 +100,46 @@ export interface DropZoneProps {
   onDragLeave?(): void;
   /** Callback triggered when the file dialog is canceled */
   onFileDialogClose?(): void;
+  /** Whether the field is required */
+  required?: boolean;
 }
 
-export const DropZone: React.FunctionComponent<DropZoneProps> & {
+// @ts-ignore
+export const DropZone: React.ForwardRefExoticComponent<
+  DropZoneProps & RefAttributes<HTMLDivElement>
+> & {
   FileUpload: typeof FileUpload;
-} = function DropZone({
-  dropOnPage,
-  label,
-  labelAction,
-  labelHidden,
-  children,
-  disabled = false,
-  outline = true,
-  accept,
-  active,
-  overlay = true,
-  allowMultiple = defaultAllowMultiple,
-  overlayText,
-  errorOverlayText,
-  type = 'file',
-  onClick,
-  error,
-  openFileDialog,
-  variableHeight,
-  onFileDialogClose,
-  customValidator,
-  onDrop,
-  onDropAccepted,
-  onDropRejected,
-  onDragEnter,
-  onDragOver,
-  onDragLeave,
-}: DropZoneProps) {
+} = React.forwardRef(function DropZone(
+  {
+    dropOnPage,
+    label,
+    labelAction,
+    labelHidden,
+    children,
+    disabled = false,
+    outline = true,
+    accept,
+    active,
+    overlay = true,
+    allowMultiple = defaultAllowMultiple,
+    overlayText,
+    errorOverlayText,
+    type = 'file',
+    onClick,
+    error,
+    openFileDialog,
+    variableHeight,
+    onFileDialogClose,
+    customValidator,
+    onDrop,
+    onDropAccepted,
+    onDropRejected,
+    onDragEnter,
+    onDragOver,
+    onDragLeave,
+  }: DropZoneProps,
+  ref: React.Ref<HTMLDivElement>
+) {
   const node = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const dragTargets = useRef<EventTarget[]>([]);
@@ -304,7 +313,8 @@ export const DropZone: React.FunctionComponent<DropZoneProps> & {
     disabled && styles.isDisabled,
     (internalError || error) && styles.hasError,
     !variableHeight && styles[variationName('size', size)],
-    measuring && styles.measuring
+    measuring && styles.measuring,
+    errorOverlayText && styles.error
   );
 
   const dragOverlay =
@@ -376,6 +386,7 @@ export const DropZone: React.FunctionComponent<DropZoneProps> & {
         id={id}
         label={labelValue}
         action={labelAction}
+        error={errorOverlayText}
         labelHidden={labelHiddenValue}
       >
         <div
@@ -406,7 +417,7 @@ export const DropZone: React.FunctionComponent<DropZoneProps> & {
       </Labelled>
     </DropZoneContext.Provider>
   );
-};
+});
 
 function stopEvent(event: DropZoneEvent | React.DragEvent<HTMLDivElement>) {
   event.preventDefault();

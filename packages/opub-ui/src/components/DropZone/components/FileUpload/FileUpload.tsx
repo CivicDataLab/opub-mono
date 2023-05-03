@@ -1,15 +1,17 @@
-import cx from 'classnames';
-import { useContext } from 'react';
+import { Box } from '../../../Box';
+import { Icon } from '../../../Icon';
+import { Text } from '../../../Text';
 import { DropZoneContext } from '../../context';
 import { uploadArrow } from '../../images';
-
-import { Box } from '../../../Box';
-import { Text } from '../../../Text';
 import styles from './FileUpload.module.scss';
+import { UploadMajor } from '@shopify/polaris-icons';
+import { IconCloudUpload } from '@tabler/icons-react';
+import cx from 'classnames';
+import { useContext } from 'react';
 
 export interface FileUploadProps {
   actionTitle?: string;
-  actionHint?: string;
+  actionHint?: React.ReactNode | string;
 }
 
 export function FileUpload(props: FileUploadProps) {
@@ -35,17 +37,28 @@ export function FileUpload(props: FileUploadProps) {
     size === 'small' && styles.small
   );
 
-  const actionHintMarkup = actionHint && (
-    <Text variant="bodySm" as="p" color="subdued">
-      {actionHint}
-    </Text>
-  );
+  const actionHintMarkup =
+    actionHint &&
+    (typeof actionHint === 'string' ? (
+      <Text variant="bodySm" as="p" color="subdued">
+        {actionHint}
+      </Text>
+    ) : (
+      actionHint
+    ));
 
   let viewMarkup;
   switch (size) {
     case 'large':
       viewMarkup = (
-        <Box flex gap="2" direction="column" alignItems="center">
+        <Box
+          flex
+          gap="8"
+          direction="column"
+          alignItems="center"
+          color="text-subdued"
+        >
+          <Icon source={IconCloudUpload} size={48} />
           {actionMarkup}
           {actionHintMarkup}
         </Box>
