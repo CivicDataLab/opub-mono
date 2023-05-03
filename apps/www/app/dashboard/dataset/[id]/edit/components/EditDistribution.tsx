@@ -1,6 +1,16 @@
 import React from 'react';
 import { EditDatasetProps } from '@/types';
-import { Box, Form, FormLayout, Input, Select, Text } from '@opub-cdl/ui';
+import {
+  Box,
+  Divider,
+  DropZone,
+  Form,
+  FormLayout,
+  Input,
+  Text,
+  Thumbnail,
+} from '@opub-cdl/ui/src';
+import { FileMinor } from '@shopify/polaris-icons';
 
 import styles from '../edit.module.scss';
 
@@ -19,27 +29,31 @@ export function EditDistribution({
         formOptions={{ defaultValues: defaultVal }}
       >
         <div className={styles.EditDataset}>
-          <Text variant="headingMd">Add Metadata</Text>
+          <div className="flex flex-col gap-1">
+            <Text variant="headingMd">Add Distribution</Text>
+            <Text variant="bodyMd" color="subdued">
+              Upload files and add details
+            </Text>
+          </div>
+          <div className="my-4">
+            <Divider />
+          </div>
 
           <Box paddingBlockStart="3">
             <FormLayout>
+              <FileUpload />
               <Input
-                name="source"
-                label="Source"
-                placeholder="example: https://data.gov.in"
+                name="title"
+                label="Title"
                 maxLength={30}
                 showCharacterCount
               />
-              <Select
-                name="frequency"
-                label="Update Frequency"
-                options={[
-                  { label: 'Daily', value: 'daily' },
-                  { label: 'Weekly', value: 'weekly' },
-                  { label: 'Monthly', value: 'monthly' },
-                  { label: 'Yearly', value: 'yearly' },
-                ]}
-                placeholder="Select an option"
+              <Input
+                name="description"
+                label="Description"
+                maxLength={300}
+                multiline={4}
+                showCharacterCount
               />
             </FormLayout>
           </Box>
@@ -48,3 +62,60 @@ export function EditDistribution({
     </Box>
   );
 }
+
+const FileUpload = () => {
+  const [file, setFile] = React.useState<File>();
+
+  const handleDropZoneDrop = React.useCallback(
+    (_dropFiles: File[], acceptedFiles: File[]) => {
+      setFile(acceptedFiles[0]);
+    },
+    []
+  );
+
+  const validImageTypes = ['image/gif', 'image/jpeg', 'image/png'];
+
+  const hint = (
+    <Text variant="bodySm" as="p" color="subdued">
+      Supported file type: .pdf, .csv, .xls <br />
+      The file size should not be more than 5 MB
+    </Text>
+  );
+
+  const fileUpload = !file && <DropZone.FileUpload actionHint={hint} />;
+  const uploadedFile = file && (
+    <Box padding="8">
+      <Box
+        flex
+        gap="2"
+        alignItems="center"
+        justifyContent="center"
+        minHeight="164px"
+      >
+        <Thumbnail
+          size="small"
+          alt={file.name}
+          source={
+            validImageTypes.includes(file.type)
+              ? window.URL.createObjectURL(file)
+              : FileMinor
+          }
+        />
+
+        <div>
+          {file.name}{' '}
+          <Text variant="bodySm" as="p">
+            {file.size} bytes
+          </Text>
+        </div>
+      </Box>
+    </Box>
+  );
+
+  return (
+    <DropZone allowMultiple={false} label="" onDrop={handleDropZoneDrop}>
+      {uploadedFile}
+      {fileUpload}
+    </DropZone>
+  );
+};

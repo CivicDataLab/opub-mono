@@ -4,6 +4,7 @@ import {
   Box,
   ComboboxMulti,
   DatePicker,
+  Divider,
   Form,
   FormLayout,
   Input,
@@ -24,7 +25,15 @@ export function EditMetadata({ defaultVal }: { defaultVal: EditDatasetProps }) {
         formOptions={{ defaultValues: defaultVal }}
       >
         <div className={styles.EditDataset}>
-          <Text variant="headingMd">Add Metadata</Text>
+          <div className="flex flex-col gap-1">
+            <Text variant="headingMd">Add Metadata</Text>
+            <Text variant="bodyMd" color="subdued">
+              Source, Date of Creation, Update Frequency, etc.
+            </Text>
+          </div>
+          <div className="my-4">
+            <Divider />
+          </div>
 
           <Box paddingBlockStart="3">
             <FormLayout>

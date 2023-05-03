@@ -11,6 +11,7 @@
   "dependencies": {
     "@opub-cdl/ui": "*",
     "@shopify/polaris-icons": "^6.14.0",
+    "@tabler/icons-react": "^2.17.0",
     "@types/node": "18.16.0",
     "@types/react": "18.0.38",
     "@types/react-dom": "18.0.11",
