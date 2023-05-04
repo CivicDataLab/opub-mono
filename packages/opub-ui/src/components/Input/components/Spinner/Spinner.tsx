@@ -1,7 +1,7 @@
-import { CaretDownMinor, CaretUpMinor } from '@shopify/polaris-icons';
 import { Icon } from '../../../Icon';
-import React from 'react';
 import styles from '../../Input.module.scss';
+import { IconCaretDown, IconCaretUp } from '@tabler/icons-react';
+import React from 'react';
 
 type HandleStepFn = (step: number) => void;
 
@@ -37,7 +37,7 @@ export const Spinner = React.forwardRef<HTMLDivElement, SpinnerProps>(
           onBlur={onBlur}
         >
           <div className={styles.SpinnerIcon}>
-            <Icon source={CaretUpMinor} />
+            <Icon source={IconCaretUp} fill="base" />
           </div>
         </button>
         <button
@@ -49,7 +49,7 @@ export const Spinner = React.forwardRef<HTMLDivElement, SpinnerProps>(
           onBlur={onBlur}
         >
           <div className={styles.SpinnerIcon}>
-            <Icon source={CaretDownMinor} />
+            <Icon source={IconCaretDown} fill="base" />
           </div>
         </button>
       </div>

@@ -1,10 +1,10 @@
 import type { TagProps } from '../../types/tag';
 import { handleMouseUpByBlurring } from '../../utils/focus';
+import { Icon } from '../Icon';
+import styles from './Tag.module.scss';
+import { IconX } from '@tabler/icons-react';
 import cx from 'classnames';
 import React from 'react';
-import styles from './Tag.module.scss';
-import { CancelSmallMinor } from '@shopify/polaris-icons';
-import { Icon } from '../Icon';
 
 export const Tag = React.forwardRef(
   (
@@ -61,7 +61,7 @@ export const Tag = React.forwardRef(
         onMouseUp={handleMouseUpByBlurring}
         disabled={disabled}
       >
-        <Icon source={CancelSmallMinor} />
+        <Icon source={IconX} size="4" />
       </button>
     ) : null;
 

@@ -8,8 +8,8 @@ import {
   Input,
   Text,
   Thumbnail,
-} from '@opub-cdl/ui';
-import { FileMinor } from '@shopify/polaris-icons';
+} from '@opub-cdl/ui/src';
+import { IconFile } from '@tabler/icons-react';
 
 import { DatasetForm } from '../../../components/dataset-form';
 import styles from '../edit.module.scss';
@@ -48,6 +48,7 @@ export function EditDistribution({
             <FormLayout>
               <FileUpload required error="This field is required" />
               <Input
+                type="number"
                 name="title"
                 label="Title"
                 maxLength={30}
@@ -115,7 +116,7 @@ const FileUpload = ({
           source={
             validImageTypes.includes(file.type)
               ? window.URL.createObjectURL(file)
-              : FileMinor
+              : IconFile
           }
         />
 

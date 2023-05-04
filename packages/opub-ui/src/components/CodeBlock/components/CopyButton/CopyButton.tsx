@@ -1,9 +1,9 @@
-import { DuplicateMinor, TickMinor } from '@shopify/polaris-icons';
-import React from 'react';
 import { Button } from '../../../Button';
 import { Icon } from '../../../Icon';
 import { Tooltip } from '../../../Tooltip';
 import styles from '../../CodeBlock.module.scss';
+import { IconCopy, IconCheck } from '@tabler/icons-react';
+import React from 'react';
 
 interface Props {
   code: string;
@@ -32,9 +32,7 @@ const CopyButton = ({ code }: Props) => {
         <Button
           onClick={handleClick}
           disabled={copied}
-          icon={
-            <Icon source={copied ? TickMinor : DuplicateMinor} color="base" />
-          }
+          icon={<Icon source={copied ? IconCheck : IconCopy} color="base" />}
           plain
         />
       </Tooltip>

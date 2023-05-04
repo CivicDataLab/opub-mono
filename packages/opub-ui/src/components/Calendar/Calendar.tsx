@@ -6,7 +6,7 @@ import styles from './Calendar.module.scss';
 import { CalendarGrid } from './components/CalendarGrid';
 import { GregorianCalendar } from '@internationalized/date';
 import { AriaCalendarProps, DateValue } from '@react-types/calendar';
-import { ArrowLeftMinor, ArrowRightMinor } from '@shopify/polaris-icons';
+import { IconArrowLeft, IconArrowRight } from '@tabler/icons-react';
 import cx from 'classnames';
 import { forwardRef, LegacyRef } from 'react';
 import { useCalendar, useLocale } from 'react-aria';
@@ -61,7 +61,7 @@ const Calendar = forwardRef(
             disabled={disabledPrev}
             {...othersPrev}
           >
-            <Icon source={ArrowLeftMinor} color="base" />
+            <Icon source={IconArrowLeft} color="base" />
           </button>
 
           <Text variant="bodyMd">{title}</Text>
@@ -70,7 +70,7 @@ const Calendar = forwardRef(
             disabled={disabledNext}
             {...othersNext}
           >
-            <Icon source={ArrowRightMinor} color="base" />
+            <Icon source={IconArrowRight} color="base" />
           </button>
         </div>
         <CalendarGrid state={state} />

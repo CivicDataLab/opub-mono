@@ -4,7 +4,6 @@ import { Text } from '../../../Text';
 import { DropZoneContext } from '../../context';
 import { uploadArrow } from '../../images';
 import styles from './FileUpload.module.scss';
-import { UploadMajor } from '@shopify/polaris-icons';
 import { IconCloudUpload } from '@tabler/icons-react';
 import cx from 'classnames';
 import { useContext } from 'react';

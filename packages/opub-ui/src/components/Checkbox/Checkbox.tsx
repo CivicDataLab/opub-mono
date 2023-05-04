@@ -3,8 +3,7 @@ import { Choice } from '../Choice';
 import { Icon } from '../Icon';
 import styles from './Checkbox.module.scss';
 import * as CheckboxRadix from '@radix-ui/react-checkbox';
-import { MinusMinor, TickSmallMinor } from '@shopify/polaris-icons';
-import { IconCheck } from '@tabler/icons-react';
+import { IconCheck, IconMinus } from '@tabler/icons-react';
 import cx from 'classnames';
 import React, { forwardRef } from 'react';
 
@@ -24,7 +23,7 @@ const Checkbox = forwardRef(
       props.disabled && styles.Disabled
     );
 
-    const iconSource = isIndeterminate ? MinusMinor : IconCheck;
+    const iconSource = isIndeterminate ? IconMinus : IconCheck;
 
     const checkboxMarkup = (
       <Choice

@@ -1,7 +1,8 @@
-import { SortMinor } from '@shopify/polaris-icons';
-import { Meta, StoryObj } from '@storybook/react';
 import { PropsVariationSection } from '../../utils/helpers';
+import { Icon } from '../Icon';
 import { Button } from './Button';
+import { Meta, StoryObj } from '@storybook/react';
+import { IconSelector } from '@tabler/icons-react';
 
 /**
  * Primary UI component for user interface
@@ -57,9 +58,15 @@ export const Basic = () => {
         'medium + with disclosure': { disclosure: 'select' },
         'slim + with disclosure': { size: 'slim', disclosure: 'select' },
 
-        'large + with icon': { size: 'large', icon: <SortMinor /> },
-        'medium + with icon': { icon: <SortMinor /> },
-        'slim + with icon': { size: 'slim', icon: <SortMinor /> },
+        'large + with icon': {
+          size: 'large',
+          icon: <Icon source={IconSelector} />,
+        },
+        'medium + with icon': { icon: <Icon source={IconSelector} /> },
+        'slim + with icon': {
+          size: 'slim',
+          icon: <Icon source={IconSelector} />,
+        },
 
         loading: { loading: true },
       }}
@@ -120,9 +127,15 @@ export const Outline = () => (
       medium: {},
       slim: { size: 'slim' },
 
-      'large + with icon': { size: 'large', icon: <SortMinor /> },
-      'medium + with icon': { icon: <SortMinor /> },
-      'slim + with icon': { size: 'slim', icon: <SortMinor /> },
+      'large + with icon': {
+        size: 'large',
+        icon: <Icon source={IconSelector} />,
+      },
+      'medium + with icon': { icon: <Icon source={IconSelector} /> },
+      'slim + with icon': {
+        size: 'slim',
+        icon: <Icon source={IconSelector} />,
+      },
     }}
   />
 );
