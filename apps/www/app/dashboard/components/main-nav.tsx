@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Avatar, Box, Icon, Text, TextField } from '@opub-cdl/ui';
+import { Avatar, Box, Icon, Text, TextField } from '@opub-cdl/ui/src';
 
 import { Icons } from '@/components/icons';
 
@@ -11,7 +11,7 @@ export function MainNav() {
       <Box flex justifyContent="space-between" gap="4" alignItems="center">
         <Link href="/">
           <Box flex alignItems="center" gap="2">
-            <Icon source={Icons.logo} color="interactive" />
+            <Icon source={Icons.logo} color="decorative4" size="6" />
             <Text variant="headingLg" as="h1">
               OPub
             </Text>

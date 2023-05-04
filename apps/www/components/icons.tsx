@@ -10,13 +10,19 @@ import {
   SearchMinor,
   SettingsMajor,
 } from '@shopify/polaris-icons';
+import {
+  IconDatabaseCog,
+  IconDatabasePlus,
+  IconFolder,
+  IconUserCog,
+} from '@tabler/icons-react';
 
 export const Icons = {
   back: ChevronLeftMinor,
-  logo: FolderMajor,
-  dataset: DynamicSourceMajor,
-  addDataset: InsertDynamicSourceMajor,
-  settings: SettingsMajor,
+  logo: IconFolder,
+  dataset: IconDatabaseCog,
+  addDataset: IconDatabasePlus,
+  userSettings: IconUserCog,
   arrowRight: ArrowRightMinor,
   search: SearchMinor,
   notification: NotificationMajor,

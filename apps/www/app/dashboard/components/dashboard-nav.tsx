@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Icon, Text } from '@opub-cdl/ui';
+import { Icon, Text } from '@opub-cdl/ui/src';
 import { twMerge } from 'tailwind-merge';
 
 import { SidebarNavItem } from 'types';
@@ -30,7 +30,7 @@ export function DashboardNav({ items }: DashboardNavProps) {
                 <span
                   className={twMerge(
                     'bg-transparent rounded-r-1 w-[3px] h-full absolute top-0 left-0',
-                    path.includes(item.href) && 'bg-iconInteractive'
+                    path.includes(item.href) && 'bg-decorativeIconFour'
                   )}
                 />
                 <div
@@ -40,7 +40,7 @@ export function DashboardNav({ items }: DashboardNavProps) {
                     path.includes(item.href) && styles.Selected
                   )}
                 >
-                  <Icon source={icon} />
+                  <Icon source={icon} size="5" />
                   <Text fontWeight="medium">{item.title}</Text>
                 </div>
               </div>

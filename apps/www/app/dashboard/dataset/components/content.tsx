@@ -1,6 +1,6 @@
 'use client';
 
-import { Box, Icon, Text } from '@opub-cdl/ui';
+import { Box, Icon, Text } from '@opub-cdl/ui/src';
 import { twMerge } from 'tailwind-merge';
 
 import { LinkButton } from '@/components/Link';
@@ -10,7 +10,12 @@ export function Content({ data }: { data?: any }) {
   return (
     <div className="flex flex-col items-center justify-center h-full w-full grow">
       <div className={twMerge('flex flex-col items-center gap-4 h-100')}>
-        <Icon source={Icons.addDataset} color="base" size="20" />
+        <Icon
+          source={Icons.addDataset}
+          color="interactive"
+          stroke={1}
+          size="20"
+        />
         <Text variant="headingSm" color="subdued">
           You have not added any datasets yet.
         </Text>

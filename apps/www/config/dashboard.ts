@@ -21,7 +21,7 @@ export const dashboardConfig: DashboardConfig = {
     {
       title: 'Account Management',
       href: '/dashboard/account',
-      icon: 'settings',
+      icon: 'userSettings',
     },
   ],
 };

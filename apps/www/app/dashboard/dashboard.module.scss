@@ -7,9 +7,8 @@
 
 .Selected {
   background-color: var(--background-selected);
-  --text: var(--interactive);
 
   svg {
-    fill: var(--icon-interactive);
+    color: var(--icon-decorative-four);
   }
 }
