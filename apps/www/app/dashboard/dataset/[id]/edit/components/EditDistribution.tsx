@@ -48,7 +48,6 @@ export function EditDistribution({
             <FormLayout>
               <FileUpload required error="This field is required" />
               <Input
-                type="number"
                 name="title"
                 label="Title"
                 maxLength={30}
