@@ -16,7 +16,7 @@ export const dashboardConfig: DashboardConfig = {
     {
       title: 'Dataset Management',
       href: '/dashboard/dataset',
-      icon: 'dataset',
+      icon: 'datasetSettings',
     },
     {
       title: 'Account Management',

@@ -29,12 +29,7 @@ export function MainNav() {
         <div className="flex items-center shrink-0 gap-4">
           <Icon color="base" source={Icons.notification} />
           <div>
-            <Avatar
-              showInitials
-              showLabel
-              name="Xquenda Andreev"
-              size="small"
-            />
+            <Avatar showInitials showLabel name="Helen Birjam" size="small" />
           </div>
         </div>
       </Box>

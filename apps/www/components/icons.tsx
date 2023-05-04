@@ -1,31 +1,29 @@
+import { ChevronLeftMinor, PackageMajor } from '@shopify/polaris-icons';
 import {
-  ArrowRightMinor,
-  ChevronLeftMinor,
-  DynamicSourceMajor,
-  FolderMajor,
-  InsertDynamicSourceMajor,
-  LinkMinor,
-  NotificationMajor,
-  PackageMajor,
-  SearchMinor,
-  SettingsMajor,
-} from '@shopify/polaris-icons';
-import {
+  IconArrowLeft,
+  IconArrowRight,
+  IconBarrierBlock,
+  IconBellFilled,
+  IconDatabase,
   IconDatabaseCog,
   IconDatabasePlus,
   IconFolder,
+  IconLink,
+  IconSearch,
   IconUserCog,
 } from '@tabler/icons-react';
 
 export const Icons = {
-  back: ChevronLeftMinor,
+  back: IconArrowLeft,
   logo: IconFolder,
-  dataset: IconDatabaseCog,
+  dataset: IconDatabase,
+  datasetSettings: IconDatabaseCog,
   addDataset: IconDatabasePlus,
   userSettings: IconUserCog,
-  arrowRight: ArrowRightMinor,
-  search: SearchMinor,
-  notification: NotificationMajor,
+  arrowRight: IconArrowRight,
+  search: IconSearch,
+  notification: IconBellFilled,
   package: PackageMajor,
-  link: LinkMinor,
+  construction: IconBarrierBlock,
+  link: IconLink,
 };

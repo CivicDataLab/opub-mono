@@ -40,7 +40,7 @@ export function DashboardNav({ items }: DashboardNavProps) {
                     path.includes(item.href) && styles.Selected
                   )}
                 >
-                  <Icon source={icon} size="5" />
+                  <Icon source={icon} />
                   <Text fontWeight="medium">{item.title}</Text>
                 </div>
               </div>
