@@ -1,4 +1,4 @@
-import { ChevronLeftMinor, PackageMajor } from '@shopify/polaris-icons';
+import { PackageMajor } from '@shopify/polaris-icons';
 import {
   IconArrowLeft,
   IconArrowRight,
@@ -8,6 +8,8 @@ import {
   IconDatabaseCog,
   IconDatabasePlus,
   IconFolder,
+  IconLayoutSidebarLeftCollapse,
+  IconLayoutSidebarLeftExpand,
   IconLink,
   IconSearch,
   IconUserCog,
@@ -26,4 +28,6 @@ export const Icons = {
   package: PackageMajor,
   construction: IconBarrierBlock,
   link: IconLink,
+  collapse: IconLayoutSidebarLeftCollapse,
+  expand: IconLayoutSidebarLeftExpand,
 };

@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Avatar, Box, Icon, Text, TextField } from '@opub-cdl/ui/src';
+import { Avatar, Box, Icon, Text, TextField } from '@opub-cdl/ui';
 
 import { Icons } from '@/components/icons';
 

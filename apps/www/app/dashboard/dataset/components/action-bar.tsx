@@ -2,7 +2,7 @@
 
 import Link, { LinkProps } from 'next/link';
 import { Size, useWindowSize } from '@/hooks/use-window-size';
-import { Box, Button, Icon, Text, Tooltip } from '@opub-cdl/ui/src';
+import { Box, Button, Icon, Text, Tooltip } from '@opub-cdl/ui';
 import { twMerge } from 'tailwind-merge';
 
 import { Icons } from '@/components/icons';
