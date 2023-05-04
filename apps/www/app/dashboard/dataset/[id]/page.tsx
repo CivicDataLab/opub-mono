@@ -1,12 +1,11 @@
 'use client';
 
 import React from 'react';
-import { useRouter } from 'next/navigation';
+import { notFound, useRouter } from 'next/navigation';
 
 import { testDataset } from '@/config/dashboard';
 import { InProgress } from '../../components/in-progress';
 import { ActionBar } from '../components/action-bar';
-import styles from '../dataset.module.scss';
 
 export default function Page({ params }: { params: { id: string } }) {
   const router = useRouter();
@@ -16,6 +15,9 @@ export default function Page({ params }: { params: { id: string } }) {
 
   // get demo data
   const data = testDataset[params.id];
+  if (!data) {
+    notFound();
+  }
 
   return (
     <div className="flex flex-col h-full">

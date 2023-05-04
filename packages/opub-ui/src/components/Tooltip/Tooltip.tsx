@@ -54,6 +54,10 @@ const Tooltip = (props: TooltipProps) => {
     sideOffset = hideArrow ? 2 : 4,
   } = props;
 
+  if (!content) {
+    return <>{children}</>;
+  }
+
   const tooltipMarkup = (
     <TooltipRadix.Root
       open={open}

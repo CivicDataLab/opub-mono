@@ -11,7 +11,7 @@ export function MainNav() {
       <Box flex justifyContent="space-between" gap="4" alignItems="center">
         <Link href="/">
           <Box flex alignItems="center" gap="2">
-            <Icon source={Icons.logo} color="interactive" />
+            <Icon source={Icons.logo} color="decorative4" size="6" />
             <Text variant="headingLg" as="h1">
               OPub
             </Text>
@@ -29,12 +29,7 @@ export function MainNav() {
         <div className="flex items-center shrink-0 gap-4">
           <Icon color="base" source={Icons.notification} />
           <div>
-            <Avatar
-              showInitials
-              showLabel
-              name="Xquenda Andreev"
-              size="small"
-            />
+            <Avatar showInitials showLabel name="Helen Birjam" size="small" />
           </div>
         </div>
       </Box>

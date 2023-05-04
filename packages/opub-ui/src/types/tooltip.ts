@@ -84,7 +84,7 @@ export type TooltipProps = Root &
     /** The element that will activate to tooltip */
     children: React.ReactNode;
     /** The content to display within the tooltip */
-    content: React.ReactNode;
+    content?: React.ReactNode;
 
     /** Width of content */
     width?: 'default' | 'wide';

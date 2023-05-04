@@ -6,10 +6,7 @@
   width: 20px;
   max-height: 100%;
   max-width: 100%;
-}
-
-.applyColor {
-  color: var(--surface);
+  color: currentColor;
 }
 
 .hasBackdrop {
@@ -31,7 +28,7 @@
 
 .colorBase {
   svg {
-    fill: var(--icon);
+    color: var(--icon);
   }
 
   &::before {
@@ -40,12 +37,12 @@
 }
 
 .colorSubdued svg {
-  fill: var(--icon-subdued);
+  color: var(--icon-subdued);
 }
 
 .colorCritical {
   svg {
-    fill: var(--icon-critical);
+    color: var(--icon-critical);
   }
 
   &::before {
@@ -54,12 +51,12 @@
 }
 
 .colorInteractive svg {
-  fill: var(--interactive);
+  color: var(--interactive);
 }
 
 .colorWarning {
   svg {
-    fill: var(--icon-warning);
+    color: var(--icon-warning);
   }
 
   &::before {
@@ -69,7 +66,7 @@
 
 .colorHighlight {
   svg {
-    fill: var(--icon-highlight);
+    color: var(--icon-highlight);
   }
 
   &::before {
@@ -79,7 +76,7 @@
 
 .colorSuccess {
   svg {
-    fill: var(--icon-success);
+    color: var(--icon-success);
   }
 
   &::before {
@@ -87,12 +84,62 @@
   }
 }
 
+.colorDecorative1 {
+  svg {
+    color: var(--icon-decorative-one);
+  }
+
+  &::before {
+    background-color: var(--surface-decorative-one);
+  }
+}
+
+.colorDecorative2 {
+  svg {
+    color: var(--icon-decorative-two);
+  }
+
+  &::before {
+    background-color: var(--surface-decorative-two);
+  }
+}
+
+.colorDecorative3 {
+  svg {
+    color: var(--icon-decorative-three);
+  }
+
+  &::before {
+    background-color: var(--surface-decorative-three);
+  }
+}
+
+.colorDecorative4 {
+  svg {
+    color: var(--icon-decorative-four);
+  }
+
+  &::before {
+    background-color: var(--surface-decorative-four);
+  }
+}
+
+.colorDecorative5 {
+  svg {
+    color: var(--icon-decorative-five);
+  }
+
+  &::before {
+    background-color: var(--surface-decorative-five);
+  }
+}
+
 .colorPrimary svg {
-  fill: var(--action-primary);
+  color: var(--action-primary);
 }
 
 .colorMagic svg {
-  fill: var(--color-icon-magic);
+  color: var(--color-icon-magic);
 }
 
 .Svg,

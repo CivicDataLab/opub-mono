@@ -4,7 +4,6 @@ import {
   Box,
   Divider,
   DropZone,
-  Form,
   FormLayout,
   Input,
   Text,
@@ -12,6 +11,7 @@ import {
 } from '@opub-cdl/ui';
 import { FileMinor } from '@shopify/polaris-icons';
 
+import { DatasetForm } from '../../../components/dataset-form';
 import styles from '../edit.module.scss';
 
 export function EditDistribution({
@@ -21,16 +21,17 @@ export function EditDistribution({
   defaultVal: EditDistributionProps;
   submitRef: React.RefObject<HTMLButtonElement>;
 }) {
-  const [disVal, setDisVal] = React.useState(defaultVal);
+  const [val, setVal] = React.useState(defaultVal);
 
   return (
     <Box paddingBlockStart="6" maxWidth="944px">
-      <Form
+      <DatasetForm
         onSubmit={() => {
-          alert('submit');
+          alert('form submitted');
         }}
-        onChange={setDisVal}
         formOptions={{ defaultValues: defaultVal }}
+        onChange={setVal}
+        submitRef={submitRef}
       >
         <div className={styles.EditDataset}>
           <div className="flex flex-col gap-1">
@@ -68,10 +69,7 @@ export function EditDistribution({
             </FormLayout>
           </Box>
         </div>
-        <button hidden ref={submitRef}>
-          submit form
-        </button>
-      </Form>
+      </DatasetForm>
     </Box>
   );
 }

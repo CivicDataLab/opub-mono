@@ -10,7 +10,7 @@
     cursor: pointer;
 
     svg {
-      fill: var(--icon);
+      color: var(--icon);
     }
   }
 
@@ -29,7 +29,7 @@
         background-color: var(--surface-selected);
 
         svg {
-          fill: var(--icon-interactive);
+          color: var(--icon-interactive);
         }
       }
     }
@@ -41,7 +41,7 @@
         color: var(--text-disabled);
 
         svg {
-          fill: var(--icon-subdued);
+          color: var(--icon-subdued);
         }
       }
     }

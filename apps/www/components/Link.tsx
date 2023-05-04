@@ -6,11 +6,15 @@ interface Props extends ButtonProps {
   href: string;
 }
 
-export function LinkButton({ href, ...props }: Props) {
+export function LinkButton({
+  href,
+  children = 'Add New Dataset',
+  ...props
+}: Props) {
   return (
     <NextLink href={href} passHref legacyBehavior>
       <Button {...props} url={href}>
-        Add New Dataset
+        {children}
       </Button>
     </NextLink>
   );

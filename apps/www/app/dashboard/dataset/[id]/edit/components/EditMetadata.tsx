@@ -6,13 +6,13 @@ import {
   ComboboxMulti,
   DatePicker,
   Divider,
-  Form,
   FormLayout,
   Input,
   Select,
   Text,
 } from '@opub-cdl/ui';
 
+import { DatasetForm } from '../../../components/dataset-form';
 import styles from '../edit.module.scss';
 
 export function EditMetadata({
@@ -29,12 +29,13 @@ export function EditMetadata({
 
   return (
     <Box paddingBlockStart="6" maxWidth="944px">
-      <Form
+      <DatasetForm
         onSubmit={() => {
           router.push(`/dashboard/dataset/${id}/edit/distribution`);
         }}
         formOptions={{ defaultValues: defaultVal }}
         onChange={setVal}
+        submitRef={submitRef}
       >
         <div className={styles.EditDataset}>
           <div className="flex flex-col gap-1">
@@ -102,10 +103,7 @@ export function EditMetadata({
             </FormLayout>
           </Box>
         </div>
-        <button hidden ref={submitRef}>
-          submit form
-        </button>
-      </Form>
+      </DatasetForm>
     </Box>
   );
 }

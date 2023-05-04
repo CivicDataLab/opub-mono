@@ -1,16 +1,14 @@
+import React from 'react';
 import { notFound } from 'next/navigation';
 
-import { dashboardConfig } from '@/config/dashboard';
-import { DashboardNav } from './components/dashboard-nav';
+import { DashboardLayout } from './components/dashboard-layout';
 import { MainNav } from './components/main-nav';
 
 interface DashboardLayoutProps {
   children?: React.ReactNode;
 }
 
-export default async function DashboardLayout({
-  children,
-}: DashboardLayoutProps) {
+export default async function Layout({ children }: DashboardLayoutProps) {
   const user = true; // await getCurrentUser()
 
   if (!user) {
@@ -22,12 +20,7 @@ export default async function DashboardLayout({
       <header className="py-3 px-4 shadow-deep bg-surfaceDefault z-2 relative">
         <MainNav />
       </header>
-      <div className="grid gap-6 grid-cols-1 grow sm:grid-cols-[240px_1fr]">
-        <aside className="hidden pt-6 pr-2 bg-surfaceDefault z-1 shadow-inset sm:block">
-          <DashboardNav items={dashboardConfig.sidebarNav} />
-        </aside>
-        <main className="px-2 sm:pl-0 sm:px-6">{children}</main>
-      </div>
+      <DashboardLayout>{children}</DashboardLayout>
     </div>
   );
 }

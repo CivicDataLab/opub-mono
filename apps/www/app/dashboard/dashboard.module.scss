@@ -7,9 +7,17 @@
 
 .Selected {
   background-color: var(--background-selected);
-  --text: var(--interactive);
 
   svg {
-    fill: var(--icon-interactive);
+    color: var(--icon-decorative-four);
   }
+}
+
+.Collapse {
+  transition: grid-template-columns var(--duration-300) var(--ease-in-out);
+}
+
+.CollapseText {
+  transition: opacity var(--duration-200) ease-in-out;
+  white-space: nowrap;
 }

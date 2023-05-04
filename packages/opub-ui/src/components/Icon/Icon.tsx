@@ -14,7 +14,11 @@ type Color =
   | 'highlight'
   | 'success'
   | 'primary'
-  | 'magic';
+  | 'decorative1'
+  | 'decorative2'
+  | 'decorative3'
+  | 'decorative4'
+  | 'decorative5';
 
 export type IconSource =
   | React.FunctionComponent<React.SVGProps<SVGSVGElement>>
@@ -32,6 +36,8 @@ export interface IconProps {
   accessibilityLabel?: string;
   /** size of the icon, use space tokens  */
   size?: SpacingSpaceScale | number;
+  /** stroke width  */
+  stroke?: number;
 }
 
 export function Icon({
@@ -40,6 +46,7 @@ export function Icon({
   backdrop,
   accessibilityLabel,
   size,
+  stroke,
 }: IconProps) {
   let sourceType: 'function' | 'placeholder' | 'external';
   if (typeof source === 'function' || typeof source === 'object') {
@@ -53,25 +60,25 @@ export function Icon({
   const className = cx(
     styles.Icon,
     color && styles[variationName('color', color)],
-    color && styles.applyColor,
     backdrop && styles.hasBackdrop
   );
 
   const SourceComponent: any = source;
-  const iconSize =
-    typeof size === 'number'
+  const iconSize = size
+    ? typeof size === 'number'
       ? size
-      : typeof size === 'number'
-      ? `var(--space-${size})`
-      : 18;
+      : Number(size) * 4
+    : 20;
+
   const contentMarkup = {
     function: (
       <SourceComponent
         className={styles.Svg}
         size={iconSize}
-        color={color ? `var(--icon-${color})` : 'currentColor'}
+        color="currentColor"
         focusable="false"
         aria-hidden="true"
+        stroke={stroke ? stroke : 2}
       />
     ),
     placeholder: <div className={styles.Placeholder} />,

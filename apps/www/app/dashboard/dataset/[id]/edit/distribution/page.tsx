@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { useRouter } from 'next/navigation';
+import { notFound, useRouter } from 'next/navigation';
 
 import { testDataset } from '@/config/dashboard';
 import { ActionBar } from '../../../components/action-bar';
@@ -14,6 +14,9 @@ export default function Page({ params }: { params: { id: string } }) {
 
   // get demo data
   const data = testDataset[params.id];
+  if (!data) {
+    notFound();
+  }
 
   return (
     <div className={styles.EditPage}>
@@ -28,6 +31,10 @@ export default function Page({ params }: { params: { id: string } }) {
         secondaryAction={{
           content: 'Cancel',
           onAction: () => router.push('/dashboard/dataset'),
+        }}
+        previousPage={{
+          link: `/dashboard/dataset/${params.id}/edit/metadata`,
+          content: 'Edit Metadata',
         }}
       />
       <EditDistribution

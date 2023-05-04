@@ -4,7 +4,6 @@ import { CreateDataset as Props } from '@/types';
 import {
   Box,
   Checkbox,
-  Form,
   FormLayout,
   Icon,
   Input,
@@ -15,6 +14,7 @@ import { IconSource } from '@opub-cdl/ui/dist/ts/components/Icon/Icon';
 
 import { Icons } from '@/components/icons';
 import { RadioCard } from '@/components/radio-card';
+import { DatasetForm } from '../../components/dataset-form';
 import styles from '../new.module.scss';
 
 const defaultValBase: Props = {
@@ -29,19 +29,22 @@ export function CreateDataset({
   submitRef,
 }: {
   defaultVal?: Props;
-  submitRef?: React.RefObject<HTMLButtonElement>;
+  submitRef: React.RefObject<HTMLButtonElement>;
 }) {
   const [val, setVal] = React.useState(defaultVal);
   const router = useRouter();
 
   const defaultValue = defaultVal || defaultValBase;
   return (
-    <Form
+    <DatasetForm
       onSubmit={() => {
         router.push('/dashboard/dataset/1/edit/metadata');
       }}
       formOptions={{ defaultValues: defaultValue }}
-      onChange={setVal}
+      onChange={(e) => {
+        setVal(e);
+      }}
+      submitRef={submitRef}
     >
       <div className={styles.CreateDataset}>
         <Text variant="headingMd">Source Type</Text>
@@ -102,10 +105,7 @@ export function CreateDataset({
           </Box>
         </Box>
       </div>
-      <button hidden ref={submitRef}>
-        submit form
-      </button>
-    </Form>
+    </DatasetForm>
   );
 }
 
@@ -124,7 +124,7 @@ const RadioItem = ({
   return (
     <RadioCard {...props}>
       <div className={styles.RadioItem}>
-        <Icon source={icon} />
+        <Icon source={icon} size="8" />
         <div className={styles.RadioContent}>
           <Text
             variant="headingSm"

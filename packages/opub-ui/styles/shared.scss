@@ -23,8 +23,8 @@ $base-font-size: 16px;
   $filter-color: null
 ) {
   svg {
-    fill: $fill-color;
-    color: $secondary-color;
+    color: $fill-color;
+    fill: $secondary-color;
   }
 
   img {

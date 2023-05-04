@@ -16,7 +16,7 @@ $spinner-icon-size: 12px;
   cursor: text;
 
   svg {
-    fill: var(--icon);
+    color: var(--icon);
   }
 }
 
@@ -72,7 +72,7 @@ $spinner-icon-size: 12px;
   }
 
   svg {
-    fill: var(--icon-disabled);
+    color: var(--icon-disabled);
   }
 }
 
