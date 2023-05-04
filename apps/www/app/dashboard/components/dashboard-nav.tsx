@@ -3,6 +3,8 @@
 import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useKeyDetect } from '@/hooks/use-key-detect';
+import { useKeyPress } from '@/hooks/use-key-press';
 import { Button, Icon, Text, Tooltip } from '@opub-cdl/ui';
 import { twMerge } from 'tailwind-merge';
 
@@ -15,8 +17,14 @@ interface DashboardNavProps {
 }
 export function DashboardNav({ items }: DashboardNavProps) {
   const [isCollapsed, setIsCollapsed] = React.useState(false);
-
+  const { key, metaKey } = useKeyDetect();
   const path = usePathname();
+
+  React.useEffect(() => {
+    if (key === 'b' && metaKey) {
+      setIsCollapsed(!isCollapsed);
+    }
+  }, [key]);
 
   if (items && !items.length) {
     return null;
@@ -53,45 +61,42 @@ export function DashboardNav({ items }: DashboardNavProps) {
           const icon = Icons[item.icon || 'arrowRight'];
           return (
             item.href && (
-              <>
-                <Link href={item.disabled ? '/' : item.href}>
-                  <div className={twMerge('flex justify-between relative')}>
-                    <span
-                      className={twMerge(
-                        'bg-transparent rounded-r-1 w-[3px] h-full absolute top-0 left-0',
-                        path.includes(item.href) && 'bg-decorativeIconFour'
-                      )}
-                    />
+              <Link key={item.href} href={item.disabled ? '/' : item.href}>
+                <div className={twMerge('flex justify-between relative')}>
+                  <span
+                    className={twMerge(
+                      'bg-transparent rounded-r-1 w-[3px] h-full absolute top-0 left-0',
+                      path.includes(item.href) && 'bg-decorativeIconFour'
+                    )}
+                  />
+                  <div
+                    className={twMerge(
+                      'flex items-center  w-full ml-2 rounded-1 overflow-hidden',
+                      styles.Item,
+                      path.includes(item.href) && styles.Selected,
+                      isCollapsed && styles.Collapsed
+                    )}
+                  >
+                    <Tooltip
+                      side="right"
+                      content={isCollapsed ? item.title : undefined}
+                    >
+                      <div className="basis-5 py-2 px-3">
+                        <Icon source={icon} />
+                      </div>
+                    </Tooltip>
                     <div
                       className={twMerge(
-                        'flex items-center  w-full ml-2 rounded-1 overflow-hidden',
-                        styles.Item,
-                        path.includes(item.href) && styles.Selected,
-                        isCollapsed && styles.Collapsed
+                        'py-2 pr-3',
+                        'whitespace-nowrap opacity-100 transition-opacity duration-300',
+                        isCollapsed && 'opacity-0'
                       )}
                     >
-                      <Tooltip
-                        side="right"
-                        content={isCollapsed ? item.title : undefined}
-                        key={item.href}
-                      >
-                        <div className="basis-5 py-2 px-3">
-                          <Icon source={icon} />
-                        </div>
-                      </Tooltip>
-                      <div
-                        className={twMerge(
-                          'py-2 pr-3',
-                          'whitespace-nowrap opacity-100 transition-opacity duration-300',
-                          isCollapsed && 'opacity-0'
-                        )}
-                      >
-                        <Text fontWeight="medium">{item.title}</Text>
-                      </div>
+                      <Text fontWeight="medium">{item.title}</Text>
                     </div>
                   </div>
-                </Link>
-              </>
+                </div>
+              </Link>
             )
           );
         })}
