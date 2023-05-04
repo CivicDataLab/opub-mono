@@ -27,17 +27,18 @@ interface Props {
 
 export function ActionBar(props: Props) {
   const { width }: Size = useWindowSize();
+  const iconSize = width && width < 480 ? '5' : '8';
 
   const backButton = props.previousPage && props.previousPage?.link && (
     <Link href={props.previousPage?.link} className={styles.BackButton}>
-      <Icon source={Icons.back} color="base" size="8" />
+      <Icon source={Icons.back} color="base" size={iconSize} />
       <Text visuallyHidden>Go back to {props.previousPage?.content} page</Text>
     </Link>
   );
 
   const backButtonAction = props.previousPage && props.previousPage?.action && (
     <button onClick={props.previousPage?.action} className={styles.BackButton}>
-      <Icon source={Icons.back} color="base" size="8" />
+      <Icon source={Icons.back} color="base" size={iconSize} />
       <Text visuallyHidden>Go back to {props.previousPage?.content} page</Text>
     </button>
   );
@@ -47,7 +48,10 @@ export function ActionBar(props: Props) {
   return (
     <div className="flex flex-wrap items-center gap-4 justify-between py-5 border-b border-divider border-solid">
       <div
-        className={twMerge(styles.ProgressNav, 'flex items-center sm:gap-4')}
+        className={twMerge(
+          styles.ProgressNav,
+          'flex items-center gap-1 sm:gap-2'
+        )}
       >
         {btn && props.previousPage ? (
           <Tooltip

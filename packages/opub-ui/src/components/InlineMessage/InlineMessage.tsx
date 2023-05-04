@@ -1,8 +1,8 @@
 import type { Error } from '../../types/shared/form';
 import { stateIcon } from '../../utils/icons';
-import React from 'react';
-import styles from './InlineMessage.module.scss';
 import { Icon } from '../Icon';
+import styles from './InlineMessage.module.scss';
+import React from 'react';
 
 export interface InlineMessageProps {
   /** Content briefly explaining how to resolve the invalid form field input. */
