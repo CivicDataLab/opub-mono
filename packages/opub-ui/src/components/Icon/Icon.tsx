@@ -6,6 +6,7 @@ import cx from 'classnames';
 import React from 'react';
 
 type Color =
+  | 'surface'
   | 'base'
   | 'subdued'
   | 'critical'
@@ -38,6 +39,8 @@ export interface IconProps {
   size?: SpacingSpaceScale | number;
   /** stroke width  */
   stroke?: number;
+  /** fill color  */
+  fill?: Color;
 }
 
 export function Icon({
@@ -47,6 +50,7 @@ export function Icon({
   accessibilityLabel,
   size,
   stroke,
+  fill,
 }: IconProps) {
   let sourceType: 'function' | 'placeholder' | 'external';
   if (typeof source === 'function' || typeof source === 'object') {
@@ -60,7 +64,8 @@ export function Icon({
   const className = cx(
     styles.Icon,
     color && styles[variationName('color', color)],
-    backdrop && styles.hasBackdrop
+    backdrop && styles.hasBackdrop,
+    'OPub-Icon'
   );
 
   const SourceComponent: any = source;
@@ -79,6 +84,9 @@ export function Icon({
         focusable="false"
         aria-hidden="true"
         stroke={stroke ? stroke : 2}
+        style={{
+          '--fill': fill ? `var(--icon-${fill})` : 'none',
+        }}
       />
     ),
     placeholder: <div className={styles.Placeholder} />,
@@ -97,7 +105,11 @@ export function Icon({
       className={className}
       style={
         size
-          ? { height: `var(--space-${size})`, width: `var(--space-${size})` }
+          ? ({
+              height: `var(--space-${size})`,
+              width: `var(--space-${size})`,
+              '--fill': fill ? `var(--icon-${fill})` : 'none',
+            } as React.CSSProperties)
           : {}
       }
     >

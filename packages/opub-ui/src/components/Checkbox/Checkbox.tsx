@@ -1,11 +1,12 @@
-import * as CheckboxRadix from '@radix-ui/react-checkbox';
-import { MinusMinor, TickSmallMinor } from '@shopify/polaris-icons';
-import cx from 'classnames';
-import React, { forwardRef } from 'react';
 import { CheckboxProps } from '../../types/checkbox';
 import { Choice } from '../Choice';
 import { Icon } from '../Icon';
 import styles from './Checkbox.module.scss';
+import * as CheckboxRadix from '@radix-ui/react-checkbox';
+import { MinusMinor, TickSmallMinor } from '@shopify/polaris-icons';
+import { IconCheck } from '@tabler/icons-react';
+import cx from 'classnames';
+import React, { forwardRef } from 'react';
 
 const Checkbox = forwardRef(
   (
@@ -23,7 +24,7 @@ const Checkbox = forwardRef(
       props.disabled && styles.Disabled
     );
 
-    const iconSource = isIndeterminate ? MinusMinor : TickSmallMinor;
+    const iconSource = isIndeterminate ? MinusMinor : IconCheck;
 
     const checkboxMarkup = (
       <Choice
@@ -44,7 +45,7 @@ const Checkbox = forwardRef(
         >
           <span className={styles.Indicator}>
             <CheckboxRadix.Indicator>
-              <Icon source={iconSource} />
+              <Icon source={iconSource} size="4" />
             </CheckboxRadix.Indicator>
           </span>
         </CheckboxRadix.Root>

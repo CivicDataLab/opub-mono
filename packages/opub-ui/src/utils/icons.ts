@@ -1,25 +1,25 @@
 import {
-  AlertMinor,
-  CancelSmallMinor,
-  CircleTickMinor,
-  InfoMinor,
-  RiskMinor,
-} from '@shopify/polaris-icons';
+  IconAlertCircleFilled,
+  IconAlertTriangleFilled,
+  IconCircleCheckFilled,
+  IconInfoCircleFilled,
+  IconX,
+} from '@tabler/icons-react';
 
 const handler = {
   get: function (target: any, name: any) {
     return Object.prototype.hasOwnProperty.call(target, name)
       ? target[name]
-      : AlertMinor; // default value
+      : IconAlertTriangleFilled; // default value
   },
 };
 
 export const icons = {
-  success: CircleTickMinor,
-  error: AlertMinor,
-  warning: RiskMinor,
-  info: InfoMinor,
-  close: CancelSmallMinor,
+  success: IconCircleCheckFilled,
+  error: IconAlertCircleFilled,
+  warning: IconAlertTriangleFilled,
+  info: IconInfoCircleFilled,
+  close: IconX,
 };
 
 export const stateIcon = new Proxy(icons, handler);
