@@ -64,18 +64,7 @@ export function ActionBar(props: Props) {
         </Text>
       </div>
 
-      {width && width > 480 ? (
-        <Box flex alignItems="center" gap="3">
-          {props.secondaryAction && (
-            <Button plain onClick={props.secondaryAction.onAction}>
-              {props.secondaryAction.content}
-            </Button>
-          )}
-          <Button primary onClick={props.primaryAction.onAction}>
-            {props.primaryAction.content}
-          </Button>
-        </Box>
-      ) : (
+      {width && width <= 480 ? (
         <Button
           primary
           onClick={props.primaryAction.onAction}
@@ -92,6 +81,17 @@ export function ActionBar(props: Props) {
         >
           {props.primaryAction.content}
         </Button>
+      ) : (
+        <Box flex alignItems="center" gap="3">
+          {props.secondaryAction && (
+            <Button plain onClick={props.secondaryAction.onAction}>
+              {props.secondaryAction.content}
+            </Button>
+          )}
+          <Button primary onClick={props.primaryAction.onAction}>
+            {props.primaryAction.content}
+          </Button>
+        </Box>
       )}
     </div>
   );
