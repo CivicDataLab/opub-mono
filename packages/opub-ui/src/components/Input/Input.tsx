@@ -11,7 +11,7 @@ import { Labelled } from '../Labelled';
 import { Text } from '../Text';
 import styles from './Input.module.scss';
 import { Resizer, Spinner, SpinnerProps } from './components';
-import { CircleCancelMinor } from '@shopify/polaris-icons';
+import { IconX } from '@tabler/icons-react';
 import cx from 'classnames';
 import React, {
   createElement,
@@ -185,7 +185,7 @@ export const Input = React.forwardRef(
           <Text as="span" visuallyHidden>
             clear input
           </Text>
-          <Icon source={CircleCancelMinor} color="base" />
+          <Icon source={IconX} color="base" />
         </button>
       ) : null;
 

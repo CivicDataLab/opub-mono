@@ -6,12 +6,7 @@ import { Menu } from '../Menu';
 import { Spinner } from '../Spinner';
 import { UnstyledButton, UnstyledButtonProps } from './BaseButton';
 import styles from './Button.module.scss';
-import {
-  CaretDownMinor,
-  CaretUpMinor,
-  SelectMinor,
-} from '@shopify/polaris-icons';
-import { IconCaretDown, IconCaretUp } from '@tabler/icons-react';
+import { IconCaretDown, IconCaretUp, IconSelector } from '@tabler/icons-react';
 import cx from 'classnames';
 import * as React from 'react';
 
@@ -303,7 +298,7 @@ function getDisclosureIconSource(
   disclosure: NonNullable<ButtonProps['disclosure']>
 ) {
   if (disclosure === 'select') {
-    return SelectMinor;
+    return IconSelector;
   }
 
   return disclosure === 'up' ? IconCaretUp : IconCaretDown;

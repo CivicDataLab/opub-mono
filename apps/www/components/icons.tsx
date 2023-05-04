@@ -1,4 +1,3 @@
-import { PackageMajor } from '@shopify/polaris-icons';
 import {
   IconArrowLeft,
   IconArrowRight,
@@ -25,7 +24,7 @@ export const Icons = {
   arrowRight: IconArrowRight,
   search: IconSearch,
   notification: IconBellFilled,
-  package: PackageMajor,
+
   construction: IconBarrierBlock,
   link: IconLink,
   collapse: IconLayoutSidebarLeftCollapse,

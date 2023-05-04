@@ -6,7 +6,7 @@ import styles from './Calendar.module.scss';
 import { CalendarGrid } from './components/CalendarGrid';
 import { GregorianCalendar } from '@internationalized/date';
 import { AriaRangeCalendarProps, DateValue } from '@react-types/calendar';
-import { ArrowLeftMinor, ArrowRightMinor } from '@shopify/polaris-icons';
+import { IconArrowLeft, IconArrowRight } from '@tabler/icons-react';
 import cx from 'classnames';
 import React from 'react';
 import { useLocale, useRangeCalendar } from 'react-aria';
@@ -62,7 +62,7 @@ function RangeCalendar(props: Props) {
           disabled={disabledPrev}
           {...othersPrev}
         >
-          <Icon source={ArrowLeftMinor} color="base" />
+          <Icon source={IconArrowLeft} color="base" />
         </button>
 
         <Text variant="bodyMd">{title}</Text>
@@ -71,7 +71,7 @@ function RangeCalendar(props: Props) {
           disabled={disabledNext}
           {...othersNext}
         >
-          <Icon source={ArrowRightMinor} color="base" />
+          <Icon source={IconArrowRight} color="base" />
         </button>
       </div>
       <CalendarGrid state={state} />

@@ -1,6 +1,3 @@
-import { SelectMinor } from '@shopify/polaris-icons';
-import cx from 'classnames';
-import React, { forwardRef, LegacyRef, useId } from 'react';
 import {
   HideableStrictOption,
   SelectGroup,
@@ -14,6 +11,9 @@ import { Icon } from '../Icon';
 import { helpTextID, Labelled } from '../Labelled';
 import { Text } from '../Text';
 import styles from './Select.module.scss';
+import { IconSelector } from '@tabler/icons-react';
+import cx from 'classnames';
+import React, { forwardRef, LegacyRef, useId } from 'react';
 
 const PLACEHOLDER_VALUE = '';
 
@@ -108,7 +108,7 @@ export const Select = forwardRef(
         {prefixMarkup}
         <span className={styles.SelectedOption}>{selectedOption.label}</span>
         <span className={styles.Icon}>
-          <Icon source={SelectMinor} />
+          <Icon source={IconSelector} color="base" />
         </span>
       </div>
     );

@@ -1,7 +1,6 @@
 @import '../../../styles/common';
 
 $height: 20px;
-$button-size: 20px;
 
 .Tag {
   --tag-bg-standard: var(--surface-neutral);
@@ -110,8 +109,7 @@ $button-size: 20px;
 
   display: block;
   flex-shrink: 0;
-  height: $button-size;
-  width: $button-size;
+  padding: var(--space-05);
   margin: 0 var(--space-1);
   border-radius: var(--border-radius-full);
   line-height: 0;
