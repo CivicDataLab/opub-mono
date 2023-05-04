@@ -2,7 +2,6 @@ import React from 'react';
 import { twMerge } from 'tailwind-merge';
 
 import { dashboardConfig } from '@/config/dashboard';
-import styles from '../dashboard.module.scss';
 import { DashboardNav } from './dashboard-nav';
 
 interface DashboardLayoutProps {
