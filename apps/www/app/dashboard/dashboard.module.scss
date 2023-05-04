@@ -1,8 +1,14 @@
 .Item {
-  transition: background-color var(--duration-200) var(--ease-in-out);
+  transition: background-color var(--duration-200) var(--ease-in-out),
+    gap var(--duration-200) var(--ease-in-out);
+
   &:hover {
     background-color: var(--background-selected);
   }
+
+  // &.Collapsed {
+  //   transform: translateX(4px);
+  // }
 }
 
 .Selected {
@@ -14,10 +20,5 @@
 }
 
 .Collapse {
-  transition: grid-template-columns var(--duration-300) var(--ease-in-out);
-}
-
-.CollapseText {
-  transition: opacity var(--duration-200) ease-in-out;
-  white-space: nowrap;
+  transition: flex-basis var(--duration-300) var(--ease-in-out);
 }
