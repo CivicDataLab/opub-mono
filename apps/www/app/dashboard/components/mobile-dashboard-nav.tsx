@@ -56,7 +56,11 @@ export function MobileDashboardNav({
               const icon = Icons[item.icon || 'arrowRight'];
               return (
                 item.href && (
-                  <Link key={item.href} href={item.disabled ? '/' : item.href}>
+                  <Link
+                    key={item.href}
+                    href={item.disabled ? '/' : item.href}
+                    onClick={() => setIsOpened(false)}
+                  >
                     <div className={twMerge('flex justify-between relative')}>
                       <span
                         className={twMerge(

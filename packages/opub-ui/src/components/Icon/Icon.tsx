@@ -106,8 +106,8 @@ export function Icon({
       style={
         size
           ? ({
-              height: `var(--space-${size})`,
-              width: `var(--space-${size})`,
+              height: iconSize,
+              width: iconSize,
               '--fill': fill ? `var(--icon-${fill})` : 'none',
             } as React.CSSProperties)
           : {}
