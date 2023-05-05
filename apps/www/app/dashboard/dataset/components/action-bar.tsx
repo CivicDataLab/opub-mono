@@ -68,7 +68,7 @@ export function ActionBar(props: Props) {
         </Text>
       </div>
 
-      {width && width <= 480 ? (
+      <div className="sm:hidden">
         <Button
           primary
           onClick={props.primaryAction.onAction}
@@ -85,7 +85,8 @@ export function ActionBar(props: Props) {
         >
           {props.primaryAction.content}
         </Button>
-      ) : (
+      </div>
+      <div className="hidden sm:block">
         <Box flex alignItems="center" gap="3">
           {props.secondaryAction && (
             <Button plain onClick={props.secondaryAction.onAction}>
@@ -96,7 +97,7 @@ export function ActionBar(props: Props) {
             {props.primaryAction.content}
           </Button>
         </Box>
-      )}
+      </div>
     </div>
   );
 }
