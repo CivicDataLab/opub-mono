@@ -4,8 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useKeyDetect } from '@/hooks/use-key-detect';
-import { useKeyPress } from '@/hooks/use-key-press';
-import { Button, Icon, Text, Tooltip } from '@opub-cdl/ui';
+import { Button, Code, Icon, Text, Tooltip } from '@opub-cdl/ui';
 import { twMerge } from 'tailwind-merge';
 
 import { SidebarNavItem } from 'types';
@@ -35,7 +34,7 @@ export function DashboardNav({ items }: DashboardNavProps) {
     <aside
       className={twMerge(
         'pt-2 pr-2 bg-surfaceDefault overflow-hidden',
-        'hidden z-1 shadow-inset basis-[240px] shrink-0 sm:block',
+        'hidden z-1 shadow-inset basis-[240px] shrink-0 md:block',
         isCollapsed && 'basis-[60px]',
         styles.Collapse
       )}
@@ -44,7 +43,12 @@ export function DashboardNav({ items }: DashboardNavProps) {
         <div className="w-fit self-end">
           <Tooltip
             side="right"
-            content={`${isCollapsed ? 'Expand' : 'Collapse'} Sidebar`}
+            content={
+              <p>
+                {isCollapsed ? 'Expand' : 'Collapse'} Sidebar
+                <Code className="text-base">⌘+B</Code>
+              </p>
+            }
           >
             <Button
               icon={<Icon source={sidebarIcon} />}

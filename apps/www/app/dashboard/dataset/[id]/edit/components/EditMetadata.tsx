@@ -10,7 +10,7 @@ import {
   Input,
   Select,
   Text,
-} from '@opub-cdl/ui/src';
+} from '@opub-cdl/ui';
 
 import { DatasetForm } from '../../../components/dataset-form';
 import styles from '../edit.module.scss';
