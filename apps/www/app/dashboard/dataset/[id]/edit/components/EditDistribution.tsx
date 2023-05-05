@@ -8,7 +8,7 @@ import {
   Input,
   Text,
   Thumbnail,
-} from '@opub-cdl/ui/src';
+} from '@opub-cdl/ui';
 import { IconFile } from '@tabler/icons-react';
 
 import { DatasetForm } from '../../../components/dataset-form';

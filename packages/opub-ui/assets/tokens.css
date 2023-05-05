@@ -138,6 +138,7 @@
 
 /* Shadows */
 :root {
+  --shadow-inset: inset -1px 0px 0px #e4e5e7;
   --shadow-inset-button-pressed: inset 0px 1px 0px 0px #00000026;
   --shadow-button: 0px 1px 0px 0px #0000000d;
   --shadow-card: 0px 0px 5px 0px #1718180d, 0px 1px 2px 0px #00000026;
