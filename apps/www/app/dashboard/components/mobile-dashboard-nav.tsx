@@ -25,10 +25,6 @@ export function MobileDashboardNav({
   setIsOpened,
   items,
 }: DashboardNavProps) {
-  if (items && !items.length) {
-    return null;
-  }
-
   const path = usePathname();
   const asideRef = React.useRef<HTMLDivElement>(null);
   useOnClickOutside(asideRef, () => {
@@ -37,10 +33,16 @@ export function MobileDashboardNav({
     }
   });
 
+  if (items && !items.length) {
+    return null;
+  }
+
   return (
     <>
       <button
-        onClick={() => setIsOpened(!isOpened)}
+        onClick={() => {
+          setIsOpened(!isOpened);
+        }}
         className={cn(styles.NavButton, isOpened && styles.NavButtonOpen)}
       >
         <Icon source={isOpened ? IconX : IconMenu} />

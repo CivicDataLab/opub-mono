@@ -8,10 +8,10 @@ export default function Home() {
   return (
     <main className="flex flex-col gap-2 w-full h-full items-center justify-center">
       <IconBrandTabler size="80" />
-      <Text variant="heading4xl" as="h1">
+      <Text variant="heading4xl" as="h1" alignment="center">
         Welcome to Open Publishing
       </Text>
-      <Text color="subdued" variant="bodyLg" as="p">
+      <Text color="subdued" variant="bodyLg" as="p" alignment="center">
         Open Publishing is a platform for publishing and sharing data and
         stories.
       </Text>
