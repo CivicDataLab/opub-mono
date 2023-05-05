@@ -1,11 +1,22 @@
 'use client';
 
+import React from 'react';
 import Link from 'next/link';
+import { useKeyDetect } from '@/hooks/use-key-detect';
 import { Avatar, Box, Icon, Text, TextField } from '@opub-cdl/ui';
 
 import { Icons } from '@/components/icons';
 
 export function MainNav() {
+  const { key, metaKey } = useKeyDetect();
+  const searchRef = React.useRef<HTMLInputElement>(null);
+
+  React.useEffect(() => {
+    if (key === 'k' && metaKey) {
+      searchRef.current?.focus();
+    }
+  }, [key]);
+
   return (
     <nav>
       <Box flex justifyContent="space-between" gap="4" alignItems="center">
@@ -24,6 +35,7 @@ export function MainNav() {
             name="Search"
             label="Search"
             labelHidden
+            ref={searchRef}
           />
         </div>
         <div className="flex items-center shrink-0 gap-4">
