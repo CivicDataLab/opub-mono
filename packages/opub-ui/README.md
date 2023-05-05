@@ -102,9 +102,18 @@ We only bundle into [ESM Modules](https://nodejs.org/api/esm.html).
 
 Pull requests are welcome. See the [contribution guidelines](https://github.com/CivicDataLab/opub-mono/blob/main/CONTRIBUTING.md) for more information.
 
+## Credits
+
+Thanks to the following projects for developing in the open and sharing their work with the community:
+
+1. [Shopify Polaris](https://github.dev/Shopify/polaris)
+2. [Radix UI](https://github.com/radix-ui/primitives)
+3. [React Spectrum](https://github.com/adobe/react-spectrum)
+4. [React Hook Form](https://github.com/react-hook-form/react-hook-form)
+5. [AriaKit](https://github.com/ariakit/ariakit)
+6. [Tabler Icons](https://github.com/tabler/tabler-icons)
+
 ## Licenses
 
 The source code is under [MIT License](https://github.com/CivicDataLab/opub-mono/blob/main/LICENSE) unless otherwise stated.
 This project uses multiple open-source libraries and projects. You can review the dependencies in the `package.json` file and check their Licenses from their GitHub repo.
-
-Some source code and icons are from [Shopify Polaris](https://github.dev/Shopify/polaris). You should go through their License as well.
