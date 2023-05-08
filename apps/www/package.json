@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "style-dictionary:build": "style-dictionary build --config ./style-dictionary.config.json"
+    "style-dictionary:build": "style-dictionary build --config ./token-build.js"
   },
   "dependencies": {
     "@opub-cdl/ui": "*",
@@ -28,9 +28,11 @@
   "devDependencies": {
     "@ianvs/prettier-plugin-sort-imports": "^3.7.2",
     "autoprefixer": "^10.4.14",
+    "color2k": "^2.0.2",
     "postcss": "^8.4.23",
     "prettier": "^2.8.8",
     "style-dictionary": "^3.8.0",
+    "style-dictionary-utils": "^1.1.0",
     "tailwindcss": "^3.3.2"
   }
 }
