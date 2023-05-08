@@ -1,10 +1,11 @@
 /* colors */
 :root {
   --background: #f6f6f7;
-  --background-invert: #202123;
   --background-hovered: #f1f2f3;
+  --background-invert: #202123;
   --background-pressed: #edeeef;
   --background-selected: #edeeef;
+
   --surface: #ffffff;
   --surface-subdued: #fafbfb;
   --surface-hovered: #f6f6f7;
@@ -40,6 +41,8 @@
   --surface-primary-selected: #f1f8f5;
   --surface-primary-selected-hovered: #b3d0c3;
   --surface-primary-selected-pressed: #a2bcb0;
+  --surface-attention: #ffea8a;
+
   --text: #202223;
   --text-on-dark: #e3e5e7;
   --text-subdued: #6d7175;
@@ -54,6 +57,7 @@
   --text-primary: #007b5c;
   --text-primary-hover: #006c50;
   --text-primary-pressed: #005c44;
+
   --icon: #5c5f62;
   --icon-surface: #ffffff;
   --icon-subdued: #8c9196;
@@ -69,6 +73,7 @@
   --icon-on-interactive: #ffffff;
   --icon-on-primary: #ffffff;
   --icon-on-critical: #ffffff;
+
   --interactive: #2c6ecb;
   --interactive-hovered: #1f5199;
   --interactive-pressed: #103262;
@@ -77,6 +82,7 @@
   --interactive-critical-hovered: #cd290c;
   --interactive-critical-disabled: #fd938d;
   --interactive-critical-pressed: #670f03;
+
   --border: #8c9196;
   --border-subdued: #c9cccf;
   --border-hovered: #999ea4;
@@ -92,8 +98,9 @@
   --border-highlight: #449da7;
   --border-highlight-subdued: #98c6cd;
   --border-neutral-subdued: #babfc3;
-  --focused: #458fff;
-  --focused-alpha: #458fff82;
+  --border-shadow: #aeb4b9;
+  --border-shadow-subdued: #babfc4;
+
   --action-secondary: #ffffff;
   --action-secondary-hovered: #f6f6f7;
   --action-secondary-pressed: #f1f2f3;
@@ -109,6 +116,7 @@
   --action-critical-pressed: #a21b00;
   --action-critical-depressed: #6c0f00;
   --action-critical-disabled: #f1f1f1;
+
   --surface-decorative-one: #ffc96b;
   --surface-decorative-two: #ffc4b0;
   --surface-decorative-three: #92e6b5;
@@ -124,21 +132,16 @@
   --icon-decorative-three: #006d41;
   --icon-decorative-four: #006a68;
   --icon-decorative-five: #ae2b4c;
-  --shadow-from-dim-light: #00000033;
-  --shadow-from-ambient-light: #1718180d;
-  --shadow-from-direct-light: #00000026;
+
   --backdrop: #00000080;
-  --overlay: #ffffff80;
   --divider: #e1e3e5;
-  --divider-dark: rgb(69, 71, 74);
-  --border-shadow: #aeb4b9;
-  --border-shadow-subdued: #babfc4;
-  --surface-attention: #ffea8a;
+  --focused: #458fff;
 }
 
 /* Shadows */
 :root {
   --shadow-inset: inset -1px 0px 0px #e4e5e7;
+  --shadow-inset-button: inset 0px -1px 0px 0px #00000033;
   --shadow-inset-button-pressed: inset 0px 1px 0px 0px #00000026;
   --shadow-button: 0px 1px 0px 0px #0000000d;
   --shadow-card: 0px 0px 5px 0px #1718180d, 0px 1px 2px 0px #00000026;
@@ -146,32 +149,26 @@
   --shadow-modal: 0px 0px 1px 0px #00000033, 0px 26px 80px 0px #00000033;
   --shadow-base: 0px 1px 3px 0px #3f3f4426, 0px 0px 0px 1px #3f3f440d;
   --shadow-deep: 0px 0px 0px 1px #062c521a, 0px 2px 16px 0px #212b3614;
-  --shadow-inset-button: inset 0px -1px 0px 0px #00000033;
   --shadow-layer: 0px 2px 16px 0px #202a3614, 0px 31px 41px 0px #202a3533;
   --shadow-top-bar: 0px 2px 2px -1px #00000026;
   --shadow-faint: 0px 1px 0px 0px #161d250d;
   --shadow-transparent: 0px 0px 0px 0px #00000000;
-
-  --shadow-inset-lg: inset 0rem 0rem 0.4375rem 0.125rem rgba(31, 33, 36, 0.18);
-  --shadow-inset-md: inset 0rem 0.125rem 0.25rem rgba(31, 33, 36, 0.32);
-  --shadow-inset-sm: inset 0rem 0rem 0.1875rem rgba(31, 33, 36, 0.56);
-  --shadow-none: none;
-  --shadow-xs: 0rem 0rem 0.125rem rgba(31, 33, 36, 0.24);
-  --shadow-sm: 0rem 0.0625rem 0.0625rem rgba(31, 33, 36, 0.1);
-  --shadow-md: 0rem 0.125rem 0.25rem rgba(31, 33, 36, 0.1),
-    0rem 0.0625rem 0.375rem rgba(31, 33, 36, 0.05);
-  --shadow-lg: 0rem 0.25rem 0.75rem rgba(31, 33, 36, 0.2),
-    0rem 0.125rem 0.375rem rgba(31, 33, 36, 0.05);
-  --shadow-xl: 0rem 0.25rem 1.125rem -0.125rem rgba(31, 33, 36, 0.08),
-    0rem 0.75rem 1.125rem -0.125rem rgba(31, 33, 36, 0.15);
-  --shadow-2xl: 0rem 2rem 2rem rgba(31, 33, 36, 0.15),
-    0rem 2rem 3.5rem -0.125rem rgba(31, 33, 36, 0.16);
+  --shadow-xs: 0px 0px 2px rgba(31, 33, 36, 0.24);
+  --shadow-sm: 0px 1px 1px rgba(31, 33, 36, 0.1);
+  --shadow-md: 0px 2px 4px rgba(31, 33, 36, 0.1),
+    0px 1px 6px rgba(31, 33, 36, 0.05);
+  --shadow-lg: 0px 4px 12px rgba(31, 33, 36, 0.2),
+    0px 2px 6px rgba(31, 33, 36, 0.05);
+  --shadow-xl: 0px 4px 18px -2px rgba(31, 33, 36, 0.08),
+    0px 12px 18px -2px rgba(31, 33, 36, 0.15);
+  --shadow-2xl: 0px 32px 32px rgba(31, 33, 36, 0.15),
+    0px 32px 56px -2px rgba(31, 33, 36, 0.16);
 }
 
 /* fonts */
 :root {
   --primary-font: 'Inter', sans-serif;
-  --font-family-mono: 'Space Mono', monospace;
+  --mono-font: 'Space Mono', monospace;
 }
 
 /* Font Styles */
@@ -224,7 +221,6 @@
   --border-dark: var(--border-width-1) solid var(--border);
   --border-transparent: var(--border-width-1) solid transparent;
   --border-divider: var(--border-width-1) solid var(--divider);
-  --border-divider-on-dark: var(--border-width-1) solid var(--divider-dark);
 }
 
 /* Space Patterns */
@@ -262,58 +258,6 @@
   --z-10: 518;
   --z-11: 519;
   --z-12: 520;
-
-  --z-index-1: 100;
-  --z-index-2: 400;
-  --z-index-3: 510;
-  --z-index-4: 512;
-  --z-index-5: 513;
-  --z-index-6: 514;
-  --z-index-7: 515;
-  --z-index-8: 516;
-  --z-index-9: 517;
-  --z-index-10: 518;
-  --z-index-11: 519;
-  --z-index-12: 520;
-}
-
-/* Motion */
-@keyframes keyframes-bounce {
-  from,
-  65%,
-  85% {
-    transform: scale(1);
-  }
-  75% {
-    transform: scale(0.85);
-  }
-  82.5% {
-    transform: scale(1.05);
-  }
-}
-
-@keyframes fade-in {
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes keyframes-pulse {
-  from,
-  75% {
-    transform: scale(0.85);
-    opacity: 1;
-  }
-  to {
-    transform: scale(2.5);
-    opacity: 0;
-  }
-}
-
-@keyframes keyframes-spin {
-  to {
-    transform: rotate(1turn);
-  }
 }
 
 :root {
@@ -335,9 +279,4 @@
   --ease-out: cubic-bezier(0, 0, 0.58, 1);
   --ease-in-out: cubic-bezier(0.42, 0, 0.58, 1);
   --linear: cubic-bezier(0, 0, 1, 1);
-
-  --keyframes-bounce: keyframes-bounce;
-  --keyframes-fade-in: keyframes-fade-in;
-  --keyframes-pulse: keyframes-pulse;
-  --keyframes-spin: keyframes-spin;
 }
