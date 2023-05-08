@@ -1,10 +1,10 @@
 /**
  * Do not edit directly
- * Generated on Mon, 08 May 2023 15:02:02 GMT
+ * Generated on Mon, 08 May 2023 16:27:47 GMT
  */
 
 :root {
-  --transparent: #00000000;
+  --color-transparent: #00000000;
   --background-hovered: #f1f2f3ff;
   --background-pressed: #edeeefff;
   --background-selected: #edeeefff;
@@ -112,20 +112,20 @@
   --action-critical-depressed: #6c0f00ff;
   --action-critical-disabled: #f1f1f1ff;
   --action-critical: #d82c0dff;
-  --decorative-surface-surface-one: #ffc96bff;
-  --decorative-surface-surface-two: #ffc4b0ff;
-  --decorative-surface-surface-three: #92e6b5ff;
-  --decorative-surface-surface-four: #91e0d6ff;
-  --decorative-surface-surface-five: #fdc9d0ff;
-  --decorative-text-text-one: #3d2800ff;
-  --decorative-text-text-two: #490b1cff;
-  --decorative-text-text-three: #002f19ff;
-  --decorative-text-text-four: #002d2dff;
-  --decorative-text-text-five: #4f0e1fff;
-  --decorative-icon-icon-one: #7e5700ff;
-  --decorative-icon-icon-two: #af294eff;
-  --decorative-icon-icon-three: #006d41ff;
-  --decorative-icon-icon-four: #006a68ff;
+  --decorative-surface-one: #ffc96bff;
+  --decorative-surface-two: #ffc4b0ff;
+  --decorative-surface-three: #92e6b5ff;
+  --decorative-surface-four: #91e0d6ff;
+  --decorative-surface-five: #fdc9d0ff;
+  --decorative-text-one: #3d2800ff;
+  --decorative-text-two: #490b1cff;
+  --decorative-text-three: #002f19ff;
+  --decorative-text-four: #002d2dff;
+  --decorative-text-five: #4f0e1fff;
+  --decorative-icon-one: #7e5700ff;
+  --decorative-icon-two: #af294eff;
+  --decorative-icon-three: #006d41ff;
+  --decorative-icon-four: #006a68ff;
   --decorative-icon-icon-five: #ae2b4cff;
   --backdrop: #00000080;
   --focused: #458fffff;
@@ -150,7 +150,7 @@
   --shadow-lg: 0px 4px 12px 0px #1f212433;
   --shadow-xl: 0px 4px 18px -2px #1f212414;
   --shadow-2xl: 0px 32px 32px 0px #1f212426;
-  --font-primary: 'Inter';
+  --font-primary: "Inter";
   --font-weight-regular: 400;
   --font-weight-medium: 500;
   --font-weight-bold: 600;
@@ -190,18 +190,34 @@
   --border-dark: 1px solid #8c9196ff;
   --border-divider: 1px solid #e1e3e5ff;
   --border-transparent: 1px solid #00000000;
-  --font-mono: 'Space Mono';
-  --z-index-z-1: 100;
-  --z-index-z-2: 400;
-  --z-index-z-3: 513;
-  --z-index-z-4: 514;
-  --z-index-z-5: 515;
-  --z-index-z-6: 516;
-  --z-index-z-7: 517;
-  --z-index-z-8: 518;
-  --z-index-z-9: 519;
-  --z-index-z-10: 520;
-  --z-index-z-max: 99999;
+  --font-mono: "Space Mono";
+  --z-1: 100;
+  --z-2: 400;
+  --z-3: 513;
+  --z-4: 514;
+  --z-5: 515;
+  --z-6: 516;
+  --z-7: 517;
+  --z-8: 518;
+  --z-9: 519;
+  --z-10: 520;
+  --z-max: 99999;
+  --duration-0: 0;
+  --duration-100: 100;
+  --duration-150: 150;
+  --duration-200: 200;
+  --duration-250: 250;
+  --duration-300: 300;
+  --duration-350: 350;
+  --duration-400: 400;
+  --duration-450: 450;
+  --duration-500: 500;
+  --duration-5000: 5000;
+  --ease: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --linear: cubic-bezier(0, 0, 1, 1);
+  --ease-in: cubic-bezier(0.42, 0, 1, 1);
+  --ease-out: cubic-bezier(0, 0, 0.58, 1);
+  --ease-in-out: cubic-bezier(0.42, 0, 0.58, 1);
   --font-size-75: 12px;
   --font-size-100: 14px;
   --font-size-200: 16px;

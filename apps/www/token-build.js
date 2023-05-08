@@ -70,33 +70,27 @@ Object.keys(tokens).forEach((rootKey) => {
 module.exports = {
   tokens: transformed,
   platforms: {
-    scss: {
-      transformGroup: 'scss',
-      buildPath: 'styles/',
-      files: [
-        {
-          destination: '_variables.scss',
-          format: 'scss/variables',
-        },
-      ],
-    },
     css: {
       transformGroup: 'css',
       buildPath: 'styles/',
       files: [
         {
-          destination: '_variables.css',
+          destination: 'tokens.css',
           format: 'css/variables',
         },
       ],
     },
-    js: {
+    ts: {
       transformGroup: 'js',
       buildPath: 'styles/',
       files: [
         {
-          destination: 'variables.js',
-          format: 'javascript/es6',
+          format: 'javascript/module',
+          destination: 'tokens.js',
+        },
+        {
+          format: 'typescript/module-declarations',
+          destination: 'tokens.d.ts',
         },
       ],
     },
