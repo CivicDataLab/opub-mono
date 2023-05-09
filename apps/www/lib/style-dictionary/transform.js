@@ -1,5 +1,5 @@
 // This code transforms the design tokens from the design system into a format that
-// is easily consumable by the rest of the codebase.
+// is consumable by the style dictionary.
 
 module.exports = (tokens) => {
   let transformed = {};
@@ -11,7 +11,7 @@ module.exports = (tokens) => {
     const obj = tokens[rootKey];
     if (obj.value) {
       // transform border value from object to string
-      if (obj['$type'] === 'border') {
+      if (obj['category'] === 'border') {
         const borderValue = `${obj.value.width} ${obj.value.style} ${obj.value.color}`;
         transformed[rootKey] = {
           ...obj,
@@ -20,7 +20,7 @@ module.exports = (tokens) => {
         return;
       }
 
-      if (obj['$type'] === 'shadow') {
+      if (obj['category'] === 'shadow') {
         const shadowValue = `${obj.value.offsetX} ${obj.value.offsetY} ${obj.value.blur} ${obj.value.spread} ${obj.value.color}`;
         transformed[rootKey] = {
           ...obj,
@@ -29,23 +29,23 @@ module.exports = (tokens) => {
         return;
       }
 
-      if (obj['$type'] === 'fontFamily') {
-        transformed[rootKey] = {
+      if (obj['category'] === 'fontFamily') {
+        transformed[rootKey.toLowerCase()] = {
           ...obj,
           value: `"${obj.value}"`,
         };
         return;
       }
 
-      if (obj['$type'] === 'fontWeight') {
-        transformed[`font-weight${rootKey}`] = {
+      if (obj['category'] === 'fontWeight') {
+        transformed[`font-weight-${rootKey.toLowerCase()}`] = {
           ...obj,
         };
         return;
       }
 
       // dont add typography in variables
-      if (obj['$type'] === 'typography') {
+      if (obj['category'] === 'typography') {
         return;
       }
 

@@ -1,6 +1,6 @@
 {
   "Default": {
-    "color-transparent": {
+    "Transparent": {
       "$type": "color",
       "$value": "#00000000"
     },

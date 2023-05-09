@@ -7,6 +7,7 @@ module.exports = (config) => {
     const configCopy = JSON.parse(JSON.stringify(config));
     return JSON.parse(
       JSON.stringify(Object.values(configCopy)[0])
+        .replaceAll('"$type"', '"category"')
         .replaceAll('"$value"', '"value"')
         .replaceAll('"$description"', '"comment"')
     );

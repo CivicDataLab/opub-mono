@@ -1,10 +1,10 @@
 /**
  * Do not edit directly
- * Generated on Mon, 08 May 2023 16:59:54 GMT
+ * Generated on Tue, 09 May 2023 08:53:58 GMT
  */
 
 :root {
-  --color-transparent: #00000000;
+  --transparent: #00000000;
   --background-hovered: #f1f2f3ff;
   --background-pressed: #edeeefff;
   --background-selected: #edeeefff;

@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Mon, 08 May 2023 16:59:54 GMT
+ * Generated on Tue, 09 May 2023 08:53:58 GMT
  */
 
 export default tokens;
@@ -22,7 +22,7 @@ declare interface DesignToken {
 }
 
 declare const tokens: {
-  "color-transparent": DesignToken,
+  "Transparent": DesignToken,
   "Background": {
     "Hovered": DesignToken,
     "Pressed": DesignToken,
@@ -252,13 +252,13 @@ declare const tokens: {
   "bodySm-semibold": {},
   "font-primary": DesignToken,
   "Regular": {},
-  "font-weightRegular": DesignToken,
+  "font-weight-regular": DesignToken,
   "Medium": {},
-  "font-weightMedium": DesignToken,
+  "font-weight-medium": DesignToken,
   "Bold": {},
-  "font-weightBold": DesignToken,
+  "font-weight-bold": DesignToken,
   "Extra Bold": {},
-  "font-weightExtra Bold": DesignToken,
+  "font-weight-extra bold": DesignToken,
   "space-0": DesignToken,
   "space-025": DesignToken,
   "space-05": DesignToken,
