@@ -18,7 +18,7 @@ module.exports = function ({ dictionary, options }) {
   sizeArray.map((token) => {
     let name;
     // used for color tokens, where we want full name in camelCase
-    if (useNameAttribute) name = token.name;
+    if (useNameAttribute) name = token.name.replace('Default', '');
     // used for box-shadow tokens, where we want to remove the category from the name
     else if (removeCategory) {
       name = token.path[token.path.length - 1].split('-').slice(1).join('-');
@@ -41,5 +41,5 @@ module.exports = function ({ dictionary, options }) {
 };
 
 function formatKey(name) {
-  return name.replace(/(\s|\/)/g, '-').toLowerCase(); // replace spaces and slashes with dashes
+  return name.replace(/(\s|\/)/g, '-'); // replace spaces and slashes with dashes
 }

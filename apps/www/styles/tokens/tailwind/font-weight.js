@@ -1,6 +1,6 @@
 module.exports = { 
-  "regular": "400",
-  "medium": "500",
-  "bold": "600",
-  "extra-bold": "700",
+  "Regular": "400",
+  "Medium": "500",
+  "Bold": "600",
+  "Extra-Bold": "700",
 }
