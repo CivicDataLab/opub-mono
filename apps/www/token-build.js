@@ -1,6 +1,6 @@
 const tokenSanitize = require('./lib/style-dictionary/sanitize');
 const transform = require('./lib/style-dictionary/transform');
-const tailwindFormat = require('./lib/style-dictionary/formats/tailwind-formattor');
+const tailwindFormat = require('./lib/style-dictionary/tailwind-formattor');
 
 const config = require('./config/figma.tokens.json');
 
@@ -103,6 +103,7 @@ module.exports = {
           format: 'tailwindFormat',
           options: {
             category: 'shadow',
+            removeCategory: true,
           },
         },
         {

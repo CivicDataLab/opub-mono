@@ -33,7 +33,7 @@ export function DashboardNav({ items }: DashboardNavProps) {
   return (
     <aside
       className={twMerge(
-        'pt-2 pr-2 bg-surfaceDefault overflow-hidden',
+        'pt-2 pr-2 overflow-hidden bg-surface',
         'hidden z-1 shadow-inset basis-[240px] shrink-0 md:block',
         isCollapsed && 'basis-[60px]',
         styles.Collapse
