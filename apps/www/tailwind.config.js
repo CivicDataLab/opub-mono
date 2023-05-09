@@ -31,6 +31,7 @@ module.exports = {
     transitionDuration,
     fontFamily,
     fontWeight,
+
     animation: {
       none: 'none',
       spin: 'spin 1s linear infinite',

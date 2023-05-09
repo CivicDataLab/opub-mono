@@ -1048,25 +1048,33 @@
         "letterSpacing": "0em"
       }
     },
-    "font-primary": {
-      "$type": "fontFamily",
-      "$value": "Inter"
+    "Font Family": {
+      "primary": {
+        "$type": "fontFamily",
+        "$value": "Inter"
+      },
+      "mono": {
+        "$type": "fontFamily",
+        "$value": "Space Mono"
+      }
     },
-    "Regular": {
-      "$type": "fontWeight",
-      "$value": "400"
-    },
-    "Medium": {
-      "$type": "fontWeight",
-      "$value": "500"
-    },
-    "Bold": {
-      "$type": "fontWeight",
-      "$value": "600"
-    },
-    "Extra Bold": {
-      "$type": "fontWeight",
-      "$value": "700"
+    "Font Weight": {
+      "Regular": {
+        "$type": "fontWeight",
+        "$value": "400"
+      },
+      "Medium": {
+        "$type": "fontWeight",
+        "$value": "500"
+      },
+      "Bold": {
+        "$type": "fontWeight",
+        "$value": "600"
+      },
+      "Extra Bold": {
+        "$type": "fontWeight",
+        "$value": "700"
+      }
     },
     "space-0": {
       "$type": "dimension",
@@ -1223,10 +1231,6 @@
         "width": "1px",
         "style": "solid"
       }
-    },
-    "font-mono": {
-      "$type": "fontFamily",
-      "$value": "Space Mono"
     },
     "z": {
       "1": {

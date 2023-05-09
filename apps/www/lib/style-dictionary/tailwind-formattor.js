@@ -1,12 +1,8 @@
+const convertValue = require('./converter');
+
 module.exports = function ({ dictionary, options }) {
-  const {
-    category,
-    type,
-    trimName,
-    noEnclose,
-    useNameAttribute,
-    removeCategory,
-  } = options;
+  const { category, type, trimName, useNameAttribute, removeCategory } =
+    options;
 
   // filter tokens by category and type
   let sizeArray = dictionary.allTokens.filter((token) => {
@@ -34,7 +30,7 @@ module.exports = function ({ dictionary, options }) {
           token.path[token.path.length - 1];
     }
 
-    const value = noEnclose ? token.value : `"${token.value}"`;
+    const value = `"${convertValue(token.value, token.category)}"`;
     families += `  "${formatKey(
       trimName ? name[name.length - 1] : name
     )}": ${value},\n`;

@@ -1,15 +1,15 @@
 const tokenSanitize = require('./lib/style-dictionary/sanitize');
-const transform = require('./lib/style-dictionary/transform');
 const tailwindFormat = require('./lib/style-dictionary/tailwind-formattor');
-
+const cssFormattor = require('./lib/style-dictionary/css-formattor');
+const jsFormattor = require('./lib/style-dictionary/js-formattor');
 const config = require('./config/figma.tokens.json');
 
-let sanitized = tokenSanitize(config);
-let tokens = transform(sanitized);
-
+let tokens = tokenSanitize(config);
 module.exports = {
   format: {
     tailwindFormat,
+    cssFormattor,
+    jsFormattor,
   },
   tokens,
   platforms: {
@@ -19,17 +19,7 @@ module.exports = {
       files: [
         {
           destination: '_variables.css',
-          format: 'css/variables',
-        },
-      ],
-    },
-    json: {
-      transforms: ['attribute/cti', 'name/cti/camel'],
-      buildPath: 'styles/tokens/',
-      files: [
-        {
-          destination: '_variables.json',
-          format: 'json/nested',
+          format: 'cssFormattor',
         },
       ],
     },
@@ -39,12 +29,8 @@ module.exports = {
       buildPath: 'styles/tokens/',
       files: [
         {
-          format: 'javascript/module-flat',
+          format: 'jsFormattor',
           destination: 'variables.js',
-        },
-        {
-          format: 'typescript/module-declarations',
-          destination: 'variables.d.ts',
         },
       ],
     },
@@ -134,7 +120,6 @@ module.exports = {
           format: 'tailwindFormat',
           options: {
             category: 'fontFamily',
-            noEnclose: true,
             trimName: true,
           },
         },
