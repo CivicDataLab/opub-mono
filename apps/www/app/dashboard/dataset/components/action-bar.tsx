@@ -46,7 +46,7 @@ export function ActionBar(props: Props) {
   const btn = props.previousPage?.action ? backButtonAction : backButton;
 
   return (
-    <div className="flex flex-wrap items-center gap-4 justify-between py-5 border-b border-divider border-solid">
+    <div className="flex flex-wrap items-center gap-4 justify-between py-5 border-b-1 border-divider border-solid">
       <div
         className={twMerge(
           styles.ProgressNav,
