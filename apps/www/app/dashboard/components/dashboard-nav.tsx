@@ -33,7 +33,7 @@ export function DashboardNav({ items }: DashboardNavProps) {
   return (
     <aside
       className={twMerge(
-        'pt-2 pr-2 bg-surfaceDefault overflow-hidden',
+        'pt-2 pr-2 overflow-hidden bg-surface',
         'hidden z-1 shadow-inset basis-[240px] shrink-0 md:block',
         isCollapsed && 'basis-[60px]',
         styles.Collapse
@@ -46,7 +46,10 @@ export function DashboardNav({ items }: DashboardNavProps) {
             content={
               <p>
                 {isCollapsed ? 'Expand' : 'Collapse'} Sidebar
-                <Code className="text-base">⌘+B</Code>
+                <span className="text-200 ml-2">
+                  <Code className="mr-1">⌘</Code>
+                  <Code>B</Code>
+                </span>
               </p>
             }
           >

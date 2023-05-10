@@ -1,9 +1,4 @@
-type BorderTokenAlias =
-  | 'base'
-  | 'dark'
-  | 'divider'
-  | 'divider-on-dark'
-  | 'transparent';
+type BorderTokenAlias = 'base' | 'dark' | 'divider' | 'transparent';
 
 export interface DividerProps {
   /** Divider border style */
