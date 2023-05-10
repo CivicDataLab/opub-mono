@@ -7,7 +7,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "style-dictionary:build": "style-dictionary build --config ./token-build.js"
+    "style-dictionary:build": "style-dictionary build --config ./token-build.js",
+    "generate": "graphql-codegen --config codegen.ts",
+    "prestart": "yarn generate",
+    "predev": "yarn generate"
   },
   "dependencies": {
     "@opub-cdl/ui": "*",
@@ -18,13 +21,22 @@
     "@types/react-dom": "18.0.11",
     "eslint": "8.39.0",
     "eslint-config-next": "13.3.1",
+    "graphql": "^16.6.0",
+    "graphql-request": "5.1.0",
     "next": "^13.4.0",
     "nextjs-toploader": "^1.3.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-query": "^3.39.3",
     "tailwind-merge": "^1.12.0"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "3.3.1",
+    "@graphql-codegen/client-preset": "3.0.1",
+    "@graphql-codegen/typescript": "^3.0.4",
+    "@graphql-codegen/typescript-graphql-request": "^4.5.9",
+    "@graphql-codegen/typescript-operations": "^3.0.4",
+    "@graphql-codegen/typescript-react-query": "^4.1.0",
     "@ianvs/prettier-plugin-sort-imports": "^3.7.2",
     "autoprefixer": "^10.4.14",
     "color2k": "^2.0.2",
