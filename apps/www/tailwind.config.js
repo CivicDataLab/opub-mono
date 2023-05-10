@@ -13,6 +13,7 @@ const transitionDuration = require('./styles/tokens/tailwind/duration');
 const zIndex = require('./styles/tokens/tailwind/z-index');
 
 module.exports = {
+  darkMode: ['class', '[data-mode="dark"]'],
   content: [
     './app/**/*.{js,ts,jsx,tsx,mdx}',
     './pages/**/*.{js,ts,jsx,tsx,mdx}',

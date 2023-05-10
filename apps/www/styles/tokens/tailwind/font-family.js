@@ -1,4 +1,4 @@
 module.exports = { 
-  "primary": "Inter",
-  "mono": "Space Mono",
+  "primary": "var(--font-family-primary)",
+  "mono": "var(--font-family-mono)",
 }

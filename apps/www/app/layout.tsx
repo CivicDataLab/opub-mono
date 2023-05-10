@@ -1,8 +1,8 @@
+import { Inter as FontSans } from 'next/font/google';
+
 import { siteConfig } from '@/config/site';
 import Provider from '@/components/provider';
 import '@/styles/globals.css';
-import '@opub-cdl/ui/dist/assets/styles.css';
-import { Inter as FontSans } from 'next/font/google';
 
 const fontSans = FontSans({ subsets: ['latin'] });
 

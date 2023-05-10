@@ -1,7 +1,7 @@
 module.exports = { 
-  "1": "1px",
-  "2": "2px",
-  "3": "3px",
-  "4": "4px",
-  "5": "5px",
+  "1": "var(--border-width-1)",
+  "2": "var(--border-width-2)",
+  "3": "var(--border-width-3)",
+  "4": "var(--border-width-4)",
+  "5": "var(--border-width-5)",
 }

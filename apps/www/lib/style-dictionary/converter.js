@@ -2,6 +2,9 @@ const convertMap = {
   border: (value) => {
     return `${value.width} ${value.style} ${value.color}`;
   },
+  duration: (value) => {
+    return `${value}ms`;
+  },
   shadow: (value) => {
     return `${value.inset ? 'inset ' : ''}${value.offsetX} ${value.offsetY} ${
       value.blur

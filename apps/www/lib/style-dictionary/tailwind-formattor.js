@@ -1,5 +1,3 @@
-const convertValue = require('./converter');
-
 module.exports = function ({ dictionary, options }) {
   const { category, type, trimName, useNameAttribute, removeCategory } =
     options;
@@ -30,7 +28,7 @@ module.exports = function ({ dictionary, options }) {
           token.path[token.path.length - 1];
     }
 
-    const value = `"${convertValue(token.value, token.category)}"`;
+    const value = `"var(${formatPath(token.path)})"`;
     families += `  "${formatKey(
       trimName ? name[name.length - 1] : name
     )}": ${value},\n`;
@@ -42,4 +40,14 @@ module.exports = function ({ dictionary, options }) {
 
 function formatKey(name) {
   return name.replace(/(\s|\/)/g, '-'); // replace spaces and slashes with dashes
+}
+
+function formatPath(path) {
+  const formattedPath = path
+    .map((item) => item.toLowerCase())
+    .join('-')
+    .replace(/(\s|\/)/g, '-') // replace spaces and slashes with dashes
+    .replace(/-default$/, ''); // remove '-default' from end of string
+
+  return `--${formattedPath}`;
 }
