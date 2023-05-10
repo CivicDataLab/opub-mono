@@ -1,5 +1,6 @@
 'use client';
 
+import React from 'react';
 import { Toaster, Tooltip } from '@opub-cdl/ui';
 import NextTopLoader from 'nextjs-toploader';
 import { SSRProvider } from 'react-aria';
