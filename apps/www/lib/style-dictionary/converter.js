@@ -3,7 +3,9 @@ const convertMap = {
     return `${value.width} ${value.style} ${value.color}`;
   },
   shadow: (value) => {
-    return `${value.offsetX} ${value.offsetY} ${value.blur} ${value.spread} ${value.color}`;
+    return `${value.inset ? 'inset ' : ''}${value.offsetX} ${value.offsetY} ${
+      value.blur
+    } ${value.spread} ${value.color}`;
   },
   default: (value) => {
     return value;

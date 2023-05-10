@@ -1,7 +1,7 @@
 module.exports = { 
-  "inset": "-1px 0px 0px 0px #e4e5e7ff",
-  "inset-button-pressed": "0px 1px 0px 0px #00000026",
-  "inset-button": "0px -1px 0px 0px #00000033",
+  "inset": "inset -1px 0px 0px 0px #e4e5e7ff",
+  "inset-button-pressed": "inset 0px 1px 0px 0px #00000026",
+  "inset-button": "inset 0px -1px 0px 0px #00000033",
   "button": "0px 1px 0px 0px #0000000d",
   "modal": "0px 0px 1px 0px #00000033",
   "layer": "0px 2px 16px 0px #202a3614",

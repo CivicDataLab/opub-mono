@@ -588,7 +588,8 @@
         "offsetX": "-1px",
         "offsetY": "0px",
         "blur": "0px",
-        "spread": "0px"
+        "spread": "0px",
+        "inset": true
       }
     },
     "shadow-inset-button-pressed": {
@@ -598,7 +599,8 @@
         "offsetX": "0px",
         "offsetY": "1px",
         "blur": "0px",
-        "spread": "0px"
+        "spread": "0px",
+        "inset": true
       }
     },
     "shadow-inset-button": {
@@ -608,7 +610,8 @@
         "offsetX": "0px",
         "offsetY": "-1px",
         "blur": "0px",
-        "spread": "0px"
+        "spread": "0px",
+        "inset": true
       }
     },
     "shadow-button": {
