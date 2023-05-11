@@ -5,6 +5,7 @@
   --op-select-content: 20;
   --op-select-input: 30;
   position: relative;
+  color: var(--text);
 
   // IE 11 fix to remove default dropdown arrow
   select::-ms-expand {

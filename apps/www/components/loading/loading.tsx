@@ -9,6 +9,7 @@ export function Loading() {
         justifyContent: 'center',
         fontSize: 'var(--font-size-600)',
         fontWeight: 'var(--font-weight-medium)',
+        color: 'var(--text)',
       }}
     >
       Loading

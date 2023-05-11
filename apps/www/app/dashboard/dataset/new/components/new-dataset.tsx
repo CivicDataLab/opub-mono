@@ -1,6 +1,7 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import { CreateDataset as Props } from '@/types';
+import { IconSource } from '@opub-cdl/ui/dist/ts/components/Icon/Icon';
 import {
   Box,
   Checkbox,
@@ -9,8 +10,7 @@ import {
   Input,
   RadioGroup,
   Text,
-} from '@opub-cdl/ui';
-import { IconSource } from '@opub-cdl/ui/dist/ts/components/Icon/Icon';
+} from '@opub-cdl/ui/src';
 
 import { Icons } from '@/components/icons';
 import { RadioCard } from '@/components/radio-card';

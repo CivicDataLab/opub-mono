@@ -120,7 +120,10 @@ const FileUpload = ({
         />
 
         <div>
-          {file.name}{' '}
+        <Text variant="bodySm" as="p">
+          {file.name}
+          </Text>
+          {' '}
           <Text variant="bodySm" as="p">
             {file.size} bytes
           </Text>
