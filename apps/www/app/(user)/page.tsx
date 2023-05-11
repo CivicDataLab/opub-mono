@@ -7,7 +7,7 @@ import styles from './page.module.scss';
 export default function Home() {
   return (
     <main className="flex flex-col gap-2 w-full h-full items-center justify-center">
-      <IconBrandTabler size="80" />
+      <IconBrandTabler size="80" color="var(--icon)" />
       <Text variant="heading4xl" as="h1" alignment="center">
         Welcome to Open Publishing
       </Text>
