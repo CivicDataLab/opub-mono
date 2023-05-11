@@ -1,6 +1,8 @@
 'use client';
 
+import React from 'react';
 import Link, { LinkProps } from 'next/link';
+import { useRouter } from 'next/navigation';
 import { Size, useWindowSize } from '@/hooks/use-window-size';
 import { Box, Button, Icon, Text, Tooltip } from '@opub-cdl/ui';
 import { twMerge } from 'tailwind-merge';
@@ -12,22 +14,30 @@ interface Props {
   title: string;
   primaryAction: {
     content: string;
-    onAction(): void;
+    onAction?(): void;
   };
   secondaryAction?: {
     content: string;
-    onAction(): void;
+    onAction?(): void;
   };
   previousPage?: {
     content: string;
     link?: LinkProps['href'];
     action?: () => void;
   };
+  preFetch?: string;
 }
 
 export function ActionBar(props: Props) {
   const { width }: Size = useWindowSize();
   const iconSize = width && width < 480 ? '5' : '8';
+
+  const router = useRouter();
+
+  React.useEffect(() => {
+    if (!props.preFetch) return;
+    router.prefetch(props.preFetch);
+  }, []);
 
   const backButton = props.previousPage && props.previousPage?.link && (
     <Link href={props.previousPage?.link} className={styles.BackButton}>
@@ -71,7 +81,7 @@ export function ActionBar(props: Props) {
       <div className="sm:hidden">
         <Button
           primary
-          onClick={props.primaryAction.onAction}
+          onClick={props.primaryAction?.onAction}
           connectedDisclosure={
             props.secondaryAction && {
               actions: [

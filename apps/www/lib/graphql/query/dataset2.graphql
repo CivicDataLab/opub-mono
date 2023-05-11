@@ -1,7 +1,0 @@
-query getDatasets2 {
-  all_datasets {
-    id
-    title
-    description
-  }
-}

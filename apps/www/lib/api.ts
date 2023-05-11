@@ -1,16 +1,22 @@
+import React from 'react';
+import { QueryClient } from '@tanstack/react-query';
 import { GraphQLClient } from 'graphql-request';
 import { getSdk } from 'lib/graphql';
-import { QueryClient } from 'react-query';
 
-const gqlClient = new GraphQLClient('http://13.233.164.47/graphql');
-export const { getDatasets, getDatasets2 } = getSdk(gqlClient);
+import { GRAPHQL_URL } from '@/config/site';
 
-export const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      refetchOnMount: false,
-      refetchOnWindowFocus: false,
-      refetchOnReconnect: false,
-    },
-  },
-});
+const gqlClient = new GraphQLClient(GRAPHQL_URL);
+export const { getDatasets, getPolicy } = getSdk(gqlClient);
+
+export const getQueryClient = React.cache(
+  () =>
+    new QueryClient({
+      defaultOptions: {
+        queries: {
+          refetchOnMount: false,
+          refetchOnWindowFocus: false,
+          refetchOnReconnect: false,
+        },
+      },
+    })
+);
