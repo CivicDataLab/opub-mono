@@ -1,8 +1,10 @@
 import type { CodegenConfig } from '@graphql-codegen/cli';
 
+import { GRAPHQL_URL } from './config/site';
+
 const config: CodegenConfig = {
   overwrite: true,
-  schema: 'http://13.233.164.47/graphql',
+  schema: GRAPHQL_URL,
   documents: 'lib/graphql/**/*.graphql',
   generates: {
     './lib/graphql/generated/graphql.ts': {

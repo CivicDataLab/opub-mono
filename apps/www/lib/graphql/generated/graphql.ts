@@ -2411,10 +2411,10 @@ export type GetDatasetsQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetDatasetsQuery = { __typename?: 'Query', all_datasets?: Array<{ __typename?: 'DatasetType', id: string, title: string, description: string } | null> | null };
 
-export type GetDatasets2QueryVariables = Exact<{ [key: string]: never; }>;
+export type GetPolicyQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetDatasets2Query = { __typename?: 'Query', all_datasets?: Array<{ __typename?: 'DatasetType', id: string, title: string, description: string } | null> | null };
+export type GetPolicyQuery = { __typename?: 'Query', all_policy?: Array<{ __typename?: 'PolicyType', id: string, title: string, description: string, issued: any, modified: any } | null> | null };
 
 
 export const GetDatasetsDocument = gql`
@@ -2426,12 +2426,14 @@ export const GetDatasetsDocument = gql`
   }
 }
     `;
-export const GetDatasets2Document = gql`
-    query getDatasets2 {
-  all_datasets {
+export const GetPolicyDocument = gql`
+    query getPolicy {
+  all_policy {
     id
     title
     description
+    issued
+    modified
   }
 }
     `;
@@ -2446,8 +2448,8 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     getDatasets(variables?: GetDatasetsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetDatasetsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetDatasetsQuery>(GetDatasetsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getDatasets', 'query');
     },
-    getDatasets2(variables?: GetDatasets2QueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetDatasets2Query> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetDatasets2Query>(GetDatasets2Document, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getDatasets2', 'query');
+    getPolicy(variables?: GetPolicyQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetPolicyQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetPolicyQuery>(GetPolicyDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getPolicy', 'query');
     }
   };
 }
