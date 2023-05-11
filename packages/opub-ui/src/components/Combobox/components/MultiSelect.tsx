@@ -4,7 +4,6 @@ import { Error, LabelledProps } from '../../../types';
 import { ComboboxSingleProps } from '../../../types/combobox';
 import itemStyles from '../../ActionList/ActionList.module.scss';
 import { Box } from '../../Box';
-import { InlineMessage } from '../../InlineMessage';
 import { Tag } from '../../Tag';
 import { Text } from '../../Text';
 import styles from '../Combobox.module.scss';
@@ -17,7 +16,7 @@ import {
 import { Portal } from 'ariakit/portal';
 import { SelectItem, SelectList, useSelectState } from 'ariakit/select';
 import cx from 'classnames';
-import { forwardRef, HTMLAttributes, useEffect, useState } from 'react';
+import { HTMLAttributes, forwardRef, useEffect, useState } from 'react';
 
 export type ComboboxMultiProps = ComboboxSingleProps & {
   defaultValues?: string[] | (() => string[]);

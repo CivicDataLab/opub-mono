@@ -32,7 +32,7 @@
   -webkit-tap-highlight-color: transparent;
 
   &:hover {
-    background: var(--action-secondary-hovered);
+    background: var(--surface-hovered);
     outline: var(--border-width-1) solid transparent;
   }
 
@@ -44,7 +44,7 @@
   }
 
   &:active {
-    background: var(--action-secondary-pressed);
+    background: var(--surface-pressed);
     box-shadow: var(--shadow-button);
 
     &::after {
@@ -54,7 +54,7 @@
   }
 
   &.pressed {
-    background: var(--action-secondary-depressed);
+    background: var(--surface-depressed);
     box-shadow: var(--shadows-inset-button-pressed);
     color: var(--text-on-primary);
     border-color: var(--border-depressed);
@@ -142,7 +142,7 @@
   }
 
   &.pressed {
-    background: var(--action-secondary-depressed);
+    background: var(--surface-depressed);
     border: var(--border-width-1) solid var(--border-depressed);
     box-shadow: none;
 

@@ -54,7 +54,7 @@ export function DashboardNav({ items }: DashboardNavProps) {
             }
           >
             <Button
-              icon={<Icon source={sidebarIcon} />}
+              icon={<Icon source={sidebarIcon} color="base" />}
               accessibilityLabel={`${
                 isCollapsed ? 'Expand' : 'Collapse'
               } Sidebar`}
@@ -89,7 +89,7 @@ export function DashboardNav({ items }: DashboardNavProps) {
                       content={isCollapsed ? item.title : undefined}
                     >
                       <div className="basis-5 py-2 px-3">
-                        <Icon source={icon} />
+                        <Icon source={icon} color="base" />
                       </div>
                     </Tooltip>
                     <div
