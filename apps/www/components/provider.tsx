@@ -14,7 +14,7 @@ export default function Provider({ children }: { children: React.ReactNode }) {
   return (
     <QueryClientProvider client={client}>
       <SSRProvider>
-        <NextTopLoader color="var(--icon-decorative-three)" />
+        <NextTopLoader color="var(--decorative-icon-three)" />
         <Tooltip.Provider>
           {children}
           <Toaster />
