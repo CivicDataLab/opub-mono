@@ -1,5 +1,3 @@
-'use client';
-
 import { Page } from './components/page-layout';
 import styles from './new.module.scss';
 
