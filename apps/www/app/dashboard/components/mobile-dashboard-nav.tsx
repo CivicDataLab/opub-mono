@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useOnClickOutside } from '@/hooks/use-on-click-outside';
 import { SidebarNavItem } from '@/types';
-import { Icon, Text } from '@opub-cdl/ui/src';
+import { Icon, Text } from '@opub-cdl/ui';
 import { IconMenu, IconX } from '@tabler/icons-react';
 import { twMerge } from 'tailwind-merge';
 

@@ -1,8 +1,8 @@
-const tokenSanitize = require('./lib/style-dictionary/sanitize');
-const tailwindFormat = require('./lib/style-dictionary/tailwind-formattor');
-const cssFormattor = require('./lib/style-dictionary/css-formattor');
-const jsFormattor = require('./lib/style-dictionary/js-formattor');
-const config = require('./config/figma.tokens.json');
+const tokenSanitize = require('../lib/style-dictionary/sanitize');
+const tailwindFormat = require('../lib/style-dictionary/tailwind-formattor');
+const cssFormattor = require('../lib/style-dictionary/css-formattor');
+const jsFormattor = require('../lib/style-dictionary/js-formattor');
+const config = require('./figma.tokens.json');
 
 let tokens = tokenSanitize(config);
 module.exports = {
