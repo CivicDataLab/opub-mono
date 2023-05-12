@@ -7,6 +7,7 @@ import '@/styles/globals.css';
 const fontSans = FontSans({ subsets: ['latin'] });
 
 export const metadata = {
+  metadataBase: new URL(siteConfig.url),
   title: {
     default: siteConfig.name,
     template: `%s | ${siteConfig.name}`,
