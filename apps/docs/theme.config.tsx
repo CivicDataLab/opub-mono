@@ -31,6 +31,17 @@ const config: DocsThemeConfig = {
     prev: true,
     next: true,
   },
+  footer: {
+    text: (
+      <span>
+        MIT {new Date().getFullYear()} ©{' '}
+        <a href="https://opub-www.vercel.app" target="_blank">
+          OPub
+        </a>
+        .
+      </span>
+    ),
+  },
 };
 
 export default config;

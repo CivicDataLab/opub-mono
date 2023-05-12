@@ -1,0 +1,49 @@
+.Item {
+  > label {
+    width: 100%;
+    padding: var(--space-4);
+    border-radius: var(--border-radius-1);
+    border: 1px solid var(--border-shadow);
+    background-color: var(--surface);
+    transition: background-color var(--duration-150) var(--ease),
+      border-color var(--duration-150) var(--ease);
+    cursor: pointer;
+
+    svg {
+      color: var(--icon);
+    }
+  }
+
+  > button {
+    transform: translateX(-100%);
+    position: absolute;
+    pointer-events: none;
+    opacity: 0;
+    margin: 0px;
+    width: 20px;
+    height: 20px;
+
+    &[data-state='checked'] {
+      + input + label {
+        border-color: var(--interactive);
+        background-color: var(--surface-selected);
+
+        svg {
+          color: var(--icon-interactive);
+        }
+      }
+    }
+
+    &[data-disabled] {
+      + input + label {
+        border-color: var(--border-subdued);
+        background-color: var(--background);
+        color: var(--text-disabled);
+
+        svg {
+          color: var(--icon-subdued);
+        }
+      }
+    }
+  }
+}

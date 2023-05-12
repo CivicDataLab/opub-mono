@@ -1,0 +1,9 @@
+query getPolicy {
+  all_policy {
+    id
+    title
+    description
+    issued
+    modified
+  }
+}

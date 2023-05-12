@@ -1,0 +1,14 @@
+.ProgressNav {
+  > span {
+    line-height: 0;
+  }
+}
+
+.BackButton {
+  transition: background-color var(--duration-150) var(--ease);
+  border-radius: var(--border-radius-1);
+
+  &:hover {
+    background-color: var(--background-pressed);
+  }
+}

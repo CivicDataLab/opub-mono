@@ -1,0 +1,37 @@
+.CreatetPage {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.CreateDataset {
+  margin-top: var(--space-6);
+}
+
+.RadioWrapper {
+  display: flex;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  margin-top: var(--space-3);
+
+  > * {
+    flex-basis: 236px;
+  }
+
+  .RadioItem {
+    display: flex;
+    gap: var(--space-4);
+    align-items: center;
+
+    > span {
+      width: var(--space-8);
+      height: var(--space-8);
+    }
+  }
+
+  .RadioContent {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+}
