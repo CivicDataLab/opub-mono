@@ -1,9 +1,10 @@
+import { TablerIconsProps } from '@tabler/icons-react';
+import cx from 'classnames';
+import React from 'react';
 import { SpacingSpaceScale } from '../../tokens';
 import { variationName } from '../../utils/css';
 import { Text } from '../Text';
 import styles from './Icon.module.scss';
-import cx from 'classnames';
-import React from 'react';
 
 type Color =
   | 'surface'
@@ -24,7 +25,10 @@ type Color =
 export type IconSource =
   | React.FunctionComponent<React.SVGProps<SVGSVGElement>>
   | 'placeholder'
-  | string;
+  | string
+  | ((props: TablerIconsProps) => React.ReactElement)
+  | TablerIconsProps
+  | React.SVGProps<SVGSVGElement>;
 
 export interface IconProps {
   /** The SVG contents to display in the icon (icons should fit in a 20 × 20 pixel viewBox) */

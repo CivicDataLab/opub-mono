@@ -2,7 +2,6 @@
   "recommendations": [
     "esbenp.prettier-vscode",
     "dbaeumer.vscode-eslint",
-    "ms-vscode.vscode-typescript-next",
     "vunguyentuan.vscode-css-variables",
     "Gruntfuggly.todo-tree"
   ]

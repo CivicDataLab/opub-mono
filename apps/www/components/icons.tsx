@@ -12,9 +12,12 @@ import {
   IconLink,
   IconSearch,
   IconUserCog,
+  TablerIconsProps,
 } from '@tabler/icons-react';
 
-export const Icons = {
+export const Icons: {
+  [key: string]: (props: TablerIconsProps) => React.ReactElement;
+} = {
   back: IconArrowLeft,
   logo: IconFolder,
   dataset: IconDatabase,

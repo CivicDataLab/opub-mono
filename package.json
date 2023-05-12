@@ -30,12 +30,12 @@
     "prettier": "^2.8.4",
     "sass": "^1.58.3",
     "tsup": "^6.7.0",
-    "turbo": "^1.9.1"
+    "turbo": "^1.9.1",
+    "typescript": "^5.0.4"
   },
   "engines": {
     "node": ">=14.0.0"
   },
-  "packageManager": "yarn@1.22.17",
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
@@ -45,6 +45,5 @@
     "*.{js,jsx,ts,tsx}": [
       "eslint --"
     ]
-  },
-  "dependencies": {}
+  }
 }

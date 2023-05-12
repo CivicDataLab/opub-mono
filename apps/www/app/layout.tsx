@@ -4,9 +4,10 @@ import { siteConfig } from '@/config/site';
 import Provider from '@/components/provider';
 import '@/styles/globals.css';
 
-const fontSans = FontSans({ subsets: ['latin'] });
+const fontSans = FontSans({ subsets: ['latin'], display: 'swap' });
 
 export const metadata = {
+  metadataBase: new URL(siteConfig.url),
   title: {
     default: siteConfig.name,
     template: `%s | ${siteConfig.name}`,

@@ -3,7 +3,7 @@ import React from 'react';
 import { AriaTimeFieldProps, useLocale, useTimeField } from 'react-aria';
 import { TimeFieldStateOptions, useTimeFieldState } from 'react-stately';
 import { DateFieldSegment } from '../DateField';
-import { Labelled, LabelledProps } from '../Labelled';
+import { Labelled } from '../Labelled';
 import cx from 'classnames';
 import inputStyles from '../Input/Input.module.scss';
 import styles from './TimeField.module.scss';

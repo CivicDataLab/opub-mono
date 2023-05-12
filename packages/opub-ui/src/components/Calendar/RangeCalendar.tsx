@@ -24,10 +24,7 @@ function createCalendar(identifier: any) {
   }
 }
 
-type Props = {} & (
-  | RangeCalendarStateOptions
-  | AriaRangeCalendarProps<DateValue>
-);
+type Props = RangeCalendarStateOptions | AriaRangeCalendarProps<DateValue>;
 
 function RangeCalendar(props: Props) {
   let { locale } = useLocale();

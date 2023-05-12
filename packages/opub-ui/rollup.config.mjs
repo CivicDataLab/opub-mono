@@ -4,12 +4,11 @@ import typescript from '@rollup/plugin-typescript';
 import svgr from '@svgr/rollup';
 import { readFileSync } from 'fs';
 import path from 'path';
-// import { visualizer } from 'rollup-plugin-visualizer';
 import banner2 from 'rollup-plugin-banner2';
 import copy from 'rollup-plugin-copy';
 import { externals } from 'rollup-plugin-node-externals';
 import postcss from 'rollup-plugin-postcss';
-import { terser } from 'rollup-plugin-terser';
+import terser from '@rollup/plugin-terser';
 
 const pkg = JSON.parse(
   readFileSync(new URL('./package.json', import.meta.url).pathname)
@@ -32,6 +31,14 @@ const rollup = (_args) => {
     },
     plugins: getPlugins(),
     external,
+    onwarn(warning, warn) {
+      // Skip certain warnings
+      if (warning.message.includes('"use client"')) return;
+      if (warning.message.includes('.module.scss')) return;
+
+      // Use default for everything else
+      warn(warning);
+    },
   };
 };
 
