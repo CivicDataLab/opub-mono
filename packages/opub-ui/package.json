@@ -73,6 +73,7 @@
     "@react-types/calendar": "^3.2.0",
     "@react-types/datepicker": "^3.3.0",
     "@react-types/shared": "^3.18.0",
+    "@rollup/plugin-terser": "^0.4.1",
     "@shopify/polaris-icons": "^6.12.0",
     "@tabler/icons-react": "^2.17.0",
     "@tanstack/react-table": "^8.8.4",
