@@ -8,3 +8,5 @@ export const siteConfig: SiteConfig = {
 };
 
 export const GRAPHQL_URL = 'http://13.233.164.47/graphql';
+
+export const locales = ['en', 'hi'];

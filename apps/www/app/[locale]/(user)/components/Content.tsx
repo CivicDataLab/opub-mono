@@ -1,24 +1,28 @@
+'use client';
+
 import Link from 'next/link';
 import { Text } from '@opub-cdl/ui';
 import { IconBrandTabler, IconShare3 } from '@tabler/icons-react';
+import { useTranslations } from 'next-intl';
 
-import styles from './page.module.scss';
+import styles from '../page.module.scss';
 
-export default function Home() {
+export function Content() {
+  const t = useTranslations('home');
+
   return (
-    <main className="flex flex-col gap-2 w-full h-full items-center justify-center">
+    <>
       <IconBrandTabler size="80" color="var(--icon)" />
       <Text variant="heading4xl" as="h1" alignment="center">
-        Welcome to Open Publishing
+        {t('title')}
       </Text>
       <Text color="subdued" variant="bodyLg" as="p" alignment="center">
-        Open Publishing is a platform for publishing and sharing data and
-        stories.
+        {t('subtitle')}
       </Text>
       <Link href="/dashboard/dataset" className={styles.card}>
-        <h2>Go to Dashboard</h2>
+        <Text variant="headingMd">{t('cta')}</Text>
         <IconShare3 />
       </Link>
-    </main>
+    </>
   );
 }
