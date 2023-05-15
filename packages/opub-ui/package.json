@@ -73,7 +73,6 @@
     "@react-types/calendar": "^3.2.0",
     "@react-types/datepicker": "^3.3.0",
     "@react-types/shared": "^3.18.0",
-    "@rollup/plugin-terser": "^0.4.1",
     "@shopify/polaris-icons": "^6.12.0",
     "@tabler/icons-react": "^2.17.0",
     "@tanstack/react-table": "^8.8.4",
@@ -85,6 +84,7 @@
   "devDependencies": {
     "@rollup/plugin-commonjs": "^24.0.1",
     "@rollup/plugin-node-resolve": "^15.0.1",
+    "@rollup/plugin-terser": "^0.4.1",
     "@rollup/plugin-typescript": "8.3.3",
     "@storybook/addon-actions": "^6.5.16",
     "@storybook/addon-console": "^1.2.3",
@@ -119,7 +119,6 @@
     "rollup-plugin-node-externals": "^5.1.2",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-postcss": "^4.0.2",
-    "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-visualizer": "^5.9.0",
     "storybook": "7.0.0-beta.47",
     "storybook-addon-pseudo-states": "^2.0.0-next.0",
