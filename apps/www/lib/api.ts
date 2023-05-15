@@ -5,8 +5,13 @@ import { GraphQLClient } from 'graphql-request';
 import { GRAPHQL_URL } from '@/config/site';
 import { getSdk } from '../graphql';
 
-const gqlClient = new GraphQLClient(GRAPHQL_URL);
-export const { getDatasets, getPolicy, create_dataset } = getSdk(gqlClient);
+const gqlClient = new GraphQLClient(GRAPHQL_URL, {
+  headers: {
+    organization: '1',
+  },
+});
+export const { getDatasets, getPolicy, create_dataset, getDatasetByID } =
+  getSdk(gqlClient);
 
 export const getQueryClient = React.cache(
   () =>

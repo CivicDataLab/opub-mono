@@ -33,21 +33,23 @@ export function CreateDataset({
   submitRef: React.RefObject<HTMLButtonElement>;
 }) {
   const [val, setVal] = React.useState<Props>(defaultVal || defaultValBase);
-  // const router = useRouter();
+  const router = useRouter();
   const defaultValue = defaultVal || defaultValBase;
 
   return (
     <DatasetForm
       onSubmit={async (value) => {
-        console.log('ran-before', value);
-
         const res = await create_dataset({
           dataset_data: {
             title: value.title,
             description: value.description,
           },
         });
-        console.log('ran-after', res.create_dataset?.dataset?.id);
+        if (res.create_dataset?.dataset?.id) {
+          router.push(
+            `/dashboard/dataset/${res.create_dataset.dataset.id}/edit/metadata`
+          );
+        }
       }}
       formOptions={{ defaultValues: defaultValue }}
       onChange={(e) => {

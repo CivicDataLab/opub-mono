@@ -1,54 +1,22 @@
-'use client';
+import { Hydrate } from '@/lib';
+import { dehydrate } from '@tanstack/react-query';
 
-import React from 'react';
-import { notFound, useRouter } from 'next/navigation';
-
-import { testDataset } from '@/config/dashboard';
-import { ActionBar } from '../../components/action-bar';
-import { EditDataset } from './components/EditDataset';
+import { getDatasetByID, getQueryClient } from '@/lib/api';
 import styles from './edit.module.scss';
+import { EditPage } from './page-layout';
 
-export default function Page({ params }: { params: { id: string } }) {
-  const router = useRouter();
-  const submitRef = React.useRef<HTMLButtonElement>(null);
-
-  React.useEffect(() => {
-    router.prefetch(`/dashboard/dataset/${params.id}/edit/metadata`);
-  }, []);
-
-  // get demo data
-  const data = testDataset[params.id];
-  if (!data) {
-    notFound();
-  }
+export default async function Page({ params }: { params: { id: string } }) {
+  const queryClient = getQueryClient();
+  await queryClient.prefetchQuery([`dataset_id_${params.id}`], () =>
+    getDatasetByID({ dataset_id: Number(params.id) })
+  );
+  const dehydratedState = dehydrate(queryClient);
 
   return (
-    <div className={styles.EditPage}>
-      <ActionBar
-        title={data.name}
-        primaryAction={{
-          content: 'Save & Next',
-          onAction: () =>
-            router.push(`/dashboard/dataset/${params.id}/edit/metadata`),
-        }}
-        secondaryAction={{
-          content: 'Cancel',
-          onAction: () => router.push('/dashboard/dataset'),
-        }}
-        previousPage={{
-          link: `/dashboard/dataset`,
-          content: 'My Datasets',
-        }}
-      />
-      <EditDataset
-        submitRef={submitRef}
-        defaultVal={{
-          type: 'file',
-          name: data.name,
-          description: data.description,
-          terms: true,
-        }}
-      />
-    </div>
+    <Hydrate state={dehydratedState}>
+      <div className={styles.EditPage}>
+        <EditPage params={params} />
+      </div>
+    </Hydrate>
   );
 }

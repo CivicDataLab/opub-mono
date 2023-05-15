@@ -2418,6 +2418,13 @@ export type GetDatasetsQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetDatasetsQuery = { __typename?: 'Query', all_datasets?: Array<{ __typename?: 'DatasetType', id: string, title: string, description: string } | null> | null };
 
+export type GetDatasetByIdQueryVariables = Exact<{
+  dataset_id?: InputMaybe<Scalars['Int']>;
+}>;
+
+
+export type GetDatasetByIdQuery = { __typename?: 'Query', dataset?: { __typename?: 'DatasetType', id: string, title: string, description: string, issued: any, highlights?: Array<string | null> | null, remote_issued?: any | null, remote_modified?: any | null, period_from?: any | null, period_to?: any | null, update_frequency?: string | null, modified: any, tags: Array<{ __typename?: 'TagType', id: string, name: string }> } | null };
+
 export type GetPolicyQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -2447,6 +2454,27 @@ export const GetDatasetsDocument = gql`
   }
 }
     `;
+export const GetDatasetByIdDocument = gql`
+    query getDatasetByID($dataset_id: Int) {
+  dataset(dataset_id: $dataset_id) {
+    id
+    title
+    description
+    issued
+    highlights
+    remote_issued
+    remote_modified
+    period_from
+    period_to
+    update_frequency
+    modified
+    tags {
+      id
+      name
+    }
+  }
+}
+    `;
 export const GetPolicyDocument = gql`
     query getPolicy {
   all_policy {
@@ -2471,6 +2499,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     getDatasets(variables?: GetDatasetsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetDatasetsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetDatasetsQuery>(GetDatasetsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getDatasets', 'query');
+    },
+    getDatasetByID(variables?: GetDatasetByIdQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetDatasetByIdQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetDatasetByIdQuery>(GetDatasetByIdDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getDatasetByID', 'query');
     },
     getPolicy(variables?: GetPolicyQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetPolicyQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetPolicyQuery>(GetPolicyDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getPolicy', 'query');

@@ -14,8 +14,7 @@ export const Page = () => {
     router.prefetch('/dashboard/dataset/new');
   }, []);
 
-  const { data } = useQuery(['all_policies'], () => getPolicy());
-  console.log(data);
+  // const { data } = useQuery(['all_policies'], () => getPolicy());
 
   return (
     <>
