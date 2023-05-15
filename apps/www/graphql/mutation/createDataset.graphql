@@ -1,0 +1,12 @@
+mutation create_dataset($dataset_data: CreateDatasetInput) {
+  create_dataset(dataset_data: $dataset_data) {
+    success
+    errors
+    dataset {
+      id
+      title
+      description
+      dataset_type
+    }
+  }
+}

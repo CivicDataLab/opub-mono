@@ -2406,6 +2406,13 @@ export enum ValidationUnits {
   Year = 'YEAR'
 }
 
+export type Create_DatasetMutationVariables = Exact<{
+  dataset_data?: InputMaybe<CreateDatasetInput>;
+}>;
+
+
+export type Create_DatasetMutation = { __typename?: 'Mutation', create_dataset?: { __typename?: 'CreateDataset', success?: boolean | null, errors?: any | null, dataset?: { __typename?: 'DatasetType', id: string, title: string, description: string, dataset_type: DatasetDatasetType } | null } | null };
+
 export type GetDatasetsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -2417,6 +2424,20 @@ export type GetPolicyQueryVariables = Exact<{ [key: string]: never; }>;
 export type GetPolicyQuery = { __typename?: 'Query', all_policy?: Array<{ __typename?: 'PolicyType', id: string, title: string, description: string, issued: any, modified: any } | null> | null };
 
 
+export const Create_DatasetDocument = gql`
+    mutation create_dataset($dataset_data: CreateDatasetInput) {
+  create_dataset(dataset_data: $dataset_data) {
+    success
+    errors
+    dataset {
+      id
+      title
+      description
+      dataset_type
+    }
+  }
+}
+    `;
 export const GetDatasetsDocument = gql`
     query getDatasets {
   all_datasets {
@@ -2445,6 +2466,9 @@ const defaultWrapper: SdkFunctionWrapper = (action, _operationName, _operationTy
 
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
+    create_dataset(variables?: Create_DatasetMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<Create_DatasetMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Create_DatasetMutation>(Create_DatasetDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'create_dataset', 'mutation');
+    },
     getDatasets(variables?: GetDatasetsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetDatasetsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetDatasetsQuery>(GetDatasetsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getDatasets', 'query');
     },

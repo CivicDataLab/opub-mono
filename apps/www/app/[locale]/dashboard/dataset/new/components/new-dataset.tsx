@@ -12,6 +12,7 @@ import {
 } from '@opub-cdl/ui';
 import { IconSource } from '@opub-cdl/ui/dist/ts/components/Icon/Icon';
 
+import { create_dataset, getQueryClient } from '@/lib/api';
 import { Icons } from '@/components/icons';
 import { RadioCard } from '@/components/radio-card';
 import { DatasetForm } from '../../components/dataset-form';
@@ -19,7 +20,7 @@ import styles from '../new.module.scss';
 
 const defaultValBase: Props = {
   type: 'file',
-  name: '',
+  title: '',
   description: '',
   terms: false,
 };
@@ -31,14 +32,22 @@ export function CreateDataset({
   defaultVal?: Props;
   submitRef: React.RefObject<HTMLButtonElement>;
 }) {
-  const [val, setVal] = React.useState(defaultVal);
-  const router = useRouter();
-
+  const [val, setVal] = React.useState<Props>(defaultVal || defaultValBase);
+  // const router = useRouter();
   const defaultValue = defaultVal || defaultValBase;
+
   return (
     <DatasetForm
-      onSubmit={() => {
-        router.push('/dashboard/dataset/1/edit/metadata');
+      onSubmit={async (value) => {
+        console.log('ran-before', value);
+
+        const res = await create_dataset({
+          dataset_data: {
+            title: value.title,
+            description: value.description,
+          },
+        });
+        console.log('ran-after', res.create_dataset?.dataset?.id);
       }}
       formOptions={{ defaultValues: defaultValue }}
       onChange={(e) => {
@@ -70,7 +79,7 @@ export function CreateDataset({
           <Box paddingBlockStart="3">
             <FormLayout>
               <Input
-                name="name"
+                name="title"
                 label="Name of Dataset"
                 placeholder="example: Population of India"
                 maxLength={30}

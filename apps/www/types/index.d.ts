@@ -30,7 +30,7 @@ export type SidebarNavItem = {
 
 export type CreateDataset = {
   type: string;
-  name: string;
+  title: string;
   description: string;
   terms: boolean;
 };
