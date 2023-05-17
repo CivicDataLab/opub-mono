@@ -2,26 +2,51 @@
 
 import React from 'react';
 import { useRouter } from 'next/navigation';
+import { graphql } from '@/gql';
 import { useQuery } from '@tanstack/react-query';
 
-import { getDatasetByID } from '@/lib/api';
+import { GraphQL } from '@/lib/api';
 import { ActionBar } from '../../../components/action-bar';
 import { EditMetadata } from '../components/EditMetadata';
 
-export function MetadataPage({ params }: { params: { id: string } }) {
+const datasetQueryDoc = graphql(`
+  query datasetQuery($dataset_id: Int) {
+    dataset(dataset_id: $dataset_id) {
+      id
+      title
+      description
+      issued
+      highlights
+      remote_issued
+      remote_modified
+      period_from
+      period_to
+      update_frequency
+      modified
+      tags {
+        id
+        name
+      }
+    }
+  }
+`);
+
+export function MetadataPage({
+  params,
+}: {
+  params: { id: string };
+  query: any;
+}) {
   const router = useRouter();
   const submitRef = React.useRef<HTMLButtonElement>(null);
 
-  const { data } = useQuery([`dataset_id_${params.id}`], () =>
-    getDatasetByID({
-      dataset_id: Number(params.id),
-    })
+  const { data } = useQuery([`dataset_${params.id}`], () =>
+    GraphQL(datasetQueryDoc, { dataset_id: Number(params.id) })
   );
 
   React.useEffect(() => {
     router.prefetch(`/dashboard/dataset/${params.id}/edit/distribution`);
   }, []);
-
   return (
     <>
       <ActionBar

@@ -1,5 +1,8 @@
+'use client';
+
 import React from 'react';
 import { useRouter } from 'next/navigation';
+import { graphql } from '@/gql';
 import { CreateDataset as Props } from '@/types';
 import {
   Box,
@@ -11,12 +14,28 @@ import {
   Text,
 } from '@opub-cdl/ui';
 import { IconSource } from '@opub-cdl/ui/dist/ts/components/Icon/Icon';
+import { useMutation } from '@tanstack/react-query';
 
-import { create_dataset, getQueryClient } from '@/lib/api';
+import { GraphQL } from '@/lib/api';
 import { Icons } from '@/components/icons';
 import { RadioCard } from '@/components/radio-card';
 import { DatasetForm } from '../../components/dataset-form';
 import styles from '../new.module.scss';
+
+const createDatasetMutation = graphql(`
+  mutation create_dataset($dataset_data: CreateDatasetInput) {
+    create_dataset(dataset_data: $dataset_data) {
+      success
+      errors
+      dataset {
+        id
+        title
+        description
+        dataset_type
+      }
+    }
+  }
+`);
 
 const defaultValBase: Props = {
   type: 'file',
@@ -36,20 +55,25 @@ export function CreateDataset({
   const router = useRouter();
   const defaultValue = defaultVal || defaultValBase;
 
+  const { mutate } = useMutation(
+    () =>
+      GraphQL(createDatasetMutation, {
+        dataset_data: {
+          title: val.title,
+          description: val.description,
+        },
+      }),
+    {
+      onSuccess: (data: any) => {
+        console.log(data);
+      },
+    }
+  );
+
   return (
     <DatasetForm
-      onSubmit={async (value) => {
-        const res = await create_dataset({
-          dataset_data: {
-            title: value.title,
-            description: value.description,
-          },
-        });
-        if (res.create_dataset?.dataset?.id) {
-          router.push(
-            `/dashboard/dataset/${res.create_dataset.dataset.id}/edit/metadata`
-          );
-        }
+      onSubmit={(value) => {
+        mutate();
       }}
       formOptions={{ defaultValues: defaultValue }}
       onChange={(e) => {

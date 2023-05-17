@@ -2,18 +2,41 @@
 
 import React from 'react';
 import { useRouter } from 'next/navigation';
+import { graphql } from '@/gql';
 import { useQuery } from '@tanstack/react-query';
 
-import { getDatasetByID } from '@/lib/api';
+import { GraphQL } from '@/lib/api';
 import { ActionBar } from '../../components/action-bar';
 import { EditDataset } from './components/EditDataset';
+
+const datasetQueryDoc = graphql(`
+  query datasetQuery($dataset_id: Int) {
+    dataset(dataset_id: $dataset_id) {
+      id
+      title
+      description
+      issued
+      highlights
+      remote_issued
+      remote_modified
+      period_from
+      period_to
+      update_frequency
+      modified
+      tags {
+        id
+        name
+      }
+    }
+  }
+`);
 
 export function EditPage({ params }: { params: { id: string } }) {
   const router = useRouter();
   const submitRef = React.useRef<HTMLButtonElement>(null);
 
   const { data } = useQuery([`dataset_id_${params.id}`], () =>
-    getDatasetByID({
+    GraphQL(datasetQueryDoc, {
       dataset_id: Number(params.id),
     })
   );

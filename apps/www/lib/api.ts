@@ -1,18 +1,28 @@
 import React from 'react';
+import { type TypedDocumentNode } from '@graphql-typed-document-node/core';
 import { QueryClient } from '@tanstack/react-query';
-import { GraphQLClient } from 'graphql-request';
+import { request } from 'graphql-request';
 
-import { GRAPHQL_URL } from '@/config/site';
-import { getSdk } from '../graphql';
+import { gqlConfig } from '@/config/site';
 
-const gqlClient = new GraphQLClient(GRAPHQL_URL, {
-  headers: {
-    organization: '1',
-  },
-});
-export const { getDatasets, getPolicy, create_dataset, getDatasetByID } =
-  getSdk(gqlClient);
+// create a wrapper function for graphql-request
+// that will be used by react-query
+export async function GraphQL<TResult, TVariables>(
+  document: TypedDocumentNode<TResult, TVariables>,
+  ...[variables]: TVariables extends Record<string, never> ? [] : [TVariables]
+) {
+  const data = await request(
+    gqlConfig.url,
+    document,
+    {
+      ...variables,
+    },
+    { ...gqlConfig.headers }
+  );
+  return data;
+}
 
+// create a wrapper function for react-query to be used by server components
 export const getQueryClient = React.cache(
   () =>
     new QueryClient({
