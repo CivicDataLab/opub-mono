@@ -1,6 +1,6 @@
-import { GraphQLClient } from 'graphql-request';
-import * as Dom from 'graphql-request/dist/types.dom';
-import gql from 'graphql-tag';
+/* eslint-disable */
+// @ts-nocheck
+import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -13,12 +13,64 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  /**
+   * The `Date` scalar type represents a Date
+   * value as specified by
+   * [iso8601](https://en.wikipedia.org/wiki/ISO_8601).
+   */
   Date: any;
+  /**
+   * The `DateTime` scalar type represents a DateTime
+   * value as specified by
+   * [iso8601](https://en.wikipedia.org/wiki/ISO_8601).
+   */
   DateTime: any;
+  /** The `Decimal` scalar type represents a python Decimal. */
   Decimal: any;
+  /**
+   *
+   *     Errors messages and codes mapped to
+   *     fields or non fields errors.
+   *     Example:
+   *     {
+   *         field_name: [
+   *             {
+   *                 "message": "error message",
+   *                 "code": "error_code"
+   *             }
+   *         ],
+   *         other_field: [
+   *             {
+   *                 "message": "error message",
+   *                 "code": "error_code"
+   *             }
+   *         ],
+   *         nonFieldErrors: [
+   *             {
+   *                 "message": "error message",
+   *                 "code": "error_code"
+   *             }
+   *         ]
+   *     }
+   *
+   */
   ExpectedErrorType: any;
+  /**
+   * Allows use of a JSON String for input / output from the GraphQL schema.
+   *
+   * Use of this type is *not recommended* as you lose the benefits of having a defined, static
+   * schema (one of the key benefits of GraphQL).
+   */
   JSONString: any;
+  /**
+   * Leverages the internal Python implmeentation of UUID (uuid.UUID) to provide native UUID objects
+   * in fields, resolvers and input.
+   */
   UUID: any;
+  /**
+   * Create scalar that ignores normal serialization/deserialization, since
+   * that will be handled by the multipart request spec
+   */
   Upload: any;
 };
 
@@ -2406,51 +2458,26 @@ export enum ValidationUnits {
   Year = 'YEAR'
 }
 
-export type GetDatasetsQueryVariables = Exact<{ [key: string]: never; }>;
+export type DatasetQueryQueryVariables = Exact<{
+  dataset_id?: InputMaybe<Scalars['Int']>;
+}>;
 
 
-export type GetDatasetsQuery = { __typename?: 'Query', all_datasets?: Array<{ __typename?: 'DatasetType', id: string, title: string, description: string } | null> | null };
+export type DatasetQueryQuery = { __typename?: 'Query', dataset?: { __typename?: 'DatasetType', id: string, title: string, description: string, issued: any, highlights?: Array<string | null> | null, remote_issued?: any | null, remote_modified?: any | null, period_from?: any | null, period_to?: any | null, update_frequency?: string | null, modified: any, tags: Array<{ __typename?: 'TagType', id: string, name: string }> } | null };
 
-export type GetPolicyQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetPolicyQuery = { __typename?: 'Query', all_policy?: Array<{ __typename?: 'PolicyType', id: string, title: string, description: string, issued: any, modified: any } | null> | null };
+export type AllDatasetsQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export const GetDatasetsDocument = gql`
-    query getDatasets {
-  all_datasets {
-    id
-    title
-    description
-  }
-}
-    `;
-export const GetPolicyDocument = gql`
-    query getPolicy {
-  all_policy {
-    id
-    title
-    description
-    issued
-    modified
-  }
-}
-    `;
+export type AllDatasetsQueryQuery = { __typename?: 'Query', all_datasets?: Array<{ __typename?: 'DatasetType', id: string, title: string, description: string } | null> | null };
 
-export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string, operationType?: string) => Promise<T>;
+export type Create_DatasetMutationVariables = Exact<{
+  dataset_data?: InputMaybe<CreateDatasetInput>;
+}>;
 
 
-const defaultWrapper: SdkFunctionWrapper = (action, _operationName, _operationType) => action();
+export type Create_DatasetMutation = { __typename?: 'Mutation', create_dataset?: { __typename?: 'CreateDataset', success?: boolean | null, errors?: any | null, dataset?: { __typename?: 'DatasetType', id: string, title: string, description: string, dataset_type: DatasetDatasetType } | null } | null };
 
-export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
-  return {
-    getDatasets(variables?: GetDatasetsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetDatasetsQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetDatasetsQuery>(GetDatasetsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getDatasets', 'query');
-    },
-    getPolicy(variables?: GetPolicyQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetPolicyQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetPolicyQuery>(GetPolicyDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getPolicy', 'query');
-    }
-  };
-}
-export type Sdk = ReturnType<typeof getSdk>;
+
+export const DatasetQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"datasetQuery"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"dataset_id"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"dataset"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"dataset_id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"dataset_id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"issued"}},{"kind":"Field","name":{"kind":"Name","value":"highlights"}},{"kind":"Field","name":{"kind":"Name","value":"remote_issued"}},{"kind":"Field","name":{"kind":"Name","value":"remote_modified"}},{"kind":"Field","name":{"kind":"Name","value":"period_from"}},{"kind":"Field","name":{"kind":"Name","value":"period_to"}},{"kind":"Field","name":{"kind":"Name","value":"update_frequency"}},{"kind":"Field","name":{"kind":"Name","value":"modified"}},{"kind":"Field","name":{"kind":"Name","value":"tags"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]}}]} as unknown as DocumentNode<DatasetQueryQuery, DatasetQueryQueryVariables>;
+export const AllDatasetsQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"allDatasetsQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"all_datasets"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]}}]} as unknown as DocumentNode<AllDatasetsQueryQuery, AllDatasetsQueryQueryVariables>;
+export const Create_DatasetDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"create_dataset"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"dataset_data"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"CreateDatasetInput"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"create_dataset"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"dataset_data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"dataset_data"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"success"}},{"kind":"Field","name":{"kind":"Name","value":"errors"}},{"kind":"Field","name":{"kind":"Name","value":"dataset"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"dataset_type"}}]}}]}}]}}]} as unknown as DocumentNode<Create_DatasetMutation, Create_DatasetMutationVariables>;

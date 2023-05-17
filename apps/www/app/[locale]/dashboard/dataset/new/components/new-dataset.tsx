@@ -1,5 +1,8 @@
+'use client';
+
 import React from 'react';
 import { useRouter } from 'next/navigation';
+import { graphql } from '@/gql';
 import { CreateDataset as Props } from '@/types';
 import {
   Box,
@@ -11,15 +14,32 @@ import {
   Text,
 } from '@opub-cdl/ui';
 import { IconSource } from '@opub-cdl/ui/dist/ts/components/Icon/Icon';
+import { useMutation } from '@tanstack/react-query';
 
+import { GraphQL } from '@/lib/api';
 import { Icons } from '@/components/icons';
 import { RadioCard } from '@/components/radio-card';
 import { DatasetForm } from '../../components/dataset-form';
 import styles from '../new.module.scss';
 
+const createDatasetMutation = graphql(`
+  mutation create_dataset($dataset_data: CreateDatasetInput) {
+    create_dataset(dataset_data: $dataset_data) {
+      success
+      errors
+      dataset {
+        id
+        title
+        description
+        dataset_type
+      }
+    }
+  }
+`);
+
 const defaultValBase: Props = {
   type: 'file',
-  name: '',
+  title: '',
   description: '',
   terms: false,
 };
@@ -31,14 +51,29 @@ export function CreateDataset({
   defaultVal?: Props;
   submitRef: React.RefObject<HTMLButtonElement>;
 }) {
-  const [val, setVal] = React.useState(defaultVal);
+  const [val, setVal] = React.useState<Props>(defaultVal || defaultValBase);
   const router = useRouter();
-
   const defaultValue = defaultVal || defaultValBase;
+
+  const { mutate } = useMutation(
+    () =>
+      GraphQL(createDatasetMutation, {
+        dataset_data: {
+          title: val.title,
+          description: val.description,
+        },
+      }),
+    {
+      onSuccess: (data: any) => {
+        console.log(data);
+      },
+    }
+  );
+
   return (
     <DatasetForm
-      onSubmit={() => {
-        router.push('/dashboard/dataset/1/edit/metadata');
+      onSubmit={(value) => {
+        mutate();
       }}
       formOptions={{ defaultValues: defaultValue }}
       onChange={(e) => {
@@ -70,7 +105,7 @@ export function CreateDataset({
           <Box paddingBlockStart="3">
             <FormLayout>
               <Input
-                name="name"
+                name="title"
                 label="Name of Dataset"
                 placeholder="example: Population of India"
                 maxLength={30}
