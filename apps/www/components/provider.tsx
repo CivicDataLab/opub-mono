@@ -8,7 +8,15 @@ import { SSRProvider } from 'react-aria';
 
 export default function Provider({ children }: { children: React.ReactNode }) {
   const [client] = React.useState(
-    new QueryClient({ defaultOptions: { queries: { staleTime: 5000 } } })
+    new QueryClient({
+      defaultOptions: {
+        queries: {
+          refetchOnMount: false,
+          refetchOnWindowFocus: false,
+          refetchOnReconnect: false,
+        },
+      },
+    })
   );
 
   return (

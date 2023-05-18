@@ -23,7 +23,6 @@ export const Page = () => {
   const { data } = useQuery(['all_datasets'], () =>
     GraphQL(allDatasetsQueryDoc)
   );
-  console.log(data);
 
   const router = useRouter();
   React.useEffect(() => {

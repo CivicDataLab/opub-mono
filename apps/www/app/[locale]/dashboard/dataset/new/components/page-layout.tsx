@@ -10,8 +10,8 @@ import { GraphQL } from '@/lib/api';
 import { ActionBar } from '../../components/action-bar';
 import { CreateDataset } from '../components/new-dataset';
 
-const createDatasetMutation = graphql(`
-  mutation create_dataset($dataset_data: CreateDatasetInput) {
+const createDatasetMutationDoc = graphql(`
+  mutation createDatasetMutation($dataset_data: CreateDatasetInput) {
     create_dataset(dataset_data: $dataset_data) {
       success
       errors
@@ -35,7 +35,7 @@ export const Page = () => {
 
   const { mutate, isLoading } = useMutation(
     (data: { dataset_data: CreateDatasetInput }) =>
-      GraphQL(createDatasetMutation, data),
+      GraphQL(createDatasetMutationDoc, data),
     {
       onSuccess: (data) => {
         router.push(

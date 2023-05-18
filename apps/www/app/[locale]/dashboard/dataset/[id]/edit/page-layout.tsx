@@ -3,29 +3,32 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import { graphql } from '@/gql';
-import { useQuery } from '@tanstack/react-query';
+import { PatchDatasetInput } from '@/gql/generated/graphql';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { GraphQL } from '@/lib/api';
 import { ActionBar } from '../../components/action-bar';
 import { EditDataset } from './components/EditDataset';
 
 const datasetQueryDoc = graphql(`
-  query datasetQuery($dataset_id: Int) {
+  query datasetEditQuery($dataset_id: Int) {
     dataset(dataset_id: $dataset_id) {
       id
       title
       description
-      issued
-      highlights
-      remote_issued
-      remote_modified
-      period_from
-      period_to
-      update_frequency
-      modified
-      tags {
+    }
+  }
+`);
+
+const patchDatasetMutationDoc = graphql(`
+  mutation patchDatasetMutation($dataset_data: PatchDatasetInput) {
+    patch_dataset(dataset_data: $dataset_data) {
+      success
+      errors
+      dataset {
         id
-        name
+        title
+        description
       }
     }
   }
@@ -35,10 +38,24 @@ export function EditPage({ params }: { params: { id: string } }) {
   const router = useRouter();
   const submitRef = React.useRef<HTMLButtonElement>(null);
 
-  const { data } = useQuery([`dataset_id_${params.id}`], () =>
+  const { data } = useQuery([`dataset_${params.id}`], () =>
     GraphQL(datasetQueryDoc, {
       dataset_id: Number(params.id),
     })
+  );
+
+  const queryClient = useQueryClient();
+  const { mutate, isLoading } = useMutation(
+    (data: { dataset_data: PatchDatasetInput }) =>
+      GraphQL(patchDatasetMutationDoc, data),
+    {
+      onSuccess: (data) => {
+        queryClient.invalidateQueries({ queryKey: [`dataset_${params.id}`] });
+        router.push(
+          `/dashboard/dataset/${data.patch_dataset?.dataset?.id}/edit/metadata`
+        );
+      },
+    }
   );
 
   React.useEffect(() => {
@@ -51,8 +68,7 @@ export function EditPage({ params }: { params: { id: string } }) {
         title={data?.dataset?.title || 'Untitled Dataset'}
         primaryAction={{
           content: 'Save & Next',
-          onAction: () =>
-            router.push(`/dashboard/dataset/${params.id}/edit/metadata`),
+          onAction: () => submitRef.current?.click(),
         }}
         secondaryAction={{
           content: 'Cancel',
@@ -62,6 +78,7 @@ export function EditPage({ params }: { params: { id: string } }) {
           link: `/dashboard/dataset`,
           content: 'My Datasets',
         }}
+        isLoading={isLoading}
       />
       <EditDataset
         submitRef={submitRef}
@@ -70,7 +87,10 @@ export function EditPage({ params }: { params: { id: string } }) {
           title: data?.dataset?.title || 'Untitled Dataset',
           description: data?.dataset?.description || '',
           terms: true,
+          id: params.id,
         }}
+        isLoading={isLoading}
+        mutate={mutate}
       />
     </>
   );

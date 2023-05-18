@@ -35,6 +35,14 @@ export type CreateDataset = {
   terms: boolean;
 };
 
+export type PatchDataset = {
+  type: string;
+  title: string;
+  description: string;
+  terms: boolean;
+  id: string;
+};
+
 export type EditDatasetProps = {
   source: string;
   created: string;
