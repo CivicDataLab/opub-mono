@@ -7,23 +7,11 @@ import styles from './edit.module.scss';
 import { EditPage } from './page-layout';
 
 const datasetQueryDoc = graphql(`
-  query datasetQuery($dataset_id: Int) {
+  query datasetEditQuery($dataset_id: Int) {
     dataset(dataset_id: $dataset_id) {
       id
       title
       description
-      issued
-      highlights
-      remote_issued
-      remote_modified
-      period_from
-      period_to
-      update_frequency
-      modified
-      tags {
-        id
-        name
-      }
     }
   }
 `);

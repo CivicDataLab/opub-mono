@@ -22,7 +22,7 @@ export async function GraphQL<TResult, TVariables>(
   return data;
 }
 
-// create a wrapper function for react-query to be used by server components
+// wrapper function for react-query to be used by server components
 export const getQueryClient = React.cache(
   () =>
     new QueryClient({

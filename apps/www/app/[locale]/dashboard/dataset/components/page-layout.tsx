@@ -23,12 +23,11 @@ export const Page = () => {
   const { data } = useQuery(['all_datasets'], () =>
     GraphQL(allDatasetsQueryDoc)
   );
-  console.log(data);
 
   const router = useRouter();
-  React.useEffect(() => {
-    router.prefetch('/dashboard/dataset/new');
-  }, []);
+  // React.useEffect(() => {
+  //   router.prefetch('/dashboard/dataset/new');
+  // }, []);
 
   return (
     <>

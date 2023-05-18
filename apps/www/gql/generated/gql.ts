@@ -13,9 +13,12 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
-    "\n  query datasetQuery($dataset_id: Int) {\n    dataset(dataset_id: $dataset_id) {\n      id\n      title\n      description\n      issued\n      highlights\n      remote_issued\n      remote_modified\n      period_from\n      period_to\n      update_frequency\n      modified\n      tags {\n        id\n        name\n      }\n    }\n  }\n": types.DatasetQueryDocument,
+    "\n  query datasetQuery($dataset_id: Int) {\n    dataset(dataset_id: $dataset_id) {\n      id\n      title\n      description\n      source\n      update_frequency\n      remote_issued\n      tags {\n        id\n        name\n      }\n    }\n  }\n": types.DatasetQueryDocument,
+    "\n  mutation updateDatasetMutation($dataset_data: UpdateDatasetInput) {\n    update_dataset(dataset_data: $dataset_data) {\n      success\n      errors\n      dataset {\n        id\n        title\n        description\n        remote_issued\n        update_frequency\n        source\n        tags {\n          id\n          name\n        }\n      }\n    }\n  }\n": types.UpdateDatasetMutationDocument,
+    "\n  query datasetEditQuery($dataset_id: Int) {\n    dataset(dataset_id: $dataset_id) {\n      id\n      title\n      description\n    }\n  }\n": types.DatasetEditQueryDocument,
+    "\n  mutation patchDatasetMutation($dataset_data: PatchDatasetInput) {\n    patch_dataset(dataset_data: $dataset_data) {\n      success\n      errors\n      dataset {\n        id\n        title\n        description\n      }\n    }\n  }\n": types.PatchDatasetMutationDocument,
     "\n  query allDatasetsQuery {\n    all_datasets {\n      id\n      title\n      description\n    }\n  }\n": types.AllDatasetsQueryDocument,
-    "\n  mutation create_dataset($dataset_data: CreateDatasetInput) {\n    create_dataset(dataset_data: $dataset_data) {\n      success\n      errors\n      dataset {\n        id\n        title\n        description\n        dataset_type\n      }\n    }\n  }\n": types.Create_DatasetDocument,
+    "\n  mutation createDatasetMutation($dataset_data: CreateDatasetInput) {\n    create_dataset(dataset_data: $dataset_data) {\n      success\n      errors\n      dataset {\n        id\n        title\n        description\n        dataset_type\n      }\n    }\n  }\n": types.CreateDatasetMutationDocument,
 };
 
 /**
@@ -35,7 +38,19 @@ export function graphql(source: string): unknown;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  query datasetQuery($dataset_id: Int) {\n    dataset(dataset_id: $dataset_id) {\n      id\n      title\n      description\n      issued\n      highlights\n      remote_issued\n      remote_modified\n      period_from\n      period_to\n      update_frequency\n      modified\n      tags {\n        id\n        name\n      }\n    }\n  }\n"): (typeof documents)["\n  query datasetQuery($dataset_id: Int) {\n    dataset(dataset_id: $dataset_id) {\n      id\n      title\n      description\n      issued\n      highlights\n      remote_issued\n      remote_modified\n      period_from\n      period_to\n      update_frequency\n      modified\n      tags {\n        id\n        name\n      }\n    }\n  }\n"];
+export function graphql(source: "\n  query datasetQuery($dataset_id: Int) {\n    dataset(dataset_id: $dataset_id) {\n      id\n      title\n      description\n      source\n      update_frequency\n      remote_issued\n      tags {\n        id\n        name\n      }\n    }\n  }\n"): (typeof documents)["\n  query datasetQuery($dataset_id: Int) {\n    dataset(dataset_id: $dataset_id) {\n      id\n      title\n      description\n      source\n      update_frequency\n      remote_issued\n      tags {\n        id\n        name\n      }\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  mutation updateDatasetMutation($dataset_data: UpdateDatasetInput) {\n    update_dataset(dataset_data: $dataset_data) {\n      success\n      errors\n      dataset {\n        id\n        title\n        description\n        remote_issued\n        update_frequency\n        source\n        tags {\n          id\n          name\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  mutation updateDatasetMutation($dataset_data: UpdateDatasetInput) {\n    update_dataset(dataset_data: $dataset_data) {\n      success\n      errors\n      dataset {\n        id\n        title\n        description\n        remote_issued\n        update_frequency\n        source\n        tags {\n          id\n          name\n        }\n      }\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query datasetEditQuery($dataset_id: Int) {\n    dataset(dataset_id: $dataset_id) {\n      id\n      title\n      description\n    }\n  }\n"): (typeof documents)["\n  query datasetEditQuery($dataset_id: Int) {\n    dataset(dataset_id: $dataset_id) {\n      id\n      title\n      description\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  mutation patchDatasetMutation($dataset_data: PatchDatasetInput) {\n    patch_dataset(dataset_data: $dataset_data) {\n      success\n      errors\n      dataset {\n        id\n        title\n        description\n      }\n    }\n  }\n"): (typeof documents)["\n  mutation patchDatasetMutation($dataset_data: PatchDatasetInput) {\n    patch_dataset(dataset_data: $dataset_data) {\n      success\n      errors\n      dataset {\n        id\n        title\n        description\n      }\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -43,7 +58,7 @@ export function graphql(source: "\n  query allDatasetsQuery {\n    all_datasets 
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  mutation create_dataset($dataset_data: CreateDatasetInput) {\n    create_dataset(dataset_data: $dataset_data) {\n      success\n      errors\n      dataset {\n        id\n        title\n        description\n        dataset_type\n      }\n    }\n  }\n"): (typeof documents)["\n  mutation create_dataset($dataset_data: CreateDatasetInput) {\n    create_dataset(dataset_data: $dataset_data) {\n      success\n      errors\n      dataset {\n        id\n        title\n        description\n        dataset_type\n      }\n    }\n  }\n"];
+export function graphql(source: "\n  mutation createDatasetMutation($dataset_data: CreateDatasetInput) {\n    create_dataset(dataset_data: $dataset_data) {\n      success\n      errors\n      dataset {\n        id\n        title\n        description\n        dataset_type\n      }\n    }\n  }\n"): (typeof documents)["\n  mutation createDatasetMutation($dataset_data: CreateDatasetInput) {\n    create_dataset(dataset_data: $dataset_data) {\n      success\n      errors\n      dataset {\n        id\n        title\n        description\n        dataset_type\n      }\n    }\n  }\n"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

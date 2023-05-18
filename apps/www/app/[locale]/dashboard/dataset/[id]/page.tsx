@@ -9,9 +9,9 @@ import { ActionBar } from '../components/action-bar';
 
 export default function Page({ params }: { params: { id: string } }) {
   const router = useRouter();
-  React.useEffect(() => {
-    router.prefetch(`/dashboard/dataset/${params.id}/edit`);
-  }, []);
+  // React.useEffect(() => {
+  //   router.prefetch(`/dashboard/dataset/${params.id}/edit`);
+  // }, []);
 
   // get demo data
   const data = testDataset[params.id];
