@@ -58,9 +58,9 @@ export function EditPage({ params }: { params: { id: string } }) {
     }
   );
 
-  React.useEffect(() => {
-    router.prefetch(`/dashboard/dataset/${params.id}/edit/metadata`);
-  }, []);
+  // React.useEffect(() => {
+  //   router.prefetch(`/dashboard/dataset/${params.id}/edit/metadata`);
+  // }, []);
 
   return (
     <>

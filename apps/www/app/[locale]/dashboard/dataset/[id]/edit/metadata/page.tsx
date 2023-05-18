@@ -12,14 +12,9 @@ const datasetQueryDoc = graphql(`
       id
       title
       description
-      issued
-      highlights
-      remote_issued
-      remote_modified
-      period_from
-      period_to
+      source
       update_frequency
-      modified
+      remote_issued
       tags {
         id
         name
@@ -30,7 +25,7 @@ const datasetQueryDoc = graphql(`
 
 export default async function Page({ params }: { params: { id: string } }) {
   const queryClient = getQueryClient();
-  await queryClient.prefetchQuery([`dataset_${params.id}`], () =>
+  await queryClient.prefetchQuery([`dataset_meta_${params.id}`], () =>
     GraphQL(datasetQueryDoc, {
       dataset_id: Number(params.id),
     })

@@ -1,6 +1,5 @@
 import React from 'react';
-import { useRouter } from 'next/navigation';
-import { EditDatasetProps } from '@/types';
+import { UpdateDatasetInput } from '@/gql/generated/graphql';
 import {
   Box,
   ComboboxMulti,
@@ -16,25 +15,32 @@ import { DatasetForm } from '../../../components/dataset-form';
 import styles from '../edit.module.scss';
 
 export function EditMetadata({
-  id,
   defaultVal,
   submitRef,
+  isLoading,
+  mutate,
 }: {
   id: string;
-  defaultVal: EditDatasetProps;
+  defaultVal: UpdateDatasetInput;
   submitRef: React.RefObject<HTMLButtonElement>;
+  isLoading: boolean;
+  mutate: (res: { dataset_data: UpdateDatasetInput }) => void;
 }) {
-  const [val, setVal] = React.useState(defaultVal);
-  const router = useRouter();
-
   return (
     <Box paddingBlockStart="6" maxWidth="944px">
       <DatasetForm
-        onSubmit={() => {
-          router.push(`/dashboard/dataset/${id}/edit/distribution`);
+        onSubmit={(value: UpdateDatasetInput) => {
+          mutate({
+            dataset_data: {
+              id: defaultVal.id,
+              source: value.source,
+              update_frequency: value.update_frequency,
+              tags_list: value.tags_list,
+              remote_issued: value.remote_issued,
+            },
+          });
         }}
         formOptions={{ defaultValues: defaultVal }}
-        onChange={setVal}
         submitRef={submitRef}
       >
         <div className={styles.EditDataset}>
@@ -60,9 +66,10 @@ export function EditMetadata({
                   autoComplete="off"
                   required
                   error="This field is required"
+                  readOnly={isLoading}
                 />
                 <Select
-                  name="frequency"
+                  name="update_frequency"
                   label="Update Frequency"
                   options={[
                     { label: 'Daily', value: 'daily' },
@@ -73,18 +80,20 @@ export function EditMetadata({
                   placeholder="Select an option"
                   required
                   error="This field is required"
+                  disabled={isLoading}
                 />
               </FormLayout.Group>
 
               <DatePicker
-                name="created"
+                name="remote_issued"
                 label="Date of Creation"
                 required
                 error="This field is required"
+                isDisabled={isLoading}
               />
               <Box maxWidth="480px">
                 <ComboboxMulti
-                  name="tags"
+                  name="tags_list"
                   label="Tags"
                   placeholder="Search Tags"
                   defaultList={[
@@ -98,6 +107,7 @@ export function EditMetadata({
                   verticalContent
                   required
                   error="This field is required"
+                  readOnly={isLoading}
                 />
               </Box>
             </FormLayout>

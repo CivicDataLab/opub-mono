@@ -37,7 +37,7 @@ export function ActionBar(props: Props) {
 
   React.useEffect(() => {
     if (!props.preFetch) return;
-    router.prefetch(props.preFetch);
+    // router.prefetch(props.preFetch);
   }, []);
 
   const backButton = props.previousPage && props.previousPage?.link && (

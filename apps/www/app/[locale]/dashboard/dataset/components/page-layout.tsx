@@ -25,9 +25,9 @@ export const Page = () => {
   );
 
   const router = useRouter();
-  React.useEffect(() => {
-    router.prefetch('/dashboard/dataset/new');
-  }, []);
+  // React.useEffect(() => {
+  //   router.prefetch('/dashboard/dataset/new');
+  // }, []);
 
   return (
     <>

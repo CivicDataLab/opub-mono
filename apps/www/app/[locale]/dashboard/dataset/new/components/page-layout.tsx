@@ -27,9 +27,9 @@ const createDatasetMutationDoc = graphql(`
 
 export const Page = () => {
   const router = useRouter();
-  React.useEffect(() => {
-    router.prefetch('/dashboard/dataset/1/edit/metadata');
-  }, []);
+  // React.useEffect(() => {
+  //   router.prefetch('/dashboard/dataset/1/edit/metadata');
+  // }, []);
 
   const submitRef = React.useRef<HTMLButtonElement>(null);
 

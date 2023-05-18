@@ -43,12 +43,11 @@ export type PatchDataset = {
   id: string;
 };
 
-export type EditDatasetProps = {
+export type EditMetaDatasetProps = {
   source: string;
   created: string;
   frequency: string;
   tags: string[];
-  terms: boolean;
 };
 
 export type EditDistributionProps = {
