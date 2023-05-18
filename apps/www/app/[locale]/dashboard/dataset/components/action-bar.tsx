@@ -26,6 +26,7 @@ interface Props {
     action?: () => void;
   };
   preFetch?: string;
+  isLoading?: boolean;
 }
 
 export function ActionBar(props: Props) {
@@ -81,6 +82,7 @@ export function ActionBar(props: Props) {
       <div className="sm:hidden">
         <Button
           primary
+          loading={props.isLoading}
           onClick={props.primaryAction?.onAction}
           connectedDisclosure={
             props.secondaryAction && {
@@ -99,11 +101,19 @@ export function ActionBar(props: Props) {
       <div className="hidden sm:block">
         <Box flex alignItems="center" gap="3">
           {props.secondaryAction && (
-            <Button plain onClick={props.secondaryAction.onAction}>
+            <Button
+              plain
+              disabled={props.isLoading}
+              onClick={props.secondaryAction.onAction}
+            >
               {props.secondaryAction.content}
             </Button>
           )}
-          <Button primary onClick={props.primaryAction.onAction}>
+          <Button
+            primary
+            loading={props.isLoading}
+            onClick={props.primaryAction.onAction}
+          >
             {props.primaryAction.content}
           </Button>
         </Box>

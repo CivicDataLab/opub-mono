@@ -1,8 +1,5 @@
-'use client';
-
 import React from 'react';
-import { useRouter } from 'next/navigation';
-import { graphql } from '@/gql';
+import { CreateDatasetInput } from '@/gql/generated/graphql';
 import { CreateDataset as Props } from '@/types';
 import {
   Box,
@@ -14,28 +11,11 @@ import {
   Text,
 } from '@opub-cdl/ui';
 import { IconSource } from '@opub-cdl/ui/dist/ts/components/Icon/Icon';
-import { useMutation } from '@tanstack/react-query';
 
-import { GraphQL } from '@/lib/api';
 import { Icons } from '@/components/icons';
 import { RadioCard } from '@/components/radio-card';
 import { DatasetForm } from '../../components/dataset-form';
 import styles from '../new.module.scss';
-
-const createDatasetMutation = graphql(`
-  mutation create_dataset($dataset_data: CreateDatasetInput) {
-    create_dataset(dataset_data: $dataset_data) {
-      success
-      errors
-      dataset {
-        id
-        title
-        description
-        dataset_type
-      }
-    }
-  }
-`);
 
 const defaultValBase: Props = {
   type: 'file',
@@ -47,33 +27,26 @@ const defaultValBase: Props = {
 export function CreateDataset({
   defaultVal,
   submitRef,
+  isLoading,
+  mutate,
 }: {
   defaultVal?: Props;
   submitRef: React.RefObject<HTMLButtonElement>;
+  isLoading: boolean;
+  mutate: (res: { dataset_data: CreateDatasetInput }) => void;
 }) {
-  const [val, setVal] = React.useState<Props>(defaultVal || defaultValBase);
-  const router = useRouter();
+  const [val, setVal] = React.useState<Props>();
   const defaultValue = defaultVal || defaultValBase;
-
-  const { mutate } = useMutation(
-    () =>
-      GraphQL(createDatasetMutation, {
-        dataset_data: {
-          title: val.title,
-          description: val.description,
-        },
-      }),
-    {
-      onSuccess: (data: any) => {
-        console.log(data);
-      },
-    }
-  );
 
   return (
     <DatasetForm
-      onSubmit={(value) => {
-        mutate();
+      onSubmit={(value: CreateDatasetInput) => {
+        mutate({
+          dataset_data: {
+            title: value.title,
+            description: value.description,
+          },
+        });
       }}
       formOptions={{ defaultValues: defaultValue }}
       onChange={(e) => {
@@ -113,6 +86,7 @@ export function CreateDataset({
                 autoComplete="off"
                 required
                 error="This field is required"
+                readOnly={isLoading}
               />
               <Input
                 name="description"
@@ -124,6 +98,7 @@ export function CreateDataset({
                 autoComplete="off"
                 required
                 error="This field is required"
+                readOnly={isLoading}
               />
             </FormLayout>
           </Box>
@@ -131,7 +106,12 @@ export function CreateDataset({
           <Box paddingBlockStart="8">
             <Text variant="headingMd">Terms & Conditions</Text>
             <Box paddingBlockStart="2">
-              <Checkbox name="terms" required error="This field is required">
+              <Checkbox
+                name="terms"
+                required
+                error="This field is required"
+                disabled={isLoading}
+              >
                 I agree to the terms and conditions as set out by the user
                 agreement. I state that I have read and understood the terms and
                 conditions.
