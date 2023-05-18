@@ -32,8 +32,8 @@ export function CreateDataset({
 }: {
   defaultVal?: Props;
   submitRef: React.RefObject<HTMLButtonElement>;
-  isLoading: boolean;
-  mutate: (res: { dataset_data: CreateDatasetInput }) => void;
+  isLoading?: boolean;
+  mutate?: (res: { dataset_data: CreateDatasetInput }) => void;
 }) {
   const [val, setVal] = React.useState<Props>();
   const defaultValue = defaultVal || defaultValBase;
@@ -41,12 +41,13 @@ export function CreateDataset({
   return (
     <DatasetForm
       onSubmit={(value: CreateDatasetInput) => {
-        mutate({
-          dataset_data: {
-            title: value.title,
-            description: value.description,
-          },
-        });
+        mutate &&
+          mutate({
+            dataset_data: {
+              title: value.title,
+              description: value.description,
+            },
+          });
       }}
       formOptions={{ defaultValues: defaultValue }}
       onChange={(e) => {
