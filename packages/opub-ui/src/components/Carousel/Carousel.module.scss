@@ -1,0 +1,43 @@
+@import '../../../styles/common';
+
+.Carousel {
+  position: relative;
+
+  .keen-slider__slide {
+    --t: opacity 0.5s var(--ease),
+      visibility 0.5s var(--ease);
+    transition: var(--t);
+
+    &[data-hidden='true'] {
+      visibility: hidden;
+      opacity: 0;
+    }
+
+    *[data-hidden='false'] {
+      visibility: visible;
+      opacity: 1;
+      transition: var(--t);
+    }
+  }
+
+}
+
+.CarouselPrevBtn {
+  border: medium none;
+  background: none;
+  cursor: pointer !important;
+  
+  svg {
+    transform: rotate(180deg);
+    filter: drop-shadow(var(--shadow-lg));
+  }
+}
+
+.CarouselNextBtn {
+  border: medium none;
+  background: none;
+  cursor: pointer !important;
+  filter: drop-shadow(var(--shadow-md));
+  position: absolute;
+  right: 0;
+}
