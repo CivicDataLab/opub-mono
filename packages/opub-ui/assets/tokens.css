@@ -260,6 +260,45 @@
   --z-12: 520;
 }
 
+/* Motion */
+@keyframes keyframes-bounce {
+  from,
+  65%,
+  85% {
+    transform: scale(1);
+  }
+  75% {
+    transform: scale(0.85);
+  }
+  82.5% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes fade-in {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes keyframes-pulse {
+  from,
+  75% {
+    transform: scale(0.85);
+    opacity: 1;
+  }
+  to {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+}
+
+@keyframes keyframes-spin {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
 :root {
   --duration-0: 0ms;
   --duration-50: 50ms;
@@ -279,4 +318,9 @@
   --ease-out: cubic-bezier(0, 0, 0.58, 1);
   --ease-in-out: cubic-bezier(0.42, 0, 0.58, 1);
   --linear: cubic-bezier(0, 0, 1, 1);
+
+  --keyframes-bounce: keyframes-bounce;
+  --keyframes-fade-in: keyframes-fade-in;
+  --keyframes-pulse: keyframes-pulse;
+  --keyframes-spin: keyframes-spin;
 }

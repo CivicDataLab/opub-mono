@@ -4,9 +4,7 @@ import React from 'react';
 import { useRouter } from 'next/navigation';
 import { graphql } from '@/gql';
 import { ResourceInput } from '@/gql/generated/graphql';
-import { useMutation, useQuery } from '@apollo/client';
-
-// import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { GraphQL } from '@/lib/api';
 import { ActionBar } from '../../../components/action-bar';
@@ -66,18 +64,27 @@ export function DistibutionPage({ params }: { params: { id: string } }) {
   const router = useRouter();
   const submitRef = React.useRef<HTMLButtonElement>(null);
 
-  const { data } = useQuery(datasetDistributionQueryDoc, {
-    variables: { dataset_id: Number(params.id) },
-    // dataset_id: Number(params.id),
-  });
-  console.log(data);
+  const { data } = useQuery([`dataset_distribution_${params.id}`], () =>
+    GraphQL(datasetDistributionQueryDoc, {
+      dataset_id: Number(params.id),
+    })
+  );
 
-  // const queryClient = useQueryClient();
-  const [mutate, { loading }] = useMutation(createResourceMutationDoc);
-
-  // React.useEffect(() => {
-  //   router.prefetch(`/dashboard/dataset/${params.id}/edit/distribution`);
-  // }, []);
+  const queryClient = useQueryClient();
+  const { mutate, isLoading } = useMutation(
+    (data: { resource_data: ResourceInput }) =>
+      GraphQL(createResourceMutationDoc, data),
+    {
+      onSuccess: (data) => {
+        queryClient.invalidateQueries({
+          queryKey: [`dataset_distribution_${params.id}`],
+        });
+        // router.push(
+        //   `/dashboard/dataset/${data.create_resource?.resource?.dataset?.id}/edit/distribution`
+        // );
+      },
+    }
+  );
 
   return (
     <>
@@ -95,7 +102,7 @@ export function DistibutionPage({ params }: { params: { id: string } }) {
           link: `dashboard/dataset/${params.id}/edit/metadata`,
           content: 'Edit Metadata',
         }}
-        isLoading={loading}
+        isLoading={isLoading}
       />
       <EditDistribution
         submitRef={submitRef}
@@ -104,7 +111,7 @@ export function DistibutionPage({ params }: { params: { id: string } }) {
           id: params.id,
           resources: data?.dataset?.resource_set || [],
         }}
-        isLoading={loading}
+        isLoading={isLoading}
         mutate={mutate}
       />
     </>

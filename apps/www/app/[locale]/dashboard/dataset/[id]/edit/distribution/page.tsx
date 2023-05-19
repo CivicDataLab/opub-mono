@@ -32,19 +32,19 @@ const datasetDistributionQueryDoc = graphql(`
 `);
 
 export default async function Page({ params }: { params: { id: string } }) {
-  // const queryClient = getQueryClient();
-  // await queryClient.prefetchQuery([`dataset_distribution_${params.id}`], () =>
-  //   GraphQL(datasetDistributionQueryDoc, {
-  //     dataset_id: Number(params.id),
-  //   })
-  // );
-  // const dehydratedState = dehydrate(queryClient);
+  const queryClient = getQueryClient();
+  await queryClient.prefetchQuery([`dataset_distribution_${params.id}`], () =>
+    GraphQL(datasetDistributionQueryDoc, {
+      dataset_id: Number(params.id),
+    })
+  );
+  const dehydratedState = dehydrate(queryClient);
 
   return (
-    <>
+    <Hydrate state={dehydratedState}>
       <div className={styles.EditPage}>
         <DistibutionPage params={params} />
       </div>
-    </>
+    </Hydrate>
   );
 }

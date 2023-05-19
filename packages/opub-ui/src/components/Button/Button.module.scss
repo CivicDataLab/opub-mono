@@ -54,9 +54,9 @@
   }
 
   &.pressed {
-    background: var(--surface-depressed);
-    box-shadow: var(--shadows-inset-button-pressed);
-    color: var(--text-on-primary);
+    background: var(--surface-pressed);
+    box-shadow: var(--shadow-inset-button-pressed);
+    color: var(--text);
     border-color: var(--border-depressed);
 
     @include recolor-icon(currentColor);
@@ -146,7 +146,7 @@
     border: var(--border-width-1) solid var(--border-depressed);
     box-shadow: none;
 
-    color: var(--text-on-primary);
+    color: var(--text);
   }
 
   &.disabled {

@@ -11,7 +11,6 @@ import {
 } from '@opub-cdl/ui';
 import { IconFile } from '@tabler/icons-react';
 
-import { blobToBase64 } from '@/lib/utils';
 import { DatasetForm } from '../../../components/dataset-form';
 import styles from '../edit.module.scss';
 
@@ -32,10 +31,8 @@ export function EditDistribution({
   };
   submitRef: React.RefObject<HTMLButtonElement>;
   isLoading: boolean;
-  mutate: (res: { variables: { resource_data: ResourceInput } }) => void;
+  mutate: (res: { resource_data: ResourceInput }) => void;
 }) {
-  // const [val, setVal] = React.useState(defaultVal);
-  // TODO fix file upload graphql
   return (
     <Box paddingBlockStart="6" maxWidth="944px">
       <DatasetForm
@@ -45,15 +42,13 @@ export function EditDistribution({
           file_details: FileInputType['file'];
         }) => {
           mutate({
-            variables: {
-              resource_data: {
-                dataset: defaultVal.id,
-                status: 'DRAFT',
-                title: data.title,
-                description: data.description,
-                file_details: {
-                  file: data.file_details[0],
-                },
+            resource_data: {
+              dataset: defaultVal.id,
+              status: 'DRAFT',
+              title: data.title,
+              description: data.description,
+              file_details: {
+                file: data.file_details[0],
               },
             },
           });
