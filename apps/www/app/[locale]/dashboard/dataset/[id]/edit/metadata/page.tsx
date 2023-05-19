@@ -35,7 +35,7 @@ export default async function Page({ params }: { params: { id: string } }) {
   return (
     <Hydrate state={dehydratedState}>
       <div className={styles.EditPage}>
-        <MetadataPage params={params} query={datasetQueryDoc} />
+        <MetadataPage params={params} />
       </div>
     </Hydrate>
   );

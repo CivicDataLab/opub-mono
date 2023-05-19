@@ -1,5 +1,5 @@
 import React from 'react';
-import { EditDistributionProps } from '@/types';
+import { FileInputType, ResourceInput } from '@/gql/generated/graphql';
 import {
   Box,
   Divider,
@@ -11,26 +11,55 @@ import {
 } from '@opub-cdl/ui';
 import { IconFile } from '@tabler/icons-react';
 
+import { blobToBase64 } from '@/lib/utils';
 import { DatasetForm } from '../../../components/dataset-form';
 import styles from '../edit.module.scss';
 
 export function EditDistribution({
   defaultVal,
   submitRef,
+  isLoading,
+  mutate,
 }: {
-  defaultVal: EditDistributionProps;
+  id: string;
+  defaultVal: {
+    id: string;
+    resources: {
+      title: string;
+      description: string;
+      file_details?: any;
+    }[];
+  };
   submitRef: React.RefObject<HTMLButtonElement>;
+  isLoading: boolean;
+  mutate: (res: { variables: { resource_data: ResourceInput } }) => void;
 }) {
-  const [val, setVal] = React.useState(defaultVal);
-
+  // const [val, setVal] = React.useState(defaultVal);
+  // TODO fix file upload graphql
   return (
     <Box paddingBlockStart="6" maxWidth="944px">
       <DatasetForm
-        onSubmit={() => {
-          alert('form submitted');
+        onSubmit={async (data: {
+          title: string;
+          description: string;
+          file_details: FileInputType['file'];
+        }) => {
+          mutate({
+            variables: {
+              resource_data: {
+                dataset: defaultVal.id,
+                status: 'DRAFT',
+                title: data.title,
+                description: data.description,
+                file_details: {
+                  file: data.file_details[0],
+                },
+              },
+            },
+          });
         }}
         formOptions={{ defaultValues: defaultVal }}
-        onChange={setVal}
+        // onChange={setVal}
         submitRef={submitRef}
       >
         <div className={styles.EditDataset}>
@@ -46,7 +75,11 @@ export function EditDistribution({
 
           <Box paddingBlockStart="3">
             <FormLayout>
-              <FileUpload required error="This field is required" />
+              <FileUpload
+                disabled={isLoading}
+                required
+                error="This field is required"
+              />
               <Input
                 name="title"
                 label="Title"
@@ -55,6 +88,7 @@ export function EditDistribution({
                 autoComplete="off"
                 required
                 error="This field is required"
+                readOnly={isLoading}
               />
               <Input
                 name="description"
@@ -65,6 +99,7 @@ export function EditDistribution({
                 autoComplete="off"
                 required
                 error="This field is required"
+                readOnly={isLoading}
               />
             </FormLayout>
           </Box>
@@ -77,9 +112,11 @@ export function EditDistribution({
 const FileUpload = ({
   required,
   error,
+  disabled,
 }: {
   required?: boolean;
   error?: string;
+  disabled?: boolean;
 }) => {
   const [file, setFile] = React.useState<File>();
 
@@ -120,10 +157,9 @@ const FileUpload = ({
         />
 
         <div>
-        <Text variant="bodySm" as="p">
-          {file.name}
-          </Text>
-          {' '}
+          <Text variant="bodySm" as="p">
+            {file.name}
+          </Text>{' '}
           <Text variant="bodySm" as="p">
             {file.size} bytes
           </Text>
@@ -134,12 +170,13 @@ const FileUpload = ({
 
   return (
     <DropZone
-      name="file"
+      name="file_details"
       required={required}
       errorOverlayText={error}
       allowMultiple={false}
       label="Upload"
       onChange={handleDropZoneDrop}
+      disabled={disabled}
     >
       {uploadedFile}
       {fileUpload}

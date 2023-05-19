@@ -1,50 +1,50 @@
-'use client';
+import { graphql } from '@/gql';
+import { Hydrate } from '@/lib';
+import { dehydrate } from '@tanstack/react-query';
 
-import React from 'react';
-import { notFound, useRouter } from 'next/navigation';
-
-import { testDataset } from '@/config/dashboard';
-import { ActionBar } from '../../../components/action-bar';
-import { EditDistribution } from '../components/EditDistribution';
+import { GraphQL, getQueryClient } from '@/lib/api';
 import styles from '../edit.module.scss';
+import { DistibutionPage } from './page-layout';
 
-export default function Page({ params }: { params: { id: string } }) {
-  const router = useRouter();
-  const submitRef = React.useRef<HTMLButtonElement>(null);
-
-  // get demo data
-  const data = testDataset[params.id];
-  if (!data) {
-    notFound();
+const datasetDistributionQueryDoc = graphql(`
+  query datasetDistributionQuery($dataset_id: Int) {
+    dataset(dataset_id: $dataset_id) {
+      id
+      title
+      resource_set {
+        id
+        title
+        description
+        file_details {
+          resource {
+            id
+            title
+            description
+          }
+          format
+          file
+          remote_url
+          source_file_name
+        }
+      }
+    }
   }
+`);
+
+export default async function Page({ params }: { params: { id: string } }) {
+  // const queryClient = getQueryClient();
+  // await queryClient.prefetchQuery([`dataset_distribution_${params.id}`], () =>
+  //   GraphQL(datasetDistributionQueryDoc, {
+  //     dataset_id: Number(params.id),
+  //   })
+  // );
+  // const dehydratedState = dehydrate(queryClient);
 
   return (
-    <div className={styles.EditPage}>
-      <ActionBar
-        title={data.name}
-        primaryAction={{
-          content: 'Save Dataset',
-          onAction: () => {
-            submitRef.current?.click();
-          },
-        }}
-        secondaryAction={{
-          content: 'Cancel',
-          onAction: () => router.push('/dashboard/dataset'),
-        }}
-        previousPage={{
-          link: `/dashboard/dataset/${params.id}/edit/metadata`,
-          content: 'Edit Metadata',
-        }}
-      />
-      <EditDistribution
-        submitRef={submitRef}
-        defaultVal={{
-          title: '',
-          description: '',
-          file: undefined,
-        }}
-      />
-    </div>
+    <>
+      <div className={styles.EditPage}>
+        <DistibutionPage params={params} />
+      </div>
+    </>
   );
 }
