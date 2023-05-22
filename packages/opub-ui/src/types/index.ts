@@ -17,14 +17,15 @@ export type {
 export type { CheckboxProps } from './checkbox';
 export type { CheckboxGroupProps, ChoiceProps } from './choicelist';
 export type { CodeBlockProps } from './code';
+export type { CollapsibleProps } from './collapsible';
 export type { ComboboxSingleProps } from './combobox';
 export type {
   ColumnContentType,
   ColumnVisibilityData,
   DataTableProps,
-  DataTableState,
-  IndexTableProps,
   SortDirection,
+  TableProps,
+  TableState,
   VerticalAlign,
 } from './datatable';
 export type { DateTimeProps } from './datetime';
@@ -43,4 +44,3 @@ export * from './shared/key';
 export type { TagProps } from './tag';
 export type { TextProps, VariantFontWeightMapping } from './text';
 export type { TooltipProps, TooltipProviderProps } from './tooltip';
-export type { CollapsibleProps } from './collapsible';

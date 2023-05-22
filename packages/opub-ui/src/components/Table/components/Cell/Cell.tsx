@@ -1,14 +1,14 @@
+import { SortDirection } from '../../../../types/datatable';
+import { Icon } from '../../../Icon';
+import { Text } from '../../../Text';
+import { Tooltip } from '../../../Tooltip';
+import styles from '../../Table.module.scss';
 import {
   SortAscendingMajor,
   SortDescendingMajor,
 } from '@shopify/polaris-icons';
-import { Icon } from '../../../Icon';
-import { Text } from '../../../Text';
-import { Tooltip } from '../../../Tooltip';
-import { SortDirection } from '../../../../types/datatable';
 import cx from 'classnames';
 import React from 'react';
-import styles from '../../IndexTable.module.scss';
 
 function SortButton({
   column,
@@ -40,7 +40,7 @@ function SortButton({
 
   const iconMarkup = (
     <span className={iconClassName}>
-      <Icon source={source} accessibilityLabel={a11ylabel} />
+      <Icon color="base" source={source} accessibilityLabel={a11ylabel} />
     </span>
   );
 
@@ -50,9 +50,7 @@ function SortButton({
       onClick={column.getToggleSortingHandler()}
     >
       {iconMarkup}
-      <Text variant="bodySm" color="subdued" fontWeight="medium">
-        {text}
-      </Text>
+      <Text variant="bodyMd">{text}</Text>
     </button>
   ) : null;
 }
@@ -86,9 +84,7 @@ export const HeaderCell = ({
           defaultSortDirection={defaultSortDirection}
         />
       ) : (
-        <Text variant="bodySm" color="subdued" fontWeight="medium">
-          {text}
-        </Text>
+        <Text variant="bodyMd">{text}</Text>
       )}
     </th>
   );
@@ -144,7 +140,7 @@ const TruncatedText = ({
   return current?.scrollWidth > current?.offsetWidth ? (
     <Tooltip.Provider>
       <Tooltip delayDuration={0} content={textRef.current.innerText}>
-        {text}
+        <Text variant="bodyMd">{text}</Text>
       </Tooltip>
     </Tooltip.Provider>
   ) : (

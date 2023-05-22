@@ -1,7 +1,8 @@
-import React from 'react';
+import { UnstyledLink } from './BaseLink';
 import styles from './Link.module.scss';
 import cx from 'classnames';
-import { UnstyledLink } from './BaseLink';
+import React from 'react';
+
 export interface LinkProps {
   /** ID for the link */
   id?: string;
@@ -19,7 +20,7 @@ export interface LinkProps {
   onClick?(): void;
   /** Descriptive text to be read to screenreaders */
   accessibilityLabel?: string;
-  /** Indicates whether or not the link is the primary navigation link when rendered inside of an `IndexTable.Row` */
+  /** Indicates whether or not the link is the primary navigation link when rendered inside of an `DataTable.Row` */
   dataPrimaryLink?: boolean;
 }
 

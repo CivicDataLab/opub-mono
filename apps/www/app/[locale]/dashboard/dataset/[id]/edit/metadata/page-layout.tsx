@@ -48,12 +48,7 @@ const updateDatasetMutationDoc = graphql(`
   }
 `);
 
-export function MetadataPage({
-  params,
-}: {
-  params: { id: string };
-  query: any;
-}) {
+export function MetadataPage({ params }: { params: { id: string } }) {
   const router = useRouter();
   const submitRef = React.useRef<HTMLButtonElement>(null);
 

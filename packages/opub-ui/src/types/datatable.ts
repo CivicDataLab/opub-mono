@@ -10,7 +10,7 @@ export interface ColumnVisibilityData {
   index: number;
 }
 
-export interface DataTableState {
+export interface TableState {
   condensed: boolean;
   columnVisibilityData: ColumnVisibilityData[];
   previousColumn?: ColumnVisibilityData;
@@ -22,7 +22,7 @@ export interface DataTableState {
   rowHovered: number | undefined;
 }
 
-export interface DataTableProps {
+export interface TableProps {
   /** List of data types, which determines content alignment for each column. Data types are "text," which aligns left, or "numeric," which aligns right. */
   columnContentTypes: ColumnContentType[];
   /** List of column headers. */
@@ -54,7 +54,7 @@ export interface DataTableProps {
   stickyHeader?: boolean;
 }
 
-export type IndexTableProps = DataTableProps & {
+export type DataTableProps = TableProps & {
   /** Callback function to run on row selection  */
   onRowSelectionChange?(selectedRows: any): void;
   /** Default selected rows  */

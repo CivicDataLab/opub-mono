@@ -1,2 +1,2 @@
 export { HeaderCell, Cell } from './Cell';
-export { Row } from './Row';
+export { Footer } from './Footer/Footer';

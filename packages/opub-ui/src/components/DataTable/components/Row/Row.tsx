@@ -1,7 +1,7 @@
 import { Checkbox } from '../../../Checkbox';
+import styles from '../../DataTable.module.scss';
 import cx from 'classnames';
 import React from 'react';
-import styles from '../../IndexTable.module.scss';
 
 type Props = {
   children: React.ReactNode;

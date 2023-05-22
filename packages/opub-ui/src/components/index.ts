@@ -12,7 +12,7 @@ export { Code } from './Code';
 export { CodeBlock } from './CodeBlock';
 export { Collapsible } from './Collapsible';
 export { Connected } from './Connected';
-export { DataTable } from './DataTable';
+export { Table } from './Table';
 export { Dialog } from './Dialog';
 export { Divider } from './Divider';
 export {
@@ -34,7 +34,7 @@ export {
 } from './Form';
 export { FormLayout } from './FormLayout';
 export { Icon } from './Icon';
-export { IndexTable } from './IndexTable';
+export { DataTable } from './DataTable';
 export { InlineMessage } from './InlineMessage';
 export { Label } from './Label';
 export { Labelled } from './Labelled';
