@@ -1,13 +1,13 @@
+import { SortDirection } from '../../../../types/datatable';
+import { Icon } from '../../../Icon';
+import { Tooltip } from '../../../Tooltip';
+import styles from '../../Table.module.scss';
 import {
   SortAscendingMajor,
   SortDescendingMajor,
 } from '@shopify/polaris-icons';
-import { Icon } from '../../../Icon';
-import { Tooltip } from '../../../Tooltip';
-import { SortDirection } from '../../../../types/datatable';
 import cx from 'classnames';
 import React from 'react';
-import styles from '../../DataTable.module.scss';
 
 function SortButton({
   column,
@@ -39,7 +39,7 @@ function SortButton({
 
   const iconMarkup = (
     <span className={iconClassName}>
-      <Icon source={source} accessibilityLabel={a11ylabel} />
+      <Icon color="base" source={source} accessibilityLabel={a11ylabel} />
     </span>
   );
 

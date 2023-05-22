@@ -1,7 +1,7 @@
 'use client';
 
 import type { TableProps } from '../../types/datatable';
-import styles from './DataTable.module.scss';
+import styles from './Table.module.scss';
 import { Cell, HeaderCell } from './components';
 import {
   flexRender,

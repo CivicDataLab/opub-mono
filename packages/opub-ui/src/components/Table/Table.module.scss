@@ -6,11 +6,9 @@
   max-width: 100vw;
   background-color: var(--surface);
   border-radius: var(--border-radius-2);
-  // overflow: hidden;
 }
 
 .ScrollContainer {
-  // overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   scroll-behavior: smooth;
   background-color: inherit;
@@ -155,6 +153,10 @@
 
     .Icon {
       opacity: 1;
+
+      svg {
+        fill: var(--icon-disabled);
+      }
     }
   }
 
