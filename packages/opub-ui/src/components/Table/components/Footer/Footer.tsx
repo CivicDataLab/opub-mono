@@ -65,6 +65,9 @@ export const Footer = ({
           setPageIndex={table.setPageIndex}
         />
       </div>
+      <div className={styles.PaginationItemsMobile}>
+        <Text variant="bodyMd">{`Page 1 of 8`}</Text>
+      </div>
       <button
         className={styles.Button}
         onClick={() => table.nextPage()}

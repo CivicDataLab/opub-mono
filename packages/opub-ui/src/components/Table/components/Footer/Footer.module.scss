@@ -2,25 +2,40 @@
 
 .Footer {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+
   width: 100%;
-  padding: var(--space-6) var(--space-8);
   background-color: var(--surface-subdued);
   border-radius: 0 0 var(--border-radius-2) var(--border-radius-2);
   border-top: var(--border-divider);
+  padding: var(--space-4) var(--space-6);
+
+  @media #{$breakpoints-md-up} {
+    padding: var(--space-6) var(--space-8);
+  }
+
+  @media #{$breakpoints-sm-up} {
+    justify-content: space-between;
+  }
 }
 
 .Pagination {
   display: flex;
   align-items: center;
-  gap: var(--space-3);
+
+  @media #{$breakpoints-md-up} {
+    gap: var(--space-3);
+  }
 }
 
 .PaginationItems {
   display: flex;
   align-items: center;
   gap: var(--space-1);
+  display: none;
 
   button {
     padding: var(--space-1) var(--space-3);
@@ -28,6 +43,21 @@
     &[aria-selected='true'] {
       background-color: var(--surface-depressed);
     }
+  }
+
+  @media #{$breakpoints-md-up} {
+    display: block;
+  }
+}
+
+.PaginationItemsMobile {
+  display: none;
+  @media #{$breakpoints-sm-up} {
+    display: block;
+  }
+
+  @media #{$breakpoints-md-up} {
+    display: none;
   }
 }
 
