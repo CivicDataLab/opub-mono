@@ -1,14 +1,14 @@
+import { SortDirection } from '../../../../types/datatable';
+import { Icon } from '../../../Icon';
+import { Text } from '../../../Text';
+import { Tooltip } from '../../../Tooltip';
+import styles from '../../DataTable.module.scss';
 import {
   SortAscendingMajor,
   SortDescendingMajor,
 } from '@shopify/polaris-icons';
-import { Icon } from '../../../Icon';
-import { Text } from '../../../Text';
-import { Tooltip } from '../../../Tooltip';
-import { SortDirection } from '../../../../types/datatable';
 import cx from 'classnames';
 import React from 'react';
-import styles from '../../IndexTable.module.scss';
 
 function SortButton({
   column,
