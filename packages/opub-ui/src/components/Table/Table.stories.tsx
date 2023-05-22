@@ -1,5 +1,8 @@
+import { Link } from '../Link';
+import { Table } from './Table';
 import { Meta, StoryObj } from '@storybook/react';
-import { createColumnHelper, IndexTable } from './IndexTable';
+import { createColumnHelper } from '@tanstack/react-table';
+import React, { useState } from 'react';
 
 /**
  * Data tables are used to organize and display all information from a data set.
@@ -7,8 +10,8 @@ import { createColumnHelper, IndexTable } from './IndexTable';
  * Reference: https://tanstack.com/table/v8/docs/guide/introduction
  */
 const meta = {
-  component: IndexTable,
-} satisfies Meta<typeof IndexTable>;
+  component: Table,
+} satisfies Meta<typeof Table>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -24,6 +27,18 @@ type Person = {
 
 const tableData: Person[] = [
   {
+    firstName: (
+      <Link url="#" removeUnderline>
+        Goodman
+      </Link>
+    ),
+    lastName: 'Linsley',
+    age: 24,
+    visits: 100,
+    status: 'In Relationship',
+    progress: 50,
+  },
+  {
     firstName: 'Tandy',
     lastName: 'Miller',
     age: 40,
@@ -39,7 +54,18 @@ const tableData: Person[] = [
     status: 'Complicated',
     progress: 10,
   },
-
+  {
+    firstName: (
+      <Link url="#" removeUnderline>
+        Goodman
+      </Link>
+    ),
+    lastName: 'Linsley',
+    age: 24,
+    visits: 100,
+    status: 'In Relationship',
+    progress: 50,
+  },
   {
     firstName: 'Tandy',
     lastName: 'Miller',
@@ -56,7 +82,18 @@ const tableData: Person[] = [
     status: 'Complicated',
     progress: 10,
   },
-
+  {
+    firstName: (
+      <Link url="#" removeUnderline>
+        Goodman
+      </Link>
+    ),
+    lastName: 'Linsley',
+    age: 24,
+    visits: 100,
+    status: 'In Relationship',
+    progress: 50,
+  },
   {
     firstName: 'Tandy',
     lastName: 'Miller',
@@ -211,14 +248,16 @@ const columnsSort = [
 
 export const Sortable: Story = {
   render: ({ ...args }) => {
+    const [sortedRows, setSortedRows] = useState<any>(null);
+
     return (
-      <IndexTable
+      <Table
         {...args}
         sortable={true}
         defaultSortDirection="desc"
         initialSortColumnIndex={4}
         // onSort={handleSort}
-        rows={tableData}
+        rows={sortedRows || tableData}
       />
     );
   },
@@ -227,26 +266,5 @@ export const Sortable: Story = {
     columnContentTypes: columnContentTypes,
     rows: tableData,
     columns: columnsSort,
-  },
-};
-
-export const SelectionAcrossPages: Story = {
-  render: ({ ...args }) => {
-    return (
-      <IndexTable
-        {...args}
-        sortable={true}
-        defaultSortDirection="desc"
-        initialSortColumnIndex={4}
-        rows={tableData}
-      />
-    );
-  },
-
-  args: {
-    columnContentTypes: columnContentTypes,
-    rows: tableData,
-    columns: columnsSort,
-    hasMoreItems: true,
   },
 };

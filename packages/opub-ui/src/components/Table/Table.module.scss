@@ -6,9 +6,11 @@
   max-width: 100vw;
   background-color: var(--surface);
   border-radius: var(--border-radius-2);
+  // overflow: hidden;
 }
 
 .ScrollContainer {
+  // overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   scroll-behavior: smooth;
   background-color: inherit;
@@ -20,91 +22,32 @@
   border-collapse: separate;
   font-size: var(--font-size-100);
   position: relative;
-
-  thead {
-    &.ItemsSelected {
-      z-index: -1;
-      opacity: 0;
-    }
-  }
 }
 
 .TableHeaderRow {
-  background-color: var(--surface-subdued);
-
   .Header-Sticky {
     position: sticky;
     top: 0;
     z-index: 1;
-    background-color: var(--surface-subdued);
-  }
-}
-
-.SelectedWrapper {
-  display: none;
-  background-color: var(--surface);
-  position: absolute;
-  top: 0;
-
-  &.ItemsSelected {
-    display: flex;
-    align-items: center;
-    gap: var(--space-6);
-    z-index: 1;
-  }
-
-  .SelectAllButton {
-    @include unstyled-button;
-    @include focus-ring;
-    color: var(--interactive);
-    font-weight: var(--font-weight-semibold);
-    margin-left: var(--space-2);
-
-    &:hover {
-      color: var(--interactive-hovered);
-    }
-
-    &:focus-visible:not(:active) {
-      @include focus-ring($style: 'focused');
-    }
+    background-color: var(--surface);
   }
 }
 
 .TableRow {
   &.Hoverable {
-    transition: background-color var(--duration-50) var(--ease-in-out);
+    transition: background-color var(--duration-200) var(--ease-in-out);
 
-    &:hover {
-      background-color: var(--surface-hovered);
-    }
-
-    &.TableRow-selected {
+    &.TableBodyRow {
       &:hover {
-        background-color: var(--surface-selected-hovered);
-      }
-    }
-
-    &.TableHeaderRow {
-      &:hover {
-        background-color: var(--surface-subdued);
+        background-color: var(--surface-hovered);
       }
     }
   }
 
-  .Cell {
-    border-top: var(--border-divider);
-
-    &:nth-child(2) {
-      padding-left: 0;
+  + .TableRow {
+    .Cell {
+      border-top: var(--border-divider);
     }
-  }
-
-  &-selectable {
-    cursor: pointer;
-  }
-
-  &-selected {
-    background-color: var(--surface-selected);
   }
 }
 
@@ -118,40 +61,43 @@
   .IncreasedTableDensity & {
     padding: var(--space-2) var(--space-4);
   }
+}
 
-  &.Cell-header {
-    font-weight: var(--font-weight-regular);
-    color: var(--text);
-    border-top: 0;
+.Cell-header {
+  font-weight: var(--font-weight-regular);
+  color: var(--text);
+  border-bottom: var(--border-divider);
+  border-top: 0;
 
-    .IncreasedTableDensity & {
-      font-weight: var(--font-weight-medium);
-      font-size: var(--font-size-75);
+  .IncreasedTableDensity & {
+    font-weight: var(--font-weight-medium);
+    font-size: var(--font-size-75);
+  }
+}
+
+.Cell-sortable {
+  padding: 0;
+
+  button {
+    padding: var(--space-2);
+    margin: var(--space-2);
+  }
+
+  .IncreasedTableDensity & {
+    padding: var(--space-2) var(--space-3);
+
+    &:first-of-type {
+      padding-left: var(--space-3);
+    }
+
+    &:last-child {
+      padding-right: var(--space-3);
     }
   }
 
-  &.Cell-sortable {
-    padding: 0;
-
-    .IncreasedTableDensity & {
-      padding: var(--space-2) var(--space-3);
-
-      &:nth-child(2) {
-        padding-left: 0;
-      }
-
-      &:first-of-type {
-        padding-left: var(--space-3);
-      }
-
-      &:last-child {
-        padding-right: var(--space-3);
-      }
-    }
-
-    .IncreasedTableDensity & .Heading-left {
-      padding-right: 0;
-    }
+  .IncreasedTableDensity & .Heading-left {
+    padding-right: 0;
+    padding-left: var(--space-1);
   }
 }
 
@@ -209,10 +155,6 @@
 
     .Icon {
       opacity: 1;
-    }
-
-    span {
-      color: var(--interactive-hovered);
     }
   }
 
@@ -294,23 +236,4 @@
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-}
-
-.Checkbox {
-  &.Cell {
-    padding: 0;
-    padding-left: var(--space-4);
-  }
-
-  > div {
-    margin: 0;
-    --gap: 0px;
-    padding: 0;
-    margin-bottom: -6px;
-    display: block;
-  }
-
-  button {
-    --size: 16px;
-  }
 }

@@ -1,8 +1,5 @@
+import { createColumnHelper, DataTable } from './DataTable';
 import { Meta, StoryObj } from '@storybook/react';
-import { createColumnHelper } from '@tanstack/react-table';
-import React, { useState } from 'react';
-import { Link } from '../Link';
-import { DataTable } from './DataTable';
 
 /**
  * Data tables are used to organize and display all information from a data set.
@@ -27,17 +24,22 @@ type Person = {
 
 const tableData: Person[] = [
   {
-    firstName: (
-      <Link url="#" removeUnderline>
-        Goodman
-      </Link>
-    ),
-    lastName: 'Linsley',
-    age: 24,
-    visits: 100,
-    status: 'In Relationship',
-    progress: 50,
+    firstName: 'Tandy',
+    lastName: 'Miller',
+    age: 40,
+    visits: 40,
+    status: 'Single',
+    progress: 80,
   },
+  {
+    firstName: 'Joe',
+    lastName: 'Dirte',
+    age: 45,
+    visits: 20,
+    status: 'Complicated',
+    progress: 10,
+  },
+
   {
     firstName: 'Tandy',
     lastName: 'Miller',
@@ -54,46 +56,7 @@ const tableData: Person[] = [
     status: 'Complicated',
     progress: 10,
   },
-  {
-    firstName: (
-      <Link url="#" removeUnderline>
-        Goodman
-      </Link>
-    ),
-    lastName: 'Linsley',
-    age: 24,
-    visits: 100,
-    status: 'In Relationship',
-    progress: 50,
-  },
-  {
-    firstName: 'Tandy',
-    lastName: 'Miller',
-    age: 40,
-    visits: 40,
-    status: 'Single',
-    progress: 80,
-  },
-  {
-    firstName: 'Joe',
-    lastName: 'Dirte',
-    age: 45,
-    visits: 20,
-    status: 'Complicated',
-    progress: 10,
-  },
-  {
-    firstName: (
-      <Link url="#" removeUnderline>
-        Goodman
-      </Link>
-    ),
-    lastName: 'Linsley',
-    age: 24,
-    visits: 100,
-    status: 'In Relationship',
-    progress: 50,
-  },
+
   {
     firstName: 'Tandy',
     lastName: 'Miller',
@@ -248,8 +211,6 @@ const columnsSort = [
 
 export const Sortable: Story = {
   render: ({ ...args }) => {
-    const [sortedRows, setSortedRows] = useState<any>(null);
-
     return (
       <DataTable
         {...args}
@@ -257,7 +218,7 @@ export const Sortable: Story = {
         defaultSortDirection="desc"
         initialSortColumnIndex={4}
         // onSort={handleSort}
-        rows={sortedRows || tableData}
+        rows={tableData}
       />
     );
   },
@@ -266,5 +227,26 @@ export const Sortable: Story = {
     columnContentTypes: columnContentTypes,
     rows: tableData,
     columns: columnsSort,
+  },
+};
+
+export const SelectionAcrossPages: Story = {
+  render: ({ ...args }) => {
+    return (
+      <DataTable
+        {...args}
+        sortable={true}
+        defaultSortDirection="desc"
+        initialSortColumnIndex={4}
+        rows={tableData}
+      />
+    );
+  },
+
+  args: {
+    columnContentTypes: columnContentTypes,
+    rows: tableData,
+    columns: columnsSort,
+    hasMoreItems: true,
   },
 };

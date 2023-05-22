@@ -3,12 +3,11 @@ import {
   SortDescendingMajor,
 } from '@shopify/polaris-icons';
 import { Icon } from '../../../Icon';
-import { Text } from '../../../Text';
 import { Tooltip } from '../../../Tooltip';
 import { SortDirection } from '../../../../types/datatable';
 import cx from 'classnames';
 import React from 'react';
-import styles from '../../IndexTable.module.scss';
+import styles from '../../DataTable.module.scss';
 
 function SortButton({
   column,
@@ -50,9 +49,7 @@ function SortButton({
       onClick={column.getToggleSortingHandler()}
     >
       {iconMarkup}
-      <Text variant="bodySm" color="subdued" fontWeight="medium">
-        {text}
-      </Text>
+      {text}
     </button>
   ) : null;
 }
@@ -86,9 +83,7 @@ export const HeaderCell = ({
           defaultSortDirection={defaultSortDirection}
         />
       ) : (
-        <Text variant="bodySm" color="subdued" fontWeight="medium">
-          {text}
-        </Text>
+        <div>{text}</div>
       )}
     </th>
   );
