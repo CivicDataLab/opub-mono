@@ -1,0 +1,80 @@
+@import '../../../../../styles/shared.scss';
+
+.Footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: var(--space-6) var(--space-8);
+  background-color: var(--surface-subdued);
+  border-radius: 0 0 var(--border-radius-2) var(--border-radius-2);
+  border-top: var(--border-divider);
+}
+
+.Pagination {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.PaginationItems {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+
+  button {
+    padding: var(--space-1) var(--space-3);
+
+    &[aria-selected='true'] {
+      background-color: var(--surface-depressed);
+    }
+  }
+}
+
+.Button {
+  all: unset;
+  cursor: pointer;
+
+  @include focus-ring($border-width: var(--border-width-1));
+
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--border-radius-1);
+
+  &:hover {
+    background-color: var(--surface-hovered);
+  }
+
+  &:active {
+    background-color: var(--surface-pressed);
+  }
+
+  &[disabled] {
+    cursor: not-allowed;
+    opacity: 0.5;
+
+    &:hover {
+      background-color: var(--surface-subdued);
+    }
+  }
+
+  &:focus-visible {
+    box-shadow: var(--shadow-button);
+    outline: 0;
+
+    @include focus-ring($style: 'focused');
+  }
+}
+
+.Direction {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+
+  svg {
+    fill: var(--icon);
+  }
+}
+
+.Span {
+  pointer-events: none;
+}

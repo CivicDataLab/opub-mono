@@ -2,12 +2,13 @@
 
 import type { TableProps } from '../../types/datatable';
 import styles from './Table.module.scss';
-import { Cell, HeaderCell } from './components';
+import { Cell, Footer, HeaderCell } from './components';
 import {
+  SortingState,
   flexRender,
   getCoreRowModel,
+  getPaginationRowModel,
   getSortedRowModel,
-  SortingState,
   useReactTable,
 } from '@tanstack/react-table';
 import cx from 'classnames';
@@ -41,7 +42,9 @@ const Table = (props: TableProps) => {
     onSortingChange: setSorting,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: sortable ? getSortedRowModel() : undefined,
+    getPaginationRowModel: getPaginationRowModel(),
   });
+  const { pageIndex, pageSize } = table.getState().pagination;
 
   const rowCountIsEven = data.length % 2 === 0;
   const themeClass = cx(
@@ -125,24 +128,17 @@ const Table = (props: TableProps) => {
               </tr>
             ))}
           </tbody>
-          <tfoot>
-            {table.getFooterGroups().map((footerGroup) => (
-              <tr key={footerGroup.id}>
-                {footerGroup.headers.map((header) => (
-                  <th key={header.id}>
-                    {header.isPlaceholder
-                      ? null
-                      : flexRender(
-                          header.column.columnDef.footer,
-                          header.getContext()
-                        )}
-                  </th>
-                ))}
-              </tr>
-            ))}
-          </tfoot>
         </table>
       </div>
+      <Footer
+        table={table}
+        rowData={{
+          rowMin: pageIndex * pageSize + 1,
+          rowMax: Math.min((pageIndex + 1) * pageSize, rows.length),
+          total: rows.length,
+          pageIndex: pageIndex,
+        }}
+      />
     </div>
   );
 };
