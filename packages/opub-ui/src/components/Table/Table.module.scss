@@ -12,6 +12,7 @@
   -webkit-overflow-scrolling: touch;
   scroll-behavior: smooth;
   background-color: inherit;
+  border-radius: var(--border-radius-2) 0 0 var(--border-radius-2);
 }
 
 .Table {
@@ -20,14 +21,31 @@
   border-collapse: separate;
   font-size: var(--font-size-100);
   position: relative;
+  box-shadow: var(--shadow-card);
+  border-radius: var(--border-radius-2);
+  background-color: var(--surface);
 }
 
 .TableHeaderRow {
+  border-radius: var(--border-radius-2) var(--border-radius-2) 0 0;
+
   .Header-Sticky {
     position: sticky;
     top: 0;
     z-index: 1;
     background-color: var(--surface);
+    border-radius: var(--border-radius-2) var(--border-radius-2) 0 0;
+  }
+
+  .Cell {
+    background-color: var(--surface-subdued);
+
+    &:first-of-type {
+      border-top-left-radius: var(--border-radius-2);
+    }
+    &:last-of-type {
+      border-top-right-radius: var(--border-radius-2);
+    }
   }
 }
 
@@ -38,6 +56,17 @@
     &.TableBodyRow {
       &:hover {
         background-color: var(--surface-hovered);
+      }
+
+      &:last-of-type {
+        .Cell {
+          &:first-of-type {
+            border-bottom-left-radius: var(--border-radius-2);
+          }
+          &:last-of-type {
+            border-bottom-right-radius: var(--border-radius-2);
+          }
+        }
       }
     }
   }
@@ -52,7 +81,7 @@
 .Cell {
   font-weight: var(--font-weight-regular);
   color: var(--text);
-  padding: var(--space-4);
+  padding: calc(var(--space-3) + var(--space-05));
   white-space: nowrap;
   text-align: left;
 

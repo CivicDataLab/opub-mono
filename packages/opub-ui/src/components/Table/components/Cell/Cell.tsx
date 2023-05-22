@@ -1,5 +1,6 @@
 import { SortDirection } from '../../../../types/datatable';
 import { Icon } from '../../../Icon';
+import { Text } from '../../../Text';
 import { Tooltip } from '../../../Tooltip';
 import styles from '../../Table.module.scss';
 import {
@@ -49,7 +50,7 @@ function SortButton({
       onClick={column.getToggleSortingHandler()}
     >
       {iconMarkup}
-      {text}
+      <Text variant="bodyMd">{text}</Text>
     </button>
   ) : null;
 }
@@ -83,7 +84,7 @@ export const HeaderCell = ({
           defaultSortDirection={defaultSortDirection}
         />
       ) : (
-        <div>{text}</div>
+        <Text variant="bodyMd">{text}</Text>
       )}
     </th>
   );
@@ -139,7 +140,7 @@ const TruncatedText = ({
   return current?.scrollWidth > current?.offsetWidth ? (
     <Tooltip.Provider>
       <Tooltip delayDuration={0} content={textRef.current.innerText}>
-        {text}
+        <Text variant="bodyMd">{text}</Text>
       </Tooltip>
     </Tooltip.Provider>
   ) : (
