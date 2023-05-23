@@ -15,7 +15,7 @@
   background-color: inherit;
   border-radius: var(--border-radius-2);
   width: 100%;
-  overflow-x: auto;
+  overflow: auto;
 }
 
 .Table {
@@ -31,14 +31,6 @@
 
 .TableHeaderRow {
   border-radius: var(--border-radius-2) var(--border-radius-2) 0 0;
-
-  .Header-Sticky {
-    position: sticky;
-    top: 0;
-    z-index: 1;
-    background-color: var(--surface);
-    border-radius: var(--border-radius-2) var(--border-radius-2) 0 0;
-  }
 
   .Cell {
     background-color: var(--surface-subdued);

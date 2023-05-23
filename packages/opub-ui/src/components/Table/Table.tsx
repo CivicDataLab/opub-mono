@@ -27,7 +27,6 @@ const Table = (props: TableProps) => {
     defaultSortDirection = 'asc',
     initialSortColumnIndex: sortedColumnIndex,
     onSort,
-    stickyHeader = false,
     hideFooter = false,
     hideResultsInFooter = false,
     hidePagination = false,
@@ -88,8 +87,7 @@ const Table = (props: TableProps) => {
                         columnTypes[index] === 'numeric' &&
                           styles['Cell-numeric'],
                         isSortable && isSorted && styles['Cell-sorted'],
-                        isSortable && styles['Cell-sortable'],
-                        stickyHeader && styles['Header-Sticky']
+                        isSortable && styles['Cell-sortable']
                       )}
                       key={header.id}
                       header={header}

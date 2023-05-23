@@ -121,13 +121,6 @@ export const WithoutPagination: Story = {
   },
 };
 
-export const StickyHeader: Story = {
-  args: {
-    ...Default.args,
-    stickyHeader: true,
-  },
-};
-
 export const ZebraStriping: Story = {
   args: {
     ...Default.args,

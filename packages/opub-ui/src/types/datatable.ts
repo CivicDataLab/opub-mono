@@ -38,8 +38,7 @@ export interface TableProps {
   initialSortColumnIndex?: number;
   /** Callback fired on click or keypress of a sortable column heading. */
   onSort?(headingIndex: number, direction: SortDirection): void;
-  /** Header becomes sticky and pins to top of table when scrolling  */
-  stickyHeader?: boolean;
+
   /** Has Footer  */
   hideFooter?: boolean;
   /** Hide Results in Footer  */
