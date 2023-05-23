@@ -2,7 +2,6 @@ import { Table } from './Table';
 import { faker } from '@faker-js/faker';
 import { Meta, StoryObj } from '@storybook/react';
 import { createColumnHelper } from '@tanstack/react-table';
-import { useState } from 'react';
 
 type Person = {
   firstName: any;
@@ -99,11 +98,6 @@ const columns = [
 ];
 
 export const Default: Story = {
-  render: ({ ...args }) => {
-    // const [data, setData] = React.useState(() => makeData(100000));
-
-    return <Table {...args} rows={data} />;
-  },
   args: {
     columnContentTypes: columnContentTypes,
     rows: data,
@@ -111,29 +105,32 @@ export const Default: Story = {
   },
 };
 
-export const StickyHeader: Story = {
+export const WithoutFooter: Story = {
   args: {
-    columnContentTypes: columnContentTypes,
-    rows: data,
-    columns: columns,
-    stickyHeader: true,
+    ...Default.args,
+    rows: data.slice(0, 20),
+    hideFooter: true,
+  },
+};
+
+export const WithoutPagination: Story = {
+  args: {
+    ...Default.args,
+    rows: data.slice(0, 20),
+    hidePagination: true,
   },
 };
 
 export const ZebraStriping: Story = {
   args: {
-    columnContentTypes: columnContentTypes,
-    rows: data,
-    columns: columns,
+    ...Default.args,
     hasZebraStripingOnData: true,
   },
 };
 
 export const IncreasedDensity: Story = {
   args: {
-    columnContentTypes: columnContentTypes,
-    rows: data,
-    columns: columns,
+    ...Default.args,
     increasedTableDensity: true,
   },
 };
@@ -164,13 +161,28 @@ const truncateData: Person[] = [
     status: 'Complicated',
     progress: 10,
   },
+  {
+    firstName: 'Tanner',
+    lastName: 'Linsley',
+    age: 24,
+    visits: 100,
+    status: 'In Relationship',
+    progress: 50,
+  },
+  {
+    firstName: 'Tandy',
+    lastName: 'Miller',
+    age: 40,
+    visits: 40,
+    status: 'Single',
+    progress: 80,
+  },
 ];
 
 export const Truncate: Story = {
   args: {
-    columnContentTypes: columnContentTypes,
+    ...Default.args,
     rows: truncateData,
-    columns: columns,
     truncate: true,
   },
 };
@@ -203,23 +215,11 @@ const columnsSort = [
 ];
 
 export const Sortable: Story = {
-  render: ({ ...args }) => {
-    const [sortedRows, setSortedRows] = useState<any>(null);
-
-    return (
-      <Table
-        {...args}
-        sortable={true}
-        defaultSortDirection="desc"
-        initialSortColumnIndex={4}
-        rows={sortedRows || data}
-      />
-    );
-  },
-
   args: {
-    columnContentTypes: columnContentTypes,
-    rows: data,
+    ...Default.args,
     columns: columnsSort,
+    initialSortColumnIndex: 4,
+    defaultSortDirection: 'desc',
+    sortable: true,
   },
 };

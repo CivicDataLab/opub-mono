@@ -118,15 +118,6 @@ export const Default: Story = {
   },
 };
 
-export const StickyHeader: Story = {
-  args: {
-    columnContentTypes: columnContentTypes,
-    rows: tableData,
-    columns: columns,
-    stickyHeader: true,
-  },
-};
-
 export const ZebraStriping: Story = {
   args: {
     columnContentTypes: columnContentTypes,

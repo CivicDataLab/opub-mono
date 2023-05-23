@@ -1,13 +1,15 @@
+import { cn } from '../../../../utils';
 import { Icon } from '../../../Icon';
 import { Text } from '../../../Text';
 import styles from './Footer.module.scss';
 import { ChevronLeftMinor, ChevronRightMinor } from '@shopify/polaris-icons';
 import { Table } from '@tanstack/react-table';
-import classNames from 'classnames';
 
 export const Footer = ({
   table,
   rowData,
+  hideResultsInFooter,
+  hidePagination,
 }: {
   table: Table<any>;
   rowData: {
@@ -16,16 +18,23 @@ export const Footer = ({
     total: number;
     pageIndex: number;
   };
+  hideResultsInFooter: boolean;
+  hidePagination: boolean;
 }) => {
   const pageOptions = table.getPageOptions();
 
-  const footerText = (
+  // shorten the text if the table is not paginated
+  const extendedText = hidePagination
+    ? ''
+    : `${rowData.rowMin} - ${rowData.rowMax} of `;
+  const footerText = !hideResultsInFooter ? (
     <Text
       variant="bodyMd"
       color="subdued"
-    >{`Showing ${rowData.rowMin} - ${rowData.rowMax} of ${rowData.total} results`}</Text>
-  );
-  const pagination = (
+    >{`Showing ${extendedText}${rowData.total} results`}</Text>
+  ) : null;
+
+  const pagination = !hidePagination ? (
     <div className={styles.Pagination}>
       <button
         className={styles.Button}
@@ -52,7 +61,7 @@ export const Footer = ({
           setPageIndex={table.setPageIndex}
         />
 
-        <span className={classNames(styles.Button, styles.Span)}>...</span>
+        <span className={cn(styles.Button, styles.Span)}>...</span>
 
         <PaginateButton
           pageIndex={rowData.pageIndex}
@@ -82,10 +91,15 @@ export const Footer = ({
         </div>
       </button>
     </div>
-  );
+  ) : null;
 
   return (
-    <div className={styles.Footer}>
+    <div
+      className={cn(
+        styles.Footer,
+        (hidePagination || hideResultsInFooter) && styles.HiddenContent
+      )}
+    >
       {footerText}
       {pagination}
     </div>

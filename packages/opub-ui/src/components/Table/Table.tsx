@@ -27,7 +27,9 @@ const Table = (props: TableProps) => {
     defaultSortDirection = 'asc',
     initialSortColumnIndex: sortedColumnIndex,
     onSort,
-    stickyHeader = false,
+    hideFooter = false,
+    hideResultsInFooter = false,
+    hidePagination = false,
     ...others
   } = props;
   const [data, setData] = React.useState(() => [...rows]);
@@ -42,9 +44,12 @@ const Table = (props: TableProps) => {
     onSortingChange: setSorting,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: sortable ? getSortedRowModel() : undefined,
-    getPaginationRowModel: getPaginationRowModel(),
+    getPaginationRowModel:
+      hideFooter || hidePagination ? undefined : getPaginationRowModel(),
   });
   const { pageIndex, pageSize } = table.getState().pagination;
+  const footerVisible =
+    !hideFooter && !(hideResultsInFooter && hidePagination) && data.length > 0;
 
   const rowCountIsEven = data.length % 2 === 0;
   const themeClass = cx(
@@ -82,8 +87,7 @@ const Table = (props: TableProps) => {
                         columnTypes[index] === 'numeric' &&
                           styles['Cell-numeric'],
                         isSortable && isSorted && styles['Cell-sorted'],
-                        isSortable && styles['Cell-sortable'],
-                        stickyHeader && styles['Header-Sticky']
+                        isSortable && styles['Cell-sortable']
                       )}
                       key={header.id}
                       header={header}
@@ -130,15 +134,19 @@ const Table = (props: TableProps) => {
           </tbody>
         </table>
       </div>
-      <Footer
-        table={table}
-        rowData={{
-          rowMin: pageIndex * pageSize + 1,
-          rowMax: Math.min((pageIndex + 1) * pageSize, rows.length),
-          total: rows.length,
-          pageIndex: pageIndex,
-        }}
-      />
+      {footerVisible && (
+        <Footer
+          table={table}
+          rowData={{
+            rowMin: pageIndex * pageSize + 1,
+            rowMax: Math.min((pageIndex + 1) * pageSize, rows.length),
+            total: rows.length,
+            pageIndex: pageIndex,
+          }}
+          hideResultsInFooter={hideResultsInFooter}
+          hidePagination={hidePagination}
+        />
+      )}
     </div>
   );
 };

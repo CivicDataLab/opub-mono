@@ -20,6 +20,10 @@
   @media #{$breakpoints-sm-up} {
     justify-content: space-between;
   }
+
+  &.HiddenContent {
+    justify-content: center;
+  }
 }
 
 .Pagination {

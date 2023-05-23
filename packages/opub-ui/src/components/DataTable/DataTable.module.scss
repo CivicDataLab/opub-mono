@@ -188,14 +188,6 @@
     fill: var(--icon-disabled);
   }
 
-  .StickyHeaderEnabled [data-sticky-active] & {
-    visibility: hidden;
-  }
-
-  .StickyHeaderEnabled [data-sticky-active] .StickyHeaderWrapper & {
-    visibility: visible;
-  }
-
   .IncreasedTableDensity & {
     font-weight: var(--font-weight-medium);
     font-size: var(--font-size-75);
