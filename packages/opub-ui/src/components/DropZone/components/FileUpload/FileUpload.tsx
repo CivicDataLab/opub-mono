@@ -2,9 +2,11 @@ import { Box } from '../../../Box';
 import { Icon } from '../../../Icon';
 import { Text } from '../../../Text';
 import { DropZoneContext } from '../../context';
-import { uploadArrow } from '../../images';
 import styles from './FileUpload.module.scss';
-import { IconCloudUpload } from '@tabler/icons-react';
+import {
+  IconCloudUpload,
+  IconSquareRoundedArrowUpFilled,
+} from '@tabler/icons-react';
 import cx from 'classnames';
 import { useContext } from 'react';
 
@@ -72,7 +74,7 @@ export function FileUpload(props: FileUploadProps) {
       );
       break;
     case 'small':
-      viewMarkup = <img width="20" src={uploadArrow} alt="" />;
+      viewMarkup = <Icon source={IconSquareRoundedArrowUpFilled} />;
       break;
   }
 

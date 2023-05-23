@@ -1,9 +1,10 @@
-import React from 'react';
-import styles from './Collapsible.module.scss';
-import cx from 'classnames';
 import { CollapsibleProps } from '../../types/collapsible';
+import { Icon } from '../Icon';
+import styles from './Collapsible.module.scss';
 import * as CollapsibleDemo from '@radix-ui/react-collapsible';
-import { MobilePlusMajor, MinusMinor } from '@shopify/polaris-icons';
+import { IconMinus, IconPlus } from '@tabler/icons-react';
+import cx from 'classnames';
+import React from 'react';
 
 export const Collapsible = ({
   collapsibleHeading,
@@ -12,7 +13,7 @@ export const Collapsible = ({
   const [open, setOpen] = React.useState(false);
 
   const className = cx(styles.CollapsibleRoot);
-
+  const iconSource = open ? IconMinus : IconPlus;
   return (
     <CollapsibleDemo.Root
       className={className}
@@ -23,7 +24,7 @@ export const Collapsible = ({
         <span className={styles.Text}>{collapsibleHeading}</span>
         <CollapsibleDemo.Trigger asChild>
           <button className={styles.IconButton}>
-            {open ? <MinusMinor /> : <MobilePlusMajor />}
+            <Icon source={iconSource} size="6" />
           </button>
         </CollapsibleDemo.Trigger>
       </div>

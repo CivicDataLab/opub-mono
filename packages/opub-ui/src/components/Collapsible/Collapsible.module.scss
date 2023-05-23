@@ -11,15 +11,16 @@
 
 .IconButton {
   font-family: inherit;
-  border-radius: 100%;
+  border-radius: var(--border-radius-2);
+  cursor: pointer;
   height: var(--space-6);
   width: var(--space-6);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: var(--interactive);
   box-shadow: var(--shadow-md);
   margin-left: var(--space-4);
+  border: none;
 }
 .IconButton[data-state='closed'] {
   background-color: var(--surface);
