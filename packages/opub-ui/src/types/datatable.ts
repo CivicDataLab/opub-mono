@@ -10,18 +10,6 @@ export interface ColumnVisibilityData {
   index: number;
 }
 
-export interface TableState {
-  condensed: boolean;
-  columnVisibilityData: ColumnVisibilityData[];
-  previousColumn?: ColumnVisibilityData;
-  currentColumn?: ColumnVisibilityData;
-  sortedColumnIndex?: number;
-  sortDirection?: SortDirection;
-  isScrolledFarthestLeft?: boolean;
-  isScrolledFarthestRight?: boolean;
-  rowHovered: number | undefined;
-}
-
 export interface TableProps {
   /** List of data types, which determines content alignment for each column. Data types are "text," which aligns left, or "numeric," which aligns right. */
   columnContentTypes: ColumnContentType[];
@@ -52,6 +40,12 @@ export interface TableProps {
   onSort?(headingIndex: number, direction: SortDirection): void;
   /** Header becomes sticky and pins to top of table when scrolling  */
   stickyHeader?: boolean;
+  /** Has Footer  */
+  hideFooter?: boolean;
+  /** Hide Results in Footer  */
+  hideResultsInFooter?: boolean;
+  /** Hide Pagination  */
+  hidePagination?: boolean;
 }
 
 export type DataTableProps = TableProps & {

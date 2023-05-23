@@ -25,7 +25,6 @@ export type {
   DataTableProps,
   SortDirection,
   TableProps,
-  TableState,
   VerticalAlign,
 } from './datatable';
 export type { DateTimeProps } from './datetime';
