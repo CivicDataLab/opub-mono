@@ -32,7 +32,6 @@ const DataTable = (props: DataTableProps) => {
     defaultSortDirection = 'asc',
     initialSortColumnIndex: sortedColumnIndex,
     onSort,
-    stickyHeader = false,
     onRowSelectionChange,
     defaultSelectedRows,
     hasMoreItems = false,
@@ -96,8 +95,7 @@ const DataTable = (props: DataTableProps) => {
                 className={cx(
                   styles.Cell,
                   styles['Cell-header'],
-                  styles.Checkbox,
-                  stickyHeader && styles['Header-Sticky']
+                  styles.Checkbox
                 )}
               >
                 <Checkbox
@@ -133,8 +131,7 @@ const DataTable = (props: DataTableProps) => {
                   className={cx(
                     styles.Cell,
                     styles['Cell-header'],
-                    styles.Checkbox,
-                    stickyHeader && styles['Header-Sticky']
+                    styles.Checkbox
                   )}
                 >
                   <Checkbox
@@ -165,8 +162,7 @@ const DataTable = (props: DataTableProps) => {
                         columnTypes[index] === 'numeric' &&
                           styles['Cell-numeric'],
                         isSortable && isSorted && styles['Cell-sorted'],
-                        isSortable && styles['Cell-sortable'],
-                        stickyHeader && styles['Header-Sticky']
+                        isSortable && styles['Cell-sortable']
                       )}
                       key={header.id}
                       header={header}
