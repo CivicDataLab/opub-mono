@@ -2,7 +2,6 @@
 
 .DataTable {
   --op-data-table-first-column-width: 145px;
-  position: relative;
   max-width: 100vw;
   background-color: var(--surface);
   border-radius: var(--border-radius-2);
@@ -15,7 +14,8 @@
   background-color: inherit;
   border-radius: var(--border-radius-2);
   width: 100%;
-  overflow: auto;
+  overflow-x: auto;
+  position: relative;
 }
 
 .Table {
@@ -23,7 +23,6 @@
   border-spacing: 0;
   border-collapse: separate;
   font-size: var(--font-size-100);
-  position: relative;
 
   border-radius: var(--border-radius-2) var(--border-radius-2) 0 0;
   background-color: var(--surface);
@@ -129,7 +128,7 @@
 }
 
 .Cell-numeric {
-  text-align: right;
+  text-align: center;
 }
 
 .Cell-truncated {
