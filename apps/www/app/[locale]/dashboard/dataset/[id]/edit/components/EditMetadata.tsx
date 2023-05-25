@@ -57,59 +57,69 @@ export function EditMetadata({
           <Box paddingBlockStart="3">
             <FormLayout>
               <FormLayout.Group>
-                <Input
-                  name="source"
-                  label="Source"
-                  placeholder="example: https://data.gov.in"
-                  maxLength={30}
-                  showCharacterCount
-                  autoComplete="off"
-                  required
-                  error="This field is required"
-                  readOnly={isLoading}
-                />
                 <Select
                   name="update_frequency"
                   label="Update Frequency"
+                  helpText="How often is this dataset updated?"
                   options={[
                     { label: 'Daily', value: 'daily' },
                     { label: 'Weekly', value: 'weekly' },
                     { label: 'Monthly', value: 'monthly' },
                     { label: 'Yearly', value: 'yearly' },
                   ]}
-                  placeholder="Select an option"
+                  placeholder="Select"
+                  required
+                  error="This field is required"
+                  disabled={isLoading}
+                />
+                <Select
+                  name="language"
+                  label="Language"
+                  helpText="What language is this dataset in?"
+                  options={[
+                    { label: 'Daily', value: 'daily' },
+                    { label: 'Weekly', value: 'weekly' },
+                    { label: 'Monthly', value: 'monthly' },
+                    { label: 'Yearly', value: 'yearly' },
+                  ]}
+                  placeholder="Select"
                   required
                   error="This field is required"
                   disabled={isLoading}
                 />
               </FormLayout.Group>
 
-              <DatePicker
-                name="remote_issued"
-                label="Date of Creation"
-                required
-                error="This field is required"
-                isDisabled={isLoading}
-              />
-              <Box maxWidth="480px">
+              <FormLayout.Group>
+                <ComboboxMulti
+                  name="geography"
+                  label="Geography"
+                  helpText="Which geography does this data belong to?"
+                  placeholder="Search Locations"
+                  defaultList={['United States', 'Canada', 'Mexico', 'India']}
+                  verticalContent
+                  required
+                  error="This field is required"
+                  readOnly={isLoading}
+                />
                 <ComboboxMulti
                   name="tags_list"
                   label="Tags"
                   placeholder="Search Tags"
+                  helpText="Any other tags or keywords that can help people discover your dataset"
                   defaultList={[
-                    'Banana',
-                    'Broccoli',
-                    'Burger',
-                    'Cake',
-                    'Candy',
-                    'Carrot',
+                    'Health',
+                    'Education',
+                    'Transportation',
+                    'Economy',
+                    'Demographics',
+                    'Environment',
                   ]}
                   verticalContent
                   required
                   error="This field is required"
                   readOnly={isLoading}
                 />
-              </Box>
+              </FormLayout.Group>
             </FormLayout>
           </Box>
         </div>
