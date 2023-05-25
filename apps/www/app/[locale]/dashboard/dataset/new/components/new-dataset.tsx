@@ -1,7 +1,6 @@
 import React from 'react';
 import { CreateDatasetInput, PatchDatasetInput } from '@/gql/generated/graphql';
 import { PatchDataset, CreateDataset as Props } from '@/types';
-import { IconSource } from '@opub-cdl/ui/dist/ts/components/Icon/Icon';
 import {
   Box,
   Checkbox,
@@ -11,6 +10,7 @@ import {
   RadioGroup,
   Text,
 } from '@opub-cdl/ui';
+import { IconSource } from '@opub-cdl/ui/dist/ts/components/Icon/Icon';
 
 import { Icons } from '@/components/icons';
 import { RadioCard } from '@/components/radio-card';
@@ -94,7 +94,7 @@ export function CreateDataset({
                 name="title"
                 label="Name of Dataset"
                 placeholder="example: Population of India"
-                maxLength={30}
+                maxLength={100}
                 showCharacterCount
                 autoComplete="off"
                 required

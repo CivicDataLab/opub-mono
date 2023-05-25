@@ -8,8 +8,8 @@ export default function DatasetLoading({
   previousPage?: boolean;
 }) {
   return (
-    <>
+    <div className="h-full">
       <Loading />
-    </>
+    </div>
   );
 }

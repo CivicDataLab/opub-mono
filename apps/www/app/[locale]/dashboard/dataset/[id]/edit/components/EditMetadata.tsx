@@ -125,7 +125,7 @@ export function EditMetadata({
           <div className="mt-8">
             <Divider />
           </div>
-          <div className="mt-4 flex items-center gap-2 justify-center">
+          <div className="mt-4 flex items-center gap-2 justify-center flex-wrap">
             <Button>Save & Exit</Button>
             <Button primary submit>
               Save & Proceed

@@ -46,7 +46,7 @@ export function EditLayout({ children, params }: LayoutProps) {
   return (
     <div className="flex flex-col h-full mt-8">
       <Header id={params.id} title={data?.dataset?.title} />
-      <div className="flex mt-4">
+      <div className="flex flex-col mt-4 lg:flex-row">
         <div>
           <Navigation id={params.id} pathItem={pathItem} />
         </div>
@@ -62,23 +62,26 @@ const Header = ({ id, title }: { id: string; title?: string }) => {
   return (
     <div className="flex gap-4 flex-wrap items-center justify-between">
       <div className="flex flex-wrap gap-4 items-center">
-        <Link href="/dataset">
+        <Link href="/dashboard/dataset">
           <Icon source={Icons.back} color="base" size="8" />
           <Text visuallyHidden>Go to dataset listing page</Text>
         </Link>
 
         <div className="flex items-center gap-2">
           {title ? (
-            <Text variant="headingLg" as="h2">
-              {title}
-            </Text>
+            <div className="text-clamp">
+              <Text variant="headingLg" as="h2">
+                {title}
+              </Text>
+            </div>
           ) : (
             <div className="min-w-[120px]">
               <SkeletonDisplayText />
             </div>
           )}
-
-          <Text color="subdued">ID #{id}</Text>
+          <div className="whitespace-nowrap">
+            <Text color="subdued">ID #{id}</Text>
+          </div>
         </div>
       </div>
       <Button url={`/dashboard/dataset/${id}/edit`} plain>
@@ -109,16 +112,23 @@ const Navigation = ({ id, pathItem }: { id: string; pathItem: string }) => {
   ];
 
   return (
-    <ul>
+    <ul className="flex overflow-x-auto max-w-[90vw] lg:block lg:overflow-x-visible lg:max-w-full">
       {links.map((link) => (
-        <li key={link.url}>
+        <li
+          className={cn(
+            link.disabled &&
+              'text-textDisabled cursor-no-drop hover:text-textDisabled focus:text-textDisabled'
+          )}
+          key={link.url}
+        >
           <Link
             className={cn(
-              'rounded-l-05 p-3 block relative w-full text-textSubdued min-w-[10rem]',
+              'rounded-l-05 p-3 block relative w-full text-textSubdued lg:min-w-[10rem] text-center',
+              'lg:text-start',
               'hover:text-text focus:text-text',
               link.selected &&
                 'bg-surface shadow-faint text-text pointer-events-none',
-              link.disabled && 'pointer-events-none text-textDisabled'
+              link.disabled && 'pointer-events-none'
             )}
             href={link.url}
           >
@@ -131,7 +141,8 @@ const Navigation = ({ id, pathItem }: { id: string; pathItem: string }) => {
             </Text>
             <span
               className={cn(
-                'bg-transparent rounded-l-1 w-[3px] h-full absolute right-0 top-0',
+                'rounded-t-1 h-[3px] w-full absolute right-0 bottom-0',
+                'bg-transparent lg:rounded-l-1 lg:w-[3px] lg:h-full right-0 lg:top-0',
                 link.selected && 'bg-decorativeIconFour'
               )}
             />
