@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import { useRouter } from 'next/navigation';
 import { graphql } from '@/gql';
 import { UpdateDatasetInput } from '@/gql/generated/graphql';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
@@ -49,7 +48,7 @@ const updateDatasetMutationDoc = graphql(`
 `);
 
 export function MetadataPage({ params }: { params: { id: string } }) {
-  const router = useRouter();
+  const router = usePRouter();
   const submitRef = React.useRef<HTMLButtonElement>(null);
 
   const { data } = useQuery([`dataset_meta_${params.id}`], () =>

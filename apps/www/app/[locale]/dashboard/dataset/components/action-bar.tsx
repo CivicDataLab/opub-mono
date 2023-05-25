@@ -2,7 +2,6 @@
 
 import React from 'react';
 import Link, { LinkProps } from 'next/link';
-import { useRouter } from 'next/navigation';
 import { Size, useWindowSize } from '@/hooks/use-window-size';
 import { Box, Button, Icon, Text, Tooltip } from '@opub-cdl/ui';
 import { twMerge } from 'tailwind-merge';
@@ -33,7 +32,7 @@ export function ActionBar(props: Props) {
   const { width }: Size = useWindowSize();
   const iconSize = width && width < 480 ? '5' : '8';
 
-  const router = useRouter();
+  const router = usePRouter();
 
   React.useEffect(() => {
     if (!props.preFetch) return;

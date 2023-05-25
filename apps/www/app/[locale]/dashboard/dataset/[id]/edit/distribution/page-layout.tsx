@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import { useRouter } from 'next/navigation';
 import { graphql } from '@/gql';
 import { ResourceInput } from '@/gql/generated/graphql';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
@@ -61,7 +60,7 @@ const createResourceMutationDoc = graphql(`
 `);
 
 export function DistibutionPage({ params }: { params: { id: string } }) {
-  const router = useRouter();
+  const router = usePRouter();
   const submitRef = React.useRef<HTMLButtonElement>(null);
 
   const { data } = useQuery([`dataset_distribution_${params.id}`], () =>

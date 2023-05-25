@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import { useRouter } from 'next/navigation';
 import { graphql } from '@/gql';
 import { CreateDatasetInput } from '@/gql/generated/graphql';
 import { useMutation } from '@tanstack/react-query';
@@ -26,7 +25,7 @@ const createDatasetMutationDoc = graphql(`
 `);
 
 export const Page = () => {
-  const router = useRouter();
+  const router = usePRouter();
   // React.useEffect(() => {
   //   router.prefetch('/dashboard/dataset/1/edit/metadata');
   // }, []);
