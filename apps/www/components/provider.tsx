@@ -1,12 +1,21 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
+import { usePathname, useSearchParams } from 'next/navigation';
 import { Toaster, Tooltip } from '@opub-cdl/ui';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import NextTopLoader from 'nextjs-toploader';
+import NProgress from 'nprogress';
 import { SSRProvider } from 'react-aria';
 
 export default function Provider({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    NProgress.done();
+  }, [pathname, searchParams]);
+
   const [client] = React.useState(
     new QueryClient({
       defaultOptions: {

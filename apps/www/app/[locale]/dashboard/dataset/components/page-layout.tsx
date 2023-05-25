@@ -1,8 +1,7 @@
 'use client';
 
-import React from 'react';
-import { useRouter } from 'next/navigation';
 import { graphql } from '@/gql';
+import { usePRouter } from '@/hooks/use-prouter';
 import { useQuery } from '@tanstack/react-query';
 
 import { GraphQL } from '@/lib/api';
@@ -24,7 +23,7 @@ export const Page = () => {
     GraphQL(allDatasetsQueryDoc)
   );
 
-  const router = useRouter();
+  const router = usePRouter();
   // React.useEffect(() => {
   //   router.prefetch('/dashboard/dataset/new');
   // }, []);
