@@ -51,7 +51,10 @@ export function EditPage({ params }: { params: { id: string } }) {
     {
       onSuccess: (data) => {
         queryClient.invalidateQueries({
-          queryKey: [`dataset_${params.id}`, `dataset_layout_${params.id}`],
+          queryKey: [`dataset_${params.id}`],
+        });
+        queryClient.invalidateQueries({
+          queryKey: [`dataset_layout_${params.id}`],
         });
         router.push(
           `/dashboard/dataset/${data.patch_dataset?.dataset?.id}/edit/metadata`
@@ -67,7 +70,7 @@ export function EditPage({ params }: { params: { id: string } }) {
   return (
     <>
       <ActionBar
-        title={data?.dataset?.title || 'Untitled Dataset'}
+        title={data?.dataset?.title || 'Untitled Datasets'}
         primaryAction={{
           content: 'Save & Next',
           onAction: () => submitRef.current?.click(),

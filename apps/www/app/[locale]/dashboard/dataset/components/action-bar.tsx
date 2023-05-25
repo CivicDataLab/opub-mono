@@ -74,9 +74,11 @@ export function ActionBar(props: Props) {
           btn
         )}
 
-        <Text variant="headingLg" as="h2">
-          {props.title}
-        </Text>
+        <div className="text-clamp max-w-[900px]">
+          <Text variant="headingLg" as="h2">
+            {props.title}
+          </Text>
+        </div>
       </div>
 
       <div className="sm:hidden">

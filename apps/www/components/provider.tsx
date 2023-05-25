@@ -10,11 +10,10 @@ import { SSRProvider } from 'react-aria';
 
 export default function Provider({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const searchParams = useSearchParams();
 
   useEffect(() => {
     NProgress.done();
-  }, [pathname, searchParams]);
+  }, [pathname]);
 
   const [client] = React.useState(
     new QueryClient({
