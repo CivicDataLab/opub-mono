@@ -93,6 +93,8 @@ export default function Snapshot() {
   const [currentSlide, setCurrentSlide] = React.useState(1);
   const [childrenLength, setChildrenLength] = React.useState(3);
 
+  const [open, setOpen] = React.useState(false);
+
   function current(data: number, length: number) {
     setCurrentSlide(data);
     setChildrenLength(length);
@@ -145,31 +147,25 @@ export default function Snapshot() {
       text: 'Funds Available',
     },
     {
-      value: '5',
+      value: '6',
       helpText:
         'Total funds available for the scheme in the selected financial year (FY)',
       text: 'Funds Available',
     },
     {
-      value: '5',
+      value: '7',
       helpText:
         'Total funds available for the scheme in the selected financial year (FY)',
       text: 'Funds Available',
     },
     {
-      value: '5',
+      value: '8',
       helpText:
         'Total funds available for the scheme in the selected financial year (FY)',
       text: 'Funds Available',
     },
     {
-      value: '5',
-      helpText:
-        'Total funds available for the scheme in the selected financial year (FY)',
-      text: 'Funds Available',
-    },
-    {
-      value: '5',
+      value: '9',
       helpText:
         'Total funds available for the scheme in the selected financial year (FY)',
       text: 'Funds Available',
@@ -186,7 +182,7 @@ export default function Snapshot() {
           <Text as="h1" variant="headingXl" fontWeight="bold">
             <div className=" mb-2">Demographic highlights</div>
           </Text>
-          <div className="rounded-sm p-2">
+          <div className="rounded-sm p-2 bg-[color:var(--border-disabled)]">
             SHOWING 0{currentSlide} / 0{childrenLength}
           </div>
         </div>
@@ -235,7 +231,38 @@ export default function Snapshot() {
           Scheme Performance Snapshots
         </Text>
       </div>
-      <div className="flex gap-11">
+      <div className={styles.MobileIndicator}>
+        <span className={styles.MobileIndicatorText}>Budget</span>
+        <Box
+          flex
+          width="12vh"
+          minHeight="5vh"
+          alignItems="center"
+          justifyContent="center"
+        >
+          <Button primary onClick={() => setOpen((val) => !val)}>
+            Indicators
+          </Button>
+          <Sheet onOpenChange={() => setOpen((val) => !val)} isOpen={open}>
+            <div className={styles.IndicatorAlterText}>Alter Indicators</div>
+            <RadioGroup className={styles.Radio} name="radio1">
+              {indicators.map((indicator) => {
+                return (
+                  <div className="mb-4">
+                    <RadioItem
+                      value={indicator.value}
+                      helpText={indicator.helpText}
+                    >
+                      {indicator.text}
+                    </RadioItem>
+                  </div>
+                );
+              })}
+            </RadioGroup>
+          </Sheet>
+        </Box>
+      </div>
+      <div className="flex gap-11 mt-8">
         <div className={styles.Indicators}>
           <div className="pb-4">
             <Text as="h1" variant="bodyLg" fontWeight="bold">
@@ -321,7 +348,9 @@ export default function Snapshot() {
                   <span>District value</span>
                 </div>
               </div>
-              <Button outline size="large">Explore More</Button>
+              <Button outline size="large">
+                Explore More
+              </Button>
             </li>
           </ul>
         </div>
