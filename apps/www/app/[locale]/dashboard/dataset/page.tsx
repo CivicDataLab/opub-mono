@@ -3,7 +3,7 @@ import { Hydrate } from '@/lib';
 import { dehydrate } from '@tanstack/react-query';
 
 import { GraphQL, getQueryClient } from '@/lib/api';
-import { Page } from './components/page-layout';
+import { Page } from './page-layout';
 
 const allDatasetsQueryDoc = graphql(`
   query allDatasetsQuery {

@@ -5,8 +5,8 @@ import { usePRouter } from '@/hooks/use-prouter';
 import { useQuery } from '@tanstack/react-query';
 
 import { GraphQL } from '@/lib/api';
-import { ActionBar } from './action-bar';
-import { Content } from './content';
+import { ActionBar } from './components/action-bar';
+import { Content } from './components/content';
 
 const allDatasetsQueryDoc = graphql(`
   query allDatasetsQuery {

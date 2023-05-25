@@ -399,8 +399,6 @@ export const Input = React.forwardRef(
       />
     );
 
-    console.log(height, maxHeight, multiline, 'height');
-
     return (
       <Labelled
         label={label}

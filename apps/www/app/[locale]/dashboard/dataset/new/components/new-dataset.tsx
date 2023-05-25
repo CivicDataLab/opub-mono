@@ -10,7 +10,7 @@ import {
   Input,
   RadioGroup,
   Text,
-} from '@opub-cdl/ui/src';
+} from '@opub-cdl/ui';
 
 import { Icons } from '@/components/icons';
 import { RadioCard } from '@/components/radio-card';

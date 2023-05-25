@@ -40,7 +40,6 @@ export const blobToBase64 = function (blob: Blob) {
   reader.onload = function () {
     var dataUrl: any = reader.result;
     var base64 = dataUrl?.split(',')[1];
-    console.log(base64, 'base64');
 
     return base64;
   };

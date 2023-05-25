@@ -7,8 +7,8 @@ import { CreateDatasetInput } from '@/gql/generated/graphql';
 import { useMutation } from '@tanstack/react-query';
 
 import { GraphQL } from '@/lib/api';
-import { ActionBar } from '../../components/action-bar';
-import { CreateDataset } from '../components/new-dataset';
+import { ActionBar } from '../components/action-bar';
+import { CreateDataset } from './components/new-dataset';
 
 const createDatasetMutationDoc = graphql(`
   mutation createDatasetMutation($dataset_data: CreateDatasetInput) {
