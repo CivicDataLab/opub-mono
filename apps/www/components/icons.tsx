@@ -3,9 +3,11 @@ import {
   IconArrowRight,
   IconBarrierBlock,
   IconBellFilled,
+  IconCloudUpload,
   IconDatabase,
   IconDatabaseCog,
   IconDatabasePlus,
+  IconFilePlus,
   IconFolder,
   IconLayoutSidebarLeftCollapse,
   IconLayoutSidebarLeftExpand,
@@ -32,4 +34,6 @@ export const Icons: {
   link: IconLink,
   collapse: IconLayoutSidebarLeftCollapse,
   expand: IconLayoutSidebarLeftExpand,
+  distribution: IconFilePlus,
+  dropzone: IconCloudUpload,
 };

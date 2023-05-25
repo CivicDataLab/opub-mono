@@ -67,7 +67,7 @@ export async function generateMetadata({ params: { locale } }: Props) {
     icons: {
       icon: '/favicon.ico',
       shortcut: '/favicon-16x16.png',
-      apple: '/apple-touch-icon.png',
+      apple: `${siteConfig.url}/apple-touch-icon.png`,
     },
     manifest: `${siteConfig.url}/site.webmanifest`,
   };

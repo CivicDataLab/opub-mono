@@ -1,9 +1,9 @@
 'use client';
 
 import React from 'react';
-import { useRouter } from 'next/navigation';
 import { graphql } from '@/gql';
 import { ResourceInput } from '@/gql/generated/graphql';
+import { usePRouter } from '@/hooks/use-prouter';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { GraphQL } from '@/lib/api';
@@ -61,7 +61,7 @@ const createResourceMutationDoc = graphql(`
 `);
 
 export function DistibutionPage({ params }: { params: { id: string } }) {
-  const router = useRouter();
+  const router = usePRouter();
   const submitRef = React.useRef<HTMLButtonElement>(null);
 
   const { data } = useQuery([`dataset_distribution_${params.id}`], () =>
@@ -79,31 +79,12 @@ export function DistibutionPage({ params }: { params: { id: string } }) {
         queryClient.invalidateQueries({
           queryKey: [`dataset_distribution_${params.id}`],
         });
-        // router.push(
-        //   `/dashboard/dataset/${data.create_resource?.resource?.dataset?.id}/edit/distribution`
-        // );
       },
     }
   );
 
   return (
     <>
-      <ActionBar
-        title={data?.dataset?.title || 'Untitled Dataset'}
-        primaryAction={{
-          content: 'Save Dataset',
-          onAction: () => submitRef.current?.click(),
-        }}
-        secondaryAction={{
-          content: 'Cancel',
-          onAction: () => router.push('/dashboard/dataset'),
-        }}
-        previousPage={{
-          link: `dashboard/dataset/${params.id}/edit/metadata`,
-          content: 'Edit Metadata',
-        }}
-        isLoading={isLoading}
-      />
       <EditDistribution
         submitRef={submitRef}
         id={params.id}

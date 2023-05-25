@@ -2,16 +2,20 @@
 
 .DataTable {
   --op-data-table-first-column-width: 145px;
-  position: relative;
   max-width: 100vw;
   background-color: var(--surface);
   border-radius: var(--border-radius-2);
+  box-shadow: var(--shadow-card);
 }
 
 .ScrollContainer {
   -webkit-overflow-scrolling: touch;
   scroll-behavior: smooth;
   background-color: inherit;
+  border-radius: var(--border-radius-2);
+  width: 100%;
+  overflow-x: auto;
+  position: relative;
 }
 
 .Table {
@@ -19,7 +23,9 @@
   border-spacing: 0;
   border-collapse: separate;
   font-size: var(--font-size-100);
-  position: relative;
+
+  border-radius: var(--border-radius-2) var(--border-radius-2) 0 0;
+  background-color: var(--surface);
 
   thead {
     &.ItemsSelected {
@@ -31,13 +37,6 @@
 
 .TableHeaderRow {
   background-color: var(--surface-subdued);
-
-  .Header-Sticky {
-    position: sticky;
-    top: 0;
-    z-index: 1;
-    background-color: var(--surface-subdued);
-  }
 }
 
 .SelectedWrapper {
@@ -289,8 +288,8 @@
 }
 
 .Checkbox {
+  --checkbox-size: 16px;
   &.Cell {
-    padding: 0;
     padding-left: var(--space-4);
   }
 
@@ -303,6 +302,6 @@
   }
 
   button {
-    --size: 16px;
+    --size: var(--checkbox-size);
   }
 }

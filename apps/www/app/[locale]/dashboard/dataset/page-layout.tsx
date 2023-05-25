@@ -1,13 +1,12 @@
 'use client';
 
-import React from 'react';
-import { useRouter } from 'next/navigation';
 import { graphql } from '@/gql';
+import { usePRouter } from '@/hooks/use-prouter';
 import { useQuery } from '@tanstack/react-query';
 
 import { GraphQL } from '@/lib/api';
-import { ActionBar } from './action-bar';
-import { Content } from './content';
+import { ActionBar } from './components/action-bar';
+import { Content } from './components/content';
 
 const allDatasetsQueryDoc = graphql(`
   query allDatasetsQuery {
@@ -24,7 +23,7 @@ export const Page = () => {
     GraphQL(allDatasetsQueryDoc)
   );
 
-  const router = useRouter();
+  const router = usePRouter();
   // React.useEffect(() => {
   //   router.prefetch('/dashboard/dataset/new');
   // }, []);

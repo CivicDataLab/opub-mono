@@ -20,6 +20,7 @@ export type FormProps = {
 export const Form: React.FunctionComponent<FormProps> = function (
   props: FormProps
 ) {
+  const formRef = React.useRef<HTMLFormElement>(null);
   const [submitSuccess, setSubmitSuccess] = React.useState(false);
   const {
     formOptions = {},
@@ -38,6 +39,31 @@ export const Form: React.FunctionComponent<FormProps> = function (
     methods.reset(formOptions.defaultValues);
   }, [formOptions.defaultValues]);
 
+  // Press cmd + enter to submit form
+  function downHandler({
+    key,
+    metaKey,
+  }: {
+    key: string;
+    metaKey?: boolean;
+  }): void {
+    if (key === 'Enter' && metaKey) {
+      formRef.current?.dispatchEvent(
+        new Event('submit', { cancelable: true, bubbles: true })
+      );
+    }
+  }
+
+  // Add event listeners to handle cmd + enter
+  React.useEffect(() => {
+    formRef.current?.addEventListener('keydown', downHandler);
+    // Remove event listeners on cleanup
+    return () => {
+      formRef.current?.removeEventListener('keydown', downHandler);
+    };
+  }, []);
+
+  // Reset form after submit success and resetValues is provided
   React.useEffect(() => {
     resetValues && submitSuccess && methods.reset(resetValues);
     const timeOut = setTimeout(() => {
@@ -49,6 +75,7 @@ export const Form: React.FunctionComponent<FormProps> = function (
     };
   }, [submitSuccess]);
 
+  // Trigger onChange when values change
   React.useEffect(() => {
     onChange && onChange(values);
   }, [values]);
@@ -56,6 +83,7 @@ export const Form: React.FunctionComponent<FormProps> = function (
   return (
     <FormProvider {...methods}>
       <form
+        ref={formRef}
         {...others}
         onSubmit={methods.handleSubmit((data) => {
           onSubmit && onSubmit(data);

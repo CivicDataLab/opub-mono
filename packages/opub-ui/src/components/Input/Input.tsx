@@ -76,7 +76,9 @@ export const Input = React.forwardRef(
     }: TextFieldProps,
     ref: React.ForwardedRef<HTMLInputElement | null>
   ) => {
-    const [height, setHeight] = useState<number | null>(null);
+    const [height, setHeight] = useState<number | null>(
+      Number(multiline) ? Number(multiline) * 26 : null // assuming 1 line = 26px for textarea
+    );
     const [focus, setFocus] = useState(Boolean(focused));
     const isAfterInitial = useIsAfterInitialMount();
 

@@ -1,9 +1,9 @@
 'use client';
 
 import React from 'react';
-import { useRouter } from 'next/navigation';
 import { graphql } from '@/gql';
 import { PatchDatasetInput } from '@/gql/generated/graphql';
+import { usePRouter } from '@/hooks/use-prouter';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { GraphQL } from '@/lib/api';
@@ -35,7 +35,7 @@ const patchDatasetMutationDoc = graphql(`
 `);
 
 export function EditPage({ params }: { params: { id: string } }) {
-  const router = useRouter();
+  const router = usePRouter();
   const submitRef = React.useRef<HTMLButtonElement>(null);
 
   const { data } = useQuery([`dataset_${params.id}`], () =>
@@ -50,7 +50,9 @@ export function EditPage({ params }: { params: { id: string } }) {
       GraphQL(patchDatasetMutationDoc, data),
     {
       onSuccess: (data) => {
-        queryClient.invalidateQueries({ queryKey: [`dataset_${params.id}`] });
+        queryClient.invalidateQueries({
+          queryKey: [`dataset_${params.id}`, `dataset_layout_${params.id}`],
+        });
         router.push(
           `/dashboard/dataset/${data.patch_dataset?.dataset?.id}/edit/metadata`
         );

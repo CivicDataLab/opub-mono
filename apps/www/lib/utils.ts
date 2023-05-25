@@ -1,7 +1,8 @@
 import { ClassValue, clsx } from 'clsx';
+import { twMerge } from 'tailwind-merge';
 
-export function cn(...inputs: ClassValue[]) {
-  return clsx(inputs);
+export function cn(...inputs: any) {
+  return twMerge(inputs);
 }
 
 export function formatDate(input: string | number): string {
@@ -40,7 +41,6 @@ export const blobToBase64 = function (blob: Blob) {
   reader.onload = function () {
     var dataUrl: any = reader.result;
     var base64 = dataUrl?.split(',')[1];
-    console.log(base64, 'base64');
 
     return base64;
   };

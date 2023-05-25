@@ -20,7 +20,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
     <div
       className={twMerge(
         'grid grid-cols-[8px_1fr] gap-1 grow h-[calc(100% - 60px)] relative',
-        'md:flex md:gap-6'
+        'md:flex'
       )}
     >
       <DashboardNav items={dashboardConfig.sidebarNav} />
