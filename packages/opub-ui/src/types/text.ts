@@ -35,7 +35,8 @@ type Color =
   | 'subdued'
   | 'text-inverse'
   | 'disabled'
-  | 'default';
+  | 'default'
+  | 'inherit';
 
 export const VariantFontWeightMapping: { [V in Variant]: FontWeight } = {
   headingXs: 'semibold',

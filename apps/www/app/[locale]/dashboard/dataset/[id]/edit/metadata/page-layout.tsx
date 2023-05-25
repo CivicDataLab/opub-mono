@@ -7,7 +7,6 @@ import { usePRouter } from '@/hooks/use-prouter';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { GraphQL } from '@/lib/api';
-import { ActionBar } from '../../../components/action-bar';
 import { EditMetadata } from '../components/EditMetadata';
 
 const datasetQueryDoc = graphql(`
@@ -18,7 +17,12 @@ const datasetQueryDoc = graphql(`
       description
       source
       update_frequency
+      language
       remote_issued
+      geography {
+        name
+        id
+      }
       tags {
         id
         name
@@ -38,6 +42,10 @@ const updateDatasetMutationDoc = graphql(`
         description
         remote_issued
         update_frequency
+        geography {
+          name
+          id
+        }
         source
         tags {
           id
@@ -72,35 +80,15 @@ export function MetadataPage({ params }: { params: { id: string } }) {
     }
   );
 
-  // React.useEffect(() => {
-  //   router.prefetch(`/dashboard/dataset/${params.id}/edit/distribution`);
-  // }, []);
-
   return (
     <>
-      <ActionBar
-        title={data?.dataset?.title || 'Untitled Dataset'}
-        primaryAction={{
-          content: 'Save & Next',
-          onAction: () => submitRef.current?.click(),
-        }}
-        secondaryAction={{
-          content: 'Cancel',
-          onAction: () => router.push('/dashboard/dataset'),
-        }}
-        previousPage={{
-          link: `/dashboard/dataset/${params.id}/edit`,
-          content: 'Edit Page',
-        }}
-        isLoading={isLoading}
-      />
       <EditMetadata
         submitRef={submitRef}
         id={params.id}
         defaultVal={{
           id: params.id,
-          source: data?.dataset?.source || '',
-          remote_issued: data?.dataset?.remote_issued || '',
+          language: data?.dataset?.language || '',
+          geo_list: data?.dataset?.geography?.map((geo) => geo.name) || [],
           update_frequency: data?.dataset?.update_frequency || '',
           tags_list: data?.dataset?.tags?.map((tag) => tag.name) || [],
         }}

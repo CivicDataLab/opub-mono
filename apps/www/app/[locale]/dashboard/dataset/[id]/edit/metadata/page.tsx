@@ -14,7 +14,12 @@ const datasetQueryDoc = graphql(`
       description
       source
       update_frequency
+      language
       remote_issued
+      geography {
+        name
+        id
+      }
       tags {
         id
         name

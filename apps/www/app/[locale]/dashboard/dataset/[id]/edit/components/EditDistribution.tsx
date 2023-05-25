@@ -9,8 +9,8 @@ import {
   Text,
   Thumbnail,
 } from '@opub-cdl/ui';
-import { IconFile } from '@tabler/icons-react';
 
+import { Icons } from '@/components/icons';
 import { DatasetForm } from '../../../components/dataset-form';
 import styles from '../edit.module.scss';
 
@@ -34,7 +34,7 @@ export function EditDistribution({
   mutate: (res: { resource_data: ResourceInput }) => void;
 }) {
   return (
-    <Box paddingBlockStart="6" maxWidth="944px">
+    <>
       <DatasetForm
         onSubmit={async (data: {
           title: string;
@@ -54,7 +54,6 @@ export function EditDistribution({
           });
         }}
         formOptions={{ defaultValues: defaultVal }}
-        // onChange={setVal}
         submitRef={submitRef}
       >
         <div className={styles.EditDataset}>
@@ -100,7 +99,7 @@ export function EditDistribution({
           </Box>
         </div>
       </DatasetForm>
-    </Box>
+    </>
   );
 }
 
@@ -147,7 +146,7 @@ const FileUpload = ({
           source={
             validImageTypes.includes(file.type)
               ? window.URL.createObjectURL(file)
-              : IconFile
+              : Icons.dropzone
           }
         />
 

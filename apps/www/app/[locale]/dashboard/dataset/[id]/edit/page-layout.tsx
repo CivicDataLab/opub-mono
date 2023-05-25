@@ -50,7 +50,9 @@ export function EditPage({ params }: { params: { id: string } }) {
       GraphQL(patchDatasetMutationDoc, data),
     {
       onSuccess: (data) => {
-        queryClient.invalidateQueries({ queryKey: [`dataset_${params.id}`] });
+        queryClient.invalidateQueries({
+          queryKey: [`dataset_${params.id}`, `dataset_layout_${params.id}`],
+        });
         router.push(
           `/dashboard/dataset/${data.patch_dataset?.dataset?.id}/edit/metadata`
         );

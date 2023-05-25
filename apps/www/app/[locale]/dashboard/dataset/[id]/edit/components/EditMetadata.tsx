@@ -1,18 +1,20 @@
 import React from 'react';
 import { UpdateDatasetInput } from '@/gql/generated/graphql';
 import {
-  Box,
+  Button,
   ComboboxMulti,
-  DatePicker,
   Divider,
   FormLayout,
-  Input,
   Select,
   Text,
 } from '@opub-cdl/ui';
 
 import { DatasetForm } from '../../../components/dataset-form';
 import styles from '../edit.module.scss';
+
+interface DefaultValues extends Omit<UpdateDatasetInput, 'geo_list'> {
+  geo_list: string[];
+}
 
 export function EditMetadata({
   defaultVal,
@@ -21,22 +23,23 @@ export function EditMetadata({
   mutate,
 }: {
   id: string;
-  defaultVal: UpdateDatasetInput;
+  defaultVal: DefaultValues;
   submitRef: React.RefObject<HTMLButtonElement>;
   isLoading: boolean;
   mutate: (res: { dataset_data: UpdateDatasetInput }) => void;
 }) {
   return (
-    <Box paddingBlockStart="6" maxWidth="944px">
+    <>
       <DatasetForm
         onSubmit={(value: UpdateDatasetInput) => {
           mutate({
             dataset_data: {
               id: defaultVal.id,
-              source: value.source,
               update_frequency: value.update_frequency,
               tags_list: value.tags_list,
-              remote_issued: value.remote_issued,
+              geo_list: value.geo_list,
+              language: value.language,
+              source: '',
             },
           });
         }}
@@ -46,15 +49,12 @@ export function EditMetadata({
         <div className={styles.EditDataset}>
           <div className="flex flex-col gap-1">
             <Text variant="headingMd">Add Metadata</Text>
-            <Text variant="bodyMd" color="subdued">
-              Source, Date of Creation, Update Frequency, etc.
-            </Text>
           </div>
           <div className="my-4">
             <Divider />
           </div>
 
-          <Box paddingBlockStart="3">
+          <div className="pt-3">
             <FormLayout>
               <FormLayout.Group>
                 <Select
@@ -77,10 +77,10 @@ export function EditMetadata({
                   label="Language"
                   helpText="What language is this dataset in?"
                   options={[
-                    { label: 'Daily', value: 'daily' },
-                    { label: 'Weekly', value: 'weekly' },
-                    { label: 'Monthly', value: 'monthly' },
-                    { label: 'Yearly', value: 'yearly' },
+                    { label: 'English', value: 'english' },
+                    { label: 'Hindi', value: 'hindi' },
+                    { label: 'Spanish', value: 'spanish' },
+                    { label: 'French', value: 'french' },
                   ]}
                   placeholder="Select"
                   required
@@ -91,9 +91,9 @@ export function EditMetadata({
 
               <FormLayout.Group>
                 <ComboboxMulti
-                  name="geography"
+                  name="geo_list"
                   label="Geography"
-                  helpText="Which geography does this data belong to?"
+                  // helpText="Which geography does this data belong to?"
                   placeholder="Search Locations"
                   defaultList={['United States', 'Canada', 'Mexico', 'India']}
                   verticalContent
@@ -105,7 +105,7 @@ export function EditMetadata({
                   name="tags_list"
                   label="Tags"
                   placeholder="Search Tags"
-                  helpText="Any other tags or keywords that can help people discover your dataset"
+                  // helpText="Any other tags or keywords that can help people discover your dataset"
                   defaultList={[
                     'Health',
                     'Education',
@@ -121,9 +121,18 @@ export function EditMetadata({
                 />
               </FormLayout.Group>
             </FormLayout>
-          </Box>
+          </div>
+          <div className="mt-8">
+            <Divider />
+          </div>
+          <div className="mt-4 flex items-center gap-2 justify-center">
+            <Button>Save & Exit</Button>
+            <Button primary submit>
+              Save & Proceed
+            </Button>
+          </div>
         </div>
       </DatasetForm>
-    </Box>
+    </>
   );
 }

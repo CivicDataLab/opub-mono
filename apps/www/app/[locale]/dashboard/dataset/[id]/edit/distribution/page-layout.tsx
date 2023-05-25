@@ -79,31 +79,12 @@ export function DistibutionPage({ params }: { params: { id: string } }) {
         queryClient.invalidateQueries({
           queryKey: [`dataset_distribution_${params.id}`],
         });
-        // router.push(
-        //   `/dashboard/dataset/${data.create_resource?.resource?.dataset?.id}/edit/distribution`
-        // );
       },
     }
   );
 
   return (
     <>
-      <ActionBar
-        title={data?.dataset?.title || 'Untitled Dataset'}
-        primaryAction={{
-          content: 'Save Dataset',
-          onAction: () => submitRef.current?.click(),
-        }}
-        secondaryAction={{
-          content: 'Cancel',
-          onAction: () => router.push('/dashboard/dataset'),
-        }}
-        previousPage={{
-          link: `dashboard/dataset/${params.id}/edit/metadata`,
-          content: 'Edit Metadata',
-        }}
-        isLoading={isLoading}
-      />
       <EditDistribution
         submitRef={submitRef}
         id={params.id}
