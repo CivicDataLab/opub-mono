@@ -10,7 +10,7 @@ import {
   Input,
   Select,
   Text,
-} from '@opub-cdl/ui/src';
+} from '@opub-cdl/ui';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { GraphQL } from '@/lib/api';
@@ -225,7 +225,7 @@ const FileUpload = ({
   const fileUpload = !file && <DropZone.FileUpload actionHint={hint} />;
   const uploadedFile = file && (
     <div className="flex items-center justify-center h-full py-16">
-      <div className="flex gap-3 items-center py-2 px-3 rounded-05 border-borderSubdued border-1 border-solid">
+      <div className="flex gap-3 items-center py-2 px-3 rounded-05 border-borderSubdued border-1 border-solid bg-surface">
         <Icon source={Icons.check} size="6" color="success" />
 
         <div className="flex flex-col">

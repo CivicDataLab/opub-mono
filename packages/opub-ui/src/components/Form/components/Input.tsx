@@ -17,6 +17,7 @@ const Input = ({ required, error, ...props }: TextfieldProps) => {
             {...field}
             {...props}
             error={fieldState.invalid && error}
+            isRequired={required}
             onChange={(val, name) => {
               props.onChange && props.onChange(val, name);
               field.onChange(val);

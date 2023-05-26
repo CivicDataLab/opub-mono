@@ -4,7 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { graphql } from '@/gql';
-import { Button, Icon, SkeletonDisplayText, Text } from '@opub-cdl/ui/src';
+import { Button, Icon, SkeletonDisplayText, Text } from '@opub-cdl/ui';
 import { useQuery } from '@tanstack/react-query';
 
 import { GraphQL } from '@/lib/api';

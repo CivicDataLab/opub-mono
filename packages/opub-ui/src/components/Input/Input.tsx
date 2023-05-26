@@ -73,6 +73,7 @@ export const Input = React.forwardRef(
       onFocus,
       onBlur,
       required,
+      isRequired,
     }: TextFieldProps,
     ref: React.ForwardedRef<HTMLInputElement | null>
   ) => {
@@ -407,7 +408,7 @@ export const Input = React.forwardRef(
         action={labelAction}
         labelHidden={labelHidden}
         helpText={helpText}
-        requiredIndicator={requiredIndicator}
+        requiredIndicator={requiredIndicator || isRequired || required}
       >
         <Connected left={connectedLeft} right={connectedRight}>
           <div className={className} onClick={handleClick}>
