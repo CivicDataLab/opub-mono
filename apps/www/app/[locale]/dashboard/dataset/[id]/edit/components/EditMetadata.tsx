@@ -46,7 +46,7 @@ export function EditMetadata({
         formOptions={{ defaultValues: defaultVal }}
         submitRef={submitRef}
       >
-        <div className={styles.EditDataset}>
+        <>
           <div className="flex flex-col gap-1">
             <Text variant="headingMd">Add Metadata</Text>
           </div>
@@ -131,7 +131,7 @@ export function EditMetadata({
               Save & Proceed
             </Button>
           </div>
-        </div>
+        </>
       </DatasetForm>
     </>
   );

@@ -445,8 +445,6 @@
   &:focus:not(.disabled) {
     @include recolor-icon(var(--interactive-hovered));
     color: var(--interactive-hovered);
-    background: transparent;
-    box-shadow: none;
 
     &:not(.removeUnderline) {
       text-decoration: underline;
