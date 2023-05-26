@@ -12,108 +12,17 @@ import {
   Sheet,
   Tabs,
   Text,
+  Carousel
 } from '@opub-cdl/ui';
-import { Carousel } from '@opub-cdl/ui/src';
-import { IconArrowLeft, IconArrowRight } from '@tabler/icons-react';
 
 import styles from './snapshot.module.scss';
 
-export default function Snapshot() {
-  const res = [
-    {
-      text: 'Area \r\n(Sq. Km.)',
-      value: '2,830',
-    },
-    {
-      text: 'Total Population',
-      value: '28,11,569',
-    },
-    {
-      text: 'Female Population ',
-      value: '13,48,236',
-    },
-    {
-      text: 'Sex Ratio (Females per 1,000 Males)',
-      value: '1,094',
-    },
-    {
-      text: 'Sex Ratio (Females per 1,000 Males)',
-      value: '1,094',
-    },
-    {
-      text: 'Sex Ratio (Females per 1,000 Males)',
-      value: '1,094',
-    },
-    {
-      text: 'Sex Ratio (Females per 1,000 Males)',
-      value: '1,094',
-    },
-    {
-      text: 'Sex Ratio (Females per 1,000 Males)',
-      value: '1,094',
-    },
-    {
-      text: 'Sex Ratio (Females per 1,000 Males)',
-      value: '1,094',
-    },
-    {
-      text: 'Sex Ratio (Females per 1,000 Males)',
-      value: '1,094',
-    },
-    {
-      text: 'Sex Ratio (Females per 1,000 Males)',
-      value: '1,094',
-    },
-    {
-      text: 'Sex Ratio (Females per 1,000 Males)',
-      value: '1,094',
-    },
-    {
-      text: 'Sex Ratio (Females per 1,000 Males)',
-      value: '1,094',
-    },
-    {
-      text: 'Sex Ratio (Females per 1,000 Males)',
-      value: '1,094',
-    },
-    {
-      text: 'Sex Ratio (Females per 1,000 Males)',
-      value: '1,094',
-    },
-    {
-      text: 'Sex Ratio (Females per 1,000 Males)',
-      value: '1,094',
-    },
-    {
-      text: 'Sex Ratio (Females per 1,000 Males)',
-      value: '1,094',
-    },
-  ];
+import { SummaryCarousel } from '@/components/Carousel';
 
-  const [currentSlide, setCurrentSlide] = React.useState(1);
-  const [childrenLength, setChildrenLength] = React.useState(3);
+export default function Snapshot() {
 
   const [open, setOpen] = React.useState(false);
 
-  function current(data: number, length: number) {
-    setCurrentSlide(data);
-    setChildrenLength(length);
-  }
-
-  function chunk(items: any, size: any) {
-    const chunks = [];
-    items = [].concat(...items);
-
-    while (items.length) {
-      chunks.push(items.splice(0, size));
-    }
-
-    return chunks;
-  }
-
-  let a: any, b: any, c: any;
-
-  [a, b, c] = chunk(res, 8);
 
   const indicators = [
     {
@@ -177,53 +86,7 @@ export default function Snapshot() {
       <Text as="h1" variant="heading3xl" fontWeight="bold">
         Araria
       </Text>
-      <Box padding="5">
-        <div className="flex justify-between">
-          <Text as="h1" variant="headingXl" fontWeight="bold">
-            <div className=" mb-2">Demographic highlights</div>
-          </Text>
-          <div className="rounded-sm p-2 bg-[color:var(--border-disabled)]">
-            SHOWING 0{currentSlide} / 0{childrenLength}
-          </div>
-        </div>
-        <div className={styles.Carousel}>
-          <Carousel
-            label=" "
-            nextBtn={<IconArrowRight />}
-            prevBtn={<IconArrowLeft />}
-            current={current}
-          >
-            <ul>
-              {a?.map((item: any, index: any) => (
-                <li key={`summary-${index}`}>
-                  <div></div>
-                  <strong>{item.value}</strong>
-                  <span>{item.text}</span>
-                </li>
-              ))}
-            </ul>
-            <ul>
-              {b?.map((item: any, index: any) => (
-                <li key={`summary-${index}`}>
-                  <div></div>
-                  <strong>{item.value}</strong>
-                  <span>{item.text}</span>
-                </li>
-              ))}
-            </ul>
-            <ul>
-              {c?.map((item: any, index: any) => (
-                <li key={`summary-${index}`}>
-                  <div></div>
-                  <strong>{item.value}</strong>
-                  <span>{item.text}</span>
-                </li>
-              ))}
-            </ul>
-          </Carousel>
-        </div>
-      </Box>
-
+      <SummaryCarousel />
       <Divider borderStyle="divider" />
 
       <div className="mt-8 mb-8">
