@@ -31,7 +31,7 @@ export interface BaseButtonProps {
   /** Indicates the current checked state of the button when acting as a toggle or switch */
   ariaChecked?: 'false' | 'true';
   /** Callback when clicked */
-  onClick?(e?: React.MouseEvent<HTMLButtonElement>): void;
+  onClick?(e?: React.MouseEvent<any>): void;
   /** Callback when button becomes focussed */
   onFocus?(e: FocusEvent<Element, Element>): void;
   /** Callback when focus leaves button */
