@@ -8,12 +8,23 @@ import NextTopLoader from 'nextjs-toploader';
 import NProgress from 'nprogress';
 import { SSRProvider } from 'react-aria';
 
+import { shallow, useIsNavigating } from '@/config/store';
+
+const selector = (state: {
+  setIsNavigation: (isNavigating: boolean) => void;
+}) => ({
+  setIsNavigation: state.setIsNavigation,
+});
+
 export default function Provider({ children }: { children: React.ReactNode }) {
+  const { setIsNavigation } = useIsNavigating(selector, shallow);
   const pathname = usePathname();
+  const searchParams = useSearchParams();
 
   useEffect(() => {
     NProgress.done();
-  }, [pathname]);
+    setIsNavigation(false);
+  }, [pathname, searchParams]);
 
   const [client] = React.useState(
     new QueryClient({
