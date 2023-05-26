@@ -2,10 +2,13 @@ import React from 'react';
 import { FileInputType, ResourceInput } from '@/gql/generated/graphql';
 import {
   Box,
+  Button,
   Divider,
   DropZone,
   FormLayout,
+  Icon,
   Input,
+  Select,
   Text,
   Thumbnail,
 } from '@opub-cdl/ui';
@@ -59,15 +62,12 @@ export function EditDistribution({
         <div className={styles.EditDataset}>
           <div className="flex flex-col gap-1">
             <Text variant="headingMd">Add Distribution</Text>
-            <Text variant="bodyMd" color="subdued">
-              Upload files and add details
-            </Text>
           </div>
-          <div className="my-4">
+          <div className="pt-4">
             <Divider />
           </div>
 
-          <Box paddingBlockStart="3">
+          <div className="pt-4">
             <FormLayout>
               <FileUpload
                 disabled={isLoading}
@@ -75,28 +75,65 @@ export function EditDistribution({
                 error="This field is required"
               />
               <Input
-                name="title"
-                label="Title"
-                maxLength={30}
-                showCharacterCount
-                autoComplete="off"
-                required
+                name="url"
+                label="OR enter URL:"
+                placeholder="link to your file"
+                prefix={<Icon source={Icons.link} />}
                 error="This field is required"
                 readOnly={isLoading}
               />
-              <Input
-                name="description"
-                label="Description"
-                maxLength={300}
-                multiline={4}
-                showCharacterCount
-                autoComplete="off"
-                required
-                error="This field is required"
-                readOnly={isLoading}
-              />
+              <FormLayout.Group>
+                <FormLayout>
+                  <Input
+                    name="title"
+                    label="Name of Distribution"
+                    maxLength={30}
+                    showCharacterCount
+                    autoComplete="off"
+                    required
+                    error="This field is required"
+                    readOnly={isLoading}
+                  />
+                  <Select
+                    name="language"
+                    label="Language"
+                    required
+                    error="This field is required"
+                    disabled={isLoading}
+                    helpText="Which language is the distribution in?"
+                    options={[
+                      { label: 'English', value: 'en' },
+                      { label: 'Hindi', value: 'hi' },
+                      { label: 'French', value: 'fr' },
+                    ]}
+                  />
+                </FormLayout>
+                <Input
+                  name="description"
+                  label="Description"
+                  maxLength={300}
+                  multiline={3}
+                  showCharacterCount
+                  autoComplete="off"
+                  required
+                  error="This field is required"
+                  readOnly={isLoading}
+                />
+              </FormLayout.Group>
             </FormLayout>
-          </Box>
+          </div>
+          <div className="pt-6">
+            <Divider />
+          </div>
+          <div className="py-4 flex items-center gap-4 flex-wrap justify-between">
+            <Button plain>Cancel</Button>
+            <div className="flex items-center gap-4 flex-wrap">
+              <Button loading={isLoading}>Save & Finish</Button>
+              <Button primary loading={isLoading}>
+                Save & Add Another
+              </Button>
+            </div>
+          </div>
         </div>
       </DatasetForm>
     </>
