@@ -1,25 +1,49 @@
 import React from 'react';
+import { graphql } from '@/gql';
 import { FileInputType, ResourceInput } from '@/gql/generated/graphql';
 import {
-  Box,
+  Button,
   Divider,
   DropZone,
   FormLayout,
+  Icon,
   Input,
+  Select,
   Text,
-  Thumbnail,
 } from '@opub-cdl/ui';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
+import { GraphQL } from '@/lib/api';
+import { bytesToSize } from '@/lib/utils';
 import { Icons } from '@/components/icons';
 import { DatasetForm } from '../../../components/dataset-form';
-import styles from '../edit.module.scss';
 
-export function EditDistribution({
-  defaultVal,
-  submitRef,
-  isLoading,
-  mutate,
-}: {
+const createResourceMutationDoc = graphql(`
+  mutation createResourceMutation($resource_data: ResourceInput) {
+    create_resource(resource_data: $resource_data) {
+      success
+      errors
+      resource {
+        id
+        title
+        description
+        file_details {
+          resource {
+            id
+            title
+            description
+          }
+          format
+          file
+          remote_url
+          source_file_name
+        }
+      }
+    }
+  }
+`);
+
+interface Props {
   id: string;
   defaultVal: {
     id: string;
@@ -30,9 +54,31 @@ export function EditDistribution({
     }[];
   };
   submitRef: React.RefObject<HTMLButtonElement>;
-  isLoading: boolean;
-  mutate: (res: { resource_data: ResourceInput }) => void;
-}) {
+  setPage: (page: 'list' | 'create') => void;
+}
+
+export function EditDistribution({
+  id,
+  defaultVal,
+  submitRef,
+  setPage,
+}: Props) {
+  // const [val, setVal] = React.useState(defaultVal);
+  const [fileSelected, setFileSelected] = React.useState(false);
+
+  const queryClient = useQueryClient();
+  const { mutate, isLoading } = useMutation(
+    (data: { resource_data: ResourceInput }) =>
+      GraphQL(createResourceMutationDoc, data),
+    {
+      onSuccess: (data) => {
+        queryClient.invalidateQueries({
+          queryKey: [`dataset_distribution_${id}`],
+        });
+      },
+    }
+  );
+
   return (
     <>
       <DatasetForm
@@ -55,49 +101,86 @@ export function EditDistribution({
         }}
         formOptions={{ defaultValues: defaultVal }}
         submitRef={submitRef}
+        // onChange={setVal}
       >
-        <div className={styles.EditDataset}>
-          <div className="flex flex-col gap-1">
-            <Text variant="headingMd">Add Distribution</Text>
-            <Text variant="bodyMd" color="subdued">
-              Upload files and add details
-            </Text>
-          </div>
-          <div className="my-4">
+        <>
+          <Text variant="headingMd">Add Distribution</Text>
+          <div className="pt-4">
             <Divider />
           </div>
 
-          <Box paddingBlockStart="3">
+          <div className="pt-4">
             <FormLayout>
               <FileUpload
                 disabled={isLoading}
                 required
                 error="This field is required"
+                setFileSelected={setFileSelected}
               />
               <Input
-                name="title"
-                label="Title"
-                maxLength={30}
-                showCharacterCount
-                autoComplete="off"
-                required
+                name="url"
+                label="OR enter URL:"
+                placeholder="link to your file"
+                prefix={<Icon source={Icons.link} />}
                 error="This field is required"
                 readOnly={isLoading}
+                disabled={fileSelected}
               />
-              <Input
-                name="description"
-                label="Description"
-                maxLength={300}
-                multiline={4}
-                showCharacterCount
-                autoComplete="off"
-                required
-                error="This field is required"
-                readOnly={isLoading}
-              />
+              <FormLayout.Group>
+                <FormLayout>
+                  <Input
+                    name="title"
+                    label="Name of Distribution"
+                    maxLength={30}
+                    showCharacterCount
+                    autoComplete="off"
+                    required
+                    error="This field is required"
+                    readOnly={isLoading}
+                  />
+                  <Select
+                    name="language"
+                    label="Language"
+                    required
+                    error="This field is required"
+                    disabled={isLoading}
+                    helpText="Which language is the distribution in?"
+                    options={[
+                      { label: 'English', value: 'en' },
+                      { label: 'Hindi', value: 'hi' },
+                      { label: 'French', value: 'fr' },
+                    ]}
+                  />
+                </FormLayout>
+                <Input
+                  name="description"
+                  label="Description"
+                  maxLength={300}
+                  multiline={3}
+                  showCharacterCount
+                  autoComplete="off"
+                  required
+                  error="This field is required"
+                  readOnly={isLoading}
+                />
+              </FormLayout.Group>
             </FormLayout>
-          </Box>
-        </div>
+          </div>
+          <div className="pt-6">
+            <Divider />
+          </div>
+          <div className="py-4 flex items-center gap-4 flex-wrap justify-between">
+            <Button plain onClick={() => setPage('list')}>
+              Cancel
+            </Button>
+            <div className="flex items-center gap-4 flex-wrap">
+              <Button loading={isLoading}>Save & Finish</Button>
+              <Button primary loading={isLoading}>
+                Save & Add Another
+              </Button>
+            </div>
+          </div>
+        </>
       </DatasetForm>
     </>
   );
@@ -107,19 +190,28 @@ const FileUpload = ({
   required,
   error,
   disabled,
+  setFileSelected,
 }: {
   required?: boolean;
   error?: string;
   disabled?: boolean;
+  setFileSelected: (val: boolean) => void;
 }) => {
   const [file, setFile] = React.useState<File>();
 
   const handleDropZoneDrop = React.useCallback(
     (_dropFiles: File[], acceptedFiles: File[]) => {
       setFile(acceptedFiles[0]);
+      setFileSelected(true);
     },
     []
   );
+
+  function handleFileDelete(props: React.MouseEvent<HTMLButtonElement>) {
+    props.stopPropagation();
+    setFileSelected(false);
+    setFile(undefined);
+  }
 
   const validImageTypes = ['image/gif', 'image/jpeg', 'image/png'];
 
@@ -132,34 +224,29 @@ const FileUpload = ({
 
   const fileUpload = !file && <DropZone.FileUpload actionHint={hint} />;
   const uploadedFile = file && (
-    <Box padding="8">
-      <Box
-        flex
-        gap="2"
-        alignItems="center"
-        justifyContent="center"
-        minHeight="164px"
-      >
-        <Thumbnail
-          size="small"
-          alt={file.name}
-          source={
-            validImageTypes.includes(file.type)
-              ? window.URL.createObjectURL(file)
-              : Icons.dropzone
-          }
-        />
+    <div className="flex items-center justify-center h-full py-16">
+      <div className="flex gap-3 items-center py-2 px-3 rounded-05 border-borderSubdued border-1 border-solid bg-surface">
+        <Icon source={Icons.check} size="6" color="success" />
 
-        <div>
-          <Text variant="bodySm" as="p">
-            {file.name}
-          </Text>{' '}
-          <Text variant="bodySm" as="p">
-            {file.size} bytes
+        <div className="flex flex-col">
+          <div className="max-w-[180px]">
+            <Text variant="headingMd" truncate>
+              {file.name}
+            </Text>
+          </div>
+          <Text variant="bodyMd" color="subdued">
+            {bytesToSize(file.size)}
           </Text>
         </div>
-      </Box>
-    </Box>
+        <Button
+          size="slim"
+          icon={<Icon source={Icons.delete} size="6" />}
+          plain
+          accessibilityLabel="delete resource"
+          onClick={handleFileDelete}
+        />
+      </div>
+    </div>
   );
 
   return (
@@ -171,6 +258,7 @@ const FileUpload = ({
       label="Upload"
       onChange={handleDropZoneDrop}
       disabled={disabled}
+      labelHidden
     >
       {uploadedFile}
       {fileUpload}

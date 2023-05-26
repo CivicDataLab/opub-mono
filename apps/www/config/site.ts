@@ -10,7 +10,7 @@ export const siteConfig: SiteConfig = {
 export const locales = ['en', 'hi'];
 
 export const gqlConfig = {
-  url: 'http://13.233.164.47/graphql',
+  url: 'https://opub-backend.civicdatalab.in/graphql',
   headers: {
     organization: '1',
   },

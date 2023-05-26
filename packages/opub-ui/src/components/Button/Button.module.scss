@@ -324,7 +324,6 @@
 .Icon {
   margin-left: calc(-1 * (var(--space-1)));
   line-height: 0;
-  width: 20px;
 
   &:last-child {
     margin-right: var(--button-disclosure-icon-offset);
@@ -445,8 +444,6 @@
   &:focus:not(.disabled) {
     @include recolor-icon(var(--interactive-hovered));
     color: var(--interactive-hovered);
-    background: transparent;
-    box-shadow: none;
 
     &:not(.removeUnderline) {
       text-decoration: underline;
@@ -568,18 +565,18 @@
 }
 
 .iconOnly {
-  padding-left: var(--space-2);
-  padding-right: var(--space-2);
+  // padding-left: var(--space-2);
+  // padding-right: var(--space-2);
 
-  &.sizeLarge {
-    padding-left: var(--space-3);
-    padding-right: var(--space-3);
-  }
+  // &.sizeLarge {
+  //   padding-left: var(--space-3);
+  //   padding-right: var(--space-3);
+  // }
 
-  &.sizeSlim {
-    padding-left: var(--space-1);
-    padding-right: var(--space-1);
-  }
+  // &.sizeSlim {
+  //   padding-left: var(--space-1);
+  //   padding-right: var(--space-1);
+  // }
 
   .Icon:first-of-type {
     margin-left: 0;

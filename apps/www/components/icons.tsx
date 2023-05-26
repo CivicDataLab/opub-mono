@@ -3,6 +3,7 @@ import {
   IconArrowRight,
   IconBarrierBlock,
   IconBellFilled,
+  IconCircleCheckFilled,
   IconCloudUpload,
   IconDatabase,
   IconDatabaseCog,
@@ -13,17 +14,16 @@ import {
   IconLayoutSidebarLeftExpand,
   IconLink,
   IconSearch,
+  IconTrash,
   IconUserCog,
-  TablerIconsProps,
+  // TablerIconsProps,
 } from '@tabler/icons-react';
 
-export const Icons: {
-  [key: string]: (props: TablerIconsProps) => React.ReactElement;
-} = {
+export const Icons = {
   back: IconArrowLeft,
   logo: IconFolder,
-  dataset: IconDatabase,
   datasetSettings: IconDatabaseCog,
+  dataset: IconDatabase,
   addDataset: IconDatabasePlus,
   userSettings: IconUserCog,
   arrowRight: IconArrowRight,
@@ -36,4 +36,6 @@ export const Icons: {
   expand: IconLayoutSidebarLeftExpand,
   distribution: IconFilePlus,
   dropzone: IconCloudUpload,
+  check: IconCircleCheckFilled,
+  delete: IconTrash,
 };
