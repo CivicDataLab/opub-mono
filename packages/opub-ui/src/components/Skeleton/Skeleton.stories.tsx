@@ -1,10 +1,8 @@
-import { Meta, StoryObj } from '@storybook/react';
 import { Skeleton } from './Skeleton';
+import { Meta, StoryObj } from '@storybook/react';
 
 /**
- * Skeleton Description
- *
- * Reference: #
+ * Skeleton primitive to show a placeholder while content is loading
  */
 const meta = {
   component: Skeleton,
@@ -14,7 +12,15 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
+  render: ({ ...args }) => {
+    return (
+      <div>
+        <Skeleton {...args} />
+      </div>
+    );
+  },
   args: {
-    children: 'Skeleton',
+    style: { height: '32px', width: '100%' },
+    className: 'supports-tailwind-classes',
   },
 };

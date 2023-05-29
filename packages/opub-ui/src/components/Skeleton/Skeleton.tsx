@@ -1,13 +1,6 @@
 import { cn } from '../../utils';
 import styles from './Skeleton.module.scss';
-import cx from 'classnames';
-import React, { forwardRef } from 'react';
-
-type Props = {
-  // children: React.ReactNode
-};
-
-// import { cn } from "@/lib/utils"
+import React from 'react';
 
 function Skeleton({
   className,
