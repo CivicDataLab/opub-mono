@@ -58,3 +58,4 @@ export { Thumbnail } from './Thumbnail';
 export { Toast, Toaster } from './Toast';
 export { Tooltip } from './Tooltip';
 export { Carousel } from "./Carousel";
+export { Skeleton } from "./Skeleton";
