@@ -59,6 +59,8 @@ export interface TextProps {
   as?: Element;
   /** Prevent text from overflowing */
   breakWord?: boolean;
+  /** Prevent text from breaking */
+  noBreak?: boolean;
   /** Text to display */
   children: ReactNode;
   /** Adjust color of text */

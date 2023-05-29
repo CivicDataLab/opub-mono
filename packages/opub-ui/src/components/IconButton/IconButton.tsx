@@ -45,7 +45,7 @@ const IconButton = forwardRef((props: IconButtonProps, ref: any) => {
         }}
       >
         <Text visuallyHidden>{children}</Text>
-        <Icon source={icon} size={iconSize} />
+        <Icon source={icon} size={iconSize} color="base" />
       </button>
     </>
   );

@@ -1,6 +1,6 @@
 'use client';
 
-import { Error, LabelledProps } from '../../../types';
+import { LabelledProps } from '../../../types';
 import { ComboboxSingleProps } from '../../../types/combobox';
 import itemStyles from '../../ActionList/ActionList.module.scss';
 import { Box } from '../../Box';
@@ -23,7 +23,7 @@ export type ComboboxMultiProps = ComboboxSingleProps & {
   values?: string[];
   onValuesChange?: any;
   list?: string[];
-  error?: Error | boolean;
+  error?: boolean | string | React.ReactNode;
   /** Adds an action to the label */
   labelAction?: LabelledProps['action'];
   /** Visually hide the label */

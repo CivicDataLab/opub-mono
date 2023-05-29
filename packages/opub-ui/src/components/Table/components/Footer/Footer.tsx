@@ -1,129 +1,101 @@
 import { cn } from '../../../../utils';
-import { Icon } from '../../../Icon';
+import { IconButton } from '../../../IconButton';
+import { Select } from '../../../Select';
 import { Text } from '../../../Text';
 import styles from './Footer.module.scss';
-import { ChevronLeftMinor, ChevronRightMinor } from '@shopify/polaris-icons';
+import {
+  IconChevronLeft,
+  IconChevronRight,
+  IconChevronsLeft,
+  IconChevronsRight,
+} from '@tabler/icons-react';
 import { Table } from '@tanstack/react-table';
 
-export const Footer = ({
-  table,
-  rowData,
-  hideResultsInFooter,
-  hidePagination,
-}: {
-  table: Table<any>;
-  rowData: {
-    rowMin: number;
-    rowMax: number;
-    total: number;
-    pageIndex: number;
-  };
-  hideResultsInFooter: boolean;
-  hidePagination: boolean;
-}) => {
-  const pageOptions = table.getPageOptions();
+const pageSizeOptions = [10, 25, 50, 100];
 
-  // shorten the text if the table is not paginated
-  const extendedText = hidePagination
-    ? ''
-    : `${rowData.rowMin} - ${rowData.rowMax} of `;
-  const footerText = !hideResultsInFooter ? (
-    <Text
-      variant="bodyMd"
-      color="subdued"
-    >{`Showing ${extendedText}${rowData.total} results`}</Text>
-  ) : null;
+export const Footer = ({ table }: { table: Table<any> }) => {
+  const {
+    getPageOptions,
+    setPageIndex,
+    getCanNextPage,
+    getCanPreviousPage,
+    getPageCount,
+    getState,
+    previousPage,
+    nextPage,
+  } = table;
 
-  const pagination = !hidePagination ? (
+  const paginationMarkup = (
     <div className={styles.Pagination}>
-      <button
-        className={styles.Button}
-        onClick={() => table.previousPage()}
-        disabled={!table.getCanPreviousPage()}
+      <IconButton
+        onClick={() => setPageIndex(0)}
+        disabled={!getCanPreviousPage()}
+        icon={IconChevronsLeft}
       >
-        <div className={styles.Direction}>
-          <Icon source={ChevronLeftMinor} />
-          <Text variant="bodyMd">
-            Previous
-            <Text visuallyHidden> Page</Text>
-          </Text>
-        </div>
-      </button>
-      <div className={styles.PaginationItems}>
-        <PaginateButton
-          pageIndex={rowData.pageIndex}
-          paginateIdx={pageOptions[0]}
-          setPageIndex={table.setPageIndex}
-        />
-        <PaginateButton
-          pageIndex={rowData.pageIndex}
-          paginateIdx={pageOptions[1]}
-          setPageIndex={table.setPageIndex}
-        />
-
-        <span className={cn(styles.Button, styles.Span)}>...</span>
-
-        <PaginateButton
-          pageIndex={rowData.pageIndex}
-          paginateIdx={pageOptions.length - 2}
-          setPageIndex={table.setPageIndex}
-        />
-        <PaginateButton
-          pageIndex={rowData.pageIndex}
-          paginateIdx={pageOptions.length - 1}
-          setPageIndex={table.setPageIndex}
-        />
-      </div>
-      <div className={styles.PaginationItemsMobile}>
-        <Text variant="bodyMd">{`Page 1 of 8`}</Text>
-      </div>
-      <button
-        className={styles.Button}
-        onClick={() => table.nextPage()}
-        disabled={!table.getCanNextPage()}
+        First Page
+      </IconButton>
+      <IconButton
+        onClick={() => previousPage()}
+        disabled={!getCanPreviousPage()}
+        icon={IconChevronLeft}
       >
-        <div className={styles.Direction}>
-          <Text variant="bodyMd">
-            Next
-            <Text visuallyHidden> Page</Text>
-          </Text>
-          <Icon source={ChevronRightMinor} />
-        </div>
-      </button>
-    </div>
-  ) : null;
+        Previous Page
+      </IconButton>
 
-  return (
-    <div
-      className={cn(
-        styles.Footer,
-        (hidePagination || hideResultsInFooter) && styles.HiddenContent
-      )}
-    >
-      {footerText}
-      {pagination}
+      <IconButton
+        onClick={() => nextPage()}
+        disabled={!getCanNextPage()}
+        icon={IconChevronRight}
+      >
+        Next Page
+      </IconButton>
+      <IconButton
+        onClick={() => setPageIndex(getPageOptions().length - 1)}
+        disabled={!getCanNextPage()}
+        icon={IconChevronsRight}
+      >
+        Last Page
+      </IconButton>
     </div>
   );
-};
 
-const PaginateButton = ({
-  pageIndex,
-  paginateIdx,
-  setPageIndex,
-}: {
-  pageIndex: number;
-  paginateIdx: number;
-  setPageIndex: (pageIndex: number) => void;
-}) => {
-  return (
-    <button
-      onClick={() => {
-        setPageIndex(paginateIdx);
+  const pageIndexMarkup = (
+    <div>
+      <div className={styles.desktopText}>
+        <Text noBreak variant="bodyMd">{`Page ${
+          getState().pagination.pageIndex + 1
+        } of ${getPageCount()}`}</Text>
+      </div>
+      <div className={styles.mobileText}>
+        <Text noBreak variant="bodyMd">{`${
+          getState().pagination.pageIndex + 1
+        } / ${getPageCount()}`}</Text>
+      </div>
+    </div>
+  );
+
+  const pageSizeMarkup = (
+    <Select
+      labelInline
+      label="Rows: "
+      options={pageSizeOptions.map((value) => ({
+        value: String(value),
+        label: String(value),
+      }))}
+      value={String(getState().pagination.pageSize)}
+      onChange={(e) => {
+        table.setPageSize(Number(e));
       }}
-      aria-selected={pageIndex === paginateIdx}
-      className={styles.Button}
-    >
-      {paginateIdx + 1}
-    </button>
+    />
+  );
+
+  return (
+    <div className={cn(styles.Footer)}>
+      {pageSizeMarkup}
+      <div className={styles.FooterRight}>
+        {pageIndexMarkup}
+        {paginationMarkup}
+      </div>
+    </div>
   );
 };
