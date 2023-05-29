@@ -16,7 +16,7 @@
   min-height: 36px;
   min-width: 36px;
   margin: 0;
-  
+
   padding: $vertical-padding var(--space-4);
   background: var(--surface);
   box-shadow: var(--shadow-button);
@@ -375,6 +375,10 @@
 
   &.disabled {
     background: var(--action-primary-disabled);
+
+    &.loading {
+      background: var(--border-success);
+    }
   }
 }
 
@@ -389,6 +393,10 @@
 
   &.disabled {
     background: var(--action-critical-disabled);
+  }
+
+  &.loading {
+    background: var(--border-critical);
   }
 }
 
@@ -736,7 +744,7 @@
   margin-left: calc(-1 * var(--space-025));
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
-
+  padding-inline: var(--space-2);
   height: 100%;
 
   &:focus,
