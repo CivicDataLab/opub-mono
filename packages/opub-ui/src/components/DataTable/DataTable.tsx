@@ -2,6 +2,7 @@
 
 import type { DataTableProps } from '../../types/datatable';
 import { Checkbox } from '../Checkbox/Checkbox';
+import { Footer } from '../Table';
 import { Text } from '../Text';
 import styles from './DataTable.module.scss';
 import { Cell, HeaderCell, Row } from './components';
@@ -35,6 +36,7 @@ const DataTable = (props: DataTableProps) => {
     onRowSelectionChange,
     defaultSelectedRows,
     hasMoreItems = false,
+    hideFooter = false,
     ...others
   } = props;
   const [data, setData] = React.useState(() => [...rows]);
@@ -51,6 +53,8 @@ const DataTable = (props: DataTableProps) => {
       );
     }
   }, [rowSelection]);
+
+  const footerVisible = !hideFooter && data.length > 0;
 
   const table = useReactTable({
     data,
@@ -212,24 +216,9 @@ const DataTable = (props: DataTableProps) => {
               </Row>
             ))}
           </tbody>
-          <tfoot>
-            {table.getFooterGroups().map((footerGroup) => (
-              <tr key={footerGroup.id}>
-                {footerGroup.headers.map((header) => (
-                  <th key={header.id}>
-                    {header.isPlaceholder
-                      ? null
-                      : flexRender(
-                          header.column.columnDef.footer,
-                          header.getContext()
-                        )}
-                  </th>
-                ))}
-              </tr>
-            ))}
-          </tfoot>
         </table>
       </div>
+      {footerVisible && <Footer table={table} />}
     </div>
   );
 };

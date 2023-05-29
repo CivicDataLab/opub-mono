@@ -299,6 +299,12 @@
   }
 }
 
+@keyframes pulse-animation {
+  50% {
+    opacity: 0.5;
+  }
+}
+
 :root {
   --duration-0: 0ms;
   --duration-50: 50ms;
@@ -311,6 +317,7 @@
   --duration-400: 400ms;
   --duration-450: 450ms;
   --duration-500: 500ms;
+  --duration-2000: 2000ms;  
   --duration-5000: 5000ms;
 
   --ease: cubic-bezier(0.25, 0.1, 0.25, 1);
@@ -321,6 +328,6 @@
 
   --keyframes-bounce: keyframes-bounce;
   --keyframes-fade-in: keyframes-fade-in;
-  --keyframes-pulse: keyframes-pulse;
+  --keyframes-pulse: pulse-animation;
   --keyframes-spin: keyframes-spin;
 }

@@ -2,6 +2,8 @@
   display: flex;
   width: 100%;
   border-bottom: var(--border-divider);
+  animation: var(--keyframes-pulse) var(--duration-2000) var(--ease-in-out)
+    infinite;
 }
 
 .Tab {

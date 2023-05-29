@@ -29,6 +29,8 @@ export type {
 } from './datatable';
 export type { DateTimeProps } from './datetime';
 export type { DividerProps } from './divider';
+export type { IconProps } from './icon';
+export type { IconButtonProps } from './iconbutton';
 export type {
   InputProps,
   MutuallyExclusiveInteractionProps,
@@ -38,8 +40,8 @@ export type { LinkLikeComponent, LinkLikeComponentProps } from './link';
 export type { ProgressBarProps } from './progressbar';
 export type { RadioGroupProps } from './radiogroup';
 export type { SelectOption, SelectProps } from './select';
-export * from './shared/form';
-export * from './shared/key';
+export type { Error, LabelledProps } from './shared/form';
+export { Key } from './shared/key';
 export type { TagProps } from './tag';
 export type { TextProps, VariantFontWeightMapping } from './text';
 export type { TooltipProps, TooltipProviderProps } from './tooltip';

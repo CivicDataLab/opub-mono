@@ -4,25 +4,31 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
-  gap: var(--space-3);
+  gap: var(--space-6);
+  overflow-x: auto;
 
   width: 100%;
   background-color: var(--surface-subdued);
   border-radius: 0 0 var(--border-radius-2) var(--border-radius-2);
   border-top: var(--border-divider);
-  padding: var(--space-4) var(--space-6);
-
-  @media #{$breakpoints-md-up} {
-    padding: var(--space-6) var(--space-8);
-  }
+  padding: var(--space-2) var(--space-4);
 
   @media #{$breakpoints-sm-up} {
-    justify-content: space-between;
+    justify-content: flex-end;
+    gap: var(--space-8);
+    padding: var(--space-4) var(--space-6);
   }
+}
 
-  &.HiddenContent {
-    justify-content: center;
+.FooterRight {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+
+  > div:first-of-type {
+    @media #{$breakpoints-sm-up} {
+      min-width: 90px;
+    }
   }
 }
 
@@ -31,7 +37,7 @@
   align-items: center;
 
   @media #{$breakpoints-md-up} {
-    gap: var(--space-3);
+    gap: var(--space-05);
   }
 }
 
@@ -56,6 +62,7 @@
 
 .PaginationItemsMobile {
   display: none;
+
   @media #{$breakpoints-sm-up} {
     display: block;
   }
@@ -96,6 +103,22 @@
     outline: 0;
 
     @include focus-ring($style: 'focused');
+  }
+}
+
+.desktopText {
+  display: none;
+
+  @media #{$breakpoints-sm-up} {
+    display: block;
+  }
+}
+
+.mobileText {
+  display: block;
+
+  @media #{$breakpoints-sm-up} {
+    display: none;
   }
 }
 

@@ -28,9 +28,11 @@
 
 .CarouselPrevBtn {
   border: medium none;
-  background: none;
+  background: var(--surface);
   cursor: pointer !important;
-  
+  padding: var(--space-4);
+  border-radius: var(--border-radius-half);
+
   svg {
     filter: drop-shadow(var(--shadow-lg));
   }
@@ -38,8 +40,11 @@
 
 .CarouselNextBtn {
   border: medium none;
-  background: none;
+  background: var(--surface);
   cursor: pointer !important;
+  padding: var(--space-4);
+  border-radius: var(--border-radius-half);
+  
   filter: drop-shadow(var(--shadow-md));
   position: absolute;
   right: 0;

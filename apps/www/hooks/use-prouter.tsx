@@ -1,5 +1,6 @@
 import { useRouter } from 'next/navigation';
-import NProgress from 'nprogress';
+
+import { navigateStart } from '@/lib/navigation';
 
 export const usePRouter = () => {
   const router = useRouter();
@@ -7,7 +8,7 @@ export const usePRouter = () => {
   const { push } = router;
 
   router.push = (href, options) => {
-    NProgress.start();
+    navigateStart();
     push(href, options);
   };
 

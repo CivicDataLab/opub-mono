@@ -2,11 +2,11 @@
 
 import React from 'react';
 import Link, { LinkProps } from 'next/link';
-import { useRouter } from 'next/navigation';
 import { Size, useWindowSize } from '@/hooks/use-window-size';
 import { Box, Button, Icon, Text, Tooltip } from '@opub-cdl/ui';
 import { twMerge } from 'tailwind-merge';
 
+import { useIsNavigating } from '@/config/store';
 import { Icons } from '@/components/icons';
 import styles from '../dataset.module.scss';
 
@@ -30,10 +30,10 @@ interface Props {
 }
 
 export function ActionBar(props: Props) {
+  const isNavigating = useIsNavigating().isNavigating;
+
   const { width }: Size = useWindowSize();
   const iconSize = width && width < 480 ? '5' : '8';
-
-  const router = useRouter();
 
   React.useEffect(() => {
     if (!props.preFetch) return;
@@ -84,7 +84,7 @@ export function ActionBar(props: Props) {
       <div className="sm:hidden">
         <Button
           primary
-          loading={props.isLoading}
+          loading={props.isLoading || isNavigating}
           onClick={props.primaryAction?.onAction}
           connectedDisclosure={
             props.secondaryAction && {
@@ -105,7 +105,7 @@ export function ActionBar(props: Props) {
           {props.secondaryAction && (
             <Button
               plain
-              disabled={props.isLoading}
+              disabled={props.isLoading || isNavigating}
               onClick={props.secondaryAction.onAction}
             >
               {props.secondaryAction.content}
@@ -113,7 +113,7 @@ export function ActionBar(props: Props) {
           )}
           <Button
             primary
-            loading={props.isLoading}
+            loading={props.isLoading || isNavigating}
             onClick={props.primaryAction.onAction}
           >
             {props.primaryAction.content}

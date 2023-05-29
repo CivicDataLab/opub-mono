@@ -9,8 +9,8 @@ import { forwardRef, LegacyRef } from 'react';
 const Provider = forwardRef(
   (
     {
-      globalDelayDuration = 500,
-      skipDelayDuration = 300,
+      globalDelayDuration,
+      skipDelayDuration = 200,
       globalDisableHoverableContent = false,
       children,
       hasUnderline,
@@ -40,7 +40,7 @@ const Tooltip = (props: TooltipProps) => {
     open,
     defaultOpen,
     onOpenChange,
-    delayDuration = 500,
+    delayDuration,
     disableHoverableContent,
     ariaLabel,
     onEscapeKeyDown,
@@ -49,7 +49,7 @@ const Tooltip = (props: TooltipProps) => {
     align,
     alignOffset,
     width = 'default',
-    solo = true,
+    solo,
     hideArrow = false,
     sideOffset = hideArrow ? 2 : 4,
   } = props;

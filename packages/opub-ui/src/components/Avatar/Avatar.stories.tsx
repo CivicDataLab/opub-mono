@@ -37,11 +37,11 @@ export const Basic = () => (
         name: 'Oluwayemisi Eun-Jung',
       },
       Customers: {
-        image: 'public/user.svg',
+        image: '/user.svg',
       },
       ' Profile Picture  ': {
         showInitials: true,
-        image: 'public/profile.svg',
+        image: '/profile.svg',
       },
     }}
   />

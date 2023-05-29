@@ -5,15 +5,17 @@ import { usePathname, useSearchParams } from 'next/navigation';
 import { Toaster, Tooltip } from '@opub-cdl/ui';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import NextTopLoader from 'nextjs-toploader';
-import NProgress from 'nprogress';
 import { SSRProvider } from 'react-aria';
+
+import { navigateEnd } from '@/lib/navigation';
 
 export default function Provider({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+  const searchParams = useSearchParams();
 
   useEffect(() => {
-    NProgress.done();
-  }, [pathname]);
+    navigateEnd();
+  }, [pathname, searchParams]);
 
   const [client] = React.useState(
     new QueryClient({

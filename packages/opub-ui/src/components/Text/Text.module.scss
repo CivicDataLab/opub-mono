@@ -168,6 +168,10 @@
   overflow-wrap: break-word;
 }
 
+.noBreak {
+  white-space: nowrap;
+}
+
 .numeric {
   font-variant-numeric: tabular-nums lining-nums;
 }

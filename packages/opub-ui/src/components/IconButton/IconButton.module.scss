@@ -1,0 +1,62 @@
+@import '../../../styles/common';
+
+.IconButton {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: var(--border-radius-1);
+  padding: 0;
+  transition: background-color var(--duration-100);
+
+  @include focus-ring($border-width: var(--border-width-1));
+
+  &.disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  &:hover {
+    background: var(--surface-hovered);
+    outline: var(--border-width-1) solid transparent;
+  }
+
+  &:focus-visible {
+    box-shadow: var(--shadow-button);
+    outline: 0;
+
+    @include focus-ring($style: 'focused');
+  }
+
+  &:active {
+    background: var(--surface-pressed);
+    box-shadow: var(--shadow-button);
+
+    &::after {
+      border: none;
+      box-shadow: none;
+    }
+  }
+
+  &.pressed {
+    background: var(--surface-pressed);
+    box-shadow: var(--shadow-inset-button-pressed);
+
+    @include recolor-icon(currentColor);
+  }
+
+  @media (-ms-high-contrast: active) {
+    border: var(--border-width-1) solid windowText;
+  }
+}
+
+.slim {
+  padding: var(--space-1);
+}
+
+.medium {
+  padding: var(--space-1);
+}
+
+.large {
+  padding: var(--space-2);
+}
