@@ -29,6 +29,8 @@ export type {
 } from './datatable';
 export type { DateTimeProps } from './datetime';
 export type { DividerProps } from './divider';
+export type { IconProps } from './icon';
+export type { IconButtonProps } from './iconbutton';
 export type {
   InputProps,
   MutuallyExclusiveInteractionProps,
