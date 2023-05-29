@@ -1,8 +1,8 @@
-import { Meta, StoryObj } from '@storybook/react';
 import { Box } from '../Box';
 import { Button } from '../Button';
 import { Text } from '../Text';
 import { Tooltip } from './Tooltip';
+import { Meta, StoryObj } from '@storybook/react';
 
 /**
  * A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it
@@ -23,7 +23,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   render: ({ ...args }) => (
-    <Tooltip.Provider>
+    <Tooltip.Provider globalDelayDuration={0}>
       <Tooltip {...args} />
     </Tooltip.Provider>
   ),
@@ -37,21 +37,21 @@ export const Default: Story = {
   },
 };
 
-export const Underline: Story = {
-  render: ({ ...args }) => (
-    <Tooltip.Provider hasUnderline>
-      <Tooltip {...args} />
-    </Tooltip.Provider>
-  ),
-  args: {
-    children: (
-      <Text fontWeight="bold" as="span">
-        Trigger underline
-      </Text>
-    ),
-    content: 'Tooltip content',
-  },
-};
+// export const Underline: Story = {
+//   render: ({ ...args }) => (
+//     <Tooltip.Provider hasUnderline>
+//       <Tooltip {...args} />
+//     </Tooltip.Provider>
+//   ),
+//   args: {
+//     children: (
+//       <Text fontWeight="bold" as="span">
+//         Trigger underline
+//       </Text>
+//     ),
+//     content: 'Tooltip content',
+//   },
+// };
 
 export const Multiple: Story = {
   render: ({ ...args }) => (
