@@ -1,23 +1,14 @@
 import { useRouter } from 'next/navigation';
-import NProgress from 'nprogress';
 
-import { shallow, useIsNavigating } from '@/config/store';
-
-const selector = (state: {
-  setIsNavigation: (isNavigating: boolean) => void;
-}) => ({
-  setIsNavigation: state.setIsNavigation,
-});
+import { navigateStart } from '@/lib/navigation';
 
 export const usePRouter = () => {
-  const { setIsNavigation } = useIsNavigating(selector, shallow);
   const router = useRouter();
 
   const { push } = router;
 
   router.push = (href, options) => {
-    NProgress.start();
-    setIsNavigation(true);
+    navigateStart();
     push(href, options);
   };
 
