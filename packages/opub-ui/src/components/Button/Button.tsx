@@ -6,7 +6,11 @@ import { Menu } from '../Menu';
 import { Spinner } from '../Spinner';
 import { UnstyledButton, UnstyledButtonProps } from './BaseButton';
 import styles from './Button.module.scss';
-import { IconCaretDown, IconCaretUp, IconSelector } from '@tabler/icons-react';
+import {
+  IconChevronDown,
+  IconChevronUp,
+  IconSelector,
+} from '@tabler/icons-react';
 import cx from 'classnames';
 import * as React from 'react';
 
@@ -161,7 +165,11 @@ const Button = React.forwardRef(
 
     const spinnerSVGMarkup = loading ? (
       <span className={styles.Spinner}>
-        <Spinner size="small" accessibilityLabel={'Loading'} />
+        <Spinner
+          size="small"
+          accessibilityLabel={'Loading'}
+          color={primary || destructive ? 'surface' : 'subdued'}
+        />
       </span>
     ) : null;
 
@@ -218,7 +226,7 @@ const Button = React.forwardRef(
           tabIndex={disclosureDisabled ? -1 : undefined}
         >
           <span className={styles.Icon}>
-            <Icon source={IconCaretDown} size="4" fill="surface" />
+            <Icon source={IconChevronDown} size="4" fill="surface" />
           </span>
         </button>
       );
@@ -301,5 +309,5 @@ function getDisclosureIconSource(
     return IconSelector;
   }
 
-  return disclosure === 'up' ? IconCaretUp : IconCaretDown;
+  return disclosure === 'up' ? IconChevronUp : IconChevronDown;
 }
