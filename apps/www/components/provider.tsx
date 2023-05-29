@@ -1,22 +1,14 @@
 'use client';
 
-import React, { useEffect } from 'react';
-import { usePathname, useSearchParams } from 'next/navigation';
+import React from 'react';
 import { Toaster, Tooltip } from '@opub-cdl/ui';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import NextTopLoader from 'nextjs-toploader';
 import { SSRProvider } from 'react-aria';
 
-import { navigateEnd } from '@/lib/navigation';
+import { RouterEvents } from '@/lib/navigation';
 
 export default function Provider({ children }: { children: React.ReactNode }) {
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-
-  useEffect(() => {
-    navigateEnd();
-  }, [pathname, searchParams]);
-
   const [client] = React.useState(
     new QueryClient({
       defaultOptions: {
@@ -32,6 +24,7 @@ export default function Provider({ children }: { children: React.ReactNode }) {
   return (
     <QueryClientProvider client={client}>
       <SSRProvider>
+        <RouterEvents />
         <NextTopLoader color="var(--decorative-icon-three)" />
         <Tooltip.Provider>
           {children}
