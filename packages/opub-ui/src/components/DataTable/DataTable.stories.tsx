@@ -1,5 +1,8 @@
+import { Icon } from '../Icon';
+import { makeTableData, Person } from '../Table/utils';
 import { createColumnHelper, DataTable } from './DataTable';
 import { Meta, StoryObj } from '@storybook/react';
+import { IconCopy, IconPencil, IconTrash } from '@tabler/icons-react';
 
 /**
  * Data tables are used to organize and display all information from a data set.
@@ -12,68 +15,6 @@ const meta = {
 
 export default meta;
 type Story = StoryObj<typeof meta>;
-
-type Person = {
-  firstName: any;
-  lastName: string;
-  age: number;
-  visits: number;
-  status: string;
-  progress: number;
-};
-
-const tableData: Person[] = [
-  {
-    firstName: 'Tandy',
-    lastName: 'Miller',
-    age: 40,
-    visits: 40,
-    status: 'Single',
-    progress: 80,
-  },
-  {
-    firstName: 'Joe',
-    lastName: 'Dirte',
-    age: 45,
-    visits: 20,
-    status: 'Complicated',
-    progress: 10,
-  },
-
-  {
-    firstName: 'Tandy',
-    lastName: 'Miller',
-    age: 40,
-    visits: 40,
-    status: 'Single',
-    progress: 80,
-  },
-  {
-    firstName: 'Joe',
-    lastName: 'Dirte',
-    age: 45,
-    visits: 20,
-    status: 'Complicated',
-    progress: 10,
-  },
-
-  {
-    firstName: 'Tandy',
-    lastName: 'Miller',
-    age: 40,
-    visits: 40,
-    status: 'Single',
-    progress: 80,
-  },
-  {
-    firstName: 'Joe',
-    lastName: 'Dirte',
-    age: 45,
-    visits: 20,
-    status: 'Complicated',
-    progress: 10,
-  },
-];
 
 const columnContentTypes: Array<'text' | 'numeric'> = [
   'text',
@@ -110,18 +51,46 @@ const columns = [
   }),
 ];
 
+const rowActions = [
+  {
+    content: 'Copy',
+    icon: <Icon source={IconCopy} />,
+    onAction: () => alert('Copy Triggered'),
+  },
+  {
+    content: 'Edit',
+    icon: <Icon source={IconPencil} />,
+    onAction: () => alert('Edit Triggered'),
+  },
+  {
+    content: 'Delete',
+    destructive: true,
+    icon: <Icon source={IconTrash} />,
+    onAction: () => alert('Delete Triggered'),
+  },
+];
+
 export const Default: Story = {
   args: {
     columnContentTypes: columnContentTypes,
-    rows: tableData,
+    rows: makeTableData(30),
     columns: columns,
+  },
+};
+
+export const WithActions: Story = {
+  args: {
+    columnContentTypes: columnContentTypes,
+    rows: makeTableData(30),
+    columns: columns,
+    rowActions: rowActions,
   },
 };
 
 export const ZebraStriping: Story = {
   args: {
     columnContentTypes: columnContentTypes,
-    rows: tableData,
+    rows: makeTableData(30),
     columns: columns,
     hasZebraStripingOnData: true,
   },
@@ -130,7 +99,7 @@ export const ZebraStriping: Story = {
 export const IncreasedDensity: Story = {
   args: {
     columnContentTypes: columnContentTypes,
-    rows: tableData,
+    rows: makeTableData(30),
     columns: columns,
     increasedTableDensity: true,
   },
@@ -208,15 +177,13 @@ export const Sortable: Story = {
         sortable={true}
         defaultSortDirection="desc"
         initialSortColumnIndex={4}
-        // onSort={handleSort}
-        rows={tableData}
       />
     );
   },
 
   args: {
     columnContentTypes: columnContentTypes,
-    rows: tableData,
+    rows: makeTableData(30),
     columns: columnsSort,
   },
 };
@@ -229,14 +196,13 @@ export const SelectionAcrossPages: Story = {
         sortable={true}
         defaultSortDirection="desc"
         initialSortColumnIndex={4}
-        rows={tableData}
       />
     );
   },
 
   args: {
     columnContentTypes: columnContentTypes,
-    rows: tableData,
+    rows: makeTableData(30),
     columns: columnsSort,
     hasMoreItems: true,
   },

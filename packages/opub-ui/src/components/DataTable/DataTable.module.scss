@@ -116,6 +116,10 @@
 
   .IncreasedTableDensity & {
     padding: var(--space-2) var(--space-4);
+
+    &.RowAction {
+      padding-inline: 0;
+    }
   }
 
   &.Cell-header {
@@ -304,4 +308,13 @@
   button {
     --size: var(--checkbox-size);
   }
+}
+
+.SelectCount {
+  position: absolute;
+  left: calc(-1 * var(--space-6));
+  z-index: var(--z-10);
+  background-color: var(--surface-depressed);
+  padding-inline: var(--space-1);
+  border-radius: var(--border-radius-05);
 }

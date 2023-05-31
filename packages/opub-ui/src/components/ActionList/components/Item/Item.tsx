@@ -1,11 +1,11 @@
-import { UnstyledLink } from '../../../Link/BaseLink';
 import type { ActionListItemDescriptor } from '../../../../types/actionlist';
 import { handleMouseUpByBlurring } from '../../../../utils/focus';
-import cx from 'classnames';
-import React from 'react';
 import { Box } from '../../../Box';
+import { UnstyledLink } from '../../../Link/BaseLink';
 import { Text } from '../../../Text';
 import styles from '../../ActionList.module.scss';
+import cx from 'classnames';
+import React from 'react';
 
 export type ItemProps = ActionListItemDescriptor;
 
@@ -90,7 +90,10 @@ export function Item({
       className={className}
       disabled={disabled}
       aria-label={accessibilityLabel}
-      onClick={onAction}
+      onClick={(e) => {
+        e.stopPropagation();
+        onAction && onAction();
+      }}
       onMouseUp={handleMouseUpByBlurring}
       role={role}
       onMouseEnter={onMouseEnter}

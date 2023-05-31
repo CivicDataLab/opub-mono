@@ -1,5 +1,7 @@
 import { Checkbox } from '../../../Checkbox';
+import { IconButton } from '../../../IconButton';
 import styles from '../../DataTable.module.scss';
+import { IconDotsVertical } from '@tabler/icons-react';
 import cx from 'classnames';
 import React from 'react';
 

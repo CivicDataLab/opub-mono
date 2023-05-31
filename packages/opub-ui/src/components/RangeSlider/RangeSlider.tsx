@@ -38,6 +38,10 @@ export type RangeSliderProps = {
   onChangeEnd?(selected: number[], name: string | undefined): void;
 } & Omit<Slider.SliderProps, 'prefix' | 'onChange'>;
 
+function normalizeValue(value: number, min: number = 0, max: number = 100) {
+  return ((value - min) / (max - min)) * 100;
+}
+
 const RangeSlider = forwardRef((props: RangeSliderProps, ref: any) => {
   const [value, setValue] = React.useState(
     props.value || props.defaultValue || [0]
@@ -58,6 +62,7 @@ const RangeSlider = forwardRef((props: RangeSliderProps, ref: any) => {
     minStepsBetweenThumbs = 1,
     onChange,
     onChangeEnd,
+    onValueChange,
     name,
     ...others
   } = props;
@@ -82,18 +87,17 @@ const RangeSlider = forwardRef((props: RangeSliderProps, ref: any) => {
   const tooltipRef2 = React.useRef<HTMLOutputElement>(null);
 
   useEffect(() => {
-    const offset1 = getThumbInBoundsOffset(16, value[0]);
-    const offset2 = getThumbInBoundsOffset(16, value[1]);
+    const normalizedValue0 = normalizeValue(value[0], others.min, others.max);
+    const normalizedValue1 = normalizeValue(value[1], others.min, others.max);
+
+    const offset1 = getThumbInBoundsOffset(16, normalizedValue0);
+    const offset2 = getThumbInBoundsOffset(16, normalizedValue1);
 
     if (tooltipRef1.current) {
-      tooltipRef1.current.style.left = `calc(${
-        value[0]
-      }% + ${offset1}px - ${16}px)`;
+      tooltipRef1.current.style.left = `calc(${normalizedValue0}% + ${offset1}px - ${16}px)`;
     }
     if (tooltipRef2.current) {
-      tooltipRef2.current.style.left = `calc(${
-        value[1]
-      }% + ${offset2}px - ${16}px)`;
+      tooltipRef2.current.style.left = `calc(${normalizedValue1}% + ${offset2}px - ${16}px)`;
     }
   }, [value]);
 
@@ -144,9 +148,12 @@ const RangeSlider = forwardRef((props: RangeSliderProps, ref: any) => {
             aria-label={String(label)}
             minStepsBetweenThumbs={minStepsBetweenThumbs}
             name={name}
-            onValueChange={onValChange}
             onValueCommit={(val) => onChangeEnd && onChangeEnd(val, name)}
             {...others}
+            onValueChange={(e) => {
+              onValChange(e);
+              onValueChange && onValueChange(e);
+            }}
           >
             <Slider.Track className={styles.Track}>
               <Slider.Range className={styles.Range} />

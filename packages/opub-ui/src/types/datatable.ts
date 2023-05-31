@@ -1,3 +1,5 @@
+import { ActionListProps } from '../components/ActionList';
+
 export type SortDirection = 'asc' | 'desc' | 'none';
 export type VerticalAlign = 'top' | 'bottom' | 'middle' | 'baseline';
 export type ColumnContentType = 'text' | 'numeric';
@@ -43,8 +45,6 @@ export interface TableProps {
   hideFooter?: boolean;
   /** Hide Results in Footer  */
   hideResultsInFooter?: boolean;
-  /** Hide Pagination  */
-  hidePagination?: boolean;
 }
 
 export type DataTableProps = TableProps & {
@@ -54,4 +54,6 @@ export type DataTableProps = TableProps & {
   defaultSelectedRows?: any;
   /** Whether to enable the selection/deselection across page  */
   hasMoreItems?: boolean;
+  /** List of row actions  */
+  rowActions?: ActionListProps['items'];
 };

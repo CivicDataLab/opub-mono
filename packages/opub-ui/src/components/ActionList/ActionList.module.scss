@@ -34,7 +34,7 @@
     background-color: var(--surface-pressed);
 
     svg {
-      fill: var(--interactive);
+      color: var(--interactive);
     }
   }
 
@@ -52,7 +52,7 @@
     background-color: var(--surface-selected);
 
     svg {
-      fill: var(--interactive);
+      color: var(--interactive);
     }
 
     &::before {
@@ -64,7 +64,7 @@
     color: var(--interactive-critical);
 
     svg {
-      fill: var(--icon-critical);
+      color: var(--icon-critical);
     }
 
     &:hover {
@@ -83,7 +83,7 @@
 
     .Prefix svg,
     .Suffix svg {
-      fill: var(--icon-disabled);
+      color: var(--icon-disabled);
     }
   }
 }
@@ -105,12 +105,12 @@
   background-position: center center;
 
   svg {
-    fill: var(--icon);
+    color: var(--icon);
   }
 }
 
 .Suffix svg {
-  fill: var(--icon);
+  color: var(--icon);
 }
 
 .Text {
