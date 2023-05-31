@@ -1,54 +1,9 @@
 import { Table } from './Table';
-import { faker } from '@faker-js/faker';
+import { Person, makeTableData } from './utils';
 import { Meta, StoryObj } from '@storybook/react';
 import { createColumnHelper } from '@tanstack/react-table';
 
-type Person = {
-  firstName: any;
-  lastName: string;
-  age: number;
-  visits: number;
-  status: string;
-  progress: number;
-};
-
-const range = (len: number) => {
-  const arr = [];
-  for (let i = 0; i < len; i++) {
-    arr.push(i);
-  }
-  return arr;
-};
-
-const newPerson = (): Person => {
-  return {
-    firstName: faker.person.firstName(),
-    lastName: faker.person.lastName(),
-    age: faker.number.int(40),
-    visits: faker.number.int(1000),
-    progress: faker.number.int(100),
-    status: faker.helpers.shuffle<Person['status']>([
-      'relationship',
-      'complicated',
-      'single',
-    ])[0]!,
-  };
-};
-
-function makeData(...lens: number[]) {
-  const makeDataLevel = (depth = 0): Person[] => {
-    const len = lens[depth]!;
-    return range(len).map((d): Person => {
-      return {
-        ...newPerson(),
-      };
-    });
-  };
-
-  return makeDataLevel();
-}
-
-const data = makeData(100);
+const data = makeTableData(100);
 
 /**
  * Data tables are used to organize and display all information from a data set.
@@ -110,14 +65,6 @@ export const WithoutFooter: Story = {
     ...Default.args,
     rows: data.slice(0, 20),
     hideFooter: true,
-  },
-};
-
-export const WithoutPagination: Story = {
-  args: {
-    ...Default.args,
-    rows: data.slice(0, 20),
-    hidePagination: true,
   },
 };
 

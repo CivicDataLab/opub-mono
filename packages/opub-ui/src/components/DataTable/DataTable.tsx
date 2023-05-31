@@ -1,20 +1,22 @@
 'use client';
 
 import type { DataTableProps } from '../../types/datatable';
+import { Box } from '../Box';
 import { Checkbox } from '../Checkbox/Checkbox';
 import { Footer } from '../Table';
 import { Text } from '../Text';
 import styles from './DataTable.module.scss';
 import { Cell, HeaderCell, Row } from './components';
+import { RowAction } from './components/Row';
 import {
   ColumnDef,
+  SortingState,
   createColumnHelper,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
-  SortingState,
   useReactTable,
 } from '@tanstack/react-table';
 import cx from 'classnames';
@@ -37,6 +39,7 @@ const DataTable = (props: DataTableProps) => {
     defaultSelectedRows,
     hasMoreItems = false,
     hideFooter = false,
+    rowActions,
     ...others
   } = props;
   const [data, setData] = React.useState(() => [...rows]);
@@ -88,44 +91,7 @@ const DataTable = (props: DataTableProps) => {
     <div className={`opub-DataTable ${themeClass}`} {...others}>
       <div className={styles.ScrollContainer}>
         <table className={styles.Table}>
-          {hasMoreItems && (
-            <div
-              className={cx(
-                styles.SelectedWrapper,
-                selectedCount > 0 && styles.ItemsSelected
-              )}
-            >
-              <div
-                className={cx(
-                  styles.Cell,
-                  styles['Cell-header'],
-                  styles.Checkbox
-                )}
-              >
-                <Checkbox
-                  name={`headerGroup-selected`}
-                  checked={
-                    table.getIsAllPageRowsSelected()
-                      ? true
-                      : table.getIsSomePageRowsSelected()
-                      ? 'indeterminate'
-                      : false
-                  }
-                  onChange={() => table.toggleAllPageRowsSelected()}
-                />
-              </div>
-              <ItemSelectedText
-                totalCount={data.length}
-                selectedCount={selectedCount}
-                table={table}
-              />
-            </div>
-          )}
-          <thead
-            className={cx(
-              hasMoreItems && selectedCount > 0 && styles.ItemsSelected
-            )}
-          >
+          <thead>
             {table.getHeaderGroups().map((headerGroup) => (
               <tr
                 className={cx(tableRowClassname, styles.TableHeaderRow)}
@@ -177,12 +143,31 @@ const DataTable = (props: DataTableProps) => {
                     />
                   );
                 })}
+                {rowActions && (
+                  <th
+                    className={cx(
+                      styles.Cell,
+                      styles['Cell-header'],
+                      styles.RowAction
+                    )}
+                  >
+                    <Box flex alignItems="center" position="relative">
+                      {selectedCount ? (
+                        <span className={styles.SelectCount}>
+                          <Text variant="bodySm">{selectedCount}</Text>
+                        </span>
+                      ) : null}
+                      <RowAction rowActions={rowActions} />
+                    </Box>
+                  </th>
+                )}
               </tr>
             ))}
           </thead>
           <tbody>
             {table.getRowModel().rows.map((row) => (
               <Row
+                key={row.id}
                 row={row}
                 classname={cx(
                   tableRowClassname,
@@ -213,6 +198,11 @@ const DataTable = (props: DataTableProps) => {
                     />
                   );
                 })}
+                {rowActions && (
+                  <td className={cx(styles.Cell, styles.RowAction)}>
+                    <RowAction rowActions={rowActions} />
+                  </td>
+                )}
               </Row>
             ))}
           </tbody>
