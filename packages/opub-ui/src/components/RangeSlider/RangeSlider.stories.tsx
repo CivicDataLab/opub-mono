@@ -1,6 +1,6 @@
+import { RangeSlider } from './RangeSlider';
 import { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
-import { RangeSlider } from './RangeSlider';
 
 /**
  * An input where the user selects a value from within a given range
@@ -30,16 +30,17 @@ export const WithMinMax: Story = {
     defaultValue: [0],
     min: -20,
     max: 20,
+    name: 'range',
+    output: true,
   },
 };
 
 export const WithSteps: Story = {
   args: {
     label: 'Range Slider',
-    defaultValue: [0],
-    min: -20,
-    max: 20,
+    defaultValue: [20],
     step: 4,
+    output: true,
   },
 };
 
@@ -68,6 +69,7 @@ export const DoubleThumb: Story = {
     label: 'Double Slider',
     defaultValue: [20, 40],
     output: true,
+    name: 'range',
     onChangeEnd: (val, name) => console.log(val, name),
   },
 };
