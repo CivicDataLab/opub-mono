@@ -141,7 +141,7 @@ const Navigation = ({ id, pathItem }: { id: string; pathItem: string }) => {
             </Text>
             <span
               className={cn(
-                'rounded-t-1 h-[3px] w-full absolute right-0 bottom-0',
+                'h-[3px] w-full absolute right-0 bottom-0',
                 'bg-transparent lg:rounded-l-1 lg:w-[3px] lg:h-full right-0 lg:top-0',
                 link.selected && 'bg-decorativeIconFour'
               )}

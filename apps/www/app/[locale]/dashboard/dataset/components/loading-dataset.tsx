@@ -1,14 +1,12 @@
 'use client';
 
+import { Spinner } from '@opub-cdl/ui';
+
 import { Loading } from '@/components/loading';
 
-export default function DatasetLoading({
-  previousPage,
-}: {
-  previousPage?: boolean;
-}) {
+export default function DatasetLoading() {
   return (
-    <div className="h-full">
+    <div className="h-full ">
       <Loading />
     </div>
   );
