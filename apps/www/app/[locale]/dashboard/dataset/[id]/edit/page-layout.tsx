@@ -7,6 +7,7 @@ import { usePRouter } from '@/hooks/use-prouter';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { GraphQL } from '@/lib/api';
+import { loadingStart } from '@/lib/navigation';
 import { ActionBar } from '../../components/action-bar';
 import { EditDataset } from './components/EditDataset';
 
@@ -73,7 +74,10 @@ export function EditPage({ params }: { params: { id: string } }) {
         title={data?.dataset?.title || 'Untitled Datasets'}
         primaryAction={{
           content: 'Save & Next',
-          onAction: () => submitRef.current?.click(),
+          onAction: () => {
+            loadingStart();
+            submitRef.current?.click();
+          },
         }}
         secondaryAction={{
           content: 'Cancel',

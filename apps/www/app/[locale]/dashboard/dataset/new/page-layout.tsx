@@ -7,6 +7,7 @@ import { usePRouter } from '@/hooks/use-prouter';
 import { useMutation } from '@tanstack/react-query';
 
 import { GraphQL } from '@/lib/api';
+import { loadingStart } from '@/lib/navigation';
 import { ActionBar } from '../components/action-bar';
 import { CreateDataset } from './components/new-dataset';
 
@@ -46,7 +47,10 @@ export const Page = () => {
         title="Add New Dataset"
         primaryAction={{
           content: 'Save & Next',
-          onAction: () => submitRef.current?.click(),
+          onAction: () => {
+            loadingStart();
+            submitRef.current?.click();
+          },
         }}
         secondaryAction={{
           content: 'Cancel',

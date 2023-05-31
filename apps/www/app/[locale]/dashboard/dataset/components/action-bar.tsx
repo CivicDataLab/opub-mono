@@ -3,7 +3,7 @@
 import React from 'react';
 import Link, { LinkProps } from 'next/link';
 import { Size, useWindowSize } from '@/hooks/use-window-size';
-import { Box, Button, Icon, Text, Tooltip } from '@opub-cdl/ui';
+import { Box, Button, Icon, Text, Tooltip } from '@opub-cdl/ui/src';
 import { twMerge } from 'tailwind-merge';
 
 import { useIsNavigating } from '@/config/store';
@@ -34,11 +34,6 @@ export function ActionBar(props: Props) {
 
   const { width }: Size = useWindowSize();
   const iconSize = width && width < 480 ? '5' : '8';
-
-  React.useEffect(() => {
-    if (!props.preFetch) return;
-    // router.prefetch(props.preFetch);
-  }, []);
 
   const backButton = props.previousPage && props.previousPage?.link && (
     <Link href={props.previousPage?.link} className={styles.BackButton}>
