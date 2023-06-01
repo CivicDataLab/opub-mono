@@ -1,10 +1,13 @@
 import { Button } from '../../../Button';
 import { Icon } from '../../../Icon';
-import { Input } from '../../../Input';
 import { Menu } from '../../../Menu';
 import { TextField } from '../../../TextField';
 import styles from '../../DataTable.module.scss';
-import { IconAdjustmentsHorizontal, IconSearch } from '@tabler/icons-react';
+import {
+  IconAdjustmentsHorizontal,
+  IconSearch,
+  IconSquareRoundedPlus,
+} from '@tabler/icons-react';
 
 export function Filter() {
   return (
@@ -15,38 +18,31 @@ export function Filter() {
           label="Filter"
           labelHidden
           placeholder="Filter"
-          prefix={<Icon source={IconSearch} size="5" />}
+          prefix={<Icon source={IconSearch} />}
           onChange={(e) => console.log(e)}
         />
         <div className={styles.FilterItems}>
           <Menu
             trigger={
-              <Button
-                icon={<Icon source={IconAdjustmentsHorizontal} size="5" />}
-              >
-                Text Label
+              <Button icon={<Icon source={IconSquareRoundedPlus} />}>
+                Age
               </Button>
             }
           />
           <Menu
             trigger={
-              <Button
-                icon={<Icon source={IconAdjustmentsHorizontal} size="5" />}
-              >
-                Numeric Label
+              <Button icon={<Icon source={IconSquareRoundedPlus} />}>
+                Status
               </Button>
             }
           />
-          <Menu trigger={<Button>More Filter</Button>} />
         </div>
       </div>
       <div className={styles.FilterRight}>
         <div>
           <Menu
             trigger={
-              <Button
-                icon={<Icon source={IconAdjustmentsHorizontal} size="5" />}
-              >
+              <Button icon={<Icon source={IconAdjustmentsHorizontal} />}>
                 View
               </Button>
             }
@@ -55,9 +51,7 @@ export function Filter() {
         <div>
           <Menu
             trigger={
-              <Button
-                icon={<Icon source={IconAdjustmentsHorizontal} size="5" />}
-              >
+              <Button icon={<Icon source={IconAdjustmentsHorizontal} />}>
                 Filter
               </Button>
             }
