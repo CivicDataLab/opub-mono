@@ -6,7 +6,7 @@ import { Checkbox } from '../Checkbox/Checkbox';
 import { Footer } from '../Table';
 import { Text } from '../Text';
 import styles from './DataTable.module.scss';
-import { Cell, Filter, HeaderCell, Row } from './components';
+import { Cell, Toolbar, HeaderCell, Row } from './components';
 import { RowAction } from './components/Row';
 import {
   ColumnDef,
@@ -90,7 +90,7 @@ const DataTable = (props: DataTableProps) => {
 
   return (
     <div className={`opub-DataTable ${themeClass}`} {...others}>
-      {addFilter && <Filter />}
+      {addFilter && <Toolbar table={table} />}
       <div
         className={cx(styles.ScrollContainer, addFilter && styles.withFilter)}
       >

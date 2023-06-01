@@ -12,9 +12,9 @@ import { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
 /**
- * Command Description
+ * Command menu for quick actions
  *
- * Reference: #
+ * Reference: https://ui.shadcn.com/docs/components/command
  */
 const meta = {
   component: Command,

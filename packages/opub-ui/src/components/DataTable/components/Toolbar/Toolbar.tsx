@@ -3,13 +3,25 @@ import { Icon } from '../../../Icon';
 import { Menu } from '../../../Menu';
 import { TextField } from '../../../TextField';
 import styles from '../../DataTable.module.scss';
-import {
-  IconAdjustmentsHorizontal,
-  IconSearch,
-  IconSquareRoundedPlus,
-} from '@tabler/icons-react';
+import { DataTableFacetedFilter } from './Filter';
+import { IconAdjustmentsHorizontal, IconSearch } from '@tabler/icons-react';
 
-export function Filter() {
+export const priorities = [
+  {
+    label: 'Relationship',
+    value: 'relationship',
+  },
+  {
+    label: 'Complicated',
+    value: 'complicated',
+  },
+  {
+    label: 'Single',
+    value: 'single',
+  },
+];
+
+export function Toolbar({ table }: { table: any }) {
   return (
     <div className={styles.Filter}>
       <div className={styles.FilterLeft}>
@@ -22,19 +34,15 @@ export function Filter() {
           onChange={(e) => console.log(e)}
         />
         <div className={styles.FilterItems}>
-          <Menu
-            trigger={
-              <Button icon={<Icon source={IconSquareRoundedPlus} />}>
-                Age
-              </Button>
-            }
+          <DataTableFacetedFilter
+            column={table.getColumn('age')}
+            title="Age"
+            options={priorities}
           />
-          <Menu
-            trigger={
-              <Button icon={<Icon source={IconSquareRoundedPlus} />}>
-                Status
-              </Button>
-            }
+          <DataTableFacetedFilter
+            column={table.getColumn('status')}
+            title="Status"
+            options={priorities}
           />
         </div>
       </div>

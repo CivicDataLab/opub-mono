@@ -34,6 +34,7 @@ export const Choice = ({
   label,
   id,
   className,
+  labelHidden,
   ...props
 }: ChoiceProps) => {
   const { error, helpText } = props;
@@ -43,13 +44,17 @@ export const Choice = ({
     error && styles.error,
     className
   );
+
+  const hiddenLabel = cx(labelHidden && styles.hidden);
   const checkboxMarkup = (
     <div className={wrapperClassName}>
       {children}
 
-      <Label disabled={!!props.disabled} htmlFor={id}>
-        {label}
-      </Label>
+      <div className={hiddenLabel}>
+        <Label disabled={!!props.disabled} htmlFor={id}>
+          {label}
+        </Label>
+      </div>
     </div>
   );
 

@@ -1,12 +1,11 @@
 @import '../../../styles/common';
 
 .Command {
-  display: flex;
   height: 100%;
   width: 100%;
   overflow: hidden;
   border-radius: var(--border-radius-2);
-  background-color: var(--background);
+  background-color: var(--surface);
   color: var(--text);
 }
 
@@ -133,8 +132,8 @@
 
 .CommandItem {
   position: relative;
-  display: flex;
   cursor: default;
+  display: flex;
   align-items: center;
   border-radius: var(--border-radius-1);
   padding: var(--space-1) var(--space-2);
@@ -143,7 +142,7 @@
   user-select: none;
 
   &[aria-selected] {
-    background-color: var(--surface-neutral-pressed);
+    background-color: var(--surface-neutral-subdued);
   }
 
   &[data-disabled] {

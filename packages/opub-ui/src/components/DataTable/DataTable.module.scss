@@ -370,3 +370,45 @@
     }
   }
 }
+
+.FilterSeparator {
+  margin-inline: var(--space-2);
+  height: var(--space-4);
+}
+
+.FilterItemsBadges {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.FilterPopover {
+  box-shadow: var(--shadow-lg);
+  max-width: 200px;
+  padding: 0;
+
+  .FilterItemInput {
+    font-size: var(--font-size-100);
+  }
+}
+
+.FilterCMDClear {
+  justify-content: center;
+  text-align: center;
+}
+
+.FilterItemCheck {
+  margin-right: var(--space-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--space-4);
+  width: var(--space-4);
+  border-radius: var(--border-radius-05);
+  border: 1px solid var(--border-subdued);
+  transition: border-color var(--duration-200) var(--ease);
+}
+
+.FilterItemLabel {
+  margin-left: var(--space-2);
+}
