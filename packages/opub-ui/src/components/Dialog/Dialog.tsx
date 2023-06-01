@@ -1,8 +1,8 @@
+import styles from './Dialog.module.scss';
+import { Footer, FooterProps, Header } from './components';
 import * as DialogRadix from '@radix-ui/react-dialog';
 import cx from 'classnames';
 import React, { forwardRef, Ref } from 'react';
-import { Footer, FooterProps, Header } from './components';
-import styles from './Dialog.module.scss';
 
 interface DialogProps extends DialogRadix.DialogProps {
   Trigger?: DialogRadix.DialogTriggerProps;
@@ -39,6 +39,9 @@ type ContentProps = {
    * @default false
    */
   titleHidden?: boolean;
+  // header hidden
+  headerHidden?: boolean;
+
   /** id for the dialog */
   id?: string;
   /** Disable animations and open modal instantly */
@@ -68,12 +71,14 @@ const Content = forwardRef((props: ContentProps, ref: any) => {
     footer,
     primaryAction,
     secondaryActions,
+    headerHidden,
+    className,
     ...others
   } = props;
   const rId = React.useId();
   const finalId = props.id || rId;
 
-  const classname = cx(
+  const classnameStyles = cx(
     styles.Dialog,
     small && styles.sizeSmall,
     large && styles.sizeLarge,
@@ -84,17 +89,21 @@ const Content = forwardRef((props: ContentProps, ref: any) => {
   return (
     <DialogRadix.Portal>
       <DialogRadix.Overlay className={styles.Overlay} />
-      <DialogRadix.Content ref={ref} className={classname} {...others}>
+      <DialogRadix.Content ref={ref} className={classnameStyles} {...others}>
         <div className="sr-only">
           <DialogRadix.Title>{title}</DialogRadix.Title>
         </div>
-        <Header id={finalId} titleHidden={titleHidden} children={title} />
-        <div className={styles.Content}>{children}</div>
-        <Footer
-          children={footer}
-          primaryAction={primaryAction}
-          secondaryActions={secondaryActions}
-        />
+        {headerHidden ? null : (
+          <Header id={finalId} titleHidden={titleHidden} children={title} />
+        )}
+        <div className={cx(styles.Content, className)}>{children}</div>
+        {footer && (
+          <Footer
+            children={footer}
+            primaryAction={primaryAction}
+            secondaryActions={secondaryActions}
+          />
+        )}
       </DialogRadix.Content>
     </DialogRadix.Portal>
   );

@@ -1,0 +1,153 @@
+@import '../../../styles/common';
+
+.Command {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  border-radius: var(--border-radius-2);
+  background-color: var(--background);
+  color: var(--text);
+}
+
+.CommandDialog {
+  overflow: hidden;
+  padding: 0;
+  box-shadow: var(--shadow-2xl);
+  border-radius: var(--border-radius-2);
+
+  position: relative;
+  z-index: var(--z-1);
+  background-color: var(--background);
+}
+
+.CommandDialogChild {
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--border-radius-1);
+
+  [cmdk-group-heading] {
+    padding: 0 var(--space-2);
+    font-weight: var(--font-weight-medium);
+    color: var(--text-subdued);
+  }
+
+  [cmdk-group]:not([hidden]) ~ [cmdk-group] {
+    padding-top: 0;
+  }
+
+  [cmdk-group] {
+    padding-inline: var(--space-2);
+  }
+
+  [cmdk-input-wrapper] svg {
+    height: var(--space-5);
+    width: var(--space-5);
+  }
+
+  [cmdk-item] {
+    padding: var(--space-3) var(--space-2);
+    svg {
+      height: var(--space-5);
+      width: var(--space-5);
+    }
+  }
+}
+
+.CommandInput {
+  padding: var(--space-1) var(--space-3);
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  border-radius: var(--border-radius-1) var(--border-radius-1) 0 0;
+  border-bottom: var(--border-divider);
+}
+
+.CommandInputChild {
+  margin-right: var(--space-2);
+  height: var(--space-4);
+  width: var(--space-4);
+  flex-shrink: 0;
+  opacity: 0.5;
+  border-radius: var(--border-radius-1);
+}
+
+.CommandInputElement {
+  width: 100%;
+  padding: var(--space-2);
+  outline: none;
+  border-radius: var(--border-radius-1);
+  border: none;
+  background-color: transparent;
+  font-size: var(--font-size-200);
+  color: var(--text);
+
+  &::placeholder {
+    color: var(--text-subdued);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+}
+
+.CommandList {
+  max-height: 300px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.CommandListEmpty {
+  padding: var(--space-6) 0;
+  text-align: center;
+  font-size: var(--font-size-100);
+  color: var(--text-subdued);
+}
+
+.CommandListDivider {
+  margin: 0 calc(var(--space-1) * -1);
+  height: 1px;
+  background-color: var(--border);
+}
+
+.CommandShortcut {
+  margin-left: auto;
+  letter-spacing: 0.1em;
+  font-size: var(--font-size-100);
+  color: var(--text-subdued);
+}
+
+.CommandGroup {
+  overflow: hidden;
+  padding: var(--space-1);
+  color: var(--text);
+
+  [cmdk-group-heading] {
+    padding: var(--space-1) var(--space-2);
+    font-weight: var(--font-weight-medium);
+    font-size: var(--font-size-100);
+    color: var(--text-subdued);
+  }
+}
+
+.CommandItem {
+  position: relative;
+  display: flex;
+  cursor: default;
+  align-items: center;
+  border-radius: var(--border-radius-1);
+  padding: var(--space-1) var(--space-2);
+  font-size: var(--font-size-100);
+  outline: none;
+  user-select: none;
+
+  &[aria-selected] {
+    background-color: var(--surface-neutral-pressed);
+  }
+
+  &[data-disabled] {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+}

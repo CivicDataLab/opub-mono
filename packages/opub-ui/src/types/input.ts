@@ -161,7 +161,6 @@ export type MutuallyExclusiveInteractionProps =
 export type TextFieldProps = NonMutuallyExclusiveProps &
   MutuallyExclusiveInteractionProps &
   MutuallyExclusiveSelectionProps;
-
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
   indicator?: true | false | 'label' | 'icon';
@@ -180,3 +179,5 @@ export interface InputProps
   fluid?: boolean;
   isReadOnly?: boolean;
 }
+
+export type TextfieldAllProps = TextFieldProps & InputProps;

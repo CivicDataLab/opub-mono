@@ -81,10 +81,10 @@ $large-width: 980px;
 
 .Dialog {
   --content-bg: var(--surface);
-  --show-from: translate(-50%, -40%);
-  --show-to: translate(-50%, -50%);
-  --hide-from: translate(-50%, -50%);
-  --hide-to: translate(-50%, -40%);
+  --show-from: translate(-50%, 5vh);
+  --show-to: translate(-50%, 10vh);
+  --hide-from: translate(-50%, 10vh);
+  --hide-to: translate(-50%, 5vh);
   z-index: var(--z-1);
 
   background-color: var(--content-bg);
@@ -93,9 +93,9 @@ $large-width: 980px;
   max-height: calc(100vh - #{$vertical-spacing});
 
   position: fixed;
-  bottom: 50%;
+  top: 10vh;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, 10vh);
   will-change: transform, opacity;
 
   &[data-state='open'] {

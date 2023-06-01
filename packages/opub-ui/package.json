@@ -78,6 +78,7 @@
     "@tabler/icons-react": "^2.17.0",
     "@tanstack/react-table": "^8.8.4",
     "ariakit": "^2.0.0-next.43",
+    "cmdk": "^0.2.0",
     "keen-slider": "^6.8.5",
     "react-aria": "3.22.0",
     "react-hook-form": "7.20.0",
