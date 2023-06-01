@@ -66,6 +66,7 @@
     "@radix-ui/react-progress": "^1.0.2",
     "@radix-ui/react-radio-group": "^1.1.1",
     "@radix-ui/react-scroll-area": "^1.0.3",
+    "@radix-ui/react-separator": "^1.0.3",
     "@radix-ui/react-slider": "^1.1.1",
     "@radix-ui/react-switch": "^1.0.2",
     "@radix-ui/react-tabs": "^1.0.3",
@@ -82,7 +83,8 @@
     "keen-slider": "^6.8.5",
     "react-aria": "3.22.0",
     "react-hook-form": "7.20.0",
-    "react-stately": "^3.21.0"
+    "react-stately": "^3.21.0",
+    "tailwind-merge": "^1.12.0"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^24.0.1",

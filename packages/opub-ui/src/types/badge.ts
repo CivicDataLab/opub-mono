@@ -1,3 +1,5 @@
+import React from 'react';
+
 export type Progress =
   | 'default'
   | 'incomplete'
@@ -29,7 +31,7 @@ export interface BadgeProps {
   status?: Status;
 
   /** The content to display inside the badge. */
-  children?: string;
+  children?: string | React.ReactElement;
 
   /** Icon to display to the left of the badge’s content. */
   icon?: React.ReactNode;
