@@ -6,7 +6,7 @@ import { Checkbox } from '../Checkbox/Checkbox';
 import { Footer } from '../Table';
 import { Text } from '../Text';
 import styles from './DataTable.module.scss';
-import { Cell, HeaderCell, Row } from './components';
+import { Cell, Filter, HeaderCell, Row } from './components';
 import { RowAction } from './components/Row';
 import {
   ColumnDef,
@@ -40,6 +40,7 @@ const DataTable = (props: DataTableProps) => {
     hasMoreItems = false,
     hideFooter = false,
     rowActions,
+    addFilter,
     ...others
   } = props;
   const [data, setData] = React.useState(() => [...rows]);
@@ -89,7 +90,10 @@ const DataTable = (props: DataTableProps) => {
 
   return (
     <div className={`opub-DataTable ${themeClass}`} {...others}>
-      <div className={styles.ScrollContainer}>
+      {addFilter && <Filter />}
+      <div
+        className={cx(styles.ScrollContainer, addFilter && styles.withFilter)}
+      >
         <table className={styles.Table}>
           <thead>
             {table.getHeaderGroups().map((headerGroup) => (

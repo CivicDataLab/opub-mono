@@ -16,6 +16,10 @@
   width: 100%;
   overflow-x: auto;
   position: relative;
+
+  &.withFilter {
+    border-radius: 0;
+  }
 }
 
 .Table {
@@ -314,7 +318,55 @@
   position: absolute;
   left: calc(-1 * var(--space-6));
   z-index: var(--z-10);
-  background-color: var(--surface-depressed);
+  background-color: var(--background-selected);
   padding-inline: var(--space-1);
   border-radius: var(--border-radius-05);
+}
+
+.Filter {
+  padding: var(--space-4);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  justify-content: space-between;
+
+  > .FilterLeft {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    flex-grow: 1;
+
+    > div:first-child {
+      flex-basis: 320px;
+    }
+
+    > .FilterItems {
+      display: none;
+      align-items: center;
+      gap: var(--space-2);
+
+      @media #{$breakpoints-sm-up} {
+        display: flex;
+      }
+    }
+  }
+
+  > .FilterRight {
+    > :first-child {
+      display: none;
+
+      @media #{$breakpoints-sm-up} {
+        display: block;
+      }
+    }
+
+    > :last-child {
+      display: block;
+
+      @media #{$breakpoints-sm-up} {
+        display: none;
+      }
+    }
+  }
 }

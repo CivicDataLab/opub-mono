@@ -87,6 +87,15 @@ export const WithActions: Story = {
   },
 };
 
+export const WithFilter: Story = {
+  args: {
+    columnContentTypes: columnContentTypes,
+    rows: makeTableData(30),
+    columns: columns,
+    addFilter: true,
+  },
+};
+
 export const ZebraStriping: Story = {
   args: {
     columnContentTypes: columnContentTypes,

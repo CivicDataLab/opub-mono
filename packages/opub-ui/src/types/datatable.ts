@@ -56,4 +56,6 @@ export type DataTableProps = TableProps & {
   hasMoreItems?: boolean;
   /** List of row actions  */
   rowActions?: ActionListProps['items'];
+  /** Add Filter  */
+  addFilter?: boolean;
 };
