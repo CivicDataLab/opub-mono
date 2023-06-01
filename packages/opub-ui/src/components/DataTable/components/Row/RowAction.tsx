@@ -1,14 +1,7 @@
-import { ActionList, ActionListProps } from '../../../ActionList';
-import { Icon } from '../../../Icon';
+import { ActionListProps } from '../../../ActionList';
 import { IconButton } from '../../../IconButton';
-import { Popover } from '../../../Popover';
-import {
-  IconCopy,
-  IconDotsVertical,
-  IconEdit,
-  IconPencil,
-  IconTrash,
-} from '@tabler/icons-react';
+import { Menu } from '../../../Menu';
+import { IconDotsVertical } from '@tabler/icons-react';
 
 function handleRowAction(event: React.MouseEvent<HTMLButtonElement>) {
   event.stopPropagation();
@@ -21,8 +14,9 @@ export function RowAction({
 }) {
   return (
     <>
-      <Popover>
-        <Popover.Trigger>
+      <Menu
+        items={rowActions}
+        trigger={
           <IconButton
             icon={IconDotsVertical}
             size="slim"
@@ -30,11 +24,8 @@ export function RowAction({
           >
             Row Action
           </IconButton>
-        </Popover.Trigger>
-        <Popover.Content>
-          <ActionList actionRole="menuitem" items={rowActions} />
-        </Popover.Content>
-      </Popover>
+        }
+      />
     </>
   );
 }
