@@ -35,7 +35,7 @@ export function DataTableFacetedFilter<TData, TValue>({
 }: DataTableFacetedFilterProps<TData, TValue>) {
   const facets = column?.getFacetedUniqueValues();
   const selectedValues = new Set(column?.getFilterValue() as string[]);
-
+  console.log(column, options);
   return (
     <Popover>
       <Popover.Trigger asChild>
@@ -100,15 +100,23 @@ export function DataTableFacetedFilter<TData, TValue>({
                     >
                       {option.label}
                     </Checkbox>
-                    <span className={styles.FilterItemLabel}>
-                      {option.icon && <Icon source={option.icon} />}
-                      <Text>{option.label}</Text>
-                    </span>
-                    {facets?.get(option.value) && (
-                      <span className="ml-auto flex h-4 w-4 items-center justify-center font-mono text-xs">
-                        <Text>{facets.get(option.value)}</Text>
+
+                    <Box
+                      flex
+                      alignItems="center"
+                      justifyContent="space-between"
+                      width="100%"
+                    >
+                      <span className={styles.FilterItemLabel}>
+                        {option.icon && <Icon source={option.icon} />}
+                        <Text>{option.label}</Text>
                       </span>
-                    )}
+                      {facets?.get(option.value) && (
+                        <span className="ml-auto flex h-4 w-4 items-center justify-center font-mono text-xs">
+                          <Text>{facets.get(option.value)}</Text>
+                        </span>
+                      )}
+                    </Box>
                   </CommandItem>
                 );
               })}

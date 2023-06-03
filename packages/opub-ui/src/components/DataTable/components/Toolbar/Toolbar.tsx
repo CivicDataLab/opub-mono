@@ -34,11 +34,11 @@ export function Toolbar({ table }: { table: any }) {
           onChange={(e) => console.log(e)}
         />
         <div className={styles.FilterItems}>
-          <DataTableFacetedFilter
-            column={table.getColumn('age')}
-            title="Age"
-            options={priorities}
-          />
+          {/* <DataTableFacetedFilter
+            column={table.getColumn('firstName')}
+            title="First Name"
+            options={firstName}
+          /> */}
           <DataTableFacetedFilter
             column={table.getColumn('status')}
             title="Status"
