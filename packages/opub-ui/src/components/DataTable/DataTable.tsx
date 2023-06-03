@@ -6,21 +6,34 @@ import { Checkbox } from '../Checkbox/Checkbox';
 import { Footer } from '../Table';
 import { Text } from '../Text';
 import styles from './DataTable.module.scss';
-import { Cell, HeaderCell, Row } from './components';
+import { Cell, Toolbar, HeaderCell, Row } from './components';
 import { RowAction } from './components/Row';
 import {
   ColumnDef,
+  ColumnFiltersState,
   SortingState,
-  createColumnHelper,
+  VisibilityState,
   flexRender,
   getCoreRowModel,
+  getFacetedRowModel,
+  getFacetedUniqueValues,
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
+  createColumnHelper,
 } from '@tanstack/react-table';
 import cx from 'classnames';
 import React from 'react';
+
+const globalFilterFn = (row: any, columnId: any, filterValue: string) => {
+  const search = filterValue.toLowerCase();
+
+  let value = row.getValue(columnId) as string;
+  if (typeof value === 'number') value = String(value);
+
+  return value?.toLowerCase().includes(search);
+};
 
 const DataTable = (props: DataTableProps) => {
   const {
@@ -40,13 +53,17 @@ const DataTable = (props: DataTableProps) => {
     hasMoreItems = false,
     hideFooter = false,
     rowActions,
+    addFilter,
     ...others
   } = props;
-  const [data, setData] = React.useState(() => [...rows]);
-  const [sorting, setSorting] = React.useState<SortingState>([]);
-  const [rowSelection, setRowSelection] = React.useState(
-    defaultSelectedRows || {}
+
+  const [rowSelection, setRowSelection] = React.useState({});
+  const [columnVisibility, setColumnVisibility] =
+    React.useState<VisibilityState>({});
+  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
+    []
   );
+  const [sorting, setSorting] = React.useState<SortingState>([]);
 
   // trigger when row selection changes
   React.useEffect(() => {
@@ -57,26 +74,34 @@ const DataTable = (props: DataTableProps) => {
     }
   }, [rowSelection]);
 
-  const footerVisible = !hideFooter && data.length > 0;
+  const footerVisible = !hideFooter && rows.length > 0;
+  const tableData = React.useMemo(() => rows, [rows]);
 
   const table = useReactTable({
-    data,
+    data: tableData,
     columns,
     state: {
       sorting,
+      columnVisibility,
       rowSelection,
+      columnFilters,
     },
+    // globalFilterFn: globalFilterFn,
     onSortingChange: setSorting,
     getCoreRowModel: getCoreRowModel(),
-    getSortedRowModel: sortable ? getSortedRowModel() : undefined,
+    getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     onRowSelectionChange: setRowSelection,
-
+    getFacetedRowModel: getFacetedRowModel(),
+    getFacetedUniqueValues: getFacetedUniqueValues(),
+    onColumnFiltersChange: setColumnFilters,
+    onColumnVisibilityChange: setColumnVisibility,
     enableRowSelection: true,
   });
+  console.log(table.getAllColumns());
 
-  const rowCountIsEven = data.length % 2 === 0;
+  const rowCountIsEven = rows.length % 2 === 0;
   const themeClass = cx(
     styles.DataTable,
     hasZebraStripingOnData && styles.ZebraStripingOnData,
@@ -89,7 +114,10 @@ const DataTable = (props: DataTableProps) => {
 
   return (
     <div className={`opub-DataTable ${themeClass}`} {...others}>
-      <div className={styles.ScrollContainer}>
+      {addFilter && <Toolbar table={table} />}
+      <div
+        className={cx(styles.ScrollContainer, addFilter && styles.withFilter)}
+      >
         <table className={styles.Table}>
           <thead>
             {table.getHeaderGroups().map((headerGroup) => (

@@ -1,5 +1,6 @@
 /* colors */
 :root {
+  --transparent: #00000000;
   --background: #f6f6f7;
   --background-hovered: #f1f2f3;
   --background-invert: #202123;
@@ -317,7 +318,7 @@
   --duration-400: 400ms;
   --duration-450: 450ms;
   --duration-500: 500ms;
-  --duration-2000: 2000ms;  
+  --duration-2000: 2000ms;
   --duration-5000: 5000ms;
 
   --ease: cubic-bezier(0.25, 0.1, 0.25, 1);

@@ -60,3 +60,5 @@ export { Tooltip } from './Tooltip';
 export { Carousel } from "./Carousel";
 export { Skeleton } from "./Skeleton";
 export { IconButton } from "./IconButton";
+export { Command } from "./Command";
+export { Separator } from "./Separator";

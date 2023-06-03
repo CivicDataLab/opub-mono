@@ -135,3 +135,7 @@
   }
   padding-left: calc(var(--space-2) + var(--choice-size));
 }
+
+.hidden {
+  @include visually-hidden;
+}
