@@ -190,7 +190,7 @@ const DataTable = (props: DataTableProps) => {
                           <Text variant="bodySm">{selectedCount}</Text>
                         </span>
                       ) : null}
-                      <RowAction rowActions={rowActions} />
+                      <RowAction row={headerGroup} rowActions={rowActions} />
                     </Box>
                   </th>
                 )}
@@ -233,7 +233,7 @@ const DataTable = (props: DataTableProps) => {
                 })}
                 {rowActions && (
                   <td className={cx(styles.Cell, styles.RowAction)}>
-                    <RowAction rowActions={rowActions} />
+                    <RowAction row={row} rowActions={rowActions} />
                   </td>
                 )}
               </Row>

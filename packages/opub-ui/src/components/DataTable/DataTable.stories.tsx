@@ -56,18 +56,24 @@ const rowActions = [
   {
     content: 'Copy',
     icon: <Icon source={IconCopy} />,
-    onAction: () => alert('Copy Triggered'),
+    onAction: (e: any) => {
+      console.log(e, ' copied');
+    },
   },
   {
     content: 'Edit',
     icon: <Icon source={IconPencil} />,
-    onAction: () => alert('Edit Triggered'),
+    onAction: (e: any) => {
+      console.log(e, ' edited');
+    },
   },
   {
     content: 'Delete',
     destructive: true,
     icon: <Icon source={IconTrash} />,
-    onAction: () => alert('Delete Triggered'),
+    onAction: (e: any) => {
+      console.log(e, ' deleted');
+    },
   },
 ];
 
