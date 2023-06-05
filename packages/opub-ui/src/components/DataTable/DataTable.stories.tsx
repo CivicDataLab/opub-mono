@@ -100,7 +100,6 @@ export const AllFeatures: Story = {
     rows: makeTableData(40),
     columns: columns,
     addToolbar: true,
-    sortable: true,
     rowActions: rowActions,
     filters: [
       {
@@ -126,7 +125,6 @@ export const WithFilter: Story = {
     rows: makeTableData(30),
     columns: columns,
     addToolbar: true,
-    sortable: true,
     filters: [
       {
         columnId: 'status',
@@ -188,71 +186,5 @@ export const Truncate: Story = {
     rows: truncateData,
     columns: columns,
     truncate: true,
-  },
-};
-
-const columnsSort = [
-  columnHelper.accessor('firstName', {
-    cell: (info) => info.getValue(),
-    header: () => <>First Name</>,
-    enableSorting: true,
-  }),
-  columnHelper.accessor((row) => row.lastName, {
-    id: 'lastName',
-    header: 'Last Name',
-    enableSorting: false,
-  }),
-  columnHelper.accessor('age', {
-    header: () => 'Age',
-    cell: (info) => info.renderValue(),
-  }),
-  columnHelper.accessor('visits', {
-    header: 'Visits',
-  }),
-  columnHelper.accessor('progress', {
-    header: 'Profile Progress',
-  }),
-  columnHelper.accessor('status', {
-    header: 'Status',
-    enableSorting: false,
-  }),
-];
-
-export const Sortable: Story = {
-  render: ({ ...args }) => {
-    return (
-      <DataTable
-        {...args}
-        sortable={true}
-        defaultSortDirection="desc"
-        initialSortColumnIndex={4}
-      />
-    );
-  },
-
-  args: {
-    columnContentTypes: columnContentTypes,
-    rows: makeTableData(30),
-    columns: columnsSort,
-  },
-};
-
-export const SelectionAcrossPages: Story = {
-  render: ({ ...args }) => {
-    return (
-      <DataTable
-        {...args}
-        sortable={true}
-        defaultSortDirection="desc"
-        initialSortColumnIndex={4}
-      />
-    );
-  },
-
-  args: {
-    columnContentTypes: columnContentTypes,
-    rows: makeTableData(30),
-    columns: columnsSort,
-    hasMoreItems: true,
   },
 };

@@ -42,7 +42,7 @@ const Table = (props: TableProps) => {
     },
     onSortingChange: setSorting,
     getCoreRowModel: getCoreRowModel(),
-    getSortedRowModel: sortable ? getSortedRowModel() : undefined,
+    getSortedRowModel: getSortedRowModel(),
     getPaginationRowModel: hideFooter ? undefined : getPaginationRowModel(),
     filterFns: {
       columnFilter: (row, id, value) => {

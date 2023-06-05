@@ -1,3 +1,4 @@
+import { range } from '../../utils';
 import { faker } from '@faker-js/faker';
 
 export type Person = {
@@ -7,14 +8,6 @@ export type Person = {
   visits: number;
   status: string;
   progress: number;
-};
-
-const range = (len: number) => {
-  const arr = [];
-  for (let i = 0; i < len; i++) {
-    arr.push(i);
-  }
-  return arr;
 };
 
 const newPerson = (): Person => {
@@ -35,7 +28,7 @@ const newPerson = (): Person => {
 export function makeTableData(...lens: number[]) {
   const makeDataLevel = (depth = 0): Person[] => {
     const len = lens[depth]!;
-    return range(len).map((d): Person => {
+    return range(len).map((): Person => {
       return {
         ...newPerson(),
       };

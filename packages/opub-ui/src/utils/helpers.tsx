@@ -119,3 +119,11 @@ export function capitalize(word = '') {
   const wordLower = word.toLowerCase();
   return wordLower.charAt(0).toUpperCase() + wordLower.slice(1);
 }
+
+export const range = (len: number) => {
+  const arr = [];
+  for (let i = 0; i < len; i++) {
+    arr.push(i);
+  }
+  return arr;
+};

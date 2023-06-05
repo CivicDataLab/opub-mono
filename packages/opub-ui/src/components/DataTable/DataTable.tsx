@@ -42,7 +42,7 @@ const DataTable = (props: DataTableProps) => {
     increasedTableDensity = true,
     hasZebraStripingOnData = false,
     truncate = false,
-    sortable = false,
+    sortable = true,
     defaultSortDirection = 'asc',
     initialSortColumnIndex: sortedColumnIndex,
     onSort,
