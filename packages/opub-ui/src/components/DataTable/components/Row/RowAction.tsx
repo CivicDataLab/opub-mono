@@ -5,17 +5,17 @@ import { IconDotsVertical } from '@tabler/icons-react';
 
 export function RowAction({
   rowActions,
-  row,
+  callbackContent,
 }: {
   rowActions: ActionListProps['items'];
-  row: any;
+  callbackContent: any;
 }) {
   return (
     <>
       <Menu
         items={rowActions}
         align="end"
-        callbackContent={row}
+        callbackContent={callbackContent}
         trigger={
           <IconButton
             icon={IconDotsVertical}

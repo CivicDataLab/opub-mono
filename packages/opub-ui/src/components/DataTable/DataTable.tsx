@@ -57,6 +57,7 @@ const DataTable = (props: DataTableProps) => {
   } = props;
 
   const [rowSelection, setRowSelection] = React.useState({});
+  const [rowSelectionObj, setRowSelectionObj] = React.useState([]);
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -66,11 +67,13 @@ const DataTable = (props: DataTableProps) => {
 
   // trigger when row selection changes
   React.useEffect(() => {
+    const selected: any = table
+      .getSelectedRowModel()
+      .flatRows.map((row) => row.original);
     if (onRowSelectionChange) {
-      onRowSelectionChange(
-        table.getSelectedRowModel().flatRows.map((row) => row.original)
-      );
+      onRowSelectionChange(selected);
     }
+    setRowSelectionObj(selected);
   }, [rowSelection]);
 
   const footerVisible = !hideFooter && rows.length > 0;
@@ -190,7 +193,10 @@ const DataTable = (props: DataTableProps) => {
                           <Text variant="bodySm">{selectedCount}</Text>
                         </span>
                       ) : null}
-                      <RowAction row={headerGroup} rowActions={rowActions} />
+                      <RowAction
+                        callbackContent={rowSelectionObj}
+                        rowActions={rowActions}
+                      />
                     </Box>
                   </th>
                 )}
@@ -233,7 +239,10 @@ const DataTable = (props: DataTableProps) => {
                 })}
                 {rowActions && (
                   <td className={cx(styles.Cell, styles.RowAction)}>
-                    <RowAction row={row} rowActions={rowActions} />
+                    <RowAction
+                      callbackContent={row.original}
+                      rowActions={rowActions}
+                    />
                   </td>
                 )}
               </Row>
