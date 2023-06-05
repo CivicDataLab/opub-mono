@@ -45,12 +45,12 @@ export const Choice = ({
     className
   );
 
-  const hiddenLabel = cx(labelHidden && styles.hidden);
+  const labelClassName = cx(styles.Label, labelHidden && styles.hidden);
   const checkboxMarkup = (
     <div className={wrapperClassName}>
       {children}
 
-      <div className={hiddenLabel}>
+      <div className={labelClassName}>
         <Label disabled={!!props.disabled} htmlFor={id}>
           {label}
         </Label>

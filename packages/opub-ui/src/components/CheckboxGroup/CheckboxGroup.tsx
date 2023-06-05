@@ -28,7 +28,7 @@ export const CheckboxGroup = React.forwardRef(
     const finalName = nameProp || name;
 
     React.useEffect(() => {
-      handleSelectChange(value);
+      handleSelectChange(value || defaultValue || []);
     }, [value]);
 
     const handleSelectChange = React.useCallback(
