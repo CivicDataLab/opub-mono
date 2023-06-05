@@ -96,6 +96,7 @@
 
   .Cell {
     border-top: var(--border-divider);
+    vertical-align: middle;
 
     &:nth-child(2) {
       padding-left: 0;
@@ -305,7 +306,6 @@
     margin: 0;
     --gap: 0px;
     padding: 0;
-    margin-bottom: -4px;
     display: block;
   }
 
