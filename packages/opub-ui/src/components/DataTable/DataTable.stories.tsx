@@ -31,35 +31,24 @@ const columns = [
   columnHelper.accessor('firstName', {
     cell: (info) => info.getValue(),
     header: () => 'First Name',
-    enableGlobalFilter: false,
-    filterFn: (row, id, value) => {
-      return value.includes(row.getValue(id));
-    },
   }),
   columnHelper.accessor((row) => row.lastName, {
     id: 'lastName',
     header: 'Last Name',
-    enableGlobalFilter: false,
   }),
   columnHelper.accessor('age', {
     header: () => 'Age',
     cell: (info) => info.renderValue(),
-    enableGlobalFilter: false,
   }),
   columnHelper.accessor('visits', {
     header: 'Visits',
-    enableGlobalFilter: false,
   }),
   columnHelper.accessor('progress', {
     header: 'Profile Progress',
-    enableGlobalFilter: false,
   }),
   columnHelper.accessor('status', {
     header: 'Status',
-    enableGlobalFilter: false,
-    filterFn: (row, id, value) => {
-      return value.includes(row.getValue(id));
-    },
+    filterFn: 'columnFilter',
   }),
 ];
 
@@ -87,6 +76,17 @@ export const Default: Story = {
     columnContentTypes: columnContentTypes,
     rows: makeTableData(30),
     columns: columns,
+  },
+};
+
+export const AllFeatures: Story = {
+  args: {
+    columnContentTypes: columnContentTypes,
+    rows: makeTableData(40),
+    columns: columns,
+    addFilter: true,
+    sortable: true,
+    rowActions: rowActions,
   },
 };
 

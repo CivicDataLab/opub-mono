@@ -412,3 +412,20 @@
 .FilterItemLabel {
   margin-left: var(--space-2);
 }
+
+.TableView {
+  padding-block: var(--space-4);
+
+  .TableViewTitle {
+    padding-inline: var(--space-4);
+    margin-bottom: var(--space-2);
+  }
+
+  .TableViewContent {
+    padding-inline: var(--space-4);
+    margin-top: var(--space-2);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+}

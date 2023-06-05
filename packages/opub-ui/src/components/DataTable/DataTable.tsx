@@ -22,18 +22,16 @@ import {
   getSortedRowModel,
   useReactTable,
   createColumnHelper,
+  FilterFn,
 } from '@tanstack/react-table';
 import cx from 'classnames';
 import React from 'react';
 
-const globalFilterFn = (row: any, columnId: any, filterValue: string) => {
-  const search = filterValue.toLowerCase();
-
-  let value = row.getValue(columnId) as string;
-  if (typeof value === 'number') value = String(value);
-
-  return value?.toLowerCase().includes(search);
-};
+declare module '@tanstack/table-core' {
+  interface FilterFns {
+    columnFilter: FilterFn<unknown>;
+  }
+}
 
 const DataTable = (props: DataTableProps) => {
   const {
@@ -86,7 +84,6 @@ const DataTable = (props: DataTableProps) => {
       rowSelection,
       columnFilters,
     },
-    // globalFilterFn: globalFilterFn,
     onSortingChange: setSorting,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
@@ -98,8 +95,15 @@ const DataTable = (props: DataTableProps) => {
     onColumnFiltersChange: setColumnFilters,
     onColumnVisibilityChange: setColumnVisibility,
     enableRowSelection: true,
+    // globalFilterFn: (row, id, value) => {
+    //   return value.includes(row.getValue(id));
+    // },
+    filterFns: {
+      columnFilter: (row, id, value) => {
+        return value.includes(row.getValue(id));
+      },
+    },
   });
-  console.log(table.getAllColumns());
 
   const rowCountIsEven = rows.length % 2 === 0;
   const themeClass = cx(

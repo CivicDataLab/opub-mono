@@ -16,6 +16,7 @@ export function RowAction({
     <>
       <Menu
         items={rowActions}
+        align="end"
         trigger={
           <IconButton
             icon={IconDotsVertical}

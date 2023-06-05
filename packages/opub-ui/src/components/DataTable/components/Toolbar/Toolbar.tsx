@@ -3,6 +3,7 @@ import { Icon } from '../../../Icon';
 import { Menu } from '../../../Menu';
 import { TextField } from '../../../TextField';
 import styles from '../../DataTable.module.scss';
+import { DataTableViewOptions } from './DataTableViewOptions';
 import { DataTableFacetedFilter } from './Filter';
 import { IconAdjustmentsHorizontal, IconSearch } from '@tabler/icons-react';
 
@@ -34,11 +35,6 @@ export function Toolbar({ table }: { table: any }) {
           onChange={(e) => console.log(e)}
         />
         <div className={styles.FilterItems}>
-          {/* <DataTableFacetedFilter
-            column={table.getColumn('firstName')}
-            title="First Name"
-            options={firstName}
-          /> */}
           <DataTableFacetedFilter
             column={table.getColumn('status')}
             title="Status"
@@ -48,13 +44,7 @@ export function Toolbar({ table }: { table: any }) {
       </div>
       <div className={styles.FilterRight}>
         <div>
-          <Menu
-            trigger={
-              <Button icon={<Icon source={IconAdjustmentsHorizontal} />}>
-                View
-              </Button>
-            }
-          />
+          <DataTableViewOptions table={table} />
         </div>
         <div>
           <Menu
