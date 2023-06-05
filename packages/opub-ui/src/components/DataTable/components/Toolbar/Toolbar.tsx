@@ -6,6 +6,11 @@ import styles from '../../DataTable.module.scss';
 import { DataTableViewOptions } from './DataTableViewOptions';
 import { DataTableFacetedFilter } from './Filter';
 import { IconAdjustmentsHorizontal, IconSearch } from '@tabler/icons-react';
+import { Table } from '@tanstack/react-table';
+
+interface DataTableViewOptionsProps<TData> {
+  table: Table<TData>;
+}
 
 export const priorities = [
   {
@@ -22,7 +27,7 @@ export const priorities = [
   },
 ];
 
-export function Toolbar({ table }: { table: any }) {
+export function Toolbar<TData>({ table }: DataTableViewOptionsProps<TData>) {
   return (
     <div className={styles.Filter}>
       <div className={styles.FilterLeft}>
@@ -30,9 +35,9 @@ export function Toolbar({ table }: { table: any }) {
           name="filter-table"
           label="Filter"
           labelHidden
-          placeholder="Filter"
+          placeholder="Global Filter"
           prefix={<Icon source={IconSearch} />}
-          onChange={(e) => console.log(e)}
+          onChange={(text) => table.setGlobalFilter(text)}
         />
         <div className={styles.FilterItems}>
           <DataTableFacetedFilter

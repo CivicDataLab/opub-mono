@@ -4,6 +4,7 @@ import { Button } from '../../../Button';
 import { Checkbox } from '../../../Checkbox';
 import { Icon } from '../../../Icon';
 import { Popover } from '../../../Popover';
+import { ScrollArea } from '../../../ScrollArea';
 import { Separator } from '../../../Separator';
 import { Text } from '../../../Text';
 import styles from '../../DataTable.module.scss';
@@ -37,23 +38,25 @@ export function DataTableViewOptions<TData>({
                 </Text>
               </div>
               <Separator />
-              <div className={styles.TableViewContent}>
-                {table
-                  .getAllColumns()
-                  .filter((column) => column.getCanSort())
-                  .map((column) => {
-                    return (
-                      <Checkbox
-                        name={column.id}
-                        key={column.id}
-                        checked={column.getIsVisible()}
-                        onChange={(value) => column.toggleVisibility(!!value)}
-                      >
-                        {column.id}
-                      </Checkbox>
-                    );
-                  })}
-              </div>
+              <ScrollArea>
+                <div className={styles.TableViewContent}>
+                  {table
+                    .getAllColumns()
+                    .filter((column) => column.getCanSort())
+                    .map((column) => {
+                      return (
+                        <Checkbox
+                          name={column.id}
+                          key={column.id}
+                          checked={column.getIsVisible()}
+                          onChange={(value) => column.toggleVisibility(!!value)}
+                        >
+                          {column.id}
+                        </Checkbox>
+                      );
+                    })}
+                </div>
+              </ScrollArea>
             </div>
           </fieldset>
         </Popover.Content>
