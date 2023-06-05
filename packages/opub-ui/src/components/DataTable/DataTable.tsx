@@ -95,9 +95,6 @@ const DataTable = (props: DataTableProps) => {
     onColumnFiltersChange: setColumnFilters,
     onColumnVisibilityChange: setColumnVisibility,
     enableRowSelection: true,
-    // globalFilterFn: (row, id, value) => {
-    //   return value.includes(row.getValue(id));
-    // },
     filterFns: {
       columnFilter: (row, id, value) => {
         return value.includes(row.getValue(id));
@@ -247,43 +244,3 @@ const DataTable = (props: DataTableProps) => {
 
 export { DataTable, createColumnHelper };
 export type { ColumnDef };
-
-const ItemSelectedText = ({
-  selectedCount,
-  totalCount,
-  table,
-}: {
-  selectedCount: number;
-  totalCount: number;
-  table: ReturnType<typeof useReactTable>;
-}) => {
-  return (
-    <div className={cx(styles.Cell, styles['Cell-header'])}>
-      {selectedCount < totalCount ? (
-        <>
-          <Text variant="bodySm" fontWeight="medium">
-            {selectedCount} item{selectedCount > 1 ? 's' : ''} selected
-          </Text>
-          <button
-            onClick={() => table.toggleAllPageRowsSelected()}
-            className={styles.SelectAllButton}
-          >
-            Select all {totalCount} items
-          </button>
-        </>
-      ) : (
-        <>
-          <Text variant="bodySm" fontWeight="medium">
-            All {totalCount} items selected
-          </Text>
-          <button
-            onClick={() => table.resetRowSelection()}
-            className={styles.SelectAllButton}
-          >
-            Undo
-          </button>
-        </>
-      )}
-    </div>
-  );
-};

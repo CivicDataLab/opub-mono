@@ -305,7 +305,7 @@
     margin: 0;
     --gap: 0px;
     padding: 0;
-    margin-bottom: -6px;
+    margin-bottom: -4px;
     display: block;
   }
 
@@ -407,6 +407,10 @@
   border-radius: var(--border-radius-05);
   border: 1px solid var(--border-subdued);
   transition: border-color var(--duration-200) var(--ease);
+}
+
+.FilterContentWrapper {
+  max-width: 400px;
 }
 
 .FilterItemLabel {

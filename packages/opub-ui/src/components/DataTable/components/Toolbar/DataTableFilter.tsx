@@ -12,6 +12,7 @@ import {
 } from '../../../Command';
 import { Icon } from '../../../Icon';
 import { Popover } from '../../../Popover';
+import { ScrollArea } from '../../../ScrollArea';
 import { Separator } from '../../../Separator';
 import { Text } from '../../../Text';
 import styles from '../../DataTable.module.scss';
@@ -28,7 +29,7 @@ interface DataTableFacetedFilterProps<TData, TValue> {
   }[];
 }
 
-export function DataTableFacetedFilter<TData, TValue>({
+export function DataTableFilter<TData, TValue>({
   column,
   title,
   options,
@@ -76,50 +77,54 @@ export function DataTableFacetedFilter<TData, TValue>({
           <CommandList>
             <CommandEmpty>No results found.</CommandEmpty>
             <CommandGroup>
-              {options.map((option) => {
-                const isSelected = selectedValues.has(option.value);
-                return (
-                  <CommandItem
-                    key={option.value}
-                    onSelect={() => {
-                      if (isSelected) {
-                        selectedValues.delete(option.value);
-                      } else {
-                        selectedValues.add(option.value);
-                      }
-                      const filterValues = Array.from(selectedValues);
-                      column?.setFilterValue(
-                        filterValues.length ? filterValues : undefined
-                      );
-                    }}
-                  >
-                    <Checkbox
-                      name={option.label}
-                      checked={isSelected}
-                      labelHidden
-                    >
-                      {option.label}
-                    </Checkbox>
+              <ScrollArea>
+                <div className={styles.FilterContentWrapper}>
+                  {options.map((option) => {
+                    const isSelected = selectedValues.has(option.value);
+                    return (
+                      <CommandItem
+                        key={option.value}
+                        onSelect={() => {
+                          if (isSelected) {
+                            selectedValues.delete(option.value);
+                          } else {
+                            selectedValues.add(option.value);
+                          }
+                          const filterValues = Array.from(selectedValues);
+                          column?.setFilterValue(
+                            filterValues.length ? filterValues : undefined
+                          );
+                        }}
+                      >
+                        <Checkbox
+                          name={option.label}
+                          checked={isSelected}
+                          labelHidden
+                        >
+                          {option.label}
+                        </Checkbox>
 
-                    <Box
-                      flex
-                      alignItems="center"
-                      justifyContent="space-between"
-                      width="100%"
-                    >
-                      <span className={styles.FilterItemLabel}>
-                        {option.icon && <Icon source={option.icon} />}
-                        <Text>{option.label}</Text>
-                      </span>
-                      {facets?.get(option.value) && (
-                        <span className="ml-auto flex h-4 w-4 items-center justify-center font-mono text-xs">
-                          <Text>{facets.get(option.value)}</Text>
-                        </span>
-                      )}
-                    </Box>
-                  </CommandItem>
-                );
-              })}
+                        <Box
+                          flex
+                          alignItems="center"
+                          justifyContent="space-between"
+                          width="100%"
+                        >
+                          <span className={styles.FilterItemLabel}>
+                            {option.icon && <Icon source={option.icon} />}
+                            <Text>{option.label}</Text>
+                          </span>
+                          {facets?.get(option.value) && (
+                            <span className="ml-auto flex h-4 w-4 items-center justify-center font-mono text-xs">
+                              <Text>{facets.get(option.value)}</Text>
+                            </span>
+                          )}
+                        </Box>
+                      </CommandItem>
+                    );
+                  })}
+                </div>
+              </ScrollArea>
             </CommandGroup>
             {selectedValues.size > 0 && (
               <>

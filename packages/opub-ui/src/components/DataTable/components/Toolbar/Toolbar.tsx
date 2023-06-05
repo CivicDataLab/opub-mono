@@ -3,8 +3,8 @@ import { Icon } from '../../../Icon';
 import { Menu } from '../../../Menu';
 import { TextField } from '../../../TextField';
 import styles from '../../DataTable.module.scss';
-import { DataTableViewOptions } from './DataTableViewOptions';
-import { DataTableFacetedFilter } from './Filter';
+import { DataTableFilter } from './DataTableFilter';
+import { DataTableView } from './DataTableView';
 import { IconAdjustmentsHorizontal, IconSearch } from '@tabler/icons-react';
 import { Table } from '@tanstack/react-table';
 
@@ -40,7 +40,7 @@ export function Toolbar<TData>({ table }: DataTableViewOptionsProps<TData>) {
           onChange={(text) => table.setGlobalFilter(text)}
         />
         <div className={styles.FilterItems}>
-          <DataTableFacetedFilter
+          <DataTableFilter
             column={table.getColumn('status')}
             title="Status"
             options={priorities}
@@ -49,7 +49,7 @@ export function Toolbar<TData>({ table }: DataTableViewOptionsProps<TData>) {
       </div>
       <div className={styles.FilterRight}>
         <div>
-          <DataTableViewOptions table={table} />
+          <DataTableView table={table} />
         </div>
         <div>
           <Menu
