@@ -28,8 +28,6 @@ export interface TableProps {
   truncate?: boolean;
   /** Increased density */
   increasedTableDensity?: boolean;
-  /** List of booleans, which maps to whether sorting is enabled or not for each column. Defaults to false for all columns.  */
-  sortable?: boolean;
   /**
    * The direction to sort the table rows on first click or keypress of a sortable column heading. Defaults to ascending.
    */
@@ -45,6 +43,8 @@ export interface TableProps {
   hideFooter?: boolean;
   /** Hide Results in Footer  */
   hideResultsInFooter?: boolean;
+  /** specify columns to be sorted  */
+  sortColumns?: string[];
 }
 
 export type TableFilterProps = {

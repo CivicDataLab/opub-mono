@@ -167,6 +167,6 @@ export const Sortable: Story = {
     columns: columnsSort,
     initialSortColumnIndex: 4,
     defaultSortDirection: 'desc',
-    sortable: true,
+    sortColumns: ['firstName', 'lastName', 'visits', 'progress', 'status'],
   },
 };

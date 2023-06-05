@@ -79,7 +79,7 @@ export const Default: Story = {
   },
 };
 
-export const statusFilter = [
+const statusFilter = [
   {
     label: 'Relationship',
     value: 'relationship',
@@ -101,6 +101,7 @@ export const AllFeatures: Story = {
     columns: columns,
     addToolbar: true,
     rowActions: rowActions,
+    sortColumns: ['firstName', 'lastName', 'visits', 'progress', 'status'],
     filters: [
       {
         columnId: 'status',
@@ -131,6 +132,15 @@ export const WithFilter: Story = {
         options: statusFilter,
       },
     ],
+  },
+};
+
+export const WithSort: Story = {
+  args: {
+    columnContentTypes: columnContentTypes,
+    rows: makeTableData(30),
+    columns: columns,
+    sortColumns: ['firstName', 'lastName', 'visits', 'progress', 'status'],
   },
 };
 

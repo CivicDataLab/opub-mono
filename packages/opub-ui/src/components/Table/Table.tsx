@@ -23,7 +23,7 @@ const Table = (props: TableProps) => {
     increasedTableDensity = false,
     hasZebraStripingOnData = false,
     truncate = false,
-    sortable = false,
+    sortColumns,
     defaultSortDirection = 'asc',
     initialSortColumnIndex: sortedColumnIndex,
     onSort,
@@ -78,7 +78,10 @@ const Table = (props: TableProps) => {
                     header.column.columnDef.header,
                     header.getContext()
                   );
-                  const isSortable = header.column.getCanSort() && sortable;
+                  const isSortable =
+                    header.column.getCanSort() &&
+                    !!sortColumns?.includes(header.id);
+
                   const isSorted = header.column.getIsSorted();
 
                   return (

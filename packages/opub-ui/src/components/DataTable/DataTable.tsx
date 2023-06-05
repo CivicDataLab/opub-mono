@@ -42,7 +42,6 @@ const DataTable = (props: DataTableProps) => {
     increasedTableDensity = true,
     hasZebraStripingOnData = false,
     truncate = false,
-    sortable = true,
     defaultSortDirection = 'asc',
     initialSortColumnIndex: sortedColumnIndex,
     onSort,
@@ -53,6 +52,7 @@ const DataTable = (props: DataTableProps) => {
     rowActions,
     addToolbar,
     filters,
+    sortColumns,
     ...others
   } = props;
 
@@ -151,7 +151,10 @@ const DataTable = (props: DataTableProps) => {
                     header.column.columnDef.header,
                     header.getContext()
                   );
-                  const isSortable = header.column.getCanSort() && sortable;
+                  const isSortable =
+                    header.column.getCanSort() &&
+                    !!sortColumns?.includes(header.id); // whether the column is in the sortColumns array
+
                   const isSorted = header.column.getIsSorted();
 
                   return (
