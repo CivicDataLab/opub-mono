@@ -7,12 +7,13 @@
 
   display: flex;
   padding: var(--space-1) 0;
-  cursor: pointer;
+  // cursor: pointer;
 
   --gap: var(--space-3);
 
   label {
     padding-inline-start: var(--gap);
+    cursor: pointer;
   }
 }
 

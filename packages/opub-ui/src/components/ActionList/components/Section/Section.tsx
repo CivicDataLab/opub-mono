@@ -1,10 +1,12 @@
-import { Box } from '../../../Box';
-import { Text } from '../../../Text';
 import type {
   ActionListItemDescriptor,
   ActionListSection,
 } from '../../../../types/actionlist';
+import { Box } from '../../../Box';
+import { MenuContext } from '../../../Menu/Menu';
+import { Text } from '../../../Text';
 import { Item } from '../Item';
+import React from 'react';
 
 export interface SectionProps {
   /** Section of action items */
@@ -26,13 +28,18 @@ export function Section({
   actionRole,
   onActionAnyItem,
 }: SectionProps) {
-  const handleAction = (itemOnAction: ActionListItemDescriptor['onAction']) => {
+  const callbackContent = React.useContext(MenuContext);
+
+  const handleAction = (
+    itemOnAction: ActionListItemDescriptor['onAction'],
+    content?: string
+  ) => {
     return () => {
       if (itemOnAction) {
-        itemOnAction();
+        itemOnAction(callbackContent || content);
       }
       if (onActionAnyItem) {
-        onActionAnyItem();
+        onActionAnyItem(callbackContent || content);
       }
     };
   };
@@ -47,7 +54,7 @@ export function Section({
             content={content}
             helpText={helpText}
             role={actionRole}
-            onAction={handleAction(onAction)}
+            onAction={handleAction(onAction, content)}
             {...item}
           />
         </li>

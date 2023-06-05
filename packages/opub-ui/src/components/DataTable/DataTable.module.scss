@@ -96,6 +96,7 @@
 
   .Cell {
     border-top: var(--border-divider);
+    vertical-align: middle;
 
     &:nth-child(2) {
       padding-left: 0;
@@ -305,7 +306,6 @@
     margin: 0;
     --gap: 0px;
     padding: 0;
-    margin-bottom: -6px;
     display: block;
   }
 
@@ -409,6 +409,28 @@
   transition: border-color var(--duration-200) var(--ease);
 }
 
+.FilterContentWrapper {
+  max-width: 400px;
+}
+
 .FilterItemLabel {
   margin-left: var(--space-2);
+}
+
+.TableView {
+  padding-block: var(--space-2);
+
+  .TableViewTitle {
+    padding-inline: var(--space-4);
+    margin-bottom: var(--space-2);
+  }
+
+  .TableViewContent {
+    padding-inline: var(--space-4);
+    margin-top: var(--space-2);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    max-height: 200px;
+  }
 }

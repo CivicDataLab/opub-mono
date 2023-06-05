@@ -1,14 +1,18 @@
-import React from 'react';
 import { ActionList } from '../ActionList';
 import type { ActionListProps } from '../ActionList/ActionList';
 import { Popover } from '../Popover';
 import type { PopoverContentProps, PopoverProps } from '../Popover';
+import React from 'react';
 
 type Props = {
   trigger: React.ReactNode;
+  /** Content to be passed to the callback function */
+  callbackContent?: any;
 } & ActionListProps &
   PopoverContentProps &
   PopoverProps;
+
+export const MenuContext = React.createContext(null);
 
 const Menu = (props: Props) => {
   const [isOpen, setIsOpen] = React.useState<boolean>(false);
@@ -21,6 +25,7 @@ const Menu = (props: Props) => {
     sections,
     actionRole = 'menuitem',
     onActionAnyItem,
+    callbackContent,
     ...others
   } = props;
 
@@ -36,12 +41,14 @@ const Menu = (props: Props) => {
         {trigger}
       </Popover.Trigger>
       <Popover.Content {...others}>
-        <ActionList
-          actionRole={actionRole}
-          items={items}
-          sections={sections}
-          onActionAnyItem={onActionAnyItem}
-        />
+        <MenuContext.Provider value={callbackContent}>
+          <ActionList
+            actionRole={actionRole}
+            items={items}
+            sections={sections}
+            onActionAnyItem={onActionAnyItem}
+          />
+        </MenuContext.Provider>
       </Popover.Content>
     </Popover>
   );

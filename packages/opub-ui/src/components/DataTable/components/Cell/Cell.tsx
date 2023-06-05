@@ -144,7 +144,7 @@ const TruncatedText = ({
   return current?.scrollWidth > current?.offsetWidth ? (
     <Tooltip.Provider>
       <Tooltip delayDuration={0} content={textRef.current.innerText}>
-        {text}
+        <Text variant="bodyMd">{text}</Text>
       </Tooltip>
     </Tooltip.Provider>
   ) : (

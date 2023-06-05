@@ -5,7 +5,7 @@ import { Meta, StoryObj } from '@storybook/react';
 import { IconCopy, IconPencil, IconTrash } from '@tabler/icons-react';
 
 /**
- * Data tables are used to organize and display all information from a data set.
+ * Data tables are used to organize and display all information from a dataset.
  *
  * Reference: https://tanstack.com/table/v8/docs/guide/introduction
  */
@@ -31,35 +31,24 @@ const columns = [
   columnHelper.accessor('firstName', {
     cell: (info) => info.getValue(),
     header: () => 'First Name',
-    enableGlobalFilter: false,
-    filterFn: (row, id, value) => {
-      return value.includes(row.getValue(id));
-    },
   }),
   columnHelper.accessor((row) => row.lastName, {
     id: 'lastName',
     header: 'Last Name',
-    enableGlobalFilter: false,
   }),
   columnHelper.accessor('age', {
     header: () => 'Age',
     cell: (info) => info.renderValue(),
-    enableGlobalFilter: false,
   }),
   columnHelper.accessor('visits', {
     header: 'Visits',
-    enableGlobalFilter: false,
   }),
   columnHelper.accessor('progress', {
     header: 'Profile Progress',
-    enableGlobalFilter: false,
   }),
   columnHelper.accessor('status', {
     header: 'Status',
-    enableGlobalFilter: false,
-    filterFn: (row, id, value) => {
-      return value.includes(row.getValue(id));
-    },
+    filterFn: 'columnFilter',
   }),
 ];
 
@@ -67,18 +56,24 @@ const rowActions = [
   {
     content: 'Copy',
     icon: <Icon source={IconCopy} />,
-    onAction: () => alert('Copy Triggered'),
+    onAction: (e: any) => {
+      console.log(e, ' copied');
+    },
   },
   {
     content: 'Edit',
     icon: <Icon source={IconPencil} />,
-    onAction: () => alert('Edit Triggered'),
+    onAction: (e: any) => {
+      console.log(e, ' edited');
+    },
   },
   {
     content: 'Delete',
     destructive: true,
     icon: <Icon source={IconTrash} />,
-    onAction: () => alert('Delete Triggered'),
+    onAction: (e: any) => {
+      console.log(e, ' deleted');
+    },
   },
 ];
 
@@ -87,6 +82,38 @@ export const Default: Story = {
     columnContentTypes: columnContentTypes,
     rows: makeTableData(30),
     columns: columns,
+  },
+};
+
+const statusFilter = [
+  {
+    label: 'Relationship',
+    value: 'relationship',
+  },
+  {
+    label: 'Complicated',
+    value: 'complicated',
+  },
+  {
+    label: 'Single',
+    value: 'single',
+  },
+];
+
+export const AllFeatures: Story = {
+  args: {
+    columnContentTypes: columnContentTypes,
+    rows: makeTableData(40),
+    columns: columns,
+    addToolbar: true,
+    rowActions: rowActions,
+    sortColumns: ['firstName', 'lastName', 'visits', 'progress', 'status'],
+    filters: [
+      {
+        columnId: 'status',
+        options: statusFilter,
+      },
+    ],
   },
 };
 
@@ -104,8 +131,22 @@ export const WithFilter: Story = {
     columnContentTypes: columnContentTypes,
     rows: makeTableData(30),
     columns: columns,
-    addFilter: true,
-    sortable: true,
+    addToolbar: true,
+    filters: [
+      {
+        columnId: 'status',
+        options: statusFilter,
+      },
+    ],
+  },
+};
+
+export const WithSort: Story = {
+  args: {
+    columnContentTypes: columnContentTypes,
+    rows: makeTableData(30),
+    columns: columns,
+    sortColumns: ['firstName', 'lastName', 'visits', 'progress', 'status'],
   },
 };
 
@@ -161,71 +202,5 @@ export const Truncate: Story = {
     rows: truncateData,
     columns: columns,
     truncate: true,
-  },
-};
-
-const columnsSort = [
-  columnHelper.accessor('firstName', {
-    cell: (info) => info.getValue(),
-    header: () => <>First Name</>,
-    enableSorting: true,
-  }),
-  columnHelper.accessor((row) => row.lastName, {
-    id: 'lastName',
-    header: 'Last Name',
-    enableSorting: false,
-  }),
-  columnHelper.accessor('age', {
-    header: () => 'Age',
-    cell: (info) => info.renderValue(),
-  }),
-  columnHelper.accessor('visits', {
-    header: 'Visits',
-  }),
-  columnHelper.accessor('progress', {
-    header: 'Profile Progress',
-  }),
-  columnHelper.accessor('status', {
-    header: 'Status',
-    enableSorting: false,
-  }),
-];
-
-export const Sortable: Story = {
-  render: ({ ...args }) => {
-    return (
-      <DataTable
-        {...args}
-        sortable={true}
-        defaultSortDirection="desc"
-        initialSortColumnIndex={4}
-      />
-    );
-  },
-
-  args: {
-    columnContentTypes: columnContentTypes,
-    rows: makeTableData(30),
-    columns: columnsSort,
-  },
-};
-
-export const SelectionAcrossPages: Story = {
-  render: ({ ...args }) => {
-    return (
-      <DataTable
-        {...args}
-        sortable={true}
-        defaultSortDirection="desc"
-        initialSortColumnIndex={4}
-      />
-    );
-  },
-
-  args: {
-    columnContentTypes: columnContentTypes,
-    rows: makeTableData(30),
-    columns: columnsSort,
-    hasMoreItems: true,
   },
 };

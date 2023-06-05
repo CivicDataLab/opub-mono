@@ -1,6 +1,5 @@
 'use client';
 
-import { Error } from '../../types';
 import { Button } from '../Button';
 import { Calendar } from '../Calendar';
 import { DateField } from '../DateField';
@@ -19,7 +18,7 @@ export type DatePickerProps = {
   /** Label for the field */
   label: string;
   /** Error to display beneath the label */
-  error?: Error | boolean;
+  error?: string | React.ReactNode | React.ReactElement | boolean;
   /** Adds an action to the label */
   labelAction?: LabelledProps['action'];
   /** Visually hide the label */

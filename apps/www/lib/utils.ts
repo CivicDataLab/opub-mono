@@ -54,3 +54,11 @@ export function bytesToSize(bytes: number) {
   const i = Math.floor(Math.log(bytes) / Math.log(1024));
   return `${Math.round(bytes / Math.pow(1024, i))} ${sizes[i]}`;
 }
+
+export const range = (len: number) => {
+  const arr = [];
+  for (let i = 0; i < len; i++) {
+    arr.push(i);
+  }
+  return arr;
+};

@@ -22,18 +22,16 @@ import {
   getSortedRowModel,
   useReactTable,
   createColumnHelper,
+  FilterFn,
 } from '@tanstack/react-table';
 import cx from 'classnames';
 import React from 'react';
 
-const globalFilterFn = (row: any, columnId: any, filterValue: string) => {
-  const search = filterValue.toLowerCase();
-
-  let value = row.getValue(columnId) as string;
-  if (typeof value === 'number') value = String(value);
-
-  return value?.toLowerCase().includes(search);
-};
+declare module '@tanstack/table-core' {
+  interface FilterFns {
+    columnFilter: FilterFn<unknown>;
+  }
+}
 
 const DataTable = (props: DataTableProps) => {
   const {
@@ -44,7 +42,6 @@ const DataTable = (props: DataTableProps) => {
     increasedTableDensity = true,
     hasZebraStripingOnData = false,
     truncate = false,
-    sortable = false,
     defaultSortDirection = 'asc',
     initialSortColumnIndex: sortedColumnIndex,
     onSort,
@@ -53,7 +50,9 @@ const DataTable = (props: DataTableProps) => {
     hasMoreItems = false,
     hideFooter = false,
     rowActions,
-    addFilter,
+    addToolbar,
+    filters,
+    sortColumns,
     ...others
   } = props;
 
@@ -86,7 +85,6 @@ const DataTable = (props: DataTableProps) => {
       rowSelection,
       columnFilters,
     },
-    // globalFilterFn: globalFilterFn,
     onSortingChange: setSorting,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
@@ -98,8 +96,12 @@ const DataTable = (props: DataTableProps) => {
     onColumnFiltersChange: setColumnFilters,
     onColumnVisibilityChange: setColumnVisibility,
     enableRowSelection: true,
+    filterFns: {
+      columnFilter: (row, id, value) => {
+        return value.includes(row.getValue(id));
+      },
+    },
   });
-  console.log(table.getAllColumns());
 
   const rowCountIsEven = rows.length % 2 === 0;
   const themeClass = cx(
@@ -114,9 +116,9 @@ const DataTable = (props: DataTableProps) => {
 
   return (
     <div className={`opub-DataTable ${themeClass}`} {...others}>
-      {addFilter && <Toolbar table={table} />}
+      {addToolbar && <Toolbar filters={filters} table={table} />}
       <div
-        className={cx(styles.ScrollContainer, addFilter && styles.withFilter)}
+        className={cx(styles.ScrollContainer, addToolbar && styles.withFilter)}
       >
         <table className={styles.Table}>
           <thead>
@@ -149,7 +151,10 @@ const DataTable = (props: DataTableProps) => {
                     header.column.columnDef.header,
                     header.getContext()
                   );
-                  const isSortable = header.column.getCanSort() && sortable;
+                  const isSortable =
+                    header.column.getCanSort() &&
+                    !!sortColumns?.includes(header.id); // whether the column is in the sortColumns array
+
                   const isSorted = header.column.getIsSorted();
 
                   return (
@@ -185,7 +190,7 @@ const DataTable = (props: DataTableProps) => {
                           <Text variant="bodySm">{selectedCount}</Text>
                         </span>
                       ) : null}
-                      <RowAction rowActions={rowActions} />
+                      <RowAction row={headerGroup} rowActions={rowActions} />
                     </Box>
                   </th>
                 )}
@@ -228,7 +233,7 @@ const DataTable = (props: DataTableProps) => {
                 })}
                 {rowActions && (
                   <td className={cx(styles.Cell, styles.RowAction)}>
-                    <RowAction rowActions={rowActions} />
+                    <RowAction row={row} rowActions={rowActions} />
                   </td>
                 )}
               </Row>
@@ -243,43 +248,3 @@ const DataTable = (props: DataTableProps) => {
 
 export { DataTable, createColumnHelper };
 export type { ColumnDef };
-
-const ItemSelectedText = ({
-  selectedCount,
-  totalCount,
-  table,
-}: {
-  selectedCount: number;
-  totalCount: number;
-  table: ReturnType<typeof useReactTable>;
-}) => {
-  return (
-    <div className={cx(styles.Cell, styles['Cell-header'])}>
-      {selectedCount < totalCount ? (
-        <>
-          <Text variant="bodySm" fontWeight="medium">
-            {selectedCount} item{selectedCount > 1 ? 's' : ''} selected
-          </Text>
-          <button
-            onClick={() => table.toggleAllPageRowsSelected()}
-            className={styles.SelectAllButton}
-          >
-            Select all {totalCount} items
-          </button>
-        </>
-      ) : (
-        <>
-          <Text variant="bodySm" fontWeight="medium">
-            All {totalCount} items selected
-          </Text>
-          <button
-            onClick={() => table.resetRowSelection()}
-            className={styles.SelectAllButton}
-          >
-            Undo
-          </button>
-        </>
-      )}
-    </div>
-  );
-};
