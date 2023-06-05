@@ -44,6 +44,11 @@ const Table = (props: TableProps) => {
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: sortable ? getSortedRowModel() : undefined,
     getPaginationRowModel: hideFooter ? undefined : getPaginationRowModel(),
+    filterFns: {
+      columnFilter: (row, id, value) => {
+        return value.includes(row.getValue(id));
+      },
+    },
   });
 
   const footerVisible = !hideFooter && data.length > 0;

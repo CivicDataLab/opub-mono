@@ -5,7 +5,7 @@ import { Meta, StoryObj } from '@storybook/react';
 import { IconCopy, IconPencil, IconTrash } from '@tabler/icons-react';
 
 /**
- * Data tables are used to organize and display all information from a data set.
+ * Data tables are used to organize and display all information from a dataset.
  *
  * Reference: https://tanstack.com/table/v8/docs/guide/introduction
  */
@@ -79,14 +79,35 @@ export const Default: Story = {
   },
 };
 
+export const statusFilter = [
+  {
+    label: 'Relationship',
+    value: 'relationship',
+  },
+  {
+    label: 'Complicated',
+    value: 'complicated',
+  },
+  {
+    label: 'Single',
+    value: 'single',
+  },
+];
+
 export const AllFeatures: Story = {
   args: {
     columnContentTypes: columnContentTypes,
     rows: makeTableData(40),
     columns: columns,
-    addFilter: true,
+    addToolbar: true,
     sortable: true,
     rowActions: rowActions,
+    filters: [
+      {
+        columnId: 'status',
+        options: statusFilter,
+      },
+    ],
   },
 };
 
@@ -104,8 +125,14 @@ export const WithFilter: Story = {
     columnContentTypes: columnContentTypes,
     rows: makeTableData(30),
     columns: columns,
-    addFilter: true,
+    addToolbar: true,
     sortable: true,
+    filters: [
+      {
+        columnId: 'status',
+        options: statusFilter,
+      },
+    ],
   },
 };
 

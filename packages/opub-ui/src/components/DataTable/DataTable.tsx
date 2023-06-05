@@ -51,7 +51,8 @@ const DataTable = (props: DataTableProps) => {
     hasMoreItems = false,
     hideFooter = false,
     rowActions,
-    addFilter,
+    addToolbar,
+    filters,
     ...others
   } = props;
 
@@ -115,9 +116,9 @@ const DataTable = (props: DataTableProps) => {
 
   return (
     <div className={`opub-DataTable ${themeClass}`} {...others}>
-      {addFilter && <Toolbar table={table} />}
+      {addToolbar && <Toolbar filters={filters} table={table} />}
       <div
-        className={cx(styles.ScrollContainer, addFilter && styles.withFilter)}
+        className={cx(styles.ScrollContainer, addToolbar && styles.withFilter)}
       >
         <table className={styles.Table}>
           <thead>

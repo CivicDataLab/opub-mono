@@ -47,15 +47,26 @@ export interface TableProps {
   hideResultsInFooter?: boolean;
 }
 
-export type DataTableProps = TableProps & {
-  /** Callback function to run on row selection  */
-  onRowSelectionChange?(selectedRows: any): void;
-  /** Default selected rows  */
-  defaultSelectedRows?: any;
-  /** Whether to enable the selection/deselection across page  */
-  hasMoreItems?: boolean;
-  /** List of row actions  */
-  rowActions?: ActionListProps['items'];
-  /** Add Filter  */
-  addFilter?: boolean;
+export type TableFilterProps = {
+  filters?: {
+    columnId: string;
+    options: {
+      label: string;
+      value: string;
+    }[];
+  }[];
 };
+
+export type DataTableProps = TableProps &
+  TableFilterProps & {
+    /** Callback function to run on row selection  */
+    onRowSelectionChange?(selectedRows: any): void;
+    /** Default selected rows  */
+    defaultSelectedRows?: any;
+    /** Whether to enable the selection/deselection across page  */
+    hasMoreItems?: boolean;
+    /** List of row actions  */
+    rowActions?: ActionListProps['items'];
+    /** Add Toolbar  */
+    addToolbar?: boolean;
+  };
