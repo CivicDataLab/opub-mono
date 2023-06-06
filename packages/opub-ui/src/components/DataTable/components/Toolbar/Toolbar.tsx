@@ -6,7 +6,11 @@ import { TextField } from '../../../TextField';
 import styles from '../../DataTable.module.scss';
 import { DataTableFilter } from './DataTableFilter';
 import { DataTableView } from './DataTableView';
-import { IconAdjustmentsHorizontal, IconSearch } from '@tabler/icons-react';
+import {
+  IconAdjustmentsHorizontal,
+  IconSearch,
+  IconX,
+} from '@tabler/icons-react';
 import { Table } from '@tanstack/react-table';
 
 interface DataTableViewOptionsProps<TData> extends TableFilterProps {
@@ -17,6 +21,10 @@ export function Toolbar<TData>({
   table,
   filters,
 }: DataTableViewOptionsProps<TData>) {
+  const isFiltered =
+    table.getPreFilteredRowModel().rows.length >
+    table.getFilteredRowModel().rows.length;
+
   return (
     <div className={styles.Filter}>
       <div className={styles.FilterLeft}>
@@ -37,6 +45,15 @@ export function Toolbar<TData>({
               options={filter.options}
             />
           ))}
+          {isFiltered && (
+            <Button
+              size="slim"
+              onClick={() => table.resetColumnFilters()}
+              icon={<Icon source={IconX} size="4" />}
+            >
+              Reset
+            </Button>
+          )}
         </div>
       </div>
       <div className={styles.FilterRight}>
