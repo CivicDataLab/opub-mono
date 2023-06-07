@@ -1,5 +1,4 @@
-import { ActionList } from '../ActionList';
-import type { ActionListProps } from '../ActionList/ActionList';
+import { ActionList, type ActionListProps } from '../ActionList/ActionList';
 import { Popover } from '../Popover';
 import type { PopoverContentProps, PopoverProps } from '../Popover';
 import React from 'react';
