@@ -47,9 +47,9 @@ yarn dev --filter @opub-cdl/ui
 
 ### New Component
 
-> Currently this is not working for Linux distros
+> Currently this might not working for Linux distros
 
-This repo includes a `new-component` module to help create boilerplate for component creation.
+This repo includes a `yarn run new-component` module to help create boilerplate for component creation.
 
 ```
 yarn run new-component Button
