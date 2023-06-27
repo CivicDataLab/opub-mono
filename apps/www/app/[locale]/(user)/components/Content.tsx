@@ -1,9 +1,9 @@
 'use client';
 
 import Link from 'next/link';
-import { Text } from '@opub-cdl/ui';
 import { IconBrandTabler, IconShare3 } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
+import { Text } from 'opub-ui';
 
 import styles from '../page.module.scss';
 

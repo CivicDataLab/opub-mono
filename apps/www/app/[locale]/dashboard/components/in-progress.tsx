@@ -1,6 +1,6 @@
 'use client';
 
-import { Icon, Text } from '@opub-cdl/ui';
+import { Icon, Text } from 'opub-ui';
 
 import { Icons } from '@/components/icons';
 

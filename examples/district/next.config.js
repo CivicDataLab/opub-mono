@@ -3,7 +3,7 @@ const nextConfig = {
   experimental: {
     appDir: true,
   },
-  transpilePackages: ["@opub-cdl/ui", "react-aria"],
-}
+  transpilePackages: ['opub-ui', 'react-aria'],
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

@@ -1,6 +1,6 @@
 'use client';
 
-import { Box, Icon, Text } from '@opub-cdl/ui';
+import { Box, Icon, Text } from 'opub-ui';
 import { twMerge } from 'tailwind-merge';
 
 import { LinkButton } from '@/components/Link';

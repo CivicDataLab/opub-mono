@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.json",
+  "exclude": [
+    "dist",
+    "build",
+    "node_modules",
+    "vite.config.ts",
+    ".storybook",
+    "**/*.stories.tsx",
+    "**/*.test.tsx"
+  ]
+}

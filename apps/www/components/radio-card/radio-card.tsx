@@ -1,5 +1,5 @@
-import { RadioItemProps } from '@opub-cdl/ui/dist/ts/components/RadioGroup/RadioGroup';
-import { RadioItem } from '@opub-cdl/ui/src';
+import { RadioItemProps } from 'opub-ui/dist/ts/components/RadioGroup/RadioGroup';
+import { RadioItem } from 'opub-ui/src';
 import { twMerge } from 'tailwind-merge';
 
 import styles from './radio-card.module.scss';

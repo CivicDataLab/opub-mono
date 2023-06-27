@@ -4,7 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useKeyDetect } from '@/hooks/use-key-detect';
-import { Button, Code, Icon, Text, Tooltip } from '@opub-cdl/ui';
+import { Button, Code, Icon, Text, Tooltip } from 'opub-ui';
 import { twMerge } from 'tailwind-merge';
 
 import { SidebarNavItem } from 'types';

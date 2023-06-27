@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 import Link from 'next/link';
-import { Box, Button, Text } from '@opub-cdl/ui';
+import { Box, Button, Text } from 'opub-ui';
 
 import { LinkButton } from '@/components/Link';
 

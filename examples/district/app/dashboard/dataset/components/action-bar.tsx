@@ -4,7 +4,7 @@ import React from 'react';
 import Link, { LinkProps } from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Size, useWindowSize } from '@/hooks/use-window-size';
-import { Box, Button, Icon, Text, Tooltip } from '@opub-cdl/ui';
+import { Box, Button, Icon, Text, Tooltip } from 'opub-ui';
 import { twMerge } from 'tailwind-merge';
 
 import { Icons } from '@/components/icons';

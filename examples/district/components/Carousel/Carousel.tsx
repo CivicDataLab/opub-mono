@@ -1,6 +1,6 @@
 import React from 'react';
-import { Box, Carousel, Text } from '@opub-cdl/ui';
 import { IconArrowLeft, IconArrowRight } from '@tabler/icons-react';
+import { Box, Carousel, Text } from 'opub-ui';
 
 import { indicatorList } from '@/config/site';
 import styles from './carousel.module.scss';
