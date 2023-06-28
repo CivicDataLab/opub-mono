@@ -10,11 +10,16 @@ import * as echarts from 'echarts/core';
 import { SVGRenderer } from 'echarts/renderers';
 
 type Props = {
+  /* xAxis of the chart */
   xAxis: string[] | number[];
-  yAxis?: string[] | number[];
-  onChartReadyCallback?: (echart: any) => void;
+  /* Data to be displayed on the chart */
   data: number[] | number[][] | string[] | string[][];
+  /* yAxis of the chart */
+  yAxis?: string[] | number[];
+  /* Theme of the chart */
   theme?: EChartsReactProps['theme'];
+  /* Callback function to be called when the chart is ready */
+  onChartReady?: (echart: any) => void;
 };
 
 export const BarChart = ({
@@ -22,7 +27,7 @@ export const BarChart = ({
   xAxis,
   yAxis,
   theme = 'light',
-  onChartReadyCallback,
+  onChartReady,
 }: Props) => {
   const option = {
     series: [
@@ -61,8 +66,7 @@ export const BarChart = ({
       notMerge={true}
       lazyUpdate={true}
       theme={theme}
-      onChartReady={onChartReadyCallback}
-      opts={{}}
+      onChartReady={onChartReady}
       option={option}
     />
   );
