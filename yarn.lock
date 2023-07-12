@@ -3103,41 +3103,6 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@opub-cdl/ui@*":
-  version "0.0.88"
-  resolved "https://registry.yarnpkg.com/@opub-cdl/ui/-/ui-0.0.88.tgz#055f2f8e9631d39157bb0aadda004bbfef77e703"
-  integrity sha512-oeZ+oJ+tpLFmgxI523KJrmbnPaQ8rgw0NfSV0Sci9Gdo6B9GbvBgVYBxV/NWuSj3dCffQ/uoi/tRXZ07tK2jQg==
-  dependencies:
-    "@atlaskit/code" "^14.5.3"
-    "@faker-js/faker" "^8.0.1"
-    "@hookform/resolvers" "^2.9.11"
-    "@internationalized/date" "^3.2.0"
-    "@radix-ui/react-alert-dialog" "^1.0.3"
-    "@radix-ui/react-avatar" "^1.0.2"
-    "@radix-ui/react-checkbox" "^1.0.1"
-    "@radix-ui/react-collapsible" "^1.0.2"
-    "@radix-ui/react-dialog" "^1.0.3"
-    "@radix-ui/react-label" "^2.0.0"
-    "@radix-ui/react-popover" "^1.0.5"
-    "@radix-ui/react-progress" "^1.0.2"
-    "@radix-ui/react-radio-group" "^1.1.1"
-    "@radix-ui/react-scroll-area" "^1.0.3"
-    "@radix-ui/react-slider" "^1.1.1"
-    "@radix-ui/react-switch" "^1.0.2"
-    "@radix-ui/react-tabs" "^1.0.3"
-    "@radix-ui/react-toast" "^1.1.3"
-    "@radix-ui/react-tooltip" "^1.0.5"
-    "@react-types/calendar" "^3.2.0"
-    "@react-types/datepicker" "^3.3.0"
-    "@react-types/shared" "^3.18.0"
-    "@shopify/polaris-icons" "^6.12.0"
-    "@tabler/icons-react" "^2.17.0"
-    "@tanstack/react-table" "^8.8.4"
-    ariakit "^2.0.0-next.43"
-    react-aria "3.22.0"
-    react-hook-form "7.20.0"
-    react-stately "^3.21.0"
-
 "@parcel/watcher@^2.1.0":
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/@parcel/watcher/-/watcher-2.1.0.tgz#5f32969362db4893922c526a842d8af7a8538545"
@@ -4336,6 +4301,11 @@
     "@react-types/shared" "^3.18.1"
     "@swc/helpers" "^0.4.14"
     clsx "^1.1.1"
+
+"@react-leaflet/core@^2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@react-leaflet/core/-/core-2.1.0.tgz#383acd31259d7c9ae8fb1b02d5e18fe613c2a13d"
+  integrity sha512-Qk7Pfu8BSarKGqILj4x7bCSZ1pjuAPZ+qmRwH5S7mDS91VSbVVsJSrW4qA+GPrro8t69gFYVMWb1Zc4yFmPiVg==
 
 "@react-stately/calendar@^3.2.1":
   version "3.2.1"
@@ -5903,7 +5873,7 @@
     "@tanstack/query-core" "4.29.17"
     use-sync-external-store "^1.2.0"
 
-"@tanstack/react-table@^8.8.4", "@tanstack/react-table@^8.9.1":
+"@tanstack/react-table@^8.9.1":
   version "8.9.3"
   resolved "https://registry.yarnpkg.com/@tanstack/react-table/-/react-table-8.9.3.tgz#03a52e9e15f65c82a8c697a445c42bfca0c5cfc4"
   integrity sha512-Ng9rdm3JPoSCi6cVZvANsYnF+UoGVRxflMb270tVj0+LjeT/ZtZ9ckxF6oLPLcKesza6VKBqtdF9mQ+vaz24Aw==
@@ -6146,6 +6116,11 @@
   dependencies:
     "@types/node" "*"
 
+"@types/geojson@*":
+  version "7946.0.10"
+  resolved "https://registry.yarnpkg.com/@types/geojson/-/geojson-7946.0.10.tgz#6dfbf5ea17142f7f9a043809f1cd4c448cb68249"
+  integrity sha512-Nmh0K3iWQJzniTuPRcJn5hxXkfB1T1pgB89SBig5PlJQU5yocazeu4jATJlaA0GYFKWMqDdvYemoSnF2pXgLVA==
+
 "@types/glob@^7.1.1", "@types/glob@^7.1.3":
   version "7.2.0"
   resolved "https://registry.yarnpkg.com/@types/glob/-/glob-7.2.0.tgz#bc1b5bf3aa92f25bd5dd39f35c57361bdce5b2eb"
@@ -6244,6 +6219,13 @@
   version "0.16.0"
   resolved "https://registry.yarnpkg.com/@types/katex/-/katex-0.16.0.tgz#0e640df3647fe237212be863e1f5111eb9754f93"
   integrity sha512-hz+S3nV6Mym5xPbT9fnO8dDhBFQguMYpY0Ipxv06JMi1ORgnEM4M1ymWDUhUNer3ElLmT583opRo4RzxKmh9jw==
+
+"@types/leaflet@^1.9.3":
+  version "1.9.3"
+  resolved "https://registry.yarnpkg.com/@types/leaflet/-/leaflet-1.9.3.tgz#7aac302189eb3aa283f444316167995df42a5467"
+  integrity sha512-Caa1lYOgKVqDkDZVWkto2Z5JtVo09spEaUt2S69LiugbBpoqQu92HYFMGUbYezZbnBkyOxMNPXHSgRrRY5UyIA==
+  dependencies:
+    "@types/geojson" "*"
 
 "@types/lodash@^4.14.167":
   version "4.14.195"
@@ -11933,6 +11915,11 @@ lazy-universal-dotenv@^4.0.0:
     dotenv "^16.0.0"
     dotenv-expand "^10.0.0"
 
+leaflet@^1.9.4:
+  version "1.9.4"
+  resolved "https://registry.yarnpkg.com/leaflet/-/leaflet-1.9.4.tgz#23fae724e282fa25745aff82ca4d394748db7d8d"
+  integrity sha512-nxS1ynzJOmOlHp+iL3FyWqK89GtNL8U8rvlMOsQdTTssxZwCXh8N2NB3GDQOL+YR3XnWyZAxwQixURb+FA74PA==
+
 leven@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/leven/-/leven-3.1.0.tgz#77891de834064cccba82ae7842bb6b14a13ed7f2"
@@ -14705,6 +14692,13 @@ react-is@^17.0.1:
   version "17.0.2"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-17.0.2.tgz#e691d4a8e9c789365655539ab372762b0efb54f0"
   integrity sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==
+
+react-leaflet@^4.2.1:
+  version "4.2.1"
+  resolved "https://registry.yarnpkg.com/react-leaflet/-/react-leaflet-4.2.1.tgz#c300e9eccaf15cb40757552e181200aa10b94780"
+  integrity sha512-p9chkvhcKrWn/H/1FFeVSqLdReGwn2qmiobOQGO3BifX+/vV/39qhY8dGqbdcPh1e6jxh/QHriLXr7a4eLFK4Q==
+  dependencies:
+    "@react-leaflet/core" "^2.1.0"
 
 react-popper@^2.2.3:
   version "2.3.0"
