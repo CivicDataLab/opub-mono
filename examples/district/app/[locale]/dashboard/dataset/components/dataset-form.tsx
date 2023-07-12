@@ -3,7 +3,7 @@ import { Form } from 'opub-ui';
 interface DatasetFormProps {
   onSubmit: (e?: any) => void;
   formOptions: any;
-  onChange: (e?: any) => void;
+  onChange?: (e?: any) => void;
   children: React.ReactNode;
   submitRef: React.RefObject<HTMLButtonElement>;
 }

@@ -1,6 +1,6 @@
 import React from 'react';
-import { useRouter } from 'next/navigation';
-import { CreateDataset as Props } from '@/types';
+import { CreateDatasetInput, PatchDatasetInput } from '@/gql/generated/graphql';
+import { PatchDataset, CreateDataset as Props } from '@/types';
 import {
   Box,
   Checkbox,
@@ -10,7 +10,7 @@ import {
   RadioGroup,
   Text,
 } from 'opub-ui';
-import { IconSource } from 'opub-ui/dist/ts/components/Icon/Icon';
+import { IconSource } from 'opub-ui/dist/ts/types/icon';
 
 import { Icons } from '@/components/icons';
 import { RadioCard } from '@/components/radio-card';
@@ -19,7 +19,7 @@ import styles from '../new.module.scss';
 
 const defaultValBase: Props = {
   type: 'file',
-  name: '',
+  title: '',
   description: '',
   terms: false,
 };
@@ -27,18 +27,39 @@ const defaultValBase: Props = {
 export function CreateDataset({
   defaultVal,
   submitRef,
+  isLoading,
+  mutate,
+  mutatePatch,
 }: {
-  defaultVal?: Props;
+  defaultVal?: PatchDataset;
   submitRef: React.RefObject<HTMLButtonElement>;
+  isLoading?: boolean;
+  mutate?: (res: { dataset_data: CreateDatasetInput }) => void;
+  mutatePatch?: (res: { dataset_data: PatchDatasetInput }) => void;
 }) {
-  const [val, setVal] = React.useState(defaultVal);
-  const router = useRouter();
-
+  const [val, setVal] = React.useState<Props>();
   const defaultValue = defaultVal || defaultValBase;
+
   return (
     <DatasetForm
-      onSubmit={() => {
-        router.push('/dashboard/dataset/1/edit/metadata');
+      onSubmit={(value: CreateDatasetInput) => {
+        mutatePatch &&
+          defaultVal &&
+          mutatePatch({
+            dataset_data: {
+              title: value.title,
+              description: value.description,
+              id: defaultVal.id,
+            },
+          });
+
+        mutate &&
+          mutate({
+            dataset_data: {
+              title: value.title,
+              description: value.description,
+            },
+          });
       }}
       formOptions={{ defaultValues: defaultValue }}
       onChange={(e) => {
@@ -70,14 +91,15 @@ export function CreateDataset({
           <Box paddingBlockStart="3">
             <FormLayout>
               <Input
-                name="name"
+                name="title"
                 label="Name of Dataset"
                 placeholder="example: Population of India"
-                maxLength={30}
+                maxLength={100}
                 showCharacterCount
                 autoComplete="off"
                 required
                 error="This field is required"
+                readOnly={isLoading}
               />
               <Input
                 name="description"
@@ -89,6 +111,7 @@ export function CreateDataset({
                 autoComplete="off"
                 required
                 error="This field is required"
+                readOnly={isLoading}
               />
             </FormLayout>
           </Box>
@@ -96,7 +119,12 @@ export function CreateDataset({
           <Box paddingBlockStart="8">
             <Text variant="headingMd">Terms & Conditions</Text>
             <Box paddingBlockStart="2">
-              <Checkbox name="terms" required error="This field is required">
+              <Checkbox
+                name="terms"
+                required
+                error="This field is required"
+                disabled={isLoading}
+              >
                 I agree to the terms and conditions as set out by the user
                 agreement. I state that I have read and understood the terms and
                 conditions.

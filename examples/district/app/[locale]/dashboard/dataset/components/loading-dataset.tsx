@@ -1,35 +1,13 @@
 'use client';
 
-import { Loading } from '@/components/loading';
-import { ActionBar } from './action-bar';
+import { Spinner } from 'opub-ui';
 
-export default function DatasetLoading({
-  previousPage,
-}: {
-  previousPage?: boolean;
-}) {
+import { Loading } from '@/components/loading';
+
+export default function DatasetLoading() {
   return (
-    <>
-      <ActionBar
-        title="Add New Dataset"
-        primaryAction={{
-          content: 'Save & Next',
-          onAction: () => {},
-        }}
-        secondaryAction={{
-          content: 'Cancel',
-          onAction: () => {},
-        }}
-        previousPage={
-          previousPage
-            ? {
-                content: 'My Datasets',
-                link: '#',
-              }
-            : undefined
-        }
-      />
-      <Loading />;
-    </>
+    <div className="h-full ">
+      <Loading />
+    </div>
   );
 }

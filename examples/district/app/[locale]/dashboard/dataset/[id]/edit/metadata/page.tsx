@@ -1,55 +1,47 @@
-'use client';
+import { graphql } from '@/gql';
+import { Hydrate } from '@/lib';
+import { dehydrate } from '@tanstack/react-query';
 
-import React from 'react';
-import { notFound, useRouter } from 'next/navigation';
-
-import { testDataset } from '@/config/dashboard';
-import { ActionBar } from '../../../components/action-bar';
-import { EditMetadata } from '../components/EditMetadata';
+import { GraphQL, getQueryClient } from '@/lib/api';
 import styles from '../edit.module.scss';
+import { MetadataPage } from './page-layout';
 
-export default function Page({ params }: { params: { id: string } }) {
-  const router = useRouter();
-  const submitRef = React.useRef<HTMLButtonElement>(null);
-
-  React.useEffect(() => {
-    router.prefetch(`/dashboard/dataset/${params.id}/edit/distribution`);
-  }, []);
-
-  // get demo data
-  const data = testDataset[params.id];
-  if (!data) {
-    notFound();
+const datasetQueryDoc = graphql(`
+  query datasetQuery($dataset_id: Int) {
+    dataset(dataset_id: $dataset_id) {
+      id
+      title
+      description
+      source
+      update_frequency
+      language
+      remote_issued
+      geography {
+        name
+        id
+      }
+      tags {
+        id
+        name
+      }
+    }
   }
+`);
+
+export default async function Page({ params }: { params: { id: string } }) {
+  const queryClient = getQueryClient();
+  await queryClient.prefetchQuery([`dataset_meta_${params.id}`], () =>
+    GraphQL(datasetQueryDoc, {
+      dataset_id: Number(params.id),
+    })
+  );
+  const dehydratedState = dehydrate(queryClient);
 
   return (
-    <div className={styles.EditPage}>
-      <ActionBar
-        title={data.name}
-        primaryAction={{
-          content: 'Save & Next',
-          onAction: () => submitRef.current?.click(),
-        }}
-        secondaryAction={{
-          content: 'Cancel',
-          onAction: () => router.push('/dashboard/dataset'),
-        }}
-        previousPage={{
-          link: `/dashboard/dataset/${params.id}/edit`,
-          content: 'Edit Page',
-        }}
-      />
-      <EditMetadata
-        submitRef={submitRef}
-        id={params.id}
-        defaultVal={{
-          source: '',
-          created: '',
-          frequency: '',
-          tags: [],
-          terms: false,
-        }}
-      />
-    </div>
+    <Hydrate state={dehydratedState}>
+      <div className={styles.EditPage}>
+        <MetadataPage params={params} />
+      </div>
+    </Hydrate>
   );
 }

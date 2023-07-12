@@ -1,13 +1,10 @@
 import React from 'react';
-import { useRouter } from 'next/navigation';
-import { EditDatasetProps } from '@/types';
+import { UpdateDatasetInput } from '@/gql/generated/graphql';
 import {
-  Box,
+  Button,
   ComboboxMulti,
-  DatePicker,
   Divider,
   FormLayout,
-  Input,
   Select,
   Text,
 } from 'opub-ui';
@@ -15,95 +12,127 @@ import {
 import { DatasetForm } from '../../../components/dataset-form';
 import styles from '../edit.module.scss';
 
+interface DefaultValues extends Omit<UpdateDatasetInput, 'geo_list'> {
+  geo_list: string[];
+}
+
 export function EditMetadata({
-  id,
   defaultVal,
   submitRef,
+  isLoading,
+  mutate,
 }: {
   id: string;
-  defaultVal: EditDatasetProps;
+  defaultVal: DefaultValues;
   submitRef: React.RefObject<HTMLButtonElement>;
+  isLoading: boolean;
+  mutate: (res: { dataset_data: UpdateDatasetInput }) => void;
 }) {
-  const [val, setVal] = React.useState(defaultVal);
-  const router = useRouter();
-
   return (
-    <Box paddingBlockStart="6" maxWidth="944px">
+    <>
       <DatasetForm
-        onSubmit={() => {
-          router.push(`/dashboard/dataset/${id}/edit/distribution`);
+        onSubmit={(value: UpdateDatasetInput) => {
+          mutate({
+            dataset_data: {
+              id: defaultVal.id,
+              update_frequency: value.update_frequency,
+              tags_list: value.tags_list,
+              geo_list: value.geo_list,
+              language: value.language,
+              source: '',
+            },
+          });
         }}
         formOptions={{ defaultValues: defaultVal }}
-        onChange={setVal}
         submitRef={submitRef}
       >
-        <div className={styles.EditDataset}>
+        <>
           <div className="flex flex-col gap-1">
             <Text variant="headingMd">Add Metadata</Text>
-            <Text variant="bodyMd" color="subdued">
-              Source, Date of Creation, Update Frequency, etc.
-            </Text>
           </div>
           <div className="my-4">
             <Divider />
           </div>
 
-          <Box paddingBlockStart="3">
+          <div className="pt-3">
             <FormLayout>
               <FormLayout.Group>
-                <Input
-                  name="source"
-                  label="Source"
-                  placeholder="example: https://data.gov.in"
-                  maxLength={30}
-                  showCharacterCount
-                  autoComplete="off"
-                  required
-                  error="This field is required"
-                />
                 <Select
-                  name="frequency"
+                  name="update_frequency"
                   label="Update Frequency"
+                  helpText="How often is this dataset updated?"
                   options={[
                     { label: 'Daily', value: 'daily' },
                     { label: 'Weekly', value: 'weekly' },
                     { label: 'Monthly', value: 'monthly' },
                     { label: 'Yearly', value: 'yearly' },
                   ]}
-                  placeholder="Select an option"
+                  placeholder="Select"
                   required
                   error="This field is required"
+                  disabled={isLoading}
+                />
+                <Select
+                  name="language"
+                  label="Language"
+                  helpText="What language is this dataset in?"
+                  options={[
+                    { label: 'English', value: 'english' },
+                    { label: 'Hindi', value: 'hindi' },
+                    { label: 'Spanish', value: 'spanish' },
+                    { label: 'French', value: 'french' },
+                  ]}
+                  placeholder="Select"
+                  required
+                  error="This field is required"
+                  disabled={isLoading}
                 />
               </FormLayout.Group>
 
-              <DatePicker
-                name="created"
-                label="Date of Creation"
-                required
-                error="This field is required"
-              />
-              <Box maxWidth="480px">
+              <FormLayout.Group>
                 <ComboboxMulti
-                  name="tags"
+                  name="geo_list"
+                  label="Geography"
+                  // helpText="Which geography does this data belong to?"
+                  placeholder="Search Locations"
+                  defaultList={['United States', 'Canada', 'Mexico', 'India']}
+                  verticalContent
+                  required
+                  error="This field is required"
+                  readOnly={isLoading}
+                />
+                <ComboboxMulti
+                  name="tags_list"
                   label="Tags"
                   placeholder="Search Tags"
+                  // helpText="Any other tags or keywords that can help people discover your dataset"
                   defaultList={[
-                    'Banana',
-                    'Broccoli',
-                    'Burger',
-                    'Cake',
-                    'Candy',
-                    'Carrot',
+                    'Health',
+                    'Education',
+                    'Transportation',
+                    'Economy',
+                    'Demographics',
+                    'Environment',
                   ]}
                   verticalContent
                   required
                   error="This field is required"
+                  readOnly={isLoading}
                 />
-              </Box>
+              </FormLayout.Group>
             </FormLayout>
-          </Box>
-        </div>
+          </div>
+          <div className="mt-8">
+            <Divider />
+          </div>
+          <div className="mt-4 flex items-center gap-2 justify-center flex-wrap">
+            <Button>Save & Exit</Button>
+            <Button primary submit>
+              Save & Proceed
+            </Button>
+          </div>
+        </>
       </DatasetForm>
-    </Box>
+    </>
   );
 }

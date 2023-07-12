@@ -2,11 +2,11 @@
 
 import React from 'react';
 import Link, { LinkProps } from 'next/link';
-import { useRouter } from 'next/navigation';
 import { Size, useWindowSize } from '@/hooks/use-window-size';
-import { Box, Button, Icon, Text, Tooltip } from 'opub-ui';
+import { Box, Button, Icon, Text, Tooltip } from 'opub-ui/src';
 import { twMerge } from 'tailwind-merge';
 
+import { useIsNavigating } from '@/config/store';
 import { Icons } from '@/components/icons';
 import styles from '../dataset.module.scss';
 
@@ -26,18 +26,14 @@ interface Props {
     action?: () => void;
   };
   preFetch?: string;
+  isLoading?: boolean;
 }
 
 export function ActionBar(props: Props) {
+  const isNavigating = useIsNavigating().isNavigating;
+
   const { width }: Size = useWindowSize();
   const iconSize = width && width < 480 ? '5' : '8';
-
-  const router = useRouter();
-
-  React.useEffect(() => {
-    if (!props.preFetch) return;
-    router.prefetch(props.preFetch);
-  }, []);
 
   const backButton = props.previousPage && props.previousPage?.link && (
     <Link href={props.previousPage?.link} className={styles.BackButton}>
@@ -73,14 +69,17 @@ export function ActionBar(props: Props) {
           btn
         )}
 
-        <Text variant="headingLg" as="h2">
-          {props.title}
-        </Text>
+        <div className="text-clamp max-w-[900px]">
+          <Text variant="headingLg" as="h2">
+            {props.title}
+          </Text>
+        </div>
       </div>
 
       <div className="sm:hidden">
         <Button
           primary
+          loading={props.isLoading || isNavigating}
           onClick={props.primaryAction?.onAction}
           connectedDisclosure={
             props.secondaryAction && {
@@ -99,11 +98,19 @@ export function ActionBar(props: Props) {
       <div className="hidden sm:block">
         <Box flex alignItems="center" gap="3">
           {props.secondaryAction && (
-            <Button plain onClick={props.secondaryAction.onAction}>
+            <Button
+              plain
+              disabled={props.isLoading || isNavigating}
+              onClick={props.secondaryAction.onAction}
+            >
               {props.secondaryAction.content}
             </Button>
           )}
-          <Button primary onClick={props.primaryAction.onAction}>
+          <Button
+            primary
+            loading={props.isLoading || isNavigating}
+            onClick={props.primaryAction.onAction}
+          >
             {props.primaryAction.content}
           </Button>
         </Box>
