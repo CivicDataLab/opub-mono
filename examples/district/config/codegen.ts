@@ -1,18 +1,15 @@
 import type { CodegenConfig } from '@graphql-codegen/cli';
 
-import { GRAPHQL_URL } from './site';
+import { gqlConfig } from './site';
 
 const config: CodegenConfig = {
-  overwrite: true,
-  schema: GRAPHQL_URL,
-  documents: 'lib/graphql/**/*.graphql',
+  schema: gqlConfig.url,
+  documents: 'app/**/*.tsx',
+  ignoreNoDocuments: true,
   generates: {
-    './lib/graphql/generated/graphql.ts': {
-      plugins: [
-        'typescript',
-        'typescript-operations',
-        'typescript-graphql-request',
-      ],
+    './gql/generated/': {
+      preset: 'client',
+      plugins: [],
     },
   },
 };

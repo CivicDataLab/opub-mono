@@ -7,7 +7,14 @@ export const siteConfig: SiteConfig = {
   url: 'https://opub-www.vercel.app',
 };
 
-export const GRAPHQL_URL = 'http://13.233.164.47/graphql';
+export const locales = ['en', 'hi'];
+
+export const gqlConfig = {
+  url: 'https://opub-backend.civicdatalab.in/graphql',
+  headers: {
+    organization: '1',
+  },
+};
 
 export const indicatorList = [
   {
