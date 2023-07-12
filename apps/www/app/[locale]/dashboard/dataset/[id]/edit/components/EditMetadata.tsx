@@ -7,7 +7,7 @@ import {
   FormLayout,
   Select,
   Text,
-} from '@opub-cdl/ui';
+} from 'opub-ui';
 
 import { DatasetForm } from '../../../components/dataset-form';
 import styles from '../edit.module.scss';

@@ -1,5 +1,6 @@
 import React from 'react';
 import { EditDistributionProps } from '@/types';
+import { IconFile } from '@tabler/icons-react';
 import {
   Box,
   Divider,
@@ -8,8 +9,7 @@ import {
   Input,
   Text,
   Thumbnail,
-} from '@opub-cdl/ui';
-import { IconFile } from '@tabler/icons-react';
+} from 'opub-ui';
 
 import { DatasetForm } from '../../../components/dataset-form';
 import styles from '../edit.module.scss';
@@ -120,10 +120,9 @@ const FileUpload = ({
         />
 
         <div>
-        <Text variant="bodySm" as="p">
-          {file.name}
-          </Text>
-          {' '}
+          <Text variant="bodySm" as="p">
+            {file.name}
+          </Text>{' '}
           <Text variant="bodySm" as="p">
             {file.size} bytes
           </Text>

@@ -3,7 +3,7 @@
 import React from 'react';
 import Link, { LinkProps } from 'next/link';
 import { Size, useWindowSize } from '@/hooks/use-window-size';
-import { Box, Button, Icon, Text, Tooltip } from '@opub-cdl/ui/src';
+import { Box, Button, Icon, Text, Tooltip } from 'opub-ui/src';
 import { twMerge } from 'tailwind-merge';
 
 import { useIsNavigating } from '@/config/store';

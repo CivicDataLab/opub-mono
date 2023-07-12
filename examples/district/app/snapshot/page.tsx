@@ -5,6 +5,7 @@ import Image from 'next/image';
 import {
   Box,
   Button,
+  Carousel,
   Divider,
   Menu,
   RadioGroup,
@@ -12,17 +13,13 @@ import {
   Sheet,
   Tabs,
   Text,
-  Carousel
-} from '@opub-cdl/ui';
-
-import styles from './snapshot.module.scss';
+} from 'opub-ui';
 
 import { SummaryCarousel } from '@/components/Carousel';
+import styles from './snapshot.module.scss';
 
 export default function Snapshot() {
-
   const [open, setOpen] = React.useState(false);
-
 
   const indicators = [
     {

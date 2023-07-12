@@ -11,8 +11,7 @@ const nextConfig = {
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],
   },
-  reactStrictMode: true,
-  transpilePackages: ['@opub-cdl/ui'],
+  transpilePackages: ['opub-ui'],
 };
 
 module.exports = withNextra(nextConfig);

@@ -9,8 +9,8 @@ import {
   Input,
   RadioGroup,
   Text,
-} from '@opub-cdl/ui';
-import { IconSource } from '@opub-cdl/ui/dist/ts/types/icon';
+} from 'opub-ui';
+import { IconSource } from 'opub-ui/dist/ts/types/icon';
 
 import { Icons } from '@/components/icons';
 import { RadioCard } from '@/components/radio-card';
