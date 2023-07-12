@@ -30,17 +30,24 @@ export type SidebarNavItem = {
 
 export type CreateDataset = {
   type: string;
-  name: string;
+  title: string;
   description: string;
   terms: boolean;
 };
 
-export type EditDatasetProps = {
+export type PatchDataset = {
+  type: string;
+  title: string;
+  description: string;
+  terms: boolean;
+  id: string;
+};
+
+export type EditMetaDatasetProps = {
   source: string;
   created: string;
   frequency: string;
   tags: string[];
-  terms: boolean;
 };
 
 export type EditDistributionProps = {

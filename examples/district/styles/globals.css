@@ -38,3 +38,12 @@ a {
     --card-rgb: 100, 100, 100;
   }
 }
+
+.text-clamp {
+  line-height: 156%;
+  overflow: hidden;
+  -webkit-line-clamp: 1;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+}

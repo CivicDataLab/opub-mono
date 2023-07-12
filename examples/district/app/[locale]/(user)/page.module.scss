@@ -1,0 +1,37 @@
+.card {
+  padding: 1rem 1.2rem;
+  border-radius: 4px;
+  background: rgba(var(--card-rgb), 0.1);
+  border: 1px solid rgba(var(--card-border-rgb), 0.15);
+  transition: background 200ms, border 200ms;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  margin-top: var(--space-2);
+  color: var(--text);
+
+  h2 {
+    font-weight: 600;
+  }
+
+  svg {
+    width: fit-content;
+  }
+
+  @media (max-width: 700px) {
+    padding: 1rem 2.5rem;
+  }
+}
+
+/* Enable hover only on non-touch devices */
+@media (hover: hover) and (pointer: fine) {
+  .card:hover {
+    background: rgba(var(--card-rgb), 0.2);
+    border: 1px solid rgba(var(--card-border-rgb), 0.2);
+  }
+
+  .card:active {
+    background: rgba(var(--card-rgb), 0.3);
+    border: 1px solid rgba(var(--card-border-rgb), 0.3);
+  }
+}
