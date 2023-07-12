@@ -1,6 +1,6 @@
 'use client';
 
-import { Spinner } from '@opub-cdl/ui';
+import { Spinner } from 'opub-ui';
 
 import { Loading } from '@/components/loading';
 

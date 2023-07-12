@@ -1,9 +1,9 @@
 'use client';
 
 import React from 'react';
-import { Toaster, Tooltip } from '@opub-cdl/ui';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import NextTopLoader from 'nextjs-toploader';
+import { Toaster, Tooltip } from 'opub-ui';
 import { SSRProvider } from 'react-aria';
 
 import { RouterEvents } from '@/lib/navigation';

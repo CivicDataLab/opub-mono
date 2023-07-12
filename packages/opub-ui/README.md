@@ -7,13 +7,13 @@ Welcome to our OPub UI. This component library is based on a [React](https://rea
 To get started with the component library, install the package via [npm](https://www.npmjs.com/):
 
 ```bash
-npm install @opub-cdl/ui --save
+npm install opub-ui --save
 ```
 
 If you prefer [Yarn](https://yarnpkg.com/en/):
 
 ```bash
-yarn add @opub-cdl/ui
+yarn add opub-ui
 ```
 
 ### Usage
@@ -23,7 +23,7 @@ The following steps are required before you can start using components:
 1. Import the CSS into the project. In the case of Nextjs, it's `_app.tsx` file.
 
 ```js
-import '@opub-cdl/ui/dist/assets/styles.css';
+import 'opub-ui/dist/assets/styles.css';
 ```
 
 2. This step is for `SSR` apps. We use [React Aria](https://react-spectrum.adobe.com/react-aria/) for some components. To ensure it works correctly in Next.js, you must wrap the App with `SSRProvider`. [More Info](https://react-spectrum.adobe.com/react-aria/ssr.html)
@@ -44,7 +44,7 @@ import { Badge, Button, Menu } from 'opub-cdl/ui';
 
 > When using with NextJs you will need to transpile the packages [More Info](https://nextjs.org/docs/advanced-features/compiler#module-transpilation), add this inside `next.config.js` :
 >
-> `transpilePackages: ['@opub-cdl/ui']`
+> `transpilePackages: ['opub-ui']`
 
 ## Components
 

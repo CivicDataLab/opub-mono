@@ -1,4 +1,4 @@
-import { Button, Divider, Icon, Text } from '@opub-cdl/ui';
+import { Button, Divider, Icon, Text } from 'opub-ui';
 
 import { Icons } from '@/components/icons';
 

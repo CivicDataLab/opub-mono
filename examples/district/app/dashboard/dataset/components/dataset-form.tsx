@@ -1,4 +1,4 @@
-import { Form } from '@opub-cdl/ui';
+import { Form } from 'opub-ui';
 
 interface DatasetFormProps {
   onSubmit: (e?: any) => void;

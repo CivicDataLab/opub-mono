@@ -1,6 +1,6 @@
 import Link from 'next/link';
-import { DateField, Text } from '@opub-cdl/ui';
 import { IconBrandTabler, IconShare3 } from '@tabler/icons-react';
+import { DateField, Text } from 'opub-ui';
 
 import styles from './page.module.scss';
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import { graphql } from '@/gql';
 import { FileInputType, ResourceInput } from '@/gql/generated/graphql';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import {
   Button,
   Divider,
@@ -10,8 +11,7 @@ import {
   Input,
   Select,
   Text,
-} from '@opub-cdl/ui';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+} from 'opub-ui';
 
 import { GraphQL } from '@/lib/api';
 import { bytesToSize } from '@/lib/utils';

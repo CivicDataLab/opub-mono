@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import { Box, Button, Text } from '@opub-cdl/ui';
+import { Box, Button, Text } from 'opub-ui';
 
 export default function ErrorPage({
   error,

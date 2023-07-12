@@ -1,4 +1,4 @@
-import { Spinner } from '@opub-cdl/ui';
+import { Spinner } from 'opub-ui';
 
 export function Loading() {
   return (
