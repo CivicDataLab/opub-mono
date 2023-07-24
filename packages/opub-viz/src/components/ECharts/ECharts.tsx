@@ -9,6 +9,8 @@ export interface ReactEChartsProps {
   settings?: SetOptionOpts;
   loading?: boolean;
   theme?: 'light' | 'dark';
+  width?: string;
+  height?: string;
 }
 
 export function ECharts({
@@ -17,6 +19,8 @@ export function ECharts({
   settings,
   loading,
   theme,
+  width = '1000px',
+  height = '600px',
 }: ReactEChartsProps): JSX.Element {
   const chartRef = useRef<HTMLDivElement>(null);
 
@@ -58,10 +62,5 @@ export function ECharts({
     }
   }, [loading, theme]);
 
-  return (
-    <div
-      ref={chartRef}
-      style={{ width: '1000px', height: '600px', ...style }}
-    />
-  );
+  return <div ref={chartRef} style={{ width, height, ...style }} />;
 }
