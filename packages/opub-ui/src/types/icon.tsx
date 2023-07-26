@@ -1,7 +1,7 @@
 import { SpacingSpaceScale } from '../tokens';
 import { TablerIconsProps } from '@tabler/icons-react';
 
-type Color =
+export type Color =
   | 'surface'
   | 'base'
   | 'subdued'

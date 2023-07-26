@@ -1,4 +1,4 @@
-import { IconSource } from './icon';
+import { Color, IconSource } from './icon';
 
 export type IconButtonProps = {
   /** Hidden Content to display inside the button. Required for accessibility */
@@ -16,4 +16,6 @@ export type IconButtonProps = {
   tooltipText?: string;
   /** Disable the button */
   disabled?: boolean;
+  /** Color of the icon */
+  color?: Color;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;

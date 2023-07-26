@@ -20,7 +20,7 @@ export function MainNav() {
 
   return (
     <nav className="bg-surface py-2 shadow-top-bar sm:py-3">
-      <div className="container mx-auto">
+      <div className="container">
         <div className="flex gap-1 items-center justify-center flex-wrap sm:justify-between">
           <Link href="/">
             <div className="flex items-center gap-0.5">

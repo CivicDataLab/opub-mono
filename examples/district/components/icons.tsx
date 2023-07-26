@@ -3,6 +3,7 @@ import {
   IconArrowRight,
   IconBarrierBlock,
   IconBellFilled,
+  IconChevronDown,
   IconDatabase,
   IconDatabaseCog,
   IconDatabasePlus,
@@ -13,6 +14,7 @@ import {
   IconListSearch,
   IconReportSearch,
   IconSearch,
+  IconSquareRoundedArrowRight,
   IconUserCog,
   TablerIconsProps,
 } from '@tabler/icons-react';
@@ -27,10 +29,12 @@ export const Icons: {
   addDataset: IconDatabasePlus,
   userSettings: IconUserCog,
   arrowRight: IconArrowRight,
+  down: IconChevronDown,
   search: IconSearch,
   notification: IconBellFilled,
   department: IconListSearch,
   scheme: IconReportSearch,
+  cardLink: IconSquareRoundedArrowRight,
 
   construction: IconBarrierBlock,
   link: IconLink,

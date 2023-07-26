@@ -133,7 +133,8 @@
   --shadow-modal: 0px 0px 1px 0px #00000033;
   --shadow-layer: 0px 2px 16px 0px #202a3614;
   --shadow-popover: 0px 3px 6px -3px #17181814;
-  --shadow-card: 0px 0px 5px 0px #1718180d;
+  --shadow-card: 0px 1px 2px 0px rgba(0, 0, 0, 0.15),
+    0px 0px 5px 0px rgba(23, 24, 24, 0.05);
   --shadow-top-bar: 0px 2px 2px -1px #00000026;
   --shadow-deep: 0px 0px 0px 1px #062c521a;
   --shadow-base: 0px 1px 3px 0px #3f3f4426;
