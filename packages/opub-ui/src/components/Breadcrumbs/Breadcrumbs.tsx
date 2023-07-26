@@ -1,10 +1,13 @@
-import React from 'react';
+import { Text } from '../Text';
 import styles from './Breadcrumbs.module.scss';
 import cx from 'classnames';
+import React from 'react';
 
 type Props = {
-  crumbs: any;
-  selected: (crumb: any) => void;
+  crumbs: {
+    label: string;
+    href: string;
+  }[];
   itemsBeforeCollapse?: number;
   itemsAfterCollapse?: number;
 };
@@ -13,7 +16,6 @@ const className = cx(styles.Breadcrumbs);
 
 const Breadcrumbs = ({
   crumbs,
-  selected,
   itemsBeforeCollapse,
   itemsAfterCollapse,
 }: Props) => {
@@ -46,14 +48,7 @@ const Breadcrumbs = ({
       <ol className={styles.List}>
         {visibleCrumbsBeforeCollapse.length > 0 &&
           visibleCrumbsBeforeCollapse.map((crumb: any, index: any) => (
-            <li key={`crumb_item${index}`} className={styles.ListItem}>
-              <button
-                className={`${styles.Button} ${styles.ButtonLink}`}
-                onClick={() => selected(crumb)}
-              >
-                {crumb}
-              </button>
-            </li>
+            <BreacrumbItem key={`crumb_item${index}`} crumb={crumb} />
           ))}
         {collapsed && (
           <li className={styles.CollapseItem}>
@@ -67,14 +62,7 @@ const Breadcrumbs = ({
         )}
         {visibleCrumbsAfterCollapse.length > 0 &&
           visibleCrumbsAfterCollapse.map((crumb: any, index: any) => (
-            <li key={`crumb_item${index}`} className={styles.ListItem}>
-              <button
-                className={`${styles.Button} ${styles.ButtonLink}`}
-                onClick={() => selected(crumb)}
-              >
-                {crumb}
-              </button>
-            </li>
+            <BreacrumbItem key={`crumb_item${index}`} crumb={crumb} />
           ))}
       </ol>
     </nav>
@@ -82,3 +70,17 @@ const Breadcrumbs = ({
 };
 
 export { Breadcrumbs };
+
+const BreacrumbItem = ({
+  crumb,
+}: {
+  crumb: { label: string; href: string };
+}) => {
+  return (
+    <li className={styles.ListItem}>
+      <Text variant="headingXs" color="subdued" fontWeight="regular">
+        <a href={crumb.href}>{crumb.label}</a>
+      </Text>
+    </li>
+  );
+};
