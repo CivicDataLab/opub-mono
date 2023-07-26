@@ -10,6 +10,8 @@ import {
   IconLayoutSidebarLeftCollapse,
   IconLayoutSidebarLeftExpand,
   IconLink,
+  IconListSearch,
+  IconReportSearch,
   IconSearch,
   IconUserCog,
   TablerIconsProps,
@@ -27,6 +29,8 @@ export const Icons: {
   arrowRight: IconArrowRight,
   search: IconSearch,
   notification: IconBellFilled,
+  department: IconListSearch,
+  scheme: IconReportSearch,
 
   construction: IconBarrierBlock,
   link: IconLink,

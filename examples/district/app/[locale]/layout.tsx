@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import { NextIntlClientProvider, createTranslator } from 'next-intl';
 
 import { siteConfig } from '@/config/site';
+import { MainNav } from '@/components/main-nav';
 import Provider from '@/components/provider';
 import locales from '../../config/locales';
 
@@ -91,7 +92,10 @@ export default async function LocaleLayout({
     <html lang={locale}>
       <body className={fontSans.className}>
         <NextIntlClientProvider locale={locale} messages={messages}>
-          <Provider>{children}</Provider>
+          <Provider>
+            <MainNav />
+            {children}
+          </Provider>
         </NextIntlClientProvider>
       </body>
     </html>

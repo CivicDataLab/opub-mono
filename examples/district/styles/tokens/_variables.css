@@ -213,14 +213,15 @@
   --ease-in: cubic-bezier(0.42, 0, 1, 1);
   --ease-out: cubic-bezier(0, 0, 0.58, 1);
   --ease-in-out: cubic-bezier(0.42, 0, 0.58, 1);
-  --font-size-75: 12px;
-  --font-size-100: 14px;
-  --font-size-200: 16px;
-  --font-size-300: 20px;
-  --font-size-400: 24px;
-  --font-size-500: 28px;
-  --font-size-600: 32px;
-  --font-size-700: 40px;
+  --font-size-75: 0.75rem;
+  --font-size-100: 0.875rem;
+  --font-size-200: 1rem;
+  --font-size-300: 1.25rem;
+  --font-size-400: 1.5rem;
+  --font-size-500: 1.75rem;
+  --font-size-600: 2rem;
+  --font-size-700: 2.5rem;
+
   --font-line-height-1: 16px;
   --font-line-height-2: 20px;
   --font-line-height-3: 24px;
