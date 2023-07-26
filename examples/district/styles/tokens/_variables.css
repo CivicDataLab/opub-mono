@@ -1,4 +1,4 @@
-:root { 
+:root {
   --transparent: #00000000;
   --background: #f6f6f7ff;
   --background-hovered: #f1f2f3ff;
@@ -133,7 +133,8 @@
   --shadow-modal: 0px 0px 1px 0px #00000033;
   --shadow-layer: 0px 2px 16px 0px #202a3614;
   --shadow-popover: 0px 3px 6px -3px #17181814;
-  --shadow-card: 0px 0px 5px 0px #1718180d;
+  --shadow-card: 0px 1px 2px 0px rgba(0, 0, 0, 0.15),
+    0px 0px 5px 0px rgba(23, 24, 24, 0.05);
   --shadow-top-bar: 0px 2px 2px -1px #00000026;
   --shadow-deep: 0px 0px 0px 1px #062c521a;
   --shadow-base: 0px 1px 3px 0px #3f3f4426;
@@ -213,14 +214,15 @@
   --ease-in: cubic-bezier(0.42, 0, 1, 1);
   --ease-out: cubic-bezier(0, 0, 0.58, 1);
   --ease-in-out: cubic-bezier(0.42, 0, 0.58, 1);
-  --font-size-75: 12px;
-  --font-size-100: 14px;
-  --font-size-200: 16px;
-  --font-size-300: 20px;
-  --font-size-400: 24px;
-  --font-size-500: 28px;
-  --font-size-600: 32px;
-  --font-size-700: 40px;
+  --font-size-75: 0.75rem;
+  --font-size-100: 0.875rem;
+  --font-size-200: 1rem;
+  --font-size-300: 1.25rem;
+  --font-size-400: 1.5rem;
+  --font-size-500: 1.75rem;
+  --font-size-600: 2rem;
+  --font-size-700: 2.5rem;
+
   --font-line-height-1: 16px;
   --font-line-height-2: 20px;
   --font-line-height-3: 24px;

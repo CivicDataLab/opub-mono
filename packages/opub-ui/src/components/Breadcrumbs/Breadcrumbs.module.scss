@@ -1,27 +1,16 @@
 @import '../../../styles/common';
 
-.Breadcrumbs {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  margin-top: var(--space-1);
-}
-
 .List {
   display: flex;
   flex-wrap: wrap;
-  padding: var(--space-0);
-  margin-bottom: var(--space-1);
+  gap: var(--space-2);
+  padding-top: var(--space-3);
+  padding-bottom: var(--space-2);
   list-style: none;
 }
 
 .List > li {
   display: flex;
-}
-
-.List > li + li:before {
-  content: '/';
-  padding: var(--space-0) var(--space-05);
 }
 
 .List > .active {
@@ -33,37 +22,25 @@
   align-items: center;
 
   & + &::before {
-    content: '/';
-    padding: var(--space-0) var(--space-05);
+    content: '>';
+    content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none'%3E%3Cg clip-path='url(%23a)'%3E%3Cpath stroke='%238C9196' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m6 4 4 4-4 4'/%3E%3C/g%3E%3Cdefs%3E%3CclipPath id='a'%3E%3Cpath fill='%23fff' d='M0 0h16v16H0z'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E");
+    margin-right: var(--space-2);
+    line-height: 0;
+  }
+
+  a {
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+      color: var(--text);
+    }
   }
 }
 
 .CollapseItem {
   display: flex;
   align-items: center;
-}
-
-.Button {
-  display: inline-block;
-  text-align: center;
-  white-space: nowrap;
-  vertical-align: middle;
-  cursor: pointer;
-  border: var(--border-transparent);
-  font-size: var(--font-size-200);
-}
-
-.ButtonLink {
-  color: var(--text);
-  background-color: transparent;
-  border-color: transparent;
-}
-
-.ButtonLink:hover {
-  color: var(--interactive-hovered);
-  text-decoration: underline;
-  background-color: transparent;
-  border-color: transparent;
 }
 
 .CollapseToggle {

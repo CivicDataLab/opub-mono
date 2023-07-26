@@ -1,5 +1,5 @@
-import { Meta, StoryObj } from '@storybook/react';
 import { Breadcrumbs } from './Breadcrumbs';
+import { Meta, StoryObj } from '@storybook/react';
 
 /**
  * Breadcrumbs are a navigation system used to show a user's location in a site or app.
@@ -16,19 +16,58 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    crumbs: ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5', 'Item 6'],
-    selected: (crumb: any) => {
-      console.log(crumb);
-    },
+    crumbs: [
+      {
+        label: 'Item 1',
+        href: '#',
+      },
+      {
+        label: 'Item 2',
+        href: '#',
+      },
+      {
+        label: 'Item 3',
+        href: '#',
+      },
+      {
+        label: 'Item 4',
+        href: '#',
+      },
+      {
+        label: 'Item 5',
+
+        href: '#',
+      },
+    ],
   },
 };
 
 export const BeforeafterCollapse: Story = {
   args: {
-    crumbs: ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5', 'Item 6'],
-    selected: (crumb: any) => {
-      console.log(crumb);
-    },
+    crumbs: [
+      {
+        label: 'Item 1',
+        href: '#',
+      },
+      {
+        label: 'Item 2',
+        href: '#',
+      },
+      {
+        label: 'Item 3',
+        href: '#',
+      },
+      {
+        label: 'Item 4',
+        href: '#',
+      },
+      {
+        label: 'Item 5',
+
+        href: '#',
+      },
+    ],
+
     itemsBeforeCollapse: 1,
     itemsAfterCollapse: 1,
   },
