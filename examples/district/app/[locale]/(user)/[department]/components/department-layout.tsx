@@ -38,9 +38,11 @@ export function Content({
       label: string;
       href: string;
       image: string;
+      lastUpdated: string;
       cards: {
-        value: string;
+        value: string | number;
         label: string;
+        type?: string;
       }[];
     }[];
   };
@@ -56,11 +58,8 @@ export function Content({
     <>
       <Breadcrumbs crumbs={breadcrumbs} />
 
-      <div className="mt-4 flex flex-col gap-4">
+      <div className="mt-4">
         <Text variant="heading3xl" as="h1">
-          {data.title}
-        </Text>
-        <Text variant="heading2xl" as="h2">
           {departmentData.title}
         </Text>
       </div>
@@ -84,21 +83,20 @@ export function Content({
         </Collapsible>
       </div>
 
-      <div className="mt-8">
+      <div className="mt-6">
         <Text variant="headingLg" as="h3">
           {data.highlights.title}
         </Text>
-        <div>
-          <div className="mt-4 flex gap-4 flex-wrap">
-            {data.highlights.cards.map((card, index) => (
-              <ContentCard
-                key={card.label + index}
-                value={card.value}
-                label={card.label}
-                color={card.color}
-              />
-            ))}
-          </div>
+
+        <div className="mt-4 flex gap-4 flex-wrap">
+          {data.highlights.cards.map((card, index) => (
+            <ContentCard
+              key={card.label + index}
+              value={card.value}
+              label={card.label}
+              color={card.color}
+            />
+          ))}
         </div>
       </div>
 
@@ -118,11 +116,11 @@ export function Content({
           </div>
         </div>
         <Separator />
-      </div>
-      <div className="mt-6 grid gap-4 lg:grid-cols-2">
-        {data.list.map((item) => (
-          <SchemeCard data={item} key={item.label} />
-        ))}
+        <div className="grid gap-4 lg:grid-cols-2">
+          {data.list.map((item) => (
+            <SchemeCard data={item} key={item.label} />
+          ))}
+        </div>
       </div>
     </>
   );

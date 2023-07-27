@@ -1,4 +1,4 @@
-import { SiteConfig } from 'types';
+import { MainConfig, SiteConfig } from 'types';
 import { Icons } from '@/components/icons';
 
 export const siteConfig: SiteConfig = {
@@ -29,6 +29,36 @@ export const navbarConfig = {
       label: 'Explore Schemes',
       href: '/#',
       icon: Icons.scheme,
+    },
+  ],
+};
+
+export const mainConfig: MainConfig = {
+  homeUrl: '/',
+  mainNav: [],
+
+  sidebarNav: [
+    {
+      title: 'District Home',
+      href: '/',
+      icon: 'home',
+    },
+    {
+      title: 'Panchayat & Rural Development',
+      href: '/panchayat-and-rural-development',
+    },
+    {
+      title: 'Public Health Engineering',
+      href: '/public-health-engineering',
+    },
+    {
+      title: 'Health Department',
+      href: '/health-department',
+    },
+    {
+      title:
+        'PWRD, Bongaigaon District Territorial Road Division, and few more words to show long department names',
+      href: '/pwrd-bongaigaon-district-territorial-road-division',
     },
   ],
 };

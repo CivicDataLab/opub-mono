@@ -19,7 +19,7 @@ const content = {
   title: 'Morigaon',
   breadcrumbs: [
     {
-      label: 'District Listing',
+      label: 'Assan State',
       href: '/',
     },
     {
@@ -65,22 +65,20 @@ const content = {
       label: 'Mahatma Gandhi National Rural Employment Guarantee Act (MGNREGA)',
       href: '#',
       image: '/logo/mgnrega.webp',
+      lastUpdated: '26 July (1d ago)',
       cards: [
         {
           value: '₹ 297',
-          label: 'Average wages per person day',
+          label: 'Average Daily Wage',
         },
         {
           value: '₹ 425',
-          label: 'Cost to generate one person day',
+          label: 'Cost / PersonDay',
         },
         {
-          value: '₹ 1.73',
-          label: 'Expenditure to generate one rupee wage',
-        },
-        {
-          value: '₹ 297',
-          label: 'Average wages per person day',
+          value: 37.6,
+          label: 'Person Days Generated',
+          type: 'progress',
         },
       ],
     },
@@ -88,14 +86,15 @@ const content = {
       label: 'National Rural Health Mission (NHM)',
       href: '#',
       image: '/logo/nhm.png',
+      lastUpdated: '25 July (2d ago)',
       cards: [
         {
           value: '₹ 297',
-          label: 'Average wages per person day',
+          label: 'Average Daily Wage',
         },
         {
           value: '₹ 425',
-          label: 'Cost to generate one person day',
+          label: 'Cost / PersonDay',
         },
         {
           value: '₹ 1.73',

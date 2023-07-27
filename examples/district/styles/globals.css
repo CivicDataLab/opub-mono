@@ -14,6 +14,8 @@ body {
   background-color: var(--background);
 }
 
+html,
+body,
 body > .opub-Tooltip {
   height: 100%;
 }

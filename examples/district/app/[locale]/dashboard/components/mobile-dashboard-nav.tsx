@@ -17,7 +17,7 @@ import styles from './styles.module.scss';
 interface DashboardNavProps {
   items: SidebarNavItem[];
   isOpened: boolean;
-  setIsOpened: (isOpened: boolean) => void;
+  setIsOpened: any;
 }
 
 export function MobileDashboardNav({
@@ -27,6 +27,7 @@ export function MobileDashboardNav({
 }: DashboardNavProps) {
   const path = usePathname();
   const asideRef = React.useRef<HTMLDivElement>(null);
+
   useOnClickOutside(asideRef, () => {
     if (isOpened) {
       setIsOpened(false);
@@ -77,7 +78,9 @@ export function MobileDashboardNav({
                           path.includes(item.href) && dashboardStyles.Selected
                         )}
                       >
-                        <Icon source={icon} color="base" />
+                        {item.icon && (
+                          <Icon source={Icons[item.icon]} color="base" />
+                        )}
                         <div
                           className={twMerge(
                             'py-2 px-3',

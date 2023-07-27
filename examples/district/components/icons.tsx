@@ -1,13 +1,15 @@
 import {
+  IconAnchor,
   IconArrowLeft,
   IconArrowRight,
   IconBarrierBlock,
   IconBellFilled,
   IconChevronDown,
+  IconChevronRight,
   IconDatabase,
   IconDatabaseCog,
   IconDatabasePlus,
-  IconFolder,
+  IconHome,
   IconLayoutSidebarLeftCollapse,
   IconLayoutSidebarLeftExpand,
   IconLink,
@@ -23,13 +25,14 @@ export const Icons: {
   [key: string]: (props: TablerIconsProps) => React.ReactElement;
 } = {
   back: IconArrowLeft,
-  logo: IconFolder,
+  logo: IconAnchor,
   dataset: IconDatabase,
   datasetSettings: IconDatabaseCog,
   addDataset: IconDatabasePlus,
   userSettings: IconUserCog,
   arrowRight: IconArrowRight,
   down: IconChevronDown,
+  right: IconChevronRight,
   search: IconSearch,
   notification: IconBellFilled,
   department: IconListSearch,
@@ -40,4 +43,5 @@ export const Icons: {
   link: IconLink,
   collapse: IconLayoutSidebarLeftCollapse,
   expand: IconLayoutSidebarLeftExpand,
+  home: IconHome,
 };

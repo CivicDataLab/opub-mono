@@ -17,15 +17,12 @@ export const DepartmentCard = ({
   };
 }) => {
   return (
-    <div className="flex flex-col gap-4 py-4 px-3 bg-surface rounded-05 shadow-card">
+    <div className="flex flex-col gap-4 p-4 bg-surface rounded-05 shadow-card">
       <div>
-        <Link href={data.href} className="block hover:underline">
-          <span className="flex gap-2 items-center justify-between mb-3">
-            <Text variant="headingXl" as="h3">
-              {data.label}
-            </Text>
-            <Icon source={Icons.cardLink} color="interactive" size={32} />
-          </span>
+        <Link href={data.href} className="block hover:underline mb-4">
+          <Text variant="headingLg" as="h3">
+            {data.label}
+          </Text>
         </Link>
         <Separator />
       </div>
@@ -38,6 +35,16 @@ export const DepartmentCard = ({
           />
         ))}
       </div>
+
+      <Link
+        href={data.href}
+        className="py-2 pl-4 pr-1 bg-surface hover:bg-surfaceHovered rounded-1 flex justify-between text-interactive"
+      >
+        <Text variant="bodyMd" fontWeight="medium" color="inherit">
+          Explore More <Text visuallyHidden>about {data.label}</Text>
+        </Text>
+        <Icon source={Icons.right} />
+      </Link>
     </div>
   );
 };
@@ -54,8 +61,9 @@ export const ContentCard = ({
   return (
     <div
       className={cn(
-        'p-4 rounded-05 border-[1px] border-solid border-borderSubdued flex flex-col gap-3',
-        color === 'highlight' && 'bg-surfaceHighlightSubdued border-none'
+        'p-4 rounded-1 border-[1px] border-solid border-borderSubdued flex flex-col gap-3',
+        color === 'highlight' &&
+          'bg-surfaceHighlightSubdued border-borderHighlightSubdued'
       )}
     >
       <Text variant="headingXl">{value}</Text>
