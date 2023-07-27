@@ -5,7 +5,7 @@ import { twMerge } from 'tailwind-merge';
 
 import { dashboardConfig } from '@/config/dashboard';
 import { cn } from '@/lib/utils';
-import { DashboardNav } from './dashboard-nav';
+import { DashboardSidebar } from './dashboard-sidebar';
 import { MobileDashboardNav } from './mobile-dashboard-nav';
 import styles from './styles.module.scss';
 
@@ -23,7 +23,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
         'md:flex'
       )}
     >
-      <DashboardNav items={dashboardConfig.sidebarNav} />
+      <DashboardSidebar items={dashboardConfig.sidebarNav} />
 
       <div className="md:hidden basis-2 z-1">
         <MobileDashboardNav

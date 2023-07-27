@@ -2,10 +2,13 @@ import React from 'react';
 import { IconArrowLeft, IconArrowRight } from '@tabler/icons-react';
 import { Box, Carousel, Text } from 'opub-ui';
 
-import { indicatorList } from '@/config/site';
 import styles from './carousel.module.scss';
 
-export function SummaryCarousel() {
+export function SummaryCarousel({
+  indicatorList,
+}: {
+  indicatorList: { text: string; value: string }[];
+}) {
   const [currentSlide, setCurrentSlide] = React.useState(1);
   const [childrenLength, setChildrenLength] = React.useState(3);
 
