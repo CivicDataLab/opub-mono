@@ -1,4 +1,5 @@
 import {
+  IconAnchor,
   IconArrowLeft,
   IconArrowRight,
   IconBarrierBlock,
@@ -8,7 +9,6 @@ import {
   IconDatabase,
   IconDatabaseCog,
   IconDatabasePlus,
-  IconFolder,
   IconHome,
   IconLayoutSidebarLeftCollapse,
   IconLayoutSidebarLeftExpand,
@@ -25,7 +25,7 @@ export const Icons: {
   [key: string]: (props: TablerIconsProps) => React.ReactElement;
 } = {
   back: IconArrowLeft,
-  logo: IconFolder,
+  logo: IconAnchor,
   dataset: IconDatabase,
   datasetSettings: IconDatabaseCog,
   addDataset: IconDatabasePlus,
