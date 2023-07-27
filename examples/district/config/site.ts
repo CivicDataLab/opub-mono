@@ -1,4 +1,5 @@
-import { SiteConfig } from 'types';
+import { MainConfig, SiteConfig } from 'types';
+import { Icons } from '@/components/icons';
 
 export const siteConfig: SiteConfig = {
   name: 'OPub',
@@ -16,73 +17,48 @@ export const gqlConfig = {
   },
 };
 
-export const indicatorList = [
-  {
-    text: 'Area \r\n(Sq. Km.)',
-    value: '2,830',
-  },
-  {
-    text: 'Total Population',
-    value: '28,11,569',
-  },
-  {
-    text: 'Female Population ',
-    value: '13,48,236',
-  },
-  {
-    text: 'Sex Ratio (Females per 1,000 Males)',
-    value: '1,094',
-  },
-  {
-    text: 'Sex Ratio (Females per 1,000 Males)',
-    value: '1,094',
-  },
-  {
-    text: 'Sex Ratio (Females per 1,000 Males)',
-    value: '1,094',
-  },
-  {
-    text: 'Sex Ratio (Females per 1,000 Males)',
-    value: '1,094',
-  },
-  {
-    text: 'Sex Ratio (Females per 1,000 Males)',
-    value: '1,094',
-  },
-  {
-    text: 'Sex Ratio (Females per 1,000 Males)',
-    value: '1,094',
-  },
-  {
-    text: 'Sex Ratio (Females per 1,000 Males)',
-    value: '1,094',
-  },
-  {
-    text: 'Sex Ratio (Females per 1,000 Males)',
-    value: '1,094',
-  },
-  {
-    text: 'Sex Ratio (Females per 1,000 Males)',
-    value: '1,094',
-  },
-  {
-    text: 'Sex Ratio (Females per 1,000 Males)',
-    value: '1,094',
-  },
-  {
-    text: 'Sex Ratio (Females per 1,000 Males)',
-    value: '1,094',
-  },
-  {
-    text: 'Sex Ratio (Females per 1,000 Males)',
-    value: '1,094',
-  },
-  {
-    text: 'Sex Ratio (Females per 1,000 Males)',
-    value: '1,094',
-  },
-  {
-    text: 'Sex Ratio (Females per 1,000 Males)',
-    value: '1,094',
-  },
-];
+export const navbarConfig = {
+  homeUrl: '/',
+  links: [
+    {
+      label: 'Explore Departments',
+      href: '/',
+      icon: Icons.department,
+    },
+    {
+      label: 'Explore Schemes',
+      href: '/#',
+      icon: Icons.scheme,
+    },
+  ],
+};
+
+export const mainConfig: MainConfig = {
+  homeUrl: '/',
+  mainNav: [],
+
+  sidebarNav: [
+    {
+      title: 'District Home',
+      href: '/',
+      icon: 'home',
+    },
+    {
+      title: 'Panchayat & Rural Development',
+      href: '/panchayat-and-rural-development',
+    },
+    {
+      title: 'Public Health Engineering',
+      href: '/public-health-engineering',
+    },
+    {
+      title: 'Health Department',
+      href: '/health-department',
+    },
+    {
+      title:
+        'PWRD, Bongaigaon District Territorial Road Division, and few more words to show long department names',
+      href: '/pwrd-bongaigaon-district-territorial-road-division',
+    },
+  ],
+};

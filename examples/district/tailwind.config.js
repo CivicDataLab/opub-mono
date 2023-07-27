@@ -52,6 +52,10 @@ module.exports = {
       xl: '1280px',
       '2xl': '1536px',
     },
+    container: {
+      center: true,
+      padding: '14px',
+    },
   },
   plugins: [],
 };

@@ -20,6 +20,7 @@ const IconButton = forwardRef((props: IconButtonProps, ref: any) => {
     withTooltip,
     tooltipText,
     disabled,
+    color,
     ...others
   } = props;
   const themeClass = cn(
@@ -45,7 +46,7 @@ const IconButton = forwardRef((props: IconButtonProps, ref: any) => {
         }}
       >
         <Text visuallyHidden>{children}</Text>
-        <Icon source={icon} size={iconSize} color="base" />
+        <Icon source={icon} size={iconSize} color={color ? color : 'base'} />
       </button>
     </>
   );

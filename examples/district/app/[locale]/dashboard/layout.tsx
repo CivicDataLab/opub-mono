@@ -1,8 +1,9 @@
 import React from 'react';
 import { notFound } from 'next/navigation';
 
+import { dashboardConfig } from '@/config/dashboard';
 import { DashboardLayout } from './components/dashboard-layout';
-import { MainNav } from './components/main-nav';
+import { DashboardNav } from './components/dashboard-nav';
 
 interface DashboardLayoutProps {
   children?: React.ReactNode;
@@ -18,9 +19,11 @@ export default async function Layout({ children }: DashboardLayoutProps) {
   return (
     <div className="flex flex-col grow h-full">
       <header className="py-3 px-4 bg-surface z-2 relative shadow-deep">
-        <MainNav />
+        <DashboardNav />
       </header>
-      <DashboardLayout>{children}</DashboardLayout>
+      <DashboardLayout dashboardConfig={dashboardConfig}>
+        {children}
+      </DashboardLayout>
     </div>
   );
 }

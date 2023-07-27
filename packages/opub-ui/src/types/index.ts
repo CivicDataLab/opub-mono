@@ -16,7 +16,6 @@ export type {
 } from './button';
 export type { CheckboxProps } from './checkbox';
 export type { CheckboxGroupProps, ChoiceProps } from './choicelist';
-export type { CodeBlockProps } from './code';
 export type { CollapsibleProps } from './collapsible';
 export type { ComboboxSingleProps } from './combobox';
 export type {
