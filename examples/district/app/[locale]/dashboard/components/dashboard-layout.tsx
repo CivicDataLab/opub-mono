@@ -3,7 +3,6 @@
 import React from 'react';
 import { twMerge } from 'tailwind-merge';
 
-import { dashboardConfig } from '@/config/dashboard';
 import { cn } from '@/lib/utils';
 import { DashboardSidebar } from './dashboard-sidebar';
 import { MobileDashboardNav } from './mobile-dashboard-nav';
@@ -11,15 +10,19 @@ import styles from './styles.module.scss';
 
 interface DashboardLayoutProps {
   children?: React.ReactNode;
+  dashboardConfig: any;
 }
 
-export function DashboardLayout({ children }: DashboardLayoutProps) {
+export function DashboardLayout({
+  children,
+  dashboardConfig,
+}: DashboardLayoutProps) {
   const [isOpened, setIsOpened] = React.useState(false);
 
   return (
     <div
       className={twMerge(
-        'grid grid-cols-[8px_1fr] gap-1 grow h-[calc(100% - 60px)] relative',
+        'grid grid-cols-[8px_1fr] gap-1 grow min-h-[calc(100%_-_48px)] relative',
         'md:flex'
       )}
     >

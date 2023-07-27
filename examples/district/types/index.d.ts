@@ -1,3 +1,5 @@
+import { IconSource } from 'opub-ui/src/types/icon';
+
 import { Icons } from '@/components/icons';
 
 export type SiteConfig = {
@@ -10,6 +12,26 @@ export type SiteConfig = {
 export type DashboardConfig = {
   mainNav: MainNavItem[];
   sidebarNav: SidebarNavItem[];
+};
+
+export type MainConfig = {} & (
+  | {
+      homeUrl: string;
+      mainNav: MainNavItem[];
+      sidebarNav: SidebarNavItem[];
+    }
+  | {
+      homeUrl: string;
+      mainNav: [];
+      sidebarNav: SidebarNavItem[];
+    }
+);
+
+export type MainNavItem = {
+  title?: string;
+  href?: string;
+  disabled?: boolean;
+  icon?: keyof typeof Icons;
 };
 
 export type SidebarNavItem = {

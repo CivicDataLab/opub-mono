@@ -1,6 +1,7 @@
 import React from 'react';
 import { notFound } from 'next/navigation';
 
+import { dashboardConfig } from '@/config/dashboard';
 import { DashboardLayout } from './components/dashboard-layout';
 import { DashboardNav } from './components/dashboard-nav';
 
@@ -20,7 +21,9 @@ export default async function Layout({ children }: DashboardLayoutProps) {
       <header className="py-3 px-4 bg-surface z-2 relative shadow-deep">
         <DashboardNav />
       </header>
-      <DashboardLayout>{children}</DashboardLayout>
+      <DashboardLayout dashboardConfig={dashboardConfig}>
+        {children}
+      </DashboardLayout>
     </div>
   );
 }
