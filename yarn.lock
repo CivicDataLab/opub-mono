@@ -10692,6 +10692,13 @@ eslint-plugin-turbo@1.10.6:
   dependencies:
     dotenv "16.0.3"
 
+eslint-plugin-turbo@^1.10.12:
+  version "1.10.12"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-turbo/-/eslint-plugin-turbo-1.10.12.tgz#3f95884faf35b56e0855d939585fa6cd457bb128"
+  integrity sha512-uNbdj+ohZaYo4tFJ6dStRXu2FZigwulR1b3URPXe0Q8YaE7thuekKNP+54CHtZPH9Zey9dmDx5btAQl9mfzGOw==
+  dependencies:
+    dotenv "16.0.3"
+
 eslint-scope@^5.1.1:
   version "5.1.1"
   resolved "https://registry.yarnpkg.com/eslint-scope/-/eslint-scope-5.1.1.tgz#e786e59a66cb92b3f6c1fb0d508aab174848f48c"

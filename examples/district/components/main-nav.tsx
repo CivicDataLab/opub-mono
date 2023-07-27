@@ -6,6 +6,7 @@ import { useKeyDetect } from '@/hooks/use-key-detect';
 import { Icon, Text, TextField } from 'opub-ui';
 import { IconSource } from 'opub-ui/src/types/icon';
 
+import { navbarConfig } from '@/config/site';
 import { Icons } from '@/components/icons';
 
 export function MainNav() {
@@ -22,7 +23,7 @@ export function MainNav() {
     <nav className="bg-surface py-2 shadow-top-bar sm:py-3">
       <div className="container">
         <div className="flex gap-1 items-center justify-center flex-wrap sm:justify-between">
-          <Link href="/">
+          <Link href={navbarConfig.homeUrl}>
             <div className="flex items-center gap-0.5">
               <Icon source={Icons.logo} color="decorative4" size="6" />
               <Text variant="headingLg" as="span">
@@ -44,12 +45,14 @@ export function MainNav() {
             />
           </div>
           <div className="flex items-center shrink-0 gap-3 flex-wrap sm:gap-5">
-            <ExploreLink
-              href="#"
-              icon={Icons.department}
-              text="Explore Departments"
-            />
-            <ExploreLink href="#" icon={Icons.scheme} text="Explore Schemes" />
+            {navbarConfig.links.map((link) => (
+              <ExploreLink
+                key={link.label}
+                href={link.href}
+                icon={link.icon}
+                text={link.label}
+              />
+            ))}
           </div>
         </div>
       </div>

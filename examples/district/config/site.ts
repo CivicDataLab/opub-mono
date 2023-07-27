@@ -1,4 +1,5 @@
 import { SiteConfig } from 'types';
+import { Icons } from '@/components/icons';
 
 export const siteConfig: SiteConfig = {
   name: 'OPub',
@@ -17,10 +18,17 @@ export const gqlConfig = {
 };
 
 export const navbarConfig = {
+  homeUrl: '/',
   links: [
     {
-      label: 'Home',
+      label: 'Explore Departments',
       href: '/',
+      icon: Icons.department,
+    },
+    {
+      label: 'Explore Schemes',
+      href: '/#',
+      icon: Icons.scheme,
     },
   ],
 };
