@@ -65,7 +65,7 @@ export function Content({
             <Separator />
             <div className="mt-4 grid lg:grid-cols-2 gap-7">
               <div className="flex flex-col gap-4">
-                <Text variant="headingMd">
+                <Text variant="headingMd" as="h3">
                   {data.collapsible.content.leftTitle}
                 </Text>
 

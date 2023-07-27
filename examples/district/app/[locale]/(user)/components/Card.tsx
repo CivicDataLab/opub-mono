@@ -29,7 +29,7 @@ export const DepartmentCard = ({
         </Link>
         <Separator />
       </div>
-      <div className="mt-4 grid gap-4 sm:grid-cols-2">
+      <div className="grid gap-4 sm:grid-cols-2">
         {data.cards.map((card, index) => (
           <ContentCard
             value={card.value}

@@ -1,15 +1,15 @@
-import { Content } from './components/district-landing-layout';
+import { Content } from './components/district-layout';
 
 const content = {
   title: 'Morigaon',
   breadcrumbs: [
     {
-      label: 'District Listing Page',
-      href: '#',
+      label: 'District Listing',
+      href: '/',
     },
     {
-      label: 'Morigaon District Page',
-      href: '#',
+      label: 'Morigaon District',
+      href: '/',
     },
   ],
   collapsible: {
@@ -49,7 +49,7 @@ const content = {
   list: [
     {
       label: 'Panchayat & Rural Development',
-      href: '#',
+      href: 'panchayat-and-rural-development',
       cards: [
         {
           value: '₹ 4,20,672 Cr.',
@@ -71,7 +71,7 @@ const content = {
     },
     {
       label: 'Public Health Engineering',
-      href: '#',
+      href: 'public-health-engineering',
       cards: [
         {
           value: '₹ 4,20,672 Cr.',
