@@ -4,7 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useKeyDetect } from '@/hooks/use-key-detect';
-import { Button, Code, Icon, Text, Tooltip } from 'opub-ui';
+import { Button, Icon, Text, Tooltip } from 'opub-ui';
 import { twMerge } from 'tailwind-merge';
 
 import { SidebarNavItem } from 'types';
@@ -43,15 +43,7 @@ export function DashboardNav({ items }: DashboardNavProps) {
         <div className="w-fit self-end">
           <Tooltip
             side="right"
-            content={
-              <p>
-                {isCollapsed ? 'Expand' : 'Collapse'} Sidebar
-                <span className="text-200 ml-2">
-                  <Code className="mr-1">⌘</Code>
-                  <Code>B</Code>
-                </span>
-              </p>
-            }
+            content={<p>{isCollapsed ? 'Expand' : 'Collapse'} Sidebar</p>}
           >
             <Button
               icon={<Icon source={sidebarIcon} color="base" />}
