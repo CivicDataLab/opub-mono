@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { ProgressBar } from 'opub-ui';
-import { Icon, Separator, Text } from 'opub-ui/src';
+import { Icon, ProgressBar, Separator, Text } from 'opub-ui';
 
 import { cn } from '@/lib/utils';
 import { Icons } from '@/components/icons';
