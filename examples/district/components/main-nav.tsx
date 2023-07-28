@@ -39,7 +39,7 @@ export function MainNav({ data }: { data: MainConfig }) {
               <ExploreLink
                 key={link.title}
                 href={link.href || ''}
-                icon={link.icon || undefined}
+                icon={link.icon || ''}
                 text={link.title || ''}
               />
             ))}
@@ -56,13 +56,13 @@ const ExploreLink = ({
   text,
 }: {
   href: string;
-  icon: any;
+  icon: string;
   text: string;
 }) => {
   return (
     <Link href={href}>
       <div className="flex gap-1 py-2 px-2 rounded-1 hover:bg-surfaceHovered sm:px-3">
-        {icon && <Icon color="base" source={icon} />}
+        {Icons[icon] && <Icon color="base" source={Icons[icon]} />}
         <Text variant="bodyMd" fontWeight="medium">
           {text}
         </Text>

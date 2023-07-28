@@ -45,3 +45,5 @@ export const Icons: {
   expand: IconLayoutSidebarLeftExpand,
   home: IconHome,
 };
+
+export default Icons;

@@ -96,7 +96,7 @@ const content = {
 
 export default function Home() {
   return (
-    <main className="container py-4">
+    <main className="container py-1 lg:py-2">
       <Content data={content} />
     </main>
   );

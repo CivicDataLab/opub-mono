@@ -11,13 +11,17 @@
 
 .CommandDialog {
   overflow: hidden;
-  padding: 0;
+  padding: 0 !important;
   box-shadow: var(--shadow-2xl);
   border-radius: var(--border-radius-2);
 
   position: relative;
   z-index: var(--z-1);
   background-color: var(--background);
+
+  @media #{$breakpoints-md-down} {
+    box-shadow: none;
+  }
 }
 
 .CommandDialogChild {

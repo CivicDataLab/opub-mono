@@ -21,7 +21,7 @@ export const SchemeCard = ({
   };
 }) => {
   return (
-    <div className="flex flex-col gap-1 justify-between py-4 px-3 bg-surface rounded-05 shadow-card">
+    <div className="flex flex-col gap-2 justify-between p-4 pb-3 bg-surface rounded-05 shadow-card">
       <div className="flex flex-col gap-3">
         <Link href={data.href} className="block hover:underline">
           <span className="flex gap-6 items-center">

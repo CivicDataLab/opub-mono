@@ -17,7 +17,7 @@ export const DepartmentCard = ({
   };
 }) => {
   return (
-    <div className="flex flex-col gap-4 p-4 bg-surface rounded-05 shadow-card">
+    <div className="p-4 pb-3 bg-surface rounded-05 shadow-card">
       <div>
         <Link href={data.href} className="block hover:underline mb-4">
           <Text variant="headingLg" as="h3">
@@ -26,7 +26,7 @@ export const DepartmentCard = ({
         </Link>
         <Separator />
       </div>
-      <div className="grid gap-4 sm:grid-cols-2">
+      <div className="grid gap-4 sm:grid-cols-2 mt-4">
         {data.cards.map((card, index) => (
           <ContentCard
             value={card.value}
@@ -38,7 +38,7 @@ export const DepartmentCard = ({
 
       <Link
         href={data.href}
-        className="py-2 pl-4 pr-1 bg-surface hover:bg-surfaceHovered rounded-1 flex justify-between text-interactive"
+        className="py-2 pl-4 mt-2 pr-1 bg-surface hover:bg-surfaceHovered rounded-1 flex justify-between text-interactive"
       >
         <Text variant="bodyMd" fontWeight="medium" color="inherit">
           Explore More <Text visuallyHidden>about {data.label}</Text>

@@ -59,7 +59,7 @@ const content = {
       },
     ],
   },
-  listTitle: 'Browse Schemes',
+  listTitle: 'Browse Schemes and Surveys',
   list: [
     {
       label: 'Mahatma Gandhi National Rural Employment Guarantee Act (MGNREGA)',
@@ -117,7 +117,7 @@ export default function Home({ params }: { params: { department: string } }) {
   }
 
   return (
-    <main className="container py-4">
+    <main className="container py-1 lg:py-2">
       <Content data={content} departmentData={page} />
     </main>
   );

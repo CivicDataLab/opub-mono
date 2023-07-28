@@ -40,14 +40,14 @@ export function DashboardSidebar({ items }: DashboardNavProps) {
                   <span
                     className={cn(
                       'bg-transparent rounded-r-2 w-[6px] h-full absolute top-0 left-[-3px]',
-                      isActive(path, item.href) && 'bg-decorativeIconFour'
+                      path === item.href && 'bg-decorativeIconFour'
                     )}
                   />
                   <div
                     className={cn(
                       'flex items-center w-full ml-2 rounded-1 overflow-hidden',
                       styles.Item,
-                      isActive(path, item.href) && styles.Selected
+                      path === item.href && styles.Selected
                     )}
                   >
                     {item.icon && (
@@ -66,7 +66,7 @@ export function DashboardSidebar({ items }: DashboardNavProps) {
                           it only happens on hard refresh and only for home page,
                           this is a hotfix for that
                       */}
-                      {isActive(path, item.href) && <div></div>}
+                      {path === item.href && <div></div>}
                       <Text truncate fontWeight="medium">
                         {item.title}
                       </Text>
@@ -82,7 +82,7 @@ export function DashboardSidebar({ items }: DashboardNavProps) {
   );
 }
 
-function isActive(path: string, href: string) {
+export function isActive(path: string, href: string) {
   if (href !== '/') {
     return path.startsWith(href);
   }
