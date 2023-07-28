@@ -71,7 +71,7 @@ export function MobileDashboardNav({ items }: DashboardNavProps) {
                   )}
                 >
                   <Link
-                    href={item.disabled ? '/' : item.href}
+                    href={item.disabled ? '/' : item.href || '#'}
                     onClick={() => setOpen(false)}
                   >
                     <span
