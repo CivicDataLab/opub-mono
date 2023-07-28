@@ -16,7 +16,6 @@ export function Content({
   departmentData,
 }: {
   data: {
-    title: string;
     breadcrumbs: {
       label: string;
       href: string;
@@ -48,6 +47,7 @@ export function Content({
   };
   departmentData: {
     title: string;
+    href: string;
   };
 }) {
   const breadcrumbs = [
@@ -118,7 +118,10 @@ export function Content({
         <Separator />
         <div className="grid gap-4 lg:grid-cols-2">
           {data.list.map((item) => (
-            <SchemeCard data={item} key={item.label} />
+            <SchemeCard
+              data={{ ...item, departmentHref: departmentData.href }}
+              key={item.label}
+            />
           ))}
         </div>
       </div>

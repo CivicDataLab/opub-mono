@@ -18,11 +18,11 @@ import {
   IconButton,
   Text,
 } from 'opub-ui/src';
-import { twMerge } from 'tailwind-merge';
 
 import { cn } from '@/lib/utils';
 import { Icons } from '@/components/icons';
 import dashboardStyles from '../dashboard.module.scss';
+import { isActive } from './dashboard-sidebar';
 import styles from './styles.module.scss';
 
 interface DashboardNavProps {
@@ -67,7 +67,7 @@ export function MobileDashboardNav({ items }: DashboardNavProps) {
                   key={item.href + item.title}
                   className={cn(
                     'flex justify-between relative',
-                    path === item.href && dashboardStyles.Selected
+                    isActive(path, item.href) && dashboardStyles.Selected
                   )}
                 >
                   <Link
@@ -75,9 +75,9 @@ export function MobileDashboardNav({ items }: DashboardNavProps) {
                     onClick={() => setOpen(false)}
                   >
                     <span
-                      className={twMerge(
+                      className={cn(
                         'bg-transparent rounded-r-2 w-[6px] h-full absolute top-0 left-[-10px]',
-                        path === item.href && 'bg-decorativeIconFour'
+                        isActive(path, item.href) && 'bg-decorativeIconFour'
                       )}
                     />
                     <div
@@ -111,7 +111,7 @@ export function MobileDashboardNav({ items }: DashboardNavProps) {
                     onClick={() => setOpen(false)}
                   >
                     <span
-                      className={twMerge(
+                      className={cn(
                         'bg-transparent rounded-r-2 w-[6px] h-full absolute top-0 left-[-10px]',
                         path === item.href && 'bg-decorativeIconFour'
                       )}

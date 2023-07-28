@@ -5,9 +5,9 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useKeyDetect } from '@/hooks/use-key-detect';
 import { Button, Icon, Text, Tooltip } from 'opub-ui';
-import { twMerge } from 'tailwind-merge';
 
 import { SidebarNavItem } from 'types';
+import { cn } from '@/lib/utils';
 import { Icons } from '@/components/icons';
 import styles from '../dashboard.module.scss';
 
@@ -32,14 +32,14 @@ export function DashboardNav({ items }: DashboardNavProps) {
   const sidebarIcon = isCollapsed ? Icons.expand : Icons.collapse;
   return (
     <aside
-      className={twMerge(
+      className={cn(
         'pt-2 pr-2 overflow-hidden bg-surface',
         'hidden z-1 shadow-inset basis-[240px] shrink-0 md:block',
         isCollapsed && 'basis-[60px]',
         styles.Collapse
       )}
     >
-      <nav className={twMerge('flex flex-col gap-2')}>
+      <nav className={cn('flex flex-col gap-2')}>
         <div className="w-fit self-end">
           <Tooltip
             side="right"
@@ -61,15 +61,15 @@ export function DashboardNav({ items }: DashboardNavProps) {
           return (
             item.href && (
               <Link key={item.href} href={item.disabled ? '/' : item.href}>
-                <div className={twMerge('flex justify-between relative')}>
+                <div className={cn('flex justify-between relative')}>
                   <span
-                    className={twMerge(
+                    className={cn(
                       'bg-transparent rounded-r-1 w-[3px] h-full absolute top-0 left-0',
                       path.includes(item.href) && 'bg-decorativeIconFour'
                     )}
                   />
                   <div
-                    className={twMerge(
+                    className={cn(
                       'flex items-center  w-full ml-2 rounded-1 overflow-hidden',
                       styles.Item,
                       path.includes(item.href) && styles.Selected,
@@ -85,7 +85,7 @@ export function DashboardNav({ items }: DashboardNavProps) {
                       </div>
                     </Tooltip>
                     <div
-                      className={twMerge(
+                      className={cn(
                         'py-2 pr-3',
                         'whitespace-nowrap opacity-100 transition-opacity duration-300',
                         isCollapsed && 'opacity-0'

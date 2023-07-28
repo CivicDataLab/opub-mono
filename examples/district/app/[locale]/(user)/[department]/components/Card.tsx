@@ -13,6 +13,7 @@ export const SchemeCard = ({
     href: string;
     image: string;
     lastUpdated: string;
+    departmentHref: string;
     cards: {
       value: string | number;
       label: string;
@@ -23,7 +24,10 @@ export const SchemeCard = ({
   return (
     <div className="flex flex-col gap-2 justify-between p-4 pb-3 bg-surface rounded-05 shadow-card">
       <div className="flex flex-col gap-3">
-        <Link href={data.href} className="block hover:underline">
+        <Link
+          href={`${data.departmentHref}/${data.href}`}
+          className="block hover:underline"
+        >
           <span className="flex gap-6 items-center">
             <Image
               src={data.image}
@@ -66,7 +70,7 @@ export const SchemeCard = ({
         </div>
       </div>
       <Link
-        href={data.href}
+        href={`${data.departmentHref}/${data.href}`}
         className="py-2 pl-4 pr-1 bg-surface hover:bg-surfaceHovered rounded-1 flex justify-between text-interactive"
       >
         <Text variant="bodyMd" fontWeight="medium" color="inherit">
