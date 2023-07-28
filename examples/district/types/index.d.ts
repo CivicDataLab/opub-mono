@@ -31,7 +31,7 @@ export type MainNavItem = {
   title?: string;
   href?: string;
   disabled?: boolean;
-  icon?: keyof typeof Icons;
+  icon?: string;
 };
 
 export type SidebarNavItem = {

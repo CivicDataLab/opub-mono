@@ -2,11 +2,22 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useOnClickOutside } from '@/hooks/use-on-click-outside';
 import { SidebarNavItem } from '@/types';
 import { IconMenu, IconX } from '@tabler/icons-react';
-import { Icon, Text } from 'opub-ui';
+import {
+  Button,
+  CommandDialog,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+  Icon,
+  IconButton,
+  Text,
+} from 'opub-ui/src';
 import { twMerge } from 'tailwind-merge';
 
 import { cn } from '@/lib/utils';
@@ -16,31 +27,119 @@ import styles from './styles.module.scss';
 
 interface DashboardNavProps {
   items: SidebarNavItem[];
-  isOpened: boolean;
-  setIsOpened: any;
 }
 
-export function MobileDashboardNav({
-  isOpened,
-  setIsOpened,
-  items,
-}: DashboardNavProps) {
+export function MobileDashboardNav({ items }: DashboardNavProps) {
+  const [open, setOpen] = React.useState(false);
+
   const path = usePathname();
+  const router = useRouter();
   const asideRef = React.useRef<HTMLDivElement>(null);
 
-  useOnClickOutside(asideRef, () => {
-    if (isOpened) {
-      setIsOpened(false);
-    }
-  });
+  const activeItem = React.useMemo(() => {
+    return items.find((item) => item.href === path);
+  }, [items, path]);
 
   if (items && !items.length) {
     return null;
   }
 
   return (
-    <>
-      <button
+    <div className="container mt-3">
+      <Button fullWidth disclosure onClick={() => setOpen((e) => !e)}>
+        {activeItem?.title || 'Select a department'}
+      </Button>
+
+      <CommandDialog open={open} onOpenChange={setOpen}>
+        <div className="flex justify-between items-center px-3 py-2">
+          <Text variant="headingMd" as="h1">
+            Select a department
+          </Text>
+          <IconButton onClick={() => setOpen(false)} icon={IconX}>
+            Close
+          </IconButton>
+        </div>
+
+        <CommandInput placeholder="search..." />
+        <CommandList className=" max-h-full">
+          <CommandEmpty>No results found.</CommandEmpty>
+          <CommandGroup heading="Departments">
+            {items.map((item) => {
+              return (
+                <CommandItem
+                  key={item.href + item.title}
+                  className={cn(
+                    'flex justify-between relative',
+                    path === item.href && dashboardStyles.Selected
+                  )}
+                >
+                  <Link
+                    href={item.disabled ? '/' : item.href}
+                    onClick={() => setOpen(false)}
+                  >
+                    <span
+                      className={twMerge(
+                        'bg-transparent rounded-r-2 w-[6px] h-full absolute top-0 left-[-10px]',
+                        path === item.href && 'bg-decorativeIconFour'
+                      )}
+                    />
+                    <div
+                      className={cn(
+                        'flex items-center w-full rounded-1 overflow-hidden',
+                        dashboardStyles.Item
+                      )}
+                    >
+                      {item.icon && (
+                        <div className="pr-1">
+                          <Icon source={Icons[item.icon]} color="base" />
+                        </div>
+                      )}
+                      <Text>{item.title}</Text>
+                    </div>
+                  </Link>
+                </CommandItem>
+              );
+            })}
+            {items.map((item) => {
+              return (
+                <CommandItem
+                  key={item.href + item.title}
+                  className={cn(
+                    'flex justify-between relative',
+                    path === item.href && dashboardStyles.Selected
+                  )}
+                >
+                  <Link
+                    href={item.disabled ? '/' : item.href}
+                    onClick={() => setOpen(false)}
+                  >
+                    <span
+                      className={twMerge(
+                        'bg-transparent rounded-r-2 w-[6px] h-full absolute top-0 left-[-10px]',
+                        path === item.href && 'bg-decorativeIconFour'
+                      )}
+                    />
+                    <div
+                      className={cn(
+                        'flex items-center w-full rounded-1 overflow-hidden',
+                        dashboardStyles.Item
+                      )}
+                    >
+                      {item.icon && (
+                        <div className="pr-1">
+                          <Icon source={Icons[item.icon]} color="base" />
+                        </div>
+                      )}
+                      <Text>{item.title}</Text>
+                    </div>
+                  </Link>
+                </CommandItem>
+              );
+            })}
+          </CommandGroup>
+        </CommandList>
+      </CommandDialog>
+      {/* <button
         onClick={() => {
           setIsOpened(!isOpened);
         }}
@@ -68,14 +167,14 @@ export function MobileDashboardNav({
                       <span
                         className={twMerge(
                           'bg-transparent rounded-r-1 w-[3px] h-full absolute top-0 left-0',
-                          path.includes(item.href) && 'bg-decorativeIconFour'
+                          path === item.href && 'bg-decorativeIconFour'
                         )}
                       />
                       <div
                         className={twMerge(
                           'flex items-center pl-2 w-full ml-2 rounded-1 overflow-hidden',
                           dashboardStyles.Item,
-                          path.includes(item.href) && dashboardStyles.Selected
+                          path === item.href && dashboardStyles.Selected
                         )}
                       >
                         {item.icon && (
@@ -87,6 +186,7 @@ export function MobileDashboardNav({
                             'whitespace-nowrap opacity-100 transition-opacity duration-300'
                           )}
                         >
+                          {path === item.href && <div></div>}
                           <Text fontWeight="medium">{item.title}</Text>
                         </div>
                       </div>
@@ -97,7 +197,7 @@ export function MobileDashboardNav({
             })}
           </ul>
         </nav>
-      </aside>
-    </>
+      </aside> */}
+    </div>
   );
 }
