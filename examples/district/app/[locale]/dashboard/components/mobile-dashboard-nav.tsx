@@ -97,42 +97,6 @@ export function MobileDashboardNav({ items }: DashboardNavProps) {
                 </CommandItem>
               );
             })}
-            {items.map((item) => {
-              return (
-                <CommandItem
-                  key={item.href + item.title}
-                  className={cn(
-                    'flex justify-between relative',
-                    path === item.href && dashboardStyles.Selected
-                  )}
-                >
-                  <Link
-                    href={item.disabled ? '/' : item.href || '#'}
-                    onClick={() => setOpen(false)}
-                  >
-                    <span
-                      className={cn(
-                        'bg-transparent rounded-r-2 w-[6px] h-full absolute top-0 left-[-10px]',
-                        path === item.href && 'bg-decorativeIconFour'
-                      )}
-                    />
-                    <div
-                      className={cn(
-                        'flex items-center w-full rounded-1 overflow-hidden',
-                        dashboardStyles.Item
-                      )}
-                    >
-                      {item.icon && (
-                        <div className="pr-1">
-                          <Icon source={Icons[item.icon]} color="base" />
-                        </div>
-                      )}
-                      <Text>{item.title}</Text>
-                    </div>
-                  </Link>
-                </CommandItem>
-              );
-            })}
           </CommandGroup>
         </CommandList>
       </CommandDialog>

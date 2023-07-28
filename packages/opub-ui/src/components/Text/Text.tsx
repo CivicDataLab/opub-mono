@@ -15,10 +15,11 @@ const Text = ({
   truncate = false,
   variant = 'bodyMd',
   visuallyHidden = false,
+  className,
 }: TextProps) => {
   const Component = as || (visuallyHidden ? 'span' : 'p');
 
-  const className = cx(
+  const style = cx(
     styles.root,
     styles[variant],
     fontWeight ? styles[fontWeight] : styles[VariantFontWeightMapping[variant]],
@@ -29,11 +30,12 @@ const Text = ({
     color && styles[color],
     numeric && styles.numeric,
     truncate && styles.truncate,
-    visuallyHidden && styles.visuallyHidden
+    visuallyHidden && styles.visuallyHidden,
+    className
   );
 
   return (
-    <Component className={className} {...(id && { id })}>
+    <Component className={style} {...(id && { id })}>
       {children}
     </Component>
   );

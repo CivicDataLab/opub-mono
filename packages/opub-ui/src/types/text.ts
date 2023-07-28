@@ -77,4 +77,6 @@ export interface TextProps {
   variant?: Variant;
   /** Visually hide the text */
   visuallyHidden?: boolean;
+  /** Custom class name */
+  className?: string;
 }

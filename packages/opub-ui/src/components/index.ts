@@ -53,7 +53,7 @@ export { SkeletonThumbnail } from './SkeletonThumbnail';
 export { Spinner } from './Spinner';
 export { Switch } from './Switch';
 export { Table } from './Table';
-export { Tabs } from './Tabs';
+export { Tabs, TabList, Tab, TabPanel } from './Tabs';
 export { Tag } from './Tag';
 export { Text } from './Text';
 export { TextField } from './TextField';
