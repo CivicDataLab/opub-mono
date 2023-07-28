@@ -33,9 +33,6 @@ export function MobileDashboardNav({ items }: DashboardNavProps) {
   const [open, setOpen] = React.useState(false);
 
   const path = usePathname();
-  const router = useRouter();
-  const asideRef = React.useRef<HTMLDivElement>(null);
-
   const activeItem = React.useMemo(() => {
     return items.find((item) => item.href === path);
   }, [items, path]);
@@ -110,7 +107,7 @@ export function MobileDashboardNav({ items }: DashboardNavProps) {
                   )}
                 >
                   <Link
-                    href={item.disabled ? '/' : item.href}
+                    href={item.disabled ? '/' : item.href || '#'}
                     onClick={() => setOpen(false)}
                   >
                     <span
@@ -139,65 +136,6 @@ export function MobileDashboardNav({ items }: DashboardNavProps) {
           </CommandGroup>
         </CommandList>
       </CommandDialog>
-      {/* <button
-        onClick={() => {
-          setIsOpened(!isOpened);
-        }}
-        className={cn(styles.NavButton, isOpened && styles.NavButtonOpen)}
-      >
-        <Icon source={isOpened ? IconX : IconMenu} />
-        <Text visuallyHidden>Trigger Menu</Text>
-      </button>
-      <aside
-        ref={asideRef}
-        className={cn(styles.Aside, isOpened && styles.AsideOpen)}
-      >
-        <nav className={styles.MobileNavContainer}>
-          <ul>
-            {items.map((item) => {
-              const icon = Icons[item.icon || 'arrowRight'];
-              return (
-                item.href && (
-                  <Link
-                    key={item.href}
-                    href={item.disabled ? '/' : item.href}
-                    onClick={() => setIsOpened(false)}
-                  >
-                    <div className={twMerge('flex justify-between relative')}>
-                      <span
-                        className={twMerge(
-                          'bg-transparent rounded-r-1 w-[3px] h-full absolute top-0 left-0',
-                          path === item.href && 'bg-decorativeIconFour'
-                        )}
-                      />
-                      <div
-                        className={twMerge(
-                          'flex items-center pl-2 w-full ml-2 rounded-1 overflow-hidden',
-                          dashboardStyles.Item,
-                          path === item.href && dashboardStyles.Selected
-                        )}
-                      >
-                        {item.icon && (
-                          <Icon source={Icons[item.icon]} color="base" />
-                        )}
-                        <div
-                          className={twMerge(
-                            'py-2 px-3',
-                            'whitespace-nowrap opacity-100 transition-opacity duration-300'
-                          )}
-                        >
-                          {path === item.href && <div></div>}
-                          <Text fontWeight="medium">{item.title}</Text>
-                        </div>
-                      </div>
-                    </div>
-                  </Link>
-                )
-              );
-            })}
-          </ul>
-        </nav>
-      </aside> */}
     </div>
   );
 }
