@@ -8,9 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "style-dictionary:build": "style-dictionary build --config ./config/style-dictionary.js",
-    "generate": "graphql-codegen --config ./config/codegen.ts",
-    "prestart": "yarn generate",
-    "predev": "yarn generate"
+    "generate": "graphql-codegen --config ./config/codegen.ts"
   },
   "dependencies": {
     "@tabler/icons-react": "^2.17.0",

@@ -21,6 +21,10 @@ export const SchemeCard = ({
     }[];
   };
 }) => {
+  if (!data) {
+    return null;
+  }
+
   return (
     <div className="flex flex-col gap-2 justify-between p-4 pb-3 bg-surface rounded-05 shadow-card">
       <div className="flex flex-col gap-3">
@@ -85,16 +89,18 @@ export const SchemeCard = ({
 export const ContentCard = ({
   value,
   label,
+  description,
   color,
 }: {
   value: string | number;
   label: string;
+  description?: string;
   color?: string;
 }) => {
   return (
     <div
       className={cn(
-        'flex-grow w-[45%]',
+        'flex-grow md:w-[45%]',
         'p-4 rounded-1 border-[1px] border-solid border-borderSubdued flex flex-col gap-3',
         color === 'highlight' &&
           'bg-surfaceHighlightSubdued w-auto border-borderHighlightSubdued'
@@ -102,6 +108,12 @@ export const ContentCard = ({
     >
       <Text variant="headingXl">{value}</Text>
       <Text variant="bodyLg">{label}</Text>
+      {description && (
+        <>
+          <Separator />
+          <Text variant="bodyMd">{description}</Text>
+        </>
+      )}
     </div>
   );
 };
@@ -109,16 +121,18 @@ export const ContentCard = ({
 export const ProgressCard = ({
   value,
   label,
+  description,
   color,
 }: {
   value: string | number;
   label: string;
+  description?: string;
   color?: string;
 }) => {
   return (
     <div
       className={cn(
-        'flex-grow w-[45%]',
+        'flex-grow md:w-[45%] ',
         'p-4 rounded-1 border-[1px] border-solid border-borderSubdued flex flex-col gap-3',
         color === 'highlight' &&
           'bg-surfaceHighlightSubdued w-auto border-borderHighlightSubdued'
@@ -137,6 +151,7 @@ export const ProgressCard = ({
           </Text>
         </div>
       </div>
+      {description && <Text variant="bodyMd">{description}</Text>}
     </div>
   );
 };

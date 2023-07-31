@@ -12,6 +12,8 @@ import {
 } from 'opub-ui';
 
 import { departments } from '../../department.config';
+import { Explorer } from './Explorer';
+import { Overview } from './Overview';
 
 export const Content = ({
   data,
@@ -45,7 +47,7 @@ export const Content = ({
     <>
       <Breadcrumbs crumbs={breadcrumbs} />
 
-      <div className="">
+      <div className="mt-4">
         <div className="flex gap-4 flex-wrap md:flex-nowrap">
           <Image
             src={schemeData.logo}
@@ -81,9 +83,9 @@ export const Content = ({
         <Divider className="my-6" />
 
         <div className="">
-          <Tabs defaultValue="narrative">
+          <Tabs defaultValue="overview">
             <TabList fitted>
-              <Tab value="narrative">
+              <Tab value="overview">
                 <Text variant="headingLg" as="h2">
                   Scheme Narrative
                 </Text>
@@ -94,12 +96,14 @@ export const Content = ({
                 </Text>
               </Tab>
             </TabList>
-            <TabPanel value="narrative">
-              <div>Scheme Narrative</div>
-            </TabPanel>
-            <TabPanel value="explorer">
-              <div>Scheme Explorer</div>
-            </TabPanel>
+            <div className="rounded-05 bg-surface shadow-card p-4 md:p-6 mt-3">
+              <TabPanel value="overview">
+                <Overview />
+              </TabPanel>
+              <TabPanel value="explorer">
+                <Explorer />
+              </TabPanel>
+            </div>
           </Tabs>
         </div>
       </div>
