@@ -4,11 +4,13 @@ import {
   IconArrowRight,
   IconBarrierBlock,
   IconBellFilled,
+  IconChartInfographic,
   IconChevronDown,
   IconChevronRight,
   IconDatabase,
   IconDatabaseCog,
   IconDatabasePlus,
+  IconFileChart,
   IconHome,
   IconLayoutSidebarLeftCollapse,
   IconLayoutSidebarLeftExpand,
@@ -44,6 +46,8 @@ export const Icons: {
   collapse: IconLayoutSidebarLeftCollapse,
   expand: IconLayoutSidebarLeftExpand,
   home: IconHome,
+  overview: IconFileChart,
+  explorer: IconChartInfographic,
 };
 
 export default Icons;

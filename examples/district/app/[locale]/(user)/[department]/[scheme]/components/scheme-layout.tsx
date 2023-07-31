@@ -1,9 +1,11 @@
 'use client';
 
+import React from 'react';
 import Image from 'next/image';
 import {
   Breadcrumbs,
   Divider,
+  Icon,
   Tab,
   TabList,
   TabPanel,
@@ -11,6 +13,7 @@ import {
   Text,
 } from 'opub-ui';
 
+import Icons from '@/components/icons';
 import { departments } from '../../department.config';
 import { Explorer } from './Explorer';
 import { Overview } from './Overview';
@@ -27,6 +30,11 @@ export const Content = ({
     }[];
     lastUpdaed: string;
     schemeInfo: string[];
+    tabs: {
+      label: string;
+      value: string;
+      icon: string;
+    }[];
   };
   schemeData: {
     title: string;
@@ -82,31 +90,54 @@ export const Content = ({
 
         <Divider className="my-6" />
 
-        <div className="">
-          <Tabs defaultValue="overview">
-            <TabList fitted>
-              <Tab value="overview">
-                <Text variant="headingLg" as="h2">
-                  Scheme Narrative
-                </Text>
-              </Tab>
-              <Tab value="explorer">
-                <Text variant="headingLg" as="h2">
-                  Scheme Explorer
-                </Text>
-              </Tab>
-            </TabList>
-            <div className="rounded-05 bg-surface shadow-card p-4 md:p-6 mt-3">
-              <TabPanel value="overview">
-                <Overview />
-              </TabPanel>
-              <TabPanel value="explorer">
-                <Explorer />
-              </TabPanel>
-            </div>
-          </Tabs>
-        </div>
+        <TabLayout tabs={data.tabs} />
       </div>
     </>
+  );
+};
+
+const TabLayout = ({
+  tabs,
+}: {
+  tabs: {
+    label: string;
+    value: string;
+    icon: string;
+  }[];
+}) => {
+  const [value, setValue] = React.useState('overview');
+
+  return (
+    <Tabs onValueChange={setValue} value={value}>
+      <TabList fitted>
+        {tabs.map((tab) => (
+          <Tab value={tab.value} key={tab.value}>
+            <div className="flex items-center gap-3">
+              <Icon
+                source={Icons[tab.icon]}
+                size={40}
+                color={value === tab.value ? 'primary' : 'subdued'}
+                stroke={1}
+              />
+              <Text
+                variant="headingLg"
+                as="h2"
+                color={value === tab.value ? 'default' : 'subdued'}
+              >
+                {tab.label}
+              </Text>
+            </div>
+          </Tab>
+        ))}
+      </TabList>
+      <div className="rounded-05 bg-surface shadow-card p-4 md:p-6 mt-3">
+        <TabPanel value="overview">
+          <Overview />
+        </TabPanel>
+        <TabPanel value="explorer">
+          <Explorer />
+        </TabPanel>
+      </div>
+    </Tabs>
   );
 };

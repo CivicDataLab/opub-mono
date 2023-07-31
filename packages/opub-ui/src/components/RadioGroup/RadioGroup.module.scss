@@ -21,6 +21,8 @@
   width: var(--choice-size);
   height: var(--choice-size);
   max-width: var(--choice-size);
+  min-width: var(--choice-size);
+
   max-height: var(--choice-size);
   border-radius: 100%;
   border: var(--border-width-2) solid var(--border);

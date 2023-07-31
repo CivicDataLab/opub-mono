@@ -7,8 +7,15 @@ import React, { useId, useRef } from 'react';
 
 export const Combobox = React.forwardRef<HTMLInputElement, ComboboxSingleProps>(
   (props: ComboboxSingleProps, ref) => {
-    const { label, id, error, combobox, verticalContent, ...comboboxProps } =
-      props;
+    const {
+      label,
+      labelHidden,
+      id,
+      error,
+      combobox,
+      verticalContent,
+      ...comboboxProps
+    } = props;
     const verticalContentRef = useRef<HTMLDivElement>(null);
 
     const rId = useId();
@@ -42,7 +49,12 @@ export const Combobox = React.forwardRef<HTMLInputElement, ComboboxSingleProps>(
     );
 
     return label ? (
-      <Labelled error={error} id={finalId} label={label}>
+      <Labelled
+        error={error}
+        id={finalId}
+        label={label}
+        labelHidden={labelHidden}
+      >
         {textField}
       </Labelled>
     ) : (

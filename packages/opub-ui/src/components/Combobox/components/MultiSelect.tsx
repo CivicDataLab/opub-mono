@@ -2,6 +2,7 @@
 
 import { LabelledProps } from '../../../types';
 import { ComboboxSingleProps } from '../../../types/combobox';
+import { cn } from '../../../utils';
 import itemStyles from '../../ActionList/ActionList.module.scss';
 import { Box } from '../../Box';
 import { Tag } from '../../Tag';
@@ -32,6 +33,8 @@ export type ComboboxMultiProps = ComboboxSingleProps & {
   requiredIndicator?: boolean;
   /** Additional text to aide in use */
   helpText?: React.ReactNode;
+  /** Additional class names to apply */
+  className?: string;
 };
 
 export const MultiSelect = forwardRef<HTMLInputElement, ComboboxMultiProps>(
@@ -52,6 +55,7 @@ export const MultiSelect = forwardRef<HTMLInputElement, ComboboxMultiProps>(
       onFilter,
       verticalContent,
       error,
+      className,
       ...comboboxProps
     } = props;
 
@@ -114,7 +118,7 @@ export const MultiSelect = forwardRef<HTMLInputElement, ComboboxMultiProps>(
     ) : null;
 
     return (
-      <div className={styles.Wrapper}>
+      <div className={cn(styles.Wrapper, className)}>
         <Combobox
           combobox={combobox}
           ref={ref}

@@ -37,6 +37,7 @@ export const Select = forwardRef(
       onBlur,
       defaultValue,
       requiredIndicator,
+      className,
     }: SelectProps,
     ref: LegacyRef<HTMLSelectElement>
   ) => {
@@ -55,7 +56,7 @@ export const Select = forwardRef(
     const id = idProp || randomId;
     const labelHidden = labelInline ? true : labelHiddenProp;
 
-    const className = cx(
+    const classes = cx(
       styles.Select,
       error && styles.error,
       disabled && styles.disabled
@@ -124,8 +125,9 @@ export const Select = forwardRef(
         labelHidden={labelHidden}
         helpText={helpText}
         requiredIndicator={requiredIndicator}
+        className={className}
       >
-        <div className={className}>
+        <div className={classes}>
           <select
             id={id}
             name={name}
