@@ -45,11 +45,6 @@ export const mainConfig: MainConfig = {
 
   sidebarNav: [
     {
-      title: 'District Home',
-      href: '/',
-      icon: 'home',
-    },
-    {
       title: 'Panchayat & Rural Development',
       href: '/panchayat-and-rural-development',
     },

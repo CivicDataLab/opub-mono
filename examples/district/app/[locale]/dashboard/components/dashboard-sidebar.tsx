@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { useParams, usePathname } from 'next/navigation';
 import { Icon, Text } from 'opub-ui';
 
 import { SidebarNavItem } from 'types';
@@ -14,6 +14,7 @@ interface DashboardNavProps {
 }
 export function DashboardSidebar({ items }: DashboardNavProps) {
   const path = usePathname();
+  const { district, department } = useParams();
 
   if (items && !items.length) {
     return null;
@@ -29,48 +30,22 @@ export function DashboardSidebar({ items }: DashboardNavProps) {
       )}
     >
       <nav className={cn('flex flex-col gap-2')}>
+        <SidebarLink
+          href={`/${district}`}
+          title={district}
+          icon={'home'}
+          department={department}
+          district={district}
+        />
         {items.map((item) => {
           return (
             item.href && (
-              <Link key={item.href + path} href={`${item.href}`}>
-                <div className={cn('flex justify-between relative')}>
-                  <span
-                    className={cn(
-                      'bg-transparent rounded-r-2 w-[6px] h-full absolute top-0 left-[-3px]',
-                      isActive(path, item.href) && 'bg-decorativeIconFour'
-                    )}
-                  />
-                  <div
-                    className={cn(
-                      'flex items-center w-full ml-2 rounded-1 overflow-hidden',
-                      styles.Item,
-                      isActive(path, item.href) && styles.Selected
-                    )}
-                  >
-                    {item.icon && (
-                      <div className="basis-5 pl-3">
-                        <Icon source={Icons[item.icon]} color="base" />
-                      </div>
-                    )}
-
-                    <div
-                      className={cn(
-                        'py-[6px] px-2 max-w-[220px]',
-                        'whitespace-nowrap opacity-100 transition-opacity duration-300'
-                      )}
-                    >
-                      {/* somehow the active styles are not applying in production
-                          it only happens on hard refresh and only for home page,
-                          this is a hotfix for that
-                      */}
-                      {isActive(path, item.href) && <div></div>}
-                      <Text truncate fontWeight="medium">
-                        {item.title}
-                      </Text>
-                    </div>
-                  </div>
-                </div>
-              </Link>
+              <SidebarLink
+                key={item.href + path}
+                href={`/${district}${item.href}`}
+                title={item.title}
+                department={department}
+              />
             )
           );
         })}
@@ -79,12 +54,66 @@ export function DashboardSidebar({ items }: DashboardNavProps) {
   );
 }
 
-export function isActive(path: string, href: string) {
-  if (href !== '/') {
-    return path.startsWith(href);
+const SidebarLink = ({
+  href,
+  title,
+  icon,
+  department,
+  district,
+}: {
+  href: string;
+  title: string;
+  icon?: string;
+  department: string;
+  district?: string;
+}) => {
+  return (
+    <Link key={href + title} href={href}>
+      <div className={cn('flex justify-between relative')}>
+        <span
+          className={cn(
+            'bg-transparent rounded-r-2 w-[6px] h-full absolute top-0 left-[-3px]',
+            isActive(department, href, district) && 'bg-decorativeIconFour'
+          )}
+        />
+        <div
+          className={cn(
+            'flex items-center w-full ml-2 rounded-1 overflow-hidden',
+            styles.Item,
+            isActive(department, href, district) && styles.Selected
+          )}
+        >
+          {icon && (
+            <div className="basis-5 pl-3">
+              <Icon source={Icons[icon]} color="base" />
+            </div>
+          )}
+
+          <div
+            className={cn(
+              'py-[6px] px-2 max-w-[220px]',
+              'whitespace-nowrap opacity-100 transition-opacity duration-300'
+            )}
+          >
+            <Text truncate fontWeight="medium">
+              {title}
+            </Text>
+          </div>
+        </div>
+      </div>
+    </Link>
+  );
+};
+
+export function isActive(department: string, href: string, district?: string) {
+  if (!department && district) {
+    return true;
   }
 
-  if (path === '/') {
+  const hrefSplit = href.split('/');
+  const sanitizedHref = hrefSplit[hrefSplit.length - 1];
+
+  if (department === sanitizedHref) {
     return true;
   }
 
