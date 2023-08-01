@@ -13,7 +13,7 @@ import {
   TabPanel,
   Tabs,
   Text,
-} from 'opub-ui/src';
+} from 'opub-ui';
 
 import Icons from '@/components/icons';
 import { explorer } from '../scheme.config';

@@ -17,7 +17,7 @@ import {
   Icon,
   IconButton,
   Text,
-} from 'opub-ui/src';
+} from 'opub-ui';
 
 import { cn } from '@/lib/utils';
 import { Icons } from '@/components/icons';
