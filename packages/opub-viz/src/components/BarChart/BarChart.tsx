@@ -20,6 +20,8 @@ type Props = {
   theme?: EChartsReactProps['theme'];
   /* Callback function to be called when the chart is ready */
   onChartReady?: (echart: any) => void;
+  /* Height of the chart */
+  height?: string;
 };
 
 export const BarChart = ({

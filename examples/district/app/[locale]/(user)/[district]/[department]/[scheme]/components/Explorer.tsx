@@ -118,6 +118,7 @@ const Content = () => {
               defaultValues={['Block 1']}
               className="w-full"
               placeholder='Select "Block"'
+              verticalContent
             />
           </div>
 

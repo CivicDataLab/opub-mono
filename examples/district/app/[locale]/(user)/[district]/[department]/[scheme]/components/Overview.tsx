@@ -1,5 +1,5 @@
-import Image from 'next/image';
 import { Text } from 'opub-ui';
+import { BarChart } from 'opub-viz';
 
 import { ContentCard, ProgressCard } from '../../components/Card';
 import { overview } from '../scheme.config';
@@ -34,12 +34,17 @@ export const Overview = () => {
             return (
               <div
                 key={index}
-                className="flex flex-col md:basis-1/3 grow gap-3 p-4 rounded-05 border-1 border-solid border-borderSubdued"
+                className="flex flex-col md:basis-1/3 grow p-4 rounded-05 border-1 border-solid border-borderSubdued"
               >
                 <Text variant="bodyLg" fontWeight="medium">
                   {profile.label}
                 </Text>
-                <Image src={profile.image} alt="" width={472} height={220} />
+                <>
+                  <BarChart
+                    xAxis={['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']}
+                    data={[120, 200, 150, 80, 70, 110, 130]}
+                  />
+                </>
                 <Text variant="bodyMd">{profile.description}</Text>
               </div>
             );
