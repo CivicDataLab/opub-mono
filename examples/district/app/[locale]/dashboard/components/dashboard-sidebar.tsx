@@ -95,7 +95,7 @@ const SidebarLink = ({
               'whitespace-nowrap opacity-100 transition-opacity duration-300'
             )}
           >
-            <Text truncate fontWeight="medium">
+            <Text truncate fontWeight="medium" className="capitalize">
               {title}
             </Text>
           </div>
