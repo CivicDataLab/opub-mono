@@ -7,6 +7,11 @@ export const siteConfig: SiteConfig = {
   url: 'https://opub-www.vercel.app',
 };
 
+export const ckan = {
+  homepage:
+    'https://ckan.civicdatalab.in/dataset/20c5eb7a-b46a-4c35-b381-dfb5dfa2cb71/resource/1a367191-4c7f-469c-970e-98792988c183/download/dist.json',
+};
+
 export const locales = ['en', 'hi'];
 
 export const gqlConfig = {

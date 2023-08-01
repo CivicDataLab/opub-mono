@@ -11,42 +11,43 @@ import { Icons } from '@/components/icons';
 import { ContentCard, DepartmentCard } from './Card';
 import styles from './Content.module.scss';
 
-export function Content({
-  data,
-}: {
-  data: {
+export interface IProps {
+  title: string;
+  href: string;
+  collapsible: {
     title: string;
-    breadcrumbs: {
-      label: string;
-      href: string;
-    }[];
-    collapsible: {
-      title: string;
-      content: {
-        leftTitle: string;
-        cards: {
-          value: string;
-          label: string;
-          color?: string;
-        }[];
-        rightTitle: string;
-        description: string[];
-      };
-    };
-    listTitle: string;
-    list: {
-      label: string;
-      href: string;
+    content: {
       cards: {
         value: string;
         label: string;
+        color: string;
       }[];
-    }[];
+      rightTitle: string;
+      description: string[];
+    };
   };
-}) {
+  listTitle: string;
+  list: {
+    label: string;
+    href: string;
+  }[];
+}
+
+export function Content({ data }: { data: IProps }) {
+  const breadcrumbs = [
+    {
+      label: 'Assam',
+      href: '/',
+    },
+    {
+      label: data.title,
+      href: `/${data.href}`,
+    },
+  ];
+
   return (
     <>
-      <Breadcrumbs crumbs={data.breadcrumbs} />
+      <Breadcrumbs crumbs={breadcrumbs} />
 
       <div className="mt-4">
         <Text variant="heading3xl" as="h1">
@@ -66,7 +67,7 @@ export function Content({
             <div className="mt-4 grid lg:grid-cols-2 gap-7">
               <div className="flex flex-col gap-4">
                 <Text variant="headingMd" as="h3">
-                  {data.collapsible.content.leftTitle}
+                  Key Highlights
                 </Text>
 
                 <div className="grid gap-4 sm:grid-cols-2">
@@ -82,7 +83,7 @@ export function Content({
               </div>
               <div className="flex flex-col gap-4">
                 <Text variant="headingMd" as="h3">
-                  {data.collapsible.content.rightTitle}
+                  About {data.title}
                 </Text>
                 <div className="flex flex-col gap-3">
                   {data.collapsible.content.description.map((item) => (
@@ -115,7 +116,7 @@ export function Content({
       </div>
       <div className="mt-6 grid gap-4 lg:grid-cols-2">
         {data.list.map((item) => (
-          <DepartmentCard data={item} key={item.label} />
+          <DepartmentCard data={item} district={data.href} key={item.label} />
         ))}
       </div>
     </>
