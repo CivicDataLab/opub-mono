@@ -32,10 +32,7 @@ export function DashboardSidebar({ items }: DashboardNavProps) {
         {items.map((item) => {
           return (
             item.href && (
-              <Link
-                key={item.href + path}
-                href={item.disabled ? '/' : item.href}
-              >
+              <Link key={item.href + path} href={`${item.href}`}>
                 <div className={cn('flex justify-between relative')}>
                   <span
                     className={cn(

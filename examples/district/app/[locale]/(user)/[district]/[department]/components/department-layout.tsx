@@ -11,26 +11,19 @@ import { Icons } from '@/components/icons';
 import { ContentCard, SchemeCard } from './Card';
 import styles from './Content.module.scss';
 
-export function Content({
-  data,
-  departmentData,
-}: {
-  data: {
-    breadcrumbs: {
-      label: string;
-      href: string;
-    }[];
+export interface IProps {
+  district: string;
+  department: string;
+  districtName: string;
+  departmentData: {
+    'dept-title': string;
     collapsible: {
       title: string;
       content: string[];
     };
-    highlights: {
+    highlights?: {
       title: string;
-      cards: {
-        value: string;
-        label: string;
-        color?: string;
-      }[];
+      cards: { value: string; label: string; color?: string }[];
     };
     listTitle: string;
     list: {
@@ -38,21 +31,27 @@ export function Content({
       href: string;
       image: string;
       lastUpdated: string;
-      cards: {
-        value: string | number;
-        label: string;
-        type?: string;
-      }[];
+      cards: { value: string; label: string; type?: string }[];
     }[];
   };
-  departmentData: {
-    title: string;
-    href: string;
-  };
-}) {
+}
+
+export function Content({ data }: { data: IProps }) {
+  const { departmentData } = data;
+
   const breadcrumbs = [
-    ...data.breadcrumbs,
-    { label: departmentData.title, href: '#' },
+    {
+      label: 'Assam',
+      href: '/',
+    },
+    {
+      label: data.districtName,
+      href: `/${data.district}`,
+    },
+    {
+      label: departmentData['dept-title'],
+      href: `/${data.district}/${data.department}`,
+    },
   ];
   return (
     <>
@@ -60,7 +59,7 @@ export function Content({
 
       <div className="mt-4">
         <Text variant="heading3xl" as="h1">
-          {departmentData.title}
+          {departmentData['dept-title']}
         </Text>
       </div>
 
@@ -68,14 +67,14 @@ export function Content({
         <Collapsible defaultOpen>
           <CollapsibleTrigger className={styles.CollapseTrigger}>
             <Text variant="headingLg" as="h3">
-              {data.collapsible.title}
+              {departmentData.collapsible.title}
             </Text>
             <Icon source={Icons.down} />
           </CollapsibleTrigger>
           <CollapsibleContent className="pb-4 px-6">
             <Separator />
             <div className="mt-4 flex flex-col gap-3">
-              {data.collapsible.content.map((item) => (
+              {departmentData.collapsible.content.map((item) => (
                 <Text key={item}>{item}</Text>
               ))}
             </div>
@@ -83,27 +82,29 @@ export function Content({
         </Collapsible>
       </div>
 
-      <div className="mt-6">
-        <Text variant="headingLg" as="h3">
-          {data.highlights.title}
-        </Text>
+      {departmentData.highlights && (
+        <div className="mt-6">
+          <Text variant="headingLg" as="h3">
+            {departmentData.highlights.title}
+          </Text>
 
-        <div className="mt-4 flex gap-4 flex-wrap">
-          {data.highlights.cards.map((card, index) => (
-            <ContentCard
-              key={card.label + index}
-              value={card.value}
-              label={card.label}
-              color={card.color}
-            />
-          ))}
+          <div className="mt-4 flex gap-4 flex-wrap">
+            {departmentData.highlights.cards.map((card, index) => (
+              <ContentCard
+                key={card.label + index}
+                value={card.value}
+                label={card.label}
+                color={card.color}
+              />
+            ))}
+          </div>
         </div>
-      </div>
+      )}
 
       <div className="mt-12 flex flex-col gap-4">
         <div className="flex gap-5 items-center justify-between flex-wrap">
           <Text variant="heading2xl" as="h3">
-            {data.listTitle}
+            {departmentData.listTitle}
           </Text>
           <div className=" basis-[400px]">
             <Input
@@ -117,9 +118,9 @@ export function Content({
         </div>
         <Separator />
         <div className="grid gap-4 lg:grid-cols-2">
-          {data.list.map((item) => (
+          {departmentData.list.map((item) => (
             <SchemeCard
-              data={{ ...item, departmentHref: departmentData.href }}
+              data={{ ...item, departmentHref: data.department }}
               key={item.label}
             />
           ))}

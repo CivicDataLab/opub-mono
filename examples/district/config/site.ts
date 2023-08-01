@@ -10,6 +10,8 @@ export const siteConfig: SiteConfig = {
 export const ckan = {
   homepage:
     'https://ckan.civicdatalab.in/dataset/20c5eb7a-b46a-4c35-b381-dfb5dfa2cb71/resource/1a367191-4c7f-469c-970e-98792988c183/download/dist.json',
+  department:
+    'https://ckan.civicdatalab.in/dataset/20c5eb7a-b46a-4c35-b381-dfb5dfa2cb71/resource/90720dad-7c29-41a4-8780-11121ef31213/download/dept.json',
 };
 
 export const locales = ['en', 'hi'];
