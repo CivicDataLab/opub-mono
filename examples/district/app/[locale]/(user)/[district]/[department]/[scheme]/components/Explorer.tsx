@@ -14,6 +14,7 @@ import {
   Tabs,
   Text,
 } from 'opub-ui';
+import { BarChart } from 'opub-viz';
 
 import Icons from '@/components/icons';
 import { explorer } from '../scheme.config';
@@ -74,6 +75,39 @@ const Indicators = () => {
 };
 
 const Content = () => {
+  const tabs = [
+    {
+      label: 'Map View',
+      value: 'map',
+      constent: (
+        <BarChart
+          xAxis={['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']}
+          data={[120, 200, 50, 80, 70, 110, 30]}
+        />
+      ),
+    },
+    {
+      label: 'Bar View',
+      value: 'bar',
+      constent: (
+        <BarChart
+          xAxis={['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']}
+          data={[120, 210, 150, 80, 70, 110, 130]}
+        />
+      ),
+    },
+    {
+      label: 'Table View',
+      value: 'table',
+      constent: (
+        <BarChart
+          xAxis={['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']}
+          data={[120, 200, 250, 80, 70, 190, 10]}
+        />
+      ),
+    },
+  ];
+
   return (
     <div className="grow h-full">
       <Tabs defaultValue={explorer.tabs[0].value}>
@@ -122,10 +156,10 @@ const Content = () => {
             />
           </div>
 
-          {explorer.tabs.map((tab) => (
+          {tabs.map((tab) => (
             <TabPanel value={tab.value} key={tab.value}>
               <div className="relative h-full min-h-[556px] mt-5">
-                <Image src="/logo/chartPlaceholder.png" alt="" layout="fill" />
+                {tab.constent}
               </div>
             </TabPanel>
           ))}

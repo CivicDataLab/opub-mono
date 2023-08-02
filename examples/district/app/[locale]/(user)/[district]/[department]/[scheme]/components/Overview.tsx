@@ -5,6 +5,8 @@ import { ContentCard, ProgressCard } from '../../components/Card';
 import { IOverview } from './scheme-layout';
 
 export const Overview = ({ data }: { data: IOverview }) => {
+  console.log(data);
+
   return (
     <div className="flex flex-col gap-12">
       <section>
@@ -41,8 +43,8 @@ export const Overview = ({ data }: { data: IOverview }) => {
                 </Text>
                 <>
                   <BarChart
-                    xAxis={['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']}
-                    data={[120, 200, 150, 80, 70, 110, 130]}
+                    xAxis={profile.data.xAxis}
+                    data={profile.data.values}
                   />
                 </>
                 <Text variant="bodyMd">{profile.description}</Text>
