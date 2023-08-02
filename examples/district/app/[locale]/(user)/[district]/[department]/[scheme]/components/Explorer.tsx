@@ -12,13 +12,19 @@ import {
   Tab,
   TabList,
   TabPanel,
+  Table,
   Tabs,
   Text,
 } from 'opub-ui';
 import { BarChart, MapChart } from 'opub-viz/src';
 
 import Icons from '@/components/icons';
-import { explorer } from '../scheme.config';
+import {
+  columnContentTypes,
+  columns,
+  explorer,
+  tableData,
+} from '../scheme.config';
 
 export const Explorer = () => {
   return (
@@ -31,7 +37,7 @@ export const Explorer = () => {
 
 const Indicators = () => {
   return (
-    <div className="basis-[244px] flex flex-col gap-4">
+    <div className="min-w-[244px] basis-[244px] flex flex-col gap-4">
       <Text variant="headingLg">Indicators</Text>
       <Input
         name="indicator-search"
@@ -49,7 +55,7 @@ const Indicators = () => {
           defaultValue={explorer.indicators[0].list[0].slug}
         >
           <ScrollArea>
-            <div className="flex flex-col gap-8 max-h-[676px]">
+            <div className="flex flex-col gap-8 max-h-[680px]">
               {explorer.indicators.map((item) => {
                 return (
                   <section key={item.title}>
@@ -94,7 +100,7 @@ const Content = () => {
           data={dataFile}
           mapName="assam"
           nameProperty="district"
-          height="450px"
+          height="500px"
         />
       ),
     },
@@ -105,7 +111,7 @@ const Content = () => {
         <BarChart
           xAxis={['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']}
           data={[120, 210, 150, 80, 70, 110, 130]}
-          height="450px"
+          height="500px"
         />
       ),
     },
@@ -113,10 +119,10 @@ const Content = () => {
       label: 'Table View',
       value: 'table',
       constent: (
-        <BarChart
-          xAxis={['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']}
-          data={[120, 200, 250, 80, 70, 190, 10]}
-          height="450px"
+        <Table
+          columns={columns}
+          rows={tableData}
+          columnContentTypes={columnContentTypes}
         />
       ),
     },
@@ -172,7 +178,7 @@ const Content = () => {
 
           {tabs.map((tab) => (
             <TabPanel value={tab.value} key={tab.value}>
-              <div className="relative h-full min-h-[500px] mt-5">
+              <div className="relative overflow-y-auto mt-5">
                 {tab.constent}
               </div>
             </TabPanel>
