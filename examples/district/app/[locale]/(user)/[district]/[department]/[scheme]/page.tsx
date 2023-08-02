@@ -1,9 +1,7 @@
 import { notFound } from 'next/navigation';
-import { Text } from 'opub-ui';
 
 import { ckan } from '@/config/site';
 import { Content } from './components/scheme-layout';
-import { content, schemes } from './scheme.config';
 
 async function getData() {
   const res = await fetch(ckan.overview, {

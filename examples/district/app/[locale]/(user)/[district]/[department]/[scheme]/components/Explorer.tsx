@@ -16,7 +16,7 @@ import {
   Tabs,
   Text,
 } from 'opub-ui';
-import { BarChart, MapChart } from 'opub-viz/src';
+import { BarChart, MapChart } from 'opub-viz';
 
 import Icons from '@/components/icons';
 import {
