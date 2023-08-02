@@ -29,6 +29,7 @@ export const BarChart = ({
   xAxis,
   yAxis,
   theme = 'light',
+  height = '300px',
   onChartReady,
 }: Props) => {
   const option = {
@@ -70,6 +71,7 @@ export const BarChart = ({
       theme={theme}
       onChartReady={onChartReady}
       option={option}
+      style={{ height: height, width: '100%' }}
     />
   );
 };

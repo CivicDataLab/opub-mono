@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import mapFile from '@/public/files/assam.json';
 import {
   ComboboxMulti,
   Icon,
@@ -14,7 +15,7 @@ import {
   Tabs,
   Text,
 } from 'opub-ui';
-import { BarChart } from 'opub-viz';
+import { BarChart, MapChart } from 'opub-viz/src';
 
 import Icons from '@/components/icons';
 import { explorer } from '../scheme.config';
@@ -74,15 +75,26 @@ const Indicators = () => {
   );
 };
 
+// temp data for map chart
+const dataFile = mapFile.features.map((feature: any) => {
+  return {
+    name: feature.properties.district,
+    value: Math.round(Math.random() * 1000),
+  };
+});
+
 const Content = () => {
   const tabs = [
     {
       label: 'Map View',
       value: 'map',
       constent: (
-        <BarChart
-          xAxis={['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']}
-          data={[120, 200, 50, 80, 70, 110, 30]}
+        <MapChart
+          mapFile={mapFile}
+          data={dataFile}
+          mapName="assam"
+          nameProperty="district"
+          height="450px"
         />
       ),
     },
@@ -93,6 +105,7 @@ const Content = () => {
         <BarChart
           xAxis={['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']}
           data={[120, 210, 150, 80, 70, 110, 130]}
+          height="450px"
         />
       ),
     },
@@ -103,6 +116,7 @@ const Content = () => {
         <BarChart
           xAxis={['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']}
           data={[120, 200, 250, 80, 70, 190, 10]}
+          height="450px"
         />
       ),
     },
@@ -158,7 +172,7 @@ const Content = () => {
 
           {tabs.map((tab) => (
             <TabPanel value={tab.value} key={tab.value}>
-              <div className="relative h-full min-h-[556px] mt-5">
+              <div className="relative h-full min-h-[500px] mt-5">
                 {tab.constent}
               </div>
             </TabPanel>

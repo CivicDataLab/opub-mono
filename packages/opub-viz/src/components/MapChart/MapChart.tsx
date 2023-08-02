@@ -47,6 +47,8 @@ type Props = {
   onChartReady?: (echart: any) => void;
   /* Callback function to be called when a new region is selected */
   onNewSelected?: (data: any) => void;
+  /* Height of the chart */
+  height?: string;
 };
 
 export const MapChart = ({
@@ -67,9 +69,9 @@ export const MapChart = ({
   theme = 'light',
   onChartReady,
   onNewSelected,
+  height = '300px',
 }: Props) => {
   const [mapOptions, setMapOptions] = React.useState({});
-  console.log(data);
 
   React.useEffect(() => {
     echarts.registerMap(mapName, mapFile as GeoJSONSourceInput, {});
@@ -157,7 +159,7 @@ export const MapChart = ({
       option={mapOptions}
       onEvents={onEvents}
       style={{
-        height: '100%',
+        height: height,
       }}
     />
   );
