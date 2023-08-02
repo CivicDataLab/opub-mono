@@ -12,7 +12,8 @@ export const ckan = {
     'https://ckan.civicdatalab.in/dataset/20c5eb7a-b46a-4c35-b381-dfb5dfa2cb71/resource/1a367191-4c7f-469c-970e-98792988c183/download/dist.json',
   department:
     'https://ckan.civicdatalab.in/dataset/20c5eb7a-b46a-4c35-b381-dfb5dfa2cb71/resource/90720dad-7c29-41a4-8780-11121ef31213/download/dept.json',
-};
+  overview: 'https://ckan.civicdatalab.in/dataset/20c5eb7a-b46a-4c35-b381-dfb5dfa2cb71/resource/98bc0fed-3e74-40bd-b6fd-07d1fc4d9494/download/schm_narrative.json'
+  };
 
 export const locales = ['en', 'hi'];
 

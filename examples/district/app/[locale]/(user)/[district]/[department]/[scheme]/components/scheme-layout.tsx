@@ -14,41 +14,67 @@ import {
 } from 'opub-ui';
 
 import Icons from '@/components/icons';
-import { departments } from '../../department.config';
+import { schemes } from '../scheme.config';
 import { Explorer } from './Explorer';
 import { Overview } from './Overview';
 
-export const Content = ({
-  data,
-  schemeData,
-  params,
-}: {
-  data: {
-    breadcrumbs: {
-      label: string;
-      href: string;
-    }[];
-    lastUpdaed: string;
-    schemeInfo: string[];
-    tabs: {
-      label: string;
-      value: string;
-      icon: string;
-    }[];
-  };
-  schemeData: {
-    title: string;
-    logo: string;
-  };
-  params: { scheme: string; department: string };
-}) => {
+export interface IOverview {
+  'scheme-title': string;
+  'scheme-desc': string;
+  'last-updated': string;
+  targetTitle: string;
+  targets: {
+    value: number;
+    label: string;
+    description: string;
+    type: string;
+  }[];
+  profileTitle: string;
+  profiles: {
+    label: string;
+    description: string;
+    image: string;
+    data: {
+      xAxis: string[];
+      values: number[];
+    };
+  }[];
+  performanceTitle: string;
+  performances: {
+    value: string;
+    label: string;
+    description: string;
+  }[];
+}
+
+interface IProps {
+  district: string;
+  districtName: string;
+  department: string;
+  departmentName: string;
+  scheme: string;
+  schemeData: IOverview;
+}
+
+export const Content = ({ data }: { data: IProps }) => {
+  const { schemeData } = data;
   const breadcrumbs = [
-    ...data.breadcrumbs,
     {
-      label: departments[params.department].title || 'Department',
-      href: params.department,
+      label: 'Assam',
+      href: '/',
     },
-    { label: schemeData.title, href: params.scheme },
+    {
+      label: data.districtName,
+      href: `/${data.district}`,
+    },
+    {
+      label: data.departmentName,
+      href: `/${data.district}/${data.department}`,
+    },
+    {
+      label: schemeData['scheme-title'],
+      href: `/${data.district}/${data.department}/${data.scheme}`,
+    },
   ];
 
   return (
@@ -56,17 +82,17 @@ export const Content = ({
       <Breadcrumbs crumbs={breadcrumbs} />
 
       <div className="mt-4">
-        <div className="flex gap-4 flex-wrap md:flex-nowrap">
+        <div className="flex gap-4 flex-wrap justify-start  md:flex-nowrap">
           <Image
-            src={schemeData.logo}
+            src={schemes[data.scheme].logo}
             alt=""
             width={168}
             height={92}
             className="object-contain"
           />
-          <div>
+          <div className="grow">
             <Text variant="heading2xl" as="h1" className="mt-4">
-              {schemeData.title}
+              {schemeData['scheme-title']}
             </Text>
             <Text
               variant="headingSm"
@@ -75,22 +101,33 @@ export const Content = ({
               fontWeight="medium"
               className="my-4"
             >
-              Last Updated: {data.lastUpdaed}
+              Last Updated: {data.schemeData['last-updated']}
             </Text>
 
-            <div className="flex flex-col gap-3">
-              {data.schemeInfo.map((info, index) => (
-                <Text variant="bodyLg" as="p" key={index}>
-                  {info}
-                </Text>
-              ))}
-            </div>
+            <Text variant="bodyLg" as="p">
+              {data.schemeData['scheme-desc']}
+            </Text>
           </div>
         </div>
 
         <Divider className="my-6" />
 
-        <TabLayout tabs={data.tabs} />
+        <TabLayout
+          tabs={[
+            {
+              label: 'Scheme Narrative',
+              value: 'overview',
+              icon: 'overview',
+              data: data.schemeData,
+            },
+            {
+              label: 'Scheme Explorer',
+              value: 'explorer',
+              icon: 'explorer',
+              data: data.schemeData,
+            },
+          ]}
+        />
       </div>
     </>
   );
@@ -103,6 +140,7 @@ const TabLayout = ({
     label: string;
     value: string;
     icon: string;
+    data: IOverview;
   }[];
 }) => {
   const [value, setValue] = React.useState('overview');
@@ -132,7 +170,7 @@ const TabLayout = ({
       </TabList>
       <div className="rounded-05 bg-surface shadow-card p-4 md:p-6 mt-3">
         <TabPanel value="overview">
-          <Overview />
+          <Overview data={tabs[0].data} />
         </TabPanel>
         <TabPanel value="explorer">
           <Explorer />

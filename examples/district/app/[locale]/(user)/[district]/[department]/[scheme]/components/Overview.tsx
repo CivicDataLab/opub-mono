@@ -2,17 +2,17 @@ import { Text } from 'opub-ui';
 import { BarChart } from 'opub-viz';
 
 import { ContentCard, ProgressCard } from '../../components/Card';
-import { overview } from '../scheme.config';
+import { IOverview } from './scheme-layout';
 
-export const Overview = () => {
+export const Overview = ({ data }: { data: IOverview }) => {
   return (
     <div className="flex flex-col gap-12">
       <section>
         <Text variant="heading2xl" as="h3">
-          {overview.targetTitle}
+          {data.targetTitle}
         </Text>
         <div className="mt-6 flex flex-wrap gap-4">
-          {overview.targets.map((target, index) => {
+          {data.targets.map((target, index) => {
             return (
               <ProgressCard
                 key={index}
@@ -27,10 +27,10 @@ export const Overview = () => {
 
       <section>
         <Text variant="heading2xl" as="h3">
-          {overview.profileTitle}
+          {data.profileTitle}
         </Text>
         <div className="mt-6 flex flex-wrap gap-4">
-          {overview.profiles.map((profile, index) => {
+          {data.profiles.map((profile, index) => {
             return (
               <div
                 key={index}
@@ -54,10 +54,10 @@ export const Overview = () => {
 
       <section>
         <Text variant="heading2xl" as="h3">
-          {overview.performanceTitle}
+          {data.performanceTitle}
         </Text>
         <div className="mt-6 flex flex-wrap gap-4">
-          {overview.performances.map((profile, index) => {
+          {data.performances.map((profile, index) => {
             return (
               <ContentCard
                 key={index}
