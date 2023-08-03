@@ -19,9 +19,9 @@ import { Explorer } from './Explorer';
 import { Overview } from './Overview';
 
 export interface IOverview {
-  'scheme-title': string;
-  'scheme-desc': string;
-  'last-updated': string;
+  schemeTitle: string;
+  schemeDesc: string;
+  lastUpdate: string;
   targetTitle: string;
   targets: {
     value: number;
@@ -72,7 +72,7 @@ export const Content = ({ data }: { data: IProps }) => {
       href: `/${data.district}/${data.department}`,
     },
     {
-      label: schemeData['scheme-title'],
+      label: schemeData.schemeTitle,
       href: `/${data.district}/${data.department}/${data.scheme}`,
     },
   ];
@@ -91,8 +91,8 @@ export const Content = ({ data }: { data: IProps }) => {
             className="object-contain"
           />
           <div className="grow">
-            <Text variant="heading2xl" as="h1" className="mt-4">
-              {schemeData['scheme-title']}
+            <Text variant="heading2xl" as="h1">
+              {schemeData.schemeTitle}
             </Text>
             <Text
               variant="headingSm"
@@ -101,11 +101,11 @@ export const Content = ({ data }: { data: IProps }) => {
               fontWeight="medium"
               className="my-4"
             >
-              Last Updated: {data.schemeData['last-updated']}
+              Last Updated: {data.schemeData.lastUpdate}
             </Text>
 
             <Text variant="bodyLg" as="p">
-              {data.schemeData['scheme-desc']}
+              {data.schemeData.schemeDesc}
             </Text>
           </div>
         </div>

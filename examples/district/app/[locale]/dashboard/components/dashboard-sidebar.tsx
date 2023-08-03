@@ -31,8 +31,8 @@ export function DashboardSidebar({ items }: DashboardNavProps) {
     >
       <nav className={cn('flex flex-col gap-2')}>
         <SidebarLink
-          href={`/${district}`}
-          title={district}
+          href={`/${district}` || '/'}
+          title={district || 'Home'}
           icon={'home'}
           department={department}
           district={district}

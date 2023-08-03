@@ -35,8 +35,8 @@ export default async function Home({
 
   const meta = {
     ...params,
-    districtName: districtObj['dist-title'],
-    departmentName: districtObj['depts'][params.department]['dept-title'],
+    districtName: districtObj.distTitle,
+    departmentName: districtObj['depts'][params.department].deptTitle,
     schemeData: districtObj['depts'][params.department][params.scheme],
   };
 
