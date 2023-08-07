@@ -16,7 +16,7 @@ export interface IProps {
   department: string;
   districtName: string;
   departmentData: {
-    'dept-title': string;
+    deptTitle: string;
     collapsible: {
       title: string;
       content: string[];
@@ -38,6 +38,7 @@ export interface IProps {
 
 export function Content({ data }: { data: IProps }) {
   const { departmentData } = data;
+  console.log(data);
 
   const breadcrumbs = [
     {
@@ -49,7 +50,7 @@ export function Content({ data }: { data: IProps }) {
       href: `/${data.district}`,
     },
     {
-      label: departmentData['dept-title'],
+      label: departmentData.deptTitle,
       href: `/${data.district}/${data.department}`,
     },
   ];
@@ -59,7 +60,7 @@ export function Content({ data }: { data: IProps }) {
 
       <div className="mt-4">
         <Text variant="heading3xl" as="h1">
-          {departmentData['dept-title']}
+          {departmentData.deptTitle}
         </Text>
       </div>
 

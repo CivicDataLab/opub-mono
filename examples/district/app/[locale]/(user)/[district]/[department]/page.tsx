@@ -4,7 +4,9 @@ import { ckan } from '@/config/site';
 import { Content } from './components/department-layout';
 
 async function getData() {
-  const res = await fetch(ckan.department);
+  const res = await fetch(ckan.department, {
+    cache: 'no-cache',
+  });
   if (!res.ok) {
     throw new Error('Failed to fetch data');
   }
@@ -24,10 +26,11 @@ export default async function Home({
   if (!districtObj || !districtObj['depts'][params.department]) {
     return notFound();
   }
+  console.log(districtObj);
 
   const meta = {
     ...params,
-    districtName: districtObj['dist-title'],
+    districtName: districtObj.distTitle,
     departmentData: districtObj['depts'][params.department],
   };
 

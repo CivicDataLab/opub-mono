@@ -4,7 +4,9 @@ import { ckan } from '@/config/site';
 import { Content } from './components/district-layout';
 
 async function getData() {
-  const res = await fetch(ckan.homepage);
+  const res = await fetch(ckan.homepage, {
+    cache: 'no-cache',
+  });
   if (!res.ok) {
     throw new Error('Failed to fetch data');
   }

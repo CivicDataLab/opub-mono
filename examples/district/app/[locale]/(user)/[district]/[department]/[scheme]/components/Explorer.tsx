@@ -1,6 +1,5 @@
 import React from 'react';
 import mapFile from '@/public/files/assam.json';
-import { useQuery } from '@tanstack/react-query';
 import {
   ComboboxMulti,
   Icon,
@@ -99,7 +98,7 @@ const Indicators = ({
           name="radio1"
           defaultValue={indicators['Targets'][0].slug}
         >
-          <div className=" overflow-auto">
+          <ScrollArea>
             <div
               className="flex flex-col gap-8 max-h-[680px]"
               ref={indicatorRef}
@@ -117,7 +116,7 @@ const Indicators = ({
                 list={indicators['District Performance']}
               />
             </div>
-          </div>
+          </ScrollArea>
         </RadioGroup>
       </div>
     </div>
