@@ -124,7 +124,7 @@ export const Content = ({ data }: { data: IProps }) => {
               label: 'Scheme Explorer',
               value: 'explorer',
               icon: 'explorer',
-              data: data.schemeData,
+              scheme: data.scheme,
             },
           ]}
         />
@@ -140,7 +140,8 @@ const TabLayout = ({
     label: string;
     value: string;
     icon: string;
-    data: IOverview;
+    data?: IOverview;
+    scheme?: string;
   }[];
 }) => {
   const [value, setValue] = React.useState('overview');
@@ -173,7 +174,7 @@ const TabLayout = ({
           <Overview data={tabs[0].data} />
         </TabPanel>
         <TabPanel value="explorer">
-          <Explorer />
+          <Explorer scheme={tabs[1].scheme} />
         </TabPanel>
       </div>
     </Tabs>

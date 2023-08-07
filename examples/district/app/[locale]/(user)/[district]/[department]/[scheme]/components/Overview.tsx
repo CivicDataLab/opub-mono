@@ -4,8 +4,8 @@ import { BarChart } from 'opub-viz';
 import { ContentCard, ProgressCard } from '../../components/Card';
 import { IOverview } from './scheme-layout';
 
-export const Overview = ({ data }: { data: IOverview }) => {
-  console.log(data);
+export const Overview = ({ data }: { data?: IOverview }) => {
+  if (!data) return null;
 
   return (
     <div className="flex flex-col gap-12">

@@ -1,5 +1,6 @@
-import Image from 'next/image';
+import React from 'react';
 import mapFile from '@/public/files/assam.json';
+import { useQuery } from '@tanstack/react-query';
 import {
   ComboboxMulti,
   Icon,
@@ -18,6 +19,8 @@ import {
 } from 'opub-ui';
 import { BarChart, MapChart } from 'opub-viz';
 
+import { ckan } from '@/config/site';
+import { useFetch } from '@/lib/api';
 import Icons from '@/components/icons';
 import {
   columnContentTypes,
@@ -26,18 +29,60 @@ import {
   tableData,
 } from '../scheme.config';
 
-export const Explorer = () => {
+export const Explorer = ({ scheme }: { scheme?: string }) => {
+  const { data, isLoading } = useFetch('indicators', ckan.indicators);
+  const indicatorRef = React.useRef(null);
+
   return (
-    <div className="flex gap-4">
-      <Indicators />
-      <Content />
+    <div className="grid grid-cols-[244px_1fr] gap-4">
+      <Indicators
+        data={data}
+        scheme={scheme || ''}
+        loading={isLoading}
+        indicatorRef={indicatorRef}
+      />
+      <Content indicatorRef={indicatorRef} />
     </div>
   );
 };
 
-const Indicators = () => {
+interface IndicatorsProps {
+  Targets: {
+    label: string;
+    slug: string;
+  }[];
+  'District Profile': {
+    label: string;
+    slug: string;
+  }[];
+  'District Performance': {
+    label: string;
+    slug: string;
+  }[];
+}
+
+const Indicators = ({
+  data,
+  scheme,
+  loading,
+  indicatorRef,
+}: {
+  data: { [key: string]: IndicatorsProps };
+  scheme: string;
+  loading: boolean;
+  indicatorRef: any;
+}) => {
+  if (loading)
+    return (
+      <div className="p-4">
+        <Text variant="headingMd">Loading...</Text>
+      </div>
+    );
+
+  const indicators = data[scheme];
+
   return (
-    <div className="min-w-[244px] basis-[244px] flex flex-col gap-4">
+    <div className="flex flex-col gap-4">
       <Text variant="headingLg">Indicators</Text>
       <Input
         name="indicator-search"
@@ -48,36 +93,61 @@ const Indicators = () => {
       />
       <div>
         <RadioGroup
-          onChange={(val, name) => {
-            console.log(val, name);
+          onChange={(val) => {
+            console.log(val);
           }}
           name="radio1"
-          defaultValue={explorer.indicators[0].list[0].slug}
+          defaultValue={indicators['Targets'][0].slug}
         >
-          <ScrollArea>
-            <div className="flex flex-col gap-8 max-h-[680px]">
-              {explorer.indicators.map((item) => {
-                return (
-                  <section key={item.title}>
-                    <div className="mb-3">
-                      <Text variant="headingSm">{item.title}</Text>
-                      <Separator className="mt-3" />
-                    </div>
-                    {item.list.map((child) => {
-                      return (
-                        <RadioItem key={child.label} value={child.slug}>
-                          {child.label}
-                        </RadioItem>
-                      );
-                    })}
-                  </section>
-                );
-              })}
+          <div className=" overflow-auto">
+            <div
+              className="flex flex-col gap-8 max-h-[680px]"
+              ref={indicatorRef}
+            >
+              <IndicatorContent
+                heading="Targets"
+                list={indicators['Targets']}
+              />
+              <IndicatorContent
+                heading="District Profile"
+                list={indicators['District Profile']}
+              />
+              <IndicatorContent
+                heading="District Performance"
+                list={indicators['District Performance']}
+              />
             </div>
-          </ScrollArea>
+          </div>
         </RadioGroup>
       </div>
     </div>
+  );
+};
+
+const IndicatorContent = ({
+  list,
+  heading,
+}: {
+  heading: string;
+  list: {
+    label: string;
+    slug: string;
+  }[];
+}) => {
+  return (
+    <section>
+      <div className="mb-3">
+        <Text variant="headingSm">{heading}</Text>
+        <Separator className="mt-3" />
+      </div>
+      {list.map((child) => {
+        return (
+          <RadioItem key={child.label} value={child.slug}>
+            {child.label}
+          </RadioItem>
+        );
+      })}
+    </section>
   );
 };
 
@@ -89,7 +159,25 @@ const dataFile = mapFile.features.map((feature: any) => {
   };
 });
 
-const Content = () => {
+const Content = ({ indicatorRef }: { indicatorRef: any }) => {
+  const [selectedTab, setSelectedTab] = React.useState('map');
+
+  const contentRef = React.useRef(null);
+
+  React.useEffect(() => {
+    // change height of indicator list based on content height
+    if (indicatorRef.current && contentRef.current) {
+      setTimeout(() => {
+        // it takes some time to render the content
+        const indicatorList = indicatorRef.current;
+        const content: any = contentRef.current;
+        const contentHeight = content.offsetHeight;
+
+        indicatorList.style.maxHeight = `${contentHeight - 50}px`;
+      }, 20);
+    }
+  }, [selectedTab]);
+
   const tabs = [
     {
       label: 'Map View',
@@ -130,7 +218,11 @@ const Content = () => {
 
   return (
     <div className="grow h-full">
-      <Tabs defaultValue={explorer.tabs[0].value}>
+      <Tabs
+        defaultValue={explorer.tabs[0].value}
+        onValueChange={setSelectedTab}
+        value={selectedTab}
+      >
         <TabList>
           {explorer.tabs.map((tab) => (
             <Tab value={tab.value} key={tab.value}>
@@ -142,8 +234,21 @@ const Content = () => {
             </Tab>
           ))}
         </TabList>
-        <div className="rounded-05 bg-background h-full p-4 md:p-6">
+        <div
+          className="rounded-05 bg-background h-full p-4 md:p-6"
+          ref={contentRef}
+        >
           <div className="flex gap-4 flex-wrap">
+            <ComboboxMulti
+              name="block"
+              label="Block"
+              labelHidden
+              defaultList={['Block 1', 'Block 2', 'Block 3', 'Block 4']}
+              defaultValues={['Block 1']}
+              className="w-full"
+              placeholder='Select "Block"'
+              verticalContent
+            />
             <Select
               name="sort"
               label="Sort By"
@@ -163,16 +268,6 @@ const Content = () => {
                 { label: '2020', value: '2020' },
               ]}
               className="w-1/3 grow"
-            />
-            <ComboboxMulti
-              name="block"
-              label="Block"
-              labelHidden
-              defaultList={['Block 1', 'Block 2', 'Block 3', 'Block 4']}
-              defaultValues={['Block 1']}
-              className="w-full"
-              placeholder='Select "Block"'
-              verticalContent
             />
           </div>
 

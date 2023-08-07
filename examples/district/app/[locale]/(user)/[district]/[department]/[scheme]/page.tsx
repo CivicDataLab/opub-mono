@@ -3,8 +3,8 @@ import { notFound } from 'next/navigation';
 import { ckan } from '@/config/site';
 import { Content } from './components/scheme-layout';
 
-async function getData() {
-  const res = await fetch(ckan.overview, {
+async function getData(query: string) {
+  const res = await fetch(query, {
     next: {
       revalidate: 1,
     },
@@ -21,14 +21,15 @@ export default async function Home({
 }: {
   params: { scheme: string; department: string; district: string };
 }) {
-  const data = await getData();
+  const data = await getData(ckan.overview);
+
   const districtObj = data[params.district];
 
   // If district or department is not found, return 404
   if (
     !districtObj ||
     !districtObj['depts'][params.department] ||
-    !districtObj['depts'][params.department][params.scheme]
+    !districtObj['depts'][params.department]['schemes'][params.scheme]
   ) {
     return notFound();
   }
@@ -37,7 +38,8 @@ export default async function Home({
     ...params,
     districtName: districtObj.distTitle,
     departmentName: districtObj['depts'][params.department].deptTitle,
-    schemeData: districtObj['depts'][params.department][params.scheme],
+    schemeData:
+      districtObj['depts'][params.department]['schemes'][params.scheme],
   };
 
   return (
