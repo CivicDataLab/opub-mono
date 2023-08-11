@@ -108,7 +108,7 @@ const Content = ({
   };
 }) => {
   const contentRef = React.useRef(null);
-  const currentData =
+  const currentData: any =
     chartData[states.selectedIndicator].years[states.selectedYear];
 
   const columns: any = [];
@@ -140,13 +140,15 @@ const Content = ({
       content: (
         <MapChart
           mapFile={mapFile}
-          data={currentData.mapdata.map((e) => {
-            return {
-              name: String(e.name),
-              value: e.value,
-              label: e.label,
-            };
-          })}
+          data={currentData.mapdata.map(
+            (e: { name: any; value: any; label: any }) => {
+              return {
+                name: String(e.name),
+                value: e.value,
+                label: e.label,
+              };
+            }
+          )}
           mapName="assam-block"
           nameProperty="BLOCK_LGD"
           height="500px"
