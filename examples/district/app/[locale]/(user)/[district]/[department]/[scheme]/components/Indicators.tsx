@@ -1,11 +1,4 @@
-import {
-  Icon,
-  Input,
-  RadioGroup,
-  RadioItem,
-  Separator,
-  Text,
-} from 'opub-ui/src';
+import { Icon, Input, RadioGroup, RadioItem, Separator, Text } from 'opub-ui';
 
 import Icons from '@/components/icons';
 
@@ -30,12 +23,14 @@ export const Indicators = ({
   loading,
   indicatorRef,
   disable,
+  setIndicator,
 }: {
   data: { [key: string]: IndicatorsProps };
   scheme: string;
   loading: boolean;
   indicatorRef: any;
   disable: boolean;
+  setIndicator: any;
 }) => {
   if (loading)
     return (
@@ -45,7 +40,6 @@ export const Indicators = ({
     );
 
   const indicators = data[scheme];
-  console.log(disable, 'aaa');
 
   return (
     <div className="flex flex-col gap-4">
@@ -60,9 +54,9 @@ export const Indicators = ({
       <div>
         <RadioGroup
           onChange={(val) => {
-            console.log(val);
+            setIndicator(val);
           }}
-          name="radio1"
+          name="indicator-radio"
           defaultValue={indicators['Targets'][0].slug}
         >
           <div className="overflow-y-auto">

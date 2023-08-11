@@ -49,9 +49,25 @@ export interface IOverview {
 
 export interface ITable {
   [key: string]: {
-    Block: string;
     [key: string]: string;
   }[];
+}
+export interface IChartData {
+  [key: string]: {
+    indicatorTitle: string;
+    years: {
+      [key: string]: {
+        bardata: {
+          xAxis: string[];
+          values: number[];
+        };
+        mapData: {
+          name: string;
+          value: number;
+        }[];
+      };
+    };
+  };
 }
 
 interface IProps {
@@ -62,10 +78,11 @@ interface IProps {
   scheme: string;
   schemeData: IOverview;
   tableData: ITable;
+  chartData: IChartData;
 }
 
 export const Content = ({ data }: { data: IProps }) => {
-  const { schemeData, tableData } = data;
+  const { schemeData, tableData, chartData } = data;
 
   const breadcrumbs = [
     {
@@ -135,6 +152,7 @@ export const Content = ({ data }: { data: IProps }) => {
               icon: 'explorer',
               scheme: data.scheme,
               tableData: tableData,
+              chartData: chartData,
             },
           ]}
         />
@@ -153,6 +171,7 @@ const TabLayout = ({
     data?: IOverview;
     scheme?: string;
     tableData?: ITable;
+    chartData?: IChartData;
   }[];
 }) => {
   const [value, setValue] = React.useState('overview');
@@ -185,7 +204,11 @@ const TabLayout = ({
           <Overview data={tabs[0].data} />
         </TabPanel>
         <TabPanel value="explorer">
-          <Explorer scheme={tabs[1].scheme} tableData={tabs[1].tableData} />
+          <Explorer
+            scheme={tabs[1].scheme}
+            tableData={tabs[1].tableData as ITable}
+            chartData={tabs[1].chartData as IChartData}
+          />
         </TabPanel>
       </div>
     </Tabs>

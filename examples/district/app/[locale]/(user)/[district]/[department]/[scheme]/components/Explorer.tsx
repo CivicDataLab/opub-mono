@@ -9,37 +9,58 @@ import { useFetch } from '@/lib/api';
 import { cn } from '@/lib/utils';
 import { explorer } from '../scheme.config';
 import { Indicators } from './Indicators';
-import { ITable } from './scheme-layout';
+import { IChartData, ITable } from './scheme-layout';
 
 export const Explorer = ({
   scheme,
   tableData,
+  chartData,
 }: {
   scheme?: string;
-  tableData: any;
+  tableData: ITable;
+  chartData: IChartData;
 }) => {
   const [selectedTab, setTab] = React.useState<'map' | 'table' | 'chart'>(
     'map'
   );
   const [selectedYear, setYear] = React.useState('2022-2023');
+  const [selectedIndicator, setIndicator] = React.useState('cpapr');
 
-  const { data, isLoading } = useFetch('indicators', ckan.indicators);
+  const { data: indicatorData, isLoading } = useFetch(
+    'indicators',
+    ckan.indicators
+  );
   const indicatorRef = React.useRef(null);
+
+  React.useEffect(() => {
+    if (indicatorData) {
+      const initialSlug = indicatorData[scheme as string]['Targets'][0].slug;
+      setIndicator(initialSlug);
+    }
+  }, [indicatorData]);
 
   return (
     <div className={cn('grid grid-cols-[244px_1fr] gap-4')}>
       <Indicators
-        data={data}
+        data={indicatorData}
         scheme={scheme || ''}
         loading={isLoading}
         indicatorRef={indicatorRef}
         disable={selectedTab === 'table'}
+        setIndicator={setIndicator}
       />
 
       <Content
         indicatorRef={indicatorRef}
         tableData={tableData}
-        states={{ setTab, setYear, selectedTab, selectedYear }}
+        chartData={chartData}
+        states={{
+          setTab,
+          setYear,
+          selectedTab,
+          selectedYear,
+          selectedIndicator,
+        }}
       />
     </div>
   );
@@ -56,18 +77,24 @@ const dataFile = mapFile.features.map((feature: any) => {
 const Content = ({
   indicatorRef,
   tableData,
+  chartData,
   states,
 }: {
   indicatorRef: any;
   tableData: ITable;
+  chartData: IChartData;
   states: {
     setTab: (tab: 'map' | 'table' | 'chart') => void;
     setYear: (year: string) => void;
     selectedTab: 'map' | 'table' | 'chart';
     selectedYear: string;
+    selectedIndicator: string;
   };
 }) => {
   const contentRef = React.useRef(null);
+  const currentData =
+    chartData[states.selectedIndicator].years[states.selectedYear];
+  console.log(currentData);
 
   const columns: any = [];
   const columnContentTypes: any = [];
@@ -110,8 +137,8 @@ const Content = ({
       value: 'bar',
       content: (
         <BarChart
-          xAxis={['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']}
-          data={[120, 210, 150, 80, 70, 110, 130]}
+          xAxis={currentData.bardata.xAxis}
+          data={currentData.bardata.values}
           height="500px"
         />
       ),
