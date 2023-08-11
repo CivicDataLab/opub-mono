@@ -22,6 +22,10 @@ export const ckan = {
     'https://ckan.civicdatalab.in/dataset/20c5eb7a-b46a-4c35-b381-dfb5dfa2cb71/resource/55fa07ae-7147-445e-8eb6-7a76c4f7f2cb/download/scheme_explorer_table_data.json',
 };
 
+export const mapPosition = {
+  morigaon: ['80%', '80%'],
+};
+
 export const locales = ['en', 'hi'];
 
 export const gqlConfig = {

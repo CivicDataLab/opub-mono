@@ -141,7 +141,7 @@ export const Content = ({ data }: { data: IProps }) => {
         <TabLayout
           tabs={[
             {
-              label: 'Scheme Narrative',
+              label: 'Scheme Overview',
               value: 'overview',
               icon: 'overview',
               data: data.schemeData,
@@ -153,6 +153,7 @@ export const Content = ({ data }: { data: IProps }) => {
               scheme: data.scheme,
               tableData: tableData,
               chartData: chartData,
+              district: data.district,
             },
           ]}
         />
@@ -172,6 +173,7 @@ const TabLayout = ({
     scheme?: string;
     tableData?: ITable;
     chartData?: IChartData;
+    district?: string;
   }[];
 }) => {
   const [value, setValue] = React.useState('overview');
@@ -208,6 +210,7 @@ const TabLayout = ({
             scheme={tabs[1].scheme}
             tableData={tabs[1].tableData as ITable}
             chartData={tabs[1].chartData as IChartData}
+            district={tabs[1].district as string}
           />
         </TabPanel>
       </div>

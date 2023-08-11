@@ -18,7 +18,7 @@ type Props = {
   /* Unique Map Name */
   mapName: string;
   /* Data to be displayed on the map */
-  data?: { name: any; value: number }[];
+  data?: { name: any; value: number; label?: string }[];
   /* Name of the property in the map file to be used as the name of the region */
   nameProperty?: string;
   /* Color of the border of the map tiles */
@@ -49,10 +49,13 @@ type Props = {
   onNewSelected?: (data: any) => void;
   /* Height of the chart */
   height?: string;
+
+  center: string[];
 };
 
 export const MapChart = ({
   mapFile,
+  center = ['80%', '80%'],
   mapName = 'map',
   data,
   nameProperty = 'GEO_NO',
@@ -73,66 +76,97 @@ export const MapChart = ({
 }: Props) => {
   const [mapOptions, setMapOptions] = React.useState({});
 
+  const memoMap = React.useMemo(() => {
+    const tempObj: any = { ...mapFile };
+    tempObj?.features?.forEach(
+      (obj: any) =>
+        (obj.properties[nameProperty] = String(obj.properties[nameProperty]))
+    );
+    return tempObj;
+  }, [mapFile]);
+
+  // find min and max value of data
+  const [min, max] = React.useMemo(() => {
+    let min = Number.MAX_SAFE_INTEGER;
+    let max = Number.MIN_SAFE_INTEGER;
+    data?.forEach((obj) => {
+      if (obj.value < min) {
+        min = obj.value;
+      }
+      if (obj.value > max) {
+        max = obj.value;
+      }
+    });
+    return [min, max];
+  }, [data]);
+
   React.useEffect(() => {
-    echarts.registerMap(mapName, mapFile as GeoJSONSourceInput, {});
-    const option = {
-      series: [
-        {
-          name: 'Indicator',
-          type: 'map',
-          roam: roam,
-          map: mapName,
-          nameProperty: nameProperty,
-          zoom: zoom,
-          itemStyle: {
-            borderColor: tileBorderColor,
-            borderWidth: tileBorderWidth,
-            areaColor: tileBackgroundColor,
-          },
-          emphasis: {
-            label: {
-              show: showLabel,
-              color: labelColor,
-            },
+    if (memoMap) {
+      echarts.registerMap(mapName, memoMap as GeoJSONSourceInput, {});
+      const option = {
+        series: [
+          {
+            name: 'Map File',
+            type: 'map',
+            roam: roam,
+            map: mapName,
+            nameProperty: nameProperty,
             itemStyle: {
-              areaColor: tileHoveredBgColor,
+              borderColor: tileBorderColor,
+              borderWidth: tileBorderWidth,
+              areaColor: tileBackgroundColor,
             },
-          },
-          select: {
-            label: {
-              show: showLabel,
-              color: labelColor,
+            emphasis: {
+              label: {
+                show: showLabel,
+                color: labelColor,
+              },
+              itemStyle: {
+                areaColor: tileHoveredBgColor,
+              },
             },
-            itemStyle: {
-              color: tileSelectedBgColor,
+            select: {
+              label: {
+                show: showLabel,
+                color: labelColor,
+              },
+              itemStyle: {
+                color: tileSelectedBgColor,
+              },
             },
+            zoom: zoom,
+            scaleLimit: {
+              min: scaleLimit[0],
+              max: scaleLimit[1],
+            },
+            data: data,
+            layoutCenter: center,
+            layoutSize: 400,
           },
-          scaleLimit: {
-            min: scaleLimit[0],
-            max: scaleLimit[1],
+        ],
+        visualMap: {
+          left: 'right',
+          min: min,
+          max: max,
+          inRange: {
+            color: ['#313695', '#4575b4', '#74add1', '#abd9e9', '#c9f0fa'],
           },
-          data: data,
+          text: ['High', 'Low'],
+          calculable: true,
         },
-      ],
-      visualMap: {
-        left: 'right',
-        min: 1,
-        max: 1000,
-        inRange: {
-          color: ['#313695', '#4575b4', '#74add1', '#abd9e9', '#c9f0fa'],
+        tooltip: {
+          trigger: 'item',
+          formatter: function (params: any) {
+            if (params.data) {
+              const { name, value, label } = params.data;
+              return `${label || name}: ${Number.isNaN(value) ? 'NA' : value}`;
+            }
+          },
         },
-        text: ['High', 'Low'],
-        calculable: true,
-      },
-      tooltip: {
-        trigger: 'axis',
-        axisPointer: {
-          type: 'shadow',
-        },
-      },
-    };
-    setMapOptions(option);
-  }, [data, mapName, mapFile]);
+      };
+      setMapOptions(option);
+    }
+  }, [data, mapName, mapFile, memoMap]);
 
   function handleClick(e: { data: any }) {
     onNewSelected && onNewSelected(e.data);

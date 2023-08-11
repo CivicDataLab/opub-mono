@@ -1,11 +1,11 @@
 import React from 'react';
-import mapFile from '@/public/files/assam.json';
+import mapFile from '@/public/files/assam_block.json';
 import { createColumnHelper } from '@tanstack/react-table';
 import { Select, Tab, TabList, TabPanel, Table, Tabs, Text } from 'opub-ui';
-import { BarChart, MapChart } from 'opub-viz';
+import { BarChart, MapChart } from 'opub-viz/src';
 import { ErrorBoundary } from 'react-error-boundary';
 
-import { ckan } from '@/config/site';
+import { ckan, mapPosition } from '@/config/site';
 import { useFetch } from '@/lib/api';
 import { cn } from '@/lib/utils';
 import { explorer } from '../scheme.config';
@@ -16,16 +16,18 @@ export const Explorer = ({
   scheme,
   tableData,
   chartData,
+  district,
 }: {
   scheme?: string;
   tableData: ITable;
   chartData: IChartData;
+  district: string;
 }) => {
+  const [selectedYear, setYear] = React.useState('2022-2023');
+  const [selectedIndicator, setIndicator] = React.useState('cpapr');
   const [selectedTab, setTab] = React.useState<'map' | 'table' | 'chart'>(
     'map'
   );
-  const [selectedYear, setYear] = React.useState('2022-2023');
-  const [selectedIndicator, setIndicator] = React.useState('cpapr');
 
   const { data: indicatorData, isLoading } = useFetch(
     'indicators',
@@ -64,6 +66,7 @@ export const Explorer = ({
           indicatorRef={indicatorRef}
           tableData={tableData}
           chartData={chartData}
+          district={district}
           states={{
             setTab,
             setYear,
@@ -90,10 +93,12 @@ const Content = ({
   tableData,
   chartData,
   states,
+  district,
 }: {
   indicatorRef: any;
   tableData: ITable;
   chartData: IChartData;
+  district: string;
   states: {
     setTab: (tab: 'map' | 'table' | 'chart') => void;
     setYear: (year: string) => void;
@@ -105,7 +110,6 @@ const Content = ({
   const contentRef = React.useRef(null);
   const currentData =
     chartData[states.selectedIndicator].years[states.selectedYear];
-  console.log(tableData, states.selectedYear, tableData);
 
   const columns: any = [];
   const columnContentTypes: any = [];
@@ -136,10 +140,19 @@ const Content = ({
       content: (
         <MapChart
           mapFile={mapFile}
-          data={dataFile}
-          mapName="assam"
-          nameProperty="district"
+          data={currentData.mapdata.map((e) => {
+            return {
+              name: String(e.name),
+              value: e.value,
+              label: e.label,
+            };
+          })}
+          mapName="assam-block"
+          nameProperty="BLOCK_LGD"
           height="500px"
+          scaleLimit={[1, 10]}
+          zoom={5}
+          center={mapPosition[district] || ['80%', '80%']}
         />
       ),
     },
@@ -162,6 +175,7 @@ const Content = ({
           columns={columns}
           rows={tableData[states.selectedYear]}
           columnContentTypes={columnContentTypes}
+          key={states.selectedYear}
         />
       ),
     },
