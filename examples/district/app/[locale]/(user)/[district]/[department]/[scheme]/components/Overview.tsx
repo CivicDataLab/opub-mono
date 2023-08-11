@@ -32,25 +32,30 @@ export const Overview = ({ data }: { data?: IOverview }) => {
           {data.profileTitle}
         </Text>
         <div className="mt-6 flex flex-wrap gap-4">
-          {data.profiles.map((profile, index) => {
-            return (
-              <div
-                key={index}
-                className="flex flex-col md:basis-1/3 grow p-4 rounded-05 border-1 border-solid border-borderSubdued"
-              >
-                <Text variant="bodyLg" fontWeight="medium">
-                  {profile.label}
-                </Text>
-                <>
-                  <BarChart
-                    xAxis={profile.data.xAxis}
-                    data={profile.data.values}
-                  />
-                </>
-                <Text variant="bodyMd">{profile.description}</Text>
-              </div>
-            );
-          })}
+          {data.profiles &&
+            data.profiles.map((profile, index) => {
+              console.log(profile);
+
+              return (
+                <div
+                  key={index}
+                  className="flex flex-col md:basis-1/3 grow p-4 rounded-05 border-1 border-solid border-borderSubdued"
+                >
+                  <Text variant="bodyLg" fontWeight="medium">
+                    {profile.label}
+                  </Text>
+                  <>
+                    {profile.data && (
+                      <BarChart
+                        xAxis={profile.data.xAxis}
+                        data={profile.data.values}
+                      />
+                    )}
+                  </>
+                  <Text variant="bodyMd">{profile.description}</Text>
+                </div>
+              );
+            })}
         </div>
       </section>
 
