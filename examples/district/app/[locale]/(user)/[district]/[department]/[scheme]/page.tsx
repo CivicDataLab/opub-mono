@@ -5,9 +5,7 @@ import { Content } from './components/scheme-layout';
 
 async function getData(query: string) {
   const res = await fetch(query, {
-    next: {
-      revalidate: 1,
-    },
+    cache: 'no-cache',
   });
   if (!res.ok) {
     throw new Error('Failed to fetch data');

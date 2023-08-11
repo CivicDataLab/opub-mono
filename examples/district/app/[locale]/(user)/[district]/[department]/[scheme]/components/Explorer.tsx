@@ -3,6 +3,7 @@ import mapFile from '@/public/files/assam.json';
 import { createColumnHelper } from '@tanstack/react-table';
 import { Select, Tab, TabList, TabPanel, Table, Tabs, Text } from 'opub-ui';
 import { BarChart, MapChart } from 'opub-viz';
+import { ErrorBoundary } from 'react-error-boundary';
 
 import { ckan } from '@/config/site';
 import { useFetch } from '@/lib/api';
@@ -50,18 +51,28 @@ export const Explorer = ({
         setIndicator={setIndicator}
       />
 
-      <Content
-        indicatorRef={indicatorRef}
-        tableData={tableData}
-        chartData={chartData}
-        states={{
-          setTab,
-          setYear,
-          selectedTab,
-          selectedYear,
-          selectedIndicator,
-        }}
-      />
+      <ErrorBoundary
+        fallback={
+          <div className="flex items-center justify-center h-full">
+            <Text variant="headingLg" as="h2">
+              Error loading Explorer
+            </Text>
+          </div>
+        }
+      >
+        <Content
+          indicatorRef={indicatorRef}
+          tableData={tableData}
+          chartData={chartData}
+          states={{
+            setTab,
+            setYear,
+            selectedTab,
+            selectedYear,
+            selectedIndicator,
+          }}
+        />
+      </ErrorBoundary>
     </div>
   );
 };
@@ -94,7 +105,7 @@ const Content = ({
   const contentRef = React.useRef(null);
   const currentData =
     chartData[states.selectedIndicator].years[states.selectedYear];
-  console.log(currentData);
+  console.log(tableData, states.selectedYear, tableData);
 
   const columns: any = [];
   const columnContentTypes: any = [];
@@ -204,6 +215,7 @@ const Content = ({
               label="Year"
               labelHidden
               onChange={states.setYear}
+              value={states.selectedYear}
               options={Object.keys(tableData).map((year) => ({
                 label: year,
                 value: year,
