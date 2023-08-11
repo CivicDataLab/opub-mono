@@ -9,13 +9,17 @@ export const siteConfig: SiteConfig = {
 
 export const ckan = {
   homepage:
-    'https://ckan.civicdatalab.in/dataset/20c5eb7a-b46a-4c35-b381-dfb5dfa2cb71/resource/1a367191-4c7f-469c-970e-98792988c183/download/dist.json',
+    'https://ckan.civicdatalab.in/dataset/20c5eb7a-b46a-4c35-b381-dfb5dfa2cb71/resource/1a367191-4c7f-469c-970e-98792988c183/download/dist_data.json',
   department:
     'https://ckan.civicdatalab.in/dataset/20c5eb7a-b46a-4c35-b381-dfb5dfa2cb71/resource/90720dad-7c29-41a4-8780-11121ef31213/download/dept.json',
   overview:
     'https://ckan.civicdatalab.in/dataset/20c5eb7a-b46a-4c35-b381-dfb5dfa2cb71/resource/98bc0fed-3e74-40bd-b6fd-07d1fc4d9494/download/schm_narrative.json',
   indicators:
-    'https://ckan.civicdatalab.in/dataset/20c5eb7a-b46a-4c35-b381-dfb5dfa2cb71/resource/6a28cb75-b400-4f52-adb1-0f219338ed03/download/indicators.json',
+    'https://ckan.civicdatalab.in/dataset/20c5eb7a-b46a-4c35-b381-dfb5dfa2cb71/resource/6a28cb75-b400-4f52-adb1-0f219338ed03/download/indicators_data.json',
+  explorer:
+    'https://ckan.civicdatalab.in/dataset/20c5eb7a-b46a-4c35-b381-dfb5dfa2cb71/resource/d81d295b-51a8-44f7-b150-77a114b14d57/download/scheme_explorer_data.json',
+  table:
+    'https://ckan.civicdatalab.in/dataset/20c5eb7a-b46a-4c35-b381-dfb5dfa2cb71/resource/55fa07ae-7147-445e-8eb6-7a76c4f7f2cb/download/scheme_explorer_table_data.json',
 };
 
 export const locales = ['en', 'hi'];

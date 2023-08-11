@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import { twMerge } from 'tailwind-merge';
 
 import { cn } from '@/lib/utils';
 import { DashboardSidebar } from './dashboard-sidebar';
@@ -19,8 +18,8 @@ export function DashboardLayout({
 }: DashboardLayoutProps) {
   return (
     <div
-      className={twMerge(
-        'grow min-h-[calc(100%_-_48px)] relative',
+      className={cn(
+        'relative grow min-h-[calc(100%_-_48px)]',
         'md:flex md:gap-1'
       )}
     >
@@ -29,7 +28,9 @@ export function DashboardLayout({
       <div className="md:hidden basis-2 z-1">
         <MobileDashboardNav items={dashboardConfig.sidebarNav} />
       </div>
-      <main className={cn(styles.Main)}>{children}</main>
+      <main className={cn(styles.Main, 'max-w-[calc(100vw_-_260px)]')}>
+        {children}
+      </main>
     </div>
   );
 }

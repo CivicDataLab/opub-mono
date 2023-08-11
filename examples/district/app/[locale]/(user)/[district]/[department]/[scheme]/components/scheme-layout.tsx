@@ -47,6 +47,13 @@ export interface IOverview {
   }[];
 }
 
+export interface ITable {
+  [key: string]: {
+    Block: string;
+    [key: string]: string;
+  }[];
+}
+
 interface IProps {
   district: string;
   districtName: string;
@@ -54,10 +61,12 @@ interface IProps {
   departmentName: string;
   scheme: string;
   schemeData: IOverview;
+  tableData: ITable;
 }
 
 export const Content = ({ data }: { data: IProps }) => {
-  const { schemeData } = data;
+  const { schemeData, tableData } = data;
+
   const breadcrumbs = [
     {
       label: 'Assam',
@@ -125,6 +134,7 @@ export const Content = ({ data }: { data: IProps }) => {
               value: 'explorer',
               icon: 'explorer',
               scheme: data.scheme,
+              tableData: tableData,
             },
           ]}
         />
@@ -142,6 +152,7 @@ const TabLayout = ({
     icon: string;
     data?: IOverview;
     scheme?: string;
+    tableData?: ITable;
   }[];
 }) => {
   const [value, setValue] = React.useState('overview');
@@ -174,7 +185,7 @@ const TabLayout = ({
           <Overview data={tabs[0].data} />
         </TabPanel>
         <TabPanel value="explorer">
-          <Explorer scheme={tabs[1].scheme} />
+          <Explorer scheme={tabs[1].scheme} tableData={tabs[1].tableData} />
         </TabPanel>
       </div>
     </Tabs>

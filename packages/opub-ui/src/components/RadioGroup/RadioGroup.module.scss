@@ -80,7 +80,6 @@
 }
 
 .Disabled {
-  background-color: var(--surface-subdued);
   border-color: var(--border-disabled);
 
   &:hover {
@@ -89,6 +88,16 @@
 
   &::before {
     background-color: var(--surface-subdued);
+  }
+
+  &[data-state='checked'] {
+    border-color: var(--border-disabled);
+  }
+
+  .RadioIndicator {
+    &::after {
+      background-color: var(--border-disabled);
+    }
   }
 }
 

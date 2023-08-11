@@ -1,152 +1,47 @@
 import React from 'react';
 import mapFile from '@/public/files/assam.json';
-import {
-  ComboboxMulti,
-  Icon,
-  Input,
-  RadioGroup,
-  RadioItem,
-  ScrollArea,
-  Select,
-  Separator,
-  Tab,
-  TabList,
-  TabPanel,
-  Table,
-  Tabs,
-  Text,
-} from 'opub-ui';
+import { createColumnHelper } from '@tanstack/react-table';
+import { Select, Tab, TabList, TabPanel, Table, Tabs, Text } from 'opub-ui';
 import { BarChart, MapChart } from 'opub-viz';
 
 import { ckan } from '@/config/site';
 import { useFetch } from '@/lib/api';
-import Icons from '@/components/icons';
-import {
-  columnContentTypes,
-  columns,
-  explorer,
-  tableData,
-} from '../scheme.config';
+import { cn } from '@/lib/utils';
+import { explorer } from '../scheme.config';
+import { Indicators } from './Indicators';
+import { ITable } from './scheme-layout';
 
-export const Explorer = ({ scheme }: { scheme?: string }) => {
+export const Explorer = ({
+  scheme,
+  tableData,
+}: {
+  scheme?: string;
+  tableData: any;
+}) => {
+  const [selectedTab, setTab] = React.useState<'map' | 'table' | 'chart'>(
+    'map'
+  );
+  const [selectedYear, setYear] = React.useState('2022-2023');
+
   const { data, isLoading } = useFetch('indicators', ckan.indicators);
   const indicatorRef = React.useRef(null);
 
   return (
-    <div className="grid grid-cols-[244px_1fr] gap-4">
+    <div className={cn('grid grid-cols-[244px_1fr] gap-4')}>
       <Indicators
         data={data}
         scheme={scheme || ''}
         loading={isLoading}
         indicatorRef={indicatorRef}
+        disable={selectedTab === 'table'}
       />
-      <Content indicatorRef={indicatorRef} />
-    </div>
-  );
-};
 
-interface IndicatorsProps {
-  Targets: {
-    label: string;
-    slug: string;
-  }[];
-  'District Profile': {
-    label: string;
-    slug: string;
-  }[];
-  'District Performance': {
-    label: string;
-    slug: string;
-  }[];
-}
-
-const Indicators = ({
-  data,
-  scheme,
-  loading,
-  indicatorRef,
-}: {
-  data: { [key: string]: IndicatorsProps };
-  scheme: string;
-  loading: boolean;
-  indicatorRef: any;
-}) => {
-  if (loading)
-    return (
-      <div className="p-4">
-        <Text variant="headingMd">Loading...</Text>
-      </div>
-    );
-
-  const indicators = data[scheme];
-
-  return (
-    <div className="flex flex-col gap-4">
-      <Text variant="headingLg">Indicators</Text>
-      <Input
-        name="indicator-search"
-        label="Indicator Search"
-        labelHidden
-        prefix={<Icon source={Icons.search} />}
-        placeholder="Search"
+      <Content
+        indicatorRef={indicatorRef}
+        tableData={tableData}
+        states={{ setTab, setYear, selectedTab, selectedYear }}
       />
-      <div>
-        <RadioGroup
-          onChange={(val) => {
-            console.log(val);
-          }}
-          name="radio1"
-          defaultValue={indicators['Targets'][0].slug}
-        >
-          <ScrollArea>
-            <div
-              className="flex flex-col gap-8 max-h-[680px]"
-              ref={indicatorRef}
-            >
-              <IndicatorContent
-                heading="Targets"
-                list={indicators['Targets']}
-              />
-              <IndicatorContent
-                heading="District Profile"
-                list={indicators['District Profile']}
-              />
-              <IndicatorContent
-                heading="District Performance"
-                list={indicators['District Performance']}
-              />
-            </div>
-          </ScrollArea>
-        </RadioGroup>
-      </div>
     </div>
-  );
-};
-
-const IndicatorContent = ({
-  list,
-  heading,
-}: {
-  heading: string;
-  list: {
-    label: string;
-    slug: string;
-  }[];
-}) => {
-  return (
-    <section>
-      <div className="mb-3">
-        <Text variant="headingSm">{heading}</Text>
-        <Separator className="mt-3" />
-      </div>
-      {list.map((child) => {
-        return (
-          <RadioItem key={child.label} value={child.slug}>
-            {child.label}
-          </RadioItem>
-        );
-      })}
-    </section>
   );
 };
 
@@ -158,10 +53,29 @@ const dataFile = mapFile.features.map((feature: any) => {
   };
 });
 
-const Content = ({ indicatorRef }: { indicatorRef: any }) => {
-  const [selectedTab, setSelectedTab] = React.useState('map');
-
+const Content = ({
+  indicatorRef,
+  tableData,
+  states,
+}: {
+  indicatorRef: any;
+  tableData: ITable;
+  states: {
+    setTab: (tab: 'map' | 'table' | 'chart') => void;
+    setYear: (year: string) => void;
+    selectedTab: 'map' | 'table' | 'chart';
+    selectedYear: string;
+  };
+}) => {
   const contentRef = React.useRef(null);
+
+  const columns: any = [];
+  const columnContentTypes: any = [];
+  const columnHelper = createColumnHelper();
+  Object.keys(tableData[states.selectedYear][0]).forEach((key: any) => {
+    columns.push(columnHelper.accessor(key, { header: key }));
+    columnContentTypes.push('numeric');
+  });
 
   React.useEffect(() => {
     // change height of indicator list based on content height
@@ -175,13 +89,13 @@ const Content = ({ indicatorRef }: { indicatorRef: any }) => {
         indicatorList.style.maxHeight = `${contentHeight - 50}px`;
       }, 20);
     }
-  }, [selectedTab]);
+  }, [states.selectedTab]);
 
   const tabs = [
     {
       label: 'Map View',
       value: 'map',
-      constent: (
+      content: (
         <MapChart
           mapFile={mapFile}
           data={dataFile}
@@ -194,7 +108,7 @@ const Content = ({ indicatorRef }: { indicatorRef: any }) => {
     {
       label: 'Bar View',
       value: 'bar',
-      constent: (
+      content: (
         <BarChart
           xAxis={['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']}
           data={[120, 210, 150, 80, 70, 110, 130]}
@@ -205,10 +119,10 @@ const Content = ({ indicatorRef }: { indicatorRef: any }) => {
     {
       label: 'Table View',
       value: 'table',
-      constent: (
+      content: (
         <Table
           columns={columns}
-          rows={tableData}
+          rows={tableData[states.selectedYear]}
           columnContentTypes={columnContentTypes}
         />
       ),
@@ -216,11 +130,11 @@ const Content = ({ indicatorRef }: { indicatorRef: any }) => {
   ];
 
   return (
-    <div className="grow h-full">
+    <div className="grow h-full overflow-x-auto">
       <Tabs
         defaultValue={explorer.tabs[0].value}
-        onValueChange={setSelectedTab}
-        value={selectedTab}
+        onValueChange={(value) => states.setTab(value as any)}
+        value={states.selectedTab}
       >
         <TabList>
           {explorer.tabs.map((tab) => (
@@ -238,7 +152,7 @@ const Content = ({ indicatorRef }: { indicatorRef: any }) => {
           ref={contentRef}
         >
           <div className="flex gap-4 flex-wrap">
-            <ComboboxMulti
+            {/* <ComboboxMulti
               name="block"
               label="Block"
               labelHidden
@@ -247,8 +161,8 @@ const Content = ({ indicatorRef }: { indicatorRef: any }) => {
               className="w-full"
               placeholder='Select "Block"'
               verticalContent
-            />
-            <Select
+            /> */}
+            {/* <Select
               name="sort"
               label="Sort By"
               labelHidden
@@ -257,24 +171,23 @@ const Content = ({ indicatorRef }: { indicatorRef: any }) => {
                 { label: 'Descending Order', value: 'desc' },
               ]}
               className="w-1/3 grow"
-            />
+            /> */}
             <Select
               name="year"
               label="Year"
               labelHidden
-              options={[
-                { label: '2019', value: '2019' },
-                { label: '2020', value: '2020' },
-              ]}
-              className="w-1/3 grow"
+              onChange={states.setYear}
+              options={Object.keys(tableData).map((year) => ({
+                label: year,
+                value: year,
+              }))}
+              // className="basis-1/3"
             />
           </div>
 
           {tabs.map((tab) => (
             <TabPanel value={tab.value} key={tab.value}>
-              <div className="relative overflow-y-auto mt-5">
-                {tab.constent}
-              </div>
+              <div className="relative overflow-y-auto mt-5">{tab.content}</div>
             </TabPanel>
           ))}
         </div>
