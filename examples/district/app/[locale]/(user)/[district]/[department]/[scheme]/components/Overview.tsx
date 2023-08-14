@@ -34,8 +34,6 @@ export const Overview = ({ data }: { data?: IOverview }) => {
         <div className="mt-6 flex flex-wrap gap-4">
           {data.profiles &&
             data.profiles.map((profile, index) => {
-              console.log(profile);
-
               return (
                 <div
                   key={index}

@@ -26,7 +26,6 @@ export default async function Home({
   if (!districtObj || !districtObj['depts'][params.department]) {
     return notFound();
   }
-  console.log(districtObj);
 
   const meta = {
     ...params,

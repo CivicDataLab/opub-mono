@@ -23,7 +23,7 @@ export const Explorer = ({
   chartData: IChartData;
   district: string;
 }) => {
-  const [selectedYear, setYear] = React.useState('2022-2023');
+  const [selectedYear, setYear] = React.useState(Object.keys(tableData)[0]);
   const [selectedIndicator, setIndicator] = React.useState('cpapr');
   const [selectedTab, setTab] = React.useState<'map' | 'table' | 'chart'>(
     'map'
@@ -80,14 +80,6 @@ export const Explorer = ({
   );
 };
 
-// temp data for map chart
-const dataFile = mapFile.features.map((feature: any) => {
-  return {
-    name: feature.properties.district,
-    value: Math.round(Math.random() * 1000),
-  };
-});
-
 const Content = ({
   indicatorRef,
   tableData,
@@ -107,6 +99,16 @@ const Content = ({
     selectedIndicator: string;
   };
 }) => {
+  if (!chartData[states.selectedIndicator]) {
+    return (
+      <div className="flex items-center justify-center h-full">
+        <Text variant="headingLg" as="h2">
+          No data available for this indicator
+        </Text>
+      </div>
+    );
+  }
+
   const contentRef = React.useRef(null);
   const currentData: any =
     chartData[states.selectedIndicator].years[states.selectedYear];

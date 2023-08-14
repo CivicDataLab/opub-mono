@@ -14,6 +14,10 @@ export const schemes: {
     title: 'National Rural Health Mission (NHM)',
     logo: '/logo/nhm.png',
   },
+  jjm: {
+    title: 'Jal Jeevan Mission (JJM)',
+    logo: '/logo/jjm.svg',
+  },
 };
 
 export const explorer = {

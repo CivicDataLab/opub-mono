@@ -38,7 +38,6 @@ export interface IProps {
 
 export function Content({ data }: { data: IProps }) {
   const { departmentData } = data;
-  console.log(data);
 
   const breadcrumbs = [
     {
