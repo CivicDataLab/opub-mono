@@ -106,7 +106,7 @@ export function Content({ data }: { data: IProps }) {
           <Text variant="heading2xl" as="h3">
             {departmentData.listTitle}
           </Text>
-          <div className=" basis-[400px]">
+          {/* <div className=" basis-[400px]">
             <Input
               name="department-search"
               label="Department Search"
@@ -114,7 +114,7 @@ export function Content({ data }: { data: IProps }) {
               prefix={<Icon source={Icons.search} />}
               placeholder="Search"
             />
-          </div>
+          </div> */}
         </div>
         <Separator />
         <div className="grid gap-4 lg:grid-cols-2">
