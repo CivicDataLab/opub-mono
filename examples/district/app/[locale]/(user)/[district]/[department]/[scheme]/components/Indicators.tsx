@@ -33,8 +33,6 @@ export const Indicators = ({
   disable: boolean;
   setIndicator: any;
 }) => {
-  console.log(data, scheme);
-
   const [search, setSearch] = React.useState('');
   const [filtered, setFiltered] = React.useState(data ? data[scheme] : null);
 

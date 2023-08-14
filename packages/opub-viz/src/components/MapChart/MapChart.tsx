@@ -49,13 +49,13 @@ type Props = {
   onNewSelected?: (data: any) => void;
   /* Height of the chart */
   height?: string;
-
-  center: string[];
+  /* Whether to show loading animation */
+  loading?: boolean;
+  colors?: string[];
 };
 
 export const MapChart = ({
   mapFile,
-  center = ['80%', '80%'],
   mapName = 'map',
   data,
   nameProperty = 'GEO_NO',
@@ -73,6 +73,8 @@ export const MapChart = ({
   onChartReady,
   onNewSelected,
   height = '300px',
+  loading = false,
+  colors = ['#c9f0fa', '#abd9e9', '#74add1', '#4575b4', '#313695'],
 }: Props) => {
   const [mapOptions, setMapOptions] = React.useState({});
 
@@ -140,8 +142,6 @@ export const MapChart = ({
               max: scaleLimit[1],
             },
             data: data,
-            layoutCenter: center,
-            layoutSize: 400,
           },
         ],
         visualMap: {
@@ -149,7 +149,7 @@ export const MapChart = ({
           min: min,
           max: max,
           inRange: {
-            color: ['#313695', '#4575b4', '#74add1', '#abd9e9', '#c9f0fa'],
+            color: colors,
           },
           text: ['High', 'Low'],
           calculable: true,
@@ -195,6 +195,7 @@ export const MapChart = ({
       style={{
         height: height,
       }}
+      showLoading={loading}
     />
   );
 };

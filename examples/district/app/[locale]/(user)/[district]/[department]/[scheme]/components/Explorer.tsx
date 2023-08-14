@@ -1,11 +1,10 @@
 import React from 'react';
-import mapFile from '@/public/files/assam_block.json';
 import { createColumnHelper } from '@tanstack/react-table';
 import { Select, Tab, TabList, TabPanel, Table, Tabs, Text } from 'opub-ui';
-import { BarChart, MapChart } from 'opub-viz';
+import { BarChart, MapChart } from 'opub-viz/src';
 import { ErrorBoundary } from 'react-error-boundary';
 
-import { ckan, mapPosition } from '@/config/site';
+import { ckan } from '@/config/site';
 import { useFetch } from '@/lib/api';
 import { cn } from '@/lib/utils';
 import { explorer } from '../scheme.config';
@@ -108,6 +107,11 @@ const Content = ({
     selectedIndicator: string;
   };
 }) => {
+  const { data: mapFile, isLoading: mapLoading } = useFetch(
+    `${district}-mapFile`,
+    `/files/${district}.json`
+  );
+
   if (!chartData[states.selectedIndicator]) {
     return (
       <div className="flex items-center justify-center h-full">
@@ -163,9 +167,8 @@ const Content = ({
           mapName="assam-block"
           nameProperty="BLOCK_LGD"
           height="500px"
-          scaleLimit={[1, 10]}
-          zoom={5}
-          center={mapPosition[district] || ['80%', '80%']}
+          colors={['#c9f0fa', '#abd9e9', '#74add1', '#4575b4', '#313695']}
+          loading={mapLoading}
         />
       ),
     },
