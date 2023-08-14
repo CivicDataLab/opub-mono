@@ -4,14 +4,7 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from '@radix-ui/react-collapsible';
-import {
-  Icon,
-  Input,
-  RadioGroup,
-  RadioItem,
-  Separator,
-  Text,
-} from 'opub-ui/src';
+import { Icon, Input, RadioGroup, RadioItem, Separator, Text } from 'opub-ui';
 
 import Icons from '@/components/icons';
 

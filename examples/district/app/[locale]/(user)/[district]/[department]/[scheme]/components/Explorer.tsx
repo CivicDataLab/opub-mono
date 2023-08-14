@@ -1,7 +1,7 @@
 import React from 'react';
 import { createColumnHelper } from '@tanstack/react-table';
 import { Select, Tab, TabList, TabPanel, Table, Tabs, Text } from 'opub-ui';
-import { BarChart, MapChart } from 'opub-viz/src';
+import { BarChart, MapChart } from 'opub-viz';
 import { ErrorBoundary } from 'react-error-boundary';
 
 import { ckan } from '@/config/site';

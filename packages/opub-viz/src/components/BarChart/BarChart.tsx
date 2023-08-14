@@ -57,6 +57,10 @@ export const BarChart = ({
       containLabel: true,
       left: 10,
     },
+    label: {
+      show: true,
+      position: 'inside',
+    },
   };
 
   echarts.use([
