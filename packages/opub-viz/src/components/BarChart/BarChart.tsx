@@ -11,7 +11,7 @@ import { SVGRenderer } from 'echarts/renderers';
 
 type Props = {
   /* xAxis of the chart */
-  xAxis: string[] | number[];
+  xAxis?: string[] | number[];
   /* Data to be displayed on the chart */
   data: number[] | number[][] | string[] | string[][];
   /* yAxis of the chart */
@@ -44,7 +44,7 @@ export const BarChart = ({
       data: xAxis,
     },
     yAxis: {
-      type: yAxis ? null : 'value',
+      type: yAxis ? null : 'category',
       data: yAxis,
     },
     tooltip: {
@@ -52,6 +52,10 @@ export const BarChart = ({
       axisPointer: {
         type: 'shadow',
       },
+    },
+    grid: {
+      containLabel: true,
+      left: 10,
     },
   };
 

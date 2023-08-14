@@ -176,11 +176,13 @@ const Content = ({
       label: 'Bar View',
       value: 'bar',
       content: (
-        <BarChart
-          xAxis={currentData.bardata.xAxis}
-          data={currentData.bardata.values}
-          height="500px"
-        />
+        <div>
+          <BarChart
+            yAxis={currentData.bardata.xAxis}
+            data={currentData.bardata.values}
+            height="500px"
+          />
+        </div>
       ),
     },
     {
