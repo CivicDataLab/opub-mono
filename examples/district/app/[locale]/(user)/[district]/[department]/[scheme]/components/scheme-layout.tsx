@@ -113,7 +113,7 @@ export const Content = ({ data }: { data: IProps }) => {
       <Breadcrumbs crumbs={breadcrumbs} />
 
       <div className="mt-4">
-        <div className="flex gap-4 flex-wrap justify-start  md:flex-nowrap">
+        <div className="flex gap-4 flex-wrap justify-start md:flex-nowrap">
           <Image
             src={schemes[data.scheme].logo}
             alt=""

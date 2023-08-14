@@ -4,6 +4,7 @@ import { Icon, ProgressBar, Separator, Text } from 'opub-ui';
 
 import { cn } from '@/lib/utils';
 import { Icons } from '@/components/icons';
+import { schemes } from '../[scheme]/scheme.config';
 
 export const SchemeCard = ({
   data,
@@ -34,7 +35,7 @@ export const SchemeCard = ({
         >
           <span className="flex gap-6 items-center">
             <Image
-              src={data.image}
+              src={schemes[data.href].logo}
               alt=""
               width={100}
               height={100}
