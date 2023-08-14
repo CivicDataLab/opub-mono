@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { Icon, ProgressBar, Separator, Text } from 'opub-ui';
 
 import { cn } from '@/lib/utils';
+import { InfoButton } from '@/components/InfoButton';
 import { Icons } from '@/components/icons';
 import { schemes } from '../[scheme]/scheme.config';
 
@@ -108,7 +109,10 @@ export const ContentCard = ({
       )}
     >
       <Text variant="headingXl">{value}</Text>
-      <Text variant="bodyLg">{label}</Text>
+      <div className="flex items-center gap-2 justify-between">
+        <Text variant="bodyLg">{label}</Text>
+        <InfoButton />
+      </div>
       {description && (
         <>
           <Separator />

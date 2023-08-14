@@ -13,6 +13,7 @@ import {
   IconDatabasePlus,
   IconFileChart,
   IconHome,
+  IconInfoCircleFilled,
   IconLayoutSidebarLeftCollapse,
   IconLayoutSidebarLeftExpand,
   IconLink,
@@ -42,6 +43,7 @@ export const Icons: {
   department: IconListSearch,
   scheme: IconReportSearch,
   cardLink: IconSquareRoundedArrowRight,
+  info: IconInfoCircleFilled,
 
   construction: IconBarrierBlock,
   link: IconLink,
