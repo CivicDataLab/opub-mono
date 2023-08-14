@@ -21,7 +21,7 @@ import { Overview } from './Overview';
 export interface IOverview {
   schemeTitle: string;
   schemeDesc: string;
-  lastUpdate: string;
+  lastUpdated: string;
   targetTitle: string;
   targets: {
     value: number;
@@ -132,7 +132,7 @@ export const Content = ({ data }: { data: IProps }) => {
               fontWeight="medium"
               className="my-4"
             >
-              Last Updated: {data.schemeData.lastUpdate}
+              Last Updated: {data.schemeData.lastUpdated}
             </Text>
 
             <Text variant="bodyLg" as="p">
