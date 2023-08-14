@@ -44,14 +44,23 @@ export const Explorer = ({
 
   return (
     <div className={cn('grid grid-cols-[244px_1fr] gap-4')}>
-      <Indicators
-        data={indicatorData}
-        scheme={scheme || ''}
-        loading={isLoading}
-        indicatorRef={indicatorRef}
-        disable={selectedTab === 'table'}
-        setIndicator={setIndicator}
-      />
+      {isLoading ? (
+        <div className="p-4">
+          <Text variant="headingMd">Loading...</Text>
+        </div>
+      ) : indicatorData ? (
+        <Indicators
+          data={indicatorData}
+          scheme={scheme || ''}
+          indicatorRef={indicatorRef}
+          disable={selectedTab === 'table'}
+          setIndicator={setIndicator}
+        />
+      ) : (
+        <div className="p-4">
+          <Text variant="headingMd">No indicators available</Text>
+        </div>
+      )}
 
       <ErrorBoundary
         fallback={

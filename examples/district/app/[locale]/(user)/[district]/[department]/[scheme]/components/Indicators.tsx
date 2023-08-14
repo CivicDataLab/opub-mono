@@ -21,26 +21,22 @@ interface IndicatorsProps {
 export const Indicators = ({
   data,
   scheme,
-  loading,
+
   indicatorRef,
   disable,
   setIndicator,
 }: {
   data: { [key: string]: IndicatorsProps };
   scheme: string;
-  loading: boolean;
+
   indicatorRef: any;
   disable: boolean;
   setIndicator: any;
 }) => {
+  console.log(data, scheme);
+
   const [search, setSearch] = React.useState('');
-  const [filtered, setFiltered] = React.useState(data[scheme]);
-  if (loading)
-    return (
-      <div className="p-4">
-        <Text variant="headingMd">Loading...</Text>
-      </div>
-    );
+  const [filtered, setFiltered] = React.useState(data ? data[scheme] : null);
 
   // filter indicators based on search
   React.useEffect(() => {
@@ -76,7 +72,7 @@ export const Indicators = ({
       }
     });
     setFiltered(filteredData);
-  }, [search, data, scheme]);
+  }, [search, data[scheme]]);
 
   return (
     <div className="flex flex-col gap-4">
@@ -90,38 +86,42 @@ export const Indicators = ({
         onChange={setSearch}
       />
       <div>
-        <RadioGroup
-          onChange={(val) => {
-            setIndicator(val);
-          }}
-          name="indicator-radio"
-          defaultValue={
-            filtered['Targets'][0] ? filtered['Targets'][0].slug : ''
-          }
-        >
-          <div className="overflow-y-auto">
-            <div
-              className="flex flex-col gap-8 max-h-[680px]"
-              ref={indicatorRef}
-            >
-              <IndicatorContent
-                heading="Targets"
-                list={filtered['Targets']}
-                disable={disable}
-              />
-              <IndicatorContent
-                heading="District Profile"
-                list={filtered['District Profile']}
-                disable={disable}
-              />
-              <IndicatorContent
-                heading="District Performance"
-                list={filtered['District Performance']}
-                disable={disable}
-              />
+        {filtered ? (
+          <RadioGroup
+            onChange={(val) => {
+              setIndicator(val);
+            }}
+            name="indicator-radio"
+            defaultValue={
+              filtered['Targets'][0] ? filtered['Targets'][0].slug : ''
+            }
+          >
+            <div className="overflow-y-auto">
+              <div
+                className="flex flex-col gap-8 max-h-[680px]"
+                ref={indicatorRef}
+              >
+                <IndicatorContent
+                  heading="Targets"
+                  list={filtered['Targets']}
+                  disable={disable}
+                />
+                <IndicatorContent
+                  heading="District Profile"
+                  list={filtered['District Profile']}
+                  disable={disable}
+                />
+                <IndicatorContent
+                  heading="District Performance"
+                  list={filtered['District Performance']}
+                  disable={disable}
+                />
+              </div>
             </div>
-          </div>
-        </RadioGroup>
+          </RadioGroup>
+        ) : (
+          <Text variant="bodyMd">No indicators found</Text>
+        )}
       </div>
     </div>
   );
