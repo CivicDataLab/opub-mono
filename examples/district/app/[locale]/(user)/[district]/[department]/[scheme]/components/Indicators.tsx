@@ -1,5 +1,17 @@
 import React from 'react';
-import { Icon, Input, RadioGroup, RadioItem, Separator, Text } from 'opub-ui';
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from '@radix-ui/react-collapsible';
+import {
+  Icon,
+  Input,
+  RadioGroup,
+  RadioItem,
+  Separator,
+  Text,
+} from 'opub-ui/src';
 
 import Icons from '@/components/icons';
 
@@ -21,7 +33,6 @@ interface IndicatorsProps {
 export const Indicators = ({
   data,
   scheme,
-
   indicatorRef,
   disable,
   setIndicator,
@@ -43,9 +54,9 @@ export const Indicators = ({
       return;
     }
     const filteredData = {
-      Targets: [],
-      'District Profile': [],
       'District Performance': [],
+      'District Profile': [],
+      Targets: [],
     };
     Object.keys(data).forEach((key) => {
       const filteredList: any = data[key]['Targets'].filter((item) =>
@@ -91,7 +102,9 @@ export const Indicators = ({
             }}
             name="indicator-radio"
             defaultValue={
-              filtered['Targets'][0] ? filtered['Targets'][0].slug : ''
+              filtered['District Performance'][0]
+                ? filtered['District Performance'][0].slug
+                : ''
             }
           >
             <div className="overflow-y-auto">
@@ -100,8 +113,8 @@ export const Indicators = ({
                 ref={indicatorRef}
               >
                 <IndicatorContent
-                  heading="Targets"
-                  list={filtered['Targets']}
+                  heading="District Performance"
+                  list={filtered['District Performance']}
                   disable={disable}
                 />
                 <IndicatorContent
@@ -110,8 +123,8 @@ export const Indicators = ({
                   disable={disable}
                 />
                 <IndicatorContent
-                  heading="District Performance"
-                  list={filtered['District Performance']}
+                  heading="Targets"
+                  list={filtered['Targets']}
                   disable={disable}
                 />
               </div>
@@ -137,29 +150,35 @@ const IndicatorContent = ({
   }[];
   disable: boolean;
 }) => {
+  const [open, setOpen] = React.useState(false);
   return (
-    <section>
-      <div className="mb-3">
-        <Text variant="headingSm" color={disable ? 'subdued' : 'default'}>
-          {heading}
-        </Text>
-        <Separator className="mt-3" />
-      </div>
-      {list.length > 0 ? (
-        list.map((child, index) => {
-          return (
-            <RadioItem
-              key={child.label + index}
-              value={child.slug}
-              disabled={disable}
-            >
-              {child.label}
-            </RadioItem>
-          );
-        })
-      ) : (
-        <Text variant="bodyMd">No indicators found</Text>
-      )}
-    </section>
+    <Collapsible asChild open={open} onOpenChange={setOpen}>
+      <section>
+        <CollapsibleTrigger className="border-none rounded-2 shadow-button bg-background hover:cursor-pointer w-full flex justify-between items-center py-2 px-4">
+          <Text variant="headingSm" color={disable ? 'subdued' : 'default'}>
+            {heading}
+          </Text>
+          <Icon source={open ? Icons.up : Icons.down} />
+        </CollapsibleTrigger>
+        <CollapsibleContent>
+          <Separator className="my-3" />
+          {list.length > 0 ? (
+            list.map((child, index) => {
+              return (
+                <RadioItem
+                  key={child.label + index}
+                  value={child.slug}
+                  disabled={disable}
+                >
+                  {child.label}
+                </RadioItem>
+              );
+            })
+          ) : (
+            <Text variant="bodyMd">No indicators found</Text>
+          )}
+        </CollapsibleContent>
+      </section>
+    </Collapsible>
   );
 };

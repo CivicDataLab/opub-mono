@@ -158,8 +158,11 @@ export const MapChart = ({
           trigger: 'item',
           formatter: function (params: any) {
             if (params.data) {
-              const { name, value, label } = params.data;
-              return `${label || name}: ${Number.isNaN(value) ? 'NA' : value}`;
+              const { name, value, label, labelVal } = params.data;
+
+              return `${label || name}: ${
+                labelVal || (Number.isNaN(value) ? 'NA' : value)
+              }`;
             }
           },
         },

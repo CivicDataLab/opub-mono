@@ -11,11 +11,17 @@ export const Overview = ({ data }: { data?: IOverview }) => {
     <div className="flex flex-col gap-12">
       <section>
         <Text variant="heading2xl" as="h3">
-          {data.targetTitle}
+          {data.performanceTitle}
         </Text>
         <div className="mt-6 flex flex-wrap gap-4">
-          {data.targets.map((target, index) => {
-            return <SelectCard type={target.type} key={index} data={target} />;
+          {data.performances.map((performance, index) => {
+            return (
+              <SelectCard
+                type={performance.type}
+                key={index}
+                data={performance}
+              />
+            );
           })}
         </div>
       </section>
@@ -36,17 +42,11 @@ export const Overview = ({ data }: { data?: IOverview }) => {
 
       <section>
         <Text variant="heading2xl" as="h3">
-          {data.performanceTitle}
+          {data.targetTitle}
         </Text>
         <div className="mt-6 flex flex-wrap gap-4">
-          {data.performances.map((performance, index) => {
-            return (
-              <SelectCard
-                type={performance.type}
-                key={index}
-                data={performance}
-              />
-            );
+          {data.targets.map((target, index) => {
+            return <SelectCard type={target.type} key={index} data={target} />;
           })}
         </div>
       </section>
@@ -61,7 +61,7 @@ function SelectCard({ type, data }: any) {
         <ContentCard
           value={data.value}
           label={data.label}
-          description={data.description}
+          // description={data.description}
         />
       );
     case 'progress':
@@ -69,7 +69,7 @@ function SelectCard({ type, data }: any) {
         <ProgressCard
           value={data.value}
           label={data.label}
-          description={data.description}
+          // description={data.description}
           min={data.min}
           max={data.max}
         />
@@ -83,7 +83,7 @@ function SelectCard({ type, data }: any) {
           <>
             <BarChart xAxis={data.data.xAxis} data={data.data.values} />
           </>
-          <Text variant="bodyMd">{data.description}</Text>
+          {/* <Text variant="bodyMd">{data.description}</Text> */}
         </div>
       );
     default:

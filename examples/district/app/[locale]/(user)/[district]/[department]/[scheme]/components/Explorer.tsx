@@ -36,7 +36,8 @@ export const Explorer = ({
 
   React.useEffect(() => {
     if (indicatorData) {
-      const initialSlug = indicatorData[scheme as string]['Targets'][0].slug;
+      const initialSlug =
+        indicatorData[scheme as string]['District Performance'][0].slug;
       setIndicator(initialSlug);
     }
   }, [indicatorData]);
@@ -156,11 +157,17 @@ const Content = ({
         <MapChart
           mapFile={mapFile}
           data={currentData.mapdata.map(
-            (e: { name: any; value: any; label: any }) => {
+            (e: {
+              name: string;
+              value: string;
+              label: string;
+              disp_val: string;
+            }) => {
               return {
                 name: String(e.name),
                 value: e.value,
                 label: e.label,
+                labelVal: e.disp_val,
               };
             }
           )}
