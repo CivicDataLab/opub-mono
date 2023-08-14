@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import { useParams, usePathname } from 'next/navigation';
 import { useKeyDetect } from '@/hooks/use-key-detect';
 import { MainConfig } from '@/types';
 import { Icon, Text } from 'opub-ui';
@@ -11,6 +12,8 @@ import { Icons } from '@/components/icons';
 export function MainNav({ data }: { data: MainConfig }) {
   const { key, metaKey } = useKeyDetect();
   const searchRef = React.useRef<HTMLInputElement>(null);
+  const { district } = useParams();
+  console.log(district);
 
   React.useEffect(() => {
     if (key === 'k' && metaKey) {
@@ -25,7 +28,7 @@ export function MainNav({ data }: { data: MainConfig }) {
           <div className="flex items-center gap-2">
             <Icon source={Icons.logo} color="decorative4" size="6" />
             <Text variant="headingLg" as="span">
-              Morigaon{' '}
+              <span className=" capitalize">{district} </span>
               <Text variant="headingSm" color="subdued">
                 (Assam)
               </Text>

@@ -66,14 +66,5 @@ export const mainConfig: MainConfig = {
       title: 'Public Health Engineering',
       href: '/public-health-engineering',
     },
-    {
-      title: 'Health Department',
-      href: '/health-department',
-    },
-    {
-      title:
-        'PWRD, Bongaigaon District Territorial Road Division, and few more words to show long department names',
-      href: '/pwrd-bongaigaon-district-territorial-road-division',
-    },
   ],
 };
