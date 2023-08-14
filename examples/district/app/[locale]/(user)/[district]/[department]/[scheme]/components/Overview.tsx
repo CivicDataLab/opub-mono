@@ -15,14 +15,7 @@ export const Overview = ({ data }: { data?: IOverview }) => {
         </Text>
         <div className="mt-6 flex flex-wrap gap-4">
           {data.targets.map((target, index) => {
-            return (
-              <ProgressCard
-                key={index}
-                value={target.value}
-                label={target.label}
-                description={target.description}
-              />
-            );
+            return <SelectCard type={target.type} key={index} data={target} />;
           })}
         </div>
       </section>
@@ -35,23 +28,7 @@ export const Overview = ({ data }: { data?: IOverview }) => {
           {data.profiles &&
             data.profiles.map((profile, index) => {
               return (
-                <div
-                  key={index}
-                  className="flex flex-col md:basis-1/3 grow p-4 rounded-05 border-1 border-solid border-borderSubdued"
-                >
-                  <Text variant="bodyLg" fontWeight="medium">
-                    {profile.label}
-                  </Text>
-                  <>
-                    {profile.data && (
-                      <BarChart
-                        xAxis={profile.data.xAxis}
-                        data={profile.data.values}
-                      />
-                    )}
-                  </>
-                  <Text variant="bodyMd">{profile.description}</Text>
-                </div>
+                <SelectCard key={index} type={profile.type} data={profile} />
               );
             })}
         </div>
@@ -62,13 +39,12 @@ export const Overview = ({ data }: { data?: IOverview }) => {
           {data.performanceTitle}
         </Text>
         <div className="mt-6 flex flex-wrap gap-4">
-          {data.performances.map((profile, index) => {
+          {data.performances.map((performance, index) => {
             return (
-              <ContentCard
+              <SelectCard
+                type={performance.type}
                 key={index}
-                value={profile.value}
-                label={profile.label}
-                description={profile.description}
+                data={performance}
               />
             );
           })}
@@ -77,3 +53,40 @@ export const Overview = ({ data }: { data?: IOverview }) => {
     </div>
   );
 };
+
+function SelectCard({ type, data }: any) {
+  switch (type) {
+    case 'number':
+      return (
+        <ContentCard
+          value={data.value}
+          label={data.label}
+          description={data.description}
+        />
+      );
+    case 'progress':
+      return (
+        <ProgressCard
+          value={data.value}
+          label={data.label}
+          description={data.description}
+          min={data.min}
+          max={data.max}
+        />
+      );
+    case 'bar':
+      return (
+        <div className="flex flex-col md:basis-1/3 grow p-4 rounded-05 border-1 border-solid border-borderSubdued">
+          <Text variant="bodyLg" fontWeight="medium">
+            {data.label}
+          </Text>
+          <>
+            <BarChart xAxis={data.data.xAxis} data={data.data.values} />
+          </>
+          <Text variant="bodyMd">{data.description}</Text>
+        </div>
+      );
+    default:
+      return null;
+  }
+}

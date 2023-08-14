@@ -123,11 +123,15 @@ export const ProgressCard = ({
   label,
   description,
   color,
+  min,
+  max,
 }: {
   value: string | number;
   label: string;
   description?: string;
   color?: string;
+  min?: number;
+  max?: number;
 }) => {
   return (
     <div
@@ -144,10 +148,10 @@ export const ProgressCard = ({
         <ProgressBar value={Number(value)} />
         <div className="flex gap-3 items-center justify-between mt-2">
           <Text variant="bodyMd" fontWeight="medium">
-            0
+            {min || 0}
           </Text>
           <Text variant="bodyMd" fontWeight="medium">
-            12.7 L
+            {max || 100}
           </Text>
         </div>
       </div>

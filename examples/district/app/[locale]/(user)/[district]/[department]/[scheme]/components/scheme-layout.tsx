@@ -28,20 +28,25 @@ export interface IOverview {
     label: string;
     description: string;
     type: string;
+    min: number;
+    max: number;
   }[];
   profileTitle: string;
   profiles: {
     label: string;
     description: string;
     image: string;
-    data: {
+    type: string;
+    data?: {
       xAxis: string[];
       values: number[];
     };
+    value?: string;
   }[];
   performanceTitle: string;
   performances: {
     value: string;
+    type: string;
     label: string;
     description: string;
   }[];
