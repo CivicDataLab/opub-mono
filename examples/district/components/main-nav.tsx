@@ -28,7 +28,9 @@ export function MainNav({ data }: { data: MainConfig }) {
             <div className="flex items-center gap-2">
               <Icon source={Icons.logo} color="decorative4" size="6" />
               <Text variant="headingLg" as="span">
-                <span className=" capitalize">{district} </span>
+                <span className="capitalize">
+                  {district ? district : 'Data for Districts'}{' '}
+                </span>
                 <Text variant="headingSm" color="subdued">
                   (Assam)
                 </Text>

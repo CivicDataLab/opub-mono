@@ -52,6 +52,9 @@ type Props = {
   /* Whether to show loading animation */
   loading?: boolean;
   colors?: string[];
+  visualMap?: any;
+
+  formatter?: (params: any) => string;
 };
 
 export const MapChart = ({
@@ -75,6 +78,8 @@ export const MapChart = ({
   height = '300px',
   loading = false,
   colors = ['#c9f0fa', '#abd9e9', '#74add1', '#4575b4', '#313695'],
+  visualMap,
+  formatter,
 }: Props) => {
   const [mapOptions, setMapOptions] = React.useState({});
 
@@ -144,27 +149,31 @@ export const MapChart = ({
             data: data,
           },
         ],
-        visualMap: {
-          left: 'right',
-          min: min,
-          max: max,
-          inRange: {
-            color: colors,
-          },
-          text: ['High', 'Low'],
-          calculable: true,
-        },
+        visualMap: visualMap
+          ? visualMap
+          : {
+              left: 'right',
+              min: min,
+              max: max,
+              inRange: {
+                color: colors,
+              },
+              text: ['High', 'Low'],
+              calculable: true,
+            },
         tooltip: {
           trigger: 'item',
-          formatter: function (params: any) {
-            if (params.data) {
-              const { name, value, label, labelVal } = params.data;
+          formatter: formatter
+            ? formatter
+            : function (params: any) {
+                if (params.data) {
+                  const { name, value, label, labelVal } = params.data;
 
-              return `${label || name}: ${
-                labelVal || (Number.isNaN(value) ? 'NA' : value)
-              }`;
-            }
-          },
+                  return `${label || name}: ${
+                    labelVal || (Number.isNaN(value) ? 'NA' : value)
+                  }`;
+                }
+              },
         },
       };
       setMapOptions(option);
