@@ -113,19 +113,7 @@ const Content = ({
     `/files/${district}.json`
   );
 
-  if (!chartData[states.selectedIndicator]) {
-    return (
-      <div className="flex items-center justify-center h-full">
-        <Text variant="headingLg" as="h2">
-          No data available for this indicator
-        </Text>
-      </div>
-    );
-  }
-
   const contentRef = React.useRef(null);
-  const currentData: any =
-    chartData[states.selectedIndicator].years[states.selectedYear];
 
   const columns: any = [];
   const columnContentTypes: any = [];
@@ -148,6 +136,18 @@ const Content = ({
       }, 20);
     }
   }, [states.selectedTab]);
+
+  if (!chartData[states.selectedIndicator]) {
+    return (
+      <div className="flex items-center justify-center h-full">
+        <Text variant="headingLg" as="h2">
+          No data available for this indicator
+        </Text>
+      </div>
+    );
+  }
+  const currentData: any =
+    chartData[states.selectedIndicator].years[states.selectedYear];
 
   const tabs = [
     {
