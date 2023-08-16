@@ -43,7 +43,7 @@ export const SourceData = ({
       data[key] = indicators.map((indicator: any) => {
         return {
           label: indicator.label,
-          value: indicator.slug,
+          value: indicator.label,
         };
       });
     });
@@ -51,10 +51,19 @@ export const SourceData = ({
     return data;
   }, [indicatorData]);
 
-  const columns: any = [];
+  const columns: any = [
+    {
+      header: 'Block',
+      accessorKey: 'Block',
+    },
+  ];
   const columnContentTypes: any = [];
   const columnHelper = createColumnHelper();
-  Object.keys(tableData[selectedYear][0]).forEach((key: any) => {
+
+  const allSelectedIndicators: any = Object.values(selectedIndicators).flat();
+
+  // Create columns based on the first row
+  allSelectedIndicators.forEach((key: any) => {
     columns.push(columnHelper.accessor(key, { header: key }));
     columnContentTypes.push('numeric');
   });
