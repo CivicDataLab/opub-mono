@@ -2,8 +2,9 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { useParams, useRouter } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import { useKeyDetect } from '@/hooks/use-key-detect';
+import { usePRouter } from '@/hooks/use-prouter';
 import { MainConfig } from '@/types';
 import { Icon, IconButton, Menu, Text } from 'opub-ui';
 
@@ -79,7 +80,7 @@ const ExploreLink = ({
 };
 
 function DistrictSelector() {
-  const router = useRouter();
+  const router = usePRouter();
   const [open, setOpen] = React.useState(false);
 
   return (

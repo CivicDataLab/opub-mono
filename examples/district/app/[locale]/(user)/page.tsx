@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { usePRouter } from '@/hooks/use-prouter';
 import { Icon, Input, Separator, Text } from 'opub-ui';
 import { MapChart } from 'opub-viz/src';
 
@@ -14,7 +14,7 @@ import { assamDistricts } from './home.config';
 export default function Home() {
   const [search, setSearch] = React.useState('');
   const [districtList, setDistrictList] = React.useState(assamDistricts);
-  const router = useRouter();
+  const router = usePRouter();
   const { data: mapFile, isLoading: mapLoading } = useFetch(
     `assam-mapFile`,
     `/files/assam.json`
