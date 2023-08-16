@@ -93,11 +93,13 @@ export const ContentCard = ({
   label,
   description,
   color,
+  info,
 }: {
   value: string | number;
   label: string;
   description?: string;
   color?: string;
+  info?: string;
 }) => {
   return (
     <div
@@ -111,7 +113,8 @@ export const ContentCard = ({
       <Text variant="headingXl">{value}</Text>
       <div className="flex items-center gap-2 justify-between">
         <Text variant="bodyLg">{label}</Text>
-        <InfoButton />
+
+        {info && <InfoButton>{info}</InfoButton>}
       </div>
       {description && (
         <>

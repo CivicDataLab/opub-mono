@@ -1,8 +1,8 @@
-import { IconButton, Popover } from 'opub-ui';
+import { IconButton, Popover, Text } from 'opub-ui';
 
 import Icons from './icons';
 
-export const InfoButton = () => {
+export const InfoButton = ({ children }) => {
   return (
     <Popover>
       <Popover.Trigger>
@@ -11,7 +11,9 @@ export const InfoButton = () => {
         </IconButton>
       </Popover.Trigger>
       <Popover.Content>
-        <div>content</div>
+        <div className="p-2 rounded-2 shadow-modal">
+          <Text variant="bodyMd">{children}</Text>
+        </div>
       </Popover.Content>
     </Popover>
   );
