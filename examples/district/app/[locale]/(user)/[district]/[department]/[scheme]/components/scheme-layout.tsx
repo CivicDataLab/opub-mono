@@ -17,6 +17,7 @@ import Icons from '@/components/icons';
 import { schemes } from '../scheme.config';
 import { Explorer } from './Explorer';
 import { Overview } from './Overview';
+import { SourceData } from './SourceData';
 
 export interface IOverview {
   schemeTitle: string;
@@ -160,6 +161,15 @@ export const Content = ({ data }: { data: IProps }) => {
               chartData: chartData,
               district: data.district,
             },
+            {
+              label: 'Source Data',
+              value: 'source-data',
+              icon: 'database-share',
+              scheme: data.scheme,
+              tableData: tableData,
+              chartData: chartData,
+              district: data.district,
+            },
           ]}
         />
       </div>
@@ -213,9 +223,14 @@ const TabLayout = ({
         <TabPanel value="explorer">
           <Explorer
             scheme={tabs[1].scheme}
-            tableData={tabs[1].tableData as ITable}
             chartData={tabs[1].chartData as IChartData}
             district={tabs[1].district as string}
+          />
+        </TabPanel>
+        <TabPanel value="source-data">
+          <SourceData
+            scheme={tabs[1].scheme}
+            tableData={tabs[1].tableData as ITable}
           />
         </TabPanel>
       </div>

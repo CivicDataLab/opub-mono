@@ -11,6 +11,7 @@ import {
   IconDatabase,
   IconDatabaseCog,
   IconDatabasePlus,
+  IconDatabaseShare,
   IconFileChart,
   IconHome,
   IconInfoCircleFilled,
@@ -52,6 +53,7 @@ export const Icons: {
   home: IconHome,
   overview: IconFileChart,
   explorer: IconChartInfographic,
+  'database-share': IconDatabaseShare,
 };
 
 export default Icons;

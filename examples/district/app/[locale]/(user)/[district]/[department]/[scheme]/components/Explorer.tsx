@@ -1,28 +1,25 @@
 import React from 'react';
-import { createColumnHelper } from '@tanstack/react-table';
-import { Select, Tab, TabList, TabPanel, Table, Tabs, Text } from 'opub-ui';
+import { Select, Tab, TabList, TabPanel, Tabs, Text } from 'opub-ui';
 import { BarChart, MapChart } from 'opub-viz';
 import { ErrorBoundary } from 'react-error-boundary';
 
 import { ckan } from '@/config/site';
 import { useFetch } from '@/lib/api';
 import { cn } from '@/lib/utils';
-import { explorer } from '../scheme.config';
 import { Indicators } from './Indicators';
-import { IChartData, ITable } from './scheme-layout';
+import { IChartData } from './scheme-layout';
 
 export const Explorer = ({
   scheme,
-  tableData,
   chartData,
   district,
 }: {
   scheme?: string;
-  tableData: ITable;
   chartData: IChartData;
   district: string;
 }) => {
-  const [selectedYear, setYear] = React.useState(Object.keys(tableData)[0]);
+  const years = Object.values(chartData)[0].years;
+  const [selectedYear, setYear] = React.useState(Object.keys(years)[0]);
   const [selectedIndicator, setIndicator] = React.useState('cpapr');
   const [selectedTab, setTab] = React.useState<'map' | 'table' | 'chart'>(
     'map'
@@ -73,7 +70,6 @@ export const Explorer = ({
       >
         <Content
           indicatorRef={indicatorRef}
-          tableData={tableData}
           chartData={chartData}
           district={district}
           states={{
@@ -91,13 +87,12 @@ export const Explorer = ({
 
 const Content = ({
   indicatorRef,
-  tableData,
   chartData,
   states,
   district,
 }: {
   indicatorRef: any;
-  tableData: ITable;
+
   chartData: IChartData;
   district: string;
   states: {
@@ -114,14 +109,6 @@ const Content = ({
   );
 
   const contentRef = React.useRef(null);
-
-  const columns: any = [];
-  const columnContentTypes: any = [];
-  const columnHelper = createColumnHelper();
-  Object.keys(tableData[states.selectedYear][0]).forEach((key: any) => {
-    columns.push(columnHelper.accessor(key, { header: key }));
-    columnContentTypes.push('numeric');
-  });
 
   React.useEffect(() => {
     // change height of indicator list based on content height
@@ -192,29 +179,26 @@ const Content = ({
         </div>
       ),
     },
-    {
-      label: 'Table View',
-      value: 'table',
-      content: (
-        <Table
-          columns={columns}
-          rows={tableData[states.selectedYear]}
-          columnContentTypes={columnContentTypes}
-          key={states.selectedYear}
-        />
-      ),
-    },
   ];
 
   return (
     <div className="grow h-full overflow-x-auto">
       <Tabs
-        defaultValue={explorer.tabs[0].value}
+        defaultValue={'map'}
         onValueChange={(value) => states.setTab(value as any)}
         value={states.selectedTab}
       >
         <TabList>
-          {explorer.tabs.map((tab) => (
+          {[
+            {
+              label: 'Map View',
+              value: 'map',
+            },
+            {
+              label: 'Bar View',
+              value: 'bar',
+            },
+          ].map((tab) => (
             <Tab value={tab.value} key={tab.value}>
               <div className="flex items-center gap-3">
                 <Text variant="bodyMd" fontWeight="medium">
@@ -228,38 +212,19 @@ const Content = ({
           className="rounded-05 bg-background h-full p-4 md:p-6"
           ref={contentRef}
         >
-          <div className="flex gap-4 flex-wrap">
-            {/* <ComboboxMulti
-              name="block"
-              label="Block"
-              labelHidden
-              defaultList={['Block 1', 'Block 2', 'Block 3', 'Block 4']}
-              defaultValues={['Block 1']}
-              className="w-full"
-              placeholder='Select "Block"'
-              verticalContent
-            /> */}
-            {/* <Select
-              name="sort"
-              label="Sort By"
-              labelHidden
-              options={[
-                { label: 'Ascending Order', value: 'asc' },
-                { label: 'Descending Order', value: 'desc' },
-              ]}
-              className="w-1/3 grow"
-            /> */}
+          <div className="flex">
             <Select
               name="year"
               label="Year"
               labelHidden
               onChange={states.setYear}
               value={states.selectedYear}
-              options={Object.keys(tableData).map((year) => ({
-                label: year,
-                value: year,
-              }))}
-              // className="basis-1/3"
+              options={Object.keys(Object.values(chartData)[0].years).map(
+                (year) => ({
+                  label: year,
+                  value: year,
+                })
+              )}
             />
           </div>
 

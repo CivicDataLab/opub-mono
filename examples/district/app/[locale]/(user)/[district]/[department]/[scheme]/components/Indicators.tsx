@@ -7,6 +7,7 @@ import {
 import { Icon, Input, RadioGroup, RadioItem, Separator, Text } from 'opub-ui';
 
 import Icons from '@/components/icons';
+import { indicatorFilter } from '../scheme.config';
 
 interface IndicatorsProps {
   Targets: {
@@ -38,7 +39,9 @@ export const Indicators = ({
   setIndicator: any;
 }) => {
   const [search, setSearch] = React.useState('');
-  const [filtered, setFiltered] = React.useState(data ? data[scheme] : null);
+  const [filtered, setFiltered] = React.useState<any>(
+    data ? data[scheme] : null
+  );
 
   // filter indicators based on search
   React.useEffect(() => {
@@ -51,28 +54,7 @@ export const Indicators = ({
       'District Profile': [],
       Targets: [],
     };
-    Object.keys(data).forEach((key) => {
-      const filteredList: any = data[key]['Targets'].filter((item) =>
-        item.label.toLowerCase().includes(search.toLowerCase())
-      );
-      if (filteredList.length > 0) {
-        filteredData['Targets'] = filteredData['Targets'].concat(filteredList);
-      }
-      const filteredList2: any = data[key]['District Profile'].filter((item) =>
-        item.label.toLowerCase().includes(search.toLowerCase())
-      );
-      if (filteredList2.length > 0) {
-        filteredData['District Profile'] =
-          filteredData['District Profile'].concat(filteredList2);
-      }
-      const filteredList3: any = data[key]['District Performance'].filter(
-        (item) => item.label.toLowerCase().includes(search.toLowerCase())
-      );
-      if (filteredList3.length > 0) {
-        filteredData['District Performance'] =
-          filteredData['District Performance'].concat(filteredList3);
-      }
-    });
+    indicatorFilter(data[scheme], search, filteredData);
     setFiltered(filteredData);
   }, [search, data[scheme]]);
 
@@ -105,21 +87,15 @@ export const Indicators = ({
                 className="flex flex-col gap-8 max-h-[680px]"
                 ref={indicatorRef}
               >
-                <IndicatorContent
-                  heading="District Performance"
-                  list={filtered['District Performance']}
-                  disable={disable}
-                />
-                <IndicatorContent
-                  heading="District Profile"
-                  list={filtered['District Profile']}
-                  disable={disable}
-                />
-                <IndicatorContent
-                  heading="Targets"
-                  list={filtered['Targets']}
-                  disable={disable}
-                />
+                {['District Performance', 'District Profile', 'Targets'].map(
+                  (item) => (
+                    <IndicatorContent
+                      key={item}
+                      heading={item}
+                      list={filtered[item]}
+                    />
+                  )
+                )}
               </div>
             </div>
           </RadioGroup>
@@ -134,23 +110,19 @@ export const Indicators = ({
 const IndicatorContent = ({
   list,
   heading,
-  disable,
 }: {
   heading: string;
   list: {
     label: string;
     slug: string;
   }[];
-  disable: boolean;
 }) => {
   const [open, setOpen] = React.useState(false);
   return (
     <Collapsible asChild open={open} onOpenChange={setOpen}>
       <section>
         <CollapsibleTrigger className="border-none rounded-2 shadow-button bg-background hover:cursor-pointer w-full flex justify-between items-center py-2 px-4">
-          <Text variant="headingSm" color={disable ? 'subdued' : 'default'}>
-            {heading}
-          </Text>
+          <Text variant="headingSm">{heading}</Text>
           <Icon source={open ? Icons.up : Icons.down} />
         </CollapsibleTrigger>
         <CollapsibleContent>
@@ -158,11 +130,7 @@ const IndicatorContent = ({
           {list.length > 0 ? (
             list.map((child, index) => {
               return (
-                <RadioItem
-                  key={child.label + index}
-                  value={child.slug}
-                  disabled={disable}
-                >
+                <RadioItem key={child.label + index} value={child.slug}>
                   {child.label}
                 </RadioItem>
               );
