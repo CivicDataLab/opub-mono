@@ -6,8 +6,10 @@ import styles from './carousel.module.scss';
 
 export function SummaryCarousel({
   indicatorList,
+  displayLength = 8,
 }: {
   indicatorList: { text: string; value: string }[];
+  displayLength?: number;
 }) {
   const [currentSlide, setCurrentSlide] = React.useState(1);
   const [childrenLength, setChildrenLength] = React.useState(3);
@@ -28,9 +30,16 @@ export function SummaryCarousel({
     return chunks;
   }
 
-  let a: any, b: any, c: any;
+  const variableNames = Array.from({ length: 26 }, (_, i) =>
+    String.fromCharCode(97 + i)
+  );
 
-  [a, b, c] = chunk(indicatorList, 8);
+  const chunks = chunk(indicatorList, displayLength);
+  const chunkedVariables: any = {};
+
+  for (let i = 0; i < chunks.length && i < variableNames.length; i++) {
+    chunkedVariables[variableNames[i]] = chunks[i];
+  }
 
   return (
     <Box padding="5">
