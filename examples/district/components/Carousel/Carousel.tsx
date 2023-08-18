@@ -58,33 +58,19 @@ export function SummaryCarousel({
           prevBtn={<IconArrowLeft />}
           current={current}
         >
-          <ul>
-            {a?.map((item: any, index: any) => (
-              <li key={`summary-${index}`}>
-                <div></div>
-                <strong>{item.value}</strong>
-                <span>{item.text}</span>
-              </li>
-            ))}
-          </ul>
-          <ul>
-            {b?.map((item: any, index: any) => (
-              <li key={`summary-${index}`}>
-                <div></div>
-                <strong>{item.value}</strong>
-                <span>{item.text}</span>
-              </li>
-            ))}
-          </ul>
-          <ul>
-            {c?.map((item: any, index: any) => (
-              <li key={`summary-${index}`}>
-                <div></div>
-                <strong>{item.value}</strong>
-                <span>{item.text}</span>
-              </li>
-            ))}
-          </ul>
+          {Object.keys(chunkedVariables).map((variableName) => (
+            <ul key={`list-${variableName}`}>
+              {chunkedVariables[variableName]?.map(
+                (item: any, index: number) => (
+                  <li key={`summary-${variableName}-${index}`}>
+                    <div></div>
+                    <strong>{item.value}</strong>
+                    <span>{item.text}</span>
+                  </li>
+                )
+              )}
+            </ul>
+          ))}
         </Carousel>
       </div>
     </Box>
