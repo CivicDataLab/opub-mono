@@ -2,7 +2,7 @@ import { IconButton, Popover, Text } from 'opub-ui';
 
 import Icons from './icons';
 
-export const InfoButton = ({ children }) => {
+export const InfoButton = ({ children }: any) => {
   return (
     <Popover>
       <Popover.Trigger>
