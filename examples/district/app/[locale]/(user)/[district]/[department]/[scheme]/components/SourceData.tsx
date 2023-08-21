@@ -57,7 +57,7 @@ export const SourceData = ({
       accessorKey: 'Block',
     },
   ];
-  const columnContentTypes: any = [];
+  const columnContentTypes: any = ['text'];
   const columnHelper = createColumnHelper();
 
   const allSelectedIndicators: any = Object.values(selectedIndicators).flat();
