@@ -104,3 +104,24 @@ export function exportCSVFile(headers: any, items: any[], fileTitle: string) {
     }
   }
 }
+
+export function downloadTable(
+  columns: {
+    header: string;
+  }[],
+  items: {
+    [key: string]: string;
+  }[],
+  fileTitle: string
+) {
+  // filter items data with column
+  const filteredItems = items.map((item) => {
+    const filteredItem: any = {};
+    columns.forEach((column) => {
+      filteredItem[column.header] = item[column.header];
+    });
+    return filteredItem;
+  });
+
+  exportCSVFile(columns, filteredItems, fileTitle);
+}

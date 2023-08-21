@@ -84,11 +84,12 @@ interface IProps {
   scheme: string;
   schemeData: IOverview;
   tableData: ITable;
+  rawTableData: ITable;
   chartData: IChartData;
 }
 
 export const Content = ({ data }: { data: IProps }) => {
-  const { schemeData, tableData, chartData } = data;
+  const { schemeData, tableData, chartData, rawTableData } = data;
 
   const breadcrumbs = [
     {
@@ -157,7 +158,6 @@ export const Content = ({ data }: { data: IProps }) => {
               value: 'explorer',
               icon: 'explorer',
               scheme: data.scheme,
-              tableData: tableData,
               chartData: chartData,
               district: data.district,
             },
@@ -167,6 +167,7 @@ export const Content = ({ data }: { data: IProps }) => {
               icon: 'database-share',
               scheme: data.scheme,
               tableData: tableData,
+              rawTableData: rawTableData,
               chartData: chartData,
               district: data.district,
             },
@@ -187,6 +188,7 @@ const TabLayout = ({
     data?: IOverview;
     scheme?: string;
     tableData?: ITable;
+    rawTableData?: ITable;
     chartData?: IChartData;
     district?: string;
   }[];
@@ -229,8 +231,9 @@ const TabLayout = ({
         </TabPanel>
         <TabPanel value="source-data">
           <SourceData
-            scheme={tabs[1].scheme}
-            tableData={tabs[1].tableData as ITable}
+            scheme={tabs[2].scheme}
+            tableData={tabs[2].tableData as ITable}
+            rawTableData={tabs[2].rawTableData as ITable}
           />
         </TabPanel>
       </div>

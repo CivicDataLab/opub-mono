@@ -7,15 +7,17 @@ import { ckan } from '@/config/site';
 import { useFetch } from '@/lib/api';
 import { cn } from '@/lib/utils';
 import Icons from '@/components/icons';
-import { exportCSVFile } from '../scheme.config';
+import { downloadTable, exportCSVFile } from '../scheme.config';
 import { IndicatorsCheckbox } from './IndicatorsCheckbox';
 import { ITable } from './scheme-layout';
 
 export const SourceData = ({
   tableData,
+  rawTableData,
   scheme,
 }: {
   tableData: ITable;
+  rawTableData: ITable;
   scheme?: string;
 }) => {
   const [selectedYear, setYear] = React.useState(Object.keys(tableData)[0]);
@@ -122,15 +124,15 @@ export const SourceData = ({
             <div className="mt-3 flex justify-end">
               <Button
                 onClick={() => {
-                  exportCSVFile(
+                  downloadTable(
                     columns,
-                    tableData[selectedYear],
+                    rawTableData[selectedYear],
                     'source-data'
                   );
                 }}
                 icon={<Icon source={Icons.download} />}
               >
-                Download File
+                Download Files
               </Button>
             </div>
           </div>
