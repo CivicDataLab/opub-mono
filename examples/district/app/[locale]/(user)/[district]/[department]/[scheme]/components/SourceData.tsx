@@ -7,7 +7,7 @@ import { ckan } from '@/config/site';
 import { useFetch } from '@/lib/api';
 import { cn } from '@/lib/utils';
 import Icons from '@/components/icons';
-import { downloadTable, exportCSVFile } from '../scheme.config';
+import { downloadTable } from '../scheme.config';
 import { IndicatorsCheckbox } from './IndicatorsCheckbox';
 import { ITable } from './scheme-layout';
 
@@ -126,13 +126,13 @@ export const SourceData = ({
                 onClick={() => {
                   downloadTable(
                     columns,
-                    rawTableData[selectedYear],
+                    tableData[selectedYear],
                     'source-data'
                   );
                 }}
                 icon={<Icon source={Icons.download} />}
               >
-                Download Files
+                Download File
               </Button>
             </div>
           </div>

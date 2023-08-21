@@ -51,7 +51,7 @@ function convertToCSV(objArray: string) {
     for (var index in array[i]) {
       if (line != '') line += ',';
 
-      line += array[i][index];
+      line += `"${array[i][index]}"`;
     }
 
     str += line + '\r\n';
@@ -71,9 +71,9 @@ export function exportCSVFile(headers: any, items: any[], fileTitle: string) {
   });
 
   if (headers) {
-    const columnHeaders = headers.map(
-      (column: { header: any }) => column.header
-    );
+    const columnHeaders = headers.map((column: { header: any }) => {
+      return `"${column.header}"`;
+    });
     itemsFormatted.unshift(columnHeaders);
   }
 
