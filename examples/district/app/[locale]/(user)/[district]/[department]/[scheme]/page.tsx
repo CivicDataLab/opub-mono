@@ -4,9 +4,7 @@ import { ckan } from '@/config/site';
 import { Content } from './components/scheme-layout';
 
 async function getData(query: string) {
-  const res = await fetch(query, {
-    cache: 'no-cache',
-  });
+  const res = await fetch(query);
   if (!res.ok) {
     throw new Error('Failed to fetch data');
   }

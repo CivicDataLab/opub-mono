@@ -18,13 +18,18 @@ export const schemes: {
   },
 };
 
-export function indicatorFilter(data: any, search: string, filteredData: any) {
+// filter indicator data based on search
+export function indicatorFilter(
+  data: any,
+  search: string,
+  filteredDataObj: any
+) {
   Object.keys(data).forEach((key) => {
     const filteredList: any = data[key].filter((item: any) =>
       item.label.toLowerCase().includes(search.toLowerCase())
     );
     if (filteredList.length > 0) {
-      filteredData[key] = filteredData[key].concat(filteredList);
+      filteredDataObj[key] = filteredDataObj[key].concat(filteredList);
     }
   });
 }
