@@ -61,15 +61,24 @@ function convertToCSV(objArray: string) {
 }
 
 export function exportCSVFile(headers: any, items: any[], fileTitle: string) {
+  const itemsFormatted = [];
+
+  // format the data
+  items.forEach((item) => {
+    itemsFormatted.push({
+      ...item,
+    });
+  });
+
   if (headers) {
     const columnHeaders = headers.map(
       (column: { header: any }) => column.header
     );
-    items.unshift(columnHeaders);
+    itemsFormatted.unshift(columnHeaders);
   }
 
   // Convert Object to JSON
-  var jsonObject = JSON.stringify(items);
+  var jsonObject = JSON.stringify(itemsFormatted);
 
   var csv = convertToCSV(jsonObject);
 
