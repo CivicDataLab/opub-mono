@@ -1,11 +1,13 @@
 import React from 'react';
 import { createColumnHelper } from '@tanstack/react-table';
-import { Select, Table, Text } from 'opub-ui';
+import { Button, Icon, Select, Table, Text } from 'opub-ui';
 import { ErrorBoundary } from 'react-error-boundary';
 
 import { ckan } from '@/config/site';
 import { useFetch } from '@/lib/api';
 import { cn } from '@/lib/utils';
+import Icons from '@/components/icons';
+import { exportCSVFile } from '../scheme.config';
 import { IndicatorsCheckbox } from './IndicatorsCheckbox';
 import { ITable } from './scheme-layout';
 
@@ -117,6 +119,20 @@ export const SourceData = ({
               columnContentTypes={columnContentTypes}
               key={selectedYear}
             />
+            <div className="mt-3 flex justify-end">
+              <Button
+                onClick={() => {
+                  exportCSVFile(
+                    columns,
+                    tableData[selectedYear],
+                    'source-data'
+                  );
+                }}
+                icon={<Icon source={Icons.download} />}
+              >
+                Download File
+              </Button>
+            </div>
           </div>
         </ErrorBoundary>
       </div>

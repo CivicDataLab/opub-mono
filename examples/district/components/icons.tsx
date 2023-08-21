@@ -12,6 +12,7 @@ import {
   IconDatabaseCog,
   IconDatabasePlus,
   IconDatabaseShare,
+  IconDownload,
   IconFileChart,
   IconHome,
   IconInfoCircleFilled,
@@ -54,6 +55,7 @@ export const Icons: {
   overview: IconFileChart,
   explorer: IconChartInfographic,
   'database-share': IconDatabaseShare,
+  download: IconDownload,
 };
 
 export default Icons;
