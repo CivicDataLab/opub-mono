@@ -50,3 +50,12 @@ export function useFetch(id: string, query: string) {
     },
   });
 }
+
+export async function getData(query: string) {
+  const res = await fetch(query);
+  if (!res.ok) {
+    throw new Error('Failed to fetch data');
+  }
+
+  return res.json();
+}

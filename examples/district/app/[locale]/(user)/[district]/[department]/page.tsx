@@ -1,23 +1,15 @@
 import { notFound } from 'next/navigation';
 
 import { ckan } from '@/config/site';
+import { getData } from '@/lib/api';
 import { Content } from './components/department-layout';
-
-async function getData() {
-  const res = await fetch(ckan.department);
-  if (!res.ok) {
-    throw new Error('Failed to fetch data');
-  }
-
-  return res.json();
-}
 
 export default async function Home({
   params,
 }: {
   params: { district: string; department: string };
 }) {
-  const data = await getData();
+  const data = await getData(ckan.department);
   const districtObj = data[params.district];
 
   // If district or department is not found, return 404

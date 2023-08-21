@@ -1,16 +1,8 @@
 import { notFound } from 'next/navigation';
 
 import { ckan } from '@/config/site';
+import { getData } from '@/lib/api';
 import { Content } from './components/scheme-layout';
-
-async function getData(query: string) {
-  const res = await fetch(query);
-  if (!res.ok) {
-    throw new Error('Failed to fetch data');
-  }
-
-  return res.json();
-}
 
 export default async function Home({
   params,

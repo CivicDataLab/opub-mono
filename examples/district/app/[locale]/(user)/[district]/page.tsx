@@ -1,23 +1,15 @@
 import { notFound } from 'next/navigation';
 
 import { ckan } from '@/config/site';
+import { getData } from '@/lib/api';
 import { Content } from './components/district-layout';
-
-async function getData() {
-  const res = await fetch(ckan.homepage);
-  if (!res.ok) {
-    throw new Error('Failed to fetch data');
-  }
-
-  return res.json();
-}
 
 export default async function Home({
   params,
 }: {
   params: { district: string };
 }) {
-  const data = await getData();
+  const data = await getData(ckan.homepage);
   const districtData = data[params.district];
 
   if (!Object.keys(data).includes(params.district)) {
