@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import {
   Breadcrumbs,
   Divider,
@@ -115,13 +116,11 @@ export const Content = ({ data }: { data: IProps }) => {
 
       <div className="mt-4">
         <div className="flex gap-4 flex-wrap justify-start md:flex-nowrap">
-          <Image
-            src={schemes[data.scheme].logo}
-            alt=""
-            width={168}
-            height={92}
-            className="object-contain"
-          />
+          <Link href={`/${data.district}/${data.department}`}>
+            <Text visuallyHidden>Go to {data.departmentName}</Text>
+            <Icon source={Icons.back} size={32} color="base" />
+          </Link>
+
           <div className="grow">
             <Text variant="heading2xl" as="h1">
               {schemeData.schemeTitle}
@@ -140,6 +139,13 @@ export const Content = ({ data }: { data: IProps }) => {
               {data.schemeData.schemeDesc}
             </Text>
           </div>
+          <Image
+            src={schemes[data.scheme].logo}
+            alt=""
+            width={168}
+            height={92}
+            className="object-contain"
+          />
         </div>
 
         <Divider className="my-6" />

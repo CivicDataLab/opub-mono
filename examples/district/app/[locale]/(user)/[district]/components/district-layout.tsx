@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import {
   Collapsible,
   CollapsibleContent,
@@ -49,7 +50,11 @@ export function Content({ data }: { data: IProps }) {
     <>
       <Breadcrumbs crumbs={breadcrumbs} />
 
-      <div className="mt-4">
+      <div className="mt-4 flex gap-4 items-center">
+        <Link href="/">
+          <Text visuallyHidden>Go to State Page</Text>
+          <Icon source={Icons.back} size={32} color="base" />
+        </Link>
         <Text variant="heading3xl" as="h1">
           {data.title}
         </Text>
