@@ -28,7 +28,7 @@ export function DashboardLayout({
       <div className="md:hidden basis-2 z-1">
         <MobileDashboardNav items={dashboardConfig.sidebarNav} />
       </div>
-      <main className={cn(styles.Main, 'max-w-[calc(100vw_-_260px)]')}>
+      <main className={cn(styles.Main, 'md:max-w-[calc(100vw_-_260px)]')}>
         {children}
       </main>
     </div>
