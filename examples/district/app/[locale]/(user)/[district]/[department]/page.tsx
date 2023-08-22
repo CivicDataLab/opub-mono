@@ -11,10 +11,6 @@ export default async function Home({
 }) {
   const data = await getData(ckan.department);
   const districtObj = data[params.district];
-  console.log(
-    districtObj,
-    !districtObj || !districtObj['depts'][params.department]
-  );
 
   // If district or department is not found, return 404
   if (!districtObj || !districtObj['depts'][params.department]) {
