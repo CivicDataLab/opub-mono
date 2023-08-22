@@ -13,11 +13,9 @@ import { ITable } from './scheme-layout';
 
 export const SourceData = ({
   tableData,
-  rawTableData,
   scheme,
 }: {
   tableData: ITable;
-  rawTableData: ITable;
   scheme?: string;
 }) => {
   const [selectedYear, setYear] = React.useState(Object.keys(tableData)[0]);

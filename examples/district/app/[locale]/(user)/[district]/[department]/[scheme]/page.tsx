@@ -11,7 +11,6 @@ export default async function Home({
 }) {
   const data = await getData(ckan.overview);
   const tableData = await getData(ckan.table);
-  const rawTableData = await getData(ckan.rawTable);
   const chartData = await getData(ckan.chart);
 
   function getSchemeObject(obj: any) {
@@ -35,7 +34,6 @@ export default async function Home({
     departmentName: districtObj['depts'][params.department].deptTitle,
     schemeData: getSchemeObject(districtObj),
     tableData: getSchemeObject(tableData[params.district]).table_data,
-    rawTableData: getSchemeObject(rawTableData[params.district]).table_data,
     chartData: getSchemeObject(chartData[params.district]).indicators,
   };
 
