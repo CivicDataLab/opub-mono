@@ -138,9 +138,14 @@ html {
   text-rendering: optimizeLegibility;
 }
 
+/* fallback for firefox windows */
+option {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
 input,
 select,
 textarea,
 button {
-  font-family: inherit;
+  font: inherit;
 }

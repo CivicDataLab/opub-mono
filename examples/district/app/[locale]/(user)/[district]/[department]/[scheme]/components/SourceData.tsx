@@ -1,6 +1,6 @@
 import React from 'react';
 import { createColumnHelper } from '@tanstack/react-table';
-import { Button, Icon, Select, Table, Text } from 'opub-ui';
+import { Button, Icon, Select, Table, Text } from 'opub-ui/src';
 import { ErrorBoundary } from 'react-error-boundary';
 
 import { ckan } from '@/config/site';
