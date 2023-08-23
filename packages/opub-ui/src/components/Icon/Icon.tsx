@@ -13,6 +13,7 @@ export function Icon({
   size,
   stroke,
   fill,
+  className,
 }: IconProps) {
   let sourceType: 'function' | 'placeholder' | 'external';
   if (typeof source === 'function' || typeof source === 'object') {
@@ -23,11 +24,12 @@ export function Icon({
     sourceType = 'external';
   }
 
-  const className = cx(
+  const classes = cx(
     styles.Icon,
     color && styles[variationName('color', color)],
     backdrop && styles.hasBackdrop,
-    'OPub-Icon'
+    'OPub-Icon',
+    className
   );
 
   const SourceComponent: any = source;
@@ -64,7 +66,7 @@ export function Icon({
 
   return (
     <span
-      className={className}
+      className={classes}
       style={
         size
           ? ({

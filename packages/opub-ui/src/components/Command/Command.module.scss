@@ -47,14 +47,6 @@
     height: var(--space-5);
     width: var(--space-5);
   }
-
-  [cmdk-item] {
-    padding: var(--space-3) var(--space-2);
-    svg {
-      height: var(--space-5);
-      width: var(--space-5);
-    }
-  }
 }
 
 .CommandInput {

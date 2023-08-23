@@ -36,6 +36,12 @@
       color: var(--text);
     }
   }
+
+  &:last-of-type {
+    > span {
+      font-weight: var(--font-weight-medium);
+    }
+  }
 }
 
 .CollapseItem {

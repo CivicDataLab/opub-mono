@@ -1,0 +1,54 @@
+@import '../../../styles/common';
+
+.Wrapper {
+  height: 100%;
+  position: relative;
+}
+
+.Legend {
+  position: absolute;
+  z-index: 999;
+  right: 16px;
+  bottom: 32px;
+  padding: 20px 10px;
+  box-shadow: 0 0 5px 0 rgba(184, 140, 140, 0.3);
+  font-size: 12px;
+  letter-spacing: 2px;
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 5px;
+  width: 16%;
+
+  & > div {
+    color: white;
+    position: relative;
+    display: flex;
+    height: 20px;
+    padding: 0 10px;
+  }
+
+  & > div::before {
+    content: '';
+    background-color: var(--color);
+    left: 0;
+    top: 0;
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+  }
+
+  @media (max-width: 768px) {
+    & > div::before {
+      width: 10px;
+      height: 10px;
+    }
+
+    & {
+      left: 38px;
+      bottom: 100px;
+      font-size: 10px;
+      letter-spacing: 0px;
+      width: 30%;
+      height: 15%;
+    }
+  }
+}

@@ -1,103 +1,117 @@
-import { Content } from './components/district-layout';
+'use client';
 
-const content = {
-  title: 'Morigaon',
-  breadcrumbs: [
-    {
-      label: 'Assam State',
-      href: '/',
-    },
-    {
-      label: 'Morigaon District',
-      href: '/',
-    },
-  ],
-  collapsible: {
-    title: 'District Highlights & Information',
-    content: {
-      leftTitle: 'Key Highlights',
-      cards: [
-        {
-          value: '₹ 4,20,672 Cr.',
-          label: 'Total Receipts',
-          color: 'highlight',
-        },
-        {
-          value: '₹ 4,20,672 Cr.',
-          label: 'Total Receipts',
-          color: 'highlight',
-        },
-        {
-          value: '₹ 4,20,672 Cr.',
-          label: 'Total Receipts',
-          color: 'highlight',
-        },
-        {
-          value: '₹ 4,20,672 Cr.',
-          label: 'Total Receipts',
-          color: 'highlight',
-        },
-      ],
-      rightTitle: 'About Morigaon',
-      description: [
-        `It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.`,
-        `There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.`,
-      ],
-    },
-  },
-  listTitle: 'Browse Line Departments',
-  list: [
-    {
-      label: 'Panchayat & Rural Development',
-      href: 'panchayat-and-rural-development',
-      cards: [
-        {
-          value: '₹ 4,20,672 Cr.',
-          label: 'Total Receipts',
-        },
-        {
-          value: '₹ 4,20,672 Cr.',
-          label: 'Total Receipts',
-        },
-        {
-          value: '₹ 4,20,672 Cr.',
-          label: 'Total Receipts',
-        },
-        {
-          value: '₹ 4,20,672 Cr.',
-          label: 'Total Receipts',
-        },
-      ],
-    },
-    {
-      label: 'Public Health Engineering',
-      href: 'public-health-engineering',
-      cards: [
-        {
-          value: '₹ 4,20,672 Cr.',
-          label: 'Total Receipts',
-        },
-        {
-          value: '₹ 4,20,672 Cr.',
-          label: 'Total Receipts',
-        },
-        {
-          value: '₹ 4,20,672 Cr.',
-          label: 'Total Receipts',
-        },
-        {
-          value: '₹ 4,20,672 Cr.',
-          label: 'Total Receipts',
-        },
-      ],
-    },
-  ],
-};
+import React from 'react';
+import Link from 'next/link';
+import { usePRouter } from '@/hooks/use-prouter';
+import { Icon, Input, Separator, Text } from 'opub-ui';
+import { MapChart } from 'opub-viz/src';
+
+import { useFetch } from '@/lib/api';
+import { cn } from '@/lib/utils';
+import { Icons } from '@/components/icons';
+import { assamDistricts } from './home.config';
 
 export default function Home() {
+  const [search, setSearch] = React.useState('');
+  const [districtList, setDistrictList] = React.useState(assamDistricts);
+  const router = usePRouter();
+  const { data: mapFile, isLoading: mapLoading } = useFetch(
+    `assam-mapFile`,
+    `/files/assam.json`
+  );
+
+  // filter districtList based on search
+  React.useEffect(() => {
+    if (search) {
+      const filteredDistricts = assamDistricts.filter((district) =>
+        district.name.toLowerCase().includes(search.toLowerCase())
+      );
+      setDistrictList(filteredDistricts);
+    } else {
+      setDistrictList(assamDistricts);
+    }
+  }, [search]);
+
   return (
-    <main className="container py-1 lg:py-2">
-      <Content data={content} />
+    <main className="px-2">
+      <div className="mx-auto mt-10 py-6 px-10 bg-surface rounded-1 shadow-lg max-w-[1180px]">
+        <Text variant="heading2xl" as="h1">
+          Data for Districts Assam
+        </Text>
+        <Separator className="my-6" />
+        <div className="max-w-[795px]">
+          <Text variant="bodyLg">
+            It is the most populated state in India, as well as the most
+            populous country subdivision in the world. The state is bordered by
+            Rajasthan to the west, Haryana, Himachal Pradesh and Delhi to the
+            northwest, Uttarakhand and an international border with Nepal to the
+            north, Bihar to the east, Madhya Pradesh to the south, and touches
+            the states of Jharkhand and Chhattisgarh to the southeast.
+          </Text>
+        </div>
+        <div className="mt-10 flex gap-10">
+          <div className="w-full max-w-[768px] bg-surfaceHighlightSubdued">
+            <MapChart
+              mapFile={mapFile}
+              mapName="assam-block"
+              height="450px"
+              loading={mapLoading}
+              nameProperty="district"
+              visualMap={{
+                show: false,
+              }}
+              tileBackgroundColor="#e3dfdf"
+              tileSelectedBgColor="#e3dfdf"
+              tileHoveredBgColor="#f2eded"
+              tileBorderColor="#8C9196"
+              data={[
+                { name: 'Morigaon', value: 0 },
+                { name: 'Nagaon', value: 0 },
+              ]}
+              formatter={function (params: any) {
+                if (params.data) {
+                  const { name } = params.data;
+                  return name;
+                }
+              }}
+              onNewSelected={(selected: any) => {
+                if (selected) {
+                  router.push(`/${selected.name.toLowerCase()}`);
+                }
+              }}
+            />
+          </div>
+          <div className="rounded-1 border-1 border-divider border-solid grow p-4">
+            <Input
+              name="district-search"
+              placeholder="Search"
+              label="Search District"
+              labelHidden
+              prefix={<Icon source={Icons.search} />}
+              onChange={setSearch}
+              value={search}
+            />
+            <div className="mt-4 overflow-y-scroll max-h-[360px]">
+              {districtList.map((district) => (
+                <Link
+                  key={district.slug}
+                  href={!district.enabled ? '#' : `/${district.slug}`}
+                  className={cn(
+                    'flex items-center gap-2 p-2 cursor-pointer text-interactive hover:text-interactiveHovered hover:underline',
+                    !district.enabled &&
+                      'opacity-50 cursor-not-allowed pointer-events-none'
+                  )}
+                  aria-disabled={!district.enabled}
+                >
+                  <Text variant="bodyLg" fontWeight="medium" color="inherit">
+                    {district.name}
+                  </Text>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
     </main>
   );
 }

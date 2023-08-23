@@ -3,7 +3,9 @@ import Link from 'next/link';
 import { Icon, ProgressBar, Separator, Text } from 'opub-ui';
 
 import { cn } from '@/lib/utils';
+import { InfoButton } from '@/components/InfoButton';
 import { Icons } from '@/components/icons';
+import { schemes } from '../[scheme]/scheme.config';
 
 export const SchemeCard = ({
   data,
@@ -13,6 +15,7 @@ export const SchemeCard = ({
     href: string;
     image: string;
     lastUpdated: string;
+    departmentHref: string;
     cards: {
       value: string | number;
       label: string;
@@ -20,13 +23,20 @@ export const SchemeCard = ({
     }[];
   };
 }) => {
+  if (!data) {
+    return null;
+  }
+
   return (
     <div className="flex flex-col gap-2 justify-between p-4 pb-3 bg-surface rounded-05 shadow-card">
       <div className="flex flex-col gap-3">
-        <Link href={data.href} className="block hover:underline">
+        <Link
+          href={`${data.departmentHref}/${data.href}`}
+          className="block hover:underline"
+        >
           <span className="flex gap-6 items-center">
             <Image
-              src={data.image}
+              src={schemes[data.href].logo}
               alt=""
               width={100}
               height={100}
@@ -66,7 +76,7 @@ export const SchemeCard = ({
         </div>
       </div>
       <Link
-        href={data.href}
+        href={`${data.departmentHref}/${data.href}`}
         className="py-2 pl-4 pr-1 bg-surface hover:bg-surfaceHovered rounded-1 flex justify-between text-interactive"
       >
         <Text variant="bodyMd" fontWeight="medium" color="inherit">
@@ -81,23 +91,37 @@ export const SchemeCard = ({
 export const ContentCard = ({
   value,
   label,
+  description,
   color,
+  info,
 }: {
   value: string | number;
   label: string;
+  description?: string;
   color?: string;
+  info?: string;
 }) => {
   return (
     <div
       className={cn(
-        'flex-grow w-[45%]',
+        'flex-grow md:w-[45%]',
         'p-4 rounded-1 border-[1px] border-solid border-borderSubdued flex flex-col gap-3',
         color === 'highlight' &&
           'bg-surfaceHighlightSubdued w-auto border-borderHighlightSubdued'
       )}
     >
       <Text variant="headingXl">{value}</Text>
-      <Text variant="bodyLg">{label}</Text>
+      <div className="flex items-center gap-2 justify-between">
+        <Text variant="bodyLg">{label}</Text>
+
+        {info && <InfoButton>{info}</InfoButton>}
+      </div>
+      {description && (
+        <>
+          <Separator />
+          <Text variant="bodyMd">{description}</Text>
+        </>
+      )}
     </div>
   );
 };
@@ -105,16 +129,22 @@ export const ContentCard = ({
 export const ProgressCard = ({
   value,
   label,
+  description,
   color,
+  min,
+  max,
 }: {
   value: string | number;
   label: string;
+  description?: string;
   color?: string;
+  min?: number;
+  max?: number;
 }) => {
   return (
     <div
       className={cn(
-        'flex-grow w-[45%]',
+        'flex-grow md:w-[45%] ',
         'p-4 rounded-1 border-[1px] border-solid border-borderSubdued flex flex-col gap-3',
         color === 'highlight' &&
           'bg-surfaceHighlightSubdued w-auto border-borderHighlightSubdued'
@@ -126,13 +156,14 @@ export const ProgressCard = ({
         <ProgressBar value={Number(value)} />
         <div className="flex gap-3 items-center justify-between mt-2">
           <Text variant="bodyMd" fontWeight="medium">
-            0
+            {min || 0}
           </Text>
           <Text variant="bodyMd" fontWeight="medium">
-            12.7 L
+            {max || 100}
           </Text>
         </div>
       </div>
+      {description && <Text variant="bodyMd">{description}</Text>}
     </div>
   );
 };

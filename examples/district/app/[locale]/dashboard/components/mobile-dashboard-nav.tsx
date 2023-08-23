@@ -2,10 +2,9 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
-import { useOnClickOutside } from '@/hooks/use-on-click-outside';
+import { useParams, usePathname } from 'next/navigation';
 import { SidebarNavItem } from '@/types';
-import { IconMenu, IconX } from '@tabler/icons-react';
+import { IconX } from '@tabler/icons-react';
 import {
   Button,
   CommandDialog,
@@ -17,13 +16,12 @@ import {
   Icon,
   IconButton,
   Text,
-} from 'opub-ui/src';
-import { twMerge } from 'tailwind-merge';
+} from 'opub-ui';
 
 import { cn } from '@/lib/utils';
 import { Icons } from '@/components/icons';
 import dashboardStyles from '../dashboard.module.scss';
-import styles from './styles.module.scss';
+import { isActive } from './dashboard-sidebar';
 
 interface DashboardNavProps {
   items: SidebarNavItem[];
@@ -33,6 +31,8 @@ export function MobileDashboardNav({ items }: DashboardNavProps) {
   const [open, setOpen] = React.useState(false);
 
   const path = usePathname();
+  const { district, department } = useParams();
+
   const activeItem = React.useMemo(() => {
     return items.find((item) => item.href === path);
   }, [items, path]);
@@ -61,76 +61,22 @@ export function MobileDashboardNav({ items }: DashboardNavProps) {
         <CommandList className=" max-h-full">
           <CommandEmpty>No results found.</CommandEmpty>
           <CommandGroup heading="Departments">
+            <MenuLink
+              href={`/${district}`}
+              title={district}
+              department={department}
+              district={district}
+              setOpen={setOpen}
+            />
             {items.map((item) => {
               return (
-                <CommandItem
-                  key={item.href + item.title}
-                  className={cn(
-                    'flex justify-between relative',
-                    path === item.href && dashboardStyles.Selected
-                  )}
-                >
-                  <Link
-                    href={item.disabled ? '/' : item.href || '#'}
-                    onClick={() => setOpen(false)}
-                  >
-                    <span
-                      className={twMerge(
-                        'bg-transparent rounded-r-2 w-[6px] h-full absolute top-0 left-[-10px]',
-                        path === item.href && 'bg-decorativeIconFour'
-                      )}
-                    />
-                    <div
-                      className={cn(
-                        'flex items-center w-full rounded-1 overflow-hidden',
-                        dashboardStyles.Item
-                      )}
-                    >
-                      {item.icon && (
-                        <div className="pr-1">
-                          <Icon source={Icons[item.icon]} color="base" />
-                        </div>
-                      )}
-                      <Text>{item.title}</Text>
-                    </div>
-                  </Link>
-                </CommandItem>
-              );
-            })}
-            {items.map((item) => {
-              return (
-                <CommandItem
-                  key={item.href + item.title}
-                  className={cn(
-                    'flex justify-between relative',
-                    path === item.href && dashboardStyles.Selected
-                  )}
-                >
-                  <Link
-                    href={item.disabled ? '/' : item.href || '#'}
-                    onClick={() => setOpen(false)}
-                  >
-                    <span
-                      className={twMerge(
-                        'bg-transparent rounded-r-2 w-[6px] h-full absolute top-0 left-[-10px]',
-                        path === item.href && 'bg-decorativeIconFour'
-                      )}
-                    />
-                    <div
-                      className={cn(
-                        'flex items-center w-full rounded-1 overflow-hidden',
-                        dashboardStyles.Item
-                      )}
-                    >
-                      {item.icon && (
-                        <div className="pr-1">
-                          <Icon source={Icons[item.icon]} color="base" />
-                        </div>
-                      )}
-                      <Text>{item.title}</Text>
-                    </div>
-                  </Link>
-                </CommandItem>
+                <MenuLink
+                  key={item.href + path}
+                  href={`/${district}${item.href}`}
+                  title={item.title}
+                  department={department}
+                  setOpen={setOpen}
+                />
               );
             })}
           </CommandGroup>
@@ -139,3 +85,55 @@ export function MobileDashboardNav({ items }: DashboardNavProps) {
     </div>
   );
 }
+
+const MenuLink = ({
+  href,
+  title,
+  icon,
+  department,
+  district,
+  setOpen,
+}: {
+  href: string;
+  title: string;
+  icon?: string;
+  department: string;
+  district?: string;
+  setOpen: (e: boolean) => void;
+}) => {
+  return (
+    <CommandItem
+      key={href + title}
+      className={cn('flex justify-between relative p-0')}
+    >
+      <Link
+        href={href || '#'}
+        onClick={() => setOpen(false)}
+        className={cn(
+          'py-3 px-2 w-full',
+          isActive(department, href, district) && dashboardStyles.Selected
+        )}
+      >
+        <span
+          className={cn(
+            'bg-transparent rounded-r-2 w-[6px] h-full absolute top-0 left-[-10px]',
+            isActive(department, href, district) && 'bg-decorativeIconFour'
+          )}
+        />
+        <div
+          className={cn(
+            'flex items-center w-full rounded-1 overflow-hidden',
+            dashboardStyles.Item
+          )}
+        >
+          {icon && (
+            <div className="pr-1">
+              <Icon source={Icons[icon]} color="base" />
+            </div>
+          )}
+          <Text className="capitalize">{title}</Text>
+        </div>
+      </Link>
+    </CommandItem>
+  );
+};

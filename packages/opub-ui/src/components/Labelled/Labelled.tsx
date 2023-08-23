@@ -1,12 +1,12 @@
 import { Action } from '../../types/button';
 import type { Error } from '../../types/shared/form';
-import cx from 'classnames';
-import React from 'react';
 import { buttonFrom } from '../Button/utils';
 import { InlineMessage } from '../InlineMessage';
 import { Label } from '../Label/Label';
 import { Text } from '../Text';
 import styles from './Labelled.module.scss';
+import cx from 'classnames';
+import React from 'react';
 
 export interface LabelledProps {
   /** A unique identifier for the label */
@@ -25,6 +25,8 @@ export interface LabelledProps {
   labelHidden?: boolean;
   /** Visual required indicator for the label */
   requiredIndicator?: boolean;
+  /** Additional class names to apply to the label */
+  className?: string;
 }
 
 export function Labelled({
@@ -36,9 +38,10 @@ export function Labelled({
   children,
   labelHidden,
   requiredIndicator,
+  className,
   ...rest
 }: LabelledProps) {
-  const className = cx(labelHidden && styles.hidden);
+  const classes = cx(labelHidden && styles.hidden, className);
 
   const actionMarkup = action ? (
     <div className={styles.Action}>{buttonFrom(action, { plain: true })}</div>
@@ -74,7 +77,7 @@ export function Labelled({
   ) : null;
 
   return (
-    <div className={className}>
+    <div className={classes}>
       {labelMarkup}
       {children}
       {errorMarkup}

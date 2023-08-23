@@ -95,9 +95,7 @@ export default async function LocaleLayout({
         <NextIntlClientProvider locale={locale} messages={messages}>
           <Provider>
             <MainNav data={mainConfig} />
-            <DashboardLayout dashboardConfig={mainConfig}>
-              {children}
-            </DashboardLayout>
+            {children}
           </Provider>
         </NextIntlClientProvider>
       </body>

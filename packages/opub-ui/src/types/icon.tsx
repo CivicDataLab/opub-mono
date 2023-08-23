@@ -40,4 +40,6 @@ export interface IconProps {
   stroke?: number;
   /** fill color  */
   fill?: Color;
+  /** class name  */
+  className?: string;
 }

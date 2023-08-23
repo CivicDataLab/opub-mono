@@ -1,8 +1,4 @@
-import { Text } from 'opub-ui';
-
-import { Content } from './components/department-layout';
-
-const departments: {
+export const departments: {
   [key: string]: {
     title: string;
   };
@@ -15,8 +11,7 @@ const departments: {
   },
 };
 
-const content = {
-  title: 'Morigaon',
+export const content = {
   breadcrumbs: [
     {
       label: 'Assan State',
@@ -63,7 +58,7 @@ const content = {
   list: [
     {
       label: 'Mahatma Gandhi National Rural Employment Guarantee Act (MGNREGA)',
-      href: '#',
+      href: 'mgnrega',
       image: '/logo/mgnrega.webp',
       lastUpdated: '26 July (1d ago)',
       cards: [
@@ -84,7 +79,7 @@ const content = {
     },
     {
       label: 'National Rural Health Mission (NHM)',
-      href: '#',
+      href: 'nhm',
       image: '/logo/nhm.png',
       lastUpdated: '25 July (2d ago)',
       cards: [
@@ -104,21 +99,3 @@ const content = {
     },
   ],
 };
-
-export default function Home({ params }: { params: { department: string } }) {
-  const page: { title: string } = departments[params.department];
-  if (!page) {
-    return (
-      <div className="flex flex-col items-center justify-center h-full">
-        <Text variant="heading3xl">404</Text>
-        <Text variant="headingMd">Page not found</Text>
-      </div>
-    );
-  }
-
-  return (
-    <main className="container py-1 lg:py-2">
-      <Content data={content} departmentData={page} />
-    </main>
-  );
-}
