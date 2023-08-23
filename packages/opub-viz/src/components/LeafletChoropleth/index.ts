@@ -1,1 +1,1 @@
-export { LeafletMap } from './LeafletMap';
+export { LeafletChoropleth } from './LeafletChoropleth';
