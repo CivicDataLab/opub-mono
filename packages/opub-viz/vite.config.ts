@@ -15,9 +15,9 @@ export default defineConfig((configEnv) => ({
   css: {
     preprocessorOptions: {
       scss: {
-        additionalData: `
-                @import "${path.resolve(__dirname, '/styles/breakpoints')}";
-            `,
+        // additionalData: `
+        //         @import "${path.resolve(__dirname, '/styles/breakpoints')}";
+        //     `,
       },
     },
   },

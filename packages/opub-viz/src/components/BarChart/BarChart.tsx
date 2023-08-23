@@ -60,6 +60,8 @@ export const BarChart = ({
     label: {
       show: true,
       position: 'inside',
+      color: '#fff',
+      fontWeight: 'bold',
     },
   };
 
