@@ -11,7 +11,7 @@ import { SVGRenderer } from 'echarts/renderers';
 
 type Props = {
   /* xAxis of the chart */
-  xAxis: string[] | number[];
+  xAxis?: string[] | number[];
   /* Data to be displayed on the chart */
   data: number[] | number[][] | string[] | string[][];
   /* yAxis of the chart */
@@ -20,6 +20,8 @@ type Props = {
   theme?: EChartsReactProps['theme'];
   /* Callback function to be called when the chart is ready */
   onChartReady?: (echart: any) => void;
+  /* Height of the chart */
+  height?: string;
 };
 
 export const BarChart = ({
@@ -27,6 +29,7 @@ export const BarChart = ({
   xAxis,
   yAxis,
   theme = 'light',
+  height = '300px',
   onChartReady,
 }: Props) => {
   const option = {
@@ -50,6 +53,16 @@ export const BarChart = ({
         type: 'shadow',
       },
     },
+    grid: {
+      containLabel: true,
+      left: 10,
+    },
+    label: {
+      show: true,
+      position: 'inside',
+      color: '#fff',
+      fontWeight: 'bold',
+    },
   };
 
   echarts.use([
@@ -68,6 +81,7 @@ export const BarChart = ({
       theme={theme}
       onChartReady={onChartReady}
       option={option}
+      style={{ height: height, width: '100%' }}
     />
   );
 };

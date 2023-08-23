@@ -87,7 +87,6 @@ $large-width: 980px;
   --hide-to: translate(-50%, 5vh);
   z-index: var(--z-1);
 
-  background-color: var(--content-bg);
   box-shadow: var(--shadow-2xl);
   width: 100%;
   max-height: calc(100vh - #{$vertical-spacing});
@@ -127,9 +126,10 @@ $large-width: 980px;
 
   @media #{$breakpoints-md-down} {
     max-height: 100%;
+    width: auto;
     transform: translate(0, 0);
+    margin-inline: var(--space-2);
     left: 0;
-    bottom: 0;
   }
 
   @media #{$breakpoints-md-up} {

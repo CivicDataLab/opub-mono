@@ -65,4 +65,6 @@ export interface SelectProps {
   onBlur?(): void;
   /** Visual required indicator, add an asterisk to label */
   requiredIndicator?: boolean;
+
+  className?: string;
 }

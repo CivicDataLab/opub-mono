@@ -1,4 +1,3 @@
-import NProgress from 'nprogress';
 import { create } from 'zustand';
 import { shallow } from 'zustand/shallow';
 

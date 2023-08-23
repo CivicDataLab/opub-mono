@@ -1,6 +1,6 @@
 import React from 'react';
 import { type TypedDocumentNode } from '@graphql-typed-document-node/core';
-import { QueryClient } from '@tanstack/react-query';
+import { QueryClient, useQuery } from '@tanstack/react-query';
 import { request } from 'graphql-request';
 
 import { gqlConfig } from '@/config/site';
@@ -35,3 +35,29 @@ export const getQueryClient = React.cache(
       },
     })
 );
+
+export function useFetch(id: string, query: string) {
+  return useQuery({
+    queryKey: [id],
+
+    queryFn: async () => {
+      try {
+        const data = await fetch(query).then((res) => res.json());
+        return data;
+      } catch (error: any) {
+        throw new Error(error);
+      }
+    },
+  });
+}
+
+export async function getData(query: string) {
+  const res = await fetch(query, {
+    cache: 'no-cache',
+  });
+  if (!res.ok) {
+    throw new Error('Failed to fetch data');
+  }
+
+  return res.json();
+}

@@ -1,13 +1,11 @@
 'use client';
 
-import React from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { useKeyDetect } from '@/hooks/use-key-detect';
-import { Button, Code, Icon, Text, Tooltip } from 'opub-ui';
-import { twMerge } from 'tailwind-merge';
+import { useParams, usePathname } from 'next/navigation';
+import { Icon, Text } from 'opub-ui';
 
 import { SidebarNavItem } from 'types';
+import { cn } from '@/lib/utils';
 import { Icons } from '@/components/icons';
 import styles from '../dashboard.module.scss';
 
@@ -15,15 +13,8 @@ interface DashboardNavProps {
   items: SidebarNavItem[];
 }
 export function DashboardSidebar({ items }: DashboardNavProps) {
-  const [isCollapsed, setIsCollapsed] = React.useState(false);
-  const { key, metaKey } = useKeyDetect();
   const path = usePathname();
-
-  React.useEffect(() => {
-    if (key === 'b' && metaKey) {
-      setIsCollapsed(!isCollapsed);
-    }
-  }, [key]);
+  const { district, department } = useParams();
 
   if (items && !items.length) {
     return null;
@@ -32,57 +23,99 @@ export function DashboardSidebar({ items }: DashboardNavProps) {
   // const sidebarIcon = isCollapsed ? Icons.expand : Icons.collapse;
   return (
     <aside
-      className={twMerge(
+      className={cn(
         'pt-5 pr-2 overflow-hidden bg-surface',
         'hidden z-1 shadow-inset basis-[240px] shrink-0 md:block',
-        isCollapsed && 'basis-[60px]',
         styles.Collapse
       )}
     >
-      <nav className={twMerge('flex flex-col gap-2')}>
+      <nav className={cn('flex flex-col gap-2')}>
+        <SidebarLink
+          href={`/${district}` || '/'}
+          title={district || 'Home'}
+          icon={'home'}
+          department={department}
+          district={district}
+        />
         {items.map((item) => {
           return (
             item.href && (
-              <Link key={item.href} href={item.disabled ? '/' : item.href}>
-                <div className={twMerge('flex justify-between relative')}>
-                  <span
-                    className={twMerge(
-                      'bg-transparent rounded-r-2 w-[6px] h-full absolute top-0 left-[-3px]',
-                      path === item.href && 'bg-decorativeIconFour'
-                    )}
-                  />
-                  <div
-                    className={twMerge(
-                      'flex items-center w-full ml-2 rounded-1 overflow-hidden',
-                      styles.Item,
-                      path === item.href && styles.Selected,
-                      isCollapsed && styles.Collapsed
-                    )}
-                  >
-                    {item.icon && (
-                      <div className="basis-5 pl-3">
-                        <Icon source={Icons[item.icon]} color="base" />
-                      </div>
-                    )}
-
-                    <div
-                      className={twMerge(
-                        'py-[6px] px-2 max-w-[220px]',
-                        'whitespace-nowrap opacity-100 transition-opacity duration-300',
-                        isCollapsed && 'opacity-0'
-                      )}
-                    >
-                      <Text truncate fontWeight="medium">
-                        {item.title}
-                      </Text>
-                    </div>
-                  </div>
-                </div>
-              </Link>
+              <SidebarLink
+                key={item.href + path}
+                href={`/${district}${item.href}`}
+                title={item.title}
+                department={department}
+              />
             )
           );
         })}
       </nav>
     </aside>
   );
+}
+
+const SidebarLink = ({
+  href,
+  title,
+  icon,
+  department,
+  district,
+}: {
+  href: string;
+  title: string;
+  icon?: string;
+  department: string;
+  district?: string;
+}) => {
+  return (
+    <Link key={href + title} href={href}>
+      <div className={cn('flex justify-between relative')}>
+        <span
+          className={cn(
+            'bg-transparent rounded-r-2 w-[6px] h-full absolute top-0 left-[-3px]',
+            isActive(department, href, district) && 'bg-decorativeIconFour'
+          )}
+        />
+        <div
+          className={cn(
+            'flex items-center w-full ml-2 rounded-1 overflow-hidden',
+            styles.Item,
+            isActive(department, href, district) && styles.Selected
+          )}
+        >
+          {icon && (
+            <div className="basis-5 pl-3">
+              <Icon source={Icons[icon]} color="base" />
+            </div>
+          )}
+
+          <div
+            className={cn(
+              'py-[6px] px-2 max-w-[220px]',
+              'whitespace-nowrap opacity-100 transition-opacity duration-300'
+            )}
+          >
+            <Text truncate fontWeight="medium" className="capitalize">
+              {title}
+            </Text>
+          </div>
+        </div>
+      </div>
+    </Link>
+  );
+};
+
+export function isActive(department: string, href: string, district?: string) {
+  if (!department && district) {
+    return true;
+  }
+
+  const hrefSplit = href.split('/');
+  const sanitizedHref = hrefSplit[hrefSplit.length - 1];
+
+  if (department === sanitizedHref) {
+    return true;
+  }
+
+  return false;
 }

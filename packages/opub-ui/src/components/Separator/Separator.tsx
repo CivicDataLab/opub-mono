@@ -17,6 +17,8 @@ type BorderTokenAlias = 'base' | 'dark' | 'divider' | 'transparent';
 interface SeparatorProps extends SeparatorPrimitive.SeparatorProps {
   /** Separator border style */
   bgColor?: BorderTokenAlias;
+
+  className?: string;
 }
 
 const Separator = React.forwardRef<

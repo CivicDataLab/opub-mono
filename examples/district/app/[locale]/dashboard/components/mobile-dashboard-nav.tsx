@@ -2,102 +2,138 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { useOnClickOutside } from '@/hooks/use-on-click-outside';
+import { useParams, usePathname } from 'next/navigation';
 import { SidebarNavItem } from '@/types';
-import { IconMenu, IconX } from '@tabler/icons-react';
-import { Icon, Text } from 'opub-ui';
-import { twMerge } from 'tailwind-merge';
+import { IconX } from '@tabler/icons-react';
+import {
+  Button,
+  CommandDialog,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+  Icon,
+  IconButton,
+  Text,
+} from 'opub-ui';
 
 import { cn } from '@/lib/utils';
 import { Icons } from '@/components/icons';
 import dashboardStyles from '../dashboard.module.scss';
-import styles from './styles.module.scss';
+import { isActive } from './dashboard-sidebar';
 
 interface DashboardNavProps {
   items: SidebarNavItem[];
-  isOpened: boolean;
-  setIsOpened: any;
 }
 
-export function MobileDashboardNav({
-  isOpened,
-  setIsOpened,
-  items,
-}: DashboardNavProps) {
-  const path = usePathname();
-  const asideRef = React.useRef<HTMLDivElement>(null);
+export function MobileDashboardNav({ items }: DashboardNavProps) {
+  const [open, setOpen] = React.useState(false);
 
-  useOnClickOutside(asideRef, () => {
-    if (isOpened) {
-      setIsOpened(false);
-    }
-  });
+  const path = usePathname();
+  const { district, department } = useParams();
+
+  const activeItem = React.useMemo(() => {
+    return items.find((item) => item.href === path);
+  }, [items, path]);
 
   if (items && !items.length) {
     return null;
   }
 
   return (
-    <>
-      <button
-        onClick={() => {
-          setIsOpened(!isOpened);
-        }}
-        className={cn(styles.NavButton, isOpened && styles.NavButtonOpen)}
-      >
-        <Icon source={isOpened ? IconX : IconMenu} />
-        <Text visuallyHidden>Trigger Menu</Text>
-      </button>
-      <aside
-        ref={asideRef}
-        className={cn(styles.Aside, isOpened && styles.AsideOpen)}
-      >
-        <nav className={styles.MobileNavContainer}>
-          <ul>
+    <div className="container mt-3">
+      <Button fullWidth disclosure onClick={() => setOpen((e) => !e)}>
+        {activeItem?.title || 'Select a department'}
+      </Button>
+
+      <CommandDialog open={open} onOpenChange={setOpen}>
+        <div className="flex justify-between items-center px-3 py-2">
+          <Text variant="headingMd" as="h1">
+            Select a department
+          </Text>
+          <IconButton onClick={() => setOpen(false)} icon={IconX}>
+            Close
+          </IconButton>
+        </div>
+
+        <CommandInput placeholder="search..." />
+        <CommandList className=" max-h-full">
+          <CommandEmpty>No results found.</CommandEmpty>
+          <CommandGroup heading="Departments">
+            <MenuLink
+              href={`/${district}`}
+              title={district}
+              department={department}
+              district={district}
+              setOpen={setOpen}
+            />
             {items.map((item) => {
-              const icon = Icons[item.icon || 'arrowRight'];
               return (
-                item.href && (
-                  <Link
-                    key={item.href}
-                    href={item.disabled ? '/' : item.href}
-                    onClick={() => setIsOpened(false)}
-                  >
-                    <div className={twMerge('flex justify-between relative')}>
-                      <span
-                        className={twMerge(
-                          'bg-transparent rounded-r-1 w-[3px] h-full absolute top-0 left-0',
-                          path.includes(item.href) && 'bg-decorativeIconFour'
-                        )}
-                      />
-                      <div
-                        className={twMerge(
-                          'flex items-center pl-2 w-full ml-2 rounded-1 overflow-hidden',
-                          dashboardStyles.Item,
-                          path.includes(item.href) && dashboardStyles.Selected
-                        )}
-                      >
-                        {item.icon && (
-                          <Icon source={Icons[item.icon]} color="base" />
-                        )}
-                        <div
-                          className={twMerge(
-                            'py-2 px-3',
-                            'whitespace-nowrap opacity-100 transition-opacity duration-300'
-                          )}
-                        >
-                          <Text fontWeight="medium">{item.title}</Text>
-                        </div>
-                      </div>
-                    </div>
-                  </Link>
-                )
+                <MenuLink
+                  key={item.href + path}
+                  href={`/${district}${item.href}`}
+                  title={item.title}
+                  department={department}
+                  setOpen={setOpen}
+                />
               );
             })}
-          </ul>
-        </nav>
-      </aside>
-    </>
+          </CommandGroup>
+        </CommandList>
+      </CommandDialog>
+    </div>
   );
 }
+
+const MenuLink = ({
+  href,
+  title,
+  icon,
+  department,
+  district,
+  setOpen,
+}: {
+  href: string;
+  title: string;
+  icon?: string;
+  department: string;
+  district?: string;
+  setOpen: (e: boolean) => void;
+}) => {
+  return (
+    <CommandItem
+      key={href + title}
+      className={cn('flex justify-between relative p-0')}
+    >
+      <Link
+        href={href || '#'}
+        onClick={() => setOpen(false)}
+        className={cn(
+          'py-3 px-2 w-full',
+          isActive(department, href, district) && dashboardStyles.Selected
+        )}
+      >
+        <span
+          className={cn(
+            'bg-transparent rounded-r-2 w-[6px] h-full absolute top-0 left-[-10px]',
+            isActive(department, href, district) && 'bg-decorativeIconFour'
+          )}
+        />
+        <div
+          className={cn(
+            'flex items-center w-full rounded-1 overflow-hidden',
+            dashboardStyles.Item
+          )}
+        >
+          {icon && (
+            <div className="pr-1">
+              <Icon source={Icons[icon]} color="base" />
+            </div>
+          )}
+          <Text className="capitalize">{title}</Text>
+        </div>
+      </Link>
+    </CommandItem>
+  );
+};
