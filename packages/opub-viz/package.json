@@ -44,7 +44,7 @@
     "coverage": "vitest run --coverage",
     "lint": "eslint --ext=tsx src",
     "lint:fix": "eslint --ext=ts,tsx,js,jsx src --fix",
-    "chromatic": "npx chromatic --exit-once-uploaded --project-token=795f989bc619",
+    "chromatic": "npx chromatic --exit-once-uploaded --project-token=chpt_05d24db7d0da805",
     "clean": "rm -rf .turbo node_modules dist"
   },
   "peerDependencies": {
