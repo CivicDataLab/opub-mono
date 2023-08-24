@@ -1,3 +1,4 @@
+import { cn } from '../../utils';
 import styles from './LeafletChoropleth.module.scss';
 import React from 'react';
 import { MapContainer, Marker, Popup, TileLayer, GeoJSON } from 'react-leaflet';
@@ -22,7 +23,7 @@ type MapProps = {
   mapDataFn: (value: number) => string;
 
   /* theme of the map */
-  mapTheme?: 'light' | 'dark';
+  mapTheme?: 'light_all' | 'dark_all';
 
   /* zoom level of the map */
   mapZoom?: number;
@@ -34,16 +35,19 @@ type MapProps = {
   zoomOnClick?: boolean;
 };
 
-type Props = MapProps & {
+type LegendProps = {
+  /* data for legend */
   legendData: { label: string; color: string }[];
 };
 
+type Props = MapProps & LegendProps;
+
 export const LeafletChoropleth = (props: Props) => {
-  const { legendData, ...others } = props;
+  const { legendData, mapTheme = 'light_all', ...others } = props;
   return (
     <div className={styles.Wrapper}>
-      <Map {...others} />
-      <Legend data={legendData} />
+      <Map mapTheme={mapTheme} {...others} />
+      <Legend legendData={legendData} theme={mapTheme} />
     </div>
   );
 };
@@ -54,9 +58,9 @@ const Map = ({
   mouseout,
   mapDataFn,
   click,
-  mapTheme = 'light',
+  mapTheme,
   mapProperty,
-  mapZoom = 7.4,
+  mapZoom = 7,
   mapCenter = [26.193, 92.773],
   zoomOnClick = true,
 }: MapProps) => {
@@ -66,8 +70,8 @@ const Map = ({
     var layer = e.target;
 
     layer.setStyle({
-      weight: 5,
-      color: '#666',
+      weight: 3,
+      color: mapTheme === 'dark_all' ? '#ddd' : '#333',
       dashArray: '',
       fillOpacity: 0.7,
     });
@@ -105,7 +109,7 @@ const Map = ({
       fillColor: mapDataFn(Number(feature.properties[mapProperty])),
       weight: 1,
       opacity: 1,
-      color: 'white',
+      color: mapTheme === 'dark_all' ? '#eee' : '#444',
       dashArray: '2',
       fillOpacity: 0.5,
     };
@@ -115,11 +119,10 @@ const Map = ({
     return feature;
   });
 
-  const mapThemeStyle = mapTheme === 'dark' ? 'dark_all' : 'light_all';
   return (
     <MapContainer center={mapCenter} zoom={mapZoom} ref={mapRef}>
       <TileLayer
-        url={`https://cartodb-basemaps-{s}.global.ssl.fastly.net/${mapThemeStyle}/{z}/{x}/{y}.png`}
+        url={`https://cartodb-basemaps-{s}.global.ssl.fastly.net/${mapTheme}/{z}/{x}/{y}.png`}
       />
       {features && (
         <GeoJSON data={feature} style={style} onEachFeature={onEachFeature} />
@@ -128,9 +131,16 @@ const Map = ({
   );
 };
 
-const Legend = ({ data }: { data: { label: string; color: string }[] }) => {
+const Legend = ({
+  legendData: data,
+  theme,
+}: LegendProps & {
+  theme: 'light_all' | 'dark_all';
+}) => {
+  const className = cn(styles.Legend, styles[theme]);
+
   return (
-    <div className={styles.Legend}>
+    <div className={className}>
       {data.map((item) => {
         return (
           <div
