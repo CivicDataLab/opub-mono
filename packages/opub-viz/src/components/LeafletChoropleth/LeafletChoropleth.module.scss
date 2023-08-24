@@ -11,19 +11,21 @@
   right: 16px;
   bottom: 32px;
   padding: 20px 10px;
-  box-shadow: 0 0 5px 0 rgba(184, 140, 140, 0.3);
+  box-shadow: 0 0 5px 0 rgba(240, 234, 234, 0.3);
+  background-color: rgba(217, 217, 217, 0.8);
   font-size: 12px;
   letter-spacing: 2px;
-  background: rgba(0, 0, 0, 0.8);
   border-radius: 5px;
-  width: 16%;
+  font-family: var(--primary-font);
 
   & > div {
-    color: white;
+    color: #000;
     position: relative;
     display: flex;
+    align-items: center;
     height: 20px;
     padding: 0 10px;
+    font-weight: 500;
   }
 
   & > div::before {
@@ -33,22 +35,48 @@
     top: 0;
     width: 20px;
     height: 20px;
-    margin-right: 5px;
+    margin-right: 12px;
   }
 
   @media (max-width: 768px) {
+    left: 38px;
+    bottom: 100px;
+    font-size: 10px;
+    letter-spacing: 0px;
+    height: 15%;
+
     & > div::before {
       width: 10px;
       height: 10px;
     }
+  }
 
-    & {
-      left: 38px;
-      bottom: 100px;
-      font-size: 10px;
-      letter-spacing: 0px;
-      width: 30%;
-      height: 15%;
+  &.light_all {
+    background: rgba(217, 217, 217, 0.8);
+    box-shadow: 0 0 5px 0 rgba(240, 234, 234, 0.3);
+
+    & > div {
+      color: #000;
     }
+  }
+
+  &.dark_all {
+    background: rgba(0, 0, 0, 0.8);
+    box-shadow: 0 0 5px 0 rgba(184, 140, 140, 0.3);
+
+    & > div {
+      color: #fff;
+    }
+  }
+}
+
+.LayerSelector {
+  position: absolute;
+  z-index: 999;
+  right: 16px;
+  top: 32px;
+
+  button {
+    cursor: pointer;
   }
 }

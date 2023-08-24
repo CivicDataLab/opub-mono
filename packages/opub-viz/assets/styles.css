@@ -1,4 +1,5 @@
 @import './tokens.css';
+@import '../styles/base.css';
 
 .leaflet-container {
   width: 100%;
