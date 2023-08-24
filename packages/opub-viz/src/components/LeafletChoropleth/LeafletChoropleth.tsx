@@ -1,6 +1,19 @@
+import { cn } from '../../utils';
+import { Popover, PopoverContent, PopoverTrigger } from '../ui';
 import styles from './LeafletChoropleth.module.scss';
+import { IconBoxMultiple } from '@tabler/icons-react';
 import React from 'react';
-import { MapContainer, Marker, Popup, TileLayer, GeoJSON } from 'react-leaflet';
+import { GeoJSON, MapContainer, TileLayer } from 'react-leaflet';
+
+const layers = [
+  'light_all',
+  'light_nolabels',
+  'dark_all',
+  'dark_nolabels',
+  'rastertiles/voyager',
+  'rastertiles/voyager_nolabels',
+] as const;
+type layerOptions = (typeof layers)[number];
 
 type MapProps = {
   /* Map file to be used */
@@ -22,7 +35,7 @@ type MapProps = {
   mapDataFn: (value: number) => string;
 
   /* theme of the map */
-  mapTheme?: 'light' | 'dark';
+  mapTheme?: layerOptions;
 
   /* zoom level of the map */
   mapZoom?: number;
@@ -34,16 +47,27 @@ type MapProps = {
   zoomOnClick?: boolean;
 };
 
-type Props = MapProps & {
+type LegendProps = {
+  /* data for legend */
   legendData: { label: string; color: string }[];
 };
 
+type Props = MapProps & LegendProps;
+
 export const LeafletChoropleth = (props: Props) => {
-  const { legendData, ...others } = props;
+  const { legendData, mapTheme = 'light_all', ...others } = props;
+
+  const [selectedLayer, setSelectedLayer] =
+    React.useState<layerOptions>(mapTheme);
+
   return (
     <div className={styles.Wrapper}>
-      <Map {...others} />
-      <Legend data={legendData} />
+      <Map mapTheme={selectedLayer} {...others} />
+      <LayerSelector
+        selectedLayer={selectedLayer}
+        setSelectedLayer={setSelectedLayer}
+      />
+      <Legend legendData={legendData} theme={selectedLayer} />
     </div>
   );
 };
@@ -54,9 +78,9 @@ const Map = ({
   mouseout,
   mapDataFn,
   click,
-  mapTheme = 'light',
+  mapTheme,
   mapProperty,
-  mapZoom = 7.4,
+  mapZoom = 7,
   mapCenter = [26.193, 92.773],
   zoomOnClick = true,
 }: MapProps) => {
@@ -66,8 +90,8 @@ const Map = ({
     var layer = e.target;
 
     layer.setStyle({
-      weight: 5,
-      color: '#666',
+      weight: 3,
+      color: mapTheme === 'dark_all' ? '#ddd' : '#333',
       dashArray: '',
       fillOpacity: 0.7,
     });
@@ -105,7 +129,7 @@ const Map = ({
       fillColor: mapDataFn(Number(feature.properties[mapProperty])),
       weight: 1,
       opacity: 1,
-      color: 'white',
+      color: mapTheme === 'dark_all' ? '#eee' : '#444',
       dashArray: '2',
       fillOpacity: 0.5,
     };
@@ -115,11 +139,10 @@ const Map = ({
     return feature;
   });
 
-  const mapThemeStyle = mapTheme === 'dark' ? 'dark_all' : 'light_all';
   return (
     <MapContainer center={mapCenter} zoom={mapZoom} ref={mapRef}>
       <TileLayer
-        url={`https://cartodb-basemaps-{s}.global.ssl.fastly.net/${mapThemeStyle}/{z}/{x}/{y}.png`}
+        url={`https://cartodb-basemaps-{s}.global.ssl.fastly.net/${mapTheme}/{z}/{x}/{y}.png`}
       />
       {features && (
         <GeoJSON data={feature} style={style} onEachFeature={onEachFeature} />
@@ -128,9 +151,16 @@ const Map = ({
   );
 };
 
-const Legend = ({ data }: { data: { label: string; color: string }[] }) => {
+const Legend = ({
+  legendData: data,
+  theme,
+}: LegendProps & {
+  theme: layerOptions;
+}) => {
+  const className = cn(styles.Legend, styles[theme]);
+
   return (
-    <div className={styles.Legend}>
+    <div className={className}>
       {data.map((item) => {
         return (
           <div
@@ -141,6 +171,55 @@ const Legend = ({ data }: { data: { label: string; color: string }[] }) => {
           </div>
         );
       })}
+    </div>
+  );
+};
+
+const LayerSelector = ({
+  selectedLayer,
+  setSelectedLayer,
+}: {
+  selectedLayer: layerOptions;
+  setSelectedLayer: (theme: layerOptions) => void;
+}) => {
+  const className = cn(styles.LayerSelector);
+
+  return (
+    <div className={className}>
+      <Popover>
+        <PopoverTrigger
+          className={cn(
+            'px-4 py-2 rounded cursor-pointer',
+            selectedLayer.includes('dark')
+              ? 'bg-gray-800/80 text-white'
+              : 'bg-gray-200/80 text-black'
+          )}
+        >
+          <span className="sr-only">Change Layer</span>
+          <IconBoxMultiple />
+        </PopoverTrigger>
+        <PopoverContent align="end">
+          <fieldset>
+            <legend>Change Layer</legend>
+            <div className="flex flex-col">
+              {layers.map((layer) => {
+                return (
+                  <label key={layer} className="flex items-center">
+                    <input
+                      type="radio"
+                      name="mapTheme"
+                      value={layer}
+                      checked={selectedLayer === layer}
+                      onChange={() => setSelectedLayer(layer)}
+                    />
+                    <span className="ml-2">{layer}</span>
+                  </label>
+                );
+              })}
+            </div>
+          </fieldset>
+        </PopoverContent>
+      </Popover>
     </div>
   );
 };

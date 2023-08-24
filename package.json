@@ -16,7 +16,7 @@
     "test": "turbo run test --filter opub-ui",
     "test:watch": "turbo run test:watch",
     "prepare": "husky install",
-    "clean": "rm -rf node_modules",
+    "clean": "rm -rf node_modules yarn.lock",
     "new-component": "new-component"
   },
   "devDependencies": {
