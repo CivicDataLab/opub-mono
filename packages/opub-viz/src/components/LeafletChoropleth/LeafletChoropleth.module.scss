@@ -69,3 +69,14 @@
     }
   }
 }
+
+.LayerSelector {
+  position: absolute;
+  z-index: 999;
+  right: 16px;
+  top: 32px;
+
+  button {
+    cursor: pointer;
+  }
+}

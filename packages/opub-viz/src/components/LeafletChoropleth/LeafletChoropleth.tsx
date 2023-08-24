@@ -1,7 +1,19 @@
 import { cn } from '../../utils';
+import { Popover, PopoverContent, PopoverTrigger } from '../ui';
 import styles from './LeafletChoropleth.module.scss';
+import { IconBoxMultiple } from '@tabler/icons-react';
 import React from 'react';
-import { MapContainer, Marker, Popup, TileLayer, GeoJSON } from 'react-leaflet';
+import { GeoJSON, MapContainer, TileLayer } from 'react-leaflet';
+
+const layers = [
+  'light_all',
+  'light_nolabels',
+  'dark_all',
+  'dark_nolabels',
+  'rastertiles/voyager',
+  'rastertiles/voyager_nolabels',
+] as const;
+type layerOptions = (typeof layers)[number];
 
 type MapProps = {
   /* Map file to be used */
@@ -23,7 +35,7 @@ type MapProps = {
   mapDataFn: (value: number) => string;
 
   /* theme of the map */
-  mapTheme?: 'light_all' | 'dark_all';
+  mapTheme?: layerOptions;
 
   /* zoom level of the map */
   mapZoom?: number;
@@ -44,10 +56,18 @@ type Props = MapProps & LegendProps;
 
 export const LeafletChoropleth = (props: Props) => {
   const { legendData, mapTheme = 'light_all', ...others } = props;
+
+  const [selectedLayer, setSelectedLayer] =
+    React.useState<layerOptions>(mapTheme);
+
   return (
     <div className={styles.Wrapper}>
-      <Map mapTheme={mapTheme} {...others} />
-      <Legend legendData={legendData} theme={mapTheme} />
+      <Map mapTheme={selectedLayer} {...others} />
+      <LayerSelector
+        selectedLayer={selectedLayer}
+        setSelectedLayer={setSelectedLayer}
+      />
+      <Legend legendData={legendData} theme={selectedLayer} />
     </div>
   );
 };
@@ -135,7 +155,7 @@ const Legend = ({
   legendData: data,
   theme,
 }: LegendProps & {
-  theme: 'light_all' | 'dark_all';
+  theme: layerOptions;
 }) => {
   const className = cn(styles.Legend, styles[theme]);
 
@@ -151,6 +171,55 @@ const Legend = ({
           </div>
         );
       })}
+    </div>
+  );
+};
+
+const LayerSelector = ({
+  selectedLayer,
+  setSelectedLayer,
+}: {
+  selectedLayer: layerOptions;
+  setSelectedLayer: (theme: layerOptions) => void;
+}) => {
+  const className = cn(styles.LayerSelector);
+
+  return (
+    <div className={className}>
+      <Popover>
+        <PopoverTrigger
+          className={cn(
+            'px-4 py-2 rounded cursor-pointer',
+            selectedLayer.includes('dark')
+              ? 'bg-gray-800/80 text-white'
+              : 'bg-gray-200/80 text-black'
+          )}
+        >
+          <span className="sr-only">Change Layer</span>
+          <IconBoxMultiple />
+        </PopoverTrigger>
+        <PopoverContent align="end">
+          <fieldset>
+            <legend>Change Layer</legend>
+            <div className="flex flex-col">
+              {layers.map((layer) => {
+                return (
+                  <label key={layer} className="flex items-center">
+                    <input
+                      type="radio"
+                      name="mapTheme"
+                      value={layer}
+                      checked={selectedLayer === layer}
+                      onChange={() => setSelectedLayer(layer)}
+                    />
+                    <span className="ml-2">{layer}</span>
+                  </label>
+                );
+              })}
+            </div>
+          </fieldset>
+        </PopoverContent>
+      </Popover>
     </div>
   );
 };
