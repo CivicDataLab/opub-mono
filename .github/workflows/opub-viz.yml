@@ -1,10 +1,10 @@
-name: 'Chromatic'
+name: 'OPub Viz'
 on:
   push:
     paths:
       - 'packages/opub-viz/**'
     branches:
-      - dev
+      - main
 jobs:
   chromatic-deployment:
     runs-on: ubuntu-latest
