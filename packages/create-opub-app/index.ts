@@ -28,36 +28,15 @@ const program = new Command(packageJson.name);
 program
   .version(packageJson.version)
   .description(packageJson.description)
-  // .arguments('<project-directory>')
+  .arguments('<project-directory>')
   .usage(`${green('<project-directory>')} [options]`)
   .action((name: string) => {
     projectPath = name;
   })
   .command('init', 'Initialize a new OPub project')
-  .option('-l, --ls  [value]', 'List directory contents')
   .parse(process.argv);
 
 const options = program.opts();
-
-async function listDirContents(filepath: string) {
-  try {
-    const files = await fs.promises.readdir(filepath);
-    const detailedFilesPromises = files.map(async (file: string) => {
-      let fileDetails = await fs.promises.lstat(path.resolve(filepath, file));
-      const { size, birthtime } = fileDetails;
-      return { filename: file, 'size(KB)': size, created_at: birthtime };
-    });
-    const detailedFiles = await Promise.all(detailedFilesPromises);
-    console.table(detailedFiles);
-  } catch (error) {
-    console.error('Error occurred while reading the directory!', error);
-  }
-}
-
-if (options.ls) {
-  const filepath = typeof options.ls === 'string' ? options.ls : __dirname;
-  listDirContents(filepath);
-}
 
 if (!process.argv.slice(2).length) {
   program.outputHelp();
@@ -66,6 +45,7 @@ if (!process.argv.slice(2).length) {
 async function run(): Promise<void> {
   createApp({
     example,
+    projectPath,
   });
 }
 

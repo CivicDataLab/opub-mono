@@ -4,7 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { usePRouter } from '@/hooks/use-prouter';
 import { Icon, Input, Separator, Text } from 'opub-ui';
-import { MapChart } from 'opub-viz/src';
+import { MapChart } from 'opub-viz';
 
 import { useFetch } from '@/lib/api';
 import { cn } from '@/lib/utils';

@@ -25,7 +25,13 @@ function isErrorLike(err: unknown): err is { message: string } {
 }
 
 let repoInfo: RepoInfo | undefined;
-export async function createApp({ example }: { example: string }) {
+export async function createApp({
+  example,
+  projectPath,
+}: {
+  example: string;
+  projectPath: string;
+}) {
   if (example) {
     let repoUrl: URL | undefined;
     try {
@@ -86,7 +92,7 @@ export async function createApp({ example }: { example: string }) {
     }
   }
 
-  const root = path.resolve('my-app');
+  const root = path.resolve(projectPath);
 
   if (!(await isWriteable(path.dirname(root)))) {
     console.error(
