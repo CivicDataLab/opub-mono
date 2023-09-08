@@ -8,9 +8,16 @@ import { Meta, StoryObj } from '@storybook/react';
 const meta = {
   component: LeafletChoropleth,
   argTypes: {
-    mapTheme: {
+    defaultLayer: {
       control: 'select',
-      options: ['light_all', 'dark_all'],
+      options: [
+        'light_all',
+        'light_nolabels',
+        'dark_all',
+        'dark_nolabels',
+        'rastertiles/voyager',
+        'rastertiles/voyager_nolabels',
+      ],
       description: 'theme of the map',
     },
   },
@@ -75,7 +82,7 @@ export const Default: Story = {
     legendData,
     mapDataFn,
     mapProperty: 'dt_code',
-    mapTheme: 'dark_all',
+    defaultLayer: 'dark_all',
     mapZoom: 7.4,
   },
 };

@@ -35,7 +35,7 @@ type MapProps = {
   mapDataFn: (value: number) => string;
 
   /* theme of the map */
-  mapTheme?: layerOptions;
+  defaultLayer?: layerOptions;
 
   /* zoom level of the map */
   mapZoom?: number;
@@ -55,19 +55,19 @@ type LegendProps = {
 type Props = MapProps & LegendProps;
 
 export const LeafletChoropleth = (props: Props) => {
-  const { legendData, mapTheme = 'light_all', ...others } = props;
+  const { legendData, defaultLayer = 'light_all', ...others } = props;
 
   const [selectedLayer, setSelectedLayer] =
-    React.useState<layerOptions>(mapTheme);
+    React.useState<layerOptions>(defaultLayer);
 
   return (
     <div className={styles.Wrapper}>
-      <Map mapTheme={selectedLayer} {...others} />
+      <Map selectedLayer={selectedLayer} {...others} key={selectedLayer} />
       <LayerSelector
         selectedLayer={selectedLayer}
         setSelectedLayer={setSelectedLayer}
       />
-      <Legend legendData={legendData} theme={selectedLayer} />
+      <Legend legendData={legendData} selectedLayer={selectedLayer} />
     </div>
   );
 };
@@ -78,12 +78,14 @@ const Map = ({
   mouseout,
   mapDataFn,
   click,
-  mapTheme,
+  selectedLayer,
   mapProperty,
   mapZoom = 7,
   mapCenter = [26.193, 92.773],
   zoomOnClick = true,
-}: MapProps) => {
+}: MapProps & {
+  selectedLayer: layerOptions;
+}) => {
   const mapRef = React.useRef<any>(null);
 
   function highlightFeature(e: { target: any }) {
@@ -91,7 +93,7 @@ const Map = ({
 
     layer.setStyle({
       weight: 3,
-      color: mapTheme === 'dark_all' ? '#ddd' : '#333',
+      color: selectedLayer?.includes('dark') ? '#ddd' : '#333',
       dashArray: '',
       fillOpacity: 0.7,
     });
@@ -129,7 +131,7 @@ const Map = ({
       fillColor: mapDataFn(Number(feature.properties[mapProperty])),
       weight: 1,
       opacity: 1,
-      color: mapTheme === 'dark_all' ? '#eee' : '#444',
+      color: selectedLayer?.includes('dark') ? '#eee' : '#444',
       dashArray: '2',
       fillOpacity: 0.5,
     };
@@ -142,7 +144,7 @@ const Map = ({
   return (
     <MapContainer center={mapCenter} zoom={mapZoom} ref={mapRef}>
       <TileLayer
-        url={`https://cartodb-basemaps-{s}.global.ssl.fastly.net/${mapTheme}/{z}/{x}/{y}.png`}
+        url={`https://cartodb-basemaps-{s}.global.ssl.fastly.net/${selectedLayer}/{z}/{x}/{y}.png`}
       />
       {features && (
         <GeoJSON data={feature} style={style} onEachFeature={onEachFeature} />
@@ -153,11 +155,11 @@ const Map = ({
 
 const Legend = ({
   legendData: data,
-  theme,
+  selectedLayer,
 }: LegendProps & {
-  theme: layerOptions;
+  selectedLayer: layerOptions;
 }) => {
-  const className = cn(styles.Legend, styles[theme]);
+  const className = cn(styles.Legend, styles[selectedLayer]);
 
   return (
     <div className={className}>
@@ -180,7 +182,7 @@ const LayerSelector = ({
   setSelectedLayer,
 }: {
   selectedLayer: layerOptions;
-  setSelectedLayer: (theme: layerOptions) => void;
+  setSelectedLayer: (selectedLayer: layerOptions) => void;
 }) => {
   const className = cn(styles.LayerSelector);
 

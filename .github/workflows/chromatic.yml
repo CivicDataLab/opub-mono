@@ -1,4 +1,4 @@
-name: 'Chromatic'
+name: 'OPub UI'
 on:
   push:
     paths:
