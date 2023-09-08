@@ -28,13 +28,12 @@ const program = new Command(packageJson.name);
 program
   .version(packageJson.version)
   .description(packageJson.description)
-  // .arguments('<project-directory>')
+  .arguments('<project-directory>')
   .usage(`${green('<project-directory>')} [options]`)
   .action((name: string) => {
     projectPath = name;
   })
   .command('init', 'Initialize a new OPub project')
-  .option('-l, --ls  [value]', 'List directory contents')
   .parse(process.argv);
 
 const options = program.opts();
@@ -46,6 +45,7 @@ if (!process.argv.slice(2).length) {
 async function run(): Promise<void> {
   createApp({
     example,
+    projectPath,
   });
 }
 

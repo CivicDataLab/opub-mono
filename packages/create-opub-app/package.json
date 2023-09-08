@@ -46,7 +46,7 @@
     "tar": "^6.2.0"
   },
   "engines": {
-    "node": ">=16.14.0"
+    "node": ">=v18.17.0"
   },
   "dependencies": {}
 }
