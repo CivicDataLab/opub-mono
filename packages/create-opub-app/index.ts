@@ -1,6 +1,7 @@
 #! /usr/bin/env node
+import { createApp } from './create-app';
 import packageJson from './package.json';
-import { green } from 'picocolors';
+import { green, cyan, red } from 'picocolors';
 
 const figlet = require('figlet');
 const { Command } = require('commander');
@@ -19,6 +20,8 @@ console.log(
 
 let projectPath: string = '';
 const packageManager = 'yarn';
+const example =
+  'https://github.com/CivicDataLab/opub-mono/tree/main/examples/district';
 
 const program = new Command(packageJson.name);
 
@@ -59,3 +62,24 @@ if (options.ls) {
 if (!process.argv.slice(2).length) {
   program.outputHelp();
 }
+
+async function run(): Promise<void> {
+  createApp({
+    example,
+  });
+}
+
+run().catch(async (reason) => {
+  console.log();
+  console.log('Aborting installation.');
+  if (reason.command) {
+    console.log(`  ${cyan(reason.command)} has failed.`);
+  } else {
+    console.log(
+      red('Unexpected error. Please report it as a bug:') + '\n',
+      reason
+    );
+  }
+  console.log();
+  process.exit(1);
+});
