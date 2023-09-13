@@ -1,4 +1,5 @@
 :root { 
+  --map-area-district-selected: var(--map-area-district-selected);
   --lightmode-red-alpha-12: #280003ED;
   --lightmode-red-alpha-11: #C30007D4;
   --lightmode-red-alpha-10: #D10007C2;
@@ -33,15 +34,18 @@
   --surface-critical: var(--surface-critical);
   --surface-warning: var(--surface-warning);
   --surface-default: var(--surface-default);
+  --map-area-district-disabled: var(--map-area-district-disabled);
   --lightmode-indigo-alpha-6: #013DE438;
   --border-interactive-focused: var(--border-interactive-focused);
   --background-subdued: var(--background-subdued);
   --lightmode-indigo-alpha-5: #023CEB26;
+  --map-area-district-border: var(--map-area-district-border);
   --lightmode-indigo-alpha-7: #0038E052;
   --border-interactive-default: var(--border-interactive-default);
   --background-dark: var(--background-dark);
   --lightmode-indigo-alpha-4: #0247F51A;
   --background-default: var(--background-default);
+  --map-area-district-default: var(--map-area-district-default);
   --lightmode-indigo-alpha-3: #0144FF0F;
   --lightmode-blue-solid-12: #00254D;
   --lightmode-violet-alpha-11: #180091BA;
@@ -71,6 +75,7 @@
   --lightmode-amber-solid-11: #AD5700;
   --lightmode-amber-solid-10: #FFA01C;
   --surface-selected: var(--surface-selected);
+  --map-area-district-hover: var(--map-area-district-hover);
   --lightmode-indigo-alpha-2: #054CFF08;
   --lightmode-pure-white: #FFFFFF;
   --lightmode-amber-solid-9: #FFB224;
