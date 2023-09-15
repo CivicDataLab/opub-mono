@@ -6,7 +6,6 @@ import { mainConfig, siteConfig } from '@/config/site';
 import { MainNav } from '@/components/main-nav';
 import Provider from '@/components/provider';
 import locales from '../../config/locales';
-import { DashboardLayout } from './dashboard/components/dashboard-layout';
 
 const fontSans = FontSans({ subsets: ['latin'], display: 'swap' });
 

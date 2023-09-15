@@ -6,7 +6,7 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from '@radix-ui/react-collapsible';
-import { Breadcrumbs, Icon, Input, Separator, Text } from 'opub-ui';
+import { Breadcrumbs, Icon, Separator, Text } from 'opub-ui';
 
 import { Icons } from '@/components/icons';
 import { ContentCard, DepartmentCard } from './Card';

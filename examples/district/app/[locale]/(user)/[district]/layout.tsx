@@ -1,5 +1,5 @@
 import { mainConfig } from '@/config/site';
-import { DashboardLayout } from '../../dashboard/components/dashboard-layout';
+import { DashboardLayout } from './components/dashboard-layout';
 
 export default async function LocaleLayout({
   children,
