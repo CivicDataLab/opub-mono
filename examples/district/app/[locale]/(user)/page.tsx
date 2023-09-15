@@ -4,7 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { usePRouter } from '@/hooks/use-prouter';
 import { Icon, Input, Separator, Text } from 'opub-ui';
-import { MapChart } from 'opub-viz';
+import { LeafletChoropleth, MapChart } from 'opub-viz';
 
 import { useFetch } from '@/lib/api';
 import { cn } from '@/lib/utils';
@@ -32,6 +32,47 @@ export default function Home() {
     }
   }, [search]);
 
+  const legendData = [
+    {
+      label: '331+',
+      color: '#a50f15',
+    },
+    {
+      label: '326 - 330',
+      color: '#de2d26',
+    },
+    {
+      label: '321 - 325',
+      color: '#fb6a4a',
+    },
+    {
+      label: '316 - 320',
+      color: '#fc9272',
+    },
+    {
+      label: '311 - 315',
+      color: '#fcbba1',
+    },
+    {
+      label: '0 - 310',
+      color: '#fee5d9',
+    },
+  ];
+
+  const mapDataFn = (value: number) => {
+    return value >= 330
+      ? '#a50f15'
+      : value >= 325
+      ? '#de2d26'
+      : value >= 320
+      ? '#fb6a4a'
+      : value >= 315
+      ? '#fc9272'
+      : value >= 310
+      ? '#fcbba1'
+      : '#fee5d9';
+  };
+
   return (
     <main className="px-2">
       <div className="mx-auto mt-10 py-6 px-10 bg-surface rounded-1 shadow-lg max-w-[1180px]">
@@ -50,8 +91,17 @@ export default function Home() {
           </Text>
         </div>
         <div className="mt-10 flex gap-10">
-          <div className="w-full max-w-[768px] bg-surfaceHighlightSubdued">
-            <MapChart
+          <div className="w-full max-w-[768px] h-[520px] bg-surfaceHighlightSubdued">
+            {!mapLoading && (
+              <LeafletChoropleth
+                features={mapFile.features}
+                legendData={legendData}
+                mapDataFn={mapDataFn}
+                mapProperty={'dt_code'}
+                mapZoom={7.4}
+              />
+            )}
+            {/* <MapChart
               mapFile={mapFile}
               mapName="assam-block"
               height="450px"
@@ -79,7 +129,7 @@ export default function Home() {
                   router.push(`/${selected.name.toLowerCase()}`);
                 }
               }}
-            />
+            /> */}
           </div>
           <div className="rounded-1 border-1 border-divider border-solid grow p-4">
             <Input
