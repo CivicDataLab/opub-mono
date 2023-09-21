@@ -1,10 +1,9 @@
+import { NextIntlClientProvider, createTranslator } from 'next-intl';
 import { Inter as FontSans } from 'next/font/google';
 import { notFound } from 'next/navigation';
-import { NextIntlClientProvider, createTranslator } from 'next-intl';
 
-import { mainConfig, siteConfig } from '@/config/site';
-import { MainNav } from '@/components/main-nav';
 import Provider from '@/components/provider';
+import { siteConfig } from '@/config/site';
 import locales from '../../config/locales';
 
 const fontSans = FontSans({ subsets: ['latin'], display: 'swap' });
@@ -93,7 +92,6 @@ export default async function LocaleLayout({
       <body className={fontSans.className}>
         <NextIntlClientProvider locale={locale} messages={messages}>
           <Provider>
-            <MainNav data={mainConfig} />
             {children}
           </Provider>
         </NextIntlClientProvider>

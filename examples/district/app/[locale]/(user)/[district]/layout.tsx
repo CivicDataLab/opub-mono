@@ -1,5 +1,6 @@
 import { mainConfig } from '@/config/site';
 import { DashboardLayout } from './components/dashboard-layout';
+import { MainNav } from '@/components/main-nav';
 
 export default async function LocaleLayout({
   children,
@@ -7,6 +8,9 @@ export default async function LocaleLayout({
   children: React.ReactNode;
 }) {
   return (
-    <DashboardLayout dashboardConfig={mainConfig}>{children}</DashboardLayout>
+    <>
+     <MainNav data={mainConfig} />
+     <DashboardLayout dashboardConfig={mainConfig}>{children}</DashboardLayout>
+    </>
   );
 }

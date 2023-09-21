@@ -4,19 +4,21 @@ import React from 'react';
 import Link from 'next/link';
 import { usePRouter } from '@/hooks/use-prouter';
 import { Icon, Input, Separator, Text } from 'opub-ui';
-import { LeafletChoropleth, MapChart } from 'opub-viz';
 
 import { useFetch } from '@/lib/api';
 import { cn } from '@/lib/utils';
 import { Icons } from '@/components/icons';
 import { assamDistricts } from './home.config';
+import dynamic from 'next/dynamic';
+
+const LeafletChoropleth = dynamic(() => import('opub-viz').then(mod => mod.LeafletChoropleth), { ssr: false })
 
 export default function Home() {
   const [search, setSearch] = React.useState('');
   const [districtList, setDistrictList] = React.useState(assamDistricts);
   const router = usePRouter();
   const { data: mapFile, isLoading: mapLoading } = useFetch(
-    `assam-mapFile`,
+    `assam-mapFiles`,
     `/files/assam.json`
   );
 
