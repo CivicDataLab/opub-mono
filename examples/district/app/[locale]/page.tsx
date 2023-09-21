@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { usePRouter } from '@/hooks/use-prouter';
 import { Icon, Input, Separator, Text } from 'opub-ui';
@@ -9,9 +10,11 @@ import { useFetch } from '@/lib/api';
 import { cn } from '@/lib/utils';
 import { Icons } from '@/components/icons';
 import { assamDistricts } from './home.config';
-import dynamic from 'next/dynamic';
 
-const LeafletChoropleth = dynamic(() => import('opub-viz').then(mod => mod.LeafletChoropleth), { ssr: false })
+const LeafletChoropleth = dynamic(
+  () => import('opub-viz').then((mod) => mod.LeafletChoropleth),
+  { ssr: false }
+);
 
 export default function Home() {
   const [search, setSearch] = React.useState('');
@@ -34,73 +37,52 @@ export default function Home() {
     }
   }, [search]);
 
-  const legendData = [
-    {
-      label: '331+',
-      color: '#a50f15',
-    },
-    {
-      label: '326 - 330',
-      color: '#de2d26',
-    },
-    {
-      label: '321 - 325',
-      color: '#fb6a4a',
-    },
-    {
-      label: '316 - 320',
-      color: '#fc9272',
-    },
-    {
-      label: '311 - 315',
-      color: '#fcbba1',
-    },
-    {
-      label: '0 - 310',
-      color: '#fee5d9',
-    },
-  ];
-
-  const mapDataFn = (value: number) => {
-    return value >= 330
-      ? '#a50f15'
-      : value >= 325
-      ? '#de2d26'
-      : value >= 320
-      ? '#fb6a4a'
-      : value >= 315
-      ? '#fc9272'
-      : value >= 310
-      ? '#fcbba1'
-      : '#fee5d9';
-  };
-
   return (
-    <main className="px-2">
-      <div className="mx-auto mt-10 py-6 px-10 bg-surface rounded-1 shadow-lg max-w-[1180px]">
-        <Text variant="heading2xl" as="h1">
-          Data for Districts Assam
-        </Text>
-        <Separator className="my-6" />
-        <div className="max-w-[795px]">
-          <Text variant="bodyLg">
-            It is the most populated state in India, as well as the most
-            populous country subdivision in the world. The state is bordered by
-            Rajasthan to the west, Haryana, Himachal Pradesh and Delhi to the
-            northwest, Uttarakhand and an international border with Nepal to the
-            north, Bihar to the east, Madhya Pradesh to the south, and touches
-            the states of Jharkhand and Chhattisgarh to the southeast.
-          </Text>
+    <main className="">
+      <div className="py-12 w-full bg-backgroundDark">
+        <div className="flex items-center justify-center gap-10">
+          <div className="w-[100px] h-[100px] bg-lightmodeVioletSolid5 rounded-full" />
+          <div className=" text-textOnBG">
+            <Text
+              variant="heading4xl"
+              as="h1"
+              className="flex items-center gap-6 uppercase"
+              color="inherit"
+            >
+              <span>অসম</span>
+              <span>Assam</span>
+            </Text>
+            <Text
+              variant="heading2xl"
+              className="mt-2 uppercase"
+              color="inherit"
+              fontWeight="regular"
+            >
+              District Dashboard
+            </Text>
+          </div>
         </div>
+      </div>
+      <div className="mx-auto px-2">
+        {/* <Text variant="heading2xl" as="h1">
+          Data for Districts Assam
+        </Text> */}
         <div className="mt-10 flex gap-10">
           <div className="w-full max-w-[768px] h-[520px] bg-surfaceHighlightSubdued">
             {!mapLoading && (
               <LeafletChoropleth
                 features={mapFile.features}
-                legendData={legendData}
-                mapDataFn={mapDataFn}
-                mapProperty={'dt_code'}
+                // legendData={legendData}
+                // mapDataFn={mapDataFn}
+                // mapProperty={'dt_code'}
                 mapZoom={7.4}
+                zoomOnClick={false}
+                click={(e) => {
+                  const features = e.feature.properties;
+                  if (features.district)
+                    router.push(`/${features.district.toLowerCase()}`);
+                }}
+                hideLayers
               />
             )}
             {/* <MapChart
