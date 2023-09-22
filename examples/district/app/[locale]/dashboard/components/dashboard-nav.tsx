@@ -1,11 +1,10 @@
 'use client';
 
-import React from 'react';
-import Link from 'next/link';
-import { useKeyDetect } from '@/hooks/use-key-detect';
-import { Avatar, Box, Icon, Text, TextField } from 'opub-ui';
-
 import { Icons } from '@/components/icons';
+import { useKeyDetect } from '@/hooks/use-key-detect';
+import Link from 'next/link';
+import { Avatar, Box, Icon, Text, TextField } from 'opub-ui';
+import React from 'react';
 
 export function DashboardNav() {
   const { key, metaKey } = useKeyDetect();

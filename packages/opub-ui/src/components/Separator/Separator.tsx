@@ -10,13 +10,13 @@ const colorMap = {
   dark: 'var(--border)',
   divider: 'var(--divider)',
   transparent: 'var(--transparent)',
-};
-
-type BorderTokenAlias = 'base' | 'dark' | 'divider' | 'transparent';
+  border: 'var(--border-default)',
+} as const;
+type layerOptions = keyof typeof colorMap;
 
 interface SeparatorProps extends SeparatorPrimitive.SeparatorProps {
-  /** Separator border style */
-  bgColor?: BorderTokenAlias;
+  /** Separator bg color */
+  bgColor?: layerOptions;
 
   className?: string;
 }
@@ -30,13 +30,13 @@ const Separator = React.forwardRef<
       className,
       orientation = 'horizontal',
       decorative = true,
-      bgColor = 'divider',
+      bgColor = 'border',
       ...props
     }: SeparatorProps,
     ref
   ) => {
     const style = {
-      '--bg-color': bgColor ? colorMap[bgColor] : undefined,
+      '--bg-color': colorMap[bgColor] ? colorMap[bgColor] : bgColor,
     } as React.CSSProperties;
 
     return (

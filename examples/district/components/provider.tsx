@@ -1,12 +1,10 @@
 'use client';
 
-import React from 'react';
+import { RouterEvents } from '@/lib/navigation';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import NextTopLoader from 'nextjs-toploader';
 import { Toaster, Tooltip } from 'opub-ui';
-import { SSRProvider } from 'react-aria';
-
-import { RouterEvents } from '@/lib/navigation';
+import React from 'react';
 
 export default function Provider({ children }: { children: React.ReactNode }) {
   const [client] = React.useState(
@@ -15,14 +13,14 @@ export default function Provider({ children }: { children: React.ReactNode }) {
 
   return (
     <QueryClientProvider client={client}>
-      <SSRProvider>
+      <>
         <RouterEvents />
         <NextTopLoader color="var(--decorative-icon-three)" />
         <Tooltip.Provider>
           {children}
           <Toaster />
         </Tooltip.Provider>
-      </SSRProvider>
+      </>
     </QueryClientProvider>
   );
 }

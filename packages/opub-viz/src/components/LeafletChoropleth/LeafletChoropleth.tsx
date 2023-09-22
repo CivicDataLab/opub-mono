@@ -29,10 +29,10 @@ type MapProps = {
   click?: (e: any) => void;
 
   /* property to be used for mapping value */
-  mapProperty: string;
+  mapProperty?: string;
 
   /* function to map data to color */
-  mapDataFn: (value: number) => string;
+  mapDataFn?: (value: number) => string;
 
   /* theme of the map */
   defaultLayer?: layerOptions;
@@ -45,17 +45,25 @@ type MapProps = {
 
   /* zoom on click */
   zoomOnClick?: boolean;
+
+  /* hide layers */
+  hideLayers?: boolean;
 };
 
 type LegendProps = {
   /* data for legend */
-  legendData: { label: string; color: string }[];
+  legendData?: { label: string; color: string }[];
 };
 
 type Props = MapProps & LegendProps;
 
 export const LeafletChoropleth = (props: Props) => {
-  const { legendData, defaultLayer = 'light_all', ...others } = props;
+  const {
+    legendData,
+    defaultLayer = 'light_all',
+    hideLayers = false,
+    ...others
+  } = props;
 
   const [selectedLayer, setSelectedLayer] =
     React.useState<layerOptions>(defaultLayer);
@@ -63,11 +71,15 @@ export const LeafletChoropleth = (props: Props) => {
   return (
     <div className={styles.Wrapper}>
       <Map selectedLayer={selectedLayer} {...others} key={selectedLayer} />
-      <LayerSelector
-        selectedLayer={selectedLayer}
-        setSelectedLayer={setSelectedLayer}
-      />
-      <Legend legendData={legendData} selectedLayer={selectedLayer} />
+      {!hideLayers && (
+        <LayerSelector
+          selectedLayer={selectedLayer}
+          setSelectedLayer={setSelectedLayer}
+        />
+      )}
+      {legendData && (
+        <Legend legendData={legendData} selectedLayer={selectedLayer} />
+      )}
     </div>
   );
 };
@@ -79,7 +91,7 @@ const Map = ({
   mapDataFn,
   click,
   selectedLayer,
-  mapProperty,
+  mapProperty = '',
   mapZoom = 7,
   mapCenter = [26.193, 92.773],
   zoomOnClick = true,
@@ -87,6 +99,14 @@ const Map = ({
   selectedLayer: layerOptions;
 }) => {
   const mapRef = React.useRef<any>(null);
+  const [unmountMap, setunmountMap] = React.useState(false);
+  //to prevent map re-initialization
+  React.useLayoutEffect(() => {
+    setunmountMap(false);
+    return () => {
+      setunmountMap(true);
+    };
+  }, []);
 
   function highlightFeature(e: { target: any }) {
     var layer = e.target;
@@ -128,7 +148,9 @@ const Map = ({
 
   const style: any = (feature: { properties: { [x: string]: number } }) => {
     return {
-      fillColor: mapDataFn(Number(feature.properties[mapProperty])),
+      fillColor: mapDataFn
+        ? mapDataFn(Number(feature.properties[mapProperty]))
+        : '#fff',
       weight: 1,
       opacity: 1,
       color: selectedLayer?.includes('dark') ? '#eee' : '#444',
@@ -141,16 +163,20 @@ const Map = ({
     return feature;
   });
 
-  return (
-    <MapContainer center={mapCenter} zoom={mapZoom} ref={mapRef}>
-      <TileLayer
-        url={`https://cartodb-basemaps-{s}.global.ssl.fastly.net/${selectedLayer}/{z}/{x}/{y}.png`}
-      />
-      {features && (
-        <GeoJSON data={feature} style={style} onEachFeature={onEachFeature} />
-      )}
-    </MapContainer>
-  );
+  if (!unmountMap) {
+    return (
+      <MapContainer center={mapCenter} zoom={mapZoom} ref={mapRef}>
+        <TileLayer
+          url={`https://cartodb-basemaps-{s}.global.ssl.fastly.net/${selectedLayer}/{z}/{x}/{y}.png`}
+        />
+        {features && (
+          <GeoJSON data={feature} style={style} onEachFeature={onEachFeature} />
+        )}
+      </MapContainer>
+    );
+  } else {
+    return 'loading map...';
+  }
 };
 
 const Legend = ({
@@ -163,16 +189,17 @@ const Legend = ({
 
   return (
     <div className={className}>
-      {data.map((item) => {
-        return (
-          <div
-            key={item.label}
-            style={{ '--color': item.color } as React.CSSProperties}
-          >
-            {item.label}
-          </div>
-        );
-      })}
+      {data &&
+        data.map((item) => {
+          return (
+            <div
+              key={item.label}
+              style={{ '--color': item.color } as React.CSSProperties}
+            >
+              {item.label}
+            </div>
+          );
+        })}
     </div>
   );
 };

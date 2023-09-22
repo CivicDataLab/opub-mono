@@ -1,6 +1,5 @@
-import { Button, Divider, Icon, Text } from 'opub-ui';
-
 import { Icons } from '@/components/icons';
+import { Button, Divider, Icon, Text } from 'opub-ui';
 
 export function DistributionList({
   setPage,

@@ -1,13 +1,12 @@
 'use client';
 
-import React from 'react';
+import { EditMetadata } from '../components/EditMetadata';
 import { graphql } from '@/gql';
 import { UpdateDatasetInput } from '@/gql/generated/graphql';
 import { usePRouter } from '@/hooks/use-prouter';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-
 import { GraphQL } from '@/lib/api';
-import { EditMetadata } from '../components/EditMetadata';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import React from 'react';
 
 const datasetQueryDoc = graphql(`
   query datasetQuery($dataset_id: Int) {

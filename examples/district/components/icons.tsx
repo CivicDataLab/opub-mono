@@ -24,6 +24,7 @@ import {
   IconSearch,
   IconSquareRoundedArrowRight,
   IconUserCog,
+  IconDiamondsFilled,
   TablerIconsProps,
 } from '@tabler/icons-react';
 
@@ -56,6 +57,7 @@ export const Icons: {
   explorer: IconChartInfographic,
   'database-share': IconDatabaseShare,
   download: IconDownload,
+  diamond: IconDiamondsFilled,
 };
 
 export default Icons;

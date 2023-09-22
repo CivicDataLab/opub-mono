@@ -1,7 +1,7 @@
 {
   "name": "opub-viz",
   "description": "OPub Visualization Library",
-  "version": "0.0.5",
+  "version": "0.0.7",
   "private": false,
   "license": "MIT",
   "author": "CivicDataLab <tech@civicdatalab.in>",
@@ -60,7 +60,6 @@
     "echarts-for-react": "^3.0.2",
     "leaflet": "^1.9.4",
     "lucide-react": "^0.268.0",
-    "opub-ui": "0.0.92",
     "react-leaflet": "^4.2.1",
     "tailwind-merge": "^1.14.0",
     "tailwindcss-animate": "^1.0.6"

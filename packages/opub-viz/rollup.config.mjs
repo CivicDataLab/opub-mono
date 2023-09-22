@@ -65,6 +65,7 @@ const getPlugins = () => {
     postcss({
       modules: true,
       use: ['sass'],
+      extract: path.resolve('dist/assets/styles-bundled.css'),
     }),
     svgr(),
     nodeResolve({ extensions }),

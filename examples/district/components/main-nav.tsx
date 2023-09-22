@@ -1,14 +1,13 @@
 'use client';
 
-import React from 'react';
-import Link from 'next/link';
-import { useParams } from 'next/navigation';
+import { Icons } from '@/components/icons';
 import { useKeyDetect } from '@/hooks/use-key-detect';
 import { usePRouter } from '@/hooks/use-prouter';
 import { MainConfig } from '@/types';
+import Link from 'next/link';
+import { useParams } from 'next/navigation';
 import { Icon, IconButton, Menu, Text } from 'opub-ui';
-
-import { Icons } from '@/components/icons';
+import React from 'react';
 
 export function MainNav({ data }: { data: MainConfig }) {
   const { key, metaKey } = useKeyDetect();

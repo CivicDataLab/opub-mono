@@ -1,8 +1,7 @@
-import React from 'react';
+import { useIsNavigating } from '@/config/store';
 import { usePathname, useSearchParams } from 'next/navigation';
 import NProgress from 'nprogress';
-
-import { useIsNavigating } from '@/config/store';
+import React from 'react';
 
 export function navigateStart() {
   NProgress.start();
