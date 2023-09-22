@@ -13,11 +13,12 @@ import { Icon, Input, Separator, Text } from 'opub-ui';
 import React from 'react';
 
 const LeafletChoropleth = dynamic(
-  () => import('opub-viz').then((mod) => mod.LeafletChoropleth),
+  () => import('opub-viz/src').then((mod) => mod.LeafletChoropleth),
   { ssr: false }
 );
 export const DistrictSelector = () => {
   const [search, setSearch] = React.useState('');
+  const [hovered, setHovered] = React.useState('District');
   const [districtList, setDistrictList] = React.useState(assamDistrictCategory);
   const router = usePRouter();
   const { data: mapFile, isLoading: mapLoading } = useFetch(
@@ -35,22 +36,45 @@ export const DistrictSelector = () => {
     }
   }, [search]);
 
+  const mapDataFn = (value: boolean) => {
+    return value
+      ? 'var(--mapareadistrict-default)'
+      : 'var(--mapareadistrict-disabled)';
+  };
+
   return (
     <div className="mx-auto mt-10 flex gap-4 max-h-[682px]">
-      <div className="w-full max-w-[1016px] p-6 rounded-05 bg-surfaceDefault shadow-basicMd hidden md:block">
+      <div className="relative w-full max-w-[1016px] p-6 rounded-05 bg-surfaceDefault shadow-basicMd hidden md:block">
         {!mapLoading && (
           <LeafletChoropleth
             features={mapFile.features}
             mapZoom={7.4}
             zoomOnClick={false}
+            mapProperty="enabled"
+            mapDataFn={mapDataFn}
             click={(e) => {
               const features = e.feature.properties;
-              if (features.district)
+              if (
+                features.district &&
+                availableDistricts.find(
+                  (e) => e.slug === features.district.toLowerCase()
+                )
+              )
                 router.push(`/${features.district.toLowerCase()}`);
             }}
             hideLayers
+            fillOpacity={1}
+            mouseover={(e) => {
+              setHovered(e.feature.properties.district);
+            }}
+            mouseout={() => {
+              setHovered('District');
+            }}
           />
         )}
+        <div className="py-2 px-4 bg-backgroundDefault absolute top-8 right-8 border-1 border-solid border-borderDefault rounded-1 z-max h-[40px]">
+          {hovered}
+        </div>
       </div>
       <div className="rounded-05 shadow-basicMd bg-surfaceDefault grow p-4 overflow-y-scroll min-w-[328px]">
         <Text variant="headingLg" fontWeight="semibold">

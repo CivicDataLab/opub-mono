@@ -1,5 +1,3 @@
-
-
 export const availableDistricts = [
   {
     name: 'Morigaon',
