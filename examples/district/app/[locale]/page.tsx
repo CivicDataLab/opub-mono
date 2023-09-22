@@ -7,7 +7,7 @@ import {
 
 export default function Home() {
   return (
-    <main className="bg-backgroundDefault pb-10 p-1 container">
+    <main className="bg-backgroundDefault pb-10">
       <Header />
       <div className="container">
         <KeyHighlights />
