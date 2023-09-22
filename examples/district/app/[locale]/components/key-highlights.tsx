@@ -31,7 +31,10 @@ export const KeyHighlights = () => {
 
       <div className="flex gap-4 flex-wrap mt-4">
         {content.map((item) => (
-          <div className="flex flex-col grow gap-3 p-4 rounded-1 bg-surfaceHighlightSubdued border-1 border-solid border-borderHighlightDefault">
+          <div
+            key={item.label}
+            className="flex flex-col grow gap-3 p-4 rounded-1 bg-surfaceHighlightSubdued border-1 border-solid border-borderHighlightDefault"
+          >
             <Text variant="headingXl">{item.value}</Text>
             <Text
               variant="headingSm"

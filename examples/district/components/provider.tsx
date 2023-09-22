@@ -1,11 +1,10 @@
 'use client';
 
-import React from 'react';
+import { RouterEvents } from '@/lib/navigation';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import NextTopLoader from 'nextjs-toploader';
 import { Toaster, Tooltip } from 'opub-ui';
-
-import { RouterEvents } from '@/lib/navigation';
+import React from 'react';
 
 export default function Provider({ children }: { children: React.ReactNode }) {
   const [client] = React.useState(

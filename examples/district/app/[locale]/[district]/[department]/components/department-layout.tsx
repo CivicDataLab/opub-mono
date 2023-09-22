@@ -1,16 +1,15 @@
 'use client';
 
-import Link from 'next/link';
+import { ContentCard, SchemeCard } from './Card';
+import styles from './Content.module.scss';
+import { Icons } from '@/components/icons';
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
 } from '@radix-ui/react-collapsible';
+import Link from 'next/link';
 import { Breadcrumbs, Icon, Input, Separator, Text } from 'opub-ui';
-
-import { Icons } from '@/components/icons';
-import { ContentCard, SchemeCard } from './Card';
-import styles from './Content.module.scss';
 
 export interface IProps {
   district: string;

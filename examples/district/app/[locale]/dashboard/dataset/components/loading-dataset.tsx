@@ -1,8 +1,7 @@
 'use client';
 
-import { Spinner } from 'opub-ui';
-
 import { Loading } from '@/components/loading';
+import { Spinner } from 'opub-ui';
 
 export default function DatasetLoading() {
   return (

@@ -1,6 +1,5 @@
-import { IconButton, Popover, Text } from 'opub-ui';
-
 import Icons from './icons';
+import { IconButton, Popover, Text } from 'opub-ui';
 
 export const InfoButton = ({ children }: any) => {
   return (

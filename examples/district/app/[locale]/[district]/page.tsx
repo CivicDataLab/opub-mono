@@ -1,8 +1,7 @@
-import { notFound } from 'next/navigation';
-
+import { Content } from './components/district-layout';
 import { ckan } from '@/config/site';
 import { getData } from '@/lib/api';
-import { Content } from './components/district-layout';
+import { notFound } from 'next/navigation';
 
 export default async function Home({
   params,

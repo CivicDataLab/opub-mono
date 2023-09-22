@@ -1,6 +1,10 @@
 'use client';
 
-import React from 'react';
+import { schemes } from '../scheme.config';
+import { Explorer } from './Explorer';
+import { Overview } from './Overview';
+import { SourceData } from './SourceData';
+import Icons from '@/components/icons';
 import Image from 'next/image';
 import Link from 'next/link';
 import {
@@ -13,12 +17,7 @@ import {
   Tabs,
   Text,
 } from 'opub-ui';
-
-import Icons from '@/components/icons';
-import { schemes } from '../scheme.config';
-import { Explorer } from './Explorer';
-import { Overview } from './Overview';
-import { SourceData } from './SourceData';
+import React from 'react';
 
 export interface IOverview {
   schemeTitle: string;

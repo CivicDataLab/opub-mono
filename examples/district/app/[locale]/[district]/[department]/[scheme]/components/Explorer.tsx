@@ -1,13 +1,12 @@
-import React from 'react';
-import { Select, Tab, TabList, TabPanel, Tabs, Text } from 'opub-ui';
-import { BarChart, MapChart } from 'opub-viz';
-import { ErrorBoundary } from 'react-error-boundary';
-
+import { Indicators } from './Indicators';
+import { IChartData } from './scheme-layout';
 import { ckan } from '@/config/site';
 import { useFetch } from '@/lib/api';
 import { cn } from '@/lib/utils';
-import { Indicators } from './Indicators';
-import { IChartData } from './scheme-layout';
+import { Select, Tab, TabList, TabPanel, Tabs, Text } from 'opub-ui';
+import { BarChart, MapChart } from 'opub-viz';
+import React from 'react';
+import { ErrorBoundary } from 'react-error-boundary';
 
 export const Explorer = ({
   scheme,

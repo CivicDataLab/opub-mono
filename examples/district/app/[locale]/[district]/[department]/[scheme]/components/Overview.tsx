@@ -1,8 +1,7 @@
-import { Text } from 'opub-ui';
-import { BarChart } from 'opub-viz';
-
 import { ContentCard, ProgressCard } from '../../components/Card';
 import { IOverview } from './scheme-layout';
+import { Text } from 'opub-ui';
+import { BarChart } from 'opub-viz';
 
 export const Overview = ({ data }: { data?: IOverview }) => {
   if (!data) return null;

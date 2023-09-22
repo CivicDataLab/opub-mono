@@ -1,11 +1,10 @@
 'use client';
 
-import React from 'react';
-
-import { cn } from '@/lib/utils';
 import { DashboardSidebar } from './dashboard-sidebar';
 import { MobileDashboardNav } from './mobile-dashboard-nav';
 import styles from './styles.module.scss';
+import { cn } from '@/lib/utils';
+import React from 'react';
 
 interface DashboardLayoutProps {
   children?: React.ReactNode;

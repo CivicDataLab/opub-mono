@@ -1,13 +1,12 @@
-import React from 'react';
-import dynamic from 'next/dynamic';
-import Link from 'next/link';
+import { assamDistricts } from '../home.config';
+import Icons from '@/components/icons';
 import { usePRouter } from '@/hooks/use-prouter';
-import { Icon, Input, Text } from 'opub-ui';
-
 import { useFetch } from '@/lib/api';
 import { cn } from '@/lib/utils';
-import Icons from '@/components/icons';
-import { assamDistricts } from '../home.config';
+import dynamic from 'next/dynamic';
+import Link from 'next/link';
+import { Icon, Input, Text } from 'opub-ui';
+import React from 'react';
 
 const LeafletChoropleth = dynamic(
   () => import('opub-viz').then((mod) => mod.LeafletChoropleth),
@@ -35,8 +34,8 @@ export const DistrictSelector = () => {
   }, [search]);
 
   return (
-    <div className="mx-auto px-2 mt-10 flex gap-10">
-      <div className="w-full max-w-[768px] h-[520px] bg-surfaceHighlightSubdued">
+    <div className="mx-auto px-2 mt-10 flex gap-4 max-h-[682px]">
+      <div className="w-full max-w-[1016px] p-6 rounded-05 bg-surfaceDefault shadow-basicMd hidden md:block">
         {!mapLoading && (
           <LeafletChoropleth
             features={mapFile.features}
@@ -51,7 +50,7 @@ export const DistrictSelector = () => {
           />
         )}
       </div>
-      <div className="rounded-1 border-1 border-divider border-solid grow p-4">
+      <div className="rounded-1 border-1 border-divider border-solid grow p-4 overflow-y-scroll">
         <Input
           name="district-search"
           placeholder="Search"
@@ -61,7 +60,7 @@ export const DistrictSelector = () => {
           onChange={setSearch}
           value={search}
         />
-        <div className="mt-4 overflow-y-scroll max-h-[360px]">
+        <div className="mt-4">
           {districtList.map((district) => (
             <Link
               key={district.slug}

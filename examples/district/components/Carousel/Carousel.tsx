@@ -1,8 +1,7 @@
-import React from 'react';
+import styles from './carousel.module.scss';
 import { IconArrowLeft, IconArrowRight } from '@tabler/icons-react';
 import { Box, Carousel, Text } from 'opub-ui';
-
-import styles from './carousel.module.scss';
+import React from 'react';
 
 export function SummaryCarousel({
   indicatorList,

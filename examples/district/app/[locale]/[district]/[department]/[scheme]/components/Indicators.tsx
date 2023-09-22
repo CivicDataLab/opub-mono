@@ -1,13 +1,12 @@
-import React from 'react';
+import { indicatorFilter } from '../scheme.config';
+import Icons from '@/components/icons';
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
 } from '@radix-ui/react-collapsible';
 import { Icon, Input, RadioGroup, RadioItem, Separator, Text } from 'opub-ui';
-
-import Icons from '@/components/icons';
-import { indicatorFilter } from '../scheme.config';
+import React from 'react';
 
 interface IndicatorsProps {
   Targets: {

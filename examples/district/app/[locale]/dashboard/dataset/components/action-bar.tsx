@@ -1,14 +1,13 @@
 'use client';
 
-import React from 'react';
-import Link, { LinkProps } from 'next/link';
-import { Size, useWindowSize } from '@/hooks/use-window-size';
-import { Box, Button, Icon, Text, Tooltip } from 'opub-ui';
-import { twMerge } from 'tailwind-merge';
-
-import { useIsNavigating } from '@/config/store';
-import { Icons } from '@/components/icons';
 import styles from '../dataset.module.scss';
+import { Icons } from '@/components/icons';
+import { useIsNavigating } from '@/config/store';
+import { Size, useWindowSize } from '@/hooks/use-window-size';
+import Link, { LinkProps } from 'next/link';
+import { Box, Button, Icon, Text, Tooltip } from 'opub-ui';
+import React from 'react';
+import { twMerge } from 'tailwind-merge';
 
 interface Props {
   title: string;

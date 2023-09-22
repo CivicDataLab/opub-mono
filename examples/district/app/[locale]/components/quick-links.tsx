@@ -1,7 +1,6 @@
+import Icons from '@/components/icons';
 import Link from 'next/link';
 import { Icon, Text } from 'opub-ui';
-
-import Icons from '@/components/icons';
 
 const content = [
   {
@@ -44,8 +43,9 @@ export const QuickLinks = () => {
       </Text>
 
       <div className="flex gap-4 flex-wrap mt-4">
-        {content.map((item) => (
+        {content.map((item, index) => (
           <Link
+            key={item.district + index}
             href={item.link}
             className="flex flex-col grow md:basis-1/3 lg:basis-1/4 gap-4 p-4 rounded-05 bg-surfaceDefault shadow-elementCard"
           >

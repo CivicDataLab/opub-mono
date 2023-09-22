@@ -1,13 +1,12 @@
 'use client';
 
+import styles from './Content.module.scss';
+import { Icons } from '@/components/icons';
+import { cn } from '@/lib/utils';
 import Link from 'next/link';
 import { useParams, usePathname } from 'next/navigation';
 import { Icon, Text } from 'opub-ui';
-
 import { SidebarNavItem } from 'types';
-import { cn } from '@/lib/utils';
-import { Icons } from '@/components/icons';
-import styles from './Content.module.scss';
 
 interface DashboardNavProps {
   items: SidebarNavItem[];

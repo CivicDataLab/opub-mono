@@ -1,10 +1,9 @@
 'use client';
 
-import { Box, Icon, Text } from 'opub-ui';
-import { twMerge } from 'tailwind-merge';
-
 import { LinkButton } from '@/components/Link';
 import { Icons } from '@/components/icons';
+import { Box, Icon, Text } from 'opub-ui';
+import { twMerge } from 'tailwind-merge';
 
 export function Content({ data }: { data?: any }) {
   return (

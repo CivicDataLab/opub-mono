@@ -1,11 +1,10 @@
+import { schemes } from '../[scheme]/scheme.config';
+import { InfoButton } from '@/components/InfoButton';
+import { Icons } from '@/components/icons';
+import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Icon, ProgressBar, Separator, Text } from 'opub-ui';
-
-import { cn } from '@/lib/utils';
-import { InfoButton } from '@/components/InfoButton';
-import { Icons } from '@/components/icons';
-import { schemes } from '../[scheme]/scheme.config';
 
 export const SchemeCard = ({
   data,

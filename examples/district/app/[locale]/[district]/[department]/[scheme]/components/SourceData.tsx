@@ -1,15 +1,14 @@
-import React from 'react';
-import { createColumnHelper } from '@tanstack/react-table';
-import { Button, Icon, Select, Table, Text } from 'opub-ui/src';
-import { ErrorBoundary } from 'react-error-boundary';
-
-import { ckan } from '@/config/site';
-import { useFetch } from '@/lib/api';
-import { cn } from '@/lib/utils';
-import Icons from '@/components/icons';
 import { downloadTable } from '../scheme.config';
 import { IndicatorsCheckbox } from './IndicatorsCheckbox';
 import { ITable } from './scheme-layout';
+import Icons from '@/components/icons';
+import { ckan } from '@/config/site';
+import { useFetch } from '@/lib/api';
+import { cn } from '@/lib/utils';
+import { createColumnHelper } from '@tanstack/react-table';
+import { Button, Icon, Select, Table, Text } from 'opub-ui/src';
+import React from 'react';
+import { ErrorBoundary } from 'react-error-boundary';
 
 export const SourceData = ({
   tableData,
