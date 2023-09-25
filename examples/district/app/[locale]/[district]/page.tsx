@@ -16,7 +16,7 @@ export default async function Home({
   }
 
   return (
-    <div className="container py-1 lg:py-2">
+    <div className="container px-7 py-1 lg:py-2">
       <Content data={districtData} />
     </div>
   );

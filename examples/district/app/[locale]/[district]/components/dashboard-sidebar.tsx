@@ -23,19 +23,18 @@ export function DashboardSidebar({ items }: DashboardNavProps) {
   return (
     <aside
       className={cn(
-        'pt-5 pr-2 overflow-hidden bg-surface',
-        'hidden z-1 shadow-inset basis-[240px] shrink-0 md:block',
+        'pt-4 overflow-hidden bg-backgroundDefault shadow-insetBasic ',
+        'hidden z-1 basis-[240px] shrink-0 md:block',
         styles.Collapse
       )}
     >
-      <nav className={cn('flex flex-col gap-2')}>
-        <SidebarLink
-          href={`/${district}` || '/'}
-          title={district || 'Home'}
-          icon={'home'}
-          department={department}
-          district={district}
-        />
+      <nav className="flex flex-col gap-2">
+        <Text
+          className="py-2 px-4 text-lightmodeGraySlateSolid11"
+          variant="headingSmSpaced"
+        >
+          {district}
+        </Text>
         {items.map((item) => {
           return (
             item.href && (
@@ -56,13 +55,11 @@ export function DashboardSidebar({ items }: DashboardNavProps) {
 const SidebarLink = ({
   href,
   title,
-  icon,
   department,
   district,
 }: {
   href: string;
   title: string;
-  icon?: string;
   department: string;
   district?: string;
 }) => {
@@ -72,29 +69,30 @@ const SidebarLink = ({
         <span
           className={cn(
             'bg-transparent rounded-r-2 w-[6px] h-full absolute top-0 left-[-3px]',
-            isActive(department, href, district) && 'bg-decorativeIconFour'
+            isActive(department, href, district) && 'bg-borderHighlightDefault'
           )}
         />
         <div
           className={cn(
-            'flex items-center w-full ml-2 rounded-1 overflow-hidden',
+            'flex items-center w-full mx-2 rounded-1 overflow-hidden hover:bg-lightmodeIndigoAlpha3',
             styles.Item,
-            isActive(department, href, district) && styles.Selected
+            isActive(department, href, district) &&
+              'bg-lightmodeIndigoAlpha4 text-lightmodeVioletAlpha11 hover:bg-lightmodeIndigoAlpha4'
           )}
         >
-          {icon && (
-            <div className="basis-5 pl-3">
-              <Icon source={Icons[icon]} color="base" />
-            </div>
-          )}
-
           <div
             className={cn(
-              'py-[6px] px-2 max-w-[220px]',
+              'p-2 max-w-[220px]',
               'whitespace-nowrap opacity-100 transition-opacity duration-300'
             )}
           >
-            <Text truncate fontWeight="medium" className="capitalize">
+            <Text
+              truncate
+              variant="headingSm"
+              fontWeight="medium"
+              className="capitalize"
+              color="inherit"
+            >
               {title}
             </Text>
           </div>

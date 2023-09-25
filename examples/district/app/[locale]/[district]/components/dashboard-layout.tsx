@@ -19,7 +19,7 @@ export function DashboardLayout({
     <div
       className={cn(
         'relative grow min-h-[calc(100%_-_48px)]',
-        'md:flex md:gap-1'
+        'md:flex md:gap-0'
       )}
     >
       <DashboardSidebar items={dashboardConfig.sidebarNav} />

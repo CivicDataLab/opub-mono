@@ -14,6 +14,7 @@ type Element =
 type Variant =
   | 'headingXs'
   | 'headingSm'
+  | 'headingSmSpaced'
   | 'headingMd'
   | 'headingLg'
   | 'headingXl'
@@ -39,13 +40,14 @@ type Color =
   | 'inherit';
 
 export const VariantFontWeightMapping: { [V in Variant]: FontWeight } = {
-  headingXs: 'semibold',
-  headingSm: 'semibold',
+  headingXs: 'medium',
+  headingSm: 'medium',
+  headingSmSpaced: 'medium',
   headingMd: 'semibold',
   headingLg: 'semibold',
   headingXl: 'semibold',
   heading2xl: 'semibold',
-  heading3xl: 'semibold',
+  heading3xl: 'bold',
   heading4xl: 'bold',
   bodySm: 'regular',
   bodyMd: 'regular',

@@ -28,12 +28,9 @@
 }
 
 .Item {
-  transition: background-color var(--duration-200) var(--ease-in-out),
+  transition:
+    background-color var(--duration-200) var(--ease-in-out),
     gap var(--duration-200) var(--ease-in-out);
-
-  &:hover {
-    background-color: var(--background-selected);
-  }
 }
 
 .Selected {
