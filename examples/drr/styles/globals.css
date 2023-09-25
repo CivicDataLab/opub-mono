@@ -1,0 +1,45 @@
+@tailwind components;
+@tailwind utilities;
+
+@import './reset.css';
+@import url('~opub-ui/dist/assets/styles.css');
+@import url('./tokens/_variables.css');
+@import url('~opub-viz/dist/assets/styles-bundled.css');
+
+:root {
+  --card-rgb: 180, 185, 188;
+  --card-border-rgb: 131, 134, 135;
+}
+
+html {
+  overflow-y: scroll;
+}
+
+body {
+  background-color: var(--background);
+}
+
+html,
+body,
+body > .opub-Tooltip {
+  height: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.text-clamp {
+  line-height: 156%;
+  overflow: hidden;
+  -webkit-line-clamp: 1;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+}
+
+.leaflet-container {
+  width: 100%;
+  height: 100%;
+}

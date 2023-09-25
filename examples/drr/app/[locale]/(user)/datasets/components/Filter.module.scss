@@ -1,0 +1,23 @@
+.CollapseTrigger {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    margin: 0;
+    width: 100%;
+    padding-block: var(--space-2);
+    padding-inline: var(--space-2);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+    svg {
+      transition: transform var(--duration-100);
+    }
+  
+    &[data-state='open'] {
+      svg {
+        transform: rotate(-180deg);
+      }
+    }
+  }

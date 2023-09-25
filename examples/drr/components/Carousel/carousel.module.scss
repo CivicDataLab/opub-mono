@@ -1,0 +1,43 @@
+.Carousel {
+  ul {
+    margin-top: var(--space-5);
+    gap: 14px;
+    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+
+    li {
+      text-align: center;
+      background-color: var(--surface);
+      padding: var(--space-5) var(--space-4);
+      border: var(--border-1);
+      border-radius: var(--space-1);
+      filter: drop-shadow(var(--shadow-inset));
+      flex-basis: 214px;
+      flex-grow: 1;
+      position: relative;
+      height: 111px;
+
+      > div {
+        width: var(--space-1);
+        height: 100%;
+        position: absolute;
+        left: var(--space-0);
+        top: var(--space-0);
+        background: var(--border-highlight);
+      }
+    }
+
+    strong {
+      font-weight: var(--font-weight-extra-bold);
+    }
+
+    span {
+      display: block;
+      font-size: 0.75rem;
+      color: var(--box-shadow-1);
+      line-height: 1.7;
+      margin-top: var(--space-1);
+    }
+  }
+}

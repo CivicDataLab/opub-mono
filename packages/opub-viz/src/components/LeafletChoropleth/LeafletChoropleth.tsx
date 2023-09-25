@@ -32,7 +32,7 @@ type MapProps = {
   mapProperty?: string;
 
   /* function to map data to color */
-  mapDataFn?: (value: any) => string;
+  mapDataFn?: (value: number) => string;
 
   /* theme of the map */
   defaultLayer?: layerOptions;
@@ -48,9 +48,6 @@ type MapProps = {
 
   /* hide layers */
   hideLayers?: boolean;
-
-  /* fill opacity */
-  fillOpacity?: number;
 };
 
 type LegendProps = {
@@ -98,7 +95,6 @@ const Map = ({
   mapZoom = 7,
   mapCenter = [26.193, 92.773],
   zoomOnClick = true,
-  fillOpacity,
 }: MapProps & {
   selectedLayer: layerOptions;
 }) => {
@@ -119,7 +115,7 @@ const Map = ({
       weight: 3,
       color: selectedLayer?.includes('dark') ? '#ddd' : '#333',
       dashArray: '',
-      fillOpacity: fillOpacity ? fillOpacity : 0.7,
+      fillOpacity: 0.7,
     });
 
     mouseover && mouseover(e.target);
@@ -159,7 +155,7 @@ const Map = ({
       opacity: 1,
       color: selectedLayer?.includes('dark') ? '#eee' : '#444',
       dashArray: '2',
-      fillOpacity: fillOpacity ? fillOpacity : 0.5,
+      fillOpacity: 0.5,
     };
   };
 
