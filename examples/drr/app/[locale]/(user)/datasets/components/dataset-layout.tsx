@@ -21,8 +21,6 @@ export function Content({ data , filters }: { data: Datasets[] , filters: Filter
     },
   ];
 
-  console.log("Wht is dat" , data)
-
   return (
     <div className="grid gap-4">
       <Text className="ps-6 pt-4" variant="headingLg">

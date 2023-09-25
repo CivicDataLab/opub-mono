@@ -26,7 +26,6 @@ export const DatasetCard = ({
   tags,
   slug,
 }: DataProps) => {
-  console.log("Dataset data" , title);
   return (
     <div className="p-4 rounded-1 bg-surface shadow-card flex flex-col gap-3">
       <div className="flex gap-4">
