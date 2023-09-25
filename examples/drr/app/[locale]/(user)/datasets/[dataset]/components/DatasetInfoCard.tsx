@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { Link, Text } from 'opub-ui';
 
-import { datasetSource } from '@/config/consts';
+import { DatasetSource } from '@/config/consts';
 
 export const DatasetInfoCard = ({
   title,
@@ -23,7 +23,7 @@ export const DatasetInfoCard = ({
         <div className="flex flex-col gap-2">
           <Text variant="headingLg">{title}</Text>
           <Text fontWeight="semibold">
-            {datasetSource} : {source}
+            {DatasetSource} : {source}
           </Text>
           <Text className="mt-3 mb-3">{description}</Text>
           <Link external url={homepage}>
