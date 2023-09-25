@@ -1,0 +1,61 @@
+.NavButton {
+  padding: var(--space-2);
+  background-color: var(--background);
+  border-radius: var(--border-radius-full);
+  border: none;
+  transition: transform var(--duration-400) ease;
+  position: absolute;
+  top: var(--space-1);
+  left: var(--space-1);
+  z-index: var(--z-4);
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    background-color: var(--background-pressed);
+  }
+}
+
+.NavButtonOpen {
+  transform: translateX(12rem);
+}
+
+.Aside {
+  transform: translateX(-15rem);
+  visibility: 0;
+  transition: transform var(--duration-400) ease 0s,
+    visibility var(--duration-400) ease 0s;
+}
+
+.AsideOpen {
+  transform: translateX(0);
+  visibility: 1;
+}
+
+.MobileNavContainer {
+  padding-top: var(--space-12);
+  background-color: var(--background);
+  width: 15rem;
+  height: 100vh;
+  padding-right: var(--space-4);
+  box-shadow: inset -1px 0px 0px #e4e5e7;
+  transition: transform var(--duration-400) ease 0s,
+    visibility var(--duration-400) ease 0s;
+
+  > ul {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+}
+
+.Main {
+  flex-grow: 1;
+  transition: transform var(--duration-400) ease 0s;
+}
+
+.MainOpened {
+  transform: translateX(15rem);
+  opacity: 0.5;
+  pointer-events: none;
+}
