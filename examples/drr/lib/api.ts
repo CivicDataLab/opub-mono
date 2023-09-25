@@ -17,7 +17,7 @@ export async function GraphQL<TResult, TVariables>(
     {
       ...variables,
     },
-    { ...gqlConfig.headers }
+    // { ...gqlConfig.headers }
   );
   return data;
 }
