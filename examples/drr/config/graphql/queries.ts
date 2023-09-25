@@ -78,9 +78,11 @@ query datasetBySlugQuery($dataset_slug: String){
     catalog {
       id
       title
-      description
-      issued
-      modified
+      organization{
+        title
+        logo
+        homepage
+      }
     }
     tags {
       id
@@ -97,7 +99,9 @@ query datasetBySlugQuery($dataset_slug: String){
       release_date
       is_downloadable
       file_details{
-        file,
+        file
+        source_file_name
+        format
       }
     }
     datasetaccessmodel_set {

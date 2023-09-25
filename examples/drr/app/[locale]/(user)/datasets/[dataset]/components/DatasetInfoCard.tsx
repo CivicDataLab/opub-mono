@@ -14,7 +14,7 @@ export const DatasetInfoCard = ({
   description: string;
   source: string;
   homepage: string;
-  logo?:string;
+  logo:string;
 
 }) => {
   return (
@@ -37,7 +37,7 @@ export const DatasetInfoCard = ({
           alt="dataset-icon"
           height={'55'}
           width="211"
-          src={logo || '/logo/nhm.png'}
+          src={logo}
         />
       </div>
     </div>

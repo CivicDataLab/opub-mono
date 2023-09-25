@@ -15,7 +15,6 @@ export default async function DatasetExplorer({
   );
   const dehydratedState = dehydrate(queryClient);
 
-
   return (
     <Hydrate state={dehydratedState}>
       <Content slug={params.dataset}/>

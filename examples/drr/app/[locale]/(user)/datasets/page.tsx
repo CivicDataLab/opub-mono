@@ -43,7 +43,6 @@ export default async function Home() {
       },
     };
   });
-  console.log('datasets~ data:', data);
 
   return <Content data={data} filters={filters} />;
 }
