@@ -42,6 +42,16 @@
   }
 }
 
+.colorDefault {
+  svg {
+    color: var(--icon-default);
+  }
+
+  &::before {
+    background-color: var(--surface-neutral);
+  }
+}
+
 .colorSubdued svg {
   color: var(--icon-subdued);
 }

@@ -1,15 +1,15 @@
 'use client';
 
-import { ContentCard, DepartmentCard } from './Card';
-import styles from './Content.module.scss';
 import { Icons } from '@/components/icons';
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
 } from '@radix-ui/react-collapsible';
-import Link from 'next/link';
-import { Breadcrumbs, Icon, Separator, Text } from 'opub-ui';
+import { Icon, Separator, Text } from 'opub-ui';
+import { BreadCrumb, Search } from '.';
+import { ContentCard, DepartmentCard } from './Card';
+import styles from './Content.module.scss';
 
 export interface IProps {
   title: string;
@@ -47,13 +47,9 @@ export function Content({ data }: { data: IProps }) {
 
   return (
     <>
-      <Breadcrumbs crumbs={breadcrumbs} />
+      <BreadCrumb backUrl="/" crumbs={breadcrumbs} />
 
       <div className="mt-7 flex gap-4 items-center">
-        {/* <Link href="/">
-          <Text visuallyHidden>Go to State Page</Text>
-          <Icon source={Icons.back} size={32} color="base" />
-        </Link> */}
         <Text variant="heading3xl" as="h1" color="subdued">
           {data.title} District
         </Text>
@@ -109,15 +105,7 @@ export function Content({ data }: { data: IProps }) {
           <Text variant="heading2xl" as="h2">
             {data.listTitle}
           </Text>
-          {/* <div className=" basis-[400px]">
-            <Input
-              name="department-search"
-              label="Department Search"
-              labelHidden
-              prefix={<Icon source={Icons.search} />}
-              placeholder="Search"
-            />
-          </div> */}
+          <Search />
         </div>
         <Separator />
       </div>
