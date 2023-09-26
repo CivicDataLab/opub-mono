@@ -27,13 +27,13 @@ export const SchemeCard = ({
   }
 
   return (
-    <div className="flex flex-col gap-2 justify-between p-4 pb-3 bg-surface rounded-05 shadow-card">
+    <div className="flex flex-col gap-2 justify-between p-4 bg-surfaceDefault rounded-05 shadow-elementCard">
       <div className="flex flex-col gap-3">
         <Link
           href={`${data.departmentHref}/${data.href}`}
           className="block hover:underline"
         >
-          <span className="flex gap-6 items-center">
+          <span className="flex gap-4 items-center">
             <Image
               src={schemes[data.href].logo}
               alt=""
@@ -41,7 +41,7 @@ export const SchemeCard = ({
               height={100}
               className="flex-shrink-0"
             />
-            <Text variant="headingXl" as="h3">
+            <Text variant="headingLg" as="h3">
               {data.label}
             </Text>
           </span>
@@ -76,7 +76,7 @@ export const SchemeCard = ({
       </div>
       <Link
         href={`${data.departmentHref}/${data.href}`}
-        className="py-2 pl-4 pr-1 bg-surface hover:bg-surfaceHovered rounded-1 flex justify-between text-interactive"
+        className="rounded-1 flex items-center justify-between text-textInteractive hover:underline"
       >
         <Text variant="bodyMd" fontWeight="medium" color="inherit">
           Explore More <Text visuallyHidden>about {data.label}</Text>
@@ -104,7 +104,7 @@ export const ContentCard = ({
     <div
       className={cn(
         'flex-grow md:w-[45%]',
-        'p-4 rounded-1 border-[1px] border-solid border-borderSubdued flex flex-col gap-3',
+        'p-4 rounded-1 border-1 border-solid border-borderSubdued flex flex-col gap-3',
         color === 'highlight' &&
           'bg-surfaceHighlightSubdued w-auto border-borderHighlightSubdued'
       )}
@@ -144,7 +144,7 @@ export const ProgressCard = ({
     <div
       className={cn(
         'flex-grow md:w-[45%] ',
-        'p-4 rounded-1 border-[1px] border-solid border-borderSubdued flex flex-col gap-3',
+        'p-4 rounded-1 border-1 border-solid border-borderSubdued flex flex-col gap-3',
         color === 'highlight' &&
           'bg-surfaceHighlightSubdued w-auto border-borderHighlightSubdued'
       )}
