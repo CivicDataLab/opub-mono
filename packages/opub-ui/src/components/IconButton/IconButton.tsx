@@ -21,12 +21,14 @@ const IconButton = forwardRef((props: IconButtonProps, ref: any) => {
     tooltipText,
     disabled,
     color,
+    className,
     ...others
   } = props;
   const themeClass = cn(
     styles.IconButton,
     styles[size],
-    disabled && styles.disabled
+    disabled && styles.disabled,
+    className
   );
   const iconSize = iconSizes[size];
 
