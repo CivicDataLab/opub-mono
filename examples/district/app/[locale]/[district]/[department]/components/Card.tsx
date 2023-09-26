@@ -93,22 +93,17 @@ export const ContentCard = ({
   description,
   color,
   info,
+  className,
 }: {
   value: string | number;
   label: string;
   description?: string;
   color?: string;
   info?: string;
+  className?: string;
 }) => {
   return (
-    <div
-      className={cn(
-        'flex-grow md:w-[45%]',
-        'p-4 rounded-1 border-1 border-solid border-borderSubdued flex flex-col gap-3',
-        color === 'highlight' &&
-          'bg-surfaceHighlightSubdued w-auto border-borderHighlightSubdued'
-      )}
-    >
+    <CardLayout className={className} color={color}>
       <Text variant="headingXl">{value}</Text>
       <div className="flex items-center gap-2 justify-between">
         <Text variant="bodyLg">{label}</Text>
@@ -117,11 +112,11 @@ export const ContentCard = ({
       </div>
       {description && (
         <>
-          <Separator />
+          <Separator className="my-4" />
           <Text variant="bodyMd">{description}</Text>
         </>
       )}
-    </div>
+    </CardLayout>
   );
 };
 
@@ -132,6 +127,7 @@ export const ProgressCard = ({
   color,
   min,
   max,
+  className,
 }: {
   value: string | number;
   label: string;
@@ -139,6 +135,38 @@ export const ProgressCard = ({
   color?: string;
   min?: number;
   max?: number;
+  className?: string;
+}) => {
+  return (
+    <CardLayout className={className} color={color}>
+      <Text variant="headingXl">{value}%</Text>
+      <Text variant="bodyLg" className="mb-4">
+        {label}
+      </Text>
+      <div>
+        <ProgressBar value={Number(value)} color="highlight" size="medium" />
+        <div className="flex gap-3 items-center justify-between mt-2">
+          <Text variant="headingLg" fontWeight="medium">
+            {min || 0}
+          </Text>
+          <Text variant="headingLg" fontWeight="medium">
+            {max || 100}
+          </Text>
+        </div>
+      </div>
+      {description && <Text variant="bodyMd">{description}</Text>}
+    </CardLayout>
+  );
+};
+
+const CardLayout = ({
+  children,
+  color,
+  className,
+}: {
+  children: React.ReactNode;
+  color?: string;
+  className?: string;
 }) => {
   return (
     <div
@@ -146,23 +174,11 @@ export const ProgressCard = ({
         'flex-grow md:w-[45%] ',
         'p-4 rounded-1 border-1 border-solid border-borderSubdued flex flex-col gap-3',
         color === 'highlight' &&
-          'bg-surfaceHighlightSubdued w-auto border-borderHighlightSubdued'
+          'bg-surfaceHighlightSubdued w-auto border-borderHighlightSubdued',
+        className
       )}
     >
-      <Text variant="headingXl">{value}%</Text>
-      <Text variant="bodyLg">{label}</Text>
-      <div>
-        <ProgressBar value={Number(value)} />
-        <div className="flex gap-3 items-center justify-between mt-2">
-          <Text variant="bodyMd" fontWeight="medium">
-            {min || 0}
-          </Text>
-          <Text variant="bodyMd" fontWeight="medium">
-            {max || 100}
-          </Text>
-        </div>
-      </div>
-      {description && <Text variant="bodyMd">{description}</Text>}
+      {children}
     </div>
   );
 };
