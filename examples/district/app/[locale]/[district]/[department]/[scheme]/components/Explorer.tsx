@@ -20,9 +20,7 @@ export const Explorer = ({
   const years = Object.values(chartData)[0].years;
   const [selectedYear, setYear] = React.useState(Object.keys(years)[0]);
   const [selectedIndicator, setIndicator] = React.useState('cpapr');
-  const [selectedTab, setTab] = React.useState<'map' | 'table' | 'chart'>(
-    'map'
-  );
+  const [selectedTab, setTab] = React.useState<'map' | 'bar'>('bar');
 
   const { data: indicatorData, isLoading } = useFetch(
     'indicators',
@@ -39,7 +37,11 @@ export const Explorer = ({
   }, [indicatorData]);
 
   return (
-    <div className={cn('grid grid-cols-[244px_1fr] gap-4')}>
+    <div
+      className={cn(
+        'grid grid-cols-[242px_1fr] gap-4 rounded-05 bg-surfaceDefault shadow-elementCard p-6'
+      )}
+    >
       {isLoading ? (
         <div className="p-4">
           <Text variant="headingMd">Loading...</Text>
@@ -49,7 +51,6 @@ export const Explorer = ({
           data={indicatorData}
           scheme={scheme || ''}
           indicatorRef={indicatorRef}
-          disable={selectedTab === 'table'}
           setIndicator={setIndicator}
         />
       ) : (
@@ -58,28 +59,28 @@ export const Explorer = ({
         </div>
       )}
 
-      <ErrorBoundary
-        fallback={
-          <div className="flex items-center justify-center h-full">
+      <div className="flex items-center justify-center h-full">
+        <ErrorBoundary
+          fallback={
             <Text variant="headingLg" as="h2">
               Error loading Explorer
             </Text>
-          </div>
-        }
-      >
-        <Content
-          indicatorRef={indicatorRef}
-          chartData={chartData}
-          district={district}
-          states={{
-            setTab,
-            setYear,
-            selectedTab,
-            selectedYear,
-            selectedIndicator,
-          }}
-        />
-      </ErrorBoundary>
+          }
+        >
+          <Content
+            indicatorRef={indicatorRef}
+            chartData={chartData}
+            district={district}
+            states={{
+              setTab,
+              setYear,
+              selectedTab,
+              selectedYear,
+              selectedIndicator,
+            }}
+          />
+        </ErrorBoundary>
+      </div>
     </div>
   );
 };
@@ -95,9 +96,9 @@ const Content = ({
   chartData: IChartData;
   district: string;
   states: {
-    setTab: (tab: 'map' | 'table' | 'chart') => void;
+    setTab: (tab: 'map' | 'bar') => void;
     setYear: (year: string) => void;
-    selectedTab: 'map' | 'table' | 'chart';
+    selectedTab: 'map' | 'bar';
     selectedYear: string;
     selectedIndicator: string;
   };
@@ -109,33 +110,44 @@ const Content = ({
 
   const contentRef = React.useRef(null);
 
-  React.useEffect(() => {
-    // change height of indicator list based on content height
-    if (indicatorRef.current && contentRef.current) {
-      setTimeout(() => {
-        // it takes some time to render the content
-        const indicatorList = indicatorRef.current;
-        const content: any = contentRef.current;
-        const contentHeight = content.offsetHeight;
+  // React.useEffect(() => {
+  //   // change height of indicator list based on content height
+  //   if (indicatorRef.current && contentRef.current) {
+  //     setTimeout(() => {
+  //       // it takes some time to render the content
+  //       const indicatorList = indicatorRef.current;
+  //       const content: any = contentRef.current;
+  //       const contentHeight = content.offsetHeight;
 
-        indicatorList.style.maxHeight = `${contentHeight - 50}px`;
-      }, 20);
-    }
-  }, [states.selectedTab]);
+  //       indicatorList.style.maxHeight = `${contentHeight - 50}px`;
+  //     }, 20);
+  //   }
+  // }, [states.selectedTab]);
 
   if (!chartData[states.selectedIndicator]) {
     return (
-      <div className="flex items-center justify-center h-full">
-        <Text variant="headingLg" as="h2">
-          No data available for this indicator
-        </Text>
-      </div>
+      <Text variant="headingLg" as="h2">
+        No data available for this indicator
+      </Text>
     );
   }
   const currentData: any =
     chartData[states.selectedIndicator].years[states.selectedYear];
 
   const tabs = [
+    {
+      label: 'Bar View',
+      value: 'bar',
+      content: (
+        <div>
+          <BarChart
+            yAxis={currentData.bardata.xAxis}
+            data={currentData.bardata.values}
+            height="512px"
+          />
+        </div>
+      ),
+    },
     {
       label: 'Map View',
       value: 'map',
@@ -165,19 +177,6 @@ const Content = ({
         />
       ),
     },
-    {
-      label: 'Bar View',
-      value: 'bar',
-      content: (
-        <div>
-          <BarChart
-            yAxis={currentData.bardata.xAxis}
-            data={currentData.bardata.values}
-            height="500px"
-          />
-        </div>
-      ),
-    },
   ];
 
   return (
@@ -190,12 +189,12 @@ const Content = ({
         <TabList>
           {[
             {
-              label: 'Map View',
-              value: 'map',
-            },
-            {
               label: 'Bar View',
               value: 'bar',
+            },
+            {
+              label: 'Map View',
+              value: 'map',
             },
           ].map((tab) => (
             <Tab value={tab.value} key={tab.value}>
@@ -208,14 +207,14 @@ const Content = ({
           ))}
         </TabList>
         <div
-          className="rounded-05 bg-background h-full p-4 md:p-6"
+          className="rounded-05 bg-background h-full p-4 bg-surfaceHighlightSubdued border-default"
           ref={contentRef}
         >
           <div className="flex">
             <Select
+              label="Select FY"
+              labelInline
               name="year"
-              label="Year"
-              labelHidden
               onChange={states.setYear}
               value={states.selectedYear}
               options={Object.keys(Object.values(chartData)[0].years).map(

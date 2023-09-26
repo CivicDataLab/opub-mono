@@ -5,7 +5,15 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from '@radix-ui/react-collapsible';
-import { Icon, Input, RadioGroup, RadioItem, Separator, Text } from 'opub-ui';
+import {
+  Icon,
+  Input,
+  RadioGroup,
+  RadioItem,
+  ScrollArea,
+  Separator,
+  Text,
+} from 'opub-ui';
 import React from 'react';
 
 interface IndicatorsProps {
@@ -27,14 +35,12 @@ export const Indicators = ({
   data,
   scheme,
   indicatorRef,
-  disable,
   setIndicator,
 }: {
   data: { [key: string]: IndicatorsProps };
   scheme: string;
 
   indicatorRef: any;
-  disable: boolean;
   setIndicator: any;
 }) => {
   const [search, setSearch] = React.useState('');
@@ -58,8 +64,12 @@ export const Indicators = ({
   }, [search, data[scheme]]);
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col">
       <Text variant="headingLg">Indicators</Text>
+      <Text variant="bodyMd" color="subdued" className="mt-2">
+        Select indicator to view insights
+      </Text>
+      <Separator className="my-4" />
       <Input
         name="indicator-search"
         label="Indicator Search"
@@ -68,7 +78,7 @@ export const Indicators = ({
         placeholder="Search"
         onChange={setSearch}
       />
-      <div>
+      <div className="mt-4">
         {filtered ? (
           <RadioGroup
             onChange={(val) => {
@@ -81,21 +91,21 @@ export const Indicators = ({
                 : ''
             }
           >
-            <div className="overflow-y-auto">
-              <div
-                className="flex flex-col gap-8 max-h-[680px]"
-                ref={indicatorRef}
-              >
-                {['District Performance', 'District Profile', 'Targets'].map(
-                  (item) => (
-                    <IndicatorContent
-                      key={item}
-                      heading={item}
-                      list={filtered[item]}
-                    />
-                  )
-                )}
-              </div>
+            <div className="max-h-[500px] overflow-auto">
+              <ScrollArea>
+                <div className="flex flex-col gap-4 " ref={indicatorRef}>
+                  {['District Performance', 'District Profile', 'Targets'].map(
+                    (item) => (
+                      <IndicatorContent
+                        key={item}
+                        heading={item}
+                        list={filtered[item]}
+                        defaultOpen={item === 'District Performance'}
+                      />
+                    )
+                  )}
+                </div>
+              </ScrollArea>
             </div>
           </RadioGroup>
         ) : (
@@ -109,23 +119,25 @@ export const Indicators = ({
 const IndicatorContent = ({
   list,
   heading,
+  defaultOpen,
 }: {
   heading: string;
   list: {
     label: string;
     slug: string;
   }[];
+  defaultOpen: boolean;
 }) => {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(defaultOpen);
   return (
     <Collapsible asChild open={open} onOpenChange={setOpen}>
       <section>
-        <CollapsibleTrigger className="border-none rounded-2 shadow-button bg-background hover:cursor-pointer w-full flex justify-between items-center py-2 px-4">
+        <CollapsibleTrigger className="border-none bg-surfaceDefault flex items-center gap-2 justify-between w-full cursor-pointer">
           <Text variant="headingSm">{heading}</Text>
           <Icon source={open ? Icons.up : Icons.down} />
         </CollapsibleTrigger>
-        <CollapsibleContent>
-          <Separator className="my-3" />
+        <CollapsibleContent className="pr-4">
+          <Separator className="mt-2 mb-3" />
           {list.length > 0 ? (
             list.map((child, index) => {
               return (
