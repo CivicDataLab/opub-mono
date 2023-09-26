@@ -4,11 +4,9 @@ $item-min-width: 50px;
 
 .Tabs {
   display: flex;
-  //   flex-wrap: wrap;
   margin: 0;
   padding: 0;
   list-style: none;
-  padding: var(--space-05);
   overflow-x: auto;
 }
 
@@ -39,14 +37,11 @@ $item-min-width: 50px;
 
 .Tab {
   @include unstyled-button;
-  color: var(--text-subdued);
-  color: var(--text);
+  color: var(--text-highlight);
   position: relative;
   justify-content: center;
   width: 100%;
   min-width: 100%;
-  margin-top: var(--space-025);
-  margin-bottom: calc(-1 * var(--space-025));
   padding: var(--space-2) var(--space-1);
   outline: none;
   text-align: center;
@@ -54,26 +49,37 @@ $item-min-width: 50px;
   text-decoration: none;
   cursor: pointer;
 
+  box-shadow: var(--shadow-inset-basic);
+
+  &.ActiveBorder {
+    border-radius: 4px 4px 0px 0px;
+    box-shadow: none;
+  }
+
   &:hover {
     text-decoration: none;
 
-    .Title {
-      font-weight: var(--font-weight-regular);
-      color: var(--text);
-      background-color: transparent;
+    &.ActiveBorder {
+      .Title {
+        font-weight: var(--font-weight-regular);
+        color: var(--text-default);
+        background-color: transparent;
 
-      &::before {
-        background-color: var(--border-hovered);
+        &::before {
+          background-color: var(--border-hovered);
+        }
       }
     }
   }
 
   &:active {
-    .Title {
-      background-color: transparent;
+    &.ActiveBorder {
+      .Title {
+        background-color: transparent;
 
-      &::before {
-        background: var(--surface-primary-selected-pressed);
+        &::before {
+          background: var(--surface-primary-selected-pressed);
+        }
       }
     }
   }
@@ -96,22 +102,34 @@ $item-min-width: 50px;
   }
 
   &[data-state='active'] {
-    font-weight: var(--font-weight-regular);
-    color: var(--text);
-
-    &:focus .Title {
-      outline: var(--border-width-3) solid transparent;
-      &::before {
-        background: var(--action-primary);
-      }
+    background: var(--surface-highlight-default, #ede9fe);
+    .Title {
+      color: var(--text-highlight);
     }
 
-    .Title {
-      outline: var(--border-width-3) solid transparent;
-      color: var(--text);
+    &.ActiveBorder {
+      background-color: var(--surface-highlight-subdued, #fbfaff);
+      font-weight: var(--font-weight-regular);
+      color: var(--text-highlight);
+      border: 1px solid var(--border-subdued, #d7dbdf);
+      box-shadow: var(--shadow-element-popover);
+      border-bottom: none;
 
-      &::before {
-        background: var(--action-primary);
+      &:focus .Title {
+        outline: var(--border-width-3) solid transparent;
+
+        &::before {
+          background: var(--action-primary-active-basic-default, #6e56cf);
+        }
+      }
+
+      .Title {
+        outline: var(--border-width-3) solid transparent;
+        color: var(--text-highlight);
+
+        &::before {
+          background: var(--action-primary-active-basic-default, #6e56cf);
+        }
       }
     }
   }
@@ -119,8 +137,8 @@ $item-min-width: 50px;
 
 .Title {
   @include focus-ring;
-  border-radius: var(--border-radius-1);
   display: block;
+  border-radius: var(--border-radius-1);
   padding: var(--space-2) var(--space-4);
   min-width: $item-min-width;
   color: var(--text-subdued);

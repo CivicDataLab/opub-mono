@@ -19,7 +19,7 @@ export function DashboardLayout({
     <div
       className={cn(
         'relative grow min-h-[calc(100%_-_48px)]',
-        'md:flex md:gap-0'
+        'md:grid md:grid-cols-[240px,1fr]'
       )}
     >
       <DashboardSidebar items={dashboardConfig.sidebarNav} />
@@ -27,7 +27,7 @@ export function DashboardLayout({
       <div className="md:hidden basis-2 z-1">
         <MobileDashboardNav items={dashboardConfig.sidebarNav} />
       </div>
-      <main className={cn(styles.Main, 'md:max-w-[calc(100vw_-_260px)]')}>
+      <main className={cn(styles.Main, 'grow md:max-w-[calc(100vw_-_240px)]')}>
         {children}
       </main>
     </div>

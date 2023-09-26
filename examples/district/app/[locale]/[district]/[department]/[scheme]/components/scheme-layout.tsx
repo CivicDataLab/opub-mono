@@ -2,7 +2,7 @@
 
 import Icons from '@/components/icons';
 import Image from 'next/image';
-import { Divider, Icon, Tab, TabList, TabPanel, Tabs, Text } from 'opub-ui';
+import { Icon, Tab, TabList, TabPanel, Tabs, Text } from 'opub-ui';
 import React from 'react';
 import { BreadCrumb } from '../../../components';
 import { schemes } from '../scheme.config';
@@ -156,7 +156,7 @@ export const Content = ({ data }: { data: IProps }) => {
             {
               label: 'Source Data',
               value: 'source-data',
-              icon: 'database-share',
+              icon: 'database-search',
               scheme: data.scheme,
               tableData: tableData,
               chartData: chartData,
@@ -186,21 +186,24 @@ const TabLayout = ({
   const [value, setValue] = React.useState('overview');
 
   return (
-    <Tabs onValueChange={setValue} value={value}>
-      <TabList fitted>
+    <Tabs onValueChange={setValue} value={value} className="mt-10">
+      <TabList
+        fitted
+        className="rounded-05 shadow-elementCard bg-surfaceDefault"
+      >
         {tabs.map((tab) => (
-          <Tab value={tab.value} key={tab.value}>
+          <Tab value={tab.value} key={tab.value} activeBorder={false}>
             <div className="flex items-center gap-3">
               <Icon
                 source={Icons[tab.icon]}
                 size={40}
-                color={value === tab.value ? 'primary' : 'subdued'}
+                color={value === tab.value ? 'highlight' : 'subdued'}
                 stroke={1}
               />
               <Text
                 variant="headingLg"
                 as="h2"
-                color={value === tab.value ? 'default' : 'subdued'}
+                color={value === tab.value ? 'inherit' : 'subdued'}
               >
                 {tab.label}
               </Text>
