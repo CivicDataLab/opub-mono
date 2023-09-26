@@ -1,7 +1,7 @@
-import React, { forwardRef } from 'react';
 import styles from './ScrollArea.module.scss';
-import cx from 'classnames';
 import * as Scroll from '@radix-ui/react-scroll-area';
+import cx from 'classnames';
+import React, { forwardRef } from 'react';
 
 type Props = {
   children: React.ReactNode;
@@ -12,8 +12,8 @@ const ScrollArea = forwardRef((props: Props, ref: any) => {
   const themeClass = cx(styles.ScrollArea, {});
 
   return (
-    <div className={`opub-ScrollArea ${themeClass}`} ref={ref} {...others}>
-      <Scroll.Root className={styles.ScrollAreaRoot}>
+    <>
+      <Scroll.Root className={styles.ScrollAreaRoot} ref={ref} {...others}>
         <Scroll.Viewport className={styles.ScrollAreaViewport}>
           {children}
         </Scroll.Viewport>
@@ -33,7 +33,7 @@ const ScrollArea = forwardRef((props: Props, ref: any) => {
         </Scroll.Scrollbar>
         <Scroll.Corner className={styles.ScrollAreaCorner} />
       </Scroll.Root>
-    </div>
+    </>
   );
 });
 
