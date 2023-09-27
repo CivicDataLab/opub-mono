@@ -100,7 +100,6 @@ export const Indicators = ({
                         key={item}
                         heading={item}
                         list={filtered[item]}
-                        defaultOpen={item === 'District Performance'}
                       />
                     )
                   )}
@@ -119,38 +118,33 @@ export const Indicators = ({
 const IndicatorContent = ({
   list,
   heading,
-  defaultOpen,
 }: {
   heading: string;
   list: {
     label: string;
     slug: string;
   }[];
-  defaultOpen: boolean;
 }) => {
-  const [open, setOpen] = React.useState(defaultOpen);
   return (
-    <Collapsible asChild open={open} onOpenChange={setOpen}>
-      <section>
-        <CollapsibleTrigger className="border-none bg-surfaceDefault flex items-center gap-2 justify-between w-full cursor-pointer">
-          <Text variant="headingSm">{heading}</Text>
-          <Icon source={open ? Icons.up : Icons.down} />
-        </CollapsibleTrigger>
-        <CollapsibleContent className="pr-4">
-          <Separator className="mt-2 mb-3" />
-          {list.length > 0 ? (
-            list.map((child, index) => {
-              return (
-                <RadioItem key={child.label + index} value={child.slug}>
-                  {child.label}
-                </RadioItem>
-              );
-            })
-          ) : (
-            <Text variant="bodyMd">No indicators found</Text>
-          )}
-        </CollapsibleContent>
-      </section>
-    </Collapsible>
+    <section className="pr-4">
+      <div className=" border-none bg-surfaceDefault flex items-center gap-2 justify-between w-full">
+        <Text variant="headingSm">{heading}</Text>
+        <Icon source={Icons.info} color="default" />
+      </div>
+      <div>
+        <Separator className="mt-2 mb-3" />
+        {list.length > 0 ? (
+          list.map((child, index) => {
+            return (
+              <RadioItem key={child.label + index} value={child.slug}>
+                {child.label}
+              </RadioItem>
+            );
+          })
+        ) : (
+          <Text variant="bodyMd">No indicators found</Text>
+        )}
+      </div>
+    </section>
   );
 };

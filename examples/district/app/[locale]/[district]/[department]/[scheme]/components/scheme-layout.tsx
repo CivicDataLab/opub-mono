@@ -201,9 +201,10 @@ const TabLayout = ({
                 stroke={1}
               />
               <Text
-                variant="headingLg"
+                variant="bodyLg"
                 as="h2"
-                color={value === tab.value ? 'inherit' : 'subdued'}
+                fontWeight={value === tab.value ? 'medium' : 'regular'}
+                color={value === tab.value ? 'inherit' : 'default'}
               >
                 {tab.label}
               </Text>

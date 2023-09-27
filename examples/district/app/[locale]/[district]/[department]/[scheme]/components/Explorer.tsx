@@ -110,20 +110,6 @@ const Content = ({
 
   const contentRef = React.useRef(null);
 
-  // React.useEffect(() => {
-  //   // change height of indicator list based on content height
-  //   if (indicatorRef.current && contentRef.current) {
-  //     setTimeout(() => {
-  //       // it takes some time to render the content
-  //       const indicatorList = indicatorRef.current;
-  //       const content: any = contentRef.current;
-  //       const contentHeight = content.offsetHeight;
-
-  //       indicatorList.style.maxHeight = `${contentHeight - 50}px`;
-  //     }, 20);
-  //   }
-  // }, [states.selectedTab]);
-
   if (!chartData[states.selectedIndicator]) {
     return (
       <Text variant="headingLg" as="h2">
