@@ -15,7 +15,7 @@ export default function Provider({ children }: { children: React.ReactNode }) {
     <QueryClientProvider client={client}>
       <>
         <RouterEvents />
-        <NextTopLoader color="var(--action-primary-success)" />
+        <NextTopLoader color="var(--action-primary-success-default)" />
         <Tooltip.Provider>
           {children}
           <Toaster />
