@@ -1,6 +1,5 @@
-import { IconSource } from 'opub-ui/src/types/icon';
-
 import { Icons } from '@/components/icons';
+import { IconSource } from 'opub-ui/src/types/icon';
 
 export type SiteConfig = {
   name: string;

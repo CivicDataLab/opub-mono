@@ -1,53 +1,76 @@
-module.exports = function ({ dictionary, options }) {
-  const { category, type, trimName, useNameAttribute, removeCategory } =
-    options;
+function arrayToCamelCase(tokens) {
+  return tokens
+    .map((word, index) => {
+      if (index === 0) return word.toLowerCase();
+      return word.charAt(0).toUpperCase() + word.slice(1);
+    })
+    .join('');
+}
 
-  // filter tokens by category and type
-  let sizeArray = dictionary.allTokens.filter((token) => {
-    if (type) {
-      return (
-        token.category === category && token.attributes.category.includes(type)
-      );
-    }
-    return token.category === category;
-  });
+function nameFormat({ name, cssStyle = false, trimName = false, trimLength }) {
+  // format `design/token` to `design-token`
+  if (cssStyle) {
+    return `--${name.toLowerCase().split('/').join('-')}`;
+  }
+
+  // format `design/token/1` to `1`
+  // with trimLength = 2, format `design/token/abc/def` to `abcDef`
+  if (trimName) {
+    return arrayToCamelCase(name.split('/').slice(-trimLength));
+  }
+
+  // format `design/token` to `designToken`
+  return `${arrayToCamelCase(name.split('/'))}`;
+}
+
+module.exports = function ({ dictionary, options }) {
+  const { category, type, trimName, trimLength = 1 } = options;
+
+  let tokensObj = Object.values(dictionary.tokens).filter(
+    (token) => token.name === category
+  );
+
+  // for border-radius and border-width since they are nested
+  if (type) {
+    tokensObj = tokensObj[0].modes[0].variables.filter((token) =>
+      token.name.includes(type)
+    );
+  }
+
+  const variables = type ? tokensObj : tokensObj[0].modes[0].variables;
 
   let families = 'module.exports = { \n';
-  sizeArray.map((token) => {
-    let name;
-    // used for color tokens, where we want full name in camelCase
-    if (useNameAttribute) name = token.name.replace('Default', '');
-    // used for box-shadow tokens, where we want to remove the category from the name
-    else if (removeCategory) {
-      name = token.path[token.path.length - 1].split('-').slice(1).join('-');
+  variables.forEach((variable) => {
+    let name = nameFormat({
+      name: variable.name,
+      trimName,
+      trimLength,
+    });
+    let value;
+    if (variable.type === 'effect') {
+      value = `"var(${nameFormat({
+        name: variable.name,
+        cssStyle: true,
+      })})"`;
     } else {
-      // used for tokens where we want only the last part of the name, eg. dimension tokens
-      name = trimName
-        ? token.path[token.path.length - 1].split('-')
-        : // all other tokens
-          token.path[token.path.length - 1];
+      // if the value is based on another design token
+      if (variable['isAlias'] === true) {
+        value = `"var(${nameFormat({
+          name: variable.value.name,
+          cssStyle: true,
+        })})"`;
+      } else {
+        // if it's a fixed value
+        if (variable.type === 'number') {
+          value = `"${variable.value}px"`;
+        } else {
+          value = `"${variable.value}"`;
+        }
+      }
     }
-
-    const value = `"var(${formatPath(token.path)})"`;
-    families += `  "${formatKey(
-      trimName ? name[name.length - 1] : name
-    )}": ${value},\n`;
+    families += `  "${name}": ${value},\n`;
   });
   families += '}\n';
 
   return families;
 };
-
-function formatKey(name) {
-  return name.replace(/(\s|\/)/g, '-'); // replace spaces and slashes with dashes
-}
-
-function formatPath(path) {
-  const formattedPath = path
-    .map((item) => item.toLowerCase())
-    .join('-')
-    .replace(/(\s|\/)/g, '-') // replace spaces and slashes with dashes
-    .replace(/-default$/, ''); // remove '-default' from end of string
-
-  return `--${formattedPath}`;
-}

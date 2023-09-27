@@ -1,10 +1,13 @@
 'use client';
 
-import React from 'react';
-import Link from 'next/link';
-import { useParams, usePathname } from 'next/navigation';
+import dashboardStyles from '../dashboard.module.scss';
+import { isActive } from './dashboard-sidebar';
+import { Icons } from '@/components/icons';
+import { cn } from '@/lib/utils';
 import { SidebarNavItem } from '@/types';
 import { IconX } from '@tabler/icons-react';
+import Link from 'next/link';
+import { useParams, usePathname } from 'next/navigation';
 import {
   Button,
   CommandDialog,
@@ -17,11 +20,7 @@ import {
   IconButton,
   Text,
 } from 'opub-ui';
-
-import { cn } from '@/lib/utils';
-import { Icons } from '@/components/icons';
-import dashboardStyles from '../dashboard.module.scss';
-import { isActive } from './dashboard-sidebar';
+import React from 'react';
 
 interface DashboardNavProps {
   items: SidebarNavItem[];

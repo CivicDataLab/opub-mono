@@ -1,7 +1,7 @@
 {
   "name": "opub-viz",
   "description": "OPub Visualization Library",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "private": false,
   "license": "MIT",
   "author": "CivicDataLab <tech@civicdatalab.in>",

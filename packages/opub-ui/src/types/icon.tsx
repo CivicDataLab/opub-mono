@@ -4,6 +4,7 @@ import { TablerIconsProps } from '@tabler/icons-react';
 export type Color =
   | 'surface'
   | 'base'
+  | 'default'
   | 'subdued'
   | 'critical'
   | 'interactive'

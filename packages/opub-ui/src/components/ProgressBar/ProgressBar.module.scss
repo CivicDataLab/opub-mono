@@ -1,11 +1,11 @@
 @import '../../../styles/common';
 
 @function progress-bar-height($height: base) {
-  $base: 16px;
+  $base: 24px;
   $data: (
     small: $base * 0.5,
     base: $base,
-    large: $base * 2,
+    large: $base * 1.5,
   );
 
   @return map-get($data, $height);
@@ -25,7 +25,7 @@
 
 .colorHighlight {
   --op-progress-bar-background: var(--surface-neutral);
-  --op-progress-bar-indicator: var(--border-highlight);
+  --op-progress-bar-indicator: var(--icon-highlight);
 }
 
 .colorPrimary {
@@ -47,7 +47,7 @@
   position: relative;
   overflow: hidden;
   background-color: var(--op-progress-bar-background);
-  border-radius: var(--border-radius-1);
+  // border-radius: var(--border-radius-1);
   width: 100%;
 
   @media (forced-colors: active) {

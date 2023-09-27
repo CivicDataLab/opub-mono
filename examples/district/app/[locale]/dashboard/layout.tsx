@@ -1,9 +1,8 @@
-import React from 'react';
-import { notFound } from 'next/navigation';
-
-import { dashboardConfig } from '@/config/dashboard';
 import { DashboardLayout } from './components/dashboard-layout';
 import { DashboardNav } from './components/dashboard-nav';
+import { dashboardConfig } from '@/config/dashboard';
+import { notFound } from 'next/navigation';
+import React from 'react';
 
 interface DashboardLayoutProps {
   children?: React.ReactNode;

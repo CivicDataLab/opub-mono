@@ -1,0 +1,50 @@
+.CollapseTrigger {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  margin: 0;
+  width: 100%;
+  padding-block: var(--space-4);
+  padding-inline: var(--space-6);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  svg {
+    transition: transform var(--duration-100);
+  }
+
+  &[data-state='open'] {
+    svg {
+      transform: rotate(-180deg);
+    }
+  }
+}
+
+.Main {
+  flex-grow: 1;
+  transition: transform var(--duration-400) ease 0s;
+}
+
+.Item {
+  transition:
+    background-color var(--duration-200) var(--ease-in-out),
+    gap var(--duration-200) var(--ease-in-out);
+}
+
+.Selected {
+  background-color: var(--background-selected);
+
+  &[aria-selected] {
+    background-color: var(--background-selected);
+  }
+
+  svg {
+    color: var(--icon-decorative-four);
+  }
+}
+
+.Collapse {
+  transition: flex-basis var(--duration-300) var(--ease-in-out);
+}

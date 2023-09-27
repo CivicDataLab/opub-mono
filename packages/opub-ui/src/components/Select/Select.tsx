@@ -11,7 +11,7 @@ import { Icon } from '../Icon';
 import { helpTextID, Labelled } from '../Labelled';
 import { Text } from '../Text';
 import styles from './Select.module.scss';
-import { IconSelector } from '@tabler/icons-react';
+import { IconChevronDown } from '@tabler/icons-react';
 import cx from 'classnames';
 import React, { forwardRef, LegacyRef, useId } from 'react';
 
@@ -109,7 +109,7 @@ export const Select = forwardRef(
         {prefixMarkup}
         <span className={styles.SelectedOption}>{selectedOption.label}</span>
         <span className={styles.Icon}>
-          <Icon source={IconSelector} color="base" />
+          <Icon source={IconChevronDown} color="base" />
         </span>
       </div>
     );

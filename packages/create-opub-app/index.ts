@@ -38,6 +38,7 @@ program
 
 const options = program.opts();
 
+// if no arguments are passed, show help
 if (!process.argv.slice(2).length) {
   program.outputHelp();
 }

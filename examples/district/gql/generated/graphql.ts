@@ -1,10 +1,17 @@
 /* eslint-disable */
 import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
+
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
-export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+export type Exact<T extends { [key: string]: unknown }> = {
+  [K in keyof T]: T[K];
+};
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & {
+  [SubKey in K]?: Maybe<T[SubKey]>;
+};
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
+  [SubKey in K]: Maybe<T[SubKey]>;
+};
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -77,7 +84,7 @@ export enum ApiDetailsFormatLoc {
   /** Header */
   Header = 'HEADER',
   /** Param */
-  Param = 'PARAM'
+  Param = 'PARAM',
 }
 
 export type ApiParameterInputType = {
@@ -95,7 +102,7 @@ export enum ApiParameterType {
   /** Pagination */
   Pagination = 'PAGINATION',
   /** Preview */
-  Preview = 'PREVIEW'
+  Preview = 'PREVIEW',
 }
 
 export type ApiParametersType = {
@@ -169,7 +176,7 @@ export type AccessModelResourceType = {
 export enum AccessTypes {
   Open = 'OPEN',
   Registered = 'REGISTERED',
-  Restricted = 'RESTRICTED'
+  Restricted = 'RESTRICTED',
 }
 
 export type ActivityFilter = {
@@ -249,7 +256,7 @@ export enum AgreementStatus {
   /** Accepted */
   Accepted = 'ACCEPTED',
   /** Rejected */
-  Rejected = 'REJECTED'
+  Rejected = 'REJECTED',
 }
 
 export type AgreementType = {
@@ -364,13 +371,13 @@ export type ApproveRejectReviewRequests = {
 
 export enum AuthLocation {
   Header = 'HEADER',
-  Param = 'PARAM'
+  Param = 'PARAM',
 }
 
 export enum AuthType {
   Credentials = 'CREDENTIALS',
   NoAuth = 'NO_AUTH',
-  Token = 'TOKEN'
+  Token = 'TOKEN',
 }
 
 export type CatalogInput = {
@@ -568,7 +575,7 @@ export type DataAccessModelRequestMutation = {
 export enum DataAccessModelRequestStatusType {
   Approved = 'APPROVED',
   Rejected = 'REJECTED',
-  Requested = 'REQUESTED'
+  Requested = 'REQUESTED',
 }
 
 export type DataAccessModelRequestType = {
@@ -600,7 +607,7 @@ export enum DataAccessModelStatus {
   /** Active */
   Active = 'ACTIVE',
   /** Disabled */
-  Disabled = 'DISABLED'
+  Disabled = 'DISABLED',
 }
 
 export enum DataAccessModelSubscriptionQuotaUnit {
@@ -615,7 +622,7 @@ export enum DataAccessModelSubscriptionQuotaUnit {
   /** Weekly */
   Weekly = 'WEEKLY',
   /** Yearly */
-  Yearly = 'YEARLY'
+  Yearly = 'YEARLY',
 }
 
 export type DataAccessModelType = {
@@ -653,7 +660,7 @@ export enum DataAccessModelValidationUnit {
   /** Week */
   Week = 'WEEK',
   /** Year */
-  Year = 'YEAR'
+  Year = 'YEAR',
 }
 
 export type DataRequestInput = {
@@ -708,14 +715,14 @@ export type DataRequestUpdateMutation = {
 
 export enum DataType {
   Api = 'API',
-  File = 'FILE'
+  File = 'FILE',
 }
 
 export enum DatasetAccessModelPaymentType {
   /** Free */
   Free = 'FREE',
   /** Paid */
-  Paid = 'PAID'
+  Paid = 'PAID',
 }
 
 export type DatasetAccessModelType = {
@@ -740,7 +747,7 @@ export enum DatasetDatasetType {
   /** Api */
   Api = 'API',
   /** File */
-  File = 'FILE'
+  File = 'FILE',
 }
 
 export type DatasetRatingApproveRejectInput = {
@@ -773,20 +780,20 @@ export enum DatasetRatingsStatus {
   /** Published */
   Published = 'PUBLISHED',
   /** Rejected */
-  Rejected = 'REJECTED'
+  Rejected = 'REJECTED',
 }
 
 export enum DatasetRequestStatusType {
   Fetched = 'FETCHED',
   Fulfilled = 'FULFILLED',
-  Requested = 'REQUESTED'
+  Requested = 'REQUESTED',
 }
 
 export enum DatasetReviewRequestRequestType {
   /** Moderation */
   Moderation = 'MODERATION',
   /** Review */
-  Review = 'REVIEW'
+  Review = 'REVIEW',
 }
 
 export enum DatasetStatus {
@@ -797,7 +804,7 @@ export enum DatasetStatus {
   Reviewed = 'REVIEWED',
   Transformationinprogress = 'TRANSFORMATIONINPROGRESS',
   Undermoderation = 'UNDERMODERATION',
-  Underreview = 'UNDERREVIEW'
+  Underreview = 'UNDERREVIEW',
 }
 
 export type DatasetType = {
@@ -940,7 +947,7 @@ export enum FieldTypes {
   Actor = 'actor',
   Browser = 'browser',
   Ip = 'ip',
-  Verb = 'verb'
+  Verb = 'verb',
 }
 
 export type FileDetailsType = {
@@ -960,14 +967,14 @@ export type FileInputType = {
 
 export enum FormatLocation {
   Header = 'HEADER',
-  Param = 'PARAM'
+  Param = 'PARAM',
 }
 
 export enum GeoTypes {
   Country = 'COUNTRY',
   District = 'DISTRICT',
   State = 'STATE',
-  Ut = 'UT'
+  Ut = 'UT',
 }
 
 export enum GeographyGeoType {
@@ -978,7 +985,7 @@ export enum GeographyGeoType {
   /** State */
   State = 'STATE',
   /** Ut */
-  Ut = 'UT'
+  Ut = 'UT',
 }
 
 export type GeographyInput = {
@@ -1006,7 +1013,7 @@ export enum InfoType {
   Datastory = 'DATASTORY',
   Other = 'OTHER',
   Report = 'REPORT',
-  Usecase = 'USECASE'
+  Usecase = 'USECASE',
 }
 
 export type KeyValueType = {
@@ -1018,7 +1025,7 @@ export type KeyValueType = {
 export enum Licenseadditionstate {
   Created = 'CREATED',
   Published = 'PUBLISHED',
-  Rejected = 'REJECTED'
+  Rejected = 'REJECTED',
 }
 
 export type LicenceAdditionInputType = {
@@ -1040,7 +1047,7 @@ export enum LicenseAdditionStatus {
   /** Published */
   Published = 'PUBLISHED',
   /** Rejected */
-  Rejected = 'REJECTED'
+  Rejected = 'REJECTED',
 }
 
 export type LicenseAdditionType = {
@@ -1087,7 +1094,7 @@ export enum LicenseStatus {
   /** Published */
   Published = 'PUBLISHED',
   /** Rejected */
-  Rejected = 'REJECTED'
+  Rejected = 'REJECTED',
 }
 
 export type LicenseType = {
@@ -1207,286 +1214,229 @@ export type Mutation = {
   update_sector?: Maybe<UpdateSector>;
 };
 
-
 export type MutationAccess_Model_ResourceArgs = {
   access_model_resource_data?: InputMaybe<AccessModelResourceInput>;
 };
-
 
 export type MutationAddress_Moderation_RequestsArgs = {
   moderation_request?: InputMaybe<ModerationRequestsApproveRejectInput>;
 };
 
-
 export type MutationAgreement_RequestArgs = {
   agreement_request?: InputMaybe<AgreementInput>;
 };
-
 
 export type MutationApprove_Reject_Data_Access_Model_RequestArgs = {
   data_access_model_request?: InputMaybe<DataAccessModelRequestUpdateInput>;
 };
 
-
 export type MutationApprove_Reject_Dataset_RatingArgs = {
   rating_data: DatasetRatingApproveRejectInput;
 };
-
 
 export type MutationApprove_Reject_LicenseArgs = {
   license_data: LicenseApproveRejectInput;
 };
 
-
 export type MutationApprove_Reject_License_AdditionArgs = {
   additions_data: LicenseAdditionApproveRejectInput;
 };
-
 
 export type MutationApprove_Reject_Moderation_RequestsArgs = {
   moderation_request?: InputMaybe<ModerationRequestsApproveRejectInput>;
 };
 
-
 export type MutationApprove_Reject_Organization_ApprovalArgs = {
   organization_data: ApproveRejectOrganizationApprovalInput;
 };
-
 
 export type MutationApprove_Reject_Organization_RequestArgs = {
   organization_request?: InputMaybe<OrganizationRequestUpdateInput>;
 };
 
-
 export type MutationApprove_Reject_PolicyArgs = {
   policy_data: PolicyApproveRejectInput;
 };
-
 
 export type MutationApprove_Reject_Review_RequestArgs = {
   review_request?: InputMaybe<ReviewRequestsApproveRejectInput>;
 };
 
-
 export type MutationCreate_Additional_InfoArgs = {
   info_data?: InputMaybe<AdditionalInfoInput>;
 };
-
 
 export type MutationCreate_Api_SourceArgs = {
   api_source_data: ApiSourceInput;
 };
 
-
 export type MutationCreate_CatalogArgs = {
   catalog_data: CatalogInput;
 };
-
 
 export type MutationCreate_Data_Access_ModelArgs = {
   data_access_model_data?: InputMaybe<DataAccessModelInput>;
 };
 
-
 export type MutationCreate_DatasetArgs = {
   dataset_data?: InputMaybe<CreateDatasetInput>;
 };
-
 
 export type MutationCreate_Dataset_RatingArgs = {
   rating_data: DatasetRatingInput;
 };
 
-
 export type MutationCreate_GeographyArgs = {
   geography_data: GeographyInput;
 };
-
 
 export type MutationCreate_LicenseArgs = {
   license_data: LicenseInput;
 };
 
-
 export type MutationCreate_License_AdditionArgs = {
   license_addition_data: LicenseAdditionsCreateInput;
 };
-
 
 export type MutationCreate_OrganizationArgs = {
   organization_data: OrganizationInput;
 };
 
-
 export type MutationCreate_PolicyArgs = {
   policy_data: PolicyInput;
 };
-
 
 export type MutationCreate_ResourceArgs = {
   resource_data?: InputMaybe<ResourceInput>;
 };
 
-
 export type MutationCreate_SectorArgs = {
   sector_data: SectorInput;
 };
-
 
 export type MutationCreate_TagArgs = {
   tag_data: TagInput;
 };
 
-
 export type MutationData_Access_Model_RequestArgs = {
   data_access_model_request?: InputMaybe<DataAccessModelRequestInput>;
 };
-
 
 export type MutationData_RequestArgs = {
   data_request?: InputMaybe<DataRequestInput>;
 };
 
-
 export type MutationDelete_Access_Model_ResourceArgs = {
   access_model_resource_data?: InputMaybe<DeleteAccessModelResourceInput>;
 };
-
 
 export type MutationDelete_Additional_InfoArgs = {
   id?: InputMaybe<Scalars['ID']>;
 };
 
-
 export type MutationDelete_Api_SourceArgs = {
   api_source_id: Scalars['Int'];
 };
-
 
 export type MutationDelete_Data_Access_ModelArgs = {
   data_access_model_data?: InputMaybe<DeleteDataAccessModelInput>;
 };
 
-
 export type MutationDelete_LicenseArgs = {
   license_id: Scalars['ID'];
 };
-
 
 export type MutationDelete_Organization_RequestArgs = {
   delete_organization_request?: InputMaybe<OrganizationRequestUpdateInput>;
 };
 
-
 export type MutationDelete_PolicyArgs = {
   policy_id: Scalars['ID'];
 };
-
 
 export type MutationDelete_ResourceArgs = {
   resource_data?: InputMaybe<DeleteResourceInput>;
 };
 
-
 export type MutationDisable_Data_Access_ModelArgs = {
   data_access_model_data?: InputMaybe<DisableDataAccessModelInput>;
 };
-
 
 export type MutationEdit_DatasetArgs = {
   dataset_data?: InputMaybe<EditDatasetInput>;
 };
 
-
 export type MutationModeration_RequestArgs = {
   moderation_request?: InputMaybe<ModerationRequestInput>;
 };
-
 
 export type MutationOpen_Data_RequestArgs = {
   data_request?: InputMaybe<OpenDataRequestInput>;
 };
 
-
 export type MutationOrganization_RequestArgs = {
   organization_request?: InputMaybe<OrganizationRequestInput>;
 };
-
 
 export type MutationPatch_DatasetArgs = {
   dataset_data?: InputMaybe<PatchDatasetInput>;
 };
 
-
 export type MutationPatch_OrganizationArgs = {
   organization_data: OrganizationPatchInput;
 };
-
 
 export type MutationReview_RequestArgs = {
   review_request?: InputMaybe<ReviewRequestInput>;
 };
 
-
 export type MutationSubscribe_MutationArgs = {
   subscribe_input: SubscribeInput;
 };
-
 
 export type MutationUpdate_Access_Model_ResourceArgs = {
   access_model_resource_data?: InputMaybe<AccessModelResourceInput>;
 };
 
-
 export type MutationUpdate_Additional_InfoArgs = {
   resource_data: AdditionalInfoInput;
 };
-
 
 export type MutationUpdate_Data_Access_ModelArgs = {
   data_access_model_data?: InputMaybe<DataAccessModelInput>;
 };
 
-
 export type MutationUpdate_Data_RequestArgs = {
   data_request?: InputMaybe<DataRequestUpdateInput>;
 };
-
 
 export type MutationUpdate_DatasetArgs = {
   dataset_data?: InputMaybe<UpdateDatasetInput>;
 };
 
-
 export type MutationUpdate_GeographyArgs = {
   geography_data: GeographyInput;
 };
-
 
 export type MutationUpdate_LicenseArgs = {
   license_data: LicenseInput;
 };
 
-
 export type MutationUpdate_License_AdditionArgs = {
   license_addition_data: LicenseAdditionsCreateInput;
 };
-
 
 export type MutationUpdate_OrganizationArgs = {
   organization_data: OrganizationInput;
 };
 
-
 export type MutationUpdate_PolicyArgs = {
   policy_data: PolicyInput;
 };
 
-
 export type MutationUpdate_ResourceArgs = {
   resource_data: ResourceInput;
 };
-
 
 export type MutationUpdate_SectorArgs = {
   sector_data: SectorInput;
@@ -1519,7 +1469,7 @@ export enum OrganizationCreateRequestOrganizationSubtypes {
   /** Organisation */
   Organisation = 'ORGANISATION',
   /** Other */
-  Other = 'OTHER'
+  Other = 'OTHER',
 }
 
 export enum OrganizationCreateRequestStatus {
@@ -1530,13 +1480,13 @@ export enum OrganizationCreateRequestStatus {
   /** Rejected */
   Rejected = 'REJECTED',
   /** Requested */
-  Requested = 'REQUESTED'
+  Requested = 'REQUESTED',
 }
 
 export enum OrganizationCreationStatusType {
   Approved = 'APPROVED',
   Rejected = 'REJECTED',
-  Requested = 'REQUESTED'
+  Requested = 'REQUESTED',
 }
 
 export type OrganizationInput = {
@@ -1594,7 +1544,7 @@ export enum OrganizationOrganizationTypes {
   /** Union Territory Government */
   UnionTerritoryGovernment = 'UNION_TERRITORY_GOVERNMENT',
   /** Urban Local Body */
-  UrbanLocalBody = 'URBAN_LOCAL_BODY'
+  UrbanLocalBody = 'URBAN_LOCAL_BODY',
 }
 
 export type OrganizationPatchInput = {
@@ -1635,14 +1585,14 @@ export enum OrganizationRequestStatus {
   /** Rejected */
   Rejected = 'REJECTED',
   /** Requested */
-  Requested = 'REQUESTED'
+  Requested = 'REQUESTED',
 }
 
 export enum OrganizationRequestStatusType {
   Approved = 'APPROVED',
   Deleted = 'DELETED',
   Rejected = 'REJECTED',
-  Requested = 'REQUESTED'
+  Requested = 'REQUESTED',
 }
 
 export type OrganizationRequestType = {
@@ -1669,7 +1619,7 @@ export enum OrganizationSubTypes {
   Department = 'DEPARTMENT',
   Ministry = 'MINISTRY',
   Organisation = 'ORGANISATION',
-  Other = 'OTHER'
+  Other = 'OTHER',
 }
 
 export type OrganizationType = {
@@ -1718,12 +1668,12 @@ export enum OrganizationTypes {
   Startup = 'STARTUP',
   StateGovernment = 'STATE_GOVERNMENT',
   UnionTerritoryGovernment = 'UNION_TERRITORY_GOVERNMENT',
-  UrbanLocalBody = 'URBAN_LOCAL_BODY'
+  UrbanLocalBody = 'URBAN_LOCAL_BODY',
 }
 
 export enum Paymenttypes {
   Free = 'FREE',
-  Paid = 'PAID'
+  Paid = 'PAID',
 }
 
 export type ParameterKeyValueType = {
@@ -1734,7 +1684,7 @@ export type ParameterKeyValueType = {
 export enum ParameterTypes {
   Exposed = 'EXPOSED',
   Pagination = 'PAGINATION',
-  Preview = 'PREVIEW'
+  Preview = 'PREVIEW',
 }
 
 export type PatchDataset = {
@@ -1780,7 +1730,7 @@ export enum PolicyStatus {
   /** Rejected */
   Rejected = 'REJECTED',
   /** Requested */
-  Requested = 'REQUESTED'
+  Requested = 'REQUESTED',
 }
 
 export type PolicyType = {
@@ -1804,7 +1754,7 @@ export enum PurposeType {
   GovernmentUse = 'GOVERNMENT_USE',
   Journalism = 'JOURNALISM',
   Others = 'OTHERS',
-  RD = 'R_D'
+  RD = 'R_D',
 }
 
 export type Query = {
@@ -1813,7 +1763,9 @@ export type Query = {
   all_api_source?: Maybe<Array<Maybe<ApiSourceType>>>;
   all_api_source_by_org?: Maybe<Array<Maybe<ApiSourceType>>>;
   all_catalog?: Maybe<Array<Maybe<CatalogType>>>;
-  all_data_access_model_requests?: Maybe<Array<Maybe<DataAccessModelRequestType>>>;
+  all_data_access_model_requests?: Maybe<
+    Array<Maybe<DataAccessModelRequestType>>
+  >;
   all_data_access_models?: Maybe<Array<Maybe<DataAccessModelType>>>;
   all_data_requests?: Maybe<Array<Maybe<DataRequestType>>>;
   all_dataset_ratings?: Maybe<Array<Maybe<DatasetRatingType>>>;
@@ -1837,8 +1789,12 @@ export type Query = {
   catalog?: Maybe<CatalogType>;
   data_access_model?: Maybe<DataAccessModelType>;
   data_access_model_request?: Maybe<DataAccessModelRequestType>;
-  data_access_model_request_org?: Maybe<Array<Maybe<DataAccessModelRequestType>>>;
-  data_access_model_request_user?: Maybe<Array<Maybe<DataAccessModelRequestType>>>;
+  data_access_model_request_org?: Maybe<
+    Array<Maybe<DataAccessModelRequestType>>
+  >;
+  data_access_model_request_user?: Maybe<
+    Array<Maybe<DataAccessModelRequestType>>
+  >;
   data_request?: Maybe<DataRequestType>;
   data_request_user?: Maybe<DataRequestType>;
   data_spec?: Maybe<Scalars['JSONString']>;
@@ -1891,36 +1847,29 @@ export type Query = {
   user_subscriptions?: Maybe<Array<Maybe<SubscribeType>>>;
 };
 
-
 export type QueryApi_SourceArgs = {
   api_source_id?: InputMaybe<Scalars['Int']>;
 };
-
 
 export type QueryCatalogArgs = {
   catalog_id?: InputMaybe<Scalars['Int']>;
 };
 
-
 export type QueryData_Access_ModelArgs = {
   data_access_model_id?: InputMaybe<Scalars['ID']>;
 };
-
 
 export type QueryData_Access_Model_RequestArgs = {
   data_access_model_request_id?: InputMaybe<Scalars['Int']>;
 };
 
-
 export type QueryData_Access_Model_Request_OrgArgs = {
   org_id?: InputMaybe<Scalars['Int']>;
 };
 
-
 export type QueryData_RequestArgs = {
   data_request_id?: InputMaybe<Scalars['UUID']>;
 };
-
 
 export type QueryData_SpecArgs = {
   dataset_access_model_request_id?: InputMaybe<Scalars['ID']>;
@@ -1928,43 +1877,35 @@ export type QueryData_SpecArgs = {
   resource_id: Scalars['ID'];
 };
 
-
 export type QueryDatasetArgs = {
   dataset_id?: InputMaybe<Scalars['Int']>;
 };
-
 
 export type QueryDataset_Access_ModelArgs = {
   anonymous_users?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   dataset_id?: InputMaybe<Scalars['ID']>;
 };
 
-
 export type QueryDataset_Access_Model_By_IdArgs = {
   dataset_access_model_id?: InputMaybe<Scalars['ID']>;
 };
-
 
 export type QueryDataset_By_SlugArgs = {
   dataset_slug?: InputMaybe<Scalars['String']>;
 };
 
-
 export type QueryDataset_By_TitleArgs = {
   dataset_title?: InputMaybe<Scalars['String']>;
 };
-
 
 export type QueryDataset_RatingArgs = {
   dataset_id?: InputMaybe<Scalars['Int']>;
 };
 
-
 export type QueryDept_By_MinistryArgs = {
   organization_id?: InputMaybe<Scalars['Int']>;
   state?: InputMaybe<Scalars['String']>;
 };
-
 
 export type QueryEntity_By_StateArgs = {
   entity_type?: InputMaybe<Scalars['String']>;
@@ -1972,36 +1913,29 @@ export type QueryEntity_By_StateArgs = {
   state?: InputMaybe<Scalars['String']>;
 };
 
-
 export type QueryGeographyArgs = {
   geography_id?: InputMaybe<Scalars['Int']>;
 };
-
 
 export type QueryInfoArgs = {
   info_id?: InputMaybe<Scalars['Int']>;
 };
 
-
 export type QueryLicenseArgs = {
   license_id?: InputMaybe<Scalars['Int']>;
 };
-
 
 export type QueryLicense_AdditionArgs = {
   license_id?: InputMaybe<Scalars['Int']>;
 };
 
-
 export type QueryMinistries_By_StateArgs = {
   state?: InputMaybe<Scalars['String']>;
 };
 
-
 export type QueryModeration_RequestArgs = {
   moderation_request_id?: InputMaybe<Scalars['Int']>;
 };
-
 
 export type QueryOrg_ActivityArgs = {
   filters?: InputMaybe<Array<InputMaybe<ActivityFilter>>>;
@@ -2010,11 +1944,9 @@ export type QueryOrg_ActivityArgs = {
   skip?: InputMaybe<Scalars['Int']>;
 };
 
-
 export type QueryOrg_Data_Access_ModelsArgs = {
   organization_id?: InputMaybe<Scalars['ID']>;
 };
-
 
 export type QueryOrg_DatasetsArgs = {
   first?: InputMaybe<Scalars['Int']>;
@@ -2022,81 +1954,65 @@ export type QueryOrg_DatasetsArgs = {
   status?: InputMaybe<DatasetStatus>;
 };
 
-
 export type QueryOrganization_By_IdArgs = {
   organization_id?: InputMaybe<Scalars['Int']>;
 };
-
 
 export type QueryOrganization_By_TidArgs = {
   organization_tid?: InputMaybe<Scalars['Int']>;
 };
 
-
 export type QueryOrganization_By_TitleArgs = {
   organization_title?: InputMaybe<Scalars['String']>;
 };
-
 
 export type QueryOrganization_RequestArgs = {
   organization_request_id?: InputMaybe<Scalars['Int']>;
 };
 
-
 export type QueryOrganization_Without_DpaArgs = {
   organization_id?: InputMaybe<Scalars['Int']>;
 };
-
 
 export type QueryPolicy_By_IdArgs = {
   policy_id?: InputMaybe<Scalars['Int']>;
 };
 
-
 export type QueryRatingArgs = {
   dataset_rating_id?: InputMaybe<Scalars['Int']>;
 };
-
 
 export type QueryResourceArgs = {
   resource_id?: InputMaybe<Scalars['Int']>;
 };
 
-
 export type QueryResource_ColumnsArgs = {
   resource_id?: InputMaybe<Scalars['Int']>;
 };
-
 
 export type QueryResource_DatasetArgs = {
   dataset_id?: InputMaybe<Scalars['Int']>;
 };
 
-
 export type QueryReview_RequestArgs = {
   review_request_id?: InputMaybe<Scalars['Int']>;
 };
-
 
 export type QuerySectorArgs = {
   sector_id?: InputMaybe<Scalars['Int']>;
 };
 
-
 export type QuerySector_By_TitleArgs = {
   sector_title?: InputMaybe<Scalars['String']>;
 };
-
 
 export type QuerySubscribeArgs = {
   subscribe_id?: InputMaybe<Scalars['Int']>;
 };
 
-
 export type QueryTagArgs = {
   tag_id?: InputMaybe<Scalars['Int']>;
 };
-
 
 export type QueryUser_ActivityArgs = {
   filters?: InputMaybe<Array<InputMaybe<ActivityFilter>>>;
@@ -2104,7 +2020,6 @@ export type QueryUser_ActivityArgs = {
   skip?: InputMaybe<Scalars['Int']>;
   user?: InputMaybe<Scalars['String']>;
 };
-
 
 export type QueryUser_Dataset_SubscriptionArgs = {
   dataset_id?: InputMaybe<Scalars['Int']>;
@@ -2118,19 +2033,19 @@ export enum RateLimitUnits {
   Quarter = 'QUARTER',
   Second = 'SECOND',
   Week = 'WEEK',
-  Year = 'YEAR'
+  Year = 'YEAR',
 }
 
 export enum RatingStatus {
   Created = 'CREATED',
   Published = 'PUBLISHED',
-  Rejected = 'REJECTED'
+  Rejected = 'REJECTED',
 }
 
 export enum RequestType {
   Get = 'GET',
   Post = 'POST',
-  Put = 'PUT'
+  Put = 'PUT',
 }
 
 export type ResourceFieldInput = {
@@ -2220,7 +2135,7 @@ export type ResourceType = {
 export enum ResponseType {
   Csv = 'CSV',
   Json = 'JSON',
-  Xml = 'XML'
+  Xml = 'XML',
 }
 
 export type ReviewRequestInput = {
@@ -2299,7 +2214,7 @@ export enum StatusType {
   Addressing = 'ADDRESSING',
   Approved = 'APPROVED',
   Rejected = 'REJECTED',
-  Requested = 'REQUESTED'
+  Requested = 'REQUESTED',
 }
 
 export type SubscribeInput = {
@@ -2322,7 +2237,7 @@ export type SubscribeType = {
 
 export enum SubscriptionAction {
   Subscribe = 'SUBSCRIBE',
-  Unsubscribe = 'UNSUBSCRIBE'
+  Unsubscribe = 'UNSUBSCRIBE',
 }
 
 export enum SubscriptionUnits {
@@ -2331,7 +2246,7 @@ export enum SubscriptionUnits {
   Monthly = 'MONTHLY',
   Quarterly = 'QUARTERLY',
   Weekly = 'WEEKLY',
-  Yearly = 'YEARLY'
+  Yearly = 'YEARLY',
 }
 
 export type TagInput = {
@@ -2454,77 +2369,884 @@ export enum ValidationUnits {
   Lifetime = 'LIFETIME',
   Month = 'MONTH',
   Week = 'WEEK',
-  Year = 'YEAR'
+  Year = 'YEAR',
 }
 
 export type CreateResourceMutationMutationVariables = Exact<{
   resource_data?: InputMaybe<ResourceInput>;
 }>;
 
-
-export type CreateResourceMutationMutation = { __typename?: 'Mutation', create_resource?: { __typename?: 'CreateResource', success?: boolean | null, errors?: any | null, resource?: { __typename?: 'ResourceType', id: string, title: string, description: string, file_details?: { __typename?: 'FileDetailsType', format: string, file: string, remote_url: string, source_file_name: string, resource: { __typename?: 'ResourceType', id: string, title: string, description: string } } | null } | null } | null };
+export type CreateResourceMutationMutation = {
+  __typename?: 'Mutation';
+  create_resource?: {
+    __typename?: 'CreateResource';
+    success?: boolean | null;
+    errors?: any | null;
+    resource?: {
+      __typename?: 'ResourceType';
+      id: string;
+      title: string;
+      description: string;
+      file_details?: {
+        __typename?: 'FileDetailsType';
+        format: string;
+        file: string;
+        remote_url: string;
+        source_file_name: string;
+        resource: {
+          __typename?: 'ResourceType';
+          id: string;
+          title: string;
+          description: string;
+        };
+      } | null;
+    } | null;
+  } | null;
+};
 
 export type DatasetQueryLayoutQueryVariables = Exact<{
   dataset_id?: InputMaybe<Scalars['Int']>;
 }>;
 
-
-export type DatasetQueryLayoutQuery = { __typename?: 'Query', dataset?: { __typename?: 'DatasetType', id: string, title: string } | null };
+export type DatasetQueryLayoutQuery = {
+  __typename?: 'Query';
+  dataset?: { __typename?: 'DatasetType'; id: string; title: string } | null;
+};
 
 export type DatasetDistributionQueryQueryVariables = Exact<{
   dataset_id?: InputMaybe<Scalars['Int']>;
 }>;
 
-
-export type DatasetDistributionQueryQuery = { __typename?: 'Query', dataset?: { __typename?: 'DatasetType', id: string, title: string, resource_set: Array<{ __typename?: 'ResourceType', id: string, title: string, description: string, file_details?: { __typename?: 'FileDetailsType', format: string, file: string, remote_url: string, source_file_name: string, resource: { __typename?: 'ResourceType', id: string, title: string, description: string } } | null }> } | null };
+export type DatasetDistributionQueryQuery = {
+  __typename?: 'Query';
+  dataset?: {
+    __typename?: 'DatasetType';
+    id: string;
+    title: string;
+    resource_set: Array<{
+      __typename?: 'ResourceType';
+      id: string;
+      title: string;
+      description: string;
+      file_details?: {
+        __typename?: 'FileDetailsType';
+        format: string;
+        file: string;
+        remote_url: string;
+        source_file_name: string;
+        resource: {
+          __typename?: 'ResourceType';
+          id: string;
+          title: string;
+          description: string;
+        };
+      } | null;
+    }>;
+  } | null;
+};
 
 export type DatasetQueryQueryVariables = Exact<{
   dataset_id?: InputMaybe<Scalars['Int']>;
 }>;
 
-
-export type DatasetQueryQuery = { __typename?: 'Query', dataset?: { __typename?: 'DatasetType', id: string, title: string, description: string, source: string, update_frequency?: string | null, language?: string | null, remote_issued?: any | null, geography: Array<{ __typename?: 'GeographyType', name: string, id: string }>, tags: Array<{ __typename?: 'TagType', id: string, name: string }> } | null };
+export type DatasetQueryQuery = {
+  __typename?: 'Query';
+  dataset?: {
+    __typename?: 'DatasetType';
+    id: string;
+    title: string;
+    description: string;
+    source: string;
+    update_frequency?: string | null;
+    language?: string | null;
+    remote_issued?: any | null;
+    geography: Array<{
+      __typename?: 'GeographyType';
+      name: string;
+      id: string;
+    }>;
+    tags: Array<{ __typename?: 'TagType'; id: string; name: string }>;
+  } | null;
+};
 
 export type UpdateDatasetMutationMutationVariables = Exact<{
   dataset_data?: InputMaybe<UpdateDatasetInput>;
 }>;
 
-
-export type UpdateDatasetMutationMutation = { __typename?: 'Mutation', update_dataset?: { __typename?: 'UpdateDataset', success?: boolean | null, errors?: any | null, dataset?: { __typename?: 'DatasetType', id: string, title: string, description: string, remote_issued?: any | null, update_frequency?: string | null, source: string, geography: Array<{ __typename?: 'GeographyType', name: string, id: string }>, tags: Array<{ __typename?: 'TagType', id: string, name: string }> } | null } | null };
+export type UpdateDatasetMutationMutation = {
+  __typename?: 'Mutation';
+  update_dataset?: {
+    __typename?: 'UpdateDataset';
+    success?: boolean | null;
+    errors?: any | null;
+    dataset?: {
+      __typename?: 'DatasetType';
+      id: string;
+      title: string;
+      description: string;
+      remote_issued?: any | null;
+      update_frequency?: string | null;
+      source: string;
+      geography: Array<{
+        __typename?: 'GeographyType';
+        name: string;
+        id: string;
+      }>;
+      tags: Array<{ __typename?: 'TagType'; id: string; name: string }>;
+    } | null;
+  } | null;
+};
 
 export type DatasetEditQueryQueryVariables = Exact<{
   dataset_id?: InputMaybe<Scalars['Int']>;
 }>;
 
-
-export type DatasetEditQueryQuery = { __typename?: 'Query', dataset?: { __typename?: 'DatasetType', id: string, title: string, description: string } | null };
+export type DatasetEditQueryQuery = {
+  __typename?: 'Query';
+  dataset?: {
+    __typename?: 'DatasetType';
+    id: string;
+    title: string;
+    description: string;
+  } | null;
+};
 
 export type PatchDatasetMutationMutationVariables = Exact<{
   dataset_data?: InputMaybe<PatchDatasetInput>;
 }>;
 
-
-export type PatchDatasetMutationMutation = { __typename?: 'Mutation', patch_dataset?: { __typename?: 'PatchDataset', success?: boolean | null, errors?: any | null, dataset?: { __typename?: 'DatasetType', id: string, title: string, description: string } | null } | null };
+export type PatchDatasetMutationMutation = {
+  __typename?: 'Mutation';
+  patch_dataset?: {
+    __typename?: 'PatchDataset';
+    success?: boolean | null;
+    errors?: any | null;
+    dataset?: {
+      __typename?: 'DatasetType';
+      id: string;
+      title: string;
+      description: string;
+    } | null;
+  } | null;
+};
 
 export type CreateDatasetMutationMutationVariables = Exact<{
   dataset_data?: InputMaybe<CreateDatasetInput>;
 }>;
 
+export type CreateDatasetMutationMutation = {
+  __typename?: 'Mutation';
+  create_dataset?: {
+    __typename?: 'CreateDataset';
+    success?: boolean | null;
+    errors?: any | null;
+    dataset?: {
+      __typename?: 'DatasetType';
+      id: string;
+      title: string;
+      description: string;
+      dataset_type: DatasetDatasetType;
+    } | null;
+  } | null;
+};
 
-export type CreateDatasetMutationMutation = { __typename?: 'Mutation', create_dataset?: { __typename?: 'CreateDataset', success?: boolean | null, errors?: any | null, dataset?: { __typename?: 'DatasetType', id: string, title: string, description: string, dataset_type: DatasetDatasetType } | null } | null };
+export type AllDatasetsQueryQueryVariables = Exact<{ [key: string]: never }>;
 
-export type AllDatasetsQueryQueryVariables = Exact<{ [key: string]: never; }>;
+export type AllDatasetsQueryQuery = {
+  __typename?: 'Query';
+  all_datasets?: Array<{
+    __typename?: 'DatasetType';
+    id: string;
+    title: string;
+    description: string;
+  } | null> | null;
+};
 
-
-export type AllDatasetsQueryQuery = { __typename?: 'Query', all_datasets?: Array<{ __typename?: 'DatasetType', id: string, title: string, description: string } | null> | null };
-
-
-export const CreateResourceMutationDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"createResourceMutation"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"resource_data"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"ResourceInput"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"create_resource"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"resource_data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"resource_data"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"success"}},{"kind":"Field","name":{"kind":"Name","value":"errors"}},{"kind":"Field","name":{"kind":"Name","value":"resource"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"file_details"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"resource"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"Field","name":{"kind":"Name","value":"format"}},{"kind":"Field","name":{"kind":"Name","value":"file"}},{"kind":"Field","name":{"kind":"Name","value":"remote_url"}},{"kind":"Field","name":{"kind":"Name","value":"source_file_name"}}]}}]}}]}}]}}]} as unknown as DocumentNode<CreateResourceMutationMutation, CreateResourceMutationMutationVariables>;
-export const DatasetQueryLayoutDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"datasetQueryLayout"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"dataset_id"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"dataset"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"dataset_id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"dataset_id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]}}]} as unknown as DocumentNode<DatasetQueryLayoutQuery, DatasetQueryLayoutQueryVariables>;
-export const DatasetDistributionQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"datasetDistributionQuery"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"dataset_id"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"dataset"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"dataset_id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"dataset_id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"resource_set"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"file_details"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"resource"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"Field","name":{"kind":"Name","value":"format"}},{"kind":"Field","name":{"kind":"Name","value":"file"}},{"kind":"Field","name":{"kind":"Name","value":"remote_url"}},{"kind":"Field","name":{"kind":"Name","value":"source_file_name"}}]}}]}}]}}]}}]} as unknown as DocumentNode<DatasetDistributionQueryQuery, DatasetDistributionQueryQueryVariables>;
-export const DatasetQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"datasetQuery"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"dataset_id"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"dataset"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"dataset_id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"dataset_id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"source"}},{"kind":"Field","name":{"kind":"Name","value":"update_frequency"}},{"kind":"Field","name":{"kind":"Name","value":"language"}},{"kind":"Field","name":{"kind":"Name","value":"remote_issued"}},{"kind":"Field","name":{"kind":"Name","value":"geography"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"tags"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]}}]} as unknown as DocumentNode<DatasetQueryQuery, DatasetQueryQueryVariables>;
-export const UpdateDatasetMutationDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"updateDatasetMutation"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"dataset_data"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"UpdateDatasetInput"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"update_dataset"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"dataset_data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"dataset_data"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"success"}},{"kind":"Field","name":{"kind":"Name","value":"errors"}},{"kind":"Field","name":{"kind":"Name","value":"dataset"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"remote_issued"}},{"kind":"Field","name":{"kind":"Name","value":"update_frequency"}},{"kind":"Field","name":{"kind":"Name","value":"geography"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"source"}},{"kind":"Field","name":{"kind":"Name","value":"tags"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]}}]}}]} as unknown as DocumentNode<UpdateDatasetMutationMutation, UpdateDatasetMutationMutationVariables>;
-export const DatasetEditQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"datasetEditQuery"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"dataset_id"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"dataset"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"dataset_id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"dataset_id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]}}]} as unknown as DocumentNode<DatasetEditQueryQuery, DatasetEditQueryQueryVariables>;
-export const PatchDatasetMutationDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"patchDatasetMutation"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"dataset_data"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"PatchDatasetInput"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"patch_dataset"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"dataset_data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"dataset_data"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"success"}},{"kind":"Field","name":{"kind":"Name","value":"errors"}},{"kind":"Field","name":{"kind":"Name","value":"dataset"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]}}]}}]} as unknown as DocumentNode<PatchDatasetMutationMutation, PatchDatasetMutationMutationVariables>;
-export const CreateDatasetMutationDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"createDatasetMutation"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"dataset_data"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"CreateDatasetInput"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"create_dataset"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"dataset_data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"dataset_data"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"success"}},{"kind":"Field","name":{"kind":"Name","value":"errors"}},{"kind":"Field","name":{"kind":"Name","value":"dataset"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"dataset_type"}}]}}]}}]}}]} as unknown as DocumentNode<CreateDatasetMutationMutation, CreateDatasetMutationMutationVariables>;
-export const AllDatasetsQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"allDatasetsQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"all_datasets"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]}}]} as unknown as DocumentNode<AllDatasetsQueryQuery, AllDatasetsQueryQueryVariables>;
+export const CreateResourceMutationDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'mutation',
+      name: { kind: 'Name', value: 'createResourceMutation' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'resource_data' },
+          },
+          type: {
+            kind: 'NamedType',
+            name: { kind: 'Name', value: 'ResourceInput' },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'create_resource' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'resource_data' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'resource_data' },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'success' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'errors' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'resource' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'title' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'description' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'file_details' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'resource' },
+                              selectionSet: {
+                                kind: 'SelectionSet',
+                                selections: [
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'id' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'title' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: {
+                                      kind: 'Name',
+                                      value: 'description',
+                                    },
+                                  },
+                                ],
+                              },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'format' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'file' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'remote_url' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'source_file_name' },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  CreateResourceMutationMutation,
+  CreateResourceMutationMutationVariables
+>;
+export const DatasetQueryLayoutDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'datasetQueryLayout' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'dataset_id' },
+          },
+          type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'dataset' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'dataset_id' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'dataset_id' },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'title' } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  DatasetQueryLayoutQuery,
+  DatasetQueryLayoutQueryVariables
+>;
+export const DatasetDistributionQueryDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'datasetDistributionQuery' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'dataset_id' },
+          },
+          type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'dataset' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'dataset_id' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'dataset_id' },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'title' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'resource_set' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'title' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'description' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'file_details' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'resource' },
+                              selectionSet: {
+                                kind: 'SelectionSet',
+                                selections: [
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'id' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'title' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: {
+                                      kind: 'Name',
+                                      value: 'description',
+                                    },
+                                  },
+                                ],
+                              },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'format' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'file' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'remote_url' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'source_file_name' },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  DatasetDistributionQueryQuery,
+  DatasetDistributionQueryQueryVariables
+>;
+export const DatasetQueryDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'datasetQuery' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'dataset_id' },
+          },
+          type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'dataset' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'dataset_id' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'dataset_id' },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'title' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'description' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'source' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'update_frequency' },
+                },
+                { kind: 'Field', name: { kind: 'Name', value: 'language' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'remote_issued' },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'geography' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                    ],
+                  },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'tags' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<DatasetQueryQuery, DatasetQueryQueryVariables>;
+export const UpdateDatasetMutationDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'mutation',
+      name: { kind: 'Name', value: 'updateDatasetMutation' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'dataset_data' },
+          },
+          type: {
+            kind: 'NamedType',
+            name: { kind: 'Name', value: 'UpdateDatasetInput' },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'update_dataset' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'dataset_data' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'dataset_data' },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'success' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'errors' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'dataset' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'title' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'description' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'remote_issued' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'update_frequency' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'geography' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'name' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'id' },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'source' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'tags' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'id' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'name' },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  UpdateDatasetMutationMutation,
+  UpdateDatasetMutationMutationVariables
+>;
+export const DatasetEditQueryDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'datasetEditQuery' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'dataset_id' },
+          },
+          type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'dataset' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'dataset_id' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'dataset_id' },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'title' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'description' } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  DatasetEditQueryQuery,
+  DatasetEditQueryQueryVariables
+>;
+export const PatchDatasetMutationDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'mutation',
+      name: { kind: 'Name', value: 'patchDatasetMutation' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'dataset_data' },
+          },
+          type: {
+            kind: 'NamedType',
+            name: { kind: 'Name', value: 'PatchDatasetInput' },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'patch_dataset' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'dataset_data' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'dataset_data' },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'success' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'errors' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'dataset' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'title' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'description' },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  PatchDatasetMutationMutation,
+  PatchDatasetMutationMutationVariables
+>;
+export const CreateDatasetMutationDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'mutation',
+      name: { kind: 'Name', value: 'createDatasetMutation' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'dataset_data' },
+          },
+          type: {
+            kind: 'NamedType',
+            name: { kind: 'Name', value: 'CreateDatasetInput' },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'create_dataset' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'dataset_data' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'dataset_data' },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'success' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'errors' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'dataset' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'title' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'description' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'dataset_type' },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  CreateDatasetMutationMutation,
+  CreateDatasetMutationMutationVariables
+>;
+export const AllDatasetsQueryDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'allDatasetsQuery' },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'all_datasets' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'title' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'description' } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  AllDatasetsQueryQuery,
+  AllDatasetsQueryQueryVariables
+>;

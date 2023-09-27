@@ -1,6 +1,9 @@
-import React from 'react';
+import { DatasetForm } from '../../../components/dataset-form';
+import { Icons } from '@/components/icons';
 import { graphql } from '@/gql';
 import { FileInputType, ResourceInput } from '@/gql/generated/graphql';
+import { GraphQL } from '@/lib/api';
+import { bytesToSize } from '@/lib/utils';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import {
   Button,
@@ -12,11 +15,7 @@ import {
   Select,
   Text,
 } from 'opub-ui';
-
-import { GraphQL } from '@/lib/api';
-import { bytesToSize } from '@/lib/utils';
-import { Icons } from '@/components/icons';
-import { DatasetForm } from '../../../components/dataset-form';
+import React from 'react';
 
 const createResourceMutationDoc = graphql(`
   mutation createResourceMutation($resource_data: ResourceInput) {
