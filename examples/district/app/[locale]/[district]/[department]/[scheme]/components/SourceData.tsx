@@ -23,12 +23,28 @@ export const SourceData = ({
     'District Profile': [],
     Targets: [],
   });
-  const indicatorRef = React.useRef(null);
 
   const { data: indicatorData, isLoading } = useFetch(
     'indicators',
     ckan.indicators
   );
+
+  const indicatorRef = React.useRef(null);
+  const contentRef = React.useRef(null);
+  React.useEffect(() => {
+    // change height of indicator list based on content height
+    if (indicatorRef.current && contentRef.current) {
+      setTimeout(() => {
+        // it takes some time to render the content
+        const indicatorList: any = indicatorRef.current;
+        const content: any = contentRef.current;
+        const contentHeight = content.offsetHeight;
+        console.log(indicatorList, contentRef, contentHeight);
+
+        indicatorList.style.maxHeight = `${contentHeight - 200}px`;
+      }, 20);
+    }
+  }, []);
 
   // replace slug with value in indicatorData
   const indicatorDataWithValues = React.useMemo(() => {
@@ -71,7 +87,11 @@ export const SourceData = ({
 
   return (
     <div>
-      <div className={cn('grid grid-cols-[244px_1fr] gap-4')}>
+      <div
+        className={cn(
+          'grid grid-cols-[242px_1fr] gap-4 rounded-05 bg-surfaceDefault shadow-elementCard p-6'
+        )}
+      >
         {isLoading ? (
           <div className="p-4">
             <Text variant="headingMd">Loading...</Text>
@@ -98,7 +118,7 @@ export const SourceData = ({
             </div>
           }
         >
-          <div className="grow h-full overflow-x-auto p-1">
+          <div className="grow h-full overflow-x-auto p-1" ref={contentRef}>
             <div className="flex mb-4">
               <Select
                 name="year"

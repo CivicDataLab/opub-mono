@@ -58,7 +58,7 @@ function nameFormat(name) {
 module.exports = function ({ dictionary }) {
   let families = ':root { \n';
   Object.values(dictionary.tokens).map((collection) => {
-    if (['Typography'].includes(collection.name)) return;
+    if (['Typography', 'Grids'].includes(collection.name)) return;
 
     collection.modes[0].variables.forEach((variable) => {
       let name = nameFormat(variable.name);

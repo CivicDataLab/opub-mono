@@ -18,7 +18,7 @@ export const Search = () => {
       <IconButton
         color="highlight"
         icon={Icons.search}
-        className="bg-surfaceHighlightDefault p-2 rounded-full hover:bg-lightmodeVioletSolid6"
+        className="bg-surfaceHighlightDefault p-2 rounded-full hover:bg-surfaceHighlightHovered"
       >
         Search
       </IconButton>

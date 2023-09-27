@@ -109,6 +109,20 @@ const Content = ({
   );
 
   const contentRef = React.useRef(null);
+  React.useEffect(() => {
+    // change height of indicator list based on content height
+    if (indicatorRef.current && contentRef.current) {
+      setTimeout(() => {
+        // it takes some time to render the content
+        const indicatorList: any = indicatorRef.current;
+        const content: any = contentRef.current;
+        const contentHeight = content.offsetHeight;
+        console.log(indicatorList, contentRef, contentHeight);
+
+        indicatorList.style.maxHeight = `${contentHeight - 100}px`;
+      }, 20);
+    }
+  }, []);
 
   if (!chartData[states.selectedIndicator]) {
     return (

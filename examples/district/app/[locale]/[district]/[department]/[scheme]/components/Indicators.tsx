@@ -1,11 +1,6 @@
 import { indicatorFilter } from '../scheme.config';
 import Icons from '@/components/icons';
 import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from '@radix-ui/react-collapsible';
-import {
   Icon,
   Input,
   RadioGroup,
@@ -91,21 +86,22 @@ export const Indicators = ({
                 : ''
             }
           >
-            <div className="max-h-[500px] overflow-auto">
-              <ScrollArea>
-                <div className="flex flex-col gap-4 " ref={indicatorRef}>
-                  {['District Performance', 'District Profile', 'Targets'].map(
-                    (item) => (
-                      <IndicatorContent
-                        key={item}
-                        heading={item}
-                        list={filtered[item]}
-                      />
-                    )
-                  )}
-                </div>
-              </ScrollArea>
-            </div>
+            <ScrollArea>
+              <div
+                className="flex flex-col gap-4 max-h-[500px]"
+                ref={indicatorRef}
+              >
+                {['District Performance', 'District Profile', 'Targets'].map(
+                  (item, index) => (
+                    <IndicatorContent
+                      key={item + index}
+                      heading={item}
+                      list={filtered[item]}
+                    />
+                  )
+                )}
+              </div>
+            </ScrollArea>
           </RadioGroup>
         ) : (
           <Text variant="bodyMd">No indicators found</Text>
