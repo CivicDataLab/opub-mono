@@ -137,6 +137,9 @@ export const SourceData = ({
               rows={tableData[selectedYear]}
               columnContentTypes={columnContentTypes}
               key={selectedYear}
+              sortColumns={columns.map(
+                (e: { accessorKey: any }) => e.accessorKey
+              )}
             />
             <div className="mt-3 flex justify-end">
               <Button
