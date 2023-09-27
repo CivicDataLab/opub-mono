@@ -10,10 +10,12 @@ import { Icon, Separator, Text } from 'opub-ui';
 import { BreadCrumb, Search } from '.';
 import { ContentCard, DepartmentCard } from './Card';
 import styles from './Content.module.scss';
+import Link from 'next/link';
 
 export interface IProps {
   title: string;
   href: string;
+  link?: string;
   collapsible: {
     title: string;
     content: {
@@ -82,9 +84,24 @@ export function Content({ data }: { data: IProps }) {
                 </div>
               </div>
               <div className="flex flex-col gap-4">
-                <Text variant="headingSm" as="h3" color="subdued">
-                  About {data.title}
-                </Text>
+                <div className="flex items-center gap-2 justify-between">
+                  <Text variant="headingSm" as="h3" color="subdued">
+                    About {data.title}
+                  </Text>
+                  {data.link && (
+                    <Text
+                      variant="bodyMd"
+                      className="underline text-textInteractive"
+                    >
+                      <Link href={data.link} target="_blank">
+                        <span className="flex items-center gap-2">
+                          Go to District Website
+                          <Icon source={Icons.externalLink} />
+                        </span>
+                      </Link>
+                    </Text>
+                  )}
+                </div>
                 <div className="flex flex-col gap-3">
                   {data.collapsible.content.description.map((item) => (
                     <Text variant="bodyLg" as="p" key={item}>

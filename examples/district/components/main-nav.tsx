@@ -1,6 +1,7 @@
 'use client';
 
 import { MainConfig } from '@/types';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { Text } from 'opub-ui';
@@ -14,15 +15,7 @@ export function MainNav({ data }: { data: MainConfig }) {
       <div className="flex gap-1 items-center justify-between flex-wrap sm:justify-between">
         <Link href={data.homeUrl}>
           <div className="flex items-center gap-4">
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <circle opacity="0.16" cx="12" cy="12" r="12" fill="#AA99EC" />
-            </svg>
+            <Image src="/logo/logo-min.svg" alt="" width={24} height={24} />
             <Text variant="headingSmSpaced" as="span" color="inherit">
               ASSAM DISTRICT DASHBOARD
             </Text>

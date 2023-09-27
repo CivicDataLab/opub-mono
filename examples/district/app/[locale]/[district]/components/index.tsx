@@ -18,7 +18,7 @@ export const Search = () => {
       <IconButton
         color="highlight"
         icon={Icons.search}
-        className="bg-surfaceHighlightDefault p-2 rounded-full hover:bg-lightmodeVioletSolid6"
+        className="bg-surfaceHighlightDefault p-2 rounded-full hover:bg-surfaceHighlightHovered"
       >
         Search
       </IconButton>
@@ -37,8 +37,8 @@ export const BreadCrumb = ({
   backUrl: string;
 }) => {
   return (
-    <div className="flex items-center gap-4">
-      <Link href={backUrl} className="mt-1">
+    <div className="flex items-start gap-2 md:gap-4">
+      <Link href={backUrl} className="mt-2">
         <Text visuallyHidden>Go to State Page</Text>
         <Icon source={Icons.leftFilled} size={24} color="default" />
       </Link>

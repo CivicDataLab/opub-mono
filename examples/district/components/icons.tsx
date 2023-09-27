@@ -28,6 +28,7 @@ import {
   IconSquareRoundedArrowRight,
   IconSquareRoundedChevronLeftFilled,
   IconUserCog,
+  IconExternalLink,
   TablerIconsProps,
 } from '@tabler/icons-react';
 
@@ -64,6 +65,7 @@ export const Icons: {
   'database-search': IconDatabaseSearch,
   download: IconDownload,
   diamond: IconDiamondsFilled,
+  externalLink: IconExternalLink,
 };
 
 export default Icons;
