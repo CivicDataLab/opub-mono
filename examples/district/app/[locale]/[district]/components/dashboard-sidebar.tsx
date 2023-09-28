@@ -5,48 +5,59 @@ import { Icons } from '@/components/icons';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
 import { useParams, usePathname } from 'next/navigation';
-import { Text } from 'opub-ui';
+import { Text, IconButton } from 'opub-ui';
+import React from 'react';
 import { SidebarNavItem } from 'types';
 
 interface DashboardNavProps {
   items: SidebarNavItem[];
+  isCollapsed: boolean;
 }
-export function DashboardSidebar({ items }: DashboardNavProps) {
+export function DashboardSidebar({ items, isCollapsed }: DashboardNavProps) {
   const path = usePathname();
+  // const [isCollapsed, setIsCollapsed] = React.useState(false);
   const { district, department } = useParams();
 
   if (items && !items.length) {
     return null;
   }
 
-  // const sidebarIcon = isCollapsed ? Icons.expand : Icons.collapse;
   return (
     <aside
       className={cn(
-        'pt-4 overflow-hidden bg-backgroundDefault shadow-insetBasic ',
-        'hidden z-1 basis-[240px] shrink-0 md:block',
+        'pt-4 bg-backgroundDefault shadow-insetBasic',
+        'hidden z-1 basis-[240px] shrink-0 md:block overflow-hidden',
+        isCollapsed && 'basis-[24px]',
         styles.Collapse
       )}
     >
-      <nav className="flex flex-col gap-2">
+      <nav className={cn('flex flex-col gap-2 relative')}>
         <Text
-          className="py-2 px-4 text-lightmodeGraySlateSolid11"
+          className={cn(
+            'py-2 px-4 z-max text-lightmodeGraySlateSolid11',
+            isCollapsed && 'hidden'
+          )}
           variant="headingSmSpaced"
         >
           {district}
         </Text>
-        {items.map((item) => {
-          return (
-            item.href && (
-              <SidebarLink
-                key={item.href + path}
-                href={`/${district}${item.href}`}
-                title={item.title}
-                department={department}
-              />
-            )
-          );
-        })}
+
+        <div
+          className={cn('flex flex-col gap-2 mt-2', isCollapsed && 'hidden')}
+        >
+          {items.map((item) => {
+            return (
+              item.href && (
+                <SidebarLink
+                  key={item.href + path}
+                  href={`/${district}${item.href}`}
+                  title={item.title}
+                  department={department}
+                />
+              )
+            );
+          })}
+        </div>
       </nav>
     </aside>
   );
@@ -74,7 +85,7 @@ const SidebarLink = ({
         />
         <div
           className={cn(
-            'flex items-center w-full mx-2 rounded-1 overflow-hidden hover:bg-lightmodeIndigoAlpha3',
+            'flex items-center w-full mx-2 rounded-1 hover:bg-lightmodeIndigoAlpha3',
             styles.Item,
             isActive(department, href, district) &&
               'bg-lightmodeIndigoAlpha4 text-lightmodeVioletAlpha11 hover:bg-lightmodeIndigoAlpha4'
@@ -82,7 +93,7 @@ const SidebarLink = ({
         >
           <div
             className={cn(
-              'p-2 max-w-[220px]',
+              'px-2 py-3 max-w-[220px]',
               'whitespace-nowrap opacity-100 transition-opacity duration-300'
             )}
           >

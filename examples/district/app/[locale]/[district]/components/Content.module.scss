@@ -48,3 +48,15 @@
 .Collapse {
   transition: flex-basis var(--duration-300) var(--ease-in-out);
 }
+
+.CollapseBtn {
+  transition: transform var(--duration-300) var(--ease-in-out);
+}
+
+.Collapsed {
+  transform: translateX(-210px);
+
+  & > span {
+    transform: rotate(180deg);
+  }
+}
