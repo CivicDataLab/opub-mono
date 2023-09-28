@@ -48,3 +48,9 @@
 .Collapse {
   transition: flex-basis var(--duration-300) var(--ease-in-out);
 }
+
+.BtnRotate {
+  & > span {
+    transform: rotate(180deg);
+  }
+}

@@ -29,6 +29,7 @@ import {
   IconSquareRoundedChevronLeftFilled,
   IconUserCog,
   IconExternalLink,
+  IconChevronsLeft,
   TablerIconsProps,
 } from '@tabler/icons-react';
 
@@ -46,6 +47,7 @@ export const Icons: {
   down: IconChevronDown,
   right: IconChevronRight,
   left: IconChevronLeft,
+  doubleLeft: IconChevronsLeft,
   leftFilled: IconSquareRoundedChevronLeftFilled,
   search: IconSearch,
   notification: IconBellFilled,

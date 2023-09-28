@@ -17,19 +17,14 @@ export function DashboardLayout({
 }: DashboardLayoutProps) {
   return (
     <div
-      className={cn(
-        'relative grow min-h-[calc(100%_-_48px)]',
-        'md:grid md:grid-cols-[240px,1fr]'
-      )}
+      className={cn('md:flex gap-1 relative grow min-h-[calc(100%_-_48px)]')}
     >
       <DashboardSidebar items={dashboardConfig.sidebarNav} />
 
       <div className="md:hidden basis-2 z-1">
         <MobileDashboardNav items={dashboardConfig.sidebarNav} />
       </div>
-      <main className={cn(styles.Main, 'grow md:max-w-[calc(100vw_-_240px)]')}>
-        {children}
-      </main>
+      <main className={cn(styles.Main, `grow`)}>{children}</main>
     </div>
   );
 }
