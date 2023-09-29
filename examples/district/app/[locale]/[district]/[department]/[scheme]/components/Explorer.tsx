@@ -7,6 +7,7 @@ import { Select, Tab, TabList, TabPanel, Tabs, Text } from 'opub-ui';
 import { BarChart, MapChart } from 'opub-viz';
 import React from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
+import { useQueryState } from 'next-usequerystate';
 
 export const Explorer = ({
   scheme,
@@ -19,8 +20,8 @@ export const Explorer = ({
 }) => {
   const years = Object.values(chartData)[0].years;
   const [selectedYear, setYear] = React.useState(Object.keys(years)[0]);
-  const [selectedIndicator, setIndicator] = React.useState('cpapr');
   const [selectedTab, setTab] = React.useState<'map' | 'bar'>('bar');
+  const [indicator, setIndicator] = useQueryState('indicator');
 
   const { data: indicatorData, isLoading } = useFetch(
     'indicators',
@@ -29,12 +30,13 @@ export const Explorer = ({
   const indicatorRef = React.useRef(null);
 
   React.useEffect(() => {
-    if (indicatorData) {
+    if (indicatorData || indicator) {
       const initialSlug =
+        indicator ||
         indicatorData[scheme as string]['District Performance'][0].slug;
       setIndicator(initialSlug);
     }
-  }, [indicatorData]);
+  }, [indicatorData, indicator]);
 
   return (
     <div
@@ -48,8 +50,8 @@ export const Explorer = ({
         </div>
       ) : indicatorData ? (
         <Indicators
-          data={indicatorData}
-          scheme={scheme || ''}
+          data={indicatorData[scheme as string] || null}
+          indicator={indicator || 'nhaoe'}
           indicatorRef={indicatorRef}
           setIndicator={setIndicator}
         />
@@ -76,7 +78,7 @@ export const Explorer = ({
               setYear,
               selectedTab,
               selectedYear,
-              selectedIndicator,
+              selectedIndicator: indicator || 'nhaoe',
             }}
           />
         </ErrorBoundary>

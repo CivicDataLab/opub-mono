@@ -28,25 +28,22 @@ interface IndicatorsProps {
 
 export const Indicators = ({
   data,
-  scheme,
   indicatorRef,
   setIndicator,
+  indicator,
 }: {
-  data: { [key: string]: IndicatorsProps };
-  scheme: string;
-
+  data: IndicatorsProps | null;
   indicatorRef: any;
   setIndicator: any;
+  indicator?: string;
 }) => {
   const [search, setSearch] = React.useState('');
-  const [filtered, setFiltered] = React.useState<any>(
-    data ? data[scheme] : null
-  );
+  const [filtered, setFiltered] = React.useState<any>(data);
 
   // filter indicators based on search
   React.useEffect(() => {
     if (search === '') {
-      setFiltered(data[scheme]);
+      setFiltered(data);
       return;
     }
     const filteredData = {
@@ -54,9 +51,9 @@ export const Indicators = ({
       'District Profile': [],
       Targets: [],
     };
-    indicatorFilter(data[scheme], search, filteredData);
+    indicatorFilter(data, search, filteredData);
     setFiltered(filteredData);
-  }, [search, data[scheme]]);
+  }, [search, data]);
 
   return (
     <div className="flex flex-col">
@@ -76,15 +73,9 @@ export const Indicators = ({
       <div className="mt-4">
         {filtered ? (
           <RadioGroup
-            onChange={(val) => {
-              setIndicator(val);
-            }}
+            onChange={setIndicator}
             name="indicator-radio"
-            defaultValue={
-              filtered['District Performance'][0]
-                ? filtered['District Performance'][0].slug
-                : ''
-            }
+            value={indicator}
           >
             <ScrollArea>
               <div

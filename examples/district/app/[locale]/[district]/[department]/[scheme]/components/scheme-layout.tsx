@@ -9,7 +9,7 @@ import { schemes } from '../scheme.config';
 import { Explorer } from './Explorer';
 import { Overview } from './Overview';
 import { SourceData } from './SourceData';
-import { useUrlParams } from '@/hooks/use-url-params';
+import { useQueryState } from 'next-usequerystate';
 
 export interface IOverview {
   schemeTitle: string;
@@ -184,16 +184,11 @@ const TabLayout = ({
     district?: string;
   }[];
 }) => {
-  const {
-    value: { tab: tabValue },
-    updateParam,
-  } = useUrlParams();
+  const [tabValue, setTabValue] = useQueryState('tab');
 
   return (
     <Tabs
-      onValueChange={(value) =>
-        updateParam({ key: 'tab', value, replace: true })
-      }
+      onValueChange={setTabValue}
       value={tabValue || 'overview'}
       className="mt-10"
     >

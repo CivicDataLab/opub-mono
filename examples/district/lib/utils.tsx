@@ -1,5 +1,6 @@
 import { twMerge } from 'tailwind-merge';
 import { ClassNameValue } from 'tailwind-merge/dist/lib/tw-join';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 export function cn(...inputs: ClassNameValue[]) {
   return twMerge(inputs);
