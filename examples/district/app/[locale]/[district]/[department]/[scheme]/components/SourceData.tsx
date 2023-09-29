@@ -42,7 +42,10 @@ export const SourceData = ({
         if (content === null) return;
 
         const contentHeight = content.offsetHeight;
-        indicatorList.style.maxHeight = `${contentHeight - 200}px`;
+        const indicatorHeight = contentHeight - 230;
+        indicatorList.style.maxHeight = `${
+          indicatorHeight <= 480 ? 480 : indicatorHeight
+        }px`;
       }, 20);
     }
   }, []);
