@@ -25,7 +25,7 @@ export function DashboardLayout({
     >
       <IconButton
         className={cn(
-          'absolute left-[220px] top-4 p-2 rounded-full z-max shadow-insetBasic bg-lightmodePureWhite hover:bg-lightmodeIndigoSolid3',
+          'absolute left-[220px] top-4 p-2 z-2 rounded-full shadow-insetBasic bg-lightmodePureWhite hover:bg-lightmodeIndigoSolid3',
           styles.CollapseBtn,
           isCollapsed && styles.Collapsed
         )}

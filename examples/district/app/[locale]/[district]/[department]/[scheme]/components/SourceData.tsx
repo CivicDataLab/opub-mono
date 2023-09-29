@@ -38,9 +38,9 @@ export const SourceData = ({
         // it takes some time to render the content
         const indicatorList: any = indicatorRef.current;
         const content: any = contentRef.current;
-        const contentHeight = content.offsetHeight;
-        console.log(indicatorList, contentRef, contentHeight);
+        if (content === null) return;
 
+        const contentHeight = content.offsetHeight;
         indicatorList.style.maxHeight = `${contentHeight - 200}px`;
       }, 20);
     }

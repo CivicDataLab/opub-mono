@@ -9,6 +9,7 @@ import { schemes } from '../scheme.config';
 import { Explorer } from './Explorer';
 import { Overview } from './Overview';
 import { SourceData } from './SourceData';
+import { useUrlParams } from '@/hooks/use-url-params';
 
 export interface IOverview {
   schemeTitle: string;
@@ -183,10 +184,19 @@ const TabLayout = ({
     district?: string;
   }[];
 }) => {
-  const [value, setValue] = React.useState('overview');
+  const {
+    value: { tab: tabValue },
+    updateParam,
+  } = useUrlParams();
 
   return (
-    <Tabs onValueChange={setValue} value={value} className="mt-10">
+    <Tabs
+      onValueChange={(value) =>
+        updateParam({ key: 'tab', value, replace: true })
+      }
+      value={tabValue || 'overview'}
+      className="mt-10"
+    >
       <TabList
         fitted
         className="rounded-05 shadow-elementCard bg-surfaceDefault"
@@ -197,14 +207,14 @@ const TabLayout = ({
               <Icon
                 source={Icons[tab.icon]}
                 size={40}
-                color={value === tab.value ? 'highlight' : 'subdued'}
+                color={tabValue === tab.value ? 'highlight' : 'subdued'}
                 stroke={1}
               />
               <Text
                 variant="bodyLg"
                 as="h2"
-                fontWeight={value === tab.value ? 'medium' : 'regular'}
-                color={value === tab.value ? 'inherit' : 'default'}
+                fontWeight={tabValue === tab.value ? 'medium' : 'regular'}
+                color={tabValue === tab.value ? 'inherit' : 'default'}
               >
                 {tab.label}
               </Text>
