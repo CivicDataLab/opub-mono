@@ -4,8 +4,9 @@ import { ITable } from './scheme-layout';
 import Icons from '@/components/icons';
 import { ckan } from '@/config/site';
 import { useFetch } from '@/lib/api';
-import { cn } from '@/lib/utils';
+import { cn, copyURLToClipboard } from '@/lib/utils';
 import { createColumnHelper } from '@tanstack/react-table';
+import { useToast } from 'opub-ui';
 import { Button, Icon, Select, Table, Text } from 'opub-ui/src';
 import React from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
@@ -38,9 +39,9 @@ export const SourceData = ({
         // it takes some time to render the content
         const indicatorList: any = indicatorRef.current;
         const content: any = contentRef.current;
-        const contentHeight = content.offsetHeight;
-        console.log(indicatorList, contentRef, contentHeight);
+        if (content === null) return;
 
+        const contentHeight = content.offsetHeight;
         indicatorList.style.maxHeight = `${contentHeight - 200}px`;
       }, 20);
     }
@@ -84,6 +85,8 @@ export const SourceData = ({
     columns.push(columnHelper.accessor(key, { header: key }));
     columnContentTypes.push('numeric');
   });
+
+  const { toast } = useToast();
 
   return (
     <div>
@@ -141,7 +144,19 @@ export const SourceData = ({
                 (e: { accessorKey: any }) => e.accessorKey
               )}
             />
-            <div className="mt-3 flex justify-end">
+            <div className="mt-3 flex justify-end gap-4">
+              <Button
+                onClick={() => {
+                  copyURLToClipboard();
+                  toast({
+                    title: 'Copied to clipboard',
+                  });
+                }}
+              >
+                <Text variant="bodyMd" as="span">
+                  Copy Link
+                </Text>
+              </Button>
               <Button
                 onClick={() => {
                   downloadTable(
@@ -150,7 +165,6 @@ export const SourceData = ({
                     'source-data'
                   );
                 }}
-                icon={<Icon source={Icons.download} />}
               >
                 Download File
               </Button>
