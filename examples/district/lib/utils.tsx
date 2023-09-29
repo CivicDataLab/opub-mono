@@ -1,7 +1,7 @@
 import { twMerge } from 'tailwind-merge';
 import { ClassNameValue } from 'tailwind-merge/dist/lib/tw-join';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-
+import { navigateEnd, navigateStart } from './navigation';
+import domtoimage from 'dom-to-image';
 export function cn(...inputs: ClassNameValue[]) {
   return twMerge(inputs);
 }
@@ -62,4 +62,26 @@ export const range = (len: number) => {
     arr.push(i);
   }
   return arr;
+};
+
+export function copyURLToClipboard() {
+  const url = window.location.href;
+  navigator.clipboard.writeText(url);
+}
+
+export const exportAsImage = async (
+  element: HTMLElement,
+  imageFileName: string
+) => {
+  navigateStart();
+  domtoimage.toJpeg(element, { quality: 0.95 }).then(function (
+    dataUrl: string
+  ) {
+    var link = document.createElement('a');
+    link.download = imageFileName;
+    link.href = dataUrl;
+    link.click();
+    link.remove();
+    navigateEnd();
+  });
 };

@@ -94,6 +94,7 @@ export const ContentCard = ({
   color,
   info,
   className,
+  link,
 }: {
   value: string | number;
   label: string;
@@ -101,10 +102,24 @@ export const ContentCard = ({
   color?: string;
   info?: string;
   className?: string;
+  link?: string;
 }) => {
   return (
-    <CardLayout className={className} color={color}>
-      <Text variant="headingXl">{value}</Text>
+    <CardLayout className={className + ' gap-4'} color={color}>
+      <div className="flex items-center gap-2 justify-between">
+        <Text variant="headingXl">{value}</Text>
+        {link && (
+          <Link
+            href={`?tab=explorer`}
+            className="rounded-1 flex items-center justify-between text-textInteractive hover:underline"
+          >
+            <Text variant="bodyMd" fontWeight="medium" color="inherit">
+              View on Explorer
+            </Text>
+            <Icon source={Icons.right} />
+          </Link>
+        )}
+      </div>
       <div className="flex items-center gap-2 justify-between">
         <Text variant="bodyLg">{label}</Text>
 
@@ -128,6 +143,7 @@ export const ProgressCard = ({
   min,
   max,
   className,
+  link,
 }: {
   value: string | number;
   label: string;
@@ -136,10 +152,24 @@ export const ProgressCard = ({
   min?: number;
   max?: number;
   className?: string;
+  link?: string;
 }) => {
   return (
     <CardLayout className={className} color={color}>
-      <Text variant="headingXl">{value}%</Text>
+      <div className="flex items-center gap-2 justify-between">
+        <Text variant="headingXl">{value}%</Text>
+        {link && (
+          <Link
+            href={`?tab=explorer`}
+            className="rounded-1 flex items-center justify-between text-textInteractive hover:underline"
+          >
+            <Text variant="bodyMd" fontWeight="medium" color="inherit">
+              View on Explorer
+            </Text>
+            <Icon source={Icons.right} />
+          </Link>
+        )}
+      </div>
       <Text variant="bodyLg" className="mb-4">
         {label}
       </Text>

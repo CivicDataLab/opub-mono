@@ -2,90 +2,104 @@ import { Indicators } from './Indicators';
 import { IChartData } from './scheme-layout';
 import { ckan } from '@/config/site';
 import { useFetch } from '@/lib/api';
-import { cn } from '@/lib/utils';
-import { Select, Tab, TabList, TabPanel, Tabs, Text } from 'opub-ui';
+import { cn, copyURLToClipboard, exportAsImage } from '@/lib/utils';
+import {
+  Button,
+  Select,
+  Tab,
+  TabList,
+  TabPanel,
+  Tabs,
+  Text,
+  useToast,
+} from 'opub-ui';
 import { BarChart, MapChart } from 'opub-viz';
 import React from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { useQueryState } from 'next-usequerystate';
 
-export const Explorer = ({
-  scheme,
-  chartData,
-  district,
-}: {
-  scheme?: string;
-  chartData: IChartData;
-  district: string;
-}) => {
-  const years = Object.values(chartData)[0].years;
-  const [selectedYear, setYear] = React.useState(Object.keys(years)[0]);
-  const [selectedTab, setTab] = React.useState<'map' | 'bar'>('bar');
-  const [indicator, setIndicator] = useQueryState('indicator');
+export const Explorer = React.forwardRef(
+  (
+    {
+      scheme,
+      chartData,
+      district,
+    }: {
+      scheme?: string;
+      chartData: IChartData;
+      district: string;
+    },
+    ref: any
+  ) => {
+    const years = Object.values(chartData)[0].years;
+    const [selectedYear, setYear] = React.useState(Object.keys(years)[0]);
+    const [selectedTab, setTab] = React.useState<'map' | 'bar'>('bar');
+    const [indicator, setIndicator] = useQueryState('indicator');
 
-  const { data: indicatorData, isLoading } = useFetch(
-    'indicators',
-    ckan.indicators
-  );
-  const indicatorRef = React.useRef(null);
+    const { data: indicatorData, isLoading } = useFetch(
+      'indicators',
+      ckan.indicators
+    );
+    const indicatorRef = React.useRef(null);
 
-  React.useEffect(() => {
-    if (indicatorData || indicator) {
-      const initialSlug =
-        indicator ||
-        indicatorData[scheme as string]['District Performance'][0].slug;
-      setIndicator(initialSlug);
-    }
-  }, [indicatorData, indicator]);
+    React.useEffect(() => {
+      if (indicatorData || indicator) {
+        const initialSlug =
+          indicator ||
+          indicatorData[scheme as string]['District Performance'][0].slug;
+        setIndicator(initialSlug);
+      }
+    }, [indicatorData, indicator]);
 
-  return (
-    <div
-      className={cn(
-        'grid grid-cols-[242px_1fr] gap-4 rounded-05 bg-surfaceDefault shadow-elementCard p-6'
-      )}
-    >
-      {isLoading ? (
-        <div className="p-4">
-          <Text variant="headingMd">Loading...</Text>
-        </div>
-      ) : indicatorData ? (
-        <Indicators
-          data={indicatorData[scheme as string] || null}
-          indicator={indicator || 'nhaoe'}
-          indicatorRef={indicatorRef}
-          setIndicator={setIndicator}
-        />
-      ) : (
-        <div className="p-4">
-          <Text variant="headingMd">No indicators available</Text>
-        </div>
-      )}
-
-      <div className="flex items-center justify-center h-full">
-        <ErrorBoundary
-          fallback={
-            <Text variant="headingLg" as="h2">
-              Error loading Explorer
-            </Text>
-          }
-        >
-          <Content
+    return (
+      <div
+        className={cn(
+          'grid grid-cols-[242px_1fr] gap-4 rounded-05 bg-surfaceDefault shadow-elementCard p-6'
+        )}
+      >
+        {isLoading ? (
+          <div className="p-4">
+            <Text variant="headingMd">Loading...</Text>
+          </div>
+        ) : indicatorData ? (
+          <Indicators
+            data={indicatorData[scheme as string] || null}
+            indicator={indicator || 'nhaoe'}
             indicatorRef={indicatorRef}
-            chartData={chartData}
-            district={district}
-            states={{
-              setTab,
-              setYear,
-              selectedTab,
-              selectedYear,
-              selectedIndicator: indicator || 'nhaoe',
-            }}
+            setIndicator={setIndicator}
           />
-        </ErrorBoundary>
+        ) : (
+          <div className="p-4">
+            <Text variant="headingMd">No indicators available</Text>
+          </div>
+        )}
+
+        <div className="flex items-center justify-center h-full" ref={ref}>
+          <ErrorBoundary
+            fallback={
+              <Text variant="headingLg" as="h2">
+                Error loading Explorer
+              </Text>
+            }
+          >
+            <Content
+              indicatorRef={indicatorRef}
+              chartData={chartData}
+              district={district}
+              states={{
+                setTab,
+                setYear,
+                selectedTab,
+                selectedYear,
+                selectedIndicator: indicator || 'nhaoe',
+              }}
+            />
+          </ErrorBoundary>
+        </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+);
 
 const Content = ({
   indicatorRef,
@@ -110,7 +124,9 @@ const Content = ({
     `/files/${district}.json`
   );
 
-  const contentRef = React.useRef(null);
+  const { toast } = useToast();
+  const contentRef: any = React.useRef(null);
+
   React.useEffect(() => {
     // change height of indicator list based on content height
     if (indicatorRef.current && contentRef.current) {
@@ -182,7 +198,7 @@ const Content = ({
   ];
 
   return (
-    <div className="grow h-full overflow-x-auto">
+    <div className="grow h-full">
       <Tabs
         defaultValue={'map'}
         onValueChange={(value) => states.setTab(value as any)}
@@ -235,6 +251,27 @@ const Content = ({
           ))}
         </div>
       </Tabs>
+      <div className="mt-3 flex justify-end gap-4">
+        <Button
+          onClick={() => {
+            copyURLToClipboard();
+            toast({
+              title: 'Copied to clipboard!',
+            });
+          }}
+        >
+          <Text variant="bodyMd" as="span">
+            Copy Link
+          </Text>
+        </Button>
+        <Button
+          onClick={() => {
+            exportAsImage(contentRef.current, 'explorer');
+          }}
+        >
+          Download File
+        </Button>
+      </div>
     </div>
   );
 };

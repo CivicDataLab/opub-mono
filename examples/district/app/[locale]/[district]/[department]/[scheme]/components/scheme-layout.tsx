@@ -2,14 +2,24 @@
 
 import Icons from '@/components/icons';
 import Image from 'next/image';
-import { Icon, Tab, TabList, TabPanel, Tabs, Text } from 'opub-ui';
+import {
+  Button,
+  Icon,
+  Tab,
+  TabList,
+  TabPanel,
+  Tabs,
+  Text,
+  useToast,
+} from 'opub-ui';
 import React from 'react';
 import { BreadCrumb } from '../../../components';
 import { schemes } from '../scheme.config';
 import { Explorer } from './Explorer';
 import { Overview } from './Overview';
 import { SourceData } from './SourceData';
-import { useQueryState } from 'next-usequerystate';
+import { parseAsString, useQueryState } from 'next-usequerystate';
+import { copyURLToClipboard, exportAsImage } from '@/lib/utils';
 
 export interface IOverview {
   schemeTitle: string;
@@ -184,14 +194,15 @@ const TabLayout = ({
     district?: string;
   }[];
 }) => {
-  const [tabValue, setTabValue] = useQueryState('tab');
+  const [tabValue, setTabValue] = useQueryState(
+    'tab',
+    parseAsString.withDefault('overview')
+  );
+  const { toast } = useToast();
+  const overviewRef: any = React.useRef(null);
 
   return (
-    <Tabs
-      onValueChange={setTabValue}
-      value={tabValue || 'overview'}
-      className="mt-10"
-    >
+    <Tabs onValueChange={setTabValue} value={tabValue} className="mt-10">
       <TabList
         fitted
         className="rounded-05 shadow-elementCard bg-surfaceDefault"
@@ -217,9 +228,34 @@ const TabLayout = ({
           </Tab>
         ))}
       </TabList>
-      <div className="mt-6">
+      <div className="mt-6 px-3 py-4 bg-surfaceDefault">
+        {tabValue === 'overview' && (
+          <div className="mb-3 flex items-center justify-end gap-4 flex-wrap">
+            <Button
+              onClick={() => {
+                copyURLToClipboard();
+                toast({
+                  title: 'Copied to clipboard',
+                });
+              }}
+            >
+              <Text variant="bodyMd" as="span">
+                Copy Link
+              </Text>
+            </Button>
+            <Button
+              onClick={() => {
+                exportAsImage(overviewRef.current, 'overview');
+              }}
+            >
+              <Text variant="bodyMd" as="span">
+                Download
+              </Text>
+            </Button>
+          </div>
+        )}
         <TabPanel value="overview">
-          <Overview data={tabs[0].data} />
+          <Overview data={tabs[0].data} ref={overviewRef} />
         </TabPanel>
         <TabPanel value="explorer">
           <Explorer
