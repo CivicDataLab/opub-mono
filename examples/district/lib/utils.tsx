@@ -2,6 +2,7 @@ import { twMerge } from 'tailwind-merge';
 import { ClassNameValue } from 'tailwind-merge/dist/lib/tw-join';
 import { navigateEnd, navigateStart } from './navigation';
 import domtoimage from 'dom-to-image';
+
 export function cn(...inputs: ClassNameValue[]) {
   return twMerge(inputs);
 }

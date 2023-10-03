@@ -3,7 +3,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '../ui';
 import styles from './LeafletChoropleth.module.scss';
 import { IconBoxMultiple } from '@tabler/icons-react';
 import React from 'react';
-import { GeoJSON, MapContainer, TileLayer } from 'react-leaflet';
+import { GeoJSON, MapContainer, TileLayer, Tooltip } from 'react-leaflet';
 
 const layers = [
   'light_all',
@@ -32,7 +32,7 @@ type MapProps = {
   mapProperty?: string;
 
   /* function to map data to color */
-  mapDataFn?: (value: any) => string;
+  mapDataFn: (value: any, type: 'default' | 'hover' | 'selected') => string;
 
   /* theme of the map */
   defaultLayer?: layerOptions;
@@ -60,7 +60,7 @@ type LegendProps = {
 
 type Props = MapProps & LegendProps;
 
-export const LeafletChoropleth = (props: Props) => {
+const LeafletChoropleth = (props: Props) => {
   const {
     legendData,
     defaultLayer = 'light_all',
@@ -91,7 +91,6 @@ const Map = ({
   features,
   mouseover,
   mouseout,
-  mapDataFn,
   click,
   selectedLayer,
   mapProperty = '',
@@ -99,66 +98,79 @@ const Map = ({
   mapCenter = [26.193, 92.773],
   zoomOnClick = true,
   fillOpacity,
+  mapDataFn,
 }: MapProps & {
   selectedLayer: layerOptions;
 }) => {
-  const mapRef = React.useRef<any>(null);
-  const [unmountMap, setunmountMap] = React.useState(false);
   //to prevent map re-initialization
+  const [unmountMap, setUnmountMap] = React.useState(false);
   React.useLayoutEffect(() => {
-    setunmountMap(false);
+    setUnmountMap(false);
     return () => {
-      setunmountMap(true);
+      setUnmountMap(true);
     };
   }, []);
 
-  function highlightFeature(e: { target: any }) {
+  const mapRef = React.useRef<any>(null);
+  console.log('mapRef', mapRef);
+
+  const handleMouseOver = React.useCallback((e: { target: any }) => {
     var layer = e.target;
 
     layer.setStyle({
-      weight: 3,
-      color: selectedLayer?.includes('dark') ? '#ddd' : '#333',
-      dashArray: '',
-      fillOpacity: fillOpacity ? fillOpacity : 0.7,
+      fillColor: mapDataFn(
+        Number(layer.feature.properties[mapProperty]),
+        'hover'
+      ),
     });
 
-    mouseover && mouseover(e.target);
-  }
+    mouseover && mouseover(layer);
+  }, []);
 
-  const resetHighlight = (e: { target: any }) => {
-    e.target.setStyle(style(e.target.feature));
-    mouseout && mouseout(e.target);
-  };
+  const handleMouseOut = React.useCallback((e: { target: any }) => {
+    var layer = e.target;
 
-  function zoomToFeature(e: { target: any }) {
+    layer.setStyle(style(layer.feature));
+    mouseout && mouseout(layer);
+  }, []);
+
+  function handleClick(e: { target: any }) {
+    var layer = e.target;
+
+    layer.setStyle({
+      fillColor: mapDataFn(
+        Number(layer.feature.properties[mapProperty]),
+        'selected'
+      ),
+    });
+
     if (zoomOnClick) {
       const map = mapRef.current;
-      map.fitBounds(e.target.getBounds());
+      map.fitBounds(layer.getBounds());
     }
 
-    click && click(e.target);
+    click && click(layer);
   }
 
   const onEachFeature = (
-    feature: any,
+    _: any,
     layer: { on: (arg0: { mouseover: any; mouseout: any; click: any }) => void }
   ) => {
     layer.on({
-      mouseover: highlightFeature,
-      mouseout: resetHighlight,
-      click: zoomToFeature,
+      mouseover: handleMouseOver,
+      mouseout: handleMouseOut,
+      click: handleClick,
     });
   };
 
   const style: any = (feature: { properties: { [x: string]: number } }) => {
     return {
-      fillColor: mapDataFn
-        ? mapDataFn(Number(feature.properties[mapProperty]))
-        : '#fff',
+      fillColor: mapDataFn(Number(feature.properties[mapProperty]), 'default'),
       weight: 1,
       opacity: 1,
-      color: selectedLayer?.includes('dark') ? '#eee' : '#444',
-      dashArray: '2',
+      color: selectedLayer?.includes('dark')
+        ? '#eee'
+        : 'var(--mapareadistrict-border)',
       fillOpacity: fillOpacity ? fillOpacity : 0.5,
     };
   };
@@ -174,7 +186,13 @@ const Map = ({
           url={`https://cartodb-basemaps-{s}.global.ssl.fastly.net/${selectedLayer}/{z}/{x}/{y}.png`}
         />
         {features && (
-          <GeoJSON data={feature} style={style} onEachFeature={onEachFeature} />
+          <>
+            <GeoJSON
+              data={feature}
+              style={style}
+              onEachFeature={onEachFeature}
+            />
+          </>
         )}
       </MapContainer>
     );
@@ -256,3 +274,5 @@ const LayerSelector = ({
     </div>
   );
 };
+
+export default React.memo(LeafletChoropleth);
