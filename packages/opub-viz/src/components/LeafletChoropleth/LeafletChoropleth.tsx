@@ -178,8 +178,6 @@ const Map = ({
     };
   };
 
-  console.log(features);
-
   const feature: any = features.map((feature: any) => {
     return feature;
   });

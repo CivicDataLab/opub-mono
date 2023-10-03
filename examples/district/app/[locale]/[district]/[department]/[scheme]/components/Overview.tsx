@@ -9,7 +9,6 @@ import Icons from '@/components/icons';
 export const Overview = React.forwardRef(
   ({ data }: { data?: IOverview }, ref: any) => {
     if (!data) return null;
-    console.log(ref);
 
     return (
       <div className="flex flex-col gap-4" ref={ref}>

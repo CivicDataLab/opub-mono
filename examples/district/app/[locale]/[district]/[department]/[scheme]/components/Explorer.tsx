@@ -5,6 +5,8 @@ import { useFetch } from '@/lib/api';
 import { cn, copyURLToClipboard, exportAsImage } from '@/lib/utils';
 import {
   Button,
+  Combobox,
+  ComboboxMulti,
   Select,
   Tab,
   TabList,
@@ -18,6 +20,7 @@ import React from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { useQueryState } from 'next-usequerystate';
 import dynamic from 'next/dynamic';
+import { BarView } from './BarView';
 
 const LeafletChoropleth = dynamic(
   () => import('opub-viz').then((mod) => mod.LeafletChoropleth),
@@ -124,6 +127,12 @@ const Content = ({
     selectedIndicator: string;
   };
 }) => {
+  const [barData, setBarData] = React.useState<{
+    xAxis: string[];
+    values: number[];
+  }>();
+  const [selectedBlocks, setSelectedBlocks] = React.useState<string[]>([]);
+
   const { data: mapFile, isLoading: mapLoading } = useFetch(
     `${district}-mapFile`,
     `/files/${district}.json`
@@ -147,6 +156,24 @@ const Content = ({
     }
   }, []);
 
+  const currentData: any =
+    chartData[states.selectedIndicator].years[states.selectedYear];
+
+  React.useEffect(() => {
+    if (!currentData) return;
+    setSelectedBlocks(currentData.bardata.xAxis);
+  }, []);
+
+  React.useEffect(() => {
+    if (selectedBlocks) {
+      const filteredData = currentData.bardata.xAxis.filter((e: any) =>
+        selectedBlocks.includes(e)
+      );
+
+      setBarData({ ...currentData.bardata, xAxis: filteredData });
+    }
+  }, [selectedBlocks]);
+
   if (!chartData[states.selectedIndicator]) {
     return (
       <Text variant="headingLg" as="h2">
@@ -154,8 +181,6 @@ const Content = ({
       </Text>
     );
   }
-  const currentData: any =
-    chartData[states.selectedIndicator].years[states.selectedYear];
 
   const mapDataFn = (
     value: boolean,
@@ -170,15 +195,7 @@ const Content = ({
     {
       label: 'Bar View',
       value: 'bar',
-      content: (
-        <div>
-          <BarChart
-            yAxis={currentData.bardata.xAxis}
-            data={currentData.bardata.values}
-            height="512px"
-          />
-        </div>
-      ),
+      content: barData ? <BarView data={barData} /> : null,
     },
     {
       label: 'Map View',
@@ -220,9 +237,7 @@ const Content = ({
             // mouseout={handleMouseOut}
           />
         ) : (
-          <div className="h-[512px] flex justify-center items-center">
-            Loading...
-          </div>
+          <div className="flex justify-center items-center">Loading...</div>
         ),
     },
   ];
@@ -258,25 +273,20 @@ const Content = ({
           className="rounded-05 bg-background h-full pt-4 bg-surfaceHighlightSubdued border-default"
           ref={contentRef}
         >
-          <div className="flex px-4">
-            <Select
-              label="Select FY"
-              labelInline
-              name="year"
-              onChange={states.setYear}
-              value={states.selectedYear}
-              options={Object.keys(Object.values(chartData)[0].years).map(
-                (year) => ({
-                  label: year,
-                  value: year,
-                })
-              )}
-            />
-          </div>
+          <Filters
+            states={states}
+            chartData={chartData}
+            barOptions={currentData.bardata.xAxis}
+            setSelectedBlocks={setSelectedBlocks}
+            tab={states.selectedTab}
+            selectedBlocks={selectedBlocks}
+          />
 
           {tabs.map((tab) => (
             <TabPanel value={tab.value} key={tab.value}>
-              <div className="relative overflow-y-auto mt-5">{tab.content}</div>
+              <div className="relative overflow-y-auto mt-5 min-h-[512px]">
+                {tab.content}
+              </div>
             </TabPanel>
           ))}
         </div>
@@ -299,8 +309,63 @@ const Content = ({
             exportAsImage(contentRef.current, 'explorer');
           }}
         >
-          Download
+          <Text variant="bodyMd" as="span">
+            Download
+          </Text>
         </Button>
+      </div>
+    </div>
+  );
+};
+
+const Filters = ({
+  states,
+  chartData,
+  barOptions,
+  setSelectedBlocks,
+  tab,
+  selectedBlocks,
+}: {
+  states: any;
+  chartData: IChartData;
+  barOptions: any;
+  setSelectedBlocks: any;
+  tab: 'map' | 'bar';
+  selectedBlocks: string[];
+}) => {
+  const options = Object.keys(Object.values(chartData)[0].years).map(
+    (year) => ({
+      label: year,
+      value: year,
+    })
+  );
+
+  return (
+    <div className="flex flex-col gap-4 px-4">
+      {tab === 'bar' && (
+        <ComboboxMulti
+          name="blocks"
+          list={barOptions}
+          defaultValues={selectedBlocks}
+          key={selectedBlocks.toString()}
+          label="Select Blocks to Compare"
+          placeholder="Select Blocks"
+          onChange={(values: any) => {
+            setSelectedBlocks(values);
+          }}
+          verticalContent
+        />
+      )}
+
+      <div className="flex">
+        <Select
+          label="Select FY"
+          labelInline
+          name="year"
+          onChange={states.setYear}
+          value={states.selectedYear}
+          options={options}
+        />
       </div>
     </div>
   );

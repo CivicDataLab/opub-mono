@@ -102,7 +102,6 @@ export const filterDistricts = (text: string) => {
       filteredObj[key].districts = [];
     }
   });
-  console.log(filteredObj);
 
   return filteredObj;
 };

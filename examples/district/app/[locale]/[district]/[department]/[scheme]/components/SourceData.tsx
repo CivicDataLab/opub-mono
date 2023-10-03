@@ -1,7 +1,6 @@
 import { downloadTable } from '../scheme.config';
 import { IndicatorsCheckbox } from './IndicatorsCheckbox';
 import { ITable } from './scheme-layout';
-import Icons from '@/components/icons';
 import { ckan } from '@/config/site';
 import { useFetch } from '@/lib/api';
 import { cn, copyURLToClipboard } from '@/lib/utils';
@@ -169,7 +168,9 @@ export const SourceData = ({
                   );
                 }}
               >
-                Download
+                <Text variant="bodyMd" as="span">
+                  Download
+                </Text>
               </Button>
             </div>
           </div>
