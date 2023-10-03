@@ -13,18 +13,31 @@ import { Icon, Input, Separator, Text } from 'opub-ui';
 import React from 'react';
 
 const LeafletChoropleth = dynamic(
-  () => import('opub-viz/src').then((mod) => mod.LeafletChoropleth),
+  () => import('opub-viz').then((mod) => mod.LeafletChoropleth),
   { ssr: false }
 );
 export const DistrictSelector = () => {
   const [search, setSearch] = React.useState('');
-  const [hovered, setHovered] = React.useState('District');
   const [districtList, setDistrictList] = React.useState(assamDistrictCategory);
   const router = usePRouter();
   const { data: mapFile, isLoading: mapLoading } = useFetch(
     `assam-mapFiles`,
     `/files/assam.json`
   );
+
+  // using ref since state will cause re-render
+  const districtNameRef = React.useRef<HTMLDivElement>(null);
+  function handleMouseOver(e: any) {
+    if (districtNameRef.current) {
+      districtNameRef.current.innerHTML = e.feature.properties.district;
+    }
+  }
+
+  function handleMouseOut() {
+    if (districtNameRef.current) {
+      districtNameRef.current.innerHTML = 'District';
+    }
+  }
 
   // filter districtList based on search
   React.useEffect(() => {
@@ -36,9 +49,12 @@ export const DistrictSelector = () => {
     }
   }, [search]);
 
-  const mapDataFn = (value: boolean) => {
+  const mapDataFn = (
+    value: boolean,
+    type: 'default' | 'hover' | 'selected' = 'default'
+  ) => {
     return value
-      ? 'var(--mapareadistrict-default)'
+      ? `var(--mapareadistrict-${type})`
       : 'var(--mapareadistrict-disabled)';
   };
 
@@ -64,16 +80,15 @@ export const DistrictSelector = () => {
             }}
             hideLayers
             fillOpacity={1}
-            mouseover={(e) => {
-              setHovered(e.feature.properties.district);
-            }}
-            mouseout={() => {
-              setHovered('District');
-            }}
+            mouseover={handleMouseOver}
+            mouseout={handleMouseOut}
           />
         )}
-        <div className="py-2 px-4 bg-backgroundDefault absolute top-8 right-8 border-1 border-solid border-borderDefault rounded-1 z-max h-[40px]">
-          {hovered}
+        <div
+          ref={districtNameRef}
+          className="py-2 px-4 bg-backgroundDefault absolute top-8 right-8 border-1 border-solid border-borderDefault rounded-1 z-max h-[40px]"
+        >
+          District
         </div>
       </div>
       <div className="rounded-05 shadow-basicMd bg-surfaceDefault grow p-4 overflow-y-scroll min-w-[328px]">

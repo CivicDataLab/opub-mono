@@ -1,13 +1,12 @@
 import { downloadTable } from '../scheme.config';
 import { IndicatorsCheckbox } from './IndicatorsCheckbox';
 import { ITable } from './scheme-layout';
-import Icons from '@/components/icons';
 import { ckan } from '@/config/site';
 import { useFetch } from '@/lib/api';
 import { cn, copyURLToClipboard } from '@/lib/utils';
 import { createColumnHelper } from '@tanstack/react-table';
 import { useToast } from 'opub-ui';
-import { Button, Icon, Select, Table, Text } from 'opub-ui/src';
+import { Button, Select, Table, Text } from 'opub-ui';
 import React from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 
@@ -169,7 +168,9 @@ export const SourceData = ({
                   );
                 }}
               >
-                Download File
+                <Text variant="bodyMd" as="span">
+                  Download
+                </Text>
               </Button>
             </div>
           </div>
