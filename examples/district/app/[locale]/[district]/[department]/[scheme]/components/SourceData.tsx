@@ -6,7 +6,7 @@ import { useFetch } from '@/lib/api';
 import { cn, copyURLToClipboard } from '@/lib/utils';
 import { createColumnHelper } from '@tanstack/react-table';
 import { useToast } from 'opub-ui';
-import { Button, Icon, Select, Table, Text } from 'opub-ui/src';
+import { Button, Select, Table, Text } from 'opub-ui';
 import React from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 
