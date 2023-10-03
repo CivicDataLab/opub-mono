@@ -50,7 +50,7 @@ export const DistrictSelector = () => {
   }, [search]);
 
   const mapDataFn = (
-    value: number,
+    value: boolean,
     type: 'default' | 'hover' | 'selected' = 'default'
   ) => {
     return value

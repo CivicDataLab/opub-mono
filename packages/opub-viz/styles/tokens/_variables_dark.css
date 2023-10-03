@@ -1,0 +1,48 @@
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+
+  :root {
+    --background: #202123ff;
+    --background-hovered: #474849;
+    --background-pressed: #555a5e;
+    --background-selected: #2d2d33;
+    --background-invert: #f6f6f7ff;
+
+    --text: #b0b0bc;
+    --text-strong: #e7e7f1;
+    --text-subdued: #85858e;
+    /* --interactive: #8bb2ff; */
+    --interactive-hovered: #2c6ecbff;
+
+    --surface: #161619;
+    --surface-hovered: #2d2d33;
+    --surface-pressed: #474849;
+    --surface-selected: #474849;
+
+    --surface-attention: #454500;
+    --surface-information: #02382d;
+    --surface-warning: #4c250f;
+    --surface-subdued: #1e1e23;
+
+    --surface-selected: #202124;
+    --surface-critical-subdued: #201e1e;
+
+    --surface-neutral: #202123;
+    --surface-neutral-hovered: #474849;
+    --surface-neutral-pressed: #555a5e;
+    --surface-neutral-disabled: #555a5e;
+
+    --card-shadow: inset 0 0 0 1px hsla(0, 0%, 100%, 0.12);
+    --card-shadow-hover: 0 4px 7px hsla(0, 0%, 100%, 0.1),
+      inset 0 0 0 1px hsla(0, 0%, 100%, 0.12);
+
+    --backdrop: rgba(0, 0, 0, 0.5);
+
+    --icon: #eeeeee;
+    --icon-subdued: #dddddd;
+    --icon-hovered: #ffffff;
+    --icon-pressed: #dddddd;
+  }
+}

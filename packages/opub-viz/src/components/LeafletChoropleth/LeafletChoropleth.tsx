@@ -51,6 +51,9 @@ type MapProps = {
 
   /* fill opacity */
   fillOpacity?: number;
+
+  /* className */
+  className?: string;
 };
 
 type LegendProps = {
@@ -65,6 +68,7 @@ const LeafletChoropleth = (props: Props) => {
     legendData,
     defaultLayer = 'light_all',
     hideLayers = false,
+    className,
     ...others
   } = props;
 
@@ -72,7 +76,7 @@ const LeafletChoropleth = (props: Props) => {
     React.useState<layerOptions>(defaultLayer);
 
   return (
-    <div className={styles.Wrapper}>
+    <div className={cn(styles.Wrapper, className)}>
       <Map selectedLayer={selectedLayer} {...others} key={selectedLayer} />
       {!hideLayers && (
         <LayerSelector
@@ -112,7 +116,6 @@ const Map = ({
   }, []);
 
   const mapRef = React.useRef<any>(null);
-  console.log('mapRef', mapRef);
 
   const handleMouseOver = React.useCallback((e: { target: any }) => {
     var layer = e.target;
@@ -174,6 +177,8 @@ const Map = ({
       fillOpacity: fillOpacity ? fillOpacity : 0.5,
     };
   };
+
+  console.log(features);
 
   const feature: any = features.map((feature: any) => {
     return feature;

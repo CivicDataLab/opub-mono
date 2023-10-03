@@ -13,11 +13,16 @@ import {
   Text,
   useToast,
 } from 'opub-ui';
-import { BarChart, MapChart } from 'opub-viz';
+import { BarChart } from 'opub-viz';
 import React from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { useQueryState } from 'next-usequerystate';
+import dynamic from 'next/dynamic';
 
+const LeafletChoropleth = dynamic(
+  () => import('opub-viz').then((mod) => mod.LeafletChoropleth),
+  { ssr: false }
+);
 export const Explorer = React.forwardRef(
   (
     {
@@ -152,6 +157,15 @@ const Content = ({
   const currentData: any =
     chartData[states.selectedIndicator].years[states.selectedYear];
 
+  const mapDataFn = (
+    value: boolean,
+    type: 'default' | 'hover' | 'selected' = 'default'
+  ) => {
+    return value
+      ? `var(--mapareadistrict-${type})`
+      : 'var(--mapareadistrict-disabled)';
+  };
+
   const tabs = [
     {
       label: 'Bar View',
@@ -169,31 +183,47 @@ const Content = ({
     {
       label: 'Map View',
       value: 'map',
-      content: (
-        <MapChart
-          mapFile={mapFile}
-          data={currentData.mapdata.map(
-            (e: {
-              name: string;
-              value: string;
-              label: string;
-              disp_val: string;
-            }) => {
-              return {
-                name: String(e.name),
-                value: e.value,
-                label: e.label,
-                labelVal: e.disp_val,
-              };
-            }
-          )}
-          mapName="assam-block"
-          nameProperty="BLOCK_LGD"
-          height="500px"
-          colors={['#c9f0fa', '#abd9e9', '#74add1', '#4575b4', '#313695']}
-          loading={mapLoading}
-        />
-      ),
+      content:
+        // <MapChart
+        //   mapFile={mapFile}
+        //   data={currentData.mapdata.map(
+        //     (e: {
+        //       name: string;
+        //       value: string;
+        //       label: string;
+        //       disp_val: string;
+        //     }) => {
+        //       return {
+        //         name: String(e.name),
+        //         value: e.value,
+        //         label: e.label,
+        //         labelVal: e.disp_val,
+        //       };
+        //     }
+        //   )}
+        //   mapName="assam-block"
+        //   nameProperty="BLOCK_LGD"
+        //   height="500px"
+        //   colors={['#c9f0fa', '#abd9e9', '#74add1', '#4575b4', '#313695']}
+        //   loading={mapLoading}
+        // />
+        !mapLoading ? (
+          <LeafletChoropleth
+            features={mapFile.features}
+            mapZoom={7.4}
+            zoomOnClick={false}
+            mapProperty="enabled"
+            mapDataFn={mapDataFn}
+            fillOpacity={1}
+            className="w-full h-[512px]"
+            // mouseover={handleMouseOver}
+            // mouseout={handleMouseOut}
+          />
+        ) : (
+          <div className="h-[512px] flex justify-center items-center">
+            Loading...
+          </div>
+        ),
     },
   ];
 
@@ -225,10 +255,10 @@ const Content = ({
           ))}
         </TabList>
         <div
-          className="rounded-05 bg-background h-full p-4 bg-surfaceHighlightSubdued border-default"
+          className="rounded-05 bg-background h-full pt-4 bg-surfaceHighlightSubdued border-default"
           ref={contentRef}
         >
-          <div className="flex">
+          <div className="flex px-4">
             <Select
               label="Select FY"
               labelInline
@@ -269,7 +299,7 @@ const Content = ({
             exportAsImage(contentRef.current, 'explorer');
           }}
         >
-          Download File
+          Download
         </Button>
       </div>
     </div>

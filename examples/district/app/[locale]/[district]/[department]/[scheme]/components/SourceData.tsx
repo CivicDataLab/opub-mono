@@ -169,7 +169,7 @@ export const SourceData = ({
                   );
                 }}
               >
-                Download File
+                Download
               </Button>
             </div>
           </div>
