@@ -3,7 +3,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '../ui';
 import styles from './LeafletChoropleth.module.scss';
 import { IconBoxMultiple } from '@tabler/icons-react';
 import React from 'react';
-import { GeoJSON, MapContainer, TileLayer, Tooltip } from 'react-leaflet';
+import { GeoJSON, MapContainer, TileLayer, ScaleControl } from 'react-leaflet';
 
 const layers = [
   'light_all',
@@ -48,6 +48,9 @@ type MapProps = {
 
   /* hide layers */
   hideLayers?: boolean;
+
+  /* hide scale */
+  hideScale?: boolean;
 
   /* fill opacity */
   fillOpacity?: number;
@@ -102,6 +105,7 @@ const Map = ({
   mapCenter = [26.193, 92.773],
   zoomOnClick = true,
   fillOpacity,
+  hideScale = false,
   mapDataFn,
 }: MapProps & {
   selectedLayer: layerOptions;
@@ -197,6 +201,7 @@ const Map = ({
             />
           </>
         )}
+        {!hideScale && <ScaleControl imperial={false} />}
       </MapContainer>
     );
   } else {
@@ -243,14 +248,13 @@ const LayerSelector = ({
       <Popover>
         <PopoverTrigger
           className={cn(
-            'px-4 py-2 rounded cursor-pointer',
-            selectedLayer.includes('dark')
-              ? 'bg-gray-800/80 text-white'
-              : 'bg-gray-200/80 text-black'
+            'p-3 rounded-1 cursor-pointer bg-lightmodeVioletSolid5 shadow-insetBasic'
           )}
         >
           <span className="sr-only">Change Layer</span>
-          <IconBoxMultiple />
+          <span className="text-lightmodeVioletSolid10">
+            <IconBoxMultiple />
+          </span>
         </PopoverTrigger>
         <PopoverContent align="end">
           <fieldset>
