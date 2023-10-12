@@ -94,25 +94,27 @@ export const SourceData = ({
     <div>
       <div
         className={cn(
-          'grid grid-cols-[242px_1fr] gap-4 rounded-05 bg-surfaceDefault shadow-elementCard p-6'
+          'md:grid grid-cols-[242px_1fr] gap-4 rounded-05 bg-surfaceDefault shadow-elementCard p-6'
         )}
       >
-        {isLoading ? (
-          <div className="p-4">
-            <Text variant="headingMd">Loading...</Text>
-          </div>
-        ) : indicatorData ? (
-          <IndicatorsCheckbox
-            data={indicatorDataWithValues}
-            indicatorRef={indicatorRef}
-            selectedIndicators={selectedIndicators}
-            setIndicators={setIndicators}
-          />
-        ) : (
-          <div className="p-4">
-            <Text variant="headingMd">No indicators available</Text>
-          </div>
-        )}
+        <div className="hidden md:block">
+          {isLoading ? (
+            <div className="p-4">
+              <Text variant="headingMd">Loading...</Text>
+            </div>
+          ) : indicatorData ? (
+            <IndicatorsCheckbox
+              data={indicatorDataWithValues}
+              indicatorRef={indicatorRef}
+              selectedIndicators={selectedIndicators}
+              setIndicators={setIndicators}
+            />
+          ) : (
+            <div className="p-4">
+              <Text variant="headingMd">No indicators available</Text>
+            </div>
+          )}
+        </div>
 
         <ErrorBoundary
           fallback={

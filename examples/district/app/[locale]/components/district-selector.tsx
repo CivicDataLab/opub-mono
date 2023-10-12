@@ -137,7 +137,7 @@ export const DistrictSelector = () => {
                 <Text variant="headingSm" fontWeight="medium" color="subdued">
                   {category.name}
                 </Text>
-                <div className="w-4 h-4 rounded-full bg-lightmodeVioletSolid8 opacity-30" />
+                {/* <div className="w-4 h-4 rounded-full bg-lightmodeVioletSolid8 opacity-30" /> */}
               </div>
               <Separator className="mt-2 mb-3" />
               <div className="flex flex-col gap-3">

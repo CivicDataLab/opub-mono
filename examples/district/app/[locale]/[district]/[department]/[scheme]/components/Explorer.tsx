@@ -62,25 +62,27 @@ export const Explorer = React.forwardRef(
     return (
       <div
         className={cn(
-          'grid grid-cols-[242px_1fr] gap-4 rounded-05 bg-surfaceDefault shadow-elementCard p-6'
+          'md:grid grid-cols-[242px_1fr] gap-4 rounded-05 bg-surfaceDefault shadow-elementCard p-6'
         )}
       >
-        {isLoading ? (
-          <div className="p-4">
-            <Text variant="headingMd">Loading...</Text>
-          </div>
-        ) : indicatorData ? (
-          <Indicators
-            data={indicatorData[scheme as string] || null}
-            indicator={indicator || 'nhaoe'}
-            indicatorRef={indicatorRef}
-            setIndicator={setIndicator}
-          />
-        ) : (
-          <div className="p-4">
-            <Text variant="headingMd">No indicators available</Text>
-          </div>
-        )}
+        <div className="hidden md:block">
+          {isLoading ? (
+            <div className="p-4">
+              <Text variant="headingMd">Loading...</Text>
+            </div>
+          ) : indicatorData ? (
+            <Indicators
+              data={indicatorData[scheme as string] || null}
+              indicator={indicator || 'nhaoe'}
+              indicatorRef={indicatorRef}
+              setIndicator={setIndicator}
+            />
+          ) : (
+            <div className="p-4">
+              <Text variant="headingMd">No indicators available</Text>
+            </div>
+          )}
+        </div>
 
         <div className="flex items-center justify-center h-full" ref={ref}>
           <ErrorBoundary
