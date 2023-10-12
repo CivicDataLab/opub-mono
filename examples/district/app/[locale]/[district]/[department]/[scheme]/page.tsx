@@ -37,7 +37,7 @@ export default async function Home({
   };
 
   return (
-    <div className="container py-1 lg:py-2">
+    <div className="px-2 md:container py-1 lg:py-2">
       <Content data={meta} />
     </div>
   );

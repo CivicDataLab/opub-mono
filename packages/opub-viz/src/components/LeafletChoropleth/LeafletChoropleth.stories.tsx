@@ -1,5 +1,5 @@
 import { features } from '../../../assets/json/assam.json';
-import { LeafletChoropleth } from './LeafletChoropleth';
+import LeafletChoropleth from './LeafletChoropleth';
 import { Meta, StoryObj } from '@storybook/react';
 
 /**
@@ -82,7 +82,6 @@ export const Default: Story = {
     legendData,
     mapDataFn,
     mapProperty: 'dt_code',
-    defaultLayer: 'dark_all',
     mapZoom: 7.4,
   },
 };
