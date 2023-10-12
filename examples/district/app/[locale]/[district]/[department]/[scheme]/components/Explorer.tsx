@@ -15,7 +15,6 @@ import {
   Text,
   useToast,
 } from 'opub-ui';
-import { BarChart } from 'opub-viz';
 import React from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { useQueryState } from 'next-usequerystate';
@@ -83,6 +82,27 @@ export const Explorer = React.forwardRef(
             </div>
           )}
         </div>
+        {/* <div className="md:hidden">
+          <Select
+            label="Select Indicator"
+            labelHidden
+            name="indicator"
+            onChange={(value) => {
+              setIndicator(value);
+            }}
+            value={indicator}
+            options={
+              indicatorData
+                ? indicatorData[scheme as string]['District Performance'].map(
+                    (e: any) => ({
+                      label: e.label,
+                      value: e.slug,
+                    })
+                  )
+                : []
+            }
+          />
+        </div> */}
 
         <div className="flex items-center justify-center h-full" ref={ref}>
           <ErrorBoundary
@@ -163,6 +183,7 @@ const Content = ({
 
   React.useEffect(() => {
     if (!currentData) return;
+
     setSelectedBlocks(currentData.bardata.xAxis);
   }, []);
 
@@ -171,10 +192,9 @@ const Content = ({
       const filteredData = currentData.bardata.xAxis.filter((e: any) =>
         selectedBlocks.includes(e)
       );
-
       setBarData({ ...currentData.bardata, xAxis: filteredData });
     }
-  }, [selectedBlocks]);
+  }, [selectedBlocks, currentData]);
 
   if (!chartData[states.selectedIndicator]) {
     return (

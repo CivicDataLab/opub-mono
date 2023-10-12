@@ -55,7 +55,7 @@ export const BarChart = ({
     },
     grid: {
       containLabel: true,
-      left: 10,
+      left: '5%',
     },
     label: {
       show: true,
