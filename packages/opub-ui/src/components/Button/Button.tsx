@@ -24,6 +24,10 @@ export interface NonMutualButtonProps {
   /** Renders a button that looks like a link */
   plain?: boolean;
 
+  kind?: 'primary' | 'secondary' | 'tertiary';
+
+  variant?: 'basic' | 'interactive' | 'critical' | 'success';
+
   /**
    * Changes the size of the button, giving it more or less padding
    * @default 'medium'
@@ -129,14 +133,18 @@ const Button = React.forwardRef(
       disclosure,
       connectedDisclosure,
       className: classes,
+      kind = 'primary',
+      variant = 'basic',
       ...otherProps
     } = props;
     const isDisabled = disabled || loading;
 
     const className = cx(
       styles.Button,
-      primary && styles.primary,
-      destructive && styles.destructive,
+      styles[variationName('kind', kind)],
+      styles[variationName('variant', variant)],
+      // primary && styles.primary,
+      // destructive && styles.destructive,
       outline && styles.outline,
       plain && styles.plain,
       monochrome && styles.monochrome,
@@ -168,7 +176,7 @@ const Button = React.forwardRef(
         <Spinner
           size="small"
           accessibilityLabel={'Loading'}
-          color={primary || destructive ? 'surface' : 'subdued'}
+          color={'surface'}
         />
       </span>
     ) : null;

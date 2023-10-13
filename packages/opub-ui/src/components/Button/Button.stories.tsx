@@ -34,12 +34,12 @@ export const Disclosure: Story = {
   },
 };
 
-export const Basic = () => {
+export const PrimaryBasic = () => {
   <Button>Test</Button>;
   return (
     <PropsVariationSection
       component={Button}
-      common={{ onChange: () => {}, children: 'Button' }}
+      common={{ onChange: () => {}, children: 'Button', action: 'primary' }}
       xAxis={{
         default: {},
         disabled: { disabled: true },
@@ -74,10 +74,10 @@ export const Basic = () => {
   );
 };
 
-export const Primary = () => (
+export const PrimaryInteractive = () => (
   <PropsVariationSection
     component={Button}
-    common={{ onChange: () => {}, children: 'Button', primary: true }}
+    common={{ onChange: () => {}, children: 'Button', variant: 'interactive' }}
     xAxis={{
       default: {},
       disabled: { disabled: true },
@@ -95,10 +95,10 @@ export const Primary = () => (
   />
 );
 
-export const Destructive = () => (
+export const PrimaryCritical = () => (
   <PropsVariationSection
     component={Button}
-    common={{ onChange: () => {}, children: 'Button', destructive: true }}
+    common={{ onChange: () => {}, children: 'Button', variant: 'critical' }}
     xAxis={{
       default: {},
       disabled: { disabled: true },
@@ -108,15 +108,38 @@ export const Destructive = () => (
       large: { size: 'large' },
       medium: {},
       slim: { size: 'slim' },
+      'large + full width': { size: 'large', fullWidth: true },
+      'medium + full width': { fullWidth: true },
+      'slim + full width': { size: 'slim', fullWidth: true },
+      loading: { loading: true },
+    }}
+  />
+);
+export const PrimarySuccess = () => (
+  <PropsVariationSection
+    component={Button}
+    common={{ onChange: () => {}, children: 'Button', variant: 'success' }}
+    xAxis={{
+      default: {},
+      disabled: { disabled: true },
+      pressed: { pressed: true },
+    }}
+    yAxis={{
+      large: { size: 'large' },
+      medium: {},
+      slim: { size: 'slim' },
+      'large + full width': { size: 'large', fullWidth: true },
+      'medium + full width': { fullWidth: true },
+      'slim + full width': { size: 'slim', fullWidth: true },
       loading: { loading: true },
     }}
   />
 );
 
-export const Outline = () => (
+export const SecondaryBasic = () => (
   <PropsVariationSection
     component={Button}
-    common={{ onChange: () => {}, children: 'Button', outline: true }}
+    common={{ onChange: () => {}, children: 'Button', kind: 'secondary' }}
     xAxis={{
       default: {},
       disabled: { disabled: true },
@@ -126,29 +149,22 @@ export const Outline = () => (
       large: { size: 'large' },
       medium: {},
       slim: { size: 'slim' },
-
-      'large + with icon': {
-        size: 'large',
-        icon: <Icon source={IconSelector} />,
-      },
-      'medium + with icon': { icon: <Icon source={IconSelector} /> },
-      'slim + with icon': {
-        size: 'slim',
-        icon: <Icon source={IconSelector} />,
-      },
+      'large + full width': { size: 'large', fullWidth: true },
+      'medium + full width': { fullWidth: true },
+      'slim + full width': { size: 'slim', fullWidth: true },
+      loading: { loading: true },
     }}
   />
 );
 
-export const OutlineMonochrome = () => (
+export const SecondaryInteractive = () => (
   <PropsVariationSection
     component={Button}
-    color="#bf0711"
     common={{
       onChange: () => {},
       children: 'Button',
-      outline: true,
-      monochrome: true,
+      variant: 'interactive',
+      kind: 'secondary',
     }}
     xAxis={{
       default: {},
@@ -159,6 +175,61 @@ export const OutlineMonochrome = () => (
       large: { size: 'large' },
       medium: {},
       slim: { size: 'slim' },
+      'large + full width': { size: 'large', fullWidth: true },
+      'medium + full width': { fullWidth: true },
+      'slim + full width': { size: 'slim', fullWidth: true },
+      loading: { loading: true },
+    }}
+  />
+);
+
+export const SecondaryCritical = () => (
+  <PropsVariationSection
+    component={Button}
+    common={{
+      onChange: () => {},
+      children: 'Button',
+      variant: 'critical',
+      kind: 'secondary',
+    }}
+    xAxis={{
+      default: {},
+      disabled: { disabled: true },
+      pressed: { pressed: true },
+    }}
+    yAxis={{
+      large: { size: 'large' },
+      medium: {},
+      slim: { size: 'slim' },
+      'large + full width': { size: 'large', fullWidth: true },
+      'medium + full width': { fullWidth: true },
+      'slim + full width': { size: 'slim', fullWidth: true },
+      loading: { loading: true },
+    }}
+  />
+);
+export const SecondarySuccess = () => (
+  <PropsVariationSection
+    component={Button}
+    common={{
+      onChange: () => {},
+      children: 'Button',
+      variant: 'success',
+      kind: 'secondary',
+    }}
+    xAxis={{
+      default: {},
+      disabled: { disabled: true },
+      pressed: { pressed: true },
+    }}
+    yAxis={{
+      large: { size: 'large' },
+      medium: {},
+      slim: { size: 'slim' },
+      'large + full width': { size: 'large', fullWidth: true },
+      'medium + full width': { fullWidth: true },
+      'slim + full width': { size: 'slim', fullWidth: true },
+      loading: { loading: true },
     }}
   />
 );
@@ -169,7 +240,7 @@ export const Plain = () => (
     common={{
       onChange: () => {},
       children: 'Button',
-      plain: true,
+      kind: 'tertiary',
     }}
     xAxis={{
       default: {},
@@ -248,23 +319,3 @@ export const PlainDisclosure = () => (
     }}
   />
 );
-
-// export const PseudoStates = () => (
-//   <Box flex gap="12" className="story-grid pseudo">
-//     <div style={{ outline: 'none' }}>
-//       <Button>Normal</Button>
-//     </div>
-//     <div style={{ outline: 'none' }} className="pseudo-hover">
-//       <Button>Hover</Button>
-//     </div>
-//     <div style={{ outline: 'none' }} className="pseudo-focus-visible">
-//       <Button>Focus</Button>
-//     </div>
-//     <div
-//       style={{ outline: 'none' }}
-//       className="pseudo-hover pseudo-focus-visible"
-//     >
-//       <Button>Hover Focus</Button>
-//     </div>
-//   </Box>
-// );
