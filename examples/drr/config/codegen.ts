@@ -3,11 +3,17 @@ import type { CodegenConfig } from '@graphql-codegen/cli';
 import { gqlConfig } from './site';
 
 const config: CodegenConfig = {
-  schema: gqlConfig.url,
-  documents: 'config/**/*.ts',
-  ignoreNoDocuments: true,
+  overwrite: true,
   generates: {
-    './gql/generated/': {
+    './gql/generated/datasets/': {
+      documents: 'config/**/dataset-queries.ts',
+      schema: gqlConfig.datasets ,
+      preset: 'client',
+      plugins: [],
+    },
+    './gql/generated/analytics/': {
+      documents: 'config/**/analaytics-queries.ts',
+      schema: gqlConfig.analytics ,
       preset: 'client',
       plugins: [],
     },

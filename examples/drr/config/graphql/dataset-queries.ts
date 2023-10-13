@@ -1,4 +1,4 @@
-import { graphql } from '@/gql';
+import { graphql } from '@/gql/generated/datasets';
 
 
 export const ALL_DATASETS_QUERY = graphql(`

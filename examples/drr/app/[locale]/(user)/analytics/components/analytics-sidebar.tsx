@@ -2,9 +2,12 @@
 
 import React from 'react';
 import { Checkbox } from 'opub-ui';
+import { ANALYTICS_INDICATORS} from '@/config/graphql/analaytics-queries';
 
 import { cn } from '@/lib/utils';
 import styles from './AnalyticsDashboard.module.scss';
+import { useQuery } from '@tanstack/react-query';
+import { GraphQL } from '@/lib/api';
 
 const indicators = [
   {
@@ -35,6 +38,11 @@ const indicators = [
   },
 ];
 export function AnalyticsDashboardSidebar() {
+
+//   const { data } = useQuery([`indicators`], () =>
+//   GraphQL('analytics', ANALYTICS_INDICATORS)
+// );
+
   return (
     <aside
       className={cn(
