@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { Breadcrumbs, Tab, TabList, TabPanel, Tabs, Text } from 'opub-ui';
 
 import { datasetsExplorerPageHeader } from '@/config/consts';
-import { DATASET_BY_SLUG } from '@/config/graphql/queries';
+import { DATASET_BY_SLUG } from '@/config/graphql/dataset-queries';
 import { GraphQL } from '@/lib/api';
 import { DatasetInfoCard } from './DatasetInfoCard';
 import { DatasetResources } from './DatasetResources';
@@ -13,7 +13,7 @@ import { formatDate } from '@/lib/utils';
 
 export function Content({ slug }: { slug: string }) {
   const { data } = useQuery([`dataset_by_slug_${slug}`], () =>
-    GraphQL(DATASET_BY_SLUG, {
+    GraphQL('datasets' , DATASET_BY_SLUG, {
       dataset_slug: slug,
     })
   );
