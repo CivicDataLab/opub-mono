@@ -16,11 +16,11 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
-  args: {
-    children: 'Button',
-  },
-};
+// export const Default: Story = {
+//   args: {
+//     children: 'Button',
+//   },
+// };
 
 export const Disclosure: Story = {
   args: {
@@ -234,18 +234,18 @@ export const SecondarySuccess = () => (
   />
 );
 
-export const Plain = () => (
+export const TertiaryBasic = () => (
   <PropsVariationSection
     component={Button}
     common={{
       onChange: () => {},
       children: 'Button',
       kind: 'tertiary',
+      variant: 'basic',
     }}
     xAxis={{
       default: {},
       disabled: { disabled: true },
-      pressed: { pressed: true },
     }}
     yAxis={{
       large: { size: 'large' },
@@ -254,19 +254,18 @@ export const Plain = () => (
   />
 );
 
-export const PlainMonochrome = () => (
+export const TertiaryInteractive = () => (
   <PropsVariationSection
     component={Button}
     common={{
       onChange: () => {},
       children: 'Button',
-      plain: true,
-      monochrome: true,
+      kind: 'tertiary',
+      variant: 'interactive',
     }}
     xAxis={{
       default: {},
       disabled: { disabled: true },
-      pressed: { pressed: true },
     }}
     yAxis={{
       large: { size: 'large' },
@@ -275,20 +274,38 @@ export const PlainMonochrome = () => (
   />
 );
 
-export const PlainDestructiveMonochrome = () => (
+export const TertiaryCritical = () => (
   <PropsVariationSection
     component={Button}
-    color="#bf0711"
     common={{
       onChange: () => {},
       children: 'Button',
-      plain: true,
-      monochrome: true,
+      kind: 'tertiary',
+      variant: 'critical',
     }}
     xAxis={{
       default: {},
       disabled: { disabled: true },
-      pressed: { pressed: true },
+    }}
+    yAxis={{
+      large: { size: 'large' },
+      medium: {},
+    }}
+  />
+);
+
+export const TertiarySuccess = () => (
+  <PropsVariationSection
+    component={Button}
+    common={{
+      onChange: () => {},
+      children: 'Button',
+      kind: 'tertiary',
+      variant: 'success',
+    }}
+    xAxis={{
+      default: {},
+      disabled: { disabled: true },
     }}
     yAxis={{
       large: { size: 'large' },
@@ -303,12 +320,11 @@ export const PlainDisclosure = () => (
     common={{
       onChange: () => {},
       children: 'Button',
-      plain: true,
+      kind: 'tertiary',
     }}
     xAxis={{
       default: {},
       disabled: { disabled: true },
-      pressed: { pressed: true },
     }}
     yAxis={{
       'large + disclosure + true': { size: 'large', disclosure: 'down' },

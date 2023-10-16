@@ -143,11 +143,7 @@ const Button = React.forwardRef(
       styles.Button,
       styles[variationName('kind', kind)],
       styles[variationName('variant', variant)],
-      // primary && styles.primary,
-      // destructive && styles.destructive,
-      outline && styles.outline,
       plain && styles.plain,
-      monochrome && styles.monochrome,
       size && size !== DEFAULT_SIZE && styles[variationName('size', size)],
       textAlign && styles[variationName('textAlign', textAlign)],
       fullWidth && styles.fullWidth,
@@ -205,15 +201,14 @@ const Button = React.forwardRef(
     if (connectedDisclosure) {
       const connectedDisclosureClassName = cx(
         styles.Button,
-        primary && styles.primary,
-        outline && styles.outline,
+        styles[variationName('kind', kind)],
+        styles[variationName('variant', variant)],
         size && size !== DEFAULT_SIZE && styles[variationName('size', size)],
         textAlign && styles[variationName('textAlign', textAlign)],
         destructive && styles.destructive,
         connectedDisclosure.disabled && styles.disabled,
         styles.iconOnly,
-        styles.ConnectedDisclosure,
-        monochrome && styles.monochrome
+        styles.ConnectedDisclosure
       );
 
       const defaultLabel = 'Related actions';
