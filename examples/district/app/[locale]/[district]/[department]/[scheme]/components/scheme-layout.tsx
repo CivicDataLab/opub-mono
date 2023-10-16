@@ -232,6 +232,8 @@ const TabLayout = ({
         {tabValue === 'overview' && (
           <div className="mb-3 flex items-center justify-end gap-4 flex-wrap">
             <Button
+              kind="secondary"
+              variant="interactive"
               onClick={() => {
                 copyURLToClipboard();
                 toast({
@@ -239,18 +241,16 @@ const TabLayout = ({
                 });
               }}
             >
-              <Text variant="bodyMd" as="span">
-                Copy Link
-              </Text>
+              Copy Link
             </Button>
             <Button
+              kind="secondary"
+              variant="interactive"
               onClick={() => {
                 exportAsImage(overviewRef.current, 'overview');
               }}
             >
-              <Text variant="bodyMd" as="span">
-                Download
-              </Text>
+              Download
             </Button>
           </div>
         )}

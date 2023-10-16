@@ -1,5 +1,4 @@
 @import './reset.css';
 @import './base.css';
 @import './tokens.css';
-@import '../styles/_variables.css';
 @import './styles-bundled.css';

@@ -315,6 +315,8 @@ const Content = ({
       </Tabs>
       <div className="mt-3 flex justify-end gap-4">
         <Button
+          kind="secondary"
+          variant="interactive"
           onClick={() => {
             copyURLToClipboard();
             toast({
@@ -322,18 +324,16 @@ const Content = ({
             });
           }}
         >
-          <Text variant="bodyMd" as="span">
-            Copy Link
-          </Text>
+          Copy Link
         </Button>
         <Button
+          kind="secondary"
+          variant="interactive"
           onClick={() => {
             exportAsImage(contentRef.current, 'explorer');
           }}
         >
-          <Text variant="bodyMd" as="span">
-            Download
-          </Text>
+          Download
         </Button>
       </div>
     </div>
