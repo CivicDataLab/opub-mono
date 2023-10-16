@@ -3,7 +3,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '../ui';
 import styles from './LeafletChoropleth.module.scss';
 import { IconBoxMultiple } from '@tabler/icons-react';
 import React from 'react';
-import { GeoJSON, MapContainer, TileLayer } from 'react-leaflet';
+import { GeoJSON, MapContainer, TileLayer, ScaleControl } from 'react-leaflet';
 
 const layers = [
   'light_all',
@@ -32,7 +32,7 @@ type MapProps = {
   mapProperty?: string;
 
   /* function to map data to color */
-  mapDataFn?: (value: any) => string;
+  mapDataFn: (value: any, type: 'default' | 'hover' | 'selected') => string;
 
   /* theme of the map */
   defaultLayer?: layerOptions;
@@ -49,8 +49,14 @@ type MapProps = {
   /* hide layers */
   hideLayers?: boolean;
 
+  /* hide scale */
+  hideScale?: boolean;
+
   /* fill opacity */
   fillOpacity?: number;
+
+  /* className */
+  className?: string;
 };
 
 type LegendProps = {
@@ -60,11 +66,12 @@ type LegendProps = {
 
 type Props = MapProps & LegendProps;
 
-export const LeafletChoropleth = (props: Props) => {
+const LeafletChoropleth = (props: Props) => {
   const {
     legendData,
     defaultLayer = 'light_all',
     hideLayers = false,
+    className,
     ...others
   } = props;
 
@@ -72,7 +79,7 @@ export const LeafletChoropleth = (props: Props) => {
     React.useState<layerOptions>(defaultLayer);
 
   return (
-    <div className={styles.Wrapper}>
+    <div className={cn(styles.Wrapper, className)}>
       <Map selectedLayer={selectedLayer} {...others} key={selectedLayer} />
       {!hideLayers && (
         <LayerSelector
@@ -91,7 +98,6 @@ const Map = ({
   features,
   mouseover,
   mouseout,
-  mapDataFn,
   click,
   selectedLayer,
   mapProperty = '',
@@ -99,66 +105,79 @@ const Map = ({
   mapCenter = [26.193, 92.773],
   zoomOnClick = true,
   fillOpacity,
+  hideScale = false,
+  mapDataFn,
 }: MapProps & {
   selectedLayer: layerOptions;
 }) => {
-  const mapRef = React.useRef<any>(null);
-  const [unmountMap, setunmountMap] = React.useState(false);
   //to prevent map re-initialization
+  const [unmountMap, setUnmountMap] = React.useState(false);
   React.useLayoutEffect(() => {
-    setunmountMap(false);
+    setUnmountMap(false);
     return () => {
-      setunmountMap(true);
+      setUnmountMap(true);
     };
   }, []);
 
-  function highlightFeature(e: { target: any }) {
+  const mapRef = React.useRef<any>(null);
+
+  const handleMouseOver = React.useCallback((e: { target: any }) => {
     var layer = e.target;
 
     layer.setStyle({
-      weight: 3,
-      color: selectedLayer?.includes('dark') ? '#ddd' : '#333',
-      dashArray: '',
-      fillOpacity: fillOpacity ? fillOpacity : 0.7,
+      fillColor: mapDataFn(
+        Number(layer.feature.properties[mapProperty]),
+        'hover'
+      ),
     });
 
-    mouseover && mouseover(e.target);
-  }
+    mouseover && mouseover(layer);
+  }, []);
 
-  const resetHighlight = (e: { target: any }) => {
-    e.target.setStyle(style(e.target.feature));
-    mouseout && mouseout(e.target);
-  };
+  const handleMouseOut = React.useCallback((e: { target: any }) => {
+    var layer = e.target;
 
-  function zoomToFeature(e: { target: any }) {
+    layer.setStyle(style(layer.feature));
+    mouseout && mouseout(layer);
+  }, []);
+
+  function handleClick(e: { target: any }) {
+    var layer = e.target;
+
+    layer.setStyle({
+      fillColor: mapDataFn(
+        Number(layer.feature.properties[mapProperty]),
+        'selected'
+      ),
+    });
+
     if (zoomOnClick) {
       const map = mapRef.current;
-      map.fitBounds(e.target.getBounds());
+      map.fitBounds(layer.getBounds());
     }
 
-    click && click(e.target);
+    click && click(layer);
   }
 
   const onEachFeature = (
-    feature: any,
+    _: any,
     layer: { on: (arg0: { mouseover: any; mouseout: any; click: any }) => void }
   ) => {
     layer.on({
-      mouseover: highlightFeature,
-      mouseout: resetHighlight,
-      click: zoomToFeature,
+      mouseover: handleMouseOver,
+      mouseout: handleMouseOut,
+      click: handleClick,
     });
   };
 
   const style: any = (feature: { properties: { [x: string]: number } }) => {
     return {
-      fillColor: mapDataFn
-        ? mapDataFn(Number(feature.properties[mapProperty]))
-        : '#fff',
+      fillColor: mapDataFn(Number(feature.properties[mapProperty]), 'default'),
       weight: 1,
       opacity: 1,
-      color: selectedLayer?.includes('dark') ? '#eee' : '#444',
-      dashArray: '2',
+      color: selectedLayer?.includes('dark')
+        ? '#eee'
+        : 'var(--mapareadistrict-border)',
       fillOpacity: fillOpacity ? fillOpacity : 0.5,
     };
   };
@@ -174,8 +193,15 @@ const Map = ({
           url={`https://cartodb-basemaps-{s}.global.ssl.fastly.net/${selectedLayer}/{z}/{x}/{y}.png`}
         />
         {features && (
-          <GeoJSON data={feature} style={style} onEachFeature={onEachFeature} />
+          <>
+            <GeoJSON
+              data={feature}
+              style={style}
+              onEachFeature={onEachFeature}
+            />
+          </>
         )}
+        {!hideScale && <ScaleControl imperial={false} />}
       </MapContainer>
     );
   } else {
@@ -222,14 +248,13 @@ const LayerSelector = ({
       <Popover>
         <PopoverTrigger
           className={cn(
-            'px-4 py-2 rounded cursor-pointer',
-            selectedLayer.includes('dark')
-              ? 'bg-gray-800/80 text-white'
-              : 'bg-gray-200/80 text-black'
+            'p-3 rounded-1 cursor-pointer bg-lightmodeVioletSolid5 shadow-insetBasic'
           )}
         >
           <span className="sr-only">Change Layer</span>
-          <IconBoxMultiple />
+          <span className="text-lightmodeVioletSolid10">
+            <IconBoxMultiple />
+          </span>
         </PopoverTrigger>
         <PopoverContent align="end">
           <fieldset>
@@ -256,3 +281,5 @@ const LayerSelector = ({
     </div>
   );
 };
+
+export default React.memo(LeafletChoropleth);

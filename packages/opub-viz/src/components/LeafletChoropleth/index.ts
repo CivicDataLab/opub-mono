@@ -1,1 +1,1 @@
-export { LeafletChoropleth } from './LeafletChoropleth';
+export { default as LeafletChoropleth } from './LeafletChoropleth';

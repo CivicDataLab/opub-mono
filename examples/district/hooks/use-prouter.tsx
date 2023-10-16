@@ -4,7 +4,12 @@ import { useRouter } from 'next/navigation';
 export const usePRouter = () => {
   const router = useRouter();
 
-  const { push } = router;
+  const { push, replace } = router;
+
+  router.replace = (href, options) => {
+    navigateStart();
+    replace(href, options);
+  };
 
   router.push = (href, options) => {
     navigateStart();

@@ -1,45 +1,49 @@
 import React from 'react';
 import { ContentCard, ProgressCard } from '../../components/Card';
 import { IOverview } from './scheme-layout';
-import { Text } from 'opub-ui';
+import { Icon, Text } from 'opub-ui';
 import { BarChart } from 'opub-viz';
+import Link from 'next/link';
+import Icons from '@/components/icons';
 
-export const Overview = ({ data }: { data?: IOverview }) => {
-  if (!data) return null;
+export const Overview = React.forwardRef(
+  ({ data }: { data?: IOverview }, ref: any) => {
+    if (!data) return null;
 
-  return (
-    <div className="flex flex-col gap-4">
-      <Card heading={data.targetTitle}>
-        {data.targets.map((target, index) => {
-          return <SelectCard type={target.type} key={index} data={target} />;
-        })}
-      </Card>
+    return (
+      <div className="flex flex-col gap-4" ref={ref}>
+        <Card heading={data.targetTitle}>
+          {data.targets.map((target, index) => {
+            return <SelectCard type={target.type} key={index} data={target} />;
+          })}
+        </Card>
 
-      <Card heading={data.profileTitle}>
-        {data.profiles &&
-          data.profiles.map((profile, index) => {
+        <Card heading={data.profileTitle}>
+          {data.profiles &&
+            data.profiles.map((profile, index) => {
+              return (
+                <SelectCard key={index} type={profile.type} data={profile} />
+              );
+            })}
+        </Card>
+
+        <Card heading={data.performanceTitle}>
+          {data.performances.map((performance, index) => {
             return (
-              <SelectCard key={index} type={profile.type} data={profile} />
+              <SelectCard
+                type={performance.type}
+                key={index}
+                data={performance}
+              />
             );
           })}
-      </Card>
+        </Card>
+      </div>
+    );
+  }
+);
 
-      <Card heading={data.performanceTitle}>
-        {data.performances.map((performance, index) => {
-          return (
-            <SelectCard
-              type={performance.type}
-              key={index}
-              data={performance}
-            />
-          );
-        })}
-      </Card>
-    </div>
-  );
-};
-
-function SelectCard({ type, data }: any) {
+function SelectCard({ type, data, link }: any) {
   switch (type) {
     case 'number':
       return (
@@ -63,7 +67,7 @@ function SelectCard({ type, data }: any) {
       );
     case 'bar':
       return (
-        <div className="flex flex-col md:basis-1/3 grow p-4 bg-surfaceSubdued rounded-1 border-1 border-solid border-borderSubdued">
+        <div className="flex flex-col justify-between md:basis-1/3 grow p-4 bg-surfaceSubdued rounded-1 border-1 border-solid border-borderSubdued">
           <Text variant="bodyLg" fontWeight="medium">
             {data.label}
           </Text>
@@ -71,6 +75,17 @@ function SelectCard({ type, data }: any) {
             <BarChart xAxis={data.data.xAxis} data={data.data.values} />
           </>
           {/* <Text variant="bodyMd">{data.description}</Text> */}
+          {link && (
+            <Link
+              href={`?tab=explorer`}
+              className="rounded-1 flex items-center justify-between text-textInteractive hover:underline"
+            >
+              <Text variant="bodyMd" fontWeight="medium" color="inherit">
+                View on Explorer
+              </Text>
+              <Icon source={Icons.right} />
+            </Link>
+          )}
         </div>
       );
     default:

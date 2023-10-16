@@ -24,6 +24,10 @@ export interface NonMutualButtonProps {
   /** Renders a button that looks like a link */
   plain?: boolean;
 
+  kind?: 'primary' | 'secondary' | 'tertiary';
+
+  variant?: 'basic' | 'interactive' | 'critical' | 'success';
+
   /**
    * Changes the size of the button, giving it more or less padding
    * @default 'medium'
@@ -129,17 +133,17 @@ const Button = React.forwardRef(
       disclosure,
       connectedDisclosure,
       className: classes,
+      kind = 'primary',
+      variant = 'basic',
       ...otherProps
     } = props;
     const isDisabled = disabled || loading;
 
     const className = cx(
       styles.Button,
-      primary && styles.primary,
-      destructive && styles.destructive,
-      outline && styles.outline,
+      styles[variationName('kind', kind)],
+      styles[variationName('variant', variant)],
       plain && styles.plain,
-      monochrome && styles.monochrome,
       size && size !== DEFAULT_SIZE && styles[variationName('size', size)],
       textAlign && styles[variationName('textAlign', textAlign)],
       fullWidth && styles.fullWidth,
@@ -168,7 +172,7 @@ const Button = React.forwardRef(
         <Spinner
           size="small"
           accessibilityLabel={'Loading'}
-          color={primary || destructive ? 'surface' : 'subdued'}
+          color={'surface'}
         />
       </span>
     ) : null;
@@ -197,15 +201,14 @@ const Button = React.forwardRef(
     if (connectedDisclosure) {
       const connectedDisclosureClassName = cx(
         styles.Button,
-        primary && styles.primary,
-        outline && styles.outline,
+        styles[variationName('kind', kind)],
+        styles[variationName('variant', variant)],
         size && size !== DEFAULT_SIZE && styles[variationName('size', size)],
         textAlign && styles[variationName('textAlign', textAlign)],
         destructive && styles.destructive,
         connectedDisclosure.disabled && styles.disabled,
         styles.iconOnly,
-        styles.ConnectedDisclosure,
-        monochrome && styles.monochrome
+        styles.ConnectedDisclosure
       );
 
       const defaultLabel = 'Related actions';
