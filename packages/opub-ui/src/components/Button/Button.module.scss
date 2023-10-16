@@ -251,8 +251,7 @@
   line-height: 0;
 
   &:last-child {
-    margin-right: var(--button-disclosure-icon-offset);
-    margin-left: var(--space-1);
+    margin-right: -2px;
   }
 
   .fullWidth.textAlignLeft &:last-child:not(:only-child) {

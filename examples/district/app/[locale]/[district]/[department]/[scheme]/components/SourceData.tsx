@@ -150,6 +150,8 @@ export const SourceData = ({
             />
             <div className="mt-3 flex justify-end gap-4">
               <Button
+                kind="secondary"
+                variant="interactive"
                 onClick={() => {
                   copyURLToClipboard();
                   toast({
@@ -157,11 +159,11 @@ export const SourceData = ({
                   });
                 }}
               >
-                <Text variant="bodyMd" as="span">
-                  Copy Link
-                </Text>
+                Copy Link
               </Button>
               <Button
+                kind="secondary"
+                variant="interactive"
                 onClick={() => {
                   downloadTable(
                     columns,
@@ -170,9 +172,7 @@ export const SourceData = ({
                   );
                 }}
               >
-                <Text variant="bodyMd" as="span">
-                  Download
-                </Text>
+                Download
               </Button>
             </div>
           </div>
