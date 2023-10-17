@@ -27,13 +27,13 @@ export const SchemeCard = ({
   }
 
   return (
-    <div className="flex flex-col gap-2 justify-between p-4 pb-3 bg-surface rounded-05 shadow-card">
+    <div className="flex flex-col gap-2 justify-between p-4 bg-surfaceDefault rounded-05 shadow-elementCard">
       <div className="flex flex-col gap-3">
         <Link
           href={`${data.departmentHref}/${data.href}`}
           className="block hover:underline"
         >
-          <span className="flex gap-6 items-center">
+          <span className="flex gap-4 items-center">
             <Image
               src={schemes[data.href].logo}
               alt=""
@@ -41,7 +41,7 @@ export const SchemeCard = ({
               height={100}
               className="flex-shrink-0"
             />
-            <Text variant="headingXl" as="h3">
+            <Text variant="headingLg" as="h3">
               {data.label}
             </Text>
           </span>
@@ -76,7 +76,7 @@ export const SchemeCard = ({
       </div>
       <Link
         href={`${data.departmentHref}/${data.href}`}
-        className="py-2 pl-4 pr-1 bg-surface hover:bg-surfaceHovered rounded-1 flex justify-between text-interactive"
+        className="rounded-1 flex items-center justify-between text-textInteractive hover:underline"
       >
         <Text variant="bodyMd" fontWeight="medium" color="inherit">
           Explore More <Text visuallyHidden>about {data.label}</Text>
@@ -93,23 +93,33 @@ export const ContentCard = ({
   description,
   color,
   info,
+  className,
+  link,
 }: {
   value: string | number;
   label: string;
   description?: string;
   color?: string;
   info?: string;
+  className?: string;
+  link?: string;
 }) => {
   return (
-    <div
-      className={cn(
-        'flex-grow md:w-[45%]',
-        'p-4 rounded-1 border-[1px] border-solid border-borderSubdued flex flex-col gap-3',
-        color === 'highlight' &&
-          'bg-surfaceHighlightSubdued w-auto border-borderHighlightSubdued'
-      )}
-    >
-      <Text variant="headingXl">{value}</Text>
+    <CardLayout className={className + ' gap-4'} color={color}>
+      <div className="flex items-center gap-2 justify-between">
+        <Text variant="headingXl">{value}</Text>
+        {link && (
+          <Link
+            href={`?tab=explorer`}
+            className="rounded-1 flex items-center justify-between text-textInteractive hover:underline"
+          >
+            <Text variant="bodyMd" fontWeight="medium" color="inherit">
+              View on Explorer
+            </Text>
+            <Icon source={Icons.right} />
+          </Link>
+        )}
+      </div>
       <div className="flex items-center gap-2 justify-between">
         <Text variant="bodyLg">{label}</Text>
 
@@ -117,11 +127,11 @@ export const ContentCard = ({
       </div>
       {description && (
         <>
-          <Separator />
+          <Separator className="my-4" />
           <Text variant="bodyMd">{description}</Text>
         </>
       )}
-    </div>
+    </CardLayout>
   );
 };
 
@@ -132,6 +142,8 @@ export const ProgressCard = ({
   color,
   min,
   max,
+  className,
+  link,
 }: {
   value: string | number;
   label: string;
@@ -139,30 +151,64 @@ export const ProgressCard = ({
   color?: string;
   min?: number;
   max?: number;
+  className?: string;
+  link?: string;
 }) => {
   return (
-    <div
-      className={cn(
-        'flex-grow md:w-[45%] ',
-        'p-4 rounded-1 border-[1px] border-solid border-borderSubdued flex flex-col gap-3',
-        color === 'highlight' &&
-          'bg-surfaceHighlightSubdued w-auto border-borderHighlightSubdued'
-      )}
-    >
-      <Text variant="headingXl">{value}%</Text>
-      <Text variant="bodyLg">{label}</Text>
+    <CardLayout className={className} color={color}>
+      <div className="flex items-center gap-2 justify-between">
+        <Text variant="headingXl">{value}%</Text>
+        {link && (
+          <Link
+            href={`?tab=explorer`}
+            className="rounded-1 flex items-center justify-between text-textInteractive hover:underline"
+          >
+            <Text variant="bodyMd" fontWeight="medium" color="inherit">
+              View on Explorer
+            </Text>
+            <Icon source={Icons.right} />
+          </Link>
+        )}
+      </div>
+      <Text variant="bodyLg" className="mb-4">
+        {label}
+      </Text>
       <div>
-        <ProgressBar value={Number(value)} />
+        <ProgressBar value={Number(value)} color="highlight" size="medium" />
         <div className="flex gap-3 items-center justify-between mt-2">
-          <Text variant="bodyMd" fontWeight="medium">
+          <Text variant="headingLg" fontWeight="medium">
             {min || 0}
           </Text>
-          <Text variant="bodyMd" fontWeight="medium">
+          <Text variant="headingLg" fontWeight="medium">
             {max || 100}
           </Text>
         </div>
       </div>
       {description && <Text variant="bodyMd">{description}</Text>}
+    </CardLayout>
+  );
+};
+
+const CardLayout = ({
+  children,
+  color,
+  className,
+}: {
+  children: React.ReactNode;
+  color?: string;
+  className?: string;
+}) => {
+  return (
+    <div
+      className={cn(
+        'flex-grow md:w-[45%] ',
+        'p-4 rounded-1 border-1 border-solid border-borderSubdued flex flex-col gap-3',
+        color === 'highlight' &&
+          'bg-surfaceHighlightSubdued w-auto border-borderHighlightSubdued',
+        className
+      )}
+    >
+      {children}
     </div>
   );
 };

@@ -94,6 +94,13 @@
   line-height: var(--font-line-height-2);
 }
 
+.headingSmSpaced {
+  font-size: var(--font-size-100);
+  line-height: var(--font-line-height-2);
+  letter-spacing: var(--space-05);
+  text-transform: uppercase;
+}
+
 .headingMd {
   font-size: var(--font-size-200);
   line-height: var(--font-line-height-3);

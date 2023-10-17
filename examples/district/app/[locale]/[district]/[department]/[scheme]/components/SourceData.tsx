@@ -1,12 +1,12 @@
 import { downloadTable } from '../scheme.config';
 import { IndicatorsCheckbox } from './IndicatorsCheckbox';
 import { ITable } from './scheme-layout';
-import Icons from '@/components/icons';
 import { ckan } from '@/config/site';
 import { useFetch } from '@/lib/api';
-import { cn } from '@/lib/utils';
+import { cn, copyURLToClipboard } from '@/lib/utils';
 import { createColumnHelper } from '@tanstack/react-table';
-import { Button, Icon, Select, Table, Text } from 'opub-ui/src';
+import { useToast } from 'opub-ui';
+import { Button, Select, Table, Text } from 'opub-ui';
 import React from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 
@@ -23,12 +23,31 @@ export const SourceData = ({
     'District Profile': [],
     Targets: [],
   });
-  const indicatorRef = React.useRef(null);
 
   const { data: indicatorData, isLoading } = useFetch(
     'indicators',
     ckan.indicators
   );
+
+  const indicatorRef = React.useRef(null);
+  const contentRef = React.useRef(null);
+  React.useEffect(() => {
+    // change height of indicator list based on content height
+    if (indicatorRef.current && contentRef.current) {
+      setTimeout(() => {
+        // it takes some time to render the content
+        const indicatorList: any = indicatorRef.current;
+        const content: any = contentRef.current;
+        if (content === null) return;
+
+        const contentHeight = content.offsetHeight;
+        const indicatorHeight = contentHeight - 230;
+        indicatorList.style.maxHeight = `${
+          indicatorHeight <= 480 ? 480 : indicatorHeight
+        }px`;
+      }, 20);
+    }
+  }, []);
 
   // replace slug with value in indicatorData
   const indicatorDataWithValues = React.useMemo(() => {
@@ -69,25 +88,33 @@ export const SourceData = ({
     columnContentTypes.push('numeric');
   });
 
+  const { toast } = useToast();
+
   return (
     <div>
-      <div className={cn('grid grid-cols-[244px_1fr] gap-4')}>
-        {isLoading ? (
-          <div className="p-4">
-            <Text variant="headingMd">Loading...</Text>
-          </div>
-        ) : indicatorData ? (
-          <IndicatorsCheckbox
-            data={indicatorDataWithValues}
-            indicatorRef={indicatorRef}
-            selectedIndicators={selectedIndicators}
-            setIndicators={setIndicators}
-          />
-        ) : (
-          <div className="p-4">
-            <Text variant="headingMd">No indicators available</Text>
-          </div>
+      <div
+        className={cn(
+          'md:grid grid-cols-[242px_1fr] gap-4 rounded-05 bg-surfaceDefault shadow-elementCard p-6'
         )}
+      >
+        <div className="hidden md:block">
+          {isLoading ? (
+            <div className="p-4">
+              <Text variant="headingMd">Loading...</Text>
+            </div>
+          ) : indicatorData ? (
+            <IndicatorsCheckbox
+              data={indicatorDataWithValues}
+              indicatorRef={indicatorRef}
+              selectedIndicators={selectedIndicators}
+              setIndicators={setIndicators}
+            />
+          ) : (
+            <div className="p-4">
+              <Text variant="headingMd">No indicators available</Text>
+            </div>
+          )}
+        </div>
 
         <ErrorBoundary
           fallback={
@@ -98,7 +125,7 @@ export const SourceData = ({
             </div>
           }
         >
-          <div className="grow h-full overflow-x-auto p-1">
+          <div className="grow h-full overflow-x-auto p-1" ref={contentRef}>
             <div className="flex mb-4">
               <Select
                 name="year"
@@ -117,9 +144,26 @@ export const SourceData = ({
               rows={tableData[selectedYear]}
               columnContentTypes={columnContentTypes}
               key={selectedYear}
+              sortColumns={columns.map(
+                (e: { accessorKey: any }) => e.accessorKey
+              )}
             />
-            <div className="mt-3 flex justify-end">
+            <div className="mt-3 flex justify-end gap-4">
               <Button
+                kind="secondary"
+                variant="interactive"
+                onClick={() => {
+                  copyURLToClipboard();
+                  toast({
+                    title: 'Copied to clipboard',
+                  });
+                }}
+              >
+                Copy Link
+              </Button>
+              <Button
+                kind="secondary"
+                variant="interactive"
                 onClick={() => {
                   downloadTable(
                     columns,
@@ -127,9 +171,8 @@ export const SourceData = ({
                     'source-data'
                   );
                 }}
-                icon={<Icon source={Icons.download} />}
               >
-                Download File
+                Download
               </Button>
             </div>
           </div>

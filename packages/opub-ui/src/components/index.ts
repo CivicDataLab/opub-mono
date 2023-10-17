@@ -58,5 +58,5 @@ export { Tag } from './Tag';
 export { Text } from './Text';
 export { TextField } from './TextField';
 export { Thumbnail } from './Thumbnail';
-export { Toast, Toaster } from './Toast';
+export { Toast, Toaster, useToast } from './Toast';
 export { Tooltip } from './Tooltip';

@@ -47,39 +47,41 @@ export function MobileDashboardNav({ items }: DashboardNavProps) {
       </Button>
 
       <CommandDialog open={open} onOpenChange={setOpen}>
-        <div className="flex justify-between items-center px-3 py-2">
-          <Text variant="headingMd" as="h1">
-            Select a department
-          </Text>
-          <IconButton onClick={() => setOpen(false)} icon={IconX}>
-            Close
-          </IconButton>
-        </div>
+        <div className="w-[96vw]">
+          <div className="flex justify-between items-center px-3 py-2">
+            <Text variant="headingMd" as="h1">
+              Select a department
+            </Text>
+            <IconButton onClick={() => setOpen(false)} icon={IconX}>
+              Close
+            </IconButton>
+          </div>
 
-        <CommandInput placeholder="search..." />
-        <CommandList className=" max-h-full">
-          <CommandEmpty>No results found.</CommandEmpty>
-          <CommandGroup heading="Departments">
-            <MenuLink
-              href={`/${district}`}
-              title={district}
-              department={department}
-              district={district}
-              setOpen={setOpen}
-            />
-            {items.map((item) => {
-              return (
-                <MenuLink
-                  key={item.href + path}
-                  href={`/${district}${item.href}`}
-                  title={item.title}
-                  department={department}
-                  setOpen={setOpen}
-                />
-              );
-            })}
-          </CommandGroup>
-        </CommandList>
+          <CommandInput placeholder="search..." />
+          <CommandList className=" max-h-full">
+            <CommandEmpty>No results found.</CommandEmpty>
+            <CommandGroup heading="Departments">
+              <MenuLink
+                href={`/${district}`}
+                title={district}
+                department={department}
+                district={district}
+                setOpen={setOpen}
+              />
+              {items.map((item) => {
+                return (
+                  <MenuLink
+                    key={item.href + path}
+                    href={`/${district}${item.href}`}
+                    title={item.title}
+                    department={department}
+                    setOpen={setOpen}
+                  />
+                );
+              })}
+            </CommandGroup>
+          </CommandList>
+        </div>
       </CommandDialog>
     </div>
   );

@@ -256,7 +256,8 @@
         "Test": "2653",
         "Status": " ",
         "DTCODE14": "304",
-        "BLK_NMS": "ASMGALAH"
+        "BLK_NMS": "ASMGALAH",
+        "enabled": true
       }
     },
     {

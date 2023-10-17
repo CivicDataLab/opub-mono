@@ -11,3 +11,4 @@ export {
 } from './Toast';
 
 export { Toaster } from './Toaster';
+export { useToast } from '../../utils/hooks/use-toast';

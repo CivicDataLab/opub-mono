@@ -1,11 +1,14 @@
 import { indicatorFilter } from '../scheme.config';
 import Icons from '@/components/icons';
 import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from '@radix-ui/react-collapsible';
-import { Checkbox, CheckboxGroup, Icon, Input, Separator, Text } from 'opub-ui';
+  Checkbox,
+  CheckboxGroup,
+  Icon,
+  Input,
+  ScrollArea,
+  Separator,
+  Text,
+} from 'opub-ui';
 import React from 'react';
 
 interface IndicatorsProps {
@@ -90,13 +93,12 @@ export const IndicatorsCheckbox = ({
   }
 
   return (
-    <div className="flex flex-col gap-4">
-      <div>
-        <Text variant="headingLg">Indicators</Text>
-        <Text variant="bodyMd" className="mt-1 block">
-          Select indicators to download data
-        </Text>
-      </div>
+    <div className="flex flex-col">
+      <Text variant="headingLg">Indicators</Text>
+      <Text variant="bodyMd" color="subdued" className="mt-2">
+        Select indicators to download data
+      </Text>
+      <Separator className="my-4" />
       <Input
         name="indicator-search"
         label="Indicator Search"
@@ -105,28 +107,30 @@ export const IndicatorsCheckbox = ({
         placeholder="Search"
         onChange={setSearch}
       />
-      <Checkbox onChange={onSelectAll} name="all-indicators">
-        Select all indicators
-      </Checkbox>
-      <div>
+      <div className="mt-4">
+        <Checkbox onChange={onSelectAll} name="all-indicators">
+          Select all indicators
+        </Checkbox>
         {filtered ? (
-          <div className="overflow-y-auto">
-            <div
-              className="flex flex-col gap-8 max-h-[680px]"
-              ref={indicatorRef}
-            >
-              {['District Performance', 'District Profile', 'Targets'].map(
-                (item) => (
-                  <IndicatorContent
-                    key={item}
-                    heading={item}
-                    list={filtered[item]}
-                    onChange={onChange}
-                    selected={selectedIndicators[item]}
-                  />
-                )
-              )}
-            </div>
+          <div className="mt-3">
+            <ScrollArea>
+              <div
+                className="flex flex-col gap-4 max-h-[580px]"
+                ref={indicatorRef}
+              >
+                {['District Performance', 'District Profile', 'Targets'].map(
+                  (item, index) => (
+                    <IndicatorContent
+                      key={item + index}
+                      heading={item}
+                      list={filtered[item]}
+                      onChange={onChange}
+                      selected={selectedIndicators[item]}
+                    />
+                  )
+                )}
+              </div>
+            </ScrollArea>
           </div>
         ) : (
           <Text variant="bodyMd">No indicators found</Text>
@@ -150,31 +154,27 @@ const IndicatorContent = ({
     value: string;
   }[];
 }) => {
-  const [open, setOpen] = React.useState(false);
   return (
-    <Collapsible asChild open={open} onOpenChange={setOpen}>
-      <section>
-        <CollapsibleTrigger className="border-none rounded-2 shadow-button bg-background hover:cursor-pointer w-full flex justify-between items-center py-2 px-4">
-          <Text variant="headingSm">{heading}</Text>
-          <Icon source={open ? Icons.up : Icons.down} />
-        </CollapsibleTrigger>
-        <CollapsibleContent>
-          <Separator className="my-3" />
-
-          {list.length > 0 ? (
-            <CheckboxGroup
-              onChange={(e) => onChange(e, heading)}
-              name={`indicator-checkbox-${heading}`}
-              title={heading}
-              titleHidden
-              options={list}
-              value={selected}
-            />
-          ) : (
-            <Text variant="bodyMd">No indicators found</Text>
-          )}
-        </CollapsibleContent>
-      </section>
-    </Collapsible>
+    <section className="pr-4">
+      <div className=" border-none bg-surfaceDefault flex items-center gap-2 justify-between w-full">
+        <Text variant="headingSm">{heading}</Text>
+        <Icon source={Icons.info} color="default" />
+      </div>
+      <div>
+        <Separator className="mt-2 mb-3" />
+        {list.length > 0 ? (
+          <CheckboxGroup
+            onChange={(e) => onChange(e, heading)}
+            name={`indicator-checkbox-${heading}`}
+            title={heading}
+            titleHidden
+            options={list}
+            value={selected}
+          />
+        ) : (
+          <Text variant="bodyMd">No indicators found</Text>
+        )}
+      </div>
+    </section>
   );
 };

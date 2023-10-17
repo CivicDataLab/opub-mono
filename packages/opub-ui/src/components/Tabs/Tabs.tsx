@@ -1,18 +1,19 @@
+import styles from './Tabs.module.scss';
 import * as TabsRadix from '@radix-ui/react-tabs';
 import cx from 'classnames';
 import { forwardRef } from 'react';
-import styles from './Tabs.module.scss';
 
 type Props = {} & TabsRadix.TabsProps;
 
 const Tabs = forwardRef((props: Props, ref: any) => {
-  const themeClass = cx(styles.Root, {});
+  const { className, ...others } = props;
+  const themeClass = cx(styles.Root, className);
 
   return (
     <TabsRadix.Root
       className={`opub-Tabs ${themeClass}`}
       ref={ref}
-      {...props}
+      {...others}
     />
   );
 });
@@ -25,20 +26,33 @@ type ListProps = {
 } & TabsRadix.TabsListProps;
 
 const TabList = forwardRef((props: ListProps, ref: any) => {
-  const { fitted, disclosureText, ...others } = props;
-  const classname = cx(styles.Tabs, fitted && styles.fitted);
+  const { fitted, disclosureText, className, ...others } = props;
+  const classname = cx(styles.Tabs, fitted && styles.fitted, className);
 
   return <TabsRadix.List className={classname} {...others} ref={ref} />;
 });
 
+type TabProps = {
+  activeBorder?: boolean;
+} & TabsRadix.TabsTriggerProps;
+
 const Tab = forwardRef(
-  ({ children, ...props }: TabsRadix.TabsTriggerProps, ref: any) => {
-    const classname = cx(styles.TabContainer);
+  (
+    { children, className, activeBorder = true, ...props }: TabProps,
+    ref: any
+  ) => {
+    const classname = cx(
+      styles.TabContainer,
+
+      className
+    );
 
     return (
       <div className={classname}>
         <TabsRadix.Trigger {...props} ref={ref} asChild>
-          <button className={styles.Tab}>
+          <button
+            className={cx(styles.Tab, activeBorder && styles.ActiveBorder)}
+          >
             <span className={styles.Title}>{children}</span>
           </button>
         </TabsRadix.Trigger>

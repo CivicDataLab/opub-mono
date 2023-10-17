@@ -2,87 +2,134 @@ import { Indicators } from './Indicators';
 import { IChartData } from './scheme-layout';
 import { ckan } from '@/config/site';
 import { useFetch } from '@/lib/api';
-import { cn } from '@/lib/utils';
-import { Select, Tab, TabList, TabPanel, Tabs, Text } from 'opub-ui';
-import { BarChart, MapChart } from 'opub-viz';
+import { cn, copyURLToClipboard, exportAsImage } from '@/lib/utils';
+import {
+  Button,
+  Combobox,
+  ComboboxMulti,
+  Select,
+  Tab,
+  TabList,
+  TabPanel,
+  Tabs,
+  Text,
+  useToast,
+} from 'opub-ui';
 import React from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
+import { useQueryState } from 'next-usequerystate';
+import dynamic from 'next/dynamic';
+import { BarView } from './BarView';
 
-export const Explorer = ({
-  scheme,
-  chartData,
-  district,
-}: {
-  scheme?: string;
-  chartData: IChartData;
-  district: string;
-}) => {
-  const years = Object.values(chartData)[0].years;
-  const [selectedYear, setYear] = React.useState(Object.keys(years)[0]);
-  const [selectedIndicator, setIndicator] = React.useState('cpapr');
-  const [selectedTab, setTab] = React.useState<'map' | 'table' | 'chart'>(
-    'map'
-  );
+const LeafletChoropleth = dynamic(
+  () => import('opub-viz').then((mod) => mod.LeafletChoropleth),
+  { ssr: false }
+);
+export const Explorer = React.forwardRef(
+  (
+    {
+      scheme,
+      chartData,
+      district,
+    }: {
+      scheme?: string;
+      chartData: IChartData;
+      district: string;
+    },
+    ref: any
+  ) => {
+    const years = Object.values(chartData)[0].years;
+    const [selectedYear, setYear] = React.useState(Object.keys(years)[0]);
+    const [selectedTab, setTab] = React.useState<'map' | 'bar'>('bar');
+    const [indicator, setIndicator] = useQueryState('indicator');
 
-  const { data: indicatorData, isLoading } = useFetch(
-    'indicators',
-    ckan.indicators
-  );
-  const indicatorRef = React.useRef(null);
+    const { data: indicatorData, isLoading } = useFetch(
+      'indicators',
+      ckan.indicators
+    );
+    const indicatorRef = React.useRef(null);
 
-  React.useEffect(() => {
-    if (indicatorData) {
-      const initialSlug =
-        indicatorData[scheme as string]['District Performance'][0].slug;
-      setIndicator(initialSlug);
-    }
-  }, [indicatorData]);
+    React.useEffect(() => {
+      if (indicatorData || indicator) {
+        const initialSlug =
+          indicator ||
+          indicatorData[scheme as string]['District Performance'][0].slug;
+        setIndicator(initialSlug);
+      }
+    }, [indicatorData, indicator]);
 
-  return (
-    <div className={cn('grid grid-cols-[244px_1fr] gap-4')}>
-      {isLoading ? (
-        <div className="p-4">
-          <Text variant="headingMd">Loading...</Text>
-        </div>
-      ) : indicatorData ? (
-        <Indicators
-          data={indicatorData}
-          scheme={scheme || ''}
-          indicatorRef={indicatorRef}
-          disable={selectedTab === 'table'}
-          setIndicator={setIndicator}
-        />
-      ) : (
-        <div className="p-4">
-          <Text variant="headingMd">No indicators available</Text>
-        </div>
-      )}
-
-      <ErrorBoundary
-        fallback={
-          <div className="flex items-center justify-center h-full">
-            <Text variant="headingLg" as="h2">
-              Error loading Explorer
-            </Text>
-          </div>
-        }
+    return (
+      <div
+        className={cn(
+          'md:grid grid-cols-[242px_1fr] gap-4 rounded-05 bg-surfaceDefault shadow-elementCard p-6'
+        )}
       >
-        <Content
-          indicatorRef={indicatorRef}
-          chartData={chartData}
-          district={district}
-          states={{
-            setTab,
-            setYear,
-            selectedTab,
-            selectedYear,
-            selectedIndicator,
-          }}
-        />
-      </ErrorBoundary>
-    </div>
-  );
-};
+        <div className="hidden md:block">
+          {isLoading ? (
+            <div className="p-4">
+              <Text variant="headingMd">Loading...</Text>
+            </div>
+          ) : indicatorData ? (
+            <Indicators
+              data={indicatorData[scheme as string] || null}
+              indicator={indicator || 'nhaoe'}
+              indicatorRef={indicatorRef}
+              setIndicator={setIndicator}
+            />
+          ) : (
+            <div className="p-4">
+              <Text variant="headingMd">No indicators available</Text>
+            </div>
+          )}
+        </div>
+        {/* <div className="md:hidden">
+          <Select
+            label="Select Indicator"
+            labelHidden
+            name="indicator"
+            onChange={(value) => {
+              setIndicator(value);
+            }}
+            value={indicator}
+            options={
+              indicatorData
+                ? indicatorData[scheme as string]['District Performance'].map(
+                    (e: any) => ({
+                      label: e.label,
+                      value: e.slug,
+                    })
+                  )
+                : []
+            }
+          />
+        </div> */}
+
+        <div className="flex items-center justify-center h-full" ref={ref}>
+          <ErrorBoundary
+            fallback={
+              <Text variant="headingLg" as="h2">
+                Error loading Explorer
+              </Text>
+            }
+          >
+            <Content
+              indicatorRef={indicatorRef}
+              chartData={chartData}
+              district={district}
+              states={{
+                setTab,
+                setYear,
+                selectedTab,
+                selectedYear,
+                selectedIndicator: indicator || 'nhaoe',
+              }}
+            />
+          </ErrorBoundary>
+        </div>
+      </div>
+    );
+  }
+);
 
 const Content = ({
   indicatorRef,
@@ -95,93 +142,130 @@ const Content = ({
   chartData: IChartData;
   district: string;
   states: {
-    setTab: (tab: 'map' | 'table' | 'chart') => void;
+    setTab: (tab: 'map' | 'bar') => void;
     setYear: (year: string) => void;
-    selectedTab: 'map' | 'table' | 'chart';
+    selectedTab: 'map' | 'bar';
     selectedYear: string;
     selectedIndicator: string;
   };
 }) => {
+  const [barData, setBarData] = React.useState<{
+    xAxis: string[];
+    values: number[];
+  }>();
+  const [selectedBlocks, setSelectedBlocks] = React.useState<string[]>([]);
+
   const { data: mapFile, isLoading: mapLoading } = useFetch(
     `${district}-mapFile`,
     `/files/${district}.json`
   );
 
-  const contentRef = React.useRef(null);
+  const { toast } = useToast();
+  const contentRef: any = React.useRef(null);
 
   React.useEffect(() => {
     // change height of indicator list based on content height
     if (indicatorRef.current && contentRef.current) {
       setTimeout(() => {
         // it takes some time to render the content
-        const indicatorList = indicatorRef.current;
+        const indicatorList: any = indicatorRef.current;
         const content: any = contentRef.current;
-        const contentHeight = content.offsetHeight;
+        if (content === null) return;
 
-        indicatorList.style.maxHeight = `${contentHeight - 50}px`;
+        const contentHeight = content.offsetHeight;
+        indicatorList.style.maxHeight = `${contentHeight - 100}px`;
       }, 20);
     }
-  }, [states.selectedTab]);
+  }, []);
 
-  if (!chartData[states.selectedIndicator]) {
-    return (
-      <div className="flex items-center justify-center h-full">
-        <Text variant="headingLg" as="h2">
-          No data available for this indicator
-        </Text>
-      </div>
-    );
-  }
   const currentData: any =
     chartData[states.selectedIndicator].years[states.selectedYear];
 
+  React.useEffect(() => {
+    if (!currentData) return;
+
+    setSelectedBlocks(currentData.bardata.xAxis);
+  }, []);
+
+  React.useEffect(() => {
+    if (selectedBlocks) {
+      const filteredData = currentData.bardata.xAxis.filter((e: any) =>
+        selectedBlocks.includes(e)
+      );
+      setBarData({ ...currentData.bardata, xAxis: filteredData });
+    }
+  }, [selectedBlocks, currentData]);
+
+  if (!chartData[states.selectedIndicator]) {
+    return (
+      <Text variant="headingLg" as="h2">
+        No data available for this indicator
+      </Text>
+    );
+  }
+
+  const mapDataFn = (
+    value: boolean,
+    type: 'default' | 'hover' | 'selected' = 'default'
+  ) => {
+    return value
+      ? `var(--mapareadistrict-${type})`
+      : 'var(--mapareadistrict-disabled)';
+  };
+
   const tabs = [
-    {
-      label: 'Map View',
-      value: 'map',
-      content: (
-        <MapChart
-          mapFile={mapFile}
-          data={currentData.mapdata.map(
-            (e: {
-              name: string;
-              value: string;
-              label: string;
-              disp_val: string;
-            }) => {
-              return {
-                name: String(e.name),
-                value: e.value,
-                label: e.label,
-                labelVal: e.disp_val,
-              };
-            }
-          )}
-          mapName="assam-block"
-          nameProperty="BLOCK_LGD"
-          height="500px"
-          colors={['#c9f0fa', '#abd9e9', '#74add1', '#4575b4', '#313695']}
-          loading={mapLoading}
-        />
-      ),
-    },
     {
       label: 'Bar View',
       value: 'bar',
-      content: (
-        <div>
-          <BarChart
-            yAxis={currentData.bardata.xAxis}
-            data={currentData.bardata.values}
-            height="500px"
+      content: barData ? <BarView data={barData} /> : null,
+    },
+    {
+      label: 'Map View',
+      value: 'map',
+      content:
+        // <MapChart
+        //   mapFile={mapFile}
+        //   data={currentData.mapdata.map(
+        //     (e: {
+        //       name: string;
+        //       value: string;
+        //       label: string;
+        //       disp_val: string;
+        //     }) => {
+        //       return {
+        //         name: String(e.name),
+        //         value: e.value,
+        //         label: e.label,
+        //         labelVal: e.disp_val,
+        //       };
+        //     }
+        //   )}
+        //   mapName="assam-block"
+        //   nameProperty="BLOCK_LGD"
+        //   height="500px"
+        //   colors={['#c9f0fa', '#abd9e9', '#74add1', '#4575b4', '#313695']}
+        //   loading={mapLoading}
+        // />
+        !mapLoading ? (
+          <LeafletChoropleth
+            features={mapFile.features}
+            mapZoom={7.4}
+            zoomOnClick={false}
+            mapProperty="enabled"
+            mapDataFn={mapDataFn}
+            fillOpacity={1}
+            className="w-full h-[512px]"
+            // mouseover={handleMouseOver}
+            // mouseout={handleMouseOut}
           />
-        </div>
-      ),
+        ) : (
+          <div className="flex justify-center items-center">Loading...</div>
+        ),
     },
   ];
 
   return (
-    <div className="grow h-full overflow-x-auto">
+    <div className="grow h-full">
       <Tabs
         defaultValue={'map'}
         onValueChange={(value) => states.setTab(value as any)}
@@ -190,12 +274,12 @@ const Content = ({
         <TabList>
           {[
             {
-              label: 'Map View',
-              value: 'map',
-            },
-            {
               label: 'Bar View',
               value: 'bar',
+            },
+            {
+              label: 'Map View',
+              value: 'map',
             },
           ].map((tab) => (
             <Tab value={tab.value} key={tab.value}>
@@ -208,32 +292,103 @@ const Content = ({
           ))}
         </TabList>
         <div
-          className="rounded-05 bg-background h-full p-4 md:p-6"
+          className="rounded-05 bg-background h-full pt-4 bg-surfaceHighlightSubdued border-default"
           ref={contentRef}
         >
-          <div className="flex">
-            <Select
-              name="year"
-              label="Year"
-              labelHidden
-              onChange={states.setYear}
-              value={states.selectedYear}
-              options={Object.keys(Object.values(chartData)[0].years).map(
-                (year) => ({
-                  label: year,
-                  value: year,
-                })
-              )}
-            />
-          </div>
+          <Filters
+            states={states}
+            chartData={chartData}
+            barOptions={currentData.bardata.xAxis}
+            setSelectedBlocks={setSelectedBlocks}
+            tab={states.selectedTab}
+            selectedBlocks={selectedBlocks}
+          />
 
           {tabs.map((tab) => (
             <TabPanel value={tab.value} key={tab.value}>
-              <div className="relative overflow-y-auto mt-5">{tab.content}</div>
+              <div className="relative overflow-y-auto mt-5 min-h-[512px]">
+                {tab.content}
+              </div>
             </TabPanel>
           ))}
         </div>
       </Tabs>
+      <div className="mt-3 flex justify-end gap-4">
+        <Button
+          kind="secondary"
+          variant="interactive"
+          onClick={() => {
+            copyURLToClipboard();
+            toast({
+              title: 'Copied to clipboard!',
+            });
+          }}
+        >
+          Copy Link
+        </Button>
+        <Button
+          kind="secondary"
+          variant="interactive"
+          onClick={() => {
+            exportAsImage(contentRef.current, 'explorer');
+          }}
+        >
+          Download
+        </Button>
+      </div>
+    </div>
+  );
+};
+
+const Filters = ({
+  states,
+  chartData,
+  barOptions,
+  setSelectedBlocks,
+  tab,
+  selectedBlocks,
+}: {
+  states: any;
+  chartData: IChartData;
+  barOptions: any;
+  setSelectedBlocks: any;
+  tab: 'map' | 'bar';
+  selectedBlocks: string[];
+}) => {
+  const options = Object.keys(Object.values(chartData)[0].years).map(
+    (year) => ({
+      label: year,
+      value: year,
+    })
+  );
+
+  return (
+    <div className="flex flex-col gap-4 px-4">
+      {tab === 'bar' && (
+        <ComboboxMulti
+          name="blocks"
+          list={barOptions}
+          defaultValues={selectedBlocks}
+          key={selectedBlocks.toString()}
+          label="Select Blocks to Compare"
+          placeholder="Select Blocks"
+          onChange={(values: any) => {
+            setSelectedBlocks(values);
+          }}
+          verticalContent
+        />
+      )}
+
+      <div className="flex">
+        <Select
+          label="Select FY"
+          labelInline
+          name="year"
+          onChange={states.setYear}
+          value={states.selectedYear}
+          options={options}
+        />
+      </div>
     </div>
   );
 };

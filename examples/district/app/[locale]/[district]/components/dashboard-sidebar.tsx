@@ -5,49 +5,59 @@ import { Icons } from '@/components/icons';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
 import { useParams, usePathname } from 'next/navigation';
-import { Icon, Text } from 'opub-ui';
+import { Text, IconButton } from 'opub-ui';
+import React from 'react';
 import { SidebarNavItem } from 'types';
 
 interface DashboardNavProps {
   items: SidebarNavItem[];
+  isCollapsed: boolean;
 }
-export function DashboardSidebar({ items }: DashboardNavProps) {
+export function DashboardSidebar({ items, isCollapsed }: DashboardNavProps) {
   const path = usePathname();
+  // const [isCollapsed, setIsCollapsed] = React.useState(false);
   const { district, department } = useParams();
 
   if (items && !items.length) {
     return null;
   }
 
-  // const sidebarIcon = isCollapsed ? Icons.expand : Icons.collapse;
   return (
     <aside
       className={cn(
-        'pt-5 pr-2 overflow-hidden bg-surface',
-        'hidden z-1 shadow-inset basis-[240px] shrink-0 md:block',
+        'pt-4 bg-backgroundDefault shadow-insetBasic',
+        'hidden z-1 basis-[240px] shrink-0 md:block overflow-hidden',
+        isCollapsed && 'basis-[24px]',
         styles.Collapse
       )}
     >
-      <nav className={cn('flex flex-col gap-2')}>
-        <SidebarLink
-          href={`/${district}` || '/'}
-          title={district || 'Home'}
-          icon={'home'}
-          department={department}
-          district={district}
-        />
-        {items.map((item) => {
-          return (
-            item.href && (
-              <SidebarLink
-                key={item.href + path}
-                href={`/${district}${item.href}`}
-                title={item.title}
-                department={department}
-              />
-            )
-          );
-        })}
+      <nav className={cn('flex flex-col gap-2 relative')}>
+        <Text
+          className={cn(
+            'py-2 px-4 z-max text-lightmodeGraySlateSolid11',
+            isCollapsed && 'hidden'
+          )}
+          variant="headingSmSpaced"
+        >
+          {district}
+        </Text>
+
+        <div
+          className={cn('flex flex-col gap-2 mt-2', isCollapsed && 'hidden')}
+        >
+          {items.map((item) => {
+            return (
+              item.href && (
+                <SidebarLink
+                  key={item.href + path}
+                  href={`/${district}${item.href}`}
+                  title={item.title}
+                  department={department}
+                />
+              )
+            );
+          })}
+        </div>
       </nav>
     </aside>
   );
@@ -56,13 +66,11 @@ export function DashboardSidebar({ items }: DashboardNavProps) {
 const SidebarLink = ({
   href,
   title,
-  icon,
   department,
   district,
 }: {
   href: string;
   title: string;
-  icon?: string;
   department: string;
   district?: string;
 }) => {
@@ -72,29 +80,30 @@ const SidebarLink = ({
         <span
           className={cn(
             'bg-transparent rounded-r-2 w-[6px] h-full absolute top-0 left-[-3px]',
-            isActive(department, href, district) && 'bg-decorativeIconFour'
+            isActive(department, href, district) && 'bg-borderHighlightDefault'
           )}
         />
         <div
           className={cn(
-            'flex items-center w-full ml-2 rounded-1 overflow-hidden',
+            'flex items-center w-full mx-2 rounded-1 hover:bg-lightmodeIndigoAlpha3',
             styles.Item,
-            isActive(department, href, district) && styles.Selected
+            isActive(department, href, district) &&
+              'bg-lightmodeIndigoAlpha4 text-lightmodeVioletAlpha11 hover:bg-lightmodeIndigoAlpha4'
           )}
         >
-          {icon && (
-            <div className="basis-5 pl-3">
-              <Icon source={Icons[icon]} color="base" />
-            </div>
-          )}
-
           <div
             className={cn(
-              'py-[6px] px-2 max-w-[220px]',
+              'px-2 py-3 max-w-[220px]',
               'whitespace-nowrap opacity-100 transition-opacity duration-300'
             )}
           >
-            <Text truncate fontWeight="medium" className="capitalize">
+            <Text
+              truncate
+              variant="headingSm"
+              fontWeight="medium"
+              className="capitalize"
+              color="inherit"
+            >
               {title}
             </Text>
           </div>

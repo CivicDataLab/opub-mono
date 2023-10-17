@@ -1,23 +1,25 @@
 'use client';
 
-import { schemes } from '../scheme.config';
-import { Explorer } from './Explorer';
-import { Overview } from './Overview';
-import { SourceData } from './SourceData';
 import Icons from '@/components/icons';
 import Image from 'next/image';
-import Link from 'next/link';
 import {
-  Breadcrumbs,
-  Divider,
+  Button,
   Icon,
   Tab,
   TabList,
   TabPanel,
   Tabs,
   Text,
+  useToast,
 } from 'opub-ui';
 import React from 'react';
+import { BreadCrumb } from '../../../components';
+import { schemes } from '../scheme.config';
+import { Explorer } from './Explorer';
+import { Overview } from './Overview';
+import { SourceData } from './SourceData';
+import { parseAsString, useQueryState } from 'next-usequerystate';
+import { copyURLToClipboard, exportAsImage } from '@/lib/utils';
 
 export interface IOverview {
   schemeTitle: string;
@@ -111,43 +113,40 @@ export const Content = ({ data }: { data: IProps }) => {
 
   return (
     <>
-      <Breadcrumbs crumbs={breadcrumbs} />
+      <BreadCrumb
+        crumbs={breadcrumbs}
+        backUrl={`/${data.district}/${data.department}`}
+      />
 
       <div className="mt-4">
         <div className="flex gap-4 flex-wrap justify-start md:flex-nowrap">
-          <Link href={`/${data.district}/${data.department}`}>
-            <Text visuallyHidden>Go to {data.departmentName}</Text>
-            <Icon source={Icons.back} size={32} color="base" />
-          </Link>
-
+          <div className="flex">
+            <Image
+              src={schemes[data.scheme].logo}
+              alt=""
+              className="object-contain"
+              width={88}
+              height={88}
+            />
+          </div>
           <div className="grow">
             <Text variant="heading2xl" as="h1">
               {schemeData.schemeTitle}
             </Text>
             <Text
-              variant="headingSm"
-              as="p"
-              color="subdued"
+              variant="bodyMd"
               fontWeight="medium"
-              className="my-4"
+              color="subdued"
+              as="p"
+              className="mt-4"
             >
               Last Updated: {data.schemeData.lastUpdated}
             </Text>
-
-            <Text variant="bodyLg" as="p">
-              {data.schemeData.schemeDesc}
-            </Text>
           </div>
-          <Image
-            src={schemes[data.scheme].logo}
-            alt=""
-            width={168}
-            height={92}
-            className="object-contain"
-          />
         </div>
-
-        <Divider className="my-6" />
+        <Text variant="bodyLg" as="p" className="mt-4">
+          {data.schemeData.schemeDesc}
+        </Text>
 
         <TabLayout
           tabs={[
@@ -168,7 +167,7 @@ export const Content = ({ data }: { data: IProps }) => {
             {
               label: 'Source Data',
               value: 'source-data',
-              icon: 'database-share',
+              icon: 'database-search',
               scheme: data.scheme,
               tableData: tableData,
               chartData: chartData,
@@ -195,24 +194,33 @@ const TabLayout = ({
     district?: string;
   }[];
 }) => {
-  const [value, setValue] = React.useState('overview');
+  const [tabValue, setTabValue] = useQueryState(
+    'tab',
+    parseAsString.withDefault('overview')
+  );
+  const { toast } = useToast();
+  const overviewRef: any = React.useRef(null);
 
   return (
-    <Tabs onValueChange={setValue} value={value}>
-      <TabList fitted>
+    <Tabs onValueChange={setTabValue} value={tabValue} className="mt-10">
+      <TabList
+        fitted
+        className="rounded-05 shadow-elementCard bg-surfaceDefault"
+      >
         {tabs.map((tab) => (
-          <Tab value={tab.value} key={tab.value}>
+          <Tab value={tab.value} key={tab.value} activeBorder={false}>
             <div className="flex items-center gap-3">
               <Icon
                 source={Icons[tab.icon]}
                 size={40}
-                color={value === tab.value ? 'primary' : 'subdued'}
+                color={tabValue === tab.value ? 'highlight' : 'subdued'}
                 stroke={1}
               />
               <Text
-                variant="headingLg"
+                variant="bodyLg"
                 as="h2"
-                color={value === tab.value ? 'default' : 'subdued'}
+                fontWeight={tabValue === tab.value ? 'medium' : 'regular'}
+                color={tabValue === tab.value ? 'inherit' : 'default'}
               >
                 {tab.label}
               </Text>
@@ -220,9 +228,34 @@ const TabLayout = ({
           </Tab>
         ))}
       </TabList>
-      <div className="rounded-05 bg-surface shadow-card p-4 md:p-6 mt-3">
+      <div className="mt-6 px-3 py-4 bg-surfaceDefault">
+        {tabValue === 'overview' && (
+          <div className="mb-3 flex items-center justify-end gap-4 flex-wrap">
+            <Button
+              kind="secondary"
+              variant="interactive"
+              onClick={() => {
+                copyURLToClipboard();
+                toast({
+                  title: 'Copied to clipboard',
+                });
+              }}
+            >
+              Copy Link
+            </Button>
+            <Button
+              kind="secondary"
+              variant="interactive"
+              onClick={() => {
+                exportAsImage(overviewRef.current, 'overview');
+              }}
+            >
+              Download
+            </Button>
+          </div>
+        )}
         <TabPanel value="overview">
-          <Overview data={tabs[0].data} />
+          <Overview data={tabs[0].data} ref={overviewRef} />
         </TabPanel>
         <TabPanel value="explorer">
           <Explorer

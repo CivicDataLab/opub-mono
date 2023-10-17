@@ -2,6 +2,7 @@
 // import '@storybook/addon-console';
 import { themes } from '@storybook/theming';
 import '../assets/styles.css';
+import '../styles/_variables.css';
 import { Tooltip } from '../src/components/Tooltip';
 import React from 'react';
 

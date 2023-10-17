@@ -20,8 +20,12 @@ export const DepartmentCard = ({
 }) => {
   return (
     <Link href={`/${district}/${data.href}`}>
-      <div className="p-4 pb-3 bg-surface rounded-05 shadow-card hover:shadow-deep">
-        <Text variant="headingLg" as="h3">
+      <div className="p-4 bg-surfaceDefault rounded-05 shadow-elementCard">
+        <Text
+          variant="headingLg"
+          as="h3"
+          className="min-h-[48px] flex items-center"
+        >
           {data.label}
         </Text>
 
@@ -38,7 +42,7 @@ export const DepartmentCard = ({
             ))}
         </div>
 
-        <div className="py-2 pl-4 pr-1 bg-surface rounded-1 flex justify-between text-interactive hover:no-underline">
+        <div className="flex justify-between text-textInteractive hover:no-underline">
           <Text variant="bodyMd" fontWeight="medium" color="inherit">
             Explore More <Text visuallyHidden>about {data.label}</Text>
           </Text>
