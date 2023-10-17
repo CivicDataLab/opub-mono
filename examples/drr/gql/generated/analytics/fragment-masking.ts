@@ -12,10 +12,9 @@ export type FragmentType<TDocumentType extends DocumentTypeDecoration<any, any>>
     : never
   : never;
 
-// return non-nullable if `fragmentType` is non-nullable
 export function useFragment<TType>(
   _documentNode: DocumentTypeDecoration<TType, any>,
-  fragmentType: FragmentType<DocumentTypeDecoration<TType, any>>
+  fragmentType: FragmentType<DocumentTypeDecoration<TType, any>> | ReadonlyArray<FragmentType<DocumentTypeDecoration<TType, any>>> | null | undefined
 ): TType | ReadonlyArray<TType> | null | undefined {
   return fragmentType as any;
 }

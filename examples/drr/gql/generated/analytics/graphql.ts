@@ -59,17 +59,20 @@ export type Geography = {
   type: Scalars['String'];
 };
 
-/** Indicators(id, name, long_description, short_description, category, type, slug, unit, geography, department, scheme) */
+/** Indicators(id, name, long_description, short_description, category, type, slug, unit, geography, department, data_source, scheme, parent) */
 export type Indicators = {
   __typename?: 'Indicators';
+  /** Contains a list of sub-indicators. */
   category?: Maybe<Scalars['String']>;
   department?: Maybe<Department>;
   geography?: Maybe<Geography>;
   longDescription?: Maybe<Scalars['String']>;
   name: Scalars['String'];
+  parent?: Maybe<Indicators>;
   scheme?: Maybe<Scheme>;
   shortDescription?: Maybe<Scalars['String']>;
   slug?: Maybe<Scalars['String']>;
+  /** Defines the type of indicator that is Raw, Derived, etc. */
   type: Scalars['String'];
   unit: Unit;
 };
@@ -114,8 +117,8 @@ export type TableDataQuery = { __typename?: 'Query', districtViewTableData: any 
 export type IndicatorsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type IndicatorsQuery = { __typename?: 'Query', indicators: Array<{ __typename?: 'Indicators', name: string, longDescription?: string | null, shortDescription?: string | null, category?: string | null, type: string, slug?: string | null, unit: { __typename?: 'Unit', id: string, name: string, description?: string | null, symbol: string } }> };
+export type IndicatorsQuery = { __typename?: 'Query', indicators: Array<{ __typename?: 'Indicators', name: string, slug?: string | null }> };
 
 
 export const TableDataDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"tableData"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"districtViewTableData"}}]}}]} as unknown as DocumentNode<TableDataQuery, TableDataQueryVariables>;
-export const IndicatorsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"indicators"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"indicators"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"longDescription"}},{"kind":"Field","name":{"kind":"Name","value":"shortDescription"}},{"kind":"Field","name":{"kind":"Name","value":"category"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"unit"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"symbol"}}]}}]}}]}}]} as unknown as DocumentNode<IndicatorsQuery, IndicatorsQueryVariables>;
+export const IndicatorsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"indicators"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"indicators"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}}]} as unknown as DocumentNode<IndicatorsQuery, IndicatorsQueryVariables>;
