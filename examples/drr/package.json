@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "style-dictionary:build": "style-dictionary build --config ./config/style-dictionary.js",
+    "build:tokens": "style-dictionary build --config ./config/style-dictionary.js",
     "generate": "graphql-codegen --watch --config ./config/codegen.ts"
   },
   "dependencies": {

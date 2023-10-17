@@ -39,52 +39,28 @@ const indicators = [
 ];
 export function AnalyticsDashboardSidebar() {
 
-//   const { data } = useQuery([`indicators`], () =>
-//   GraphQL('analytics', ANALYTICS_INDICATORS)
-// );
+  const { data } = useQuery([`indicators`], () =>
+  GraphQL('analytics', ANALYTICS_INDICATORS)
+);
 
   return (
     <aside
       className={cn(
-        'pt-5 pr-2 overflow-hidden bg-surface',
+        'pt-5 pr-2 overflow-hidden bg-surfaceDefault shadow-basicMd',
         'hidden z-1 shadow-inset basis-[320px] shrink-0 md:block',
         styles.Collapse
       )}
     >
       <div className="px-4 py-1">
-        {indicators.map((indicator, index) =>
-          indicator?.nested ? (
-            <React.Fragment>
-              <Checkbox
-                key={index}
-                value={indicator.value}
-                name="checkbox"
-                title="Select an indicator"
-              >
-                {indicator.label}
-              </Checkbox>
-              {indicator?.nested.map((nestedIndicator, nestedIndex) => (
-                <div className="px-2">
-                  <Checkbox
-                    key={nestedIndex}
-                    value={nestedIndicator.value}
-                    name="checkbox"
-                  >
-                    {nestedIndicator.label}
-                  </Checkbox>
-                </div>
-              ))}
-            </React.Fragment>
-          ) : (
+        {data?.indicators.map((indicator, index) =>
             <Checkbox
               key={index}
-              value={indicator.value}
+              value={indicator?.slug || 'NA'}
               name="checkbox"
               title="Select an indicator"
             >
-              {indicator.label}
+              {indicator.name}
             </Checkbox>
-          )
         )}
       </div>
     </aside>

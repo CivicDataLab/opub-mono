@@ -11,7 +11,6 @@ export function Content() {
   const { data } = useQuery([`district_table_data`], () =>
     GraphQL('analytics', ANALYTICS_TABLE_DATA)
   );
-  
 
   const columnData = [
     {
@@ -44,12 +43,9 @@ export function Content() {
     },
   ];
 
-
   return (
-    <div className="w-full h-full bg-surface">
-      <div className="flex">
-        <MapComponent />
-      </div>
+    <div className="w-full h-full grid gap-4 grid-rows-2">
+      <MapComponent />
       <Table
         columnContentTypes={['text', 'text', 'text', 'text', 'text', 'text']}
         columns={columnData}

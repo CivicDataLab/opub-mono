@@ -14,7 +14,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  */
 const documents = {
     "\nquery tableData{\n  districtViewTableData\n}\n": types.TableDataDocument,
-    "\nquery indicators{\n    indicators {\n      name\n      longDescription\n      shortDescription\n      category\n      type\n      slug\n      unit {\n        id\n        name\n        description\n        symbol\n      }\n    }\n  }\n  ": types.IndicatorsDocument,
+    "\nquery indicators{\n    indicators {\n      name\n      slug\n  }\n}\n": types.IndicatorsDocument,
 };
 
 /**
@@ -38,7 +38,7 @@ export function graphql(source: "\nquery tableData{\n  districtViewTableData\n}\
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\nquery indicators{\n    indicators {\n      name\n      longDescription\n      shortDescription\n      category\n      type\n      slug\n      unit {\n        id\n        name\n        description\n        symbol\n      }\n    }\n  }\n  "): (typeof documents)["\nquery indicators{\n    indicators {\n      name\n      longDescription\n      shortDescription\n      category\n      type\n      slug\n      unit {\n        id\n        name\n        description\n        symbol\n      }\n    }\n  }\n  "];
+export function graphql(source: "\nquery indicators{\n    indicators {\n      name\n      slug\n  }\n}\n"): (typeof documents)["\nquery indicators{\n    indicators {\n      name\n      slug\n  }\n}\n"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};
