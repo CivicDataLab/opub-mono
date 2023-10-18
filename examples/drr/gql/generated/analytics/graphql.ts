@@ -87,6 +87,11 @@ export type Query = {
 };
 
 
+export type QueryDistrictViewTableDataArgs = {
+  geoFilter?: InputMaybe<GeoFilter>;
+};
+
+
 export type QueryGeographyArgs = {
   filters?: InputMaybe<GeoFilter>;
 };
