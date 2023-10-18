@@ -31,14 +31,14 @@ export const BreadCrumb = ({
   backUrl,
 }: {
   crumbs: {
-    label: string;
+    label: any;
     href: string;
   }[];
   backUrl: string;
 }) => {
   return (
-    <div className="flex items-start gap-2 md:gap-4">
-      <Link href={backUrl} className="mt-2">
+    <div className="flex items-center gap-2 md:gap-4">
+      <Link href={backUrl} className="mt-1">
         <Text visuallyHidden>Go to State Page</Text>
         <Icon source={Icons.leftFilled} size={24} color="default" />
       </Link>

@@ -94,7 +94,7 @@ export const Content = ({ data }: { data: IProps }) => {
 
   const breadcrumbs = [
     {
-      label: 'Assam',
+      label: <Icon source={Icons.home} />,
       href: '/',
     },
     {
