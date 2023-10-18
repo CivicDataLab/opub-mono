@@ -15,9 +15,5 @@ export default async function Home({
     return notFound();
   }
 
-  return (
-    <div className="container py-1 lg:py-2">
-      <Content data={districtData} />
-    </div>
-  );
+  return <Content data={districtData} />;
 }

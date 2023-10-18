@@ -22,7 +22,7 @@ html {
 }
 
 body {
-  background-color: var(--background-subdued);
+  background-color: var(--background-solid-subdued);
 }
 
 html,

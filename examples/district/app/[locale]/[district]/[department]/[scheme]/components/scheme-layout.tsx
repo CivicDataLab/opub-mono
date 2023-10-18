@@ -118,7 +118,7 @@ export const Content = ({ data }: { data: IProps }) => {
         backUrl={`/${data.district}/${data.department}`}
       />
 
-      <div className="mt-4">
+      <div className="mt-4 px-2 md:container py-1 lg:py-2">
         <div className="flex gap-4 flex-wrap justify-start md:flex-nowrap">
           <div className="flex">
             <Image
