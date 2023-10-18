@@ -13,14 +13,14 @@ export default function Provider({ children }: { children: React.ReactNode }) {
 
   return (
     <QueryClientProvider client={client}>
-      <>
+      <React.Fragment>
         <RouterEvents />
         <NextTopLoader color="var(--action-primary-success-default)" />
         <Tooltip.Provider>
           {children}
           <Toaster />
         </Tooltip.Provider>
-      </>
+      </React.Fragment>
     </QueryClientProvider>
   );
 }
