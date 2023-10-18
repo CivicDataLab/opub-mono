@@ -1,6 +1,6 @@
 const cssFormattor = require('./helpers/css-formattor');
 const twFormat = require('./helpers/tailwind-formattor');
-const config = require('./variables.json');
+const config = require('./tokens.json');
 
 module.exports = {
   format: {
