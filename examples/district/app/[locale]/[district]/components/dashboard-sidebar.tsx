@@ -34,7 +34,7 @@ export function DashboardSidebar({ items, isCollapsed }: DashboardNavProps) {
       <nav className={cn('flex flex-col gap-2 relative')}>
         <Text
           className={cn(
-            'py-2 px-4 z-max text-lightmodeGraySlateSolid11',
+            'py-2 px-4 z-max text-baseGraySlateSolid11',
             isCollapsed && 'hidden'
           )}
           variant="headingSmSpaced"
@@ -85,10 +85,10 @@ const SidebarLink = ({
         />
         <div
           className={cn(
-            'flex items-center w-full mx-2 rounded-1 hover:bg-lightmodeIndigoAlpha3',
+            'flex items-center w-full mx-2 rounded-1 hover:bg-baseIndigoAlpha3',
             styles.Item,
             isActive(department, href, district) &&
-              'bg-lightmodeIndigoAlpha4 text-lightmodeVioletAlpha11 hover:bg-lightmodeIndigoAlpha4'
+              'bg-baseIndigoAlpha4 text-baseVioletAlpha11 hover:bg-baseIndigoAlpha4'
           )}
         >
           <div
