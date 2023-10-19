@@ -18,28 +18,28 @@ export function Content() {
       header: 'District',
     },
     {
-      accessorKey: 'govt_resp',
-      header: 'Coping Capacity: gov',
+      accessorKey: 'composite-score',
+      header: 'Composite Score',
     },
     {
-      accessorKey: 'demo_vul',
-      header: 'Demo Vulnerability',
+      accessorKey: 'damages-and-losses',
+      header: 'Damages and Losses',
     },
     {
-      accessorKey: 'fld_proneness',
-      header: 'Flood Proneness',
+      accessorKey: 'vulnerability',
+      header: 'Vulnerability',
     },
     {
-      accessorKey: 'flood_damages',
-      header: 'Flood Damages',
+      accessorKey: 'governance-response',
+      header: 'Governance response',
     },
     {
-      accessorKey: 'infr_access',
-      header: 'Infra Access',
+      accessorKey: 'flood-hazard',
+      header: 'Flood Hazard',
     },
     {
-      accessorKey: 'prep_need',
-      header: 'Need for Preparedness',
+      accessorKey: 'exposure',
+      header: 'Exposure',
     },
   ];
 

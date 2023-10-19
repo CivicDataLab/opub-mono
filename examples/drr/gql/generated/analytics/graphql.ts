@@ -83,6 +83,8 @@ export type Query = {
   districtViewTableData: Scalars['JSON'];
   geography: Array<Geography>;
   indicators: Array<Indicators>;
+  indicatorsByCategory: Scalars['JSON'];
+  revCricleViewTableData: Scalars['JSON'];
   scheme: Array<Scheme>;
 };
 
@@ -94,6 +96,11 @@ export type QueryDistrictViewTableDataArgs = {
 
 export type QueryGeographyArgs = {
   filters?: InputMaybe<GeoFilter>;
+};
+
+
+export type QueryRevCricleViewTableDataArgs = {
+  geoFilter?: InputMaybe<GeoFilter>;
 };
 
 /** Scheme(id, name, description, slug, department) */
@@ -124,6 +131,12 @@ export type IndicatorsQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type IndicatorsQuery = { __typename?: 'Query', indicators: Array<{ __typename?: 'Indicators', name: string, slug?: string | null }> };
 
+export type IndicatorsByQueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type IndicatorsByQueryQuery = { __typename?: 'Query', indicatorsByCategory: any };
+
 
 export const TableDataDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"tableData"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"districtViewTableData"}}]}}]} as unknown as DocumentNode<TableDataQuery, TableDataQueryVariables>;
 export const IndicatorsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"indicators"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"indicators"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}}]} as unknown as DocumentNode<IndicatorsQuery, IndicatorsQueryVariables>;
+export const IndicatorsByQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"indicatorsByQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"indicatorsByCategory"}}]}}]} as unknown as DocumentNode<IndicatorsByQueryQuery, IndicatorsByQueryQueryVariables>;

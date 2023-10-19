@@ -14,3 +14,9 @@ query indicators{
   }
 }
 `)
+
+export const ANALYTICS_INDICATORS_BY_CATEGORY = graphql(`query indicatorsByQuery{
+  indicatorsByCategory
+}
+`
+)
