@@ -1,7 +1,7 @@
 import React from 'react';
 import { Hydrate, dehydrate } from '@tanstack/react-query';
 
-import { ANALYTICS_TABLE_DATA , ANALYTICS_INDICATORS_BY_CATEGORY} from '@/config/graphql/analaytics-queries';
+import { ANALYTICS_TABLE_DATA , ANALYTICS_INDICATORS} from '@/config/graphql/analaytics-queries';
 import { GraphQL, getQueryClient } from '@/lib/api';
 import { Content } from './components/analytics-layout';
 
@@ -12,12 +12,12 @@ export default async function Home() {
   );
 
   await queryClient.prefetchQuery([`indicators`], () =>
-  GraphQL('analytics', ANALYTICS_INDICATORS_BY_CATEGORY)
+  GraphQL('analytics', ANALYTICS_INDICATORS)
 );
   const dehydratedState = dehydrate(queryClient);
   return (
     <Hydrate state={dehydratedState}>
-      <Content />;
+      <Content />
     </Hydrate>
   );
 }
