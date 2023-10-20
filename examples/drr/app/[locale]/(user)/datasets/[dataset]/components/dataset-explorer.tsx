@@ -14,7 +14,7 @@ import { formatDate } from '@/lib/utils';
 export function Content({ slug }: { slug: string }) {
   const { data } = useQuery([`dataset_by_slug_${slug}`], () =>
     GraphQL('datasets' , DATASET_BY_SLUG, {
-      dataset_slug: slug, 
+      dataset_slug: slug,
     })
   );
 

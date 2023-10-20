@@ -2,14 +2,9 @@
 
 import React from 'react';
 import dynamic from 'next/dynamic';
-import { Table } from 'opub-ui';
-
-import { useQuery } from '@tanstack/react-query';
-import { ANALYTICS_TABLE_DATA } from '@/config/graphql/analaytics-queries';
-import { GraphQL } from '@/lib/api';
 
 import { useFetch } from '@/lib/api';
-import { Text, Separator } from 'opub-ui';
+import { Text } from 'opub-ui';
 
 const LeafletChoropleth = dynamic(
   () => import('opub-viz').then((mod) => mod.LeafletChoropleth),
@@ -21,23 +16,6 @@ export function MapComponent() {
     `assam-mapFile`,
     `/files/assam.json`
   );
-
-  const { data } = useQuery([`district_table_data`], () =>
-    GraphQL('analytics', ANALYTICS_TABLE_DATA)
-  );
-
-  // const columnData = [
-  //   {
-  //     accessorKey: 'District',
-  //     header: 'Districts',
-  //   },
-  //   {
-  //     accessorKey: 'Population affected',
-  //     header: 'Population Affected',
-  //   },
-    
-    
-  // ];
 
   const [hovered, setHovered] = React.useState('District');
 
@@ -105,26 +83,7 @@ export function MapComponent() {
           />
         )}
       </div>
-
-      {/* <div className='flex flex-col gap-4 w-72 px-3 py-3'>
-
-        <div className= "flex flex-row justify-between items-center self-stretch">
-          <Text variant='bodySm' fontWeight='bold'>Population affected(FRIMS)
-            <a href="">Switch</a>
-          </Text>
-        </div>
-        <Separator />
-
-        <Table
-          columnContentTypes={['text', 'text']}
-          columns={columnData}
-          rows={data?.districtViewTableData}
-          hideFooter={true}
-        />
-
-      </div> */}
-
-      
+      <Text>Frims Data</Text>
     </div>
   );
 }

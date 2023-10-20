@@ -1340,13 +1340,11 @@
         ]
       },
       "properties": {
+        "dt_code": "300",
         "district": "Kokrajhar",
-        "demo_vul": 92,
-        "fld_proneness": 99.33,
-        "flood_damages": 86.33,
-        "govt_resp": 147,
-        "infr_access": 95.33,
-        "prep_need": 97.33
+        "st_code": "18",
+        "year": "2011_c",
+        "st_nm": "Assam"
       }
     },
     {
@@ -2050,13 +2048,11 @@
         ]
       },
       "properties": {
+        "dt_code": "301",
         "district": "Dhubri",
-        "demo_vul": 110.33,
-        "fld_proneness": 157,
-        "flood_damages": 73.33,
-        "govt_resp": 66.67,
-        "infr_access": 97.67,
-        "prep_need": 99
+        "st_code": "18",
+        "year": "2011_c",
+        "st_nm": "Assam"
       }
     },
     {
@@ -2187,13 +2183,11 @@
         ]
       },
       "properties": {
+        "dt_code": "302",
         "district": "Goalpara",
-        "demo_vul": 134,
-        "fld_proneness": 127.33,
-        "flood_damages": 153.67,
-        "govt_resp": 136,
-        "infr_access": 84.33,
-        "prep_need": 147
+        "st_code": "18",
+        "year": "2011_c",
+        "st_nm": "Assam"
       }
     },
     {
