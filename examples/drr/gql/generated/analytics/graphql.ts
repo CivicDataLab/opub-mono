@@ -37,17 +37,12 @@ export type Department = {
   name: Scalars['String'];
 };
 
-export type DjangoModelFilterInput = {
-  pk: Scalars['ID'];
-};
-
 /** Geography(id, name, code, type, parentId) */
 export type GeoFilter = {
   AND?: InputMaybe<GeoFilter>;
   OR?: InputMaybe<GeoFilter>;
-  id?: InputMaybe<Scalars['ID']>;
+  code?: InputMaybe<Scalars['ID']>;
   name?: InputMaybe<Scalars['String']>;
-  parentId?: InputMaybe<DjangoModelFilterInput>;
 };
 
 /** Geography(id, name, code, type, parentId) */
@@ -57,6 +52,14 @@ export type Geography = {
   name: Scalars['String'];
   parentId?: Maybe<Geography>;
   type: Scalars['String'];
+};
+
+/** Indicators(id, name, long_description, short_description, category, type, slug, unit, geography, department, data_source, scheme, parent) */
+export type IndicatorFilter = {
+  AND?: InputMaybe<IndicatorFilter>;
+  OR?: InputMaybe<IndicatorFilter>;
+  name?: InputMaybe<Scalars['String']>;
+  slug?: InputMaybe<Scalars['String']>;
 };
 
 /** Indicators(id, name, long_description, short_description, category, type, slug, unit, geography, department, data_source, scheme, parent) */
@@ -91,6 +94,7 @@ export type Query = {
 
 export type QueryDistrictViewTableDataArgs = {
   geoFilter?: InputMaybe<GeoFilter>;
+  indcFilter?: InputMaybe<IndicatorFilter>;
 };
 
 
@@ -101,6 +105,7 @@ export type QueryGeographyArgs = {
 
 export type QueryRevCricleViewTableDataArgs = {
   geoFilter?: InputMaybe<GeoFilter>;
+  indcFilter?: InputMaybe<IndicatorFilter>;
 };
 
 /** Scheme(id, name, description, slug, department) */
