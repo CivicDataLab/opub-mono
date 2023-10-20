@@ -6,7 +6,7 @@ import { cn } from '@/lib/utils';
 import { AnalyticsDashboardSidebar } from './analytics-sidebar';
 import styles from './styles.module.scss';
 import { Text, Button, IconButton } from 'opub-ui';
-import Icons from '@/components/icons';
+import {Icons} from '@/components/icons';
 
 
 interface DashboardLayoutProps {

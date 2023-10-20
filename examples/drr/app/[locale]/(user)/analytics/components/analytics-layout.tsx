@@ -7,7 +7,7 @@ import { ANALYTICS_TABLE_DATA } from '@/config/graphql/analaytics-queries';
 import { GraphQL } from '@/lib/api';
 import { MapComponent } from './ChoroplethMap';
 import { Checkbox, Separator, IconButton } from 'opub-ui';
-import Icons from '@/components/icons';
+import {Icons} from '@/components/icons';
 
 export function Content() {
   const { data } = useQuery([`district_table_data`], () =>
@@ -135,13 +135,14 @@ export function Content() {
 
         </div>
 
-        <div className="flex flex-row items-start self-stretch">
+        <div className="flex flex-row">
+        {/* <div className="flex flex-row items-start self-stretch"> */}
 
-            <div className='h-140'>
+            {/* <div className='flex flex-col '> */}
 
                 <MapComponent />
 
-            </div>
+            {/* </div> */}
             
 
             <div className='flex flex-col gap-4 w-72 px-3 py-3'>
