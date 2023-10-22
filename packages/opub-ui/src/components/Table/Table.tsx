@@ -34,6 +34,10 @@ const Table = (props: TableProps) => {
   const [data, setData] = React.useState(() => [...rows]);
   const [sorting, setSorting] = React.useState<SortingState>([]);
 
+  React.useEffect(() => {
+    setData(rows);
+  }, [rows]);
+
   const table = useReactTable({
     data,
     columns,

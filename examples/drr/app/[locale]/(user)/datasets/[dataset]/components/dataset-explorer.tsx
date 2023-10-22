@@ -3,7 +3,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { Breadcrumbs, Tab, TabList, TabPanel, Tabs, Text } from 'opub-ui';
 
-import { datasetsExplorerPageHeader } from '@/config/consts';
+import { datasetsExplorerPageHeader } from '@/config/consts.ts';
 import { DATASET_BY_SLUG } from '@/config/graphql/dataset-queries';
 import { GraphQL } from '@/lib/api';
 import { DatasetInfoCard } from './DatasetInfoCard';

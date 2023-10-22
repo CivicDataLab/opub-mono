@@ -1,8 +1,14 @@
 import { graphql } from '@/gql/generated/analytics';
 
 export const ANALYTICS_TABLE_DATA = graphql(`
-query tableData{
-  districtViewTableData
+query tableData($indcFilter: IndicatorFilter){
+  districtViewTableData(indcFilter: $indcFilter)
+}
+`)
+
+export const ANALYTICS_REVENUE_TABLE_DATA =  graphql(`
+query revenueCircleTable($indcFilter: IndicatorFilter){
+  revCricleViewTableData(indcFilter: $indcFilter)
 }
 `)
 

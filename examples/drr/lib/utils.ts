@@ -14,6 +14,13 @@ export function formatDate(input: string | number): string {
   });
 }
 
+export function deSlugify(slug : string) {
+  // Replace hyphens or underscores with spaces
+  const deSlugified = slug.replace(/[-_]/g, ' ');
+  // Capitalize the first letter of each word
+  return deSlugified.replace(/\b\w/g, (char) => char.toUpperCase());
+}
+
 const convertMap: any = {
   border: (value: { width: any; style: any; color: any }) => {
     return `${value.width} ${value.style} ${value.color}`;

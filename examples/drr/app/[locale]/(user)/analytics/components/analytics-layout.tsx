@@ -1,56 +1,123 @@
 'use client';
 
+import React from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { Table } from 'opub-ui';
+import { RadioGroup, RadioItem, Select, Separator, Text } from 'opub-ui';
 
-import { ANALYTICS_TABLE_DATA } from '@/config/graphql/analaytics-queries';
+import { DistrictColumnData, RevenueColumnData } from '@/config/consts.ts';
+import {
+  ANALYTICS_REVENUE_TABLE_DATA,
+  ANALYTICS_TABLE_DATA,
+} from '@/config/graphql/analaytics-queries';
 import { GraphQL } from '@/lib/api';
+import { deSlugify } from '@/lib/utils';
 import { MapComponent } from './ChoroplethMap';
+import { FrimsDataTable } from './FrimsDataTable';
+import { TableComponent } from './TableComponent';
 
-export function Content() {
-  const { data } = useQuery([`district_table_data`], () =>
-    GraphQL('analytics', ANALYTICS_TABLE_DATA)
+const DropdownOptions = [
+  {
+    label: 'Kokrajhar',
+    value: 'kokrajhar',
+  },
+  {
+    label: 'Dhubri',
+    value: 'dhubri',
+  },
+  {
+    label: 'Goalpara',
+    value: 'goalpara',
+  },
+];
+
+const Boundaries = [
+  {
+    name: 'District Boundaries',
+    id: 'district',
+  },
+  {
+    name: 'Revenue Circle Boundaries',
+    id: 'revenue-circle',
+  },
+];
+
+export function Content({ indicator }: { indicator: string }) {
+  const [boundary, setBoundary] = React.useState('district');
+
+  const { data } = useQuery([`district_table_data_${indicator}`], () =>
+    GraphQL('analytics', ANALYTICS_TABLE_DATA, {
+      indcFilter: { slug: indicator },
+    })
   );
 
-  const columnData = [
-    {
-      accessorKey: 'district',
-      header: 'District',
-    },
-    {
-      accessorKey: 'composite-score',
-      header: 'Composite Score',
-    },
-    {
-      accessorKey: 'damages-and-losses',
-      header: 'Damages and Losses',
-    },
-    {
-      accessorKey: 'vulnerability',
-      header: 'Vulnerability',
-    },
-    {
-      accessorKey: 'governance-response',
-      header: 'Governance response',
-    },
-    {
-      accessorKey: 'flood-hazard',
-      header: 'Flood Hazard',
-    },
-    {
-      accessorKey: 'exposure',
-      header: 'Exposure',
-    },
-  ];
+  const revenueData = useQuery([`revenue_table_data_${indicator}`], () =>
+    GraphQL('analytics', ANALYTICS_REVENUE_TABLE_DATA, {
+      indcFilter: { slug: indicator },
+    })
+  );
+
+  const columns = boundary === 'district' ? DistrictColumnData : RevenueColumnData
+
+  const columnDataIndex = columns.findIndex(
+    (obj) => Object.keys(obj)[0] === indicator
+  );
 
   return (
-    <div className="w-full h-full grid gap-4 grid-rows-2">
-      <MapComponent />
-      <Table
-        columnContentTypes={['text', 'text', 'text', 'text', 'text', 'text']}
-        columns={columnData}
-        rows={data?.districtViewTableData}
-      />
+    <div className="w-full h-fit-content grid gap-4 grid-rows-2">
+      <div className="bg-surfaceDefault shadow-basicMd p-4">
+        <div className="flex flex-col gap-2 mb-4">
+          <Text className="text-baseGraySlateSolid11" variant="headingLg">
+            {deSlugify(indicator)}
+          </Text>
+          <Text className="text-baseGraySlateSolid11" variant="bodyLg">
+            Time Period : September 2022
+          </Text>
+        </div>
+        <Separator />
+        <RadioGroup
+          onChange={(val, name) => {
+            console.log('change', val, name);
+            setBoundary(val);
+          }}
+          name={boundary}
+          defaultValue={'district'}
+        >
+          <div className="flex gap-2 mt-2">
+            {Boundaries.map((item, index) => (
+              <RadioItem key={index} value={item.id}>
+                {item.name}
+              </RadioItem>
+            ))}
+          </div>
+        </RadioGroup>
+        <Select
+          label="Select District"
+          className="w-[380px] mt-2"
+          name="select-1"
+          onChange={function Yu() {}}
+          options={DropdownOptions}
+        />
+        <div className="flex mt-4 gap-4 min-h-[400px]">
+          <MapComponent />
+          <FrimsDataTable
+            rowData={
+              boundary === 'district'
+                ? data?.districtViewTableData?.frims_data
+                : revenueData?.data?.revCricleViewTableData?.frims_data
+            }
+          />
+        </div>
+      </div>
+      <div className="h-fit-content">
+        <TableComponent
+          columnData={columns[columnDataIndex][indicator]}
+          rowData={
+            boundary === 'district'
+              ? data?.districtViewTableData?.table_data
+              : revenueData?.data?.revCricleViewTableData?.table_data
+          }
+        />
+      </div>
     </div>
   );
 }

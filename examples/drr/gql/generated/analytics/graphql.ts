@@ -54,7 +54,7 @@ export type Geography = {
   type: Scalars['String'];
 };
 
-/** Indicators(id, name, long_description, short_description, category, type, slug, unit, geography, department, data_source, scheme, parent) */
+/** Indicators(id, name, long_description, short_description, category, type, slug, unit, geography, department, data_source, scheme, parent, display_order) */
 export type IndicatorFilter = {
   AND?: InputMaybe<IndicatorFilter>;
   OR?: InputMaybe<IndicatorFilter>;
@@ -62,10 +62,10 @@ export type IndicatorFilter = {
   slug?: InputMaybe<Scalars['String']>;
 };
 
-/** Indicators(id, name, long_description, short_description, category, type, slug, unit, geography, department, data_source, scheme, parent) */
+/** Indicators(id, name, long_description, short_description, category, type, slug, unit, geography, department, data_source, scheme, parent, display_order) */
 export type Indicators = {
   __typename?: 'Indicators';
-  /** Contains a list of sub-indicators. */
+  /** Describes the type sub-indicators */
   category?: Maybe<Scalars['String']>;
   department?: Maybe<Department>;
   geography?: Maybe<Geography>;
@@ -126,10 +126,19 @@ export type Unit = {
   symbol: Scalars['String'];
 };
 
-export type TableDataQueryVariables = Exact<{ [key: string]: never; }>;
+export type TableDataQueryVariables = Exact<{
+  indcFilter?: InputMaybe<IndicatorFilter>;
+}>;
 
 
 export type TableDataQuery = { __typename?: 'Query', districtViewTableData: any };
+
+export type RevenueCircleTableQueryVariables = Exact<{
+  indcFilter?: InputMaybe<IndicatorFilter>;
+}>;
+
+
+export type RevenueCircleTableQuery = { __typename?: 'Query', revCricleViewTableData: any };
 
 export type IndicatorsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -142,6 +151,7 @@ export type IndicatorsByQueryQueryVariables = Exact<{ [key: string]: never; }>;
 export type IndicatorsByQueryQuery = { __typename?: 'Query', indicatorsByCategory: any };
 
 
-export const TableDataDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"tableData"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"districtViewTableData"}}]}}]} as unknown as DocumentNode<TableDataQuery, TableDataQueryVariables>;
+export const TableDataDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"tableData"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"indcFilter"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"IndicatorFilter"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"districtViewTableData"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"indcFilter"},"value":{"kind":"Variable","name":{"kind":"Name","value":"indcFilter"}}}]}]}}]} as unknown as DocumentNode<TableDataQuery, TableDataQueryVariables>;
+export const RevenueCircleTableDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"revenueCircleTable"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"indcFilter"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"IndicatorFilter"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"revCricleViewTableData"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"indcFilter"},"value":{"kind":"Variable","name":{"kind":"Name","value":"indcFilter"}}}]}]}}]} as unknown as DocumentNode<RevenueCircleTableQuery, RevenueCircleTableQueryVariables>;
 export const IndicatorsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"indicators"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"indicators"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}}]} as unknown as DocumentNode<IndicatorsQuery, IndicatorsQueryVariables>;
 export const IndicatorsByQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"indicatorsByQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"indicatorsByCategory"}}]}}]} as unknown as DocumentNode<IndicatorsByQueryQuery, IndicatorsByQueryQueryVariables>;

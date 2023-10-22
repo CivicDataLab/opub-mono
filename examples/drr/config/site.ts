@@ -64,7 +64,7 @@ export const mainConfig: MainConfig = {
   mainNav: [
     {
       title: 'Analytics',
-      href: '/analytics',
+      href: `/analytics/?indicator=composite-score`,
     },
     {
       title: 'Datasets',

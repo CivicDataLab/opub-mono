@@ -6,7 +6,7 @@ import { useParams } from 'next/navigation';
 import { useKeyDetect } from '@/hooks/use-key-detect';
 import { usePRouter } from '@/hooks/use-prouter';
 import { MainConfig } from '@/types';
-import { platformName } from '@/config/consts';
+import { platformName } from '@/config/consts.ts';
 import { Icon, IconButton, Menu, Text } from 'opub-ui';
 
 import { Icons } from '@/components/icons';

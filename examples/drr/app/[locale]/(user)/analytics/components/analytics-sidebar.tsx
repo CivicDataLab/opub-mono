@@ -1,19 +1,21 @@
 'use client';
 
 import React from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
 } from '@radix-ui/react-collapsible';
 import { useQuery } from '@tanstack/react-query';
-import { Checkbox, Icon, Text } from 'opub-ui';
+import { Icon, RadioGroup, RadioItem, Text } from 'opub-ui';
 
 import { ANALYTICS_INDICATORS_BY_CATEGORY } from '@/config/graphql/analaytics-queries';
 import { GraphQL } from '@/lib/api';
 import { cn } from '@/lib/utils';
 import Icons from '@/components/icons';
 import styles from './AnalyticsDashboard.module.scss';
+import RadioButton from './RadioButton';
 
 type IndicatorsByCategory = {
   [category: string]: {
@@ -27,6 +29,14 @@ type IndicatorData = {
 
 type Data = {
   data: IndicatorData | undefined;
+};
+
+const IndicatorMap: { [key: string]: string } = {
+  'Damages and Losses Indicators': 'damages-and-losses',
+  'Exposure Indicators': 'exposure',
+  'Vulnerability Indicators': 'vulnerability',
+  'Flood Hazard Indicators': 'flood-hazard',
+  'Governance Response Indicators': 'governance-response',
 };
 
 export function AnalyticsDashboardSidebar() {
@@ -80,6 +90,12 @@ export function AnalyticsDashboardSidebar() {
 }
 
 export const IndicatorCheckboxList = ({ data }: { data: IndicatorData }) => {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const indicatorParam = searchParams.get('indicator');
+
+  const [radioValue, setRadioValue] = React.useState(indicatorParam);
+
   return data?.indicatorsByCategory?.map((indicator, index: React.Key) => {
     const categoryName = Object.keys(indicator)[0];
     const children = indicator[categoryName];
@@ -88,14 +104,29 @@ export const IndicatorCheckboxList = ({ data }: { data: IndicatorData }) => {
     return categoryName === 'Main' ? (
       <div className="mt-4 flex flex-col gap-3">
         {Object.entries(children).map(([key, value]) => (
-          <Checkbox
+          // <RadioGroup
+          //   onChange={(val, name) => {
+          //     router.push(`/analytics/?indicator=${val}`);
+          //   }}
+          //   name={key}
+          //   aria-checked={indicatorParam === value ? 'true' : 'false'}
+          //   key={key}
+          //   // defaultValue={value}
+          // >
+          //   <RadioItem value={value}>{key}</RadioItem>
+          //   {/* <RadioItem value="23">Radio 2</RadioItem> */}
+          // </RadioGroup>
+          <RadioButton
+            changed={() => {
+              router.push(`/analytics/?indicator=${value}`),
+                setRadioValue(value);
+            }}
             key={key}
-            value={value || 'NA'}
-            name="checkbox"
-            title="Select an indicator"
-          >
-            {key}
-          </Checkbox>
+            id={value}
+            isSelected={value === radioValue}
+            label={key}
+            value={value}
+          />
         ))}
       </div>
     ) : (
@@ -106,30 +137,27 @@ export const IndicatorCheckboxList = ({ data }: { data: IndicatorData }) => {
       >
         <div className="max-w-full min-w-max bg-surfaceNeutral rounded-1 border-t-0 border-1 border-solid border-borderSubdued">
           <CollapsibleTrigger className={styles.CollapseTrigger}>
-            {/* <Checkbox
-              key={index}
-              value={categoryName}
-              name="checkbox"
-              title="Select an indicator"
-            >
-              {categoryName}
-            </Checkbox> */}
             <Text key={index}>{categoryName}</Text>
             <Icon source={Icons.down} />
           </CollapsibleTrigger>
         </div>
 
         <CollapsibleContent className="pb-4 px-2 max-w-full min-w-max">
-          <div className="mt-4 flex flex-col gap-3">
+          <div className="flex flex-col">
             {Object.entries(children).map(([key, value]) => (
-              <Checkbox
+              <RadioButton
+                changed={() => {
+                  router.push(
+                    `/analytics/?indicator=${IndicatorMap[categoryName]}`
+                  ),
+                    setRadioValue(value);
+                }}
                 key={key}
-                value={value || 'NA'}
-                name="checkbox"
-                title="Select an indicator"
-              >
-                {key}
-              </Checkbox>
+                id={value}
+                isSelected={value === radioValue}
+                label={key}
+                value={key}
+              />
             ))}
           </div>
         </CollapsibleContent>

@@ -4,7 +4,7 @@
 import { FilterProps , Datasets } from '@/types';
 import { Breadcrumbs, Icon, Text, TextField } from 'opub-ui';
 
-import { datasetsPageHeader } from '@/config/consts';
+import { datasetsPageHeader } from '@/config/consts.ts';
 import { Icons } from '@/components/icons';
 import { DatasetCard } from './DatasetCard';
 import { FilterBox } from './FilterBox';

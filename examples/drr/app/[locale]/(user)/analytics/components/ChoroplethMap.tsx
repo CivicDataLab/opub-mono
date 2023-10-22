@@ -34,8 +34,7 @@ export function MapComponent() {
   };
 
   return (
-    <div className="bg-surfaceDefault shadow-basicMd p-4 flex gap-4 max-h-[682px]">
-      <div className="relative w-[900px] rounded-05 shadow-basicMd hidden md:block">
+      <div className="relative w-[900px] rounded-05 hidden md:block">
         {!mapLoading && (
           <LeafletChoropleth
             features={mapFile.features}
@@ -83,7 +82,5 @@ export function MapComponent() {
           />
         )}
       </div>
-      <Text>Frims Data</Text>
-    </div>
   );
 }

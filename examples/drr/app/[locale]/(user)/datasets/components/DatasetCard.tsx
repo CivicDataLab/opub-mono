@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { Tag, Text } from 'opub-ui';
 
-import { DatasetSource, LastUpdated, UpdateFreq } from '@/config/consts';
+import { DatasetSource, LastUpdated, UpdateFreq } from '@/config/consts.ts';
 import { formatDate } from '@/lib/utils';
 
 export interface DataProps {
