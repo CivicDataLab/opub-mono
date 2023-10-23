@@ -77,12 +77,12 @@ export function AnalyticsDashboardSidebar() {
   return (
     <aside
       className={cn(
-        'pt-5 pr-2 overflow-hidden bg-surfaceDefault shadow-basicMd',
+        'pr-2 overflow-hidden bg-surfaceDefault shadow-basicMd',
         'hidden z-1 shadow-inset basis-[320px] shrink-0 md:block',
         styles.Collapse
       )}
     >
-      <div className="px-4 py-1">
+      <div className="px-4 pt-12 bg-baseCyanSolid1 border-r-1 border-solid">
         {structuredData && <IndicatorCheckboxList data={structuredData} />}
       </div>
     </aside>
@@ -102,7 +102,7 @@ export const IndicatorCheckboxList = ({ data }: { data: IndicatorData }) => {
 
     //* To not have Collapisble for Main Indicator i.e. Composite Score
     return categoryName === 'Main' ? (
-      <div className="mt-4 flex flex-col gap-3">
+      <div className="flex flex-col gap-3">
         {Object.entries(children).map(([key, value]) => (
           // <RadioGroup
           //   onChange={(val, name) => {
@@ -133,11 +133,11 @@ export const IndicatorCheckboxList = ({ data }: { data: IndicatorData }) => {
       <Collapsible
         defaultOpen
         key={index}
-        className="border-borderSubdued border-1 border-solid rounded-1"
+        className="rounded-1"
       >
-        <div className="max-w-full min-w-max bg-surfaceNeutral rounded-1 border-t-0 border-1 border-solid border-borderSubdued">
+        <div className=" bg-surfaceHighlightSubdued max-w-full min-w-max bg-surfaceNeutral rounded-1 border-t-0 border-1 border-solid border-borderSubdued">
           <CollapsibleTrigger className={styles.CollapseTrigger}>
-            <Text key={index}>{categoryName}</Text>
+            <Text key={index} >{categoryName}</Text>
             <Icon source={Icons.down} />
           </CollapsibleTrigger>
         </div>
