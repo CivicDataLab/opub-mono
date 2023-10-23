@@ -112,13 +112,6 @@ const Map = ({
 }) => {
   //to prevent map re-initialization
   const [unmountMap, setUnmountMap] = React.useState(false);
-  React.useLayoutEffect(() => {
-    setUnmountMap(false);
-    return () => {
-      setUnmountMap(true);
-    };
-  }, []);
-
   const mapRef = React.useRef<any>(null);
 
   const handleMouseOver = React.useCallback((e: { target: any }) => {
@@ -196,6 +189,7 @@ const Map = ({
           <>
             <GeoJSON
               data={feature}
+              key={feature[0]['properties']['composite-score']}
               style={style}
               onEachFeature={onEachFeature}
             />

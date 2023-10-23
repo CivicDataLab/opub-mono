@@ -15,21 +15,6 @@ import { MapComponent } from './ChoroplethMap';
 import { FrimsDataTable } from './FrimsDataTable';
 import { TableComponent } from './TableComponent';
 
-const DropdownOptions = [
-  {
-    label: 'Kokrajhar',
-    value: 'kokrajhar',
-  },
-  {
-    label: 'Dhubri',
-    value: 'dhubri',
-  },
-  {
-    label: 'Goalpara',
-    value: 'goalpara',
-  },
-];
-
 const Boundaries = [
   {
     name: 'District Boundaries',
@@ -43,6 +28,27 @@ const Boundaries = [
 
 export function Content({ indicator }: { indicator: string }) {
   const [boundary, setBoundary] = React.useState('district');
+
+  const DropdownOptions = [
+    {
+      label : boundary === 'district'  ? 'Select District' : 'Select Revenue Circle',
+      value : boundary === 'district'  ? 'Select District' : 'Select Revenue Circle',
+      disabled: true
+    },
+    {
+      label: 'Kokrajhar',
+      value: 'kokrajhar',
+    },
+    {
+      label: 'Dhubri',
+      value: 'dhubri',
+    },
+    {
+      label: 'Goalpara',
+      value: 'goalpara',
+    },
+  ];
+  
 
   const { data } = useQuery([`district_table_data_${indicator}`], () =>
     GraphQL('analytics', ANALYTICS_TABLE_DATA, {
@@ -94,11 +100,13 @@ export function Content({ indicator }: { indicator: string }) {
           label="Select District"
           className="w-[380px] mt-2"
           name="select-1"
+          labelHidden
+          value=""
           onChange={function Yu() {}}
           options={DropdownOptions}
         />
         <div className="flex mt-4 gap-4 min-h-[400px]">
-          <MapComponent />
+          <MapComponent boundary={boundary} />
           <FrimsDataTable
             rowData={
               boundary === 'district'

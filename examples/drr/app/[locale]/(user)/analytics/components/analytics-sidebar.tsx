@@ -31,12 +31,76 @@ type Data = {
   data: IndicatorData | undefined;
 };
 
-const IndicatorMap: { [key: string]: string } = {
-  'Damages and Losses Indicators': 'damages-and-losses',
-  'Exposure Indicators': 'exposure',
-  'Vulnerability Indicators': 'vulnerability',
-  'Flood Hazard Indicators': 'flood-hazard',
-  'Governance Response Indicators': 'governance-response',
+type IndicatorMapType = {
+  [key: string]: Array<{
+    indicator: string;
+    'sub-indicator': string | null;
+  }>;
+};
+
+const IndicatorMap: IndicatorMapType = {
+  'Damages and Losses Indicators': [
+    {
+      indicator: 'damages-and-losses',
+      'sub-indicator': null,
+    },
+    {
+      indicator: 'damages-and-losses',
+      'sub-indicator': 'population-affected',
+    },
+    {
+      indicator: 'damages-and-losses',
+      'sub-indicator': 'crop-area-affected',
+    },
+  ],
+  'Exposure Indicators': [
+    {
+      indicator: 'exposure',
+      'sub-indicator': null,
+    },
+    {
+      indicator: 'exposure',
+      'sub-indicator': 'population',
+    },
+    {
+      indicator: 'exposure',
+      'sub-indicator': 'sex-ratio',
+    },
+  ],
+  'Vulnerability Indicators': [
+    {
+      indicator: 'vulnerability',
+      'sub-indicator': null,
+    },
+  ],
+  'Flood Hazard Indicators': [
+    {
+      indicator: 'flood-hazard',
+      'sub-indicator': null,
+    },
+    {
+      indicator: 'flood-hazard',
+      'sub-indicator': 'elevation',
+    },
+    {
+      indicator: 'flood-hazard',
+      'sub-indicator': 'inundation',
+    },
+    {
+      indicator: 'flood-hazard',
+      'sub-indicator': 'rainfall',
+    },
+    {
+      indicator: 'flood-hazard',
+      'sub-indicator': 'river-water-level',
+    },
+  ],
+  'Governance Response Indicators': [
+    {
+      indicator: 'governance-response',
+      'sub-indicator': null,
+    },
+  ],
 };
 
 export function AnalyticsDashboardSidebar() {
@@ -144,12 +208,16 @@ export const IndicatorCheckboxList = ({ data }: { data: IndicatorData }) => {
 
         <CollapsibleContent className="pb-4 px-2 max-w-full min-w-max">
           <div className="flex flex-col">
-            {Object.entries(children).map(([key, value]) => (
+            {Object.entries(children).map(([key, value], index) => (
               <RadioButton
                 changed={() => {
-                  router.push(
-                    `/analytics/?indicator=${IndicatorMap[categoryName]}`
-                  ),
+                  IndicatorMap[categoryName][index]['sub-indicator']
+                    ? router.push(
+                        `/analytics/?indicator=${IndicatorMap[categoryName][index]['indicator']}&sub-indicator=${IndicatorMap[categoryName][index]['sub-indicator']}`
+                      )
+                    : router.push(
+                        `/analytics/?indicator=${IndicatorMap[categoryName][index]['indicator']}`
+                      ),
                     setRadioValue(value);
                 }}
                 key={key}

@@ -1341,12 +1341,12 @@
       },
       "properties": {
         "district": "Kokrajhar",
-        "demo_vul": 92,
-        "fld_proneness": 99.33,
-        "flood_damages": 86.33,
-        "govt_resp": 147,
-        "infr_access": 95.33,
-        "prep_need": 97.33
+        "damages-and-losses": 86.33,
+        "exposure": 95.33,
+        "flood-hazard": 99.33,
+        "governance-response": 147,
+        "vulnerability": 92,
+        "composite-score": 97.33
       }
     },
     {
@@ -2051,12 +2051,20 @@
       },
       "properties": {
         "district": "Dhubri",
-        "demo_vul": 110.33,
-        "fld_proneness": 157,
-        "flood_damages": 73.33,
-        "govt_resp": 66.67,
-        "infr_access": 97.67,
-        "prep_need": 99
+        "damages-and-losses": 73.33,
+        "exposure": 97.67,
+        "flood-hazard": 157,
+        "governance-response": 66.67,
+        "vulnerability": 110.33,
+        "crop-area-affected": 78.67,
+        "population-affected": 49.67,
+        "population": 95.67,
+        "sex-ratio": 81,
+        "elevation": 91,
+        "inundation": 109,
+        "rainfall": 24,
+        "river-water-level": 104.33,
+        "composite-score": 99
       }
     },
     {
@@ -2188,12 +2196,12 @@
       },
       "properties": {
         "district": "Goalpara",
-        "demo_vul": 134,
-        "fld_proneness": 127.33,
-        "flood_damages": 153.67,
-        "govt_resp": 136,
-        "infr_access": 84.33,
-        "prep_need": 147
+        "damages-and-losses": 153.67,
+        "exposure": 84.33,
+        "flood-hazard": 127.33,
+        "governance-response": 136,
+        "vulnerability": 134,
+        "composite-score": 147
       }
     },
     {

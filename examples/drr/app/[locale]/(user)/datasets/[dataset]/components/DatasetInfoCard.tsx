@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { Link, Text } from 'opub-ui';
 
-import { DatasetSource } from '@/config/consts';
+import { DatasetSource } from '@/config/consts.ts';
 
 export const DatasetInfoCard = ({
   title,

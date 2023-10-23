@@ -36,7 +36,7 @@ export const gqlConfig: {
   [key: string]: string;
 } = {
   datasets: 'https://opub-backend.civicdatalab.in/graphql',
-  analytics: 'http://13.127.173.177:8000/graphql',
+  analytics: 'https://drr.backend.open-contracting.in/graphql',
 };
 
 export const elasticSearch = {
