@@ -23,14 +23,14 @@ export function MainNav({ data }: { data: MainConfig }) {
   }, [key]);
 
   return (
-    <header className="bg-surface py-3 px-6 shadow-top-bar sm:py-3 z-2 relative">
+    <header className="bg-backgroundSolidDark shadow-elementTopNav py-3 px-6 shadow-top-bar sm:py-3 z-2 relative">
       <div className="flex gap-1 items-center justify-center flex-wrap sm:justify-between">
         <div className="flex items-center gap-1">
           <Link href={data.homeUrl}>
             <div className="flex items-center gap-2">
               <Icon source={Icons.logo} color="decorative4" size="6" />
               <Text variant="headingLg" as="span">
-                <span className="capitalize">
+                <span className="text-textOnBGDefault capitalize">
                   {district ? district : platformName}{' '}
                 </span>
               </Text>
@@ -68,7 +68,7 @@ const ExploreLink = ({
     <Link href={href}>
       <div className="flex gap-1 py-2 px-2 rounded-1 hover:bg-surfaceHovered sm:px-3">
         {Icons[icon] && <Icon color="base" source={Icons[icon]} />}
-        <Text variant="bodyMd" fontWeight="medium">
+        <Text variant="bodyMd" fontWeight="medium" className="text-textOnBGDefault">
           {text}
         </Text>
       </div>

@@ -20,7 +20,7 @@ export const FilterBox = ({ filters }: { filters: FilterProps[] }) => (
             defaultOpen
             className="border-borderSubdued border-1 border-solid rounded-1"
           >
-            <div className="max-w-full min-w-max bg-surfaceNeutral rounded-1 border-t-0 border-1 border-solid border-borderSubdued">
+            <div className=" bg-surfaceHighlightSubdued max-w-full min-w-max bg-surfaceNeutral rounded-1 border-t-0 border-1 border-solid border-borderSubdued">
               <CollapsibleTrigger className={styles.CollapseTrigger}>
                 <Text key={key} variant="headingMd" as="h3">
                   {key}

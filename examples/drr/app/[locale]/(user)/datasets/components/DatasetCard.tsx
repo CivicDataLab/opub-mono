@@ -27,14 +27,14 @@ export const DatasetCard = ({
   slug,
 }: DataProps) => {
   return (
-    <div className="p-4 rounded-1 bg-surface shadow-card flex flex-col gap-3">
+    <div className=" bg-surfaceDefault p-4 shadow-elementCard rounded-2 bg-surface shadow-card flex flex-col gap-3">
       <div className="flex gap-4">
         <div
           id="leftContainer"
           className="flex flex-2 flex-col gap-2 text-interactive"
         >
           <Link href={`/datasets/${slug}`}>
-            <Text color="inherit" variant="headingXl">
+            <Text color="inherit" className=" text-textHighlight " variant="headingXl">
               {title}
             </Text>
           </Link>
