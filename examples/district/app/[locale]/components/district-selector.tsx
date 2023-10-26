@@ -86,7 +86,7 @@ export const DistrictSelector = () => {
         )}
         <div
           ref={districtNameRef}
-          className="py-2 px-4 bg-backgroundDefault absolute top-8 right-8 border-1 border-solid border-borderDefault rounded-1 z-max h-[40px]"
+          className="py-2 px-4 bg-surfaceDefault absolute top-8 right-8 border-1 border-solid border-borderDefault rounded-1 z-max h-[40px]"
         >
           District
         </div>
@@ -137,7 +137,6 @@ export const DistrictSelector = () => {
                 <Text variant="headingSm" fontWeight="medium" color="subdued">
                   {category.name}
                 </Text>
-                {/* <div className="w-4 h-4 rounded-full bg-lightmodeVioletSolid8 opacity-30" /> */}
               </div>
               <Separator className="mt-2 mb-3" />
               <div className="flex flex-col gap-3">

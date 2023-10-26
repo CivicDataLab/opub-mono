@@ -16,7 +16,8 @@ export type Color =
   | 'decorative2'
   | 'decorative3'
   | 'decorative4'
-  | 'decorative5';
+  | 'decorative5'
+  | string;
 
 export type IconSource =
   | React.FunctionComponent<React.SVGProps<SVGSVGElement>>
@@ -43,4 +44,6 @@ export interface IconProps {
   fill?: Color;
   /** class name  */
   className?: string;
+  /** Prevent click event */
+  noEvents?: boolean;
 }

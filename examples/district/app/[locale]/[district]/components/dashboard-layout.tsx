@@ -25,7 +25,7 @@ export function DashboardLayout({
     >
       <IconButton
         className={cn(
-          'hidden md:block absolute left-[220px] top-4 p-2 z-2 rounded-full shadow-insetBasic bg-lightmodePureWhite hover:bg-lightmodeIndigoSolid3',
+          'hidden md:block absolute left-[220px] top-4 p-2 z-2 rounded-full shadow-insetBasic bg-basePureWhite hover:bg-baseIndigoSolid3',
           styles.CollapseBtn,
           isCollapsed && styles.Collapsed
         )}
@@ -40,9 +40,9 @@ export function DashboardLayout({
         items={dashboardConfig.sidebarNav}
       />
 
-      <div className="md:hidden basis-2 z-1">
+      {/* <div className="md:hidden basis-2 z-1">
         <MobileDashboardNav items={dashboardConfig.sidebarNav} />
-      </div>
+      </div> */}
       <main className={cn(styles.Main, `grow`)}>{children}</main>
     </div>
   );

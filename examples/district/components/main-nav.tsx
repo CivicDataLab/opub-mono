@@ -11,13 +11,13 @@ export function MainNav({ data }: { data: MainConfig }) {
   const { district } = useParams();
 
   return (
-    <header className="relative bg-backgroundDark text-lightmodeIndigoSolid2 py-3 px-10 shadow-top-bar sm:py-3 z-2 ">
+    <header className="relative bg-backgroundSolidDark text-baseIndigoSolid2 py-3 px-10 shadow-top-bar sm:py-3 z-2 ">
       <div className="flex gap-1 items-center justify-between flex-wrap sm:justify-between">
         <Link href={data.homeUrl}>
           <div className="flex items-center gap-4">
             <Image src="/logo/logo-min.svg" alt="" width={24} height={24} />
             <Text variant="headingSmSpaced" as="span" color="inherit">
-              ASSAM DISTRICT DASHBOARD
+              D4D ASSAM: DISTRICT DASHBOARD
             </Text>
           </div>
         </Link>

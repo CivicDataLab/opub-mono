@@ -73,9 +73,9 @@ module.exports = function ({ dictionary }) {
           // if it's a fixed value
           const val = variable.value;
           if (variable.type === 'number') {
-            value = `${variable.value}px`;
+            value = `${val}px`;
           } else {
-            value = variable.value;
+            value = val;
           }
         }
       }

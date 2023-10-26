@@ -248,11 +248,11 @@ const LayerSelector = ({
       <Popover>
         <PopoverTrigger
           className={cn(
-            'p-3 rounded-1 cursor-pointer bg-lightmodeVioletSolid5 shadow-insetBasic'
+            'p-3 rounded-1 cursor-pointer bg-baseVioletSolid5 shadow-insetBasic'
           )}
         >
           <span className="sr-only">Change Layer</span>
-          <span className="text-lightmodeVioletSolid10">
+          <span className="text-baseVioletSolid10">
             <IconBoxMultiple />
           </span>
         </PopoverTrigger>

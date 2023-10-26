@@ -36,9 +36,5 @@ export default async function Home({
     chartData: getSchemeObject(chartData[params.district]).indicators,
   };
 
-  return (
-    <div className="px-2 md:container py-1 lg:py-2">
-      <Content data={meta} />
-    </div>
-  );
+  return <Content data={meta} />;
 }

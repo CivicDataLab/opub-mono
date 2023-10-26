@@ -30,7 +30,10 @@ import {
   IconUserCog,
   IconExternalLink,
   IconChevronsLeft,
+  IconMenu,
+  IconX,
   TablerIconsProps,
+  IconChevronsRight,
 } from '@tabler/icons-react';
 
 export const Icons: {
@@ -48,6 +51,7 @@ export const Icons: {
   right: IconChevronRight,
   left: IconChevronLeft,
   doubleLeft: IconChevronsLeft,
+  doubleRight: IconChevronsRight,
   leftFilled: IconSquareRoundedChevronLeftFilled,
   search: IconSearch,
   notification: IconBellFilled,
@@ -68,6 +72,8 @@ export const Icons: {
   download: IconDownload,
   diamond: IconDiamondsFilled,
   externalLink: IconExternalLink,
+  menu: IconMenu,
+  cross: IconX,
 };
 
 export default Icons;
