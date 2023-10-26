@@ -33,15 +33,15 @@ export function MapComponent({ boundary }: { boundary: string }) {
 
 
   const mapDataFn = (value: number) => {
-    return value >= 80
+    return value >= 3
       ? '#d73027'
-      : value >= 70
+      : value >= 2
       ? '#fc8d59'
-      : value >= 50
+      : value >= 1
       ? '#fee090'
-      : value >= 40
+      : value >= 0.5
       ? '#dbeaee'
-      : value >= 30
+      : value >= 0.3
       ? '#91bfdb'
       : '#4575b4';
   };
@@ -64,27 +64,27 @@ export function MapComponent({ boundary }: { boundary: string }) {
           legendData={[
             {
               color: '#d73027',
-              label: '80+',
+              label: '3+',
             },
             {
               color: '#fc8d59',
-              label: '60 - 80',
+              label: '2 - 3',
             },
             {
               color: '#fee090',
-              label: '50 - 60',
+              label: '1 - 2',
             },
             {
               color: '#dbeaee',
-              label: '40 - 50',
+              label: '0.5 - 1',
             },
             {
               color: '#91bfdb',
-              label: '30 - 40',
+              label: '0.3 - 0.5',
             },
             {
               color: '#4575b4',
-              label: '0 - 30',
+              label: '0 - 0.3',
             },
           ]}
           mapDataFn={mapDataFn}

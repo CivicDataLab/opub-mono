@@ -58,10 +58,6 @@ const DistrictColumnData : ColumnData = [
           header: 'Damages and Losses',
         },
         {
-          accessorKey: 'crop-area-affected',
-          header: 'Crop Area Affected',
-        },
-        {
           accessorKey: 'population-affected',
           header: 'Population Affected',
         },
@@ -187,10 +183,7 @@ const DistrictColumnData : ColumnData = [
           accessorKey: 'damages-and-losses',
           header: 'Damages and Losses',
         },
-        {
-          accessorKey: 'crop-area-affected',
-          header: 'Crop Area Affected',
-        },
+     
         {
           accessorKey: 'population-affected',
           header: 'Population Affected',
