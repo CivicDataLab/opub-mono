@@ -7,8 +7,10 @@ import {
 
 export default function Home() {
   return (
-    <main className="bg-backgroundDefault pb-10">
-      <Header />
+    <main className="bg-backgroundSolidDefault pb-10">
+      <div className="hidden md:block">
+        <Header />
+      </div>
       <div className="container">
         <KeyHighlights />
         <DistrictSelector />

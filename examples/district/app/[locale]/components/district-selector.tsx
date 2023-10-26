@@ -86,7 +86,7 @@ export const DistrictSelector = () => {
         )}
         <div
           ref={districtNameRef}
-          className="py-2 px-4 bg-backgroundDefault absolute top-8 right-8 border-1 border-solid border-borderDefault rounded-1 z-max h-[40px]"
+          className="py-2 px-4 bg-surfaceDefault absolute top-8 right-8 border-1 border-solid border-borderDefault rounded-1 z-max h-[40px]"
         >
           District
         </div>

@@ -14,6 +14,7 @@ export function Icon({
   stroke,
   fill,
   className,
+  noEvents,
 }: IconProps) {
   let sourceType: 'function' | 'placeholder' | 'external';
   if (typeof source === 'function' || typeof source === 'object') {
@@ -50,6 +51,7 @@ export function Icon({
         stroke={stroke ? stroke : 2}
         style={{
           '--fill': fill ? `var(--icon-${fill})` : 'none',
+          pointerEvents: noEvents ? 'none' : 'auto',
         }}
       />
     ),
