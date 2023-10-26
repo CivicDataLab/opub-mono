@@ -58,7 +58,7 @@ export function Content({ data }: { data: IProps }) {
     <>
       <BreadCrumb backUrl={`/${data.district}`} crumbs={breadcrumbs} />
 
-      <div div className="container py-1 lg:py-2">
+      <div className="container py-1 lg:py-2">
         <Text variant="heading3xl" as="h1" color="subdued" className="mt-7">
           {departmentData.deptTitle}
         </Text>
