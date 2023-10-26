@@ -69,13 +69,18 @@ export function Content({ indicator }: { indicator: string }) {
   );
 
   return (
+    <>
+    <div className='mt-4 mb-6'>
+      <Text variant="heading3xl"> DRR Dashboard : Analytical Map</Text>
+    </div>
+    
     <div className="w-full h-fit-content grid gap-4 grid-rows-2">
       <div className="bg-surfaceDefault shadow-basicMd p-4">
         <div className="flex flex-col gap-2 mb-4">
-          <Text className="text-baseGraySlateSolid11" variant="headingLg">
+          <Text className=" text-textSubdued" variant="headingLg">
             {deSlugify(indicator)}
           </Text>
-          <Text className="text-baseGraySlateSolid11" variant="bodyLg">
+          <Text className="text-textSubdued" variant="bodyLg">
             Time Period : September 2022
           </Text>
         </div>
@@ -127,5 +132,7 @@ export function Content({ indicator }: { indicator: string }) {
         />
       </div>
     </div>
+    </>
+
   );
 }
