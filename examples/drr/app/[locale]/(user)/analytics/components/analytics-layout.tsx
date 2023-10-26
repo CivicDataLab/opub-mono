@@ -17,17 +17,17 @@ import { TableComponent } from './TableComponent';
 
 const Boundaries = [
   {
-    name: 'District Boundaries',
-    id: 'district',
-  },
-  {
     name: 'Revenue Circle Boundaries',
     id: 'revenue-circle',
+  },
+  {
+    name: 'District Boundaries',
+    id: 'district',
   },
 ];
 
 export function Content({ indicator }: { indicator: string }) {
-  const [boundary, setBoundary] = React.useState('district');
+  const [boundary, setBoundary] = React.useState('revenue-circle');
 
   const DropdownOptions = [
     {
@@ -91,7 +91,7 @@ export function Content({ indicator }: { indicator: string }) {
             setBoundary(val);
           }}
           name={boundary}
-          defaultValue={'district'}
+          defaultValue={'revenue-circle'}
         >
           <div className="flex gap-2 mt-2">
             {Boundaries.map((item, index) => (
@@ -113,6 +113,7 @@ export function Content({ indicator }: { indicator: string }) {
         <div className="flex mt-4 gap-4 min-h-[400px]">
           <MapComponent boundary={boundary} />
           <FrimsDataTable
+            boundary={boundary}
             rowData={
               boundary === 'district'
                 ? data?.districtViewTableData?.frims_data

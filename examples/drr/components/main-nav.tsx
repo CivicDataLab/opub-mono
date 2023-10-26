@@ -14,7 +14,6 @@ import { Icons } from '@/components/icons';
 export function MainNav({ data }: { data: MainConfig }) {
   const { key, metaKey } = useKeyDetect();
   const searchRef = React.useRef<HTMLInputElement>(null);
-  const { district } = useParams();
 
   React.useEffect(() => {
     if (key === 'k' && metaKey) {
@@ -29,11 +28,18 @@ export function MainNav({ data }: { data: MainConfig }) {
           <Link href={data.homeUrl}>
             <div className="flex items-center gap-2">
               <Icon source={Icons.logo} color="decorative4" size="6" />
+              <div className="flex flex-col gap-1">
               <Text variant="headingLg" as="span">
                 <span className="text-textOnBGDefault capitalize">
-                  {district ? district : platformName}{' '}
+                  {platformName}{' '}
                 </span>
               </Text>
+              <Text variant="bodySm" as="span" fontWeight="semibold" className="ml-16">
+                <span className="text-textOnBGDefault capitalize">
+                for Disaster Risk Reduction
+                </span>
+              </Text>
+              </div>
             </div>
           </Link>
         </div>
@@ -47,7 +53,7 @@ export function MainNav({ data }: { data: MainConfig }) {
                 icon={link.icon || ''}
                 text={link.title || ''}
               />
-            ))}
+            ))} 
           </div>
         )}
       </div>

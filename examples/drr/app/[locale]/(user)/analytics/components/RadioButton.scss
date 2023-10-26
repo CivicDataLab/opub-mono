@@ -5,7 +5,7 @@ $md-radio-size: 20px;
 $md-radio-checked-size: 10px; 
 
 .RadioButton {
-    margin: 16px 0;
+    margin: var(--space-2) 0;
 
     input[type="radio"] {
         display: none;

@@ -1,4 +1,4 @@
-const platformName = 'IDS-DRR';
+const platformName = 'Intelligent Data Solution';
 
 // Datasets page
 const DatasetSource = 'Source'
@@ -148,7 +148,7 @@ const DistrictColumnData : ColumnData = [
     {
       'composite-score': [
         {
-          accessorKey: 'revenue circle',
+          accessorKey: 'revenue-circle',
           header: 'Revenue Circle',
         },
         {
@@ -180,7 +180,7 @@ const DistrictColumnData : ColumnData = [
     {
       'damages-and-losses': [
         {
-          accessorKey: 'revenue circle',
+          accessorKey: 'revenue-circle',
           header: 'Revenue Circle',
         },
         {
@@ -200,7 +200,7 @@ const DistrictColumnData : ColumnData = [
     {
       'flood-hazard': [
         {
-          accessorKey: 'revenue circle',
+          accessorKey: 'revenue-circle',
           header: 'Revenue Circle',
         },
         {
@@ -231,7 +231,7 @@ const DistrictColumnData : ColumnData = [
     {
       exposure: [
         {
-          accessorKey: 'revenue circle',
+          accessorKey: 'revenue-circle',
           header: 'Revenue Circle',
         },
         {
@@ -251,7 +251,7 @@ const DistrictColumnData : ColumnData = [
     {
       vulnerability: [
         {
-          accessorKey: 'revenue circle',
+          accessorKey: 'revenue-circle',
           header: 'Revenue Circle',
         },
         {
@@ -263,7 +263,7 @@ const DistrictColumnData : ColumnData = [
     {
       'governance-response': [
         {
-          accessorKey: 'revenue circle',
+          accessorKey: 'revenue-circle',
           header: 'Revenue Circle',
         },
         {

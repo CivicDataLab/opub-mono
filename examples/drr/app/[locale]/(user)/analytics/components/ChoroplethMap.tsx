@@ -23,66 +23,74 @@ export function MapComponent({ boundary }: { boundary: string }) {
     `/files/assam_block.json`
   );
 
+
   const searchParams = useSearchParams();
   const indicatorParam = searchParams.get('indicator');
   const SubIndicatorParam = searchParams.get('sub-indicator');
 
   const [hovered, setHovered] = React.useState('District');
+  const [FilteredRevenueCircleFeatures, setFilteredFeatures] = React.useState([]);
+
 
   const mapDataFn = (value: number) => {
     return value >= 80
-      ? '#a50f15'
+      ? '#d73027'
       : value >= 70
-      ? '#de2d26'
+      ? '#fc8d59'
       : value >= 50
-      ? '#fb6a4a'
+      ? '#fee090'
       : value >= 40
-      ? '#fc9272'
+      ? '#dbeaee'
       : value >= 30
-      ? '#fcbba1'
-      : '#fee5d9';
+      ? '#91bfdb'
+      : '#4575b4';
   };
+
+  const filterByRevenue = (features : any) => {
+    if(revenueMapFile.features) {
+      const filteredFeatures = revenueMapFile.features.filter((feature: { properties: { district_1: string; }; })  => feature.properties.district_1 === features?.district)
+      setFilteredFeatures(filteredFeatures)
+    }
+  }
 
   return (
     <div className="relative w-[900px] rounded-05 hidden md:block">
       {!mapLoading && !revenueMapLoading && (
         <LeafletChoropleth
-          features={ boundary === 'district' ? mapFile.features : revenueMapFile.features}
+          features={ boundary === 'district' ? FilteredRevenueCircleFeatures.length !==0 ? FilteredRevenueCircleFeatures   :  mapFile.features : revenueMapFile.features}
           mapZoom={7.4}
           mapProperty={SubIndicatorParam || indicatorParam || 'composite-score'}
-          zoomOnClick={false}
+          zoomOnClick={true}
           legendData={[
             {
-              color: '#a50f15',
+              color: '#d73027',
               label: '80+',
             },
             {
-              color: '#de2d26',
+              color: '#fc8d59',
               label: '60 - 80',
             },
             {
-              color: '#fb6a4a',
+              color: '#fee090',
               label: '50 - 60',
             },
             {
-              color: '#fc9272',
+              color: '#dbeaee',
               label: '40 - 50',
             },
             {
-              color: '#fcbba1',
+              color: '#91bfdb',
               label: '30 - 40',
             },
             {
-              color: '#fee5d9',
+              color: '#4575b4',
               label: '0 - 30',
             },
           ]}
           mapDataFn={mapDataFn}
           click={(e) => {
-            const features = e.feature.properties;
-            console.log('Features', features);
+            filterByRevenue(e.feature.properties)
           }}
-          hideLayers
           mouseover={(e) => {
             setHovered(e.feature.properties.district);
           }}
