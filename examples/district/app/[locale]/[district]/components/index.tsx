@@ -31,18 +31,28 @@ export const BreadCrumb = ({
   backUrl,
 }: {
   crumbs: {
-    label: string;
+    label: any;
     href: string;
   }[];
   backUrl: string;
 }) => {
   return (
-    <div className="flex items-start gap-2 md:gap-4">
-      <Link href={backUrl} className="mt-2">
+    <div className="md:container flex items-center gap-2 md:gap-4 bg-backgroundSolidDefault md:bg-transparent">
+      <Link href={backUrl} className="mt-5 hidden md:block">
         <Text visuallyHidden>Go to State Page</Text>
         <Icon source={Icons.leftFilled} size={24} color="default" />
       </Link>
-      <Breadcrumbs crumbs={crumbs} />
+      <div className="hidden md:block mt-4">
+        <Breadcrumbs crumbs={crumbs} />
+      </div>
+
+      <div className="md:hidden px-5">
+        <Breadcrumbs
+          crumbs={crumbs}
+          itemsAfterCollapse={1}
+          itemsBeforeCollapse={2}
+        />
+      </div>
     </div>
   );
 };

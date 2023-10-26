@@ -22,9 +22,5 @@ export default async function Home({
     departmentData: districtObj['depts'][params.department],
   };
 
-  return (
-    <div className="container py-1 lg:py-2">
-      <Content data={meta} />
-    </div>
-  );
+  return <Content data={meta} />;
 }
