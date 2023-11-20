@@ -74,7 +74,7 @@ export function Content({ indicator }: { indicator: string }) {
       <Text variant="heading3xl"> DRR Dashboard : Analytical Map</Text>
     </div>
     
-    <div className="w-full h-fit-content grid gap-4 grid-rows-2">
+    <div className="w-full flex flex-col gap-4">
       <div className="bg-surfaceDefault shadow-basicMd p-4">
         <div className="flex flex-col gap-2 mb-4">
           <Text className=" text-textSubdued" variant="headingLg">

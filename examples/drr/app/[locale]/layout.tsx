@@ -1,4 +1,4 @@
-import { Inter as FontSans } from 'next/font/google';
+import { Noto_Sans_Display as FontSans } from 'next/font/google';
 import { notFound } from 'next/navigation';
 import { NextIntlClientProvider, createTranslator } from 'next-intl';
 

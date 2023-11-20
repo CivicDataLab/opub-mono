@@ -59,6 +59,7 @@ export function MapComponent({ boundary }: { boundary: string }) {
         <LeafletChoropleth
           features={ boundary === 'district' ? FilteredRevenueCircleFeatures.length !==0 ? FilteredRevenueCircleFeatures   :  mapFile.features : revenueMapFile.features}
           mapZoom={7.4}
+          scrollWheelZoom={false}
           mapProperty={SubIndicatorParam || indicatorParam || 'composite-score'}
           zoomOnClick={true}
           legendData={[

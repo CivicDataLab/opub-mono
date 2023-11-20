@@ -146,7 +146,7 @@ export function AnalyticsDashboardSidebar() {
         styles.Collapse
       )}
     >
-      <div className="px-4 pt-12 bg-baseCyanSolid1 border-r-1 border-solid">
+      <div className="px-4 h-full pt-12 bg-baseCyanSolid1 border-r-1 border-solid">
         {structuredData && <IndicatorCheckboxList data={structuredData} />}
       </div>
     </aside>
@@ -163,45 +163,15 @@ export const IndicatorCheckboxList = ({ data }: { data: IndicatorData }) => {
   return data?.indicatorsByCategory?.map((indicator, index: React.Key) => {
     const categoryName = Object.keys(indicator)[0];
     const children = indicator[categoryName];
-
-    //* To not have Collapisble for Main Indicator i.e. Composite Score
-    return categoryName === 'Main' ? (
-      <div className="flex flex-col gap-3">
-        {Object.entries(children).map(([key, value]) => (
-          // <RadioGroup
-          //   onChange={(val, name) => {
-          //     router.push(`/analytics/?indicator=${val}`);
-          //   }}
-          //   name={key}
-          //   aria-checked={indicatorParam === value ? 'true' : 'false'}
-          //   key={key}
-          //   // defaultValue={value}
-          // >
-          //   <RadioItem value={value}>{key}</RadioItem>
-          //   {/* <RadioItem value="23">Radio 2</RadioItem> */}
-          // </RadioGroup>
-          <RadioButton
-            changed={() => {
-              router.push(`/analytics/?indicator=${value}`),
-                setRadioValue(value);
-            }}
-            key={key}
-            id={value}
-            isSelected={value === radioValue}
-            label={key}
-            value={value}
-          />
-        ))}
-      </div>
-    ) : (
-      <Collapsible
+    
+     return <Collapsible
         defaultOpen
         key={index}
         className="rounded-1"
       >
-        <div className=" bg-surfaceHighlightSubdued max-w-full min-w-max bg-surfaceNeutral rounded-1 border-t-0 border-1 border-solid border-borderSubdued">
+        <div className=" bg-surfaceHighlightSubdued max-w-full min-w-max bg-surfaceNeutral rounded-1 border-t-0 border-1 border-solid border-borderSubdued mb-5">
           <CollapsibleTrigger className={styles.CollapseTrigger}>
-            <Text key={index} >{categoryName}</Text>
+            <Text className='text-textDefault' fontWeight="bold" key={index} >{categoryName}</Text>
             <Icon source={Icons.down} />
           </CollapsibleTrigger>
         </div>
@@ -230,6 +200,5 @@ export const IndicatorCheckboxList = ({ data }: { data: IndicatorData }) => {
           </div>
         </CollapsibleContent>
       </Collapsible>
-    );
   });
 };

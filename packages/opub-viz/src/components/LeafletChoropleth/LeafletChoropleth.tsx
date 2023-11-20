@@ -46,6 +46,9 @@ type MapProps = {
   /* zoom on click */
   zoomOnClick?: boolean;
 
+  /* zoom on mouse wheel */ 
+  scrollWheelZoom?: boolean;
+
   /* hide layers */
   hideLayers?: boolean;
 
@@ -105,6 +108,7 @@ const Map = ({
   mapCenter = [26.193, 92.773],
   zoomOnClick = true,
   fillOpacity,
+  scrollWheelZoom=true,
   hideScale = false,
   mapDataFn,
 }: MapProps & {
@@ -181,7 +185,7 @@ const Map = ({
 
   if (!unmountMap) {
     return (
-      <MapContainer center={mapCenter} zoom={mapZoom} ref={mapRef}>
+      <MapContainer scrollWheelZoom={scrollWheelZoom} center={mapCenter} zoom={mapZoom} ref={mapRef}>
         <TileLayer
           url={`https://cartodb-basemaps-{s}.global.ssl.fastly.net/${selectedLayer}/{z}/{x}/{y}.png`}
         />

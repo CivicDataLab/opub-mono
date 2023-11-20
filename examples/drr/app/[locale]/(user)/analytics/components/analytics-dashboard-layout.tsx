@@ -5,7 +5,6 @@ import React from 'react';
 import { cn } from '@/lib/utils';
 import { AnalyticsDashboardSidebar } from './analytics-sidebar';
 import styles from './styles.module.scss';
-import { Text } from 'opub-ui';
 
 interface DashboardLayoutProps {
   children?: React.ReactNode;
@@ -15,17 +14,16 @@ export function AnalyticsDashboardLayout({ children }: DashboardLayoutProps) {
   return (
     <React.Fragment>
       <div
-        className={cn(
-          'relative grow min-h-[calc(100%_-_48px)]',
-          'md:flex md:gap-1'
-        )}
+        className={cn('md:flex relative gap-1 grow min-h-[calc(100%_-_48px)]')}
       >
         <AnalyticsDashboardSidebar />
-        
-        <main className={cn(styles.Main, 'md:max-w-[calc(100vw_-_260px)] pl-4')}>
+
+        <main
+          className={cn(styles.Main, 'md:max-w-[calc(100vw_-_320px)] pl-4 h-[100vh] overflow-y-auto')}
+        >
           {children}
         </main>
       </div>
     </React.Fragment>
-  );
+  )
 }
