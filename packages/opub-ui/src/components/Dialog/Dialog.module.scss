@@ -8,7 +8,7 @@ $large-width: 980px;
 
 .Container {
   position: fixed;
-  z-index: var(--z-11);
+  z-index: var(--z-max);
   top: 0;
   right: 0;
   bottom: 0;
@@ -80,12 +80,13 @@ $large-width: 980px;
 }
 
 .Dialog {
-  --content-bg: var(--surface);
+  --content-bg: var(--surface-default);
   --show-from: translate(-50%, 5vh);
   --show-to: translate(-50%, 10vh);
   --hide-from: translate(-50%, 10vh);
   --hide-to: translate(-50%, 5vh);
   z-index: var(--z-1);
+  background-color: var(--content-bg);
 
   box-shadow: var(--shadow-2xl);
   width: 100%;
