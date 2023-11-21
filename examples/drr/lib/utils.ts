@@ -14,11 +14,19 @@ export function formatDate(input: string | number): string {
   });
 }
 
-export function deSlugify(slug : string) {
+export function deSlugify(slug: string) {
   // Replace hyphens or underscores with spaces
   const deSlugified = slug.replace(/[-_]/g, ' ');
   // Capitalize the first letter of each word
   return deSlugified.replace(/\b\w/g, (char) => char.toUpperCase());
+}
+
+export function slugify(string: string) {
+  return string
+    .toLowerCase()
+    .replace(/[^\w\s-]/g, '') // Remove non-word characters (excluding spaces and hyphens)
+    .replace(/\s+/g, '-') // Replace spaces with hyphens
+    .replace(/--+/g, '-'); // Replace consecutive hyphens with a single hyphen
 }
 
 const convertMap: any = {

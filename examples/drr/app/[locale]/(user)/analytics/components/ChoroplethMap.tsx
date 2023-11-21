@@ -23,14 +23,30 @@ export function MapComponent({ boundary }: { boundary: string }) {
     `/files/assam_block.json`
   );
 
+  // using ref since state will cause re-render
+  const districtNameRef = React.useRef<HTMLDivElement>(null);
+  function handleMouseOver(e: any) {
+    if (districtNameRef.current) {
+      districtNameRef.current.innerHTML = e.feature.properties.district
+        ? e.feature.properties.district
+        : e.feature.properties.revenue_ci;
+    }
+  }
+
+  function handleMouseOut(e: any) {
+    if (districtNameRef.current) {
+      districtNameRef.current.innerHTML =
+      e.feature.properties.district ? 'District' : 'Revenue Circle';
+    }
+  }
 
   const searchParams = useSearchParams();
   const indicatorParam = searchParams.get('indicator');
   const SubIndicatorParam = searchParams.get('sub-indicator');
 
-  const [hovered, setHovered] = React.useState('District');
-  const [FilteredRevenueCircleFeatures, setFilteredFeatures] = React.useState([]);
-
+  const [FilteredRevenueCircleFeatures, setFilteredFeatures] = React.useState(
+    []
+  );
 
   const mapDataFn = (value: number) => {
     return value >= 3
@@ -46,18 +62,23 @@ export function MapComponent({ boundary }: { boundary: string }) {
       : '#4575b4';
   };
 
-  const filterByRevenue = (features : any) => {
-    if(revenueMapFile.features) {
-      const filteredFeatures = revenueMapFile.features.filter((feature: { properties: { district_1: string; }; })  => feature.properties.district_1 === features?.district)
-      setFilteredFeatures(filteredFeatures)
+  const filterByRevenue = (features: any) => {
+    if (revenueMapFile.features) {
+      const filteredFeatures = revenueMapFile.features.filter(
+        (feature: { properties: { district_1: string } }) =>
+          feature.properties.district_1 === features?.district
+      );
+      setFilteredFeatures(filteredFeatures);
     }
-  }
+  };
 
   return (
-    <div className="relative w-[900px] rounded-05 hidden md:block">
+    <div className="relative w-full rounded-05 hidden md:block">
       {!mapLoading && !revenueMapLoading && (
         <LeafletChoropleth
-          features={ boundary === 'district' ? FilteredRevenueCircleFeatures.length !==0 ? FilteredRevenueCircleFeatures   :  mapFile.features : revenueMapFile.features}
+          features={
+            boundary === 'district' ? mapFile.features : revenueMapFile.features
+          }
           mapZoom={7.4}
           scrollWheelZoom={false}
           mapProperty={SubIndicatorParam || indicatorParam || 'composite-score'}
@@ -90,16 +111,18 @@ export function MapComponent({ boundary }: { boundary: string }) {
           ]}
           mapDataFn={mapDataFn}
           click={(e) => {
-            filterByRevenue(e.feature.properties)
+            filterByRevenue(e.feature.properties);
           }}
-          mouseover={(e) => {
-            setHovered(e.feature.properties.district);
-          }}
-          mouseout={() => {
-            setHovered('District');
-          }}
+          mouseover={handleMouseOver}
+          mouseout={handleMouseOut}
         />
       )}
+      <div
+        ref={districtNameRef}
+        className="py-2 px-4 bg-backgroundDefault absolute top-8 right-16 border-1 border-solid border-borderDefault rounded-1 z-max h-[40px]"
+      >
+        {boundary === 'district' ? 'District' : 'Revenue Circle'}
+      </div>
     </div>
   );
 }

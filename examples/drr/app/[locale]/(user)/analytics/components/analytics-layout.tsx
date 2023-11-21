@@ -87,7 +87,6 @@ export function Content({ indicator }: { indicator: string }) {
         <Separator />
         <RadioGroup
           onChange={(val, name) => {
-            console.log('change', val, name);
             setBoundary(val);
           }}
           name={boundary}
@@ -110,16 +109,8 @@ export function Content({ indicator }: { indicator: string }) {
           onChange={function Yu() {}}
           options={DropdownOptions}
         />
-        <div className="flex mt-4 gap-4 min-h-[400px]">
+        <div className="flex mt-4 min-h-[400px]">
           <MapComponent boundary={boundary} />
-          <FrimsDataTable
-            boundary={boundary}
-            rowData={
-              boundary === 'district'
-                ? data?.districtViewTableData?.frims_data
-                : revenueData?.data?.revCricleViewTableData?.frims_data
-            }
-          />
         </div>
       </div>
       <div className="h-fit-content">

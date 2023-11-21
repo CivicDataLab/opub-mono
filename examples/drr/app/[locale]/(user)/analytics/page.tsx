@@ -2,7 +2,6 @@ import React from 'react';
 import { Hydrate, dehydrate } from '@tanstack/react-query';
 
 import {
-  ANALYTICS_INDICATORS,
   ANALYTICS_INDICATORS_BY_CATEGORY,
   ANALYTICS_REVENUE_TABLE_DATA,
   ANALYTICS_TABLE_DATA,
@@ -34,10 +33,6 @@ export default async function Home({
 
   await queryClient.prefetchQuery([`indicatorsByCategory`], () =>
     GraphQL('analytics', ANALYTICS_INDICATORS_BY_CATEGORY)
-  );
-
-  await queryClient.prefetchQuery([`indicators`], () =>
-    GraphQL('analytics', ANALYTICS_INDICATORS)
   );
 
   const dehydratedState = dehydrate(queryClient);

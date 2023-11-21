@@ -9,13 +9,9 @@ import {
 } from '@radix-ui/react-collapsible';
 import { useQuery } from '@tanstack/react-query';
 import { Icon, RadioGroup, RadioItem, Text } from 'opub-ui';
-
-import {
-  ANALYTICS_INDICATORS,
-  ANALYTICS_INDICATORS_BY_CATEGORY,
-} from '@/config/graphql/analaytics-queries';
+import { ANALYTICS_INDICATORS_BY_CATEGORY } from '@/config/graphql/analaytics-queries';
 import { GraphQL } from '@/lib/api';
-import { cn } from '@/lib/utils';
+import { cn, slugify } from '@/lib/utils';
 import Icons from '@/components/icons';
 import styles from './AnalyticsDashboard.module.scss';
 import RadioButton from './RadioButton';
@@ -46,56 +42,7 @@ export function AnalyticsDashboardSidebar() {
     GraphQL('analytics', ANALYTICS_INDICATORS_BY_CATEGORY)
   );
 
-  const indicatorsData = useQuery([`indicators`], () =>
-    GraphQL('analytics', ANALYTICS_INDICATORS)
-  );
-
-  //* To Get the Indicators in a particular format so that they can be used in URL formation check line no . 163 to 168
-
-  /* 
-    Sample on how convertedData would look 
-    {
-      'Damages and Losses Indicators': [
-        {
-          indicator: 'damages-and-losses',
-          'sub-indicator': null,
-        },
-        {
-          indicator: 'damages-and-losses',
-          'sub-indicator': 'population-affected',
-        },
-        {
-          indicator: 'damages-and-losses',
-          'sub-indicator': 'crop-area-affected',
-        },
-      ]
-    }
-  */
-
-  const indicators = indicatorsData && indicatorsData?.data?.indicators;
-  let convertedData: IndicatorMapType | undefined = undefined;
-  if (indicators) {
-    indicators.forEach((item) => {
-      const category = item.category;
-      const slug = item.slug;
-      const parentName = item.parent ? item.parent.name : null;
-
-      if (convertedData && !convertedData[category || 'Indicator']) {
-        convertedData[category || 'Indicator'] = [];
-      }
-
-      let subIndicator = null;
-      if (parentName && parentName !== 'Composite Score') {
-        subIndicator = slug;
-      }
-
-      convertedData &&
-        convertedData[category || 'Indicator'].push({
-          indicator: slug || 'NA',
-          'sub-indicator': subIndicator || 'NA',
-        });
-    });
-  }
+  let convertedData: IndicatorMapType | undefined = {};
 
   //* To Get the Composite Score on the top of the data sequence
   const categories = data && data?.indicatorsByCategory;
@@ -124,6 +71,52 @@ export function AnalyticsDashboardSidebar() {
       structuredData = {
         indicatorsByCategory: orderedCategories,
       };
+    }
+
+    //* To Get the Indicators in a particular format so that they can be used in URL formation check line no . 176 to 180
+
+    /* 
+    Sample on how convertedData would look 
+    {
+      'Damages and Losses Indicators': [
+        {
+          indicator: 'damages-and-losses',
+          'sub-indicator': null,
+        },
+        {
+          indicator: 'damages-and-losses',
+          'sub-indicator': 'population-affected',
+        },
+        {
+          indicator: 'damages-and-losses',
+          'sub-indicator': 'crop-area-affected',
+        },
+      ]
+    }
+  */
+    for (let item of categories) {
+      let category = Object.keys(item)[0];
+
+      convertedData[category] = [];
+
+      // Flag to track the first nested key-value pair
+      let isFirst = true;
+
+      for (let subCategory in item[category]) {
+        let indicator = item[category][subCategory];
+
+        let convertedItem = {
+          indicator: isFirst
+            ? indicator
+            : item[category][Object.keys(item[category])[0]],
+          'sub-indicator': isFirst ? null : indicator,
+        };
+
+        // Set the flag to false after the first iteration
+        isFirst = false;
+
+        convertedData[category].push(convertedItem);
+      }
     }
   }
 
