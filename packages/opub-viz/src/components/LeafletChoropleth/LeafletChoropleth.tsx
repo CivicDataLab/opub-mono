@@ -1,5 +1,6 @@
 import { cn } from '../../utils';
 import { Popover, PopoverContent, PopoverTrigger } from '../ui';
+import { getRandomNumber } from '../../utils'
 import styles from './LeafletChoropleth.module.scss';
 import { IconBoxMultiple } from '@tabler/icons-react';
 import React from 'react';
@@ -174,7 +175,7 @@ const Map = ({
       opacity: 1,
       color: selectedLayer?.includes('dark')
         ? '#eee'
-        : 'var(--mapareadistrict-border)',
+        : '#889096',
       fillOpacity: fillOpacity ? fillOpacity : 0.5,
     };
   };
@@ -193,7 +194,7 @@ const Map = ({
           <>
             <GeoJSON
               data={feature}
-              key={feature[0]['properties']['composite-score']}
+              key={getRandomNumber(1 , 10)}
               style={style}
               onEachFeature={onEachFeature}
             />

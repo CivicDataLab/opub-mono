@@ -10,7 +10,10 @@ import {
 import { useQuery } from '@tanstack/react-query';
 import { Icon, RadioGroup, RadioItem, Text } from 'opub-ui';
 
-import { ANALYTICS_INDICATORS_BY_CATEGORY } from '@/config/graphql/analaytics-queries';
+import {
+  ANALYTICS_INDICATORS,
+  ANALYTICS_INDICATORS_BY_CATEGORY,
+} from '@/config/graphql/analaytics-queries';
 import { GraphQL } from '@/lib/api';
 import { cn } from '@/lib/utils';
 import Icons from '@/components/icons';
@@ -38,75 +41,61 @@ type IndicatorMapType = {
   }>;
 };
 
-const IndicatorMap: IndicatorMapType = {
-  'Damages and Losses Indicators': [
-    {
-      indicator: 'damages-and-losses',
-      'sub-indicator': null,
-    },
-    {
-      indicator: 'damages-and-losses',
-      'sub-indicator': 'population-affected',
-    },
-    {
-      indicator: 'damages-and-losses',
-      'sub-indicator': 'crop-area-affected',
-    },
-  ],
-  'Exposure Indicators': [
-    {
-      indicator: 'exposure',
-      'sub-indicator': null,
-    },
-    {
-      indicator: 'exposure',
-      'sub-indicator': 'population',
-    },
-    {
-      indicator: 'exposure',
-      'sub-indicator': 'sex-ratio',
-    },
-  ],
-  'Vulnerability Indicators': [
-    {
-      indicator: 'vulnerability',
-      'sub-indicator': null,
-    },
-  ],
-  'Flood Hazard Indicators': [
-    {
-      indicator: 'flood-hazard',
-      'sub-indicator': null,
-    },
-    {
-      indicator: 'flood-hazard',
-      'sub-indicator': 'elevation',
-    },
-    {
-      indicator: 'flood-hazard',
-      'sub-indicator': 'inundation',
-    },
-    {
-      indicator: 'flood-hazard',
-      'sub-indicator': 'rainfall',
-    },
-    {
-      indicator: 'flood-hazard',
-      'sub-indicator': 'river-water-level',
-    },
-  ],
-  'Governance Response Indicators': [
-    {
-      indicator: 'governance-response',
-      'sub-indicator': null,
-    },
-  ],
-};
-
 export function AnalyticsDashboardSidebar() {
-  const { data }: Data = useQuery([`indicators`], () =>
+  const { data }: Data = useQuery([`indicatorsByCategory`], () =>
     GraphQL('analytics', ANALYTICS_INDICATORS_BY_CATEGORY)
   );
+
+  const indicatorsData = useQuery([`indicators`], () =>
+    GraphQL('analytics', ANALYTICS_INDICATORS)
+  );
+
+  //* To Get the Indicators in a particular format so that they can be used in URL formation check line no . 163 to 168
+
+  /* 
+    Sample on how convertedData would look 
+    {
+      'Damages and Losses Indicators': [
+        {
+          indicator: 'damages-and-losses',
+          'sub-indicator': null,
+        },
+        {
+          indicator: 'damages-and-losses',
+          'sub-indicator': 'population-affected',
+        },
+        {
+          indicator: 'damages-and-losses',
+          'sub-indicator': 'crop-area-affected',
+        },
+      ]
+    }
+  */
+
+  const indicators = indicatorsData && indicatorsData?.data?.indicators;
+  let convertedData: IndicatorMapType | undefined = undefined;
+  if (indicators) {
+    indicators.forEach((item) => {
+      const category = item.category;
+      const slug = item.slug;
+      const parentName = item.parent ? item.parent.name : null;
+
+      if (convertedData && !convertedData[category || 'Indicator']) {
+        convertedData[category || 'Indicator'] = [];
+      }
+
+      let subIndicator = null;
+      if (parentName && parentName !== 'Composite Score') {
+        subIndicator = slug;
+      }
+
+      convertedData &&
+        convertedData[category || 'Indicator'].push({
+          indicator: slug || 'NA',
+          'sub-indicator': subIndicator || 'NA',
+        });
+    });
+  }
 
   //* To Get the Composite Score on the top of the data sequence
   const categories = data && data?.indicatorsByCategory;
@@ -147,13 +136,24 @@ export function AnalyticsDashboardSidebar() {
       )}
     >
       <div className="px-4 h-full pt-12 bg-baseCyanSolid1 border-r-1 border-solid">
-        {structuredData && <IndicatorCheckboxList data={structuredData} />}
+        {structuredData && (
+          <IndicatorCheckboxList
+            indicators={convertedData}
+            data={structuredData}
+          />
+        )}
       </div>
     </aside>
   );
 }
 
-export const IndicatorCheckboxList = ({ data }: { data: IndicatorData }) => {
+export const IndicatorCheckboxList = ({
+  data,
+  indicators,
+}: {
+  data: IndicatorData;
+  indicators: IndicatorMapType | undefined;
+}) => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const indicatorParam = searchParams.get('indicator');
@@ -163,15 +163,13 @@ export const IndicatorCheckboxList = ({ data }: { data: IndicatorData }) => {
   return data?.indicatorsByCategory?.map((indicator, index: React.Key) => {
     const categoryName = Object.keys(indicator)[0];
     const children = indicator[categoryName];
-    
-     return <Collapsible
-        defaultOpen
-        key={index}
-        className="rounded-1"
-      >
+    return (
+      <Collapsible defaultOpen key={index} className="rounded-1">
         <div className=" bg-surfaceHighlightSubdued max-w-full min-w-max bg-surfaceNeutral rounded-1 border-t-0 border-1 border-solid border-borderSubdued mb-5">
           <CollapsibleTrigger className={styles.CollapseTrigger}>
-            <Text className='text-textDefault' fontWeight="bold" key={index} >{categoryName}</Text>
+            <Text className="text-textDefault" fontWeight="bold" key={index}>
+              {categoryName}
+            </Text>
             <Icon source={Icons.down} />
           </CollapsibleTrigger>
         </div>
@@ -181,14 +179,16 @@ export const IndicatorCheckboxList = ({ data }: { data: IndicatorData }) => {
             {Object.entries(children).map(([key, value], index) => (
               <RadioButton
                 changed={() => {
-                  IndicatorMap[categoryName][index]['sub-indicator']
-                    ? router.push(
-                        `/analytics/?indicator=${IndicatorMap[categoryName][index]['indicator']}&sub-indicator=${IndicatorMap[categoryName][index]['sub-indicator']}`
-                      )
-                    : router.push(
-                        `/analytics/?indicator=${IndicatorMap[categoryName][index]['indicator']}`
-                      ),
-                    setRadioValue(value);
+                  if (indicators) {
+                    indicators[categoryName][index]['sub-indicator']
+                      ? router.push(
+                          `/analytics/?indicator=${indicators[categoryName][index]['indicator']}&sub-indicator=${indicators[categoryName][index]['sub-indicator']}`
+                        )
+                      : router.push(
+                          `/analytics/?indicator=${indicators[categoryName][index]['indicator']}`
+                        ),
+                      setRadioValue(value);
+                  }
                 }}
                 key={key}
                 id={value}
@@ -200,5 +200,6 @@ export const IndicatorCheckboxList = ({ data }: { data: IndicatorData }) => {
           </div>
         </CollapsibleContent>
       </Collapsible>
+    );
   });
 };

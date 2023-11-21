@@ -15,7 +15,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
 const documents = {
     "\nquery tableData($indcFilter: IndicatorFilter){\n  districtViewTableData(indcFilter: $indcFilter)\n}\n": types.TableDataDocument,
     "\nquery revenueCircleTable($indcFilter: IndicatorFilter){\n  revCricleViewTableData(indcFilter: $indcFilter)\n}\n": types.RevenueCircleTableDocument,
-    "\nquery indicators{\n    indicators {\n      name\n      slug\n  }\n}\n": types.IndicatorsDocument,
+    "\nquery indicators{\n    indicators {\n      name\n      slug\n      category\n      parent{\n        name\n      }\n  }\n}\n": types.IndicatorsDocument,
     "query indicatorsByQuery{\n  indicatorsByCategory\n}\n": types.IndicatorsByQueryDocument,
 };
 
@@ -44,7 +44,7 @@ export function graphql(source: "\nquery revenueCircleTable($indcFilter: Indicat
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\nquery indicators{\n    indicators {\n      name\n      slug\n  }\n}\n"): (typeof documents)["\nquery indicators{\n    indicators {\n      name\n      slug\n  }\n}\n"];
+export function graphql(source: "\nquery indicators{\n    indicators {\n      name\n      slug\n      category\n      parent{\n        name\n      }\n  }\n}\n"): (typeof documents)["\nquery indicators{\n    indicators {\n      name\n      slug\n      category\n      parent{\n        name\n      }\n  }\n}\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

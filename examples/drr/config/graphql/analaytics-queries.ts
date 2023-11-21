@@ -17,6 +17,10 @@ query indicators{
     indicators {
       name
       slug
+      category
+      parent{
+        name
+      }
   }
 }
 `)
