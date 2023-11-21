@@ -104,14 +104,19 @@ export function Section({
   );
 
   return hasMultipleSections ? (
-    <Box
-      as="li"
+    <li
       role="presentation"
-      {...(!isFirst && { borderBlockStart: 'divider' })}
-      {...(!section.title && { paddingBlockStart: '2' })}
+      style={{
+        ...(!isFirst && {
+          borderBlockStart: 'var(--border-default)',
+          borderBlockStartWidth: 'var(--space-025)',
+          borderBlockStartStyle: 'solid',
+        }),
+        ...(!section.title && { paddingBlockStart: 'var(--space-2)' }),
+      }}
     >
       {sectionMarkup}
-    </Box>
+    </li>
   ) : (
     sectionMarkup
   );
