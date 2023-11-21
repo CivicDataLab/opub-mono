@@ -1,14 +1,6 @@
-import { Button } from '../Button';
 import { Icon } from '../Icon';
-import { Popover } from '../Popover';
 import { ActionList } from './ActionList';
-import {
-  DeleteMinor,
-  EditMinor,
-  ExportMinor,
-  ImportMinor,
-  TickMinor,
-} from '@shopify/polaris-icons';
+import { ExportMinor, ImportMinor, TickMinor } from '@shopify/polaris-icons';
 import { Meta, StoryObj } from '@storybook/react';
 
 /**
@@ -17,6 +9,7 @@ import { Meta, StoryObj } from '@storybook/react';
  * Reference: https://polaris.shopify.com/components/lists/action-list
  */
 const meta = {
+  title: 'Verified/ActionList',
   component: ActionList,
 } satisfies Meta<typeof ActionList>;
 
