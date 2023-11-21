@@ -113,6 +113,9 @@ export function ActionList({
       ref={actionListRef}
       role={elementRole}
       tabIndex={elementTabIndex}
+      shadow="popover"
+      width="fit-content"
+      borderRadius="2"
     >
       {listeners}
       {sectionMarkup}

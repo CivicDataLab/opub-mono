@@ -69,7 +69,7 @@ export function Section({
       paddingBlockEnd="2"
       paddingInlineEnd="4"
     >
-      <Text as="p" variant="headingXs">
+      <Text as="p" variant="bodySm" fontWeight="semibold">
         {section.title}
       </Text>
     </Box>

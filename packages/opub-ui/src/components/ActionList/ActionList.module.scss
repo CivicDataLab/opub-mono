@@ -25,22 +25,23 @@
   }
 
   &:hover {
-    background-color: var(--surface-hovered);
+    background-color: var(--action-secondary-neutral-hovered);
     text-decoration: none;
-    outline: var(--border-width-3) solid transparent;
+    outline: var(--border-width-2) solid transparent;
   }
 
   &:active {
-    background-color: var(--surface-pressed);
+    background-color: var(--action-secondary-interactive-default);
 
     svg {
-      color: var(--interactive);
+      color: var(--icon-interactive);
+      fill: var(--icon-interactive);
     }
   }
 
   &:focus-visible:not(:active) {
     @include focus-ring($style: 'focused');
-    outline: var(--border-width-3) solid transparent;
+    outline: var(--border-width-2) solid transparent;
   }
 
   &:visited {
@@ -52,7 +53,8 @@
     background-color: var(--surface-selected);
 
     svg {
-      color: var(--interactive);
+      color: var(--icon-interactive);
+      fill: var(--icon-interactive);
     }
 
     &::before {
@@ -65,15 +67,16 @@
 
     svg {
       color: var(--icon-critical);
+      fill: var(--icon-critical);
     }
 
     &:hover {
-      background-color: var(--surface-critical-subdued-hovered);
+      background-color: var(--action-secondary-critical-default);
     }
 
     &:active,
     &.active {
-      background-color: var(--surface-critical-subdued-pressed);
+      background-color: var(--action-secondary-critical-pressed);
     }
   }
 
@@ -84,6 +87,7 @@
     .Prefix svg,
     .Suffix svg {
       color: var(--icon-disabled);
+      fill: var(--icon-disabled);
     }
   }
 }
@@ -105,12 +109,12 @@
   background-position: center center;
 
   svg {
-    color: var(--icon);
+    color: var(--icon-default);
   }
 }
 
 .Suffix svg {
-  color: var(--icon);
+  color: var(--icon-default);
 }
 
 .Text {
