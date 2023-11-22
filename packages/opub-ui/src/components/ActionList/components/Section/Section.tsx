@@ -2,7 +2,7 @@ import type {
   ActionListItemDescriptor,
   ActionListSection,
 } from '../../../../types/actionlist';
-import { Box } from '../../../Box';
+// import { Box } from '../../../Box';
 import { MenuContext } from '../../../Menu/Menu';
 import { Text } from '../../../Text';
 import { Item } from '../Item';
@@ -63,16 +63,11 @@ export function Section({
   );
 
   const titleMarkup = section.title ? (
-    <Box
-      paddingBlockStart="4"
-      paddingInlineStart="4"
-      paddingBlockEnd="2"
-      paddingInlineEnd="4"
-    >
+    <div style={{ padding: 'var(--space-2)' }}>
       <Text as="p" variant="bodySm" fontWeight="semibold">
         {section.title}
       </Text>
-    </Box>
+    </div>
   ) : null;
 
   let sectionRole: 'menu' | 'presentation' | undefined;
@@ -91,15 +86,16 @@ export function Section({
   const sectionMarkup = (
     <>
       {titleMarkup}
-      <Box
-        as="ul"
-        padding="2"
-        {...(hasMultipleSections && { paddingBlockStart: '0' })}
-        {...(sectionRole && { role: sectionRole })}
+      <ul
+        style={{
+          ...(hasMultipleSections && { paddingBlockStart: '0' }),
+          ...(sectionRole && { role: sectionRole }),
+          padding: 'var(--space-05)',
+        }}
         tabIndex={!hasMultipleSections ? -1 : undefined}
       >
         {actionMarkup}
-      </Box>
+      </ul>
     </>
   );
 

@@ -9,8 +9,8 @@ import {
   wrapFocusNextFocusableMenuItem,
   wrapFocusPreviousFocusableMenuItem,
 } from '../../utils/focus';
-import { Box } from '../Box';
 import { KeypressListener } from '../KeypressListener';
+import styles from './ActionList.module.scss';
 import { Item, ItemProps } from './components/Item';
 import { Section } from './components/Section';
 import { useRef } from 'react';
@@ -107,19 +107,18 @@ export function ActionList({
       </>
     ) : null;
 
+  const Element = hasMultipleSections ? 'ul' : 'div';
+
   return (
-    <Box
-      as={hasMultipleSections ? 'ul' : 'div'}
+    <Element
       ref={actionListRef}
       role={elementRole}
       tabIndex={elementTabIndex}
-      shadow="popover"
-      width="fit-content"
-      borderRadius="2"
+      className={styles.ActionList}
     >
       {listeners}
       {sectionMarkup}
-    </Box>
+    </Element>
   );
 }
 

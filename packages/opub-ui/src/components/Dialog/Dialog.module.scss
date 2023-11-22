@@ -64,7 +64,7 @@ $large-width: 980px;
 }
 
 .Overlay {
-  background-color: var(--backdrop);
+  background-color: var(--surface-backdrop);
   position: fixed;
   inset: 0;
   will-change: transform, opacity;
@@ -88,7 +88,7 @@ $large-width: 980px;
   z-index: var(--z-1);
   background-color: var(--content-bg);
 
-  box-shadow: var(--shadow-2xl);
+  box-shadow: var(--shadow-basic-2xl);
   width: 100%;
   max-height: calc(100vh - #{$vertical-spacing});
 

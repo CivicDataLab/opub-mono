@@ -1,5 +1,11 @@
 @import '../../../styles/common';
 
+.ActionList {
+  box-shadow: var(--shadow-element-popover);
+  width: fit-content;
+  border-radius: var(--border-radius-2);
+}
+
 .Item {
   --op-action-list-image-size: 20px;
   --op-action-list-item-min-height: var(--space-10);

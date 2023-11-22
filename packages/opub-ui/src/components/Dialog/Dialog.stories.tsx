@@ -1,6 +1,6 @@
-import { Meta, StoryObj } from '@storybook/react';
 import { Button } from '../Button';
 import { Dialog } from './Dialog';
+import { Meta, StoryObj } from '@storybook/react';
 
 /**
  * A window overlaid on either the primary window or another dialog window, rendering the content underneath inert.
@@ -8,6 +8,7 @@ import { Dialog } from './Dialog';
  * Reference: https://www.radix-ui.com/docs/primitives/components/dialog
  */
 const meta = {
+  title: 'Verified/Dialog',
   component: Dialog.Content,
 } satisfies Meta<typeof Dialog.Content>;
 
