@@ -1,6 +1,6 @@
 .Pip {
   --pc-pip-size: var(--space-2);
-  --pc-pip-color: var(--icon);
+  --pc-pip-color: var(--icon-default);
   display: inline-block;
   color: var(--pc-pip-color);
   height: var(--pc-pip-size);
@@ -19,11 +19,11 @@
 }
 
 .statusNew {
-  --pc-pip-color: var(--icon);
+  --pc-pip-color: var(--icon-default);
 }
 
 .statusAttention {
-  --pc-pip-color: var(--icon-attention);
+  --pc-pip-color: var(--icon-highlight);
 }
 
 .statusWarning {

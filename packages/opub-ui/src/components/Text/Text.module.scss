@@ -3,7 +3,7 @@
 .root {
   margin: 0;
   text-align: inherit;
-  color: var(--text);
+  color: var(--text-default);
 }
 
 .block {
@@ -37,7 +37,7 @@
 }
 
 .default {
-  color: var(--text);
+  color: var(--text-default);
 }
 
 .inherit {
