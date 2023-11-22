@@ -229,7 +229,7 @@ const Button = React.forwardRef(
           tabIndex={disclosureDisabled ? -1 : undefined}
         >
           <span className={styles.Icon}>
-            <Icon source={IconChevronDown} fill="surface" />
+            <Icon source={IconChevronDown} />
           </span>
         </button>
       );

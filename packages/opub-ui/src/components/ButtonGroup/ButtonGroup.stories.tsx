@@ -1,6 +1,6 @@
-import { Meta, StoryObj } from '@storybook/react';
 import { Button } from '../Button';
 import { ButtonGroup } from './ButtonGroup';
+import { Meta, StoryObj } from '@storybook/react';
 
 /**
  * Button group displays multiple related actions stacked or in a horizontal row to help with arrangement and spacing.
@@ -8,6 +8,7 @@ import { ButtonGroup } from './ButtonGroup';
  * Reference: https://polaris.shopify.com/components/actions/button-group
  */
 const meta = {
+  title: 'Verified/ButtonGroup',
   component: ButtonGroup,
 } satisfies Meta<typeof ButtonGroup>;
 
