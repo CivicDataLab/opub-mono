@@ -61,7 +61,7 @@ const Calendar = forwardRef(
             disabled={disabledPrev}
             {...othersPrev}
           >
-            <Icon source={IconArrowLeft} color="base" />
+            <Icon source={IconArrowLeft} />
           </button>
 
           <Text variant="bodyMd">{title}</Text>
@@ -70,7 +70,7 @@ const Calendar = forwardRef(
             disabled={disabledNext}
             {...othersNext}
           >
-            <Icon source={IconArrowRight} color="base" />
+            <Icon source={IconArrowRight} />
           </button>
         </div>
         <CalendarGrid state={state} />
