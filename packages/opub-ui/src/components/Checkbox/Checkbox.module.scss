@@ -77,14 +77,14 @@
 
     &.Disabled {
       &::before {
-        background-color: var(--interactive-disabled);
+        background-color: var(--action-primary-disabled);
       }
     }
   }
 }
 
 .Indicator {
-  @include recolor-icon(var(--icon-on-interactive));
+  @include recolor-icon(var(--icon-onbg-default));
 
   position: absolute;
   top: 50%;
