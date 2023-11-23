@@ -1,9 +1,9 @@
-import { Meta, StoryObj } from '@storybook/react';
 import { ActionList } from '../ActionList';
 import { Button } from '../Button';
 import { Select } from '../Select';
 import { TextField } from '../TextField';
 import { Popover } from './Popover';
+import { Meta, StoryObj } from '@storybook/react';
 
 /**
  * Popovers are small overlays that open on demand
@@ -11,6 +11,7 @@ import { Popover } from './Popover';
  * Reference: https://www.radix-ui.com/docs/primitives/components/popover
  */
 const meta = {
+  title: 'Verified/Popover',
   component: Popover.Content,
   argTypes: {
     children: {

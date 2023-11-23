@@ -12,8 +12,7 @@ export type Color =
   | 'interactive'
   | 'onBgDefault'
   | 'onBgSubdued'
-  | 'onBgDisabled'
-  | string;
+  | 'onBgDisabled';
 
 export type IconSource =
   | React.FunctionComponent<React.SVGProps<SVGSVGElement>>
