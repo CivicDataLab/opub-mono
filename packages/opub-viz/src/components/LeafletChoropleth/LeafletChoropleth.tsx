@@ -1,6 +1,6 @@
 import { cn } from '../../utils';
+import { getRandomNumber } from '../../utils';
 import { Popover, PopoverContent, PopoverTrigger } from '../ui';
-import { getRandomNumber } from '../../utils'
 import styles from './LeafletChoropleth.module.scss';
 import { IconBoxMultiple } from '@tabler/icons-react';
 import React from 'react';
@@ -47,7 +47,7 @@ type MapProps = {
   /* zoom on click */
   zoomOnClick?: boolean;
 
-  /* zoom on mouse wheel */ 
+  /* zoom on mouse wheel */
   scrollWheelZoom?: boolean;
 
   /* hide layers */
@@ -109,7 +109,7 @@ const Map = ({
   mapCenter = [26.193, 92.773],
   zoomOnClick = true,
   fillOpacity,
-  scrollWheelZoom=true,
+  scrollWheelZoom = true,
   hideScale = false,
   mapDataFn,
 }: MapProps & {
@@ -173,9 +173,7 @@ const Map = ({
       fillColor: mapDataFn(Number(feature.properties[mapProperty]), 'default'),
       weight: 1,
       opacity: 1,
-      color: selectedLayer?.includes('dark')
-        ? '#eee'
-        : '#889096',
+      color: selectedLayer?.includes('dark') ? '#eee' : '#889096',
       fillOpacity: fillOpacity ? fillOpacity : 0.5,
     };
   };
@@ -186,7 +184,18 @@ const Map = ({
 
   if (!unmountMap) {
     return (
-      <MapContainer scrollWheelZoom={scrollWheelZoom} center={mapCenter} zoom={mapZoom} ref={mapRef}>
+      <MapContainer
+        whenReady={() =>
+          setInterval(() => {
+            mapRef.current.invalidateSize();
+          }, 100)
+        }
+        style={{ position: 'absolute' }}
+        scrollWheelZoom={scrollWheelZoom}
+        center={mapCenter}
+        zoom={mapZoom}
+        ref={mapRef}
+      >
         <TileLayer
           url={`https://cartodb-basemaps-{s}.global.ssl.fastly.net/${selectedLayer}/{z}/{x}/{y}.png`}
         />
@@ -194,7 +203,7 @@ const Map = ({
           <>
             <GeoJSON
               data={feature}
-              key={getRandomNumber(1 , 10)}
+              key={getRandomNumber(1, 10)}
               style={style}
               onEachFeature={onEachFeature}
             />

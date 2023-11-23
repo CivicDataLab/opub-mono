@@ -24,6 +24,7 @@ import {
   IconSearch,
   IconSquareRoundedArrowRight,
   IconUserCog,
+  IconChevronsLeft,
   TablerIconsProps,
 } from '@tabler/icons-react';
 
@@ -31,6 +32,7 @@ export const Icons: {
   [key: string]: (props: TablerIconsProps) => React.ReactElement;
 } = {
   back: IconArrowLeft,
+  doubleLeft: IconChevronsLeft,
   logo: IconAnchor,
   dataset: IconDatabase,
   datasetSettings: IconDatabaseCog,

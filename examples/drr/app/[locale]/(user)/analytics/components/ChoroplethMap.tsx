@@ -12,7 +12,6 @@ const LeafletChoropleth = dynamic(
 );
 
 export function MapComponent({ boundary }: { boundary: string }) {
-
   const { data: mapFile, isLoading: mapLoading } = useFetch(
     `assam-mapFile`,
     `/files/assam.json`
@@ -35,8 +34,9 @@ export function MapComponent({ boundary }: { boundary: string }) {
 
   function handleMouseOut(e: any) {
     if (districtNameRef.current) {
-      districtNameRef.current.innerHTML =
-      e.feature.properties.district ? 'District' : 'Revenue Circle';
+      districtNameRef.current.innerHTML = e.feature.properties.district
+        ? 'District'
+        : 'Revenue Circle';
     }
   }
 

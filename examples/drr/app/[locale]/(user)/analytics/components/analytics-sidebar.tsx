@@ -9,6 +9,7 @@ import {
 } from '@radix-ui/react-collapsible';
 import { useQuery } from '@tanstack/react-query';
 import { Icon, RadioGroup, RadioItem, Text } from 'opub-ui';
+
 import { ANALYTICS_INDICATORS_BY_CATEGORY } from '@/config/graphql/analaytics-queries';
 import { GraphQL } from '@/lib/api';
 import { cn, slugify } from '@/lib/utils';
@@ -37,7 +38,11 @@ type IndicatorMapType = {
   }>;
 };
 
-export function AnalyticsDashboardSidebar() {
+export function AnalyticsDashboardSidebar({
+  isCollapsed,
+}: {
+  isCollapsed: Boolean;
+}) {
   const { data }: Data = useQuery([`indicatorsByCategory`], () =>
     GraphQL('analytics', ANALYTICS_INDICATORS_BY_CATEGORY)
   );
@@ -125,10 +130,17 @@ export function AnalyticsDashboardSidebar() {
       className={cn(
         'pr-2 overflow-hidden bg-surfaceDefault shadow-basicMd',
         'hidden z-1 shadow-inset basis-[320px] shrink-0 md:block',
+        isCollapsed && 'basis-[32px]',
+        'border-r-1 border-solid border-borderSubdued',
         styles.Collapse
       )}
     >
-      <div className="px-4 h-full pt-12 bg-baseCyanSolid1 border-r-1 border-solid">
+      <div
+        className={cn(
+          'px-4 h-full pt-12 bg-baseCyanSolid1',
+          isCollapsed && 'hidden'
+        )}
+      >
         {structuredData && (
           <IndicatorCheckboxList
             indicators={convertedData}
@@ -150,7 +162,6 @@ export const IndicatorCheckboxList = ({
   const router = useRouter();
   const searchParams = useSearchParams();
   const indicatorParam = searchParams.get('indicator');
-
   const [radioValue, setRadioValue] = React.useState(indicatorParam);
 
   return data?.indicatorsByCategory?.map((indicator, index: React.Key) => {
@@ -167,7 +178,7 @@ export const IndicatorCheckboxList = ({
           </CollapsibleTrigger>
         </div>
 
-        <CollapsibleContent className="pb-4 px-2 max-w-full min-w-max">
+        <CollapsibleContent className="pb-4 px-2 max-w-full min-w-max data-[state=open]:mt-[-12px]">
           <div className="flex flex-col">
             {Object.entries(children).map(([key, value], index) => (
               <RadioButton

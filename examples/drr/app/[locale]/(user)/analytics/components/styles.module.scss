@@ -59,3 +59,19 @@
   opacity: 0.5;
   pointer-events: none;
 }
+
+.Collapse {
+  transition: flex-basis var(--duration-300) var(--ease-in-out);
+}
+
+.CollapseBtn {
+  transition: transform var(--duration-300) var(--ease-in-out);
+}
+
+.Collapsed {
+  transform: translateX(-290px);
+
+  & > span {
+    transform: rotate(180deg);
+  }
+}
