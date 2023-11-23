@@ -53,7 +53,12 @@ export function PropsVariationSection({
                   minWidth: 140,
                 }}
               >
-                <div>
+                <div
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                  }}
+                >
                   <Component {...common} {...xProps} {...yProps} />
                 </div>
               </td>

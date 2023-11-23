@@ -61,12 +61,14 @@ export const PrimaryBasic = () => {
 
         'large + with icon': {
           size: 'large',
-          icon: <Icon source={IconSelector} />,
+          icon: <Icon source={IconSelector} color="onBgDefault" />,
         },
-        'medium + with icon': { icon: <Icon source={IconSelector} /> },
+        'medium + with icon': {
+          icon: <Icon source={IconSelector} color="onBgDefault" />,
+        },
         'slim + with icon': {
           size: 'slim',
-          icon: <Icon source={IconSelector} />,
+          icon: <Icon source={IconSelector} color="onBgDefault" />,
         },
 
         loading: { loading: true },
