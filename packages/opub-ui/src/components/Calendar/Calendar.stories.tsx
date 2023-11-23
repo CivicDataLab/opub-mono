@@ -1,8 +1,8 @@
+import { Calendar } from './Calendar';
+import { RangeCalendar } from './RangeCalendar';
 import { isWeekend } from '@internationalized/date';
 import { Meta, StoryObj } from '@storybook/react';
 import { useLocale } from 'react-aria';
-import { Calendar } from './Calendar';
-import { RangeCalendar } from './RangeCalendar';
 
 /**
  * A calendar displays one or more date grids and allows users to select a single date.
@@ -10,6 +10,7 @@ import { RangeCalendar } from './RangeCalendar';
  * Reference: https://react-spectrum.adobe.com/react-aria/useCalendar.html
  */
 const meta = {
+  title: 'Verified/Calendar',
   component: Calendar,
 } satisfies Meta<typeof Calendar>;
 
