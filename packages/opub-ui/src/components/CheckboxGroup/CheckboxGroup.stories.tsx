@@ -1,12 +1,13 @@
-import { Meta, StoryObj } from '@storybook/react';
 import { Button } from '../Button';
 import { FormLayout } from '../FormLayout';
 import { CheckboxGroup } from './CheckboxGroup';
+import { Meta, StoryObj } from '@storybook/react';
 
 /**
  * A Checkbox Group lets you create a list of grouped checkboxes.
  */
 const meta = {
+  title: 'Verified/CheckboxGroup',
   component: CheckboxGroup,
 } satisfies Meta<typeof CheckboxGroup>;
 
