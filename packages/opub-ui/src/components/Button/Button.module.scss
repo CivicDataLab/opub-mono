@@ -70,7 +70,7 @@
   background: var(--button-color);
   border-width: 0;
   border-color: transparent;
-  box-shadow: var(--shadow-button-default), var(--shadow-inset-button);
+  box-shadow: var(--shadow-button-default);
 
   color: var(--button-text);
 
@@ -83,13 +83,13 @@
 
   &:focus {
     border-color: $border-color;
-    box-shadow: var(--shadow-button-default), var(--shadow-inset-button);
+    box-shadow: var(--shadow-button-default);
   }
 
   &:active {
     background: var(--button-color-active);
     border-color: $border-color;
-    box-shadow: var(--shadow-button-default), var(--shadow-inset-button);
+    box-shadow: var(--shadow-button-default);
   }
 
   &.pressed {
@@ -97,12 +97,12 @@
 
     background: var(--button-color-depressed);
     border-color: $border-color;
-    box-shadow: var(--shadow-button-default), var(--shadow-inset-button);
+    box-shadow: var(--shadow-button-default);
 
     &:hover,
     &:focus {
       background: var(--button-color-depressed);
-      box-shadow: var(--shadow-button-default), var(--shadow-inset-button);
+      box-shadow: var(--shadow-button-default);
     }
   }
 }

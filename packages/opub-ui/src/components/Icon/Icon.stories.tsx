@@ -1,7 +1,7 @@
 import { PropsVariationSection } from '../../utils';
 import { Icon } from './Icon';
-import { AddCodeMajor } from '@shopify/polaris-icons';
 import { Meta, StoryObj } from '@storybook/react';
+import { IconCode } from '@tabler/icons-react';
 
 /**
  * Icons are used to visually communicate core parts of the product and available actions.
@@ -18,17 +18,21 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    source: AddCodeMajor,
+    source: IconCode,
     color: 'default',
+    backdrop: true,
   },
 };
 
 export const Colors = () => (
   <PropsVariationSection
     component={Icon}
-    common={{ source: AddCodeMajor }}
+    common={{ source: IconCode }}
     xAxis={{
       default: {},
+      backdrop: {
+        backdrop: true,
+      },
     }}
     yAxis={{
       default: {},
@@ -48,7 +52,7 @@ export const BgColors = () => (
   >
     <PropsVariationSection
       component={Icon}
-      common={{ source: AddCodeMajor }}
+      common={{ source: IconCode }}
       xAxis={{
         default: {},
       }}

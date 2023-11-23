@@ -191,6 +191,7 @@ const Button = React.forwardRef(
               source={
                 loading ? 'placeholder' : getDisclosureIconSource(disclosure)
               }
+              color="onBgDefault"
             />
           )}
         </div>
@@ -229,7 +230,7 @@ const Button = React.forwardRef(
           tabIndex={disclosureDisabled ? -1 : undefined}
         >
           <span className={styles.Icon}>
-            <Icon source={IconChevronDown} />
+            <Icon source={IconChevronDown} color="onBgDefault" />
           </span>
         </button>
       );

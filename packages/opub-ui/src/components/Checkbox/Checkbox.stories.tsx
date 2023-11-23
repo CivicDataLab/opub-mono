@@ -1,6 +1,6 @@
-import { Meta, StoryObj } from '@storybook/react';
 import { PropsVariationSection } from '../../utils/helpers';
 import { Checkbox } from './Checkbox';
+import { Meta, StoryObj } from '@storybook/react';
 
 /**
  * A control that allows the user to toggle between checked and not checked.
@@ -8,6 +8,7 @@ import { Checkbox } from './Checkbox';
  * Reference: https://www.radix-ui.com/docs/primitives/components/checkbox
  */
 const meta = {
+  title: 'Verified/Checkbox',
   component: Checkbox,
 } satisfies Meta<typeof Checkbox>;
 
