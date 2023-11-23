@@ -22,7 +22,11 @@ export function DataTableView<TData>({
     <>
       <Popover>
         <Popover.Trigger>
-          <Button icon={<Icon source={IconAdjustmentsHorizontal} />}>
+          <Button
+            icon={
+              <Icon source={IconAdjustmentsHorizontal} color="onBgDefault" />
+            }
+          >
             View
           </Button>
         </Popover.Trigger>

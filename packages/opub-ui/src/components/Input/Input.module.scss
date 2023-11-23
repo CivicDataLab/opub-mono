@@ -6,17 +6,18 @@ $spinner-icon-size: 12px;
 .TextField {
   --opub-text-field-contents: 20;
   --opub-text-field-backdrop: 10;
+  --focused: var(--text-interactive);
 
   @include text-style-input;
 
   position: relative;
   display: flex;
   align-items: center;
-  color: var(--text);
+  color: var(--text-default);
   cursor: text;
 
   svg {
-    color: var(--icon);
+    color: var(--icon-default);
   }
 }
 
@@ -48,8 +49,8 @@ $spinner-icon-size: 12px;
 
 .error {
   > .Backdrop {
-    background-color: var(--surface-critical-subdued);
-    border-color: var(--border-critical);
+    background-color: var(--surface-critical);
+    border-color: var(--border-critical-default);
 
     &::after {
       border-color: var(--focused);
@@ -66,7 +67,7 @@ $spinner-icon-size: 12px;
   cursor: initial;
 
   > .Backdrop {
-    background-color: var(--surface-disabled);
+    background-color: var(--surface-subdued);
     border-color: var(--border-subdued);
     border-top-color: var(--border-disabled);
   }
@@ -78,7 +79,7 @@ $spinner-icon-size: 12px;
 
 .Input {
   font-size: var(--font-size-200);
-  font-weight: var(--font-weight-regular);
+  font-weight: 400;
   line-height: var(--font-line-height-2);
 
   text-transform: initial;
@@ -94,10 +95,10 @@ $spinner-icon-size: 12px;
   padding: calc((2.25rem - var(--font-line-height-3) - var(--space-05)) / 2)
     var(--space-3);
   background: none;
-  border: var(--border-transparent);
+  border: var(--border-width-1) solid transparent;
   appearance: none;
-  caret-color: var(--text);
-  color: var(--text);
+  caret-color: var(--text-default);
+  color: var(--text-default);
 
   @media #{$breakpoints-md-up} {
     font-size: var(--font-size-100);
@@ -135,7 +136,7 @@ $spinner-icon-size: 12px;
 
   &:-webkit-autofill {
     border-radius: var(--border-radius-1);
-    border: var(--border-width-1) solid var(--border-shadow);
+    border: var(--border-width-1) solid var(--border-subdued);
     border-top-color: #898f94;
     border-right-color: transparent;
   }
@@ -182,8 +183,8 @@ $spinner-icon-size: 12px;
   bottom: 0;
   left: 0;
 
-  background-color: var(--surface);
-  border: var(--border-width-1) solid var(--border-shadow);
+  background-color: var(--surface-default);
+  border: var(--border-width-1) solid var(--border-subdued);
   border-top-color: #898f94;
   border-radius: var(--border-radius-1);
 }
@@ -217,7 +218,7 @@ $spinner-icon-size: 12px;
   padding-top: var(--space-2);
   max-height: 140px;
   overflow: scroll;
-  border: var(--border-transparent);
+  border: var(--border-width-1) solid transparent;
   width: 100%;
 
   > .Input {
@@ -288,7 +289,7 @@ $spinner-icon-size: 12px;
 
 .Segment {
   --opub-text-field-spinner-border-radius: calc(var(--border-radius-1) - 2px);
-  background: var(--surface-neutral);
+  background: var(--surface-subdued);
   border-radius: var(--opub-text-field-spinner-border-radius);
   display: flex;
   flex: 1 1 0%;
@@ -303,7 +304,7 @@ $spinner-icon-size: 12px;
   }
 
   &:active {
-    background: var(--surface-neutral-pressed);
+    background: var(--surface-selected);
   }
 
   &:first-of-type {
@@ -324,7 +325,7 @@ $spinner-icon-size: 12px;
   --opub-text-field-spinner-offset-large: calc(2px + var(--border-width-1));
   z-index: var(--opub-text-field-contents);
   margin: var(--opub-text-field-spinner-offset-large);
-  color: var(--icon);
+  color: var(--icon-default);
 
   display: flex;
   align-self: stretch;

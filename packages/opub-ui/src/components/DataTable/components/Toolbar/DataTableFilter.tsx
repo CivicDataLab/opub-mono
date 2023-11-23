@@ -40,7 +40,7 @@ export function DataTableFilter<TData, TValue>({
   return (
     <Popover>
       <Popover.Trigger asChild>
-        <Button icon={<Icon source={IconCirclePlus} />}>
+        <Button icon={<Icon source={IconCirclePlus} color="onBgDefault" />}>
           <Box flex alignItems="center">
             {title}
             {selectedValues?.size > 0 && (

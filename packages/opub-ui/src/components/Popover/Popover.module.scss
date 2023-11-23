@@ -19,9 +19,9 @@ $vertical-motion-offset: -5px;
 .Content {
   max-width: calc(100vw - var(--space-8));
   margin: $visible-portion-of-arrow var(--space-05) var(--space-4);
-  box-shadow: var(--shadow-xl);
+  box-shadow: var(--shadow-basic-xl);
   border-radius: var(--border-radius-2);
-  background-color: var(--surface);
+  background-color: var(--surface-default);
 
   transform-origin: var(--radix-popover-content-transform-origin);
   animation: scaleIn 100ms ease-out;
