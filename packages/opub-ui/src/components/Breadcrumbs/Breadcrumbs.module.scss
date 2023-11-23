@@ -14,7 +14,7 @@
 }
 
 .List > .active {
-  color: var(--focused);
+  color: var(--border-focus);
 }
 
 .ListItem {
@@ -30,16 +30,17 @@
 
   a {
     cursor: pointer;
+    color: inherit;
 
     &:hover {
       text-decoration: underline;
-      color: var(--text);
+      color: var(--text-default);
     }
   }
 
   &:last-of-type {
     > span {
-      font-weight: var(--font-weight-medium);
+      font-weight: 500;
     }
   }
 }
@@ -51,7 +52,7 @@
 
 .CollapseToggle {
   font-size: var(--font-size-100);
-  color: var(--interactive-hovered);
+  // color: var(--interactive-hovered);
   cursor: pointer;
 
   &:hover {

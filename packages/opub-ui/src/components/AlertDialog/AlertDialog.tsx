@@ -9,7 +9,6 @@ interface DialogProps extends AlertDialogRadix.DialogProps {
   Trigger?: AlertDialogRadix.DialogTriggerProps;
   Content?: ContentProps;
 }
-// console.log();
 
 const AlertDialog = ({ children, ...props }: DialogProps) => {
   return <AlertDialogRadix.Root {...props}>{children}</AlertDialogRadix.Root>;

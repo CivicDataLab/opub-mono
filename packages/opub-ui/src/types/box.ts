@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   ColorsActionTokenAlias,
   ColorsBackdropTokenAlias,
@@ -9,8 +8,8 @@ import {
   ShapeBorderWidthScale,
   SpacingSpaceScale,
 } from '../tokens';
-
 import { ResponsiveProp } from '../utils/css';
+import React from 'react';
 
 type Element = 'div' | 'span' | 'section' | 'legend' | 'ul' | 'li';
 
@@ -35,6 +34,7 @@ export type ColorTokenScale =
   | 'text-warning';
 
 export type BorderTokenAlias =
+  | 'default'
   | 'base'
   | 'dark'
   | 'divider'

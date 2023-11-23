@@ -37,7 +37,7 @@ export const Spinner = React.forwardRef<HTMLDivElement, SpinnerProps>(
           onBlur={onBlur}
         >
           <div className={styles.SpinnerIcon}>
-            <Icon source={IconCaretUp} fill="base" />
+            <Icon source={IconCaretUp} />
           </div>
         </button>
         <button
@@ -49,7 +49,7 @@ export const Spinner = React.forwardRef<HTMLDivElement, SpinnerProps>(
           onBlur={onBlur}
         >
           <div className={styles.SpinnerIcon}>
-            <Icon source={IconCaretDown} fill="base" />
+            <Icon source={IconCaretDown} />
           </div>
         </button>
       </div>

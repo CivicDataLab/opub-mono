@@ -8,6 +8,7 @@ import { Meta, StoryObj } from '@storybook/react';
  */
 
 const meta = {
+  title: 'Verified/Breadcrumbs',
   component: Breadcrumbs,
 } satisfies Meta<typeof Breadcrumbs>;
 

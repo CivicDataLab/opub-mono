@@ -10,6 +10,7 @@ import { IconSelector } from '@tabler/icons-react';
  * Reference: https://polaris.shopify.com/components/actions/button
  */
 const meta = {
+  title: 'Verified/Button',
   component: Button,
 } satisfies Meta<typeof Button>;
 

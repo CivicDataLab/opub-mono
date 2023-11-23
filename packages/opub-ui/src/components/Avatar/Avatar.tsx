@@ -48,7 +48,7 @@ const Avatar = ({
   );
 
   return (
-    <Box flex gap={'2'} justifyContent={'center'} alignItems="center">
+    <div className={styles.Wrapper}>
       <AvatarRadix.Root className={className}>
         {image ? (
           <AvatarRadix.Image src={image} />
@@ -57,7 +57,7 @@ const Avatar = ({
         )}
       </AvatarRadix.Root>
       {showLabel && <Text fontWeight="medium">{name}</Text>}
-    </Box>
+    </div>
   );
 };
 

@@ -3,13 +3,13 @@
 .Badge {
   border-radius: var(--border-radius-3);
   font-weight: 400;
-  font-size: var(--space-3);
+  font-size: var(--font-size-300);
   padding: var(--space-05) var(--space-2);
-  background-color: var(--surface-neutral);
-  color: var(--text);
+  background-color: var(--surface-subdued);
+  color: var(--text-default);
 
   @media print {
-    border: solid var(--border-width-1) var(--border);
+    border: solid var(--border-width-1) var(--border-default);
   }
 }
 
@@ -18,7 +18,7 @@
 }
 
 .statusInfo {
-  background-color: var(--surface-highlight);
+  background-color: var(--surface-highlight-default);
 }
 
 .statusAttention {
@@ -48,4 +48,5 @@
 .PipContainer {
   margin-left: calc(-1 * var(--space-05));
   margin-right: var(--space-1);
+  margin-top: -5px;
 }

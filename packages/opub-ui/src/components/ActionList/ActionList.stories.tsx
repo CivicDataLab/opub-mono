@@ -1,7 +1,7 @@
-import { Meta, StoryObj } from '@storybook/react';
-import { Button } from '../Button';
-import { Popover } from '../Popover';
+import { Icon } from '../Icon';
 import { ActionList } from './ActionList';
+import { ExportMinor, ImportMinor, TickMinor } from '@shopify/polaris-icons';
+import { Meta, StoryObj } from '@storybook/react';
 
 /**
  * Action lists render a list of actions or selectable options. This component is usually placed inside a popover container to create a dropdown menu
@@ -9,6 +9,7 @@ import { ActionList } from './ActionList';
  * Reference: https://polaris.shopify.com/components/lists/action-list
  */
 const meta = {
+  title: 'Verified/ActionList',
   component: ActionList,
 } satisfies Meta<typeof ActionList>;
 
@@ -18,18 +19,44 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   render: ({ ...args }) => {
     return (
-      <Popover>
-        <Popover.Trigger>
-          <Button disclosure>More actions</Button>
-        </Popover.Trigger>
-        <Popover.Content>
-          <ActionList {...args} />
-        </Popover.Content>
-      </Popover>
+      <div className="">
+        <ActionList {...args} />
+      </div>
     );
   },
   args: {
     actionRole: 'menuitem',
     items: [{ content: 'Create Organisation' }, { content: 'Create Dataset' }],
+  },
+};
+
+export const WithSuffix: Story = {
+  ...Default,
+  args: {
+    items: [
+      {
+        active: true,
+        content: 'Import file',
+        icon: <ImportMinor />,
+        suffix: <Icon source={TickMinor} />,
+      },
+      { content: 'Export file', icon: <ExportMinor /> },
+    ],
+  },
+};
+
+export const WithSections: Story = {
+  ...Default,
+  args: {
+    sections: [
+      {
+        title: 'File options',
+        items: [{ content: 'Import file' }, { content: 'Export file' }],
+      },
+      {
+        title: 'Bulk actions',
+        items: [{ content: 'Edit' }, { content: 'Delete' }],
+      },
+    ],
   },
 };
