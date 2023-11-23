@@ -64,6 +64,7 @@ $border-width-data: (
 }
 
 @mixin focus-ring($size: 'base', $border-width: 0, $style: 'base') {
+  --focused: var(--text-interactive);
   $stroke: rem(2px);
   $offset: if(
     $border-width == 0,

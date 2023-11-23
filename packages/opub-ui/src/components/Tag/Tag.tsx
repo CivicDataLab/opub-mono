@@ -15,13 +15,12 @@ export const Tag = React.forwardRef(
       onRemove,
       accessibilityLabel,
       url,
-      color = 'standard',
       value = '',
       ...other
     }: TagProps,
     ref: React.LegacyRef<HTMLSpanElement>
   ) => {
-    const segmented = onRemove && url;
+    const segmented = onRemove && url && !disabled;
     const className = cx(
       styles.Tag,
       disabled && styles.disabled,
@@ -82,16 +81,7 @@ export const Tag = React.forwardRef(
       );
 
     return (
-      <span
-        {...other}
-        className={className}
-        ref={ref}
-        style={{
-          /* @ts-ignore */
-          '--background-color': `var(--tag-bg-${color})`,
-          '--text-color': `var(--tag-fg-${color})`,
-        }}
-      >
+      <span {...other} className={className} ref={ref}>
         {tagContent}
         {removeButton}
       </span>
