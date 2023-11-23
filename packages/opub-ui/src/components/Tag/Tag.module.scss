@@ -3,52 +3,35 @@
 $height: 20px;
 
 .Tag {
-  --tag-bg-standard: var(--surface-neutral);
-  --tag-fg-standard: var(--text);
-  --tag-bg-one: var(--surface-decorative-one);
-  --tag-fg-one: var(--text-decorative-one);
-  --tag-bg-two: var(--surface-decorative-two);
-  --tag-fg-two: var(--text-decorative-two);
-  --tag-bg-three: var(--surface-decorative-three);
-  --tag-fg-three: var(--text-decorative-three);
-  --tag-bg-four: var(--surface-decorative-four);
-  --tag-fg-four: var(--text-decorative-four);
-  --tag-bg-five: var(--surface-decorative-five);
-  --tag-fg-five: var(--text-decorative-five);
-
-  --background-color: var(--tag-bg-standard);
-  --text-color: var(--tag-fg-standard);
-
   display: inline-flex;
   max-width: 100%;
-
   align-items: center;
   min-height: 28px;
   padding: 0 var(--space-2);
-  background-color: var(--background-color);
+  background-color: var(--surface-highlight-default);
   border-radius: var(--border-radius-1);
-  color: var(--text-color);
+  color: var(--text-default);
 
   &.disabled {
     @include recolor-icon(var(--icon-disabled));
     transition: none;
-    background: var(--surface-neutral-disabled);
+    background: var(--surface-subdued);
     color: var(--text-disabled);
+    pointer-events: none;
   }
 
   &.clickable {
     @include unstyled-button;
     cursor: pointer;
     padding: var(--space-1) var(--space-2);
-    background-color: var(--background-color);
     outline: var(--border-width-1) solid transparent;
-    color: var(--text-color);
+    background-color: var(--surface-highlight-default);
 
     font-size: 13px;
     line-height: var(--font-line-height-2);
 
     &:hover {
-      background: var(--surface-neutral-hovered);
+      background: var(--surface-highlight-hovered);
     }
 
     @include focus-ring;
@@ -56,12 +39,8 @@ $height: 20px;
       @include focus-ring($style: 'focused');
     }
 
-    &:active {
-      background: var(--surface-neutral-pressed);
-    }
-
     &:disabled {
-      background: var(--surface-neutral-disabled);
+      background: var(--surface-subdued);
       cursor: default;
       pointer-events: none;
       color: var(--text-disabled);
@@ -95,6 +74,7 @@ $height: 20px;
   text-overflow: ellipsis;
   white-space: nowrap;
   vertical-align: middle;
+  display: inline-block;
 
   @media #{$breakpoints-sm-up} {
     font-size: var(--font-size-75);
@@ -103,7 +83,7 @@ $height: 20px;
 }
 
 .Button {
-  @include recolor-icon(var(--icon));
+  @include recolor-icon(var(--icon-default));
   @include unstyled-button;
 
   display: block;
@@ -114,12 +94,11 @@ $height: 20px;
   line-height: 0;
 
   &:hover {
-    background: var(--surface-neutral-hovered);
+    background-color: var(--surface-highlight-hovered);
     outline: var(--border-width-1) solid transparent;
   }
 
   @include focus-ring;
-
   &:focus-visible:not(:active) {
     @include focus-ring($style: 'focused');
   }
@@ -132,6 +111,10 @@ $height: 20px;
     @include recolor-icon(var(--icon-disabled));
     cursor: default;
     pointer-events: none;
+
+    &:hover {
+      background-color: transparent;
+    }
   }
 
   &.segmented {
@@ -141,7 +124,7 @@ $height: 20px;
 
 .Link {
   display: inline-grid;
-  color: var(--text);
+  color: var(--text-default);
   outline: none;
   border-radius: var(--border-radius-1);
   text-decoration: none;
@@ -171,7 +154,7 @@ $height: 20px;
   }
 
   &:hover {
-    background: var(--surface-neutral-hovered);
+    background: var(--surface-highlight-hovered);
     text-decoration: underline;
   }
 
