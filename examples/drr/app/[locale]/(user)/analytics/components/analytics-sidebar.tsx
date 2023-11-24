@@ -9,6 +9,7 @@ import {
 } from '@radix-ui/react-collapsible';
 import { useQuery } from '@tanstack/react-query';
 import { Icon, RadioGroup, RadioItem, Text } from 'opub-ui';
+import { IconButton } from 'opub-ui/src';
 
 import { ANALYTICS_INDICATORS_BY_CATEGORY } from '@/config/graphql/analaytics-queries';
 import { GraphQL } from '@/lib/api';
@@ -135,18 +136,99 @@ export function AnalyticsDashboardSidebar({
         styles.Collapse
       )}
     >
-      <div
-        className={cn(
-          'px-4 h-full pt-12 bg-baseCyanSolid1',
-          isCollapsed && 'hidden'
-        )}
-      >
-        {structuredData && (
-          <IndicatorCheckboxList
-            indicators={convertedData}
-            data={structuredData}
-          />
-        )}
+      <div className="pt-16">
+        <span
+          className={cn(
+            ' pl-0 rounded justify-end items-center',
+            isCollapsed && 'hidden'
+          )}
+        >
+          <div className="flex pl-5 pt-1 pr-4 pb-0.5 items-start gap-1.5 ">
+            <IconButton color="highlight" icon={Icons.iconHelpSquare}>
+              Help Square
+            </IconButton>
+            <Text className="text-textHighlight pt-1" variant="headingMd">
+              Tutorial Mode
+            </Text>
+          </div>
+        </span>
+        <Collapsible defaultOpen className={cn(isCollapsed && 'hidden')}>
+          <div className=" bg-surfaceSelected max-w-full min-w-max bg-surfaceNeutral rounded-1 border-t-0 border-1 border-solid border-borderSubdued mb-5 ">
+            <CollapsibleTrigger className={styles.CollapseTrigger}>
+              <Text className="text-textDefault" fontWeight="bold">
+                Select an indicator
+              </Text>
+              <Icon source={Icons.minus} />
+            </CollapsibleTrigger>
+          </div>
+
+          <CollapsibleContent className="pb-4 px-2 max-w-full min-w-max data-[state=open]:mt-[-12px]">
+            <div
+              className={cn(
+                'px-4 h-full pt-px bg-baseCyanSolid1',
+                isCollapsed && 'hidden'
+              )}
+            >
+              {structuredData && (
+                <IndicatorCheckboxList
+                  indicators={convertedData}
+                  data={structuredData}
+                />
+              )}
+            </div>
+          </CollapsibleContent>
+        </Collapsible>
+
+        <Collapsible defaultOpen className={cn(isCollapsed && 'hidden')}>
+          <div className=" bg-surfaceSelected max-w-full min-w-max bg-surfaceNeutral rounded-1 border-t-0 border-1 border-solid border-borderSubdued mb-5 ">
+            <CollapsibleTrigger className={styles.CollapseTrigger}>
+              <Text className="text-textDefault" fontWeight="bold">
+                Select a time period
+              </Text>
+              <Icon source={Icons.minus} />
+            </CollapsibleTrigger>
+          </div>
+
+          <CollapsibleContent className="pb-4 px-2 max-w-full min-w-max data-[state=open]:mt-[-12px]">
+            <div className="px-4 h-full pt-4">
+              <RadioButton label="September 2022" />
+            </div>
+          </CollapsibleContent>
+        </Collapsible>
+
+        <div className="flex">
+          <span className={cn('h-7 pl-0 rounded', isCollapsed && 'hidden')}>
+            <IconButton
+              color="highlight"
+              icon={Icons.iconShare}
+              className={cn(
+                'bg-surfaceHighlightDefault p-2 hover:bg-surfaceHighlightHovered',
+                isCollapsed && 'hidden'
+              )}
+            >
+              Share
+            </IconButton>
+            <Text className="text-textHighlight" variant="headingMd">
+              Share
+            </Text>
+          </span>
+
+          <span className={cn('h-7 pl-0 rounded', isCollapsed && 'hidden')}>
+            <IconButton
+              color="highlight"
+              icon={Icons.download}
+              className={cn(
+                'bg-surfaceHighlightDefault p-2 hover:bg-surfaceHighlightHovered',
+                isCollapsed && 'hidden'
+              )}
+            >
+              Download
+            </IconButton>
+            <Text className="text-textHighlight" variant="headingMd">
+              Download
+            </Text>
+          </span>
+        </div>
       </div>
     </aside>
   );

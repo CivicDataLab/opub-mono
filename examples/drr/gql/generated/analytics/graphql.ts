@@ -37,7 +37,7 @@ export type Department = {
   name: Scalars['String'];
 };
 
-/** Geography(id, name, code, type, parentId) */
+/** Geography(id, name, code, type, parentId, geom) */
 export type GeoFilter = {
   AND?: InputMaybe<GeoFilter>;
   OR?: InputMaybe<GeoFilter>;
@@ -45,16 +45,16 @@ export type GeoFilter = {
   name?: InputMaybe<Scalars['String']>;
 };
 
-/** Geography(id, name, code, type, parentId) */
+/** Geography(id, name, code, type, parentId, geom) */
 export type Geography = {
   __typename?: 'Geography';
-  code: Scalars['String'];
+  code?: Maybe<Scalars['String']>;
   name: Scalars['String'];
   parentId?: Maybe<Geography>;
   type: Scalars['String'];
 };
 
-/** Indicators(id, name, long_description, short_description, category, type, slug, unit, geography, department, data_source, scheme, parent, display_order) */
+/** Indicators(id, name, long_description, short_description, category, type, slug, unit, geography, department, data_source, scheme, parent, display_order, is_visible) */
 export type IndicatorFilter = {
   AND?: InputMaybe<IndicatorFilter>;
   OR?: InputMaybe<IndicatorFilter>;
@@ -62,7 +62,7 @@ export type IndicatorFilter = {
   slug?: InputMaybe<Scalars['String']>;
 };
 
-/** Indicators(id, name, long_description, short_description, category, type, slug, unit, geography, department, data_source, scheme, parent, display_order) */
+/** Indicators(id, name, long_description, short_description, category, type, slug, unit, geography, department, data_source, scheme, parent, display_order, is_visible) */
 export type Indicators = {
   __typename?: 'Indicators';
   /** Describes the type sub-indicators */
@@ -76,7 +76,7 @@ export type Indicators = {
   shortDescription?: Maybe<Scalars['String']>;
   slug?: Maybe<Scalars['String']>;
   /** Defines the type of indicator that is Raw, Derived, etc. */
-  type: Scalars['String'];
+  type?: Maybe<Scalars['String']>;
   unit: Unit;
 };
 
@@ -123,7 +123,7 @@ export type Unit = {
   description?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   name: Scalars['String'];
-  symbol: Scalars['String'];
+  symbol?: Maybe<Scalars['String']>;
 };
 
 export type TableDataQueryVariables = Exact<{
