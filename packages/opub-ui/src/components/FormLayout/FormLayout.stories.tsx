@@ -1,7 +1,7 @@
-import { Meta, StoryObj } from '@storybook/react';
 import { Button } from '../Button';
 import { TextField } from '../TextField';
 import { FormLayout } from './FormLayout';
+import { Meta, StoryObj } from '@storybook/react';
 
 /**
  * Use form layout to arrange fields within a form using standard spacing. By
@@ -9,6 +9,7 @@ import { FormLayout } from './FormLayout';
  * Reference: https://polaris.shopify.com/components/layout-and-structure/form-layout
  */
 const meta = {
+  title: 'Verified/FormLayout',
   component: FormLayout,
 } satisfies Meta<typeof FormLayout>;
 
