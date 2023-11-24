@@ -10,6 +10,7 @@ import { Meta, StoryObj } from '@storybook/react';
  * Reference: https://www.radix-ui.com/docs/primitives/components/tooltip
  */
 const meta = {
+  title: 'Verified/Tooltip',
   component: Tooltip,
   argTypes: {
     children: {

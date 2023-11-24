@@ -1,5 +1,5 @@
-import { Meta, StoryObj } from '@storybook/react';
 import { Switch } from './Switch';
+import { Meta, StoryObj } from '@storybook/react';
 
 /**
  * A control that allows the user to toggle between checked and not checked.
@@ -7,6 +7,7 @@ import { Switch } from './Switch';
  * Reference: https://www.radix-ui.com/docs/primitives/components/switch
  */
 const meta = {
+  title: 'Verified/Switch',
   component: Switch,
 } satisfies Meta<typeof Switch>;
 

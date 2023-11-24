@@ -61,12 +61,12 @@ $item-min-width: 50px;
 
     &.ActiveBorder {
       .Title {
-        font-weight: var(--font-weight-regular);
+        font-weight: 400;
         color: var(--text-default);
         background-color: transparent;
 
         &::before {
-          background-color: var(--border-hovered);
+          background-color: var(--border-subdued);
         }
       }
     }
@@ -86,7 +86,7 @@ $item-min-width: 50px;
 
   &:focus-visible {
     .Title {
-      font-weight: var(--font-weight-regular);
+      font-weight: 400;
       color: var(--text);
     }
 
@@ -109,7 +109,7 @@ $item-min-width: 50px;
 
     &.ActiveBorder {
       background-color: var(--surface-highlight-subdued, #fbfaff);
-      font-weight: var(--font-weight-regular);
+      font-weight: 400;
       color: var(--text-highlight);
       border: 1px solid var(--border-subdued, #d7dbdf);
       box-shadow: var(--shadow-element-popover);
