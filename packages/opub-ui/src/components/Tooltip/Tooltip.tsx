@@ -1,6 +1,7 @@
 'use client';
 
 import { TooltipProps, TooltipProviderProps } from '../../types/tooltip';
+import { Text } from '../Text';
 import styles from './Tooltip.module.scss';
 import * as TooltipRadix from '@radix-ui/react-tooltip';
 import cx from 'classnames';
@@ -81,7 +82,7 @@ const Tooltip = (props: TooltipProps) => {
           alignOffset={alignOffset}
           aria-label={ariaLabel}
         >
-          {content}
+          <Text variant="bodyMd">{content}</Text>
           {!hideArrow && <TooltipRadix.Arrow className={styles.Arrow} />}
         </TooltipRadix.Content>
       </TooltipRadix.Portal>

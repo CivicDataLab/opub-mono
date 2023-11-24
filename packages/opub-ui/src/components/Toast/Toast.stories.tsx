@@ -1,8 +1,8 @@
-import { Meta } from '@storybook/react';
 import { useToast } from '../../utils/hooks/use-toast';
 import { Button } from '../Button';
 import { ToastAction } from './Toast';
 import { Toaster } from './Toaster';
+import { Meta } from '@storybook/react';
 
 /**
  * Toast Description A succinct message that is displayed temporarily.
@@ -10,6 +10,7 @@ import { Toaster } from './Toaster';
  * Reference: https://www.radix-ui.com/docs/primitives/components/toast
  */
 const meta = {
+  title: 'Verified/Toast',
   component: Toaster,
 } satisfies Meta<typeof Toaster>;
 

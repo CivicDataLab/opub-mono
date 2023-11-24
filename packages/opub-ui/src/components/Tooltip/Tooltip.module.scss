@@ -18,13 +18,12 @@
 
 .Content {
   --op-tooltip-overlay-offset: var(--space-3);
-  --op-tooltip-border-radius: var(--border-radius-1);
+  --op-tooltip-border-radius: var(--border-radius-1, 4px);
 
   max-height: var(--radix-tooltip-content-available-height);
-  box-shadow: var(--shadow-xl), var(--shadow-lg);
+  box-shadow: var(--shadow-element-popover);
   border-radius: var(--op-tooltip-border-radius);
-  background-color: var(--surface);
-  color: var(--text);
+  background-color: var(--surface-default);
   word-break: break-word;
   padding: var(--space-1) var(--space-2);
   pointer-events: none;
@@ -34,7 +33,6 @@
   }
 
   max-width: 200px;
-  font-size: var(--font-size-75);
 
   animation-duration: var(--duration-100);
   animation-timing-function: var(--ease-in);
@@ -62,8 +60,8 @@
 }
 
 .Arrow {
-  color: var(--surface);
-  fill: var(--surface);
+  color: var(--surface-default);
+  fill: var(--surface-default);
 }
 
 @keyframes slideUpAndFade {
