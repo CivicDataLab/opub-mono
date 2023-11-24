@@ -1,8 +1,8 @@
-import React, { forwardRef, LegacyRef } from 'react';
+import { variationName } from '../../utils/css';
+import { Icon } from '../Icon';
 import styles from './Thumbnail.module.scss';
 import cx from 'classnames';
-
-import { variationName } from '../../utils/css';
+import React, { forwardRef, LegacyRef } from 'react';
 
 type Size = 'extraSmall' | 'small' | 'medium' | 'large';
 

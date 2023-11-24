@@ -21,9 +21,7 @@ export function Toolbar<TData>({
   table,
   filters,
 }: DataTableViewOptionsProps<TData>) {
-  const isFiltered =
-    table.getPreFilteredRowModel().rows.length >
-    table.getFilteredRowModel().rows.length;
+  const isFiltered = table.getState().columnFilters.length > 0;
 
   return (
     <div className={styles.Filter}>
@@ -49,7 +47,8 @@ export function Toolbar<TData>({
             <Button
               size="slim"
               onClick={() => table.resetColumnFilters()}
-              icon={<Icon source={IconX} size="4" />}
+              icon={<Icon source={IconX} size="4" color="highlight" />}
+              kind="tertiary"
             >
               Reset
             </Button>
@@ -63,7 +62,14 @@ export function Toolbar<TData>({
         <div>
           <Menu
             trigger={
-              <Button icon={<Icon source={IconAdjustmentsHorizontal} />}>
+              <Button
+                icon={
+                  <Icon
+                    source={IconAdjustmentsHorizontal}
+                    color="onBgDefault"
+                  />
+                }
+              >
                 Filter
               </Button>
             }

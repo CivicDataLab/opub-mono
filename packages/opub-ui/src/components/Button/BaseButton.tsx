@@ -1,8 +1,9 @@
-import React, { LegacyRef } from 'react';
 import type { BaseButtonProps } from '../../types/button';
 import { handleMouseUpByBlurring } from '../../utils/focus';
 import { useDisableClick } from '../../utils/hooks';
-import { UnstyledLink } from '../Link/BaseLink';
+import { UnstyledLink } from './BaseLink';
+import React, { LegacyRef } from 'react';
+
 export interface UnstyledButtonProps extends BaseButtonProps {
   /** The content to display inside the button */
   children?: string | string[] | undefined | React.ReactNode;

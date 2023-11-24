@@ -36,14 +36,14 @@ export function ActionBar(props: Props) {
 
   const backButton = props.previousPage && props.previousPage?.link && (
     <Link href={props.previousPage?.link} className={styles.BackButton}>
-      <Icon source={Icons.back} color="base" size={iconSize} />
+      <Icon source={Icons.back} color="default" size={iconSize} />
       <Text visuallyHidden>Go back to {props.previousPage?.content} page</Text>
     </Link>
   );
 
   const backButtonAction = props.previousPage && props.previousPage?.action && (
     <button onClick={props.previousPage?.action} className={styles.BackButton}>
-      <Icon source={Icons.back} color="base" size={iconSize} />
+      <Icon source={Icons.back} color="default" size={iconSize} />
       <Text visuallyHidden>Go back to {props.previousPage?.content} page</Text>
     </button>
   );

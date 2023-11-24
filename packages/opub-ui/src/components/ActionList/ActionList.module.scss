@@ -42,7 +42,6 @@
 
     svg {
       color: var(--icon-interactive);
-      fill: var(--icon-interactive);
     }
   }
 
@@ -61,7 +60,6 @@
 
     svg {
       color: var(--icon-interactive);
-      fill: var(--icon-interactive);
     }
 
     &::before {
@@ -74,7 +72,6 @@
 
     svg {
       color: var(--icon-critical);
-      fill: var(--icon-critical);
     }
 
     &:hover {
@@ -94,7 +91,6 @@
     .Prefix svg,
     .Suffix svg {
       color: var(--icon-disabled);
-      fill: var(--icon-disabled);
     }
   }
 }

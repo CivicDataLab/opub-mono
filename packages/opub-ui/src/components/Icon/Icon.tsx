@@ -48,7 +48,7 @@ export function Icon({
       <SourceComponent
         className={styles.Svg}
         size={iconSize}
-        fill={`var(--icon-${convertToCSSVariable(color)})`}
+        color={`var(--icon-${convertToCSSVariable(color)})`}
         focusable="false"
         aria-hidden="true"
         stroke={stroke ? stroke : 2}

@@ -17,7 +17,7 @@
 
     &:focus-within {
       & + div {
-        outline: 2px solid var(--focused);
+        outline: 2px solid var(--text-interactive);
         outline-offset: 2px;
       }
     }

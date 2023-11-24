@@ -5,6 +5,7 @@ import { Meta, StoryObj } from '@storybook/react';
  * Skeleton primitive to show a placeholder while content is loading
  */
 const meta = {
+  title: 'Verified/Skeleton',
   component: Skeleton,
 } satisfies Meta<typeof Skeleton>;
 

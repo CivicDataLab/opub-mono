@@ -70,7 +70,7 @@
   background: var(--button-color);
   border-width: 0;
   border-color: transparent;
-  box-shadow: var(--shadow-button-default), var(--shadow-inset-button);
+  box-shadow: var(--shadow-button-default);
 
   color: var(--button-text);
 
@@ -83,13 +83,13 @@
 
   &:focus {
     border-color: $border-color;
-    box-shadow: var(--shadow-button-default), var(--shadow-inset-button);
+    box-shadow: var(--shadow-button-default);
   }
 
   &:active {
     background: var(--button-color-active);
     border-color: $border-color;
-    box-shadow: var(--shadow-button-default), var(--shadow-inset-button);
+    box-shadow: var(--shadow-button-default);
   }
 
   &.pressed {
@@ -97,12 +97,12 @@
 
     background: var(--button-color-depressed);
     border-color: $border-color;
-    box-shadow: var(--shadow-button-default), var(--shadow-inset-button);
+    box-shadow: var(--shadow-button-default);
 
     &:hover,
     &:focus {
       background: var(--button-color-depressed);
-      box-shadow: var(--shadow-button-default), var(--shadow-inset-button);
+      box-shadow: var(--shadow-button-default);
     }
   }
 }
@@ -183,22 +183,22 @@
   font-size: var(--font-size-100);
   font-weight: 500;
   line-height: var(--font-line-height-1);
-
   text-transform: initial;
   letter-spacing: initial;
-
   position: relative;
-
   display: flex;
-
   justify-content: center;
-
   align-items: center;
+  gap: var(--space-1);
   min-width: 1px;
   min-height: 1px;
 
   .Button:not(.kindTertiary) & {
     width: 100%;
+  }
+
+  .Icon {
+    margin-bottom: -2px;
   }
 }
 

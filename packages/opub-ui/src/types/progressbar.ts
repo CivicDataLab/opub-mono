@@ -16,7 +16,7 @@ export type ProgressBarProps = {
    * Color of progressbar
    * @default 'highlight'
    */
-  color?: 'highlight' | 'primary' | 'success' | 'critical';
+  color?: 'highlight' | 'interactive' | 'success' | 'critical';
   /**
    * Whether the fill animation is triggered
    * @default true

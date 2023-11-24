@@ -1,8 +1,6 @@
-type BorderTokenAlias = 'base' | 'dark' | 'divider' | 'transparent';
-
 export interface DividerProps {
-  /** Divider border style */
-  borderStyle?: BorderTokenAlias;
+  /** Direction of the divider */
+  direction?: 'horizontal' | 'vertical';
   /** custom classname */
   className?: string;
 }

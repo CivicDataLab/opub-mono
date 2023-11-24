@@ -1,14 +1,15 @@
-import { Meta, StoryObj } from '@storybook/react';
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Box } from '../Box';
 import { Button } from '../Button';
 import { Tag } from '../Tag';
 import { TextField } from './TextField';
+import { Meta, StoryObj } from '@storybook/react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
 /**
  * TextFields are text inputs that allow users to input custom text entries with a keyboard. Various decorations can be displayed around the field to communicate the entry requirements.
  */
 const meta = {
+  title: 'Verified/TextField',
   component: TextField,
 } as Meta<typeof TextField>;
 

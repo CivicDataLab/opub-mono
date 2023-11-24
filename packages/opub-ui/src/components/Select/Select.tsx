@@ -71,6 +71,7 @@ export const Select = forwardRef(
     if (helpText) {
       describedBy.push(helpTextID(id));
     }
+
     if (error) {
       describedBy.push(`${id}Error`);
     }
@@ -109,7 +110,7 @@ export const Select = forwardRef(
         {prefixMarkup}
         <span className={styles.SelectedOption}>{selectedOption.label}</span>
         <span className={styles.Icon}>
-          <Icon source={IconChevronDown} color="base" />
+          <Icon source={IconChevronDown} color="default" />
         </span>
       </div>
     );

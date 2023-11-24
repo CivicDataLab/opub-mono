@@ -227,6 +227,7 @@
   align-self: flex-end;
   opacity: 0;
   transition: opacity var(--duration-200) var(--ease);
+  margin-inline: var(--space-1);
 }
 
 .ZebraStripingOnData {

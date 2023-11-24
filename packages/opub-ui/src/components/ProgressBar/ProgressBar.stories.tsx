@@ -1,6 +1,6 @@
-import { Meta, StoryObj } from '@storybook/react';
 import { PropsVariationSection } from '../../utils/helpers';
 import { ProgressBar } from './ProgressBar';
+import { Meta, StoryObj } from '@storybook/react';
 
 /**
  * Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.
@@ -8,6 +8,7 @@ import { ProgressBar } from './ProgressBar';
  * Reference: https://www.radix-ui.com/docs/primitives/components/progress
  */
 const meta = {
+  title: 'Verified/ProgressBar',
   component: ProgressBar,
 } satisfies Meta<typeof ProgressBar>;
 
@@ -33,8 +34,8 @@ export const States: Story = {
         }}
         yAxis={{
           highlight: {},
+          interactive: { color: 'interactive' },
           success: { color: 'success' },
-          primary: { color: 'primary' },
           critical: { color: 'critical' },
           'animated: false': { animated: false },
         }}

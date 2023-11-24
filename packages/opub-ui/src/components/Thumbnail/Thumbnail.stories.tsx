@@ -1,6 +1,7 @@
-import { CalendarMinor, GrammarMajor } from '@shopify/polaris-icons';
-import { Meta, StoryObj } from '@storybook/react';
+import { Icon } from '../Icon';
 import { Thumbnail } from './Thumbnail';
+import { Meta, StoryObj } from '@storybook/react';
+import { IconCalendar } from '@tabler/icons-react';
 
 /**
  * Thumbnail Description
@@ -8,6 +9,7 @@ import { Thumbnail } from './Thumbnail';
  * Reference: #
  */
 const meta = {
+  title: 'Verified/Thumbnail',
   component: Thumbnail,
 } satisfies Meta<typeof Thumbnail>;
 
@@ -47,6 +49,6 @@ export const SVG: Story = {
   args: {
     ...Default.args,
     size: 'small',
-    source: CalendarMinor,
+    source: IconCalendar,
   },
 };

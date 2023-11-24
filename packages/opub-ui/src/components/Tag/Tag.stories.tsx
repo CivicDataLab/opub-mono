@@ -1,9 +1,9 @@
-import { AppsMinor } from '@shopify/polaris-icons';
-import { Meta, StoryObj } from '@storybook/react';
 import { PropsVariationSection } from '../../utils/helpers';
 import { Box } from '../Box';
 import { Icon } from '../Icon';
 import { Tag } from './Tag';
+import { Meta, StoryObj } from '@storybook/react';
+import { IconSun } from '@tabler/icons-react';
 
 /**
  * Tag represent a set of interactive keywords that help label, organize, and categorize objects
@@ -11,6 +11,7 @@ import { Tag } from './Tag';
  * Reference: https://polaris.shopify.com/components/selection-and-input/tag
  */
 const meta = {
+  title: 'Verified/Tag',
   component: Tag,
 } satisfies Meta<typeof Tag>;
 
@@ -33,34 +34,6 @@ export const Long: Story = {
   },
 };
 
-export const Colors = () => (
-  <PropsVariationSection
-    component={Tag}
-    common={{ children: 'Tag' }}
-    xAxis={{
-      colors: {},
-    }}
-    yAxis={{
-      standard: {},
-      one: {
-        color: 'one',
-      },
-      two: {
-        color: 'two',
-      },
-      three: {
-        color: 'three',
-      },
-      four: {
-        color: 'four',
-      },
-      five: {
-        color: 'five',
-      },
-    }}
-  />
-);
-
 export const States = () => (
   <PropsVariationSection
     component={Tag}
@@ -71,7 +44,7 @@ export const States = () => (
       'custom children': {
         children: (
           <Box flex alignItems="center" gap="1">
-            <Icon source={AppsMinor} />
+            <Icon source={IconSun} />
             <span>Sun is up</span>
           </Box>
         ),

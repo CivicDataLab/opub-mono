@@ -1,7 +1,7 @@
-import { getLocalTimeZone, today, parseDate } from '@internationalized/date';
-import { Meta, StoryObj } from '@storybook/react';
 import { DatePicker } from './DatePicker';
 import { DateRangePicker } from './DateRangePicker';
+import { getLocalTimeZone, today, parseDate } from '@internationalized/date';
+import { Meta, StoryObj } from '@storybook/react';
 
 /**
  * A date picker combines a DateField and a Calendar popover to allow users to enter or select a date and time value.
@@ -9,6 +9,7 @@ import { DateRangePicker } from './DateRangePicker';
  * Reference: https://react-spectrum.adobe.com/react-aria/useDatePicker.html
  */
 const meta = {
+  title: 'Verified/DatePicker',
   component: DatePicker,
 } satisfies Meta<typeof DatePicker>;
 

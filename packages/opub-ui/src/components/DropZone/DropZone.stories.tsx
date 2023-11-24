@@ -1,11 +1,11 @@
-import { FileMinor } from '@shopify/polaris-icons';
-import { Meta, StoryObj } from '@storybook/react';
-import { useCallback, useState } from 'react';
 import { Box } from '../Box';
 import { Button } from '../Button';
 import { Text } from '../Text';
 import { Thumbnail } from '../Thumbnail';
 import { DropZone } from './DropZone';
+import { Meta, StoryObj } from '@storybook/react';
+import { IconFile } from '@tabler/icons-react';
+import { useCallback, useState } from 'react';
 
 /**
  * The drop zone component lets users upload files by dragging and dropping the files into an area on a page, or activating a button.
@@ -13,6 +13,7 @@ import { DropZone } from './DropZone';
  * Reference: https://polaris.shopify.com/components/selection-and-input/drop-zone
  */
 const meta = {
+  title: 'Verified/DropZone',
   component: DropZone,
 } satisfies Meta<typeof DropZone>;
 
@@ -44,7 +45,7 @@ export const Default: Story = {
                 source={
                   validImageTypes.includes(file.type)
                     ? window.URL.createObjectURL(file)
-                    : FileMinor
+                    : IconFile
                 }
               />
 
@@ -98,7 +99,7 @@ export const SingleUpload: Story = {
           source={
             validImageTypes.includes(file.type)
               ? window.URL.createObjectURL(file)
-              : FileMinor
+              : IconFile
           }
         />
 
@@ -177,7 +178,7 @@ export const CustomHint: Story = {
                 source={
                   validImageTypes.includes(file.type)
                     ? window.URL.createObjectURL(file)
-                    : FileMinor
+                    : IconFile
                 }
               />
 
@@ -235,7 +236,7 @@ export const CustomTrigger: Story = {
                 source={
                   validImageTypes.includes(file.type)
                     ? window.URL.createObjectURL(file)
-                    : FileMinor
+                    : IconFile
                 }
               />
 

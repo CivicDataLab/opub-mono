@@ -188,7 +188,7 @@ export const Input = React.forwardRef(
           <Text as="span" visuallyHidden>
             clear input
           </Text>
-          <Icon source={IconX} color="base" />
+          <Icon source={IconX} color="default" />
         </button>
       ) : null;
 

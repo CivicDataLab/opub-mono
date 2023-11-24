@@ -5,19 +5,18 @@
   width: 100%;
   overflow: hidden;
   border-radius: var(--border-radius-2);
-  background-color: var(--surface);
-  color: var(--text);
+  background-color: var(--surface-default);
+  color: var(--text-default);
 }
 
 .CommandDialog {
   overflow: hidden;
   padding: 0 !important;
-  box-shadow: var(--shadow-2xl);
+  box-shadow: var(--shadow-basic-2xl);
   border-radius: var(--border-radius-2);
 
   position: relative;
   z-index: var(--z-1);
-  background-color: var(--background);
 
   @media #{$breakpoints-md-down} {
     box-shadow: none;
@@ -31,7 +30,7 @@
 
   [cmdk-group-heading] {
     padding: 0 var(--space-2);
-    font-weight: var(--font-weight-medium);
+    font-weight: 500;
     color: var(--text-subdued);
   }
 
@@ -55,7 +54,7 @@
   align-items: center;
   gap: var(--space-1);
   border-radius: var(--border-radius-1) var(--border-radius-1) 0 0;
-  border-bottom: var(--border-divider);
+  border-bottom: var(--border-default);
 }
 
 .CommandInputChild {
@@ -75,7 +74,7 @@
   border: none;
   background-color: transparent;
   font-size: var(--font-size-200);
-  color: var(--text);
+  color: var(--text-default);
 
   &::placeholder {
     color: var(--text-subdued);
@@ -103,7 +102,7 @@
 .CommandListDivider {
   margin: 0 calc(var(--space-1) * -1);
   height: 1px;
-  background-color: var(--border);
+  background-color: var(--border-default);
 }
 
 .CommandShortcut {
@@ -116,11 +115,11 @@
 .CommandGroup {
   overflow: hidden;
   padding: var(--space-1);
-  color: var(--text);
+  color: var(--text-default);
 
   [cmdk-group-heading] {
     padding: var(--space-1) var(--space-2);
-    font-weight: var(--font-weight-medium);
+    font-weight: 500;
     font-size: var(--font-size-100);
     color: var(--text-subdued);
   }
@@ -138,7 +137,7 @@
   user-select: none;
 
   &[aria-selected] {
-    background-color: var(--surface-neutral-subdued);
+    background-color: var(--surface-subdued);
   }
 
   &[data-disabled] {

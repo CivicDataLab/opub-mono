@@ -11,14 +11,14 @@
 
   width: 40px;
   height: 24px;
-  background-color: var(--interactive-disabled);
+  background-color: var(--action-primary-interactive-default);
   border-radius: 9999px;
   position: relative;
 
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 
   &[data-state='checked'] {
-    background-color: var(--focused);
+    background-color: var(--action-primary-interactive-pressed);
   }
 
   @include focus-ring;
@@ -32,7 +32,7 @@
   display: block;
   width: 16px;
   height: 16px;
-  background-color: var(--surface);
+  background-color: var(--surface-default);
   border-radius: 9999px;
   transition: transform var(--ease-in) var(--duration-100);
   transform: translateX(4px);

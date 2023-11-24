@@ -1,5 +1,5 @@
-import { Meta } from '@storybook/react';
 import { RadioGroup, RadioItem } from './RadioGroup';
+import { Meta } from '@storybook/react';
 
 /**
  * A set of checkable buttons—known as radio buttons—where no more than one of the buttons can be checked at a time.
@@ -7,6 +7,7 @@ import { RadioGroup, RadioItem } from './RadioGroup';
  * Reference: https://www.radix-ui.com/docs/primitives/components/radio-group
  */
 const meta = {
+  title: 'Verified/RadioGroup',
   component: RadioGroup,
 } satisfies Meta<typeof RadioGroup>;
 
@@ -41,7 +42,7 @@ export const Disabled = () => (
   <RadioGroup name="radio1">
     <RadioItem value="12">Radio 1</RadioItem>
     <RadioItem value="23" disabled>
-      Radio 2
+      Radio 2 (disabled)
     </RadioItem>
     <RadioItem value="11">Radio 3</RadioItem>
   </RadioGroup>

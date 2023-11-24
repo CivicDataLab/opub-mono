@@ -15,9 +15,10 @@
 .RadioItem {
   all: unset;
   --choice-size: 16px;
+  --focused: var(--text-interactive);
 
   position: relative;
-  background-color: var(--surface);
+  background-color: var(--surface-default);
   width: var(--choice-size);
   height: var(--choice-size);
   max-width: var(--choice-size);
@@ -25,15 +26,15 @@
 
   max-height: var(--choice-size);
   border-radius: 100%;
-  border: var(--border-width-2) solid var(--border);
+  border: var(--border-width-2) solid var(--border-default);
   transition: border-color var(--duration-150) var(--ease);
 
   &:hover {
-    border-color: var(--border-hovered);
+    border-color: var(--border-subdued);
   }
 
   &[data-state='checked'] {
-    border-color: var(--interactive);
+    border-color: var(--icon-interactive);
   }
 
   &:focus-visible {
@@ -66,7 +67,7 @@
     min-width: var(--icon-size);
     min-height: var(--icon-size);
     border-radius: 50%;
-    background-color: var(--interactive);
+    background-color: var(--icon-interactive);
 
     @media (-ms-high-contrast: active) {
       fill: windowText;

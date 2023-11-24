@@ -6,7 +6,7 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from '@radix-ui/react-collapsible';
-import { Icon, Separator, Text } from 'opub-ui';
+import { Icon, Divider, Text } from 'opub-ui';
 import { BreadCrumb, Search } from '.';
 import { ContentCard, DepartmentCard } from './Card';
 import styles from './Content.module.scss';
@@ -65,7 +65,7 @@ export function Content({ data }: { data: IProps }) {
             </CollapsibleTrigger>
 
             <CollapsibleContent className="pb-4 px-6">
-              <Separator />
+              <Divider />
               <div className="mt-4 grid lg:grid-cols-2 gap-7">
                 <div className="flex flex-col gap-4">
                   <Text variant="headingSm" as="h3" color="subdued">
@@ -122,7 +122,7 @@ export function Content({ data }: { data: IProps }) {
             </Text>
             <Search />
           </div>
-          <Separator />
+          <Divider />
         </div>
         <div className="mt-6 grid gap-4 lg:grid-cols-2">
           {data.list.map((item) => (

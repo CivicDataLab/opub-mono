@@ -1,11 +1,12 @@
-import { Meta, StoryObj } from '@storybook/react';
 import { PropsVariationSection } from '../../utils/helpers';
 import { InlineMessage } from './InlineMessage';
+import { Meta, StoryObj } from '@storybook/react';
 
 /**
  * An inline message lets users know when important information is available
  */
 const meta = {
+  title: 'Verified/InlineMessage',
   component: InlineMessage,
 } satisfies Meta<typeof InlineMessage>;
 

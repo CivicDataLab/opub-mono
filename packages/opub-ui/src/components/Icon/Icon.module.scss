@@ -2,7 +2,6 @@
 
 .Icon {
   --size: 20px;
-  --fill: none;
   display: block;
   height: var(--size);
   width: var(--size);
@@ -29,62 +28,62 @@
 }
 
 .colorDefault {
-  svg {
-    color: var(--icon-default);
+  &::before {
+    background-color: var(--surface-selected);
   }
 }
 
 .colorSubdued {
-  svg {
-    color: var(--icon-subdued);
+  &::before {
+    background-color: var(--surface-subdued);
   }
 }
 
 .colorCritical {
-  svg {
-    color: var(--icon-critical);
+  &::before {
+    background-color: var(--surface-critical);
   }
 }
 
 .colorInteractive {
-  svg {
-    color: var(--interactive);
+  &::before {
+    background-color: var(--surface-interactive);
   }
 }
 
 .colorWarning {
-  svg {
-    color: var(--icon-warning);
+  &::before {
+    background-color: var(--surface-warning);
   }
 }
 
 .colorHighlight {
-  svg {
-    color: var(--icon-highlight);
+  &::before {
+    background-color: var(--surface-highlight-default);
   }
 }
 
 .colorSuccess {
-  svg {
-    color: var(--icon-success);
+  &::before {
+    background-color: var(--surface-success);
   }
 }
 
 .colorOnBgDefault {
-  svg {
-    color: var(--icon-onbg-default);
+  &::before {
+    background-color: var(--surface-success);
   }
 }
 
 .colorOnBgSubdued {
-  svg {
-    color: var(--icon-onbg-subdued);
+  &::before {
+    background-color: var(--surface-success);
   }
 }
 
 .colorOnBgDisabled {
-  svg {
-    color: var(--icon-onbg-disabled);
+  &::before {
+    background-color: var(--surface-success);
   }
 }
 

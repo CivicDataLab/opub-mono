@@ -8,6 +8,7 @@ import { IconMinus, IconPlus, IconSettings } from '@tabler/icons-react';
  * Icon Button component
  */
 const meta = {
+  title: 'Verified/IconButton',
   component: IconButton,
 
   argTypes: {
