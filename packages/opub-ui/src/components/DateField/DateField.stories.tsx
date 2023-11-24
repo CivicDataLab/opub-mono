@@ -1,6 +1,6 @@
-import { Meta, StoryObj } from '@storybook/react';
 import { DateField } from './DateField';
 import { now, getLocalTimeZone } from '@internationalized/date';
+import { Meta, StoryObj } from '@storybook/react';
 
 /**
  * DateFields allow users to enter and edit date and time values using a keyboard
@@ -8,6 +8,7 @@ import { now, getLocalTimeZone } from '@internationalized/date';
  * Reference: https://react-spectrum.adobe.com/react-aria/useDateField.html
  */
 const meta = {
+  title: 'Verified/DateField',
   component: DateField,
 } satisfies Meta<typeof DateField>;
 

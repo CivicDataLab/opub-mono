@@ -84,7 +84,7 @@ const SidebarLink = ({
         >
           {icon && (
             <div className="basis-5 pl-3">
-              <Icon source={Icons[icon]} color="base" />
+              <Icon source={Icons[icon]} color="default" />
             </div>
           )}
 

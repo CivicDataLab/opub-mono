@@ -127,7 +127,7 @@ const MenuLink = ({
         >
           {icon && (
             <div className="pr-1">
-              <Icon source={Icons[icon]} color="base" />
+              <Icon source={Icons[icon]} color="default" />
             </div>
           )}
           <Text className="capitalize">{title}</Text>

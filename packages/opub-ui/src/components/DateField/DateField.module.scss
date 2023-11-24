@@ -22,7 +22,7 @@
 
     &:focus-within {
       & + div {
-        outline: 2px solid var(--focused);
+        outline: 2px solid var(--text-interactive);
         outline-offset: 2px;
       }
     }
@@ -34,7 +34,7 @@
   font-variant-numeric: tabular-nums;
   text-align: right;
   font-size: var(--font-size-100);
-  color: var(--text);
+  color: var(--text-default);
 
   &.Placeholder {
     color: var(--text-subdued);
@@ -42,8 +42,8 @@
   }
 
   &:focus {
-    color: var(--text-on-dark);
-    background: var(--interactive);
+    color: var(--text-onbg-default);
+    background: var(--text-interactive);
 
     outline: none;
   }
@@ -56,7 +56,7 @@
   min-width: 230px;
 
   > span {
-    color: var(--text);
+    color: var(--text-default);
     z-index: 11;
     padding-inline: var(--space-05);
   }

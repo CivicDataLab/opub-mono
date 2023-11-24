@@ -1,16 +1,9 @@
 import { DividerProps } from '../../types/divider';
+import { cn } from '../../utils';
 import styles from './Divider.module.scss';
-import React from 'react';
 
-export const Divider = ({
-  borderStyle = 'divider',
-  className,
-}: DividerProps) => {
-  const style = {
-    '--divider-border-style': borderStyle
-      ? `var(--border-${borderStyle})`
-      : undefined,
-  } as React.CSSProperties;
+export const Divider = ({ className, direction }: DividerProps) => {
+  const style = cn(styles.Divider, className, direction && styles[direction]);
 
-  return <hr className={styles.Divider + ` ${className}`} style={style} />;
+  return <hr className={style} />;
 };

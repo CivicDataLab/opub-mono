@@ -18,7 +18,7 @@ export function CloseButton({
       className={cx(styles.CloseButton, titleHidden && styles.titleHidden)}
       aria-label="Close dialog"
     >
-      <Icon source={IconX} color="base" />
+      <Icon source={IconX} color="default" />
     </button>
   );
 }

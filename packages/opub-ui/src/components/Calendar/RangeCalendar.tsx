@@ -59,7 +59,7 @@ function RangeCalendar(props: Props) {
           disabled={disabledPrev}
           {...othersPrev}
         >
-          <Icon source={IconArrowLeft} color="base" />
+          <Icon source={IconArrowLeft} color="default" />
         </button>
 
         <Text variant="bodyMd">{title}</Text>
@@ -68,7 +68,7 @@ function RangeCalendar(props: Props) {
           disabled={disabledNext}
           {...othersNext}
         >
-          <Icon source={IconArrowRight} color="base" />
+          <Icon source={IconArrowRight} color="default" />
         </button>
       </div>
       <CalendarGrid state={state} />
