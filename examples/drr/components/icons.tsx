@@ -8,23 +8,26 @@ import {
   IconChevronDown,
   IconChevronRight,
   IconChevronUp,
+  IconChevronsLeft,
   IconDatabase,
   IconDatabaseCog,
   IconDatabasePlus,
   IconDatabaseShare,
   IconDownload,
   IconFileChart,
+  IconHelpSquare,
   IconHome,
   IconInfoCircleFilled,
   IconLayoutSidebarLeftCollapse,
   IconLayoutSidebarLeftExpand,
   IconLink,
   IconListSearch,
+  IconMinus,
   IconReportSearch,
   IconSearch,
+  IconShare,
   IconSquareRoundedArrowRight,
   IconUserCog,
-  IconChevronsLeft,
   TablerIconsProps,
 } from '@tabler/icons-react';
 
@@ -58,6 +61,9 @@ export const Icons: {
   explorer: IconChartInfographic,
   'database-share': IconDatabaseShare,
   download: IconDownload,
+  minus: IconMinus,
+  iconShare: IconShare,
+  iconHelpSquare: IconHelpSquare,
 };
 
 export default Icons;
