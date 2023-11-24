@@ -1,5 +1,5 @@
-import { Meta, StoryObj } from '@storybook/react';
 import { SkeletonTabs } from './SkeletonTabs';
+import { Meta, StoryObj } from '@storybook/react';
 
 /**
  * SkeletonTabs tabs are used to provide a low fidelity representation of content before it appears on the page
@@ -7,6 +7,7 @@ import { SkeletonTabs } from './SkeletonTabs';
  * Reference: https://polaris.shopify.com/components/feedback-indicators/SkeletonTabs-tabs
  */
 const meta = {
+  title: 'Verified/SkeletonTabs',
   component: SkeletonTabs,
 } satisfies Meta<typeof SkeletonTabs>;
 

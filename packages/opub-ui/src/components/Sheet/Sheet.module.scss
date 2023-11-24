@@ -21,7 +21,7 @@ $vertical-spacing: 60px;
 }
 
 .Sheet {
-  --sheet-bg: var(--surface, #ffffff);
+  --sheet-bg: var(--surface-default, #ffffff);
   --inlineWidth: 360px;
   --blockHeight: 280px;
 
@@ -34,8 +34,8 @@ $vertical-spacing: 60px;
   overflow: auto;
   inset: unset;
 
-  width: var(--width);
-  height: var(--height);
+  width: var(--inlineWidth);
+  height: var(--blockHeight);
 
   &[data-state='open'] {
     animation: slideIn var(--duration-200) var(--ease);
