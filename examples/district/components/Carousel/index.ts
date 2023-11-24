@@ -1,1 +1,0 @@
-export { SummaryCarousel } from './Carousel';
