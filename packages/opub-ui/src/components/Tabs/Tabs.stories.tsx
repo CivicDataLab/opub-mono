@@ -1,6 +1,6 @@
-import { Meta, StoryObj } from '@storybook/react';
 import { Box } from '../Box';
 import { Tab, TabList, TabPanel, Tabs } from './Tabs';
+import { Meta, StoryObj } from '@storybook/react';
 
 /**
  * A set of layered sections of content—known as tab panels—that are displayed one at a time.
@@ -8,6 +8,7 @@ import { Tab, TabList, TabPanel, Tabs } from './Tabs';
  * Reference: https://www.radix-ui.com/docs/primitives/components/tabs
  */
 const meta = {
+  title: 'Verified/Tabs',
   component: Tabs,
 } satisfies Meta<typeof Tabs>;
 
@@ -49,6 +50,38 @@ export const Fitted: Story = {
             <Tab value="1">Tab 1</Tab>
             <Tab value="2">Tab 2</Tab>
             <Tab value="3">Tab 3</Tab>
+          </TabList>
+          <TabPanel value="1">
+            <Box padding="5">1</Box>
+          </TabPanel>
+          <TabPanel value="2">
+            <Box padding="5">2</Box>
+          </TabPanel>
+          <TabPanel value="3">
+            <Box padding="5">3</Box>
+          </TabPanel>
+        </Tabs>
+      </>
+    );
+  },
+  args: {},
+};
+
+export const WithoutBorder: Story = {
+  render: ({ ...args }) => {
+    return (
+      <>
+        <Tabs defaultValue="1" {...args}>
+          <TabList>
+            <Tab activeBorder={false} value="1">
+              Tab Name 1
+            </Tab>
+            <Tab activeBorder={false} value="2">
+              Tab Name 2
+            </Tab>
+            <Tab activeBorder={false} value="3">
+              Tab Name 3
+            </Tab>
           </TabList>
           <TabPanel value="1">
             <Box padding="5">1</Box>
