@@ -3,6 +3,7 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { RadioGroup, RadioItem, Select, Separator, Text } from 'opub-ui';
+import { Button, Icon, IconButton } from 'opub-ui/src';
 
 import { DistrictColumnData, RevenueColumnData } from '@/config/consts.ts';
 import {
@@ -11,6 +12,7 @@ import {
 } from '@/config/graphql/analaytics-queries';
 import { GraphQL } from '@/lib/api';
 import { deSlugify } from '@/lib/utils';
+import { Icons } from '@/components/icons';
 import { MapComponent } from './ChoroplethMap';
 import { FrimsDataTable } from './FrimsDataTable';
 import { TableComponent } from './TableComponent';
@@ -73,8 +75,29 @@ export function Content({ indicator }: { indicator: string }) {
 
   return (
     <>
-      <div className="mt-4 mb-6">
-        <Text variant="heading3xl"> DRR Dashboard : Analytical Map</Text>
+      <div className="flex items-center space-x-20 ">
+        <div className="mt-4 mb-6 flex items-center gap-4">
+          <Text variant="heading2xl"> DRR Dashboard : Analytical Maps</Text>
+          <IconButton
+            color="highlight"
+            icon={Icons.iconShare}
+            className="bg-actionsSecondaryBasicDefault p-2 hover:bg-surfaceHighlightHovered"
+          >
+            Share
+          </IconButton>
+
+          <IconButton
+            color="highlight"
+            icon={Icons.download}
+            className="bg-actionsSecondaryBasicDefault p-2 hover:bg-surfaceHighlightHovered"
+          >
+            Download
+          </IconButton>
+
+          <div>
+            <Button>View Charts</Button>
+          </div>
+        </div>
       </div>
 
       <div className="w-full flex flex-col gap-4">
