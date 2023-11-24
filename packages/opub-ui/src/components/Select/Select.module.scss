@@ -5,7 +5,7 @@
   --op-select-content: 20;
   --op-select-input: 30;
   position: relative;
-  color: var(--text);
+  color: var(--text-default);
 
   // IE 11 fix to remove default dropdown arrow
   select::-ms-expand {
@@ -14,7 +14,7 @@
 
   &:focus-within .Backdrop {
     @include focus-ring($style: 'focused');
-    outline: var(--border-width-3) solid transparent;
+    outline: var(--border-width-2) solid transparent;
   }
 }
 
@@ -86,7 +86,7 @@
 .Input {
   // Even though the input is invisible, text styles apply to the options menu
   font-size: var(--font-size-200);
-  font-weight: var(--font-weight-regular);
+  font-weight: 400;
   line-height: var(--font-line-height-2);
   text-transform: initial;
   letter-spacing: initial;
@@ -114,21 +114,21 @@
   right: 0;
   bottom: 0;
   left: 0;
-  border: var(--border-width-1) solid var(--border-shadow);
+  border: var(--border-width-1) solid var(--border-default);
   border-radius: var(--border-radius-1);
-  background-color: var(--surface);
-  box-shadow: var(--shadow-sm);
+  background-color: var(--surface-default);
+  box-shadow: var(--shadow-basic-sm);
   @include focus-ring($border-width: 1px);
   position: absolute;
 }
 
 .error {
   .Backdrop {
-    border-color: var(--border-critical);
-    background-color: var(--surface-critical-subdued);
+    border-color: var(--border-critical-default);
+    background-color: var(--surface-critical);
     &.hover,
     &:hover {
-      border-color: var(--border-critical);
+      border-color: var(--border-critical-subdued);
     }
   }
 

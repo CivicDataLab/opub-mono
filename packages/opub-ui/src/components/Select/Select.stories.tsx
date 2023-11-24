@@ -1,6 +1,8 @@
-import { Meta } from '@storybook/react';
-import { useCallback, useState } from 'react';
 import { Select } from '../Form/components/Select';
+import { Icon } from '../Icon';
+import { Meta } from '@storybook/react';
+import { IconChevronDown, IconChevronUp } from '@tabler/icons-react';
+import { useCallback, useState } from 'react';
 
 /**
  * Select lets user choose one option from an options menu. Consider select when you have 4 or more options, to avoid cluttering the interface.
@@ -8,6 +10,7 @@ import { Select } from '../Form/components/Select';
  * Reference: https://polaris.shopify.com/components/selection-and-input/select
  */
 const meta = {
+  title: 'Verified/Select',
   component: Select,
 } satisfies Meta<typeof Select>;
 
@@ -77,7 +80,7 @@ export function Disabled({ ...props }) {
     />
   );
 }
-// TODO: Using prefix crashes the brwser
+// TODO: Using icon prefix crashes the browser
 // export function Prefix({ ...props }) {
 //   const [selected, setSelected] = useState('Decrease');
 
@@ -90,17 +93,18 @@ export function Disabled({ ...props }) {
 //     {
 //       label: 'Increase',
 //       value: 'Increase',
-//       prefix: <ChevronUp />,
+//       prefix: <Icon source={IconChevronUp} />,
 //     },
 //     {
 //       label: 'Decrease',
 //       value: 'Decrease',
-//       prefix: <ChevronDown />,
+//       prefix: <Icon source={IconChevronDown} />,
 //     },
 //   ];
 
 //   return (
 //     <Select
+//       name="select-21"
 //       label="Permission"
 //       options={options}
 //       onChange={handleSelectChange}
@@ -111,7 +115,7 @@ export function Disabled({ ...props }) {
 // }
 
 export function Error({ ...props }) {
-  const [selected, setSelected] = useState('');
+  const [selected, setSelected] = useState('Bangaluru');
 
   const handleSelectChange = useCallback(
     (value: string) => setSelected(value),
@@ -122,10 +126,10 @@ export function Error({ ...props }) {
     <Select
       label="Province"
       name="select-1"
-      options={['Bangaluru']}
+      options={['Bangaluru', 'Mumbai', 'Delhi']}
       value={selected}
       onChange={handleSelectChange}
-      error="Province is required"
+      error={selected === 'Bangaluru' ? 'Bengaluru not allowed' : undefined}
       {...props}
     />
   );

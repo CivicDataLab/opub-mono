@@ -71,6 +71,7 @@ export const Select = forwardRef(
     if (helpText) {
       describedBy.push(helpTextID(id));
     }
+
     if (error) {
       describedBy.push(`${id}Error`);
     }

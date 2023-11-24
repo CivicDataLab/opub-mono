@@ -1,13 +1,14 @@
 .Divider {
-  border: 0;
-  margin: 0;
-  width: 100%;
-  border-block-start: 1px solid var(--border-default);
+  flex-shrink: 0;
+  background-color: var(--border-default);
 }
 
-.vertical {
-  height: 100%;
+.Horizontal {
+  height: 1px;
+  width: 100%;
+}
+
+.Vertical {
   width: 1px;
-  border-width: 1px;
-  border-inline-start: 1px solid var(--border-default);
+  height: 100%;
 }

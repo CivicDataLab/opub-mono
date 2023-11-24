@@ -8,7 +8,7 @@ import { Labelled, LabelledProps } from '../Labelled';
 import { Popover } from '../Popover';
 import styles from './DatePicker.module.scss';
 import { DateValue } from '@react-types/calendar';
-import { IconCalendarEvent } from '@tabler/icons-react';
+import { IconCalendar } from '@tabler/icons-react';
 import cx from 'classnames';
 import React from 'react';
 import { AriaDatePickerProps, useDatePicker } from 'react-aria';
@@ -75,7 +75,7 @@ const DatePicker = React.forwardRef(
             >
               <Popover.Trigger>
                 <Button
-                  icon={<Icon source={IconCalendarEvent} color="onBgDefault" />}
+                  icon={<Icon source={IconCalendar} color="onBgDefault" />}
                   size="slim"
                   {...othersProps}
                   onClick={() => (!state.isOpen ? state.open() : state.close())}

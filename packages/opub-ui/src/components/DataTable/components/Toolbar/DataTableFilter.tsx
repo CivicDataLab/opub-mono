@@ -10,10 +10,10 @@ import {
   CommandItem,
   CommandList,
 } from '../../../Command';
+import { Divider } from '../../../Divider';
 import { Icon } from '../../../Icon';
 import { Popover } from '../../../Popover';
 import { ScrollArea } from '../../../ScrollArea';
-import { Separator } from '../../../Separator';
 import { Text } from '../../../Text';
 import styles from '../../DataTable.module.scss';
 import { IconCirclePlus } from '@tabler/icons-react';
@@ -45,7 +45,7 @@ export function DataTableFilter<TData, TValue>({
             {title}
             {selectedValues?.size > 0 && (
               <>
-                <Separator
+                <Divider
                   orientation="vertical"
                   className={styles.FilterSeparator}
                 />
@@ -128,7 +128,7 @@ export function DataTableFilter<TData, TValue>({
             </CommandGroup>
             {selectedValues.size > 0 && (
               <>
-                <Separator />
+                <Divider />
                 <CommandGroup>
                   <CommandItem
                     onSelect={() => column?.setFilterValue(undefined)}

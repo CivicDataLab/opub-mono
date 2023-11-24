@@ -17,7 +17,7 @@ export const Default: Story = {};
 export const Veritcal: Story = {
   render: () => (
     <div style={{ height: '300px' }}>
-      <Divider direction="vertical" />
+      <Divider orientation="vertical" />
     </div>
   ),
 };

@@ -42,7 +42,6 @@ export { Menu } from './Menu';
 export { Popover } from './Popover';
 export { ProgressBar } from './ProgressBar';
 export { ScrollArea } from './ScrollArea';
-export { Separator } from './Separator';
 export { Sheet } from './Sheet';
 export { Skeleton } from './Skeleton';
 export { SkeletonBodyText } from './SkeletonBodyText';
