@@ -2,5 +2,12 @@
   border: 0;
   margin: 0;
   width: 100%;
-  border-block-start: var(--divider-border-style);
+  border-block-start: 1px solid var(--border-default);
+}
+
+.vertical {
+  height: 100%;
+  width: 1px;
+  border-width: 1px;
+  border-inline-start: 1px solid var(--border-default);
 }

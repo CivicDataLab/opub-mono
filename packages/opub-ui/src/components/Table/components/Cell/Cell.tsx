@@ -40,7 +40,7 @@ function SortButton({
 
   const iconMarkup = (
     <span className={iconClassName}>
-      <Icon color="base" source={source} accessibilityLabel={a11ylabel} />
+      <Icon color="default" source={source} accessibilityLabel={a11ylabel} />
     </span>
   );
 
