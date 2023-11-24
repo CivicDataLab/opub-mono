@@ -2,7 +2,7 @@
 
 $item-min-width: 50px;
 
-.Tabs {
+.TabList {
   display: flex;
   margin: 0;
   padding: 0;
@@ -10,26 +10,7 @@ $item-min-width: 50px;
   overflow-x: auto;
 }
 
-.fitted {
-  flex-wrap: nowrap;
-
-  .TabContainer {
-    flex: 1 1 100%;
-  }
-
-  .Title {
-    width: 100%;
-    padding: var(--space-2) var(--space-4);
-  }
-}
-
-.fillSpace {
-  .TabContainer {
-    flex: 1 1 auto;
-  }
-}
-
-.TabContainer {
+.TabWrapper {
   display: flex;
   margin: 0;
   padding: 0;
@@ -37,19 +18,29 @@ $item-min-width: 50px;
 
 .Tab {
   @include unstyled-button;
+
   color: var(--text-highlight);
   position: relative;
   justify-content: center;
-  width: 100%;
-  min-width: 100%;
-  padding: var(--space-2) var(--space-1);
+  padding: var(--space-4);
+  padding-bottom: var(--space-3);
   outline: none;
   text-align: center;
   white-space: nowrap;
   text-decoration: none;
   cursor: pointer;
-
   box-shadow: var(--shadow-inset-basic);
+
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: var(--space-1);
+    right: var(--space-1);
+    height: 3px;
+    border-top-left-radius: var(--border-radius-1);
+    border-top-right-radius: var(--border-radius-1);
+  }
 
   &.ActiveBorder {
     border-radius: 4px 4px 0px 0px;
@@ -57,54 +48,31 @@ $item-min-width: 50px;
   }
 
   &:hover {
-    text-decoration: none;
-
     &.ActiveBorder {
       .Title {
-        font-weight: 400;
-        color: var(--text-default);
-        background-color: transparent;
-
         &::before {
-          background-color: var(--border-subdued);
+          background-color: var(--border-highlight-subdued);
         }
       }
     }
   }
 
-  &:active {
-    &.ActiveBorder {
-      .Title {
-        background-color: transparent;
-
-        &::before {
-          background: var(--surface-primary-selected-pressed);
-        }
-      }
-    }
-  }
-
-  &:focus-visible {
+  &:focus-visible:not(:active) {
     .Title {
-      font-weight: 400;
-      color: var(--text);
+      @include focus-ring($style: 'focused');
     }
-
-    &:not(:active) {
-      .Title {
-        @include focus-ring($style: 'focused');
-      }
-    }
-  }
-
-  &:visited {
-    color: inherit;
   }
 
   &[data-state='active'] {
-    background: var(--surface-highlight-default, #ede9fe);
+    background: var(--surface-highlight-subdued, #fbfaff);
+
     .Title {
       color: var(--text-highlight);
+      font-weight: 500;
+    }
+
+    svg {
+      color: var(--icon-highlight);
     }
 
     &.ActiveBorder {
@@ -112,24 +80,11 @@ $item-min-width: 50px;
       font-weight: 400;
       color: var(--text-highlight);
       border: 1px solid var(--border-subdued, #d7dbdf);
-      box-shadow: var(--shadow-element-popover);
       border-bottom: none;
+      box-shadow: var(--shadow-element-popover);
 
-      &:focus .Title {
-        outline: var(--border-width-3) solid transparent;
-
-        &::before {
-          background: var(--action-primary-active-basic-default, #6e56cf);
-        }
-      }
-
-      .Title {
-        outline: var(--border-width-3) solid transparent;
-        color: var(--text-highlight);
-
-        &::before {
-          background: var(--action-primary-active-basic-default, #6e56cf);
-        }
+      &::before {
+        background: var(--action-primary-basic-default, #6e56cf);
       }
     }
   }
@@ -138,19 +93,17 @@ $item-min-width: 50px;
 .Title {
   @include focus-ring;
   display: block;
-  border-radius: var(--border-radius-1);
-  padding: var(--space-2) var(--space-4);
   min-width: $item-min-width;
-  color: var(--text-subdued);
+}
 
-  &::before {
-    content: '';
-    position: absolute;
-    bottom: calc(-1 * var(--space-2));
-    left: 0;
-    right: 0;
-    height: var(--border-width-3);
-    border-top-left-radius: var(--border-radius-1);
-    border-top-right-radius: var(--border-radius-1);
+.fitted {
+  flex-wrap: nowrap;
+
+  .Tab {
+    flex: 1 1 100%;
+  }
+
+  .Title {
+    width: 100%;
   }
 }
