@@ -14,12 +14,12 @@ import styles from './DropZone.module.scss';
 import { FileUpload } from './components';
 import { DropZoneContext } from './context';
 import {
-  defaultAllowMultiple,
   DropZoneEvent,
+  defaultAllowMultiple,
   fileAccepted,
   getDataTransferFiles,
 } from './utils';
-import { CircleAlertMajor, UploadMajor } from '@shopify/polaris-icons';
+import { IconAlertCircle, IconUpload } from '@tabler/icons-react';
 import cx from 'classnames';
 import React, {
   FunctionComponent,
@@ -322,12 +322,12 @@ export const DropZone: React.ForwardRefExoticComponent<
     !internalError &&
     !error &&
     overlay &&
-    overlayMarkup(UploadMajor, 'interactive', overlayTextWithDefault);
+    overlayMarkup(IconUpload, 'interactive', overlayTextWithDefault);
 
   const dragErrorOverlay =
     dragging &&
     (internalError || error) &&
-    overlayMarkup(CircleAlertMajor, 'critical', errorOverlayTextWithDefault);
+    overlayMarkup(IconAlertCircle, 'critical', errorOverlayTextWithDefault);
 
   const context = useMemo(
     () => ({

@@ -183,22 +183,22 @@
   font-size: var(--font-size-100);
   font-weight: 500;
   line-height: var(--font-line-height-1);
-
   text-transform: initial;
   letter-spacing: initial;
-
   position: relative;
-
   display: flex;
-
   justify-content: center;
-
   align-items: center;
+  gap: var(--space-1);
   min-width: 1px;
   min-height: 1px;
 
   .Button:not(.kindTertiary) & {
     width: 100%;
+  }
+
+  .Icon {
+    margin-bottom: -2px;
   }
 }
 

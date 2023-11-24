@@ -42,7 +42,6 @@
 
     svg {
       color: var(--icon-interactive);
-      fill: var(--icon-interactive);
     }
   }
 
@@ -61,7 +60,6 @@
 
     svg {
       color: var(--icon-interactive);
-      fill: var(--icon-interactive);
     }
 
     &::before {
@@ -93,7 +91,6 @@
     .Prefix svg,
     .Suffix svg {
       color: var(--icon-disabled);
-      fill: var(--icon-disabled);
     }
   }
 }

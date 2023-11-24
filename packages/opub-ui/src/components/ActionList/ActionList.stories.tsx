@@ -1,7 +1,7 @@
 import { Icon } from '../Icon';
 import { ActionList } from './ActionList';
-import { ExportMinor, ImportMinor, TickMinor } from '@shopify/polaris-icons';
 import { Meta, StoryObj } from '@storybook/react';
+import { IconCheck, IconFileExport, IconFileImport } from '@tabler/icons-react';
 
 /**
  * Action lists render a list of actions or selectable options. This component is usually placed inside a popover container to create a dropdown menu
@@ -37,10 +37,10 @@ export const WithSuffix: Story = {
       {
         active: true,
         content: 'Import file',
-        icon: <ImportMinor />,
-        suffix: <Icon source={TickMinor} />,
+        icon: IconFileImport,
+        suffix: IconCheck,
       },
-      { content: 'Export file', icon: <ExportMinor /> },
+      { content: 'Export file', icon: IconFileExport },
     ],
   },
 };
