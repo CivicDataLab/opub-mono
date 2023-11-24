@@ -7,6 +7,7 @@ import { SkeletonBodyText } from './SkeletonBodyText';
  * Reference: https://polaris.shopify.com/components/feedback-indicators/skeleton-body-text
  */
 const meta = {
+  title: 'Verified/SkeletonBodyText',
   component: SkeletonBodyText,
 } satisfies Meta<typeof SkeletonBodyText>;
 
