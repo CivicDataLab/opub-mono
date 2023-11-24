@@ -2,10 +2,10 @@
 
 import { Button } from '../../../Button';
 import { Checkbox } from '../../../Checkbox';
+import { Divider } from '../../../Divider';
 import { Icon } from '../../../Icon';
 import { Popover } from '../../../Popover';
 import { ScrollArea } from '../../../ScrollArea';
-import { Separator } from '../../../Separator';
 import { Text } from '../../../Text';
 import styles from '../../DataTable.module.scss';
 import { IconAdjustmentsHorizontal } from '@tabler/icons-react';
@@ -41,7 +41,7 @@ export function DataTableView<TData>({
                   Toggle Columns
                 </Text>
               </div>
-              <Separator />
+              <Divider />
               <ScrollArea>
                 <div className={styles.TableViewContent}>
                   {table

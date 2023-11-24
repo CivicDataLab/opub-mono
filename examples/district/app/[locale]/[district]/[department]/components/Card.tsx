@@ -4,7 +4,7 @@ import { Icons } from '@/components/icons';
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Icon, ProgressBar, Separator, Text } from 'opub-ui';
+import { Icon, ProgressBar, Divider, Text } from 'opub-ui';
 
 export const SchemeCard = ({
   data,
@@ -47,7 +47,7 @@ export const SchemeCard = ({
           </span>
         </Link>
 
-        <Separator />
+        <Divider />
 
         <Text variant="bodyMd" color="subdued">
           Last Updated: {data.lastUpdated || 'N/A'}
@@ -127,7 +127,7 @@ export const ContentCard = ({
       </div>
       {description && (
         <>
-          <Separator className="my-4" />
+          <Divider className="my-4" />
           <Text variant="bodyMd">{description}</Text>
         </>
       )}

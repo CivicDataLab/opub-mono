@@ -1,7 +1,7 @@
-import { Meta, StoryObj } from '@storybook/react';
 import { Box } from '../Box';
 import { Text } from '../Text';
 import { ScrollArea } from './ScrollArea';
+import { Meta, StoryObj } from '@storybook/react';
 
 /**
  * Augments native scroll functionality for custom, cross-browser styling.
@@ -9,6 +9,7 @@ import { ScrollArea } from './ScrollArea';
  * Reference: https://www.radix-ui.com/docs/primitives/components/scroll-area
  */
 const meta = {
+  title: 'Verified/ScrollArea',
   component: ScrollArea,
 } satisfies Meta<typeof ScrollArea>;
 

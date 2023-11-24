@@ -6,7 +6,7 @@ import {
   Icon,
   Input,
   ScrollArea,
-  Separator,
+  Divider,
   Text,
 } from 'opub-ui';
 import React from 'react';
@@ -98,7 +98,7 @@ export const IndicatorsCheckbox = ({
       <Text variant="bodyMd" color="subdued" className="mt-2">
         Select indicators to download data
       </Text>
-      <Separator className="my-4" />
+      <Divider className="my-4" />
       <Input
         name="indicator-search"
         label="Indicator Search"
@@ -161,7 +161,7 @@ const IndicatorContent = ({
         <Icon source={Icons.info} color="default" />
       </div>
       <div>
-        <Separator className="mt-2 mb-3" />
+        <Divider className="mt-2 mb-3" />
         {list.length > 0 ? (
           <CheckboxGroup
             onChange={(e) => onChange(e, heading)}
