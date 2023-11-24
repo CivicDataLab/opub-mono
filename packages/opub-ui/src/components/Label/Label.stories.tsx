@@ -1,5 +1,5 @@
-import { Meta } from '@storybook/react';
 import { Label } from './Label';
+import { Meta } from '@storybook/react';
 
 /**
  * Renders an accessible label associated with controls.
@@ -7,6 +7,7 @@ import { Label } from './Label';
  * Reference: https://www.radix-ui.com/docs/primitives/components/label
  */
 export default {
+  title: 'Verified/Label',
   component: Label,
 
   argTypes: {
@@ -25,5 +26,13 @@ export const Primary = {
   args: {
     children: 'Label',
     htmlFor: '#',
+  },
+};
+
+export const Error = {
+  args: {
+    children: 'Label Error',
+    htmlFor: '#',
+    error: true,
   },
 };

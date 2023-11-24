@@ -1,15 +1,15 @@
 .base {
-  font-weight: var(--font-weight-regular);
+  font-weight: 400;
   font-size: var(--font-size-100);
   line-height: var(--font-line-height-2);
   display: block;
   width: 100%;
   width: fit-content;
-  color: var(--text);
+  color: var(--text-default);
 }
 
 .error {
-  color: var(--color-error);
+  color: var(--text-critical);
 }
 
 .disabled {

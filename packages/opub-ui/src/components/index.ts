@@ -38,7 +38,6 @@ export { IconButton } from './IconButton';
 export { InlineMessage } from './InlineMessage';
 export { Label } from './Label';
 export { Labelled } from './Labelled';
-export { Link } from './Link';
 export { Menu } from './Menu';
 export { Popover } from './Popover';
 export { ProgressBar } from './ProgressBar';
