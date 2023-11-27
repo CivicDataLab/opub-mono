@@ -153,17 +153,16 @@ export function AnalyticsDashboardSidebar({
           </div>
         </span>
         <Collapsible defaultOpen className={cn(isCollapsed && 'hidden')}>
-          {/* <div className="pl-4 bg-surfaceSelected max-w-full min-w-max bg-surfaceNeutral border-t-0 border-1 border-solid border-borderSubdued mb-5"> */}
           <div className="pl-4 bg-surfaceSelected max-w-full min-w-max bg-surfaceNeutral border-b-1 border-solid border-borderSubdued mb-5">
             <CollapsibleTrigger className={styles.CollapseTrigger}>
               <Text className="text-textSubdued" fontWeight="bold">
                 Select an indicator
               </Text>
-              <Icon color="textDisabled" source={Icons.minus} />
+              <Icon color='subdued' source={Icons.minus} />
             </CollapsibleTrigger>
           </div>
 
-          <CollapsibleContent className="pb-4 px-2 max-w-full min-w-max data-[state=open]:mt-[-12px]">
+          <CollapsibleContent className="pb-4 max-w-full data-[state=open]:mt-[-12px]">
             <div
               className={cn(
                 'px-4 h-full pt-px bg-baseCyanSolid1',
@@ -184,16 +183,16 @@ export function AnalyticsDashboardSidebar({
           defaultOpen
           className={cn(isCollapsed && 'hidden', 'mb-6 ')}
         >
-          <div className="pl-4 bg-surfaceSelected max-w-full min-w-max bg-surfaceNeutral border-b-1 border-solid border-borderSubdued mb-5">
+          <div className="pl-4 bg-surfaceSelected max-w-full bg-surfaceNeutral border-b-1 border-solid border-borderSubdued mb-5">
             <CollapsibleTrigger className={styles.CollapseTrigger}>
               <Text className="text-textSubdued" fontWeight="bold">
                 Select a time period
               </Text>
-              <Icon source={Icons.minus} />
+              <Icon color='subdued' source={Icons.minus} />
             </CollapsibleTrigger>
           </div>
 
-          <CollapsibleContent className="pb-4 px-2 max-w-full min-w-max data-[state=open]:mt-[-12px]">
+          <CollapsibleContent className="pb-4 px-2 max-w-full data-[state=open]:mt-[-12px]">
             <div className="px-4 h-full pt-4">
               <RadioButton label="September 2022" />
             </div>

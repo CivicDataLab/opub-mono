@@ -4,6 +4,7 @@ import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import {
   Button,
+  IconButton,
   RadioGroup,
   RadioItem,
   Select,
@@ -90,29 +91,33 @@ export function Content({ indicator }: { indicator: string }) {
 
   return (
     <>
-      <span className="flex items-center gap-x-96 self-stretch">
+      <span className="flex items-center justify-between">
         <span className="mt-4 mb-6 flex items-center gap-4">
-          <Text variant="heading2xl"> DRR Dashboard : Analytical Maps</Text>
-          <div className="bg-actionsSecondaryBasicDefault rounded-1 border-2 border-solid border-borderHighlightDefault p-1">
+          <Text variant="heading2xl" fontWeight="bold">
+            Assam DRR Analytics: Map Dashboard
+          </Text>
+          <div className="bg-actionsSecondaryBasicDefault rounded-1 border-1 border-solid border-borderHighlightDefault">
             <IconButton color="highlight" icon={Icons.iconShare}>
               Share
             </IconButton>
           </div>
 
-          <div className="bg-actionsSecondaryBasicDefault rounded-1 border-2 border-solid border-borderHighlightDefault p-1">
+          <div className="bg-actionsSecondaryBasicDefault rounded-1 border-1 border-solid border-borderHighlightDefault">
             <IconButton
               color="highlight"
               icon={Icons.download}
-              // className="bg-actionsSecondaryBasicDefault border border-solid p-2 hover:bg-surfaceHighlightHovered"
             >
               Download
             </IconButton>
           </div>
         </span>
 
-        <button className="text-center bg-actionsPrimaryBasicDefault rounded-1 text-backgroundSolidDefault py-2 px-16  justify-center items-center ">
+        <Button
+          size="medium"
+          className="bg-actionsPrimaryBasicDefault w-[336px]"
+        >
           View Charts
-        </button>
+        </Button>
       </span>
 
       <div className="w-full flex flex-col gap-4">
