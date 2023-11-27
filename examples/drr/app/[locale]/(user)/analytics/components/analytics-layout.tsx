@@ -11,7 +11,7 @@ import {
   ANALYTICS_TABLE_DATA,
 } from '@/config/graphql/analaytics-queries';
 import { GraphQL } from '@/lib/api';
-import { deSlugify } from '@/lib/utils';
+import { cn, deSlugify } from '@/lib/utils';
 import { Icons } from '@/components/icons';
 import { MapComponent } from './ChoroplethMap';
 import { FrimsDataTable } from './FrimsDataTable';
@@ -77,18 +77,22 @@ export function Content({ indicator }: { indicator: string }) {
       <div className="flex items-center space-x-20 ">
         <div className="mt-4 mb-6 flex items-center gap-4">
           <Text variant="heading2xl"> DRR Dashboard : Analytical Maps</Text>
+          {/* <div className="bg-actionsSecondaryBasicDefault border-1 border-solid border-borderHighlightDefault p-2 hover:bg-"> */}
           <IconButton
             color="highlight"
             icon={Icons.iconShare}
-            className="bg-actionsSecondaryBasicDefault p-2 hover:bg-surfaceHighlightHovered"
+            className={cn(
+              'bg-actionsPrimaryBasicDefault border-1 border-solid border-borderHighlightDefault p-2 hover:bg'
+            )}
           >
             Share
           </IconButton>
+          {/* </div> */}
 
           <IconButton
             color="highlight"
             icon={Icons.download}
-            className="bg-actionsSecondaryBasicDefault p-2 hover:bg-surfaceHighlightHovered"
+            className="bg-actionsSecondaryBasicDefault border border-solid p-2 hover:bg-surfaceHighlightHovered"
           >
             Download
           </IconButton>

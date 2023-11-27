@@ -129,7 +129,7 @@ export function AnalyticsDashboardSidebar({
   return (
     <aside
       className={cn(
-        'pr-2 overflow-hidden bg-surfaceDefault shadow-basicMd',
+        'pr-0 overflow-hidden bg-surfaceDefault shadow-basicMd',
         'hidden z-1 shadow-inset basis-[320px] shrink-0 md:block',
         isCollapsed && 'basis-[32px]',
         'border-r-1 border-solid border-borderSubdued',
@@ -143,7 +143,7 @@ export function AnalyticsDashboardSidebar({
             isCollapsed && 'hidden'
           )}
         >
-          <div className="flex pl-5 pt-1 pr-4 pb-0.5 items-start gap-1.5 ">
+          <div className="flex pl-5 pt-1 pr-4 pb-0.5 items-start gap-1.5 mb-6 ">
             <IconButton color="highlight" icon={Icons.iconHelpSquare}>
               Help Square
             </IconButton>
@@ -153,9 +153,9 @@ export function AnalyticsDashboardSidebar({
           </div>
         </span>
         <Collapsible defaultOpen className={cn(isCollapsed && 'hidden')}>
-          <div className=" bg-surfaceSelected max-w-full min-w-max bg-surfaceNeutral rounded-1 border-t-0 border-1 border-solid border-borderSubdued mb-5 ">
+          <div className="pl-4 bg-surfaceSelected max-w-full min-w-max bg-surfaceNeutral rounded-1 border-t-0 border-1 border-solid border-borderSubdued mb-5">
             <CollapsibleTrigger className={styles.CollapseTrigger}>
-              <Text className="text-textDefault" fontWeight="bold">
+              <Text className="text-textSubdued" fontWeight="bold">
                 Select an indicator
               </Text>
               <Icon source={Icons.minus} />
@@ -179,10 +179,13 @@ export function AnalyticsDashboardSidebar({
           </CollapsibleContent>
         </Collapsible>
 
-        <Collapsible defaultOpen className={cn(isCollapsed && 'hidden')}>
-          <div className=" bg-surfaceSelected max-w-full min-w-max bg-surfaceNeutral rounded-1 border-t-0 border-1 border-solid border-borderSubdued mb-5 ">
+        <Collapsible
+          defaultOpen
+          className={cn(isCollapsed && 'hidden', 'mb-6 ')}
+        >
+          <div className="pl-4 bg-surfaceSelected max-w-full min-w-max bg-surfaceNeutral rounded-1 border-t-0 border-1 border-solid border-borderSubdued mb-5 ">
             <CollapsibleTrigger className={styles.CollapseTrigger}>
-              <Text className="text-textDefault" fontWeight="bold">
+              <Text className="text-textSubdued" fontWeight="bold">
                 Select a time period
               </Text>
               <Icon source={Icons.minus} />
@@ -196,8 +199,13 @@ export function AnalyticsDashboardSidebar({
           </CollapsibleContent>
         </Collapsible>
 
-        <div className="flex">
-          <span className={cn('h-7 pl-0 rounded', isCollapsed && 'hidden')}>
+        <div className="flex flex-col gap-4 p-0 pb-4 mb-8">
+          <div
+            className={cn(
+              'flex rounded gap-1.5 items-start pl-4 pr-52 pt-1 pb-0.5',
+              isCollapsed && 'hidden'
+            )}
+          >
             <IconButton
               color="highlight"
               icon={Icons.iconShare}
@@ -211,9 +219,14 @@ export function AnalyticsDashboardSidebar({
             <Text className="text-textHighlight" variant="headingMd">
               Share
             </Text>
-          </span>
+          </div>
 
-          <span className={cn('h-7 pl-0 rounded', isCollapsed && 'hidden')}>
+          <div
+            className={cn(
+              'flex rounded gap-1.5 items-start pl-4 pr-52 pt-1 pb-0.5',
+              isCollapsed && 'hidden'
+            )}
+          >
             <IconButton
               color="highlight"
               icon={Icons.download}
@@ -227,7 +240,27 @@ export function AnalyticsDashboardSidebar({
             <Text className="text-textHighlight" variant="headingMd">
               Download
             </Text>
-          </span>
+          </div>
+          <div
+            className={cn(
+              'flex rounded gap-1.5 items-start pl-4 pr-40 pt-1 pb-0.5',
+              isCollapsed && 'hidden'
+            )}
+          >
+            <IconButton
+              color="highlight"
+              icon={Icons.iconChartBar}
+              className={cn(
+                'bg-surfaceHighlightDefault p-2 hover:bg-surfaceHighlightHovered',
+                isCollapsed && 'hidden'
+              )}
+            >
+              View Charts
+            </IconButton>
+            <Text className="text-textHighlight flex" variant="headingMd">
+              View Charts
+            </Text>
+          </div>
         </div>
       </div>
     </aside>
