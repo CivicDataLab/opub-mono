@@ -2,10 +2,19 @@
 
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { RadioGroup, RadioItem, Select, Separator, Text } from 'opub-ui';
+import {
+  Button,
+  RadioGroup,
+  RadioItem,
+  Select,
+  Separator,
+  Text,
+} from 'opub-ui';
 
 import { DistrictColumnData, RevenueColumnData } from '@/config/consts.ts';
 import {
+  ANALYTICS_INDICATORS,
+  ANALYTICS_REVENUE_MAP_DATA,
   ANALYTICS_REVENUE_TABLE_DATA,
   ANALYTICS_TABLE_DATA,
 } from '@/config/graphql/analaytics-queries';
@@ -64,6 +73,13 @@ export function Content({ indicator }: { indicator: string }) {
     })
   );
 
+  const revenueMapData = useQuery([`revenue_map_data_${indicator}`], () =>
+    GraphQL('analytics', ANALYTICS_REVENUE_MAP_DATA, {
+      indcFilter: { slug: indicator },
+      dataFilter: { dataPeriod: '2023_08' },
+    })
+  );
+
   const columns =
     boundary === 'district' ? DistrictColumnData : RevenueColumnData;
 
@@ -76,7 +92,6 @@ export function Content({ indicator }: { indicator: string }) {
       <div className="mt-4 mb-6">
         <Text variant="heading3xl"> DRR Dashboard : Analytical Map</Text>
       </div>
-
       <div className="w-full flex flex-col gap-4">
         <div className="bg-surfaceDefault shadow-basicMd p-4">
           <div className="flex flex-col gap-2 mb-4">
@@ -113,7 +128,11 @@ export function Content({ indicator }: { indicator: string }) {
             options={DropdownOptions}
           />
           <div className="flex mt-4 min-h-[400px]">
-            <MapComponent boundary={boundary} />
+            <MapComponent
+              revenueDataloading={revenueData?.isLoading}
+              revenueData={revenueMapData?.data?.revCircleMapData}
+              boundary={boundary}
+            />
           </div>
         </div>
         <div className="h-fit-content">

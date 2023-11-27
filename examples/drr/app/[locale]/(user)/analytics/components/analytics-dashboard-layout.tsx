@@ -34,14 +34,7 @@ export function AnalyticsDashboardLayout({ children }: DashboardLayoutProps) {
         </IconButton>
         <AnalyticsDashboardSidebar isCollapsed={isCollapsed} />
 
-        <main
-          className={cn(
-            styles.Main,
-            'pl-10'
-          )}
-        >
-          {children}
-        </main>
+        <main className={cn(styles.Main, 'px-10', 'py-6')}>{children}</main>
       </div>
     </React.Fragment>
   );

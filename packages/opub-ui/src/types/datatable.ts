@@ -44,6 +44,7 @@ export interface TableProps {
   /** Hide Results in Footer  */
   hideResultsInFooter?: boolean;
   /** specify columns to be sorted  */
+  className?: string;
   sortColumns?: string[];
 }
 

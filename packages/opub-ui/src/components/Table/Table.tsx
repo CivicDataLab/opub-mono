@@ -28,7 +28,7 @@ const Table = (props: TableProps) => {
     initialSortColumnIndex: sortedColumnIndex,
     onSort,
     hideFooter = false,
-
+    className,
     ...others
   } = props;
   const [data, setData] = React.useState(() => [...rows]);
@@ -70,7 +70,7 @@ const Table = (props: TableProps) => {
   return (
     <div className={`opub-DataTable ${themeClass}`} {...others}>
       <div className={styles.ScrollContainer}>
-        <table className={styles.Table}>
+        <table className={cx(styles.Table , className)}>
           <thead>
             {table.getHeaderGroups().map((headerGroup) => (
               <tr

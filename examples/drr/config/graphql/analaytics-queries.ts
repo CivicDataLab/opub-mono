@@ -12,6 +12,12 @@ query revenueCircleTable($indcFilter: IndicatorFilter! , $dataFilter: DataFilter
 }
 `)
 
+export const ANALYTICS_REVENUE_MAP_DATA = graphql(`
+query revenueCircleMapData($indcFilter: IndicatorFilter! , $dataFilter: DataFilter!){
+  revCircleMapData(indcFilter: $indcFilter , dataFilter:$dataFilter)
+}
+`)
+
 export const ANALYTICS_INDICATORS = graphql(`
 query indicators{
     indicators {

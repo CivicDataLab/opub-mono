@@ -11,16 +11,16 @@ const LeafletChoropleth = dynamic(
   { ssr: false }
 );
 
-export function MapComponent({ boundary }: { boundary: string }) {
+export function MapComponent({ revenueDataloading , revenueData , boundary }: { revenueDataloading : Boolean; revenueData: any; boundary: string }) {
   const { data: mapFile, isLoading: mapLoading } = useFetch(
     `assam-mapFile`,
     `/files/assam.json`
   );
 
-  const { data: revenueMapFile, isLoading: revenueMapLoading } = useFetch(
-    `assam-RevenueMapFile`,
-    `/files/assam_block.json`
-  );
+  // const { data: revenueMapFile, isLoading: revenueMapLoading } = useFetch(
+  //   `assam-RevenueMapFile`,
+  //   `/files/assam_block.json`
+  // );
 
   // using ref since state will cause re-render
   const districtNameRef = React.useRef<HTMLDivElement>(null);
@@ -49,22 +49,22 @@ export function MapComponent({ boundary }: { boundary: string }) {
   );
 
   const mapDataFn = (value: number) => {
-    return value >= 3
+    return value >= 5
       ? '#d73027'
-      : value >= 2
+      : value >= 4
       ? '#fc8d59'
-      : value >= 1
+      : value >= 3
       ? '#fee090'
-      : value >= 0.5
+      : value >= 2
       ? '#dbeaee'
-      : value >= 0.3
+      : value >= 1
       ? '#91bfdb'
       : '#4575b4';
   };
 
   const filterByRevenue = (features: any) => {
-    if (revenueMapFile.features) {
-      const filteredFeatures = revenueMapFile.features.filter(
+    if (revenueData?.features) {
+      const filteredFeatures = revenueData?.features.filter(
         (feature: { properties: { district_1: string } }) =>
           feature.properties.district_1 === features?.district
       );
@@ -74,10 +74,10 @@ export function MapComponent({ boundary }: { boundary: string }) {
 
   return (
     <div className="relative w-full rounded-05 hidden md:block">
-      {!mapLoading && !revenueMapLoading && (
+      {!mapLoading && !revenueDataloading && (
         <LeafletChoropleth
           features={
-            boundary === 'district' ? mapFile.features : revenueMapFile.features
+            boundary === 'district' ? mapFile.features : revenueData?.features
           }
           mapZoom={7.4}
           scrollWheelZoom={false}
@@ -86,27 +86,23 @@ export function MapComponent({ boundary }: { boundary: string }) {
           legendData={[
             {
               color: '#d73027',
-              label: '3+',
+              label: 'High',
             },
             {
               color: '#fc8d59',
-              label: '2 - 3',
+              label: '',
             },
             {
               color: '#fee090',
-              label: '1 - 2',
+              label: 'Medium',
             },
             {
               color: '#dbeaee',
-              label: '0.5 - 1',
-            },
-            {
-              color: '#91bfdb',
-              label: '0.3 - 0.5',
+              label: '',
             },
             {
               color: '#4575b4',
-              label: '0 - 0.3',
+              label: 'Low',
             },
           ]}
           mapDataFn={mapDataFn}

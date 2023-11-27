@@ -12,8 +12,9 @@ const RadioButton = (props: any) => {
         value={props.value}
         type="radio"
         checked={props.isSelected}
+        aria-checked={props.isSelected}
       />
-      <label htmlFor={props.id} title={props.label}>
+      <label aria-label={props.label} htmlFor={props.id} title={props.label}>
         <Text>{props.label}</Text>
       </label>
     </div>

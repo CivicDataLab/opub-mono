@@ -1,4 +1,5 @@
 import { Table } from 'opub-ui/src';
+import styles from './styles.module.scss';
 
 export function TableComponent({ rowData, columnData }: any) {
   return (
@@ -6,6 +7,7 @@ export function TableComponent({ rowData, columnData }: any) {
       columnContentTypes={['text', 'text', 'text', 'text', 'text', 'text']}
       columns={columnData}
       rows={rowData}
+      className={styles.Table}
     />
   );
 }

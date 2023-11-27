@@ -152,7 +152,7 @@ const DistrictColumnData : ColumnData = [
           header: 'Composite Score',
         },
         {
-          accessorKey: 'damages-and-losses',
+          accessorKey: 'damages-losses',
           header: 'Damages and Losses',
         },
         {
@@ -160,7 +160,7 @@ const DistrictColumnData : ColumnData = [
           header: 'Vulnerability',
         },
         {
-          accessorKey: 'governance-response',
+          accessorKey: 'government-response',
           header: 'Governance response',
         },
         {
@@ -174,19 +174,30 @@ const DistrictColumnData : ColumnData = [
       ],
     },
     {
-      'damages-and-losses': [
+      'damages-losses': [
         {
           accessorKey: 'revenue-circle',
           header: 'Revenue Circle',
         },
         {
-          accessorKey: 'damages-and-losses',
+          accessorKey: 'damages-losses',
           header: 'Damages and Losses',
         },
-     
         {
-          accessorKey: 'population-affected',
+          accessorKey: 'population-affected-total',
           header: 'Population Affected',
+        },
+        {
+          accessorKey: 'human-live-lost',
+          header: 'Human lives lost',
+        },
+        {
+          accessorKey: 'crop-area',
+          header: 'Crop area affected',
+        },
+        {
+          accessorKey: 'total-house-fully-damaged',
+          header: 'Number of houses damaged',
         },
       ],
     },
@@ -201,23 +212,23 @@ const DistrictColumnData : ColumnData = [
           header: 'Flood Hazard',
         },
         {
-          accessorKey: 'elevation',
-          header: 'Elevation',
+          accessorKey: 'sum-rain',
+          header: 'Sum rainfall value in the revenue circle',
         },
   
         {
-          accessorKey: 'inundation',
-          header: 'Inundation',
+          accessorKey: 'inundation-intensity-mean',
+          header: 'Mean intensity of inundation',
         },
   
         {
-          accessorKey: 'rainfall',
-          header: 'Rainfall',
+          accessorKey: 'riverlevel-mean',
+          header: 'Mean river water level',
         },
   
         {
-          accessorKey: 'river-water-level',
-          header: 'River Water Level',
+          accessorKey: 'elevation-mean',
+          header: 'Mean elevation',
         },
       ],
     },
@@ -232,12 +243,20 @@ const DistrictColumnData : ColumnData = [
           header: 'Exposure',
         },
         {
-          accessorKey: 'population',
-          header: 'Population',
+          accessorKey: 'sum-male-population',
+          header: 'Total Male Population*',
         },
         {
-          accessorKey: 'sex-ratio',
-          header: 'Sex Ratio',
+          accessorKey: 'sum-female-population',
+          header: 'Total Female Population*',
+        },
+        {
+          accessorKey: 'households',
+          header: 'Total number of households*',
+        },
+        {
+          accessorKey: 'sum-population',
+          header: 'Population*',
         },
       ],
     },
@@ -251,17 +270,57 @@ const DistrictColumnData : ColumnData = [
           accessorKey: 'vulnerability',
           header: 'Vulnerability',
         },
+        {
+          accessorKey: 'schools-count',
+          header: 'Number of Schools in the Revenue Circle',
+        },
+        {
+          accessorKey: 'health-centres-count',
+          header: 'Number of health centres in the Revenue Circle',
+        },
+        {
+          accessorKey: 'road-length',
+          header: 'Length of road in the Revenue Circle',
+        },
+        {
+          accessorKey: 'road-length',
+          header: 'Length of road in the Revenue Circle',
+        },
+        {
+          accessorKey: 'net-sown-area-in-hac',
+          header: 'Net sown area',
+        },
+        {
+          accessorKey: 'mean-sexratio',
+          header: 'Mean sex ratio in the Revenue Circle*',
+        },
       ],
     },
     {
-      'governance-response': [
+      'government-response': [
         {
           accessorKey: 'revenue-circle',
           header: 'Revenue Circle',
         },
         {
-          accessorKey: 'governance-response',
-          header: 'Governance Response',
+          accessorKey: 'government-response',
+          header: 'Government Response',
+        },
+        {
+          accessorKey: 'total-tender-awarded-value',
+          header: 'Total value of flood related tenders',
+        },
+        {
+          accessorKey: 'sdrf-tenders-awarded-value',
+          header: 'Total value of flood related tenders granted under SDRF Scheme',
+        },
+        {
+          accessorKey: 'restoration-measures-tenders-awarded-value',
+          header: 'Total value of flood related tenders related to Preparedness',
+        },
+        {
+          accessorKey: 'immediate-measures-tenders-awarded-value',
+          header: 'Total value of flood related tenders related to Immediate Measures',
         },
       ],
     },
