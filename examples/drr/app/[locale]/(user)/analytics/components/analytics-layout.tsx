@@ -19,7 +19,8 @@ import {
   ANALYTICS_TABLE_DATA,
 } from '@/config/graphql/analaytics-queries';
 import { GraphQL } from '@/lib/api';
-import { deSlugify } from '@/lib/utils';
+import { cn, deSlugify } from '@/lib/utils';
+import { Icons } from '@/components/icons';
 import { MapComponent } from './ChoroplethMap';
 import { FrimsDataTable } from './FrimsDataTable';
 import { TableComponent } from './TableComponent';
@@ -89,9 +90,31 @@ export function Content({ indicator }: { indicator: string }) {
 
   return (
     <>
-      <div className="mt-4 mb-6">
-        <Text variant="heading3xl"> DRR Dashboard : Analytical Map</Text>
-      </div>
+      <span className="flex items-center gap-x-96 self-stretch">
+        <span className="mt-4 mb-6 flex items-center gap-4">
+          <Text variant="heading2xl"> DRR Dashboard : Analytical Maps</Text>
+          <div className="bg-actionsSecondaryBasicDefault rounded-1 border-2 border-solid border-borderHighlightDefault p-1">
+            <IconButton color="highlight" icon={Icons.iconShare}>
+              Share
+            </IconButton>
+          </div>
+
+          <div className="bg-actionsSecondaryBasicDefault rounded-1 border-2 border-solid border-borderHighlightDefault p-1">
+            <IconButton
+              color="highlight"
+              icon={Icons.download}
+              // className="bg-actionsSecondaryBasicDefault border border-solid p-2 hover:bg-surfaceHighlightHovered"
+            >
+              Download
+            </IconButton>
+          </div>
+        </span>
+
+        <button className="text-center bg-actionsPrimaryBasicDefault rounded-1 text-backgroundSolidDefault py-2 px-16  justify-center items-center ">
+          View Charts
+        </button>
+      </span>
+
       <div className="w-full flex flex-col gap-4">
         <div className="bg-surfaceDefault shadow-basicMd p-4">
           <div className="flex flex-col gap-2 mb-4">
