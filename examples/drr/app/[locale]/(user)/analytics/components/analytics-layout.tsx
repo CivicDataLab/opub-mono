@@ -37,7 +37,7 @@ const Boundaries = [
   },
 ];
 
-export function Content({ indicator }: { indicator: string }) {
+export function Content({ subIndicator , indicator }: { subIndicator: string; indicator: string }) {
   const [boundary, setBoundary] = React.useState('revenue-circle');
 
   const DropdownOptions = [
@@ -75,9 +75,10 @@ export function Content({ indicator }: { indicator: string }) {
     })
   );
 
-  const revenueMapData = useQuery([`revenue_map_data_${indicator}`], () =>
+  const indicatorForMapData = subIndicator ? subIndicator : indicator
+  const revenueMapData = useQuery([`revenue_map_data_${indicatorForMapData}`], () =>
     GraphQL('analytics', ANALYTICS_REVENUE_MAP_DATA, {
-      indcFilter: { slug: indicator },
+      indcFilter: { slug: indicatorForMapData },
       dataFilter: { dataPeriod: '2023_08' },
     })
   );
@@ -157,7 +158,7 @@ export function Content({ indicator }: { indicator: string }) {
           />
           <div className="flex mt-4 min-h-[400px]">
             <MapComponent
-              revenueDataloading={revenueData?.isLoading}
+              revenueDataloading={revenueMapData?.isFetching}
               revenueData={revenueMapData?.data?.revCircleMapData}
               boundary={boundary}
             />

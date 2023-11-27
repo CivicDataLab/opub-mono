@@ -187,7 +187,7 @@ const Map = ({
       <MapContainer
         whenReady={() =>
           setInterval(() => {
-            mapRef.current.invalidateSize();
+            mapRef?.current?.invalidateSize();
           }, 100)
         }
         style={{ position: 'absolute' }}

@@ -3,6 +3,7 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
 import { useSearchParams } from 'next/navigation';
+import { Spinner } from 'opub-ui';
 
 import { useFetch } from '@/lib/api';
 
@@ -11,7 +12,15 @@ const LeafletChoropleth = dynamic(
   { ssr: false }
 );
 
-export function MapComponent({ revenueDataloading , revenueData , boundary }: { revenueDataloading : Boolean; revenueData: any; boundary: string }) {
+export function MapComponent({
+  revenueDataloading,
+  revenueData,
+  boundary,
+}: {
+  revenueDataloading: Boolean;
+  revenueData: any;
+  boundary: string;
+}) {
   const { data: mapFile, isLoading: mapLoading } = useFetch(
     `assam-mapFile`,
     `/files/assam.json`
@@ -74,7 +83,7 @@ export function MapComponent({ revenueDataloading , revenueData , boundary }: { 
 
   return (
     <div className="relative w-full rounded-05 hidden md:block">
-      {!mapLoading && !revenueDataloading && (
+      {!mapLoading && !revenueDataloading ? (
         <LeafletChoropleth
           features={
             boundary === 'district' ? mapFile.features : revenueData?.features
@@ -112,6 +121,10 @@ export function MapComponent({ revenueDataloading , revenueData , boundary }: { 
           mouseover={handleMouseOver}
           mouseout={handleMouseOut}
         />
+      ) : (
+      <center className="grid place-content-center items-center h-full">
+        <Spinner />
+      </center>
       )}
       <div
         ref={districtNameRef}

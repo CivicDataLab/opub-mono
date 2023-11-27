@@ -42,11 +42,13 @@ export default async function Home({
   GraphQL('analytics', ANALYTICS_INDICATORS)
 );
 
+const indicatorForMapData = searchParams['sub-indicator'] ? searchParams['sub-indicator'] : searchParams?.indicator
+
   await queryClient.prefetchQuery(
-    [`revenue_map_data_${searchParams?.indicator}`],
+    [`revenue_map_data_${indicatorForMapData}`],
     () =>
       GraphQL('analytics', ANALYTICS_REVENUE_MAP_DATA, {
-        indcFilter: { slug: searchParams?.indicator },
+        indcFilter: { slug: indicatorForMapData},
         dataFilter: { dataPeriod: '2023_08' },
       })
   );
@@ -54,7 +56,7 @@ export default async function Home({
   const dehydratedState = dehydrate(queryClient);
   return (
     <Hydrate state={dehydratedState}>
-      <Content indicator={searchParams?.indicator} />
+      <Content subIndicator={searchParams['sub-indicator']} indicator={searchParams?.indicator} />
     </Hydrate>
   );
 }
