@@ -153,8 +153,7 @@ export function AnalyticsDashboardSidebar({
           </div>
         </span>
         <Collapsible defaultOpen className={cn(isCollapsed && 'hidden')}>
-          {/* <div className="pl-4 bg-surfaceSelected max-w-full min-w-max bg-surfaceNeutral border-t-0 border-1 border-solid border-borderSubdued mb-5"> */}
-          <div className="pl-4 bg-surfaceSelected max-w-full min-w-max bg-surfaceNeutral border-b-1 border-solid border-borderSubdued mb-5">
+          <div className="pl-4 bg-surfaceSelected max-w-full min-w-max bg-surfaceNeutral rounded-1 border-t-0 border-1 border-solid border-borderSubdued mb-5">
             <CollapsibleTrigger className={styles.CollapseTrigger}>
               <Text className="text-textSubdued" fontWeight="bold">
                 Select an indicator
