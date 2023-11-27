@@ -75,34 +75,30 @@ export function Content({ indicator }: { indicator: string }) {
 
   return (
     <>
-      <div className="flex items-center space-x-20 ">
-        <div className="mt-4 mb-6 flex items-center gap-4">
+      <span className="flex items-center gap-x-96 self-stretch">
+        <span className="mt-4 mb-6 flex items-center gap-4">
           <Text variant="heading2xl"> DRR Dashboard : Analytical Maps</Text>
-          {/* <div className="bg-actionsSecondaryBasicDefault border-1 border-solid border-borderHighlightDefault p-2 hover:bg-"> */}
-          <IconButton
-            color="highlight"
-            icon={Icons.iconShare}
-            className={cn(
-              'bg-actionsPrimaryBasicDefault border-1 border-solid border-borderHighlightDefault p-2 hover:bg'
-            )}
-          >
-            Share
-          </IconButton>
-          {/* </div> */}
-
-          <IconButton
-            color="highlight"
-            icon={Icons.download}
-            className="bg-actionsSecondaryBasicDefault border border-solid p-2 hover:bg-surfaceHighlightHovered"
-          >
-            Download
-          </IconButton>
-
-          <div>
-            <Button>View Charts</Button>
+          <div className="bg-actionsSecondaryBasicDefault rounded-1 border-2 border-solid border-borderHighlightDefault p-1">
+            <IconButton color="highlight" icon={Icons.iconShare}>
+              Share
+            </IconButton>
           </div>
-        </div>
-      </div>
+
+          <div className="bg-actionsSecondaryBasicDefault rounded-1 border-2 border-solid border-borderHighlightDefault p-1">
+            <IconButton
+              color="highlight"
+              icon={Icons.download}
+              // className="bg-actionsSecondaryBasicDefault border border-solid p-2 hover:bg-surfaceHighlightHovered"
+            >
+              Download
+            </IconButton>
+          </div>
+        </span>
+
+        <button className="text-center bg-actionsPrimaryBasicDefault rounded-1 text-backgroundSolidDefault py-2 px-16  justify-center items-center ">
+          View Charts
+        </button>
+      </span>
 
       <div className="w-full flex flex-col gap-4">
         <div className="bg-surfaceDefault shadow-basicMd p-4">

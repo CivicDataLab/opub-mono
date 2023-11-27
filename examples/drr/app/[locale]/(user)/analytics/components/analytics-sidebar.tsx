@@ -159,7 +159,7 @@ export function AnalyticsDashboardSidebar({
               <Text className="text-textSubdued" fontWeight="bold">
                 Select an indicator
               </Text>
-              <Icon source={Icons.minus} />
+              <Icon color="textDisabled" source={Icons.minus} />
             </CollapsibleTrigger>
           </div>
 
@@ -184,7 +184,7 @@ export function AnalyticsDashboardSidebar({
           defaultOpen
           className={cn(isCollapsed && 'hidden', 'mb-6 ')}
         >
-          <div className="pl-4 bg-surfaceSelected max-w-full min-w-max bg-surfaceNeutral rounded-1 border-t-0 border-1 border-solid border-borderSubdued mb-5 ">
+          <div className="pl-4 bg-surfaceSelected max-w-full min-w-max bg-surfaceNeutral border-b-1 border-solid border-borderSubdued mb-5">
             <CollapsibleTrigger className={styles.CollapseTrigger}>
               <Text className="text-textSubdued" fontWeight="bold">
                 Select a time period
@@ -203,7 +203,7 @@ export function AnalyticsDashboardSidebar({
         <div className="flex flex-col gap-4 p-0 pb-4 mb-8">
           <div
             className={cn(
-              'flex rounded gap-1.5 items-start pl-4 pr-52 pt-1 pb-0.5',
+              'flex rounded gap-1.5 pl-4 pr-52 pt-1 pb-0.5 items-center',
               isCollapsed && 'hidden'
             )}
           >
@@ -224,7 +224,7 @@ export function AnalyticsDashboardSidebar({
 
           <div
             className={cn(
-              'flex rounded gap-1.5 items-start pl-4 pr-52 pt-1 pb-0.5',
+              'flex rounded gap-1.5 items-center pl-4 pr-52 pt-1 pb-0.5',
               isCollapsed && 'hidden'
             )}
           >
@@ -244,7 +244,7 @@ export function AnalyticsDashboardSidebar({
           </div>
           <div
             className={cn(
-              'flex rounded gap-1.5 items-start pl-4 pr-40 pt-1 pb-0.5',
+              'flex rounded gap-1.5 items-center pl-4 pr-40 pt-1 pb-0.5',
               isCollapsed && 'hidden'
             )}
           >
