@@ -28,6 +28,7 @@ export default async function Home({
     () =>
       GraphQL('analytics', ANALYTICS_REVENUE_TABLE_DATA, {
         indcFilter: { slug: searchParams?.indicator },
+        dataFilter: { dataPeriod: '2023_08' },
       })
   );
 

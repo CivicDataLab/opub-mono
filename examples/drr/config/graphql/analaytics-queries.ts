@@ -7,8 +7,8 @@ query tableData($indcFilter: IndicatorFilter){
 `)
 
 export const ANALYTICS_REVENUE_TABLE_DATA =  graphql(`
-query revenueCircleTable($indcFilter: IndicatorFilter){
-  revCricleViewTableData(indcFilter: $indcFilter)
+query revenueCircleTable($indcFilter: IndicatorFilter! , $dataFilter: DataFilter!){
+  revCircleViewTableData(indcFilter: $indcFilter , dataFilter:$dataFilter)
 }
 `)
 

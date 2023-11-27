@@ -60,6 +60,7 @@ export function Content({ indicator }: { indicator: string }) {
   const revenueData = useQuery([`revenue_table_data_${indicator}`], () =>
     GraphQL('analytics', ANALYTICS_REVENUE_TABLE_DATA, {
       indcFilter: { slug: indicator },
+      dataFilter: { dataPeriod: '2023_08' },
     })
   );
 
@@ -121,7 +122,7 @@ export function Content({ indicator }: { indicator: string }) {
             rowData={
               boundary === 'district'
                 ? data?.districtViewTableData?.table_data
-                : revenueData?.data?.revCricleViewTableData?.table_data
+                : revenueData?.data?.revCircleViewTableData?.table_data
             }
           />
         </div>

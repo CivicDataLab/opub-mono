@@ -56,7 +56,7 @@ export function AnalyticsDashboardSidebar({
     let compositeScoreIndex = -1;
     // Find the index of the "Composite Score" category
     for (let i = 0; i < categories.length; i++) {
-      if ('Main' in categories[i]) {
+      if ('Composite Score' in categories[i]) {
         compositeScoreIndex = i;
         break;
       }

@@ -18,6 +18,11 @@ export type Scalars = {
   JSON: any;
 };
 
+export type CustomDataPeriodList = {
+  __typename?: 'CustomDataPeriodList';
+  value: Scalars['String'];
+};
+
 /** Data(id, value, added, modified, indicator, geography, scheme, data_period) */
 export type Data = {
   __typename?: 'Data';
@@ -29,6 +34,13 @@ export type Data = {
   value?: Maybe<Scalars['Int']>;
 };
 
+/** Data(id, value, added, modified, indicator, geography, scheme, data_period) */
+export type DataFilter = {
+  AND?: InputMaybe<DataFilter>;
+  OR?: InputMaybe<DataFilter>;
+  dataPeriod?: InputMaybe<Scalars['String']>;
+};
+
 /** Department(id, name, description, slug, geography) */
 export type Department = {
   __typename?: 'Department';
@@ -37,7 +49,7 @@ export type Department = {
   name: Scalars['String'];
 };
 
-/** Geography(id, name, code, type, parentId) */
+/** Geography(id, name, code, type, parentId, geom) */
 export type GeoFilter = {
   AND?: InputMaybe<GeoFilter>;
   OR?: InputMaybe<GeoFilter>;
@@ -45,16 +57,16 @@ export type GeoFilter = {
   name?: InputMaybe<Scalars['String']>;
 };
 
-/** Geography(id, name, code, type, parentId) */
+/** Geography(id, name, code, type, parentId, geom) */
 export type Geography = {
   __typename?: 'Geography';
-  code: Scalars['String'];
+  code?: Maybe<Scalars['String']>;
   name: Scalars['String'];
   parentId?: Maybe<Geography>;
   type: Scalars['String'];
 };
 
-/** Indicators(id, name, long_description, short_description, category, type, slug, unit, geography, department, data_source, scheme, parent, display_order) */
+/** Indicators(id, name, long_description, short_description, category, type, slug, unit, geography, department, data_source, scheme, parent, display_order, is_visible) */
 export type IndicatorFilter = {
   AND?: InputMaybe<IndicatorFilter>;
   OR?: InputMaybe<IndicatorFilter>;
@@ -62,7 +74,7 @@ export type IndicatorFilter = {
   slug?: InputMaybe<Scalars['String']>;
 };
 
-/** Indicators(id, name, long_description, short_description, category, type, slug, unit, geography, department, data_source, scheme, parent, display_order) */
+/** Indicators(id, name, long_description, short_description, category, type, slug, unit, geography, department, data_source, scheme, parent, display_order, is_visible) */
 export type Indicators = {
   __typename?: 'Indicators';
   /** Describes the type sub-indicators */
@@ -76,7 +88,7 @@ export type Indicators = {
   shortDescription?: Maybe<Scalars['String']>;
   slug?: Maybe<Scalars['String']>;
   /** Defines the type of indicator that is Raw, Derived, etc. */
-  type: Scalars['String'];
+  type?: Maybe<Scalars['String']>;
   unit: Unit;
 };
 
@@ -85,14 +97,22 @@ export type Query = {
   data: Array<Data>;
   districtViewTableData: Scalars['JSON'];
   geography: Array<Geography>;
+  getDataTimePeriods: Array<CustomDataPeriodList>;
   indicators: Array<Indicators>;
   indicatorsByCategory: Scalars['JSON'];
-  revCricleViewTableData: Scalars['JSON'];
+  revCircleMapData: Scalars['JSON'];
+  revCircleViewTableData: Scalars['JSON'];
   scheme: Array<Scheme>;
 };
 
 
+export type QueryDataArgs = {
+  filters?: InputMaybe<DataFilter>;
+};
+
+
 export type QueryDistrictViewTableDataArgs = {
+  dataFilter?: InputMaybe<DataFilter>;
   geoFilter?: InputMaybe<GeoFilter>;
   indcFilter?: InputMaybe<IndicatorFilter>;
 };
@@ -103,9 +123,17 @@ export type QueryGeographyArgs = {
 };
 
 
-export type QueryRevCricleViewTableDataArgs = {
+export type QueryRevCircleMapDataArgs = {
+  dataFilter: DataFilter;
   geoFilter?: InputMaybe<GeoFilter>;
-  indcFilter?: InputMaybe<IndicatorFilter>;
+  indcFilter: IndicatorFilter;
+};
+
+
+export type QueryRevCircleViewTableDataArgs = {
+  dataFilter: DataFilter;
+  geoFilter?: InputMaybe<GeoFilter>;
+  indcFilter: IndicatorFilter;
 };
 
 /** Scheme(id, name, description, slug, department) */
@@ -123,7 +151,7 @@ export type Unit = {
   description?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   name: Scalars['String'];
-  symbol: Scalars['String'];
+  symbol?: Maybe<Scalars['String']>;
 };
 
 export type TableDataQueryVariables = Exact<{
@@ -134,11 +162,12 @@ export type TableDataQueryVariables = Exact<{
 export type TableDataQuery = { __typename?: 'Query', districtViewTableData: any };
 
 export type RevenueCircleTableQueryVariables = Exact<{
-  indcFilter?: InputMaybe<IndicatorFilter>;
+  indcFilter: IndicatorFilter;
+  dataFilter: DataFilter;
 }>;
 
 
-export type RevenueCircleTableQuery = { __typename?: 'Query', revCricleViewTableData: any };
+export type RevenueCircleTableQuery = { __typename?: 'Query', revCircleViewTableData: any };
 
 export type IndicatorsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -152,6 +181,6 @@ export type IndicatorsByQueryQuery = { __typename?: 'Query', indicatorsByCategor
 
 
 export const TableDataDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"tableData"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"indcFilter"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"IndicatorFilter"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"districtViewTableData"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"indcFilter"},"value":{"kind":"Variable","name":{"kind":"Name","value":"indcFilter"}}}]}]}}]} as unknown as DocumentNode<TableDataQuery, TableDataQueryVariables>;
-export const RevenueCircleTableDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"revenueCircleTable"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"indcFilter"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"IndicatorFilter"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"revCricleViewTableData"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"indcFilter"},"value":{"kind":"Variable","name":{"kind":"Name","value":"indcFilter"}}}]}]}}]} as unknown as DocumentNode<RevenueCircleTableQuery, RevenueCircleTableQueryVariables>;
+export const RevenueCircleTableDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"revenueCircleTable"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"indcFilter"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"IndicatorFilter"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"dataFilter"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"DataFilter"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"revCircleViewTableData"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"indcFilter"},"value":{"kind":"Variable","name":{"kind":"Name","value":"indcFilter"}}},{"kind":"Argument","name":{"kind":"Name","value":"dataFilter"},"value":{"kind":"Variable","name":{"kind":"Name","value":"dataFilter"}}}]}]}}]} as unknown as DocumentNode<RevenueCircleTableQuery, RevenueCircleTableQueryVariables>;
 export const IndicatorsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"indicators"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"indicators"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"category"}},{"kind":"Field","name":{"kind":"Name","value":"parent"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]}}]} as unknown as DocumentNode<IndicatorsQuery, IndicatorsQueryVariables>;
 export const IndicatorsByQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"indicatorsByQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"indicatorsByCategory"}}]}}]} as unknown as DocumentNode<IndicatorsByQueryQuery, IndicatorsByQueryQueryVariables>;
