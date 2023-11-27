@@ -6,7 +6,6 @@ export function TableComponent({ rowData, columnData }: any) {
       columnContentTypes={['text', 'text', 'text', 'text', 'text', 'text']}
       columns={columnData}
       rows={rowData}
-      hideFooter
     />
   );
 }

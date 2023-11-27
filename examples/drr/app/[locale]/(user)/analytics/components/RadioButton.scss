@@ -27,7 +27,11 @@ $md-radio-checked-size: 10px;
         margin-bottom: 0;
         cursor: pointer;
         vertical-align: bottom;
-
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 300px;
+        
         &:before, &:after {
             position: absolute;            
             content: '';  

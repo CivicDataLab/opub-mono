@@ -13,7 +13,7 @@ const RadioButton = (props: any) => {
         type="radio"
         checked={props.isSelected}
       />
-      <label htmlFor={props.id}>
+      <label htmlFor={props.id} title={props.label}>
         <Text>{props.label}</Text>
       </label>
     </div>
