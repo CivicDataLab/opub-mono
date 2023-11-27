@@ -128,7 +128,7 @@ export function Content({ subIndicator , indicator }: { subIndicator: string; in
               {deSlugify(indicator)}
             </Text>
             <Text className="text-textSubdued" variant="bodyLg">
-              Time Period : September 2022
+              Time Period : September 2023
             </Text>
           </div>
           <Separator />

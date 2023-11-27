@@ -8,7 +8,7 @@ import {
   CollapsibleTrigger,
 } from '@radix-ui/react-collapsible';
 import { useQuery } from '@tanstack/react-query';
-import { Icon, RadioGroup, RadioItem, Text } from 'opub-ui';
+import { Icon, Text } from 'opub-ui';
 import { IconButton } from 'opub-ui/src';
 
 import { ANALYTICS_INDICATORS_BY_CATEGORY } from '@/config/graphql/analaytics-queries';
@@ -158,7 +158,7 @@ export function AnalyticsDashboardSidebar({
               <Text className="text-textSubdued" fontWeight="bold">
                 Select an indicator
               </Text>
-              <Icon color='subdued' source={Icons.minus} />
+              <Icon color="subdued" source={Icons.minus} />
             </CollapsibleTrigger>
           </div>
 
@@ -188,13 +188,13 @@ export function AnalyticsDashboardSidebar({
               <Text className="text-textSubdued" fontWeight="bold">
                 Select a time period
               </Text>
-              <Icon color='subdued' source={Icons.minus} />
+              <Icon color="subdued" source={Icons.minus} />
             </CollapsibleTrigger>
           </div>
 
           <CollapsibleContent className="pb-4 px-2 max-w-full data-[state=open]:mt-[-12px]">
             <div className="px-4 h-full pt-4">
-              <RadioButton label="September 2022" />
+              <RadioButton isSelected label="September 2023" />
             </div>
           </CollapsibleContent>
         </Collapsible>
