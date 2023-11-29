@@ -14,6 +14,23 @@ export function formatDate(input: string | number): string {
   });
 }
 
+// util function to format data in the following format "2023_08"
+export function formatDateString(dateString: string) {
+  // Split the string into year and month parts
+  const [year, month] = dateString.split('_');
+
+  // Create a Date object with the specified year and month (subtract 1 from the month, as months in JavaScript are zero-based)
+  const dateObject = new Date(parseInt(year), parseInt(month) - 1);
+
+  // Format the date as "Month Year"
+  const formattedDate = new Intl.DateTimeFormat('en-US', {
+    month: 'long',
+    year: 'numeric',
+  }).format(dateObject);
+
+  return formattedDate;
+}
+
 export function deSlugify(slug: string) {
   // Replace hyphens or underscores with spaces
   const deSlugified = slug.replace(/[-_]/g, ' ');

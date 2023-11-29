@@ -35,17 +35,17 @@ export function MapComponent({
   const districtNameRef = React.useRef<HTMLDivElement>(null);
   function handleMouseOver(e: any) {
     if (districtNameRef.current) {
-      districtNameRef.current.innerHTML = e.feature.properties.district
-        ? e.feature.properties.district
-        : e.feature.properties.revenue_ci;
+      districtNameRef.current.innerHTML =
+        boundary === 'district'
+          ? e.feature.properties.district
+          : e.feature.properties.name;
     }
   }
 
   function handleMouseOut(e: any) {
     if (districtNameRef.current) {
-      districtNameRef.current.innerHTML = e.feature.properties.district
-        ? 'District'
-        : 'Revenue Circle';
+      districtNameRef.current.innerHTML =
+        boundary === 'district' ? 'District' : 'Revenue Circle';
     }
   }
 
@@ -81,6 +81,8 @@ export function MapComponent({
     }
   };
 
+  const mapProperty = SubIndicatorParam || indicatorParam || 'composite-score';
+
   return (
     <div className="relative w-full rounded-05 hidden md:block">
       {!mapLoading && !revenueDataloading ? (
@@ -89,8 +91,18 @@ export function MapComponent({
             boundary === 'district' ? mapFile.features : revenueData?.features
           }
           mapZoom={7.4}
+          classifyData={
+            ![
+              'damages-losses',
+              'population-affected-total',
+              'human-live-lost',
+              'crop-area',
+              'total-house-fully-damaged',
+            ].includes(mapProperty)
+          }
+          fillOpacity={1}
           scrollWheelZoom={false}
-          mapProperty={SubIndicatorParam || indicatorParam || 'composite-score'}
+          mapProperty={mapProperty}
           zoomOnClick={true}
           legendData={[
             {
@@ -122,9 +134,9 @@ export function MapComponent({
           mouseout={handleMouseOut}
         />
       ) : (
-      <center className="grid place-content-center items-center h-full">
-        <Spinner />
-      </center>
+        <center className="grid place-content-center items-center h-full">
+          <Spinner />
+        </center>
       )}
       <div
         ref={districtNameRef}

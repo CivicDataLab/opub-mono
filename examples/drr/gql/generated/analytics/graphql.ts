@@ -94,12 +94,15 @@ export type Indicators = {
 
 export type Query = {
   __typename?: 'Query';
+  ChartIndicators: Scalars['JSON'];
   data: Array<Data>;
+  districtMapData: Scalars['JSON'];
   districtViewTableData: Scalars['JSON'];
   geography: Array<Geography>;
   getDataTimePeriods: Array<CustomDataPeriodList>;
   indicators: Array<Indicators>;
   indicatorsByCategory: Scalars['JSON'];
+  revCircleChartData: Scalars['JSON'];
   revCircleMapData: Scalars['JSON'];
   revCircleViewTableData: Scalars['JSON'];
   scheme: Array<Scheme>;
@@ -111,15 +114,29 @@ export type QueryDataArgs = {
 };
 
 
-export type QueryDistrictViewTableDataArgs = {
-  dataFilter?: InputMaybe<DataFilter>;
+export type QueryDistrictMapDataArgs = {
+  dataFilter: DataFilter;
   geoFilter?: InputMaybe<GeoFilter>;
-  indcFilter?: InputMaybe<IndicatorFilter>;
+  indcFilter: IndicatorFilter;
+};
+
+
+export type QueryDistrictViewTableDataArgs = {
+  dataFilter: DataFilter;
+  geoFilter?: InputMaybe<GeoFilter>;
+  indcFilter: IndicatorFilter;
 };
 
 
 export type QueryGeographyArgs = {
   filters?: InputMaybe<GeoFilter>;
+};
+
+
+export type QueryRevCircleChartDataArgs = {
+  dataFilter: DataFilter;
+  geoFilter?: InputMaybe<GeoFilter>;
+  indcFilter: IndicatorFilter;
 };
 
 
@@ -132,6 +149,7 @@ export type QueryRevCircleMapDataArgs = {
 
 export type QueryRevCircleViewTableDataArgs = {
   dataFilter: DataFilter;
+  forMap?: Scalars['Boolean'];
   geoFilter?: InputMaybe<GeoFilter>;
   indcFilter: IndicatorFilter;
 };
@@ -155,7 +173,8 @@ export type Unit = {
 };
 
 export type TableDataQueryVariables = Exact<{
-  indcFilter?: InputMaybe<IndicatorFilter>;
+  indcFilter: IndicatorFilter;
+  dataFilter: DataFilter;
 }>;
 
 
@@ -182,14 +201,20 @@ export type IndicatorsQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type IndicatorsQuery = { __typename?: 'Query', indicators: Array<{ __typename?: 'Indicators', name: string, slug?: string | null, category?: string | null, parent?: { __typename?: 'Indicators', name: string } | null }> };
 
+export type DataTimePeriodsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type DataTimePeriodsQuery = { __typename?: 'Query', getDataTimePeriods: Array<{ __typename?: 'CustomDataPeriodList', value: string }> };
+
 export type IndicatorsByQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type IndicatorsByQueryQuery = { __typename?: 'Query', indicatorsByCategory: any };
 
 
-export const TableDataDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"tableData"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"indcFilter"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"IndicatorFilter"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"districtViewTableData"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"indcFilter"},"value":{"kind":"Variable","name":{"kind":"Name","value":"indcFilter"}}}]}]}}]} as unknown as DocumentNode<TableDataQuery, TableDataQueryVariables>;
+export const TableDataDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"tableData"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"indcFilter"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"IndicatorFilter"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"dataFilter"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"DataFilter"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"districtViewTableData"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"indcFilter"},"value":{"kind":"Variable","name":{"kind":"Name","value":"indcFilter"}}},{"kind":"Argument","name":{"kind":"Name","value":"dataFilter"},"value":{"kind":"Variable","name":{"kind":"Name","value":"dataFilter"}}}]}]}}]} as unknown as DocumentNode<TableDataQuery, TableDataQueryVariables>;
 export const RevenueCircleTableDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"revenueCircleTable"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"indcFilter"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"IndicatorFilter"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"dataFilter"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"DataFilter"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"revCircleViewTableData"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"indcFilter"},"value":{"kind":"Variable","name":{"kind":"Name","value":"indcFilter"}}},{"kind":"Argument","name":{"kind":"Name","value":"dataFilter"},"value":{"kind":"Variable","name":{"kind":"Name","value":"dataFilter"}}}]}]}}]} as unknown as DocumentNode<RevenueCircleTableQuery, RevenueCircleTableQueryVariables>;
 export const RevenueCircleMapDataDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"revenueCircleMapData"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"indcFilter"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"IndicatorFilter"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"dataFilter"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"DataFilter"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"revCircleMapData"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"indcFilter"},"value":{"kind":"Variable","name":{"kind":"Name","value":"indcFilter"}}},{"kind":"Argument","name":{"kind":"Name","value":"dataFilter"},"value":{"kind":"Variable","name":{"kind":"Name","value":"dataFilter"}}}]}]}}]} as unknown as DocumentNode<RevenueCircleMapDataQuery, RevenueCircleMapDataQueryVariables>;
 export const IndicatorsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"indicators"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"indicators"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"category"}},{"kind":"Field","name":{"kind":"Name","value":"parent"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]}}]} as unknown as DocumentNode<IndicatorsQuery, IndicatorsQueryVariables>;
+export const DataTimePeriodsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"dataTimePeriods"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getDataTimePeriods"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"value"}}]}}]}}]} as unknown as DocumentNode<DataTimePeriodsQuery, DataTimePeriodsQueryVariables>;
 export const IndicatorsByQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"indicatorsByQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"indicatorsByCategory"}}]}}]} as unknown as DocumentNode<IndicatorsByQueryQuery, IndicatorsByQueryQueryVariables>;

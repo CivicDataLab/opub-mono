@@ -14,13 +14,12 @@ import {
 
 import { DistrictColumnData, RevenueColumnData } from '@/config/consts.ts';
 import {
-  ANALYTICS_INDICATORS,
   ANALYTICS_REVENUE_MAP_DATA,
   ANALYTICS_REVENUE_TABLE_DATA,
   ANALYTICS_TABLE_DATA,
 } from '@/config/graphql/analaytics-queries';
 import { GraphQL } from '@/lib/api';
-import { cn, deSlugify } from '@/lib/utils';
+import { deSlugify, formatDateString } from '@/lib/utils';
 import { Icons } from '@/components/icons';
 import { MapComponent } from './ChoroplethMap';
 import { FrimsDataTable } from './FrimsDataTable';
@@ -37,7 +36,15 @@ const Boundaries = [
   },
 ];
 
-export function Content({ subIndicator , indicator }: { subIndicator: string; indicator: string }) {
+export function Content({
+  subIndicator,
+  timePeriod,
+  indicator,
+}: {
+  subIndicator: string;
+  timePeriod: string;
+  indicator: string;
+}) {
   const [boundary, setBoundary] = React.useState('revenue-circle');
 
   const DropdownOptions = [
@@ -62,25 +69,47 @@ export function Content({ subIndicator , indicator }: { subIndicator: string; in
     },
   ];
 
-  const { data } = useQuery([`district_table_data_${indicator}`], () =>
-    GraphQL('analytics', ANALYTICS_TABLE_DATA, {
-      indcFilter: { slug: indicator },
-    })
+  const { data } = useQuery(
+    [`district_table_data_${indicator}`],
+    () =>
+      GraphQL('analytics', ANALYTICS_TABLE_DATA, {
+        indcFilter: { slug: indicator },
+        dataFilter: { dataPeriod: timePeriod },
+      }),
+    {
+      refetchOnMount: false,
+      refetchOnWindowFocus: false,
+      refetchOnReconnect: false,
+    }
   );
 
-  const revenueData = useQuery([`revenue_table_data_${indicator}`], () =>
-    GraphQL('analytics', ANALYTICS_REVENUE_TABLE_DATA, {
-      indcFilter: { slug: indicator },
-      dataFilter: { dataPeriod: '2023_08' },
-    })
+  const revenueData = useQuery(
+    [`revenue_table_data_${indicator}_${timePeriod}`],
+    () =>
+      GraphQL('analytics', ANALYTICS_REVENUE_TABLE_DATA, {
+        indcFilter: { slug: indicator },
+        dataFilter: { dataPeriod: timePeriod },
+      }),
+    {
+      refetchOnMount: false,
+      refetchOnWindowFocus: false,
+      refetchOnReconnect: false,
+    }
   );
 
-  const indicatorForMapData = subIndicator ? subIndicator : indicator
-  const revenueMapData = useQuery([`revenue_map_data_${indicatorForMapData}`], () =>
-    GraphQL('analytics', ANALYTICS_REVENUE_MAP_DATA, {
-      indcFilter: { slug: indicatorForMapData },
-      dataFilter: { dataPeriod: '2023_08' },
-    })
+  const indicatorForMapData = subIndicator ? subIndicator : indicator;
+  const revenueMapData = useQuery(
+    [`revenue_map_data_${indicatorForMapData}_${timePeriod}`],
+    () =>
+      GraphQL('analytics', ANALYTICS_REVENUE_MAP_DATA, {
+        indcFilter: { slug: indicatorForMapData },
+        dataFilter: { dataPeriod: timePeriod },
+      }),
+    {
+      refetchOnMount: false,
+      refetchOnWindowFocus: false,
+      refetchOnReconnect: false,
+    }
   );
 
   const columns =
@@ -104,10 +133,7 @@ export function Content({ subIndicator , indicator }: { subIndicator: string; in
           </div>
 
           <div className="bg-actionsSecondaryBasicDefault rounded-1 border-1 border-solid border-borderHighlightDefault">
-            <IconButton
-              color="highlight"
-              icon={Icons.download}
-            >
+            <IconButton color="highlight" icon={Icons.download}>
               Download
             </IconButton>
           </div>
@@ -115,7 +141,7 @@ export function Content({ subIndicator , indicator }: { subIndicator: string; in
 
         <Button
           size="medium"
-          className="bg-actionsPrimaryBasicDefault w-[336px]"
+          className="bg-actionsPrimaryBasicDefault w-[336px] hover:bg-actionsPrimaryBasicDefault"
         >
           View Charts
         </Button>
@@ -128,7 +154,7 @@ export function Content({ subIndicator , indicator }: { subIndicator: string; in
               {deSlugify(indicator)}
             </Text>
             <Text className="text-textSubdued" variant="bodyLg">
-              Time Period : September 2023
+              {`Time Period : ${formatDateString(timePeriod)}`}
             </Text>
           </div>
           <Separator />
@@ -156,7 +182,7 @@ export function Content({ subIndicator , indicator }: { subIndicator: string; in
             onChange={function Yu() {}}
             options={DropdownOptions}
           />
-          <div className="flex mt-4 min-h-[400px]">
+          <div className="flex mt-4 min-h-[600px]">
             <MapComponent
               revenueDataloading={revenueMapData?.isFetching}
               revenueData={revenueMapData?.data?.revCircleMapData}

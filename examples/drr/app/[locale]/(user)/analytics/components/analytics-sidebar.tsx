@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter , usePathname ,  useSearchParams } from 'next/navigation';
 import {
   Collapsible,
   CollapsibleContent,
@@ -11,9 +11,12 @@ import { useQuery } from '@tanstack/react-query';
 import { Icon, Text } from 'opub-ui';
 import { IconButton } from 'opub-ui/src';
 
-import { ANALYTICS_INDICATORS_BY_CATEGORY } from '@/config/graphql/analaytics-queries';
+import {
+  ANALYTICS_INDICATORS_BY_CATEGORY,
+  ANALYTICS_TIME_PERIODS,
+} from '@/config/graphql/analaytics-queries';
 import { GraphQL } from '@/lib/api';
-import { cn, slugify } from '@/lib/utils';
+import { cn, deSlugify, formatDateString, slugify } from '@/lib/utils';
 import Icons from '@/components/icons';
 import styles from './AnalyticsDashboard.module.scss';
 import RadioButton from './RadioButton';
@@ -44,8 +47,34 @@ export function AnalyticsDashboardSidebar({
 }: {
   isCollapsed: Boolean;
 }) {
-  const { data }: Data = useQuery([`indicatorsByCategory`], () =>
-    GraphQL('analytics', ANALYTICS_INDICATORS_BY_CATEGORY)
+
+  const pathname = usePathname();
+  const router = useRouter();
+  const searchParams = useSearchParams()
+  const indicator = searchParams.get('indicator');
+  const subIndicator = searchParams.get('sub-indicator');
+  const timePeriod = searchParams.get('time-period');
+  const [timePeriodRadioValue, setTimePeriodRadioValue] =
+    React.useState(timePeriod);
+
+  const { data }: Data = useQuery(
+    [`indicatorsByCategory`],
+    () => GraphQL('analytics', ANALYTICS_INDICATORS_BY_CATEGORY),
+    {
+      refetchOnMount: false,
+      refetchOnWindowFocus: false,
+      refetchOnReconnect: false,
+    }
+  );
+
+  const timePeriodData = useQuery(
+    [`timePeriods`],
+    () => GraphQL('analytics', ANALYTICS_TIME_PERIODS),
+    {
+      refetchOnMount: false,
+      refetchOnWindowFocus: false,
+      refetchOnReconnect: false,
+    }
   );
 
   let convertedData: IndicatorMapType | undefined = {};
@@ -84,7 +113,7 @@ export function AnalyticsDashboardSidebar({
     /* 
     Sample on how convertedData would look 
     {
-      'Damages and Losses Indicators': [
+      'Damages and Losses': [
         {
           indicator: 'damages-and-losses',
           'sub-indicator': null,
@@ -143,14 +172,14 @@ export function AnalyticsDashboardSidebar({
             isCollapsed && 'hidden'
           )}
         >
-          <div className="flex pl-5 pt-1 pr-4 pb-0.5 items-start gap-1.5 mb-6 ">
+          {/* <div className="flex pl-5 pt-1 pr-4 pb-0.5 items-start gap-1.5 mb-6 ">
             <IconButton color="highlight" icon={Icons.iconHelpSquare}>
               Help Square
             </IconButton>
             <Text className="text-textHighlight pt-1" variant="headingMd">
               Tutorial Mode
             </Text>
-          </div>
+          </div> */}
         </span>
         <Collapsible defaultOpen className={cn(isCollapsed && 'hidden')}>
           <div className="pl-4 bg-surfaceSelected max-w-full min-w-max bg-surfaceNeutral border-b-1 border-solid border-borderSubdued mb-5">
@@ -194,7 +223,19 @@ export function AnalyticsDashboardSidebar({
 
           <CollapsibleContent className="pb-4 px-2 max-w-full data-[state=open]:mt-[-12px]">
             <div className="px-4 h-full pt-4">
-              <RadioButton isSelected label="September 2023" />
+              {timePeriodData?.data?.getDataTimePeriods.map((item, index) => (
+                <RadioButton
+                  changed={() => {
+                    router.push( subIndicator ? `${pathname}?indicator=${indicator}&sub-indicator=${subIndicator}&time-period=${item?.value}` : `${pathname}?indicator=${indicator}&time-period=${item?.value}`);
+                    setTimePeriodRadioValue(item?.value);
+                  }}
+                  key={`${index}_${item?.value}`}
+                  id={`${item?.value}_index`}
+                  isSelected={item?.value === timePeriodRadioValue}
+                  label={formatDateString(item?.value)}
+                  value={item?.value}
+                />
+              ))}
             </div>
           </CollapsibleContent>
         </Collapsible>
@@ -277,16 +318,28 @@ export const IndicatorCheckboxList = ({
   const router = useRouter();
   const searchParams = useSearchParams();
   const indicatorParam = searchParams.get('indicator');
+  const timePeriod = searchParams.get('time-period');
   const [radioValue, setRadioValue] = React.useState(indicatorParam);
 
-  return data?.indicatorsByCategory?.map((indicator, index: React.Key) => {
+  return data?.indicatorsByCategory?.map((indicator, index: Number) => {
     const categoryName = Object.keys(indicator)[0];
     const children = indicator[categoryName];
     return (
-      <Collapsible defaultOpen key={index} className="rounded-1">
+      <Collapsible
+        defaultOpen={
+          indicators &&
+          indicators[categoryName][0]['indicator'] === indicatorParam
+        }
+        key={`${index}`}
+        className="rounded-1"
+      >
         <div className=" bg-surfaceHighlightSubdued max-w-full min-w-max bg-surfaceNeutral rounded-1 border-t-0 border-1 border-solid border-borderSubdued mb-5">
           <CollapsibleTrigger className={styles.CollapseTrigger}>
-            <Text className="text-textDefault" fontWeight="bold" key={index}>
+            <Text
+              className="text-textDefault"
+              fontWeight="bold"
+              key={`${index}`}
+            >
               {categoryName}
             </Text>
             <Icon source={Icons.down} />
@@ -296,25 +349,32 @@ export const IndicatorCheckboxList = ({
         <CollapsibleContent className="pb-4 px-2 max-w-full min-w-max data-[state=open]:mt-[-12px]">
           <div className="flex flex-col">
             {Object.entries(children).map(([key, value], index) => (
-              <RadioButton
-                changed={() => {
-                  if (indicators) {
-                    indicators[categoryName][index]['sub-indicator']
-                      ? router.push(
-                          `/analytics/?indicator=${indicators[categoryName][index]['indicator']}&sub-indicator=${indicators[categoryName][index]['sub-indicator']}`
-                        )
-                      : router.push(
-                          `/analytics/?indicator=${indicators[categoryName][index]['indicator']}`
-                        ),
-                      setRadioValue(value);
-                  }
-                }}
-                key={key}
-                id={value}
-                isSelected={value === radioValue}
-                label={key}
-                value={key}
-              />
+              <>
+                <RadioButton
+                  changed={() => {
+                    if (indicators) {
+                      indicators[categoryName][index]['sub-indicator']
+                        ? router.push(
+                            `/analytics/?indicator=${indicators[categoryName][index]['indicator']}&sub-indicator=${indicators[categoryName][index]['sub-indicator']}&time-period=${timePeriod}`
+                          )
+                        : router.push(
+                            `/analytics/?indicator=${indicators[categoryName][index]['indicator']}&time-period=${timePeriod}`
+                          ),
+                        setRadioValue(value);
+                    }
+                  }}
+                  key={key}
+                  id={value}
+                  isSelected={value === radioValue}
+                  label={key}
+                  value={key}
+                />
+                {key === 'Composite Score' && (
+                  <Text className="text-variablesIconInteractive mx-8">
+                    *Mitigation & Preparedness
+                  </Text>
+                )}
+              </>
             ))}
           </div>
         </CollapsibleContent>

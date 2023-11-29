@@ -1,8 +1,8 @@
 import { graphql } from '@/gql/generated/analytics';
 
 export const ANALYTICS_TABLE_DATA = graphql(`
-query tableData($indcFilter: IndicatorFilter){
-  districtViewTableData(indcFilter: $indcFilter)
+query tableData($indcFilter: IndicatorFilter! , $dataFilter: DataFilter!){
+  districtViewTableData(indcFilter: $indcFilter , dataFilter:$dataFilter)
 }
 `)
 
@@ -27,6 +27,14 @@ query indicators{
       parent{
         name
       }
+  }
+}
+`)
+
+export const ANALYTICS_TIME_PERIODS = graphql(`
+query dataTimePeriods{
+  getDataTimePeriods {
+    value
   }
 }
 `)

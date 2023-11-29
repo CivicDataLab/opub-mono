@@ -5,6 +5,8 @@ import styles from './LeafletChoropleth.module.scss';
 import { IconBoxMultiple } from '@tabler/icons-react';
 import React from 'react';
 import { GeoJSON, MapContainer, TileLayer, ScaleControl } from 'react-leaflet';
+const classyBrew = require('classybrew')
+var brew = new classyBrew();
 
 const layers = [
   'light_all',
@@ -59,6 +61,9 @@ type MapProps = {
   /* fill opacity */
   fillOpacity?: number;
 
+  /* To specify if classification of data is required*/
+  classifyData?: boolean;
+
   /* className */
   className?: string;
 };
@@ -112,12 +117,27 @@ const Map = ({
   scrollWheelZoom = true,
   hideScale = false,
   mapDataFn,
+  classifyData = false
 }: MapProps & {
   selectedLayer: layerOptions;
 }) => {
   //to prevent map re-initialization
   const [unmountMap, setUnmountMap] = React.useState(false);
   const mapRef = React.useRef<any>(null);
+
+  // pass values from your geojson object into an empty array
+  // see link above to view geojson used in this example
+  var values = [];
+  for (var i = 0; i < features.length; i++) {
+    if (features[i].properties[mapProperty] == null) continue;
+    values.push(features[i].properties[mapProperty]);
+  }
+
+  // Set the brew properties
+  brew.setSeries(values);
+  brew.setNumClasses(5);
+  brew.setColorCode("RdYlBu");
+  brew.classify('jenks')
 
   const handleMouseOver = React.useCallback((e: { target: any }) => {
     var layer = e.target;
@@ -170,7 +190,7 @@ const Map = ({
 
   const style: any = (feature: { properties: { [x: string]: number } }) => {
     return {
-      fillColor: mapDataFn(Number(feature.properties[mapProperty]), 'default'),
+      fillColor: classifyData ? brew.getColorInRange(feature.properties[mapProperty]) : mapDataFn(Number(feature.properties[mapProperty]), 'default'),
       weight: 1,
       opacity: 1,
       color: selectedLayer?.includes('dark') ? '#eee' : '#889096',

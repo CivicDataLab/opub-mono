@@ -3,10 +3,9 @@ import { Hydrate, dehydrate } from '@tanstack/react-query';
 
 import {
   ANALYTICS_INDICATORS_BY_CATEGORY,
-  ANALYTICS_REVENUE_MAP_DATA,
   ANALYTICS_REVENUE_TABLE_DATA,
   ANALYTICS_TABLE_DATA,
-  ANALYTICS_INDICATORS
+  ANALYTICS_TIME_PERIODS,
 } from '@/config/graphql/analaytics-queries';
 import { GraphQL, getQueryClient } from '@/lib/api';
 import { Content } from './components/analytics-layout';
@@ -22,15 +21,16 @@ export default async function Home({
     () =>
       GraphQL('analytics', ANALYTICS_TABLE_DATA, {
         indcFilter: { slug: searchParams?.indicator },
+        dataFilter: { dataPeriod: searchParams['time-period'] },
       })
   );
 
   await queryClient.prefetchQuery(
-    [`revenue_table_data_${searchParams?.indicator}`],
+    [`revenue_table_data_${searchParams?.indicator}_${searchParams['time-period']}`],
     () =>
       GraphQL('analytics', ANALYTICS_REVENUE_TABLE_DATA, {
         indcFilter: { slug: searchParams?.indicator },
-        dataFilter: { dataPeriod: '2023_08' },
+        dataFilter: { dataPeriod: searchParams['time-period'] },
       })
   );
 
@@ -38,25 +38,18 @@ export default async function Home({
     GraphQL('analytics', ANALYTICS_INDICATORS_BY_CATEGORY)
   );
 
-  await queryClient.prefetchQuery([`indicators`], () =>
-  GraphQL('analytics', ANALYTICS_INDICATORS)
-);
-
-const indicatorForMapData = searchParams['sub-indicator'] ? searchParams['sub-indicator'] : searchParams?.indicator
-
-  await queryClient.prefetchQuery(
-    [`revenue_map_data_${indicatorForMapData}`],
-    () =>
-      GraphQL('analytics', ANALYTICS_REVENUE_MAP_DATA, {
-        indcFilter: { slug: indicatorForMapData},
-        dataFilter: { dataPeriod: '2023_08' },
-      })
+  await queryClient.prefetchQuery([`timePeriods`], () =>
+    GraphQL('analytics', ANALYTICS_TIME_PERIODS)
   );
 
   const dehydratedState = dehydrate(queryClient);
   return (
     <Hydrate state={dehydratedState}>
-      <Content subIndicator={searchParams['sub-indicator']} indicator={searchParams?.indicator} />
+      <Content
+        subIndicator={searchParams['sub-indicator']}
+        timePeriod={searchParams['time-period']}
+        indicator={searchParams?.indicator}
+      />
     </Hydrate>
   );
 }

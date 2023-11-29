@@ -21,7 +21,6 @@ $md-radio-checked-size: 10px;
 
     label {
         display: inline-block;
-        height:$md-radio-size;
         position: relative;
         padding: 0 ($md-radio-size + 10px);
         margin-bottom: 0;
@@ -31,7 +30,12 @@ $md-radio-checked-size: 10px;
         overflow: hidden;
         text-overflow: ellipsis;
         max-width: 300px;
-        
+
+        span {
+            position: relative;
+            bottom: 1px;
+        }
+
         &:before, &:after {
             position: absolute;            
             content: '';  
