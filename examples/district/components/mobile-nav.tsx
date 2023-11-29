@@ -28,11 +28,11 @@ export const MobileNav = () => {
     if (open) {
       document.body.style.overflow = 'hidden';
     } else {
-      document.body.style.overflow = 'auto';
+      document.body.style.overflow = 'initial';
     }
 
     return () => {
-      document.body.style.overflow = 'auto';
+      document.body.style.overflow = 'initial';
     };
   }, [open]);
 
