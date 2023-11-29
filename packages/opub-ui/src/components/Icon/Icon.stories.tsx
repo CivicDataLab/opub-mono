@@ -72,7 +72,7 @@ export const Filled = () => (
   <div>
     <PropsVariationSection
       component={Icon}
-      common={{ source: IconSquareRoundedChevronLeftFilled, filled: true }}
+      common={{ source: IconSquareRoundedChevronLeftFilled }}
       xAxis={{
         default: {},
       }}

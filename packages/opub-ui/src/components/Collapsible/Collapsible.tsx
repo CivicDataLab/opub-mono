@@ -24,7 +24,7 @@ export const Collapsible = ({
         <span className={styles.Text}>{collapsibleHeading}</span>
         <CollapsibleDemo.Trigger asChild>
           <button className={styles.IconButton}>
-            <Icon source={iconSource} size="6" />
+            <Icon source={iconSource} size={24} />
           </button>
         </CollapsibleDemo.Trigger>
       </div>

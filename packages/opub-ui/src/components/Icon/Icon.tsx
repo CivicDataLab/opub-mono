@@ -3,7 +3,6 @@ import { variationName } from '../../utils/css';
 import { Text } from '../Text';
 import styles from './Icon.module.scss';
 import cx from 'classnames';
-import React from 'react';
 
 export function Icon({
   source,
@@ -14,7 +13,6 @@ export function Icon({
   stroke,
   className,
   noEvents,
-  filled,
 }: IconProps) {
   const classes = cx(
     styles.Icon,
@@ -25,11 +23,7 @@ export function Icon({
   );
 
   const SourceComponent: any = source;
-  const iconSize = size
-    ? typeof size === 'number'
-      ? size
-      : Number(size) * 4
-    : 20;
+  const iconSize = size ? size : 20;
 
   const style = {
     height: size ? size : iconSize,

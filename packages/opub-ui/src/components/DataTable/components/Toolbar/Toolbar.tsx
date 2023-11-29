@@ -47,7 +47,7 @@ export function Toolbar<TData>({
             <Button
               size="slim"
               onClick={() => table.resetColumnFilters()}
-              icon={<Icon source={IconX} size="4" color="highlight" />}
+              icon={<Icon source={IconX} size={16} color="highlight" />}
               kind="tertiary"
             >
               Reset
