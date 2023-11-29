@@ -61,7 +61,7 @@ export const Explorer = React.forwardRef(
     return (
       <div
         className={cn(
-          'md:grid grid-cols-[242px_1fr] gap-4 rounded-05 bg-surfaceDefault shadow-elementCard p-6'
+          'md:grid grid-cols-[242px_1fr] gap-4 rounded-05 md:bg-surfaceDefault md:shadow-elementCard md:p-6'
         )}
       >
         <div className="hidden md:block">
