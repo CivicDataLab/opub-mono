@@ -32,7 +32,7 @@ export function ActionBar(props: Props) {
   const isNavigating = useIsNavigating().isNavigating;
 
   const { width }: Size = useWindowSize();
-  const iconSize = width && width < 480 ? '5' : '8';
+  const iconSize = width && width < 480 ? 20 : 32;
 
   const backButton = props.previousPage && props.previousPage?.link && (
     <Link href={props.previousPage?.link} className={styles.BackButton}>
