@@ -47,7 +47,7 @@
 
 .ScrollAreaThumb {
   flex: 1;
-  background-color: var(--border);
+  background-color: var(--border-default);
   border-radius: var(--scrollbar-size);
   position: relative;
 
@@ -66,5 +66,5 @@
 }
 
 .ScrollAreaCorner {
-  background-color: var(--border);
+  background-color: var(--border-default);
 }

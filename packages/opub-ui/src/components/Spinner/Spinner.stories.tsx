@@ -7,6 +7,7 @@ import { Meta } from '@storybook/react';
  * For loading states, spinners should only be used for content that can’t be represented with skeleton loading components, like for data charts.
  */
 export default {
+  title: 'Verified/Spinner',
   component: Spinner,
 
   argTypes: {

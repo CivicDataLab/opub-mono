@@ -9,7 +9,7 @@ import {
   CollapsibleTrigger,
 } from '@radix-ui/react-collapsible';
 import Link from 'next/link';
-import { Breadcrumbs, Icon, Input, Separator, Text } from 'opub-ui';
+import { Breadcrumbs, Icon, Input, Divider, Text } from 'opub-ui';
 import { BreadCrumb, Search } from '../../components';
 
 export interface IProps {
@@ -73,7 +73,7 @@ export function Content({ data }: { data: IProps }) {
             </CollapsibleTrigger>
 
             <CollapsibleContent className="pb-4 px-6">
-              <Separator />
+              <Divider />
               <div className="mt-4 flex flex-col gap-3">
                 {departmentData.collapsible.content.map((item) => (
                   <Text key={item}>{item}</Text>
@@ -109,7 +109,7 @@ export function Content({ data }: { data: IProps }) {
             </Text>
             <Search />
           </div>
-          <Separator className="mt-3 mb-4" />
+          <Divider className="mt-3 mb-4" />
           <div className="grid gap-4 lg:grid-cols-2">
             {departmentData.list.map((item) => (
               <SchemeCard

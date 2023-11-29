@@ -1,6 +1,6 @@
-import { Meta, StoryObj } from '@storybook/react';
 import { TimeField } from './TimeField';
 import { now, getLocalTimeZone, Time } from '@internationalized/date';
+import { Meta, StoryObj } from '@storybook/react';
 
 /**
  * TimeFields allow users to enter and edit time values using a keyboard
@@ -8,6 +8,7 @@ import { now, getLocalTimeZone, Time } from '@internationalized/date';
  * Reference: https://react-spectrum.adobe.com/react-aria/useTimeField.html
  */
 const meta = {
+  title: 'Verified/TimeField',
   component: TimeField,
 } satisfies Meta<typeof TimeField>;
 

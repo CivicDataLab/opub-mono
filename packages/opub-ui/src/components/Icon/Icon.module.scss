@@ -2,17 +2,12 @@
 
 .Icon {
   --size: 20px;
-  --fill: none;
   display: block;
   height: var(--size);
   width: var(--size);
   max-height: 100%;
   max-width: 100%;
   color: currentColor;
-
-  svg {
-    fill: var(--fill);
-  }
 }
 
 .hasBackdrop {
@@ -32,130 +27,64 @@
   }
 }
 
-.colorBase {
-  svg {
-    color: var(--icon);
-  }
-
-  &::before {
-    background-color: var(--surface-neutral);
-  }
-}
-
 .colorDefault {
-  svg {
-    color: var(--icon-default);
-  }
-
   &::before {
-    background-color: var(--surface-neutral);
+    background-color: var(--surface-selected);
   }
 }
 
-.colorSubdued svg {
-  color: var(--icon-subdued);
+.colorSubdued {
+  &::before {
+    background-color: var(--surface-subdued);
+  }
 }
 
 .colorCritical {
-  svg {
-    color: var(--icon-critical);
-  }
-
   &::before {
     background-color: var(--surface-critical);
   }
 }
 
-.colorInteractive svg {
-  color: var(--interactive);
+.colorInteractive {
+  &::before {
+    background-color: var(--surface-interactive);
+  }
 }
 
 .colorWarning {
-  svg {
-    color: var(--icon-warning);
-  }
-
   &::before {
     background-color: var(--surface-warning);
   }
 }
 
 .colorHighlight {
-  svg {
-    color: var(--icon-highlight);
-  }
-
   &::before {
-    background-color: var(--surface-highlight);
+    background-color: var(--surface-highlight-default);
   }
 }
 
 .colorSuccess {
-  svg {
-    color: var(--icon-success);
-  }
-
   &::before {
     background-color: var(--surface-success);
   }
 }
 
-.colorDecorative1 {
-  svg {
-    color: var(--icon-decorative-one);
-  }
-
+.colorOnBgDefault {
   &::before {
-    background-color: var(--surface-decorative-one);
+    background-color: var(--surface-success);
   }
 }
 
-.colorDecorative2 {
-  svg {
-    color: var(--icon-decorative-two);
-  }
-
+.colorOnBgSubdued {
   &::before {
-    background-color: var(--surface-decorative-two);
+    background-color: var(--surface-success);
   }
 }
 
-.colorDecorative3 {
-  svg {
-    color: var(--icon-decorative-three);
-  }
-
+.colorOnBgDisabled {
   &::before {
-    background-color: var(--surface-decorative-three);
+    background-color: var(--surface-success);
   }
-}
-
-.colorDecorative4 {
-  svg {
-    color: var(--icon-decorative-four);
-  }
-
-  &::before {
-    background-color: var(--surface-decorative-four);
-  }
-}
-
-.colorDecorative5 {
-  svg {
-    color: var(--icon-decorative-five);
-  }
-
-  &::before {
-    background-color: var(--surface-decorative-five);
-  }
-}
-
-.colorPrimary svg {
-  color: var(--action-primary);
-}
-
-.colorMagic svg {
-  color: var(--color-icon-magic);
 }
 
 .Svg,

@@ -17,6 +17,7 @@ import React from 'react';
  * Reference: https://ui.shadcn.com/docs/components/command
  */
 const meta = {
+  title: 'Verified/Command',
   component: Command,
 } satisfies Meta<typeof Command>;
 

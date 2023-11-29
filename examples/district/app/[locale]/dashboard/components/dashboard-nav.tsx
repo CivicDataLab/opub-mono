@@ -21,7 +21,7 @@ export function DashboardNav() {
       <Box flex justifyContent="space-between" gap="4" alignItems="center">
         <Link href="/">
           <Box flex alignItems="center" gap="2">
-            <Icon source={Icons.logo} color="decorative4" size="6" />
+            <Icon source={Icons.logo} size="6" />
             <Text variant="headingLg" as="h1">
               OPub
             </Text>
@@ -38,7 +38,7 @@ export function DashboardNav() {
           />
         </div>
         <div className="flex items-center shrink-0 gap-4">
-          <Icon color="base" source={Icons.notification} />
+          <Icon color="default" source={Icons.notification} />
           <div>
             <Avatar showInitials showLabel name="Helen Birjam" size="small" />
           </div>

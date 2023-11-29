@@ -1,6 +1,6 @@
-import { Meta } from '@storybook/react';
 import { Box } from '../Box';
 import { Text } from './Text';
+import { Meta } from '@storybook/react';
 
 /**
  * Typography helps establish hierarchy and communicate important content by creating clear visual patterns.
@@ -8,6 +8,7 @@ import { Text } from './Text';
  * Reference: https://polaris.shopify.com/components/typography/text
  */
 const meta = {
+  title: 'Verified/Text',
   component: Text,
 } satisfies Meta<typeof Text>;
 

@@ -48,13 +48,13 @@ const IconButton = forwardRef((props: IconButtonProps, ref: any) => {
         }}
       >
         <Text visuallyHidden>{children}</Text>
-        <Icon source={icon} size={iconSize} color={color ? color : 'inherit'} />
+        <Icon source={icon} size={iconSize} color={color ? color : 'default'} />
       </button>
     </>
   );
 
   const markup =
-    withTooltip || disabled || tooltipText ? (
+    withTooltip || !disabled || tooltipText ? (
       <Tooltip content={tooltipText || children}>{buttonMarkup}</Tooltip>
     ) : (
       buttonMarkup

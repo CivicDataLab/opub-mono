@@ -3,9 +3,9 @@
 .DataTable {
   --op-data-table-first-column-width: 145px;
   max-width: 100vw;
-  background-color: var(--surface);
+  background-color: var(--surface-default);
   border-radius: var(--border-radius-2);
-  box-shadow: var(--shadow-card);
+  box-shadow: var(--shadow-element-card);
 }
 
 .ScrollContainer {
@@ -29,7 +29,7 @@
   font-size: var(--font-size-100);
 
   border-radius: var(--border-radius-2) var(--border-radius-2) 0 0;
-  background-color: var(--surface);
+  background-color: var(--surface-default);
 
   thead {
     &.ItemsSelected {
@@ -45,7 +45,7 @@
 
 .SelectedWrapper {
   display: none;
-  background-color: var(--surface);
+  background-color: var(--surface-default);
   position: absolute;
   top: 0;
 
@@ -55,22 +55,6 @@
     gap: var(--space-6);
     z-index: 1;
   }
-
-  .SelectAllButton {
-    @include unstyled-button;
-    @include focus-ring;
-    color: var(--interactive);
-    font-weight: var(--font-weight-semibold);
-    margin-left: var(--space-2);
-
-    &:hover {
-      color: var(--interactive-hovered);
-    }
-
-    &:focus-visible:not(:active) {
-      @include focus-ring($style: 'focused');
-    }
-  }
 }
 
 .TableRow {
@@ -78,12 +62,12 @@
     transition: background-color var(--duration-50) var(--ease-in-out);
 
     &:hover {
-      background-color: var(--surface-hovered);
+      background-color: var(--surface-subdued);
     }
 
     &.TableRow-selected {
       &:hover {
-        background-color: var(--surface-selected-hovered);
+        background-color: var(--surface-selected);
       }
     }
 
@@ -95,7 +79,7 @@
   }
 
   .Cell {
-    border-top: var(--border-divider);
+    border-top: var(--border-default);
     vertical-align: middle;
 
     &:nth-child(2) {
@@ -113,8 +97,8 @@
 }
 
 .Cell {
-  font-weight: var(--font-weight-regular);
-  color: var(--text);
+  font-weight: 400;
+  color: var(--text-default);
   padding: var(--space-4);
   white-space: nowrap;
   text-align: left;
@@ -128,12 +112,12 @@
   }
 
   &.Cell-header {
-    font-weight: var(--font-weight-regular);
-    color: var(--text);
+    font-weight: 400;
+    color: var(--text-default);
     border-top: 0;
 
     .IncreasedTableDensity & {
-      font-weight: var(--font-weight-medium);
+      font-weight: 500;
       font-size: var(--font-size-75);
     }
   }
@@ -186,18 +170,18 @@
   display: inline-flex;
   justify-content: flex-end;
   align-items: baseline;
-  color: var(--text);
+  color: var(--text-default);
   transition: color var(--duration-200) var(--ease);
   cursor: pointer;
   padding: var(--space-2);
   margin: var(--space-2);
 
   svg {
-    fill: var(--icon-disabled);
+    color: var(--icon-disabled);
   }
 
   .IncreasedTableDensity & {
-    font-weight: var(--font-weight-medium);
+    font-weight: 500;
     font-size: var(--font-size-75);
     padding: 0;
     padding-right: var(--space-1);
@@ -205,14 +189,14 @@
   }
 
   &:hover {
-    color: var(--interactive-hovered);
+    color: var(--icon-interactive);
 
     .Icon {
       opacity: 1;
     }
 
     span {
-      color: var(--interactive-hovered);
+      color: var(--icon-interactive);
     }
   }
 
@@ -239,17 +223,17 @@
     opacity: 1;
 
     svg {
-      fill: var(--icon);
+      fill: var(--icon-default);
     }
   }
 
   &:hover svg {
-    fill: var(--interactive-hovered);
+    fill: var(--icon-interactive);
   }
 
   .Heading:focus:not(:active) {
     svg {
-      fill: var(--icon);
+      fill: var(--icon-default);
     }
   }
 }
@@ -318,7 +302,7 @@
   position: absolute;
   left: calc(-1 * var(--space-6));
   z-index: var(--z-10);
-  background-color: var(--background-selected);
+  background-color: var(--background-alpha-medium);
   padding-inline: var(--space-1);
   border-radius: var(--border-radius-05);
 }
@@ -383,7 +367,7 @@
 }
 
 .FilterPopover {
-  box-shadow: var(--shadow-lg);
+  box-shadow: var(--shadow-basic-lg);
   max-width: 200px;
   padding: 0;
 

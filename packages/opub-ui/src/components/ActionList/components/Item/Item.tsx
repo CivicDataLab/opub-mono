@@ -1,7 +1,9 @@
 import type { ActionListItemDescriptor } from '../../../../types/actionlist';
+import { Color } from '../../../../types/icon';
 import { handleMouseUpByBlurring } from '../../../../utils/focus';
 import { Box } from '../../../Box';
-import { UnstyledLink } from '../../../Link/BaseLink';
+import { UnstyledLink } from '../../../Button/BaseLink';
+import { Icon } from '../../../Icon';
 import { Text } from '../../../Text';
 import styles from '../../ActionList.module.scss';
 import cx from 'classnames';
@@ -18,7 +20,6 @@ export function Item({
   onAction,
   onMouseEnter,
   icon,
-  prefix,
   suffix,
   disabled,
   external,
@@ -34,12 +35,20 @@ export function Item({
     active && styles.active
   );
 
-  let prefixMarkup: React.ReactNode | null = null;
+  let color: Color = 'default';
+  if (destructive) {
+    color = 'critical';
+  } else if (active) {
+    color = 'interactive';
+  }
 
-  if (prefix) {
-    prefixMarkup = <span className={styles.Prefix}>{prefix}</span>;
-  } else if (icon) {
-    prefixMarkup = <span className={styles.Prefix}>{icon}</span>;
+  let prefixMarkup: React.ReactNode | null = null;
+  if (icon) {
+    prefixMarkup = (
+      <span className={styles.Prefix}>
+        {<Icon source={icon} color={color} />}
+      </span>
+    );
   }
 
   const contentText = ellipsis && content ? `${content}…` : content;
@@ -56,7 +65,9 @@ export function Item({
   );
 
   const suffixMarkup = suffix && (
-    <span className={cx(styles.Suffix, styles.Prefix)}>{suffix}</span>
+    <span className={cx(styles.Suffix, styles.Prefix)}>
+      {<Icon source={suffix} color={color} />}
+    </span>
   );
 
   const textMarkup = <span className={styles.Text}>{contentMarkup}</span>;
@@ -68,8 +79,6 @@ export function Item({
       {suffixMarkup}
     </Box>
   );
-
-  // const scrollMarkup = active ? <ScrollTo /> : null;
 
   const control = url ? (
     <UnstyledLink
@@ -102,10 +111,5 @@ export function Item({
     </button>
   );
 
-  return (
-    <>
-      {/* {scrollMarkup} */}
-      {control}
-    </>
-  );
+  return <>{control}</>;
 }

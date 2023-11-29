@@ -3,10 +3,7 @@ import { Icon } from '../../../Icon';
 import { Text } from '../../../Text';
 import { Tooltip } from '../../../Tooltip';
 import styles from '../../Table.module.scss';
-import {
-  SortAscendingMajor,
-  SortDescendingMajor,
-} from '@shopify/polaris-icons';
+import { IconSortAscending, IconSortDescending } from '@tabler/icons-react';
 import cx from 'classnames';
 import React from 'react';
 
@@ -31,8 +28,7 @@ function SortButton({
   const iconClassName = cx(sortable && styles.Icon);
   const sortDirection = column.getIsSorted() as string;
   const direction = sortDirection ? sortDirection : defaultSortDirection;
-  const source =
-    direction === 'desc' ? SortDescendingMajor : SortAscendingMajor;
+  const source = direction === 'desc' ? IconSortDescending : IconSortAscending;
 
   const a11ylabel = `Sorted in ${
     direction === 'desc' ? 'descending' : 'ascending'
@@ -40,7 +36,7 @@ function SortButton({
 
   const iconMarkup = (
     <span className={iconClassName}>
-      <Icon color="base" source={source} accessibilityLabel={a11ylabel} />
+      <Icon color="default" source={source} accessibilityLabel={a11ylabel} />
     </span>
   );
 

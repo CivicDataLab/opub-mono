@@ -1,13 +1,14 @@
-import { Meta, StoryObj } from '@storybook/react';
-import React from 'react';
 import { Box } from '../Box';
 import { Button } from '../Button';
 import { Sheet } from './Sheet';
+import { Meta, StoryObj } from '@storybook/react';
+import React from 'react';
 
 /**
  * Sheet is a panel that slides in from the side of the screen.
  */
 const meta = {
+  title: 'Verified/Sheet',
   component: Sheet,
 } satisfies Meta<typeof Sheet>;
 
@@ -144,6 +145,7 @@ export const Sizes: Story = {
           side={side}
           isOpen={open}
           size={size}
+          className="tray"
         >
           <Box
             flex

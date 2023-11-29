@@ -24,30 +24,29 @@
 }
 
 .colorHighlight {
-  --op-progress-bar-background: var(--surface-neutral);
-  --op-progress-bar-indicator: var(--icon-highlight);
+  --op-progress-bar-background: var(--surface-highlight-default);
+  --op-progress-bar-indicator: var(--action-primary-basic-default);
 }
 
-.colorPrimary {
-  --op-progress-bar-background: var(--surface-neutral);
-  --op-progress-bar-indicator: var(--action-primary);
+.colorInteractive {
+  --op-progress-bar-background: var(--surface-interactive);
+  --op-progress-bar-indicator: var(--action-primary-interactive-default);
 }
 
 .colorSuccess {
-  --op-progress-bar-background: var(--surface-neutral);
-  --op-progress-bar-indicator: var(--border-success);
+  --op-progress-bar-background: var(--surface-success);
+  --op-progress-bar-indicator: var(--action-primary-success-default);
 }
 
 .colorCritical {
-  --op-progress-bar-background: var(--surface-neutral);
-  --op-progress-bar-indicator: var(--interactive-critical);
+  --op-progress-bar-background: var(--surface-critical);
+  --op-progress-bar-indicator: var(--action-primary-critical-default);
 }
 
 .Root {
   position: relative;
   overflow: hidden;
   background-color: var(--op-progress-bar-background);
-  // border-radius: var(--border-radius-1);
   width: 100%;
 
   @media (forced-colors: active) {

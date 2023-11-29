@@ -120,7 +120,7 @@ export const Content = ({ data }: { data: IProps }) => {
 
       <div className="mt-4 px-2 md:container py-1 lg:py-2">
         <div className="flex gap-4 flex-wrap justify-start md:flex-nowrap">
-          <div className="flex">
+          <div className="hidden md:flex">
             <Image
               src={schemes[data.scheme].logo}
               alt=""
@@ -228,7 +228,7 @@ const TabLayout = ({
           </Tab>
         ))}
       </TabList>
-      <div className="mt-6 px-3 py-4 bg-surfaceDefault">
+      <div className="mt-6 md:px-3 md:py-4 md:bg-surfaceDefault">
         {tabValue === 'overview' && (
           <div className="mb-3 flex items-center justify-end gap-4 flex-wrap">
             <Button
@@ -244,7 +244,7 @@ const TabLayout = ({
               Copy Link
             </Button>
             <Button
-              kind="secondary"
+              kind="primary"
               variant="interactive"
               onClick={() => {
                 exportAsImage(overviewRef.current, 'overview');

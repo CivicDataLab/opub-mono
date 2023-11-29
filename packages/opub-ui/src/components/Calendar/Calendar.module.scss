@@ -3,8 +3,8 @@
 .Calendar {
   max-width: 290px;
   padding: var(--space-5);
-  background-color: var(--surface);
-  box-shadow: var(--shadow-popover);
+  background-color: var(--surface-default);
+  box-shadow: var(--shadow-element-popover);
   border-radius: var(--border-radius-2);
 
   table {
@@ -24,7 +24,7 @@
     @include focus-ring;
     &:focus-visible:not(:active) {
       @include focus-ring($style: 'focused');
-      outline: var(--border-width-3) solid transparent;
+      outline: var(--border-width-2) solid transparent;
     }
 
     border-radius: var(--border-radius-1);
@@ -32,11 +32,11 @@
     transition: background-color var(--duration-100) var(--ease-in-out);
 
     &:hover {
-      background-color: var(--surface-hovered);
+      background-color: var(--surface-subdued);
     }
 
     &:active {
-      background-color: var(--surface-pressed) !important;
+      background-color: var(--surface-selected) !important;
     }
   }
 }
@@ -49,40 +49,42 @@
   transition: background-color var(--duration-100) var(--ease-in-out);
 
   &:hover:not(.Disabled, .Selected, .Unavailable) {
-    background-color: var(--surface-hovered);
+    background-color: var(--surface-subdued);
   }
 
   &.Today {
-    background-color: var(--surface-pressed);
+    background-color: var(--surface-selected);
   }
 
   &.Selected {
-    background-color: var(--interactive);
+    background-color: var(--background-alpha-dark);
     > span {
-      color: var(--text-on-interactive);
+      color: var(--text-onbg-default);
     }
 
     &.HighlightedRange {
       background-color: var(--surface-selected);
       border-radius: 0;
+
       > span {
-        color: var(--text);
+        color: var(--text-default);
       }
     }
 
     &.SelectionStart {
       border-radius: var(--border-radius-6) 0px 0px var(--border-radius-6);
-      background-color: var(--interactive);
+      background-color: var(--background-alpha-dark);
+
       > span {
-        color: var(--text-on-interactive);
+        color: var(--text-onbg-default);
       }
     }
 
     &.SelectionEnd {
       border-radius: 0px var(--border-radius-6) var(--border-radius-6) 0px;
-      background-color: var(--interactive);
+      background-color: var(--background-alpha-dark);
       > span {
-        color: var(--text-on-interactive);
+        color: var(--text-onbg-default);
       }
     }
 

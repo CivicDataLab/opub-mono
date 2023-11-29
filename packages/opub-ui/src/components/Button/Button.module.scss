@@ -5,7 +5,7 @@
     (36px - var(--font-line-height-2) - var(--space-05)) / 2
   );
 
-  @include recolor-icon(var(--icon));
+  @include recolor-icon(var(--icon-default));
 
   @include focus-ring($border-width: var(--border-width-1));
 
@@ -18,13 +18,12 @@
   margin: 0;
 
   padding: $vertical-padding var(--space-4);
-  background: var(--surface);
-  box-shadow: var(--shadow-button);
+  background: var(--background-solid-default);
+  box-shadow: var(--shadow-button-default);
   border-radius: var(--border-radius-1);
   color: var(--text);
-  border: var(--border-width-1) solid var(--border-neutral-subdued);
+  border: var(--border-width-1) solid var(--border-subdued);
   border-top-color: var(--border-subdued);
-  border-bottom-color: var(--border-shadow-subdued);
   line-height: 1;
   text-align: center;
   cursor: pointer;
@@ -37,15 +36,15 @@
   }
 
   &:focus-visible {
-    box-shadow: var(--shadow-button);
+    box-shadow: var(--shadow-button-default);
     outline: 0;
 
     @include focus-ring($style: 'focused');
   }
 
   &:active {
-    background: var(--surface-pressed);
-    box-shadow: var(--shadow-button);
+    background: var(--surface-selected);
+    box-shadow: var(--shadow-button-default);
 
     &::after {
       border: none;
@@ -54,10 +53,8 @@
   }
 
   &.pressed {
-    background: var(--surface-pressed);
-    box-shadow: var(--shadow-inset-button-pressed);
-    color: var(--text);
-    border-color: var(--border-depressed);
+    background: var(--surface-selected);
+    color: var(--text-default);
 
     @include recolor-icon(currentColor);
   }
@@ -73,7 +70,7 @@
   background: var(--button-color);
   border-width: 0;
   border-color: transparent;
-  box-shadow: var(--shadow-button), var(--shadows-inset-button);
+  box-shadow: var(--shadow-button-default);
 
   color: var(--button-text);
 
@@ -86,13 +83,13 @@
 
   &:focus {
     border-color: $border-color;
-    box-shadow: var(--shadow-button), var(--shadows-inset-button);
+    box-shadow: var(--shadow-button-default);
   }
 
   &:active {
     background: var(--button-color-active);
     border-color: $border-color;
-    box-shadow: var(--shadow-button), var(--shadows-inset-button);
+    box-shadow: var(--shadow-button-default);
   }
 
   &.pressed {
@@ -100,12 +97,12 @@
 
     background: var(--button-color-depressed);
     border-color: $border-color;
-    box-shadow: var(--shadow-button), var(--shadows-inset-button);
+    box-shadow: var(--shadow-button-default);
 
     &:hover,
     &:focus {
       background: var(--button-color-depressed);
-      box-shadow: var(--shadow-button), var(--shadows-inset-button);
+      box-shadow: var(--shadow-button-default);
     }
   }
 }
@@ -184,24 +181,24 @@
 
 .Content {
   font-size: var(--font-size-100);
-  font-weight: var(--font-weight-medium);
+  font-weight: 500;
   line-height: var(--font-line-height-1);
-
   text-transform: initial;
   letter-spacing: initial;
-
   position: relative;
-
   display: flex;
-
   justify-content: center;
-
   align-items: center;
+  gap: var(--space-1);
   min-width: 1px;
   min-height: 1px;
 
   .Button:not(.kindTertiary) & {
     width: 100%;
+  }
+
+  .Icon {
+    margin-bottom: -2px;
   }
 }
 
@@ -247,7 +244,6 @@
 }
 
 .Icon {
-  margin-left: calc(-1 * (var(--space-1)));
   line-height: 0;
 
   &:last-child {
@@ -294,7 +290,7 @@
   --button-color-active: var(--action-primary-basic-pressed);
   --button-color-depressed: var(--action-primary-basic-depressed);
 
-  @include recolor-icon(var(--icon-on-primary));
+  @include recolor-icon(var(--icon-onbg-default));
 
   &.disabled {
     background: var(--action-primary-disabled);
@@ -330,7 +326,7 @@
   --button-color-active: var(--action-primary-interactive-pressed);
   --button-color-depressed: var(--action-primary-interactive-depressed);
 
-  @include recolor-icon(var(--icon-on-primary));
+  @include recolor-icon(var(--icon-onbg-default));
 
   &.disabled {
     background: var(--action-primary-disabled);
@@ -366,7 +362,7 @@
   --button-color-active: var(--action-primary-critical-pressed);
   --button-color-depressed: var(--action-primary-critical-depressed);
 
-  @include recolor-icon(var(--icon-on-primary));
+  @include recolor-icon(var(--icon-onbg-default));
 
   &.disabled {
     background: var(--action-primary-disabled);
@@ -402,7 +398,7 @@
   --button-color-active: var(--action-primary-success-pressed);
   --button-color-depressed: var(--action-primary-success-depressed);
 
-  @include recolor-icon(var(--icon-on-primary));
+  @include recolor-icon(var(--icon-onbg-default));
 
   &.disabled {
     background: var(--action-primary-disabled);
@@ -471,7 +467,7 @@
   color: var(--text-highlight);
 
   > .Content {
-    font-weight: var(--font-weight-regular);
+    font-weight: 400;
 
     @include focus-ring;
   }
@@ -575,7 +571,7 @@
 
   .Content {
     font-size: var(--font-size-200);
-    font-weight: var(--font-weight-medium);
+    font-weight: 500;
     line-height: var(--font-line-height-2);
 
     text-transform: initial;

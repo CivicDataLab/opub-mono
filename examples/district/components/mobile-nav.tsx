@@ -6,7 +6,7 @@ import * as Collapsible from '@radix-ui/react-collapsible';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
 import { mainConfig } from '@/config/site';
-import { useParams, usePathname } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 
 const districts = [
   {
@@ -28,52 +28,54 @@ export const MobileNav = () => {
     if (open) {
       document.body.style.overflow = 'hidden';
     } else {
-      document.body.style.overflow = 'auto';
+      document.body.style.overflow = 'initial';
     }
 
     return () => {
-      document.body.style.overflow = 'auto';
+      document.body.style.overflow = 'initial';
     };
   }, [open]);
 
   return (
-    <header>
-      <div className="px-5 py-3 bg-backgroundSolidDark text-textOnBGDefault flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-2">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            fill="none"
-          >
-            <g
-              stroke="#fff"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="1.5"
-              clip-path="url(#a)"
+    <>
+      <header>
+        <div className="px-5 py-3 bg-backgroundSolidDark text-textOnBGDefault flex items-center justify-between">
+          <Link href="/" className="flex items-center gap-2">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              fill="none"
             >
-              <path d="M8 4 4 6v5l4 2 4-2V6L8 4ZM12 11l4 2 4-2V6l-4-2-4 2M8 13v5l4 2 4-2v-5" />
-            </g>
-            <defs>
-              <clipPath id="a">
-                <path fill="#fff" d="M0 0h24v24H0z" />
-              </clipPath>
-            </defs>
-          </svg>
-          <Text variant="headingSmSpaced" color="inherit">
-            D4D ASSAM
-          </Text>
-        </Link>
+              <g
+                stroke="#fff"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="1.5"
+                clipPath="url(#a)"
+              >
+                <path d="M8 4 4 6v5l4 2 4-2V6L8 4ZM12 11l4 2 4-2V6l-4-2-4 2M8 13v5l4 2 4-2v-5" />
+              </g>
+              <defs>
+                <clipPath id="a">
+                  <path fill="#fff" d="M0 0h24v24H0z" />
+                </clipPath>
+              </defs>
+            </svg>
+            <Text variant="headingSmSpaced" color="inherit">
+              D4D ASSAM
+            </Text>
+          </Link>
 
-        <IconButton
-          icon={open ? Icons.cross : Icons.menu}
-          onClick={() => setOpen((e) => !e)}
-          className="text-textOnBGDefault"
-        >
-          Menu
-        </IconButton>
-      </div>
+          <IconButton
+            icon={open ? Icons.cross : Icons.menu}
+            onClick={() => setOpen((e) => !e)}
+            color="onBgDefault"
+          >
+            Menu
+          </IconButton>
+        </div>
+      </header>
       {open && (
         <div className="h-screen overflow-y-auto bg-backgroundSolidDark text-textOnBGDefault border-t-1 border-solid border-baseGraySlateSolid11">
           <Link
@@ -108,7 +110,7 @@ export const MobileNav = () => {
           ))}
         </div>
       )}
-    </header>
+    </>
   );
 };
 

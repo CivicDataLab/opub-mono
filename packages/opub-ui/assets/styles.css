@@ -1,4 +1,9 @@
 @import './reset.css';
 @import './base.css';
-@import './tokens.css';
+/* @import './tokens.css'; */
 @import './styles-bundled.css';
+
+:root {
+  --primary-font: 'Inter', sans-serif;
+  --mono-font: 'Space Mono', monospace;
+}

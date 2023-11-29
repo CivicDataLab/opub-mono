@@ -13,23 +13,24 @@
   &.disabled {
     cursor: not-allowed;
     opacity: 0.5;
+    background: transparent;
   }
 
   &:hover {
-    background: var(--surface-hovered);
+    // background: var(--surface-selected);
     outline: var(--border-width-1) solid transparent;
   }
 
   &:focus-visible {
-    box-shadow: var(--shadow-button);
+    box-shadow: var(--shadow-button-default);
     outline: 0;
 
     @include focus-ring($style: 'focused');
   }
 
   &:active {
-    background: var(--surface-pressed);
-    box-shadow: var(--shadow-button);
+    // background: var(--surface-selected);
+    box-shadow: var(--shadow-button-default);
 
     &::after {
       border: none;
@@ -38,8 +39,8 @@
   }
 
   &.pressed {
-    background: var(--surface-pressed);
-    box-shadow: var(--shadow-inset-button-pressed);
+    // background: var(--surface-selected);
+    box-shadow: var(--shadow-button-pressed);
 
     @include recolor-icon(currentColor);
   }

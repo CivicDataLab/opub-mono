@@ -1,6 +1,6 @@
 import { Icon } from '../../../Icon';
 import styles from '../../Input.module.scss';
-import { IconCaretDown, IconCaretUp } from '@tabler/icons-react';
+import { IconCaretDownFilled, IconCaretUpFilled } from '@tabler/icons-react';
 import React from 'react';
 
 type HandleStepFn = (step: number) => void;
@@ -37,7 +37,7 @@ export const Spinner = React.forwardRef<HTMLDivElement, SpinnerProps>(
           onBlur={onBlur}
         >
           <div className={styles.SpinnerIcon}>
-            <Icon source={IconCaretUp} fill="base" />
+            <Icon source={IconCaretUpFilled} />
           </div>
         </button>
         <button
@@ -49,7 +49,7 @@ export const Spinner = React.forwardRef<HTMLDivElement, SpinnerProps>(
           onBlur={onBlur}
         >
           <div className={styles.SpinnerIcon}>
-            <Icon source={IconCaretDown} fill="base" />
+            <Icon source={IconCaretDownFilled} />
           </div>
         </button>
       </div>

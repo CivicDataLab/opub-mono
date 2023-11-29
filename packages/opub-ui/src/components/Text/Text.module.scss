@@ -3,7 +3,7 @@
 .root {
   margin: 0;
   text-align: inherit;
-  color: var(--text);
+  color: var(--text-default);
 }
 
 .block {
@@ -37,7 +37,7 @@
 }
 
 .default {
-  color: var(--text);
+  color: var(--text-default);
 }
 
 .inherit {
@@ -65,23 +65,23 @@
 }
 
 .text-inverse {
-  color: var(--text-on-dark);
+  color: var(--text-onbg-default);
 }
 
 .regular {
-  font-weight: var(--font-weight-regular);
+  font-weight: 400;
 }
 
 .medium {
-  font-weight: var(--font-weight-medium);
+  font-weight: 500;
 }
 
 .semibold {
-  font-weight: var(--font-weight-semibold);
+  font-weight: 600;
 }
 
 .bold {
-  font-weight: var(--font-weight-bold);
+  font-weight: 700;
 }
 
 .headingXs {

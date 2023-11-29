@@ -24,7 +24,7 @@ const content = [
 
 export const KeyHighlights = () => {
   return (
-    <section className="mt-10">
+    <section className="pt-4 md:pt-10">
       <Text variant="headingLg" fontWeight="semibold" color="subdued">
         Key Highlights of Assam
       </Text>

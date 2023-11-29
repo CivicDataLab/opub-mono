@@ -77,7 +77,7 @@ export function MobileDashboardNav({
                           path.includes(item.href) && dashboardStyles.Selected
                         )}
                       >
-                        <Icon source={icon} color="base" />
+                        <Icon source={icon} />
                         <div
                           className={twMerge(
                             'py-2 px-3',

@@ -8,6 +8,7 @@ import React from 'react';
  * Reference: https://www.radix-ui.com/docs/primitives/components/slider
  */
 const meta = {
+  title: 'Verified/RangeSlider',
   component: RangeSlider,
 } satisfies Meta<typeof RangeSlider>;
 

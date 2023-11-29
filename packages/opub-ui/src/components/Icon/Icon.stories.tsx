@@ -1,6 +1,10 @@
-import { AddCodeMajor } from '@shopify/polaris-icons';
-import { Meta, StoryObj } from '@storybook/react';
+import { PropsVariationSection } from '../../utils';
 import { Icon } from './Icon';
+import { Meta, StoryObj } from '@storybook/react';
+import {
+  IconCode,
+  IconSquareRoundedChevronLeftFilled,
+} from '@tabler/icons-react';
 
 /**
  * Icons are used to visually communicate core parts of the product and available actions.
@@ -8,6 +12,7 @@ import { Icon } from './Icon';
  * Reference: https://polaris.shopify.com/components/images-and-icons/icon
  */
 const meta = {
+  title: 'Verified/Icon',
   component: Icon,
 } satisfies Meta<typeof Icon>;
 
@@ -16,7 +21,64 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    source: AddCodeMajor,
-    color: 'base',
+    source: IconCode,
+    color: 'default',
+    backdrop: true,
   },
 };
+
+export const Colors = () => (
+  <PropsVariationSection
+    component={Icon}
+    common={{ source: IconCode }}
+    xAxis={{
+      default: {},
+      backdrop: {
+        backdrop: true,
+      },
+    }}
+    yAxis={{
+      default: {},
+      subdued: { color: 'subdued' },
+      critical: { color: 'critical' },
+      warning: { color: 'warning' },
+      success: { color: 'success' },
+      highlight: { color: 'highlight' },
+      interactive: { color: 'interactive' },
+    }}
+  />
+);
+
+export const BgColors = () => (
+  <div
+    style={{ backgroundColor: 'var(--background-solid-dark)', color: 'white' }}
+  >
+    <PropsVariationSection
+      component={Icon}
+      common={{ source: IconCode }}
+      xAxis={{
+        default: {},
+      }}
+      yAxis={{
+        onBgDefault: { color: 'onBgDefault' },
+        onBgSubdued: { color: 'onBgSubdued' },
+        onBgDisabled: { color: 'onBgDisabled' },
+      }}
+    />
+  </div>
+);
+
+export const Filled = () => (
+  <div>
+    <PropsVariationSection
+      component={Icon}
+      common={{ source: IconSquareRoundedChevronLeftFilled, filled: true }}
+      xAxis={{
+        default: {},
+      }}
+      yAxis={{
+        default: { color: 'default' },
+      }}
+    />
+  </div>
+);

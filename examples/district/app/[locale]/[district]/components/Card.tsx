@@ -1,7 +1,7 @@
 import { Icons } from '@/components/icons';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
-import { Icon, Separator, Text } from 'opub-ui';
+import { Icon, Divider, Text } from 'opub-ui';
 
 export const DepartmentCard = ({
   data,
@@ -29,7 +29,7 @@ export const DepartmentCard = ({
           {data.label}
         </Text>
 
-        <Separator className="my-4" />
+        <Divider className="my-4" />
 
         <div className="grid gap-4 sm:grid-cols-2 mt-4">
           {data.cards &&

@@ -1,5 +1,6 @@
-import React from 'react';
 import type { DestructableAction, DisableableAction } from './button';
+import { IconProps } from './icon';
+import React from 'react';
 
 export interface ActionListItemDescriptor
   extends DisableableAction,
@@ -9,11 +10,9 @@ export interface ActionListItemDescriptor
   /** Additional hint text to display with item */
   helpText?: React.ReactNode;
   /** Source of the icon */
-  icon?: React.ReactNode;
-  /** Prefix source */
-  prefix?: React.ReactNode;
+  icon?: IconProps['source'];
   /** Suffix source */
-  suffix?: React.ReactNode;
+  suffix?: IconProps['source'];
   /**  Add an ellipsis suffix to action content */
   ellipsis?: boolean;
   /** Whether the action is active or not */

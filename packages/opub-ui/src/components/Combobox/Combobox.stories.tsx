@@ -1,5 +1,5 @@
-import { Meta, StoryObj } from '@storybook/react';
 import { Combobox, ComboboxMulti } from './Combobox';
+import { Meta, StoryObj } from '@storybook/react';
 
 /**
  * Combobox is an accessible autocomplete input that enables users to filter a list of options and select one or more values.
@@ -7,6 +7,7 @@ import { Combobox, ComboboxMulti } from './Combobox';
  * Reference: https://ariakit.org/examples/combobox-multiple
  */
 const meta = {
+  title: 'Verified/Combobox',
   component: Combobox,
 } satisfies Meta<typeof Combobox>;
 

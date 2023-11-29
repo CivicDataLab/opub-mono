@@ -9,12 +9,12 @@
   position: relative;
   display: block;
   overflow: hidden;
-  background: var(--surface);
+  background: var(--surface-default);
 
   min-width: var(--op-thumbnail-extra-small-size);
   max-width: 100%;
   border-radius: var(--border-radius-1);
-  border: var(--border-divider);
+  border: var(--border-default);
 
   &::after {
     content: '';
@@ -26,18 +26,38 @@
 
 .sizeExtraSmall {
   width: var(--op-thumbnail-extra-small-size);
+
+  svg {
+    width: var(--op-thumbnail-extra-small-size);
+    height: var(--op-thumbnail-extra-small-size);
+  }
 }
 
 .sizeSmall {
   width: var(--op-thumbnail-small-size);
+
+  svg {
+    width: var(--op-thumbnail-small-size);
+    height: var(--op-thumbnail-small-size);
+  }
 }
 
 .sizeMedium {
   width: var(--op-thumbnail-medium-size);
+
+  svg {
+    width: var(--op-thumbnail-medium-size);
+    height: var(--op-thumbnail-medium-size);
+  }
 }
 
 .sizeLarge {
   width: var(--op-thumbnail-large-size);
+
+  svg {
+    width: var(--op-thumbnail-large-size);
+    height: var(--op-thumbnail-large-size);
+  }
 }
 
 .transparent {
@@ -53,9 +73,9 @@
   margin: auto;
   max-width: 100%;
   max-height: 100%;
-  color: var(--icon-subdued);
+  color: var(--icon-default);
 
   svg {
-    fill: currentColor;
+    color: currentColor;
   }
 }

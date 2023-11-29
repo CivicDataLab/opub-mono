@@ -1,8 +1,8 @@
+import dialogStyles from '../Dialog/Dialog.module.scss';
+import styles from './Sheet.module.scss';
 import * as Dialog from '@radix-ui/react-dialog';
 import cx from 'classnames';
 import { forwardRef, Ref } from 'react';
-import dialogStyles from '../Dialog/Dialog.module.scss';
-import styles from './Sheet.module.scss';
 
 export interface SheetProps extends Dialog.DialogProps {
   // the title of the sheet (used for accessibility)
@@ -17,6 +17,8 @@ export interface SheetProps extends Dialog.DialogProps {
   size?: 'narrow' | 'medium' | 'wide' | 'extended' | 'full';
   // whether the sheet should act as a modal (prevents interaction with the rest of the page)
   modal?: boolean;
+  // add classes to the sheet
+  className?: string;
 }
 
 const Sheet = forwardRef((props: SheetProps, ref: Ref<HTMLDivElement>) => {
@@ -26,9 +28,10 @@ const Sheet = forwardRef((props: SheetProps, ref: Ref<HTMLDivElement>) => {
     side = 'left',
     size = 'narrow',
     isOpen,
+    className,
     ...rest
   } = props;
-  const themeClass = cx(styles.Sheet, styles[side], styles[size]);
+  const themeClass = cx(styles.Sheet, styles[side], styles[size], className);
 
   return (
     <div className={`opub-Sheet`} ref={ref}>

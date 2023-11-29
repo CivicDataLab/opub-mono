@@ -10,6 +10,7 @@ import { IconSelector } from '@tabler/icons-react';
  * Reference: https://polaris.shopify.com/components/actions/button
  */
 const meta = {
+  title: 'Verified/Button',
   component: Button,
 } satisfies Meta<typeof Button>;
 
@@ -60,12 +61,14 @@ export const PrimaryBasic = () => {
 
         'large + with icon': {
           size: 'large',
-          icon: <Icon source={IconSelector} />,
+          icon: <Icon source={IconSelector} color="onBgDefault" />,
         },
-        'medium + with icon': { icon: <Icon source={IconSelector} /> },
+        'medium + with icon': {
+          icon: <Icon source={IconSelector} color="onBgDefault" />,
+        },
         'slim + with icon': {
           size: 'slim',
-          icon: <Icon source={IconSelector} />,
+          icon: <Icon source={IconSelector} color="onBgDefault" />,
         },
 
         loading: { loading: true },

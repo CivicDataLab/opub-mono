@@ -1,19 +1,19 @@
-import {
-  DeleteMinor,
-  EditMinor,
-  ExportMinor,
-  ImportMinor,
-  TickMinor,
-} from '@shopify/polaris-icons';
-import { Meta, StoryObj } from '@storybook/react';
 import { Button } from '../Button';
-import { Icon } from '../Icon';
 import { Menu } from './Menu';
+import { Meta, StoryObj } from '@storybook/react';
+import {
+  IconCheck,
+  IconEdit,
+  IconFileExport,
+  IconFileImport,
+  IconTrash,
+} from '@tabler/icons-react';
 
 /**
  * A wrapper around Popover and ActionList Components
  */
 const meta = {
+  title: 'Verified/Menu',
   component: Menu,
 } satisfies Meta<typeof Menu>;
 
@@ -44,10 +44,10 @@ export const WithSuffix: Story = {
       {
         active: true,
         content: 'Import file',
-        icon: <ImportMinor />,
-        suffix: <Icon source={TickMinor} />,
+        icon: IconFileImport,
+        suffix: IconCheck,
       },
-      { content: 'Export file', icon: <ExportMinor /> },
+      { content: 'Export file', icon: IconFileExport },
     ],
   },
 };
@@ -60,15 +60,15 @@ export const WithSections: Story = {
       {
         title: 'File options',
         items: [
-          { content: 'Import file', icon: <ImportMinor /> },
-          { content: 'Export file', icon: <ExportMinor /> },
+          { content: 'Import file', icon: IconFileImport },
+          { content: 'Export file', icon: IconFileExport },
         ],
       },
       {
         title: 'Bulk actions',
         items: [
-          { content: 'Edit', icon: <EditMinor /> },
-          { content: 'Delete', icon: <DeleteMinor /> },
+          { content: 'Edit', icon: IconEdit },
+          { content: 'Delete', destructive: true, icon: IconTrash },
         ],
       },
     ],
@@ -83,13 +83,13 @@ export const DestructiveItem: Story = {
       {
         active: true,
         content: 'Import file',
-        icon: <ImportMinor />,
+        icon: IconFileImport,
       },
-      { content: 'Export file', icon: <ExportMinor /> },
+      { content: 'Export file', icon: IconFileExport },
       {
         destructive: true,
         content: 'Delete file',
-        icon: <DeleteMinor />,
+        icon: IconTrash,
       },
     ],
   },

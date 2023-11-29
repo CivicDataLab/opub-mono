@@ -1,6 +1,6 @@
 'use client';
 
-import { Box, Button, Text } from 'opub-ui';
+import { Button, Text } from 'opub-ui';
 import { useEffect } from 'react';
 
 export default function ErrorPage({
@@ -15,19 +15,11 @@ export default function ErrorPage({
   }, [error]);
 
   return (
-    <Box
-      width="100%"
-      minHeight="100%"
-      flex
-      justifyContent="center"
-      alignItems="center"
-      direction="column"
-      gap="3"
-    >
+    <div className="w-full min-h-full flex justify-center items-center flex-col gap-3">
       <Text variant="headingMd" as="h2">
         Something went wrong!
       </Text>
       <Button onClick={() => reset()}>Try again</Button>
-    </Box>
+    </div>
   );
 }

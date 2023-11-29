@@ -7,24 +7,15 @@ import React from 'react';
 
 export function Icon({
   source,
-  color,
+  color = 'default',
   backdrop,
   accessibilityLabel,
   size,
   stroke,
-  fill,
   className,
   noEvents,
+  filled,
 }: IconProps) {
-  let sourceType: 'function' | 'placeholder' | 'external';
-  if (typeof source === 'function' || typeof source === 'object') {
-    sourceType = 'function';
-  } else if (source === 'placeholder') {
-    sourceType = 'placeholder';
-  } else {
-    sourceType = 'external';
-  }
-
   const classes = cx(
     styles.Icon,
     color && styles[variationName('color', color)],
@@ -40,49 +31,36 @@ export function Icon({
       : Number(size) * 4
     : 20;
 
-  const contentMarkup = {
-    function: (
+  const style = {
+    height: size ? size : iconSize,
+    width: size ? size : iconSize,
+    color: `var(--icon-${convertToCSSVariable(color)})`,
+  };
+
+  return (
+    <span className={classes} style={style}>
+      <Text as="span" visuallyHidden>
+        {accessibilityLabel}
+      </Text>
       <SourceComponent
         className={styles.Svg}
         size={iconSize}
-        color="currentColor"
+        color={`var(--icon-${convertToCSSVariable(color)})`}
         focusable="false"
         aria-hidden="true"
         stroke={stroke ? stroke : 2}
         style={{
-          '--fill': fill ? `var(--icon-${fill})` : 'none',
           pointerEvents: noEvents ? 'none' : 'auto',
         }}
       />
-    ),
-    placeholder: <div className={styles.Placeholder} />,
-    external: (
-      <img
-        className={styles.Img}
-        src={`data:image/svg+xml;utf8,${source}`}
-        alt=""
-        aria-hidden="true"
-      />
-    ),
-  };
-
-  return (
-    <span
-      className={classes}
-      style={
-        size
-          ? ({
-              height: iconSize,
-              width: iconSize,
-              '--fill': fill ? `var(--icon-${fill})` : 'none',
-            } as React.CSSProperties)
-          : {}
-      }
-    >
-      <Text as="span" visuallyHidden>
-        {accessibilityLabel}
-      </Text>
-      {contentMarkup[sourceType]}
     </span>
   );
+}
+
+function convertToCSSVariable(string: string) {
+  if (string.includes('onBg')) {
+    const split = string.split('onBg')[1];
+    return `onbg-${split.toLocaleLowerCase()}`;
+  }
+  return string;
 }

@@ -44,6 +44,14 @@ export const Overview = React.forwardRef(
 );
 
 function SelectCard({ type, data, link }: any) {
+  const series = [
+    {
+      name: 'Bar Chart',
+      data: data.data?.values || [],
+      type: 'bar',
+    },
+  ];
+
   switch (type) {
     case 'number':
       return (
@@ -72,7 +80,7 @@ function SelectCard({ type, data, link }: any) {
             {data.label}
           </Text>
           <>
-            <BarChart xAxis={data.data.xAxis} data={data.data.values} />
+            <BarChart xAxis={data.data.xAxis} series={series} />
           </>
           {/* <Text variant="bodyMd">{data.description}</Text> */}
           {link && (

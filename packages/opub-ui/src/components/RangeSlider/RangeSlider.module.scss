@@ -22,7 +22,7 @@
   --op-range-slider-output: 20;
   --op-range-slider-track-height: 4px;
   --op-track-dashed-border-radius: var(--border-radius-1);
-  $dashedTrackColor: var(--border);
+  $dashedTrackColor: var(--border-default);
 
   position: relative;
   flex-grow: 1;
@@ -52,7 +52,7 @@
 
 .Range {
   position: absolute;
-  background-color: var(--interactive);
+  background-color: var(--text-interactive);
   border-radius: 9999px;
   height: 100%;
 
@@ -77,8 +77,8 @@
 
   border: var(--border-transparent);
   border-radius: var(--border-radius-full);
-  background: linear-gradient(var(--interactive), var(--interactive));
-  box-shadow: 0 0 0 0 var(--focused);
+  background: linear-gradient(var(--text-interactive), var(--text-interactive));
+  box-shadow: 0 0 0 0 var(--text-interactive);
   appearance: none;
   transition: box-shadow var(--duration-100) var(--ease);
   transition-property: border-color, box-shadow, transform;
@@ -87,6 +87,7 @@
 
   &:focus-visible {
     transform: scale(1.2);
+    outline: var(--border-width-2) solid var(--text-interactive);
   }
 
   &[data-disabled] {
@@ -137,11 +138,11 @@ $range-output-translate-x: calc(
 .OutputBubble {
   position: relative;
   display: flex;
-  box-shadow: var(--shadow-xl);
+  box-shadow: var(--shadow-basic-xl);
   padding: 0 var(--space-2);
   min-width: $range-output-size;
   height: $range-output-size;
-  background-color: var(--surface);
+  background-color: var(--surface-default);
   border-radius: var(--border-radius-1);
   transition-property: transform;
   transition-duration: var(--duration-200);

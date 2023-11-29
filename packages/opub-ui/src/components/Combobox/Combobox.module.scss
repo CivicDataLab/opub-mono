@@ -27,11 +27,11 @@
   padding: var(--popover-padding);
 
   max-width: calc(100vw - var(--space-8));
-  box-shadow: var(--shadow-xl);
+  box-shadow: var(--shadow-basic-xl);
   border-radius: var(--border-radius-2);
 
-  background-color: var(--surface);
-  color: var(--text);
+  background-color: var(--surface-default);
+  color: var(--text-default);
 
   transform-origin: 50% 0px;
   animation: scaleIn 100ms ease-out;
