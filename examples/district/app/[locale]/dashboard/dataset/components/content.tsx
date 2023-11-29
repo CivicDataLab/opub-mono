@@ -13,7 +13,7 @@ export function Content({ data }: { data?: any }) {
           source={Icons.addDataset}
           color="interactive"
           stroke={1}
-          size="20"
+          size={80}
         />
         <Text variant="headingSm" color="subdued">
           You have not added any datasets yet.

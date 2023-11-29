@@ -3,7 +3,6 @@ import { variationName } from '../../utils/css';
 import { Text } from '../Text';
 import styles from './Icon.module.scss';
 import cx from 'classnames';
-import React from 'react';
 
 export function Icon({
   source,
@@ -24,24 +23,16 @@ export function Icon({
   );
 
   const SourceComponent: any = source;
-  const iconSize = size
-    ? typeof size === 'number'
-      ? size
-      : Number(size) * 4
-    : 20;
+  const iconSize = size ? size : 20;
+
+  const style = {
+    height: size ? size : iconSize,
+    width: size ? size : iconSize,
+    color: `var(--icon-${convertToCSSVariable(color)})`,
+  };
 
   return (
-    <span
-      className={classes}
-      style={
-        size
-          ? ({
-              height: iconSize,
-              width: iconSize,
-            } as React.CSSProperties)
-          : {}
-      }
-    >
+    <span className={classes} style={style}>
       <Text as="span" visuallyHidden>
         {accessibilityLabel}
       </Text>

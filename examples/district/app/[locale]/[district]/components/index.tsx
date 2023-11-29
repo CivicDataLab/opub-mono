@@ -40,7 +40,7 @@ export const BreadCrumb = ({
     <div className="md:container flex items-center gap-2 md:gap-4 bg-backgroundSolidDefault md:bg-transparent">
       <Link href={backUrl} className="mt-5 hidden md:block">
         <Text visuallyHidden>Go to State Page</Text>
-        <Icon source={Icons.leftFilled} size={24} color="default" />
+        <Icon source={Icons.leftFilled} size={24} />
       </Link>
       <div className="hidden md:block mt-4">
         <Breadcrumbs crumbs={crumbs} />

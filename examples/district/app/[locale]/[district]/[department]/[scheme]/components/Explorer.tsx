@@ -61,7 +61,7 @@ export const Explorer = React.forwardRef(
     return (
       <div
         className={cn(
-          'md:grid grid-cols-[242px_1fr] gap-4 rounded-05 bg-surfaceDefault shadow-elementCard p-6'
+          'md:grid grid-cols-[242px_1fr] gap-4 rounded-05 md:bg-surfaceDefault md:shadow-elementCard md:p-6'
         )}
       >
         <div className="hidden md:block">
@@ -283,11 +283,7 @@ const Content = ({
             },
           ].map((tab) => (
             <Tab value={tab.value} key={tab.value}>
-              <div className="flex items-center gap-3">
-                <Text variant="bodyMd" fontWeight="medium">
-                  {tab.label}
-                </Text>
-              </div>
+              {tab.label}
             </Tab>
           ))}
         </TabList>
@@ -327,7 +323,7 @@ const Content = ({
           Copy Link
         </Button>
         <Button
-          kind="secondary"
+          kind="primary"
           variant="interactive"
           onClick={() => {
             exportAsImage(contentRef.current, 'explorer');

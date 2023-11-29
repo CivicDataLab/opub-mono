@@ -1,4 +1,4 @@
-import { BarChart } from 'opub-viz/src';
+import { BarChart } from 'opub-viz';
 import React from 'react';
 
 export const BarView = React.forwardRef(({ data }: { data: any }, ref: any) => {

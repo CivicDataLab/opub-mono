@@ -46,7 +46,7 @@ const Checkbox = forwardRef(
             <CheckboxRadix.Indicator>
               <Icon
                 source={iconSource}
-                size="4"
+                size={16}
                 color="onBgDefault"
                 stroke={3}
               />

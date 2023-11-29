@@ -1,7 +1,10 @@
 import { PropsVariationSection } from '../../utils';
 import { Icon } from './Icon';
 import { Meta, StoryObj } from '@storybook/react';
-import { IconCode } from '@tabler/icons-react';
+import {
+  IconCode,
+  IconSquareRoundedChevronLeftFilled,
+} from '@tabler/icons-react';
 
 /**
  * Icons are used to visually communicate core parts of the product and available actions.
@@ -60,6 +63,21 @@ export const BgColors = () => (
         onBgDefault: { color: 'onBgDefault' },
         onBgSubdued: { color: 'onBgSubdued' },
         onBgDisabled: { color: 'onBgDisabled' },
+      }}
+    />
+  </div>
+);
+
+export const Filled = () => (
+  <div>
+    <PropsVariationSection
+      component={Icon}
+      common={{ source: IconSquareRoundedChevronLeftFilled }}
+      xAxis={{
+        default: {},
+      }}
+      yAxis={{
+        default: { color: 'default' },
       }}
     />
   </div>

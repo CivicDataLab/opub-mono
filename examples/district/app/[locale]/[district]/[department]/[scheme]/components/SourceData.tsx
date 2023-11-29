@@ -162,7 +162,7 @@ export const SourceData = ({
                 Copy Link
               </Button>
               <Button
-                kind="secondary"
+                kind="primary"
                 variant="interactive"
                 onClick={() => {
                   downloadTable(

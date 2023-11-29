@@ -1,4 +1,3 @@
-import { SpacingSpaceScale } from '../tokens';
 import { TablerIconsProps } from '@tabler/icons-react';
 
 export type Color =
@@ -32,7 +31,7 @@ export interface IconProps {
   /** Descriptive text to be read to screenreaders */
   accessibilityLabel?: string;
   /** size of the icon, use space tokens  */
-  size?: SpacingSpaceScale | number;
+  size?: number;
   /** stroke width  */
   stroke?: number;
   /** class name  */

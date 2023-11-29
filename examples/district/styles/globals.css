@@ -1,4 +1,4 @@
-@tailwind base;
+/* @tailwind base; */
 @tailwind components;
 @tailwind utilities;
 
@@ -18,19 +18,19 @@
   --card-border-rgb: 131, 134, 135;
 }
 
-html {
+/* html {
   overflow-y: scroll;
-}
+} */
 
 body {
   background-color: var(--background-solid-subdued);
 }
 
-html,
+/* html,
 body,
 body > .opub-Tooltip {
   height: 100%;
-}
+} */
 
 a {
   color: inherit;
