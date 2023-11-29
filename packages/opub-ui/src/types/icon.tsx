@@ -39,4 +39,6 @@ export interface IconProps {
   className?: string;
   /** Prevent click event */
   noEvents?: boolean;
+  /** fill the icon */
+  filled?: boolean;
 }

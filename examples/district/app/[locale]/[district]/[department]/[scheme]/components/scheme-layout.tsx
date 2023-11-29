@@ -244,7 +244,7 @@ const TabLayout = ({
               Copy Link
             </Button>
             <Button
-              kind="secondary"
+              kind="primary"
               variant="interactive"
               onClick={() => {
                 exportAsImage(overviewRef.current, 'overview');

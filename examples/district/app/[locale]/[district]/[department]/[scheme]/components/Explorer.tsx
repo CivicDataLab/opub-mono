@@ -283,11 +283,7 @@ const Content = ({
             },
           ].map((tab) => (
             <Tab value={tab.value} key={tab.value}>
-              <div className="flex items-center gap-3">
-                <Text variant="bodyMd" fontWeight="medium">
-                  {tab.label}
-                </Text>
-              </div>
+              {tab.label}
             </Tab>
           ))}
         </TabList>
@@ -327,7 +323,7 @@ const Content = ({
           Copy Link
         </Button>
         <Button
-          kind="secondary"
+          kind="primary"
           variant="interactive"
           onClick={() => {
             exportAsImage(contentRef.current, 'explorer');

@@ -96,7 +96,10 @@ export function Content({ data }: { data: IProps }) {
                         <Link href={data.link} target="_blank">
                           <span className="flex items-center gap-2">
                             Go to District Website
-                            <Icon source={Icons.externalLink} />
+                            <Icon
+                              color="interactive"
+                              source={Icons.externalLink}
+                            />
                           </span>
                         </Link>
                       </Text>

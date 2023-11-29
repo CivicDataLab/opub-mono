@@ -48,10 +48,10 @@ export const MobileNav = () => {
           >
             <g
               stroke="#fff"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="1.5"
-              clip-path="url(#a)"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="1.5"
+              clipPath="url(#a)"
             >
               <path d="M8 4 4 6v5l4 2 4-2V6L8 4ZM12 11l4 2 4-2V6l-4-2-4 2M8 13v5l4 2 4-2v-5" />
             </g>
