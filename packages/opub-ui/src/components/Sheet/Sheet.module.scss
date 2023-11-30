@@ -30,7 +30,7 @@ $vertical-spacing: 60px;
   will-change: transform, opacity;
   appearance: none;
   position: fixed;
-  z-index: var(--z-10);
+  z-index: var(--z-max, 99999);
   overflow: auto;
   inset: unset;
 

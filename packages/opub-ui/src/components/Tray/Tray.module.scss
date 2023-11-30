@@ -13,6 +13,7 @@
 }
 
 .Overlay {
+  display: block;
   pointer-events: none;
   position: fixed;
   inset: 0px;
