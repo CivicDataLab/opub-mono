@@ -13,6 +13,9 @@ const transitionDuration = require('./styles/tokens/tailwind/duration');
 const zIndex = require('./styles/tokens/tailwind/z-index');
 
 module.exports = {
+  corePlugins: {
+    preflight: false,
+  },
   darkMode: ['class', '[data-mode="dark"]'],
   content: [
     './app/**/*.{js,ts,jsx,tsx,mdx}',
