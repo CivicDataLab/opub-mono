@@ -14,6 +14,8 @@ import {
 
 import { DistrictColumnData, RevenueColumnData } from '@/config/consts.ts';
 import {
+  ANALYTICS_CHART_DATA,
+  ANALYTICS_GEOGRAPHY_DATA,
   ANALYTICS_REVENUE_MAP_DATA,
   ANALYTICS_REVENUE_TABLE_DATA,
   ANALYTICS_TABLE_DATA,
@@ -21,6 +23,7 @@ import {
 import { GraphQL } from '@/lib/api';
 import { deSlugify, formatDateString } from '@/lib/utils';
 import { Icons } from '@/components/icons';
+import { ChartComponent } from './ChartComponent';
 import { MapComponent } from './ChoroplethMap';
 import { FrimsDataTable } from './FrimsDataTable';
 import { TableComponent } from './TableComponent';
@@ -46,6 +49,11 @@ export function Content({
   indicator: string;
 }) {
   const [boundary, setBoundary] = React.useState('revenue-circle');
+  const [isMapVisible, setIsMapVisible] = React.useState(true);
+
+  const toggleVisibility = () => {
+    setIsMapVisible((prev) => !prev);
+  };
 
   const DropdownOptions = [
     {
@@ -112,6 +120,33 @@ export function Content({
     }
   );
 
+  const chartData = useQuery(
+    [`chart_data_${indicator}_${timePeriod}`],
+    () =>
+      GraphQL('analytics', ANALYTICS_CHART_DATA, {
+        indcFilter: { slug: indicator },
+        dataFilter: { dataPeriod: timePeriod },
+      }),
+    {
+      refetchOnMount: false,
+      refetchOnWindowFocus: false,
+      refetchOnReconnect: false,
+    }
+  );
+
+  const districts = useQuery(
+    [`district_data_${boundary}_${timePeriod}`],
+    () =>
+      GraphQL('analytics', ANALYTICS_GEOGRAPHY_DATA, {
+        filters: { type: 'REVENUE CIRCLE' },
+      }),
+    {
+      refetchOnMount: false,
+      refetchOnWindowFocus: false,
+      refetchOnReconnect: false,
+    }
+  );
+
   const columns =
     boundary === 'district' ? DistrictColumnData : RevenueColumnData;
 
@@ -142,8 +177,9 @@ export function Content({
         <Button
           size="medium"
           className="bg-actionsPrimaryBasicDefault w-[336px] hover:bg-actionsPrimaryBasicDefault"
+          onClick={toggleVisibility}
         >
-          View Charts
+          {`${isMapVisible ? 'View Charts' : 'View Maps'}`}
         </Button>
       </span>
 
@@ -154,7 +190,7 @@ export function Content({
               {deSlugify(indicator)}
             </Text>
             <Text className="text-textSubdued" variant="bodyLg">
-              {`Time Period : ${formatDateString(timePeriod)}`}
+              {timePeriod && `Time Period : ${formatDateString(timePeriod)}`} 
             </Text>
           </div>
           <Separator />
@@ -175,18 +211,33 @@ export function Content({
           </RadioGroup>
           <Select
             label="Select District"
-            className="w-[380px] mt-2"
+            className={`w-[380px] mt-2 ${isMapVisible ? 'visible' : 'hidden'}`}
             name="select-1"
             labelHidden
             value=""
             onChange={function Yu() {}}
             options={DropdownOptions}
           />
-          <div className="flex mt-4 min-h-[600px]">
+          <div
+            className={`flex mt-4 min-h-[600px] ${
+              isMapVisible ? 'visible' : 'hidden'
+            }`}
+          >
             <MapComponent
               revenueDataloading={revenueMapData?.isFetching}
               revenueData={revenueMapData?.data?.revCircleMapData}
               boundary={boundary}
+            />
+          </div>
+          <div
+            className={`flex mt-2 min-h-[600px] ${
+              isMapVisible ? 'hidden' : 'visible'
+            }`}
+          >
+            <ChartComponent
+              chartDataloading={chartData?.isFetching}
+              chartData={chartData?.data?.revCircleChartData}
+              districtsData={districts?.data?.geography}
             />
           </div>
         </div>

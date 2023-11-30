@@ -19,6 +19,8 @@ const documents = {
     "\nquery indicators{\n    indicators {\n      name\n      slug\n      category\n      parent{\n        name\n      }\n  }\n}\n": types.IndicatorsDocument,
     "\nquery dataTimePeriods{\n  getDataTimePeriods {\n    value\n  }\n}\n": types.DataTimePeriodsDocument,
     "query indicatorsByQuery{\n  indicatorsByCategory\n}\n": types.IndicatorsByQueryDocument,
+    "\nquery getCircleChartData ($indcFilter: IndicatorFilter! , $dataFilter: DataFilter!){\n  revCircleChartData(indcFilter: $indcFilter , dataFilter:$dataFilter) \n}\n": types.GetCircleChartDataDocument,
+    "\n  query getGeographyData($filters: GeoFilter!) {\n    geography(filters: $filters) {\n      name\n    }\n  }\n": types.GetGeographyDataDocument,
 };
 
 /**
@@ -59,6 +61,14 @@ export function graphql(source: "\nquery dataTimePeriods{\n  getDataTimePeriods 
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "query indicatorsByQuery{\n  indicatorsByCategory\n}\n"): (typeof documents)["query indicatorsByQuery{\n  indicatorsByCategory\n}\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\nquery getCircleChartData ($indcFilter: IndicatorFilter! , $dataFilter: DataFilter!){\n  revCircleChartData(indcFilter: $indcFilter , dataFilter:$dataFilter) \n}\n"): (typeof documents)["\nquery getCircleChartData ($indcFilter: IndicatorFilter! , $dataFilter: DataFilter!){\n  revCircleChartData(indcFilter: $indcFilter , dataFilter:$dataFilter) \n}\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query getGeographyData($filters: GeoFilter!) {\n    geography(filters: $filters) {\n      name\n    }\n  }\n"): (typeof documents)["\n  query getGeographyData($filters: GeoFilter!) {\n    geography(filters: $filters) {\n      name\n    }\n  }\n"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};
