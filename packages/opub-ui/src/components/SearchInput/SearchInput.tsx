@@ -1,0 +1,65 @@
+import { cn } from '../../utils';
+import { Icon } from '../Icon';
+import { IconButton } from '../IconButton';
+import { Input } from '../Input';
+import styles from './SearchInput.module.scss';
+import { IconSearch } from '@tabler/icons-react';
+import React, { forwardRef } from 'react';
+
+type Props = {
+  // Additional classname for wrapper
+  className?: string;
+  // Default value for input
+  defaultValue?: string;
+  // onChange handler
+  onChange?: (value: string) => void;
+  // onSubmit handler
+  onSubmit?: (value: string) => void;
+  // Show button
+  withButton?: boolean;
+  // Disabled
+  disabled?: boolean;
+};
+
+const SearchInput = forwardRef((props: Props, ref: any) => {
+  const [search, setSearch] = React.useState(props.defaultValue || '');
+
+  const className = cn(styles.SearchInput, props.className);
+  return (
+    <div className={className}>
+      <Input
+        name="department-search"
+        label="Department Search"
+        labelHidden
+        placeholder="Search"
+        value={search}
+        onChange={(e) => {
+          setSearch(e);
+          props.onChange && props.onChange(e);
+        }}
+        ref={ref}
+        prefix={!props.withButton && <Icon source={IconSearch} />}
+        clearButton
+        onClearButtonClick={() => {
+          setSearch('');
+          props.onChange && props.onChange('');
+          ref.current.focus();
+        }}
+        disabled={props.disabled}
+      />
+      {props.withButton && (
+        <IconButton
+          color="highlight"
+          icon={IconSearch}
+          className={styles.SearchButton}
+          onClick={() => props.onSubmit && props.onSubmit(search)}
+          disabled={props.disabled}
+        >
+          Search
+        </IconButton>
+      )}
+    </div>
+  );
+});
+
+export { SearchInput };
