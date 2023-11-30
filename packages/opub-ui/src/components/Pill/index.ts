@@ -1,1 +1,1 @@
-export { Tag } from './Tag';
+export { Pill } from './Pill';

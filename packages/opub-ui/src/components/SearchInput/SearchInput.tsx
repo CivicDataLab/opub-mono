@@ -19,6 +19,12 @@ type Props = {
   withButton?: boolean;
   // Disabled
   disabled?: boolean;
+  // Placeholder
+  placeholder?: string;
+  // label
+  label: string;
+  // name
+  name: string;
 };
 
 const SearchInput = forwardRef((props: Props, ref: any) => {
@@ -28,10 +34,10 @@ const SearchInput = forwardRef((props: Props, ref: any) => {
   return (
     <div className={className}>
       <Input
-        name="department-search"
-        label="Department Search"
+        name={props.name}
+        label={props.label}
         labelHidden
-        placeholder="Search"
+        placeholder={props.placeholder || 'Search'}
         value={search}
         onChange={(e) => {
           setSearch(e);

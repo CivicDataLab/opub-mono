@@ -20,6 +20,8 @@ export const Default: Story = {
     onSubmit: (e) => {
       console.log('onSubmit', e);
     },
+    name: 'Search',
+    label: 'Search',
   },
 };
 
@@ -33,6 +35,8 @@ export const WithButton: Story = {
       console.log('onSubmit', e);
     },
     withButton: true,
+    name: 'Search',
+    label: 'Search',
   },
 };
 
@@ -47,5 +51,7 @@ export const Disabled: Story = {
     },
     withButton: true,
     disabled: true,
+    name: 'Search',
+    label: 'Search',
   },
 };
