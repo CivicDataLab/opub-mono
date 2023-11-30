@@ -1,0 +1,37 @@
+@import '../../../styles/common';
+
+.Tray {
+  border-radius: var(--border-radius-2, 8px) var(--border-radius-2, 8px)
+    var(--border-radius-0, 0px) var(--border-radius-0, 0px);
+  background: var(--surface-default, #fff);
+  box-shadow: var(--shadow-basic-md);
+  padding: 0 var(--border-radius-5, 20px) var(--space-8, 32px)
+    var(--border-radius-5, 20px);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.Overlay {
+  pointer-events: none;
+  position: fixed;
+  inset: 0px;
+  z-index: var(--z-10);
+  background-color: var(--base-gray-slate-alpha-9, rgba(0, 17, 30, 0.47));
+}
+
+.Bar {
+  display: inline-block;
+  border-radius: var(--border-radius-1, 4px);
+  background: transparent;
+  border: none;
+  margin-inline: auto;
+  cursor: pointer;
+
+  > div {
+    width: var(--space-8, 32px);
+    height: var(--space-05, 2px);
+    background: var(--border-default, #c1c8cd);
+    display: inline-block;
+  }
+}

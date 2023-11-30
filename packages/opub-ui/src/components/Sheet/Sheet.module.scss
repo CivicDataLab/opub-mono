@@ -107,6 +107,7 @@ $vertical-spacing: 60px;
   &.bottom {
     width: 100vw;
     height: var(--blockHeight);
+    max-height: 100vh;
 
     &.medium {
       --blockHeight: 360px;
