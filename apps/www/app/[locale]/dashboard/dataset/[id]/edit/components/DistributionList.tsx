@@ -31,7 +31,7 @@ const NoList = ({
     <div className="flex flex-col items-center justify-center p-6">
       <Icon
         source={Icons.distribution}
-        size="16"
+        size={64}
         stroke={1}
         color="interactive"
       />

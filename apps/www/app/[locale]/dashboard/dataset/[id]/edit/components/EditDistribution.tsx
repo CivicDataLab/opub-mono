@@ -226,7 +226,7 @@ const FileUpload = ({
   const uploadedFile = file && (
     <div className="flex items-center justify-center h-full py-16">
       <div className="flex gap-3 items-center py-2 px-3 rounded-05 border-borderSubdued border-1 border-solid bg-surface">
-        <Icon source={Icons.check} size="6" color="success" />
+        <Icon source={Icons.check} size={24} color="success" />
 
         <div className="flex flex-col">
           <div className="max-w-[180px]">
@@ -240,7 +240,7 @@ const FileUpload = ({
         </div>
         <Button
           size="slim"
-          icon={<Icon source={Icons.delete} size="6" />}
+          icon={<Icon source={Icons.delete} size={24} />}
           plain
           accessibilityLabel="delete resource"
           onClick={handleFileDelete}

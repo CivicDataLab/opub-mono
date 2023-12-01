@@ -63,7 +63,7 @@ const Header = ({ id, title }: { id: string; title?: string }) => {
     <div className="flex gap-4 flex-wrap items-center justify-between">
       <div className="flex flex-wrap gap-4 items-center">
         <Link href="/dashboard/dataset">
-          <Icon source={Icons.back} size="8" />
+          <Icon source={Icons.back} size={32} />
           <Text visuallyHidden>Go to dataset listing page</Text>
         </Link>
 
