@@ -78,7 +78,7 @@
 }
 
 body {
-  color: var(--text);
+  color: var(--text-default);
   line-height: 150%;
   box-sizing: border-box;
   font-family: var(--primary-font);

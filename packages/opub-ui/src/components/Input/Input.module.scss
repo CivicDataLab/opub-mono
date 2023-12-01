@@ -150,6 +150,8 @@ $spinner-icon-size: 12px;
 }
 
 .Input-hasClearButton {
+  padding-inline-end: var(--space-8);
+
   &[type='search'] {
     &::-webkit-search-cancel-button {
       appearance: none;
@@ -253,8 +255,9 @@ $spinner-icon-size: 12px;
 
 .ClearButton {
   @include focus-ring;
-
   @include unstyled-button;
+  position: absolute;
+  right: 0;
 
   z-index: var(--opub-text-field-contents);
   margin: 0 var(--space-3) 0 var(--space-1);

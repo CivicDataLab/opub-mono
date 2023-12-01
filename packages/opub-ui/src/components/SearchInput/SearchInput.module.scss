@@ -1,0 +1,21 @@
+@import '../../../styles/common';
+
+.SearchInput {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.SearchButton {
+  background-color: var(--surface-highlight-default);
+  padding: var(--space-2);
+  border-radius: var(--border-radius-full);
+
+  &:hover {
+    background-color: var(--surface-highlight-hovered);
+  }
+
+  &[aria-disabled='true'] {
+    background-color: var(--surface-highlight-disabled);
+  }
+}

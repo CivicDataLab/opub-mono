@@ -1,16 +1,15 @@
 'use client';
 
-import { ContentCard, SchemeCard } from './Card';
-import styles from './Content.module.scss';
 import { Icons } from '@/components/icons';
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
 } from '@radix-ui/react-collapsible';
-import Link from 'next/link';
-import { Breadcrumbs, Icon, Input, Divider, Text } from 'opub-ui';
-import { BreadCrumb, Search } from '../../components';
+import { Divider, Icon, SearchInput, Text } from 'opub-ui';
+import { BreadCrumb } from '../../components';
+import { ContentCard, SchemeCard } from './Card';
+import styles from './Content.module.scss';
 
 export interface IProps {
   district: string;
@@ -107,7 +106,11 @@ export function Content({ data }: { data: IProps }) {
             <Text variant="headingLg" as="h3">
               {departmentData.listTitle}
             </Text>
-            <Search />
+            <SearchInput
+              name="department-search"
+              label="Department Search"
+              withButton
+            />
           </div>
           <Divider className="mt-3 mb-4" />
           <div className="grid gap-4 lg:grid-cols-2">

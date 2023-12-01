@@ -60,7 +60,7 @@ export const Tag = React.forwardRef(
         onMouseUp={handleMouseUpByBlurring}
         disabled={disabled}
       >
-        <Icon source={IconX} />
+        <Icon source={IconX} size={16} />
       </button>
     ) : null;
 

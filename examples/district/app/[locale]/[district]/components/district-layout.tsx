@@ -6,8 +6,8 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from '@radix-ui/react-collapsible';
-import { Icon, Divider, Text } from 'opub-ui';
-import { BreadCrumb, Search } from '.';
+import { Icon, Divider, Text, SearchInput } from 'opub-ui';
+import { BreadCrumb } from '.';
 import { ContentCard, DepartmentCard } from './Card';
 import styles from './Content.module.scss';
 import Link from 'next/link';
@@ -123,7 +123,11 @@ export function Content({ data }: { data: IProps }) {
             <Text variant="headingLg" as="h2">
               {data.listTitle}
             </Text>
-            <Search />
+            <SearchInput
+              name="district-search"
+              label="district Search"
+              withButton
+            />
           </div>
           <Divider />
         </div>

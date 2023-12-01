@@ -93,7 +93,7 @@ export const MobileNav = () => {
               )}
             />
             <div className="p-3 pr-5 flex items-center gap-3 ">
-              <Icon source={Icons.home} />
+              <Icon source={Icons.home} color="onBgDefault" />
               <Text variant="headingSmSpaced" color="inherit">
                 Home (District List)
               </Text>
@@ -145,14 +145,16 @@ const NavItem = ({
           />
           <div className="flex items-center justify-between gap-3 w-full p-3 pr-5">
             <div className="flex items-center gap-3 ">
-              <Icon source={Icons.diamond} />
+              <Icon source={Icons.diamond} color="onBgDefault" />
               <Text variant="headingSmSpaced" color="inherit">
                 {district.title}
               </Text>
             </div>
-            <div className={cn('transform', open && ' rotate-90')}>
-              <Icon source={Icons.doubleRight} />
-            </div>
+            <Icon
+              source={Icons.doubleRight}
+              color="onBgDefault"
+              className={cn('transform', open && ' rotate-90')}
+            />
           </div>
         </button>
       </Collapsible.Trigger>
