@@ -47,6 +47,7 @@ export const BarChart = ({
       type: yAxis ? null : 'value',
       data: yAxis,
     },
+    legend: {},
     tooltip: {
       trigger: 'axis',
       axisPointer: {
