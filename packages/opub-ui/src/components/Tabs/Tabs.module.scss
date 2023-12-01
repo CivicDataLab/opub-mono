@@ -31,6 +31,12 @@ $item-min-width: 50px;
   cursor: pointer;
   box-shadow: var(--shadow-inset-basic);
 
+  @media #{$breakpoints-md-down} {
+    padding-block: var(--space-2);
+    padding-inline-start: var(--space-5);
+    padding-inline-end: var(--space-6);
+  }
+
   &::before {
     content: '';
     position: absolute;
@@ -64,7 +70,7 @@ $item-min-width: 50px;
   }
 
   &[data-state='active'] {
-    background: var(--surface-highlight-subdued, #fbfaff);
+    background: var(--surface-highlight-default, #fbfaff);
 
     .Title {
       color: var(--text-highlight);

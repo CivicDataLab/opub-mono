@@ -81,7 +81,7 @@ export const SchemeCard = ({
         <Text variant="bodyMd" fontWeight="medium" color="inherit">
           Explore More <Text visuallyHidden>about {data.label}</Text>
         </Text>
-        <Icon source={Icons.right} />
+        <Icon source={Icons.right} color="interactive" />
       </Link>
     </div>
   );
@@ -116,7 +116,7 @@ export const ContentCard = ({
             <Text variant="bodyMd" fontWeight="medium" color="inherit">
               View on Explorer
             </Text>
-            <Icon source={Icons.right} />
+            <Icon source={Icons.right} color="interactive" />
           </Link>
         )}
       </div>
@@ -166,7 +166,7 @@ export const ProgressCard = ({
             <Text variant="bodyMd" fontWeight="medium" color="inherit">
               View on Explorer
             </Text>
-            <Icon source={Icons.right} />
+            <Icon source={Icons.right} color="interactive" />
           </Link>
         )}
       </div>

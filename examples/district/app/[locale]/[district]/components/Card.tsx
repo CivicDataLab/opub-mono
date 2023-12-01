@@ -46,7 +46,7 @@ export const DepartmentCard = ({
           <Text variant="bodyMd" fontWeight="medium" color="inherit">
             Explore More <Text visuallyHidden>about {data.label}</Text>
           </Text>
-          <Icon source={Icons.right} />
+          <Icon source={Icons.right} color="interactive" />
         </div>
       </div>
     </Link>

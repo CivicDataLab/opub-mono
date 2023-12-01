@@ -94,7 +94,7 @@ export const SourceData = ({
     <div>
       <div
         className={cn(
-          'md:grid grid-cols-[242px_1fr] gap-4 rounded-05 bg-surfaceDefault shadow-elementCard p-6'
+          'md:grid grid-cols-[242px_1fr] gap-4 p-3 md:p-5 rounded-05 bg-surfaceDefault shadow-elementCard'
         )}
       >
         <div className="hidden md:block">
@@ -129,14 +129,15 @@ export const SourceData = ({
             <div className="flex mb-4">
               <Select
                 name="year"
-                label="Year"
-                labelHidden
+                label="Select FY"
+                labelInline
                 onChange={setYear}
                 value={selectedYear}
                 options={Object.keys(tableData).map((year) => ({
                   label: year,
                   value: year,
                 }))}
+                className="w-full md:w-fit"
               />
             </div>
             <Table

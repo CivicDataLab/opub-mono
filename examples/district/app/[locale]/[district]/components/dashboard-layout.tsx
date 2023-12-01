@@ -3,7 +3,6 @@
 import { IconButton } from 'opub-ui';
 import styles from './Content.module.scss';
 import { DashboardSidebar } from './dashboard-sidebar';
-import { MobileDashboardNav } from './mobile-dashboard-nav';
 import { cn } from '@/lib/utils';
 import React from 'react';
 import Icons from '@/components/icons';

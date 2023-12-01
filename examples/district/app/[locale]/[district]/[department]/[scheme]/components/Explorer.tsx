@@ -20,6 +20,7 @@ import { ErrorBoundary } from 'react-error-boundary';
 import { useQueryState } from 'next-usequerystate';
 import dynamic from 'next/dynamic';
 import { BarView } from './BarView';
+import { useWindowSize } from '@/hooks/use-window-size';
 
 const LeafletChoropleth = dynamic(
   () => import('opub-viz').then((mod) => mod.LeafletChoropleth),
@@ -264,6 +265,9 @@ const Content = ({
     },
   ];
 
+  const { width } = useWindowSize();
+  const isMobile = width ? width < 768 : false;
+
   return (
     <div className="grow h-full">
       <Tabs
@@ -271,7 +275,7 @@ const Content = ({
         onValueChange={(value) => states.setTab(value as any)}
         value={states.selectedTab}
       >
-        <TabList>
+        <TabList fitted={isMobile}>
           {[
             {
               label: 'Bar View',
@@ -298,6 +302,7 @@ const Content = ({
             setSelectedBlocks={setSelectedBlocks}
             tab={states.selectedTab}
             selectedBlocks={selectedBlocks}
+            isMobile={isMobile}
           />
 
           {tabs.map((tab) => (
@@ -343,6 +348,7 @@ const Filters = ({
   setSelectedBlocks,
   tab,
   selectedBlocks,
+  isMobile,
 }: {
   states: any;
   chartData: IChartData;
@@ -350,6 +356,7 @@ const Filters = ({
   setSelectedBlocks: any;
   tab: 'map' | 'bar';
   selectedBlocks: string[];
+  isMobile: boolean;
 }) => {
   const options = Object.keys(Object.values(chartData)[0].years).map(
     (year) => ({
@@ -359,7 +366,7 @@ const Filters = ({
   );
 
   return (
-    <div className="flex flex-col gap-4 px-4">
+    <div className="flex flex-col gap-2 md:gap-4 px-4">
       {tab === 'bar' && (
         <ComboboxMulti
           name="blocks"
@@ -383,6 +390,7 @@ const Filters = ({
           onChange={states.setYear}
           value={states.selectedYear}
           options={options}
+          className="w-full md:w-fit"
         />
       </div>
     </div>
