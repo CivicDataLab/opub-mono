@@ -12,7 +12,7 @@ export function Content() {
 
   return (
     <>
-      <IconBrandTabler size="80" color="var(--icon)" />
+      <IconBrandTabler size={320} color="var(--icon)" />
       <Text variant="heading4xl" as="h1" alignment="center">
         {t('title')}
       </Text>

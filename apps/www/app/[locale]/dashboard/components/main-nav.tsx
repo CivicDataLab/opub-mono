@@ -22,7 +22,7 @@ export function MainNav() {
       <Box flex justifyContent="space-between" gap="4" alignItems="center">
         <Link href="/">
           <Box flex alignItems="center" gap="2">
-            <Icon source={Icons.logo} size="6" />
+            <Icon source={Icons.logo} size={24} />
             <Text variant="headingLg" as="h1">
               OPub
             </Text>
