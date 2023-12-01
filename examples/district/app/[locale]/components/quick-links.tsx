@@ -37,12 +37,12 @@ const content = [
 
 export const QuickLinks = () => {
   return (
-    <section className="mt-10">
+    <section className="mt-6 md:mt-10">
       <Text variant="headingLg" fontWeight="semibold" color="subdued">
         Quick Links
       </Text>
 
-      <div className="flex gap-4 flex-wrap mt-4">
+      <div className="flex gap-2 md:gap-4 flex-wrap mt-4">
         {content.map((item, index) => (
           <Link
             key={item.district + index}
@@ -58,7 +58,6 @@ export const QuickLinks = () => {
               >
                 {item.district}
               </Text>
-              {/* TODO: change opub-ui variables to new one */}
               <Icon source={Icons.right} color="interactive" />
             </div>
             <Text variant="headingLg" fontWeight="semibold">

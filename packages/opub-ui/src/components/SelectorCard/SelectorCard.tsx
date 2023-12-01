@@ -1,7 +1,6 @@
 import { cn } from '../../utils';
 import { Button } from '../Button';
 import { Divider } from '../Divider';
-import { Pill } from '../Pill';
 import { Text } from '../Text';
 import styles from './SelectorCard.module.scss';
 import React, { forwardRef } from 'react';

@@ -34,6 +34,7 @@ import {
   IconX,
   TablerIconsProps,
   IconChevronsRight,
+  IconCircleChevronRight,
 } from '@tabler/icons-react';
 
 export const Icons: {
@@ -48,7 +49,7 @@ export const Icons: {
   arrowRight: IconArrowRight,
   up: IconChevronUp,
   down: IconChevronDown,
-  right: IconChevronRight,
+  right: IconCircleChevronRight,
   left: IconChevronLeft,
   doubleLeft: IconChevronsLeft,
   doubleRight: IconChevronsRight,

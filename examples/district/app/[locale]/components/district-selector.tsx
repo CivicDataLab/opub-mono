@@ -59,8 +59,8 @@ export const DistrictSelector = () => {
   };
 
   return (
-    <div className="mx-auto mt-10 flex gap-4 max-h-[682px]">
-      <div className="relative w-full max-w-[1016px] p-6 rounded-05 bg-surfaceDefault shadow-basicMd hidden md:block">
+    <div className="hidden md:flex mx-auto mt-10 gap-4 max-h-[682px]">
+      <div className="relative w-full max-w-[1016px] p-6 rounded-05 bg-surfaceDefault shadow-basicMd">
         {!mapLoading && (
           <LeafletChoropleth
             features={mapFile.features}
