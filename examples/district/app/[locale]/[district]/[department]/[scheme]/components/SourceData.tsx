@@ -82,16 +82,18 @@ export const SourceData = ({
 
   React.useEffect(() => {
     // set first 5 District Performance indicators as selected by default
-    const firstFive = indicatorDataWithValues['District Performance'].slice(
-      0,
-      5
-    );
-    setSelectedIndicators((prev: any) => {
-      return {
-        ...prev,
-        'District Performance': firstFive.map((item: any) => item.value),
-      };
-    });
+    if (indicatorDataWithValues) {
+      const firstFive = indicatorDataWithValues['District Performance'].slice(
+        0,
+        5
+      );
+      setSelectedIndicators((prev: any) => {
+        return {
+          ...prev,
+          'District Performance': firstFive.map((item: any) => item.value),
+        };
+      });
+    }
   }, [indicatorDataWithValues]);
 
   const columns: any = [
