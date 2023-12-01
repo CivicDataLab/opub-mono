@@ -22,9 +22,13 @@ export function DashboardLayout({
     <div
       className={cn('md:flex relative gap-1 grow min-h-[calc(100%_-_48px)]')}
     >
+      <DashboardSidebar
+        isCollapsed={isCollapsed}
+        items={dashboardConfig.sidebarNav}
+      />
       <IconButton
         className={cn(
-          'hidden md:block absolute left-[220px] top-4 p-2 z-2 rounded-full shadow-insetBasic bg-basePureWhite hover:bg-baseIndigoSolid3',
+          'hidden md:block absolute left-[-24px] top-4 p-2 z-10 rounded-full shadow-insetBasic bg-basePureWhite hover:bg-baseIndigoSolid3',
           styles.CollapseBtn,
           isCollapsed && styles.Collapsed
         )}
@@ -32,17 +36,10 @@ export function DashboardLayout({
         icon={Icons.doubleLeft}
         onClick={() => setIsCollapsed((e) => !e)}
       >
-        Collapse Sidebar
+        {isCollapsed ? 'Expand' : 'Collapse'} Sidebar
       </IconButton>
-      <DashboardSidebar
-        isCollapsed={isCollapsed}
-        items={dashboardConfig.sidebarNav}
-      />
 
-      {/* <div className="md:hidden basis-2 z-1">
-        <MobileDashboardNav items={dashboardConfig.sidebarNav} />
-      </div> */}
-      <main className={cn(styles.Main, `grow`)}>{children}</main>
+      <main className={cn(styles.Main, `grow pb-10`)}>{children}</main>
     </div>
   );
 }

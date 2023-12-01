@@ -1,11 +1,10 @@
 'use client';
 
 import styles from './Content.module.scss';
-import { Icons } from '@/components/icons';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
 import { useParams, usePathname } from 'next/navigation';
-import { Text, IconButton } from 'opub-ui';
+import { Text } from 'opub-ui';
 import React from 'react';
 import { SidebarNavItem } from 'types';
 
@@ -15,7 +14,6 @@ interface DashboardNavProps {
 }
 export function DashboardSidebar({ items, isCollapsed }: DashboardNavProps) {
   const path = usePathname();
-  // const [isCollapsed, setIsCollapsed] = React.useState(false);
   const { district, department } = useParams();
 
   if (items && !items.length) {
@@ -25,7 +23,7 @@ export function DashboardSidebar({ items, isCollapsed }: DashboardNavProps) {
   return (
     <aside
       className={cn(
-        'pt-4 bg-backgroundSolidDefault shadow-insetBasic',
+        'pt-4 bg-backgroundSolidDefault shadow-insetBasic min-h-[calc(100vh_-_50px)]',
         'hidden z-1 basis-[240px] shrink-0 md:block overflow-hidden',
         isCollapsed && 'basis-[24px]',
         styles.Collapse
