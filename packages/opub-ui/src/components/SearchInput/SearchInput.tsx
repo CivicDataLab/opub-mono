@@ -30,7 +30,7 @@ type Props = {
 const SearchInput = forwardRef((props: Props, ref: any) => {
   const [search, setSearch] = React.useState(props.defaultValue || '');
 
-  const className = cn(styles.SearchInput, props.className);
+  const className = cn(props.withButton && styles.SearchInput, props.className);
   return (
     <div className={className}>
       <Input

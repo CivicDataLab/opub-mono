@@ -20,6 +20,7 @@ import { Overview } from './Overview';
 import { SourceData } from './SourceData';
 import { parseAsString, useQueryState } from 'next-usequerystate';
 import { copyURLToClipboard, exportAsImage } from '@/lib/utils';
+import { useWindowSize } from '@/hooks/use-window-size';
 
 export interface IOverview {
   schemeTitle: string;
@@ -138,7 +139,7 @@ export const Content = ({ data }: { data: IProps }) => {
               fontWeight="medium"
               color="subdued"
               as="p"
-              className="mt-4"
+              className="mt-3 md:mt-4"
             >
               Last Updated: {data.schemeData.lastUpdated}
             </Text>
@@ -198,11 +199,18 @@ const TabLayout = ({
     'tab',
     parseAsString.withDefault('overview')
   );
-  const { toast } = useToast();
   const overviewRef: any = React.useRef(null);
 
+  const { toast } = useToast();
+  const { width } = useWindowSize();
+  const isMobile = width && width < 768;
+
   return (
-    <Tabs onValueChange={setTabValue} value={tabValue} className="mt-10">
+    <Tabs
+      onValueChange={setTabValue}
+      value={tabValue}
+      className="mt-8 md:mt-10"
+    >
       <TabList
         fitted
         className="rounded-05 shadow-elementCard bg-surfaceDefault"
@@ -212,12 +220,12 @@ const TabLayout = ({
             <div className="flex items-center gap-3">
               <Icon
                 source={Icons[tab.icon]}
-                size={40}
+                size={isMobile ? 32 : 40}
                 color={tabValue === tab.value ? 'highlight' : 'subdued'}
                 stroke={1}
               />
               <Text
-                variant="bodyLg"
+                variant={isMobile ? 'bodyMd' : 'bodyLg'}
                 as="h2"
                 fontWeight={tabValue === tab.value ? 'medium' : 'regular'}
                 color={tabValue === tab.value ? 'inherit' : 'default'}
@@ -228,7 +236,7 @@ const TabLayout = ({
           </Tab>
         ))}
       </TabList>
-      <div className="mt-6 md:px-3 md:py-4 md:bg-surfaceDefault">
+      <div className="mt-4 md:mt-6 md:px-3 md:py-4 md:bg-surfaceDefault">
         {tabValue === 'overview' && (
           <div className="mb-3 flex items-center justify-end gap-4 flex-wrap">
             <Button

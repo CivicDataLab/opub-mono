@@ -108,7 +108,9 @@ export const Select = forwardRef(
       <div className={styles.Content} aria-hidden aria-disabled={disabled}>
         {inlineLabelMarkup}
         {prefixMarkup}
-        <span className={styles.SelectedOption}>{selectedOption.label}</span>
+        <Text as="span" className={styles.SelectedOption}>
+          {selectedOption.label}
+        </Text>
         <span className={styles.Icon}>
           <Icon source={IconChevronDown} color="default" />
         </span>

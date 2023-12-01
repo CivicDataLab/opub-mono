@@ -42,17 +42,6 @@ export const IndicatorsCheckbox = ({
   const [filtered, setFiltered] = React.useState<any>(data ? data : null);
 
   React.useEffect(() => {
-    // set first 5 District Performance indicators as selected by default
-    const firstFive = data['District Performance'].slice(0, 5);
-    setIndicators((prev: any) => {
-      return {
-        ...prev,
-        'District Performance': firstFive.map((item: any) => item.value),
-      };
-    });
-  }, []);
-
-  React.useEffect(() => {
     // filter indicators based on search
     if (search === '') {
       setFiltered(data);

@@ -20,4 +20,9 @@
       transform: rotate(-180deg);
     }
   }
+
+  @media (max-width: 768px) {
+    padding: var(--space-3, 12px) var(--space-3, 12px)
+      var(--border-radius-4, 16px) var(--space-3, 12px);
+  }
 }
