@@ -44,3 +44,17 @@ export const ANALYTICS_INDICATORS_BY_CATEGORY = graphql(`query indicatorsByQuery
 }
 `
 )
+
+export const ANALYTICS_CHART_DATA = graphql(`
+query getCircleChartData ($indcFilter: IndicatorFilter! , $dataFilter: DataFilter!){
+  revCircleChartData(indcFilter: $indcFilter , dataFilter:$dataFilter) 
+}
+`)
+
+export const ANALYTICS_GEOGRAPHY_DATA = graphql(`
+  query getGeographyData($filters: GeoFilter!) {
+    geography(filters: $filters) {
+      name
+    }
+  }
+`);

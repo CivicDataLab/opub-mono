@@ -13,7 +13,12 @@ type Props = {
   /* xAxis of the chart */
   xAxis?: string[] | number[];
   /* Data to be displayed on the chart */
-  data: number[] | number[][] | string[] | string[][];
+  //data: number[] | number[][] | string[] | string[][];
+  series: {
+    name: string;
+    type: string;
+    data: number[];
+  }[];
   /* yAxis of the chart */
   yAxis?: string[] | number[];
   /* Theme of the chart */
@@ -25,7 +30,7 @@ type Props = {
 };
 
 export const BarChart = ({
-  data,
+  series,
   xAxis,
   yAxis,
   theme = 'light',
@@ -33,12 +38,7 @@ export const BarChart = ({
   onChartReady,
 }: Props) => {
   const option = {
-    series: [
-      {
-        type: 'bar',
-        data: data,
-      },
-    ],
+    series: series,
     xAxis: {
       type: xAxis ? null : 'value',
       data: xAxis,
