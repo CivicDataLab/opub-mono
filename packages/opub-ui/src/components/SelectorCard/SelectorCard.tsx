@@ -28,7 +28,7 @@ const SelectorCard = forwardRef((props: Props, ref: any) => {
   }
 
   return (
-    <div className={`opub-SelectorCard ${themeClass}`} ref={ref} {...props}>
+    <div className={`opub-SelectorCard ${themeClass}`} ref={ref}>
       <Text variant="headingSmSpaced">{title}</Text>
       {content}
       <Divider />

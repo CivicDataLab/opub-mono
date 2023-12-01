@@ -5,8 +5,16 @@ import { ckan } from '@/config/site';
 import { useFetch } from '@/lib/api';
 import { cn, copyURLToClipboard } from '@/lib/utils';
 import { createColumnHelper } from '@tanstack/react-table';
-import { useToast } from 'opub-ui';
-import { Button, Select, Table, Text } from 'opub-ui';
+import {
+  Button,
+  Select,
+  Table,
+  Text,
+  Tray,
+  Pill,
+  SelectorCard,
+  useToast,
+} from 'opub-ui';
 import React from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 
@@ -18,11 +26,12 @@ export const SourceData = ({
   scheme?: string;
 }) => {
   const [selectedYear, setYear] = React.useState(Object.keys(tableData)[0]);
-  const [selectedIndicators, setIndicators] = React.useState({
+  const [selectedIndicators, setSelectedIndicators] = React.useState<any>({
     'District Performance': [],
     'District Profile': [],
     Targets: [],
   });
+  const [trayOpen, setTrayOpen] = React.useState(false);
 
   const { data: indicatorData, isLoading } = useFetch(
     'indicators',
@@ -71,6 +80,20 @@ export const SourceData = ({
     return data;
   }, [indicatorData]);
 
+  React.useEffect(() => {
+    // set first 5 District Performance indicators as selected by default
+    const firstFive = indicatorDataWithValues['District Performance'].slice(
+      0,
+      5
+    );
+    setSelectedIndicators((prev: any) => {
+      return {
+        ...prev,
+        'District Performance': firstFive.map((item: any) => item.value),
+      };
+    });
+  }, [indicatorDataWithValues]);
+
   const columns: any = [
     {
       header: 'Block',
@@ -90,8 +113,72 @@ export const SourceData = ({
 
   const { toast } = useToast();
 
+  function removePill(str: string) {
+    let key: string, index: number;
+    // find the key (indicator category) and index of the pill
+    Object.keys(selectedIndicators).forEach((k: any) => {
+      const i = selectedIndicators[k].indexOf(str);
+      if (i !== -1) {
+        key = k;
+        index = i;
+      }
+    });
+
+    // remove the pill
+    setSelectedIndicators((prev: any) => {
+      const data = { ...prev };
+      data[key].splice(index, 1);
+      return data;
+    });
+  }
+
   return (
     <div>
+      <div className="block md:hidden mb-4">
+        <SelectorCard
+          title="Selected Indicators"
+          selected={
+            <>
+              {allSelectedIndicators.length > 0 ? (
+                <div className="flex flex-col gap-1">
+                  {allSelectedIndicators.map((item: any) => (
+                    <Pill
+                      variant="info"
+                      truncate
+                      onRemove={removePill}
+                      returnValue={item}
+                    >
+                      {item}
+                    </Pill>
+                  ))}
+                </div>
+              ) : (
+                <Text variant="bodyMd">No indicator selected</Text>
+              )}
+            </>
+          }
+          buttonText="Edit Indicators"
+          onClick={() => setTrayOpen(true)}
+        />
+        <Tray open={trayOpen} onOpenChange={setTrayOpen} size="extended">
+          {isLoading ? (
+            <div className="p-4">
+              <Text variant="headingMd">Loading...</Text>
+            </div>
+          ) : indicatorData ? (
+            <IndicatorsCheckbox
+              data={indicatorDataWithValues}
+              indicatorRef={indicatorRef}
+              selectedIndicators={selectedIndicators}
+              setIndicators={setSelectedIndicators}
+            />
+          ) : (
+            <div className="p-4">
+              <Text variant="headingMd">No indicators available</Text>
+            </div>
+          )}
+        </Tray>
+      </div>
       <div
         className={cn(
           'md:grid grid-cols-[242px_1fr] gap-4 p-3 md:p-5 rounded-05 bg-surfaceDefault shadow-elementCard'
@@ -107,7 +194,7 @@ export const SourceData = ({
               data={indicatorDataWithValues}
               indicatorRef={indicatorRef}
               selectedIndicators={selectedIndicators}
-              setIndicators={setIndicators}
+              setIndicators={setSelectedIndicators}
             />
           ) : (
             <div className="p-4">

@@ -15,7 +15,6 @@ export const Pill = React.forwardRef(
       disabled = false,
       onRemove = () => {},
       accessibilityLabel,
-      url,
       returnValue = '',
       variant = 'neutral',
       truncate,
@@ -27,8 +26,7 @@ export const Pill = React.forwardRef(
       styles.Pill,
       styles.removable,
       variant && styles[variationName('variant', variant)],
-      disabled && styles.disabled,
-      url && !disabled && styles.linkable
+      disabled && styles.disabled
     );
 
     let tagTitle = accessibilityLabel;
@@ -52,18 +50,11 @@ export const Pill = React.forwardRef(
       </button>
     );
 
-    const tagContent =
-      url && !disabled ? (
-        <a className={cn(styles.Link)} href={url}>
-          <Text variant="bodySm" truncate={truncate}>
-            {children}
-          </Text>
-        </a>
-      ) : (
-        <Text variant="bodySm" truncate={truncate}>
-          {children}
-        </Text>
-      );
+    const tagContent = (
+      <Text variant="bodySm" truncate={truncate}>
+        {children}
+      </Text>
+    );
 
     return (
       <span {...other} className={className} ref={ref}>
