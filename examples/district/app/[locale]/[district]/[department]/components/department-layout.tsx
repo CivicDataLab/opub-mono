@@ -71,7 +71,7 @@ export function Content({ data }: { data: IProps }) {
               <Icon source={Icons.down} />
             </CollapsibleTrigger>
 
-            <CollapsibleContent className="pb-4 px-6">
+            <CollapsibleContent className="pb-4 px-3 md:px-6">
               <Divider />
               <div className="mt-4 flex flex-col gap-3">
                 {departmentData.collapsible.content.map((item) => (

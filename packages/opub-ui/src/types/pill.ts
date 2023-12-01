@@ -1,4 +1,4 @@
-interface NonMutuallyExclusiveProps {
+export type PillProps = {
   /** Content to display in the tag */
   children?: React.ReactNode;
   /** Disables the tag  */
@@ -11,10 +11,6 @@ interface NonMutuallyExclusiveProps {
   variant?: 'neutral' | 'info' | 'success' | 'warning' | 'critical';
   /** Value that is returned on click of remove button */
   returnValue?: string;
-}
-
-export type PillProps = NonMutuallyExclusiveProps &
-  (
-    | { onClick?(): void; onRemove?: undefined; url?: undefined }
-    | { onClick?: undefined; onRemove?(value: string): void; url?: string }
-  );
+  /** Truncate text to one line */
+  truncate?: boolean;
+};

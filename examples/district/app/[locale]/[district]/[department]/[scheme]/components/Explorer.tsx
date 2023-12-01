@@ -5,14 +5,15 @@ import { useFetch } from '@/lib/api';
 import { cn, copyURLToClipboard, exportAsImage } from '@/lib/utils';
 import {
   Button,
-  Combobox,
   ComboboxMulti,
   Select,
+  SelectorCard,
   Tab,
   TabList,
   TabPanel,
   Tabs,
   Text,
+  Tray,
   useToast,
 } from 'opub-ui';
 import React from 'react';
@@ -20,6 +21,7 @@ import { ErrorBoundary } from 'react-error-boundary';
 import { useQueryState } from 'next-usequerystate';
 import dynamic from 'next/dynamic';
 import { BarView } from './BarView';
+import { useWindowSize } from '@/hooks/use-window-size';
 
 const LeafletChoropleth = dynamic(
   () => import('opub-viz').then((mod) => mod.LeafletChoropleth),
@@ -42,6 +44,8 @@ export const Explorer = React.forwardRef(
     const [selectedYear, setYear] = React.useState(Object.keys(years)[0]);
     const [selectedTab, setTab] = React.useState<'map' | 'bar'>('bar');
     const [indicator, setIndicator] = useQueryState('indicator');
+    const [indicatorName, setIndicatorName] = React.useState('indicator');
+    const [trayOpen, setTrayOpen] = React.useState(false);
 
     const { data: indicatorData, isLoading } = useFetch(
       'indicators',
@@ -58,10 +62,28 @@ export const Explorer = React.forwardRef(
       }
     }, [indicatorData, indicator]);
 
+    // TODO: improve this section by adding better API
+    // set indicator name
+    React.useEffect(() => {
+      if (indicatorData) {
+        const indicatorObjsArr: any = Object.values(
+          indicatorData[scheme as string]
+        );
+        indicatorObjsArr.forEach((objsArr: any) => {
+          const indicatorObj = objsArr.find((e: any) => e.slug === indicator);
+
+          if (indicatorObj) {
+            setIndicatorName(indicatorObj.label);
+            return;
+          }
+        });
+      }
+    }, [indicatorData, indicator]);
+
     return (
       <div
         className={cn(
-          'md:grid grid-cols-[242px_1fr] gap-4 rounded-05 md:bg-surfaceDefault md:shadow-elementCard md:p-6'
+          'flex flex-col md:grid grid-cols-[242px_1fr] gap-4 rounded-05 md:bg-surfaceDefault md:shadow-elementCard md:p-6'
         )}
       >
         <div className="hidden md:block">
@@ -82,27 +104,35 @@ export const Explorer = React.forwardRef(
             </div>
           )}
         </div>
-        {/* <div className="md:hidden">
-          <Select
-            label="Select Indicator"
-            labelHidden
-            name="indicator"
-            onChange={(value) => {
-              setIndicator(value);
-            }}
-            value={indicator}
-            options={
-              indicatorData
-                ? indicatorData[scheme as string]['District Performance'].map(
-                    (e: any) => ({
-                      label: e.label,
-                      value: e.slug,
-                    })
-                  )
-                : []
-            }
+        <div className="block md:hidden">
+          <SelectorCard
+            title="Selected Indicator"
+            selected={indicatorName}
+            buttonText="Switch Indicator"
+            onClick={() => setTrayOpen(true)}
           />
-        </div> */}
+          <Tray open={trayOpen} onOpenChange={setTrayOpen} size="extended">
+            {isLoading ? (
+              <div className="p-4">
+                <Text variant="headingMd">Loading...</Text>
+              </div>
+            ) : indicatorData ? (
+              <Indicators
+                data={indicatorData[scheme as string] || null}
+                indicator={indicator || 'nhaoe'}
+                indicatorRef={indicatorRef}
+                setIndicator={(e: string) => {
+                  setIndicator(e);
+                  setTrayOpen(false);
+                }}
+              />
+            ) : (
+              <div className="p-4">
+                <Text variant="headingMd">No indicators available</Text>
+              </div>
+            )}
+          </Tray>
+        </div>
 
         <div className="flex items-center justify-center h-full" ref={ref}>
           <ErrorBoundary
@@ -255,14 +285,15 @@ const Content = ({
             mapDataFn={mapDataFn}
             fillOpacity={1}
             className="w-full h-[512px]"
-            // mouseover={handleMouseOver}
-            // mouseout={handleMouseOut}
           />
         ) : (
           <div className="flex justify-center items-center">Loading...</div>
         ),
     },
   ];
+
+  const { width } = useWindowSize();
+  const isMobile = width ? width < 768 : false;
 
   return (
     <div className="grow h-full">
@@ -271,7 +302,7 @@ const Content = ({
         onValueChange={(value) => states.setTab(value as any)}
         value={states.selectedTab}
       >
-        <TabList>
+        <TabList fitted={isMobile}>
           {[
             {
               label: 'Bar View',
@@ -298,6 +329,7 @@ const Content = ({
             setSelectedBlocks={setSelectedBlocks}
             tab={states.selectedTab}
             selectedBlocks={selectedBlocks}
+            isMobile={isMobile}
           />
 
           {tabs.map((tab) => (
@@ -343,6 +375,7 @@ const Filters = ({
   setSelectedBlocks,
   tab,
   selectedBlocks,
+  isMobile,
 }: {
   states: any;
   chartData: IChartData;
@@ -350,6 +383,7 @@ const Filters = ({
   setSelectedBlocks: any;
   tab: 'map' | 'bar';
   selectedBlocks: string[];
+  isMobile: boolean;
 }) => {
   const options = Object.keys(Object.values(chartData)[0].years).map(
     (year) => ({
@@ -359,7 +393,7 @@ const Filters = ({
   );
 
   return (
-    <div className="flex flex-col gap-4 px-4">
+    <div className="flex flex-col gap-2 md:gap-4 px-4">
       {tab === 'bar' && (
         <ComboboxMulti
           name="blocks"
@@ -383,6 +417,7 @@ const Filters = ({
           onChange={states.setYear}
           value={states.selectedYear}
           options={options}
+          className="w-full md:w-fit"
         />
       </div>
     </div>

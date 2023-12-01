@@ -56,13 +56,6 @@
   box-sizing: border-box;
   padding: calc(control-vertical-padding()) var(--space-2)
     calc(control-vertical-padding()) var(--space-3);
-
-  @media #{$breakpoints-md-down} {
-    div > span {
-      font-size: var(--font-size-200);
-      line-height: var(--font-line-height-2);
-    }
-  }
 }
 
 .SelectedOption {

@@ -64,7 +64,7 @@ export function Content({ data }: { data: IProps }) {
               <Icon source={Icons.down} />
             </CollapsibleTrigger>
 
-            <CollapsibleContent className="pb-4 px-6">
+            <CollapsibleContent className="pb-4 px-3 md:px-6">
               <Divider />
               <div className="mt-4 grid lg:grid-cols-2 gap-7">
                 <div className="flex flex-col gap-4">
@@ -83,8 +83,8 @@ export function Content({ data }: { data: IProps }) {
                     ))}
                   </div>
                 </div>
-                <div className="flex flex-col gap-4">
-                  <div className="flex items-center gap-2 justify-between">
+                <div className="flex flex-col gap-3 md:gap-4">
+                  <div className="flex flex-wrap items-center gap-2 justify-between">
                     <Text variant="headingSm" as="h3" color="subdued">
                       About {data.title}
                     </Text>

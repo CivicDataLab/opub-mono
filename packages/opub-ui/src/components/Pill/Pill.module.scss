@@ -4,6 +4,7 @@ $height: 20px;
 
 .Pill {
   display: inline-flex;
+  justify-content: space-between;
   align-items: center;
   max-width: 100%;
   padding: var(--space-1, 4px) var(--space-2, 8px) var(--space-1, 4px)
@@ -19,10 +20,6 @@ $height: 20px;
     background: var(--surface-subdued);
     color: var(--text-disabled);
     pointer-events: none;
-  }
-
-  &.linkable {
-    padding: 0;
   }
 
   &.variantInfo {
@@ -68,37 +65,5 @@ $height: 20px;
     @include recolor-icon(var(--icon-disabled));
     cursor: default;
     pointer-events: none;
-  }
-}
-
-.Link {
-  display: inline-grid;
-  color: var(--text-default);
-  outline: none;
-  border-radius: var(--border-radius-1);
-  text-decoration: none;
-  min-height: $height;
-  padding: 0 var(--space-2);
-
-  @include focus-ring;
-
-  &:focus-visible:not(:active) {
-    @include focus-ring($style: 'focused');
-    text-decoration: underline;
-  }
-
-  &:hover {
-    background: var(--surface-highlight-hovered);
-    text-decoration: underline;
-  }
-
-  &.segmented {
-    &:hover {
-      background: none;
-    }
-
-    &::after {
-      margin-right: var(--space-1);
-    }
   }
 }

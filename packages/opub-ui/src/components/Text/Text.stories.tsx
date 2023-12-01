@@ -40,6 +40,9 @@ export const Variants = () => (
     <Text as="h6" variant="headingXs">
       Text with HeadingXs variant
     </Text>
+    <Text as="h6" variant="headingSmSpaced">
+      Text with headingSmSpaced variant
+    </Text>
     <Text as="p" variant="bodyLg">
       Text with BodyLg variant
     </Text>
@@ -91,28 +94,51 @@ export const WithFontWeight = () => (
 );
 
 export const WithColor = () => (
-  <Box flex direction="column">
+  <Box flex direction="column" gap="1">
+    <Text as="p" variant="bodyMd" color="default">
+      Default Text is used to communicate the majority of information on the
+    </Text>
     <Text as="p" variant="bodyMd" color="subdued">
-      Use to de-emphasize a piece of text that is less important to merchants
-      than other nearby text. May also be used to indicate when normal content
-      is absent, for example, “No supplier listed”. Don’t use only for aesthetic
-      effect.
+      Subdued Text is used to create a hierarchy of information on the page.
+    </Text>
+    <Text as="p" variant="bodyMd" color="disabled">
+      Disabled Text is used to indicate that a field is disabled and cannot be
+      interacted with.
     </Text>
     <Text as="p" variant="bodyMd" color="success">
-      Use in combination with a symbol showing an increasing value to indicate
-      an upward trend.
+      Use to indicate that something was successful.
     </Text>
     <Text as="p" variant="bodyMd" color="warning">
-      Use to denote something that needs attention, or that merchants need to
-      take action on.
+      Use to indicate that something needs attention.
     </Text>
     <Text as="p" variant="bodyMd" color="critical">
-      Use in combination with a symbol showing a decreasing value to indicate a
-      downward trend.
+      Use to indicate that something has failed.
     </Text>
-    <div style={{ backgroundColor: 'var(--text)', width: 'fit-content' }}>
-      <Text as="p" variant="bodyMd" color="text-inverse">
+    <Text as="p" variant="bodyMd" color="highlight">
+      Highlight Text is used to highlight important information on the page.
+    </Text>
+    <Text as="p" variant="bodyMd" color="interactive">
+      Interactive Text is used to indicate that something can be interacted
+      with.
+    </Text>
+    <div
+      style={{
+        backgroundColor: 'var(--background-solid-dark)',
+        width: 'fit-content',
+      }}
+    >
+      <Text as="p" variant="bodyMd" color="onBgDefault">
         Use in situations where background is dark.
+      </Text>
+    </div>
+    <div
+      style={{
+        backgroundColor: 'var(--background-solid-dark)',
+        width: 'fit-content',
+      }}
+    >
+      <Text as="p" variant="bodyMd" color="onBgDisabled">
+        This is the disabled version for dark background
       </Text>
     </div>
   </Box>

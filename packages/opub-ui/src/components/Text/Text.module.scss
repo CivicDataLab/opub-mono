@@ -36,12 +36,12 @@
   text-align: justify;
 }
 
-.default {
-  color: var(--text-default);
-}
-
 .inherit {
   color: inherit;
+}
+
+.default {
+  color: var(--text-default);
 }
 
 .disabled {
@@ -64,8 +64,20 @@
   color: var(--text-subdued);
 }
 
-.text-inverse {
+.highlight {
+  color: var(--text-highlight);
+}
+
+.interactive {
+  color: var(--text-interactive);
+}
+
+.onBgDefault {
   color: var(--text-onbg-default);
+}
+
+.onBgDisabled {
+  color: var(--text-onbg-disabled);
 }
 
 .regular {

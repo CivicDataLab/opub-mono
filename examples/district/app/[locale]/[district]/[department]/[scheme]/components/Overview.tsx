@@ -109,11 +109,11 @@ const Card = ({
   children: React.ReactNode;
 }) => {
   return (
-    <section className="p-6 bg-surfaceDefault rounded-2 shadow-basicMd">
+    <section className="p-3 md:p-6 bg-surfaceDefault rounded-2 shadow-basicMd">
       <Text variant="headingXl" as="h3">
         {heading}
       </Text>
-      <div className="mt-6 flex flex-wrap gap-4">
+      <div className="mt-4 md:mt-6 flex flex-wrap gap-2 md:gap-4">
         <>{children}</>
       </div>
     </section>
