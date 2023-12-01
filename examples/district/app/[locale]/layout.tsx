@@ -1,4 +1,5 @@
 import { MobileNav } from '@/components/mobile-nav';
+import { Footer } from './components/footer';
 import locales from '../../config/locales';
 import Provider from '@/components/provider';
 import { siteConfig } from '@/config/site';
@@ -92,12 +93,9 @@ export default async function LocaleLayout({
       <body className={fontSans.className}>
         <NextIntlClientProvider locale={locale} messages={messages}>
           <Provider>
-            <>
-              <div className="md:hidden">
-                <MobileNav />
-              </div>
-              {children}
-            </>
+            <MobileNav />
+            {children}
+            <Footer />
           </Provider>
         </NextIntlClientProvider>
       </body>

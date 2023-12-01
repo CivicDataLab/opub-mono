@@ -181,7 +181,7 @@ export const SourceData = ({
       </div>
       <div
         className={cn(
-          'md:grid grid-cols-[242px_1fr] gap-4 p-3 md:p-5 rounded-05 bg-surfaceDefault shadow-elementCard'
+          'md:grid grid-cols-[242px_1fr] gap-4 p-3 md:p-5 rounded-05 bg-surfaceHighlightSubdued md:bg-surfaceDefault shadow-elementCard'
         )}
       >
         <div className="hidden md:block">
@@ -236,7 +236,7 @@ export const SourceData = ({
                 (e: { accessorKey: any }) => e.accessorKey
               )}
             />
-            <div className="mt-3 flex justify-end gap-4">
+            <div className="mt-3 justify-end gap-4 hidden md:flex">
               <Button
                 kind="secondary"
                 variant="interactive"
@@ -265,6 +265,29 @@ export const SourceData = ({
             </div>
           </div>
         </ErrorBoundary>
+      </div>
+      <div className="md:hidden mt-4 md:mt6 py-4 px-3 rounded-2 shadow-elementCard flex items-center justify-end gap-4 flex-wrap bg-surfaceDefault">
+        <Button
+          kind="secondary"
+          variant="interactive"
+          onClick={() => {
+            copyURLToClipboard();
+            toast({
+              title: 'Copied to clipboard',
+            });
+          }}
+        >
+          Copy Link
+        </Button>
+        <Button
+          kind="primary"
+          variant="interactive"
+          onClick={() => {
+            downloadTable(columns, tableData[selectedYear], 'source-data');
+          }}
+        >
+          Download
+        </Button>
       </div>
     </div>
   );

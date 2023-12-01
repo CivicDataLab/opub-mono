@@ -39,7 +39,7 @@ export const MobileNav = () => {
   return (
     <>
       <header>
-        <div className="px-5 py-3 bg-backgroundSolidDark text-textOnBGDefault flex items-center justify-between">
+        <div className="md:hidden px-5 py-3 bg-backgroundSolidDark text-textOnBGDefault flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
             <svg
               xmlns="http://www.w3.org/2000/svg"
