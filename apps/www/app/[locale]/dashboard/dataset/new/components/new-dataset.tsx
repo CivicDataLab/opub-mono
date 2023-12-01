@@ -152,7 +152,7 @@ const RadioItem = ({
   return (
     <RadioCard {...props}>
       <div className={styles.RadioItem}>
-        <Icon source={icon} size="8" />
+        <Icon source={icon} size={32} />
         <div className={styles.RadioContent}>
           <Text
             variant="headingSm"
