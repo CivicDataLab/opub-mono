@@ -90,7 +90,8 @@ export function MapComponent({
             ].includes(mapProperty)
           }
           fillOpacity={1}
-          filterLabel={dropDownValue !== '' && boundary === 'district' ? 'Dhubri' : ''}
+          filterLabel={dropDownValue !== '' && boundary === 'district' ? dropDownValue : ''}
+          filterProperty={'district-code'}
           scrollWheelZoom={false}
           mapProperty={mapProperty}
           legendData={[

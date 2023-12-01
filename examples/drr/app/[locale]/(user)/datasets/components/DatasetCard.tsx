@@ -100,19 +100,12 @@ export const DatasetCard = ({
           </div>
         </div>
 
-        {/* <div id="rightContainer" className="flex flex-3 flex-col gap-2"> */}
-        <div
-          id="rightContainer"
-          className="flex justify-between items-center self-stretch"
-        >
-          <span className="flex py-1 px-2 items-center gap-1 border-solid rounded borderHighlightDefault bg-surfaceDefault">
-            {tags?.length > 0 &&
-              tags?.map((tag, index) => (
-                <Tag color="two" key={index}>
-                  {tag}
-                </Tag>
-              ))}
-            {/* <Tag>TAG 2</Tag> */}
+        <div id="rightContainer" className="flex flex-3 flex-col gap-2">
+          <Text variant="bodyMd">{description}</Text>
+          <span className="flex gap-2">
+            {tags?.length > 0 && tags?.map((tag, index) => (
+              <Tag key={index}>{tag}</Tag>
+            ))}
           </span>
           <Button
             size="slim"
