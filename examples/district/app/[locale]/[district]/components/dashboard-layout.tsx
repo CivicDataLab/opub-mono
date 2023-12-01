@@ -36,7 +36,7 @@ export function DashboardLayout({
         icon={Icons.doubleLeft}
         onClick={() => setIsCollapsed((e) => !e)}
       >
-        Collapse Sidebar
+        {isCollapsed ? 'Expand' : 'Collapse'} Sidebar
       </IconButton>
 
       <main className={cn(styles.Main, `grow pb-10`)}>{children}</main>
