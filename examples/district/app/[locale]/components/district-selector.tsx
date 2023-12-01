@@ -82,6 +82,7 @@ export const DistrictSelector = () => {
             fillOpacity={1}
             mouseover={handleMouseOver}
             mouseout={handleMouseOut}
+            defaultLayer="light_nolabels"
           />
         )}
         <div
