@@ -30,13 +30,17 @@ type Alignment = 'start' | 'center' | 'end' | 'justify';
 type FontWeight = 'regular' | 'medium' | 'semibold' | 'bold';
 
 type Color =
-  | 'success'
+  | 'default'
+  | 'medium'
+  | 'subdued'
+  | 'disabled'
   | 'critical'
   | 'warning'
-  | 'subdued'
-  | 'text-inverse'
-  | 'disabled'
-  | 'default'
+  | 'success'
+  | 'highlight'
+  | 'interactive'
+  | 'onBgDefault'
+  | 'onBgDisabled'
   | 'inherit';
 
 export const VariantFontWeightMapping: { [V in Variant]: FontWeight } = {
