@@ -78,7 +78,7 @@ export const Explorer = React.forwardRef(
           }
         });
       }
-    }, [indicator]);
+    }, [indicatorData, indicator]);
 
     return (
       <div
@@ -112,15 +112,25 @@ export const Explorer = React.forwardRef(
             onClick={() => setTrayOpen(true)}
           />
           <Tray open={trayOpen} onOpenChange={setTrayOpen} size="extended">
-            <Indicators
-              data={indicatorData[scheme as string] || null}
-              indicator={indicator || 'nhaoe'}
-              indicatorRef={indicatorRef}
-              setIndicator={(e: string) => {
-                setIndicator(e);
-                setTrayOpen(false);
-              }}
-            />
+            {isLoading ? (
+              <div className="p-4">
+                <Text variant="headingMd">Loading...</Text>
+              </div>
+            ) : indicatorData ? (
+              <Indicators
+                data={indicatorData[scheme as string] || null}
+                indicator={indicator || 'nhaoe'}
+                indicatorRef={indicatorRef}
+                setIndicator={(e: string) => {
+                  setIndicator(e);
+                  setTrayOpen(false);
+                }}
+              />
+            ) : (
+              <div className="p-4">
+                <Text variant="headingMd">No indicators available</Text>
+              </div>
+            )}
           </Tray>
         </div>
 
