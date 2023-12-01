@@ -53,7 +53,7 @@ export function useFetch(id: string, query: string) {
 }
 
 export async function getData(query: string) {
-  const res = await fetch(query, {
+  const res = await fetch(`${query}?size=10`, {
     cache: 'no-cache',
   });
   if (!res.ok) {

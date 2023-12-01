@@ -97,6 +97,7 @@ export type Query = {
   __typename?: 'Query';
   ChartIndicators: Scalars['JSON'];
   data: Array<Data>;
+  districtChartData: Scalars['JSON'];
   districtMapData: Scalars['JSON'];
   districtViewTableData: Scalars['JSON'];
   geography: Array<Geography>;
@@ -112,6 +113,13 @@ export type Query = {
 
 export type QueryDataArgs = {
   filters?: InputMaybe<DataFilter>;
+};
+
+
+export type QueryDistrictChartDataArgs = {
+  dataFilter: DataFilter;
+  geoFilter?: InputMaybe<GeoFilter>;
+  indcFilter: IndicatorFilter;
 };
 
 

@@ -5,31 +5,17 @@ import { getData } from '@/lib/api';
 import { Content } from './components/dataset-layout';
 
 export default async function Home() {
-  const filters: FilterProps[] = [
-    {
-      Category: [
-        'Exposure',
-        'Flood Hazard',
-        'Vulnerability - Losses & Damages',
-        'Coping Capacity - Infrastructure',
-        'Coping Capacity - Governance',
-      ],
-    },
-    {
-      'Reference Period': ['2023', '2022', '2021', '2020'],
-    },
-    {
-      'Administrative Division': ['Revenue Circle', 'District', 'State'],
-    },
-  ];
-
   const datasetData = await getData(elasticSearch.datasets);
+
+  const filters : FilterProps[] = Object.keys(datasetData?.aggregations).map((key) => ({
+    [key]: datasetData?.aggregations[key]?.all?.buckets.map((bucket: { key: string; }) => bucket.key),
+  }));
   
   const data: Datasets[] = datasetData?.hits?.hits?.map((item: any) => {
     return {
       title: item._source?.dataset_title,
       slug: item._source?.slug,
-      source: item._source?.catalog_title,
+      source: item._source?.source,
       description: item._source?.dataset_description,
       organization: {
         logo: item?.org_logo || 'NA',
@@ -45,5 +31,5 @@ export default async function Home() {
     };
   });
 
-    return <Content data={data} filters={filters}/>;
+    return <Content count={datasetData?.hits?.total?.value} data={data} filters={filters}/>;
 }

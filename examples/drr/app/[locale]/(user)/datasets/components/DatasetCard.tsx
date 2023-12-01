@@ -1,8 +1,8 @@
 import React from 'react';
-import Link from 'next/link';
+// import Link from 'next/link';
 import { Button, Tag, Text } from 'opub-ui';
 
-import { DatasetSource, LastUpdated, UpdateFreq } from '@/config/consts.ts';
+import { DatasetSource } from '@/config/consts.ts';
 import { formatDate } from '@/lib/utils';
 
 export interface DataProps {
@@ -15,17 +15,17 @@ export interface DataProps {
   fileTypes: string[];
   tags: string[];
   slug: string;
+  datasetDownloadLink: string;
 }
 export const DatasetCard = ({
   title,
   source,
   description,
-  lastUpdated,
-  updateFrequency,
   fileTypes,
   period,
   tags,
   slug,
+  datasetDownloadLink,
 }: DataProps) => {
   return (
     <div className=" bg-surfaceDefault p-6 shadow-elementCard rounded-2 flex flex-col gap-4 rounded">
@@ -33,7 +33,7 @@ export const DatasetCard = ({
         id="leftContainer"
         className="flex flex-2 flex-col gap-2 text-interactive items-stretch truncate"
       >
-        <Link href={`/datasets/${slug}`}>
+        {/* <Link href={`/datasets/${slug}`}> */}
           <Text
             color="inherit"
             className=" text-textHighlight "
@@ -43,7 +43,7 @@ export const DatasetCard = ({
           >
             {title}
           </Text>
-        </Link>
+        {/* </Link> */}
 
         <div className="flex items-start gap-4 self-stretch">
           <div className="flex flex-col items-start gap-2 w-96">
@@ -84,34 +84,21 @@ export const DatasetCard = ({
             <Text
               variant="bodyMd"
               fontWeight="regular"
-              className="text-ellipsis overflow-x-hidden w-[730px]"
-              // text-overflow={true}
-              truncate={true}
+              className="w-[500px] whitespace-normal"
             >
               {description}
             </Text>
-            {/* <Text
-              variant="bodyMd"
-              fontWeight="regular"
-              className="text-textInteractive"
-            >
-              show more
-            </Text> */}
           </div>
         </div>
 
-        <div id="rightContainer" className="flex flex-3 flex-col gap-2">
-          <Text variant="bodyMd">{description}</Text>
-          <span className="flex gap-2">
-            {tags?.length > 0 && tags?.map((tag, index) => (
-              <Tag key={index}>{tag}</Tag>
-            ))}
-          </span>
-          <Button
-            size="slim"
-            className="bg-actionsPrimaryBasicDefault w-[156px] px-4 py-2 content-center items-center gap-0 rounded border-solid"
-          >
-            Download
+        <div
+          id="rightContainer"
+          className="flex flex-3 flex-col gap-2 items-end"
+        >
+          {tags?.length > 0 &&
+            tags?.map((tag, index) => <Tag key={index}>{tag}</Tag>)}
+          <Button className="bg-actionsPrimaryBasicDefault w-[156px] rounded hover:bg-actionsPrimaryBasicDefault">
+            <a href={datasetDownloadLink}>Download</a>
           </Button>
         </div>
       </div>

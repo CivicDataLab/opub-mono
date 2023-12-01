@@ -1,7 +1,8 @@
 'use client';
 
 import React from 'react';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
+import { usePRouter } from '@/hooks/use-prouter';
 import {
   Collapsible,
   CollapsibleContent,
@@ -48,7 +49,7 @@ export function AnalyticsDashboardSidebar({
   isCollapsed: Boolean;
 }) {
   const pathname = usePathname();
-  const router = useRouter();
+  const router = usePRouter()
   const searchParams = useSearchParams();
   const indicator = searchParams.get('indicator');
   const subIndicator = searchParams.get('sub-indicator');
@@ -326,7 +327,7 @@ export const IndicatorCheckboxList = ({
   data: IndicatorData;
   indicators: IndicatorMapType | undefined;
 }) => {
-  const router = useRouter();
+  const router = usePRouter();
   const searchParams = useSearchParams();
   const indicatorParam = searchParams.get('indicator');
   const subIndicatorParam = searchParams.get('sub-indicator');

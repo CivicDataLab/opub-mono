@@ -53,6 +53,7 @@ export function Content({
   const [isMapVisible, setIsMapVisible] = React.useState(true);
 
   const toggleVisibility = () => {
+    setDropdownValue('')
     setIsMapVisible((prev) => !prev);
   };
   const [dropDownValue, setDropdownValue] = React.useState('');
@@ -236,7 +237,7 @@ export function Content({
               {deSlugify(indicator)}
             </Text>
             <Text className="text-textSubdued" variant="bodyLg">
-              {timePeriod && `Time Period : ${formatDateString(timePeriod)}`} 
+              {timePeriod && `Time Period : ${formatDateString(timePeriod)} to Present`} 
             </Text>
           </div>
           <Separator />
