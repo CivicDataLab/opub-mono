@@ -59,7 +59,7 @@ export function Content({
         <div className=" w-1/5">
           <FilterBox filters={filters} />
         </div>
-        <div className="flex w-4/5 flex-col gap-6">
+        <div className="flex w-4/5 flex-col gap-4 rounded shadow-card border-solid p-6">
           {data.map((dataset, index) => (
             <DatasetCard
               key={index}
