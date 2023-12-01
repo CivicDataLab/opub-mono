@@ -2,7 +2,6 @@ import { indicatorFilter } from '../scheme.config';
 import Icons from '@/components/icons';
 import {
   Icon,
-  Input,
   RadioGroup,
   RadioItem,
   ScrollArea,

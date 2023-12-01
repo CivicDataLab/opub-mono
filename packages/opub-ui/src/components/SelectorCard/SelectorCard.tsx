@@ -19,8 +19,8 @@ const SelectorCard = forwardRef((props: Props, ref: any) => {
   let content;
   if (typeof selected === 'string') {
     content = (
-      <Text variant="bodyMd" color="highlight">
-        Person Days Generated as a share of Cumulative Projection of Person Days
+      <Text variant="bodyMd" color="highlight" fontWeight="medium">
+        {selected}
       </Text>
     );
   } else {

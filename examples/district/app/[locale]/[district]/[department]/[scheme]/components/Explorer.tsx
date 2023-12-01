@@ -5,14 +5,15 @@ import { useFetch } from '@/lib/api';
 import { cn, copyURLToClipboard, exportAsImage } from '@/lib/utils';
 import {
   Button,
-  Combobox,
   ComboboxMulti,
   Select,
+  SelectorCard,
   Tab,
   TabList,
   TabPanel,
   Tabs,
   Text,
+  Tray,
   useToast,
 } from 'opub-ui';
 import React from 'react';
@@ -43,6 +44,8 @@ export const Explorer = React.forwardRef(
     const [selectedYear, setYear] = React.useState(Object.keys(years)[0]);
     const [selectedTab, setTab] = React.useState<'map' | 'bar'>('bar');
     const [indicator, setIndicator] = useQueryState('indicator');
+    const [indicatorName, setIndicatorName] = React.useState('indicator');
+    const [trayOpen, setTrayOpen] = React.useState(false);
 
     const { data: indicatorData, isLoading } = useFetch(
       'indicators',
@@ -59,10 +62,28 @@ export const Explorer = React.forwardRef(
       }
     }, [indicatorData, indicator]);
 
+    // TODO: improve this section by adding better API
+    // set indicator name
+    React.useEffect(() => {
+      if (indicatorData) {
+        const indicatorObjsArr: any = Object.values(
+          indicatorData[scheme as string]
+        );
+        indicatorObjsArr.forEach((objsArr: any) => {
+          const indicatorObj = objsArr.find((e: any) => e.slug === indicator);
+
+          if (indicatorObj) {
+            setIndicatorName(indicatorObj.label);
+            return;
+          }
+        });
+      }
+    }, [indicator]);
+
     return (
       <div
         className={cn(
-          'md:grid grid-cols-[242px_1fr] gap-4 rounded-05 md:bg-surfaceDefault md:shadow-elementCard md:p-6'
+          'flex flex-col md:grid grid-cols-[242px_1fr] gap-4 rounded-05 md:bg-surfaceDefault md:shadow-elementCard md:p-6'
         )}
       >
         <div className="hidden md:block">
@@ -83,27 +104,25 @@ export const Explorer = React.forwardRef(
             </div>
           )}
         </div>
-        {/* <div className="md:hidden">
-          <Select
-            label="Select Indicator"
-            labelHidden
-            name="indicator"
-            onChange={(value) => {
-              setIndicator(value);
-            }}
-            value={indicator}
-            options={
-              indicatorData
-                ? indicatorData[scheme as string]['District Performance'].map(
-                    (e: any) => ({
-                      label: e.label,
-                      value: e.slug,
-                    })
-                  )
-                : []
-            }
+        <div className="block md:hidden">
+          <SelectorCard
+            title="Selected Indicator"
+            selected={indicatorName}
+            buttonText="Switch Indicator"
+            onClick={() => setTrayOpen(true)}
           />
-        </div> */}
+          <Tray open={trayOpen} onOpenChange={setTrayOpen} size="extended">
+            <Indicators
+              data={indicatorData[scheme as string] || null}
+              indicator={indicator || 'nhaoe'}
+              indicatorRef={indicatorRef}
+              setIndicator={(e: string) => {
+                setIndicator(e);
+                setTrayOpen(false);
+              }}
+            />
+          </Tray>
+        </div>
 
         <div className="flex items-center justify-center h-full" ref={ref}>
           <ErrorBoundary
@@ -256,8 +275,6 @@ const Content = ({
             mapDataFn={mapDataFn}
             fillOpacity={1}
             className="w-full h-[512px]"
-            // mouseover={handleMouseOver}
-            // mouseout={handleMouseOut}
           />
         ) : (
           <div className="flex justify-center items-center">Loading...</div>
