@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { useRouter , usePathname ,  useSearchParams } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import {
   Collapsible,
   CollapsibleContent,
@@ -47,15 +47,16 @@ export function AnalyticsDashboardSidebar({
 }: {
   isCollapsed: Boolean;
 }) {
-
   const pathname = usePathname();
   const router = useRouter();
-  const searchParams = useSearchParams()
+  const searchParams = useSearchParams();
   const indicator = searchParams.get('indicator');
   const subIndicator = searchParams.get('sub-indicator');
   const timePeriod = searchParams.get('time-period');
   const [timePeriodRadioValue, setTimePeriodRadioValue] =
     React.useState(timePeriod);
+  const [openIndicator, setOpenIndicator] = React.useState(true);
+  const [openTimePeriod, setOpenTimePeriod] = React.useState(true);
 
   const { data }: Data = useQuery(
     [`indicatorsByCategory`],
@@ -181,13 +182,17 @@ export function AnalyticsDashboardSidebar({
             </Text>
           </div> */}
         </span>
-        <Collapsible defaultOpen className={cn(isCollapsed && 'hidden')}>
+        <Collapsible
+          open={openIndicator}
+          onOpenChange={setOpenIndicator}
+          className={cn(isCollapsed && 'hidden')}
+        >
           <div className="pl-4 bg-surfaceSelected max-w-full min-w-max bg-surfaceNeutral border-b-1 border-solid border-borderSubdued mb-5">
             <CollapsibleTrigger className={styles.CollapseTrigger}>
               <Text className="text-textSubdued" fontWeight="bold">
                 Select an indicator
               </Text>
-              <Icon color="subdued" source={Icons.minus} />
+              <Icon color="subdued" source={ openIndicator ? Icons.minus : Icons.plus} />
             </CollapsibleTrigger>
           </div>
 
@@ -209,6 +214,8 @@ export function AnalyticsDashboardSidebar({
         </Collapsible>
 
         <Collapsible
+          open={openTimePeriod}
+          onOpenChange={setOpenTimePeriod}
           defaultOpen
           className={cn(isCollapsed && 'hidden', 'mb-6 ')}
         >
@@ -217,7 +224,7 @@ export function AnalyticsDashboardSidebar({
               <Text className="text-textSubdued" fontWeight="bold">
                 Select a time period
               </Text>
-              <Icon color="subdued" source={Icons.minus} />
+              <Icon color="subdued" source={openTimePeriod ? Icons.minus : Icons.plus} />
             </CollapsibleTrigger>
           </div>
 
@@ -226,7 +233,11 @@ export function AnalyticsDashboardSidebar({
               {timePeriodData?.data?.getDataTimePeriods.map((item, index) => (
                 <RadioButton
                   changed={() => {
-                    router.push( subIndicator ? `${pathname}?indicator=${indicator}&sub-indicator=${subIndicator}&time-period=${item?.value}` : `${pathname}?indicator=${indicator}&time-period=${item?.value}`);
+                    router.push(
+                      subIndicator
+                        ? `${pathname}?indicator=${indicator}&sub-indicator=${subIndicator}&time-period=${item?.value}`
+                        : `${pathname}?indicator=${indicator}&time-period=${item?.value}`
+                    );
                     setTimePeriodRadioValue(item?.value);
                   }}
                   key={`${index}_${item?.value}`}
@@ -262,7 +273,7 @@ export function AnalyticsDashboardSidebar({
             </Text>
           </div>
 
-          <div
+          {/* <div
             className={cn(
               'flex rounded gap-1.5 items-center pl-4 pr-52 pt-1 pb-0.5',
               isCollapsed && 'hidden'
@@ -281,7 +292,7 @@ export function AnalyticsDashboardSidebar({
             <Text className="text-textHighlight" variant="headingMd">
               Download
             </Text>
-          </div>
+          </div> */}
           <div
             className={cn(
               'flex rounded gap-1.5 items-center pl-4 pr-40 pt-1 pb-0.5',
@@ -318,8 +329,9 @@ export const IndicatorCheckboxList = ({
   const router = useRouter();
   const searchParams = useSearchParams();
   const indicatorParam = searchParams.get('indicator');
+  const subIndicatorParam = searchParams.get('sub-indicator');
   const timePeriod = searchParams.get('time-period');
-  const [radioValue, setRadioValue] = React.useState(indicatorParam);
+  const [radioValue, setRadioValue] = React.useState(subIndicatorParam || indicatorParam);
 
   return data?.indicatorsByCategory?.map((indicator, index: Number) => {
     const categoryName = Object.keys(indicator)[0];

@@ -3,18 +3,23 @@ import { getRandomNumber } from '../../utils';
 import { Popover, PopoverContent, PopoverTrigger } from '../ui';
 import styles from './LeafletChoropleth.module.scss';
 import { IconBoxMultiple } from '@tabler/icons-react';
+import L from 'leaflet';
 import React from 'react';
-import { GeoJSON, MapContainer, TileLayer, ScaleControl } from 'react-leaflet';
-const classyBrew = require('classybrew')
+import {
+  GeoJSON,
+  MapContainer,
+  TileLayer,
+  ScaleControl,
+  useMap,
+} from 'react-leaflet';
+
+const classyBrew = require('classybrew');
 var brew = new classyBrew();
 
 const layers = [
-  'light_all',
-  'light_nolabels',
-  'dark_all',
-  'dark_nolabels',
-  'rastertiles/voyager',
-  'rastertiles/voyager_nolabels',
+  'Gray',
+  'Dark',
+  'Satellite',
 ] as const;
 type layerOptions = (typeof layers)[number];
 
@@ -66,6 +71,9 @@ type MapProps = {
 
   /* className */
   className?: string;
+
+  /* filtering map */
+  filterLabel?: string;
 };
 
 type LegendProps = {
@@ -78,7 +86,7 @@ type Props = MapProps & LegendProps;
 const LeafletChoropleth = (props: Props) => {
   const {
     legendData,
-    defaultLayer = 'light_all',
+    defaultLayer = 'Gray',
     hideLayers = false,
     className,
     ...others
@@ -103,6 +111,25 @@ const LeafletChoropleth = (props: Props) => {
   );
 };
 
+function FitBounds({
+  filterLabel,
+  features,
+}: {
+  filterLabel: string;
+  features: any;
+}) {
+  if (filterLabel !== '') {
+    const map = useMap();
+    const filteredLayer = features.filter(
+      (l: { properties: { district: string } }) =>
+        l.properties.district === filterLabel
+    );
+    const bounds = L.geoJSON(filteredLayer[0].geometry).getBounds();
+    map.fitBounds(bounds, { maxZoom: 9 });
+  }
+  return null;
+}
+
 const Map = ({
   features,
   mouseover,
@@ -117,14 +144,14 @@ const Map = ({
   scrollWheelZoom = true,
   hideScale = false,
   mapDataFn,
-  classifyData = false
+  classifyData = false,
+  filterLabel = '',
 }: MapProps & {
   selectedLayer: layerOptions;
 }) => {
   //to prevent map re-initialization
   const [unmountMap, setUnmountMap] = React.useState(false);
   const mapRef = React.useRef<any>(null);
-
   // pass values from your geojson object into an empty array
   // see link above to view geojson used in this example
   var values = [];
@@ -135,18 +162,19 @@ const Map = ({
 
   // Set the brew properties
   brew.setSeries(values);
-  brew.setNumClasses(5);
-  brew.setColorCode("RdYlBu");
-  brew.classify('jenks')
+  brew.setNumClasses(6);
+  brew.setColorCode('RdYlBu');
+  brew.classify('equal_interval');
 
   const handleMouseOver = React.useCallback((e: { target: any }) => {
     var layer = e.target;
 
     layer.setStyle({
-      fillColor: mapDataFn(
-        Number(layer.feature.properties[mapProperty]),
-        'hover'
-      ),
+      fillColor: classifyData
+        ? brew.getColorInRange(layer.feature.properties[mapProperty])
+        : mapDataFn(Number(layer.feature.properties[mapProperty]), 'hover'),
+      weight: 5,
+      color: '#3388ff',
     });
 
     mouseover && mouseover(layer);
@@ -163,10 +191,9 @@ const Map = ({
     var layer = e.target;
 
     layer.setStyle({
-      fillColor: mapDataFn(
-        Number(layer.feature.properties[mapProperty]),
-        'selected'
-      ),
+      fillColor: classifyData
+        ? brew.getColorInRange(layer.feature.properties[mapProperty])
+        : mapDataFn(Number(layer.feature.properties[mapProperty]), 'selected'),
     });
 
     if (zoomOnClick) {
@@ -190,7 +217,9 @@ const Map = ({
 
   const style: any = (feature: { properties: { [x: string]: number } }) => {
     return {
-      fillColor: classifyData ? brew.getColorInRange(feature.properties[mapProperty]) : mapDataFn(Number(feature.properties[mapProperty]), 'default'),
+      fillColor: classifyData
+        ? brew.getColorInRange(feature.properties[mapProperty])
+        : mapDataFn(Number(feature.properties[mapProperty]), 'default'),
       weight: 1,
       opacity: 1,
       color: selectedLayer?.includes('dark') ? '#eee' : '#889096',
@@ -201,6 +230,12 @@ const Map = ({
   const feature: any = features.map((feature: any) => {
     return feature;
   });
+
+  const LayerMap = {
+    'Satellite': 'http://mt1.google.com/vt/lyrs=s&hl=pl&&x={x}&y={y}&z={z}',
+    'Gray' : 'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}',
+    'Dark' : 'https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png'
+  }
 
   if (!unmountMap) {
     return (
@@ -217,7 +252,7 @@ const Map = ({
         ref={mapRef}
       >
         <TileLayer
-          url={`https://cartodb-basemaps-{s}.global.ssl.fastly.net/${selectedLayer}/{z}/{x}/{y}.png`}
+          url={LayerMap[selectedLayer]}
         />
         {features && (
           <>
@@ -229,6 +264,7 @@ const Map = ({
             />
           </>
         )}
+        <FitBounds filterLabel={filterLabel} features={features} />
         {!hideScale && <ScaleControl imperial={false} />}
       </MapContainer>
     );
@@ -290,7 +326,7 @@ const LayerSelector = ({
             <div className="flex flex-col">
               {layers.map((layer) => {
                 return (
-                  <label key={layer} className="flex items-center">
+                  <label key={layer} className="flex gap-2 items-center">
                     <input
                       type="radio"
                       name="mapTheme"

@@ -4,6 +4,7 @@ import React from 'react';
 import { useSearchParams } from 'next/navigation';
 import Select from 'react-select';
 import { BarChart } from 'opub-viz/src';
+import { deSlugify } from '@/lib/utils';
 
 export function ChartComponent({
   chartDataloading,
@@ -17,7 +18,10 @@ export function ChartComponent({
 
   const [district, setDistrict] = React.useState<any>([{ label: "Balijana", value: "Balijana" }]);
   const searchParams = useSearchParams();
-  const timePeriod: string = searchParams.get('time-period') || '';
+  const timePeriod: string = searchParams.get('time-period') || '2023_08';
+  const subIndicator = searchParams.get('sub-indicator');
+  const indicator = searchParams.get('indicator')
+  const indicatorToMap = subIndicator || indicator || 'composite-score'
 
   let districtArray: any = [];
   if (districtsData) {
@@ -32,8 +36,8 @@ export function ChartComponent({
   let series:any = [];
   if(district && chartData){
     series.push({
-        name: 'Composite Score',
-        data: district.map((dist:any) => chartData[timePeriod]["composite-score"][dist.value]),
+        name: deSlugify(indicatorToMap),
+        data: district.map((dist:any) => chartData[timePeriod][indicatorToMap][dist.value]),
         type: 'bar',
       })
   }

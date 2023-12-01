@@ -14,8 +14,9 @@ import {
 
 import { DistrictColumnData, RevenueColumnData } from '@/config/consts.ts';
 import {
+  ANALYTICS_DISTRICT_MAP_DATA,
+  ANALYTICS_GEOGRAPHIES,
   ANALYTICS_CHART_DATA,
-  ANALYTICS_GEOGRAPHY_DATA,
   ANALYTICS_REVENUE_MAP_DATA,
   ANALYTICS_REVENUE_TABLE_DATA,
   ANALYTICS_TABLE_DATA,
@@ -54,35 +55,40 @@ export function Content({
   const toggleVisibility = () => {
     setIsMapVisible((prev) => !prev);
   };
+  const [dropDownValue, setDropdownValue] = React.useState('');
+  const [tableData, setTableData] = React.useState([]);
+  const [revenueTableData, setRevenueTableData] = React.useState([]);
 
-  const DropdownOptions = [
+  const geographyMap: any = {
+    'revenue-circle': 'REVENUE CIRCLE',
+    district: 'DISTRICT',
+  };
+
+  interface DropdownOptionProps {
+    label: string;
+    value:  string;
+    selected?: boolean;
+    disabled: boolean;
+  }
+
+  const DropdownOptions : DropdownOptionProps[] = [
     {
       label:
         boundary === 'district' ? 'Select District' : 'Select Revenue Circle',
-      value:
-        boundary === 'district' ? 'Select District' : 'Select Revenue Circle',
+      value: '',
+      selected: true,
       disabled: true,
-    },
-    {
-      label: 'Kokrajhar',
-      value: 'kokrajhar',
-    },
-    {
-      label: 'Dhubri',
-      value: 'dhubri',
-    },
-    {
-      label: 'Goalpara',
-      value: 'goalpara',
     },
   ];
 
   const { data } = useQuery(
-    [`district_table_data_${indicator}`],
+    [`district_table_data_${indicator}_${timePeriod}_${dropDownValue}`],
     () =>
       GraphQL('analytics', ANALYTICS_TABLE_DATA, {
         indcFilter: { slug: indicator },
         dataFilter: { dataPeriod: timePeriod },
+        ...(dropDownValue !== '' &&
+          boundary === 'district' && { geoFilter: { code: dropDownValue } }),
       }),
     {
       refetchOnMount: false,
@@ -92,11 +98,15 @@ export function Content({
   );
 
   const revenueData = useQuery(
-    [`revenue_table_data_${indicator}_${timePeriod}`],
+    [`revenue_table_data_${indicator}_${timePeriod}_${dropDownValue}`],
     () =>
       GraphQL('analytics', ANALYTICS_REVENUE_TABLE_DATA, {
         indcFilter: { slug: indicator },
         dataFilter: { dataPeriod: timePeriod },
+        ...(dropDownValue !== '' &&
+          boundary === 'revenue-circle' && {
+            geoFilter: { code: dropDownValue },
+          }),
       }),
     {
       refetchOnMount: false,
@@ -104,6 +114,15 @@ export function Content({
       refetchOnReconnect: false,
     }
   );
+
+  React.useEffect(() => {
+    if (data) {
+      setTableData(data.districtViewTableData?.table_data);
+    }
+    if (revenueData.data) {
+      setRevenueTableData(revenueData.data?.revCircleViewTableData?.table_data);
+    }
+  }, [data, revenueData?.data]);
 
   const indicatorForMapData = subIndicator ? subIndicator : indicator;
   const revenueMapData = useQuery(
@@ -120,11 +139,49 @@ export function Content({
     }
   );
 
+  const districtMapData = useQuery(
+    [`district_map_data_${indicatorForMapData}_${timePeriod}_${dropDownValue}`],
+    () =>
+      GraphQL('analytics', ANALYTICS_DISTRICT_MAP_DATA, {
+        indcFilter: { slug: indicatorForMapData },
+        dataFilter: { dataPeriod: timePeriod },
+        ...(dropDownValue !== '' && { geoFilter: { code: dropDownValue } }),
+      }),
+    {
+      refetchOnMount: false,
+      refetchOnWindowFocus: false,
+      refetchOnReconnect: false,
+    }
+  );
+
+  const geographiesData = useQuery(
+    [`geographies_data_${boundary}`],
+    () =>
+      GraphQL('analytics', ANALYTICS_GEOGRAPHIES, {
+        filters: { type: geographyMap[boundary] },
+      }),
+    {
+      refetchOnMount: false,
+      refetchOnWindowFocus: false,
+      refetchOnReconnect: false,
+    }
+  );
+
+  if (geographiesData) {
+    geographiesData.data?.geography.forEach((geography) => {
+      DropdownOptions.push({
+        label: geography.name,
+        value: geography.code ? geography.code : 'NA',
+        disabled: false,
+      });
+    });
+  }
+
   const chartData = useQuery(
-    [`chart_data_${indicator}_${timePeriod}`],
+    [`chart_data_${indicatorForMapData}_${timePeriod}`],
     () =>
       GraphQL('analytics', ANALYTICS_CHART_DATA, {
-        indcFilter: { slug: indicator },
+        indcFilter: { slug: indicatorForMapData },
         dataFilter: { dataPeriod: timePeriod },
       }),
     {
@@ -134,21 +191,10 @@ export function Content({
     }
   );
 
-  const districts = useQuery(
-    [`district_data_${boundary}_${timePeriod}`],
-    () =>
-      GraphQL('analytics', ANALYTICS_GEOGRAPHY_DATA, {
-        filters: { type: 'REVENUE CIRCLE' },
-      }),
-    {
-      refetchOnMount: false,
-      refetchOnWindowFocus: false,
-      refetchOnReconnect: false,
-    }
-  );
-
   const columns =
-    boundary === 'district' ? DistrictColumnData : RevenueColumnData;
+    boundary === 'district' && dropDownValue === ''
+      ? DistrictColumnData
+      : RevenueColumnData;
 
   const columnDataIndex = columns.findIndex(
     (obj) => Object.keys(obj)[0] === indicator
@@ -167,11 +213,11 @@ export function Content({
             </IconButton>
           </div>
 
-          <div className="bg-actionsSecondaryBasicDefault rounded-1 border-1 border-solid border-borderHighlightDefault">
+          {/* <div className="bg-actionsSecondaryBasicDefault rounded-1 border-1 border-solid border-borderHighlightDefault">
             <IconButton color="highlight" icon={Icons.download}>
               Download
             </IconButton>
-          </div>
+          </div> */}
         </span>
 
         <Button
@@ -194,28 +240,38 @@ export function Content({
             </Text>
           </div>
           <Separator />
-          <RadioGroup
-            onChange={(val, name) => {
-              setBoundary(val);
-            }}
-            name={boundary}
-            defaultValue={'revenue-circle'}
-          >
-            <div className="flex gap-2 mt-2">
-              {Boundaries.map((item, index) => (
-                <RadioItem key={index} value={item.id}>
-                  {item.name}
-                </RadioItem>
-              ))}
-            </div>
-          </RadioGroup>
+          <div className="flex gap-5 items-end">
+            <IconButton
+              onClick={() => setDropdownValue('')}
+              color="highlight"
+              icon={Icons.home}
+            >
+              Home
+            </IconButton>
+            <RadioGroup
+              onChange={(val, name) => {
+                setDropdownValue('')
+                setBoundary(val);
+              }}
+              name={boundary}
+              defaultValue={'revenue-circle'}
+            >
+              <div className="flex gap-2 mt-2">
+                {Boundaries.map((item, index) => (
+                  <RadioItem key={index} value={item.id}>
+                    {item.name}
+                  </RadioItem>
+                ))}
+              </div>
+            </RadioGroup>
+          </div>
           <Select
-            label="Select District"
+            label={'Select District'}
             className={`w-[380px] mt-2 ${isMapVisible ? 'visible' : 'hidden'}`}
-            name="select-1"
+            name={'select_district'}
             labelHidden
-            value=""
-            onChange={function Yu() {}}
+            value={dropDownValue}
+            onChange={setDropdownValue}
             options={DropdownOptions}
           />
           <div
@@ -226,7 +282,10 @@ export function Content({
             <MapComponent
               revenueDataloading={revenueMapData?.isFetching}
               revenueData={revenueMapData?.data?.revCircleMapData}
+              districtDataloading={districtMapData?.isFetching}
+              districtData={districtMapData?.data?.districtMapData}
               boundary={boundary}
+              dropDownValue={dropDownValue}
             />
           </div>
           <div
@@ -237,19 +296,19 @@ export function Content({
             <ChartComponent
               chartDataloading={chartData?.isFetching}
               chartData={chartData?.data?.revCircleChartData}
-              districtsData={districts?.data?.geography}
+              districtsData={geographiesData?.data?.geography}
             />
           </div>
         </div>
         <div className="h-fit-content">
-          <TableComponent
-            columnData={columns[columnDataIndex][indicator]}
-            rowData={
-              boundary === 'district'
-                ? data?.districtViewTableData?.table_data
-                : revenueData?.data?.revCircleViewTableData?.table_data
-            }
-          />
+          {tableData.length &&
+            revenueTableData.length &&
+            revenueData.isFetched && (
+              <TableComponent
+                columnData={columns[columnDataIndex][indicator]}
+                rowData={boundary === 'district' ? tableData : revenueTableData}
+              />
+            )}
         </div>
       </div>
     </>

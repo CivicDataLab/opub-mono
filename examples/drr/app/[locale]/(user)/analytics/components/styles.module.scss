@@ -82,5 +82,9 @@
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 140px;
+
+    span {
+      font-weight: var(--font-weight-medium);
+    }
   }
 }

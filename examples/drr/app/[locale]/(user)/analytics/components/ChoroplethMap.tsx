@@ -5,8 +5,6 @@ import dynamic from 'next/dynamic';
 import { useSearchParams } from 'next/navigation';
 import { Spinner } from 'opub-ui';
 
-import { useFetch } from '@/lib/api';
-
 const LeafletChoropleth = dynamic(
   () => import('opub-viz/src').then((mod) => mod.LeafletChoropleth),
   { ssr: false }
@@ -15,37 +13,38 @@ const LeafletChoropleth = dynamic(
 export function MapComponent({
   revenueDataloading,
   revenueData,
+  districtDataloading,
+  districtData,
   boundary,
+  dropDownValue
 }: {
   revenueDataloading: Boolean;
   revenueData: any;
+  districtDataloading: boolean;
+  districtData: any;
   boundary: string;
+  dropDownValue: string;
 }) {
-  const { data: mapFile, isLoading: mapLoading } = useFetch(
-    `assam-mapFile`,
-    `/files/assam.json`
-  );
-
-  // const { data: revenueMapFile, isLoading: revenueMapLoading } = useFetch(
-  //   `assam-RevenueMapFile`,
-  //   `/files/assam_block.json`
-  // );
-
   // using ref since state will cause re-render
   const districtNameRef = React.useRef<HTMLDivElement>(null);
   function handleMouseOver(e: any) {
     if (districtNameRef.current) {
-      districtNameRef.current.innerHTML =
-        boundary === 'district'
-          ? e.feature.properties.district
-          : e.feature.properties.name;
+      districtNameRef.current.innerHTML = e.feature.properties.name;
     }
   }
+
+  const [mapBoundary, setMapBoundary] = React.useState(boundary);
+
+  React.useEffect(() => {
+    setMapBoundary(boundary);
+  }, [boundary]);
 
   function handleMouseOut(e: any) {
     if (districtNameRef.current) {
       districtNameRef.current.innerHTML =
-        boundary === 'district' ? 'District' : 'Revenue Circle';
+        e.feature.properties.type === 'DISTRICT'
+          ? 'District'
+          : 'Revenue Circle';
     }
   }
 
@@ -53,9 +52,6 @@ export function MapComponent({
   const indicatorParam = searchParams.get('indicator');
   const SubIndicatorParam = searchParams.get('sub-indicator');
 
-  const [FilteredRevenueCircleFeatures, setFilteredFeatures] = React.useState(
-    []
-  );
 
   const mapDataFn = (value: number) => {
     return value >= 5
@@ -71,26 +67,19 @@ export function MapComponent({
       : '#4575b4';
   };
 
-  const filterByRevenue = (features: any) => {
-    if (revenueData?.features) {
-      const filteredFeatures = revenueData?.features.filter(
-        (feature: { properties: { district_1: string } }) =>
-          feature.properties.district_1 === features?.district
-      );
-      setFilteredFeatures(filteredFeatures);
-    }
-  };
-
   const mapProperty = SubIndicatorParam || indicatorParam || 'composite-score';
 
   return (
     <div className="relative w-full rounded-05 hidden md:block">
-      {!mapLoading && !revenueDataloading ? (
+      {!districtDataloading && !revenueDataloading ? (
         <LeafletChoropleth
           features={
-            boundary === 'district' ? mapFile.features : revenueData?.features
+            mapBoundary === 'district'
+              ? districtData.features
+              : revenueData?.features
           }
           mapZoom={7.4}
+          zoomOnClick={false}
           classifyData={
             ![
               'damages-losses',
@@ -101,9 +90,9 @@ export function MapComponent({
             ].includes(mapProperty)
           }
           fillOpacity={1}
+          filterLabel={dropDownValue !== '' && boundary === 'district' ? 'Dhubri' : ''}
           scrollWheelZoom={false}
           mapProperty={mapProperty}
-          zoomOnClick={true}
           legendData={[
             {
               color: '#d73027',
@@ -118,7 +107,11 @@ export function MapComponent({
               label: 'Medium',
             },
             {
-              color: '#dbeaee',
+              color: '#e0f3f8',
+              label: '',
+            },
+            {
+              color: '#91bfdb',
               label: '',
             },
             {
@@ -127,9 +120,6 @@ export function MapComponent({
             },
           ]}
           mapDataFn={mapDataFn}
-          click={(e) => {
-            filterByRevenue(e.feature.properties);
-          }}
           mouseover={handleMouseOver}
           mouseout={handleMouseOut}
         />
@@ -140,9 +130,9 @@ export function MapComponent({
       )}
       <div
         ref={districtNameRef}
-        className="py-2 px-4 bg-backgroundDefault absolute top-8 right-16 border-1 border-solid border-borderDefault rounded-1 z-max h-[40px]"
+        className="py-2 px-4 bg-surfaceDefault absolute top-4 right-16 border-1 border-solid border-borderDefault rounded-1 z-max h-[40px]"
       >
-        {boundary === 'district' ? 'District' : 'Revenue Circle'}
+        {mapBoundary === 'district' ? 'District' : 'Revenue Circle'}
       </div>
     </div>
   );
