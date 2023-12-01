@@ -59,8 +59,6 @@
 }
 
 .Collapsed {
-  transform: translateX(-210px);
-
   & > span {
     transform: rotate(180deg);
   }
