@@ -16,11 +16,7 @@ import {
 const classyBrew = require('classybrew');
 var brew = new classyBrew();
 
-const layers = [
-  'Gray',
-  'Dark',
-  'Satellite',
-] as const;
+const layers = ['Gray', 'Dark', 'Satellite'] as const;
 type layerOptions = (typeof layers)[number];
 
 type MapProps = {
@@ -74,6 +70,9 @@ type MapProps = {
 
   /* filtering map */
   filterLabel?: string;
+
+  /* property to filter upon */
+  filterProperty?: string;
 };
 
 type LegendProps = {
@@ -112,17 +111,18 @@ const LeafletChoropleth = (props: Props) => {
 };
 
 function FitBounds({
+  filterProperty,
   filterLabel,
   features,
 }: {
+  filterProperty: string;
   filterLabel: string;
   features: any;
 }) {
   if (filterLabel !== '') {
     const map = useMap();
     const filteredLayer = features.filter(
-      (l: { properties: { district: string } }) =>
-        l.properties.district === filterLabel
+      (l: { properties: { [x: string]: string; }; }) => l.properties[filterProperty] === filterLabel
     );
     const bounds = L.geoJSON(filteredLayer[0].geometry).getBounds();
     map.fitBounds(bounds, { maxZoom: 9 });
@@ -146,6 +146,7 @@ const Map = ({
   mapDataFn,
   classifyData = false,
   filterLabel = '',
+  filterProperty = '',
 }: MapProps & {
   selectedLayer: layerOptions;
 }) => {
@@ -232,10 +233,10 @@ const Map = ({
   });
 
   const LayerMap = {
-    'Satellite': 'http://mt1.google.com/vt/lyrs=s&hl=pl&&x={x}&y={y}&z={z}',
-    'Gray' : 'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}',
-    'Dark' : 'https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png'
-  }
+    Satellite: 'http://mt1.google.com/vt/lyrs=s&hl=pl&&x={x}&y={y}&z={z}',
+    Gray: 'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}',
+    Dark: 'https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png',
+  };
 
   if (!unmountMap) {
     return (
@@ -251,9 +252,7 @@ const Map = ({
         zoom={mapZoom}
         ref={mapRef}
       >
-        <TileLayer
-          url={LayerMap[selectedLayer]}
-        />
+        <TileLayer url={LayerMap[selectedLayer]} />
         {features && (
           <>
             <GeoJSON
@@ -264,7 +263,11 @@ const Map = ({
             />
           </>
         )}
-        <FitBounds filterLabel={filterLabel} features={features} />
+        <FitBounds
+          filterProperty={filterProperty}
+          filterLabel={filterLabel}
+          features={features}
+        />
         {!hideScale && <ScaleControl imperial={false} />}
       </MapContainer>
     );

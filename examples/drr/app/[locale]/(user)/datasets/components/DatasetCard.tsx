@@ -56,7 +56,7 @@ export const DatasetCard = ({
         <div id="rightContainer" className="flex flex-3 flex-col gap-2">
           <Text variant="bodyMd">{description}</Text>
           <span className="flex gap-2">
-            {tags.length > 0 && tags?.map((tag, index) => (
+            {tags?.length > 0 && tags?.map((tag, index) => (
               <Tag key={index}>{tag}</Tag>
             ))}
           </span>
