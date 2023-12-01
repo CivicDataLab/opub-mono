@@ -2,30 +2,36 @@
 
 import React from 'react';
 import { useSearchParams } from 'next/navigation';
-import Select from 'react-select';
 import { BarChart } from 'opub-viz/src';
+import Select from 'react-select';
 import { deSlugify } from '@/lib/utils';
 
 export function ChartComponent({
   chartDataloading,
   chartData,
-  districtsData
+  districtsData,
 }: {
   chartDataloading: Boolean;
   chartData: any;
-  districtsData: any
+  districtsData: any;
 }) {
-
-  const [district, setDistrict] = React.useState<any>([{ label: "Balijana", value: "Balijana" }]);
+  const [district, setDistrict] = React.useState<any>([
+    { label: 'Balijana', value: 'Balijana' },
+  ]);
   const searchParams = useSearchParams();
   const timePeriod: string = searchParams.get('time-period') || '2023_08';
   const subIndicator = searchParams.get('sub-indicator');
-  const indicator = searchParams.get('indicator')
-  const indicatorToMap = subIndicator || indicator || 'composite-score'
+  const indicator = searchParams.get('indicator');
+  const indicatorToMap = subIndicator || indicator || 'composite-score';
 
-  let districtArray: any = [];
+  interface DropdownOptionProps {
+    label: string;
+    value: string;
+  }
+
+  const districtArray: DropdownOptionProps[] = [];
   if (districtsData) {
-    districtsData.forEach((district:any) => {
+    districtsData.forEach((district: any) => {
       districtArray.push({
         label: district.name,
         value: district.name,
@@ -33,13 +39,21 @@ export function ChartComponent({
     });
   }
 
-  let series:any = [];
-  if(district && chartData){
+  interface Series {
+    name: string;
+    data: number[];
+    type: string;
+  }
+
+  const series: Series[] = [];
+  if (district && chartData) {
     series.push({
-        name: deSlugify(indicatorToMap),
-        data: district.map((dist:any) => chartData[timePeriod][indicatorToMap][dist.value]),
-        type: 'bar',
-      })
+      name: deSlugify(indicatorToMap),
+      data: district.map(
+        (dist: any) => chartData[timePeriod][indicatorToMap][dist.value]
+      ),
+      type: 'bar',
+    });
   }
 
   const handleSelectChange = (value: any) => {
@@ -50,36 +64,37 @@ export function ChartComponent({
     }
   };
 
-  const disableOptions = () => (
-    district.length == 3 ? true : false
-  );
+  const disableOptions = () => (district.length == 3 ? true : false);
 
   return (
     <div className="relative w-full">
-      {!chartDataloading && districtArray.length > 0  ? (
+      {districtArray.length > 0 && (
         <>
           <Select
             className="w-[450px]"
             name="select-1"
             isMulti
-            defaultValue={districtArray[0].value}
             value={district}
             onChange={handleSelectChange}
             options={districtArray}
             isOptionDisabled={disableOptions}
           />
-          <BarChart
-            yAxis={district.map((item:any) => item.label)}
-            series={series}
-            height="500px"
-          />
+          <span className=" px-2 text-75 text-textCritical">
+            {district.length < 1
+              ? 'Select 1-3 districts, then add indicators for comparison'
+              : null}
+          </span>
+          {!chartDataloading ? (
+            <BarChart
+              yAxis={district.map((item: any) => item.label)}
+              series={series}
+              height="500px"
+            />
+          ) : (
+            <div>Chart is loading</div>
+          )}
         </>
-      ) : 
-      <>
-       <div>
-        Chart is loading
-       </div>
-      </>}
+      )}
     </div>
   );
 }
