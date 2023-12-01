@@ -8,6 +8,7 @@ import {
   ScrollArea,
   Divider,
   Text,
+  SearchInput,
 } from 'opub-ui';
 import React from 'react';
 
@@ -99,14 +100,12 @@ export const IndicatorsCheckbox = ({
         Select indicators to download data
       </Text>
       <Divider className="my-4" />
-      <Input
+      <SearchInput
         name="indicator-search"
         label="Indicator Search"
-        labelHidden
-        prefix={<Icon source={Icons.search} />}
-        placeholder="Search"
         onChange={setSearch}
       />
+
       <div className="mt-4">
         <Checkbox onChange={onSelectAll} name="all-indicators">
           Select all indicators

@@ -9,8 +9,8 @@ import React from 'react';
  */
 const meta = {
   title: 'Verified/Sheet',
-  component: Sheet,
-} satisfies Meta<typeof Sheet>;
+  component: Sheet.Content,
+} satisfies Meta<typeof Sheet.Content>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -18,6 +18,8 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   render: () => {
     const [open, setOpen] = React.useState(false);
+    console.log(open);
+
     return (
       <Box
         flex
@@ -26,11 +28,11 @@ export const Default: Story = {
         alignItems="center"
         justifyContent="center"
       >
-        <Button primary onClick={() => setOpen((val) => !val)}>
-          Open Sheet
-        </Button>
-        <Sheet onOpenChange={() => setOpen((val) => !val)} isOpen={open}>
-          Sheet
+        <Sheet>
+          <Sheet.Trigger>
+            <Button primary>Open Sheet</Button>
+          </Sheet.Trigger>
+          <Sheet.Content>Sheet Content</Sheet.Content>
         </Sheet>
       </Box>
     );
@@ -43,9 +45,9 @@ export const Sides: Story = {
     const [open, setOpen] = React.useState(false);
     const [side, setSide] = React.useState<any>('');
 
-    React.useEffect(() => {
-      if (side) setOpen((val) => !val);
-    }, [side]);
+    // React.useEffect(() => {
+    //   if (side) setOpen((val) => !val);
+    // }, [side]);
 
     function handleOpenChange(side: string) {
       setSide(side);
@@ -61,9 +63,13 @@ export const Sides: Story = {
         direction="column"
         wrap="wrap"
       >
-        <Button primary onClick={() => handleOpenChange('top')}>
-          From Top
-        </Button>
+        <Sheet>
+          <Sheet.Trigger>
+            <Button onClick={() => handleOpenChange('top')}>From Top</Button>
+          </Sheet.Trigger>
+          <Sheet.Content side={side}>Sheet Content</Sheet.Content>
+        </Sheet>
+
         <Box
           flex
           gap="2"
@@ -71,23 +77,31 @@ export const Sides: Story = {
           alignItems="center"
           justifyContent="center"
         >
-          <Button primary onClick={() => handleOpenChange('left')}>
-            From Left
-          </Button>
-          <Button primary onClick={() => handleOpenChange('right')}>
-            From Right
-          </Button>
+          <Sheet>
+            <Sheet.Trigger>
+              <Button onClick={() => handleOpenChange('left')}>
+                From Left
+              </Button>
+            </Sheet.Trigger>
+            <Sheet.Content side={side}>Sheet Content</Sheet.Content>
+          </Sheet>
+          <Sheet>
+            <Sheet.Trigger>
+              <Button onClick={() => handleOpenChange('right')}>
+                From Right
+              </Button>
+            </Sheet.Trigger>
+            <Sheet.Content side={side}>Sheet Content</Sheet.Content>
+          </Sheet>
         </Box>
 
-        <Button primary onClick={() => handleOpenChange('bottom')}>
-          From Bottom
-        </Button>
-        <Sheet
-          onOpenChange={() => setOpen((val) => !val)}
-          side={side}
-          isOpen={open}
-        >
-          Sheet
+        <Sheet>
+          <Sheet.Trigger>
+            <Button onClick={() => handleOpenChange('bottom')}>
+              From Bottom
+            </Button>
+          </Sheet.Trigger>
+          <Sheet.Content side={side}>Sheet Content</Sheet.Content>
         </Sheet>
       </Box>
     );
@@ -95,19 +109,11 @@ export const Sides: Story = {
   args: {},
 };
 
-type sides = 'left' | 'right' | 'top' | 'bottom';
 type sizes = 'narrow' | 'medium' | 'wide' | 'extended' | 'full';
 const sizeArr = ['narrow', 'medium', 'wide', 'extended', 'full'];
 export const Sizes: Story = {
   render: () => {
-    const [open, setOpen] = React.useState(false);
-    const [side, setSide] = React.useState<sides | undefined>(undefined);
     const [size, setSize] = React.useState<sizes | undefined>(undefined);
-
-    function handleOpenChange(side: sides) {
-      setSide(side);
-      setOpen((val) => !val);
-    }
 
     return (
       <Box
@@ -119,50 +125,26 @@ export const Sizes: Story = {
         direction="column"
         wrap="wrap"
       >
-        <Button primary onClick={() => handleOpenChange('top')}>
-          From Top
-        </Button>
-        <Box
-          flex
-          gap="2"
-          width="100%"
-          alignItems="center"
-          justifyContent="center"
-        >
-          <Button primary onClick={() => handleOpenChange('left')}>
-            From Left
-          </Button>
-          <Button primary onClick={() => handleOpenChange('right')}>
-            From Right
-          </Button>
-        </Box>
-
-        <Button primary onClick={() => handleOpenChange('bottom')}>
-          From Bottom
-        </Button>
-        <Sheet
-          onOpenChange={() => setOpen((val) => !val)}
-          side={side}
-          isOpen={open}
-          size={size}
-          className="tray"
-        >
-          <Box
-            flex
-            gap="2"
-            direction={side === 'left' || side === 'right' ? 'column' : 'row'}
-            wrap="wrap"
-            alignItems="center"
-            justifyContent="center"
-            width="100%"
-            minHeight="100%"
-          >
-            {sizeArr.map((size: any) => (
-              <Button key={size} primary onClick={() => setSize(size)}>
-                {size}
-              </Button>
-            ))}
-          </Box>
+        <Sheet>
+          <Sheet.Trigger>
+            <Button>Open Sheet</Button>
+          </Sheet.Trigger>
+          <Sheet.Content size={size}>
+            <Box
+              flex
+              gap="2"
+              wrap="wrap"
+              alignItems="center"
+              width="100%"
+              minHeight="100%"
+            >
+              {sizeArr.map((size: any) => (
+                <Button key={size} primary onClick={() => setSize(size)}>
+                  {size}
+                </Button>
+              ))}
+            </Box>
+          </Sheet.Content>
         </Sheet>
       </Box>
     );

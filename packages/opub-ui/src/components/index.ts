@@ -58,3 +58,5 @@ export { TextField } from './TextField';
 export { Thumbnail } from './Thumbnail';
 export { Toast, Toaster, useToast } from './Toast';
 export { Tooltip } from './Tooltip';
+export { SearchInput } from "./SearchInput";
+export { Tray } from "./Tray";

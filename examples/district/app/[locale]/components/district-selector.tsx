@@ -9,7 +9,7 @@ import { useFetch } from '@/lib/api';
 import { cn } from '@/lib/utils';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
-import { Icon, Input, Divider, Text } from 'opub-ui';
+import { Icon, Input, Divider, Text, SearchInput } from 'opub-ui';
 import React from 'react';
 
 const LeafletChoropleth = dynamic(
@@ -121,15 +121,12 @@ export const DistrictSelector = () => {
           ))}
         </div>
         <Divider className="my-4" />
-        <Input
+        <SearchInput
           name="district-search"
-          placeholder="Search"
-          label="Search District"
-          labelHidden
-          prefix={<Icon source={Icons.search} />}
+          label="Search Search"
           onChange={setSearch}
-          value={search}
         />
+
         <div className="mt-8 flex flex-col gap-4">
           {Object.values(districtList).map((category) => (
             <div key={category.name}>

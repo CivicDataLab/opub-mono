@@ -3,7 +3,7 @@
 import { Icons } from '@/components/icons';
 import { useKeyDetect } from '@/hooks/use-key-detect';
 import Link from 'next/link';
-import { Avatar, Box, Icon, Text, TextField } from 'opub-ui';
+import { Avatar, Box, Icon, SearchInput, Text, TextField } from 'opub-ui';
 import React from 'react';
 
 export function DashboardNav() {
@@ -28,14 +28,7 @@ export function DashboardNav() {
           </Box>
         </Link>
         <div className="hidden w-full max-w-[578px] md:block">
-          <TextField
-            prefix={<Icon source={Icons.search} />}
-            placeholder="Search"
-            name="Search"
-            label="Search"
-            labelHidden
-            ref={searchRef}
-          />
+          <SearchInput name="Search" label="Search" ref={searchRef} />
         </div>
         <div className="flex items-center shrink-0 gap-4">
           <Icon color="default" source={Icons.notification} />
