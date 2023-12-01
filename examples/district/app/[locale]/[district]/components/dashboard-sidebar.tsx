@@ -25,7 +25,7 @@ export function DashboardSidebar({ items, isCollapsed }: DashboardNavProps) {
   return (
     <aside
       className={cn(
-        'pt-4 bg-backgroundSolidDefault shadow-insetBasic',
+        'pt-4 bg-backgroundSolidDefault shadow-insetBasic h-[calc(100vh_-_50px)]',
         'hidden z-1 basis-[240px] shrink-0 md:block overflow-hidden',
         isCollapsed && 'basis-[24px]',
         styles.Collapse
