@@ -6,14 +6,14 @@ import { Breadcrumbs, Tab, TabList, TabPanel, Tabs, Text } from 'opub-ui';
 import { datasetsExplorerPageHeader } from '@/config/consts.ts';
 import { DATASET_BY_SLUG } from '@/config/graphql/dataset-queries';
 import { GraphQL } from '@/lib/api';
+import { formatDate } from '@/lib/utils';
 import { DatasetInfoCard } from './DatasetInfoCard';
 import { DatasetResources } from './DatasetResources';
 import { MetadataCard } from './MetadataCard';
-import { formatDate } from '@/lib/utils';
 
 export function Content({ slug }: { slug: string }) {
   const { data } = useQuery([`dataset_by_slug_${slug}`], () =>
-    GraphQL('datasets' , DATASET_BY_SLUG, {
+    GraphQL('datasets', DATASET_BY_SLUG, {
       dataset_slug: slug,
     })
   );
@@ -71,14 +71,14 @@ export function Content({ slug }: { slug: string }) {
   ];
 
   return (
-    <div className="grid gap-4">
-      <Text className="ps-6 pt-4" variant="headingLg">
+    <div className="grid gap-4 px-10 pt-6">
+      <Text className="ps-6 pt-4 " variant="heading2xl">
         {datasetsExplorerPageHeader}
       </Text>
-      <div className="bg-surface py-3.5 ps-6">
+      {/* <div className="bg-surface py-3.5 ps-6">
         <Breadcrumbs crumbs={breadcrumbs} />
-      </div>
-      <div className="container flex flex-col gap-6">
+      </div> */}
+      <div className=" flex flex-col gap-5 p-0 items-center self-stretch shadow-basicSm  w-full">
         <DatasetInfoCard
           title={explorerData?.title || 'NA'}
           description={explorerData?.description || 'NA'}
@@ -87,14 +87,18 @@ export function Content({ slug }: { slug: string }) {
           logo={explorerData?.catalog?.organization?.logo || '/logo/nhm.png'}
         />
 
-        <div className="flex gap-1">
-          <div className="px-8 bg-surface rounded-1 shadow-card flex gap-1 grow">
+        <div className="flex gap-5 grow self-stretch shadow-basicSm">
+          <div className="px-0 flex flex-col items-start shadow-card gap-2 grow ">
             <Tabs className="min-w-full" defaultValue="data-resources">
               <TabList>
                 {tabList.map((tab) => (
                   <Tab value={tab.value} key={tab.value}>
-                    <div className="flex items-center gap-3">
-                      <Text variant="bodyMd" fontWeight="medium">
+                    <div className="flex justify-center items-center p-0 bg-surfaceSelected">
+                      <Text
+                        variant="bodyMd"
+                        fontWeight="medium"
+                        color="inherit"
+                      >
                         {tab.label}
                       </Text>
                     </div>
@@ -103,7 +107,7 @@ export function Content({ slug }: { slug: string }) {
               </TabList>
               {tabContent.map((tab) => (
                 <TabPanel value={tab.value} key={tab.value}>
-                  <div className="relative overflow-y-auto mt-5">
+                  <div className="overflow-y-auto p-6 gap-6 space-y-6 ">
                     {tab.content}
                   </div>
                 </TabPanel>

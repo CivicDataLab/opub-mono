@@ -7,6 +7,7 @@ import {
   IconChartBar,
   IconChartInfographic,
   IconChevronDown,
+  IconChevronLeft,
   IconChevronRight,
   IconChevronUp,
   IconChevronsLeft,
@@ -68,6 +69,7 @@ export const Icons: {
   iconShare: IconShare,
   iconHelpSquare: IconHelpSquare,
   iconChartBar: IconChartBar,
+  iconChevronLeft: IconChevronLeft,
 };
 
 export default Icons;

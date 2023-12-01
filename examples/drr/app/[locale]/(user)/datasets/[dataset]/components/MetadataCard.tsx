@@ -16,25 +16,13 @@ export function MetadataCard({
   licenses,
 }: Metadata) {
   return (
-    <div className="p-8 bg-surface rounded-1 shadow-card flex flex-col gap-5 shrink-0 basis-[350px]">
+    <div className="py-4 px-6 shadow-card shadow-basicSm bg-surface rounded-1 shadow-card flex flex-col gap-5 shrink-0 basis-[350px]">
       <Text fontWeight="semibold">Metadata</Text>
       <dl>
-        <DataList
-          label={'Last Updated'}
-          value={lastUpdated || 'NA'}
-        />
-        <DataList
-          label={'Update Frequency'}
-          value={updateFrequency || 'NA'}
-        />
-        <DataList
-          label={'Additional Tags'}
-          value={tags || 'NA'}
-        />
-        <DataList
-          label={'File types'}
-          value={fileTypes || 'NA'}
-        />
+        <DataList label={'Last Updated'} value={lastUpdated || 'NA'} />
+        <DataList label={'Update Frequency'} value={updateFrequency || 'NA'} />
+        <DataList label={'Additional Tags'} value={tags || 'NA'} />
+        <DataList label={'File types'} value={fileTypes || 'NA'} />
         <DataList label={'Licenses'} value={licenses || 'NA'} />
       </dl>
     </div>
@@ -50,9 +38,9 @@ export const DataList = ({
 }) => {
   return (
     <div>
-      <div className="flex gap-4 pt-2">
+      <div className="flex gap-4 py-2 border-b-1 border-solid border-borderSubdued">
         <dt className="min-w-[130px]">
-          <Text fontWeight="semibold" variant="bodyMd">
+          <Text fontWeight="medium" variant="bodyMd">
             {label} :
           </Text>
         </dt>
@@ -60,11 +48,13 @@ export const DataList = ({
           {Array.isArray(value) ? (
             value.map((tag, index) => <Tag key={index}>{tag}</Tag>)
           ) : (
-            <Text variant="bodyMd">{value}</Text>
+            <Text fontWeight="medium" variant="bodyMd">
+              {value}
+            </Text>
           )}
         </dd>
       </div>
-      <Separator className="mt-2" />
+      {/* <Separator className="mt-2" /> */}
     </div>
   );
 };
