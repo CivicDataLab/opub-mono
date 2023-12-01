@@ -18,6 +18,7 @@ export const Pill = React.forwardRef(
       url,
       returnValue = '',
       variant = 'neutral',
+      truncate,
       ...other
     }: PillProps,
     ref: React.LegacyRef<HTMLSpanElement>
@@ -54,10 +55,14 @@ export const Pill = React.forwardRef(
     const tagContent =
       url && !disabled ? (
         <a className={cn(styles.Link)} href={url}>
-          <Text variant="bodySm">{children}</Text>
+          <Text variant="bodySm" truncate={truncate}>
+            {children}
+          </Text>
         </a>
       ) : (
-        <Text variant="bodySm">{children}</Text>
+        <Text variant="bodySm" truncate={truncate}>
+          {children}
+        </Text>
       );
 
     return (

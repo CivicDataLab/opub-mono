@@ -11,6 +11,8 @@ interface NonMutuallyExclusiveProps {
   variant?: 'neutral' | 'info' | 'success' | 'warning' | 'critical';
   /** Value that is returned on click of remove button */
   returnValue?: string;
+  /** Truncate text to one line */
+  truncate?: boolean;
 }
 
 export type PillProps = NonMutuallyExclusiveProps &

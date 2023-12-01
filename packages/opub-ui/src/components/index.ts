@@ -60,3 +60,4 @@ export { Toast, Toaster, useToast } from './Toast';
 export { Tooltip } from './Tooltip';
 export { SearchInput } from "./SearchInput";
 export { Tray } from "./Tray";
+export { SelectorCard } from "./SelectorCard";
