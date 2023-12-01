@@ -341,7 +341,13 @@ const Content = ({
           ))}
         </div>
       </Tabs>
-      <div className="mt-3 flex justify-end gap-4">
+      <div
+        className={cn(
+          'mt-3 flex justify-end gap-4',
+          isMobile &&
+            'mt-4 md:mt6 py-4 px-3 rounded-2 shadow-elementCard flex items-center justify-end gap-4 flex-wrap bg-surfaceDefault'
+        )}
+      >
         <Button
           kind="secondary"
           variant="interactive"

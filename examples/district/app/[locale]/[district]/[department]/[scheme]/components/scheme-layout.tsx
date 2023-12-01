@@ -236,9 +236,25 @@ const TabLayout = ({
           </Tab>
         ))}
       </TabList>
-      <div className="mt-4 md:mt-6 md:px-3 md:py-4 md:bg-surfaceDefault">
+      <div className="mt-4 md:mt-6">
+        <TabPanel value="overview">
+          <Overview data={tabs[0].data} ref={overviewRef} />
+        </TabPanel>
+        <TabPanel value="explorer">
+          <Explorer
+            scheme={tabs[1].scheme}
+            chartData={tabs[1].chartData as IChartData}
+            district={tabs[1].district as string}
+          />
+        </TabPanel>
+        <TabPanel value="source-data">
+          <SourceData
+            scheme={tabs[2].scheme}
+            tableData={tabs[2].tableData as ITable}
+          />
+        </TabPanel>
         {tabValue === 'overview' && (
-          <div className="mb-3 flex items-center justify-end gap-4 flex-wrap">
+          <div className="mt-4 md:mt6 py-4 px-3 rounded-2 shadow-elementCard flex items-center justify-end gap-4 flex-wrap bg-surfaceDefault">
             <Button
               kind="secondary"
               variant="interactive"
@@ -262,22 +278,6 @@ const TabLayout = ({
             </Button>
           </div>
         )}
-        <TabPanel value="overview">
-          <Overview data={tabs[0].data} ref={overviewRef} />
-        </TabPanel>
-        <TabPanel value="explorer">
-          <Explorer
-            scheme={tabs[1].scheme}
-            chartData={tabs[1].chartData as IChartData}
-            district={tabs[1].district as string}
-          />
-        </TabPanel>
-        <TabPanel value="source-data">
-          <SourceData
-            scheme={tabs[2].scheme}
-            tableData={tabs[2].tableData as ITable}
-          />
-        </TabPanel>
       </div>
     </Tabs>
   );

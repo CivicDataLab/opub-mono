@@ -39,10 +39,7 @@ export function DashboardLayout({
         items={dashboardConfig.sidebarNav}
       />
 
-      {/* <div className="md:hidden basis-2 z-1">
-        <MobileDashboardNav items={dashboardConfig.sidebarNav} />
-      </div> */}
-      <main className={cn(styles.Main, `grow`)}>{children}</main>
+      <main className={cn(styles.Main, `grow pb-10`)}>{children}</main>
     </div>
   );
 }
