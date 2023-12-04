@@ -88,6 +88,7 @@ $vertical-spacing: 60px;
   &.right {
     width: var(--inlineWidth);
     height: 100vh;
+    height: 100svh;
 
     &.medium {
       --inlineWidth: 420px;
@@ -108,6 +109,7 @@ $vertical-spacing: 60px;
     width: 100vw;
     height: var(--blockHeight);
     max-height: 100vh;
+    max-height: 100svh;
 
     &.medium {
       --blockHeight: 360px;
@@ -116,10 +118,12 @@ $vertical-spacing: 60px;
       --blockHeight: 480px;
     }
     &.extended {
-      --blockHeight: 90vh;
+      --blockHeight: 85vh;
+      --blockHeight: 85svh;
     }
     &.full {
       --blockHeight: 100vh;
+      --blockHeight: 100svh;
     }
   }
 }
