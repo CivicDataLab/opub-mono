@@ -22,7 +22,6 @@ import { useQueryState } from 'next-usequerystate';
 import dynamic from 'next/dynamic';
 import { BarView } from './BarView';
 import { useWindowSize } from '@/hooks/use-window-size';
-import { MapChart } from 'opub-viz';
 
 const LeafletChoropleth = dynamic(
   () => import('opub-viz').then((mod) => mod.LeafletChoropleth),
@@ -253,33 +252,43 @@ const Content = ({
     {
       label: 'Map View',
       value: 'map',
-      content: !mapLoading ? (
-        <MapChart
-          mapFile={mapFile}
-          data={currentData.mapdata.map(
-            (e: {
-              name: string;
-              value: string;
-              label: string;
-              disp_val: string;
-            }) => {
-              return {
-                name: String(e.name),
-                value: e.value,
-                label: e.label,
-                labelVal: e.disp_val,
-              };
-            }
-          )}
-          mapName="assam-block"
-          nameProperty="BLOCK_LGD"
-          height="500px"
-          colors={['#c9f0fa', '#abd9e9', '#74add1', '#4575b4', '#313695']}
-          loading={mapLoading}
-        />
-      ) : (
-        <div className="flex justify-center items-center">Loading...</div>
-      ),
+      content:
+        // <MapChart
+        //   mapFile={mapFile}
+        //   data={currentData.mapdata.map(
+        //     (e: {
+        //       name: string;
+        //       value: string;
+        //       label: string;
+        //       disp_val: string;
+        //     }) => {
+        //       return {
+        //         name: String(e.name),
+        //         value: e.value,
+        //         label: e.label,
+        //         labelVal: e.disp_val,
+        //       };
+        //     }
+        //   )}
+        //   mapName="assam-block"
+        //   nameProperty="BLOCK_LGD"
+        //   height="500px"
+        //   colors={['#c9f0fa', '#abd9e9', '#74add1', '#4575b4', '#313695']}
+        //   loading={mapLoading}
+        // />
+        !mapLoading ? (
+          <LeafletChoropleth
+            features={mapFile.features}
+            mapZoom={7.4}
+            zoomOnClick={false}
+            mapProperty="enabled"
+            mapDataFn={mapDataFn}
+            fillOpacity={1}
+            className="w-full h-[512px]"
+          />
+        ) : (
+          <div className="flex justify-center items-center">Loading...</div>
+        ),
     },
   ];
 
