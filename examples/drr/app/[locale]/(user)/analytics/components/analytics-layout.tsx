@@ -237,7 +237,7 @@ export function Content({
               {deSlugify(indicator)}
             </Text>
             <Text className="text-textSubdued" variant="bodyLg">
-              {timePeriod && `Time Period : ${formatDateString(timePeriod)} to Present`} 
+              {timePeriod && `${formatDateString(timePeriod)}`} 
             </Text>
           </div>
           <Separator />

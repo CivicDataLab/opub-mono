@@ -29,6 +29,11 @@ export function Content({
     },
   ];
 
+  if (typeof document !== 'undefined') {
+    setTimeout(() => {
+      document.body.style.cssText = 'overflow: auto;';
+    }, 1000);
+  }
   const DownloadDatasetMap: { [key: string]: string } = {
     'Composite Score':
       'https://opub-backend.civicdatalab.in/get_dist_data/?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFiaGluYXZAY2l2aWNkYXRhbGFiLmluIiwiZGFtX3Jlc291cmNlIjo1LCJkYW1fcmVxdWVzdCI6NSwiZGFtIjo0LCJyZXNvdXJjZV9pZCI6NSwiZXhwIjoxNzE2OTcyNDYxLCJ0b2tlbl90aW1lIjoiMTIvMDEvMjAyMywgMDg6NDc6NDEiLCJpYXQiOjE3MDE0MjA0NjF9.wLKVYHzIYZ3sBh6R19WHSh__rjBR2yxei8O6kPOUtp8&format=CSV&type=file',
@@ -59,15 +64,19 @@ export function Content({
           </Text>
           <div className="w-7/12 flex gap-2 items-center">
             <div className="flex-1">
-            <TextField
-              placeholder="Search"
-              name="Search"
-              label="Search"
-              type="search"
-              labelHidden
-            />
+              <TextField
+                placeholder="Search"
+                name="Search"
+                label="Search"
+                type="search"
+                labelHidden
+              />
             </div>
-            <IconButton className="bg-actionsSecondaryBasicDefault rounded-1 border-1 border-solid border-borderHighlightDefault" color={'highlight'} icon={Icons.search}>
+            <IconButton
+              className="bg-actionsSecondaryBasicDefault rounded-1 border-1 border-solid border-borderHighlightDefault"
+              color={'highlight'}
+              icon={Icons.search}
+            >
               Search
             </IconButton>
           </div>
@@ -85,7 +94,6 @@ export function Content({
         <div className="flex w-4/5 flex-col gap-4 rounded shadow-card border-solid p-6">
           {data.map((dataset, index) => (
             <DatasetCard
-              key={index}
               title={dataset?.title || 'NA'}
               source={dataset?.source || 'NA'}
               description={dataset?.description || 'NA'}

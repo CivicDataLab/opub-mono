@@ -7,6 +7,7 @@ export function TableComponent({ rowData, columnData }: any) {
     <Table
       columnContentTypes={['text', 'text', 'text', 'text', 'text', 'text']}
       columns={columnData}
+      sortColumns={["revenue-circle" , "district"]}
       rows={rowData}
       className={styles.Table}
     />

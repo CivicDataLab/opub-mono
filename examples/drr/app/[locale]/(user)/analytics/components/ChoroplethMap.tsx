@@ -16,7 +16,7 @@ export function MapComponent({
   districtDataloading,
   districtData,
   boundary,
-  dropDownValue
+  dropDownValue,
 }: {
   revenueDataloading: Boolean;
   revenueData: any;
@@ -52,20 +52,46 @@ export function MapComponent({
   const indicatorParam = searchParams.get('indicator');
   const SubIndicatorParam = searchParams.get('sub-indicator');
 
-
   const mapDataFn = (value: number) => {
-    return value >= 5
-      ? '#d73027'
-      : value >= 4
-      ? '#fc8d59'
-      : value >= 3
-      ? '#fee090'
-      : value >= 2
-      ? '#dbeaee'
-      : value >= 1
-      ? '#91bfdb'
-      : '#4575b4';
+    let colorString;
+    switch (value) {
+      case 1:
+        colorString = '#4575b4';
+        break;
+      case 2:
+        colorString = '#91bfdb';
+        break;
+      case 3:
+        colorString = '#dbeaee';
+        break;
+      case 4:
+        colorString = '#fee090';
+        break;
+      case 5:
+        colorString = '#fc8d59';
+        break;
+      case 6:
+        colorString = '#d73027';
+        break;
+      default:
+        colorString = '#4575b4';
+        break;
+    }
+    return colorString;
   };
+
+  const slugsNotToBeClassified = [
+    'composite-score',
+    'flood-hazard',
+    'exposure',
+    'vulnerability',
+    'government-response',
+    'damages-losses',
+    'population-affected-total',
+    'human-live-lost',
+    'crop-area',
+    'total-house-fully-damaged',
+  ];
 
   const mapProperty = SubIndicatorParam || indicatorParam || 'composite-score';
 
@@ -80,17 +106,11 @@ export function MapComponent({
           }
           mapZoom={7.4}
           zoomOnClick={false}
-          classifyData={
-            ![
-              'damages-losses',
-              'population-affected-total',
-              'human-live-lost',
-              'crop-area',
-              'total-house-fully-damaged',
-            ].includes(mapProperty)
-          }
+          classifyData={!slugsNotToBeClassified.includes(mapProperty)}
           fillOpacity={1}
-          filterLabel={dropDownValue !== '' && boundary === 'district' ? dropDownValue : ''}
+          filterLabel={
+            dropDownValue !== '' && boundary === 'district' ? dropDownValue : ''
+          }
           filterProperty={'district-code'}
           scrollWheelZoom={false}
           mapProperty={mapProperty}

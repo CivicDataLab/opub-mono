@@ -11,6 +11,7 @@ type ColumnData = Array<{
   [key: string]: Array<{
     accessorKey: string;
     header: string;
+    enableSorting?: boolean;
   }>;
 }>;
 
@@ -20,6 +21,7 @@ const DistrictColumnData : ColumnData = [
         {
           accessorKey: 'district',
           header: 'District',
+          enableSorting: true,
         },
         {
           accessorKey: 'composite-score',
@@ -206,6 +208,7 @@ const DistrictColumnData : ColumnData = [
         {
           accessorKey: 'revenue-circle',
           header: 'Revenue Circle',
+          enableSorting: true,
         },
         {
           accessorKey: 'composite-score',

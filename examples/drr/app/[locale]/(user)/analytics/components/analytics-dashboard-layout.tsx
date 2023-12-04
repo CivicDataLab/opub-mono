@@ -15,10 +15,18 @@ interface DashboardLayoutProps {
 export function AnalyticsDashboardLayout({ children }: DashboardLayoutProps) {
   const [isCollapsed, setIsCollapsed] = React.useState(false);
 
+  if (typeof document !== 'undefined') {
+    setTimeout(() => {
+      document.body.style.cssText = 'overflow: hidden;';
+    }, 1000);
+  }
+
   return (
     <React.Fragment>
       <div
-        className={cn('md:flex relative gap-1 grow min-h-[calc(100%_-_48px)]')}
+        className={cn(
+          'md:flex relative gap-1 grow max-h-full min-h-[calc(100%_-_48px)] overflow-y-hidden'
+        )}
       >
         <IconButton
           className={cn(
@@ -34,7 +42,16 @@ export function AnalyticsDashboardLayout({ children }: DashboardLayoutProps) {
         </IconButton>
         <AnalyticsDashboardSidebar isCollapsed={isCollapsed} />
 
-        <main className={cn(styles.Main, 'px-10', 'py-6')}>{children}</main>
+        <main
+          className={cn(
+            styles.Main,
+            'px-10',
+            'py-6',
+            'h-[90vh] overflow-y-scroll'
+          )}
+        >
+          {children}
+        </main>
       </div>
     </React.Fragment>
   );
