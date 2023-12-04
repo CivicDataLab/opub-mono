@@ -172,7 +172,7 @@
     margin: 0;
   }
 
-  &:hover {
+  // &:hover {
     color: var(--interactive-hovered);
 
     .Icon {
@@ -182,7 +182,7 @@
         fill: var(--icon-disabled);
       }
     }
-  }
+  // }
 
   &:focus-visible:not(:active) {
     @include focus-ring($style: 'focused');

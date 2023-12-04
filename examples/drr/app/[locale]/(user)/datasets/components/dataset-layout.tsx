@@ -94,6 +94,7 @@ export function Content({
         <div className="flex w-4/5 flex-col gap-4 rounded shadow-card border-solid p-6">
           {data.map((dataset, index) => (
             <DatasetCard
+              keyIndex={index}
               title={dataset?.title || 'NA'}
               source={dataset?.source || 'NA'}
               description={dataset?.description || 'NA'}

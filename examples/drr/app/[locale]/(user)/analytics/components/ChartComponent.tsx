@@ -9,14 +9,14 @@ import { deSlugify } from '@/lib/utils';
 export function ChartComponent({
   chartDataloading,
   chartData,
-  districtsData,
+  dropDownData,
 }: {
   chartDataloading: Boolean;
   chartData: any;
-  districtsData: any;
+  dropDownData: any;
 }) {
   const [district, setDistrict] = React.useState<any>([
-    { label: 'Balijana', value: 'Balijana' },
+    { label: 'Balijana', value: '116' },
   ]);
   const searchParams = useSearchParams();
   const timePeriod: string = searchParams.get('time-period') || '2023_08';
@@ -30,11 +30,11 @@ export function ChartComponent({
   }
 
   const districtArray: DropdownOptionProps[] = [];
-  if (districtsData) {
-    districtsData.forEach((district: any) => {
+  if (dropDownData) {
+    dropDownData.forEach((district: any) => {
       districtArray.push({
         label: district.name,
-        value: district.name,
+        value: district.code,
       });
     });
   }
@@ -50,7 +50,7 @@ export function ChartComponent({
     series.push({
       name: deSlugify(indicatorToMap),
       data: district.map(
-        (dist: any) => chartData[timePeriod][indicatorToMap][dist.value]
+        (dist: any) => chartData[timePeriod][indicatorToMap][dist.value][dist.label]
       ),
       type: 'bar',
     });

@@ -6,6 +6,7 @@ import { DatasetSource } from '@/config/consts.ts';
 import { formatDate } from '@/lib/utils';
 
 export interface DataProps {
+  keyIndex:number;
   title: string;
   source: string;
   description: string;
@@ -18,6 +19,7 @@ export interface DataProps {
   datasetDownloadLink: string;
 }
 export const DatasetCard = ({
+  keyIndex,
   title,
   source,
   description,
@@ -28,7 +30,7 @@ export const DatasetCard = ({
   datasetDownloadLink,
 }: DataProps) => {
   return (
-    <div className=" bg-surfaceDefault p-6 shadow-elementCard rounded-2 flex flex-col gap-4 rounded">
+    <div key={keyIndex} className=" bg-surfaceDefault p-6 shadow-elementCard rounded-2 flex flex-col gap-4 rounded">
       <div
         id="leftContainer"
         className="flex flex-2 flex-col gap-2 text-interactive items-stretch truncate"

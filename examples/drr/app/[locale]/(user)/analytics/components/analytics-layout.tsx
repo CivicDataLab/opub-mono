@@ -297,7 +297,7 @@ export function Content({
             <ChartComponent
               chartDataloading={chartData?.isFetching}
               chartData={chartData?.data?.revCircleChartData}
-              districtsData={geographiesData?.data?.geography}
+              dropDownData={geographiesData?.data?.geography}
             />
           </div>
         </div>

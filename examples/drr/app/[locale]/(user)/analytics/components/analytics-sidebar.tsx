@@ -167,7 +167,7 @@ export function AnalyticsDashboardSidebar({
         styles.Collapse
       )}
     >
-      <div className="pt-16 h-[90vh] hover:overflow-y-scroll">
+      <div className="pt-16 h-[90vh] overflow-y-scroll overflow-x-hidden">
         <span
           className={cn(
             ' pl-0 rounded justify-end items-center',
