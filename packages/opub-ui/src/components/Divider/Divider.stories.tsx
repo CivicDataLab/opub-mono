@@ -5,7 +5,7 @@ import { Meta, StoryObj } from '@storybook/react';
  * Use to separate or group content
  */
 const meta = {
-  title: 'Verified/Divider',
+  title: 'Components/Divider',
   component: Divider,
 } satisfies Meta<typeof Divider>;
 

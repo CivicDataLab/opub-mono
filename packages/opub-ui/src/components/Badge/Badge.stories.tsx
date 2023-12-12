@@ -8,7 +8,7 @@ import { Meta, StoryObj } from '@storybook/react';
  */
 
 const meta = {
-  title: 'Verified/Badge',
+  title: 'Components/Badge',
   component: Badge,
 } satisfies Meta<typeof Badge>;
 

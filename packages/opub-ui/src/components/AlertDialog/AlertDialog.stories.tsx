@@ -8,7 +8,7 @@ import { Meta, StoryObj } from '@storybook/react';
  * Reference: https://www.radix-ui.com/docs/primitives/components/alert-dialog
  */
 const meta = {
-  title: 'Verified/AlertDialog',
+  title: 'Components/AlertDialog',
   component: AlertDialog.Content,
 } satisfies Meta<typeof AlertDialog.Content>;
 

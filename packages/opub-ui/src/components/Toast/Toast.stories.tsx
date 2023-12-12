@@ -10,7 +10,7 @@ import { Meta } from '@storybook/react';
  * Reference: https://www.radix-ui.com/docs/primitives/components/toast
  */
 const meta = {
-  title: 'Verified/Toast',
+  title: 'Components/Toast',
   component: Toaster,
 } satisfies Meta<typeof Toaster>;
 

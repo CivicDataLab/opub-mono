@@ -13,7 +13,7 @@ import { useCallback, useState } from 'react';
  * Reference: https://polaris.shopify.com/components/selection-and-input/drop-zone
  */
 const meta = {
-  title: 'Verified/DropZone',
+  title: 'Components/DropZone',
   component: DropZone,
 } satisfies Meta<typeof DropZone>;
 

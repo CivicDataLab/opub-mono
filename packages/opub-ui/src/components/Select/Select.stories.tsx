@@ -10,7 +10,7 @@ import { useCallback, useState } from 'react';
  * Reference: https://polaris.shopify.com/components/selection-and-input/select
  */
 const meta = {
-  title: 'Verified/Select',
+  title: 'Components/Select',
   component: Select,
 } satisfies Meta<typeof Select>;
 

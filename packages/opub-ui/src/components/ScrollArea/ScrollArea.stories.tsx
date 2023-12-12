@@ -9,7 +9,7 @@ import { Meta, StoryObj } from '@storybook/react';
  * Reference: https://www.radix-ui.com/docs/primitives/components/scroll-area
  */
 const meta = {
-  title: 'Verified/ScrollArea',
+  title: 'Components/ScrollArea',
   component: ScrollArea,
 } satisfies Meta<typeof ScrollArea>;
 
