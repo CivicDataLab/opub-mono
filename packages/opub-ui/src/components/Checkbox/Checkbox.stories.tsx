@@ -8,7 +8,7 @@ import { Meta, StoryObj } from '@storybook/react';
  * Reference: https://www.radix-ui.com/docs/primitives/components/checkbox
  */
 const meta = {
-  title: 'Verified/Checkbox',
+  title: 'Components/Checkbox',
   component: Checkbox,
 } satisfies Meta<typeof Checkbox>;
 

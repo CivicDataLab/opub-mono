@@ -7,7 +7,7 @@ import { Meta, StoryObj } from '@storybook/react';
  * Reference: https://ariakit.org/examples/combobox-multiple
  */
 const meta = {
-  title: 'Verified/Combobox',
+  title: 'Components/Combobox',
   component: Combobox,
 } satisfies Meta<typeof Combobox>;
 

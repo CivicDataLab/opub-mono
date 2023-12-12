@@ -1,17 +1,18 @@
-import { dirname, join } from "path";
-import { StorybookConfig } from '@storybook/react-vite';
+import { dirname, join } from 'path';
+
 const turbosnap = require('vite-plugin-turbosnap');
 const { mergeConfig } = require('vite');
 
 const config = {
-  stories: ['../src'],
+  stories: ['../src', '../docs'],
   addons: [
-    getAbsolutePath("@storybook/addon-links"),
-    getAbsolutePath("@storybook/addon-essentials"),
-    getAbsolutePath("@storybook/addon-interactions"),
+    getAbsolutePath('@storybook/addon-links'),
+    getAbsolutePath('@storybook/addon-essentials'),
+    getAbsolutePath('@storybook/addon-interactions'),
+    getAbsolutePath("@storybook/addon-mdx-gfm")
   ],
   framework: {
-    name: getAbsolutePath("@storybook/react-vite"),
+    name: getAbsolutePath('@storybook/react-vite'),
     options: {},
   },
   docs: {
@@ -33,5 +34,5 @@ const config = {
 export default config;
 
 function getAbsolutePath(value: string): any {
-  return dirname(require.resolve(join(value, "package.json")));
+  return dirname(require.resolve(join(value, 'package.json')));
 }

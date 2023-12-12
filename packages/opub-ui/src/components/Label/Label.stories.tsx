@@ -7,7 +7,7 @@ import { Meta } from '@storybook/react';
  * Reference: https://www.radix-ui.com/docs/primitives/components/label
  */
 export default {
-  title: 'Verified/Label',
+  title: 'Components/Label',
   component: Label,
 
   argTypes: {

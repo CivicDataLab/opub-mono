@@ -6,7 +6,7 @@ import { Meta, StoryObj } from '@storybook/react';
  * Pill is a component that displays a short string of text, which can removed.
  */
 const meta = {
-  title: 'Verified/Pill',
+  title: 'Components/Pill',
   component: Pill,
 } satisfies Meta<typeof Pill>;
 

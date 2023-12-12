@@ -8,7 +8,7 @@ import { Meta, StoryObj } from '@storybook/react';
  * Reference: https://react-spectrum.adobe.com/react-aria/useTimeField.html
  */
 const meta = {
-  title: 'Verified/TimeField',
+  title: 'Components/TimeField',
   component: TimeField,
 } satisfies Meta<typeof TimeField>;
 

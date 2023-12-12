@@ -9,7 +9,7 @@ import { Meta, StoryObj } from '@storybook/react';
  * Reference: https://react-spectrum.adobe.com/react-aria/useDatePicker.html
  */
 const meta = {
-  title: 'Verified/DatePicker',
+  title: 'Components/DatePicker',
   component: DatePicker,
 } satisfies Meta<typeof DatePicker>;
 

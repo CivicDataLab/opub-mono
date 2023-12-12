@@ -7,7 +7,7 @@ import { Meta, StoryObj } from '@storybook/react';
  * Reference: https://www.radix-ui.com/docs/primitives/components/switch
  */
 const meta = {
-  title: 'Verified/Switch',
+  title: 'Components/Switch',
   component: Switch,
 } satisfies Meta<typeof Switch>;
 

@@ -8,7 +8,7 @@ import { Meta, StoryObj } from '@storybook/react';
  * Reference: https://www.radix-ui.com/docs/primitives/components/tabs
  */
 const meta = {
-  title: 'Verified/Tabs',
+  title: 'Components/Tabs',
   component: Tabs,
 } satisfies Meta<typeof Tabs>;
 

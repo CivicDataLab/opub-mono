@@ -8,7 +8,7 @@ import React from 'react';
  * Sheet is a panel that slides in from the side of the screen.
  */
 const meta = {
-  title: 'Verified/Sheet',
+  title: 'Components/Sheet',
   component: Sheet.Content,
 } satisfies Meta<typeof Sheet.Content>;
 

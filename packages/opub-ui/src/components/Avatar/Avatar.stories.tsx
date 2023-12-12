@@ -8,7 +8,7 @@ import { Meta, StoryObj } from '@storybook/react';
  * Reference: https://polaris.shopify.com/components/images-and-icons/avatar
  */
 const meta = {
-  title: 'Verified/Avatar',
+  title: 'Components/Avatar',
   component: Avatar,
 } satisfies Meta<typeof Avatar>;
 

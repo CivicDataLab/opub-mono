@@ -11,7 +11,7 @@ import { Meta, StoryObj } from '@storybook/react';
  * Reference: https://www.radix-ui.com/docs/primitives/components/popover
  */
 const meta = {
-  title: 'Verified/Popover',
+  title: 'Components/Popover',
   component: Popover.Content,
   argTypes: {
     children: {

@@ -1,5 +1,5 @@
-import { Meta, StoryObj } from '@storybook/react';
 import { SkeletonBodyText } from './SkeletonBodyText';
+import { Meta, StoryObj } from '@storybook/react';
 
 /**
  * Skeleton body text is used to provide a low fidelity representation of content before it appears on the page
@@ -7,7 +7,7 @@ import { SkeletonBodyText } from './SkeletonBodyText';
  * Reference: https://polaris.shopify.com/components/feedback-indicators/skeleton-body-text
  */
 const meta = {
-  title: 'Verified/SkeletonBodyText',
+  title: 'Components/SkeletonBodyText',
   component: SkeletonBodyText,
 } satisfies Meta<typeof SkeletonBodyText>;
 

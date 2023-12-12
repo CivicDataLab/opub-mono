@@ -8,7 +8,7 @@ import { Meta, StoryObj } from '@storybook/react';
  * Reference: https://www.radix-ui.com/docs/primitives/components/dialog
  */
 const meta = {
-  title: 'Verified/Dialog',
+  title: 'Components/Dialog',
   component: Dialog.Content,
 } satisfies Meta<typeof Dialog.Content>;
 

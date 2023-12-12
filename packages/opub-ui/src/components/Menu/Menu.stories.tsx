@@ -13,7 +13,7 @@ import {
  * A wrapper around Popover and ActionList Components
  */
 const meta = {
-  title: 'Verified/Menu',
+  title: 'Components/Menu',
   component: Menu,
 } satisfies Meta<typeof Menu>;
 

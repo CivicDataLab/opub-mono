@@ -8,7 +8,7 @@ import { Meta, StoryObj } from '@storybook/react';
  * Reference: https://www.radix-ui.com/docs/primitives/components/progress
  */
 const meta = {
-  title: 'Verified/ProgressBar',
+  title: 'Components/ProgressBar',
   component: ProgressBar,
 } satisfies Meta<typeof ProgressBar>;
 
