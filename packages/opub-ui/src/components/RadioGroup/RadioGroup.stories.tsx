@@ -7,7 +7,7 @@ import { Meta } from '@storybook/react';
  * Reference: https://www.radix-ui.com/docs/primitives/components/radio-group
  */
 const meta = {
-  title: 'Verified/RadioGroup',
+  title: 'Components/RadioGroup',
   component: RadioGroup,
 } satisfies Meta<typeof RadioGroup>;
 

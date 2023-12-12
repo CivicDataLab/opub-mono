@@ -12,7 +12,7 @@ import {
  * Reference: https://polaris.shopify.com/components/images-and-icons/icon
  */
 const meta = {
-  title: 'Verified/Icon',
+  title: 'Components/Icon',
   component: Icon,
 } satisfies Meta<typeof Icon>;
 

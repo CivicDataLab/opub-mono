@@ -10,7 +10,7 @@ import { IconCopy, IconPencil, IconTrash } from '@tabler/icons-react';
  * Reference: https://tanstack.com/table/v8/docs/guide/introduction
  */
 const meta = {
-  title: 'Verified/DataTable',
+  title: 'Components/DataTable',
   component: DataTable,
 } satisfies Meta<typeof DataTable>;
 

@@ -8,7 +8,7 @@ import { Meta, StoryObj } from '@storybook/react';
  * Reference: https://react-spectrum.adobe.com/react-aria/useDateField.html
  */
 const meta = {
-  title: 'Verified/DateField',
+  title: 'Components/DateField',
   component: DateField,
 } satisfies Meta<typeof DateField>;
 

@@ -7,9 +7,19 @@ import { Tooltip } from '../src/components/Tooltip';
 import React from 'react';
 
 export const parameters = {
-  parameters: {
-    docs: {
-      theme: themes.light,
+  docs: {
+    theme: themes.light,
+  },
+  options: {
+    storySort: {
+      order: [
+        'Guides',
+        ['Introduction'],
+        'Foundations',
+        'Styles',
+        'Patterns',
+        'components',
+      ],
     },
   },
 };

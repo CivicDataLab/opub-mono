@@ -11,7 +11,7 @@ const data = makeTableData(100);
  * Reference: https://tanstack.com/table/v8/docs/guide/introduction
  */
 const meta = {
-  title: 'Verified/Table',
+  title: 'Components/Table',
   component: Table,
 } satisfies Meta<typeof Table>;
 

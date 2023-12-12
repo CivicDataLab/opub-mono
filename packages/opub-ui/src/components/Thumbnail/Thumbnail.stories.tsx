@@ -9,7 +9,7 @@ import { IconCalendar } from '@tabler/icons-react';
  * Reference: #
  */
 const meta = {
-  title: 'Verified/Thumbnail',
+  title: 'Components/Thumbnail',
   component: Thumbnail,
 } satisfies Meta<typeof Thumbnail>;
 

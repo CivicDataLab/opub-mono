@@ -11,7 +11,7 @@ import { IconSun } from '@tabler/icons-react';
  * Reference: https://polaris.shopify.com/components/selection-and-input/tag
  */
 const meta = {
-  title: 'Verified/Tag',
+  title: 'Components/Tag',
   component: Tag,
 } satisfies Meta<typeof Tag>;
 

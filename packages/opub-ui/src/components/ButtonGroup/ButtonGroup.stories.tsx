@@ -8,7 +8,7 @@ import { Meta, StoryObj } from '@storybook/react';
  * Reference: https://polaris.shopify.com/components/actions/button-group
  */
 const meta = {
-  title: 'Verified/ButtonGroup',
+  title: 'Components/ButtonGroup',
   component: ButtonGroup,
 } satisfies Meta<typeof ButtonGroup>;
 

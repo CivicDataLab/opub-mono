@@ -10,7 +10,7 @@ import { useLocale } from 'react-aria';
  * Reference: https://react-spectrum.adobe.com/react-aria/useCalendar.html
  */
 const meta = {
-  title: 'Verified/Calendar',
+  title: 'Components/Calendar',
   component: Calendar,
 } satisfies Meta<typeof Calendar>;
 

@@ -9,7 +9,7 @@ import { Meta, StoryObj } from '@storybook/react';
  * Reference: https://polaris.shopify.com/components/layout-and-structure/form-layout
  */
 const meta = {
-  title: 'Verified/FormLayout',
+  title: 'Components/FormLayout',
   component: FormLayout,
 } satisfies Meta<typeof FormLayout>;
 

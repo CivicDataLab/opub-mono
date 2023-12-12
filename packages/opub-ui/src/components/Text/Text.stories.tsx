@@ -8,7 +8,7 @@ import { Meta } from '@storybook/react';
  * Reference: https://polaris.shopify.com/components/typography/text
  */
 const meta = {
-  title: 'Verified/Text',
+  title: 'Components/Text',
   component: Text,
 } satisfies Meta<typeof Text>;
 

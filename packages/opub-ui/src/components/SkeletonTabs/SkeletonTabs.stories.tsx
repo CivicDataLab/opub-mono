@@ -7,7 +7,7 @@ import { Meta, StoryObj } from '@storybook/react';
  * Reference: https://polaris.shopify.com/components/feedback-indicators/SkeletonTabs-tabs
  */
 const meta = {
-  title: 'Verified/SkeletonTabs',
+  title: 'Components/SkeletonTabs',
   component: SkeletonTabs,
 } satisfies Meta<typeof SkeletonTabs>;
 

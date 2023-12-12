@@ -9,7 +9,7 @@ import { IconCheck, IconFileExport, IconFileImport } from '@tabler/icons-react';
  * Reference: https://polaris.shopify.com/components/lists/action-list
  */
 const meta = {
-  title: 'Verified/ActionList',
+  title: 'Components/ActionList',
   component: ActionList,
 } satisfies Meta<typeof ActionList>;
 

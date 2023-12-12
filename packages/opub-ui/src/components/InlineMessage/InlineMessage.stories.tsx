@@ -6,7 +6,7 @@ import { Meta, StoryObj } from '@storybook/react';
  * An inline message lets users know when important information is available
  */
 const meta = {
-  title: 'Verified/InlineMessage',
+  title: 'Components/InlineMessage',
   component: InlineMessage,
 } satisfies Meta<typeof InlineMessage>;
 

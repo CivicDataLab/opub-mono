@@ -7,7 +7,7 @@ import { Meta, StoryObj } from '@storybook/react';
  * Reference: https://polaris.shopify.com/components/feedback-indicators/skeleton-display-text
  */
 const meta = {
-  title: 'Verified/SkeletonDisplayText',
+  title: 'Components/SkeletonDisplayText',
   component: SkeletonDisplayText,
 } satisfies Meta<typeof SkeletonDisplayText>;
 
