@@ -27,23 +27,21 @@ export function ChartComponent({
     value: string;
   }
 
+  const [districtArray, setDistrictArray] = React.useState<DropdownOptionProps[]>([]);
   React.useEffect(() => {
     if (dropDownData && dropDownData.length > 0) {
       setDistrict([
         { label: dropDownData[0].name, value: dropDownData[0].code },
-      ]);
+      ])
+
+      const updatedDistrictArray = dropDownData.map((districtItem: any) => ({
+        label: districtItem.name,
+        value: districtItem.code,
+      }));
+  
+      setDistrictArray(updatedDistrictArray);
     }
   }, [dropDownData]);
-
-  const districtArray: DropdownOptionProps[] = [];
-  if (dropDownData) {
-    dropDownData.forEach((district: any) => {
-      districtArray.push({
-        label: district.name,
-        value: district.code,
-      });
-    });
-  }
 
   interface Series {
     name: string;
