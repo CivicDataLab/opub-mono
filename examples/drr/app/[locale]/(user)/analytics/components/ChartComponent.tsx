@@ -15,9 +15,7 @@ export function ChartComponent({
   chartData: any;
   dropDownData: any;
 }) {
-  const [district, setDistrict] = React.useState<any>([
-    { label: 'Balijana', value: '116' },
-  ]);
+  const [district, setDistrict] = React.useState<any>();
   const searchParams = useSearchParams();
   const timePeriod: string = searchParams.get('time-period') || '2023_08';
   const subIndicator = searchParams.get('sub-indicator');
@@ -28,6 +26,14 @@ export function ChartComponent({
     label: string;
     value: string;
   }
+
+  React.useEffect(() => {
+    if (dropDownData && dropDownData.length > 0) {
+      setDistrict([
+        { label: dropDownData[0].name, value: dropDownData[0].code },
+      ]);
+    }
+  }, [dropDownData]);
 
   const districtArray: DropdownOptionProps[] = [];
   if (dropDownData) {
@@ -47,11 +53,13 @@ export function ChartComponent({
 
   const series: Series[] = [];
   if (district && chartData) {
+    const data: number[] = [];
+    district.forEach((dist: any) => {
+      data.push(chartData[timePeriod][indicatorToMap][dist.value][dist.label]);
+    });
     series.push({
       name: deSlugify(indicatorToMap),
-      data: district.map(
-        (dist: any) => chartData[timePeriod][indicatorToMap][dist.value][dist.label]
-      ),
+      data: data,
       type: 'bar',
     });
   }
@@ -65,6 +73,13 @@ export function ChartComponent({
   };
 
   const disableOptions = () => (district.length == 3 ? true : false);
+
+  const yAxis: string[] = [];
+  if (district) {
+    district.forEach((item: any) => {
+      yAxis.push(item.label);
+    });
+  }
 
   return (
     <div className="relative w-full">
@@ -80,16 +95,12 @@ export function ChartComponent({
             isOptionDisabled={disableOptions}
           />
           <span className=" px-2 text-75 text-textCritical">
-            {district.length < 1
+            {district?.length < 1
               ? 'Select 1-3 districts, then add indicators for comparison'
               : null}
           </span>
           {!chartDataloading ? (
-            <BarChart
-              yAxis={district.map((item: any) => item.label)}
-              series={series}
-              height="500px"
-            />
+            <BarChart yAxis={yAxis} series={series} height="500px" />
           ) : (
             <div>Chart is loading</div>
           )}
