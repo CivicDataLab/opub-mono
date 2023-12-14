@@ -114,7 +114,7 @@ export const Explorer = React.forwardRef(
           <Tray open={trayOpen} onOpenChange={setTrayOpen} size="extended">
             {isLoading ? (
               <div className="p-4">
-                <Text variant="headingMd">Loading...</Text>
+                <Text variant="headingMd">Loading Indicators...</Text>
               </div>
             ) : indicatorData ? (
               <Indicators
@@ -211,18 +211,40 @@ const Content = ({
   const currentData: any =
     chartData[states.selectedIndicator].years[states.selectedYear];
 
+  const barDataObj: any = {
+    Khagorijan: 15452.0,
+    Batadraba: 19506.0,
+    Juria: 40642.0,
+    Kaliabor: 9102.0,
+    Rupahihut: 22841.0,
+    Lowkhowa: 19017.0,
+    Kathiatoli: 38942.0,
+    Raha: 17224.0,
+    Dolongghat: 5108.0,
+    Barhampur: 9450.0,
+    Pakhimoria: 8232.0,
+    Bajiagaon: 20247.0,
+    'Pachim Kaliabor': 14392.0,
+  };
+
   React.useEffect(() => {
     if (!currentData) return;
 
-    setSelectedBlocks(currentData.bardata.xAxis);
+    setSelectedBlocks(Object.keys(barDataObj));
   }, []);
 
   React.useEffect(() => {
     if (selectedBlocks) {
-      const filteredData = currentData.bardata.xAxis.filter((e: any) =>
-        selectedBlocks.includes(e)
-      );
-      setBarData({ ...currentData.bardata, xAxis: filteredData });
+      const filteredData: any = {};
+      Object.keys(barDataObj).forEach((key) => {
+        if (selectedBlocks.includes(key)) {
+          filteredData[key] = barDataObj[key];
+        }
+      });
+      setBarData({
+        xAxis: Object.keys(filteredData),
+        values: Object.values(filteredData),
+      });
     }
   }, [selectedBlocks, currentData]);
 
@@ -243,11 +265,22 @@ const Content = ({
       : 'var(--mapareadistrict-disabled)';
   };
 
+  let barView = null;
+  if (barData) barView = <BarView data={barData} />;
+  if (selectedBlocks.length < 2)
+    barView = (
+      <div className="flex items-center justify-center mt-5">
+        <Text variant="headingLg" as="span">
+          Please select atleast 2 blocks to compare
+        </Text>
+      </div>
+    );
+
   const tabs = [
     {
       label: 'Bar View',
       value: 'bar',
-      content: barData ? <BarView data={barData} /> : null,
+      content: barView,
     },
     {
       label: 'Map View',
@@ -381,7 +414,6 @@ const Filters = ({
   setSelectedBlocks,
   tab,
   selectedBlocks,
-  isMobile,
 }: {
   states: any;
   chartData: IChartData;

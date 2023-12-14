@@ -1,1 +1,96 @@
 # Develop
+
+Welcome to the development section of the documentation. Here you will find information on seting up OPub UI, tools that helps, and how to contribute.
+
+## First Steps
+
+OPub UI is built on top of [React](https://reactjs.org/) and [Radix UI](https://www.radix-ui.com/primitives). If you are not familiar with these, we recommend you read up on them before continuing.
+
+### Add OPub UI to your project
+
+OPub UI is available as an npm package. You can install it using your favorite package manager.
+
+```bash
+npm install @opub/ui
+```
+
+or
+
+```bash
+yarn add @opub/ui
+```
+
+### Add base styles
+
+OPub UI comes with a set of base styles that you need to import into your project. The base styles are required for OPub UI to work correctly. Add them in the base css file of your project.
+
+```css
+@import url('~opub-ui/dist/assets/styles.css');
+```
+
+### Usage
+
+Once you complete the initial setup, you can import components into your project as needed:
+
+```js
+import { Badge, Button, Menu } from 'opub-cdl/ui';
+```
+
+## Working with Next.js
+
+If you are using [Next.js](https://nextjs.org/), you will need to [transpile the packages](https://nextjs.org/docs/advanced-features/compiler#module-transpilation). Add this inside `next.config.js`:
+
+```js
+module.exports = {
+  transpilePackages: ['opub-ui', 'react-aria'],
+};
+```
+
+## Tools
+
+- [Storybook](https://main--64004009fa0a900a3197549c.chromatic.com/) - View the complete list of available components.
+- [Color Contrast Checker](https://marijohannessen.github.io/color-contrast-checker/) - Check the contrast of your colors.
+
+## Contributing
+
+We welcome contributions to OPub UI. Please read our [contributing guidelines](https://github.com/CivicDataLab/opub-mono/blob/main/CONTRIBUTING.md) to get started.
+
+### New Component
+
+This repo includes a `yarn run new-component` module to help create boilerplate for component creation.
+
+```
+yarn run new-component Button
+```
+
+This will create a new component directory in `packages/opub-ui/src` with required files and also export the component in the index.ts
+
+```
+components/
+┣ Button/
+┃ ┣ Button.module.scss/
+┃ ┣ Button.stories.tsx/
+┃ ┣ Button.test.tsx/
+┃ ┣ Button.tsx/
+┃ ┣ index.ts/
+```
+
+## Publishing to NPM
+
+OPub UI is available as an npm package. To publish a new version, follow these steps:
+
+### Bundling
+
+To bundle the package, run:
+
+```bash
+yarn build
+```
+
+This will create a `dist` folder with the bundled files. Then from the root of the project, run:
+
+```bash
+yarn changeset publish
+```
+
+Make sure to update the version number in the `package.json` file before publishing.

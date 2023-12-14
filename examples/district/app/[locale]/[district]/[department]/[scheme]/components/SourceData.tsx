@@ -165,7 +165,7 @@ export const SourceData = ({
         <Tray open={trayOpen} onOpenChange={setTrayOpen} size="extended">
           {isLoading ? (
             <div className="p-4">
-              <Text variant="headingMd">Loading...</Text>
+              <Text variant="headingMd">Loading Indicators...</Text>
             </div>
           ) : indicatorData ? (
             <IndicatorsCheckbox
