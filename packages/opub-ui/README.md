@@ -26,17 +26,7 @@ The following steps are required before you can start using components:
 import 'opub-ui/dist/assets/styles.css';
 ```
 
-2. This step is for `SSR` apps. We use [React Aria](https://react-spectrum.adobe.com/react-aria/) for some components. To ensure it works correctly in Next.js, you must wrap the App with `SSRProvider`. [More Info](https://react-spectrum.adobe.com/react-aria/ssr.html)
-
-```js
-import { SSRProvider } from 'react-aria';
-
-<SSRProvider>
-  <Component {...pageProps} />
-</SSRProvider>;
-```
-
-3. Once you complete the initial setup, you can import components into your project as needed:
+2. Once you complete the initial setup, you can import components into your project as needed:
 
 ```js
 import { Badge, Button, Menu } from 'opub-cdl/ui';

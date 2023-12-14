@@ -18,19 +18,9 @@
   --card-border-rgb: 131, 134, 135;
 }
 
-/* html {
-  overflow-y: scroll;
-} */
-
 body {
   background-color: var(--background-solid-subdued);
 }
-
-/* html,
-body,
-body > .opub-Tooltip {
-  height: 100%;
-} */
 
 a {
   color: inherit;
