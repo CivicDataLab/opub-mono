@@ -3,6 +3,9 @@
     "esbenp.prettier-vscode",
     "dbaeumer.vscode-eslint",
     "vunguyentuan.vscode-css-variables",
-    "Gruntfuggly.todo-tree"
+    "Gruntfuggly.todo-tree",
+    "formulahendry.auto-close-tag",
+    "formulahendry.auto-rename-tag",
+    "bradlc.vscode-tailwindcss"
   ]
 }
