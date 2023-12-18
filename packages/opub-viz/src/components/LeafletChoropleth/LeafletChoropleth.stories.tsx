@@ -82,6 +82,8 @@ export const Default: Story = {
     legendData,
     mapDataFn,
     mapProperty: 'dt_code',
-    mapZoom: 7.4,
+    mapZoom: 7.8,
+    fillOpacity: 1,
+    mapCenter: [26.193, 92.3],
   },
 };

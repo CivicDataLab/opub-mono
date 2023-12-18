@@ -5,15 +5,13 @@ import { IconBoxMultiple } from '@tabler/icons-react';
 import React from 'react';
 import { GeoJSON, MapContainer, TileLayer, ScaleControl } from 'react-leaflet';
 
-const layers = [
-  'light_all',
-  'light_nolabels',
-  'dark_all',
-  'dark_nolabels',
-  'rastertiles/voyager',
-  'rastertiles/voyager_nolabels',
-] as const;
-type layerOptions = (typeof layers)[number];
+const layers = {
+  satellie:
+    'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+  dark: 'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png',
+  light: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+} as const;
+type layerOptions = keyof typeof layers;
 
 type MapProps = {
   /* Map file to be used */
@@ -69,7 +67,7 @@ type Props = MapProps & LegendProps;
 const LeafletChoropleth = (props: Props) => {
   const {
     legendData,
-    defaultLayer = 'light_all',
+    defaultLayer = 'light',
     hideLayers = false,
     className,
     ...others
@@ -178,7 +176,7 @@ const Map = ({
       color: selectedLayer?.includes('dark')
         ? '#eee'
         : 'var(--mapareadistrict-border)',
-      fillOpacity: fillOpacity ? fillOpacity : 0.5,
+      fillOpacity: fillOpacity ? fillOpacity : 0.9,
     };
   };
 
@@ -188,10 +186,14 @@ const Map = ({
 
   if (!unmountMap) {
     return (
-      <MapContainer center={mapCenter} zoom={mapZoom} ref={mapRef}>
-        <TileLayer
-          url={`https://cartodb-basemaps-{s}.global.ssl.fastly.net/${selectedLayer}/{z}/{x}/{y}.png`}
-        />
+      <MapContainer
+        center={mapCenter}
+        zoom={mapZoom}
+        ref={mapRef}
+        zoomDelta={0.25}
+        zoomSnap={0.25}
+      >
+        <TileLayer url={layers[selectedLayer]} />
         {features && (
           <>
             <GeoJSON
@@ -260,7 +262,7 @@ const LayerSelector = ({
           <fieldset>
             <legend>Change Layer</legend>
             <div className="flex flex-col">
-              {layers.map((layer) => {
+              {Object.keys(layers).map((layer: any) => {
                 return (
                   <label key={layer} className="flex items-center">
                     <input
