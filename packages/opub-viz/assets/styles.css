@@ -1,4 +1,4 @@
-/* @import './tokens.css'; */
+@import 'leaflet/dist/leaflet.css';
 @import '../styles/base.css';
 
 .leaflet-container {
