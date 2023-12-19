@@ -1,5 +1,6 @@
 'use client';
 
+import { cn } from '../../utils';
 import styles from './Popover.module.scss';
 import * as Radix from '@radix-ui/react-popover';
 import React from 'react';
@@ -38,6 +39,7 @@ const Content = React.forwardRef(
       children,
       isPortal = true,
       isArrow = false,
+      className,
       ...props
     }: PopoverContentProps,
     forwardedRef: React.Ref<HTMLDivElement>
@@ -47,7 +49,7 @@ const Content = React.forwardRef(
     return (
       <PortalDom className={styles.Portal}>
         <Radix.Content
-          className={styles.Content}
+          className={cn(styles.Content, className)}
           sideOffset={5}
           {...props}
           ref={forwardedRef}

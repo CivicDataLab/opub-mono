@@ -10,14 +10,7 @@ const meta = {
   argTypes: {
     defaultLayer: {
       control: 'select',
-      options: [
-        'light_all',
-        'light_nolabels',
-        'dark_all',
-        'dark_nolabels',
-        'rastertiles/voyager',
-        'rastertiles/voyager_nolabels',
-      ],
+      options: ['satellite', 'light', 'dark'],
       description: 'theme of the map',
     },
   },
@@ -82,6 +75,8 @@ export const Default: Story = {
     legendData,
     mapDataFn,
     mapProperty: 'dt_code',
-    mapZoom: 7.4,
+    mapZoom: 7.8,
+    fillOpacity: 1,
+    mapCenter: [26.193, 92.3],
   },
 };

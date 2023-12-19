@@ -1,19 +1,17 @@
 import { cn } from '../../utils';
-import { Popover, PopoverContent, PopoverTrigger } from '../ui';
 import styles from './LeafletChoropleth.module.scss';
-import { IconBoxMultiple } from '@tabler/icons-react';
+import { IconStack } from '@tabler/icons-react';
+import { Popover, RadioGroup, RadioItem, Text } from 'opub-ui';
 import React from 'react';
 import { GeoJSON, MapContainer, TileLayer, ScaleControl } from 'react-leaflet';
 
-const layers = [
-  'light_all',
-  'light_nolabels',
-  'dark_all',
-  'dark_nolabels',
-  'rastertiles/voyager',
-  'rastertiles/voyager_nolabels',
-] as const;
-type layerOptions = (typeof layers)[number];
+const layers = {
+  light: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+  dark: 'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png',
+  satellite:
+    'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+} as const;
+type layerOptions = keyof typeof layers;
 
 type MapProps = {
   /* Map file to be used */
@@ -62,6 +60,9 @@ type MapProps = {
 type LegendProps = {
   /* data for legend */
   legendData?: { label: string; color: string }[];
+
+  /* heading for legend */
+  legendHeading?: { heading: string; subheading?: string };
 };
 
 type Props = MapProps & LegendProps;
@@ -69,7 +70,8 @@ type Props = MapProps & LegendProps;
 const LeafletChoropleth = (props: Props) => {
   const {
     legendData,
-    defaultLayer = 'light_all',
+    legendHeading,
+    defaultLayer = 'light',
     hideLayers = false,
     className,
     ...others
@@ -80,16 +82,23 @@ const LeafletChoropleth = (props: Props) => {
 
   return (
     <div className={cn(styles.Wrapper, className)}>
-      <Map selectedLayer={selectedLayer} {...others} key={selectedLayer} />
-      {!hideLayers && (
-        <LayerSelector
-          selectedLayer={selectedLayer}
-          setSelectedLayer={setSelectedLayer}
-        />
-      )}
-      {legendData && (
-        <Legend legendData={legendData} selectedLayer={selectedLayer} />
-      )}
+      <Map
+        selectedLayer={selectedLayer}
+        key={selectedLayer}
+        hideLayers={hideLayers}
+        {...others}
+      />
+      <div>
+        {!hideLayers && (
+          <LayerSelector
+            selectedLayer={selectedLayer}
+            setSelectedLayer={setSelectedLayer}
+          />
+        )}
+        {legendData && (
+          <Legend legendData={legendData} legendHeading={legendHeading} />
+        )}
+      </div>
     </div>
   );
 };
@@ -107,6 +116,7 @@ const Map = ({
   fillOpacity,
   hideScale = false,
   mapDataFn,
+  hideLayers = false,
 }: MapProps & {
   selectedLayer: layerOptions;
 }) => {
@@ -178,7 +188,7 @@ const Map = ({
       color: selectedLayer?.includes('dark')
         ? '#eee'
         : 'var(--mapareadistrict-border)',
-      fillOpacity: fillOpacity ? fillOpacity : 0.5,
+      fillOpacity: fillOpacity ? fillOpacity : 0.9,
     };
   };
 
@@ -188,10 +198,14 @@ const Map = ({
 
   if (!unmountMap) {
     return (
-      <MapContainer center={mapCenter} zoom={mapZoom} ref={mapRef}>
-        <TileLayer
-          url={`https://cartodb-basemaps-{s}.global.ssl.fastly.net/${selectedLayer}/{z}/{x}/{y}.png`}
-        />
+      <MapContainer
+        center={mapCenter}
+        zoom={mapZoom}
+        ref={mapRef}
+        zoomDelta={0.25}
+        zoomSnap={0.25}
+      >
+        {!hideLayers && <TileLayer url={layers[selectedLayer]} />}
         {features && (
           <>
             <GeoJSON
@@ -209,27 +223,35 @@ const Map = ({
   }
 };
 
-const Legend = ({
-  legendData: data,
-  selectedLayer,
-}: LegendProps & {
-  selectedLayer: layerOptions;
-}) => {
-  const className = cn(styles.Legend, styles[selectedLayer]);
+const Legend = ({ legendData, legendHeading }: LegendProps) => {
+  if (!legendData) return null;
 
+  const className = cn(styles.Legend);
   return (
     <div className={className}>
-      {data &&
-        data.map((item) => {
+      {legendHeading && (
+        <div className="flex flex-col gap-1">
+          <Text variant="headingMd">{legendHeading.heading}</Text>
+          {legendHeading.subheading && (
+            <Text variant="bodyMd" color="subdued">
+              {legendHeading.subheading}
+            </Text>
+          )}
+        </div>
+      )}
+      <div className="flex flex-col gap-1">
+        {legendData.map((item) => {
           return (
             <div
               key={item.label}
               style={{ '--color': item.color } as React.CSSProperties}
+              className={cn(styles.LegendItem)}
             >
-              {item.label}
+              <Text variant="bodyMd">{item.label}</Text>
             </div>
           );
         })}
+      </div>
     </div>
   );
 };
@@ -246,40 +268,39 @@ const LayerSelector = ({
   return (
     <div className={className}>
       <Popover>
-        <PopoverTrigger
-          className={cn(
-            'p-3 rounded-1 cursor-pointer bg-baseVioletSolid5 shadow-insetBasic'
-          )}
-        >
-          <span className="sr-only">Change Layer</span>
-          <span className="text-baseVioletSolid10">
-            <IconBoxMultiple />
-          </span>
-        </PopoverTrigger>
-        <PopoverContent align="end">
-          <fieldset>
-            <legend>Change Layer</legend>
-            <div className="flex flex-col">
-              {layers.map((layer) => {
-                return (
-                  <label key={layer} className="flex items-center">
-                    <input
-                      type="radio"
-                      name="mapTheme"
-                      value={layer}
-                      checked={selectedLayer === layer}
-                      onChange={() => setSelectedLayer(layer)}
-                    />
-                    <span className="ml-2">{layer}</span>
-                  </label>
-                );
-              })}
-            </div>
-          </fieldset>
-        </PopoverContent>
+        <Popover.Trigger>
+          <button
+            className={cn(
+              'p-1 rounded-1 border-solid border-borderHighlightSubdued bg-surfaceHighlightSubdued hover:bg-surfaceHighlightDefault leading-[0]'
+            )}
+          >
+            <span className="sr-only">Change Layer</span>
+            <span aria-hidden="true">
+              <IconStack color="var(--icon-highlight)" />
+            </span>
+          </button>
+        </Popover.Trigger>
+        <Popover.Content align="end" className="py-2 px-3">
+          <RadioGroup
+            onChange={(val: any) => {
+              setSelectedLayer(val);
+            }}
+            name="mapTheme"
+            value={selectedLayer}
+            title="Change Layer"
+          >
+            {Object.keys(layers).map((layer: any) => {
+              return (
+                <RadioItem key={layer} value={layer}>
+                  {layer}
+                </RadioItem>
+              );
+            })}
+          </RadioGroup>
+        </Popover.Content>
       </Popover>
     </div>
   );
 };
 
-export default React.memo(LeafletChoropleth);
+export default LeafletChoropleth;
