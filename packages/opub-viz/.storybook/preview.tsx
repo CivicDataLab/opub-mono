@@ -14,11 +14,7 @@ const preview = {
   parameters,
   decorators: [
     (Story) => {
-      return (
-        <Tooltip.Provider>
-          <Story />
-        </Tooltip.Provider>
-      );
+      return <Story />;
     },
   ],
 };
