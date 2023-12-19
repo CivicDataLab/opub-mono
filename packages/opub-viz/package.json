@@ -34,6 +34,7 @@
     "node": ">=16 <=18"
   },
   "scripts": {
+    "vite": "vite",
     "dev": "storybook dev -p 6007",
     "build": "run-s build:types build:js",
     "build:types": "tsc -b ./tsconfig.node.json",
@@ -62,7 +63,8 @@
     "lucide-react": "^0.268.0",
     "react-leaflet": "^4.2.1",
     "tailwind-merge": "^1.14.0",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "opub-ui": "*"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^24.0.1",

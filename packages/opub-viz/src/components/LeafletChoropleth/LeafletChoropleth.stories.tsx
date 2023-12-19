@@ -10,14 +10,7 @@ const meta = {
   argTypes: {
     defaultLayer: {
       control: 'select',
-      options: [
-        'light_all',
-        'light_nolabels',
-        'dark_all',
-        'dark_nolabels',
-        'rastertiles/voyager',
-        'rastertiles/voyager_nolabels',
-      ],
+      options: ['satellite', 'light', 'dark'],
       description: 'theme of the map',
     },
   },

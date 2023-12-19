@@ -1,4 +1,5 @@
 import { themes } from '@storybook/theming';
+import { Tooltip } from 'opub-ui';
 import React from 'react';
 import '../assets/styles.css';
 
@@ -12,7 +13,11 @@ const preview = {
   parameters,
   decorators: [
     (Story) => {
-      return <Story />;
+      return (
+        <Tooltip.Provider>
+          <Story />
+        </Tooltip.Provider>
+      );
     },
   ],
 };
