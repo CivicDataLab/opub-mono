@@ -35,6 +35,8 @@
   },
   "scripts": {
     "vite": "vite",
+    "vite-build": "vite build --outDir viteDist",
+    "preview": "vite preview",
     "dev": "storybook dev -p 6007",
     "build": "run-s build:types build:js",
     "build:types": "tsc -b ./tsconfig.node.json",
