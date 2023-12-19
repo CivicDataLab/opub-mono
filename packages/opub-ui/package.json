@@ -1,7 +1,7 @@
 {
   "name": "opub-ui",
   "description": "OPub UI Library",
-  "version": "0.0.97",
+  "version": "0.0.98",
   "private": false,
   "license": "MIT",
   "author": "CivicDataLab <tech@civicdatalab.in>",
@@ -24,6 +24,7 @@
   ],
   "sideEffects": false,
   "main": "dist/index.js",
+  "module": "dist/index.js",
   "types": "dist/ts/index.d.ts",
   "files": [
     "dist",
