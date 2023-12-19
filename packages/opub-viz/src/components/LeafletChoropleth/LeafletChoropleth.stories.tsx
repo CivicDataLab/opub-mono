@@ -1,5 +1,5 @@
 import { features } from '../../../assets/json/assam.json';
-import LeafletChoropleth from './LeafletChoropleth';
+import { LeafletChoropleth } from './LeafletChoropleth';
 import { Meta, StoryObj } from '@storybook/react';
 
 /**
@@ -60,6 +60,11 @@ const mapDataFn = (value: number) => {
     : '#fee5d9';
 };
 
+const legendHeading = {
+  heading: 'Districts',
+  subheading: 'Average Rainfall (mm)',
+};
+
 export const Default: Story = {
   render: (args) => {
     if (!features) return <div>Loading...</div>;
@@ -78,5 +83,6 @@ export const Default: Story = {
     mapZoom: 7.8,
     fillOpacity: 1,
     mapCenter: [26.193, 92.3],
+    legendHeading,
   },
 };

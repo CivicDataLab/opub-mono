@@ -6,11 +6,14 @@ import { defineConfig } from 'vite';
 import tsConfigPaths from 'vite-tsconfig-paths';
 
 // https://vitejs.dev/config/
-export default defineConfig((configEnv) => ({
+export default defineConfig(() => ({
   plugins: [react(), tsConfigPaths()],
   test: {
     globals: true,
     environment: 'happy-dom',
+  },
+  resolve: {
+    preserveSymlinks: true,
   },
   css: {
     preprocessorOptions: {

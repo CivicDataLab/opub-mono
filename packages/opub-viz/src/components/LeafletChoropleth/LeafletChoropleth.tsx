@@ -3,7 +3,7 @@ import styles from './LeafletChoropleth.module.scss';
 import { IconStack } from '@tabler/icons-react';
 import { Popover, RadioGroup, RadioItem, Text } from 'opub-ui';
 import React from 'react';
-import { GeoJSON, MapContainer, TileLayer, ScaleControl } from 'react-leaflet';
+import { GeoJSON, MapContainer, ScaleControl, TileLayer } from 'react-leaflet';
 
 const layers = {
   light: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -185,9 +185,8 @@ const Map = ({
       fillColor: mapDataFn(Number(feature.properties[mapProperty]), 'default'),
       weight: 1,
       opacity: 1,
-      color: selectedLayer?.includes('dark')
-        ? '#eee'
-        : 'var(--mapareadistrict-border)',
+      color:
+        selectedLayer === 'dark' ? '#eee' : 'var(--mapareadistrict-border)',
       fillOpacity: fillOpacity ? fillOpacity : 0.9,
     };
   };
@@ -303,4 +302,5 @@ const LayerSelector = ({
   );
 };
 
+export { LeafletChoropleth };
 export default LeafletChoropleth;

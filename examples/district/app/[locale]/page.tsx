@@ -3,7 +3,7 @@ import {
   Header,
   KeyHighlights,
   QuickLinks,
-  DistrictSelectorMobile
+  DistrictSelectorMobile,
 } from './components';
 
 export default function Home() {

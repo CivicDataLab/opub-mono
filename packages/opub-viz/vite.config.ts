@@ -14,11 +14,10 @@ export default defineConfig((configEnv) => ({
   },
   css: {
     preprocessorOptions: {
-      scss: {
-        // additionalData: `
-        //         @import "${path.resolve(__dirname, '/styles/breakpoints')}";
-        //     `,
-      },
+      scss: {},
     },
+  },
+  resolve: {
+    preserveSymlinks: true,
   },
 }));
