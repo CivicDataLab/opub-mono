@@ -1,7 +1,7 @@
 import { cn } from '../../utils';
 import styles from './LeafletChoropleth.module.scss';
 import { IconStack } from '@tabler/icons-react';
-import { Popover, RadioGroup, RadioItem, Text } from 'opub-ui/src';
+import { Popover, RadioGroup, RadioItem, Text } from 'opub-ui';
 import React from 'react';
 import { GeoJSON, MapContainer, ScaleControl, TileLayer } from 'react-leaflet';
 
@@ -302,4 +302,5 @@ const LayerSelector = ({
   );
 };
 
+export { LeafletChoropleth };
 export default LeafletChoropleth;
