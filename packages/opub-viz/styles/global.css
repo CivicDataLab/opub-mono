@@ -1,4 +1,5 @@
 @import './tokens/_variables.css';
+@import 'opub-ui/dist/assets/styles.css';
 
 @tailwind base;
 @tailwind components;
@@ -41,8 +42,4 @@ body {
   position: absolute;
   white-space: nowrap;
   width: 1px;
-}
-
-[data-radix-popper-content-wrapper] {
-  z-index: var(--z-10) !important;
 }

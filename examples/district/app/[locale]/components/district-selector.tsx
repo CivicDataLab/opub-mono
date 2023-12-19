@@ -9,12 +9,12 @@ import { useFetch } from '@/lib/api';
 import { cn } from '@/lib/utils';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
-import { Icon, Input, Divider, Text, SearchInput } from 'opub-ui';
+import { Icon, Divider, Text, SearchInput } from 'opub-ui';
 import React from 'react';
 
 const LeafletChoropleth = dynamic(
   () => import('opub-viz').then((mod) => mod.LeafletChoropleth),
-  { ssr: false }
+  { ssr: false, loading: () => <div>Loading...</div> }
 );
 export const DistrictSelector = () => {
   const [search, setSearch] = React.useState('');

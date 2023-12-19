@@ -1,8 +1,2 @@
-@import 'leaflet/dist/leaflet.css';
-@import url('opub-ui/dist/assets/styles.css');
-@import '../styles/base.css';
-
-.leaflet-container {
-  width: 100%;
-  height: 100%;
-}
+@import './styles-bundled.css';
+@import './base.css';

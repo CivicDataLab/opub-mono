@@ -38,5 +38,5 @@ body {
 }
 
 [data-radix-popper-content-wrapper] {
-  z-index: var(--z-12) !important;
+  z-index: var(--z-max, 999999) !important;
 }

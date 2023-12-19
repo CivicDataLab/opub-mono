@@ -71,6 +71,9 @@ const getPlugins = () => {
     nodeResolve({ extensions }),
     commonjs(),
     externals({ deps: true, packagePath: './package.json' }),
+    copy({
+      targets: [{ src: 'assets', dest: 'dist' }],
+    }),
     typescript(typeScriptOptions),
     terser(),
     banner2(() => `'use client';`),
