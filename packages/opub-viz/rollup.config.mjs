@@ -51,6 +51,7 @@ const getPlugins = () => {
       'node_modules',
       'build',
       'dist',
+      'viteDist',
       'scripts',
       '.storybook',
       '**/*.stories.tsx',

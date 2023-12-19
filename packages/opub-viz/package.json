@@ -24,6 +24,7 @@
   ],
   "sideEffects": false,
   "main": "dist/index.js",
+  "module": "dist/index.js",
   "types": "dist/ts/index.d.ts",
   "files": [
     "dist",
@@ -63,7 +64,7 @@
     "echarts-for-react": "^3.0.2",
     "leaflet": "^1.9.4",
     "lucide-react": "^0.268.0",
-    "opub-ui": "^0.0.97",
+    "opub-ui": "^0.0.98",
     "react-leaflet": "^4.2.1",
     "tailwind-merge": "^1.14.0",
     "tailwindcss-animate": "^1.0.7"
