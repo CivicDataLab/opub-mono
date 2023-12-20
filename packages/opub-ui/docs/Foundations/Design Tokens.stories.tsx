@@ -6,7 +6,7 @@ const meta = {
 
 export default meta;
 
-export const Default: any = {
+export const Colors: any = {
   render: () => {
     return <TokenTable />;
   },
