@@ -15,11 +15,13 @@ import { Table } from '@tanstack/react-table';
 
 interface DataTableViewOptionsProps<TData> extends TableFilterProps {
   table: Table<TData>;
+  hideViewSelector?: boolean;
 }
 
 export function Toolbar<TData>({
   table,
   filters,
+  hideViewSelector,
 }: DataTableViewOptionsProps<TData>) {
   const isFiltered = table.getState().columnFilters.length > 0;
 
@@ -56,9 +58,11 @@ export function Toolbar<TData>({
         </div>
       </div>
       <div className={styles.FilterRight}>
-        <div>
-          <DataTableView table={table} />
-        </div>
+        {!hideViewSelector && (
+          <div>
+            <DataTableView table={table} />
+          </div>
+        )}
         <div>
           <Menu
             trigger={

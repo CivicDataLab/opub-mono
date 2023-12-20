@@ -17,12 +17,12 @@ function SortButton({
   column: any;
   sortable: boolean;
   text: React.ReactNode;
-  columnType: string;
+  columnType?: string;
   defaultSortDirection: SortDirection;
 }) {
   const headerClassName = cx(
     styles.Heading,
-    columnType === 'text' && styles['Heading-left']
+    columnType && columnType === 'text' && styles['Heading-left']
   );
 
   const iconClassName = cx(sortable && styles.Icon);
@@ -58,7 +58,7 @@ type HeaderProps = {
   sortable: boolean;
   className: string;
   text: React.ReactNode;
-  columnType: string;
+  columnType?: string;
   defaultSortDirection: SortDirection;
 };
 

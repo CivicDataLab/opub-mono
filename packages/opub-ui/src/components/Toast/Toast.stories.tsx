@@ -21,7 +21,7 @@ export const Default = () => {
 
   return (
     <>
-      <Toaster />
+      {/* <Toaster /> */}
       <Button
         onClick={() => {
           toast({
@@ -38,7 +38,7 @@ export const ToastDescription = () => {
   const { toast } = useToast();
   return (
     <>
-      <Toaster />
+      {/* <Toaster /> */}
       <Button
         onClick={() => {
           toast({
@@ -57,7 +57,7 @@ export const ToastWithActionDescription = () => {
   const { toast } = useToast();
   return (
     <>
-      <Toaster />
+      {/* <Toaster /> */}
       <Button
         onClick={() => {
           toast({
@@ -77,7 +77,7 @@ export const WithAction = () => {
   const { toast } = useToast();
   return (
     <>
-      <Toaster />
+      {/* <Toaster /> */}
       <Button
         onClick={() => {
           toast({
@@ -96,7 +96,7 @@ export const Error = () => {
   const { toast } = useToast();
   return (
     <>
-      <Toaster />
+      {/* <Toaster /> */}
       <Button
         onClick={() => {
           toast({
@@ -115,7 +115,7 @@ export const MultiToastDefault = () => {
   const { toast } = useToast();
   return (
     <>
-      <Toaster />
+      {/* <Toaster /> */}
       <Button
         onClick={() => {
           toast({
