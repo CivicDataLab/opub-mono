@@ -2,7 +2,7 @@ import { ActionListProps } from '../components/ActionList';
 
 export type SortDirection = 'asc' | 'desc' | 'none';
 export type VerticalAlign = 'top' | 'bottom' | 'middle' | 'baseline';
-export type ColumnContentType = 'text' | 'numeric';
+export type ColumnContentType = 'text' | 'numeric' | 'node';
 
 export interface ColumnVisibilityData {
   leftEdge: number;
