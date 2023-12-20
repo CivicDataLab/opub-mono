@@ -7,7 +7,7 @@ import { GeoJSON, MapContainer, ScaleControl, TileLayer } from 'react-leaflet';
 
 const layers = {
   light: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-  dark: 'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png',
+  dark: 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
   satellite:
     'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
 } as const;
@@ -201,8 +201,8 @@ const Map = ({
         center={mapCenter}
         zoom={mapZoom}
         ref={mapRef}
-        zoomDelta={0.25}
-        zoomSnap={0.25}
+        zoomDelta={0.5}
+        zoomSnap={0.5}
       >
         {!hideLayers && <TileLayer url={layers[selectedLayer]} />}
         {features && (
