@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 @import './reset.css';
-@import url('~opub-ui/dist/assets/styles.css');
+@import url('opub-ui/dist/style.css');
 @import url('./tokens/_variables.css');
 
 :root {

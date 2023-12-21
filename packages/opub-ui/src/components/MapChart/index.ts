@@ -1,2 +1,1 @@
-export { MapChart } from './MapChart';
-export { default } from './MapChart';
+export { default as MapChart } from './MapChart';

@@ -23,9 +23,12 @@ import dynamic from 'next/dynamic';
 import { BarView } from './BarView';
 import { useWindowSize } from '@/hooks/use-window-size';
 
-const MapChart = dynamic(() => import('opub-ui').then((mod) => mod.MapChart), {
-  ssr: false,
-});
+const MapChart = dynamic(
+  () => import('opub-ui/viz').then((mod) => mod.MapChart),
+  {
+    ssr: false,
+  }
+);
 export const Explorer = React.forwardRef(
   (
     {

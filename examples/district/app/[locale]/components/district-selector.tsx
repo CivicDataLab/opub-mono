@@ -12,10 +12,18 @@ import Link from 'next/link';
 import { Icon, Divider, Text, SearchInput } from 'opub-ui';
 import React from 'react';
 
-const MapChart = dynamic(() => import('opub-ui').then((mod) => mod.MapChart), {
-  ssr: false,
-  loading: () => <div>Loading...</div>,
-});
+const MapChart = dynamic(
+  () => import('opub-ui/viz').then((mod) => mod.MapChart),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="w-full h-full flex items-center justify-center">
+        <Text variant="bodyLg">Loading Map...</Text>
+      </div>
+    ),
+  }
+);
+
 export const DistrictSelector = () => {
   const [search, setSearch] = React.useState('');
   const [districtList, setDistrictList] = React.useState(assamDistrictCategory);
@@ -68,7 +76,7 @@ export const DistrictSelector = () => {
             zoomOnClick={false}
             mapProperty="enabled"
             mapDataFn={mapDataFn}
-            click={(e) => {
+            click={(e: any) => {
               const features = e.feature.properties;
               if (
                 features.district &&

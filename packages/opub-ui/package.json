@@ -1,7 +1,7 @@
 {
   "name": "opub-ui",
   "description": "OPub UI Library",
-  "version": "0.0.99",
+  "version": "0.1.0",
   "private": false,
   "license": "MIT",
   "author": "CivicDataLab <tech@civicdatalab.in>",
@@ -23,9 +23,20 @@
     "React Component Library"
   ],
   "sideEffects": false,
-  "main": "dist/index.js",
-  "module": "dist/index.js",
-  "types": "dist/ts/index.d.ts",
+  "main": "./dist/index.js",
+  "types": "./dist/ts/index.d.ts",
+  "exports": {
+    ".": "./dist/index.js",
+    "./viz": "./dist/viz.js",
+    "./dist/style.css": "./dist/assets/styles.css"
+  },
+  "typesVersions": {
+    "*": {
+      "viz": [
+        "dist/ts/viz.d.ts"
+      ]
+    }
+  },
   "files": [
     "dist",
     "README.md"

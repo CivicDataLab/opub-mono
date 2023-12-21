@@ -76,8 +76,19 @@ type Props = MapProps & LegendProps;
 const MapChart = (props: Props) => {
   const { defaultLayer = 'light', className, ...others } = props;
 
+  //to prevent map re-initialization
+  const [unmountMap, setUnmountMap] = React.useState(false);
+  React.useLayoutEffect(() => {
+    setUnmountMap(false);
+    return () => {
+      setUnmountMap(true);
+    };
+  }, []);
+
   const [selectedLayer, setSelectedLayer] =
     React.useState<layerOptions>(defaultLayer);
+
+  if (unmountMap) return 'loading map...';
 
   return (
     <div className={cn(styles.Wrapper, className)}>
@@ -113,15 +124,6 @@ const Map = ({
   legendData?: { label: string; color: string }[];
   legendHeading?: { heading: string; subheading?: string };
 }) => {
-  //to prevent map re-initialization
-  const [unmountMap, setUnmountMap] = React.useState(false);
-  React.useLayoutEffect(() => {
-    setUnmountMap(false);
-    return () => {
-      setUnmountMap(true);
-    };
-  }, []);
-
   const mapRef = React.useRef<any>(null);
 
   const handleMouseOver = React.useCallback((e: { target: any }) => {
@@ -188,43 +190,35 @@ const Map = ({
     return feature;
   });
 
-  if (!unmountMap) {
-    return (
-      <MapContainer
-        center={mapCenter}
-        zoom={mapZoom}
-        ref={mapRef}
-        zoomDelta={0.5}
-        zoomSnap={0.5}
-      >
-        {!hideLayers && (
-          <>
-            <LayerSelector
-              selectedLayer={selectedLayer}
-              setSelectedLayer={setLayer}
-            />
-            <TileLayer url={layers[selectedLayer]} key={selectedLayer} />
-          </>
-        )}
-        {legendData && (
-          <Legend legendData={legendData} legendHeading={legendHeading} />
-        )}
-        <FullscreenControl />
-        {features && (
-          <>
-            <GeoJSON
-              data={feature}
-              style={style}
-              onEachFeature={onEachFeature}
-            />
-          </>
-        )}
-        {!hideScale && <ScaleControl imperial={false} />}
-      </MapContainer>
-    );
-  } else {
-    return 'loading map...';
-  }
+  return (
+    <MapContainer
+      center={mapCenter}
+      zoom={mapZoom}
+      ref={mapRef}
+      zoomDelta={0.5}
+      zoomSnap={0.5}
+    >
+      {!hideLayers && (
+        <>
+          <LayerSelector
+            selectedLayer={selectedLayer}
+            setSelectedLayer={setLayer}
+          />
+          <TileLayer url={layers[selectedLayer]} key={selectedLayer} />
+        </>
+      )}
+      {legendData && (
+        <Legend legendData={legendData} legendHeading={legendHeading} />
+      )}
+      <FullscreenControl />
+      {features && (
+        <>
+          <GeoJSON data={feature} style={style} onEachFeature={onEachFeature} />
+        </>
+      )}
+      {!hideScale && <ScaleControl imperial={false} />}
+    </MapContainer>
+  );
 };
 
 const Legend = ({ legendData, legendHeading }: LegendProps) => {
@@ -307,5 +301,4 @@ const LayerSelector = ({
   );
 };
 
-export { MapChart };
 export default MapChart;
