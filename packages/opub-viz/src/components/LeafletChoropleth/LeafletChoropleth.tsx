@@ -4,6 +4,10 @@ import { IconStack } from '@tabler/icons-react';
 import { Popover, RadioGroup, RadioItem, Text } from 'opub-ui';
 import React from 'react';
 import { GeoJSON, MapContainer, ScaleControl, TileLayer } from 'react-leaflet';
+import { FullscreenControl } from 'react-leaflet-fullscreen';
+import 'react-leaflet-fullscreen/styles.css';
+
+// import screenfull from 'screenfull';
 
 const layers = {
   light: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -68,14 +72,7 @@ type LegendProps = {
 type Props = MapProps & LegendProps;
 
 const LeafletChoropleth = (props: Props) => {
-  const {
-    legendData,
-    legendHeading,
-    defaultLayer = 'light',
-    hideLayers = false,
-    className,
-    ...others
-  } = props;
+  const { defaultLayer = 'light', className, ...others } = props;
 
   const [selectedLayer, setSelectedLayer] =
     React.useState<layerOptions>(defaultLayer);
@@ -84,21 +81,9 @@ const LeafletChoropleth = (props: Props) => {
     <div className={cn(styles.Wrapper, className)}>
       <Map
         selectedLayer={selectedLayer}
-        key={selectedLayer}
-        hideLayers={hideLayers}
+        setLayer={setSelectedLayer}
         {...others}
       />
-      <div>
-        {!hideLayers && (
-          <LayerSelector
-            selectedLayer={selectedLayer}
-            setSelectedLayer={setSelectedLayer}
-          />
-        )}
-        {legendData && (
-          <Legend legendData={legendData} legendHeading={legendHeading} />
-        )}
-      </div>
     </div>
   );
 };
@@ -117,8 +102,14 @@ const Map = ({
   hideScale = false,
   mapDataFn,
   hideLayers = false,
+  setLayer,
+  legendData,
+  legendHeading,
 }: MapProps & {
   selectedLayer: layerOptions;
+  setLayer: any;
+  legendData?: { label: string; color: string }[];
+  legendHeading?: { heading: string; subheading?: string };
 }) => {
   //to prevent map re-initialization
   const [unmountMap, setUnmountMap] = React.useState(false);
@@ -204,7 +195,19 @@ const Map = ({
         zoomDelta={0.5}
         zoomSnap={0.5}
       >
-        {!hideLayers && <TileLayer url={layers[selectedLayer]} />}
+        {!hideLayers && (
+          <>
+            <LayerSelector
+              selectedLayer={selectedLayer}
+              setSelectedLayer={setLayer}
+            />
+            <TileLayer url={layers[selectedLayer]} key={selectedLayer} />
+          </>
+        )}
+        {legendData && (
+          <Legend legendData={legendData} legendHeading={legendHeading} />
+        )}
+        <FullscreenControl />
         {features && (
           <>
             <GeoJSON
