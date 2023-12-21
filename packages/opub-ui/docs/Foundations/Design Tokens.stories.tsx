@@ -49,7 +49,7 @@ const space = Object.values(spaceRaw).map((space: any) => {
 const exampleFormatSpace = (info: any) => {
   return (
     <div
-      className="w-full h-12 rounded-1 bg-borderHighlightDefault"
+      className="w-full rounded-1 bg-borderHighlightDefault"
       style={{
         height: info.getValue(),
       }}
@@ -61,5 +61,114 @@ const exampleFormatSpace = (info: any) => {
 export const Space: any = {
   render: () => {
     return <TokenTable data={space} exampleFormat={exampleFormatSpace} />;
+  },
+};
+
+const borderRaw = { ...tokens.collections[2].modes[0].variables };
+const borders = Object.values(borderRaw).map((border: any) => {
+  const value =
+    typeof border.value === 'number' ? border.value : border.value.name;
+
+  return {
+    name: border.name,
+    value: value,
+    example:
+      typeof border.value === 'number'
+        ? `${border.value}px`
+        : convertToCssVariable(value),
+  };
+});
+
+const exampleFormatBorder = (info: any, type: 'radius' | 'width') => {
+  const isRadius = info.row.original.name.includes('radius');
+
+  if (isRadius) {
+    return (
+      <div
+        className="w-12 h-12 bg-borderHighlightDefault"
+        style={{
+          borderRadius: info.getValue(),
+        }}
+        aria-hidden="true"
+      />
+    );
+  }
+
+  return (
+    <div
+      className="w-12 h-12 border-solid border-borderDefault rounded-1"
+      style={{
+        borderWidth: info.getValue(),
+      }}
+      aria-hidden="true"
+    />
+  );
+};
+
+export const Borders: any = {
+  render: () => {
+    return <TokenTable data={borders} exampleFormat={exampleFormatBorder} />;
+  },
+};
+
+// Elevation
+function rgbaToString(rgba: any) {
+  return `rgba(${rgba.r}, ${rgba.g}, ${rgba.b}, ${rgba.a})`;
+}
+
+function effectObjToString(effect: any) {
+  let value = '';
+  switch (effect.type) {
+    case 'DROP_SHADOW':
+      value = `${effect.offset.x}px ${effect.offset.y}px ${effect.radius}px ${
+        effect.spread
+      }px ${rgbaToString(effect.color)}`;
+      break;
+    case 'INNER_SHADOW':
+      value = `inset ${effect.offset.x}px ${effect.offset.y}px ${
+        effect.radius
+      }px ${effect.spread}px ${rgbaToString(effect.color)}`;
+      break;
+    default:
+      value = `${effect.offset.x}px ${effect.offset.y}px ${effect.radius}px ${
+        effect.spread
+      }px ${rgbaToString(effect.color)}`;
+      break;
+  }
+  return value;
+}
+
+const elevationRaw = { ...tokens.collections[4].modes[0].variables };
+
+const elevations = Object.values(elevationRaw).map((effect) => {
+  let value = '';
+  effect.value.effects.forEach((val: any) => {
+    value += `${effectObjToString(val)}, `;
+  });
+
+  return {
+    name: effect.name,
+    value: value.slice(0, -2),
+    example: value.slice(0, -2),
+  };
+});
+
+const exampleFormatElevation = (info: any) => {
+  return (
+    <div
+      className="w-full min-w-24 h-12 rounded-1"
+      style={{
+        boxShadow: info.getValue(),
+      }}
+      aria-hidden="true"
+    />
+  );
+};
+
+export const Elevations: any = {
+  render: () => {
+    return (
+      <TokenTable data={elevations} exampleFormat={exampleFormatElevation} />
+    );
   },
 };
