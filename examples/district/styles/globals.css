@@ -2,14 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer components {
-  .border-default {
-    @apply border-1 border-solid border-borderDefault;
-  }
-}
-
 @import './reset.css';
-@import url('opub-ui/dist/assets/styles.css');
+@import url('~opub-ui/dist/assets/styles.css');
 @import url('./tokens/_variables.css');
 
 :root {
@@ -33,9 +27,4 @@ a {
   line-clamp: 3;
   -webkit-box-orient: vertical;
   display: -webkit-box;
-}
-
-.leaflet-container {
-  width: 100%;
-  height: 100%;
 }

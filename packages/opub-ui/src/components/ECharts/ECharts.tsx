@@ -1,3 +1,5 @@
+'use client';
+
 import { init, getInstanceByDom } from 'echarts';
 import type { EChartsOption, ECharts as EType, SetOptionOpts } from 'echarts';
 import { useRef, useEffect } from 'react';

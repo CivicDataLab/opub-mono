@@ -31,9 +31,9 @@ export function MainNav({ data }: { data: MainConfig }) {
 }
 
 // function to deslug and capitalize the district name
-export function capitalizeDistrictName(district: string) {
+export function capitalizeDistrictName(district: any) {
   return district
     .split('-')
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(' ');
 }

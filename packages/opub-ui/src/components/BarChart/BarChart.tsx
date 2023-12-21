@@ -1,3 +1,5 @@
+'use client';
+
 import { EChartsReactProps } from 'echarts-for-react';
 import ReactEChartsCore from 'echarts-for-react/lib/core';
 import { BarChart as Chart } from 'echarts/charts';

@@ -1,9 +1,10 @@
+'use client';
+
 import { IconStack } from '@tabler/icons-react';
 import React from 'react';
 import { GeoJSON, MapContainer, ScaleControl, TileLayer } from 'react-leaflet';
 import { FullscreenControl } from 'react-leaflet-fullscreen';
 import 'react-leaflet-fullscreen/styles.css';
-// import { Popover, RadioGroup, RadioItem, Text } from '../';
 import { cn } from '../../utils';
 import { Popover } from '../Popover';
 import { RadioGroup, RadioItem } from '../RadioGroup';
