@@ -7406,6 +7406,13 @@
   dependencies:
     "@types/geojson" "*"
 
+"@types/leaflet@^1.9.8":
+  version "1.9.8"
+  resolved "https://registry.yarnpkg.com/@types/leaflet/-/leaflet-1.9.8.tgz#32162a8eaf305c63267e99470b9603b5883e63e8"
+  integrity sha512-EXdsL4EhoUtGm2GC2ZYtXn+Fzc6pluVgagvo2VC1RHWToLGlTRwVYoDpqS/7QXa01rmDyBjJk3Catpf60VMkwg==
+  dependencies:
+    "@types/geojson" "*"
+
 "@types/lodash@^4.14.167":
   version "4.14.198"
   resolved "https://registry.npmjs.org/@types/lodash/-/lodash-4.14.198.tgz"
@@ -10241,7 +10248,7 @@ eastasianwidth@^0.2.0:
 
 echarts-for-react@^3.0.2:
   version "3.0.2"
-  resolved "https://registry.npmjs.org/echarts-for-react/-/echarts-for-react-3.0.2.tgz"
+  resolved "https://registry.yarnpkg.com/echarts-for-react/-/echarts-for-react-3.0.2.tgz#ac5859157048a1066d4553e34b328abb24f2b7c1"
   integrity sha512-DRwIiTzx8JfwPOVgGttDytBqdp5VzCSyMRIxubgU/g2n9y3VLUmF2FK7Icmg/sNVkv4+rktmrLN9w22U2yy3fA==
   dependencies:
     fast-deep-equal "^3.1.3"
@@ -10254,6 +10261,14 @@ echarts@5.3.0:
   dependencies:
     tslib "2.3.0"
     zrender "5.3.0"
+
+echarts@^5.4.3:
+  version "5.4.3"
+  resolved "https://registry.yarnpkg.com/echarts/-/echarts-5.4.3.tgz#f5522ef24419164903eedcfd2b506c6fc91fb20c"
+  integrity sha512-mYKxLxhzy6zyTi/FaEbJMOZU1ULGEQHaeIeuMR5L+JnJTpz+YR03mnnpBhbR4+UYJAgiXgpyTVLffPAjOTLkZA==
+  dependencies:
+    tslib "2.3.0"
+    zrender "5.4.4"
 
 ee-first@1.1.1:
   version "1.1.1"
@@ -13329,7 +13344,7 @@ leaflet.fullscreen@2.4.0:
 
 leaflet@^1.9.4:
   version "1.9.4"
-  resolved "https://registry.npmjs.org/leaflet/-/leaflet-1.9.4.tgz"
+  resolved "https://registry.yarnpkg.com/leaflet/-/leaflet-1.9.4.tgz#23fae724e282fa25745aff82ca4d394748db7d8d"
   integrity sha512-nxS1ynzJOmOlHp+iL3FyWqK89GtNL8U8rvlMOsQdTTssxZwCXh8N2NB3GDQOL+YR3XnWyZAxwQixURb+FA74PA==
 
 "legacy-swc-helpers@npm:@swc/helpers@=0.4.14":
@@ -16248,7 +16263,7 @@ react-leaflet-fullscreen@^4.1.1:
 
 react-leaflet@^4.2.1:
   version "4.2.1"
-  resolved "https://registry.npmjs.org/react-leaflet/-/react-leaflet-4.2.1.tgz"
+  resolved "https://registry.yarnpkg.com/react-leaflet/-/react-leaflet-4.2.1.tgz#c300e9eccaf15cb40757552e181200aa10b94780"
   integrity sha512-p9chkvhcKrWn/H/1FFeVSqLdReGwn2qmiobOQGO3BifX+/vV/39qhY8dGqbdcPh1e6jxh/QHriLXr7a4eLFK4Q==
   dependencies:
     "@react-leaflet/core" "^2.1.0"
@@ -19200,6 +19215,13 @@ zrender@5.3.0:
   version "5.3.0"
   resolved "https://registry.npmjs.org/zrender/-/zrender-5.3.0.tgz"
   integrity sha512-Ln2QB5uqI1ftNYMtCRxd+XDq6MOttLgam2tmhKAVA+j0ko47UT+VNlDvKTkqe4K2sJhBvB0EhYNLebqlCTjatQ==
+  dependencies:
+    tslib "2.3.0"
+
+zrender@5.4.4:
+  version "5.4.4"
+  resolved "https://registry.yarnpkg.com/zrender/-/zrender-5.4.4.tgz#8854f1d95ecc82cf8912f5a11f86657cb8c9e261"
+  integrity sha512-0VxCNJ7AGOMCWeHVyTrGzUgrK4asT4ml9PEkeGirAkKNYXYzoPJCLvmyfdoOXcjTHPs10OZVMfD1Rwg16AZyYw==
   dependencies:
     tslib "2.3.0"
 
