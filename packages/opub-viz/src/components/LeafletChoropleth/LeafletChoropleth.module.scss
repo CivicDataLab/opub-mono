@@ -9,7 +9,7 @@
 
 .Legend {
   position: absolute;
-  z-index: 999;
+  z-index: var(--z-max);
   right: 16px;
   bottom: 32px;
   padding: var(--space-3);
@@ -39,7 +39,7 @@
 
 .LayerSelector {
   position: absolute;
-  z-index: 999;
+  z-index: var(--z-max);
   right: 16px;
   top: 16px;
 
