@@ -95,7 +95,6 @@
     "@storybook/addon-essentials": "7.6.4",
     "@storybook/addon-interactions": "7.6.4",
     "@storybook/addon-links": "7.6.4",
-    "@storybook/addon-mdx-gfm": "^7.6.4",
     "@storybook/addons": "7.6.4",
     "@storybook/react": "7.6.4",
     "@storybook/react-vite": "7.6.4",

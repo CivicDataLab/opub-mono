@@ -3,7 +3,7 @@ import { DataTable } from '../../src/components/DataTable';
 import { useToast } from '../../src/components/Toast';
 import { createColumnHelper } from '@tanstack/react-table';
 
-export const TokenTable = ({ data }: any) => {
+export const TokenTable = ({ data, exampleFormat }: any) => {
   const { toast } = useToast();
 
   function copyToClipboard(text: string) {
@@ -50,13 +50,7 @@ export const TokenTable = ({ data }: any) => {
     }),
     columnHelper.accessor('example', {
       cell: (info) => {
-        return (
-          <div
-            className="w-full h-12 rounded-1 border-1 border-solid border-borderDefault"
-            style={{ backgroundColor: info.getValue() }}
-            aria-hidden="true"
-          />
-        );
+        return exampleFormat(info);
       },
       header: () => 'Example',
     }),
@@ -76,6 +70,6 @@ export const TokenTable = ({ data }: any) => {
   );
 };
 
-function convertToCssVariable(name: string) {
+export function convertToCssVariable(name: string) {
   return `var(--${name.split('/').join('-').toLowerCase()})`;
 }
