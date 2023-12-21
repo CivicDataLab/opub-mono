@@ -1,13 +1,13 @@
 import { features } from '../../../assets/json/assam.json';
-import { LeafletChoropleth } from './LeafletChoropleth';
+import { MapChart } from './MapChart';
 import { Meta, StoryObj } from '@storybook/react';
 
 /**
  * Map charts are commonly used to compare values and show categories across geographical regions, and are best utilized when the data contains geographic information.
  */
 const meta = {
-  title: 'Visualizations/LeafletChoropleth',
-  component: LeafletChoropleth,
+  title: 'Visualizations/MapChart',
+  component: MapChart,
   argTypes: {
     defaultLayer: {
       control: 'select',
@@ -15,7 +15,7 @@ const meta = {
       description: 'theme of the map',
     },
   },
-} satisfies Meta<typeof LeafletChoropleth>;
+} satisfies Meta<typeof MapChart>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -72,7 +72,7 @@ export const Default: Story = {
 
     return (
       <div style={{ height: '600px' }}>
-        <LeafletChoropleth {...args} />
+        <MapChart {...args} />
       </div>
     );
   },

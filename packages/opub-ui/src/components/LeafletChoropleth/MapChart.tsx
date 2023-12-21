@@ -8,7 +8,7 @@ import { cn } from '../../utils';
 import { Popover } from '../Popover';
 import { RadioGroup, RadioItem } from '../RadioGroup';
 import { Text } from '../Text';
-import styles from './LeafletChoropleth.module.scss';
+import styles from './MapChart.module.scss';
 
 const layers = {
   light: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -72,7 +72,7 @@ type LegendProps = {
 
 type Props = MapProps & LegendProps;
 
-const LeafletChoropleth = (props: Props) => {
+const MapChart = (props: Props) => {
   const { defaultLayer = 'light', className, ...others } = props;
 
   const [selectedLayer, setSelectedLayer] =
@@ -306,5 +306,5 @@ const LayerSelector = ({
   );
 };
 
-export { LeafletChoropleth };
-export default LeafletChoropleth;
+export { MapChart };
+export default MapChart;

@@ -1,1 +1,1 @@
-export { default as LeafletChoropleth } from './LeafletChoropleth';
+export { default as MapChart } from './MapChart';
