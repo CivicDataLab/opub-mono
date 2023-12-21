@@ -12,10 +12,10 @@ import Link from 'next/link';
 import { Icon, Divider, Text, SearchInput } from 'opub-ui';
 import React from 'react';
 
-const LeafletChoropleth = dynamic(
-  () => import('opub-viz').then((mod) => mod.LeafletChoropleth),
-  { ssr: false, loading: () => <div>Loading...</div> }
-);
+const MapChart = dynamic(() => import('opub-ui').then((mod) => mod.MapChart), {
+  ssr: false,
+  loading: () => <div>Loading...</div>,
+});
 export const DistrictSelector = () => {
   const [search, setSearch] = React.useState('');
   const [districtList, setDistrictList] = React.useState(assamDistrictCategory);
@@ -62,7 +62,7 @@ export const DistrictSelector = () => {
     <div className="hidden md:flex mx-auto mt-10 gap-4 max-h-[682px]">
       <div className="relative w-full max-w-[1016px] p-6 rounded-05 bg-surfaceDefault shadow-basicMd">
         {!mapLoading && (
-          <LeafletChoropleth
+          <MapChart
             features={mapFile.features}
             mapZoom={7.4}
             zoomOnClick={false}

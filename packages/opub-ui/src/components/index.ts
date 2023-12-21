@@ -62,3 +62,6 @@ export { SearchInput } from './SearchInput';
 export { Tray } from './Tray';
 export { SelectorCard } from './SelectorCard';
 export { Pill } from './Pill';
+export { BarChart } from './BarChart';
+export { ECharts } from './ECharts';
+export { MapChart } from './MapChart';

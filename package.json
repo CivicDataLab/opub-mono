@@ -18,7 +18,7 @@
     "prepare": "husky install",
     "clean": "rm -rf node_modules yarn.lock",
     "new-component": "new-component",
-    "build:packages": "turbo run build --filter=create-opub-app --filter=opub-viz --filter=opub-ui"
+    "build:packages": "turbo run build --filter=create-opub-app --filter=opub-ui"
   },
   "devDependencies": {
     "@changesets/cli": "^2.26.1",
