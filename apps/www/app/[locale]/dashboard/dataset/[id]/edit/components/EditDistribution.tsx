@@ -1,6 +1,9 @@
-import React from 'react';
+import { DatasetForm } from '../../../components/dataset-form';
+import { Icons } from '@/components/icons';
 import { graphql } from '@/gql';
 import { FileInputType, ResourceInput } from '@/gql/generated/graphql';
+import { GraphQL } from '@/lib/api';
+import { bytesToSize } from '@/lib/utils';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import {
   Button,
@@ -12,11 +15,7 @@ import {
   Select,
   Text,
 } from 'opub-ui';
-
-import { GraphQL } from '@/lib/api';
-import { bytesToSize } from '@/lib/utils';
-import { Icons } from '@/components/icons';
-import { DatasetForm } from '../../../components/dataset-form';
+import React from 'react';
 
 const createResourceMutationDoc = graphql(`
   mutation createResourceMutation($resource_data: ResourceInput) {
@@ -71,7 +70,7 @@ export function EditDistribution({
     (data: { resource_data: ResourceInput }) =>
       GraphQL(createResourceMutationDoc, data),
     {
-      onSuccess: (data) => {
+      onSuccess: () => {
         queryClient.invalidateQueries({
           queryKey: [`dataset_distribution_${id}`],
         });
@@ -204,7 +203,7 @@ const FileUpload = ({
       setFile(acceptedFiles[0]);
       setFileSelected(true);
     },
-    []
+    [setFileSelected]
   );
 
   function handleFileDelete(props: React.MouseEvent<HTMLButtonElement>) {
@@ -212,8 +211,6 @@ const FileUpload = ({
     setFileSelected(false);
     setFile(undefined);
   }
-
-  const validImageTypes = ['image/gif', 'image/jpeg', 'image/png'];
 
   const hint = (
     <Text variant="bodySm" as="p" color="subdued">

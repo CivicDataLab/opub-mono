@@ -1,6 +1,6 @@
 const convertValue = require('./converter');
 
-module.exports = function ({ dictionary, options }) {
+module.exports = function ({ dictionary }) {
   let families = ':root { \n';
   dictionary.allTokens.map((token) => {
     if (token.category === 'typography') return;

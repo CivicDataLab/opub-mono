@@ -1,4 +1,7 @@
-import React from 'react';
+import { DatasetForm } from '../../components/dataset-form';
+import styles from '../new.module.scss';
+import { Icons } from '@/components/icons';
+import { RadioCard } from '@/components/radio-card';
 import { CreateDatasetInput, PatchDatasetInput } from '@/gql/generated/graphql';
 import { PatchDataset, CreateDataset as Props } from '@/types';
 import {
@@ -11,11 +14,7 @@ import {
   RadioGroup,
   Text,
 } from 'opub-ui';
-
-import { Icons } from '@/components/icons';
-import { RadioCard } from '@/components/radio-card';
-import { DatasetForm } from '../../components/dataset-form';
-import styles from '../new.module.scss';
+import React from 'react';
 
 const defaultValBase: Props = {
   type: 'file',
@@ -37,7 +36,7 @@ export function CreateDataset({
   mutate?: (res: { dataset_data: CreateDatasetInput }) => void;
   mutatePatch?: (res: { dataset_data: PatchDatasetInput }) => void;
 }) {
-  const [val, setVal] = React.useState<Props>();
+  // const [val, setVal] = React.useState<Props>();
   const defaultValue = defaultVal || defaultValBase;
 
   return (
@@ -62,9 +61,9 @@ export function CreateDataset({
           });
       }}
       formOptions={{ defaultValues: defaultValue }}
-      onChange={(e) => {
-        setVal(e);
-      }}
+      // onChange={(e) => {
+      //   setVal(e);
+      // }}
       submitRef={submitRef}
     >
       <div className={styles.CreateDataset}>

@@ -1,15 +1,14 @@
 'use client';
 
-import React from 'react';
+import styles from '../dashboard.module.scss';
+import { Icons } from '@/components/icons';
+import { useKeyDetect } from '@/hooks/use-key-detect';
+import { cn } from '@/lib/utils';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useKeyDetect } from '@/hooks/use-key-detect';
 import { Button, Icon, Text, Tooltip } from 'opub-ui';
-
+import React from 'react';
 import { SidebarNavItem } from 'types';
-import { cn } from '@/lib/utils';
-import { Icons } from '@/components/icons';
-import styles from '../dashboard.module.scss';
 
 interface DashboardNavProps {
   items: SidebarNavItem[];
@@ -23,7 +22,7 @@ export function DashboardNav({ items }: DashboardNavProps) {
     if (key === 'b' && metaKey) {
       setIsCollapsed(!isCollapsed);
     }
-  }, [key]);
+  }, [key, isCollapsed, metaKey]);
 
   if (items && !items.length) {
     return null;

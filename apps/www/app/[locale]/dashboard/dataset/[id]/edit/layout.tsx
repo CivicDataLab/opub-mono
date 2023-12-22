@@ -1,6 +1,5 @@
-import React from 'react';
-
 import { EditLayout } from './components/EditLayout';
+import React from 'react';
 
 interface DashboardLayoutProps {
   children?: React.ReactNode;
@@ -11,5 +10,5 @@ export default async function Layout({
   children,
   params,
 }: DashboardLayoutProps) {
-  return <EditLayout children={children} params={params} />;
+  return <EditLayout params={params}>{children}</EditLayout>;
 }

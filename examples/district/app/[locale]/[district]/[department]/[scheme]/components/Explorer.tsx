@@ -62,7 +62,7 @@ export const Explorer = React.forwardRef(
           indicatorData[scheme as string]['District Performance'][0].slug;
         setIndicator(initialSlug);
       }
-    }, [indicatorData, indicator]);
+    }, [indicatorData, indicator, setIndicator, scheme]);
 
     // TODO: improve this section by adding better API
     // set indicator name
@@ -80,7 +80,7 @@ export const Explorer = React.forwardRef(
           }
         });
       }
-    }, [indicatorData, indicator]);
+    }, [indicatorData, indicator, scheme]);
 
     return (
       <div
@@ -170,7 +170,6 @@ const Content = ({
   district,
 }: {
   indicatorRef: any;
-
   chartData: IChartData;
   district: string;
   states: {
@@ -186,6 +185,7 @@ const Content = ({
     values: number[];
   }>();
   const [selectedBlocks, setSelectedBlocks] = React.useState<string[]>([]);
+  const { width } = useWindowSize();
 
   const { data: mapFile, isLoading: mapLoading } = useFetch(
     `${district}-mapFile`,
@@ -208,32 +208,34 @@ const Content = ({
         indicatorList.style.maxHeight = `${contentHeight - 100}px`;
       }, 20);
     }
-  }, []);
+  }, [indicatorRef]);
 
   const currentData: any =
     chartData[states.selectedIndicator].years[states.selectedYear];
 
-  const barDataObj: any = {
-    Khagorijan: 15452.0,
-    Batadraba: 19506.0,
-    Juria: 40642.0,
-    Kaliabor: 9102.0,
-    Rupahihut: 22841.0,
-    Lowkhowa: 19017.0,
-    Kathiatoli: 38942.0,
-    Raha: 17224.0,
-    Dolongghat: 5108.0,
-    Barhampur: 9450.0,
-    Pakhimoria: 8232.0,
-    Bajiagaon: 20247.0,
-    'Pachim Kaliabor': 14392.0,
-  };
+  const barDataObj: any = React.useMemo(() => {
+    return {
+      Khagorijan: 15452.0,
+      Batadraba: 19506.0,
+      Kaliabor: 9102.0,
+      Rupahihut: 22841.0,
+      Lowkhowa: 19017.0,
+      Kathiatoli: 38942.0,
+      Raha: 17224.0,
+      Dolongghat: 5108.0,
+      Barhampur: 9450.0,
+      Pakhimoria: 8232.0,
+      Bajiagaon: 20247.0,
+      'Pachim Kaliabor': 14392.0,
+      Juria: 40642.0,
+    };
+  }, []);
 
   React.useEffect(() => {
     if (!currentData) return;
 
     setSelectedBlocks(Object.keys(barDataObj));
-  }, []);
+  }, [currentData, barDataObj]);
 
   React.useEffect(() => {
     if (selectedBlocks) {
@@ -248,7 +250,7 @@ const Content = ({
         values: Object.values(filteredData),
       });
     }
-  }, [selectedBlocks, currentData]);
+  }, [selectedBlocks, currentData, barDataObj]);
 
   if (!chartData[states.selectedIndicator]) {
     return (
@@ -327,7 +329,6 @@ const Content = ({
     },
   ];
 
-  const { width } = useWindowSize();
   const isMobile = width ? width < 768 : false;
 
   return (

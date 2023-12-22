@@ -78,7 +78,7 @@ export const SourceData = ({
     });
 
     return data;
-  }, [indicatorData]);
+  }, [indicatorData, scheme]);
 
   React.useEffect(() => {
     // set first 5 District Performance indicators as selected by default
@@ -145,6 +145,7 @@ export const SourceData = ({
                 <div className="flex flex-col gap-1">
                   {allSelectedIndicators.map((item: any) => (
                     <Pill
+                      key={item}
                       variant="info"
                       truncate
                       onRemove={removePill}

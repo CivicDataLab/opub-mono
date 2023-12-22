@@ -5,6 +5,7 @@ import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Icon, ProgressBar, Divider, Text } from 'opub-ui';
+import React from 'react';
 
 export const SchemeCard = ({
   data,

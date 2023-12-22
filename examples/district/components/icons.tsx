@@ -7,7 +7,6 @@ import {
   IconChartInfographic,
   IconChevronDown,
   IconChevronLeft,
-  IconChevronRight,
   IconChevronUp,
   IconDatabase,
   IconDatabaseCog,
@@ -36,6 +35,7 @@ import {
   IconChevronsRight,
   IconCircleChevronRight,
 } from '@tabler/icons-react';
+import React from 'react';
 
 export const Icons: {
   [key: string]: (props: TablerIconsProps) => React.ReactElement;

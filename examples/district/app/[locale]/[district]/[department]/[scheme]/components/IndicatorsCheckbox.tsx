@@ -4,7 +4,6 @@ import {
   Checkbox,
   CheckboxGroup,
   Icon,
-  Input,
   ScrollArea,
   Divider,
   Text,
