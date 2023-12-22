@@ -41,7 +41,7 @@ export type DatFieldProps = {
 } & DateTimeProps &
   (DateFieldStateOptions | AriaDateFieldProps<DateValue>);
 
-const DateField = (props: DatFieldProps) => {
+const DateField = (props: any) => {
   const {
     trim,
     isRange,

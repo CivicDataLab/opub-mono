@@ -44,7 +44,7 @@ const Content = React.forwardRef(
     }: PopoverContentProps,
     forwardedRef: React.Ref<HTMLDivElement>
   ) => {
-    const PortalDom = isPortal ? Radix.Portal : React.Fragment;
+    const PortalDom: any = isPortal ? Radix.Portal : React.Fragment;
 
     return (
       <PortalDom className={styles.Portal}>

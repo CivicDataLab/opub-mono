@@ -18,7 +18,7 @@ export type DatePickerProps = {
   /** Label for the field */
   label: string;
   /** Error to display beneath the label */
-  error?: string | React.ReactNode | React.ReactElement | boolean;
+  error?: any;
   /** Adds an action to the label */
   labelAction?: LabelledProps['action'];
   /** Visually hide the label */
