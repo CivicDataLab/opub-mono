@@ -113,7 +113,7 @@ export async function createApp({
 
   const originalDirectory = process.cwd();
 
-  console.log(`Creating a new Next.js app in ${green(root)}.`);
+  console.log(`Creating a new OPub app in ${green(root)}.`);
   console.log();
 
   process.chdir(root);
