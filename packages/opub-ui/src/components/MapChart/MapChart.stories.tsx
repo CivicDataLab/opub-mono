@@ -1,5 +1,5 @@
 import { features } from '../../../assets/json/assam.json';
-import { MapChart } from './MapChart';
+import MapChart from './MapChart';
 import { Meta, StoryObj } from '@storybook/react';
 
 /**
