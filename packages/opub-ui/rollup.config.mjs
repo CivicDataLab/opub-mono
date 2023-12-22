@@ -51,6 +51,7 @@ const getPlugins = () => {
       'node_modules',
       'build',
       'dist',
+      '/docs',
       'scripts',
       '.storybook',
       '**/*.stories.tsx',

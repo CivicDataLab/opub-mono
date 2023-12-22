@@ -58,3 +58,5 @@ function convertToCSSVariable(string: string) {
   }
   return string;
 }
+
+export type { IconProps };

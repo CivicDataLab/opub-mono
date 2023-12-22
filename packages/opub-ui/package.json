@@ -23,8 +23,6 @@
     "React Component Library"
   ],
   "sideEffects": false,
-  "main": "./dist/index.js",
-  "types": "./dist/ts/index.d.ts",
   "exports": {
     ".": "./dist/index.js",
     "./viz": "./dist/viz.js",
@@ -32,6 +30,9 @@
   },
   "typesVersions": {
     "*": {
+      "*": [
+        "dist/ts/index.d.ts"
+      ],
       "viz": [
         "dist/ts/viz.d.ts"
       ]

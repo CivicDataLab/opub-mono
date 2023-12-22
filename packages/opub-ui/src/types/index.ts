@@ -13,6 +13,7 @@ export type {
   ComplexAction,
   DestructableAction,
   DisableableAction,
+  BaseButtonProps,
 } from './button';
 export type { CheckboxProps } from './checkbox';
 export type { CheckboxGroupProps, ChoiceProps } from './choicelist';

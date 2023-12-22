@@ -6,11 +6,11 @@ import {
   Checkbox,
   FormLayout,
   Icon,
+  IconProps,
   Input,
   RadioGroup,
   Text,
 } from 'opub-ui';
-import { IconSource } from 'opub-ui/dist/ts/types/icon';
 
 import { Icons } from '@/components/icons';
 import { RadioCard } from '@/components/radio-card';
@@ -147,7 +147,7 @@ const RadioItem = ({
   title: string;
   subtitle: string;
   disabled?: boolean;
-  icon: IconSource;
+  icon: IconProps['source'];
 }) => {
   return (
     <RadioCard {...props}>

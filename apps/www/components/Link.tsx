@@ -1,6 +1,5 @@
 import NextLink from 'next/link';
-import { Button } from 'opub-ui';
-import { ButtonProps } from 'opub-ui/dist/ts/components/Button/Button';
+import { Button, ButtonProps } from 'opub-ui';
 
 interface Props extends ButtonProps {
   href: string;

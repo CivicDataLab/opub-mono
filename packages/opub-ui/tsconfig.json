@@ -19,7 +19,7 @@
     "declaration": true,
     "declarationDir": "dist/ts",
     "declarationMap": false,
-    "emitDeclarationOnly": true
+    "emitDeclarationOnly": false
   },
   "exclude": ["dist", "build", "node_modules", "vite.config.ts"],
   "include": [".", "./src", "./.storybook", "**/*.tsx"],

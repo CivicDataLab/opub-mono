@@ -29,7 +29,7 @@ import 'opub-ui/dist/assets/styles.css';
 2. Once you complete the initial setup, you can import components into your project as needed:
 
 ```js
-import { Badge, Button, Menu } from 'opub-cdl/ui';
+import { Badge, Button, Menu } from 'opub-ui';
 ```
 
 > When using with NextJs you will need to transpile the packages [More Info](https://nextjs.org/docs/advanced-features/compiler#module-transpilation), add this inside `next.config.js` :
