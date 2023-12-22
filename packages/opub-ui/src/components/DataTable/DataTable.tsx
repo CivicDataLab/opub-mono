@@ -6,11 +6,11 @@ import { Checkbox } from '../Checkbox/Checkbox';
 import { Footer } from '../Table';
 import { Text } from '../Text';
 import styles from './DataTable.module.scss';
-import { Cell, Toolbar, HeaderCell, Row } from './components';
+import { Cell, HeaderCell, Row, Toolbar } from './components';
 import { RowAction } from './components/Row';
 import {
-  ColumnDef,
   ColumnFiltersState,
+  FilterFn,
   SortingState,
   VisibilityState,
   flexRender,
@@ -21,8 +21,6 @@ import {
   getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
-  createColumnHelper,
-  FilterFn,
 } from '@tanstack/react-table';
 import cx from 'classnames';
 import React from 'react';
@@ -272,5 +270,4 @@ const DataTable = (props: DataTableProps) => {
   );
 };
 
-export { DataTable, createColumnHelper };
-export type { ColumnDef };
+export { DataTable };

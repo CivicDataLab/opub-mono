@@ -2,7 +2,6 @@ import type {
   ActionListItemDescriptor,
   ActionListSection,
 } from '../../../../types/actionlist';
-// import { Box } from '../../../Box';
 import { MenuContext } from '../../../Menu/Menu';
 import { Text } from '../../../Text';
 import { Item } from '../Item';
