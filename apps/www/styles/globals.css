@@ -1,9 +1,9 @@
+@tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@import url('~opub-ui/dist/assets/styles.css');
+@import url('opub-ui/dist/assets/styles.css');
 @import url('./tokens/_variables.css');
-/* @import url('./tokens/_variables_dark.css'); */
 
 :root {
   --card-rgb: 180, 185, 188;

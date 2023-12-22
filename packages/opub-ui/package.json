@@ -28,7 +28,7 @@
   "exports": {
     ".": "./dist/index.js",
     "./viz": "./dist/viz.js",
-    "./dist/style.css": "./dist/assets/styles.css"
+    "./dist/assets/styles.css": "./dist/assets/styles.css"
   },
   "typesVersions": {
     "*": {
