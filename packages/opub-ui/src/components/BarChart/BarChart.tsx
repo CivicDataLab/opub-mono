@@ -14,14 +14,14 @@ import { SVGRenderer } from 'echarts/renderers';
 type Props = {
   /* xAxis of the chart */
   xAxis?: string[] | number[];
+  /* yAxis of the chart */
+  yAxis?: string[] | number[];
   /* Data to be displayed on the chart */
   series: {
     name: string;
     type: string;
     data: number[];
   }[];
-  /* yAxis of the chart */
-  yAxis?: string[] | number[];
   /* Theme of the chart */
   theme?: EChartsReactProps['theme'];
   /* Callback function to be called when the chart is ready */
