@@ -2,8 +2,8 @@
 
 A WIP (work in progress) platform to speed up the development of Open Data Dashboards, aimed at simplifying the process of creating and managing data visualizations, enabling users to easily analyze and present complex data in a user-friendly and accessible way.
 
-[Stroybook](https://main--64004009fa0a900a3197549c.chromatic.com/)<br>
-[Dashboard](https://opub-www.vercel.app/dashboard)<br>
+[Stroybook](https://main--64004009fa0a900a3197549c.chromatic.com/)`<br>`
+[Dashboard](https://opub-www.vercel.app/dashboard)`<br>`
 [Documentation](https://opub-docs.netlify.app)
 
 ## What's inside?
@@ -14,9 +14,8 @@ This repository, built using [Turborepo](https://github.com/vercel/turbo), utili
 
 - `apps/www`: web application built using the [Next.js framework](https://github.com/vercel/next.js/)
 - `apps/docs`: documentation site built using [Nextra](https://github.com/shuding/nextra)
-- `packages/opub-ui`: a library of reusable React components used in both the web and docs applications.
-- `packages/eslint-config-custom`: `eslint` configurations for the eslint tool, including `eslint-config-next` and `eslint-config-prettier`.
-- `packages/tsconfig`: configuration files for [TypeScript](https://github.com/microsoft/TypeScript/) used throughout the repository.
+- `packages/opub-ui`: a library of reusable React components used in both the web and docs applications
+- `packages/create-opub-app`: a CLI tool to quickly spin up a new OPub app in minutes
 
 ### Build
 

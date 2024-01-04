@@ -8,7 +8,7 @@ We need a way for anyone to start a new personalized OPub app as fast and easily
 
 ## Get Started
 
-`npx create-opub-app my-opub`
+`npm create opub-app my-opub`
 
 > This will create a new OPub app named `my-opub` on your local.
 >
