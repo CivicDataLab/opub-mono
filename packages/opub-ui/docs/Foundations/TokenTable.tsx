@@ -1,6 +1,6 @@
 import { Button } from '../../src/components/Button';
 import { DataTable } from '../../src/components/DataTable';
-import { toast } from '../../src/components/Sonner';
+import { toast } from '../../src/components/Toast';
 import { createColumnHelper } from '@tanstack/react-table';
 
 export const TokenTable = ({ data, exampleFormat }: any) => {
