@@ -8,7 +8,7 @@ import styles from './Labelled.module.scss';
 import cx from 'classnames';
 import React from 'react';
 
-export interface LabelledProps {
+export type LabelledProps = {
   /** A unique identifier for the label */
   id?: string;
   /** Text for the label */
@@ -27,7 +27,7 @@ export interface LabelledProps {
   requiredIndicator?: boolean;
   /** Additional class names to apply to the label */
   className?: string;
-}
+};
 
 export function Labelled({
   id = '',

@@ -1,4 +1,4 @@
-import { LabelledProps } from '../components/Labelled';
+import type { LabelledProps } from '../components/Labelled';
 import type { Error } from './shared/form';
 
 export interface StrictOption {

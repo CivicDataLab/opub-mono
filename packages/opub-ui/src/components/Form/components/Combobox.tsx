@@ -1,6 +1,6 @@
 'use client';
 
-import { ComboboxSingleProps, Error } from '../../../types';
+import { ComboboxSingleProps, type Error } from '../../../types';
 import {
   Combobox as ComboboxBase,
   ComboboxMulti as ComboboxMultiBase,
