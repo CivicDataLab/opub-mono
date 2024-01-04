@@ -43,6 +43,6 @@ export { Tag } from './Tag';
 export { Text } from './Text';
 export { TextField } from './TextField';
 export { Thumbnail } from './Thumbnail';
-export { Toast, Toaster, useToast } from './Toast';
+export { Toaster, toast } from './Toast';
 export { Tooltip } from './Tooltip';
 export { Tray } from './Tray';

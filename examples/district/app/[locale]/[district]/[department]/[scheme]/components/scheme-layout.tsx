@@ -10,7 +10,7 @@ import {
   TabPanel,
   Tabs,
   Text,
-  useToast,
+  toast,
 } from 'opub-ui';
 import React from 'react';
 import { BreadCrumb } from '../../../components';
@@ -201,7 +201,6 @@ const TabLayout = ({
   );
   const overviewRef: any = React.useRef(null);
 
-  const { toast } = useToast();
   const { width } = useWindowSize();
   const isMobile = width && width < 768;
 
@@ -260,8 +259,11 @@ const TabLayout = ({
               variant="interactive"
               onClick={() => {
                 copyURLToClipboard();
-                toast({
-                  title: 'Copied to clipboard',
+                toast('Copied to clipboard', {
+                  action: {
+                    label: 'Dismiss',
+                    onClick: () => {},
+                  },
                 });
               }}
             >

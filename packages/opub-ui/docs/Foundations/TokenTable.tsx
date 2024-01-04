@@ -1,11 +1,9 @@
 import { Button } from '../../src/components/Button';
 import { DataTable } from '../../src/components/DataTable';
-import { useToast } from '../../src/components/Toast';
+import { toast } from '../../src/components/Sonner';
 import { createColumnHelper } from '@tanstack/react-table';
 
 export const TokenTable = ({ data, exampleFormat }: any) => {
-  const { toast } = useToast();
-
   function copyToClipboard(text: string) {
     const elem = document.createElement('textarea');
     elem.value = text;
@@ -31,9 +29,11 @@ export const TokenTable = ({ data, exampleFormat }: any) => {
           <Button
             onClick={() => {
               copyToClipboard(convertToCssVariable(value));
-
-              toast({
-                title: `copied ${value} as css variable`,
+              toast(`copied ${value} as css variable`, {
+                action: {
+                  label: 'Dismiss',
+                  onClick: () => {},
+                },
               });
             }}
             kind="tertiary"

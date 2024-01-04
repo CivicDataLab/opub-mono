@@ -13,7 +13,7 @@ import {
   Tray,
   Pill,
   SelectorCard,
-  useToast,
+  toast,
 } from 'opub-ui';
 import React from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
@@ -112,8 +112,6 @@ export const SourceData = ({
     columns.push(columnHelper.accessor(key, { header: key }));
     columnContentTypes.push('numeric');
   });
-
-  const { toast } = useToast();
 
   function removePill(str: string) {
     let key: string, index: number;
@@ -245,8 +243,11 @@ export const SourceData = ({
                 variant="interactive"
                 onClick={() => {
                   copyURLToClipboard();
-                  toast({
-                    title: 'Copied to clipboard',
+                  toast('Copied to clipboard', {
+                    action: {
+                      label: 'Dismiss',
+                      onClick: () => {},
+                    },
                   });
                 }}
               >
@@ -275,8 +276,11 @@ export const SourceData = ({
           variant="interactive"
           onClick={() => {
             copyURLToClipboard();
-            toast({
-              title: 'Copied to clipboard',
+            toast('Copied to clipboard', {
+              action: {
+                label: 'Dismiss',
+                onClick: () => {},
+              },
             });
           }}
         >

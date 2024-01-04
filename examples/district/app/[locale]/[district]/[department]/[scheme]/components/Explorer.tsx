@@ -14,7 +14,7 @@ import {
   Tabs,
   Text,
   Tray,
-  useToast,
+  toast,
 } from 'opub-ui';
 import React from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
@@ -192,7 +192,6 @@ const Content = ({
     `/files/${district}.json`
   );
 
-  const { toast } = useToast();
   const contentRef: any = React.useRef(null);
 
   React.useEffect(() => {
@@ -389,8 +388,11 @@ const Content = ({
           variant="interactive"
           onClick={() => {
             copyURLToClipboard();
-            toast({
-              title: 'Copied to clipboard!',
+            toast('Copied to clipboard', {
+              action: {
+                label: 'Dismiss',
+                onClick: () => {},
+              },
             });
           }}
         >
