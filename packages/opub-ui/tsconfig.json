@@ -1,5 +1,4 @@
 {
-  "extends": "../tsconfig/react-library.json",
   "compilerOptions": {
     "target": "ESNext",
     "useDefineForClassFields": true,
