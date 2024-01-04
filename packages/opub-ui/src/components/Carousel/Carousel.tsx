@@ -1,146 +1,258 @@
-"use client"
-import React, { useState, useRef, useEffect} from 'react';
-import 'keen-slider/keen-slider.min.css';
-import { useKeenSlider } from 'keen-slider/react';
-import styles from './Carousel.module.scss'
+import { cn } from '../../utils';
+import { Button } from '../Button';
+import { IconButton } from '../IconButton';
+import { IconArrowLeft, IconArrowRight } from '@tabler/icons-react';
+import useEmblaCarousel, {
+  type EmblaCarouselType as CarouselApi,
+  type EmblaOptionsType as CarouselOptions,
+  type EmblaPluginType as CarouselPlugin,
+} from 'embla-carousel-react';
+import * as React from 'react';
 
-type Props = {
-  /**
-   * content for the carousel
-   */
-  children: any;
+type CarouselProps = {
+  setApi?: (api: CarouselApi) => void;
+  opts?: CarouselOptions;
+  plugins?: CarouselPlugin[];
+  orientation?: 'horizontal' | 'vertical';
+};
 
-  /**
-   * previous button content (icon or text)
-   */
-  prevBtn: React.ReactNode;
+type CarouselContextProps = {
+  carouselRef: ReturnType<typeof useEmblaCarousel>[0];
+  api: ReturnType<typeof useEmblaCarousel>[1];
+  scrollPrev: () => void;
+  scrollNext: () => void;
+  canScrollPrev: boolean;
+  canScrollNext: boolean;
+} & CarouselProps;
 
-  /**
-   * next button content (icon or text)
-   */
-  nextBtn: React.ReactNode;
+const CarouselContext = React.createContext<CarouselContextProps | null>(null);
 
-  /**
-   * label for the carousel (a11y)
-   */
-  label: string;
-  current?:any;
+function useCarousel() {
+  const context = React.useContext(CarouselContext);
+
+  if (!context) {
+    throw new Error('useCarousel must be used within a <Carousel />');
+  }
+
+  return context;
 }
 
-
-const Carousel = ({ children, prevBtn, nextBtn, label, current }: Props) => {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [loaded, setLoaded] = useState(false);
-  const carouselRef = useRef<any>(null)
-   
-  current?.(currentSlide+1,children.length)
-  // check if children prop is wrapped in a fragment container
-  let carouselItems = children;
-  if (children.type == React.Fragment) {
-    carouselItems = children.props.children;
-  }
-  // if it's a single element, put it in a array
-  carouselItems = !Array.isArray(carouselItems) ? [carouselItems] : carouselItems;
-
-  function handleArrowKeys(e:any) {
-    if (e.key == 'ArrowRight') {
-      instanceRef.current?.next();
-      carouselRef.current?.querySelector('.carouselNextBtn').focus();
-    } else if (e.key == 'ArrowLeft') {
-      instanceRef.current?.prev();
-      carouselRef.current?.querySelector('.carouselPrevBtn').focus();
-    }
-  }
-  useEffect(() => {
-    if(carouselRef.current)
-    carouselRef.current?.addEventListener('keydown', handleArrowKeys);
-  }, []);
-
-  const [refCallback, instanceRef] = useKeenSlider({
-    // carousel methods
-    rubberband: false,
-    dragSpeed: 0.1,
-    defaultAnimation: {
-      duration: 800,
+const Carousel = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement> & CarouselProps
+>(
+  (
+    {
+      orientation = 'horizontal',
+      opts,
+      setApi,
+      plugins,
+      className,
+      children,
+      ...props
     },
-    slideChanged(slider) {
-      setCurrentSlide(slider.track.details.rel);    
-      var slidys = carouselRef.current.querySelectorAll('.keen-slider__slide');
-      slidys.forEach(function (slidy:any, idx:any) {
-        if (idx === slider.track.details.rel) {
-          slidy.setAttribute('data-hidden', 'false');
-          slidy.setAttribute('tabindex', '0');
-        } else {
-          slidy.setAttribute('data-hidden', 'true');
-          slidy.removeAttribute('tabindex');
+    ref
+  ) => {
+    const [carouselRef, api] = useEmblaCarousel(
+      {
+        ...opts,
+        axis: orientation === 'horizontal' ? 'x' : 'y',
+      },
+      plugins
+    );
+    const [canScrollPrev, setCanScrollPrev] = React.useState(false);
+    const [canScrollNext, setCanScrollNext] = React.useState(false);
+
+    const onSelect = React.useCallback((api: CarouselApi) => {
+      if (!api) {
+        return;
+      }
+
+      setCanScrollPrev(api.canScrollPrev());
+      setCanScrollNext(api.canScrollNext());
+    }, []);
+
+    const scrollPrev = React.useCallback(() => {
+      api?.scrollPrev();
+    }, [api]);
+
+    const scrollNext = React.useCallback(() => {
+      api?.scrollNext();
+    }, [api]);
+
+    const handleKeyDown = React.useCallback(
+      (event: React.KeyboardEvent<HTMLDivElement>) => {
+        if (event.key === 'ArrowLeft') {
+          event.preventDefault();
+          scrollPrev();
+        } else if (event.key === 'ArrowRight') {
+          event.preventDefault();
+          scrollNext();
         }
-      });
-    },
-    created() {
-      setLoaded(true);
-      setTimeout(() => {
-        var slide = carouselRef.current.querySelector('.keen-slider__slide');
-        slide.setAttribute('data-hidden', 'false');
-        slide.setAttribute('tabindex', '0');
-      }, 10);
-    },
-  });
+      },
+      [scrollPrev, scrollNext]
+    );
+
+    React.useEffect(() => {
+      if (!api || !setApi) {
+        return;
+      }
+
+      setApi(api);
+    }, [api, setApi]);
+
+    React.useEffect(() => {
+      if (!api) {
+        return;
+      }
+
+      onSelect(api);
+      api.on('reInit', onSelect);
+      api.on('select', onSelect);
+
+      return () => {
+        api?.off('select', onSelect);
+      };
+    }, [api, onSelect]);
+
+    return (
+      <CarouselContext.Provider
+        value={{
+          carouselRef,
+          api: api,
+          opts,
+          orientation:
+            orientation || (opts?.axis === 'y' ? 'vertical' : 'horizontal'),
+          scrollPrev,
+          scrollNext,
+          canScrollPrev,
+          canScrollNext,
+        }}
+      >
+        <div
+          ref={ref}
+          onKeyDownCapture={handleKeyDown}
+          className={cn('relative', className)}
+          role="region"
+          aria-roledescription="carousel"
+          {...props}
+        >
+          {children}
+        </div>
+      </CarouselContext.Provider>
+    );
+  }
+);
+Carousel.displayName = 'Carousel';
+
+const CarouselContent = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => {
+  const { carouselRef, orientation } = useCarousel();
+
+  return (
+    <div ref={carouselRef} className="overflow-hidden">
+      <div
+        ref={ref}
+        className={cn(
+          'flex',
+          orientation === 'horizontal' ? '-ml-4' : '-mt-4 flex-col',
+          className
+        )}
+        {...props}
+      />
+    </div>
+  );
+});
+CarouselContent.displayName = 'CarouselContent';
+
+const CarouselItem = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => {
+  const { orientation } = useCarousel();
 
   return (
     <div
-      ref={carouselRef}
+      ref={ref}
       role="group"
-      aria-roledescription="slider"
-      aria-label={label}
-      className={styles.Carousel}
-    >
-      <span className="sr-only" aria-live="polite">{`Showing slide ${
-        currentSlide + 1
-      } of ${carouselItems.length}`}</span>
-      <div className="keen-slider" ref={refCallback}>
-        {carouselItems.map((item:any, index:any) =>
-          React.cloneElement(item, {
-            key: `carouselItem-${index}`,
-            className: 'keen-slider__slide',
-            'data-hidden': 'true',
-            'aria-roledescription': 'slide',
-            role: 'group',
-          })
-        )}
-      </div>
-
-      {loaded && instanceRef.current && (
-        <div className={`carouselBtnWrapper ${styles.ButtonWrapper}`}>
-          <button
-            className={styles.CarouselPrevBtn}
-            aria-label="Previous Slide"
-            onClick={(e: any) =>
-              e.stopPropagation() || instanceRef.current?.prev()
-            }
-            aria-disabled={currentSlide === 0 ? 'true' : undefined}
-            tabIndex={currentSlide === 0 ? -1 : undefined}
-          >
-            {prevBtn}
-          </button>
-          <button
-            className={styles.CarouselNextBtn}
-            aria-label="Next Slide"
-            onClick={(e: any) =>
-              e.stopPropagation() || instanceRef.current?.next()
-            }
-            aria-disabled={
-              currentSlide === carouselItems.length - 1 ? 'true' : undefined
-            }
-            tabIndex={
-              currentSlide === carouselItems.length - 1 ? -1 : undefined
-            }
-          >
-            {nextBtn}
-          </button>
-        </div>
+      aria-roledescription="slide"
+      className={cn(
+        'min-w-0 shrink-0 grow-0 basis-full',
+        orientation === 'horizontal' ? 'pl-4' : 'pt-4',
+        className
       )}
-    </div>
+      {...props}
+    />
   );
-};
+});
+CarouselItem.displayName = 'CarouselItem';
 
-export { Carousel };
+const CarouselPrevious = React.forwardRef<
+  HTMLButtonElement,
+  React.ComponentProps<typeof Button>
+>(({ className, variant = 'outline', size = 'icon', ...props }, ref) => {
+  const { orientation, scrollPrev, canScrollPrev } = useCarousel();
+
+  return (
+    <IconButton
+      ref={ref}
+      // variant={variant}
+      size="slim"
+      // className={cn(
+      //   'absolute  h-8 w-8 rounded-full',
+      //   orientation === 'horizontal'
+      //     ? '-left-12 top-1/2 -translate-y-1/2'
+      //     : '-top-12 left-1/2 -translate-x-1/2 rotate-90',
+      //   className
+      // )}
+      disabled={!canScrollPrev}
+      onClick={scrollPrev}
+      icon={IconArrowLeft}
+      {...props}
+    >
+      Previous slide
+    </IconButton>
+  );
+});
+CarouselPrevious.displayName = 'CarouselPrevious';
+
+const CarouselNext = React.forwardRef<
+  HTMLButtonElement,
+  React.ComponentProps<typeof Button>
+>(({ className, variant = 'outline', size = 'icon', ...props }, ref) => {
+  const { orientation, scrollNext, canScrollNext } = useCarousel();
+
+  return (
+    <IconButton
+      ref={ref}
+      size="slim"
+      icon={IconArrowRight}
+      // variant={variant}
+      // size={size}
+      // className={cn(
+      //   'absolute h-8 w-8 rounded-full',
+      //   orientation === 'horizontal'
+      //     ? '-right-12 top-1/2 -translate-y-1/2'
+      //     : '-bottom-12 left-1/2 -translate-x-1/2 rotate-90',
+      //   className
+      // )}
+      disabled={!canScrollNext}
+      onClick={scrollNext}
+      {...props}
+    >
+      Next slide
+    </IconButton>
+  );
+});
+CarouselNext.displayName = 'CarouselNext';
+
+export {
+  type CarouselApi,
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselPrevious,
+  CarouselNext,
+};
