@@ -1,11 +1,14 @@
 'use client';
 
 import React from 'react';
-import { IconButton } from 'opub-ui';
+import { useQuery } from '@tanstack/react-query';
 
+import { ANALYTICS_REVENUE_TABLE_DATA } from '@/config/graphql/analaytics-queries';
+import { GraphQL } from '@/lib/api';
 import { cn } from '@/lib/utils';
 import Icons from '@/components/icons';
-import { AnalyticsDashboardSidebar } from './analytics-sidebar';
+//import { AnalyticsDashboardSidebar } from './analytics-sidebar';
+import { SidebarLayout } from './sidebar-layout';
 import styles from './styles.module.scss';
 
 interface DashboardLayoutProps {
@@ -21,6 +24,22 @@ export function AnalyticsDashboardLayout({ children }: DashboardLayoutProps) {
     }, 1000);
   }
 
+  const revenueData = useQuery(
+    [`revenue_table_data`],
+    () =>
+      GraphQL('analytics', ANALYTICS_REVENUE_TABLE_DATA, {
+        indcFilter: { slug: 'composite-score' },
+        dataFilter: { dataPeriod: '2023_08' },
+
+        geoFilter: { code: '116' },
+      }),
+    {
+      refetchOnMount: false,
+      refetchOnWindowFocus: false,
+      refetchOnReconnect: false,
+    }
+  );
+
   return (
     <React.Fragment>
       <div
@@ -28,7 +47,7 @@ export function AnalyticsDashboardLayout({ children }: DashboardLayoutProps) {
           'md:flex relative gap-1 grow max-h-full min-h-[calc(100%_-_48px)] overflow-y-hidden'
         )}
       >
-        <IconButton
+        {/* <IconButton
           className={cn(
             'hidden md:block absolute left-[300px] top-4 p-2 z-2 rounded shadow-insetBasic bg-surfaceDefault border-solid border-borderSubdued',
             styles.CollapseBtn,
@@ -39,8 +58,7 @@ export function AnalyticsDashboardLayout({ children }: DashboardLayoutProps) {
           onClick={() => setIsCollapsed((e) => !e)}
         >
           Collapse Sidebar
-        </IconButton>
-        <AnalyticsDashboardSidebar isCollapsed={isCollapsed} />
+        </IconButton> */}
 
         <main
           className={cn(
@@ -52,6 +70,11 @@ export function AnalyticsDashboardLayout({ children }: DashboardLayoutProps) {
         >
           {children}
         </main>
+        {revenueData.isFetched && (
+          <SidebarLayout
+            revenueData={revenueData?.data?.revCircleViewTableData?.table_data}
+          />
+        )}
       </div>
     </React.Fragment>
   );
