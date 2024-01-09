@@ -60,7 +60,6 @@ export const Grouped: Story = {
 }
 
 export const Line: Story = {
-	name: 'yAxis',
 	args: {
 		xAxis: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
 		series: [
@@ -75,7 +74,6 @@ export const Line: Story = {
 }
 
 export const LineSmooth: Story = {
-	name: 'yAxis',
 	args: {
 		xAxis: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
 		series: [
