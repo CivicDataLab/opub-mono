@@ -97,11 +97,16 @@ export const Popup: Story = {
 		if (map) {
 			map.eachLayer((layer: any) => {
 				const district = layer.feature?.properties.district
-				if (district === 'Nagaon' || district === 'Morigaon') {
+				if (district === 'Nagaon' || district === 'Sonitpur') {
 					layer
 						.bindPopup(
 							() => {
-								return layer.feature?.properties.district
+								return `<div> 
+										<strong>${district}</strong>
+										<span class="block mt-1">
+											Data: ${layer.feature?.properties.dt_code}
+										</span>
+									</div>`
 							},
 							{
 								maxWidth: 200,
