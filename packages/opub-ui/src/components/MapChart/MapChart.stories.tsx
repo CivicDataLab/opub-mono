@@ -101,12 +101,10 @@ export const Popup: Story = {
 					layer
 						.bindPopup(
 							() => {
-								return `<div> 
-										<strong>${district}</strong>
-										<span class="block mt-1">
-											Data: ${layer.feature?.properties.dt_code}
-										</span>
-									</div>`
+								return `<span> 
+								${district} <br />
+								Rainfall: ${layer.feature?.properties.dt_code}
+									</span>`
 							},
 							{
 								maxWidth: 200,
@@ -114,6 +112,7 @@ export const Popup: Story = {
 								autoClose: false,
 								closeOnEscapeKey: false,
 								closeOnClick: false,
+								className: 'opub-leaflet-popup',
 							}
 						)
 						.openPopup()
