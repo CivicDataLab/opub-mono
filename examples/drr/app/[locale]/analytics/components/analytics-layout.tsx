@@ -1,3 +1,7 @@
+'use client'
+import React from "react";
+import { MapComponent } from "./map-component";
+
 export function Content({
     timePeriod,
     indicator,
@@ -6,7 +10,10 @@ export function Content({
     indicator: string;
   }) {
     return (
+      <React.Fragment>
         <p>{indicator}-{timePeriod}</p>
+        <MapComponent />
+      </React.Fragment>
     )
 
   }

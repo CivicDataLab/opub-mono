@@ -34,3 +34,9 @@ export const ANALYTICS_GEOGRAPHY_DATA = graphql(`
     }
   }
 `);
+
+export const ANALYTICS_DISTRICT_CHART_DATA = graphql(`
+query getDistrictchartdata ($indcFilter: IndicatorFilter! , $dataFilter: DataFilter!) {
+  districtChartData(indcFilter: $indcFilter , dataFilter:$dataFilter) 
+}
+`)
