@@ -3,10 +3,14 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 
-import { ANALYTICS_REVENUE_TABLE_DATA } from '@/config/graphql/analaytics-queries';
+import {
+  ANALYTICS_REVENUE_TABLE_DATA,
+  ANALYTICS_DISTRICT_CHART_DATA
+} from '@/config/graphql/analaytics-queries';
 import { GraphQL } from '@/lib/api';
 import { cn } from '@/lib/utils';
 import Icons from '@/components/icons';
+import { SidebarDefaultLayout } from './SidebarDefaultLayout';
 //import { AnalyticsDashboardSidebar } from './analytics-sidebar';
 import { SidebarLayout } from './sidebar-layout';
 import styles from './styles.module.scss';
@@ -40,6 +44,22 @@ export function AnalyticsDashboardLayout({ children }: DashboardLayoutProps) {
     }
   );
 
+  const chartData = useQuery(
+    [`chart_data`],
+    () =>
+      GraphQL('analytics', ANALYTICS_DISTRICT_CHART_DATA, {
+        indcFilter: { slug: 'composite-score' },
+        dataFilter: { dataPeriod: '2022_11' },
+      }),
+    {
+      refetchOnMount: false,
+      refetchOnWindowFocus: false,
+      refetchOnReconnect: false,
+    }
+  );
+
+  const REVENUE_CIRCLE = 'CHARIDUAR';
+
   return (
     <React.Fragment>
       <div
@@ -70,11 +90,19 @@ export function AnalyticsDashboardLayout({ children }: DashboardLayoutProps) {
         >
           {children}
         </main>
-        {revenueData.isFetched && (
-          <SidebarLayout
-            revenueData={revenueData?.data?.revCircleViewTableData?.table_data}
-          />
-        )}
+        {REVENUE_CIRCLE
+          ? chartData.isFetched && (
+              <SidebarDefaultLayout
+                chartData={chartData?.data?.districtChartData}
+              />
+            )
+          : revenueData.isFetched && (
+              <SidebarLayout
+                revenueData={
+                  revenueData?.data?.revCircleViewTableData?.table_data
+                }
+              />
+            )}
       </div>
     </React.Fragment>
   );

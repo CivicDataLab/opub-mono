@@ -48,7 +48,8 @@ export function SidebarLayout({ revenueData }: any) {
         'p-4',
         'pr-0 overflow-hidden bg-surfaceDefault shadow-basicMd',
         'hidden z-1 shadow-inset basis-[500px] shrink-0 md:block',
-        'border-r-1 border-solid border-borderSubdued'
+        'border-r-1 border-solid border-borderSubdued',
+        'overflow-y-auto'
       )}
     >
       <Text variant="headingMd" fontWeight="bold">

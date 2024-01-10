@@ -72,3 +72,9 @@ query getCircleChartData ($indcFilter: IndicatorFilter! , $dataFilter: DataFilte
   revCircleChartData(indcFilter: $indcFilter , dataFilter:$dataFilter) 
 }
 `)
+
+export const ANALYTICS_DISTRICT_CHART_DATA = graphql(`
+query getDistrictchartdata ($indcFilter: IndicatorFilter! , $dataFilter: DataFilter!) {
+  districtChartData(indcFilter: $indcFilter , dataFilter:$dataFilter) 
+}
+`)
