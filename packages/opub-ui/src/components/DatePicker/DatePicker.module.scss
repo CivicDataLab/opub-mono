@@ -1,26 +1,32 @@
 @import '../../../styles/common';
 
 .DatePickerTrigger {
-  width: fit-content;
+	width: fit-content;
 }
 
 .Wrapper {
-  display: inline-flex;
-  gap: var(--space-1);
-  width: fit-content;
-  justify-content: flex-start;
-  flex-wrap: wrap;
+	display: inline-flex;
+	gap: var(--space-1);
+	width: fit-content;
+	justify-content: flex-start;
+	flex-wrap: wrap;
+	position: relative;
 
-  label {
-    width: fit-content;
-  }
+	label {
+		width: fit-content;
+	}
+
+	> button {
+		z-index: 1;
+		margin-right: var(--space-1);
+	}
 }
 
 .Error {
-  border-color: var(--border-critical);
-  background-color: var(--surface-critical-subdued);
-  &.hover,
-  &:hover {
-    border-color: var(--border-critical);
-  }
+	border-color: var(--border-critical);
+	background-color: var(--surface-critical-subdued);
+	&.hover,
+	&:hover {
+		border-color: var(--border-critical);
+	}
 }
