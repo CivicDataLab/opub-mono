@@ -97,11 +97,14 @@ export const Popup: Story = {
 		if (map) {
 			map.eachLayer((layer: any) => {
 				const district = layer.feature?.properties.district
-				if (district === 'Nagaon' || district === 'Morigaon') {
+				if (district === 'Nagaon' || district === 'Sonitpur') {
 					layer
 						.bindPopup(
 							() => {
-								return layer.feature?.properties.district
+								return `<span> 
+								${district} <br />
+								Rainfall: ${layer.feature?.properties.dt_code}
+									</span>`
 							},
 							{
 								maxWidth: 200,
@@ -109,6 +112,7 @@ export const Popup: Story = {
 								autoClose: false,
 								closeOnEscapeKey: false,
 								closeOnClick: false,
+								className: 'opub-leaflet-popup',
 							}
 						)
 						.openPopup()

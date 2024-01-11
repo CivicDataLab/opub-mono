@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('opub-ui/dist/assets/styles.css');
+@import url('./tokens/_variables.css');
+
+body {
+  background-color: var(--background-solid-subdued);
+}
