@@ -56,10 +56,12 @@ const DateField = (props: any) => {
 	} = props
 	let { locale } = useLocale()
 	let ref = React.useRef(null)
+
 	let state = useDateFieldState({
 		...others,
 		locale,
 		createCalendar,
+		// granularity: 'month',
 	})
 
 	let { labelProps, fieldProps } = useDateField(others, state, ref)

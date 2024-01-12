@@ -47,7 +47,7 @@ export const CalendarRange: RangeStory = {
 	args: {},
 }
 
-export const YearRange: any = {
+export const Year: any = {
 	render: ({ ...args }) => {
 		return <YearCalendar {...args} />
 	},
