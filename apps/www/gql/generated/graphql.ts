@@ -83,13 +83,18 @@ export enum ApiDetailsFormatLoc {
 export type ApiParameterInputType = {
   default: Scalars['String'];
   description?: InputMaybe<Scalars['String']>;
+  download_api_options_same?: InputMaybe<Scalars['Boolean']>;
+  download_options?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   format?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['ID']>;
   key: Scalars['String'];
+  options?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   type?: InputMaybe<ParameterTypes>;
 };
 
 export enum ApiParameterType {
+  /** Download */
+  Download = 'DOWNLOAD',
   /** Exposed */
   Exposed = 'EXPOSED',
   /** Pagination */
@@ -103,9 +108,12 @@ export type ApiParametersType = {
   api_details: ApiDetailsType;
   default: Scalars['String'];
   description: Scalars['String'];
+  download_api_options_same: Scalars['Boolean'];
+  download_options?: Maybe<Array<Scalars['String']>>;
   format: Scalars['String'];
   id: Scalars['ID'];
   key: Scalars['String'];
+  options?: Maybe<Array<Scalars['String']>>;
   type: ApiParameterType;
 };
 
@@ -146,6 +154,7 @@ export type ApiSourceType = {
 export type AccessModelResourceInput = {
   access_model_id: Scalars['ID'];
   dataset_id: Scalars['ID'];
+  description: Scalars['String'];
   id?: InputMaybe<Scalars['ID']>;
   payment?: InputMaybe<Scalars['Int']>;
   payment_type: Paymenttypes;
@@ -203,6 +212,10 @@ export type AdditionalInfoInput = {
   file?: InputMaybe<Scalars['Upload']>;
   format?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['ID']>;
+  license_title?: InputMaybe<Scalars['String']>;
+  license_url?: InputMaybe<Scalars['String']>;
+  policy_title?: InputMaybe<Scalars['String']>;
+  policy_url?: InputMaybe<Scalars['String']>;
   remote_url?: InputMaybe<Scalars['String']>;
   title: Scalars['String'];
   type?: InputMaybe<InfoType>;
@@ -216,7 +229,15 @@ export type AdditionalInfoType = {
   format?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   issued: Scalars['DateTime'];
+  /** For EXTERNAL datasets */
+  license_title?: Maybe<Scalars['String']>;
+  /** For EXTERNAL datasets */
+  license_url?: Maybe<Scalars['String']>;
   modified: Scalars['DateTime'];
+  /** For EXTERNAL datasets */
+  policy_title?: Maybe<Scalars['String']>;
+  /** For EXTERNAL datasets */
+  policy_url?: Maybe<Scalars['String']>;
   remote_url: Scalars['String'];
   title: Scalars['String'];
   type?: Maybe<Scalars['String']>;
@@ -269,12 +290,15 @@ export type ApiDetailsType = {
   apiparameter_set: Array<ApiParametersType>;
   auth_required: Scalars['Boolean'];
   default_format?: Maybe<Scalars['String']>;
+  download_formats?: Maybe<Array<Scalars['String']>>;
+  download_same_as_api: Scalars['Boolean'];
   format_key?: Maybe<Scalars['String']>;
   format_loc?: Maybe<ApiDetailsFormatLoc>;
+  is_large_dataset: Scalars['Boolean'];
   parameters?: Maybe<Array<Maybe<ApiParametersType>>>;
   request_type: Scalars['String'];
   resource: ResourceType;
-  response_type: Scalars['String'];
+  response_type?: Maybe<Scalars['String']>;
   supported_formats?: Maybe<Array<Scalars['String']>>;
   url_path: Scalars['String'];
 };
@@ -283,8 +307,11 @@ export type ApiInputType = {
   api_source: Scalars['ID'];
   auth_required: Scalars['Boolean'];
   default_format?: InputMaybe<Scalars['String']>;
+  download_formats?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  download_same_as_api?: InputMaybe<Scalars['Boolean']>;
   format_key?: InputMaybe<Scalars['String']>;
   format_loc?: InputMaybe<FormatLocation>;
+  is_large_dataset?: InputMaybe<Scalars['Boolean']>;
   parameters?: InputMaybe<Array<InputMaybe<ApiParameterInputType>>>;
   request_type?: InputMaybe<RequestType>;
   response_type?: InputMaybe<ResponseType>;
@@ -433,9 +460,9 @@ export type CreateDataset = {
 };
 
 export type CreateDatasetInput = {
-  dataset_type?: InputMaybe<DataType>;
+  dataset_type: DataType;
   description: Scalars['String'];
-  funnel?: InputMaybe<Scalars['String']>;
+  funnel?: Scalars['String'];
   title: Scalars['String'];
 };
 
@@ -443,6 +470,13 @@ export type CreateDatasetRating = {
   __typename?: 'CreateDatasetRating';
   dataset_rating?: Maybe<DatasetRatingType>;
   errors?: Maybe<Scalars['ExpectedErrorType']>;
+  success?: Maybe<Scalars['Boolean']>;
+};
+
+export type CreateExternalAccessModel = {
+  __typename?: 'CreateExternalAccessModel';
+  errors?: Maybe<Scalars['ExpectedErrorType']>;
+  external_access_model?: Maybe<ExternalAccessModelType>;
   success?: Maybe<Scalars['Boolean']>;
 };
 
@@ -485,7 +519,7 @@ export type CreateOrganizationType = {
   dpa_email?: Maybe<Scalars['String']>;
   dpa_name?: Maybe<Scalars['String']>;
   dpa_phone?: Maybe<Scalars['String']>;
-  homepage?: Maybe<Scalars['String']>;
+  homepage: Scalars['String'];
   id: Scalars['ID'];
   issued: Scalars['DateTime'];
   logo?: Maybe<Scalars['String']>;
@@ -494,9 +528,10 @@ export type CreateOrganizationType = {
   organization_ptr: OrganizationType;
   organization_subtypes?: Maybe<OrganizationCreateRequestOrganizationSubtypes>;
   organization_types: OrganizationOrganizationTypes;
+  orgdpahistory?: Maybe<OrgDpaType>;
   parent?: Maybe<OrganizationType>;
   remark?: Maybe<Scalars['String']>;
-  sample_data_url?: Maybe<Scalars['String']>;
+  sample_data_url: Scalars['String'];
   state?: Maybe<GeographyType>;
   status: OrganizationCreateRequestStatus;
   title: Scalars['String'];
@@ -567,6 +602,7 @@ export type DataAccessModelRequestMutation = {
 
 export enum DataAccessModelRequestStatusType {
   Approved = 'APPROVED',
+  Paymentpending = 'PAYMENTPENDING',
   Rejected = 'REJECTED',
   Requested = 'REQUESTED'
 }
@@ -585,6 +621,7 @@ export type DataAccessModelRequestType = {
   remaining_quota?: Maybe<Scalars['Int']>;
   remark?: Maybe<Scalars['String']>;
   status: Scalars['String'];
+  token_time: Scalars['DateTime'];
   user?: Maybe<Scalars['String']>;
   user_email?: Maybe<Scalars['String']>;
   validity?: Maybe<Scalars['String']>;
@@ -708,6 +745,7 @@ export type DataRequestUpdateMutation = {
 
 export enum DataType {
   Api = 'API',
+  External = 'EXTERNAL',
   File = 'FILE'
 }
 
@@ -718,6 +756,13 @@ export enum DatasetAccessModelPaymentType {
   Paid = 'PAID'
 }
 
+export type DatasetAccessModelRequestUserMigration = {
+  __typename?: 'DatasetAccessModelRequestUserMigration';
+  data_access_model_request?: Maybe<DataAccessModelRequestType>;
+  errors?: Maybe<Scalars['ExpectedErrorType']>;
+  success?: Maybe<Scalars['Boolean']>;
+};
+
 export type DatasetAccessModelType = {
   __typename?: 'DatasetAccessModelType';
   agreements: Array<AgreementType>;
@@ -725,6 +770,7 @@ export type DatasetAccessModelType = {
   dataset: DatasetType;
   datasetaccessmodelrequest_set: Array<DataAccessModelRequestType>;
   datasetaccessmodelresource_set: Array<AccessModelResourceType>;
+  description: Scalars['String'];
   id: Scalars['ID'];
   issued: Scalars['DateTime'];
   modified: Scalars['DateTime'];
@@ -736,9 +782,18 @@ export type DatasetAccessModelType = {
   usage?: Maybe<Scalars['Int']>;
 };
 
+export type DatasetCount = {
+  __typename?: 'DatasetCount';
+  dataset_count?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+};
+
 export enum DatasetDatasetType {
   /** Api */
   Api = 'API',
+  /** External */
+  External = 'EXTERNAL',
   /** File */
   File = 'FILE'
 }
@@ -803,7 +858,7 @@ export enum DatasetStatus {
 export type DatasetType = {
   __typename?: 'DatasetType';
   accepted_agreement?: Maybe<Scalars['String']>;
-  action?: Maybe<Scalars['String']>;
+  action: Scalars['String'];
   additionalinfo_set: Array<AdditionalInfoType>;
   average_rating?: Maybe<Scalars['Float']>;
   catalog: CatalogType;
@@ -815,12 +870,14 @@ export type DatasetType = {
   datasetreviewrequest_set: Array<ReviewRequestType>;
   description: Scalars['String'];
   download_count: Scalars['Int'];
-  funnel?: Maybe<Scalars['String']>;
+  externalaccessmodel_set: Array<ExternalAccessModelType>;
+  funnel: Scalars['String'];
   geography: Array<GeographyType>;
   highlights?: Maybe<Array<Maybe<Scalars['String']>>>;
   hvd_rating: Scalars['Decimal'];
   id: Scalars['ID'];
   in_series?: Maybe<Scalars['String']>;
+  is_datedynamic: Scalars['Boolean'];
   issued: Scalars['DateTime'];
   language?: Maybe<Scalars['String']>;
   last_updated?: Maybe<Scalars['DateTime']>;
@@ -839,7 +896,7 @@ export type DatasetType = {
   source: Scalars['String'];
   spatial_coverage?: Maybe<Scalars['String']>;
   spatial_resolution?: Maybe<Scalars['String']>;
-  status?: Maybe<Scalars['String']>;
+  status: Scalars['String'];
   subscribe_set: Array<SubscribeType>;
   tags: Array<TagType>;
   temporal_coverage?: Maybe<Scalars['String']>;
@@ -882,6 +939,16 @@ export type DeleteDataAccessModel = {
 };
 
 export type DeleteDataAccessModelInput = {
+  id: Scalars['ID'];
+};
+
+export type DeleteExternalAccessModel = {
+  __typename?: 'DeleteExternalAccessModel';
+  errors?: Maybe<Scalars['ExpectedErrorType']>;
+  success?: Maybe<Scalars['String']>;
+};
+
+export type DeleteExternalAccessModelInput = {
   id: Scalars['ID'];
 };
 
@@ -936,6 +1003,23 @@ export type EditDatasetInput = {
   new_version_name: Scalars['String'];
 };
 
+export type ExternalAccessModelInput = {
+  dataset: Scalars['ID'];
+  id?: InputMaybe<Scalars['ID']>;
+  license: Scalars['ID'];
+  policy?: InputMaybe<Scalars['ID']>;
+};
+
+export type ExternalAccessModelType = {
+  __typename?: 'ExternalAccessModelType';
+  dataset: DatasetType;
+  id: Scalars['ID'];
+  issued: Scalars['DateTime'];
+  license: LicenseType;
+  modified: Scalars['DateTime'];
+  policy?: Maybe<PolicyType>;
+};
+
 export enum FieldTypes {
   Actor = 'actor',
   Browser = 'browser',
@@ -950,12 +1034,20 @@ export type FileDetailsType = {
   remote_url: Scalars['String'];
   resource: ResourceType;
   source_file_name: Scalars['String'];
+  supported_formats?: Maybe<Array<Scalars['String']>>;
 };
 
 export type FileInputType = {
   file?: InputMaybe<Scalars['Upload']>;
   format?: InputMaybe<Scalars['String']>;
   remote_url?: InputMaybe<Scalars['String']>;
+};
+
+export type Filters = {
+  __typename?: 'Filters';
+  geographies?: Maybe<Array<Maybe<GeographyItem>>>;
+  providers?: Maybe<Array<Maybe<OrgsItem>>>;
+  sectors?: Maybe<Array<Maybe<SectorItem>>>;
 };
 
 export enum FormatLocation {
@@ -985,14 +1077,20 @@ export type GeographyInput = {
   geo_type: GeoTypes;
   id?: InputMaybe<Scalars['ID']>;
   name?: InputMaybe<Scalars['String']>;
-  official_id: Scalars['String'];
+  official_id?: InputMaybe<Scalars['String']>;
   parent_id?: InputMaybe<Scalars['String']>;
+};
+
+export type GeographyItem = {
+  __typename?: 'GeographyItem';
+  geograph_name?: Maybe<Scalars['String']>;
+  geography_id?: Maybe<Scalars['String']>;
 };
 
 export type GeographyType = {
   __typename?: 'GeographyType';
   dataset_set: Array<DatasetType>;
-  geo_type: GeographyGeoType;
+  geo_type?: Maybe<GeographyGeoType>;
   geography_set: Array<GeographyType>;
   id: Scalars['ID'];
   name: Scalars['String'];
@@ -1077,8 +1175,9 @@ export type LicenseInput = {
   id?: InputMaybe<Scalars['ID']>;
   license_additions?: InputMaybe<Array<InputMaybe<LicenceAdditionInputType>>>;
   remote_url?: InputMaybe<Scalars['String']>;
-  short_name: Scalars['String'];
+  short_name?: InputMaybe<Scalars['String']>;
   title: Scalars['String'];
+  type?: InputMaybe<Scalars['String']>;
 };
 
 export enum LicenseStatus {
@@ -1096,6 +1195,7 @@ export type LicenseType = {
   created_organization?: Maybe<OrganizationType>;
   dataaccessmodel_set: Array<DataAccessModelType>;
   description: Scalars['String'];
+  externalaccessmodel_set: Array<ExternalAccessModelType>;
   file: Scalars['String'];
   id: Scalars['ID'];
   issued: Scalars['DateTime'];
@@ -1106,6 +1206,7 @@ export type LicenseType = {
   short_name?: Maybe<Scalars['String']>;
   status: LicenseStatus;
   title: Scalars['String'];
+  type?: Maybe<Scalars['String']>;
 };
 
 export type ModerationRequestInput = {
@@ -1166,6 +1267,7 @@ export type Mutation = {
   create_data_access_model?: Maybe<CreateDataAccessModel>;
   create_dataset?: Maybe<CreateDataset>;
   create_dataset_rating?: Maybe<CreateDatasetRating>;
+  create_external_access_model?: Maybe<CreateExternalAccessModel>;
   create_geography?: Maybe<CreateGeography>;
   create_license?: Maybe<CreateLicense>;
   create_license_addition?: Maybe<CreateLicenseAddition>;
@@ -1176,10 +1278,12 @@ export type Mutation = {
   create_tag?: Maybe<CreateTag>;
   data_access_model_request?: Maybe<DataAccessModelRequestMutation>;
   data_request?: Maybe<DataRequestMutation>;
+  dataset_access_model_request_user_migration?: Maybe<DatasetAccessModelRequestUserMigration>;
   delete_access_model_resource?: Maybe<DeleteAccessModelResource>;
   delete_additional_info?: Maybe<DeleteAdditionalInfo>;
   delete_api_source?: Maybe<DeleteApiSource>;
   delete_data_access_model?: Maybe<DeleteDataAccessModel>;
+  delete_external_access_model?: Maybe<DeleteExternalAccessModel>;
   delete_license?: Maybe<DeleteLicense>;
   delete_organization_request?: Maybe<DeleteOrganizationRequestMutation>;
   delete_policy?: Maybe<DeletePolicy>;
@@ -1204,6 +1308,7 @@ export type Mutation = {
   update_organization?: Maybe<UpdateOrganization>;
   update_policy?: Maybe<UpdatePolicy>;
   update_resource?: Maybe<UpdateResource>;
+  update_schema?: Maybe<UpdateSchema>;
   update_sector?: Maybe<UpdateSector>;
 };
 
@@ -1298,6 +1403,11 @@ export type MutationCreate_Dataset_RatingArgs = {
 };
 
 
+export type MutationCreate_External_Access_ModelArgs = {
+  external_access_model_data?: InputMaybe<ExternalAccessModelInput>;
+};
+
+
 export type MutationCreate_GeographyArgs = {
   geography_data: GeographyInput;
 };
@@ -1348,6 +1458,11 @@ export type MutationData_RequestArgs = {
 };
 
 
+export type MutationDataset_Access_Model_Request_User_MigrationArgs = {
+  data_access_model_request?: InputMaybe<UserMigrationInput>;
+};
+
+
 export type MutationDelete_Access_Model_ResourceArgs = {
   access_model_resource_data?: InputMaybe<DeleteAccessModelResourceInput>;
 };
@@ -1365,6 +1480,11 @@ export type MutationDelete_Api_SourceArgs = {
 
 export type MutationDelete_Data_Access_ModelArgs = {
   data_access_model_data?: InputMaybe<DeleteDataAccessModelInput>;
+};
+
+
+export type MutationDelete_External_Access_ModelArgs = {
+  external_access_model_data?: InputMaybe<DeleteExternalAccessModelInput>;
 };
 
 
@@ -1439,7 +1559,7 @@ export type MutationUpdate_Access_Model_ResourceArgs = {
 
 
 export type MutationUpdate_Additional_InfoArgs = {
-  resource_data: AdditionalInfoInput;
+  info_data: AdditionalInfoInput;
 };
 
 
@@ -1488,6 +1608,11 @@ export type MutationUpdate_ResourceArgs = {
 };
 
 
+export type MutationUpdate_SchemaArgs = {
+  resource_data: UpdateSchemaInput;
+};
+
+
 export type MutationUpdate_SectorArgs = {
   sector_data: SectorInput;
 };
@@ -1504,8 +1629,44 @@ export type OpenDataRequestMutation = {
   success?: Maybe<Scalars['Boolean']>;
 };
 
+export type OrgDpaType = {
+  __typename?: 'OrgDpaType';
+  address?: Maybe<Scalars['String']>;
+  cdo_notification: Scalars['String'];
+  contact_email?: Maybe<Scalars['String']>;
+  data_description?: Maybe<Scalars['String']>;
+  description: Scalars['String'];
+  dpa_designation?: Maybe<Scalars['String']>;
+  dpa_email?: Maybe<Scalars['String']>;
+  dpa_name?: Maybe<Scalars['String']>;
+  dpa_phone?: Maybe<Scalars['String']>;
+  homepage: Scalars['String'];
+  id: Scalars['ID'];
+  issued: Scalars['DateTime'];
+  logo?: Maybe<Scalars['String']>;
+  modified: Scalars['DateTime'];
+  new_cdo_notification: Scalars['String'];
+  new_dpa: Scalars['String'];
+  ogd_tid?: Maybe<Scalars['Int']>;
+  old_dpa?: Maybe<Scalars['String']>;
+  org_id?: Maybe<OrganizationType>;
+  organization_ptr: OrganizationType;
+  organization_subtypes?: Maybe<OrganizationCreateRequestOrganizationSubtypes>;
+  organization_types: OrganizationOrganizationTypes;
+  organizationcreaterequest_ptr: CreateOrganizationType;
+  parent?: Maybe<OrganizationType>;
+  remark?: Maybe<Scalars['String']>;
+  sample_data_url: Scalars['String'];
+  state?: Maybe<GeographyType>;
+  status: OrganizationCreateRequestStatus;
+  title: Scalars['String'];
+  upload_sample_data_file: Scalars['String'];
+  username: Scalars['String'];
+};
+
 export type OrgItem = {
   __typename?: 'OrgItem';
+  dpa_email?: Maybe<Scalars['String']>;
   org_id?: Maybe<Scalars['String']>;
   parent?: Maybe<Array<Maybe<Scalars['String']>>>;
   title?: Maybe<Scalars['String']>;
@@ -1683,7 +1844,7 @@ export type OrganizationType = {
   dataaccessmodel_set: Array<DataAccessModelType>;
   dataset_count?: Maybe<Scalars['Int']>;
   description: Scalars['String'];
-  homepage?: Maybe<Scalars['String']>;
+  homepage: Scalars['String'];
   id: Scalars['ID'];
   issued: Scalars['DateTime'];
   license_set: Array<LicenseType>;
@@ -1692,6 +1853,7 @@ export type OrganizationType = {
   organization_types: OrganizationOrganizationTypes;
   organizationcreaterequest?: Maybe<CreateOrganizationType>;
   organizationrequest_set: Array<OrganizationRequestType>;
+  orgdpahistory_set: Array<OrgDpaType>;
   parent?: Maybe<OrganizationType>;
   parent_field: Array<OrganizationType>;
   policy_set: Array<PolicyType>;
@@ -1721,6 +1883,12 @@ export enum OrganizationTypes {
   UrbanLocalBody = 'URBAN_LOCAL_BODY'
 }
 
+export type OrgsItem = {
+  __typename?: 'OrgsItem';
+  org_id?: Maybe<Scalars['String']>;
+  org_title?: Maybe<Scalars['String']>;
+};
+
 export enum Paymenttypes {
   Free = 'FREE',
   Paid = 'PAID'
@@ -1732,6 +1900,7 @@ export type ParameterKeyValueType = {
 };
 
 export enum ParameterTypes {
+  Download = 'DOWNLOAD',
   Exposed = 'EXPOSED',
   Pagination = 'PAGINATION',
   Preview = 'PREVIEW'
@@ -1772,6 +1941,7 @@ export type PolicyInput = {
   id?: InputMaybe<Scalars['ID']>;
   remote_url?: InputMaybe<Scalars['String']>;
   title: Scalars['String'];
+  type?: InputMaybe<Scalars['String']>;
 };
 
 export enum PolicyStatus {
@@ -1787,6 +1957,7 @@ export type PolicyType = {
   __typename?: 'PolicyType';
   datasetaccessmodel_set: Array<DatasetAccessModelType>;
   description: Scalars['String'];
+  externalaccessmodel_set: Array<ExternalAccessModelType>;
   file: Scalars['String'];
   id: Scalars['ID'];
   issued: Scalars['DateTime'];
@@ -1796,6 +1967,36 @@ export type PolicyType = {
   remote_url: Scalars['String'];
   status: PolicyStatus;
   title: Scalars['String'];
+  type?: Maybe<Scalars['String']>;
+};
+
+export type ProviderAdminItem = {
+  __typename?: 'ProviderAdminItem';
+  cdo_notif?: Maybe<Scalars['String']>;
+  dp_count?: Maybe<Scalars['Int']>;
+  dpa_list?: Maybe<Array<Maybe<OrgDpaType>>>;
+  org_dataset_count?: Maybe<Scalars['Int']>;
+  org_id?: Maybe<Scalars['String']>;
+  org_title?: Maybe<Scalars['String']>;
+  provider_email?: Maybe<Scalars['String']>;
+  provider_name?: Maybe<Scalars['String']>;
+  provider_user_name?: Maybe<Scalars['String']>;
+  updated?: Maybe<Scalars['String']>;
+  user_org_dataset_count?: Maybe<Scalars['Int']>;
+};
+
+export type ProviderItem = {
+  __typename?: 'ProviderItem';
+  dataset_count?: Maybe<Scalars['Int']>;
+  dataset_list?: Maybe<Array<Maybe<DatasetType>>>;
+  dpa_email?: Maybe<Scalars['String']>;
+  dpa_name?: Maybe<Scalars['String']>;
+  org_id?: Maybe<Scalars['String']>;
+  org_title?: Maybe<Scalars['String']>;
+  provider_email?: Maybe<Scalars['String']>;
+  provider_name?: Maybe<Scalars['String']>;
+  provider_user_name?: Maybe<Scalars['String']>;
+  updated?: Maybe<Scalars['String']>;
 };
 
 export enum PurposeType {
@@ -1816,8 +2017,10 @@ export type Query = {
   all_data_access_model_requests?: Maybe<Array<Maybe<DataAccessModelRequestType>>>;
   all_data_access_models?: Maybe<Array<Maybe<DataAccessModelType>>>;
   all_data_requests?: Maybe<Array<Maybe<DataRequestType>>>;
+  all_dataset_filters?: Maybe<Filters>;
   all_dataset_ratings?: Maybe<Array<Maybe<DatasetRatingType>>>;
   all_datasets?: Maybe<Array<Maybe<DatasetType>>>;
+  all_external_access_models?: Maybe<Array<Maybe<ExternalAccessModelType>>>;
   all_geography?: Maybe<Array<Maybe<GeographyType>>>;
   all_info?: Maybe<Array<Maybe<AdditionalInfoType>>>;
   all_license?: Maybe<Array<Maybe<LicenseType>>>;
@@ -1826,12 +2029,16 @@ export type Query = {
   all_organization_requests?: Maybe<Array<Maybe<OrganizationRequestType>>>;
   all_organizations?: Maybe<Array<Maybe<OrganizationType>>>;
   all_organizations_hierarchy?: Maybe<Array<Maybe<OrgItem>>>;
+  all_pending_data_access_model_requests?: Maybe<Array<Maybe<DataAccessModelRequestType>>>;
   all_policy?: Maybe<Array<Maybe<PolicyType>>>;
+  all_provider_admins?: Maybe<Array<Maybe<ProviderAdminItem>>>;
+  all_providers?: Maybe<Array<Maybe<ProviderItem>>>;
   all_resources?: Maybe<Array<Maybe<ResourceType>>>;
   all_review_requests?: Maybe<Array<Maybe<ReviewRequestType>>>;
   all_sector?: Maybe<Array<Maybe<SectorType>>>;
   all_subscriptions?: Maybe<Array<Maybe<SubscribeType>>>;
   all_tag?: Maybe<Array<Maybe<TagType>>>;
+  all_users?: Maybe<Array<Maybe<UserItem>>>;
   api_source?: Maybe<ApiSourceType>;
   approved_policy?: Maybe<Array<Maybe<PolicyType>>>;
   catalog?: Maybe<CatalogType>;
@@ -1845,11 +2052,14 @@ export type Query = {
   dataset?: Maybe<DatasetType>;
   dataset_access_model?: Maybe<Array<Maybe<DatasetAccessModelType>>>;
   dataset_access_model_by_id?: Maybe<DatasetAccessModelType>;
+  dataset_by_downloads?: Maybe<Array<Maybe<DatasetType>>>;
   dataset_by_slug?: Maybe<DatasetType>;
   dataset_by_title?: Maybe<DatasetType>;
+  dataset_count_org?: Maybe<Array<Maybe<DatasetCount>>>;
   dataset_rating?: Maybe<Array<Maybe<DatasetRatingType>>>;
   dept_by_ministry?: Maybe<Array<Maybe<OrganizationType>>>;
   entity_by_state?: Maybe<Array<Maybe<OrganizationType>>>;
+  external_access_model_by_dataset?: Maybe<ExternalAccessModelType>;
   geography?: Maybe<GeographyType>;
   info?: Maybe<AdditionalInfoType>;
   license?: Maybe<LicenseType>;
@@ -1865,14 +2075,16 @@ export type Query = {
   org_datasets?: Maybe<Array<Maybe<DatasetType>>>;
   organization_by_id?: Maybe<OrganizationType>;
   organization_by_tid?: Maybe<OrganizationType>;
-  organization_by_title?: Maybe<OrganizationType>;
+  organization_by_title?: Maybe<Array<Maybe<OrganizationType>>>;
   organization_request?: Maybe<OrganizationRequestType>;
   organization_request_user?: Maybe<Array<Maybe<OrganizationRequestType>>>;
   organization_without_dpa?: Maybe<Array<Maybe<OrganizationType>>>;
   organizations?: Maybe<Array<Maybe<OrganizationType>>>;
   organizations_by_user?: Maybe<Array<Maybe<OrganizationType>>>;
+  organizations_child?: Maybe<Array<Maybe<OrganizationType>>>;
   policy_by_id?: Maybe<PolicyType>;
   policy_by_org?: Maybe<Array<Maybe<PolicyType>>>;
+  published_organization_by_id?: Maybe<OrganizationType>;
   rating?: Maybe<DatasetRatingType>;
   rating_by_org?: Maybe<Array<Maybe<DatasetRatingType>>>;
   requested_rejected_organizations?: Maybe<Array<Maybe<OrganizationType>>>;
@@ -1884,11 +2096,35 @@ export type Query = {
   sector?: Maybe<SectorType>;
   sector_by_title?: Maybe<SectorType>;
   stat_count?: Maybe<StatsType>;
+  sub_geographies?: Maybe<Array<Maybe<GeographyType>>>;
   subscribe?: Maybe<SubscribeType>;
   tag?: Maybe<TagType>;
   user_activity?: Maybe<Array<Maybe<ActivityType>>>;
   user_dataset_subscription?: Maybe<SubscribeType>;
   user_subscriptions?: Maybe<Array<Maybe<SubscribeType>>>;
+};
+
+
+export type QueryAll_Data_Access_Model_RequestsArgs = {
+  first?: InputMaybe<Scalars['Int']>;
+  skip?: InputMaybe<Scalars['Int']>;
+};
+
+
+export type QueryAll_DatasetsArgs = {
+  first?: InputMaybe<Scalars['Int']>;
+  skip?: InputMaybe<Scalars['Int']>;
+};
+
+
+export type QueryAll_Pending_Data_Access_Model_RequestsArgs = {
+  first?: InputMaybe<Scalars['Int']>;
+  skip?: InputMaybe<Scalars['Int']>;
+};
+
+
+export type QueryAll_ProvidersArgs = {
+  org_id?: InputMaybe<Scalars['Int']>;
 };
 
 
@@ -1945,6 +2181,18 @@ export type QueryDataset_Access_Model_By_IdArgs = {
 };
 
 
+export type QueryDataset_By_DownloadsArgs = {
+  first?: InputMaybe<Scalars['Int']>;
+  frm?: InputMaybe<Scalars['String']>;
+  geo?: InputMaybe<Scalars['String']>;
+  hvd?: InputMaybe<Scalars['Boolean']>;
+  org?: InputMaybe<Scalars['String']>;
+  sector?: InputMaybe<Scalars['String']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  to?: InputMaybe<Scalars['String']>;
+};
+
+
 export type QueryDataset_By_SlugArgs = {
   dataset_slug?: InputMaybe<Scalars['String']>;
 };
@@ -1952,6 +2200,16 @@ export type QueryDataset_By_SlugArgs = {
 
 export type QueryDataset_By_TitleArgs = {
   dataset_title?: InputMaybe<Scalars['String']>;
+};
+
+
+export type QueryDataset_Count_OrgArgs = {
+  by?: InputMaybe<Scalars['String']>;
+  frm?: InputMaybe<Scalars['String']>;
+  geo?: InputMaybe<Scalars['String']>;
+  org?: InputMaybe<Scalars['String']>;
+  sector?: InputMaybe<Scalars['String']>;
+  to?: InputMaybe<Scalars['String']>;
 };
 
 
@@ -1970,6 +2228,11 @@ export type QueryEntity_By_StateArgs = {
   entity_type?: InputMaybe<Scalars['String']>;
   parent_id?: InputMaybe<Scalars['String']>;
   state?: InputMaybe<Scalars['String']>;
+};
+
+
+export type QueryExternal_Access_Model_By_DatasetArgs = {
+  dataset_id?: InputMaybe<Scalars['ID']>;
 };
 
 
@@ -2007,6 +2270,7 @@ export type QueryOrg_ActivityArgs = {
   filters?: InputMaybe<Array<InputMaybe<ActivityFilter>>>;
   first?: InputMaybe<Scalars['Int']>;
   organization_id?: InputMaybe<Scalars['ID']>;
+  search_query?: InputMaybe<Scalars['String']>;
   skip?: InputMaybe<Scalars['Int']>;
 };
 
@@ -2048,8 +2312,18 @@ export type QueryOrganization_Without_DpaArgs = {
 };
 
 
+export type QueryOrganizations_ChildArgs = {
+  organization_id?: InputMaybe<Scalars['Int']>;
+};
+
+
 export type QueryPolicy_By_IdArgs = {
   policy_id?: InputMaybe<Scalars['Int']>;
+};
+
+
+export type QueryPublished_Organization_By_IdArgs = {
+  organization_id?: InputMaybe<Scalars['Int']>;
 };
 
 
@@ -2088,6 +2362,11 @@ export type QuerySector_By_TitleArgs = {
 };
 
 
+export type QuerySub_GeographiesArgs = {
+  parent_id?: InputMaybe<Scalars['Int']>;
+};
+
+
 export type QuerySubscribeArgs = {
   subscribe_id?: InputMaybe<Scalars['Int']>;
 };
@@ -2101,6 +2380,7 @@ export type QueryTagArgs = {
 export type QueryUser_ActivityArgs = {
   filters?: InputMaybe<Array<InputMaybe<ActivityFilter>>>;
   first?: InputMaybe<Scalars['Int']>;
+  search_query?: InputMaybe<Scalars['String']>;
   skip?: InputMaybe<Scalars['Int']>;
   user?: InputMaybe<Scalars['String']>;
 };
@@ -2148,8 +2428,11 @@ export type ResourceInput = {
   compression_format?: InputMaybe<Scalars['String']>;
   dataset: Scalars['ID'];
   description?: InputMaybe<Scalars['String']>;
+  external_url?: InputMaybe<Scalars['String']>;
   file_details?: InputMaybe<FileInputType>;
   id?: InputMaybe<Scalars['ID']>;
+  is_downloadable?: InputMaybe<Scalars['String']>;
+  is_large_data?: InputMaybe<Scalars['Boolean']>;
   masked_fields?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   media_type?: InputMaybe<Scalars['String']>;
   packaging_format?: InputMaybe<Scalars['String']>;
@@ -2201,9 +2484,12 @@ export type ResourceType = {
   dataset: DatasetType;
   datasetaccessmodelresource_set: Array<AccessModelResourceType>;
   description: Scalars['String'];
+  external_url?: Maybe<Scalars['String']>;
   file_details?: Maybe<FileDetailsType>;
   filedetails?: Maybe<FileDetailsType>;
   id: Scalars['ID'];
+  is_downloadable: Scalars['Boolean'];
+  is_large_data: Scalars['Boolean'];
   issued: Scalars['DateTime'];
   masked_fields?: Maybe<Array<Scalars['String']>>;
   media_type?: Maybe<Scalars['String']>;
@@ -2264,8 +2550,14 @@ export type SectorInput = {
   highlights?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   id?: InputMaybe<Scalars['ID']>;
   name: Scalars['String'];
-  official_id: Scalars['String'];
+  official_id?: InputMaybe<Scalars['String']>;
   parent_id?: InputMaybe<Scalars['String']>;
+};
+
+export type SectorItem = {
+  __typename?: 'SectorItem';
+  sector_id?: Maybe<Scalars['String']>;
+  sector_name?: Maybe<Scalars['String']>;
 };
 
 export type SectorType = {
@@ -2336,7 +2628,7 @@ export enum SubscriptionUnits {
 
 export type TagInput = {
   id?: InputMaybe<Scalars['ID']>;
-  name?: InputMaybe<Scalars['String']>;
+  name: Scalars['String'];
 };
 
 export type TagType = {
@@ -2379,25 +2671,26 @@ export type UpdateDatasetInput = {
   confirms_to?: InputMaybe<Scalars['String']>;
   contact_point?: InputMaybe<Scalars['String']>;
   funnel?: InputMaybe<Scalars['String']>;
-  geo_list?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  geo_list: Array<InputMaybe<Scalars['String']>>;
   highlights?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  id: Scalars['ID'];
+  id?: InputMaybe<Scalars['ID']>;
   in_series?: InputMaybe<Scalars['String']>;
+  is_datedynamic?: InputMaybe<Scalars['String']>;
   language?: InputMaybe<Scalars['String']>;
   period_from?: InputMaybe<Scalars['Date']>;
   period_to?: InputMaybe<Scalars['Date']>;
   qualified_attribution?: InputMaybe<Scalars['String']>;
-  remote_issued?: InputMaybe<Scalars['Date']>;
+  remote_issued: Scalars['Date'];
   remote_modified?: InputMaybe<Scalars['Date']>;
-  sector_list?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  source?: InputMaybe<Scalars['String']>;
+  sector_list: Array<InputMaybe<Scalars['String']>>;
+  source: Scalars['String'];
   spatial_coverage?: InputMaybe<Scalars['String']>;
   spatial_resolution?: InputMaybe<Scalars['String']>;
   tags_list?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   temporal_coverage?: InputMaybe<Scalars['String']>;
   temporal_resolution?: InputMaybe<Scalars['String']>;
   theme?: InputMaybe<Scalars['String']>;
-  update_frequency?: InputMaybe<Scalars['String']>;
+  update_frequency: Scalars['String'];
 };
 
 export type UpdateGeography = {
@@ -2442,11 +2735,41 @@ export type UpdateResource = {
   success?: Maybe<Scalars['Boolean']>;
 };
 
+export type UpdateSchema = {
+  __typename?: 'UpdateSchema';
+  errors?: Maybe<Scalars['ExpectedErrorType']>;
+  resource?: Maybe<ResourceType>;
+  success?: Maybe<Scalars['Boolean']>;
+};
+
+export type UpdateSchemaInput = {
+  id?: InputMaybe<Scalars['ID']>;
+  schema?: InputMaybe<Array<InputMaybe<ResourceSchemaInputType>>>;
+};
+
 export type UpdateSector = {
   __typename?: 'UpdateSector';
   errors?: Maybe<Scalars['ExpectedErrorType']>;
   sector?: Maybe<SectorType>;
   success?: Maybe<Scalars['Boolean']>;
+};
+
+export type UserItem = {
+  __typename?: 'UserItem';
+  dataset_access_count?: Maybe<Scalars['Int']>;
+  dataset_list?: Maybe<Array<Maybe<DatasetType>>>;
+  date_joined?: Maybe<Scalars['String']>;
+  email?: Maybe<Scalars['String']>;
+  first_name?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  ratings_user?: Maybe<Scalars['Int']>;
+  username?: Maybe<Scalars['String']>;
+};
+
+export type UserMigrationInput = {
+  source_dam_id?: InputMaybe<Scalars['ID']>;
+  target_dam_id?: InputMaybe<Scalars['ID']>;
+  target_user?: InputMaybe<Scalars['String']>;
 };
 
 export enum ValidationUnits {

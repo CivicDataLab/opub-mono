@@ -95,13 +95,14 @@ export type Indicators = {
 
 export type Query = {
   __typename?: 'Query';
-  ChartIndicators: Scalars['JSON'];
   data: Array<Data>;
   districtChartData: Scalars['JSON'];
   districtMapData: Scalars['JSON'];
   districtViewTableData: Scalars['JSON'];
   geography: Array<Geography>;
   getDataTimePeriods: Array<CustomDataPeriodList>;
+  getDistrictRevCircle: Scalars['JSON'];
+  getFactors: Scalars['JSON'];
   indicators: Array<Indicators>;
   indicatorsByCategory: Scalars['JSON'];
   revCircleChartData: Scalars['JSON'];
@@ -139,6 +140,11 @@ export type QueryDistrictViewTableDataArgs = {
 
 export type QueryGeographyArgs = {
   filters?: InputMaybe<GeoFilter>;
+};
+
+
+export type QueryGetDistrictRevCircleArgs = {
+  geoFilter: GeoFilter;
 };
 
 
