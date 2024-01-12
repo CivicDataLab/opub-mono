@@ -61,7 +61,6 @@ const DateField = (props: any) => {
 		...others,
 		locale,
 		createCalendar,
-		// granularity: 'month',
 	})
 
 	let { labelProps, fieldProps } = useDateField(others, state, ref)
