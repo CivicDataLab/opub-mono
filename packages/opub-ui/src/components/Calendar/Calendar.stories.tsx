@@ -1,9 +1,9 @@
 import { Calendar } from './Calendar'
 import { RangeCalendar } from './RangeCalendar'
 import { YearCalendar } from './YearCalendar'
-import { isWeekend } from '@internationalized/date'
+import { getLocalTimeZone, isWeekend } from '@internationalized/date'
 import { Meta, StoryObj } from '@storybook/react'
-import { useLocale } from 'react-aria'
+import { useDateFormatter, useLocale } from 'react-aria'
 
 /**
  * A calendar displays one or more date grids and allows users to select a single date.
@@ -49,7 +49,17 @@ export const CalendarRange: RangeStory = {
 
 export const Year: any = {
 	render: ({ ...args }) => {
-		return <YearCalendar {...args} />
+		let formatter = useDateFormatter({ dateStyle: 'medium' })
+
+		return (
+			<YearCalendar
+				{...args}
+				onChange={(date: any) => {
+					const formatted = formatter.format(date.toDate(getLocalTimeZone()))
+					console.log(formatted)
+				}}
+			/>
+		)
 	},
 	args: {},
 }

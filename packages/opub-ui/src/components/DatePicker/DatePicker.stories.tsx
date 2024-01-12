@@ -41,6 +41,7 @@ export const Month: Story = {
 	args: {
 		label: 'Month Picker',
 		onChange: (val) => console.log(val),
+		defaultValue: parseDate('2023-02-04'),
 	},
 }
 
@@ -50,7 +51,7 @@ export const DisabledDates: StoryRange = {
 		label: 'Date Picker',
 		minValue: today(getLocalTimeZone()),
 		defaultValue: {
-			start: parseDate('2022-02-03'),
+			start: parseDate('2022-02-04'),
 			end: parseDate('2022-05-03'),
 		},
 		errorMessage: 'Date must be in the future',
