@@ -75,7 +75,7 @@
 	}
 
 	&.Selected {
-		background-color: var(--background-alpha-dark);
+		background-color: var(--icon-interactive);
 		> span {
 			color: var(--text-onbg-default);
 		}
@@ -91,7 +91,7 @@
 
 		&.SelectionStart {
 			border-radius: var(--border-radius-6) 0px 0px var(--border-radius-6);
-			background-color: var(--background-alpha-dark);
+			background-color: var(--icon-interactive);
 
 			> span {
 				color: var(--text-onbg-default);
@@ -100,7 +100,7 @@
 
 		&.SelectionEnd {
 			border-radius: 0px var(--border-radius-6) var(--border-radius-6) 0px;
-			background-color: var(--background-alpha-dark);
+			background-color: var(--icon-interactive);
 			> span {
 				color: var(--text-onbg-default);
 			}
