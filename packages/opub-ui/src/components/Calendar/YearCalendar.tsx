@@ -18,6 +18,29 @@ import {
 	useCalendarState,
 } from 'react-stately'
 
+const monthsObj: {
+	[key: number]: { month: string; value: number; label: string }[]
+} = {
+	0: [
+		{ month: 'Jan', value: 1, label: 'January' },
+		{ month: 'Feb', value: 2, label: 'February' },
+		{ month: 'Mar', value: 3, label: 'March' },
+		{ month: 'Apr', value: 4, label: 'April' },
+	],
+	1: [
+		{ month: 'May', value: 5, label: 'May' },
+		{ month: 'Jun', value: 6, label: 'June' },
+		{ month: 'Jul', value: 7, label: 'July' },
+		{ month: 'Aug', value: 8, label: 'August' },
+	],
+	2: [
+		{ month: 'Sep', value: 9, label: 'September' },
+		{ month: 'Oct', value: 10, label: 'October' },
+		{ month: 'Nov', value: 11, label: 'November' },
+		{ month: 'Dec', value: 12, label: 'December' },
+	],
+}
+
 export const YearCalendar = (
 	props: CalendarStateOptions<DateValue> | AriaCalendarProps<DateValue>
 ) => {
@@ -73,7 +96,7 @@ export const YearCalendar = (
 				<NextButton />
 			</div>
 
-			<MonthSelector state={state} props={props} />
+			<MonthSelector state={state} />
 		</div>
 	)
 }
@@ -92,38 +115,45 @@ function YearDropdown({ state }: { state: CalendarState }) {
 	)
 }
 
-function MonthSelector({ state, props }: any) {
-	const [_, setChosenDate] = React.useState<any>(null)
+function MonthSelector({ state }: { state: CalendarState }) {
+	React.useEffect(() => {
+		const nextFocusElm = document.querySelector(
+			`[data-label="${state.focusedDate.month}, ${state.focusedDate.year}"]`
+		) as HTMLElement
+		nextFocusElm.focus()
+	}, [state.focusedDate])
 
 	let onClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
 		const value = Number((e.target as HTMLElement).getAttribute('value'))
 		let date = state.focusedDate.set({ month: value })
 		state.setFocusedDate(date)
 		state.setValue(date)
-		setChosenDate({ month: date.month, year: date.year })
 	}
 
-	const monthsObj: {
-		[key: number]: { month: string; value: number; label: string }[]
-	} = {
-		0: [
-			{ month: 'Jan', value: 1, label: 'January' },
-			{ month: 'Feb', value: 2, label: 'February' },
-			{ month: 'Mar', value: 3, label: 'March' },
-			{ month: 'Apr', value: 4, label: 'April' },
-		],
-		1: [
-			{ month: 'May', value: 5, label: 'May' },
-			{ month: 'Jun', value: 6, label: 'June' },
-			{ month: 'Jul', value: 7, label: 'July' },
-			{ month: 'Aug', value: 8, label: 'August' },
-		],
-		2: [
-			{ month: 'Sep', value: 9, label: 'September' },
-			{ month: 'Oct', value: 10, label: 'October' },
-			{ month: 'Nov', value: 11, label: 'November' },
-			{ month: 'Dec', value: 12, label: 'December' },
-		],
+	function handleKeyDown(e: React.KeyboardEvent<HTMLTableElement>) {
+		let updatedDate
+		switch (e.key) {
+			case 'ArrowUp':
+				e.preventDefault()
+				updatedDate = state.focusedDate.subtract({ months: 4 })
+				state.setFocusedDate(updatedDate)
+				break
+			case 'ArrowDown':
+				e.preventDefault()
+				updatedDate = state.focusedDate.add({ months: 4 })
+				state.setFocusedDate(updatedDate)
+				break
+			case 'ArrowLeft':
+				e.preventDefault()
+				updatedDate = state.focusedDate.subtract({ months: 1 })
+				state.setFocusedDate(updatedDate)
+				break
+			case 'ArrowRight':
+				e.preventDefault()
+				updatedDate = state.focusedDate.add({ months: 1 })
+				state.setFocusedDate(updatedDate)
+				break
+		}
 	}
 
 	const calendar = [...new Array(3).keys()].map((_, i) => {
@@ -131,7 +161,7 @@ function MonthSelector({ state, props }: any) {
 			<tr key={i}>
 				{monthsObj[i].map((mon, i) => {
 					const selected =
-						state.focusedDate.month === mon.value &&
+						state.value?.month === mon.value &&
 						state.focusedDate.year === state.value?.year
 
 					return (
@@ -147,6 +177,7 @@ function MonthSelector({ state, props }: any) {
 								)}
 								value={mon.value}
 								aria-label={`${mon.label}, ${state.focusedDate.year}`}
+								data-label={`${mon.value}, ${state.focusedDate.year}`}
 							>
 								<Text color="subdued">{mon.month}</Text>
 							</button>
@@ -158,7 +189,7 @@ function MonthSelector({ state, props }: any) {
 	})
 
 	return (
-		<table role="grid">
+		<table role="grid" onKeyDown={handleKeyDown}>
 			<tbody className="mt-2 flex flex-col gap-2">{calendar}</tbody>
 		</table>
 	)
