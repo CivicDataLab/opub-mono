@@ -84,7 +84,7 @@ const Header = ({ id, title }: { id: string; title?: string }) => {
           </div>
         </div>
       </div>
-      <Button url={`/dashboard/dataset/${id}/edit`} plain>
+      <Button url={`/dashboard/dataset/${id}/edit`} kind="tertiary">
         Edit Info
       </Button>
     </div>
