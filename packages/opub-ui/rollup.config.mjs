@@ -78,9 +78,6 @@ const getPlugins = () => {
     typescript(typeScriptOptions),
     terser(),
     banner2(() => `'use client';`),
-    // visualizer({
-    //   filename: 'bundle-analysis.html',
-    // }),
   ];
 };
 
