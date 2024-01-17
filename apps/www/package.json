@@ -9,8 +9,8 @@
 		"lint": "next lint",
 		"style-dictionary:build": "style-dictionary build --config ./config/style-dictionary.js",
 		"generate": "graphql-codegen --config ./config/codegen.ts",
-		"prestart": "yarn generate",
-		"predev": "yarn generate",
+		"prestart": "npm run generate",
+		"predev": "npm run generate",
 		"clean": "rm -rf node_modules package-lock.json"
 	},
 	"dependencies": {
