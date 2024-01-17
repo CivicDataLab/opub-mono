@@ -17,7 +17,7 @@ git clone https://github.com/CivicDataLab/opub-mono.git
 ```bash
 cd opub-mono
 
-yarn
+npm i
 ```
 
 3. Start the development server:

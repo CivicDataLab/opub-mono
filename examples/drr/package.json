@@ -3,7 +3,7 @@
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
-		"dev": "next dev & yarn generate",
+		"dev": "next dev & npm run generate",
 		"build": "next build",
 		"start": "next start",
 		"lint": "next lint",
