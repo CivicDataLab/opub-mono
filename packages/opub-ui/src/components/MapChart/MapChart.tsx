@@ -97,7 +97,7 @@ const MapChart = (props: Props) => {
 	const [selectedLayer, setSelectedLayer] =
 		React.useState<layerOptions>(defaultLayer)
 
-	if (unmountMap) return 'loading map...'
+	if (unmountMap) return <>{'loading map...'}</>
 
 	return (
 		<div className={cn(styles.Wrapper, className)}>
