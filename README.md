@@ -8,7 +8,7 @@ A WIP (work in progress) platform to speed up the development of Open Data Dashb
 
 ## What's inside?
 
-This repository, built using [Turborepo](https://github.com/vercel/turbo), utilizes [Yarn](https://classic.yarnpkg.com/) as its package manager and contains the following packages and applications:
+This repository, built using [Turborepo](https://github.com/vercel/turbo), utilizes [NPM](https://www.npmjs.com/) as its package manager and contains the following packages and applications:
 
 ### Apps and Packages
 
@@ -23,7 +23,7 @@ To build all apps and packages, run the following command:
 
 ```
 cd opub-mono
-yarn build
+npm run build
 ```
 
 ### Develop
@@ -32,7 +32,7 @@ To develop all apps and packages, run the following command:
 
 ```
 cd opub-mono
-yarn dev
+npm run dev
 ```
 
 ### Develop Only Specific Package
@@ -41,17 +41,17 @@ To develop only package, let's say UI, run the following command:
 
 ```
 cd opub-mono
-yarn dev --filter opub-ui
+npm run dev --filter opub-ui
 ```
 
 ### New Component
 
 > Currently this might not working for Linux distros
 
-This repo includes a `yarn run new-component` module to help create boilerplate for component creation.
+This repo includes a `npm run new-component` module to help create boilerplate for component creation.
 
 ```
-yarn run new-component Button
+npm run new-component Button
 ```
 
 This will create a new component directory in `packages/opub-ui/src` with required files and also export the component in the index.ts

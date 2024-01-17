@@ -16,10 +16,11 @@
 		"test": "turbo run test --filter opub-ui",
 		"test:watch": "turbo run test:watch",
 		"prepare": "husky install",
-		"clean": "rm -rf node_modules yarn.lock",
+		"clean": "rm -rf node_modules package-lock.json",
+		"clean:modules": "find . -name 'node_modules' -type d -prune -exec rm -rf '{}' +",
 		"new-component": "new-component",
 		"build:packages": "turbo run build --filter=create-opub-app --filter=opub-ui",
-		"publish": "yarn changeset publish"
+		"publish": "npm run changeset publish"
 	},
 	"devDependencies": {
 		"@changesets/cli": "^2.26.1",
@@ -27,7 +28,7 @@
 		"@typescript-eslint/parser": "^5.57.1",
 		"eslint-config-custom": "*",
 		"classnames": "^2.3.2",
-		"husky": "^8.0.3",
+		"husky": "^8.0.0",
 		"lint-staged": "^13.2.0",
 		"new-component-opub": "git+https://github.com/CivicDataLab/new-component.git",
 		"prettier": "^2.8.4",
@@ -38,16 +39,6 @@
 	},
 	"engines": {
 		"node": ">=14.0.0"
-	},
-	"husky": {
-		"hooks": {
-			"pre-commit": "lint-staged"
-		}
-	},
-	"lint-staged": {
-		"*.{js,jsx,ts,tsx}": [
-			"eslint --"
-		]
 	},
 	"dependencies": {}
 }
