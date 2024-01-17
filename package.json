@@ -28,7 +28,7 @@
 		"@typescript-eslint/parser": "^5.57.1",
 		"eslint-config-custom": "*",
 		"classnames": "^2.3.2",
-		"husky": "^8.0.3",
+		"husky": "^8.0.0",
 		"lint-staged": "^13.2.0",
 		"new-component-opub": "git+https://github.com/CivicDataLab/new-component.git",
 		"prettier": "^2.8.4",
@@ -44,11 +44,6 @@
 		"hooks": {
 			"pre-commit": "lint-staged"
 		}
-	},
-	"lint-staged": {
-		"*.{js,jsx,ts,tsx}": [
-			"eslint --"
-		]
 	},
 	"dependencies": {}
 }
