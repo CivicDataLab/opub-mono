@@ -1,5 +1,5 @@
-import { Combobox, ComboboxMulti } from './Combobox';
-import { Meta, StoryObj } from '@storybook/react';
+import { Combobox } from "./Combobox";
+import { Meta, StoryObj } from "@storybook/react";
 
 /**
  * Combobox is an accessible autocomplete input that enables users to filter a list of options and select one or more values.
@@ -7,97 +7,72 @@ import { Meta, StoryObj } from '@storybook/react';
  * Reference: https://ariakit.org/examples/combobox-multiple
  */
 const meta = {
-  title: 'Components/Combobox',
+  title: "Components/Combobox",
   component: Combobox,
 } satisfies Meta<typeof Combobox>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const metaMulti = {
-  component: ComboboxMulti,
-} satisfies Meta<typeof ComboboxMulti>;
-
-type StoryMulti = StoryObj<typeof metaMulti>;
-
-const options = [
-  'Apple',
-  'Banana',
-  'Broccoli',
-  'Burger',
-  'Cake',
-  'Candy',
-  'Carrot',
-  'Cherry',
-  'Chocolate',
-  'Cookie',
-  'Cucumber',
-  'Donut',
-  'Fish',
-  'Fries',
-  'Grape',
-  'Green apple',
-  'Hot dog',
-  'Ice cream',
-  'Kiwi',
-  'Lemon',
-  'Lollipop',
-  'Onion',
-  'Orange',
-  'Pasta',
-  'Pineapple',
-  'Pizza',
-  'Potato',
-  'Salad',
-  'Sandwich',
-  'Steak',
-  'Strawberry',
-  'Tomato',
-  'Watermelon',
+const options: string[] = [
+  "Apple",
+  "Banana",
+  "Broccoli",
+  "Burger",
+  "Cake",
+  "Candy",
+  "Carrot",
+  "Cherry",
+  "Chocolate",
+  "Cookie",
+  "Cucumber",
+  "Donut",
+  "Fish",
+  "Fries",
+  "Grape",
+  "Green apple",
+  "Hot dog",
+  "Ice cream",
+  "Kiwi",
+  "Lemon",
+  "Lollipop",
+  "Onion",
+  "Orange",
+  "Pasta",
+  "Pineapple",
+  "Pizza",
+  "Potato",
+  "Salad",
+  "Sandwich",
+  "Steak",
+  "Strawberry",
+  "Tomato",
+  "Watermelon",
 ];
 
 export const Default: Story = {
   args: {
-    label: 'Your favorite food',
-    placeholder: 'e.g., Apple, Burger',
-    defaultList: options,
-    defaultValue: 'Banana',
+    label: "Your favorite food",
+    placeholder: "e.g., Apple, Burger",
+    list: options,
   },
 };
 
-export const Multi: StoryMulti = {
-  render: ({ ...args }) => {
-    return (
-      <ComboboxMulti
-        defaultList={options}
-        defaultValues={['Banana']}
-        {...args}
-      />
-    );
-  },
-
+export const MultiSelect: Story = {
   args: {
-    label: 'Your favorite food',
-    placeholder: 'e.g., Apple, Burger',
-    defaultList: options,
+    label: "Your favorite food",
+    placeholder: "e.g., Apple, Burger",
+    list: options,
+    selectedValue: [],
   },
 };
 
-export const VerticalContent: StoryMulti = {
-  render: ({ ...args }) => {
-    return (
-      <ComboboxMulti
-        defaultList={options}
-        defaultValues={['Banana', 'Broccoli']}
-        {...args}
-      />
-    );
-  },
-
+export const DisplaySelected: Story = {
   args: {
-    label: 'Your favorite food',
-    placeholder: 'e.g., Apple, Burger',
-    defaultList: options,
-    verticalContent: true,
+    label: "Your favorite food",
+    placeholder: "e.g., Apple, Burger",
+    list: options,
+    displaySelected: true,
+    selectedValue: ["Apple"],
   },
 };

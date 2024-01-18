@@ -1,4 +1,4 @@
-@import '../../../styles/common';
+@import "../../../styles/common";
 
 .ActionList {
   box-shadow: var(--shadow-element-popover);
@@ -15,7 +15,8 @@
   );
   @include unstyled-button;
   @include focus-ring;
-  display: block;
+  display: flex;
+  align-items: center;
   width: 100%;
   min-height: var(--op-action-list-item-min-height);
   text-align: left;
@@ -45,8 +46,9 @@
     }
   }
 
-  &:focus-visible:not(:active) {
-    @include focus-ring($style: 'focused');
+  &:focus-visible:not(:active),
+  &[data-focus-visible] {
+    @include focus-ring($style: "focused");
     outline: var(--border-width-2) solid transparent;
   }
 
@@ -55,7 +57,7 @@
   }
 
   &.active,
-  &[aria-selected='true'] {
+  &[aria-selected="true"] {
     background-color: var(--surface-selected);
 
     svg {
