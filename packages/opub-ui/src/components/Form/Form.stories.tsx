@@ -1,6 +1,7 @@
 import { Button } from "../Button";
 import { FormLayout } from "../FormLayout";
 import { Text } from "../Text";
+import { Thumbnail } from "../Thumbnail";
 import { Form } from "./Form";
 import {
   Checkbox,
@@ -15,8 +16,10 @@ import {
   DateRangePicker,
   Combobox,
   Select,
+  DropZone,
 } from "./components";
 import { Meta } from "@storybook/react";
+import { IconFile } from "@tabler/icons-react";
 import React from "react";
 
 /**
@@ -73,6 +76,7 @@ const defaultValBase = {
   time: "04:45",
   combobox: "Apple",
   comboboxMulti: ["Banana", "Broccoli", "Candy", "Carrot"],
+  dropZone: [],
 };
 
 const comboboxOptions = [
@@ -117,7 +121,10 @@ export const FormBase = ({ ...args }) => {
   return (
     <>
       <Form
-        onSubmit={(e) => setValues(e)}
+        onSubmit={(e) => {
+          setValues(e);
+          console.log(e);
+        }}
         formOptions={{ defaultValues: defaultValBase }}
         {...args}
       >
@@ -150,8 +157,8 @@ export const FormBase = ({ ...args }) => {
               name="combobox"
               placeholder="Type to see options"
               label="Select Single Item"
-              onChange={(val) => {
-                console.log(val);
+              onChange={(val, name) => {
+                console.log(val, name);
               }}
             />
             <Combobox
@@ -161,11 +168,12 @@ export const FormBase = ({ ...args }) => {
               placeholder="Type to see options"
               displaySelected
               selectedValue={[]}
-              onChange={(val) => {
-                console.log(val);
+              onChange={(val, name) => {
+                console.log(val, name);
               }}
             />
           </FormLayout.Group>
+          <DropFile />
 
           <Button submit size="slim">
             Submit
@@ -204,5 +212,57 @@ export const ResetOnSubmit = () => {
         date: "",
       }}
     />
+  );
+};
+
+const DropFile = () => {
+  const [files, setFiles] = React.useState<File[]>([]);
+
+  const handleDropZoneDrop = React.useCallback(
+    (_dropFiles: File[], acceptedFiles: File[]) => {
+      setFiles((files) => [...files, ...acceptedFiles]);
+    },
+    []
+  );
+
+  const validImageTypes = ["image/gif", "image/jpeg", "image/png"];
+
+  const fileUpload = !files.length && <DropZone.FileUpload />;
+  const uploadedFiles = files.length > 0 && (
+    <div style={{ padding: "0" }}>
+      <div className="flex gap-2 flex-col">
+        {files.map((file, index) => (
+          <div className="flex gap-2 items-center" key={index}>
+            <Thumbnail
+              size="small"
+              alt={file.name}
+              source={
+                validImageTypes.includes(file.type)
+                  ? window.URL.createObjectURL(file)
+                  : IconFile
+              }
+            />
+
+            <div>
+              {file.name}{" "}
+              <Text variant="bodySm" as="p">
+                {file.size} bytes
+              </Text>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+
+  return (
+    <DropZone
+      name="dropZone"
+      onChange={handleDropZoneDrop}
+      label="Upload files"
+    >
+      {uploadedFiles}
+      {fileUpload}
+    </DropZone>
   );
 };

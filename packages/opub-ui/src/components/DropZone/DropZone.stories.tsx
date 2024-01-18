@@ -1,11 +1,11 @@
-import { Box } from '../Box';
-import { Button } from '../Button';
-import { Text } from '../Text';
-import { Thumbnail } from '../Thumbnail';
-import { DropZone } from './DropZone';
-import { Meta, StoryObj } from '@storybook/react';
-import { IconFile } from '@tabler/icons-react';
-import { useCallback, useState } from 'react';
+import { Box } from "../Box";
+import { Button } from "../Button";
+import { Text } from "../Text";
+import { Thumbnail } from "../Thumbnail";
+import { DropZone } from "./DropZone";
+import { Meta, StoryObj } from "@storybook/react";
+import { IconFile } from "@tabler/icons-react";
+import { useCallback, useState } from "react";
 
 /**
  * The drop zone component lets users upload files by dragging and dropping the files into an area on a page, or activating a button.
@@ -13,7 +13,7 @@ import { useCallback, useState } from 'react';
  * Reference: https://polaris.shopify.com/components/selection-and-input/drop-zone
  */
 const meta = {
-  title: 'Components/DropZone',
+  title: "Components/DropZone",
   component: DropZone,
 } satisfies Meta<typeof DropZone>;
 
@@ -31,11 +31,11 @@ export const Default: Story = {
       []
     );
 
-    const validImageTypes = ['image/gif', 'image/jpeg', 'image/png'];
+    const validImageTypes = ["image/gif", "image/jpeg", "image/png"];
 
     const fileUpload = !files.length && <DropZone.FileUpload />;
     const uploadedFiles = files.length > 0 && (
-      <div style={{ padding: '0' }}>
+      <div style={{ padding: "0" }}>
         <Box flex gap="2" direction="column">
           {files.map((file, index) => (
             <Box flex gap="2" alignItems="center" key={index}>
@@ -50,7 +50,7 @@ export const Default: Story = {
               />
 
               <div>
-                {file.name}{' '}
+                {file.name}{" "}
                 <Text variant="bodySm" as="p">
                   {file.size} bytes
                 </Text>
@@ -73,7 +73,7 @@ export const Default: Story = {
 export const Label: Story = {
   ...Default,
   args: {
-    label: 'Files',
+    label: "Files",
   },
 };
 
@@ -88,7 +88,7 @@ export const SingleUpload: Story = {
       []
     );
 
-    const validImageTypes = ['image/gif', 'image/jpeg', 'image/png'];
+    const validImageTypes = ["image/gif", "image/jpeg", "image/png"];
 
     const fileUpload = !file && <DropZone.FileUpload />;
     const uploadedFiles = file && (
@@ -104,7 +104,7 @@ export const SingleUpload: Story = {
         />
 
         <div>
-          {file.name}{' '}
+          {file.name}{" "}
           <Text variant="bodySm" as="p">
             {file.size} bytes
           </Text>
@@ -120,7 +120,7 @@ export const SingleUpload: Story = {
     );
   },
   args: {
-    label: 'Single Upload',
+    label: "Single Upload",
     allowMultiple: false,
   },
 };
@@ -134,7 +134,7 @@ export const Medium: Story = {
     </div>
   ),
   args: {
-    label: 'Medium',
+    label: "Medium",
   },
 };
 
@@ -147,7 +147,7 @@ export const Small: Story = {
     </div>
   ),
   args: {
-    label: 'Small',
+    label: "Small",
   },
 };
 
@@ -162,13 +162,13 @@ export const CustomHint: Story = {
       []
     );
 
-    const validImageTypes = ['image/gif', 'image/jpeg', 'image/png'];
+    const validImageTypes = ["image/gif", "image/jpeg", "image/png"];
 
     const fileUpload = !files.length && (
       <DropZone.FileUpload actionHint="Accepts .gif, .jpg, and .png" />
     );
     const uploadedFiles = files.length > 0 && (
-      <div style={{ padding: '0' }}>
+      <div style={{ padding: "0" }}>
         <Box flex gap="2" direction="column">
           {files.map((file, index) => (
             <Box flex gap="2" alignItems="center" key={index}>
@@ -183,7 +183,7 @@ export const CustomHint: Story = {
               />
 
               <div>
-                {file.name}{' '}
+                {file.name}{" "}
                 <Text variant="bodySm" as="p">
                   {file.size} bytes
                 </Text>
@@ -220,13 +220,13 @@ export const CustomTrigger: Story = {
       []
     );
 
-    const validImageTypes = ['image/gif', 'image/jpeg', 'image/png'];
+    const validImageTypes = ["image/gif", "image/jpeg", "image/png"];
 
     const fileUpload = !files.length && (
       <DropZone.FileUpload actionHint="Accepts .gif, .jpg, and .png" />
     );
     const uploadedFiles = files.length > 0 && (
-      <div style={{ padding: '0' }}>
+      <div style={{ padding: "0" }}>
         <Box flex gap="2" direction="column">
           {files.map((file, index) => (
             <Box flex gap="2" alignItems="center" key={index}>
@@ -241,7 +241,7 @@ export const CustomTrigger: Story = {
               />
 
               <div>
-                {file.name}{' '}
+                {file.name}{" "}
                 <Text variant="bodySm" as="p">
                   {file.size} bytes
                 </Text>
@@ -254,7 +254,7 @@ export const CustomTrigger: Story = {
 
     return (
       <Box flex gap="2" direction="column" alignItems="start">
-        <Button plain removeUnderline onClick={toggleOpenFileDialog}>
+        <Button kind="tertiary" removeUnderline onClick={toggleOpenFileDialog}>
           Upload Image
         </Button>
         <DropZone
