@@ -31,6 +31,7 @@ export const ANALYTICS_GEOGRAPHY_DATA = graphql(`
   query getGeographyData($filters: GeoFilter!) {
     geography(filters: $filters) {
       name
+      code
     }
   }
 `);
@@ -38,5 +39,11 @@ export const ANALYTICS_GEOGRAPHY_DATA = graphql(`
 export const ANALYTICS_DISTRICT_CHART_DATA = graphql(`
 query getDistrictchartdata ($indcFilter: IndicatorFilter! , $dataFilter: DataFilter!) {
   districtChartData(indcFilter: $indcFilter , dataFilter:$dataFilter) 
+}
+`)
+
+export const ANALYTICS_REVENUE_MAP_DATA = graphql(`
+query revenueCircleMapData($indcFilter: IndicatorFilter! , $dataFilter: DataFilter!){
+  revCircleMapData(indcFilter: $indcFilter , dataFilter:$dataFilter)
 }
 `)

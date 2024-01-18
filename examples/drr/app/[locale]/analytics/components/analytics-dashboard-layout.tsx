@@ -69,7 +69,7 @@ export function AnalyticsDashboardLayout({ children }: DashboardLayoutProps) {
             styles.Main,
             'px-4',
             'py-6',
-            'h-[90vh] overflow-y-scroll'
+            'h-[80vh]'
           )}
         >
           {children}

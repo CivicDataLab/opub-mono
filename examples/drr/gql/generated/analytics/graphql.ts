@@ -110,6 +110,8 @@ export type Query = {
   getDataTimePeriods: Array<CustomDataPeriodList>;
   getDistrictRevCircle: Scalars['JSON'];
   getFactors: Scalars['JSON'];
+  getDistrictRevCircle: Scalars['JSON'];
+  getFactors: Scalars['JSON'];
   indicators: Array<Indicators>;
   indicatorsByCategory: Scalars['JSON'];
   revCircleChartData: Scalars['JSON'];
@@ -142,6 +144,16 @@ export type QueryDistrictViewTableDataArgs = {
 
 export type QueryGeographyArgs = {
   filters?: InputMaybe<GeoFilter>;
+};
+
+
+export type QueryGetDistrictRevCircleArgs = {
+  geoFilter: GeoFilter;
+};
+
+
+export type QueryGetDistrictRevCircleArgs = {
+  geoFilter: GeoFilter;
 };
 
 export type QueryGetDistrictRevCircleArgs = {
@@ -223,6 +235,8 @@ export type GetGeographyDataQueryVariables = Exact<{
   filters: GeoFilter;
 }>;
 
+
+export type GetGeographyDataQuery = { __typename?: 'Query', geography: Array<{ __typename?: 'Geography', name: string, code?: string | null }> };
 export type GetGeographyDataQuery = {
   __typename?: 'Query';
   geography: Array<{ __typename?: 'Geography'; name: string }>;
