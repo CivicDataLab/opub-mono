@@ -1,17 +1,10 @@
 /* eslint-disable */
 import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
-
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
-export type Exact<T extends { [key: string]: unknown }> = {
-  [K in keyof T]: T[K];
-};
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> & {
-  [SubKey in K]?: Maybe<T[SubKey]>;
-};
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
-  [SubKey in K]: Maybe<T[SubKey]>;
-};
+export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -118,9 +111,11 @@ export type Query = {
   scheme: Array<Scheme>;
 };
 
+
 export type QueryDataArgs = {
   filters?: InputMaybe<DataFilter>;
 };
+
 
 export type QueryDistrictChartDataArgs = {
   dataFilter: DataFilter;
@@ -128,11 +123,13 @@ export type QueryDistrictChartDataArgs = {
   indcFilter: IndicatorFilter;
 };
 
+
 export type QueryDistrictMapDataArgs = {
   dataFilter: DataFilter;
   geoFilter?: InputMaybe<GeoFilter>;
   indcFilter: IndicatorFilter;
 };
+
 
 export type QueryDistrictViewTableDataArgs = {
   dataFilter: DataFilter;
@@ -140,9 +137,11 @@ export type QueryDistrictViewTableDataArgs = {
   indcFilter: IndicatorFilter;
 };
 
+
 export type QueryGeographyArgs = {
   filters?: InputMaybe<GeoFilter>;
 };
+
 
 export type QueryGetDistrictRevCircleArgs = {
   geoFilter: GeoFilter;
@@ -166,11 +165,13 @@ export type QueryRevCircleChartDataArgs = {
   indcFilter: IndicatorFilter;
 };
 
+
 export type QueryRevCircleMapDataArgs = {
   dataFilter: DataFilter;
   geoFilter?: InputMaybe<GeoFilter>;
   indcFilter: IndicatorFilter;
 };
+
 
 export type QueryRevCircleViewTableDataArgs = {
   dataFilter: DataFilter;
@@ -203,33 +204,18 @@ export type RevenueCircleTableQueryVariables = Exact<{
   geoFilter?: InputMaybe<GeoFilter>;
 }>;
 
-export type RevenueCircleTableQuery = {
-  __typename?: 'Query';
-  revCircleViewTableData: any;
-};
 
-export type IndicatorsQueryVariables = Exact<{ [key: string]: never }>;
+export type RevenueCircleTableQuery = { __typename?: 'Query', revCircleViewTableData: any };
 
-export type IndicatorsQuery = {
-  __typename?: 'Query';
-  indicators: Array<{
-    __typename?: 'Indicators';
-    name: string;
-    slug?: string | null;
-    category?: string | null;
-    parent?: { __typename?: 'Indicators'; name: string } | null;
-  }>;
-};
+export type IndicatorsQueryVariables = Exact<{ [key: string]: never; }>;
 
-export type DataTimePeriodsQueryVariables = Exact<{ [key: string]: never }>;
 
-export type DataTimePeriodsQuery = {
-  __typename?: 'Query';
-  getDataTimePeriods: Array<{
-    __typename?: 'CustomDataPeriodList';
-    value: string;
-  }>;
-};
+export type IndicatorsQuery = { __typename?: 'Query', indicators: Array<{ __typename?: 'Indicators', name: string, slug?: string | null, category?: string | null, parent?: { __typename?: 'Indicators', name: string } | null }> };
+
+export type DataTimePeriodsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type DataTimePeriodsQuery = { __typename?: 'Query', getDataTimePeriods: Array<{ __typename?: 'CustomDataPeriodList', value: string }> };
 
 export type GetGeographyDataQueryVariables = Exact<{
   filters: GeoFilter;
