@@ -14,6 +14,7 @@ import {
   TimeField,
   DateRangePicker,
   Combobox,
+  Select,
 } from "./components";
 import { Meta } from "@storybook/react";
 import React from "react";
@@ -122,7 +123,7 @@ export const FormBase = ({ ...args }) => {
       >
         <FormLayout>
           <Input name="text" label="Name" />
-          {/* <Select name="select" label="Select Period" options={options} /> */}
+          <Select name="select" label="Select Period" options={options} />
           <RangeSlider name="range" label="Budget" prefix={<p>$</p>} />
           <Checkbox name="checkbox"> I agree to T&C</Checkbox>
           <CheckboxGroup
@@ -140,9 +141,9 @@ export const FormBase = ({ ...args }) => {
             <DateField name="date" label="Choose Date" />
             <DatePicker name="date-picker" label="Choose Birthday" />
 
-            <TimeField name="time" label="Choose Range" />
+            <TimeField name="time" label="Choose Time" />
           </FormLayout.Group>
-          <DateRangePicker name="date-range" label="Choose Time" />
+          <DateRangePicker name="date-range" label="Choose Range" />
           <FormLayout.Group>
             <Combobox
               list={comboboxOptions}
