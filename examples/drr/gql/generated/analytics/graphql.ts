@@ -78,9 +78,16 @@ export type QueryDistrictViewDataArgs = {
   indcFilter: IndicatorFilter;
 };
 
+<<<<<<< HEAD
 export type QueryGetDistrictRevCircleArgs = {
   geoFilter: GeoFilter;
 };
+=======
+export type QueryGeographyArgs = {
+  filters?: InputMaybe<GeoFilter>;
+};
+
+>>>>>>> c3f64ca2 (connect map data to map component)
 
 export type QueryGetTimeTrendsArgs = {
   dataFilter: DataFilter;
@@ -88,8 +95,23 @@ export type QueryGetTimeTrendsArgs = {
   indcFilter: IndicatorFilter;
 };
 
+<<<<<<< HEAD
 export type QueryIndicatorsArgs = {
   indcFilter?: InputMaybe<IndicatorFilter>;
+=======
+<<<<<<< HEAD
+export type QueryGetDistrictRevCircleArgs = {
+  geoFilter: GeoFilter;
+};
+
+=======
+>>>>>>> 6714281 (connect map data to map component)
+
+export type QueryRevCircleChartDataArgs = {
+  dataFilter: DataFilter;
+  geoFilter?: InputMaybe<GeoFilter>;
+  indcFilter: IndicatorFilter;
+>>>>>>> c3f64ca2 (connect map data to map component)
 };
 
 export type QueryRevCircleMapDataArgs = {
@@ -149,10 +171,13 @@ export type GetDistrictRevCircleQueryVariables = Exact<{
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 export type GetDistrictRevCircleQuery = {
 =======
 =======
 >>>>>>> fd8977ed (fix www/ user and listing)
+=======
+>>>>>>> c3f64ca2 (connect map data to map component)
 <<<<<<< HEAD
 export type GetGeographyDataQuery = {
 >>>>>>> d9a8add0 (connect map data to map component)
@@ -164,6 +189,8 @@ export type GetGeographyDataQuery = {
 export type GetGeographyDataQuery = { __typename?: 'Query', geography: Array<{ __typename?: 'Geography', name: string, code?: string | null }> };
 >>>>>>> 085dc798 (connect map data to map component)
 =======
+=======
+>>>>>>> fa733bcd (connect map data to map component)
 
 export type GetGeographyDataQuery = { __typename?: 'Query', geography: Array<{ __typename?: 'Geography', name: string, code?: string | null }> };
 =======
@@ -172,13 +199,21 @@ export type GetGeographyDataQuery = {
   geography: Array<{ __typename?: 'Geography'; name: string }>;
 };
 >>>>>>> 2c5b0dd (fix www/ user and listing)
+<<<<<<< HEAD
 >>>>>>> 03a733f2 (fix www/ user and listing)
+=======
+=======
+
+export type GetGeographyDataQuery = { __typename?: 'Query', geography: Array<{ __typename?: 'Geography', name: string, code?: string | null }> };
+>>>>>>> 6714281 (connect map data to map component)
+>>>>>>> fa733bcd (connect map data to map component)
 
 export type RevenueCircleMapDataQueryVariables = Exact<{
   indcFilter: IndicatorFilter;
   dataFilter: DataFilter;
 }>;
 
+<<<<<<< HEAD
 export type RevenueCircleMapDataQuery = {
   __typename?: 'Query';
   revCircleMapData: any;
@@ -212,6 +247,12 @@ export const RevCircleViewDataDocument = {
 =======
 =======
 >>>>>>> fd8977ed (fix www/ user and listing)
+=======
+export type GetDistrictchartdataQuery = { __typename?: 'Query', districtChartData: any };
+
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> c3f64ca2 (connect map data to map component)
 <<<<<<< HEAD
 export const RevenueCircleTableDocument = {
 >>>>>>> d9a8add0 (connect map data to map component)
@@ -760,8 +801,12 @@ export const GetTimeTrendsDocument = {
 =======
 =======
 >>>>>>> 03a733f2 (fix www/ user and listing)
+=======
+>>>>>>> fa733bcd (connect map data to map component)
 export type GetDistrictchartdataQuery = { __typename?: 'Query', districtChartData: any };
 
+=======
+>>>>>>> 6714281 (connect map data to map component)
 export type RevenueCircleMapDataQueryVariables = Exact<{
   indcFilter: IndicatorFilter;
   dataFilter: DataFilter;
@@ -776,6 +821,7 @@ export const IndicatorsDocument = {"kind":"Document","definitions":[{"kind":"Ope
 export const DataTimePeriodsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"dataTimePeriods"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getDataTimePeriods"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"value"}}]}}]}}]} as unknown as DocumentNode<DataTimePeriodsQuery, DataTimePeriodsQueryVariables>;
 export const GetGeographyDataDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getGeographyData"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"filters"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"GeoFilter"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"geography"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"filters"},"value":{"kind":"Variable","name":{"kind":"Name","value":"filters"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"code"}}]}}]}}]} as unknown as DocumentNode<GetGeographyDataQuery, GetGeographyDataQueryVariables>;
 export const GetDistrictchartdataDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getDistrictchartdata"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"indcFilter"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"IndicatorFilter"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"dataFilter"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"DataFilter"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"districtChartData"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"indcFilter"},"value":{"kind":"Variable","name":{"kind":"Name","value":"indcFilter"}}},{"kind":"Argument","name":{"kind":"Name","value":"dataFilter"},"value":{"kind":"Variable","name":{"kind":"Name","value":"dataFilter"}}}]}]}}]} as unknown as DocumentNode<GetDistrictchartdataQuery, GetDistrictchartdataQueryVariables>;
+<<<<<<< HEAD
 export const RevenueCircleMapDataDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"revenueCircleMapData"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"indcFilter"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"IndicatorFilter"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"dataFilter"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"DataFilter"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"revCircleMapData"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"indcFilter"},"value":{"kind":"Variable","name":{"kind":"Name","value":"indcFilter"}}},{"kind":"Argument","name":{"kind":"Name","value":"dataFilter"},"value":{"kind":"Variable","name":{"kind":"Name","value":"dataFilter"}}}]}]}}]} as unknown as DocumentNode<RevenueCircleMapDataQuery, RevenueCircleMapDataQueryVariables>;
 <<<<<<< HEAD
 >>>>>>> 085dc798 (connect map data to map component)
@@ -1063,5 +1109,14 @@ export const GetDistrictchartdataDocument = {
   GetDistrictchartdataQueryVariables
 >;
 >>>>>>> 2c5b0dd (fix www/ user and listing)
+<<<<<<< HEAD
 >>>>>>> 03a733f2 (fix www/ user and listing)
+<<<<<<< HEAD
 >>>>>>> fd8977ed (fix www/ user and listing)
+=======
+=======
+=======
+export const RevenueCircleMapDataDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"revenueCircleMapData"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"indcFilter"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"IndicatorFilter"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"dataFilter"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"DataFilter"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"revCircleMapData"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"indcFilter"},"value":{"kind":"Variable","name":{"kind":"Name","value":"indcFilter"}}},{"kind":"Argument","name":{"kind":"Name","value":"dataFilter"},"value":{"kind":"Variable","name":{"kind":"Name","value":"dataFilter"}}}]}]}}]} as unknown as DocumentNode<RevenueCircleMapDataQuery, RevenueCircleMapDataQueryVariables>;
+>>>>>>> 6714281 (connect map data to map component)
+>>>>>>> fa733bcd (connect map data to map component)
+>>>>>>> c3f64ca2 (connect map data to map component)
