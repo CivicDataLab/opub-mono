@@ -26,12 +26,6 @@ export function Combobox(
   const [selectedValues, setSelectedValues] = useState(props.selectedValue);
   const combobox = useComboboxStore();
 
-  React.useEffect(() => {
-    if (props.onChange && selectedValues) {
-      props.onChange(selectedValues);
-    }
-  }, [selectedValues]);
-
   const matches = useMemo(() => {
     return matchSorter(props.list, searchValue);
   }, [searchValue]);
@@ -40,6 +34,7 @@ export function Combobox(
     if (selectedValues && typeof selectedValues !== "string") {
       const finalArr = selectedValues.filter((v: string) => v !== value);
       setSelectedValues(finalArr);
+      props.onChange && props.onChange(finalArr);
     }
   }
 
@@ -66,7 +61,10 @@ export function Combobox(
   return (
     <ComboboxProvider
       selectedValue={selectedValues}
-      setSelectedValue={setSelectedValues}
+      setSelectedValue={(e) => {
+        setSelectedValues(e);
+        props.onChange && props.onChange(e);
+      }}
       setValue={(value) => {
         startTransition(() => {
           setSearchValue(value);

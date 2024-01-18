@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { DropZone as DZ } from '../../DropZone';
-import { DropZoneProps } from '../../DropZone/DropZone';
-import { FileUpload } from '../../DropZone/components';
-import { Controller, useFormContext } from 'react-hook-form';
+import { DropZone as DZ } from "../../DropZone";
+import { DropZoneProps } from "../../DropZone/DropZone";
+import { FileUpload } from "../../DropZone/components";
+import { Controller, useFormContext } from "react-hook-form";
 
-type Props = DropZoneProps & {
+type Props = Omit<DropZoneProps, "onDrop"> & {
   required?: boolean;
   error?: string;
   name: string;
