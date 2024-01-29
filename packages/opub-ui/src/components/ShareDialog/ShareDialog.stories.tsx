@@ -24,7 +24,6 @@ export const Default: Story = {
       fetch(image)
         .then((response) => response.blob())
         .then(async (blob) => {
-          console.log(blob);
           await navigator.clipboard
             .write([
               new ClipboardItem({
