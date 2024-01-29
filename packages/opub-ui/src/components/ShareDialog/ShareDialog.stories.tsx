@@ -2,11 +2,10 @@ import { ShareDialog } from "./ShareDialog";
 import { Meta, StoryObj } from "@storybook/react";
 
 /**
- * ShareDialog Description
- *
- * Reference: #
+ * ShareDialog component can be used to share/download/embed an image.
  */
 const meta = {
+  title: "Components/ShareDialog",
   component: ShareDialog,
 } satisfies Meta<typeof ShareDialog>;
 
@@ -19,18 +18,26 @@ export const Default: Story = {
     alt: "visualisation",
     title: "Share Visualization",
     onDownload: () => {
-      downloadImg({
-        url: "https://opub-www.vercel.app/og.png",
-        name: "test.png",
-      });
+      download("https://opub-www.vercel.app/og.png", "test");
     },
   },
 };
 
-function downloadImg({ url, name }: { url: string; name: string }) {
-  var link = document.createElement("a");
-  link.download = name;
-  link.href = url;
-  link.click();
-  link.remove();
-}
+const download = (url: RequestInfo | URL, name: string) => {
+  if (!url) {
+    throw new Error("Resource URL not provided");
+  }
+  fetch(url)
+    .then((response) => response.blob())
+    .then((blob) => {
+      const blobURL = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = blobURL;
+      a.download = name;
+      document.body.appendChild(a);
+      a.click();
+    })
+    .catch(() => {
+      throw new Error("Error while downloading file");
+    });
+};
