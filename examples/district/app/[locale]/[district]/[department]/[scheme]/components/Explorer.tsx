@@ -4,7 +4,7 @@ import { IChartData } from "./scheme-layout";
 import { ckan } from "@/config/site";
 import { useWindowSize } from "@/hooks/use-window-size";
 import { useFetch } from "@/lib/api";
-import { cn, copyURLToClipboard, exportAsImage } from "@/lib/utils";
+import { cn, copyURLToClipboard } from "@/lib/utils";
 import { useQueryState } from "next-usequerystate";
 import dynamic from "next/dynamic";
 import {
@@ -12,6 +12,7 @@ import {
   Combobox,
   Select,
   SelectorCard,
+  ShareDialog,
   Tab,
   TabList,
   TabPanel,
@@ -29,6 +30,7 @@ const MapChart = dynamic(
     ssr: false,
   }
 );
+
 export const Explorer = React.forwardRef(
   (
     {
@@ -398,7 +400,7 @@ const Content = ({
         >
           Copy Link
         </Button>
-        <Button
+        {/* <Button
           kind="primary"
           variant="interactive"
           onClick={() => {
@@ -406,11 +408,77 @@ const Content = ({
           }}
         >
           Download
-        </Button>
+        </Button> */}
+        <Share />
       </div>
     </div>
   );
 };
+
+function Share() {
+  const image = "https://opub-www.vercel.app/og.png";
+  const alt = "visualisation";
+
+  const [dataUri, setDataUri] = React.useState<string | undefined>();
+
+  async function onOpen(image: string) {
+    await fetch(`/api?url=${image}`)
+      .then((res) => {
+        return res.blob();
+      })
+      .then(async (res: Blob) => {
+        const base64 = await res.text();
+        setDataUri(base64);
+        // console.log(res)
+
+        // copy image to clipboard
+        await navigator.clipboard
+          .write([
+            new ClipboardItem({
+              [res.type]: res,
+            }),
+          ])
+          .then(() => {
+            toast("Chart has been copied to clipboard", {
+              action: {
+                label: "cancel",
+                onClick: () => {},
+              },
+            });
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      })
+      .catch((err) => console.log(err));
+  }
+
+  const download = (dataUri: string | undefined, name: string) => {
+    if (!dataUri) {
+      throw new Error("href is undefined");
+    }
+    const a = document.createElement("a");
+    a.href = dataUri;
+    a.download = name;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  };
+
+  return (
+    <ShareDialog
+      image={dataUri}
+      alt={alt}
+      title="Share Chart"
+      onOpen={() => onOpen(image)}
+      onDownload={() => download(dataUri, "test")}
+      size="medium"
+      variant="interactive"
+    >
+      Share
+    </ShareDialog>
+  );
+}
 
 const Filters = ({
   states,

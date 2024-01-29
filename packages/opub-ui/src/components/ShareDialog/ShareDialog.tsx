@@ -8,7 +8,7 @@ import { IconShare, IconX } from "@tabler/icons-react";
 import React from "react";
 
 type Props = {
-  image: string;
+  image?: string | Blob;
   alt: string;
   title: string;
   children: React.ReactNode;
@@ -49,6 +49,8 @@ const ShareDialog = React.forwardRef(
       setIsOpen(!isOpen);
     }
 
+    const imgUrl = image instanceof Blob ? URL.createObjectURL(image) : image;
+
     return (
       <div ref={ref}>
         <Dialog open={isOpen} onOpenChange={handleOpen}>
@@ -80,14 +82,20 @@ const ShareDialog = React.forwardRef(
                 Close Dialog
               </IconButton>
             </div>
-            <Divider className="mt-2" />
-            <img
-              src={image}
-              alt={alt}
-              width={768}
-              height={384}
-              className=" object-contain w-full h-96"
-            />
+            <Divider className="my-2" />
+            {imgUrl ? (
+              <img
+                src={imgUrl}
+                alt={alt}
+                width={768}
+                height={384}
+                className="object-contain w-full h-96"
+              />
+            ) : (
+              <div className="w-full h-20 flex items-center justify-center">
+                Loading Image...
+              </div>
+            )}
             <div className="flex items-center gap-2 justify-end flex-wrap">
               <Button size="slim" kind="secondary" disabled>
                 Share via
