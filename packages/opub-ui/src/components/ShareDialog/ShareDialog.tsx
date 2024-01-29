@@ -10,20 +10,28 @@ import React from "react";
 type Props = {
   image: string;
   alt: string;
-  onDownload?: () => void;
   title: string;
+  onDownload?: () => void;
+  onOpen?: () => void;
 };
 
 const ShareDialog = React.forwardRef(
   (
-    { image, alt, onDownload, title }: Props,
+    { image, alt, onDownload, title, onOpen }: Props,
     ref?: React.Ref<HTMLDivElement>
   ) => {
     const [isOpen, setIsOpen] = React.useState(false);
 
+    function handleOpen() {
+      if (onOpen && !isOpen) {
+        onOpen();
+      }
+      setIsOpen(!isOpen);
+    }
+
     return (
       <div ref={ref}>
-        <Dialog open={isOpen} onOpenChange={setIsOpen}>
+        <Dialog open={isOpen} onOpenChange={handleOpen}>
           <Dialog.Trigger>
             <Button
               icon={<Icon source={IconShare} size={14} color="highlight" />}
