@@ -20,7 +20,11 @@ export async function GET(request: NextRequest) {
     const page = await browser.newPage();
     await page.goto(url);
 
-    const screenshot = await page.screenshot({ encoding: "base64" });
+    const screenshot = await page.screenshot({
+      encoding: "base64",
+      omitBackground: true,
+      optimizeForSpeed: true,
+    });
 
     return new Response(`data:image/png;base64,${screenshot}`, {
       headers: {
