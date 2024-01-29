@@ -1,7 +1,15 @@
-'use client';
+"use client";
 
-import Icons from '@/components/icons';
-import Image from 'next/image';
+import { BreadCrumb } from "../../../components";
+import { schemes } from "../scheme.config";
+import { Explorer } from "./Explorer";
+import { Overview } from "./Overview";
+import { SourceData } from "./SourceData";
+import Icons from "@/components/icons";
+import { useWindowSize } from "@/hooks/use-window-size";
+import { copyURLToClipboard, exportAsImage } from "@/lib/utils";
+import { parseAsString, useQueryState } from "next-usequerystate";
+import Image from "next/image";
 import {
   Button,
   Icon,
@@ -11,16 +19,8 @@ import {
   Tabs,
   Text,
   toast,
-} from 'opub-ui';
-import React from 'react';
-import { BreadCrumb } from '../../../components';
-import { schemes } from '../scheme.config';
-import { Explorer } from './Explorer';
-import { Overview } from './Overview';
-import { SourceData } from './SourceData';
-import { parseAsString, useQueryState } from 'next-usequerystate';
-import { copyURLToClipboard, exportAsImage } from '@/lib/utils';
-import { useWindowSize } from '@/hooks/use-window-size';
+} from "opub-ui";
+import React from "react";
 
 export interface IOverview {
   schemeTitle: string;
@@ -96,7 +96,7 @@ export const Content = ({ data }: { data: IProps }) => {
   const breadcrumbs = [
     {
       label: <Icon source={Icons.home} />,
-      href: '/',
+      href: "/",
     },
     {
       label: data.districtName,
@@ -152,23 +152,23 @@ export const Content = ({ data }: { data: IProps }) => {
         <TabLayout
           tabs={[
             {
-              label: 'Scheme Overview',
-              value: 'overview',
-              icon: 'overview',
+              label: "Scheme Overview",
+              value: "overview",
+              icon: "overview",
               data: data.schemeData,
             },
             {
-              label: 'Scheme Explorer',
-              value: 'explorer',
-              icon: 'explorer',
+              label: "Scheme Explorer",
+              value: "explorer",
+              icon: "explorer",
               scheme: data.scheme,
               chartData: chartData,
               district: data.district,
             },
             {
-              label: 'Source Data',
-              value: 'source-data',
-              icon: 'database-search',
+              label: "Source Data",
+              value: "source-data",
+              icon: "database-search",
               scheme: data.scheme,
               tableData: tableData,
               chartData: chartData,
@@ -196,8 +196,8 @@ const TabLayout = ({
   }[];
 }) => {
   const [tabValue, setTabValue] = useQueryState(
-    'tab',
-    parseAsString.withDefault('overview')
+    "tab",
+    parseAsString.withDefault("overview")
   );
   const overviewRef: any = React.useRef(null);
 
@@ -220,14 +220,14 @@ const TabLayout = ({
               <Icon
                 source={Icons[tab.icon]}
                 size={isMobile ? 32 : 40}
-                color={tabValue === tab.value ? 'highlight' : 'subdued'}
+                color={tabValue === tab.value ? "highlight" : "subdued"}
                 stroke={1}
               />
               <Text
-                variant={isMobile ? 'bodyMd' : 'bodyLg'}
+                variant={isMobile ? "bodyMd" : "bodyLg"}
                 as="h2"
-                fontWeight={tabValue === tab.value ? 'medium' : 'regular'}
-                color={tabValue === tab.value ? 'inherit' : 'default'}
+                fontWeight={tabValue === tab.value ? "medium" : "regular"}
+                color={tabValue === tab.value ? "inherit" : "default"}
               >
                 {tab.label}
               </Text>
@@ -252,16 +252,16 @@ const TabLayout = ({
             tableData={tabs[2].tableData as ITable}
           />
         </TabPanel>
-        {tabValue === 'overview' && (
+        {tabValue === "overview" && (
           <div className="mt-4 md:mt6 py-4 px-3 rounded-2 shadow-elementCard flex items-center justify-end gap-4 flex-wrap bg-surfaceDefault">
             <Button
               kind="secondary"
               variant="interactive"
               onClick={() => {
                 copyURLToClipboard();
-                toast('Copied to clipboard', {
+                toast("Copied to clipboard", {
                   action: {
-                    label: 'Dismiss',
+                    label: "Dismiss",
                     onClick: () => {},
                   },
                 });
@@ -273,7 +273,7 @@ const TabLayout = ({
               kind="primary"
               variant="interactive"
               onClick={() => {
-                exportAsImage(overviewRef.current, 'overview');
+                exportAsImage(overviewRef.current, "overview");
               }}
             >
               Download
