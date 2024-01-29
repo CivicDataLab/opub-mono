@@ -10,18 +10,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0 # Required to retrieve git history
       - name: Setup Node.js environment
         uses: actions/setup-node@v3
         with:
           node-version: 18
-          cache: 'yarn'
       - name: Install dependencies
-        run: yarn
+        run: npm ci
       - name: Publish Library to Chromatic
-        uses: chromaui/action@v1
+        uses: chromaui/action@latest
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           workingDir: packages/opub-ui

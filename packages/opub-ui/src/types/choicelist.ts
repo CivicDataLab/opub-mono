@@ -1,4 +1,4 @@
-import { Error } from './shared/form';
+import { type Error } from './shared/form';
 
 export interface ChoiceProps {
   /** Value of the choice */

@@ -1,9 +1,8 @@
 /** @type {import('next').NextConfig} */
+const withNextIntl = require('next-intl/plugin')();
+
 const nextConfig = {
-  experimental: {
-    appDir: true,
-  },
-  transpilePackages: ['opub-ui', 'react-aria', 'opub-viz'],
+  transpilePackages: ['opub-ui'],
 };
 
-module.exports = nextConfig;
+module.exports = withNextIntl(nextConfig);

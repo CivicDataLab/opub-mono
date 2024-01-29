@@ -3,9 +3,11 @@ import { Footer } from './components/footer';
 import locales from '../../config/locales';
 import Provider from '@/components/provider';
 import { siteConfig } from '@/config/site';
-import { NextIntlClientProvider, createTranslator } from 'next-intl';
+import { NextIntlClientProvider } from 'next-intl';
 import { Inter as FontSans } from 'next/font/google';
 import { notFound } from 'next/navigation';
+import React from 'react';
+import { unstable_setRequestLocale } from 'next-intl/server';
 
 const fontSans = FontSans({ subsets: ['latin'], display: 'swap' });
 
@@ -13,16 +15,7 @@ export function generateStaticParams() {
   return locales.all.map((locale) => ({ locale }));
 }
 
-type Props = {
-  children: React.ReactNode;
-  params: { locale: string };
-};
-
-export async function generateMetadata({ params: { locale } }: Props) {
-  const messages = (await import(`../../locales/${locale}.json`)).default;
-
-  const t = createTranslator({ locale, messages });
-
+export async function generateMetadata() {
   return {
     metadataBase: new URL(siteConfig.url),
     title: {
@@ -45,10 +38,6 @@ export async function generateMetadata({ params: { locale } }: Props) {
       },
     ],
     creator: 'CivicDataLab',
-    themeColor: [
-      { media: '(prefers-color-scheme: light)', color: 'white' },
-      { media: '(prefers-color-scheme: dark)', color: 'black' },
-    ],
     openGraph: {
       type: 'website',
       locale: 'en_US',
@@ -87,6 +76,7 @@ export default async function LocaleLayout({
   } catch (error) {
     notFound();
   }
+  unstable_setRequestLocale(locale);
 
   return (
     <html lang={locale}>

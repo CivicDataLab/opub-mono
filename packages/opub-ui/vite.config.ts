@@ -12,6 +12,9 @@ export default defineConfig(() => ({
     globals: true,
     environment: 'happy-dom',
   },
+  resolve: {
+    preserveSymlinks: true,
+  },
   css: {
     preprocessorOptions: {
       scss: {

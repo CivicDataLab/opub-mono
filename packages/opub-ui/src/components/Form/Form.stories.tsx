@@ -1,7 +1,8 @@
-import { Button } from '../Button';
-import { FormLayout } from '../FormLayout';
-import { Text } from '../Text';
-import { Form } from './Form';
+import { Button } from "../Button";
+import { FormLayout } from "../FormLayout";
+import { Text } from "../Text";
+import { Thumbnail } from "../Thumbnail";
+import { Form } from "./Form";
 import {
   Checkbox,
   Input,
@@ -14,100 +15,104 @@ import {
   TimeField,
   DateRangePicker,
   Combobox,
-  ComboboxMulti,
-} from './components';
-import { Meta } from '@storybook/react';
-import React from 'react';
+  Select,
+  DropZone,
+} from "./components";
+import { Meta } from "@storybook/react";
+import { IconFile } from "@tabler/icons-react";
+import React from "react";
 
 /**
  * A wrapper component that handles the submission of forms.
  */
 const meta = {
+  title: "Components/Form",
   component: Form,
 
   argTypes: {
     children: {
-      control: 'null',
-      description: 'Form Field elements',
+      control: "null",
+      description: "Form Field elements",
     },
   },
 } satisfies Meta<typeof Form>;
 export default meta;
 
 const options = [
-  { label: 'Today', value: 'today' },
-  { label: 'Yesterday', value: 'yesterday' },
-  { label: 'Last 7 days', value: 'lastWeek' },
+  { label: "Today", value: "today" },
+  { label: "Yesterday", value: "yesterday" },
+  { label: "Last 7 days", value: "lastWeek" },
 ];
 
 const checkboxOptions = [
   {
-    label: 'ReactJs',
-    value: 'react',
-    helpText: 'Kinda Popular these days.',
+    label: "ReactJs",
+    value: "react",
+    helpText: "Kinda Popular these days.",
   },
   {
-    label: 'VueJs',
-    value: 'vue',
+    label: "VueJs",
+    value: "vue",
   },
   {
-    label: 'AngularJs',
-    value: 'angular',
+    label: "AngularJs",
+    value: "angular",
   },
 ];
 
 const defaultValBase = {
-  text: 'Excalibur',
-  select: 'yesterday',
+  text: "Excalibur",
+  select: "yesterday",
   range: [6],
   checkbox: true,
-  'checkbox-group': ['angular', 'vue'],
-  radio: '1',
-  date: '2020-02-06',
-  'date-picker': '1998-03-25',
-  'date-range': {
-    start: '2020-02-06',
-    end: '2020-02-10',
+  "checkbox-group": ["angular", "vue"],
+  radio: "1",
+  date: "2020-02-06",
+  "date-picker": "1998-03-25",
+  "date-range": {
+    start: "2020-02-06",
+    end: "2020-02-10",
   },
-  time: '04:45',
-  combobox: 'Apple',
-  comboboxMulti: ['Banana', 'Broccoli', 'Candy', 'Carrot'],
+  time: "04:45",
+  combobox: "Apple",
+  comboboxMulti: ["Banana", "Broccoli", "Candy", "Carrot"],
+  dropZone: [],
 };
 
 const comboboxOptions = [
-  'Apple',
-  'Banana',
-  'Broccoli',
-  'Burger',
-  'Cake',
-  'Candy',
-  'Carrot',
-  'Cherry',
-  'Chocolate',
-  'Cookie',
-  'Cucumber',
-  'Donut',
-  'Fish',
-  'Fries',
-  'Grape',
-  'Green apple',
-  'Hot dog',
-  'Ice cream',
-  'Kiwi',
-  'Lemon',
-  'Lollipop',
-  'Onion',
-  'Orange',
-  'Pasta',
-  'Pineapple',
-  'Pizza',
-  'Potato',
-  'Salad',
-  'Sandwich',
-  'Steak',
-  'Strawberry',
-  'Tomato',
-  'Watermelon',
+  "Apple",
+  "Banana",
+  "Broccoli",
+  "Burger",
+  "Cake",
+  "Candy",
+  "Carrot",
+  "Cherry",
+  "Chocolate",
+  "Cookie",
+  "Cucumber",
+  "Donut",
+  "Fish",
+  "Fries",
+  "Grape",
+  "Green apple",
+  "Hot dog",
+  "Ice cream",
+  "Kiwi",
+  "Lemon",
+  "Lollipop",
+  "Onion",
+  "Orange",
+  "Pasta",
+  "Pineapple",
+  "Pizza",
+  "Potato",
+  "Salad",
+  "Sandwich",
+  "Steak",
+  "Strawberry",
+  "Tomato",
+  "Watermelon",
 ];
 
 export const FormBase = ({ ...args }) => {
@@ -116,13 +121,16 @@ export const FormBase = ({ ...args }) => {
   return (
     <>
       <Form
-        onSubmit={(e) => setValues(e)}
+        onSubmit={(e) => {
+          setValues(e);
+          console.log(e);
+        }}
         formOptions={{ defaultValues: defaultValBase }}
         {...args}
       >
         <FormLayout>
           <Input name="text" label="Name" />
-          {/* <Select name="select" label="Select Period" options={options} /> */}
+          <Select name="select" label="Select Period" options={options} />
           <RangeSlider name="range" label="Budget" prefix={<p>$</p>} />
           <Checkbox name="checkbox"> I agree to T&C</Checkbox>
           <CheckboxGroup
@@ -140,24 +148,32 @@ export const FormBase = ({ ...args }) => {
             <DateField name="date" label="Choose Date" />
             <DatePicker name="date-picker" label="Choose Birthday" />
 
-            <TimeField name="time" label="Choose Range" />
+            <TimeField name="time" label="Choose Time" />
           </FormLayout.Group>
-          <DateRangePicker name="date-range" label="Choose Time" />
+          <DateRangePicker name="date-range" label="Choose Range" />
           <FormLayout.Group>
             <Combobox
-              defaultList={comboboxOptions}
+              list={comboboxOptions}
               name="combobox"
               placeholder="Type to see options"
               label="Select Single Item"
+              onChange={(val, name) => {
+                console.log(val, name);
+              }}
             />
-            <ComboboxMulti
-              defaultList={comboboxOptions}
+            <Combobox
+              list={comboboxOptions}
               name="comboboxMulti"
               label="Select Multiple Item"
               placeholder="Type to see options"
-              verticalContent
+              displaySelected
+              selectedValue={[]}
+              onChange={(val, name) => {
+                console.log(val, name);
+              }}
             />
           </FormLayout.Group>
+          <DropFile />
 
           <Button submit size="slim">
             Submit
@@ -166,7 +182,7 @@ export const FormBase = ({ ...args }) => {
       </Form>
 
       <br />
-      <Text>{values ? 'Submitted' : 'Default'} Output:</Text>
+      <Text>{values ? "Submitted" : "Default"} Output:</Text>
       <br />
       <pre>{JSON.stringify(values || defaultValBase, null, 2)}</pre>
     </>
@@ -187,14 +203,66 @@ export const ResetOnSubmit = () => {
   return (
     <FormBase
       resetValues={{
-        text: '',
-        select: '',
+        text: "",
+        select: "",
         range: [0],
         checkbox: false,
-        'checkbox-group': [],
-        radio: '',
-        date: '',
+        "checkbox-group": [],
+        radio: "",
+        date: "",
       }}
     />
+  );
+};
+
+const DropFile = () => {
+  const [files, setFiles] = React.useState<File[]>([]);
+
+  const handleDropZoneDrop = React.useCallback(
+    (_dropFiles: File[], acceptedFiles: File[]) => {
+      setFiles((files) => [...files, ...acceptedFiles]);
+    },
+    []
+  );
+
+  const validImageTypes = ["image/gif", "image/jpeg", "image/png"];
+
+  const fileUpload = !files.length && <DropZone.FileUpload />;
+  const uploadedFiles = files.length > 0 && (
+    <div style={{ padding: "0" }}>
+      <div className="flex gap-2 flex-col">
+        {files.map((file, index) => (
+          <div className="flex gap-2 items-center" key={index}>
+            <Thumbnail
+              size="small"
+              alt={file.name}
+              source={
+                validImageTypes.includes(file.type)
+                  ? window.URL.createObjectURL(file)
+                  : IconFile
+              }
+            />
+
+            <div>
+              {file.name}{" "}
+              <Text variant="bodySm" as="p">
+                {file.size} bytes
+              </Text>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+
+  return (
+    <DropZone
+      name="dropZone"
+      onChange={handleDropZoneDrop}
+      label="Upload files"
+    >
+      {uploadedFiles}
+      {fileUpload}
+    </DropZone>
   );
 };

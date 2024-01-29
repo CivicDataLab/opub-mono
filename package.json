@@ -1,54 +1,44 @@
 {
-  "name": "turbo",
-  "version": "1.9.1",
-  "private": true,
-  "workspaces": [
-    "apps/*",
-    "examples/*",
-    "packages/*"
-  ],
-  "scripts": {
-    "build": "turbo run build",
-    "postbuild": "turbo run postbuild",
-    "dev": "turbo run dev",
-    "lint": "turbo run lint --filter opub-ui",
-    "format": "prettier --write \"**/*.{ts,tsx,md,scss}\"",
-    "test": "turbo run test --filter opub-ui",
-    "test:watch": "turbo run test:watch",
-    "prepare": "husky install",
-    "clean": "rm -rf node_modules yarn.lock",
-    "new-component": "new-component",
-    "build:packages": "turbo run build --filter=create-opub-app --filter=opub-viz --filter=opub-ui"
-  },
-  "devDependencies": {
-    "@changesets/cli": "^2.26.1",
-    "@typescript-eslint/eslint-plugin": "^5.57.1",
-    "@typescript-eslint/parser": "^5.57.1",
-    "classnames": "^2.3.2",
-    "eslint-config-custom": "*",
-    "husky": "^8.0.3",
-    "lint-staged": "^13.2.0",
-    "new-component-opub": "git+https://github.com/CivicDataLab/new-component.git",
-    "prettier": "^2.8.4",
-    "sass": "^1.58.3",
-    "tsup": "^6.7.0",
-    "turbo": "^1.9.1",
-    "typescript": "^5.0.4"
-  },
-  "engines": {
-    "node": ">=14.0.0"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
-      "eslint --"
-    ]
-  },
-  "dependencies": {
-    "eslint-plugin-turbo": "^1.10.12"
-  }
+	"name": "turbo",
+	"version": "1.9.1",
+	"private": true,
+	"workspaces": [
+		"apps/*",
+		"examples/*",
+		"packages/*"
+	],
+	"scripts": {
+		"build": "turbo run build",
+		"postbuild": "turbo run postbuild",
+		"dev": "turbo run dev",
+		"lint": "turbo run lint --filter opub-ui",
+		"format": "prettier --write \"**/*.{ts,tsx,md,scss}\"",
+		"test": "turbo run test --filter opub-ui",
+		"test:watch": "turbo run test:watch",
+		"prepare": "husky install",
+		"clean": "rm -rf node_modules package-lock.json",
+		"clean:modules": "find . -name 'node_modules' -type d -prune -exec rm -rf '{}' +",
+		"new-component": "new-component",
+		"build:packages": "turbo run build --filter=create-opub-app --filter=opub-ui",
+		"publish": "changeset publish"
+	},
+	"devDependencies": {
+		"@changesets/cli": "^2.26.1",
+		"@typescript-eslint/eslint-plugin": "^5.57.1",
+		"@typescript-eslint/parser": "^5.57.1",
+		"eslint-config-custom": "*",
+		"classnames": "^2.3.2",
+		"husky": "^8.0.0",
+		"lint-staged": "^13.2.0",
+		"new-component-opub": "git+https://github.com/CivicDataLab/new-component.git",
+		"prettier": "^2.8.4",
+		"sass": "^1.58.3",
+		"tsup": "^6.7.0",
+		"turbo": "^1.9.1",
+		"typescript": "^5.0.4"
+	},
+	"engines": {
+		"node": ">=14.0.0"
+	},
+	"dependencies": {}
 }

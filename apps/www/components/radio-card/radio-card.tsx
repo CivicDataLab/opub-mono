@@ -1,5 +1,4 @@
-import { RadioItem } from 'opub-ui';
-import { RadioItemProps } from 'opub-ui/dist/ts/components/RadioGroup/RadioGroup';
+import { RadioItem, RadioItemProps } from 'opub-ui';
 import { twMerge } from 'tailwind-merge';
 
 import styles from './radio-card.module.scss';

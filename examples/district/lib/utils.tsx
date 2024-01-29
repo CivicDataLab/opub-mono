@@ -2,6 +2,7 @@ import { twMerge } from 'tailwind-merge';
 import { ClassNameValue } from 'tailwind-merge/dist/lib/tw-join';
 import { navigateEnd, navigateStart } from './navigation';
 import domtoimage from 'dom-to-image';
+import { toast } from 'opub-ui';
 
 export function cn(...inputs: ClassNameValue[]) {
   return twMerge(inputs);
@@ -84,5 +85,11 @@ export const exportAsImage = async (
     link.click();
     link.remove();
     navigateEnd();
+    toast('Downloaded as JPEG', {
+      action: {
+        label: 'Dismiss',
+        onClick: () => {},
+      },
+    });
   });
 };

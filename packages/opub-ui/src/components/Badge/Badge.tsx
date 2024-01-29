@@ -1,8 +1,8 @@
 import { BadgeProps } from '../../types/badge';
-import cx from 'classnames';
 import { Text } from '../Text';
 import styles from './Badge.module.scss';
 import { Pip } from './components/Pip';
+import cx from 'classnames';
 
 export const Badge = ({
   progress = 'default',
@@ -21,13 +21,11 @@ export const Badge = ({
 
   if (progress && !icon) {
     accessibilityMarkup = (
-      <span className={styles.PipContainer}>
-        <Pip
-          progress={progress}
-          status={status}
-          accessibilityLabelOverride={accessibilityLabel}
-        />
-      </span>
+      <Pip
+        progress={progress}
+        status={status}
+        accessibilityLabelOverride={accessibilityLabel}
+      />
     );
   }
 

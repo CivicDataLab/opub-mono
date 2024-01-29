@@ -1,10 +1,10 @@
+import Icons from '@/components/icons';
+import Link from 'next/link';
+import { Icon, Text } from 'opub-ui';
 import React from 'react';
 import { ContentCard, ProgressCard } from '../../components/Card';
 import { IOverview } from './scheme-layout';
-import { Icon, Text } from 'opub-ui';
-import { BarChart } from 'opub-viz';
-import Link from 'next/link';
-import Icons from '@/components/icons';
+import { BarChart } from 'opub-ui/viz';
 
 export const Overview = React.forwardRef(
   ({ data }: { data?: IOverview }, ref: any) => {

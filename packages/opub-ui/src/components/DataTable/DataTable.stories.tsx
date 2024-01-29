@@ -1,8 +1,9 @@
 import { Icon } from '../Icon';
 import { makeTableData, Person } from '../Table/utils';
-import { createColumnHelper, DataTable } from './DataTable';
+import { DataTable } from './DataTable';
 import { Meta, StoryObj } from '@storybook/react';
 import { IconCopy, IconPencil, IconTrash } from '@tabler/icons-react';
+import { createColumnHelper } from '@tanstack/react-table';
 
 /**
  * Data tables are used to organize and display all information from a dataset.

@@ -8,6 +8,11 @@
   background-color: var(--surface-subdued);
   color: var(--text-default);
 
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  width: max-content;
+
   @media print {
     border: solid var(--border-width-1) var(--border-default);
   }

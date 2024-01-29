@@ -69,7 +69,7 @@ const SidebarLink = ({
 }: {
   href: string;
   title: string;
-  department: string;
+  department: string | string[];
   district?: string;
 }) => {
   return (
@@ -111,7 +111,11 @@ const SidebarLink = ({
   );
 };
 
-export function isActive(department: string, href: string, district?: string) {
+export function isActive(
+  department: string | string[],
+  href: string,
+  district?: string | string[]
+) {
   if (!department && district) {
     return true;
   }

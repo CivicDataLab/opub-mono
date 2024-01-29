@@ -1,1 +1,0 @@
-export { MapChart } from './MapChart';

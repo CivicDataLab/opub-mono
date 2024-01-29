@@ -1,1 +1,174 @@
-# Accessibility
+
+## Introduction
+
+  
+
+As designers, we have the unique opportunity to offer **virtually everyone** an equally functional experience. WHO estimates that 16% of the world’s population lives with some form of permanent disability. It falls on us to incorporate accessibility everyweher, to build a world where PWD can function normally.
+
+  
+
+And that goes for digital products too.
+
+  
+
+OPub DS follows the CDL accessibility guidelines, which aim to comply with WCAG 2 AA and GIGW 3.
+
+  
+
+WCAG 2 is a time-tested set of standards that has been applied across the world and improved upon since 2008. Since CDL works extensively with government agencies in building open data platforms for civic applications, OPub DS aims to follow the latest GIGW 3 standards.
+
+  
+
+***Note:***
+
+*For the full standards, always refer to the official guidelines -*  
+
+*WCAG 2 [https://www.w3.org/WAI/standards-guidelines/wcag/](https://www.w3.org/WAI/standards-guidelines/wcag/)*  
+
+*GIGW 3 [https://guidelines.india.gov.in/new-features-of-gigw-3-0/?hash=accessibility1](https://guidelines.india.gov.in/new-features-of-gigw-3-0/?hash=accessibility1)* 
+
+  
+
+## Principles
+
+#### Understand before you solve
+
+  
+
+User needs and user behaviour are at the heart of CDL’s designs. It’s impossible to make an accessible product without first understanding and evaluating what users are likely to do, and what situations they are likely to encounter on the product. 
+
+While considering the user journey, also consider the point of view of people with disabilities. Understand as many potential scenarios as possible before ideating solutions and designing the product.
+
+  
+
+#### Design with accessibility in mind
+
+Accessibility should be woven into the product from the design stage itself. The design process goes through several essential steps where user needs are understood and solutions are tailored to meet these needs.
+
+  
+
+So including the needs of PWD first and foremost allows us to build solutions that function optimally for all users. Doing this also prevents wasting resources down the line to add or force-fit accessibility into a deployed product.
+
+  
+
+## CDL's checklist
+
+#### Desktop accessibility
+
+1. Communicate information by colours where necessary.
+   Not everyone who uses digital products (particularly civic engagement/ civic benefit products) is tech or domain literate. Colours and their connotations can go a long way in simplifying complex and critical information.
+    > For example: Diverging colour scales in data visualisations, using red to alert and green to indicate a good/healthy status.
+
+
+2. Make data visualisations accessible wherever possible by making them screen reader friendly
+   
+3. Ensure colour-blindness friendly colours are used wherever possible. Add non-colour elements to communicate the information clearly.
+   
+3. Extra content (extra info, or alert messages) can be ‘hoverable’
+    > Explore adding a delay to let users look and and possibly interact with the extra content before it disappears.
+    
+    > As long as the user is hovering, the extra content should remain visible.
+
+5. Allow flexible text resizing up to 200 percent, allowing people with visual impairments to see larger font and read comfortably
+
+5. Ensure keyboard navigation for all actions on the website.
+    > Make the hierarchy of this navigation intuitive - by clicking ‘Tab’, where will the cursor/focus go next?
+
+6. Ensure that focus state outlines are discernable and clear to users.  
+
+7. Include 'Skip to main' triggers
+    > 'Skip to main' is helpful to keyboard users, who can scroll with a mouse, to go to the main content quickly.
+
+8. Include icon labels (for all icons) to indicate what the visual icon is. This is beneficial to users who rely on text-to-speech software, and users who do not understand the icon
+
+9. Expand support for multiple native languages where possible, in hyper local products
+    > Apply multiple local languages to the UI to check that the layout behaves the right way in all of them. (This is for native language options, not for browser auto translate)
+
+  
+  
+  
+
+## Current considerations
+
+### Vision impaired users 
+#### How these users experience products:
+- Visually impaired users need to *hear* whatever is on the interface  - they often use screen reader softwares for this purpose
+- Since they cannot see, they cannot interact through mouse or cursor input - they frequently use the keyboard to navigate and interact
+- Users with *low vision* (vs. no vision) may use platforms with enlarged font size or magnification.
+
+
+#### Overall guiding questions for product builders:
+- Is all the visual content adequately explained through text?
+- Do images have alt text?
+- Is the platform navigation hierarchy intuitive so that keyboard users can move around the platform without much confusion?
+- Does the layout, hierarchy, grouping of information communicate things correctly when the screen is magnified?
+- Does the platform use the right fonts and colours with optimal contrast for good readability?
+
+
+#### Guidelines for Accessible Data visualisations:
+CDL works primarily with data and data visualisations are a major element in many CDL products. This element is particularly difficult to make accessible to vision impaired users. 
+Below are a set of guidelines to apply wherever possible, **especially in products that are open-access and available to the public at large**. 
+
+Consider the 3 aspects of structure, navigation, and description [(ref)](https://news.mit.edu/2022/data-visualization-accessible-blind-0602)
+1. Structure: Apply a hierarchy to the content of the data visualisation.
+   > I.e Apply hierarchy to indicate graph title, X and Y axes, summary of the data, legend, and any other content. 
+
+2. Navigation: Establish a path / way for users to move between the levels of hierarchy. This allows the screen reader to go through each aspect of the data visualisation.
+
+3. Description: Give crisp, clear content for the screen-reader to say at each level.
+   > This includes the way the information is spoken and how much or what information should be spoken
+   > (❌The title of this graph is Time Trends of Rainfall over the past five years vs. ✔Graph Title, Time Trends of Rainfall, Past 5 years, in Sonitpur District)
+   
+#### Guidelines for Colour-blindness Friendly Platforms:**
+Colour blind users cannot differentiate colours, so they rely on information from all other aspects of content except the colour. 
+
+> For example, yhey will not be able to perceive a red box as an alerting or alarming piece of information unless there is some non-colour information attached to it
+
+Check the following to make platforms accessible to colour-blind users:
+1. Use a colour-blindness friendly colour palette for data visualisations 
+   > See the palettes in ColourBrewer which offer reasonable differentiation in different shades of colours.
+
+2. Always translate the information conveyed by colours into some non-colour element.
+   > For example, a red 'alert' indicator can be accompanied by an icon or a text copy that indicates the alert.
+3. Ensure that CTAs, buttons, links, and other action items indicate that they are clickable through some non-colour element 
+(again using a relevant icon or using effective copy)
+
+
+### Hearing impaired users
+
+#### How these users experience products:
+- Hearing impaired users cannot hear, so they need to *see* the information contained in an audio.
+- They rely on closed captioning and other (usually visual) representations of audio.
+
+#### Overall guiding questions for product builders:
+- Can we avoid audio content here? Is the audio content conveying important information or is it a sensory add-on?
+- If there is audio or video content that is necessary, have they all been transcribed and are close captions provided?
+
+  
+### Physically impaired users
+
+#### How these users experience products:
+- Physically impaired users sometimes cannot hold and use a mouse for input.
+- They may rely on keyboards, voice recognition software, console controllers, trackballs to navigate platforms.
+#### Overall guiding questions for product builders:
+- Have we established hierarchy on the platform for easy keyboard navigation?
+- Where possible, have we tested the platform using keyboard navigation?
+  
+
+### Users facing understanding barriers & language barriers
+
+#### How these users experience products:
+- Users without much tech or domain literacy about the topics contained in the platform may not understand what it is and how to use it.
+  > For example, without help, a newbie to stock trading cannot make sense of the insights on a trading platform.
+- Users who don't understand the language of the platform usually rely on other symbolic or visual clues to interpret information.
+
+#### Overall guiding questions for product builders:
+- Consider the target audience - are they people with little to no context and do we want to educate them?
+- Have we provided tutorials, guides, how-to's, additional reference material for users to learn about the platform and its content?
+- Have we tried strategically placing help text in the relevant parts of the platform (wherever users take action or need to interpret information)?
+- Are we providing icons and symbols for users of other languages to understand information on the platform?
+
+**Note:** CDL currently does not offer multiple regional languages as native language options on our products. 
+All our products are built for English. 
+Browser based products can take advantage of browser translation features. 
+Regional languages may be something we will implement in hyper-local, niche-audience products in the future.

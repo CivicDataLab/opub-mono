@@ -1,3 +1,4 @@
+import { Color } from '../../types/icon';
 import type { Error } from '../../types/shared/form';
 import { stateIcon } from '../../utils/icons';
 import { Icon } from '../Icon';
@@ -13,7 +14,7 @@ export interface InlineMessageProps {
   appearance?: 'success' | 'error' | 'warning' | 'info';
 }
 
-const stateColor = {
+const stateColor: Record<string, Color | undefined> = {
   success: 'success',
   error: 'critical',
   warning: 'warning',
@@ -41,7 +42,7 @@ function InlineMessage({
       }
     >
       <div className={styles.Icon}>
-        <Icon source={icon} />
+        <Icon source={icon} color={stateColor[appearance] || 'critical'} />
       </div>
       {message}
     </div>

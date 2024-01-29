@@ -14,7 +14,7 @@ export interface ColumnVisibilityData {
 
 export interface TableProps {
   /** List of data types, which determines content alignment for each column. Data types are "text," which aligns left, or "numeric," which aligns right. */
-  columnContentTypes: ColumnContentType[];
+  columnContentTypes?: ColumnContentType[];
   /** List of column headers. */
   columns: any[];
   /** List of data rows. */
@@ -69,4 +69,10 @@ export type DataTableProps = TableProps &
     rowActions?: ActionListProps['items'];
     /** Add Toolbar  */
     addToolbar?: boolean;
+    /** Hide Checkbox  */
+    hideSelection?: boolean;
+
+    hideViewSelector?: boolean;
+
+    defaultRowCount?: 10 | 25 | 50 | 100;
   };

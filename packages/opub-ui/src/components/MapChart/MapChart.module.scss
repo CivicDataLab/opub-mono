@@ -1,0 +1,49 @@
+.Wrapper {
+  height: 100%;
+  position: relative;
+
+  > div {
+    background-color: var(--surface-interactive);
+  }
+}
+
+.Legend {
+  position: absolute;
+  z-index: var(--z-max);
+  right: 16px;
+  bottom: 32px;
+  padding: var(--space-3);
+  border-radius: var(--border-radius-1);
+  border: 1px solid var(--border-subdued);
+  background-color: var(--surface-default);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.LegendItem {
+  display: flex;
+  align-items: center;
+
+  &::before {
+    content: '';
+    background-color: var(--color);
+    border: 1px solid var(--border-subdued, #d7dbdf);
+    left: 0;
+    top: 0;
+    width: 24px;
+    height: 24px;
+    margin-right: var(--space-4);
+  }
+}
+
+.LayerSelector {
+  position: absolute;
+  z-index: var(--z-max);
+  right: 16px;
+  top: 16px;
+
+  button {
+    cursor: pointer;
+  }
+}

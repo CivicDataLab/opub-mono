@@ -1,4 +1,7 @@
 .card {
+  --card-rgb: 180, 185, 188;
+  --card-border-rgb: 131, 134, 135;
+
   padding: 1rem 1.2rem;
   border-radius: 4px;
   background: rgba(var(--card-rgb), 0.1);

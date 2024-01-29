@@ -1,4 +1,4 @@
-import { Error, LabelledProps } from './shared/form';
+import type { Error, LabelledProps } from './shared/form';
 
 type Type =
   | 'text'

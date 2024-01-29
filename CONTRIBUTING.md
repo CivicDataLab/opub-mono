@@ -42,7 +42,7 @@ For requesting new features, components, etc, head over to [Discussions](https:/
 ## Use a Consistent Coding Style
 
 - This project uses ESLint and multiple recommended plugin for consistent styling. You will find a `.eslintrc` file in the repo which contains all the rules.
-- You can try running `yarn lint` for style unification
+- You can try running `npm run lint` for style unification
 
 ## License
 

@@ -1,6 +1,6 @@
+import { Action } from '../button';
 import React from 'react';
 import { ReactElement } from 'react';
-import { Action } from '../button';
 
 export type Error =
   | string
@@ -8,7 +8,7 @@ export type Error =
   | ReactElement
   | (string | ReactElement)[];
 
-export interface LabelledProps {
+export type LabelledProps = {
   /** A unique identifier for the label */
   id?: string;
   /** Text for the label */
@@ -25,4 +25,4 @@ export interface LabelledProps {
   labelHidden?: boolean;
   /** Visual required indicator for the label */
   requiredIndicator?: boolean;
-}
+};

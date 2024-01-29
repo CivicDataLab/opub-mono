@@ -1,18 +1,9 @@
-import React from 'react';
-import { UpdateDatasetInput } from '@/gql/generated/graphql';
-import {
-  Button,
-  ComboboxMulti,
-  Divider,
-  FormLayout,
-  Select,
-  Text,
-} from 'opub-ui';
+import { DatasetForm } from "../../../components/dataset-form";
+import { UpdateDatasetInput } from "@/gql/generated/graphql";
+import { Button, Combobox, Divider, FormLayout, Select, Text } from "opub-ui";
+import React from "react";
 
-import { DatasetForm } from '../../../components/dataset-form';
-import styles from '../edit.module.scss';
-
-interface DefaultValues extends Omit<UpdateDatasetInput, 'geo_list'> {
+interface DefaultValues extends Omit<UpdateDatasetInput, "geo_list"> {
   geo_list: string[];
 }
 
@@ -39,7 +30,7 @@ export function EditMetadata({
               tags_list: value.tags_list,
               geo_list: value.geo_list,
               language: value.language,
-              source: '',
+              source: "",
             },
           });
         }}
@@ -62,10 +53,10 @@ export function EditMetadata({
                   label="Update Frequency"
                   helpText="How often is this dataset updated?"
                   options={[
-                    { label: 'Daily', value: 'daily' },
-                    { label: 'Weekly', value: 'weekly' },
-                    { label: 'Monthly', value: 'monthly' },
-                    { label: 'Yearly', value: 'yearly' },
+                    { label: "Daily", value: "daily" },
+                    { label: "Weekly", value: "weekly" },
+                    { label: "Monthly", value: "monthly" },
+                    { label: "Yearly", value: "yearly" },
                   ]}
                   placeholder="Select"
                   required
@@ -77,10 +68,10 @@ export function EditMetadata({
                   label="Language"
                   helpText="What language is this dataset in?"
                   options={[
-                    { label: 'English', value: 'english' },
-                    { label: 'Hindi', value: 'hindi' },
-                    { label: 'Spanish', value: 'spanish' },
-                    { label: 'French', value: 'french' },
+                    { label: "English", value: "english" },
+                    { label: "Hindi", value: "hindi" },
+                    { label: "Spanish", value: "spanish" },
+                    { label: "French", value: "french" },
                   ]}
                   placeholder="Select"
                   required
@@ -90,34 +81,32 @@ export function EditMetadata({
               </FormLayout.Group>
 
               <FormLayout.Group>
-                <ComboboxMulti
+                <Combobox
                   name="geo_list"
                   label="Geography"
                   // helpText="Which geography does this data belong to?"
                   placeholder="Search Locations"
-                  defaultList={['United States', 'Canada', 'Mexico', 'India']}
-                  verticalContent
+                  list={["United States", "Canada", "Mexico", "India"]}
+                  displaySelected
                   required
                   error="This field is required"
-                  readOnly={isLoading}
                 />
-                <ComboboxMulti
+                <Combobox
                   name="tags_list"
                   label="Tags"
                   placeholder="Search Tags"
                   // helpText="Any other tags or keywords that can help people discover your dataset"
-                  defaultList={[
-                    'Health',
-                    'Education',
-                    'Transportation',
-                    'Economy',
-                    'Demographics',
-                    'Environment',
+                  list={[
+                    "Health",
+                    "Education",
+                    "Transportation",
+                    "Economy",
+                    "Demographics",
+                    "Environment",
                   ]}
-                  verticalContent
+                  displaySelected
                   required
                   error="This field is required"
-                  readOnly={isLoading}
                 />
               </FormLayout.Group>
             </FormLayout>
@@ -127,9 +116,7 @@ export function EditMetadata({
           </div>
           <div className="mt-4 flex items-center gap-2 justify-center flex-wrap">
             <Button>Save & Exit</Button>
-            <Button primary submit>
-              Save & Proceed
-            </Button>
+            <Button submit>Save & Proceed</Button>
           </div>
         </>
       </DatasetForm>

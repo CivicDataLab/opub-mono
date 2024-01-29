@@ -1,42 +1,80 @@
+@import 'leaflet/dist/leaflet.css';
+
 body {
-  color: var(--text-default);
-  line-height: 150%;
-  box-sizing: border-box;
-  font-family: var(--primary-font);
-  --outline: 2px solid var(--text-interactive);
-  --outline-offset: 2px;
+	color: var(--text-default);
+	line-height: 150%;
+	box-sizing: border-box;
+	font-family: var(--primary-font);
+	--outline: 2px solid var(--text-interactive);
+	--outline-offset: 2px;
 }
 
 *,
 ::after,
 ::before {
-  box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 *:focus {
-  outline: var(--outline);
-  outline-offset: var(--outline-offset);
+	outline: var(--outline);
+	outline-offset: var(--outline-offset);
 }
 
 *:focus:not(:focus-visible) {
-  outline: none;
+	outline: none;
 }
 
 *:focus-visible {
-  outline: var(--outline);
-  outline-offset: var(--outline-offset);
+	outline: var(--outline);
+	outline-offset: var(--outline-offset);
 }
 
 .sr-only:not(:where(:focus, :active, :focus-within)) {
-  clip: rect(0 0 0 0);
-  clip-path: inset(50%);
-  height: 1px;
-  overflow: hidden;
-  position: absolute;
-  white-space: nowrap;
-  width: 1px;
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
 }
 
 [data-radix-popper-content-wrapper] {
-  z-index: var(--z-max, 999999) !important;
+	z-index: var(--z-max, 999999) !important;
+}
+
+.text-clamp {
+	line-height: 156%;
+	overflow: hidden;
+	-webkit-line-clamp: 1;
+	line-clamp: 3;
+	-webkit-box-orient: vertical;
+	display: -webkit-box;
+}
+
+.leaflet-container {
+	width: 100%;
+	height: 100%;
+	font-family: var(--primary-font);
+}
+
+.opub-leaflet-popup .leaflet-popup-content-wrapper {
+	border-radius: var(--border-radius-5);
+	padding: var(--space-1) var(--space-4);
+	background-color: var(--background-solid-dark);
+	color: var(--text-onbg-default);
+}
+
+.opub-leaflet-popup .leaflet-popup-tip-container {
+	left: 30%;
+}
+
+.opub-leaflet-popup .leaflet-popup-tip {
+	background-color: var(--background-solid-dark);
+}
+
+.opub-leaflet-popup .leaflet-popup-content {
+	margin: 0;
+	font-weight: 500;
+	font-size: var(--font-size-75);
 }

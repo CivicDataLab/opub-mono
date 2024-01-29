@@ -96,10 +96,10 @@ const MenuLink = ({
   setOpen,
 }: {
   href: string;
-  title: string;
+  title: string | string[];
   icon?: string;
-  department: string;
-  district?: string;
+  department: string | string[];
+  district?: string | string[];
   setOpen: (e: boolean) => void;
 }) => {
   return (

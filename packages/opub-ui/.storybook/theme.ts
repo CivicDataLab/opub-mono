@@ -1,9 +1,8 @@
-import { create } from '@storybook/theming/create';
+import { create } from '@storybook/theming/create'
 
 export default create({
-  base: 'light',
-  brandTitle: 'My custom Storybook',
-  brandUrl: 'https://example.com',
-  brandImage: 'https://storybook.js.org/images/placeholders/350x150.png',
-  brandTarget: '_self',
-});
+	base: 'light',
+	brandTitle: 'OPub UI',
+	brandUrl: 'https://github.com/CivicDataLab/opub-mono',
+	brandTarget: '_self',
+})

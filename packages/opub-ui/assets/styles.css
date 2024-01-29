@@ -3,6 +3,7 @@
 @import './styles-bundled.css';
 
 :root {
-  --primary-font: 'Inter', sans-serif;
-  --mono-font: 'Space Mono', monospace;
+	--primary-font: 'Inter', -apple-system, BlinkMacSystemFont, 'San Francisco',
+		'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
+	--mono-font: 'Space Mono', monospace;
 }

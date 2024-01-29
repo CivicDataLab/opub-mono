@@ -1,14 +1,14 @@
-import { Box } from '../Box';
-import { Button } from '../Button';
-import { Sheet } from './Sheet';
-import { Meta, StoryObj } from '@storybook/react';
-import React from 'react';
+import { Box } from "../Box";
+import { Button } from "../Button";
+import { Sheet } from "./Sheet";
+import { Meta, StoryObj } from "@storybook/react";
+import React from "react";
 
 /**
  * Sheet is a panel that slides in from the side of the screen.
  */
 const meta = {
-  title: 'Components/Sheet',
+  title: "Components/Sheet",
   component: Sheet.Content,
 } satisfies Meta<typeof Sheet.Content>;
 
@@ -30,7 +30,7 @@ export const Default: Story = {
       >
         <Sheet>
           <Sheet.Trigger>
-            <Button primary>Open Sheet</Button>
+            <Button>Open Sheet</Button>
           </Sheet.Trigger>
           <Sheet.Content>Sheet Content</Sheet.Content>
         </Sheet>
@@ -43,7 +43,7 @@ export const Default: Story = {
 export const Sides: Story = {
   render: () => {
     const [open, setOpen] = React.useState(false);
-    const [side, setSide] = React.useState<any>('');
+    const [side, setSide] = React.useState<any>("");
 
     // React.useEffect(() => {
     //   if (side) setOpen((val) => !val);
@@ -65,7 +65,7 @@ export const Sides: Story = {
       >
         <Sheet>
           <Sheet.Trigger>
-            <Button onClick={() => handleOpenChange('top')}>From Top</Button>
+            <Button onClick={() => handleOpenChange("top")}>From Top</Button>
           </Sheet.Trigger>
           <Sheet.Content side={side}>Sheet Content</Sheet.Content>
         </Sheet>
@@ -79,7 +79,7 @@ export const Sides: Story = {
         >
           <Sheet>
             <Sheet.Trigger>
-              <Button onClick={() => handleOpenChange('left')}>
+              <Button onClick={() => handleOpenChange("left")}>
                 From Left
               </Button>
             </Sheet.Trigger>
@@ -87,7 +87,7 @@ export const Sides: Story = {
           </Sheet>
           <Sheet>
             <Sheet.Trigger>
-              <Button onClick={() => handleOpenChange('right')}>
+              <Button onClick={() => handleOpenChange("right")}>
                 From Right
               </Button>
             </Sheet.Trigger>
@@ -97,7 +97,7 @@ export const Sides: Story = {
 
         <Sheet>
           <Sheet.Trigger>
-            <Button onClick={() => handleOpenChange('bottom')}>
+            <Button onClick={() => handleOpenChange("bottom")}>
               From Bottom
             </Button>
           </Sheet.Trigger>
@@ -109,8 +109,8 @@ export const Sides: Story = {
   args: {},
 };
 
-type sizes = 'narrow' | 'medium' | 'wide' | 'extended' | 'full';
-const sizeArr = ['narrow', 'medium', 'wide', 'extended', 'full'];
+type sizes = "narrow" | "medium" | "wide" | "extended" | "full";
+const sizeArr = ["narrow", "medium", "wide", "extended", "full"];
 export const Sizes: Story = {
   render: () => {
     const [size, setSize] = React.useState<sizes | undefined>(undefined);
@@ -139,7 +139,7 @@ export const Sizes: Story = {
               minHeight="100%"
             >
               {sizeArr.map((size: any) => (
-                <Button key={size} primary onClick={() => setSize(size)}>
+                <Button key={size} onClick={() => setSize(size)}>
                   {size}
                 </Button>
               ))}

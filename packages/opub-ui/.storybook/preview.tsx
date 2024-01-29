@@ -10,6 +10,7 @@ export const parameters = {
     theme: themes.light,
   },
   options: {
+    showPanel: false,
     storySort: {
       order: [
         'Guides',

@@ -1,113 +1,131 @@
 @import '../../../styles/common';
 
 .Calendar {
-  max-width: 290px;
-  padding: var(--space-5);
-  background-color: var(--surface-default);
-  box-shadow: var(--shadow-element-popover);
-  border-radius: var(--border-radius-2);
+	max-width: 290px;
+	padding: var(--space-5);
+	background-color: var(--surface-default);
+	box-shadow: var(--shadow-element-popover);
+	border-radius: var(--border-radius-2);
 
-  table {
-    width: 100%;
-  }
+	table {
+		width: 100%;
+	}
+
+	&.YearCalendar {
+		max-width: 200px;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+	}
 }
 
 .Header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 4px;
-  margin: 0 8px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 4px;
+	margin: 0 8px;
 
-  button {
-    @include unstyled-button;
-    @include focus-ring;
-    &:focus-visible:not(:active) {
-      @include focus-ring($style: 'focused');
-      outline: var(--border-width-2) solid transparent;
-    }
+	button {
+		@include unstyled-button;
+		@include focus-ring;
+		&:focus-visible:not(:active) {
+			@include focus-ring($style: 'focused');
+			outline: var(--border-width-2) solid transparent;
+		}
 
-    border-radius: var(--border-radius-1);
-    padding: var(--space-05) var(--space-1);
-    transition: background-color var(--duration-100) var(--ease-in-out);
+		border-radius: var(--border-radius-1);
+		padding: var(--space-05) var(--space-1);
+		transition: background-color var(--duration-100) var(--ease-in-out);
 
-    &:hover {
-      background-color: var(--surface-subdued);
-    }
+		&:hover {
+			background-color: var(--surface-subdued);
+		}
 
-    &:active {
-      background-color: var(--surface-selected) !important;
-    }
-  }
+		&:active {
+			background-color: var(--surface-selected) !important;
+		}
+	}
 }
 
 .Cell {
-  cursor: default;
-  text-align: center;
-  border-radius: var(--border-radius-1);
-  padding: var(--space-1) var(--space-2);
-  transition: background-color var(--duration-100) var(--ease-in-out);
+	cursor: default;
+	text-align: center;
+	border-radius: var(--border-radius-1);
+	padding: var(--space-1) var(--space-2);
+	transition: background-color var(--duration-100) var(--ease-in-out);
 
-  &:hover:not(.Disabled, .Selected, .Unavailable) {
-    background-color: var(--surface-subdued);
-  }
+	&.YearCell {
+		width: var(--space-10);
+		padding-inline: 0;
+		border: none;
+		background-color: transparent;
 
-  &.Today {
-    background-color: var(--surface-selected);
-  }
+		> span {
+			pointer-events: none;
+		}
+	}
 
-  &.Selected {
-    background-color: var(--background-alpha-dark);
-    > span {
-      color: var(--text-onbg-default);
-    }
+	&:hover:not(.Disabled, .Selected, .Unavailable) {
+		background-color: var(--surface-subdued);
+	}
 
-    &.HighlightedRange {
-      background-color: var(--surface-selected);
-      border-radius: 0;
+	&.Today {
+		background-color: var(--surface-selected);
+	}
 
-      > span {
-        color: var(--text-default);
-      }
-    }
+	&.Selected {
+		background-color: var(--icon-interactive);
+		> span {
+			color: var(--text-onbg-default);
+		}
 
-    &.SelectionStart {
-      border-radius: var(--border-radius-6) 0px 0px var(--border-radius-6);
-      background-color: var(--background-alpha-dark);
+		&.HighlightedRange {
+			background-color: var(--surface-selected);
+			border-radius: 0;
 
-      > span {
-        color: var(--text-onbg-default);
-      }
-    }
+			> span {
+				color: var(--text-default);
+			}
+		}
 
-    &.SelectionEnd {
-      border-radius: 0px var(--border-radius-6) var(--border-radius-6) 0px;
-      background-color: var(--background-alpha-dark);
-      > span {
-        color: var(--text-onbg-default);
-      }
-    }
+		&.SelectionStart {
+			border-radius: var(--border-radius-6) 0px 0px var(--border-radius-6);
+			background-color: var(--icon-interactive);
 
-    &.SelectionStart.SelectionEnd {
-      border-radius: var(--border-radius-6);
-    }
-  }
+			> span {
+				color: var(--text-onbg-default);
+			}
+		}
 
-  &.Unavailable {
-    > span {
-      color: var(--text-critical);
-    }
-  }
+		&.SelectionEnd {
+			border-radius: 0px var(--border-radius-6) var(--border-radius-6) 0px;
+			background-color: var(--icon-interactive);
+			> span {
+				color: var(--text-onbg-default);
+			}
+		}
 
-  &.Disabled {
-    > span {
-      color: var(--text-disabled);
-    }
-  }
+		&.SelectionStart.SelectionEnd {
+			border-radius: var(--border-radius-6);
+		}
+	}
+
+	&.Unavailable {
+		> span {
+			color: var(--text-critical);
+		}
+	}
+
+	&.Disabled {
+		> span {
+			color: var(--text-disabled);
+		}
+	}
 }
 
 .Weeks {
-  > th {
-    padding: var(--space-2);
-  }
+	> th {
+		padding: var(--space-2);
+	}
 }

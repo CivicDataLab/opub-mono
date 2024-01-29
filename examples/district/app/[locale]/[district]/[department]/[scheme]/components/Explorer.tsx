@@ -1,11 +1,15 @@
-import { Indicators } from './Indicators';
-import { IChartData } from './scheme-layout';
-import { ckan } from '@/config/site';
-import { useFetch } from '@/lib/api';
-import { cn, copyURLToClipboard, exportAsImage } from '@/lib/utils';
+import { BarView } from "./BarView";
+import { Indicators } from "./Indicators";
+import { IChartData } from "./scheme-layout";
+import { ckan } from "@/config/site";
+import { useWindowSize } from "@/hooks/use-window-size";
+import { useFetch } from "@/lib/api";
+import { cn, copyURLToClipboard, exportAsImage } from "@/lib/utils";
+import { useQueryState } from "next-usequerystate";
+import dynamic from "next/dynamic";
 import {
   Button,
-  ComboboxMulti,
+  Combobox,
   Select,
   SelectorCard,
   Tab,
@@ -14,18 +18,16 @@ import {
   Tabs,
   Text,
   Tray,
-  useToast,
-} from 'opub-ui';
-import React from 'react';
-import { ErrorBoundary } from 'react-error-boundary';
-import { useQueryState } from 'next-usequerystate';
-import dynamic from 'next/dynamic';
-import { BarView } from './BarView';
-import { useWindowSize } from '@/hooks/use-window-size';
+  toast,
+} from "opub-ui";
+import React from "react";
+import { ErrorBoundary } from "react-error-boundary";
 
-const LeafletChoropleth = dynamic(
-  () => import('opub-viz').then((mod) => mod.LeafletChoropleth),
-  { ssr: false }
+const MapChart = dynamic(
+  () => import("opub-ui/viz").then((mod) => mod.MapChart),
+  {
+    ssr: false,
+  }
 );
 export const Explorer = React.forwardRef(
   (
@@ -42,13 +44,13 @@ export const Explorer = React.forwardRef(
   ) => {
     const years = Object.values(chartData)[0].years;
     const [selectedYear, setYear] = React.useState(Object.keys(years)[0]);
-    const [selectedTab, setTab] = React.useState<'map' | 'bar'>('bar');
-    const [indicator, setIndicator] = useQueryState('indicator');
-    const [indicatorName, setIndicatorName] = React.useState('indicator');
+    const [selectedTab, setTab] = React.useState<"map" | "bar">("bar");
+    const [indicator, setIndicator] = useQueryState("indicator");
+    const [indicatorName, setIndicatorName] = React.useState("indicator");
     const [trayOpen, setTrayOpen] = React.useState(false);
 
     const { data: indicatorData, isLoading } = useFetch(
-      'indicators',
+      "indicators",
       ckan.indicators
     );
     const indicatorRef = React.useRef(null);
@@ -57,10 +59,10 @@ export const Explorer = React.forwardRef(
       if (indicatorData || indicator) {
         const initialSlug =
           indicator ||
-          indicatorData[scheme as string]['District Performance'][0].slug;
+          indicatorData[scheme as string]["District Performance"][0].slug;
         setIndicator(initialSlug);
       }
-    }, [indicatorData, indicator]);
+    }, [indicatorData, indicator, setIndicator, scheme]);
 
     // TODO: improve this section by adding better API
     // set indicator name
@@ -78,12 +80,12 @@ export const Explorer = React.forwardRef(
           }
         });
       }
-    }, [indicatorData, indicator]);
+    }, [indicatorData, indicator, scheme]);
 
     return (
       <div
         className={cn(
-          'flex flex-col md:grid grid-cols-[242px_1fr] gap-4 rounded-05 md:bg-surfaceDefault md:shadow-elementCard md:p-6'
+          "flex flex-col md:grid grid-cols-[242px_1fr] gap-4 rounded-05 md:bg-surfaceDefault md:shadow-elementCard md:p-6"
         )}
       >
         <div className="hidden md:block">
@@ -94,7 +96,7 @@ export const Explorer = React.forwardRef(
           ) : indicatorData ? (
             <Indicators
               data={indicatorData[scheme as string] || null}
-              indicator={indicator || 'nhaoe'}
+              indicator={indicator || "nhaoe"}
               indicatorRef={indicatorRef}
               setIndicator={setIndicator}
             />
@@ -119,7 +121,7 @@ export const Explorer = React.forwardRef(
             ) : indicatorData ? (
               <Indicators
                 data={indicatorData[scheme as string] || null}
-                indicator={indicator || 'nhaoe'}
+                indicator={indicator || "nhaoe"}
                 indicatorRef={indicatorRef}
                 setIndicator={(e: string) => {
                   setIndicator(e);
@@ -151,7 +153,7 @@ export const Explorer = React.forwardRef(
                 setYear,
                 selectedTab,
                 selectedYear,
-                selectedIndicator: indicator || 'nhaoe',
+                selectedIndicator: indicator || "nhaoe",
               }}
             />
           </ErrorBoundary>
@@ -168,13 +170,12 @@ const Content = ({
   district,
 }: {
   indicatorRef: any;
-
   chartData: IChartData;
   district: string;
   states: {
-    setTab: (tab: 'map' | 'bar') => void;
+    setTab: (tab: "map" | "bar") => void;
     setYear: (year: string) => void;
-    selectedTab: 'map' | 'bar';
+    selectedTab: "map" | "bar";
     selectedYear: string;
     selectedIndicator: string;
   };
@@ -184,13 +185,13 @@ const Content = ({
     values: number[];
   }>();
   const [selectedBlocks, setSelectedBlocks] = React.useState<string[]>([]);
+  const { width } = useWindowSize();
 
   const { data: mapFile, isLoading: mapLoading } = useFetch(
     `${district}-mapFile`,
     `/files/${district}.json`
   );
 
-  const { toast } = useToast();
   const contentRef: any = React.useRef(null);
 
   React.useEffect(() => {
@@ -206,32 +207,34 @@ const Content = ({
         indicatorList.style.maxHeight = `${contentHeight - 100}px`;
       }, 20);
     }
-  }, []);
+  }, [indicatorRef]);
 
   const currentData: any =
     chartData[states.selectedIndicator].years[states.selectedYear];
 
-  const barDataObj: any = {
-    Khagorijan: 15452.0,
-    Batadraba: 19506.0,
-    Juria: 40642.0,
-    Kaliabor: 9102.0,
-    Rupahihut: 22841.0,
-    Lowkhowa: 19017.0,
-    Kathiatoli: 38942.0,
-    Raha: 17224.0,
-    Dolongghat: 5108.0,
-    Barhampur: 9450.0,
-    Pakhimoria: 8232.0,
-    Bajiagaon: 20247.0,
-    'Pachim Kaliabor': 14392.0,
-  };
+  const barDataObj: any = React.useMemo(() => {
+    return {
+      Khagorijan: 15452.0,
+      Batadraba: 19506.0,
+      Kaliabor: 9102.0,
+      Rupahihut: 22841.0,
+      Lowkhowa: 19017.0,
+      Kathiatoli: 38942.0,
+      Raha: 17224.0,
+      Dolongghat: 5108.0,
+      Barhampur: 9450.0,
+      Pakhimoria: 8232.0,
+      Bajiagaon: 20247.0,
+      "Pachim Kaliabor": 14392.0,
+      Juria: 40642.0,
+    };
+  }, []);
 
   React.useEffect(() => {
     if (!currentData) return;
 
     setSelectedBlocks(Object.keys(barDataObj));
-  }, []);
+  }, [currentData, barDataObj]);
 
   React.useEffect(() => {
     if (selectedBlocks) {
@@ -246,7 +249,7 @@ const Content = ({
         values: Object.values(filteredData),
       });
     }
-  }, [selectedBlocks, currentData]);
+  }, [selectedBlocks, currentData, barDataObj]);
 
   if (!chartData[states.selectedIndicator]) {
     return (
@@ -258,11 +261,11 @@ const Content = ({
 
   const mapDataFn = (
     value: boolean,
-    type: 'default' | 'hover' | 'selected' = 'default'
+    type: "default" | "hover" | "selected" = "default"
   ) => {
     return value
       ? `var(--mapareadistrict-${type})`
-      : 'var(--mapareadistrict-disabled)';
+      : "var(--mapareadistrict-disabled)";
   };
 
   let barView = null;
@@ -278,13 +281,13 @@ const Content = ({
 
   const tabs = [
     {
-      label: 'Bar View',
-      value: 'bar',
+      label: "Bar View",
+      value: "bar",
       content: barView,
     },
     {
-      label: 'Map View',
-      value: 'map',
+      label: "Map View",
+      value: "map",
       content:
         // <MapChart
         //   mapFile={mapFile}
@@ -310,7 +313,7 @@ const Content = ({
         //   loading={mapLoading}
         // />
         !mapLoading ? (
-          <LeafletChoropleth
+          <MapChart
             features={mapFile.features}
             mapZoom={7.4}
             zoomOnClick={false}
@@ -325,25 +328,24 @@ const Content = ({
     },
   ];
 
-  const { width } = useWindowSize();
   const isMobile = width ? width < 768 : false;
 
   return (
     <div className="grow h-full">
       <Tabs
-        defaultValue={'map'}
+        defaultValue={"map"}
         onValueChange={(value) => states.setTab(value as any)}
         value={states.selectedTab}
       >
         <TabList fitted={isMobile}>
           {[
             {
-              label: 'Bar View',
-              value: 'bar',
+              label: "Bar View",
+              value: "bar",
             },
             {
-              label: 'Map View',
-              value: 'map',
+              label: "Map View",
+              value: "map",
             },
           ].map((tab) => (
             <Tab value={tab.value} key={tab.value}>
@@ -376,9 +378,9 @@ const Content = ({
       </Tabs>
       <div
         className={cn(
-          'mt-3 flex justify-end gap-4',
+          "mt-3 flex justify-end gap-4",
           isMobile &&
-            'mt-4 md:mt6 py-4 px-3 rounded-2 shadow-elementCard flex items-center justify-end gap-4 flex-wrap bg-surfaceDefault'
+            "mt-4 md:mt6 py-4 px-3 rounded-2 shadow-elementCard flex items-center justify-end gap-4 flex-wrap bg-surfaceDefault"
         )}
       >
         <Button
@@ -386,8 +388,11 @@ const Content = ({
           variant="interactive"
           onClick={() => {
             copyURLToClipboard();
-            toast({
-              title: 'Copied to clipboard!',
+            toast("Copied to clipboard", {
+              action: {
+                label: "Dismiss",
+                onClick: () => {},
+              },
             });
           }}
         >
@@ -397,7 +402,7 @@ const Content = ({
           kind="primary"
           variant="interactive"
           onClick={() => {
-            exportAsImage(contentRef.current, 'explorer');
+            exportAsImage(contentRef.current, "explorer");
           }}
         >
           Download
@@ -419,7 +424,7 @@ const Filters = ({
   chartData: IChartData;
   barOptions: any;
   setSelectedBlocks: any;
-  tab: 'map' | 'bar';
+  tab: "map" | "bar";
   selectedBlocks: string[];
   isMobile: boolean;
 }) => {
@@ -432,18 +437,18 @@ const Filters = ({
 
   return (
     <div className="flex flex-col gap-2 md:gap-4 px-4">
-      {tab === 'bar' && (
-        <ComboboxMulti
+      {tab === "bar" && (
+        <Combobox
           name="blocks"
           list={barOptions}
-          defaultValues={selectedBlocks}
+          selectedValue={selectedBlocks}
           key={selectedBlocks.toString()}
           label="Select Blocks to Compare"
           placeholder="Select Blocks"
           onChange={(values: any) => {
             setSelectedBlocks(values);
           }}
-          verticalContent
+          displaySelected
         />
       )}
 

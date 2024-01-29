@@ -1,7 +1,6 @@
 import { dirname, join } from 'path';
-
-const turbosnap = require('vite-plugin-turbosnap');
-const { mergeConfig } = require('vite');
+import { mergeConfig } from 'vite';
+import turbosnap from 'vite-plugin-turbosnap';
 
 const config = {
   stories: ['../src', '../docs'],
@@ -9,7 +8,6 @@ const config = {
     getAbsolutePath('@storybook/addon-links'),
     getAbsolutePath('@storybook/addon-essentials'),
     getAbsolutePath('@storybook/addon-interactions'),
-    getAbsolutePath("@storybook/addon-mdx-gfm")
   ],
   framework: {
     name: getAbsolutePath('@storybook/react-vite'),

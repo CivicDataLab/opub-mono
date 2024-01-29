@@ -6,11 +6,11 @@ import { Checkbox } from '../Checkbox/Checkbox';
 import { Footer } from '../Table';
 import { Text } from '../Text';
 import styles from './DataTable.module.scss';
-import { Cell, Toolbar, HeaderCell, Row } from './components';
+import { Cell, HeaderCell, Row, Toolbar } from './components';
 import { RowAction } from './components/Row';
 import {
-  ColumnDef,
   ColumnFiltersState,
+  FilterFn,
   SortingState,
   VisibilityState,
   flexRender,
@@ -21,8 +21,6 @@ import {
   getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
-  createColumnHelper,
-  FilterFn,
 } from '@tanstack/react-table';
 import cx from 'classnames';
 import React from 'react';
@@ -37,7 +35,7 @@ const DataTable = (props: DataTableProps) => {
   const {
     rows,
     columns,
-    columnContentTypes: columnTypes = 'text',
+    columnContentTypes: columnTypes,
     hoverable = true,
     increasedTableDensity = true,
     hasZebraStripingOnData = false,
@@ -47,12 +45,14 @@ const DataTable = (props: DataTableProps) => {
     onSort,
     onRowSelectionChange,
     defaultSelectedRows,
-    hasMoreItems = false,
     hideFooter = false,
     rowActions,
     addToolbar,
     filters,
     sortColumns,
+    hideSelection = false,
+    hideViewSelector = false,
+    defaultRowCount = 10,
     ...others
   } = props;
 
@@ -98,13 +98,17 @@ const DataTable = (props: DataTableProps) => {
     getFacetedUniqueValues: getFacetedUniqueValues(),
     onColumnFiltersChange: setColumnFilters,
     onColumnVisibilityChange: setColumnVisibility,
-    enableRowSelection: true,
+    enableRowSelection: !hideSelection,
     filterFns: {
       columnFilter: (row, id, value) => {
         return value.includes(row.getValue(id));
       },
     },
   });
+
+  React.useLayoutEffect(() => {
+    table.setPageSize(defaultRowCount);
+  }, [defaultRowCount]);
 
   const rowCountIsEven = rows.length % 2 === 0;
   const themeClass = cx(
@@ -119,7 +123,13 @@ const DataTable = (props: DataTableProps) => {
 
   return (
     <div className={`opub-DataTable ${themeClass}`} {...others}>
-      {addToolbar && <Toolbar filters={filters} table={table} />}
+      {addToolbar && (
+        <Toolbar
+          filters={filters}
+          table={table}
+          hideViewSelector={hideViewSelector}
+        />
+      )}
       <div
         className={cx(styles.ScrollContainer, addToolbar && styles.withFilter)}
       >
@@ -130,25 +140,27 @@ const DataTable = (props: DataTableProps) => {
                 className={cx(tableRowClassname, styles.TableHeaderRow)}
                 key={headerGroup.id}
               >
-                <th
-                  className={cx(
-                    styles.Cell,
-                    styles['Cell-header'],
-                    styles.Checkbox
-                  )}
-                >
-                  <Checkbox
-                    name={headerGroup.id}
-                    checked={
-                      table.getIsAllPageRowsSelected()
-                        ? true
-                        : table.getIsSomePageRowsSelected()
-                        ? 'indeterminate'
-                        : false
-                    }
-                    onChange={() => table.toggleAllPageRowsSelected()}
-                  />
-                </th>
+                {!hideSelection && (
+                  <th
+                    className={cx(
+                      styles.Cell,
+                      styles['Cell-header'],
+                      styles.Checkbox
+                    )}
+                  >
+                    <Checkbox
+                      name={headerGroup.id}
+                      checked={
+                        table.getIsAllPageRowsSelected()
+                          ? true
+                          : table.getIsSomePageRowsSelected()
+                          ? 'indeterminate'
+                          : false
+                      }
+                      onChange={() => table.toggleAllPageRowsSelected()}
+                    />
+                  </th>
+                )}
                 {headerGroup.headers.map((header, index) => {
                   const text = flexRender(
                     header.column.columnDef.header,
@@ -165,7 +177,8 @@ const DataTable = (props: DataTableProps) => {
                       className={cx(
                         styles.Cell,
                         styles['Cell-header'],
-                        columnTypes[index] === 'numeric' &&
+                        columnTypes &&
+                          columnTypes[index] === 'numeric' &&
                           styles['Cell-numeric'],
                         isSortable && isSorted && styles['Cell-sorted'],
                         isSortable && styles['Cell-sortable']
@@ -174,7 +187,7 @@ const DataTable = (props: DataTableProps) => {
                       header={header}
                       sortable={isSortable}
                       text={text}
-                      columnType={columnTypes[index]}
+                      columnType={columnTypes && columnTypes[index]}
                       defaultSortDirection={defaultSortDirection}
                     />
                   );
@@ -208,6 +221,7 @@ const DataTable = (props: DataTableProps) => {
               <Row
                 key={row.id}
                 row={row}
+                hideSelection={hideSelection}
                 classname={cx(
                   tableRowClassname,
                   styles.TableBodyRow,
@@ -224,7 +238,8 @@ const DataTable = (props: DataTableProps) => {
                     <Cell
                       className={cx(
                         styles.Cell,
-                        columnTypes[index] === 'numeric' &&
+                        columnTypes &&
+                          columnTypes[index] === 'numeric' &&
                           styles['Cell-numeric'],
                         index === 0 && styles['Cell-firstColumn'],
                         index === 0 && truncate && styles['Cell-truncated']
@@ -255,5 +270,4 @@ const DataTable = (props: DataTableProps) => {
   );
 };
 
-export { DataTable, createColumnHelper };
-export type { ColumnDef };
+export { DataTable };

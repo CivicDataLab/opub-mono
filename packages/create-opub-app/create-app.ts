@@ -113,7 +113,7 @@ export async function createApp({
 
   const originalDirectory = process.cwd();
 
-  console.log(`Creating a new Next.js app in ${green(root)}.`);
+  console.log(`Creating a new OPub app in ${green(root)}.`);
   console.log();
 
   process.chdir(root);
@@ -124,11 +124,7 @@ export async function createApp({
   try {
     if (repoInfo) {
       const repoInfo2 = repoInfo;
-      console.log(
-        `Downloading files from repo ${cyan(
-          example
-        )}. This might take a moment.`
-      );
+      console.log(`Downloading files from repo ${cyan(example)}`);
       console.log();
       await retry(() => downloadAndExtractRepo(root, repoInfo2), {
         retries: 3,
@@ -140,7 +136,9 @@ export async function createApp({
 
   hasPackageJson = fs.existsSync(packageJsonPath);
   if (hasPackageJson) {
-    console.log('Installing packages. This might take a couple of minutes.');
+    console.log(
+      'Installing packages. Grab a cup of chai, this might take a while.'
+    );
     console.log();
 
     await install(root, null, { packageManager: 'yarn', isOnline: true });
