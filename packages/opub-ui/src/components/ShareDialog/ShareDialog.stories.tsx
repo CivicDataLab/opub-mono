@@ -76,5 +76,6 @@ export const Default: Story = {
     image,
     alt,
     title: "Share Visualization",
+    children: "Share",
   },
 };

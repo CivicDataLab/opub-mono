@@ -11,13 +11,33 @@ type Props = {
   image: string;
   alt: string;
   title: string;
+  children: React.ReactNode;
   onDownload?: () => void;
   onOpen?: () => void;
+  kind?: "primary" | "secondary" | "tertiary";
+
+  variant?: "basic" | "interactive" | "critical" | "success";
+
+  /**
+   * Changes the size of the button, giving it more or less padding
+   * @default 'medium'
+   */
+  size?: "slim" | "medium" | "large";
 };
 
 const ShareDialog = React.forwardRef(
   (
-    { image, alt, onDownload, title, onOpen }: Props,
+    {
+      image,
+      alt,
+      onDownload,
+      title,
+      onOpen,
+      children,
+      kind = "primary",
+      variant = "basic",
+      size = "slim",
+    }: Props,
     ref?: React.Ref<HTMLDivElement>
   ) => {
     const [isOpen, setIsOpen] = React.useState(false);
@@ -34,11 +54,19 @@ const ShareDialog = React.forwardRef(
         <Dialog open={isOpen} onOpenChange={handleOpen}>
           <Dialog.Trigger>
             <Button
-              icon={<Icon source={IconShare} size={14} color="highlight" />}
-              kind="secondary"
+              icon={
+                <Icon
+                  source={IconShare}
+                  size={14}
+                  color={kind === "primary" ? "onBgDefault" : "highlight"}
+                />
+              }
+              kind={kind}
+              variant={variant}
+              size={size}
               onClick={() => setIsOpen(true)}
             >
-              Share
+              {children}
             </Button>
           </Dialog.Trigger>
           <Dialog.Content headerHidden title="Share">
