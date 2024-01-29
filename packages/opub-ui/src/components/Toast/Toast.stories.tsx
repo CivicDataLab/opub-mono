@@ -1,12 +1,21 @@
 import { Button } from "../Button";
 import { toast } from "./Toast";
+import { Meta, StoryObj } from "@storybook/react";
 
 /**
  * A succinct message that is displayed temporarily.
  *
  * Reference: https://ui.shadcn.com/docs/components/sonner
  */
-export const Default = {
+const meta = {
+  title: "Components/Toast",
+  component: toast,
+} satisfies Meta<typeof toast>;
+
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const Default: Story = {
   render: () => {
     return (
       <>
@@ -26,5 +35,6 @@ export const Default = {
       </>
     );
   },
+  // @ts-ignore
   args: {},
 };

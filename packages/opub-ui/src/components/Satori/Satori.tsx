@@ -37,6 +37,18 @@ async function init() {
   ];
 }
 
+export const getSVG = async (Component: any, props: any) => {
+  const { width, height } = props;
+
+  const fonts: any = await init();
+  const svg = await satori(<Component {...props} />, {
+    width,
+    height,
+    fonts,
+  });
+  return svg;
+};
+
 export default function App({
   Component,
   props = {
@@ -47,15 +59,10 @@ export default function App({
   Component: any;
   props: any;
 }) {
-  const { width, height } = props;
-
   const handleClick = async () => {
-    const fonts: any = await init();
-    const svg = await satori(<Component {...props} />, {
-      width,
-      height,
-      fonts,
-    });
+    const svg = await getSVG(Component, props);
+    console.log(svg);
+
     downloadSvgAsPng(svg);
   };
 

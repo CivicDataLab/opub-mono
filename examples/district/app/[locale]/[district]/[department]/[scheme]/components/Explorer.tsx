@@ -1,9 +1,11 @@
+import { downloadImage } from "../scheme.config";
 import { BarView } from "./BarView";
 import { Indicators } from "./Indicators";
 import { IChartData } from "./scheme-layout";
 import { ckan } from "@/config/site";
 import { useWindowSize } from "@/hooks/use-window-size";
 import { useFetch } from "@/lib/api";
+import { navigateEnd } from "@/lib/navigation";
 import { cn, copyURLToClipboard } from "@/lib/utils";
 import { useQueryState } from "next-usequerystate";
 import dynamic from "next/dynamic";
@@ -19,6 +21,8 @@ import {
   Tabs,
   Text,
   Tray,
+  getSVG,
+  svgToPngURL,
   toast,
 } from "opub-ui";
 import React from "react";
@@ -416,54 +420,68 @@ const Content = ({
 };
 
 function Share() {
-  const image = "https://opub-www.vercel.app/og.png";
+  const image =
+    "http://localhost:3000/en/morigaon/panchayat-and-rural-development/mgnrega?tab=explorer&indicator=nhaoe";
   const alt = "visualisation";
 
   const [dataUri, setDataUri] = React.useState<string | undefined>();
 
+  async function copyImage(url: string) {
+    if (navigator.clipboard.write) {
+      const response = await fetch(url);
+      const blob = await response.blob();
+
+      const item = new ClipboardItem({ [blob.type]: blob });
+      await navigator.clipboard.write([item]).then(
+        function () {
+          toast("Chart has been copied to clipboard", {
+            action: {
+              label: "cancel",
+              onClick: () => {},
+            },
+          });
+        },
+        function (error) {
+          console.error("unable to write to clipboard. Error:");
+          console.log(error);
+        }
+      );
+    }
+  }
+
   async function onOpen(image: string) {
     await fetch(`/api?url=${image}`)
-      .then((res) => {
-        return res.blob();
-      })
+      .then((res) => res.blob())
       .then(async (res: Blob) => {
         const base64 = await res.text();
-        setDataUri(base64);
-        // console.log(res)
 
-        // copy image to clipboard
-        await navigator.clipboard
-          .write([
-            new ClipboardItem({
-              [res.type]: res,
-            }),
-          ])
-          .then(() => {
-            toast("Chart has been copied to clipboard", {
-              action: {
-                label: "cancel",
-                onClick: () => {},
-              },
-            });
+        function SatoriComp() {
+          return (
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+              }}
+            >
+              <Text variant="headingLg">Hello</Text>
+              <img src={base64} />
+            </div>
+          );
+        }
+
+        await getSVG(SatoriComp, {
+          width: 1024,
+          height: 768,
+        })
+          .then((res) => svgToPngURL(res))
+          .then((res) => {
+            setDataUri(res);
+            copyImage(res);
           })
-          .catch((error) => {
-            console.log(error);
-          });
+          .catch((err) => console.log(err));
       })
       .catch((err) => console.log(err));
   }
-
-  const download = (dataUri: string | undefined, name: string) => {
-    if (!dataUri) {
-      throw new Error("href is undefined");
-    }
-    const a = document.createElement("a");
-    a.href = dataUri;
-    a.download = name;
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-  };
 
   return (
     <ShareDialog
@@ -471,7 +489,7 @@ function Share() {
       alt={alt}
       title="Share Chart"
       onOpen={() => onOpen(image)}
-      onDownload={() => download(dataUri, "test")}
+      onDownload={() => downloadImage(dataUri, "test")}
       size="medium"
       variant="interactive"
     >
