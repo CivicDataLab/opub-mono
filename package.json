@@ -26,12 +26,13 @@
 		"@changesets/cli": "^2.26.1",
 		"@typescript-eslint/eslint-plugin": "^5.57.1",
 		"@typescript-eslint/parser": "^5.57.1",
-		"eslint-config-custom": "*",
 		"classnames": "^2.3.2",
+		"eslint-config-custom": "*",
 		"husky": "^8.0.0",
 		"lint-staged": "^13.2.0",
 		"new-component-opub": "git+https://github.com/CivicDataLab/new-component.git",
-		"prettier": "^2.8.4",
+		"prettier": "^3.2.4",
+		"prettier-plugin-tailwindcss": "^0.5.11",
 		"sass": "^1.58.3",
 		"tsup": "^6.7.0",
 		"turbo": "^1.9.1",
@@ -39,6 +40,5 @@
 	},
 	"engines": {
 		"node": ">=14.0.0"
-	},
-	"dependencies": {}
+	}
 }
