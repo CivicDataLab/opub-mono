@@ -1,11 +1,12 @@
-import { Button } from "../Button";
-import { Dialog } from "../Dialog";
-import { Divider } from "../Divider";
-import { Icon } from "../Icon";
-import { IconButton } from "../IconButton";
-import { Text } from "../Text";
-import { IconShare, IconX } from "@tabler/icons-react";
-import React from "react";
+import React from 'react';
+import { IconShare, IconX } from '@tabler/icons-react';
+
+import { Button } from '../Button';
+import { Dialog } from '../Dialog';
+import { Divider } from '../Divider';
+import { Icon } from '../Icon';
+import { IconButton } from '../IconButton';
+import { Text } from '../Text';
 
 type Props = {
   image?: string;
@@ -14,15 +15,15 @@ type Props = {
   children: React.ReactNode;
   onDownload?: () => void;
   onOpen?: () => void;
-  kind?: "primary" | "secondary" | "tertiary";
+  kind?: 'primary' | 'secondary' | 'tertiary';
 
-  variant?: "basic" | "interactive" | "critical" | "success";
+  variant?: 'basic' | 'interactive' | 'critical' | 'success';
 
   /**
    * Changes the size of the button, giving it more or less padding
    * @default 'medium'
    */
-  size?: "slim" | "medium" | "large";
+  size?: 'slim' | 'medium' | 'large';
 
   /**
    * Custom class name for the wrapper
@@ -39,9 +40,9 @@ const ShareDialog = React.forwardRef(
       title,
       onOpen,
       children,
-      kind = "primary",
-      variant = "basic",
-      size = "slim",
+      kind = 'primary',
+      variant = 'basic',
+      size = 'slim',
       className,
     }: Props,
     ref?: React.Ref<HTMLDivElement>
@@ -64,7 +65,7 @@ const ShareDialog = React.forwardRef(
                 <Icon
                   source={IconShare}
                   size={14}
-                  color={kind === "primary" ? "onBgDefault" : "highlight"}
+                  color={kind === 'primary' ? 'onBgDefault' : 'highlight'}
                 />
               }
               kind={kind}
@@ -76,7 +77,7 @@ const ShareDialog = React.forwardRef(
             </Button>
           </Dialog.Trigger>
           <Dialog.Content headerHidden title="Share">
-            <div className="flex items-center gap-2 justify-between">
+            <div className="flex items-center justify-between gap-2">
               <Text variant="headingMd">{title}</Text>
               <IconButton
                 onClick={() => setIsOpen(false)}
@@ -93,14 +94,14 @@ const ShareDialog = React.forwardRef(
                 alt={alt}
                 width={768}
                 height={384}
-                className="object-contain w-full h-96"
+                className="h-96 w-full object-contain"
               />
             ) : (
-              <div className="w-full h-20 flex items-center justify-center">
+              <div className="flex h-[384px] w-full items-center justify-center">
                 Loading Image...
               </div>
             )}
-            <div className="flex items-center gap-2 justify-end flex-wrap mt-4">
+            <div className="mt-4 flex flex-wrap items-center justify-end gap-2">
               <Button size="slim" kind="secondary" disabled>
                 Share via
               </Button>
