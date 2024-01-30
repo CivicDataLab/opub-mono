@@ -1,4 +1,3 @@
-import { downloadImage } from "../scheme.config";
 import { BarView } from "./BarView";
 import { Indicators } from "./Indicators";
 import { IChartData } from "./scheme-layout";
@@ -20,8 +19,7 @@ import {
   Tabs,
   Text,
   Tray,
-  getSVG,
-  svgToPngURL,
+  useScreenshot,
   toast,
 } from "opub-ui";
 import React from "react";
@@ -418,35 +416,15 @@ const Content = ({
   );
 };
 
+const image =
+  "http://localhost:3000/en/morigaon/panchayat-and-rural-development/mgnrega?tab=explorer&indicator=nhaoe";
+const alt = "visualisation";
+
 function Share() {
-  const image =
-    "http://localhost:3000/en/morigaon/panchayat-and-rural-development/mgnrega?tab=explorer&indicator=nhaoe";
-  const alt = "visualisation";
+  const { createSvg, svgToPngURL, copyToClipboard, downloadFile } =
+    useScreenshot();
 
-  const [dataUri, setDataUri] = React.useState<string | undefined>();
-
-  async function copyImage(url: string) {
-    if (navigator.clipboard.write) {
-      const response = await fetch(url);
-      const blob = await response.blob();
-
-      const item = new ClipboardItem({ [blob.type]: blob });
-      await navigator.clipboard.write([item]).then(
-        function () {
-          toast("Chart has been copied to clipboard", {
-            action: {
-              label: "cancel",
-              onClick: () => {},
-            },
-          });
-        },
-        function (error) {
-          console.error("unable to write to clipboard. Error:");
-          console.log(error);
-        }
-      );
-    }
-  }
+  const [dataUri, setDataUri] = React.useState<string>("");
 
   async function onOpen(image: string) {
     await fetch(`/api?url=${image}`)
@@ -463,19 +441,19 @@ function Share() {
               }}
             >
               <Text variant="headingLg">Hello</Text>
-              <img src={base64} alt="" />
+              <img src={base64} alt={alt} />
             </div>
           );
         }
 
-        await getSVG(SatoriComp, {
+        await createSvg(<SatoriComp />, {
           width: 1024,
           height: 768,
         })
           .then((res: any) => svgToPngURL(res))
           .then((res: any) => {
             setDataUri(res);
-            copyImage(res);
+            copyToClipboard(res, "Chart has been copied to clipboard");
           })
           .catch((err: any) => console.log(err));
       })
@@ -488,7 +466,7 @@ function Share() {
       alt={alt}
       title="Share Chart"
       onOpen={() => onOpen(image)}
-      onDownload={() => downloadImage(dataUri, "test")}
+      onDownload={() => downloadFile(dataUri, "test")}
       size="medium"
       variant="interactive"
     >

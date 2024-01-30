@@ -1,2 +1,1 @@
-export * from "./Satori";
-export * from "./utils";
+export { useScreenshot } from "./hooks";
