@@ -23,6 +23,11 @@ type Props = {
    * @default 'medium'
    */
   size?: "slim" | "medium" | "large";
+
+  /**
+   * Custom class name for the wrapper
+   */
+  className?: string;
 };
 
 const ShareDialog = React.forwardRef(
@@ -37,6 +42,7 @@ const ShareDialog = React.forwardRef(
       kind = "primary",
       variant = "basic",
       size = "slim",
+      className,
     }: Props,
     ref?: React.Ref<HTMLDivElement>
   ) => {
@@ -50,7 +56,7 @@ const ShareDialog = React.forwardRef(
     }
 
     return (
-      <div ref={ref}>
+      <div ref={ref} className={className}>
         <Dialog open={isOpen} onOpenChange={handleOpen}>
           <Dialog.Trigger>
             <Button

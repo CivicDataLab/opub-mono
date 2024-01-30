@@ -472,12 +472,12 @@ function Share() {
           width: 1024,
           height: 768,
         })
-          .then((res) => svgToPngURL(res))
-          .then((res) => {
+          .then((res: any) => svgToPngURL(res))
+          .then((res: any) => {
             setDataUri(res);
             copyImage(res);
           })
-          .catch((err) => console.log(err));
+          .catch((err: any) => console.log(err));
       })
       .catch((err) => console.log(err));
   }
