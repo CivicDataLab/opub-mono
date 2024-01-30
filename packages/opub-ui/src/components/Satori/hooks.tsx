@@ -1,7 +1,8 @@
-import { toast } from "../Toast";
-import { initFonts } from "./utils";
-import React from "react";
-import satori from "satori";
+import React from 'react';
+import satori from 'satori';
+
+import { toast } from '../Toast';
+import { initFonts } from './utils';
 
 export const useScreenshot = () => {
   const createSvg = async (
@@ -9,8 +10,6 @@ export const useScreenshot = () => {
     props: { width: number; height: number }
   ) => {
     const fonts: any = await initFonts();
-    console.log(fonts);
-
     const svg = await satori(Component, {
       width: props.width,
       height: props.height,
@@ -21,18 +20,18 @@ export const useScreenshot = () => {
 
   const downloadFile = async (
     url: string,
-    name: string = "File",
+    name: string = 'File',
     runOnFinish?: () => null
   ) => {
     try {
-      const a = document.createElement("a");
+      const a = document.createElement('a');
       a.href = url;
       a.download = name;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
     } catch (error) {
-      console.error("unable to download. Error:");
+      console.error('unable to download. Error:');
       console.log(error);
     } finally {
       runOnFinish && runOnFinish();
@@ -42,19 +41,19 @@ export const useScreenshot = () => {
 
   const downloadSvgAsPng = async (
     svg: string,
-    name: string = "Image.png",
+    name: string = 'Image.png',
     runOnFinish?: () => null
   ) => {
     const pngURL = await svgToPngURL(svg);
     try {
-      const a = document.createElement("a");
+      const a = document.createElement('a');
       a.href = pngURL;
       a.download = name;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
     } catch (error) {
-      console.error("unable to download. Error:");
+      console.error('unable to download. Error:');
       console.log(error);
     } finally {
       URL.revokeObjectURL(pngURL);
@@ -65,28 +64,29 @@ export const useScreenshot = () => {
   const svgToPngURL = (svg: string) =>
     new Promise<string>((resolve, reject) => {
       const img = new Image();
+
       img.onload = () => {
-        const canvas = document.createElement("canvas");
+        const canvas = document.createElement('canvas');
         canvas.width = img.naturalWidth;
         canvas.height = img.naturalHeight;
-        const ctx = canvas.getContext("2d");
+        const ctx = canvas.getContext('2d');
         ctx!.drawImage(img, 0, 0);
-        resolve(canvas.toDataURL("image/png"));
+        resolve(canvas.toDataURL('image/png'));
         URL.revokeObjectURL(img.src);
       };
       img.onerror = (e) => {
         reject(e);
         URL.revokeObjectURL(img.src);
       };
-      img.src = URL.createObjectURL(new Blob([svg], { type: "image/svg+xml" }));
+      img.src = URL.createObjectURL(new Blob([svg], { type: 'image/svg+xml' }));
     });
 
   async function copyToClipboard(url: string, toastMessage?: string) {
-    if (!("ClipboardItem" in window)) {
+    if (!('ClipboardItem' in window)) {
       console.error(
         "Your browser doesn't support copying images into the clipboard." +
-          " If you use Firefox you can enable it" +
-          " by setting dom.events.asyncClipboard.clipboardItem to true."
+          ' If you use Firefox you can enable it' +
+          ' by setting dom.events.asyncClipboard.clipboardItem to true.'
       );
       return;
     }
@@ -102,12 +102,12 @@ export const useScreenshot = () => {
       toastMessage &&
         toast(toastMessage, {
           action: {
-            label: "cancel",
+            label: 'cancel',
             onClick: () => {},
           },
         });
     } catch (error) {
-      console.error("unable to write to clipboard. Error:");
+      console.error('unable to write to clipboard. Error:');
       console.log(error);
     }
   }

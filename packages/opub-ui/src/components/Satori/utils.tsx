@@ -1,17 +1,17 @@
-import { createIntlSegmenterPolyfill } from "intl-segmenter-polyfill";
+import { createIntlSegmenterPolyfill } from 'intl-segmenter-polyfill';
 
 export async function initFonts() {
-  if (typeof window === "undefined") return [];
+  if (typeof window === 'undefined') return [];
 
   const [font, Segmenter] =
     window.__resource ||
     (window.__resource = await Promise.all([
-      fetch("/Inter-Bold.ttf").then((res) => res.arrayBuffer()),
+      fetch('/Inter-Bold.ttf').then((res) => res.arrayBuffer()),
       !globalThis.Intl || !globalThis.Intl.Segmenter
         ? createIntlSegmenterPolyfill(
             fetch(
               new URL(
-                "intl-segmenter-polyfill/dist/break_iterator.wasm",
+                'intl-segmenter-polyfill/dist/break_iterator.wasm',
                 import.meta.url
               )
             )
@@ -27,9 +27,9 @@ export async function initFonts() {
 
   return [
     {
-      name: "Inter",
+      name: 'Inter',
       data: font,
-      style: "normal",
+      style: 'normal',
       weight: 700,
     },
   ];

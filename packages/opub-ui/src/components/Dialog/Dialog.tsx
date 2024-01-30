@@ -1,8 +1,9 @@
-import styles from './Dialog.module.scss';
-import { Footer, FooterProps, Header } from './components';
+import React, { Ref, forwardRef } from 'react';
 import * as DialogRadix from '@radix-ui/react-dialog';
 import cx from 'classnames';
-import React, { forwardRef, Ref } from 'react';
+
+import styles from './Dialog.module.scss';
+import { Footer, FooterProps, Header } from './components';
 
 interface DialogProps extends DialogRadix.DialogProps {
   Trigger?: DialogRadix.DialogTriggerProps;
