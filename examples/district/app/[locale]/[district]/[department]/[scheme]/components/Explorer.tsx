@@ -5,7 +5,6 @@ import { IChartData } from "./scheme-layout";
 import { ckan } from "@/config/site";
 import { useWindowSize } from "@/hooks/use-window-size";
 import { useFetch } from "@/lib/api";
-import { navigateEnd } from "@/lib/navigation";
 import { cn, copyURLToClipboard } from "@/lib/utils";
 import { useQueryState } from "next-usequerystate";
 import dynamic from "next/dynamic";
@@ -464,7 +463,7 @@ function Share() {
               }}
             >
               <Text variant="headingLg">Hello</Text>
-              <img src={base64} />
+              <img src={base64} alt="" />
             </div>
           );
         }
