@@ -18,6 +18,7 @@ export default function Card({ width = 660, height = 300 }: CardProps) {
         letterSpacing: -width / 220,
         fontWeight: 700,
         whiteSpace: "nowrap",
+        fontFamily: "Inter",
       }}
     >
       <div
