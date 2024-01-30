@@ -68,7 +68,7 @@ $large-width: 980px;
   position: fixed;
   inset: 0;
   will-change: transform, opacity;
-  z-index: var(--z-1);
+  z-index: var(--z-max);
 
   &[data-state='open'] {
     animation: overlayShow var(--duration-100) var(--ease);
@@ -85,7 +85,7 @@ $large-width: 980px;
   --show-to: translate(-50%, 10vh);
   --hide-from: translate(-50%, 10vh);
   --hide-to: translate(-50%, 5vh);
-  z-index: var(--z-1);
+  z-index: var(--z-max);
   background-color: var(--content-bg);
 
   box-shadow: var(--shadow-basic-2xl);

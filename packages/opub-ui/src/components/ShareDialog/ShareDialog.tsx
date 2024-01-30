@@ -1,6 +1,7 @@
 import React from 'react';
 import { IconShare, IconX } from '@tabler/icons-react';
 
+import { cn } from '../../utils';
 import { Button } from '../Button';
 import { Dialog } from '../Dialog';
 import { Divider } from '../Divider';
@@ -57,7 +58,7 @@ const ShareDialog = React.forwardRef(
     }
 
     return (
-      <div ref={ref} className={className}>
+      <div ref={ref} className={cn(className)}>
         <Dialog open={isOpen} onOpenChange={handleOpen}>
           <Dialog.Trigger>
             <Button
@@ -76,7 +77,7 @@ const ShareDialog = React.forwardRef(
               {children}
             </Button>
           </Dialog.Trigger>
-          <Dialog.Content headerHidden title="Share">
+          <Dialog.Content headerHidden title="Share" className="z-max">
             <div className="flex items-center justify-between gap-2">
               <Text variant="headingMd">{title}</Text>
               <IconButton
