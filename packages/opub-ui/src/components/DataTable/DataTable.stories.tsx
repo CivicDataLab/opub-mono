@@ -1,9 +1,9 @@
-import { Icon } from '../Icon';
-import { makeTableData, Person } from '../Table/utils';
-import { DataTable } from './DataTable';
 import { Meta, StoryObj } from '@storybook/react';
 import { IconCopy, IconPencil, IconTrash } from '@tabler/icons-react';
 import { createColumnHelper } from '@tanstack/react-table';
+
+import { makeTableData, Person } from '../Table/utils';
+import { DataTable } from './DataTable';
 
 /**
  * Data tables are used to organize and display all information from a dataset.
@@ -57,14 +57,14 @@ const columns = [
 const rowActions = [
   {
     content: 'Copy',
-    icon: <Icon source={IconCopy} />,
+    icon: IconCopy,
     onAction: (e: any) => {
       console.log(e, ' copied');
     },
   },
   {
     content: 'Edit',
-    icon: <Icon source={IconPencil} />,
+    icon: IconPencil,
     onAction: (e: any) => {
       console.log(e, ' edited');
     },
@@ -72,7 +72,7 @@ const rowActions = [
   {
     content: 'Delete',
     destructive: true,
-    icon: <Icon source={IconTrash} color="critical" />,
+    icon: IconTrash,
     onAction: (e: any) => {
       console.log(e, ' deleted');
     },

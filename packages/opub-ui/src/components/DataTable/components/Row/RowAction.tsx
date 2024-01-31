@@ -1,7 +1,8 @@
+import { IconDotsVertical } from '@tabler/icons-react';
+
 import { ActionListProps } from '../../../ActionList';
 import { IconButton } from '../../../IconButton';
 import { Menu } from '../../../Menu';
-import { IconDotsVertical } from '@tabler/icons-react';
 
 export function RowAction({
   rowActions,
@@ -10,6 +11,8 @@ export function RowAction({
   rowActions: ActionListProps['items'];
   callbackContent: any;
 }) {
+  console.log(rowActions, 'rowActions');
+
   return (
     <>
       <Menu

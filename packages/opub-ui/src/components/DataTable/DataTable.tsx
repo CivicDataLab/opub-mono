@@ -1,18 +1,9 @@
 'use client';
 
-import type { DataTableProps } from '../../types/datatable';
-import { Box } from '../Box';
-import { Checkbox } from '../Checkbox/Checkbox';
-import { Footer } from '../Table';
-import { Text } from '../Text';
-import styles from './DataTable.module.scss';
-import { Cell, HeaderCell, Row, Toolbar } from './components';
-import { RowAction } from './components/Row';
+import React from 'react';
 import {
   ColumnFiltersState,
   FilterFn,
-  SortingState,
-  VisibilityState,
   flexRender,
   getCoreRowModel,
   getFacetedRowModel,
@@ -20,10 +11,20 @@ import {
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
+  SortingState,
   useReactTable,
+  VisibilityState,
 } from '@tanstack/react-table';
 import cx from 'classnames';
-import React from 'react';
+
+import type { DataTableProps } from '../../types/datatable';
+import { Box } from '../Box';
+import { Checkbox } from '../Checkbox/Checkbox';
+import { Footer } from '../Table';
+import { Text } from '../Text';
+import { Cell, HeaderCell, Row, Toolbar } from './components';
+import { RowAction } from './components/Row';
+import styles from './DataTable.module.scss';
 
 declare module '@tanstack/table-core' {
   interface FilterFns {
@@ -154,8 +155,8 @@ const DataTable = (props: DataTableProps) => {
                         table.getIsAllPageRowsSelected()
                           ? true
                           : table.getIsSomePageRowsSelected()
-                          ? 'indeterminate'
-                          : false
+                            ? 'indeterminate'
+                            : false
                       }
                       onChange={() => table.toggleAllPageRowsSelected()}
                     />
