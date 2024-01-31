@@ -1,6 +1,5 @@
 import React from 'react';
 import { Meta, StoryObj } from '@storybook/react';
-import domtoimage from 'dom-to-image';
 
 import { ShareDialog } from '../ShareDialog';
 import Card from './Card';
