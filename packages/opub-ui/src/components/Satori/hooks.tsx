@@ -65,19 +65,34 @@ export const useScreenshot = () => {
     }
   };
 
+  const svgToPngURL = (svg: string) =>
+    new Promise<string>((resolve, reject) => {
+      const img = new Image();
+
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        canvas.width = img.naturalWidth;
+        canvas.height = img.naturalHeight;
+        const ctx = canvas.getContext('2d');
+        ctx!.drawImage(img, 0, 0);
+        resolve(canvas.toDataURL('image/png'));
+        URL.revokeObjectURL(img.src);
+      };
+      img.onerror = (e) => {
+        reject(e);
+        URL.revokeObjectURL(img.src);
+      };
+      img.src = URL.createObjectURL(new Blob([svg], { type: 'image/svg+xml' }));
+    });
+
   const domToUrl = async (
     element: HTMLElement | string | SVGElement,
     props: { quality?: number; width?: number; height?: number } = {
       quality: 2,
     }
   ) => {
-    let elm: HTMLElement = element as HTMLElement;
-    if (typeof element === 'string') {
-      var parser = new DOMParser();
-      var doc = parser.parseFromString(element, 'image/svg+xml');
-      elm = doc.documentElement;
-      console.log(elm);
-    }
+    let elm =
+      typeof element === 'string' ? svgStringtoElement(element) : element;
     const { quality, ...rest } = props;
     const dataImgURL = await domtoimage.toPng(elm, {
       quality,
@@ -85,6 +100,12 @@ export const useScreenshot = () => {
     });
     return dataImgURL;
   };
+
+  function svgStringtoElement(svgString: string) {
+    var parser = new DOMParser();
+    var doc = parser.parseFromString(svgString, 'image/svg+xml');
+    return doc.documentElement;
+  }
 
   async function copyToClipboard(url: string, toastMessage?: string) {
     if (!('ClipboardItem' in window)) {
@@ -123,5 +144,7 @@ export const useScreenshot = () => {
     downloadSvgAsPng,
     downloadFile,
     copyToClipboard,
+    svgStringtoElement,
+    svgToPngURL,
   };
 };
