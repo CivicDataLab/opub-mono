@@ -1,5 +1,6 @@
 import React from 'react';
 import { Meta, StoryObj } from '@storybook/react';
+import domtoimage from 'dom-to-image';
 
 import { ShareDialog } from '../ShareDialog';
 import Card from './Card';
@@ -70,18 +71,12 @@ export const Chart: Story = {
 
     const handleOpen = async () => {
       const SVG = ref.current?.querySelector('svg') as SVGElement;
-
       const ChartDataURL = await svgToPngURL(SVG.outerHTML);
 
-      const svg = await createSvg(
-        <>
-          <img src={ChartDataURL} alt="" />
-        </>,
-        {
-          width,
-          height,
-        }
-      );
+      const svg = await createSvg(<img src={ChartDataURL} alt="" />, {
+        width: SVG.clientWidth,
+        height: SVG.clientHeight,
+      });
       const dataURL = await svgToPngURL(svg);
       setDataURL(dataURL);
       copyToClipboard(dataURL, 'Image is copied to clipboard');
@@ -96,7 +91,7 @@ export const Chart: Story = {
           image={dataURL}
           size="medium"
           onOpen={handleOpen}
-          onDownload={() => downloadFile(dataURL, 'test')}
+          onDownload={() => downloadFile(dataURL, 'Line Chart')}
           className="mt-4"
         >
           Share
@@ -109,9 +104,12 @@ export const Chart: Story = {
 export const Map: Story = {
   render: () => {
     const ref = React.useRef<HTMLDivElement>(null);
+    const [map, setMap] = React.useState<any>(null);
+
     React.useEffect(() => {
       if (ref.current === null) return;
-      initMap(ref.current);
+      const { map } = initMap(ref.current);
+      setMap(map);
     }, []);
 
     const [dataURL, setDataURL] = React.useState<string>('');
@@ -119,20 +117,17 @@ export const Map: Story = {
       useScreenshot();
 
     const handleOpen = async () => {
-      const SVG = ref.current?.querySelector('svg') as SVGElement;
-      console.log(SVG.outerHTML);
+      const dataImgURL = await domtoimage.toPng(ref.current as HTMLElement, {
+        quality: 2,
+        width: map.getSize().x,
+        height: map.getSize().y,
+      });
 
-      const ChartDataURL = await svgToPngURL(SVG.outerHTML);
+      const svg = await createSvg(<img src={dataImgURL} alt="" />, {
+        width: map.getSize().x,
+        height: map.getSize().y,
+      });
 
-      const svg = await createSvg(
-        <>
-          <img src={ChartDataURL} alt="" />
-        </>,
-        {
-          width,
-          height,
-        }
-      );
       const dataURL = await svgToPngURL(svg);
       setDataURL(dataURL);
       copyToClipboard(dataURL, 'Image is copied to clipboard');
@@ -147,7 +142,7 @@ export const Map: Story = {
           image={dataURL}
           size="medium"
           onOpen={handleOpen}
-          onDownload={() => downloadFile(dataURL, 'test')}
+          onDownload={() => downloadFile(dataURL, 'Map Chart')}
           className="mt-4"
         >
           Share
