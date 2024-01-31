@@ -1,12 +1,7 @@
-import { BarView } from "./BarView";
-import { Indicators } from "./Indicators";
-import { IChartData } from "./scheme-layout";
-import { ckan } from "@/config/site";
-import { useWindowSize } from "@/hooks/use-window-size";
-import { useFetch } from "@/lib/api";
-import { cn, copyURLToClipboard } from "@/lib/utils";
-import { useQueryState } from "next-usequerystate";
-import dynamic from "next/dynamic";
+import React from 'react';
+import dynamic from 'next/dynamic';
+import { useWindowSize } from '@/hooks/use-window-size';
+import { useQueryState } from 'next-usequerystate';
 import {
   Button,
   Combobox,
@@ -18,15 +13,21 @@ import {
   TabPanel,
   Tabs,
   Text,
+  toast,
   Tray,
   useScreenshot,
-  toast,
-} from "opub-ui";
-import React from "react";
-import { ErrorBoundary } from "react-error-boundary";
+} from 'opub-ui';
+import { ErrorBoundary } from 'react-error-boundary';
+
+import { ckan } from '@/config/site';
+import { useFetch } from '@/lib/api';
+import { cn, copyURLToClipboard } from '@/lib/utils';
+import { BarView } from './BarView';
+import { Indicators } from './Indicators';
+import { IChartData } from './scheme-layout';
 
 const MapChart = dynamic(
-  () => import("opub-ui/viz").then((mod) => mod.MapChart),
+  () => import('opub-ui/viz').then((mod) => mod.MapChart),
   {
     ssr: false,
   }
@@ -47,13 +48,13 @@ export const Explorer = React.forwardRef(
   ) => {
     const years = Object.values(chartData)[0].years;
     const [selectedYear, setYear] = React.useState(Object.keys(years)[0]);
-    const [selectedTab, setTab] = React.useState<"map" | "bar">("bar");
-    const [indicator, setIndicator] = useQueryState("indicator");
-    const [indicatorName, setIndicatorName] = React.useState("indicator");
+    const [selectedTab, setTab] = React.useState<'map' | 'bar'>('bar');
+    const [indicator, setIndicator] = useQueryState('indicator');
+    const [indicatorName, setIndicatorName] = React.useState('indicator');
     const [trayOpen, setTrayOpen] = React.useState(false);
 
     const { data: indicatorData, isLoading } = useFetch(
-      "indicators",
+      'indicators',
       ckan.indicators
     );
     const indicatorRef = React.useRef(null);
@@ -62,7 +63,7 @@ export const Explorer = React.forwardRef(
       if (indicatorData || indicator) {
         const initialSlug =
           indicator ||
-          indicatorData[scheme as string]["District Performance"][0].slug;
+          indicatorData[scheme as string]['District Performance'][0].slug;
         setIndicator(initialSlug);
       }
     }, [indicatorData, indicator, setIndicator, scheme]);
@@ -88,7 +89,7 @@ export const Explorer = React.forwardRef(
     return (
       <div
         className={cn(
-          "flex flex-col md:grid grid-cols-[242px_1fr] gap-4 rounded-05 md:bg-surfaceDefault md:shadow-elementCard md:p-6"
+          'flex grid-cols-[242px_1fr] flex-col gap-4 rounded-05 md:grid md:bg-surfaceDefault md:p-6 md:shadow-elementCard'
         )}
       >
         <div className="hidden md:block">
@@ -99,7 +100,7 @@ export const Explorer = React.forwardRef(
           ) : indicatorData ? (
             <Indicators
               data={indicatorData[scheme as string] || null}
-              indicator={indicator || "nhaoe"}
+              indicator={indicator || 'nhaoe'}
               indicatorRef={indicatorRef}
               setIndicator={setIndicator}
             />
@@ -124,7 +125,7 @@ export const Explorer = React.forwardRef(
             ) : indicatorData ? (
               <Indicators
                 data={indicatorData[scheme as string] || null}
-                indicator={indicator || "nhaoe"}
+                indicator={indicator || 'nhaoe'}
                 indicatorRef={indicatorRef}
                 setIndicator={(e: string) => {
                   setIndicator(e);
@@ -139,7 +140,7 @@ export const Explorer = React.forwardRef(
           </Tray>
         </div>
 
-        <div className="flex items-center justify-center h-full" ref={ref}>
+        <div className="flex h-full items-center justify-center" ref={ref}>
           <ErrorBoundary
             fallback={
               <Text variant="headingLg" as="h2">
@@ -156,7 +157,7 @@ export const Explorer = React.forwardRef(
                 setYear,
                 selectedTab,
                 selectedYear,
-                selectedIndicator: indicator || "nhaoe",
+                selectedIndicator: indicator || 'nhaoe',
               }}
             />
           </ErrorBoundary>
@@ -176,9 +177,9 @@ const Content = ({
   chartData: IChartData;
   district: string;
   states: {
-    setTab: (tab: "map" | "bar") => void;
+    setTab: (tab: 'map' | 'bar') => void;
     setYear: (year: string) => void;
-    selectedTab: "map" | "bar";
+    selectedTab: 'map' | 'bar';
     selectedYear: string;
     selectedIndicator: string;
   };
@@ -228,7 +229,7 @@ const Content = ({
       Barhampur: 9450.0,
       Pakhimoria: 8232.0,
       Bajiagaon: 20247.0,
-      "Pachim Kaliabor": 14392.0,
+      'Pachim Kaliabor': 14392.0,
       Juria: 40642.0,
     };
   }, []);
@@ -264,18 +265,18 @@ const Content = ({
 
   const mapDataFn = (
     value: boolean,
-    type: "default" | "hover" | "selected" = "default"
+    type: 'default' | 'hover' | 'selected' = 'default'
   ) => {
     return value
       ? `var(--mapareadistrict-${type})`
-      : "var(--mapareadistrict-disabled)";
+      : 'var(--mapareadistrict-disabled)';
   };
 
   let barView = null;
   if (barData) barView = <BarView data={barData} />;
   if (selectedBlocks.length < 2)
     barView = (
-      <div className="flex items-center justify-center mt-5">
+      <div className="mt-5 flex items-center justify-center">
         <Text variant="headingLg" as="span">
           Please select atleast 2 blocks to compare
         </Text>
@@ -284,13 +285,13 @@ const Content = ({
 
   const tabs = [
     {
-      label: "Bar View",
-      value: "bar",
+      label: 'Bar View',
+      value: 'bar',
       content: barView,
     },
     {
-      label: "Map View",
-      value: "map",
+      label: 'Map View',
+      value: 'map',
       content:
         // <MapChart
         //   mapFile={mapFile}
@@ -323,10 +324,10 @@ const Content = ({
             mapProperty="enabled"
             mapDataFn={mapDataFn}
             fillOpacity={1}
-            className="w-full h-[512px]"
+            className="h-[512px] w-full"
           />
         ) : (
-          <div className="flex justify-center items-center">Loading...</div>
+          <div className="flex items-center justify-center">Loading...</div>
         ),
     },
   ];
@@ -334,21 +335,21 @@ const Content = ({
   const isMobile = width ? width < 768 : false;
 
   return (
-    <div className="grow h-full">
+    <div className="h-full grow">
       <Tabs
-        defaultValue={"map"}
+        defaultValue={'map'}
         onValueChange={(value) => states.setTab(value as any)}
         value={states.selectedTab}
       >
         <TabList fitted={isMobile}>
           {[
             {
-              label: "Bar View",
-              value: "bar",
+              label: 'Bar View',
+              value: 'bar',
             },
             {
-              label: "Map View",
-              value: "map",
+              label: 'Map View',
+              value: 'map',
             },
           ].map((tab) => (
             <Tab value={tab.value} key={tab.value}>
@@ -357,7 +358,7 @@ const Content = ({
           ))}
         </TabList>
         <div
-          className="rounded-05 bg-background h-full pt-4 bg-surfaceHighlightSubdued border-default"
+          className="bg-background border-default h-full rounded-05 bg-surfaceHighlightSubdued pt-4"
           ref={contentRef}
         >
           <Filters
@@ -372,7 +373,7 @@ const Content = ({
 
           {tabs.map((tab) => (
             <TabPanel value={tab.value} key={tab.value}>
-              <div className="relative overflow-y-auto mt-5 min-h-[512px]">
+              <div className="relative mt-5 min-h-[512px] overflow-y-auto">
                 {tab.content}
               </div>
             </TabPanel>
@@ -381,9 +382,9 @@ const Content = ({
       </Tabs>
       <div
         className={cn(
-          "mt-3 flex justify-end gap-4",
+          'mt-3 flex justify-end gap-4',
           isMobile &&
-            "mt-4 md:mt6 py-4 px-3 rounded-2 shadow-elementCard flex items-center justify-end gap-4 flex-wrap bg-surfaceDefault"
+            'md:mt6 mt-4 flex flex-wrap items-center justify-end gap-4 rounded-2 bg-surfaceDefault px-3 py-4 shadow-elementCard'
         )}
       >
         <Button
@@ -391,9 +392,9 @@ const Content = ({
           variant="interactive"
           onClick={() => {
             copyURLToClipboard();
-            toast("Copied to clipboard", {
+            toast('Copied to clipboard', {
               action: {
-                label: "Dismiss",
+                label: 'Dismiss',
                 onClick: () => {},
               },
             });
@@ -417,14 +418,14 @@ const Content = ({
 };
 
 const image =
-  "http://localhost:3000/en/morigaon/panchayat-and-rural-development/mgnrega?tab=explorer&indicator=nhaoe";
-const alt = "visualisation";
+  'http://localhost:3000/en/morigaon/panchayat-and-rural-development/mgnrega?tab=explorer&indicator=nhaoe';
+const alt = 'visualisation';
 
 function Share() {
-  const { createSvg, svgToPngURL, copyToClipboard, downloadFile } =
+  const { createSvg, domToUrl, copyToClipboard, downloadFile } =
     useScreenshot();
 
-  const [dataUri, setDataUri] = React.useState<string>("");
+  const [dataUri, setDataUri] = React.useState<string>('');
 
   async function onOpen(image: string) {
     await fetch(`/api?url=${image}`)
@@ -436,8 +437,8 @@ function Share() {
           return (
             <div
               style={{
-                display: "flex",
-                flexDirection: "column",
+                display: 'flex',
+                flexDirection: 'column',
               }}
             >
               <Text variant="headingLg">Hello</Text>
@@ -450,10 +451,10 @@ function Share() {
           width: 1024,
           height: 768,
         })
-          .then((res: any) => svgToPngURL(res))
+          .then((res: any) => domToUrl(res))
           .then((res: any) => {
             setDataUri(res);
-            copyToClipboard(res, "Chart has been copied to clipboard");
+            copyToClipboard(res, 'Chart has been copied to clipboard');
           })
           .catch((err: any) => console.log(err));
       })
@@ -466,7 +467,7 @@ function Share() {
       alt={alt}
       title="Share Chart"
       onOpen={() => onOpen(image)}
-      onDownload={() => downloadFile(dataUri, "test")}
+      onDownload={() => downloadFile(dataUri, 'test')}
       size="medium"
       variant="interactive"
     >
@@ -487,7 +488,7 @@ const Filters = ({
   chartData: IChartData;
   barOptions: any;
   setSelectedBlocks: any;
-  tab: "map" | "bar";
+  tab: 'map' | 'bar';
   selectedBlocks: string[];
   isMobile: boolean;
 }) => {
@@ -499,8 +500,8 @@ const Filters = ({
   );
 
   return (
-    <div className="flex flex-col gap-2 md:gap-4 px-4">
-      {tab === "bar" && (
+    <div className="flex flex-col gap-2 px-4 md:gap-4">
+      {tab === 'bar' && (
         <Combobox
           name="blocks"
           list={barOptions}
