@@ -1,6 +1,5 @@
 import React from 'react';
 import { Meta, StoryObj } from '@storybook/react';
-import domtoimage from 'dom-to-image';
 
 import { ShareDialog } from '../ShareDialog';
 import Card from './Card';
@@ -25,7 +24,7 @@ const height = 800;
 export const Default: Story = {
   render: () => {
     const [dataURL, setDataURL] = React.useState<string>('');
-    const { createSvg, svgToPngURL, downloadFile, copyToClipboard } =
+    const { createSvg, domToUrl, downloadFile, copyToClipboard } =
       useScreenshot();
 
     const handleClick = async () => {
@@ -33,7 +32,7 @@ export const Default: Story = {
         width,
         height,
       });
-      const dataURL = await svgToPngURL(svg);
+      const dataURL = await domToUrl(svg);
       setDataURL(dataURL);
       copyToClipboard(dataURL, 'Image is copied to clipboard');
     };
@@ -66,26 +65,38 @@ export const Chart: Story = {
     }, []);
 
     const [dataURL, setDataURL] = React.useState<string>('');
-    const { createSvg, svgToPngURL, downloadFile, copyToClipboard } =
+    const { createSvg, domToUrl, downloadFile, copyToClipboard } =
       useScreenshot();
 
     const handleOpen = async () => {
       const SVG = ref.current?.querySelector('svg') as SVGElement;
-      const ChartDataURL = await svgToPngURL(SVG.outerHTML);
 
-      const svg = await createSvg(<img src={ChartDataURL} alt="" />, {
-        width: SVG.clientWidth,
-        height: SVG.clientHeight,
+      const dataImgURL = await domToUrl(SVG, {
+        width: 1760,
+        height: 600,
       });
-      const dataURL = await svgToPngURL(svg);
-      setDataURL(dataURL);
-      copyToClipboard(dataURL, 'Image is copied to clipboard');
+
+      // const svg = await createSvg(<img src={dataImgURL} alt="" />, {
+      //   width: 1760,
+      //   height: 600,
+      // });
+
+      // const dataURL = await domToUrl(svg, {
+      //   width: 1760,
+      //   height: 600,
+      // });
+      setDataURL(dataImgURL);
+      copyToClipboard(dataImgURL, 'Image is copied to clipboard');
     };
 
     return (
       <>
-        <div ref={ref} className="h-[400px]" />
+        <div ref={ref} className="sr-only h-[600px] w-[1760px]" />
         <ShareDialog
+          props={{
+            width: 1760,
+            height: 600,
+          }}
           alt=""
           title="Download Image"
           image={dataURL}
@@ -105,43 +116,48 @@ export const Map: Story = {
   render: () => {
     const ref = React.useRef<HTMLDivElement>(null);
     const [map, setMap] = React.useState<any>(null);
+    const [isLoading, setIsLoading] = React.useState<boolean>(false);
+    const [dataURL, setDataURL] = React.useState<string>('');
+    const { createSvg, domToUrl, downloadFile, copyToClipboard } =
+      useScreenshot();
 
     React.useEffect(() => {
       if (ref.current === null) return;
       const { map } = initMap(ref.current);
+
       setMap(map);
     }, []);
 
-    const [dataURL, setDataURL] = React.useState<string>('');
-    const { createSvg, svgToPngURL, downloadFile, copyToClipboard } =
-      useScreenshot();
-
-    const handleOpen = async () => {
-      const dataImgURL = await domtoimage.toPng(ref.current as HTMLElement, {
-        quality: 2,
+    async function generateImage(map?: any) {
+      setIsLoading(true);
+      const dataImgURL = await domToUrl(ref.current as HTMLElement, {
         width: map.getSize().x,
         height: map.getSize().y,
       });
 
-      const svg = await createSvg(<img src={dataImgURL} alt="" />, {
-        width: map.getSize().x,
-        height: map.getSize().y,
-      });
-
-      const dataURL = await svgToPngURL(svg);
-      setDataURL(dataURL);
-      copyToClipboard(dataURL, 'Image is copied to clipboard');
-    };
+      // const svg = await createSvg(<img src={dataImgURL} alt="" />, {
+      //   width: map.getSize().x,
+      //   height: map.getSize().y,
+      // });
+      // const dataURL = await domToUrl(svg, {
+      //   width: map.getSize().x,
+      //   height: map.getSize().y,
+      // });
+      setDataURL(dataImgURL);
+      setIsLoading(false);
+      copyToClipboard(dataImgURL, 'Image is copied to clipboard');
+    }
 
     return (
       <>
         <div ref={ref} className="h-[600px]" />
         <ShareDialog
+          loading={isLoading}
           alt=""
           title="Download Image"
           image={dataURL}
           size="medium"
-          onOpen={handleOpen}
+          onOpen={() => generateImage(map)}
           onDownload={() => downloadFile(dataURL, 'Map Chart')}
           className="mt-4"
         >

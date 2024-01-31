@@ -1,4 +1,5 @@
 import React from 'react';
+import domtoimage from 'dom-to-image';
 import satori from 'satori';
 
 import { toast } from '../Toast';
@@ -40,14 +41,17 @@ export const useScreenshot = () => {
   };
 
   const downloadSvgAsPng = async (
-    svg: string,
+    svg: HTMLElement | string | SVGElement,
+    props: { quality?: number; width?: number; height?: number } = {
+      quality: 2,
+    },
     name: string = 'Image.png',
     runOnFinish?: () => null
   ) => {
-    const pngURL = await svgToPngURL(svg);
+    const dataImgURL = await domToUrl(svg, props);
     try {
       const a = document.createElement('a');
-      a.href = pngURL;
+      a.href = dataImgURL;
       a.download = name;
       document.body.appendChild(a);
       a.click();
@@ -56,30 +60,31 @@ export const useScreenshot = () => {
       console.error('unable to download. Error:');
       console.log(error);
     } finally {
-      URL.revokeObjectURL(pngURL);
+      URL.revokeObjectURL(dataImgURL);
       runOnFinish && runOnFinish();
     }
   };
 
-  const svgToPngURL = (svg: string) =>
-    new Promise<string>((resolve, reject) => {
-      const img = new Image();
-
-      img.onload = () => {
-        const canvas = document.createElement('canvas');
-        canvas.width = img.naturalWidth;
-        canvas.height = img.naturalHeight;
-        const ctx = canvas.getContext('2d');
-        ctx!.drawImage(img, 0, 0);
-        resolve(canvas.toDataURL('image/png'));
-        URL.revokeObjectURL(img.src);
-      };
-      img.onerror = (e) => {
-        reject(e);
-        URL.revokeObjectURL(img.src);
-      };
-      img.src = URL.createObjectURL(new Blob([svg], { type: 'image/svg+xml' }));
+  const domToUrl = async (
+    element: HTMLElement | string | SVGElement,
+    props: { quality?: number; width?: number; height?: number } = {
+      quality: 2,
+    }
+  ) => {
+    let elm: HTMLElement = element as HTMLElement;
+    if (typeof element === 'string') {
+      var parser = new DOMParser();
+      var doc = parser.parseFromString(element, 'image/svg+xml');
+      elm = doc.documentElement;
+      console.log(elm);
+    }
+    const { quality, ...rest } = props;
+    const dataImgURL = await domtoimage.toPng(elm, {
+      quality,
+      ...rest,
     });
+    return dataImgURL;
+  };
 
   async function copyToClipboard(url: string, toastMessage?: string) {
     if (!('ClipboardItem' in window)) {
@@ -114,7 +119,7 @@ export const useScreenshot = () => {
 
   return {
     createSvg,
-    svgToPngURL,
+    domToUrl,
     downloadSvgAsPng,
     downloadFile,
     copyToClipboard,
