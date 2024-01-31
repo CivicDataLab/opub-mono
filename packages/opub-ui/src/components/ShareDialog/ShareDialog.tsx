@@ -30,6 +30,15 @@ type Props = {
    * Custom class name for the wrapper
    */
   className?: string;
+
+  /**
+   * whether the image is loading
+   */
+  loading?: boolean;
+
+  props?: {
+    [key: string]: any;
+  };
 };
 
 const ShareDialog = React.forwardRef(
@@ -45,6 +54,8 @@ const ShareDialog = React.forwardRef(
       variant = 'basic',
       size = 'slim',
       className,
+      loading,
+      props,
     }: Props,
     ref?: React.Ref<HTMLDivElement>
   ) => {
@@ -89,16 +100,17 @@ const ShareDialog = React.forwardRef(
               </IconButton>
             </div>
             <Divider className="my-2" />
-            {image ? (
+            {image && !loading ? (
               <img
                 src={image}
                 alt={alt}
                 width={768}
                 height={384}
-                className="h-96 w-full object-contain"
+                {...props}
+                className="h-full w-full object-contain"
               />
             ) : (
-              <div className="flex h-[384px] w-full items-center justify-center">
+              <div className="flex h-[240px] w-full items-center justify-center">
                 Loading Image...
               </div>
             )}

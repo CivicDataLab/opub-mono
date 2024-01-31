@@ -48,7 +48,7 @@ const legendHeading = {
   subheading: 'Average Rainfall (mm)',
 };
 
-export function initMap(mapDom: HTMLElement) {
+export function initMap(mapDom: HTMLElement, onTileLoad?: (map: any) => void) {
   const map = L.map(mapDom, {
     center: L.latLng(26.193, 92.3),
     zoom: 7.9,
@@ -72,9 +72,9 @@ export function initMap(mapDom: HTMLElement) {
     },
   }).addTo(map);
 
-  L.tileLayer(`https://tile.openstreetmap.org/{z}/{x}/{y}.png`, {
+  let tiles = L.tileLayer(`https://tile.openstreetmap.org/{z}/{x}/{y}.png`, {
     maxZoom: 19,
   }).addTo(map);
 
-  return { map };
+  return { map, tiles };
 }
