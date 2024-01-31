@@ -24,7 +24,7 @@ const height = 800;
 export const Default: Story = {
   render: () => {
     const [dataURL, setDataURL] = React.useState<string>('');
-    const { createSvg, domToUrl, downloadFile, copyToClipboard } =
+    const { createSvg, svgToPngURL, downloadFile, copyToClipboard } =
       useScreenshot();
 
     const handleClick = async () => {
@@ -32,7 +32,8 @@ export const Default: Story = {
         width,
         height,
       });
-      const dataURL = await domToUrl(svg);
+
+      const dataURL = await svgToPngURL(svg);
       setDataURL(dataURL);
       copyToClipboard(dataURL, 'Image is copied to clipboard');
     };
@@ -59,13 +60,16 @@ export const Default: Story = {
 export const Chart: Story = {
   render: () => {
     const ref = React.useRef<HTMLDivElement>(null);
+    const [chart, setChart] = React.useState<any>(null);
+
     React.useEffect(() => {
       if (ref.current === null) return;
-      initChart(ref.current);
+      const chart = initChart(ref.current);
+      setChart(chart);
     }, []);
 
     const [dataURL, setDataURL] = React.useState<string>('');
-    const { createSvg, domToUrl, downloadFile, copyToClipboard } =
+    const { createSvg, domToUrl, svgToPngURL, downloadFile, copyToClipboard } =
       useScreenshot();
 
     const handleOpen = async () => {
@@ -76,15 +80,18 @@ export const Chart: Story = {
         height: 600,
       });
 
-      // const svg = await createSvg(<img src={dataImgURL} alt="" />, {
+      // const svg = await createSvg(wrapper.firstChild, {
       //   width: 1760,
+      //   height: 600,
+      // });
+      // const dataURL = await svgToPngURL(svg);
+      // setDataURL(dataURL);
+
+      // const dataURL = await domToUrl(svg, {
+      //   width: 400,
       //   height: 600,
       // });
 
-      // const dataURL = await domToUrl(svg, {
-      //   width: 1760,
-      //   height: 600,
-      // });
       setDataURL(dataImgURL);
       copyToClipboard(dataImgURL, 'Image is copied to clipboard');
     };

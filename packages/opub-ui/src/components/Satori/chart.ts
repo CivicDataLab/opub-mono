@@ -27,4 +27,6 @@ export function initChart(chartDom: HTMLElement) {
   };
 
   option && myChart.setOption(option);
+
+  return myChart;
 }
