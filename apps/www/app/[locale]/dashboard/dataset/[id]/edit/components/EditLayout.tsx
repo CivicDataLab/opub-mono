@@ -44,13 +44,13 @@ export function EditLayout({ children, params }: LayoutProps) {
   }
 
   return (
-    <div className="flex flex-col h-full mt-8">
+    <div className="mt-8 flex h-full flex-col">
       <Header id={params.id} title={data?.dataset?.title} />
-      <div className="flex flex-col mt-4 lg:flex-row">
+      <div className="mt-4 flex flex-col lg:flex-row">
         <div>
           <Navigation id={params.id} pathItem={pathItem} />
         </div>
-        <div className="flex-grow max-w-[994px] py-4 px-6 bg-surface shadow-card border-l-divider rounded-tl-none">
+        <div className="bg-surface shadow-card border-l-divider rounded-tl-none max-w-[994px] flex-grow px-6 py-4">
           {children}
         </div>
       </div>
@@ -60,8 +60,8 @@ export function EditLayout({ children, params }: LayoutProps) {
 
 const Header = ({ id, title }: { id: string; title?: string }) => {
   return (
-    <div className="flex gap-4 flex-wrap items-center justify-between">
-      <div className="flex flex-wrap gap-4 items-center">
+    <div className="flex flex-wrap items-center justify-between gap-4">
+      <div className="flex flex-wrap items-center gap-4">
         <Link href="/dashboard/dataset">
           <Icon source={Icons.back} size={32} />
           <Text visuallyHidden>Go to dataset listing page</Text>
@@ -112,22 +112,22 @@ const Navigation = ({ id, pathItem }: { id: string; pathItem: string }) => {
   ];
 
   return (
-    <ul className="flex overflow-x-auto max-w-[90vw] lg:block lg:overflow-x-visible lg:max-w-full">
+    <ul className="flex max-w-[90vw] overflow-x-auto lg:block lg:max-w-full lg:overflow-x-visible">
       {links.map((link) => (
         <li
           className={cn(
             link.disabled &&
-              'text-textDisabled cursor-no-drop hover:text-textDisabled focus:text-textDisabled'
+              'cursor-no-drop text-textDisabled hover:text-textDisabled focus:text-textDisabled'
           )}
           key={link.url}
         >
           <Link
             className={cn(
-              'rounded-l-05 p-3 block relative w-full text-textSubdued lg:min-w-[10rem] text-center',
+              'relative block w-full rounded-l-05 p-3 text-center text-textSubdued lg:min-w-[10rem]',
               'lg:text-start',
-              'hover:text-text focus:text-text',
+              'hover:text-textDefault focus:text-textDefault',
               link.selected &&
-                'bg-surface shadow-faint text-text pointer-events-none',
+                'pointer-events-none bg-surfaceDefault text-textDefault shadow-insetBasic',
               link.disabled && 'pointer-events-none'
             )}
             href={link.url}
@@ -141,8 +141,8 @@ const Navigation = ({ id, pathItem }: { id: string; pathItem: string }) => {
             </Text>
             <span
               className={cn(
-                'h-[3px] w-full absolute right-0 bottom-0',
-                'bg-transparent lg:rounded-l-1 lg:w-[3px] lg:h-full right-0 lg:top-0',
+                'absolute bottom-0 right-0 h-[3px] w-full',
+                'right-0 bg-transparent lg:top-0 lg:h-full lg:w-[3px] lg:rounded-l-1',
                 link.selected && 'bg-decorativeIconFour'
               )}
             />

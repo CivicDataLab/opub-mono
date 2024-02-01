@@ -16,8 +16,8 @@ export default async function Layout({ children }: DashboardLayoutProps) {
   }
 
   return (
-    <div className="flex flex-col grow h-full">
-      <header className="py-3 px-4 bg-surface z-2 relative shadow-deep">
+    <div className="flex h-full grow flex-col">
+      <header className="relative z-2 bg-surfaceDefault px-4 py-3 shadow-elementTopNav">
         <MainNav />
       </header>
       <DashboardLayout>{children}</DashboardLayout>
