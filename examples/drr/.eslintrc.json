@@ -1,5 +1,5 @@
 {
-  "ignorePatterns": ["**/generated/*.ts"],
+  "ignorePatterns": ["**/generated/**/*.ts"],
   "extends": ["eslint:recommended", "next"],
   "rules": {
     "no-unused-vars": "off",
