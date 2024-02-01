@@ -1,10 +1,17 @@
 /* eslint-disable */
 import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
+
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
-export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+export type Exact<T extends { [key: string]: unknown }> = {
+  [K in keyof T]: T[K];
+};
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & {
+  [SubKey in K]?: Maybe<T[SubKey]>;
+};
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
+  [SubKey in K]: Maybe<T[SubKey]>;
+};
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -77,25 +84,30 @@ export enum ApiDetailsFormatLoc {
   /** Header */
   Header = 'HEADER',
   /** Param */
-  Param = 'PARAM'
+  Param = 'PARAM',
 }
 
 export type ApiParameterInputType = {
   default: Scalars['String'];
   description?: InputMaybe<Scalars['String']>;
+  download_api_options_same?: InputMaybe<Scalars['Boolean']>;
+  download_options?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   format?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['ID']>;
   key: Scalars['String'];
+  options?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   type?: InputMaybe<ParameterTypes>;
 };
 
 export enum ApiParameterType {
+  /** Download */
+  Download = 'DOWNLOAD',
   /** Exposed */
   Exposed = 'EXPOSED',
   /** Pagination */
   Pagination = 'PAGINATION',
   /** Preview */
-  Preview = 'PREVIEW'
+  Preview = 'PREVIEW',
 }
 
 export type ApiParametersType = {
@@ -103,9 +115,12 @@ export type ApiParametersType = {
   api_details: ApiDetailsType;
   default: Scalars['String'];
   description: Scalars['String'];
+  download_api_options_same: Scalars['Boolean'];
+  download_options?: Maybe<Array<Scalars['String']>>;
   format: Scalars['String'];
   id: Scalars['ID'];
   key: Scalars['String'];
+  options?: Maybe<Array<Scalars['String']>>;
   type: ApiParameterType;
 };
 
@@ -146,6 +161,7 @@ export type ApiSourceType = {
 export type AccessModelResourceInput = {
   access_model_id: Scalars['ID'];
   dataset_id: Scalars['ID'];
+  description: Scalars['String'];
   id?: InputMaybe<Scalars['ID']>;
   payment?: InputMaybe<Scalars['Int']>;
   payment_type: Paymenttypes;
@@ -169,7 +185,7 @@ export type AccessModelResourceType = {
 export enum AccessTypes {
   Open = 'OPEN',
   Registered = 'REGISTERED',
-  Restricted = 'RESTRICTED'
+  Restricted = 'RESTRICTED',
 }
 
 export type ActivityFilter = {
@@ -203,6 +219,10 @@ export type AdditionalInfoInput = {
   file?: InputMaybe<Scalars['Upload']>;
   format?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['ID']>;
+  license_title?: InputMaybe<Scalars['String']>;
+  license_url?: InputMaybe<Scalars['String']>;
+  policy_title?: InputMaybe<Scalars['String']>;
+  policy_url?: InputMaybe<Scalars['String']>;
   remote_url?: InputMaybe<Scalars['String']>;
   title: Scalars['String'];
   type?: InputMaybe<InfoType>;
@@ -216,7 +236,15 @@ export type AdditionalInfoType = {
   format?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   issued: Scalars['DateTime'];
+  /** For EXTERNAL datasets */
+  license_title?: Maybe<Scalars['String']>;
+  /** For EXTERNAL datasets */
+  license_url?: Maybe<Scalars['String']>;
   modified: Scalars['DateTime'];
+  /** For EXTERNAL datasets */
+  policy_title?: Maybe<Scalars['String']>;
+  /** For EXTERNAL datasets */
+  policy_url?: Maybe<Scalars['String']>;
   remote_url: Scalars['String'];
   title: Scalars['String'];
   type?: Maybe<Scalars['String']>;
@@ -249,7 +277,7 @@ export enum AgreementStatus {
   /** Accepted */
   Accepted = 'ACCEPTED',
   /** Rejected */
-  Rejected = 'REJECTED'
+  Rejected = 'REJECTED',
 }
 
 export type AgreementType = {
@@ -269,12 +297,15 @@ export type ApiDetailsType = {
   apiparameter_set: Array<ApiParametersType>;
   auth_required: Scalars['Boolean'];
   default_format?: Maybe<Scalars['String']>;
+  download_formats?: Maybe<Array<Scalars['String']>>;
+  download_same_as_api: Scalars['Boolean'];
   format_key?: Maybe<Scalars['String']>;
   format_loc?: Maybe<ApiDetailsFormatLoc>;
+  is_large_dataset: Scalars['Boolean'];
   parameters?: Maybe<Array<Maybe<ApiParametersType>>>;
   request_type: Scalars['String'];
   resource: ResourceType;
-  response_type: Scalars['String'];
+  response_type?: Maybe<Scalars['String']>;
   supported_formats?: Maybe<Array<Scalars['String']>>;
   url_path: Scalars['String'];
 };
@@ -283,8 +314,11 @@ export type ApiInputType = {
   api_source: Scalars['ID'];
   auth_required: Scalars['Boolean'];
   default_format?: InputMaybe<Scalars['String']>;
+  download_formats?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  download_same_as_api?: InputMaybe<Scalars['Boolean']>;
   format_key?: InputMaybe<Scalars['String']>;
   format_loc?: InputMaybe<FormatLocation>;
+  is_large_dataset?: InputMaybe<Scalars['Boolean']>;
   parameters?: InputMaybe<Array<InputMaybe<ApiParameterInputType>>>;
   request_type?: InputMaybe<RequestType>;
   response_type?: InputMaybe<ResponseType>;
@@ -364,13 +398,13 @@ export type ApproveRejectReviewRequests = {
 
 export enum AuthLocation {
   Header = 'HEADER',
-  Param = 'PARAM'
+  Param = 'PARAM',
 }
 
 export enum AuthType {
   Credentials = 'CREDENTIALS',
   NoAuth = 'NO_AUTH',
-  Token = 'TOKEN'
+  Token = 'TOKEN',
 }
 
 export type CatalogInput = {
@@ -433,9 +467,9 @@ export type CreateDataset = {
 };
 
 export type CreateDatasetInput = {
-  dataset_type?: InputMaybe<DataType>;
+  dataset_type: DataType;
   description: Scalars['String'];
-  funnel?: InputMaybe<Scalars['String']>;
+  funnel?: Scalars['String'];
   title: Scalars['String'];
 };
 
@@ -443,6 +477,13 @@ export type CreateDatasetRating = {
   __typename?: 'CreateDatasetRating';
   dataset_rating?: Maybe<DatasetRatingType>;
   errors?: Maybe<Scalars['ExpectedErrorType']>;
+  success?: Maybe<Scalars['Boolean']>;
+};
+
+export type CreateExternalAccessModel = {
+  __typename?: 'CreateExternalAccessModel';
+  errors?: Maybe<Scalars['ExpectedErrorType']>;
+  external_access_model?: Maybe<ExternalAccessModelType>;
   success?: Maybe<Scalars['Boolean']>;
 };
 
@@ -485,7 +526,7 @@ export type CreateOrganizationType = {
   dpa_email?: Maybe<Scalars['String']>;
   dpa_name?: Maybe<Scalars['String']>;
   dpa_phone?: Maybe<Scalars['String']>;
-  homepage?: Maybe<Scalars['String']>;
+  homepage: Scalars['String'];
   id: Scalars['ID'];
   issued: Scalars['DateTime'];
   logo?: Maybe<Scalars['String']>;
@@ -494,9 +535,10 @@ export type CreateOrganizationType = {
   organization_ptr: OrganizationType;
   organization_subtypes?: Maybe<OrganizationCreateRequestOrganizationSubtypes>;
   organization_types: OrganizationOrganizationTypes;
+  orgdpahistory?: Maybe<OrgDpaType>;
   parent?: Maybe<OrganizationType>;
   remark?: Maybe<Scalars['String']>;
-  sample_data_url?: Maybe<Scalars['String']>;
+  sample_data_url: Scalars['String'];
   state?: Maybe<GeographyType>;
   status: OrganizationCreateRequestStatus;
   title: Scalars['String'];
@@ -567,8 +609,9 @@ export type DataAccessModelRequestMutation = {
 
 export enum DataAccessModelRequestStatusType {
   Approved = 'APPROVED',
+  Paymentpending = 'PAYMENTPENDING',
   Rejected = 'REJECTED',
-  Requested = 'REQUESTED'
+  Requested = 'REQUESTED',
 }
 
 export type DataAccessModelRequestType = {
@@ -585,6 +628,7 @@ export type DataAccessModelRequestType = {
   remaining_quota?: Maybe<Scalars['Int']>;
   remark?: Maybe<Scalars['String']>;
   status: Scalars['String'];
+  token_time: Scalars['DateTime'];
   user?: Maybe<Scalars['String']>;
   user_email?: Maybe<Scalars['String']>;
   validity?: Maybe<Scalars['String']>;
@@ -600,7 +644,7 @@ export enum DataAccessModelStatus {
   /** Active */
   Active = 'ACTIVE',
   /** Disabled */
-  Disabled = 'DISABLED'
+  Disabled = 'DISABLED',
 }
 
 export enum DataAccessModelSubscriptionQuotaUnit {
@@ -615,7 +659,7 @@ export enum DataAccessModelSubscriptionQuotaUnit {
   /** Weekly */
   Weekly = 'WEEKLY',
   /** Yearly */
-  Yearly = 'YEARLY'
+  Yearly = 'YEARLY',
 }
 
 export type DataAccessModelType = {
@@ -653,7 +697,7 @@ export enum DataAccessModelValidationUnit {
   /** Week */
   Week = 'WEEK',
   /** Year */
-  Year = 'YEAR'
+  Year = 'YEAR',
 }
 
 export type DataRequestInput = {
@@ -708,15 +752,23 @@ export type DataRequestUpdateMutation = {
 
 export enum DataType {
   Api = 'API',
-  File = 'FILE'
+  External = 'EXTERNAL',
+  File = 'FILE',
 }
 
 export enum DatasetAccessModelPaymentType {
   /** Free */
   Free = 'FREE',
   /** Paid */
-  Paid = 'PAID'
+  Paid = 'PAID',
 }
+
+export type DatasetAccessModelRequestUserMigration = {
+  __typename?: 'DatasetAccessModelRequestUserMigration';
+  data_access_model_request?: Maybe<DataAccessModelRequestType>;
+  errors?: Maybe<Scalars['ExpectedErrorType']>;
+  success?: Maybe<Scalars['Boolean']>;
+};
 
 export type DatasetAccessModelType = {
   __typename?: 'DatasetAccessModelType';
@@ -725,6 +777,7 @@ export type DatasetAccessModelType = {
   dataset: DatasetType;
   datasetaccessmodelrequest_set: Array<DataAccessModelRequestType>;
   datasetaccessmodelresource_set: Array<AccessModelResourceType>;
+  description: Scalars['String'];
   id: Scalars['ID'];
   issued: Scalars['DateTime'];
   modified: Scalars['DateTime'];
@@ -736,11 +789,20 @@ export type DatasetAccessModelType = {
   usage?: Maybe<Scalars['Int']>;
 };
 
+export type DatasetCount = {
+  __typename?: 'DatasetCount';
+  dataset_count?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+};
+
 export enum DatasetDatasetType {
   /** Api */
   Api = 'API',
+  /** External */
+  External = 'EXTERNAL',
   /** File */
-  File = 'FILE'
+  File = 'FILE',
 }
 
 export type DatasetRatingApproveRejectInput = {
@@ -773,20 +835,20 @@ export enum DatasetRatingsStatus {
   /** Published */
   Published = 'PUBLISHED',
   /** Rejected */
-  Rejected = 'REJECTED'
+  Rejected = 'REJECTED',
 }
 
 export enum DatasetRequestStatusType {
   Fetched = 'FETCHED',
   Fulfilled = 'FULFILLED',
-  Requested = 'REQUESTED'
+  Requested = 'REQUESTED',
 }
 
 export enum DatasetReviewRequestRequestType {
   /** Moderation */
   Moderation = 'MODERATION',
   /** Review */
-  Review = 'REVIEW'
+  Review = 'REVIEW',
 }
 
 export enum DatasetStatus {
@@ -797,13 +859,13 @@ export enum DatasetStatus {
   Reviewed = 'REVIEWED',
   Transformationinprogress = 'TRANSFORMATIONINPROGRESS',
   Undermoderation = 'UNDERMODERATION',
-  Underreview = 'UNDERREVIEW'
+  Underreview = 'UNDERREVIEW',
 }
 
 export type DatasetType = {
   __typename?: 'DatasetType';
   accepted_agreement?: Maybe<Scalars['String']>;
-  action?: Maybe<Scalars['String']>;
+  action: Scalars['String'];
   additionalinfo_set: Array<AdditionalInfoType>;
   average_rating?: Maybe<Scalars['Float']>;
   catalog: CatalogType;
@@ -815,12 +877,14 @@ export type DatasetType = {
   datasetreviewrequest_set: Array<ReviewRequestType>;
   description: Scalars['String'];
   download_count: Scalars['Int'];
-  funnel?: Maybe<Scalars['String']>;
+  externalaccessmodel_set: Array<ExternalAccessModelType>;
+  funnel: Scalars['String'];
   geography: Array<GeographyType>;
   highlights?: Maybe<Array<Maybe<Scalars['String']>>>;
   hvd_rating: Scalars['Decimal'];
   id: Scalars['ID'];
   in_series?: Maybe<Scalars['String']>;
+  is_datedynamic: Scalars['Boolean'];
   issued: Scalars['DateTime'];
   language?: Maybe<Scalars['String']>;
   last_updated?: Maybe<Scalars['DateTime']>;
@@ -839,7 +903,7 @@ export type DatasetType = {
   source: Scalars['String'];
   spatial_coverage?: Maybe<Scalars['String']>;
   spatial_resolution?: Maybe<Scalars['String']>;
-  status?: Maybe<Scalars['String']>;
+  status: Scalars['String'];
   subscribe_set: Array<SubscribeType>;
   tags: Array<TagType>;
   temporal_coverage?: Maybe<Scalars['String']>;
@@ -882,6 +946,16 @@ export type DeleteDataAccessModel = {
 };
 
 export type DeleteDataAccessModelInput = {
+  id: Scalars['ID'];
+};
+
+export type DeleteExternalAccessModel = {
+  __typename?: 'DeleteExternalAccessModel';
+  errors?: Maybe<Scalars['ExpectedErrorType']>;
+  success?: Maybe<Scalars['String']>;
+};
+
+export type DeleteExternalAccessModelInput = {
   id: Scalars['ID'];
 };
 
@@ -936,11 +1010,28 @@ export type EditDatasetInput = {
   new_version_name: Scalars['String'];
 };
 
+export type ExternalAccessModelInput = {
+  dataset: Scalars['ID'];
+  id?: InputMaybe<Scalars['ID']>;
+  license: Scalars['ID'];
+  policy?: InputMaybe<Scalars['ID']>;
+};
+
+export type ExternalAccessModelType = {
+  __typename?: 'ExternalAccessModelType';
+  dataset: DatasetType;
+  id: Scalars['ID'];
+  issued: Scalars['DateTime'];
+  license: LicenseType;
+  modified: Scalars['DateTime'];
+  policy?: Maybe<PolicyType>;
+};
+
 export enum FieldTypes {
   Actor = 'actor',
   Browser = 'browser',
   Ip = 'ip',
-  Verb = 'verb'
+  Verb = 'verb',
 }
 
 export type FileDetailsType = {
@@ -950,6 +1041,7 @@ export type FileDetailsType = {
   remote_url: Scalars['String'];
   resource: ResourceType;
   source_file_name: Scalars['String'];
+  supported_formats?: Maybe<Array<Scalars['String']>>;
 };
 
 export type FileInputType = {
@@ -958,16 +1050,23 @@ export type FileInputType = {
   remote_url?: InputMaybe<Scalars['String']>;
 };
 
+export type Filters = {
+  __typename?: 'Filters';
+  geographies?: Maybe<Array<Maybe<GeographyItem>>>;
+  providers?: Maybe<Array<Maybe<OrgsItem>>>;
+  sectors?: Maybe<Array<Maybe<SectorItem>>>;
+};
+
 export enum FormatLocation {
   Header = 'HEADER',
-  Param = 'PARAM'
+  Param = 'PARAM',
 }
 
 export enum GeoTypes {
   Country = 'COUNTRY',
   District = 'DISTRICT',
   State = 'STATE',
-  Ut = 'UT'
+  Ut = 'UT',
 }
 
 export enum GeographyGeoType {
@@ -978,21 +1077,27 @@ export enum GeographyGeoType {
   /** State */
   State = 'STATE',
   /** Ut */
-  Ut = 'UT'
+  Ut = 'UT',
 }
 
 export type GeographyInput = {
   geo_type: GeoTypes;
   id?: InputMaybe<Scalars['ID']>;
   name?: InputMaybe<Scalars['String']>;
-  official_id: Scalars['String'];
+  official_id?: InputMaybe<Scalars['String']>;
   parent_id?: InputMaybe<Scalars['String']>;
+};
+
+export type GeographyItem = {
+  __typename?: 'GeographyItem';
+  geograph_name?: Maybe<Scalars['String']>;
+  geography_id?: Maybe<Scalars['String']>;
 };
 
 export type GeographyType = {
   __typename?: 'GeographyType';
   dataset_set: Array<DatasetType>;
-  geo_type: GeographyGeoType;
+  geo_type?: Maybe<GeographyGeoType>;
   geography_set: Array<GeographyType>;
   id: Scalars['ID'];
   name: Scalars['String'];
@@ -1006,7 +1111,7 @@ export enum InfoType {
   Datastory = 'DATASTORY',
   Other = 'OTHER',
   Report = 'REPORT',
-  Usecase = 'USECASE'
+  Usecase = 'USECASE',
 }
 
 export type KeyValueType = {
@@ -1018,7 +1123,7 @@ export type KeyValueType = {
 export enum Licenseadditionstate {
   Created = 'CREATED',
   Published = 'PUBLISHED',
-  Rejected = 'REJECTED'
+  Rejected = 'REJECTED',
 }
 
 export type LicenceAdditionInputType = {
@@ -1040,7 +1145,7 @@ export enum LicenseAdditionStatus {
   /** Published */
   Published = 'PUBLISHED',
   /** Rejected */
-  Rejected = 'REJECTED'
+  Rejected = 'REJECTED',
 }
 
 export type LicenseAdditionType = {
@@ -1077,8 +1182,9 @@ export type LicenseInput = {
   id?: InputMaybe<Scalars['ID']>;
   license_additions?: InputMaybe<Array<InputMaybe<LicenceAdditionInputType>>>;
   remote_url?: InputMaybe<Scalars['String']>;
-  short_name: Scalars['String'];
+  short_name?: InputMaybe<Scalars['String']>;
   title: Scalars['String'];
+  type?: InputMaybe<Scalars['String']>;
 };
 
 export enum LicenseStatus {
@@ -1087,7 +1193,7 @@ export enum LicenseStatus {
   /** Published */
   Published = 'PUBLISHED',
   /** Rejected */
-  Rejected = 'REJECTED'
+  Rejected = 'REJECTED',
 }
 
 export type LicenseType = {
@@ -1096,6 +1202,7 @@ export type LicenseType = {
   created_organization?: Maybe<OrganizationType>;
   dataaccessmodel_set: Array<DataAccessModelType>;
   description: Scalars['String'];
+  externalaccessmodel_set: Array<ExternalAccessModelType>;
   file: Scalars['String'];
   id: Scalars['ID'];
   issued: Scalars['DateTime'];
@@ -1106,6 +1213,7 @@ export type LicenseType = {
   short_name?: Maybe<Scalars['String']>;
   status: LicenseStatus;
   title: Scalars['String'];
+  type?: Maybe<Scalars['String']>;
 };
 
 export type ModerationRequestInput = {
@@ -1166,6 +1274,7 @@ export type Mutation = {
   create_data_access_model?: Maybe<CreateDataAccessModel>;
   create_dataset?: Maybe<CreateDataset>;
   create_dataset_rating?: Maybe<CreateDatasetRating>;
+  create_external_access_model?: Maybe<CreateExternalAccessModel>;
   create_geography?: Maybe<CreateGeography>;
   create_license?: Maybe<CreateLicense>;
   create_license_addition?: Maybe<CreateLicenseAddition>;
@@ -1176,10 +1285,12 @@ export type Mutation = {
   create_tag?: Maybe<CreateTag>;
   data_access_model_request?: Maybe<DataAccessModelRequestMutation>;
   data_request?: Maybe<DataRequestMutation>;
+  dataset_access_model_request_user_migration?: Maybe<DatasetAccessModelRequestUserMigration>;
   delete_access_model_resource?: Maybe<DeleteAccessModelResource>;
   delete_additional_info?: Maybe<DeleteAdditionalInfo>;
   delete_api_source?: Maybe<DeleteApiSource>;
   delete_data_access_model?: Maybe<DeleteDataAccessModel>;
+  delete_external_access_model?: Maybe<DeleteExternalAccessModel>;
   delete_license?: Maybe<DeleteLicense>;
   delete_organization_request?: Maybe<DeleteOrganizationRequestMutation>;
   delete_policy?: Maybe<DeletePolicy>;
@@ -1204,289 +1315,249 @@ export type Mutation = {
   update_organization?: Maybe<UpdateOrganization>;
   update_policy?: Maybe<UpdatePolicy>;
   update_resource?: Maybe<UpdateResource>;
+  update_schema?: Maybe<UpdateSchema>;
   update_sector?: Maybe<UpdateSector>;
 };
-
 
 export type MutationAccess_Model_ResourceArgs = {
   access_model_resource_data?: InputMaybe<AccessModelResourceInput>;
 };
 
-
 export type MutationAddress_Moderation_RequestsArgs = {
   moderation_request?: InputMaybe<ModerationRequestsApproveRejectInput>;
 };
-
 
 export type MutationAgreement_RequestArgs = {
   agreement_request?: InputMaybe<AgreementInput>;
 };
 
-
 export type MutationApprove_Reject_Data_Access_Model_RequestArgs = {
   data_access_model_request?: InputMaybe<DataAccessModelRequestUpdateInput>;
 };
-
 
 export type MutationApprove_Reject_Dataset_RatingArgs = {
   rating_data: DatasetRatingApproveRejectInput;
 };
 
-
 export type MutationApprove_Reject_LicenseArgs = {
   license_data: LicenseApproveRejectInput;
 };
-
 
 export type MutationApprove_Reject_License_AdditionArgs = {
   additions_data: LicenseAdditionApproveRejectInput;
 };
 
-
 export type MutationApprove_Reject_Moderation_RequestsArgs = {
   moderation_request?: InputMaybe<ModerationRequestsApproveRejectInput>;
 };
-
 
 export type MutationApprove_Reject_Organization_ApprovalArgs = {
   organization_data: ApproveRejectOrganizationApprovalInput;
 };
 
-
 export type MutationApprove_Reject_Organization_RequestArgs = {
   organization_request?: InputMaybe<OrganizationRequestUpdateInput>;
 };
-
 
 export type MutationApprove_Reject_PolicyArgs = {
   policy_data: PolicyApproveRejectInput;
 };
 
-
 export type MutationApprove_Reject_Review_RequestArgs = {
   review_request?: InputMaybe<ReviewRequestsApproveRejectInput>;
 };
-
 
 export type MutationCreate_Additional_InfoArgs = {
   info_data?: InputMaybe<AdditionalInfoInput>;
 };
 
-
 export type MutationCreate_Api_SourceArgs = {
   api_source_data: ApiSourceInput;
 };
-
 
 export type MutationCreate_CatalogArgs = {
   catalog_data: CatalogInput;
 };
 
-
 export type MutationCreate_Data_Access_ModelArgs = {
   data_access_model_data?: InputMaybe<DataAccessModelInput>;
 };
-
 
 export type MutationCreate_DatasetArgs = {
   dataset_data?: InputMaybe<CreateDatasetInput>;
 };
 
-
 export type MutationCreate_Dataset_RatingArgs = {
   rating_data: DatasetRatingInput;
 };
 
+export type MutationCreate_External_Access_ModelArgs = {
+  external_access_model_data?: InputMaybe<ExternalAccessModelInput>;
+};
 
 export type MutationCreate_GeographyArgs = {
   geography_data: GeographyInput;
 };
 
-
 export type MutationCreate_LicenseArgs = {
   license_data: LicenseInput;
 };
-
 
 export type MutationCreate_License_AdditionArgs = {
   license_addition_data: LicenseAdditionsCreateInput;
 };
 
-
 export type MutationCreate_OrganizationArgs = {
   organization_data: OrganizationInput;
 };
-
 
 export type MutationCreate_PolicyArgs = {
   policy_data: PolicyInput;
 };
 
-
 export type MutationCreate_ResourceArgs = {
   resource_data?: InputMaybe<ResourceInput>;
 };
-
 
 export type MutationCreate_SectorArgs = {
   sector_data: SectorInput;
 };
 
-
 export type MutationCreate_TagArgs = {
   tag_data: TagInput;
 };
-
 
 export type MutationData_Access_Model_RequestArgs = {
   data_access_model_request?: InputMaybe<DataAccessModelRequestInput>;
 };
 
-
 export type MutationData_RequestArgs = {
   data_request?: InputMaybe<DataRequestInput>;
 };
 
+export type MutationDataset_Access_Model_Request_User_MigrationArgs = {
+  data_access_model_request?: InputMaybe<UserMigrationInput>;
+};
 
 export type MutationDelete_Access_Model_ResourceArgs = {
   access_model_resource_data?: InputMaybe<DeleteAccessModelResourceInput>;
 };
 
-
 export type MutationDelete_Additional_InfoArgs = {
   id?: InputMaybe<Scalars['ID']>;
 };
-
 
 export type MutationDelete_Api_SourceArgs = {
   api_source_id: Scalars['Int'];
 };
 
-
 export type MutationDelete_Data_Access_ModelArgs = {
   data_access_model_data?: InputMaybe<DeleteDataAccessModelInput>;
 };
 
+export type MutationDelete_External_Access_ModelArgs = {
+  external_access_model_data?: InputMaybe<DeleteExternalAccessModelInput>;
+};
 
 export type MutationDelete_LicenseArgs = {
   license_id: Scalars['ID'];
 };
 
-
 export type MutationDelete_Organization_RequestArgs = {
   delete_organization_request?: InputMaybe<OrganizationRequestUpdateInput>;
 };
-
 
 export type MutationDelete_PolicyArgs = {
   policy_id: Scalars['ID'];
 };
 
-
 export type MutationDelete_ResourceArgs = {
   resource_data?: InputMaybe<DeleteResourceInput>;
 };
-
 
 export type MutationDisable_Data_Access_ModelArgs = {
   data_access_model_data?: InputMaybe<DisableDataAccessModelInput>;
 };
 
-
 export type MutationEdit_DatasetArgs = {
   dataset_data?: InputMaybe<EditDatasetInput>;
 };
-
 
 export type MutationModeration_RequestArgs = {
   moderation_request?: InputMaybe<ModerationRequestInput>;
 };
 
-
 export type MutationOpen_Data_RequestArgs = {
   data_request?: InputMaybe<OpenDataRequestInput>;
 };
-
 
 export type MutationOrganization_RequestArgs = {
   organization_request?: InputMaybe<OrganizationRequestInput>;
 };
 
-
 export type MutationPatch_DatasetArgs = {
   dataset_data?: InputMaybe<PatchDatasetInput>;
 };
-
 
 export type MutationPatch_OrganizationArgs = {
   organization_data: OrganizationPatchInput;
 };
 
-
 export type MutationReview_RequestArgs = {
   review_request?: InputMaybe<ReviewRequestInput>;
 };
-
 
 export type MutationSubscribe_MutationArgs = {
   subscribe_input: SubscribeInput;
 };
 
-
 export type MutationUpdate_Access_Model_ResourceArgs = {
   access_model_resource_data?: InputMaybe<AccessModelResourceInput>;
 };
 
-
 export type MutationUpdate_Additional_InfoArgs = {
-  resource_data: AdditionalInfoInput;
+  info_data: AdditionalInfoInput;
 };
-
 
 export type MutationUpdate_Data_Access_ModelArgs = {
   data_access_model_data?: InputMaybe<DataAccessModelInput>;
 };
 
-
 export type MutationUpdate_Data_RequestArgs = {
   data_request?: InputMaybe<DataRequestUpdateInput>;
 };
-
 
 export type MutationUpdate_DatasetArgs = {
   dataset_data?: InputMaybe<UpdateDatasetInput>;
 };
 
-
 export type MutationUpdate_GeographyArgs = {
   geography_data: GeographyInput;
 };
-
 
 export type MutationUpdate_LicenseArgs = {
   license_data: LicenseInput;
 };
 
-
 export type MutationUpdate_License_AdditionArgs = {
   license_addition_data: LicenseAdditionsCreateInput;
 };
-
 
 export type MutationUpdate_OrganizationArgs = {
   organization_data: OrganizationInput;
 };
 
-
 export type MutationUpdate_PolicyArgs = {
   policy_data: PolicyInput;
 };
-
 
 export type MutationUpdate_ResourceArgs = {
   resource_data: ResourceInput;
 };
 
+export type MutationUpdate_SchemaArgs = {
+  resource_data: UpdateSchemaInput;
+};
 
 export type MutationUpdate_SectorArgs = {
   sector_data: SectorInput;
@@ -1504,8 +1575,44 @@ export type OpenDataRequestMutation = {
   success?: Maybe<Scalars['Boolean']>;
 };
 
+export type OrgDpaType = {
+  __typename?: 'OrgDpaType';
+  address?: Maybe<Scalars['String']>;
+  cdo_notification: Scalars['String'];
+  contact_email?: Maybe<Scalars['String']>;
+  data_description?: Maybe<Scalars['String']>;
+  description: Scalars['String'];
+  dpa_designation?: Maybe<Scalars['String']>;
+  dpa_email?: Maybe<Scalars['String']>;
+  dpa_name?: Maybe<Scalars['String']>;
+  dpa_phone?: Maybe<Scalars['String']>;
+  homepage: Scalars['String'];
+  id: Scalars['ID'];
+  issued: Scalars['DateTime'];
+  logo?: Maybe<Scalars['String']>;
+  modified: Scalars['DateTime'];
+  new_cdo_notification: Scalars['String'];
+  new_dpa: Scalars['String'];
+  ogd_tid?: Maybe<Scalars['Int']>;
+  old_dpa?: Maybe<Scalars['String']>;
+  org_id?: Maybe<OrganizationType>;
+  organization_ptr: OrganizationType;
+  organization_subtypes?: Maybe<OrganizationCreateRequestOrganizationSubtypes>;
+  organization_types: OrganizationOrganizationTypes;
+  organizationcreaterequest_ptr: CreateOrganizationType;
+  parent?: Maybe<OrganizationType>;
+  remark?: Maybe<Scalars['String']>;
+  sample_data_url: Scalars['String'];
+  state?: Maybe<GeographyType>;
+  status: OrganizationCreateRequestStatus;
+  title: Scalars['String'];
+  upload_sample_data_file: Scalars['String'];
+  username: Scalars['String'];
+};
+
 export type OrgItem = {
   __typename?: 'OrgItem';
+  dpa_email?: Maybe<Scalars['String']>;
   org_id?: Maybe<Scalars['String']>;
   parent?: Maybe<Array<Maybe<Scalars['String']>>>;
   title?: Maybe<Scalars['String']>;
@@ -1519,7 +1626,7 @@ export enum OrganizationCreateRequestOrganizationSubtypes {
   /** Organisation */
   Organisation = 'ORGANISATION',
   /** Other */
-  Other = 'OTHER'
+  Other = 'OTHER',
 }
 
 export enum OrganizationCreateRequestStatus {
@@ -1530,13 +1637,13 @@ export enum OrganizationCreateRequestStatus {
   /** Rejected */
   Rejected = 'REJECTED',
   /** Requested */
-  Requested = 'REQUESTED'
+  Requested = 'REQUESTED',
 }
 
 export enum OrganizationCreationStatusType {
   Approved = 'APPROVED',
   Rejected = 'REJECTED',
-  Requested = 'REQUESTED'
+  Requested = 'REQUESTED',
 }
 
 export type OrganizationInput = {
@@ -1594,7 +1701,7 @@ export enum OrganizationOrganizationTypes {
   /** Union Territory Government */
   UnionTerritoryGovernment = 'UNION_TERRITORY_GOVERNMENT',
   /** Urban Local Body */
-  UrbanLocalBody = 'URBAN_LOCAL_BODY'
+  UrbanLocalBody = 'URBAN_LOCAL_BODY',
 }
 
 export type OrganizationPatchInput = {
@@ -1635,14 +1742,14 @@ export enum OrganizationRequestStatus {
   /** Rejected */
   Rejected = 'REJECTED',
   /** Requested */
-  Requested = 'REQUESTED'
+  Requested = 'REQUESTED',
 }
 
 export enum OrganizationRequestStatusType {
   Approved = 'APPROVED',
   Deleted = 'DELETED',
   Rejected = 'REJECTED',
-  Requested = 'REQUESTED'
+  Requested = 'REQUESTED',
 }
 
 export type OrganizationRequestType = {
@@ -1669,7 +1776,7 @@ export enum OrganizationSubTypes {
   Department = 'DEPARTMENT',
   Ministry = 'MINISTRY',
   Organisation = 'ORGANISATION',
-  Other = 'OTHER'
+  Other = 'OTHER',
 }
 
 export type OrganizationType = {
@@ -1683,7 +1790,7 @@ export type OrganizationType = {
   dataaccessmodel_set: Array<DataAccessModelType>;
   dataset_count?: Maybe<Scalars['Int']>;
   description: Scalars['String'];
-  homepage?: Maybe<Scalars['String']>;
+  homepage: Scalars['String'];
   id: Scalars['ID'];
   issued: Scalars['DateTime'];
   license_set: Array<LicenseType>;
@@ -1692,6 +1799,7 @@ export type OrganizationType = {
   organization_types: OrganizationOrganizationTypes;
   organizationcreaterequest?: Maybe<CreateOrganizationType>;
   organizationrequest_set: Array<OrganizationRequestType>;
+  orgdpahistory_set: Array<OrgDpaType>;
   parent?: Maybe<OrganizationType>;
   parent_field: Array<OrganizationType>;
   policy_set: Array<PolicyType>;
@@ -1718,12 +1826,18 @@ export enum OrganizationTypes {
   Startup = 'STARTUP',
   StateGovernment = 'STATE_GOVERNMENT',
   UnionTerritoryGovernment = 'UNION_TERRITORY_GOVERNMENT',
-  UrbanLocalBody = 'URBAN_LOCAL_BODY'
+  UrbanLocalBody = 'URBAN_LOCAL_BODY',
 }
+
+export type OrgsItem = {
+  __typename?: 'OrgsItem';
+  org_id?: Maybe<Scalars['String']>;
+  org_title?: Maybe<Scalars['String']>;
+};
 
 export enum Paymenttypes {
   Free = 'FREE',
-  Paid = 'PAID'
+  Paid = 'PAID',
 }
 
 export type ParameterKeyValueType = {
@@ -1732,9 +1846,10 @@ export type ParameterKeyValueType = {
 };
 
 export enum ParameterTypes {
+  Download = 'DOWNLOAD',
   Exposed = 'EXPOSED',
   Pagination = 'PAGINATION',
-  Preview = 'PREVIEW'
+  Preview = 'PREVIEW',
 }
 
 export type PatchDataset = {
@@ -1772,6 +1887,7 @@ export type PolicyInput = {
   id?: InputMaybe<Scalars['ID']>;
   remote_url?: InputMaybe<Scalars['String']>;
   title: Scalars['String'];
+  type?: InputMaybe<Scalars['String']>;
 };
 
 export enum PolicyStatus {
@@ -1780,13 +1896,14 @@ export enum PolicyStatus {
   /** Rejected */
   Rejected = 'REJECTED',
   /** Requested */
-  Requested = 'REQUESTED'
+  Requested = 'REQUESTED',
 }
 
 export type PolicyType = {
   __typename?: 'PolicyType';
   datasetaccessmodel_set: Array<DatasetAccessModelType>;
   description: Scalars['String'];
+  externalaccessmodel_set: Array<ExternalAccessModelType>;
   file: Scalars['String'];
   id: Scalars['ID'];
   issued: Scalars['DateTime'];
@@ -1796,6 +1913,36 @@ export type PolicyType = {
   remote_url: Scalars['String'];
   status: PolicyStatus;
   title: Scalars['String'];
+  type?: Maybe<Scalars['String']>;
+};
+
+export type ProviderAdminItem = {
+  __typename?: 'ProviderAdminItem';
+  cdo_notif?: Maybe<Scalars['String']>;
+  dp_count?: Maybe<Scalars['Int']>;
+  dpa_list?: Maybe<Array<Maybe<OrgDpaType>>>;
+  org_dataset_count?: Maybe<Scalars['Int']>;
+  org_id?: Maybe<Scalars['String']>;
+  org_title?: Maybe<Scalars['String']>;
+  provider_email?: Maybe<Scalars['String']>;
+  provider_name?: Maybe<Scalars['String']>;
+  provider_user_name?: Maybe<Scalars['String']>;
+  updated?: Maybe<Scalars['String']>;
+  user_org_dataset_count?: Maybe<Scalars['Int']>;
+};
+
+export type ProviderItem = {
+  __typename?: 'ProviderItem';
+  dataset_count?: Maybe<Scalars['Int']>;
+  dataset_list?: Maybe<Array<Maybe<DatasetType>>>;
+  dpa_email?: Maybe<Scalars['String']>;
+  dpa_name?: Maybe<Scalars['String']>;
+  org_id?: Maybe<Scalars['String']>;
+  org_title?: Maybe<Scalars['String']>;
+  provider_email?: Maybe<Scalars['String']>;
+  provider_name?: Maybe<Scalars['String']>;
+  provider_user_name?: Maybe<Scalars['String']>;
+  updated?: Maybe<Scalars['String']>;
 };
 
 export enum PurposeType {
@@ -1804,7 +1951,7 @@ export enum PurposeType {
   GovernmentUse = 'GOVERNMENT_USE',
   Journalism = 'JOURNALISM',
   Others = 'OTHERS',
-  RD = 'R_D'
+  RD = 'R_D',
 }
 
 export type Query = {
@@ -1813,11 +1960,15 @@ export type Query = {
   all_api_source?: Maybe<Array<Maybe<ApiSourceType>>>;
   all_api_source_by_org?: Maybe<Array<Maybe<ApiSourceType>>>;
   all_catalog?: Maybe<Array<Maybe<CatalogType>>>;
-  all_data_access_model_requests?: Maybe<Array<Maybe<DataAccessModelRequestType>>>;
+  all_data_access_model_requests?: Maybe<
+    Array<Maybe<DataAccessModelRequestType>>
+  >;
   all_data_access_models?: Maybe<Array<Maybe<DataAccessModelType>>>;
   all_data_requests?: Maybe<Array<Maybe<DataRequestType>>>;
+  all_dataset_filters?: Maybe<Filters>;
   all_dataset_ratings?: Maybe<Array<Maybe<DatasetRatingType>>>;
   all_datasets?: Maybe<Array<Maybe<DatasetType>>>;
+  all_external_access_models?: Maybe<Array<Maybe<ExternalAccessModelType>>>;
   all_geography?: Maybe<Array<Maybe<GeographyType>>>;
   all_info?: Maybe<Array<Maybe<AdditionalInfoType>>>;
   all_license?: Maybe<Array<Maybe<LicenseType>>>;
@@ -1826,30 +1977,43 @@ export type Query = {
   all_organization_requests?: Maybe<Array<Maybe<OrganizationRequestType>>>;
   all_organizations?: Maybe<Array<Maybe<OrganizationType>>>;
   all_organizations_hierarchy?: Maybe<Array<Maybe<OrgItem>>>;
+  all_pending_data_access_model_requests?: Maybe<
+    Array<Maybe<DataAccessModelRequestType>>
+  >;
   all_policy?: Maybe<Array<Maybe<PolicyType>>>;
+  all_provider_admins?: Maybe<Array<Maybe<ProviderAdminItem>>>;
+  all_providers?: Maybe<Array<Maybe<ProviderItem>>>;
   all_resources?: Maybe<Array<Maybe<ResourceType>>>;
   all_review_requests?: Maybe<Array<Maybe<ReviewRequestType>>>;
   all_sector?: Maybe<Array<Maybe<SectorType>>>;
   all_subscriptions?: Maybe<Array<Maybe<SubscribeType>>>;
   all_tag?: Maybe<Array<Maybe<TagType>>>;
+  all_users?: Maybe<Array<Maybe<UserItem>>>;
   api_source?: Maybe<ApiSourceType>;
   approved_policy?: Maybe<Array<Maybe<PolicyType>>>;
   catalog?: Maybe<CatalogType>;
   data_access_model?: Maybe<DataAccessModelType>;
   data_access_model_request?: Maybe<DataAccessModelRequestType>;
-  data_access_model_request_org?: Maybe<Array<Maybe<DataAccessModelRequestType>>>;
-  data_access_model_request_user?: Maybe<Array<Maybe<DataAccessModelRequestType>>>;
+  data_access_model_request_org?: Maybe<
+    Array<Maybe<DataAccessModelRequestType>>
+  >;
+  data_access_model_request_user?: Maybe<
+    Array<Maybe<DataAccessModelRequestType>>
+  >;
   data_request?: Maybe<DataRequestType>;
   data_request_user?: Maybe<DataRequestType>;
   data_spec?: Maybe<Scalars['JSONString']>;
   dataset?: Maybe<DatasetType>;
   dataset_access_model?: Maybe<Array<Maybe<DatasetAccessModelType>>>;
   dataset_access_model_by_id?: Maybe<DatasetAccessModelType>;
+  dataset_by_downloads?: Maybe<Array<Maybe<DatasetType>>>;
   dataset_by_slug?: Maybe<DatasetType>;
   dataset_by_title?: Maybe<DatasetType>;
+  dataset_count_org?: Maybe<Array<Maybe<DatasetCount>>>;
   dataset_rating?: Maybe<Array<Maybe<DatasetRatingType>>>;
   dept_by_ministry?: Maybe<Array<Maybe<OrganizationType>>>;
   entity_by_state?: Maybe<Array<Maybe<OrganizationType>>>;
+  external_access_model_by_dataset?: Maybe<ExternalAccessModelType>;
   geography?: Maybe<GeographyType>;
   info?: Maybe<AdditionalInfoType>;
   license?: Maybe<LicenseType>;
@@ -1865,14 +2029,16 @@ export type Query = {
   org_datasets?: Maybe<Array<Maybe<DatasetType>>>;
   organization_by_id?: Maybe<OrganizationType>;
   organization_by_tid?: Maybe<OrganizationType>;
-  organization_by_title?: Maybe<OrganizationType>;
+  organization_by_title?: Maybe<Array<Maybe<OrganizationType>>>;
   organization_request?: Maybe<OrganizationRequestType>;
   organization_request_user?: Maybe<Array<Maybe<OrganizationRequestType>>>;
   organization_without_dpa?: Maybe<Array<Maybe<OrganizationType>>>;
   organizations?: Maybe<Array<Maybe<OrganizationType>>>;
   organizations_by_user?: Maybe<Array<Maybe<OrganizationType>>>;
+  organizations_child?: Maybe<Array<Maybe<OrganizationType>>>;
   policy_by_id?: Maybe<PolicyType>;
   policy_by_org?: Maybe<Array<Maybe<PolicyType>>>;
+  published_organization_by_id?: Maybe<OrganizationType>;
   rating?: Maybe<DatasetRatingType>;
   rating_by_org?: Maybe<Array<Maybe<DatasetRatingType>>>;
   requested_rejected_organizations?: Maybe<Array<Maybe<OrganizationType>>>;
@@ -1884,6 +2050,7 @@ export type Query = {
   sector?: Maybe<SectorType>;
   sector_by_title?: Maybe<SectorType>;
   stat_count?: Maybe<StatsType>;
+  sub_geographies?: Maybe<Array<Maybe<GeographyType>>>;
   subscribe?: Maybe<SubscribeType>;
   tag?: Maybe<TagType>;
   user_activity?: Maybe<Array<Maybe<ActivityType>>>;
@@ -1891,36 +2058,48 @@ export type Query = {
   user_subscriptions?: Maybe<Array<Maybe<SubscribeType>>>;
 };
 
+export type QueryAll_Data_Access_Model_RequestsArgs = {
+  first?: InputMaybe<Scalars['Int']>;
+  skip?: InputMaybe<Scalars['Int']>;
+};
+
+export type QueryAll_DatasetsArgs = {
+  first?: InputMaybe<Scalars['Int']>;
+  skip?: InputMaybe<Scalars['Int']>;
+};
+
+export type QueryAll_Pending_Data_Access_Model_RequestsArgs = {
+  first?: InputMaybe<Scalars['Int']>;
+  skip?: InputMaybe<Scalars['Int']>;
+};
+
+export type QueryAll_ProvidersArgs = {
+  org_id?: InputMaybe<Scalars['Int']>;
+};
 
 export type QueryApi_SourceArgs = {
   api_source_id?: InputMaybe<Scalars['Int']>;
 };
 
-
 export type QueryCatalogArgs = {
   catalog_id?: InputMaybe<Scalars['Int']>;
 };
-
 
 export type QueryData_Access_ModelArgs = {
   data_access_model_id?: InputMaybe<Scalars['ID']>;
 };
 
-
 export type QueryData_Access_Model_RequestArgs = {
   data_access_model_request_id?: InputMaybe<Scalars['Int']>;
 };
-
 
 export type QueryData_Access_Model_Request_OrgArgs = {
   org_id?: InputMaybe<Scalars['Int']>;
 };
 
-
 export type QueryData_RequestArgs = {
   data_request_id?: InputMaybe<Scalars['UUID']>;
 };
-
 
 export type QueryData_SpecArgs = {
   dataset_access_model_request_id?: InputMaybe<Scalars['ID']>;
@@ -1928,43 +2107,55 @@ export type QueryData_SpecArgs = {
   resource_id: Scalars['ID'];
 };
 
-
 export type QueryDatasetArgs = {
   dataset_id?: InputMaybe<Scalars['Int']>;
 };
-
 
 export type QueryDataset_Access_ModelArgs = {
   anonymous_users?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   dataset_id?: InputMaybe<Scalars['ID']>;
 };
 
-
 export type QueryDataset_Access_Model_By_IdArgs = {
   dataset_access_model_id?: InputMaybe<Scalars['ID']>;
 };
 
+export type QueryDataset_By_DownloadsArgs = {
+  first?: InputMaybe<Scalars['Int']>;
+  frm?: InputMaybe<Scalars['String']>;
+  geo?: InputMaybe<Scalars['String']>;
+  hvd?: InputMaybe<Scalars['Boolean']>;
+  org?: InputMaybe<Scalars['String']>;
+  sector?: InputMaybe<Scalars['String']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  to?: InputMaybe<Scalars['String']>;
+};
 
 export type QueryDataset_By_SlugArgs = {
   dataset_slug?: InputMaybe<Scalars['String']>;
 };
 
-
 export type QueryDataset_By_TitleArgs = {
   dataset_title?: InputMaybe<Scalars['String']>;
 };
 
+export type QueryDataset_Count_OrgArgs = {
+  by?: InputMaybe<Scalars['String']>;
+  frm?: InputMaybe<Scalars['String']>;
+  geo?: InputMaybe<Scalars['String']>;
+  org?: InputMaybe<Scalars['String']>;
+  sector?: InputMaybe<Scalars['String']>;
+  to?: InputMaybe<Scalars['String']>;
+};
 
 export type QueryDataset_RatingArgs = {
   dataset_id?: InputMaybe<Scalars['Int']>;
 };
 
-
 export type QueryDept_By_MinistryArgs = {
   organization_id?: InputMaybe<Scalars['Int']>;
   state?: InputMaybe<Scalars['String']>;
 };
-
 
 export type QueryEntity_By_StateArgs = {
   entity_type?: InputMaybe<Scalars['String']>;
@@ -1972,49 +2163,45 @@ export type QueryEntity_By_StateArgs = {
   state?: InputMaybe<Scalars['String']>;
 };
 
+export type QueryExternal_Access_Model_By_DatasetArgs = {
+  dataset_id?: InputMaybe<Scalars['ID']>;
+};
 
 export type QueryGeographyArgs = {
   geography_id?: InputMaybe<Scalars['Int']>;
 };
 
-
 export type QueryInfoArgs = {
   info_id?: InputMaybe<Scalars['Int']>;
 };
-
 
 export type QueryLicenseArgs = {
   license_id?: InputMaybe<Scalars['Int']>;
 };
 
-
 export type QueryLicense_AdditionArgs = {
   license_id?: InputMaybe<Scalars['Int']>;
 };
-
 
 export type QueryMinistries_By_StateArgs = {
   state?: InputMaybe<Scalars['String']>;
 };
 
-
 export type QueryModeration_RequestArgs = {
   moderation_request_id?: InputMaybe<Scalars['Int']>;
 };
-
 
 export type QueryOrg_ActivityArgs = {
   filters?: InputMaybe<Array<InputMaybe<ActivityFilter>>>;
   first?: InputMaybe<Scalars['Int']>;
   organization_id?: InputMaybe<Scalars['ID']>;
+  search_query?: InputMaybe<Scalars['String']>;
   skip?: InputMaybe<Scalars['Int']>;
 };
-
 
 export type QueryOrg_Data_Access_ModelsArgs = {
   organization_id?: InputMaybe<Scalars['ID']>;
 };
-
 
 export type QueryOrg_DatasetsArgs = {
   first?: InputMaybe<Scalars['Int']>;
@@ -2022,89 +2209,85 @@ export type QueryOrg_DatasetsArgs = {
   status?: InputMaybe<DatasetStatus>;
 };
 
-
 export type QueryOrganization_By_IdArgs = {
   organization_id?: InputMaybe<Scalars['Int']>;
 };
-
 
 export type QueryOrganization_By_TidArgs = {
   organization_tid?: InputMaybe<Scalars['Int']>;
 };
 
-
 export type QueryOrganization_By_TitleArgs = {
   organization_title?: InputMaybe<Scalars['String']>;
 };
-
 
 export type QueryOrganization_RequestArgs = {
   organization_request_id?: InputMaybe<Scalars['Int']>;
 };
 
-
 export type QueryOrganization_Without_DpaArgs = {
   organization_id?: InputMaybe<Scalars['Int']>;
 };
 
+export type QueryOrganizations_ChildArgs = {
+  organization_id?: InputMaybe<Scalars['Int']>;
+};
 
 export type QueryPolicy_By_IdArgs = {
   policy_id?: InputMaybe<Scalars['Int']>;
 };
 
+export type QueryPublished_Organization_By_IdArgs = {
+  organization_id?: InputMaybe<Scalars['Int']>;
+};
 
 export type QueryRatingArgs = {
   dataset_rating_id?: InputMaybe<Scalars['Int']>;
 };
 
-
 export type QueryResourceArgs = {
   resource_id?: InputMaybe<Scalars['Int']>;
 };
-
 
 export type QueryResource_ColumnsArgs = {
   resource_id?: InputMaybe<Scalars['Int']>;
 };
 
-
 export type QueryResource_DatasetArgs = {
   dataset_id?: InputMaybe<Scalars['Int']>;
 };
-
 
 export type QueryReview_RequestArgs = {
   review_request_id?: InputMaybe<Scalars['Int']>;
 };
 
-
 export type QuerySectorArgs = {
   sector_id?: InputMaybe<Scalars['Int']>;
 };
-
 
 export type QuerySector_By_TitleArgs = {
   sector_title?: InputMaybe<Scalars['String']>;
 };
 
+export type QuerySub_GeographiesArgs = {
+  parent_id?: InputMaybe<Scalars['Int']>;
+};
 
 export type QuerySubscribeArgs = {
   subscribe_id?: InputMaybe<Scalars['Int']>;
 };
 
-
 export type QueryTagArgs = {
   tag_id?: InputMaybe<Scalars['Int']>;
 };
 
-
 export type QueryUser_ActivityArgs = {
   filters?: InputMaybe<Array<InputMaybe<ActivityFilter>>>;
   first?: InputMaybe<Scalars['Int']>;
+  search_query?: InputMaybe<Scalars['String']>;
   skip?: InputMaybe<Scalars['Int']>;
   user?: InputMaybe<Scalars['String']>;
 };
-
 
 export type QueryUser_Dataset_SubscriptionArgs = {
   dataset_id?: InputMaybe<Scalars['Int']>;
@@ -2118,19 +2301,19 @@ export enum RateLimitUnits {
   Quarter = 'QUARTER',
   Second = 'SECOND',
   Week = 'WEEK',
-  Year = 'YEAR'
+  Year = 'YEAR',
 }
 
 export enum RatingStatus {
   Created = 'CREATED',
   Published = 'PUBLISHED',
-  Rejected = 'REJECTED'
+  Rejected = 'REJECTED',
 }
 
 export enum RequestType {
   Get = 'GET',
   Post = 'POST',
-  Put = 'PUT'
+  Put = 'PUT',
 }
 
 export type ResourceFieldInput = {
@@ -2148,8 +2331,11 @@ export type ResourceInput = {
   compression_format?: InputMaybe<Scalars['String']>;
   dataset: Scalars['ID'];
   description?: InputMaybe<Scalars['String']>;
+  external_url?: InputMaybe<Scalars['String']>;
   file_details?: InputMaybe<FileInputType>;
   id?: InputMaybe<Scalars['ID']>;
+  is_downloadable?: InputMaybe<Scalars['String']>;
+  is_large_data?: InputMaybe<Scalars['Boolean']>;
   masked_fields?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   media_type?: InputMaybe<Scalars['String']>;
   packaging_format?: InputMaybe<Scalars['String']>;
@@ -2201,9 +2387,12 @@ export type ResourceType = {
   dataset: DatasetType;
   datasetaccessmodelresource_set: Array<AccessModelResourceType>;
   description: Scalars['String'];
+  external_url?: Maybe<Scalars['String']>;
   file_details?: Maybe<FileDetailsType>;
   filedetails?: Maybe<FileDetailsType>;
   id: Scalars['ID'];
+  is_downloadable: Scalars['Boolean'];
+  is_large_data: Scalars['Boolean'];
   issued: Scalars['DateTime'];
   masked_fields?: Maybe<Array<Scalars['String']>>;
   media_type?: Maybe<Scalars['String']>;
@@ -2220,7 +2409,7 @@ export type ResourceType = {
 export enum ResponseType {
   Csv = 'CSV',
   Json = 'JSON',
-  Xml = 'XML'
+  Xml = 'XML',
 }
 
 export type ReviewRequestInput = {
@@ -2264,8 +2453,14 @@ export type SectorInput = {
   highlights?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   id?: InputMaybe<Scalars['ID']>;
   name: Scalars['String'];
-  official_id: Scalars['String'];
+  official_id?: InputMaybe<Scalars['String']>;
   parent_id?: InputMaybe<Scalars['String']>;
+};
+
+export type SectorItem = {
+  __typename?: 'SectorItem';
+  sector_id?: Maybe<Scalars['String']>;
+  sector_name?: Maybe<Scalars['String']>;
 };
 
 export type SectorType = {
@@ -2299,7 +2494,7 @@ export enum StatusType {
   Addressing = 'ADDRESSING',
   Approved = 'APPROVED',
   Rejected = 'REJECTED',
-  Requested = 'REQUESTED'
+  Requested = 'REQUESTED',
 }
 
 export type SubscribeInput = {
@@ -2322,7 +2517,7 @@ export type SubscribeType = {
 
 export enum SubscriptionAction {
   Subscribe = 'SUBSCRIBE',
-  Unsubscribe = 'UNSUBSCRIBE'
+  Unsubscribe = 'UNSUBSCRIBE',
 }
 
 export enum SubscriptionUnits {
@@ -2331,12 +2526,12 @@ export enum SubscriptionUnits {
   Monthly = 'MONTHLY',
   Quarterly = 'QUARTERLY',
   Weekly = 'WEEKLY',
-  Yearly = 'YEARLY'
+  Yearly = 'YEARLY',
 }
 
 export type TagInput = {
   id?: InputMaybe<Scalars['ID']>;
-  name?: InputMaybe<Scalars['String']>;
+  name: Scalars['String'];
 };
 
 export type TagType = {
@@ -2379,25 +2574,26 @@ export type UpdateDatasetInput = {
   confirms_to?: InputMaybe<Scalars['String']>;
   contact_point?: InputMaybe<Scalars['String']>;
   funnel?: InputMaybe<Scalars['String']>;
-  geo_list?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  geo_list: Array<InputMaybe<Scalars['String']>>;
   highlights?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  id: Scalars['ID'];
+  id?: InputMaybe<Scalars['ID']>;
   in_series?: InputMaybe<Scalars['String']>;
+  is_datedynamic?: InputMaybe<Scalars['String']>;
   language?: InputMaybe<Scalars['String']>;
   period_from?: InputMaybe<Scalars['Date']>;
   period_to?: InputMaybe<Scalars['Date']>;
   qualified_attribution?: InputMaybe<Scalars['String']>;
-  remote_issued?: InputMaybe<Scalars['Date']>;
+  remote_issued: Scalars['Date'];
   remote_modified?: InputMaybe<Scalars['Date']>;
-  sector_list?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  source?: InputMaybe<Scalars['String']>;
+  sector_list: Array<InputMaybe<Scalars['String']>>;
+  source: Scalars['String'];
   spatial_coverage?: InputMaybe<Scalars['String']>;
   spatial_resolution?: InputMaybe<Scalars['String']>;
   tags_list?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   temporal_coverage?: InputMaybe<Scalars['String']>;
   temporal_resolution?: InputMaybe<Scalars['String']>;
   theme?: InputMaybe<Scalars['String']>;
-  update_frequency?: InputMaybe<Scalars['String']>;
+  update_frequency: Scalars['String'];
 };
 
 export type UpdateGeography = {
@@ -2442,6 +2638,18 @@ export type UpdateResource = {
   success?: Maybe<Scalars['Boolean']>;
 };
 
+export type UpdateSchema = {
+  __typename?: 'UpdateSchema';
+  errors?: Maybe<Scalars['ExpectedErrorType']>;
+  resource?: Maybe<ResourceType>;
+  success?: Maybe<Scalars['Boolean']>;
+};
+
+export type UpdateSchemaInput = {
+  id?: InputMaybe<Scalars['ID']>;
+  schema?: InputMaybe<Array<InputMaybe<ResourceSchemaInputType>>>;
+};
+
 export type UpdateSector = {
   __typename?: 'UpdateSector';
   errors?: Maybe<Scalars['ExpectedErrorType']>;
@@ -2449,82 +2657,907 @@ export type UpdateSector = {
   success?: Maybe<Scalars['Boolean']>;
 };
 
+export type UserItem = {
+  __typename?: 'UserItem';
+  dataset_access_count?: Maybe<Scalars['Int']>;
+  dataset_list?: Maybe<Array<Maybe<DatasetType>>>;
+  date_joined?: Maybe<Scalars['String']>;
+  email?: Maybe<Scalars['String']>;
+  first_name?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  ratings_user?: Maybe<Scalars['Int']>;
+  username?: Maybe<Scalars['String']>;
+};
+
+export type UserMigrationInput = {
+  source_dam_id?: InputMaybe<Scalars['ID']>;
+  target_dam_id?: InputMaybe<Scalars['ID']>;
+  target_user?: InputMaybe<Scalars['String']>;
+};
+
 export enum ValidationUnits {
   Day = 'DAY',
   Lifetime = 'LIFETIME',
   Month = 'MONTH',
   Week = 'WEEK',
-  Year = 'YEAR'
+  Year = 'YEAR',
 }
 
 export type CreateResourceMutationMutationVariables = Exact<{
   resource_data?: InputMaybe<ResourceInput>;
 }>;
 
-
-export type CreateResourceMutationMutation = { __typename?: 'Mutation', create_resource?: { __typename?: 'CreateResource', success?: boolean | null, errors?: any | null, resource?: { __typename?: 'ResourceType', id: string, title: string, description: string, file_details?: { __typename?: 'FileDetailsType', format: string, file: string, remote_url: string, source_file_name: string, resource: { __typename?: 'ResourceType', id: string, title: string, description: string } } | null } | null } | null };
+export type CreateResourceMutationMutation = {
+  __typename?: 'Mutation';
+  create_resource?: {
+    __typename?: 'CreateResource';
+    success?: boolean | null;
+    errors?: any | null;
+    resource?: {
+      __typename?: 'ResourceType';
+      id: string;
+      title: string;
+      description: string;
+      file_details?: {
+        __typename?: 'FileDetailsType';
+        format: string;
+        file: string;
+        remote_url: string;
+        source_file_name: string;
+        resource: {
+          __typename?: 'ResourceType';
+          id: string;
+          title: string;
+          description: string;
+        };
+      } | null;
+    } | null;
+  } | null;
+};
 
 export type DatasetQueryLayoutQueryVariables = Exact<{
   dataset_id?: InputMaybe<Scalars['Int']>;
 }>;
 
-
-export type DatasetQueryLayoutQuery = { __typename?: 'Query', dataset?: { __typename?: 'DatasetType', id: string, title: string } | null };
+export type DatasetQueryLayoutQuery = {
+  __typename?: 'Query';
+  dataset?: { __typename?: 'DatasetType'; id: string; title: string } | null;
+};
 
 export type DatasetDistributionQueryQueryVariables = Exact<{
   dataset_id?: InputMaybe<Scalars['Int']>;
 }>;
 
-
-export type DatasetDistributionQueryQuery = { __typename?: 'Query', dataset?: { __typename?: 'DatasetType', id: string, title: string, resource_set: Array<{ __typename?: 'ResourceType', id: string, title: string, description: string, file_details?: { __typename?: 'FileDetailsType', format: string, file: string, remote_url: string, source_file_name: string, resource: { __typename?: 'ResourceType', id: string, title: string, description: string } } | null }> } | null };
+export type DatasetDistributionQueryQuery = {
+  __typename?: 'Query';
+  dataset?: {
+    __typename?: 'DatasetType';
+    id: string;
+    title: string;
+    resource_set: Array<{
+      __typename?: 'ResourceType';
+      id: string;
+      title: string;
+      description: string;
+      file_details?: {
+        __typename?: 'FileDetailsType';
+        format: string;
+        file: string;
+        remote_url: string;
+        source_file_name: string;
+        resource: {
+          __typename?: 'ResourceType';
+          id: string;
+          title: string;
+          description: string;
+        };
+      } | null;
+    }>;
+  } | null;
+};
 
 export type DatasetQueryQueryVariables = Exact<{
   dataset_id?: InputMaybe<Scalars['Int']>;
 }>;
 
-
-export type DatasetQueryQuery = { __typename?: 'Query', dataset?: { __typename?: 'DatasetType', id: string, title: string, description: string, source: string, update_frequency?: string | null, language?: string | null, remote_issued?: any | null, geography: Array<{ __typename?: 'GeographyType', name: string, id: string }>, tags: Array<{ __typename?: 'TagType', id: string, name: string }> } | null };
+export type DatasetQueryQuery = {
+  __typename?: 'Query';
+  dataset?: {
+    __typename?: 'DatasetType';
+    id: string;
+    title: string;
+    description: string;
+    source: string;
+    update_frequency?: string | null;
+    language?: string | null;
+    remote_issued?: any | null;
+    geography: Array<{
+      __typename?: 'GeographyType';
+      name: string;
+      id: string;
+    }>;
+    tags: Array<{ __typename?: 'TagType'; id: string; name: string }>;
+  } | null;
+};
 
 export type UpdateDatasetMutationMutationVariables = Exact<{
   dataset_data?: InputMaybe<UpdateDatasetInput>;
 }>;
 
-
-export type UpdateDatasetMutationMutation = { __typename?: 'Mutation', update_dataset?: { __typename?: 'UpdateDataset', success?: boolean | null, errors?: any | null, dataset?: { __typename?: 'DatasetType', id: string, title: string, description: string, remote_issued?: any | null, update_frequency?: string | null, source: string, geography: Array<{ __typename?: 'GeographyType', name: string, id: string }>, tags: Array<{ __typename?: 'TagType', id: string, name: string }> } | null } | null };
+export type UpdateDatasetMutationMutation = {
+  __typename?: 'Mutation';
+  update_dataset?: {
+    __typename?: 'UpdateDataset';
+    success?: boolean | null;
+    errors?: any | null;
+    dataset?: {
+      __typename?: 'DatasetType';
+      id: string;
+      title: string;
+      description: string;
+      remote_issued?: any | null;
+      update_frequency?: string | null;
+      source: string;
+      geography: Array<{
+        __typename?: 'GeographyType';
+        name: string;
+        id: string;
+      }>;
+      tags: Array<{ __typename?: 'TagType'; id: string; name: string }>;
+    } | null;
+  } | null;
+};
 
 export type DatasetEditQueryQueryVariables = Exact<{
   dataset_id?: InputMaybe<Scalars['Int']>;
 }>;
 
-
-export type DatasetEditQueryQuery = { __typename?: 'Query', dataset?: { __typename?: 'DatasetType', id: string, title: string, description: string } | null };
+export type DatasetEditQueryQuery = {
+  __typename?: 'Query';
+  dataset?: {
+    __typename?: 'DatasetType';
+    id: string;
+    title: string;
+    description: string;
+  } | null;
+};
 
 export type PatchDatasetMutationMutationVariables = Exact<{
   dataset_data?: InputMaybe<PatchDatasetInput>;
 }>;
 
-
-export type PatchDatasetMutationMutation = { __typename?: 'Mutation', patch_dataset?: { __typename?: 'PatchDataset', success?: boolean | null, errors?: any | null, dataset?: { __typename?: 'DatasetType', id: string, title: string, description: string } | null } | null };
+export type PatchDatasetMutationMutation = {
+  __typename?: 'Mutation';
+  patch_dataset?: {
+    __typename?: 'PatchDataset';
+    success?: boolean | null;
+    errors?: any | null;
+    dataset?: {
+      __typename?: 'DatasetType';
+      id: string;
+      title: string;
+      description: string;
+    } | null;
+  } | null;
+};
 
 export type CreateDatasetMutationMutationVariables = Exact<{
   dataset_data?: InputMaybe<CreateDatasetInput>;
 }>;
 
+export type CreateDatasetMutationMutation = {
+  __typename?: 'Mutation';
+  create_dataset?: {
+    __typename?: 'CreateDataset';
+    success?: boolean | null;
+    errors?: any | null;
+    dataset?: {
+      __typename?: 'DatasetType';
+      id: string;
+      title: string;
+      description: string;
+      dataset_type: DatasetDatasetType;
+    } | null;
+  } | null;
+};
 
-export type CreateDatasetMutationMutation = { __typename?: 'Mutation', create_dataset?: { __typename?: 'CreateDataset', success?: boolean | null, errors?: any | null, dataset?: { __typename?: 'DatasetType', id: string, title: string, description: string, dataset_type: DatasetDatasetType } | null } | null };
+export type AllDatasetsQueryQueryVariables = Exact<{ [key: string]: never }>;
 
-export type AllDatasetsQueryQueryVariables = Exact<{ [key: string]: never; }>;
+export type AllDatasetsQueryQuery = {
+  __typename?: 'Query';
+  all_datasets?: Array<{
+    __typename?: 'DatasetType';
+    id: string;
+    title: string;
+    description: string;
+  } | null> | null;
+};
 
-
-export type AllDatasetsQueryQuery = { __typename?: 'Query', all_datasets?: Array<{ __typename?: 'DatasetType', id: string, title: string, description: string } | null> | null };
-
-
-export const CreateResourceMutationDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"createResourceMutation"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"resource_data"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"ResourceInput"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"create_resource"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"resource_data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"resource_data"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"success"}},{"kind":"Field","name":{"kind":"Name","value":"errors"}},{"kind":"Field","name":{"kind":"Name","value":"resource"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"file_details"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"resource"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"Field","name":{"kind":"Name","value":"format"}},{"kind":"Field","name":{"kind":"Name","value":"file"}},{"kind":"Field","name":{"kind":"Name","value":"remote_url"}},{"kind":"Field","name":{"kind":"Name","value":"source_file_name"}}]}}]}}]}}]}}]} as unknown as DocumentNode<CreateResourceMutationMutation, CreateResourceMutationMutationVariables>;
-export const DatasetQueryLayoutDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"datasetQueryLayout"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"dataset_id"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"dataset"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"dataset_id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"dataset_id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]}}]} as unknown as DocumentNode<DatasetQueryLayoutQuery, DatasetQueryLayoutQueryVariables>;
-export const DatasetDistributionQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"datasetDistributionQuery"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"dataset_id"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"dataset"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"dataset_id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"dataset_id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"resource_set"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"file_details"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"resource"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"Field","name":{"kind":"Name","value":"format"}},{"kind":"Field","name":{"kind":"Name","value":"file"}},{"kind":"Field","name":{"kind":"Name","value":"remote_url"}},{"kind":"Field","name":{"kind":"Name","value":"source_file_name"}}]}}]}}]}}]}}]} as unknown as DocumentNode<DatasetDistributionQueryQuery, DatasetDistributionQueryQueryVariables>;
-export const DatasetQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"datasetQuery"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"dataset_id"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"dataset"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"dataset_id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"dataset_id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"source"}},{"kind":"Field","name":{"kind":"Name","value":"update_frequency"}},{"kind":"Field","name":{"kind":"Name","value":"language"}},{"kind":"Field","name":{"kind":"Name","value":"remote_issued"}},{"kind":"Field","name":{"kind":"Name","value":"geography"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"tags"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]}}]} as unknown as DocumentNode<DatasetQueryQuery, DatasetQueryQueryVariables>;
-export const UpdateDatasetMutationDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"updateDatasetMutation"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"dataset_data"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"UpdateDatasetInput"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"update_dataset"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"dataset_data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"dataset_data"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"success"}},{"kind":"Field","name":{"kind":"Name","value":"errors"}},{"kind":"Field","name":{"kind":"Name","value":"dataset"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"remote_issued"}},{"kind":"Field","name":{"kind":"Name","value":"update_frequency"}},{"kind":"Field","name":{"kind":"Name","value":"geography"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"source"}},{"kind":"Field","name":{"kind":"Name","value":"tags"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]}}]}}]} as unknown as DocumentNode<UpdateDatasetMutationMutation, UpdateDatasetMutationMutationVariables>;
-export const DatasetEditQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"datasetEditQuery"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"dataset_id"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"dataset"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"dataset_id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"dataset_id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]}}]} as unknown as DocumentNode<DatasetEditQueryQuery, DatasetEditQueryQueryVariables>;
-export const PatchDatasetMutationDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"patchDatasetMutation"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"dataset_data"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"PatchDatasetInput"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"patch_dataset"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"dataset_data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"dataset_data"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"success"}},{"kind":"Field","name":{"kind":"Name","value":"errors"}},{"kind":"Field","name":{"kind":"Name","value":"dataset"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]}}]}}]} as unknown as DocumentNode<PatchDatasetMutationMutation, PatchDatasetMutationMutationVariables>;
-export const CreateDatasetMutationDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"createDatasetMutation"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"dataset_data"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"CreateDatasetInput"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"create_dataset"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"dataset_data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"dataset_data"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"success"}},{"kind":"Field","name":{"kind":"Name","value":"errors"}},{"kind":"Field","name":{"kind":"Name","value":"dataset"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"dataset_type"}}]}}]}}]}}]} as unknown as DocumentNode<CreateDatasetMutationMutation, CreateDatasetMutationMutationVariables>;
-export const AllDatasetsQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"allDatasetsQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"all_datasets"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]}}]} as unknown as DocumentNode<AllDatasetsQueryQuery, AllDatasetsQueryQueryVariables>;
+export const CreateResourceMutationDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'mutation',
+      name: { kind: 'Name', value: 'createResourceMutation' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'resource_data' },
+          },
+          type: {
+            kind: 'NamedType',
+            name: { kind: 'Name', value: 'ResourceInput' },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'create_resource' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'resource_data' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'resource_data' },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'success' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'errors' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'resource' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'title' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'description' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'file_details' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'resource' },
+                              selectionSet: {
+                                kind: 'SelectionSet',
+                                selections: [
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'id' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'title' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: {
+                                      kind: 'Name',
+                                      value: 'description',
+                                    },
+                                  },
+                                ],
+                              },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'format' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'file' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'remote_url' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'source_file_name' },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  CreateResourceMutationMutation,
+  CreateResourceMutationMutationVariables
+>;
+export const DatasetQueryLayoutDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'datasetQueryLayout' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'dataset_id' },
+          },
+          type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'dataset' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'dataset_id' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'dataset_id' },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'title' } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  DatasetQueryLayoutQuery,
+  DatasetQueryLayoutQueryVariables
+>;
+export const DatasetDistributionQueryDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'datasetDistributionQuery' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'dataset_id' },
+          },
+          type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'dataset' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'dataset_id' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'dataset_id' },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'title' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'resource_set' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'title' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'description' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'file_details' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'resource' },
+                              selectionSet: {
+                                kind: 'SelectionSet',
+                                selections: [
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'id' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'title' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: {
+                                      kind: 'Name',
+                                      value: 'description',
+                                    },
+                                  },
+                                ],
+                              },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'format' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'file' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'remote_url' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'source_file_name' },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  DatasetDistributionQueryQuery,
+  DatasetDistributionQueryQueryVariables
+>;
+export const DatasetQueryDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'datasetQuery' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'dataset_id' },
+          },
+          type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'dataset' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'dataset_id' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'dataset_id' },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'title' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'description' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'source' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'update_frequency' },
+                },
+                { kind: 'Field', name: { kind: 'Name', value: 'language' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'remote_issued' },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'geography' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                    ],
+                  },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'tags' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<DatasetQueryQuery, DatasetQueryQueryVariables>;
+export const UpdateDatasetMutationDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'mutation',
+      name: { kind: 'Name', value: 'updateDatasetMutation' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'dataset_data' },
+          },
+          type: {
+            kind: 'NamedType',
+            name: { kind: 'Name', value: 'UpdateDatasetInput' },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'update_dataset' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'dataset_data' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'dataset_data' },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'success' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'errors' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'dataset' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'title' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'description' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'remote_issued' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'update_frequency' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'geography' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'name' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'id' },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'source' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'tags' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'id' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'name' },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  UpdateDatasetMutationMutation,
+  UpdateDatasetMutationMutationVariables
+>;
+export const DatasetEditQueryDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'datasetEditQuery' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'dataset_id' },
+          },
+          type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'dataset' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'dataset_id' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'dataset_id' },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'title' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'description' } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  DatasetEditQueryQuery,
+  DatasetEditQueryQueryVariables
+>;
+export const PatchDatasetMutationDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'mutation',
+      name: { kind: 'Name', value: 'patchDatasetMutation' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'dataset_data' },
+          },
+          type: {
+            kind: 'NamedType',
+            name: { kind: 'Name', value: 'PatchDatasetInput' },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'patch_dataset' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'dataset_data' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'dataset_data' },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'success' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'errors' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'dataset' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'title' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'description' },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  PatchDatasetMutationMutation,
+  PatchDatasetMutationMutationVariables
+>;
+export const CreateDatasetMutationDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'mutation',
+      name: { kind: 'Name', value: 'createDatasetMutation' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'dataset_data' },
+          },
+          type: {
+            kind: 'NamedType',
+            name: { kind: 'Name', value: 'CreateDatasetInput' },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'create_dataset' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'dataset_data' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'dataset_data' },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'success' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'errors' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'dataset' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'title' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'description' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'dataset_type' },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  CreateDatasetMutationMutation,
+  CreateDatasetMutationMutationVariables
+>;
+export const AllDatasetsQueryDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'allDatasetsQuery' },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'all_datasets' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'title' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'description' } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  AllDatasetsQueryQuery,
+  AllDatasetsQueryQueryVariables
+>;
