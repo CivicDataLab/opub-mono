@@ -1,9 +1,10 @@
-import { DatasetForm } from "../../../components/dataset-form";
-import { UpdateDatasetInput } from "@/gql/generated/graphql";
-import { Button, Combobox, Divider, FormLayout, Select, Text } from "opub-ui";
-import React from "react";
+import React from 'react';
+import { UpdateDatasetInput } from '@/gql/generated/graphql';
+import { Button, Combobox, Divider, FormLayout, Select, Text } from 'opub-ui';
 
-interface DefaultValues extends Omit<UpdateDatasetInput, "geo_list"> {
+import { DatasetForm } from '../../../components/dataset-form';
+
+interface DefaultValues extends Omit<UpdateDatasetInput, 'geo_list'> {
   geo_list: string[];
 }
 
@@ -30,7 +31,9 @@ export function EditMetadata({
               tags_list: value.tags_list,
               geo_list: value.geo_list,
               language: value.language,
-              source: "",
+              source: '',
+              remote_issued: '',
+              sector_list: [],
             },
           });
         }}
@@ -53,10 +56,10 @@ export function EditMetadata({
                   label="Update Frequency"
                   helpText="How often is this dataset updated?"
                   options={[
-                    { label: "Daily", value: "daily" },
-                    { label: "Weekly", value: "weekly" },
-                    { label: "Monthly", value: "monthly" },
-                    { label: "Yearly", value: "yearly" },
+                    { label: 'Daily', value: 'daily' },
+                    { label: 'Weekly', value: 'weekly' },
+                    { label: 'Monthly', value: 'monthly' },
+                    { label: 'Yearly', value: 'yearly' },
                   ]}
                   placeholder="Select"
                   required
@@ -68,10 +71,10 @@ export function EditMetadata({
                   label="Language"
                   helpText="What language is this dataset in?"
                   options={[
-                    { label: "English", value: "english" },
-                    { label: "Hindi", value: "hindi" },
-                    { label: "Spanish", value: "spanish" },
-                    { label: "French", value: "french" },
+                    { label: 'English', value: 'english' },
+                    { label: 'Hindi', value: 'hindi' },
+                    { label: 'Spanish', value: 'spanish' },
+                    { label: 'French', value: 'french' },
                   ]}
                   placeholder="Select"
                   required
@@ -86,7 +89,7 @@ export function EditMetadata({
                   label="Geography"
                   // helpText="Which geography does this data belong to?"
                   placeholder="Search Locations"
-                  list={["United States", "Canada", "Mexico", "India"]}
+                  list={['United States', 'Canada', 'Mexico', 'India']}
                   displaySelected
                   required
                   error="This field is required"
@@ -97,12 +100,12 @@ export function EditMetadata({
                   placeholder="Search Tags"
                   // helpText="Any other tags or keywords that can help people discover your dataset"
                   list={[
-                    "Health",
-                    "Education",
-                    "Transportation",
-                    "Economy",
-                    "Demographics",
-                    "Environment",
+                    'Health',
+                    'Education',
+                    'Transportation',
+                    'Economy',
+                    'Demographics',
+                    'Environment',
                   ]}
                   displaySelected
                   required
@@ -114,7 +117,7 @@ export function EditMetadata({
           <div className="mt-8">
             <Divider />
           </div>
-          <div className="mt-4 flex items-center gap-2 justify-center flex-wrap">
+          <div className="mt-4 flex flex-wrap items-center justify-center gap-2">
             <Button>Save & Exit</Button>
             <Button submit>Save & Proceed</Button>
           </div>

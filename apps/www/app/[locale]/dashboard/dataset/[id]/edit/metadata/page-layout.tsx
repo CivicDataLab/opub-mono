@@ -91,6 +91,9 @@ export function MetadataPage({ params }: { params: { id: string } }) {
           geo_list: data?.dataset?.geography?.map((geo) => geo.name) || [],
           update_frequency: data?.dataset?.update_frequency || '',
           tags_list: data?.dataset?.tags?.map((tag) => tag.name) || [],
+          remote_issued: data?.dataset?.remote_issued || '',
+          source: data?.dataset?.source || '',
+          sector_list: [],
         }}
         isLoading={isLoading}
         mutate={mutate}
