@@ -48,7 +48,6 @@ export const Page = () => {
         primaryAction={{
           content: 'Save & Next',
           onAction: () => {
-            loadingStart();
             submitRef.current?.click();
           },
         }}

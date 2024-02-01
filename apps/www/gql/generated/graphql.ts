@@ -2861,18 +2861,6 @@ export type CreateDatasetMutationMutation = {
   } | null;
 };
 
-export type AllDatasetsQueryQueryVariables = Exact<{ [key: string]: never }>;
-
-export type AllDatasetsQueryQuery = {
-  __typename?: 'Query';
-  all_datasets?: Array<{
-    __typename?: 'DatasetType';
-    id: string;
-    title: string;
-    description: string;
-  } | null> | null;
-};
-
 export const CreateResourceMutationDocument = {
   kind: 'Document',
   definitions: [
@@ -3530,34 +3518,4 @@ export const CreateDatasetMutationDocument = {
 } as unknown as DocumentNode<
   CreateDatasetMutationMutation,
   CreateDatasetMutationMutationVariables
->;
-export const AllDatasetsQueryDocument = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'OperationDefinition',
-      operation: 'query',
-      name: { kind: 'Name', value: 'allDatasetsQuery' },
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'all_datasets' },
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [
-                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'title' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'description' } },
-              ],
-            },
-          },
-        ],
-      },
-    },
-  ],
-} as unknown as DocumentNode<
-  AllDatasetsQueryQuery,
-  AllDatasetsQueryQueryVariables
 >;

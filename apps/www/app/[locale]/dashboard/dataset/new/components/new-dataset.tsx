@@ -63,9 +63,6 @@ export function CreateDataset({
           });
       }}
       formOptions={{ defaultValues: defaultValue }}
-      // onChange={(e) => {
-      //   setVal(e);
-      // }}
       submitRef={submitRef}
     >
       <div className={styles.CreateDataset}>

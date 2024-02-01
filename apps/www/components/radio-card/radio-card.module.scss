@@ -3,13 +3,14 @@
     width: 100%;
     padding: var(--space-4);
     border-radius: var(--border-radius-1);
-    border: 1px solid var(--border-shadow);
-    background-color: var(--surface);
-    transition: background-color var(--duration-150) var(--ease),
+    border: 1px solid var(--border-default);
+    background-color: var(--surface-default);
+    transition:
+      background-color var(--duration-150) var(--ease),
       border-color var(--duration-150) var(--ease);
 
     svg {
-      color: var(--icon);
+      stroke: var(--icon-default);
     }
   }
 
@@ -27,11 +28,11 @@
         width: 100%;
 
         label {
-          border-color: var(--interactive);
-          background-color: var(--surface-selected);
+          border-color: var(--border-interactive-default);
+          background-color: var(--surface-interactive);
 
           svg {
-            color: var(--icon-interactive);
+            stroke: var(--icon-interactive);
           }
         }
       }
@@ -43,11 +44,11 @@
 
         label {
           border-color: var(--border-subdued);
-          background-color: var(--background);
+          background-color: var(--surface-subdued);
           color: var(--text-disabled);
 
           svg {
-            color: var(--icon-subdued);
+            stroke: var(--icon-subdued);
           }
         }
       }
