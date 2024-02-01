@@ -49,7 +49,7 @@ export default function ErrorPage({
       direction="column"
       gap="4"
     >
-      <div className="text-center flex flex-col gap-1">
+      <div className="flex flex-col gap-1 text-center">
         <Text variant="headingLg" as="h2">
           {errorType.title}
         </Text>

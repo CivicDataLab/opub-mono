@@ -19,9 +19,10 @@ export default function Page({ params }: { params: { id: string } }) {
   if (!data) {
     notFound();
   }
+  console.log('sdasdadqwa');
 
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex h-full flex-col">
       <ActionBar
         title={data.name}
         primaryAction={{
