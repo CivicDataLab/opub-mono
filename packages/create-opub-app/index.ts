@@ -27,42 +27,21 @@ program.version(packageJson.version).description(packageJson.description);
 
 program
   .arguments('[project-directory]')
-  .usage(`${green('<project-directory>')} [options]`)
+  .usage(`${green('[project-directory]')} [options]`)
   .action((name: string) => {
     projectPath = name;
   });
 
 program
   .option(
-    '--use-npm',
+    '-m, --manager [npm | pnpm | yarn | bun]',
     `
 
-  Explicitly tell the CLI to bootstrap the application using npm
+  Explicitly tell the CLI to bootstrap the application using specific package manager
 `
   )
   .option(
-    '--use-pnpm',
-    `
-
-  Explicitly tell the CLI to bootstrap the application using pnpm
-`
-  )
-  .option(
-    '--use-yarn',
-    `
-
-  Explicitly tell the CLI to bootstrap the application using Yarn
-`
-  )
-  .option(
-    '--use-bun',
-    `
-
-  Explicitly tell the CLI to bootstrap the application using Bun
-`
-  )
-  .option(
-    '-e, --example [d4d | data-exchange | <example-url>]',
+    '-e, --example [d4d | data-exchange]',
     `
 
   An example to bootstrap the app with. Currently supports ${green('d4d')} 
@@ -83,13 +62,9 @@ console.log(
 );
 
 const options: {
-  useNpm: boolean;
-  usePnpm: boolean;
-  useYarn: boolean;
-  useBun: boolean;
+  manager: string | boolean;
   example: boolean | string;
 } = program.opts();
-
 async function run(): Promise<void> {
   if (typeof projectPath === 'string') {
     projectPath = projectPath.trim();
@@ -100,30 +75,39 @@ async function run(): Promise<void> {
    */
   if (options.example === true) {
     console.error(
-      'Please provide an example name or url, otherwise remove the example option.'
+      'Please provide an example name, otherwise remove the example option.'
     );
     process.exit(1);
   }
 
   const example =
-    (typeof options.example === 'string' && options.example.trim()) || 'd4d';
+    (typeof options.example === 'string' && options.example.trim()) || '';
 
-  if (!Object.keys(examples).includes(example)) {
+  if (example && !Object.keys(examples).includes(example)) {
     console.error(
       `The example provided is not supported. Please provide a valid example. We support ${green('d4d')} and ${green('data-exchange')}`
     );
     process.exit(1);
   }
 
-  let packageManager = options.useNpm
-    ? 'npm'
-    : options.usePnpm
-      ? 'pnpm'
-      : options.useYarn
-        ? 'yarn'
-        : options.useBun
-          ? 'bun'
-          : undefined;
+  if (options.manager === true) {
+    console.error(
+      'Please provide an manager name, otherwise remove the manager option.'
+    );
+    process.exit(1);
+  }
+
+  const manager =
+    (typeof options.manager === 'string' &&
+      options.manager.toLowerCase().trim()) ||
+    '';
+
+  if (manager && !['npm', 'pnpm', 'yarn', 'bun'].includes(manager)) {
+    console.error(
+      `The package manager provided is not supported. Please provide a valid manager. We support ${green('d4d')} and ${green('data-exchange')}`
+    );
+    process.exit(1);
+  }
 
   const project = await p.group(
     {
@@ -136,7 +120,7 @@ async function run(): Promise<void> {
           });
         },
       }),
-      ...(!options.example && {
+      ...(!example && {
         example: () => {
           return p.select({
             message: 'Which example will you use?',
@@ -148,7 +132,7 @@ async function run(): Promise<void> {
           });
         },
       }),
-      ...(!packageManager && {
+      ...(!manager && {
         packageManager: () => {
           return p.select({
             message: 'Which package manager will you use?',
@@ -184,17 +168,15 @@ async function run(): Promise<void> {
     process.exit(1);
   }
 
+  const exampleKey = example || (project.example as string);
+
   /**
    * Create the app
    */
-
-  const exampleKey = options.example || (project.example as string);
-  packageManager = packageManager || (project.packageManager as string);
-
   createApp({
     example: examples[exampleKey].link,
     projectPath,
-    packageManager,
+    packageManager: manager || (project.packageManager as string),
   });
 }
 
