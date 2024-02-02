@@ -8,16 +8,30 @@ We need a way for anyone to start a new personalized OPub app as fast and easily
 
 ## Get Started
 
-`npm create opub-app my-opub`
+```bash
+npm create opub-app
+```
 
-> This will create a new OPub app named `my-opub` on your local.
->
-> Currently it's hardcoded to `examples/d4d`
+## Arguments
+
+The CLI takes a single argument, the name of the project and options to choose a template and package manager.
+
+```bash
+npm create opub-app [package-name] [options]
+
+eg: npm create opub-app my-opub-app -e d4d -m pnpm
+```
+
+### Options
+
+- `-e, --example` - An example to bootstrap the app with. `[d4d | data-exchange]`
+- `-m, --manager` - Explicitly tell the CLI to bootstrap the application using specific package manager. `[npm | pnpm | yarn | bun]`
 
 ## Tech Stack
 
 - [commander](https://github.com/tj/commander.js) - backbone of the CLI
-- [figlet]() - text formattor
+- [clack](https://github.com/natemoo-re/clack) - used for interactive prompt
+- [figlet](https://github.com/cmatsuoka/figlet) - text formattor
 - [picocolors](https://github.com/alexeyraspopov/picocolors) - add colors to CLI
 - [got](https://github.com/sindresorhus/got) - HTML request library
 - [tar](https://github.com/isaacs/node-tar) - extract tar compressed file
@@ -27,7 +41,7 @@ We need a way for anyone to start a new personalized OPub app as fast and easily
 
 - [x] Test in various environments
 
-  - [x] Windows
+  - [x] Windows (WSL2)
   - [x] Linux
   - [x] Mac
 
