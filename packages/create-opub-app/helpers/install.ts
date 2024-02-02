@@ -1,8 +1,6 @@
 import spawn from 'cross-spawn';
 import { yellow } from 'picocolors';
 
-import type { PackageManager } from './get-pkg-manager';
-
 /**
  * Spawn a package manager installation based on user preference.
  *
@@ -10,7 +8,7 @@ import type { PackageManager } from './get-pkg-manager';
  */
 export async function install(
   /** Indicate which package manager to use. */
-  packageManager: PackageManager,
+  packageManager: string,
   /** Indicate whether there is an active Internet connection.*/
   isOnline: boolean
 ): Promise<void> {
