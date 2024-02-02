@@ -1,10 +1,10 @@
 import { createWriteStream, promises as fs } from 'fs';
-import got from 'got';
 import { tmpdir } from 'os';
 import { join } from 'path';
 import { Stream } from 'stream';
-import tar from 'tar';
 import { promisify } from 'util';
+import got from 'got';
+import tar from 'tar';
 
 export type RepoInfo = {
   username: string;
@@ -60,19 +60,6 @@ export function hasRepo({
   const packagePath = `${filePath ? `/${filePath}` : ''}/package.json`;
 
   return isUrlOk(contentsUrl + packagePath + `?ref=${branch}`);
-}
-
-export function existsInRepo(nameOrUrl: string): Promise<boolean> {
-  try {
-    const url = new URL(nameOrUrl);
-    return isUrlOk(url.href);
-  } catch {
-    return isUrlOk(
-      `https://api.github.com/repos/CivicDataLab/opub-mono/contents/examples/${encodeURIComponent(
-        nameOrUrl
-      )}`
-    );
-  }
 }
 
 async function downloadTar(url: string) {
