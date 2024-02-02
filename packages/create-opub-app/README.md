@@ -25,17 +25,18 @@ We need a way for anyone to start a new personalized OPub app as fast and easily
 
 ## Next Steps
 
-- [ ] Test in various environments
+- [x] Test in various environments
 
-  - [ ] Windows
+  - [x] Windows
   - [x] Linux
   - [x] Mac
 
-- [ ] Ask for new name if the provided one is not unique
-- [ ] Add option to select template based on initiative
+- [x] Ask for new name if the provided one is not unique
+- [x] Add option to select template based on initiative
 - [ ] Add option to choose theme
-- [ ] Add support for multiple package managers
+- [x] Add support for multiple package managers
 
-  - [ ] npm
-  - [ ] yarn
+  - [x] npm
+  - [x] yarn
   - [x] pnpm
+  - [x] bun
