@@ -9,7 +9,6 @@ import {
   hasRepo,
   RepoInfo,
 } from './helpers/examples';
-import type { PackageManager } from './helpers/get-pkg-manager';
 import { install } from './helpers/install';
 import { isFolderEmpty } from './helpers/is-folder-empty';
 import { getOnline } from './helpers/is-online';
@@ -34,8 +33,16 @@ export async function createApp({
 }: {
   example: string;
   projectPath: string;
-  packageManager: PackageManager;
+  packageManager: string;
 }) {
+  console.log();
+  console.log(
+    cyan(
+      `Using ${packageManager} as package manager. ${packageManager !== 'npm' ? 'Do make sure you have it installed locally.' : ''}`
+    )
+  );
+  console.log();
+
   if (example) {
     let repoUrl: URL | undefined;
     try {
