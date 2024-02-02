@@ -1,18 +1,20 @@
-import {
-  RepoInfo,
-  downloadAndExtractRepo,
-  existsInRepo,
-  getRepoInfo,
-  hasRepo,
-} from './helpers/examples';
-import { install } from './helpers/install';
-import { isFolderEmpty } from './helpers/is-folder-empty';
-import { isWriteable } from './helpers/is-writeable';
-import { makeDir } from './helpers/make-dir';
-import retry from 'async-retry';
 import fs from 'fs';
 import path from 'path';
-import { red, green, cyan } from 'picocolors';
+import retry from 'async-retry';
+import { cyan, green, red } from 'picocolors';
+
+import {
+  downloadAndExtractRepo,
+  getRepoInfo,
+  hasRepo,
+  RepoInfo,
+} from './helpers/examples';
+import type { PackageManager } from './helpers/get-pkg-manager';
+import { install } from './helpers/install';
+import { isFolderEmpty } from './helpers/is-folder-empty';
+import { getOnline } from './helpers/is-online';
+import { isWriteable } from './helpers/is-writeable';
+import { makeDir } from './helpers/make-dir';
 
 export class DownloadError extends Error {}
 
@@ -28,9 +30,11 @@ let repoInfo: RepoInfo | undefined;
 export async function createApp({
   example,
   projectPath,
+  packageManager,
 }: {
   example: string;
   projectPath: string;
+  packageManager: PackageManager;
 }) {
   if (example) {
     let repoUrl: URL | undefined;
@@ -74,21 +78,6 @@ export async function createApp({
         );
         process.exit(1);
       }
-    } else if (example !== '__internal-testing-retry') {
-      const foundRepo = await existsInRepo(example);
-
-      if (!foundRepo) {
-        console.error(
-          `Could not locate an example named ${red(
-            `"${example}"`
-          )}. It could be due to the following:\n`,
-          `1. Your spelling of example ${red(
-            `"${example}"`
-          )} might be incorrect.\n`,
-          `2. You might not be connected to the internet or you are behind a proxy.`
-        );
-        process.exit(1);
-      }
     }
   }
 
@@ -111,6 +100,8 @@ export async function createApp({
     process.exit(1);
   }
 
+  const useYarn = packageManager === 'yarn';
+  const isOnline = !useYarn || (await getOnline());
   const originalDirectory = process.cwd();
 
   console.log(`Creating a new OPub app in ${green(root)}.`);
@@ -137,11 +128,39 @@ export async function createApp({
   hasPackageJson = fs.existsSync(packageJsonPath);
   if (hasPackageJson) {
     console.log(
-      'Installing packages. Grab a cup of chai, this might take a while.'
+      `Installing packages using ${packageManager}. Grab a cup of chai, this might take a while.`
     );
     console.log();
 
-    await install(root, null, { packageManager: 'yarn', isOnline: true });
+    await install(packageManager, isOnline);
+    console.log();
+
+    let cdpath: string;
+    if (path.join(originalDirectory, appName) === projectPath) {
+      cdpath = appName;
+    } else {
+      cdpath = projectPath;
+    }
+
+    console.log(`${green('Success!')} Created ${appName} at ${projectPath}`);
+
+    if (hasPackageJson) {
+      console.log('Inside that directory, you can run several commands:');
+      console.log();
+      console.log(cyan(`  ${packageManager} ${useYarn ? '' : 'run '}dev`));
+      console.log('    Starts the development server.');
+      console.log();
+      console.log(cyan(`  ${packageManager} ${useYarn ? '' : 'run '}build`));
+      console.log('    Builds the app for production.');
+      console.log();
+      console.log(cyan(`  ${packageManager} start`));
+      console.log('    Runs the built app in production mode.');
+      console.log();
+      console.log('We suggest that you begin by typing:');
+      console.log();
+      console.log(cyan('  cd'), cdpath);
+      console.log(`  ${cyan(`${packageManager} ${useYarn ? '' : 'run '}dev`)}`);
+    }
     console.log();
   }
 }

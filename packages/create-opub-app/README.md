@@ -37,5 +37,5 @@ We need a way for anyone to start a new personalized OPub app as fast and easily
 - [ ] Add support for multiple package managers
 
   - [ ] npm
-  - [x] yarn
-  - [ ] pnpm
+  - [ ] yarn
+  - [x] pnpm
