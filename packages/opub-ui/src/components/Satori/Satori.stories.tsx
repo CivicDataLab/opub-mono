@@ -69,8 +69,7 @@ export const Chart: Story = {
     }, []);
 
     const [dataURL, setDataURL] = React.useState<string>('');
-    const { createSvg, domToUrl, svgToPngURL, downloadFile, copyToClipboard } =
-      useScreenshot();
+    const { domToUrl, downloadFile, copyToClipboard } = useScreenshot();
 
     const handleOpen = async () => {
       const SVG = ref.current?.querySelector('svg') as SVGElement;
@@ -78,19 +77,9 @@ export const Chart: Story = {
       const dataImgURL = await domToUrl(SVG, {
         width: 1760,
         height: 600,
+        scale: 3,
+        backgroundColor: 'white',
       });
-
-      // const svg = await createSvg(wrapper.firstChild, {
-      //   width: 1760,
-      //   height: 600,
-      // });
-      // const dataURL = await svgToPngURL(svg);
-      // setDataURL(dataURL);
-
-      // const dataURL = await domToUrl(svg, {
-      //   width: 400,
-      //   height: 600,
-      // });
 
       setDataURL(dataImgURL);
       copyToClipboard(dataImgURL, 'Image is copied to clipboard');
@@ -102,7 +91,7 @@ export const Chart: Story = {
         <ShareDialog
           props={{
             width: 1760,
-            height: 600,
+            height: 384,
           }}
           alt=""
           title="Download Image"
@@ -125,8 +114,7 @@ export const Map: Story = {
     const [map, setMap] = React.useState<any>(null);
     const [isLoading, setIsLoading] = React.useState<boolean>(false);
     const [dataURL, setDataURL] = React.useState<string>('');
-    const { createSvg, domToUrl, downloadFile, copyToClipboard } =
-      useScreenshot();
+    const { domToUrl, downloadFile } = useScreenshot();
 
     React.useEffect(() => {
       if (ref.current === null) return;
@@ -140,19 +128,11 @@ export const Map: Story = {
       const dataImgURL = await domToUrl(ref.current as HTMLElement, {
         width: map.getSize().x,
         height: map.getSize().y,
+        scale: 3,
       });
 
-      // const svg = await createSvg(<img src={dataImgURL} alt="" />, {
-      //   width: map.getSize().x,
-      //   height: map.getSize().y,
-      // });
-      // const dataURL = await domToUrl(svg, {
-      //   width: map.getSize().x,
-      //   height: map.getSize().y,
-      // });
       setDataURL(dataImgURL);
       setIsLoading(false);
-      copyToClipboard(dataImgURL, 'Image is copied to clipboard');
     }
 
     return (
@@ -167,6 +147,9 @@ export const Map: Story = {
           onOpen={() => generateImage(map)}
           onDownload={() => downloadFile(dataURL, 'Map Chart')}
           className="mt-4"
+          props={{
+            height: 380,
+          }}
         >
           Share
         </ShareDialog>

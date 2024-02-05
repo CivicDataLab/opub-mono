@@ -7,6 +7,7 @@ import { Dialog } from '../Dialog';
 import { Divider } from '../Divider';
 import { Icon } from '../Icon';
 import { IconButton } from '../IconButton';
+import { useScreenshot } from '../Satori';
 import { Text } from '../Text';
 
 type Props = {
@@ -60,6 +61,30 @@ const ShareDialog = React.forwardRef(
     ref?: React.Ref<HTMLDivElement>
   ) => {
     const [isOpen, setIsOpen] = React.useState(false);
+    const { copyToClipboard, shareImage, apiSupport } = useScreenshot();
+    const isSupported = apiSupport();
+
+    const shareActions: any = ['copyToClipboard', 'shareImage']
+      .map((action: string) => {
+        if (action === 'copyToClipboard' && isSupported['copyToClipboard']) {
+          return {
+            content: 'Copy Image',
+            onAction: () => {
+              copyToClipboard(image as string, 'Image is copied to clipboard');
+            },
+          };
+        }
+        if (action === 'shareImage' && isSupported['shareImage']) {
+          return {
+            content: 'Share',
+            onAction: () => {
+              shareImage(image as string);
+            },
+          };
+        }
+        return null;
+      })
+      .filter(Boolean);
 
     function handleOpen() {
       if (onOpen && !isOpen) {
@@ -110,18 +135,23 @@ const ShareDialog = React.forwardRef(
                 className="h-full w-full object-contain"
               />
             ) : (
-              <div className="flex h-[240px] w-full items-center justify-center">
+              <div
+                className={`flex h-[300px] w-full items-center justify-center`}
+              >
                 Loading Image...
               </div>
             )}
             <div className="mt-4 flex flex-wrap items-center justify-end gap-2">
               <Button size="slim" kind="secondary" disabled>
-                Share via
-              </Button>
-              <Button size="slim" kind="secondary" disabled>
                 Embed
               </Button>
-              <Button onClick={onDownload} size="slim">
+              <Button
+                onClick={onDownload}
+                size="slim"
+                connectedDisclosure={{
+                  actions: shareActions,
+                }}
+              >
                 Download
               </Button>
             </div>
