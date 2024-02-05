@@ -113,18 +113,8 @@ const ShareDialog = React.forwardRef(
               {children}
             </Button>
           </Dialog.Trigger>
-          <Dialog.Content headerHidden title="Share" className="z-max">
-            <div className="flex items-center justify-between gap-2">
-              <Text variant="headingMd">{title}</Text>
-              <IconButton
-                onClick={() => setIsOpen(false)}
-                size="slim"
-                icon={IconX}
-              >
-                Close Dialog
-              </IconButton>
-            </div>
-            <Divider className="my-2" />
+          <Dialog.Content title={title} className="z-max mt-[-20px]">
+            <Divider className="mb-2" />
             {image && !loading ? (
               <img
                 src={image}
@@ -132,7 +122,7 @@ const ShareDialog = React.forwardRef(
                 width={768}
                 height={384}
                 {...props}
-                className="h-full w-full object-contain"
+                className="h-full w-full overflow-auto object-contain"
               />
             ) : (
               <div

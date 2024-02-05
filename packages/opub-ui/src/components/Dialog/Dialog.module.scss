@@ -131,6 +131,7 @@ $large-width: 980px;
     transform: translate(0, 0);
     margin-inline: var(--space-2);
     left: 0;
+    right: 0;
   }
 
   @media #{$breakpoints-md-up} {

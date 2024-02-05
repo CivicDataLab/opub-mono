@@ -35,7 +35,6 @@ export const Default: Story = {
 
       const dataURL = await svgToPngURL(svg);
       setDataURL(dataURL);
-      copyToClipboard(dataURL, 'Image is copied to clipboard');
     };
 
     return (
@@ -82,7 +81,6 @@ export const Chart: Story = {
       });
 
       setDataURL(dataImgURL);
-      copyToClipboard(dataImgURL, 'Image is copied to clipboard');
     };
 
     return (
