@@ -1,6 +1,9 @@
 #! /usr/bin/env node
+import fs from 'fs';
+import path from 'path';
 import * as p from '@clack/prompts';
 import { Command } from 'commander';
+import figlet from 'figlet';
 import { cyan, green, red } from 'picocolors';
 
 import { createApp } from './create-app';
@@ -8,11 +11,6 @@ import { isFolderEmpty } from './helpers/is-folder-empty';
 import packageJson from './package.json';
 import { examples } from './utils/constants';
 import { validateAppName } from './utils/validateAppName';
-
-const figlet = require('figlet');
-
-const fs = require('fs');
-const path = require('path');
 
 let projectPath: string;
 

@@ -34,6 +34,7 @@
   },
   "devDependencies": {
     "@types/async-retry": "^1.4.5",
+    "@types/figlet": "^1.5.8",
     "@types/node": "^20.5.9",
     "@types/prompts": "^2.4.2",
     "@types/tar": "^6.1.5",
