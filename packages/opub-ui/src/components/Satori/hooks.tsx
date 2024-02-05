@@ -1,11 +1,13 @@
 import React from 'react';
-import domtoimage from 'dom-to-image';
+import { domToPng } from 'modern-screenshot';
 import satori from 'satori';
 
 import { toast } from '../Toast';
+import { DomPngOptions } from './types';
 import { initFonts } from './utils';
 
 export const useScreenshot = () => {
+  // use satori to create svg
   const createSvg = async (
     Component: React.ReactElement,
     props: { width: number; height: number }
@@ -42,27 +44,14 @@ export const useScreenshot = () => {
 
   const downloadSvgAsPng = async (
     svg: HTMLElement | string | SVGElement,
-    props: { quality?: number; width?: number; height?: number } = {
-      quality: 2,
+    props: DomPngOptions = {
+      scale: 2,
     },
     name: string = 'Image.png',
     runOnFinish?: () => null
   ) => {
     const dataImgURL = await domToUrl(svg, props);
-    try {
-      const a = document.createElement('a');
-      a.href = dataImgURL;
-      a.download = name;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-    } catch (error) {
-      console.error('unable to download. Error:');
-      console.log(error);
-    } finally {
-      URL.revokeObjectURL(dataImgURL);
-      runOnFinish && runOnFinish();
-    }
+    downloadFile(dataImgURL, name, runOnFinish);
   };
 
   const svgToPngURL = (svg: string) =>
@@ -87,15 +76,15 @@ export const useScreenshot = () => {
 
   const domToUrl = async (
     element: HTMLElement | string | SVGElement,
-    props: { quality?: number; width?: number; height?: number } = {
-      quality: 2,
+    props: DomPngOptions = {
+      scale: 1,
     }
   ) => {
     let elm =
       typeof element === 'string' ? svgStringtoElement(element) : element;
-    const { quality, ...rest } = props;
-    const dataImgURL = await domtoimage.toPng(elm, {
-      quality,
+    const { scale, ...rest } = props;
+    const dataImgURL = await domToPng(elm, {
+      scale,
       ...rest,
     });
     return dataImgURL;
@@ -117,14 +106,11 @@ export const useScreenshot = () => {
       return;
     }
     try {
-      const data = await fetch(url);
-      const blob = await data.blob();
+      const blob = new ClipboardItem({
+        'image/png': fetch(url).then((response) => response.blob()),
+      });
 
-      await navigator.clipboard.write([
-        new ClipboardItem({
-          [blob.type]: blob,
-        }),
-      ]);
+      navigator.clipboard.write([blob]);
       toastMessage &&
         toast(toastMessage, {
           action: {
@@ -138,6 +124,44 @@ export const useScreenshot = () => {
     }
   }
 
+  async function shareImage(dataUrl: string) {
+    if (!('share' in navigator)) {
+      console.error('Your browser does not support the Web Share API');
+      return;
+    }
+
+    const blob = await fetch(dataUrl).then((res) => res.blob());
+    const file = new File([blob], 'counter.png', { type: blob.type });
+    const files = [file];
+
+    const shareData = {
+      files,
+    };
+    if (navigator.canShare(shareData)) {
+      navigator.share(shareData);
+    }
+  }
+
+  function apiSupport() {
+    const [apis, setApis] = React.useState({
+      copyToClipboard: false,
+      shareImage: false,
+    });
+
+    const getApiSupport = () => {
+      return {
+        copyToClipboard: 'ClipboardItem' in window,
+        shareImage: 'share' in navigator,
+      };
+    };
+
+    React.useEffect(() => {
+      setApis(getApiSupport());
+    }, []);
+
+    return apis;
+  }
+
   return {
     createSvg,
     domToUrl,
@@ -146,5 +170,7 @@ export const useScreenshot = () => {
     copyToClipboard,
     svgStringtoElement,
     svgToPngURL,
+    shareImage,
+    apiSupport,
   };
 };
