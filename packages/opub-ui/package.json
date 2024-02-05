@@ -44,7 +44,7 @@
   ],
   "outputDir": "./dist",
   "engines": {
-    "node": ">=16 <=18"
+    "node": ">=16"
   },
   "scripts": {
     "dev": "storybook dev -p 6006",

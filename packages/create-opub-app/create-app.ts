@@ -13,7 +13,6 @@ import { install } from './helpers/install';
 import { isFolderEmpty } from './helpers/is-folder-empty';
 import { getOnline } from './helpers/is-online';
 import { isWriteable } from './helpers/is-writeable';
-import { makeDir } from './helpers/make-dir';
 
 export class DownloadError extends Error {}
 
@@ -102,7 +101,7 @@ export async function createApp({
 
   const appName = path.basename(root);
 
-  await makeDir(root);
+  await fs.promises.mkdir(root, { recursive: true });
   if (!isFolderEmpty(root, appName)) {
     process.exit(1);
   }
