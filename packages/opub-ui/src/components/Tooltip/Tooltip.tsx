@@ -1,11 +1,12 @@
 'use client';
 
+import { forwardRef, LegacyRef } from 'react';
+import * as TooltipRadix from '@radix-ui/react-tooltip';
+
 import { TooltipProps, TooltipProviderProps } from '../../types/tooltip';
+import { cn } from '../../utils';
 import { Text } from '../Text';
 import styles from './Tooltip.module.scss';
-import * as TooltipRadix from '@radix-ui/react-tooltip';
-import cx from 'classnames';
-import { forwardRef, LegacyRef } from 'react';
 
 const Provider = forwardRef(
   (
@@ -18,7 +19,7 @@ const Provider = forwardRef(
     }: TooltipProviderProps,
     ref: LegacyRef<HTMLDivElement>
   ) => {
-    const classname = cx(styles.Wrapper, hasUnderline && styles.HasUnderline);
+    const classname = cn(styles.Wrapper, hasUnderline && styles.HasUnderline);
 
     return (
       <div className={`opub-Tooltip ${classname}`} ref={ref}>
@@ -53,6 +54,7 @@ const Tooltip = (props: TooltipProps) => {
     solo,
     hideArrow = false,
     sideOffset = hideArrow ? 2 : 4,
+    className,
   } = props;
 
   if (!content) {
@@ -67,13 +69,13 @@ const Tooltip = (props: TooltipProps) => {
       delayDuration={delayDuration}
       disableHoverableContent={disableHoverableContent}
     >
-      <TooltipRadix.Trigger className={styles.Trigger} asChild>
+      <TooltipRadix.Trigger className={cn(styles.Trigger, className)} asChild>
         <span>{children}</span>
       </TooltipRadix.Trigger>
 
       <TooltipRadix.Portal>
         <TooltipRadix.Content
-          className={cx(styles.Content, width === 'wide' && styles.Wide)}
+          className={cn(styles.Content, width === 'wide' && styles.Wide)}
           onEscapeKeyDown={onEscapeKeyDown}
           onPointerDownOutside={onPointerDownOutside}
           side={side}
