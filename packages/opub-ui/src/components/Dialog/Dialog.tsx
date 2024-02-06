@@ -1,9 +1,9 @@
-import React, { Ref, forwardRef } from 'react';
+import React, { forwardRef, Ref } from 'react';
 import * as DialogRadix from '@radix-ui/react-dialog';
-import cx from 'classnames';
 
-import styles from './Dialog.module.scss';
+import { cn } from '../../utils';
 import { Footer, FooterProps, Header } from './components';
+import styles from './Dialog.module.scss';
 
 interface DialogProps extends DialogRadix.DialogProps {
   Trigger?: DialogRadix.DialogTriggerProps;
@@ -79,7 +79,7 @@ const Content = forwardRef((props: ContentProps, ref: any) => {
   const rId = React.useId();
   const finalId = props.id || rId;
 
-  const classnameStyles = cx(
+  const classnameStyles = cn(
     styles.Dialog,
     small && styles.sizeSmall,
     large && styles.sizeLarge,
@@ -97,7 +97,7 @@ const Content = forwardRef((props: ContentProps, ref: any) => {
         {headerHidden ? null : (
           <Header id={finalId} titleHidden={titleHidden} children={title} />
         )}
-        <div className={cx(styles.Content, className)}>{children}</div>
+        <div className={cn(styles.Content, className)}>{children}</div>
         {footer && (
           <Footer
             children={footer}

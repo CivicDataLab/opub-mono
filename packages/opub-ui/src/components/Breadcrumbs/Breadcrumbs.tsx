@@ -1,7 +1,8 @@
+import React from 'react';
+
+import { cn } from '../../utils';
 import { Text } from '../Text';
 import styles from './Breadcrumbs.module.scss';
-import cx from 'classnames';
-import React from 'react';
 
 type Props = {
   crumbs: {
@@ -12,7 +13,7 @@ type Props = {
   itemsAfterCollapse?: number;
 };
 
-const className = cx(styles.Breadcrumbs);
+const className = cn(styles.Breadcrumbs);
 
 const Breadcrumbs = ({
   crumbs,

@@ -1,6 +1,6 @@
 import { TextProps, VariantFontWeightMapping } from '../../types/text';
+import { cn } from '../../utils';
 import styles from './Text.module.scss';
-import cx from 'classnames';
 
 const Text = ({
   alignment,
@@ -19,7 +19,7 @@ const Text = ({
 }: TextProps) => {
   const Component = as || (visuallyHidden ? 'span' : 'p');
 
-  const style = cx(
+  const style = cn(
     styles.root,
     styles[variant],
     fontWeight ? styles[fontWeight] : styles[VariantFontWeightMapping[variant]],

@@ -1,9 +1,10 @@
+import React, { forwardRef } from 'react';
+
+import { cn } from '../../utils';
 import { ScrollArea } from '../ScrollArea';
 import { Sheet } from '../Sheet';
 import { Text } from '../Text';
 import styles from './Tray.module.scss';
-import cx from 'classnames';
-import React, { forwardRef } from 'react';
 
 type Props = {
   // content for the tray
@@ -39,7 +40,7 @@ const Tray = forwardRef((props: Props, ref: any) => {
     }
   }, [open]);
 
-  const themeClass = cx(styles.Tray, className);
+  const themeClass = cn(styles.Tray, className);
   return (
     <Sheet
       open={openState}

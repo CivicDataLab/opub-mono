@@ -1,7 +1,7 @@
-import styles from './ScrollArea.module.scss';
-import * as Scroll from '@radix-ui/react-scroll-area';
-import cx from 'classnames';
 import React, { forwardRef } from 'react';
+import * as Scroll from '@radix-ui/react-scroll-area';
+
+import styles from './ScrollArea.module.scss';
 
 type Props = {
   children: React.ReactNode;
@@ -9,7 +9,6 @@ type Props = {
 
 const ScrollArea = forwardRef((props: Props, ref: any) => {
   const { children, ...others } = props;
-  const themeClass = cx(styles.ScrollArea, {});
 
   return (
     <>

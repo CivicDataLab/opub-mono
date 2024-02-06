@@ -1,5 +1,5 @@
-import cx from 'classnames';
 import { Progress, Status } from '../../../../types/badge';
+import { cn } from '../../../../utils';
 import { Text } from '../../../Text';
 import styles from './Pip.module.scss';
 
@@ -18,7 +18,7 @@ export const Pip = ({
   progress = 'complete',
   accessibilityLabelOverride,
 }: PipProps) => {
-  const className = cx(
+  const className = cn(
     styles.Pip,
     status && styles[variationName('status', status)],
     progress && styles[variationName('progress', progress)]

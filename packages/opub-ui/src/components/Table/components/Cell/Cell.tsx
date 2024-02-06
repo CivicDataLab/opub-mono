@@ -1,11 +1,12 @@
+import React from 'react';
+import { IconSortAscending, IconSortDescending } from '@tabler/icons-react';
+
 import { SortDirection } from '../../../../types/datatable';
+import { cn } from '../../../../utils';
 import { Icon } from '../../../Icon';
 import { Text } from '../../../Text';
 import { Tooltip } from '../../../Tooltip';
 import styles from '../../Table.module.scss';
-import { IconSortAscending, IconSortDescending } from '@tabler/icons-react';
-import cx from 'classnames';
-import React from 'react';
 
 function SortButton({
   column,
@@ -20,12 +21,12 @@ function SortButton({
   columnType: string;
   defaultSortDirection: SortDirection;
 }) {
-  const headerClassName = cx(
+  const headerClassName = cn(
     styles.Heading,
     columnType === 'text' && styles['Heading-left']
   );
 
-  const iconClassName = cx(sortable && styles.Icon);
+  const iconClassName = cn(sortable && styles.Icon);
   const sortDirection = column.getIsSorted() as string;
   const direction = sortDirection ? sortDirection : defaultSortDirection;
   const source = direction === 'desc' ? IconSortDescending : IconSortAscending;

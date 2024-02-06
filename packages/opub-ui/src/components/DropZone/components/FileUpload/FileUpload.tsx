@@ -1,14 +1,15 @@
+import { useContext } from 'react';
+import {
+  IconCloudUpload,
+  IconSquareRoundedArrowUpFilled,
+} from '@tabler/icons-react';
+
+import { cn } from '../../../../utils';
 import { Box } from '../../../Box';
 import { Icon } from '../../../Icon';
 import { Text } from '../../../Text';
 import { DropZoneContext } from '../../context';
 import styles from './FileUpload.module.scss';
-import {
-  IconCloudUpload,
-  IconSquareRoundedArrowUpFilled,
-} from '@tabler/icons-react';
-import cx from 'classnames';
-import { useContext } from 'react';
 
 export interface FileUploadProps {
   actionTitle?: string;
@@ -28,10 +29,10 @@ export function FileUpload(props: FileUploadProps) {
     actionTitle = allowMultiple ? `Add ${type}s` : `Add ${type}`,
     actionHint,
   } = props;
-  const actionClassNames = cx(styles.Action, disabled && styles.disabled);
+  const actionClassNames = cn(styles.Action, disabled && styles.disabled);
   const actionMarkup = <div className={actionClassNames}>{actionTitle}</div>;
 
-  const fileUploadClassName = cx(
+  const fileUploadClassName = cn(
     styles.FileUpload,
     measuring && styles.measuring,
     size === 'large' && styles.large,

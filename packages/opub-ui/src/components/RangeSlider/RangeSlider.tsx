@@ -1,15 +1,16 @@
 'use client';
 
+import React, { forwardRef, useEffect } from 'react';
+import * as Slider from '@radix-ui/react-slider';
+
 import type { Action } from '../../types/button';
 import type { Error } from '../../types/shared/form';
+import { cn } from '../../utils';
 import { Box } from '../Box';
 import { Labelled } from '../Labelled';
 import { Text } from '../Text';
 import styles from './RangeSlider.module.scss';
 import { getThumbInBoundsOffset } from './utils';
-import * as Slider from '@radix-ui/react-slider';
-import cx from 'classnames';
-import React, { forwardRef, useEffect } from 'react';
 
 export type RangeSliderProps = {
   /** Label for the range input */
@@ -47,7 +48,7 @@ const RangeSlider = forwardRef((props: RangeSliderProps, ref: any) => {
     props.value || props.defaultValue || [0]
   );
 
-  const themeClass = cx(styles.RangeSlider, {});
+  const themeClass = cn(styles.RangeSlider);
   const {
     id,
     label,

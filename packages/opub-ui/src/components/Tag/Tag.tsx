@@ -1,10 +1,11 @@
+import React from 'react';
+import { IconX } from '@tabler/icons-react';
+
 import type { TagProps } from '../../types/tag';
+import { cn } from '../../utils';
 import { handleMouseUpByBlurring } from '../../utils/focus';
 import { Icon } from '../Icon';
 import styles from './Tag.module.scss';
-import { IconX } from '@tabler/icons-react';
-import cx from 'classnames';
-import React from 'react';
 
 export const Tag = React.forwardRef(
   (
@@ -21,7 +22,7 @@ export const Tag = React.forwardRef(
     ref: React.LegacyRef<HTMLSpanElement>
   ) => {
     const segmented = onRemove && url && !disabled;
-    const className = cx(
+    const className = cn(
       styles.Tag,
       disabled && styles.disabled,
       onClick && onClick.name && styles.clickable,
@@ -55,7 +56,7 @@ export const Tag = React.forwardRef(
       <button
         type="button"
         aria-label={ariaLabel}
-        className={cx(styles.Button, segmented && styles.segmented)}
+        className={cn(styles.Button, segmented && styles.segmented)}
         onClick={() => onRemove(value)}
         onMouseUp={handleMouseUpByBlurring}
         disabled={disabled}
@@ -67,7 +68,7 @@ export const Tag = React.forwardRef(
     const tagContent =
       url && !disabled ? (
         <a
-          className={cx(styles.Link, segmented && styles.segmented)}
+          className={cn(styles.Link, segmented && styles.segmented)}
           href={url}
         >
           <span title={tagTitle} className={styles.LinkText}>

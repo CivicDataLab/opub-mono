@@ -1,7 +1,6 @@
-import { variationName } from '../../utils/css';
+import { cn, variationName } from '../../utils/css';
 import { useIsAfterInitialMount } from '../../utils/hooks/use-is-after-initial-mount';
 import styles from './Spinner.module.scss';
-import cx from 'classnames';
 
 type Size = 'small' | 'large';
 
@@ -34,7 +33,7 @@ export function Spinner({
 }: SpinnerProps) {
   const isAfterInitialMount = useIsAfterInitialMount();
 
-  const className = cx(
+  const className = cn(
     styles.Spinner,
     size && styles[variationName('size', size)]
   );

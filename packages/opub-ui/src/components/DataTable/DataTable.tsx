@@ -15,9 +15,9 @@ import {
   useReactTable,
   VisibilityState,
 } from '@tanstack/react-table';
-import cx from 'classnames';
 
 import type { DataTableProps } from '../../types/datatable';
+import { cn } from '../../utils';
 import { Box } from '../Box';
 import { Checkbox } from '../Checkbox/Checkbox';
 import { Footer } from '../Table';
@@ -112,14 +112,14 @@ const DataTable = (props: DataTableProps) => {
   }, [defaultRowCount]);
 
   const rowCountIsEven = rows.length % 2 === 0;
-  const themeClass = cx(
+  const themeClass = cn(
     styles.DataTable,
     hasZebraStripingOnData && styles.ZebraStripingOnData,
     hasZebraStripingOnData && rowCountIsEven && styles.RowCountIsEven,
     increasedTableDensity && styles.IncreasedTableDensity
   );
 
-  const tableRowClassname = cx(styles.TableRow, hoverable && styles.Hoverable);
+  const tableRowClassname = cn(styles.TableRow, hoverable && styles.Hoverable);
   const selectedCount = Object.keys(rowSelection).length;
 
   return (
@@ -132,18 +132,18 @@ const DataTable = (props: DataTableProps) => {
         />
       )}
       <div
-        className={cx(styles.ScrollContainer, addToolbar && styles.withFilter)}
+        className={cn(styles.ScrollContainer, addToolbar && styles.withFilter)}
       >
         <table className={styles.Table}>
           <thead>
             {table.getHeaderGroups().map((headerGroup) => (
               <tr
-                className={cx(tableRowClassname, styles.TableHeaderRow)}
+                className={cn(tableRowClassname, styles.TableHeaderRow)}
                 key={headerGroup.id}
               >
                 {!hideSelection && (
                   <th
-                    className={cx(
+                    className={cn(
                       styles.Cell,
                       styles['Cell-header'],
                       styles.Checkbox
@@ -175,7 +175,7 @@ const DataTable = (props: DataTableProps) => {
 
                   return (
                     <HeaderCell
-                      className={cx(
+                      className={cn(
                         styles.Cell,
                         styles['Cell-header'],
                         columnTypes &&
@@ -195,7 +195,7 @@ const DataTable = (props: DataTableProps) => {
                 })}
                 {rowActions && (
                   <th
-                    className={cx(
+                    className={cn(
                       styles.Cell,
                       styles['Cell-header'],
                       styles.RowAction
@@ -223,7 +223,7 @@ const DataTable = (props: DataTableProps) => {
                 key={row.id}
                 row={row}
                 hideSelection={hideSelection}
-                classname={cx(
+                classname={cn(
                   tableRowClassname,
                   styles.TableBodyRow,
                   row.getCanSelect() && styles['TableRow-selectable'],
@@ -237,7 +237,7 @@ const DataTable = (props: DataTableProps) => {
                   );
                   return (
                     <Cell
-                      className={cx(
+                      className={cn(
                         styles.Cell,
                         columnTypes &&
                           columnTypes[index] === 'numeric' &&
@@ -254,7 +254,7 @@ const DataTable = (props: DataTableProps) => {
                   );
                 })}
                 {rowActions && (
-                  <td className={cx(styles.Cell, styles.RowAction)}>
+                  <td className={cn(styles.Cell, styles.RowAction)}>
                     <RowAction
                       callbackContent={row.original}
                       rowActions={rowActions}

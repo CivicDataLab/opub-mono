@@ -1,6 +1,6 @@
-import cx from 'classnames';
 import React from 'react';
-import { elementChildren } from '../../utils';
+
+import { cn, elementChildren } from '../../utils';
 import styles from './ButtonGroup.module.scss';
 import { Item } from './components';
 
@@ -29,7 +29,7 @@ export function ButtonGroup({
   connectedTop,
   noWrap,
 }: ButtonGroupProps) {
-  const className = cx(
+  const className = cn(
     styles.ButtonGroup,
     spacing && styles[spacing],
     segmented && styles.segmented,

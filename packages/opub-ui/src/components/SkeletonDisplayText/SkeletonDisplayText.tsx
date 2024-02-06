@@ -1,6 +1,6 @@
-import { variationName } from '../../utils/css';
-import cx from 'classnames';
+import { cn, variationName } from '../../utils/css';
 import styles from './SkeletonDisplayText.module.scss';
+
 type Size = 'small' | 'medium' | 'large' | 'extraLarge';
 
 export interface SkeletonDisplayTextProps {
@@ -14,7 +14,7 @@ export interface SkeletonDisplayTextProps {
 export function SkeletonDisplayText({
   size = 'medium',
 }: SkeletonDisplayTextProps) {
-  const className = cx(
+  const className = cn(
     styles.DisplayText,
     size && styles[variationName('size', size)]
   );

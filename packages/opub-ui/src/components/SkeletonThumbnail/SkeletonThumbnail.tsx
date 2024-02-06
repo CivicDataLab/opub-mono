@@ -1,6 +1,6 @@
-import { variationName } from '../../utils/css';
-import cx from 'classnames';
+import { cn, variationName } from '../../utils/css';
 import styles from './SkeletonThumbnail.module.scss';
+
 type Size = 'extraSmall' | 'small' | 'medium' | 'large';
 
 export interface SkeletonThumbnailProps {
@@ -12,7 +12,7 @@ export interface SkeletonThumbnailProps {
 }
 
 export function SkeletonThumbnail({ size = 'medium' }: SkeletonThumbnailProps) {
-  const className = cx(
+  const className = cn(
     styles.SkeletonThumbnail,
     size && styles[variationName('size', size)]
   );

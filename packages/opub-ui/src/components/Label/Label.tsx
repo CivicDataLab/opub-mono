@@ -1,6 +1,7 @@
 import * as LabelRadix from '@radix-ui/react-label';
 import { LabelProps } from '@radix-ui/react-label/dist/index';
-import cx from 'classnames';
+
+import { cn } from '../../utils';
 import styles from './Label.module.scss';
 
 export interface LabelInterface extends LabelProps {
@@ -21,11 +22,12 @@ export function Label({ children, ...props }: LabelInterface) {
   return (
     <LabelRadix.Root
       {...otherProps}
-      className={cx(styles.base, {
-        [styles['error']]: error,
-        [styles['disabled']]: disabled,
-        [styles['RequiredIndicator']]: requiredIndicator,
-      })}
+      className={cn(
+        styles.base,
+        error && [styles['error']],
+        disabled && [styles['disabled']],
+        requiredIndicator && [styles['RequiredIndicator']]
+      )}
     >
       {children}
     </LabelRadix.Root>

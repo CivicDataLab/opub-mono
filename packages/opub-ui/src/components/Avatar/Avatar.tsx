@@ -1,8 +1,8 @@
-import { Box } from '../Box';
+import * as AvatarRadix from '@radix-ui/react-avatar';
+
+import { cn } from '../../utils';
 import { Text } from '../Text';
 import styles from './Avatar.module.scss';
-import * as AvatarRadix from '@radix-ui/react-avatar';
-import cx from 'classnames';
 
 type Props = {
   showLabel?: boolean;
@@ -38,7 +38,7 @@ const Avatar = ({
       .map((item: any) => item[0])
       .join('')
       .toUpperCase();
-  const className = cx(
+  const className = cn(
     styles.Avatar,
     variantStyles[size],
     size === 'medium' && showInitials && styles.AvatarProfileMedium,

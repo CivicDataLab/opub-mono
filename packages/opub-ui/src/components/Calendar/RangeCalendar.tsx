@@ -1,19 +1,20 @@
 'use client';
 
-import { Icon } from '../Icon';
-import { Text } from '../Text';
-import styles from './Calendar.module.scss';
-import { CalendarGrid } from './components/CalendarGrid';
+import React from 'react';
 import { GregorianCalendar } from '@internationalized/date';
 import { AriaRangeCalendarProps, DateValue } from '@react-types/calendar';
 import { IconArrowLeft, IconArrowRight } from '@tabler/icons-react';
-import cx from 'classnames';
-import React from 'react';
 import { useLocale, useRangeCalendar } from 'react-aria';
 import {
   RangeCalendarStateOptions,
   useRangeCalendarState,
 } from 'react-stately';
+
+import { cn } from '../../utils';
+import { Icon } from '../Icon';
+import { Text } from '../Text';
+import styles from './Calendar.module.scss';
+import { CalendarGrid } from './components/CalendarGrid';
 
 function createCalendar(identifier: any) {
   switch (identifier) {
@@ -35,7 +36,7 @@ function RangeCalendar(props: Props) {
   });
 
   let ref = React.useRef(null);
-  const themeClass = cx(styles.Calendar, {});
+  const themeClass = cn(styles.Calendar);
 
   let { calendarProps, prevButtonProps, nextButtonProps, title } =
     useRangeCalendar(props, state, ref);

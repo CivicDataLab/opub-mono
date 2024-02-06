@@ -1,7 +1,8 @@
+import { IconX } from '@tabler/icons-react';
+
+import { cn } from '../../../../utils';
 import { Icon } from '../../../Icon';
 import styles from './CloseButton.module.scss';
-import { IconX } from '@tabler/icons-react';
-import cx from 'classnames';
 
 export interface CloseButtonProps {
   titleHidden?: boolean;
@@ -15,7 +16,7 @@ export function CloseButton({
   return (
     <button
       onClick={onClick}
-      className={cx(styles.CloseButton, titleHidden && styles.titleHidden)}
+      className={cn(styles.CloseButton, titleHidden && styles.titleHidden)}
       aria-label="Close dialog"
     >
       <Icon source={IconX} color="default" />

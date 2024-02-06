@@ -1,13 +1,14 @@
+import React from 'react';
+
 import type { ActionListItemDescriptor } from '../../../../types/actionlist';
 import { Color } from '../../../../types/icon';
+import { cn } from '../../../../utils';
 import { handleMouseUpByBlurring } from '../../../../utils/focus';
 import { Box } from '../../../Box';
 import { UnstyledLink } from '../../../Button/BaseLink';
 import { Icon } from '../../../Icon';
 import { Text } from '../../../Text';
 import styles from '../../ActionList.module.scss';
-import cx from 'classnames';
-import React from 'react';
 
 export type ItemProps = ActionListItemDescriptor;
 
@@ -28,7 +29,7 @@ export function Item({
   active,
   role,
 }: ItemProps) {
-  const className = cx(
+  const className = cn(
     styles.Item,
     disabled && styles.disabled,
     destructive && styles.destructive,
@@ -65,7 +66,7 @@ export function Item({
   );
 
   const suffixMarkup = suffix && (
-    <span className={cx(styles.Suffix, styles.Prefix)}>
+    <span className={cn(styles.Suffix, styles.Prefix)}>
       {<Icon source={suffix} color={color} />}
     </span>
   );

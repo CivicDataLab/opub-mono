@@ -1,10 +1,11 @@
+import React, { useId } from 'react';
+
 import { CheckboxGroupProps } from '../../types/choicelist';
+import { cn } from '../../utils';
 import { Checkbox } from '../Checkbox';
 import { InlineMessage } from '../InlineMessage';
 import { Text } from '../Text';
 import styles from './CheckboxGroup.module.scss';
-import cx from 'classnames';
-import React, { useId } from 'react';
 
 export const CheckboxGroup = React.forwardRef(
   (
@@ -51,7 +52,7 @@ export const CheckboxGroup = React.forwardRef(
       onChange && onChange(nextArr, nameProp);
     }
 
-    const wrapperClassName = cx(styles.CheckboxGroup);
+    const wrapperClassName = cn(styles.CheckboxGroup);
     const titleMarkup = title ? (
       <Text variant="bodyMd" as="legend" visuallyHidden={titleHidden}>
         {title}

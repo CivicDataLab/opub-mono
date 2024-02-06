@@ -1,8 +1,8 @@
+import { cn } from '../../utils';
 import { InlineMessage } from '../InlineMessage';
 import { Label } from '../Label';
 import { Text } from '../Text';
 import styles from './Choice.module.scss';
-import cx from 'classnames';
 
 export interface ChoiceProps {
   /** A unique identifier for the choice */
@@ -39,13 +39,13 @@ export const Choice = ({
 }: ChoiceProps) => {
   const { error, helpText } = props;
 
-  const wrapperClassName = cx(
+  const wrapperClassName = cn(
     styles.Checkbox,
     error && styles.error,
     className
   );
 
-  const labelClassName = cx(styles.Label, labelHidden && styles.hidden);
+  const labelClassName = cn(styles.Label, labelHidden && styles.hidden);
   const checkboxMarkup = (
     <div className={wrapperClassName}>
       {children}

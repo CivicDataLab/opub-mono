@@ -1,8 +1,9 @@
+import { forwardRef, Ref } from 'react';
+import * as Dialog from '@radix-ui/react-dialog';
+
+import { cn } from '../../utils';
 import dialogStyles from '../Dialog/Dialog.module.scss';
 import styles from './Sheet.module.scss';
-import * as Dialog from '@radix-ui/react-dialog';
-import cx from 'classnames';
-import { forwardRef, Ref } from 'react';
 
 interface SheetProps extends Dialog.DialogProps {
   Trigger?: Dialog.DialogTriggerProps;
@@ -49,7 +50,7 @@ const Content = forwardRef(
       size = 'narrow',
       className,
     } = props;
-    const themeClass = cx(styles.Sheet, styles[side], styles[size], className);
+    const themeClass = cn(styles.Sheet, styles[side], styles[size], className);
 
     return (
       <Dialog.Portal>
