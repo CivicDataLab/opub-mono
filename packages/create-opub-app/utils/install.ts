@@ -8,17 +8,9 @@ import { yellow } from 'picocolors';
  */
 export async function install(
   /** Indicate which package manager to use. */
-  packageManager: string,
-  /** Indicate whether there is an active Internet connection.*/
-  isOnline: boolean
+  packageManager: string
 ): Promise<void> {
   const args: string[] = ['install'];
-  if (!isOnline) {
-    console.log(
-      yellow('You appear to be offline.\nFalling back to the local cache.')
-    );
-    args.push('--offline');
-  }
   /**
    * Return a Promise that resolves once the installation is finished.
    */

@@ -4,6 +4,7 @@ import { join } from 'path';
 import { Stream } from 'stream';
 import { promisify } from 'util';
 import got from 'got';
+import { red } from 'picocolors';
 import tar from 'tar';
 
 export type RepoInfo = {
@@ -89,4 +90,53 @@ export async function downloadAndExtractRepo(
   });
 
   await fs.unlink(tempFile);
+}
+
+export async function verifyURL(example: string) {
+  let repoUrl: URL | undefined;
+  let repoInfo: RepoInfo | undefined;
+
+  try {
+    repoUrl = new URL(example);
+  } catch (error: any) {
+    if (error.code !== 'ERR_INVALID_URL') {
+      console.error(error);
+      process.exit(1);
+    }
+  }
+
+  if (repoUrl) {
+    if (repoUrl.origin !== 'https://github.com') {
+      console.error(
+        `Invalid URL: ${red(
+          `"${example}"`
+        )}. Only GitHub repositories are supported. Please use a GitHub URL and try again.`
+      );
+      process.exit(1);
+    }
+
+    repoInfo = await getRepoInfo(repoUrl);
+
+    if (!repoInfo) {
+      console.error(
+        `Found invalid GitHub URL: ${red(
+          `"${example}"`
+        )}. Please fix the URL and try again.`
+      );
+      process.exit(1);
+    }
+
+    const found = await hasRepo(repoInfo);
+
+    if (!found) {
+      console.error(
+        `Could not locate the repository for ${red(
+          `"${example}"`
+        )}. Please check that the repository exists and try again.`
+      );
+      process.exit(1);
+    }
+  }
+
+  return repoInfo;
 }

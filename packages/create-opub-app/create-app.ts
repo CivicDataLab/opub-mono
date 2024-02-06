@@ -1,18 +1,13 @@
 import fs from 'fs';
 import path from 'path';
 import retry from 'async-retry';
-import { cyan, green, red } from 'picocolors';
+import fse from 'fs-extra';
+import { cyan, green } from 'picocolors';
 
-import {
-  downloadAndExtractRepo,
-  getRepoInfo,
-  hasRepo,
-  RepoInfo,
-} from './helpers/examples';
-import { install } from './helpers/install';
-import { isFolderEmpty } from './helpers/is-folder-empty';
-import { getOnline } from './helpers/is-online';
-import { isWriteable } from './helpers/is-writeable';
+import { install } from './utils/install';
+import { isFolderEmpty } from './utils/is-folder-empty';
+import { isWriteable } from './utils/is-writeable';
+import { downloadAndExtractRepo, verifyURL } from './utils/repo';
 
 export class DownloadError extends Error {}
 
@@ -24,7 +19,6 @@ function isErrorLike(err: unknown): err is { message: string } {
   );
 }
 
-let repoInfo: RepoInfo | undefined;
 export async function createApp({
   example,
   projectPath,
@@ -41,51 +35,6 @@ export async function createApp({
     )
   );
   console.log();
-
-  if (example) {
-    let repoUrl: URL | undefined;
-    try {
-      repoUrl = new URL(example);
-    } catch (error: any) {
-      if (error.code !== 'ERR_INVALID_URL') {
-        console.error(error);
-        process.exit(1);
-      }
-    }
-
-    if (repoUrl) {
-      if (repoUrl.origin !== 'https://github.com') {
-        console.error(
-          `Invalid URL: ${red(
-            `"${example}"`
-          )}. Only GitHub repositories are supported. Please use a GitHub URL and try again.`
-        );
-        process.exit(1);
-      }
-
-      repoInfo = await getRepoInfo(repoUrl);
-
-      if (!repoInfo) {
-        console.error(
-          `Found invalid GitHub URL: ${red(
-            `"${example}"`
-          )}. Please fix the URL and try again.`
-        );
-        process.exit(1);
-      }
-
-      const found = await hasRepo(repoInfo);
-
-      if (!found) {
-        console.error(
-          `Could not locate the repository for ${red(
-            `"${example}"`
-          )}. Please check that the repository exists and try again.`
-        );
-        process.exit(1);
-      }
-    }
-  }
 
   const root = path.resolve(projectPath);
 
@@ -106,24 +55,19 @@ export async function createApp({
     process.exit(1);
   }
 
-  const useYarn = packageManager === 'yarn';
-  const isOnline = !useYarn || (await getOnline());
-  const originalDirectory = process.cwd();
+  const repoInfo = await verifyURL(example);
 
   console.log(`Creating a new OPub app in ${green(root)}.`);
   console.log();
 
+  // change current directory to the project directory
   process.chdir(root);
-
-  const packageJsonPath = path.join(root, 'package.json');
-  let hasPackageJson = false;
 
   try {
     if (repoInfo) {
-      const repoInfo2 = repoInfo;
       console.log(`Downloading files from repo ${cyan(example)}`);
       console.log();
-      await retry(() => downloadAndExtractRepo(root, repoInfo2), {
+      await retry(() => downloadAndExtractRepo(root, { ...repoInfo }), {
         retries: 3,
       });
     }
@@ -131,17 +75,27 @@ export async function createApp({
     throw new DownloadError(isErrorLike(reason) ? reason.message : reason + '');
   }
 
-  hasPackageJson = fs.existsSync(packageJsonPath);
+  const packageJsonPath = path.join(root, 'package.json');
+  let hasPackageJson = fs.existsSync(packageJsonPath);
   if (hasPackageJson) {
     console.log(
       `Installing packages using ${packageManager}. Grab a cup of chai, this might take a while.`
     );
     console.log();
 
-    await install(packageManager, isOnline);
+    // install all packages in the project
+    await install(packageManager);
     console.log();
 
+    // update the project name in package json
+    const pkgJson = fse.readJSONSync(packageJsonPath);
+    pkgJson.name = appName;
+    fse.writeJSONSync(packageJsonPath, pkgJson, {
+      spaces: 2,
+    });
+
     let cdpath: string;
+    const originalDirectory = process.cwd();
     if (path.join(originalDirectory, appName) === projectPath) {
       cdpath = appName;
     } else {
@@ -150,23 +104,24 @@ export async function createApp({
 
     console.log(`${green('Success!')} Created ${appName} at ${projectPath}`);
 
-    if (hasPackageJson) {
-      console.log('Inside that directory, you can run several commands:');
-      console.log();
-      console.log(cyan(`  ${packageManager} ${useYarn ? '' : 'run '}dev`));
-      console.log('    Starts the development server.');
-      console.log();
-      console.log(cyan(`  ${packageManager} ${useYarn ? '' : 'run '}build`));
-      console.log('    Builds the app for production.');
-      console.log();
-      console.log(cyan(`  ${packageManager} start`));
-      console.log('    Runs the built app in production mode.');
-      console.log();
-      console.log('We suggest that you begin by typing:');
-      console.log();
-      console.log(cyan('  cd'), cdpath);
-      console.log(`  ${cyan(`${packageManager} ${useYarn ? '' : 'run '}dev`)}`);
-    }
+    // provide a guide for the user to get started
+    const useYarn = packageManager === 'yarn';
+    console.log('Inside that directory, you can run several commands:');
+    console.log();
+    console.log(cyan(`  ${packageManager} ${useYarn ? '' : 'run '}dev`));
+    console.log('    Starts the development server.');
+    console.log();
+    console.log(cyan(`  ${packageManager} ${useYarn ? '' : 'run '}build`));
+    console.log('    Builds the app for production.');
+    console.log();
+    console.log(cyan(`  ${packageManager} start`));
+    console.log('    Runs the built app in production mode.');
+    console.log();
+    console.log('We suggest that you begin by typing:');
+    console.log();
+    console.log(cyan('  cd'), cdpath);
+    console.log(`  ${cyan(`${packageManager} ${useYarn ? '' : 'run '}dev`)}`);
+
     console.log();
   }
 }
