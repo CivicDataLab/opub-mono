@@ -1,5 +1,6 @@
 import { Command } from 'commander';
-import { green } from 'picocolors';
+
+import { colors } from './logger';
 
 let projectPath: string;
 
@@ -12,7 +13,7 @@ export function initCli(packageJson: {
   program.version(packageJson.version).description(packageJson.description);
   program
     .arguments('[project-directory]')
-    .usage(`${green('[project-directory]')} [options]`)
+    .usage(`${colors.success('[project-directory]')} [options]`)
     .action((name: string) => {
       projectPath = name;
     });
@@ -28,8 +29,8 @@ export function initCli(packageJson: {
       '-e, --example [d4d | data-exchange]',
       `
 
-  An example to bootstrap the app with. Currently supports ${green('d4d')} 
-  and ${green('data-exchange')}
+  An example to bootstrap the app with. Currently supports ${colors.success('d4d')} 
+  and ${colors.success('data-exchange')}
 `
     )
     .allowUnknownOption();

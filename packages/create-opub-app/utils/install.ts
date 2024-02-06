@@ -1,5 +1,4 @@
 import spawn from 'cross-spawn';
-import { yellow } from 'picocolors';
 
 /**
  * Spawn a package manager installation based on user preference.

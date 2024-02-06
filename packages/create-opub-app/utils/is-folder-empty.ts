@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
-import { blue, green } from 'picocolors';
+
+import { colors } from './logger';
 
 export function isFolderEmpty(root: string, name: string): boolean {
   const validFiles = [
@@ -34,14 +35,14 @@ export function isFolderEmpty(root: string, name: string): boolean {
 
   if (conflicts.length > 0) {
     console.log(
-      `The directory ${green(name)} contains files that could conflict:`
+      `The directory ${colors.success(name)} contains files that could conflict:`
     );
     console.log();
     for (const file of conflicts) {
       try {
         const stats = fs.lstatSync(path.join(root, file));
         if (stats.isDirectory()) {
-          console.log(`  ${blue(file)}/`);
+          console.log(`  ${colors.info(file)}/`);
         } else {
           console.log(`  ${file}`);
         }

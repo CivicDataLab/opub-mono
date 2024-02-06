@@ -1,13 +1,13 @@
 #! /usr/bin/env node
 import fs from 'fs';
 import path from 'path';
-import { cyan, green, red } from 'picocolors';
 
 import { createApp } from './create-app';
 import packageJson from './package.json';
 import { examples } from './utils/constants';
 import { initCli } from './utils/initCli';
 import { isFolderEmpty } from './utils/is-folder-empty';
+import { colors } from './utils/logger';
 import { prompts } from './utils/prompts';
 import { renderTitle } from './utils/renderTitle';
 
@@ -42,7 +42,7 @@ async function run(): Promise<void> {
 
   if (example && !Object.keys(examples).includes(example)) {
     console.error(
-      `The example provided is not supported. Please provide a valid example. We support ${green('d4d')} and ${green('data-exchange')}`
+      `The example provided is not supported. Please provide a valid example. We support ${colors.success('d4d')} and ${colors.success('data-exchange')}`
     );
     process.exit(1);
   }
@@ -66,7 +66,7 @@ async function run(): Promise<void> {
 
   if (manager && !['npm', 'pnpm', 'yarn', 'bun'].includes(manager)) {
     console.error(
-      `The package manager provided is not supported. Please provide a valid manager. We support ${green('d4d')} and ${green('data-exchange')}`
+      `The package manager provided is not supported. Please provide a valid manager. We support ${colors.success('d4d')} and ${colors.success('data-exchange')}`
     );
     process.exit(1);
   }
@@ -107,10 +107,10 @@ run().catch(async (reason) => {
   console.log();
   console.log('Aborting installation.');
   if (reason.command) {
-    console.log(`  ${cyan(reason.command)} has failed.`);
+    console.log(`  ${colors.info(reason.command)} has failed.`);
   } else {
     console.log(
-      red('Unexpected error. Please report it as a bug:') + '\n',
+      colors.error('Unexpected error. Please report it as a bug:') + '\n',
       reason
     );
   }
