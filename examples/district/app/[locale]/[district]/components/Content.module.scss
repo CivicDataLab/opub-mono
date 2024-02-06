@@ -56,10 +56,9 @@
 
 .CollapseBtn {
   transition: transform var(--duration-300) var(--ease-in-out);
+  transform: translateX(210px);
 }
 
 .Collapsed {
-  & > span {
-    transform: rotate(180deg);
-  }
+  transform: rotate(180deg);
 }

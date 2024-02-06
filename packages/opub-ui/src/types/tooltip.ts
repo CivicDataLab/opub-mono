@@ -94,4 +94,7 @@ export type TooltipProps = Root &
     solo?: boolean;
     // Hide Arrow
     hideArrow?: boolean;
+
+    // Classname
+    className?: string;
   };

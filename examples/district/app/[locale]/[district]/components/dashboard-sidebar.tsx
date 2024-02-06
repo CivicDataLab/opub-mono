@@ -1,12 +1,13 @@
 'use client';
 
-import styles from './Content.module.scss';
-import { cn } from '@/lib/utils';
+import React from 'react';
 import Link from 'next/link';
 import { useParams, usePathname } from 'next/navigation';
 import { Text } from 'opub-ui';
-import React from 'react';
+
 import { SidebarNavItem } from 'types';
+import { cn } from '@/lib/utils';
+import styles from './Content.module.scss';
 
 interface DashboardNavProps {
   items: SidebarNavItem[];
@@ -23,16 +24,16 @@ export function DashboardSidebar({ items, isCollapsed }: DashboardNavProps) {
   return (
     <aside
       className={cn(
-        'pt-4 bg-backgroundSolidDefault shadow-insetBasic min-h-[calc(100vh_-_50px)]',
-        'hidden z-1 basis-[240px] shrink-0 md:block overflow-hidden',
+        'min-h-[calc(100vh_-_50px)] bg-backgroundSolidDefault pt-4 shadow-insetBasic',
+        'z-1 hidden shrink-0 basis-[240px] overflow-hidden md:block',
         isCollapsed && 'basis-[24px]',
         styles.Collapse
       )}
     >
-      <nav className={cn('flex flex-col gap-2 relative')}>
+      <nav className={cn('relative flex flex-col gap-2')}>
         <Text
           className={cn(
-            'py-2 px-4 z-max text-baseGraySlateSolid11',
+            'z-max px-4 py-2 text-baseGraySlateSolid11',
             isCollapsed && 'hidden'
           )}
           variant="headingSmSpaced"
@@ -41,7 +42,7 @@ export function DashboardSidebar({ items, isCollapsed }: DashboardNavProps) {
         </Text>
 
         <div
-          className={cn('flex flex-col gap-2 mt-2', isCollapsed && 'hidden')}
+          className={cn('mt-2 flex flex-col gap-2', isCollapsed && 'hidden')}
         >
           {items.map((item) => {
             return (
@@ -74,16 +75,16 @@ const SidebarLink = ({
 }) => {
   return (
     <Link key={href + title} href={href}>
-      <div className={cn('flex justify-between relative')}>
+      <div className={cn('relative flex justify-between')}>
         <span
           className={cn(
-            'bg-transparent rounded-r-2 w-[6px] h-full absolute top-0 left-[-3px]',
+            'absolute left-[-3px] top-0 h-full w-[6px] rounded-r-2 bg-transparent',
             isActive(department, href, district) && 'bg-borderHighlightDefault'
           )}
         />
         <div
           className={cn(
-            'flex items-center w-full mx-2 rounded-1 hover:bg-baseIndigoAlpha3',
+            'mx-2 flex w-full items-center rounded-1 hover:bg-baseIndigoAlpha3',
             styles.Item,
             isActive(department, href, district) &&
               'bg-baseIndigoAlpha4 text-baseVioletAlpha11 hover:bg-baseIndigoAlpha4'
@@ -91,7 +92,7 @@ const SidebarLink = ({
         >
           <div
             className={cn(
-              'px-2 py-3 max-w-[220px]',
+              'max-w-[220px] px-2 py-3',
               'whitespace-nowrap opacity-100 transition-opacity duration-300'
             )}
           >

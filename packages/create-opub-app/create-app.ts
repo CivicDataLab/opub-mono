@@ -105,13 +105,13 @@ export async function createApp({
     console.log(`${green('Success!')} Created ${appName} at ${projectPath}`);
 
     // provide a guide for the user to get started
-    const useYarn = packageManager === 'yarn';
+    const useNpm = packageManager === 'npm';
     console.log('Inside that directory, you can run several commands:');
     console.log();
-    console.log(cyan(`  ${packageManager} ${useYarn ? '' : 'run '}dev`));
+    console.log(cyan(`  ${packageManager} ${useNpm ? 'run ' : ''}dev`));
     console.log('    Starts the development server.');
     console.log();
-    console.log(cyan(`  ${packageManager} ${useYarn ? '' : 'run '}build`));
+    console.log(cyan(`  ${packageManager} ${useNpm ? 'run ' : ''}build`));
     console.log('    Builds the app for production.');
     console.log();
     console.log(cyan(`  ${packageManager} start`));
@@ -120,7 +120,7 @@ export async function createApp({
     console.log('We suggest that you begin by typing:');
     console.log();
     console.log(cyan('  cd'), cdpath);
-    console.log(`  ${cyan(`${packageManager} ${useYarn ? '' : 'run '}dev`)}`);
+    console.log(`  ${cyan(`${packageManager} ${useNpm ? 'run ' : ''}dev`)}`);
 
     console.log();
   }

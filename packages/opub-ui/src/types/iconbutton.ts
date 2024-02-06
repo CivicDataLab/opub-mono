@@ -1,5 +1,6 @@
-import { Color, IconSource } from './icon';
 import { TablerIconsProps } from '@tabler/icons-react';
+
+import { Color } from './icon';
 
 export type IconButtonProps = {
   /** Hidden Content to display inside the button. Required for accessibility */
@@ -19,4 +20,6 @@ export type IconButtonProps = {
   disabled?: boolean;
   /** Color of the icon */
   color?: Color;
+
+  tooltipSide?: 'top' | 'right' | 'bottom' | 'left';
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;
