@@ -31,8 +31,6 @@ eg: npm create opub-app my-opub-app -e d4d -m pnpm
 
 - [commander](https://github.com/tj/commander.js) - backbone of the CLI
 - [clack](https://github.com/natemoo-re/clack) - used for interactive prompt
-- [figlet](https://github.com/cmatsuoka/figlet) - text formattor
-- [picocolors](https://github.com/alexeyraspopov/picocolors) - add colors to CLI
 - [got](https://github.com/sindresorhus/got) - HTML request library
 - [tar](https://github.com/isaacs/node-tar) - extract tar compressed file
 - [@vercel/ncc ](https://github.com/vercel/ncc)- compile Node.js modules into a single file
@@ -45,9 +43,9 @@ eg: npm create opub-app my-opub-app -e d4d -m pnpm
   - [x] Linux
   - [x] Mac
 
+- [ ] Add option to choose theme
 - [x] Ask for new name if the provided one is not unique
 - [x] Add option to select template based on initiative
-- [ ] Add option to choose theme
 - [x] Add support for multiple package managers
 
   - [x] npm
