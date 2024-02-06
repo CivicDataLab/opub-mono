@@ -2,3 +2,30 @@
     flex-grow: 1;
     transition: transform var(--duration-400) ease 0s;
   }
+  
+  .IndicatorBtn {
+    cursor: pointer;
+    outline: none;
+    vertical-align: middle;
+    text-decoration: none;
+    color: #fff;
+    border-radius: 25px;
+    -webkit-transition: width 0.5s;
+    transition: width 0.5s;
+  }
+  
+.IndicatorBtnText {
+    max-width: 0;
+    display: inline-block;
+    -webkit-transition: color .25s 1.5s, max-width 2s;
+    transition: color .25s 1.5s, max-width 2s;
+    vertical-align: top;
+    white-space: nowrap;
+    overflow: hidden;
+    color: #11181C;
+  }
+  
+  .IndicatorBtn:hover .IndicatorBtnText {
+    max-width: 300px;
+    color: #11181C;
+  }
