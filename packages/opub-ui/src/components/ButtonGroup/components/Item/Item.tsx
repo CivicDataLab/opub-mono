@@ -1,6 +1,6 @@
-import cx from 'classnames';
 import React from 'react';
-import { useToggle } from '../../../../utils';
+
+import { cn, useToggle } from '../../../../utils';
 import styles from '../../ButtonGroup.module.scss';
 
 export interface ItemProps {
@@ -14,7 +14,7 @@ export function Item({ button }: ItemProps) {
     setFalse: forceFalseFocused,
   } = useToggle(false);
 
-  const className = cx(
+  const className = cn(
     styles.Item,
     focused && styles['Item-focused'],
     button.props.plain && styles['Item-plain']

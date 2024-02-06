@@ -1,9 +1,9 @@
+import React, { forwardRef, Ref } from 'react';
 import * as Progress from '@radix-ui/react-progress';
+
 import { motion } from '../../tokens/motion';
 import { ProgressBarProps } from '../../types/progressbar';
-import { variationName } from '../../utils/css';
-import cx from 'classnames';
-import React, { forwardRef, Ref } from 'react';
+import { cn, variationName } from '../../utils/css';
 import styles from './ProgressBar.module.scss';
 
 const ProgressBar = forwardRef(
@@ -21,7 +21,7 @@ const ProgressBar = forwardRef(
       return () => clearTimeout(timer);
     }, []);
 
-    const themeClass = cx(
+    const themeClass = cn(
       styles.Root,
       size && styles[variationName('size', size)],
       color && styles[variationName('color', color)]

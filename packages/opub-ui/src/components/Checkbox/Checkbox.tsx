@@ -1,11 +1,12 @@
+import React, { forwardRef } from 'react';
+import * as CheckboxRadix from '@radix-ui/react-checkbox';
+import { IconCheck, IconMinus } from '@tabler/icons-react';
+
 import { CheckboxProps } from '../../types/checkbox';
+import { cn } from '../../utils';
 import { Choice } from '../Choice';
 import { Icon } from '../Icon';
 import styles from './Checkbox.module.scss';
-import * as CheckboxRadix from '@radix-ui/react-checkbox';
-import { IconCheck, IconMinus } from '@tabler/icons-react';
-import cx from 'classnames';
-import React, { forwardRef } from 'react';
 
 const Checkbox = forwardRef(
   (
@@ -17,7 +18,7 @@ const Checkbox = forwardRef(
     const id = React.useId();
     const isIndeterminate = props.checked === 'indeterminate';
 
-    const inputClassName = cx(
+    const inputClassName = cn(
       styles.Input,
       error && styles.Error,
       props.disabled && styles.Disabled

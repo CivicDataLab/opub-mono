@@ -1,15 +1,16 @@
+import React from 'react';
+import * as RadioRadix from '@radix-ui/react-radio-group';
+import type {
+  RadioGroupItemProps,
+  RadioGroupProps,
+} from '@radix-ui/react-radio-group';
+
 import type { Error } from '../../types/shared/form';
+import { cn } from '../../utils';
 import { Choice } from '../Choice';
 import { InlineMessage } from '../InlineMessage';
 import { Text } from '../Text';
 import styles from './RadioGroup.module.scss';
-import * as RadioRadix from '@radix-ui/react-radio-group';
-import type {
-  RadioGroupProps,
-  RadioGroupItemProps,
-} from '@radix-ui/react-radio-group';
-import cx from 'classnames';
-import React from 'react';
 
 export type RadioProps = Omit<RadioGroupProps, 'onChange'> & {
   name: string;
@@ -76,7 +77,7 @@ const RadioItem = ({ children, className, ...props }: RadioItemProps) => {
   const { helpText, value, disabled, required } = props;
   const id = React.useId();
 
-  const inputClassName = cx(
+  const inputClassName = cn(
     styles.RadioItem,
     props.disabled && styles.Disabled
   );

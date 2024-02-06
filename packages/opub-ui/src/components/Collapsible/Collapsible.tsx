@@ -1,10 +1,11 @@
-import { CollapsibleProps } from '../../types/collapsible';
-import { Icon } from '../Icon';
-import styles from './Collapsible.module.scss';
+import React from 'react';
 import * as CollapsibleDemo from '@radix-ui/react-collapsible';
 import { IconMinus, IconPlus } from '@tabler/icons-react';
-import cx from 'classnames';
-import React from 'react';
+
+import { CollapsibleProps } from '../../types/collapsible';
+import { cn } from '../../utils';
+import { Icon } from '../Icon';
+import styles from './Collapsible.module.scss';
 
 export const Collapsible = ({
   collapsibleHeading,
@@ -12,7 +13,7 @@ export const Collapsible = ({
 }: CollapsibleProps) => {
   const [open, setOpen] = React.useState(false);
 
-  const className = cx(styles.CollapsibleRoot);
+  const className = cn(styles.CollapsibleRoot);
   const iconSource = open ? IconMinus : IconPlus;
   return (
     <CollapsibleDemo.Root

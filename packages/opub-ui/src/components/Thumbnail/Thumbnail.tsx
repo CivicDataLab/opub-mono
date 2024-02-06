@@ -1,8 +1,8 @@
-import { variationName } from '../../utils/css';
+import React, { forwardRef, LegacyRef } from 'react';
+
+import { cn, variationName } from '../../utils/css';
 import { Icon } from '../Icon';
 import styles from './Thumbnail.module.scss';
-import cx from 'classnames';
-import React, { forwardRef, LegacyRef } from 'react';
 
 type Size = 'extraSmall' | 'small' | 'medium' | 'large';
 
@@ -25,7 +25,7 @@ export const Thumbnail = forwardRef(
     { source, alt, size = 'medium', transparent }: ThumbnailProps,
     ref: LegacyRef<HTMLSpanElement>
   ) => {
-    const className = cx(
+    const className = cn(
       styles.Thumbnail,
       size && styles[variationName('size', size)],
       transparent && styles.transparent

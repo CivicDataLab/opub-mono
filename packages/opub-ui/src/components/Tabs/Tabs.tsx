@@ -1,8 +1,9 @@
+import { forwardRef } from 'react';
+import * as TabsRadix from '@radix-ui/react-tabs';
+
+import { cn } from '../../utils';
 import { Text } from '../Text';
 import styles from './Tabs.module.scss';
-import * as TabsRadix from '@radix-ui/react-tabs';
-import cx from 'classnames';
-import { forwardRef } from 'react';
 
 type Props = {} & TabsRadix.TabsProps;
 
@@ -27,7 +28,7 @@ type ListProps = {
 
 const TabList = forwardRef((props: ListProps, ref: any) => {
   const { fitted, disclosureText, className, ...others } = props;
-  const classname = cx(styles.TabList, fitted && styles.fitted, className);
+  const classname = cn(styles.TabList, fitted && styles.fitted, className);
 
   return <TabsRadix.List className={classname} {...others} ref={ref} />;
 });
@@ -44,7 +45,7 @@ const Tab = forwardRef(
     return (
       <TabsRadix.Trigger {...props} ref={ref} asChild>
         <button
-          className={cx(
+          className={cn(
             styles.Tab,
             activeBorder && styles.ActiveBorder,
             className

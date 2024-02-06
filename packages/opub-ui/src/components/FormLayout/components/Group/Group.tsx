@@ -1,6 +1,6 @@
-import cx from 'classnames';
 import React, { Children } from 'react';
-import { wrapWithComponent } from '../../../../utils';
+
+import { cn, wrapWithComponent } from '../../../../utils';
 import { Box } from '../../../Box';
 import styles from '../../FormLayout.module.scss';
 import { Item } from '../Item';
@@ -13,7 +13,7 @@ export interface GroupProps {
 }
 
 export function Group({ children, condensed, title, helpText }: GroupProps) {
-  const className = cx(condensed ? styles.condensed : styles.grouped);
+  const className = cn(condensed ? styles.condensed : styles.grouped);
 
   const id = React.useId();
 

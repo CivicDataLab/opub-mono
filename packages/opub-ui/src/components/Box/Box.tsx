@@ -1,7 +1,11 @@
-import cx from 'classnames';
 import React, { createElement, forwardRef } from 'react';
+
 import { BoxProps, FlexStyleProps } from '../../types/box';
-import { getResponsiveProps, sanitizeCustomProperties } from '../../utils/css';
+import {
+  cn,
+  getResponsiveProps,
+  sanitizeCustomProperties,
+} from '../../utils/css';
 import boxStyles from './Box.module.scss';
 
 export const Box = forwardRef<HTMLElement, BoxProps & FlexStyleProps>(
@@ -175,7 +179,7 @@ export const Box = forwardRef<HTMLElement, BoxProps & FlexStyleProps>(
       alignContent,
     } as React.CSSProperties;
 
-    const className = cx(
+    const className = cn(
       boxStyles.Box,
       visuallyHidden && boxStyles.visuallyHidden,
       printHidden && boxStyles.printHidden,

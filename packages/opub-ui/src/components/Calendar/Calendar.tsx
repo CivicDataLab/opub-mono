@@ -1,16 +1,17 @@
 'use client';
 
+import { forwardRef, LegacyRef } from 'react';
+import { GregorianCalendar } from '@internationalized/date';
+import { AriaCalendarProps, DateValue } from '@react-types/calendar';
+import { IconArrowLeft, IconArrowRight } from '@tabler/icons-react';
+import { useCalendar, useLocale } from 'react-aria';
+import { CalendarStateOptions, useCalendarState } from 'react-stately';
+
+import { cn } from '../../utils';
 import { Icon } from '../Icon';
 import { Text } from '../Text';
 import styles from './Calendar.module.scss';
 import { CalendarGrid } from './components/CalendarGrid';
-import { GregorianCalendar } from '@internationalized/date';
-import { AriaCalendarProps, DateValue } from '@react-types/calendar';
-import { IconArrowLeft, IconArrowRight } from '@tabler/icons-react';
-import cx from 'classnames';
-import { forwardRef, LegacyRef } from 'react';
-import { useCalendar, useLocale } from 'react-aria';
-import { CalendarStateOptions, useCalendarState } from 'react-stately';
 
 function createCalendar(identifier: any) {
   switch (identifier) {
@@ -48,7 +49,7 @@ const Calendar = forwardRef(
       ...othersNext
     } = nextButtonProps;
 
-    const themeClass = cx(styles.Calendar, {});
+    const themeClass = cn(styles.Calendar);
     return (
       <div
         {...calendarProps}

@@ -1,26 +1,5 @@
 'use client';
 
-import { variationName } from '../../utils/css';
-import { debounce } from '../../utils/debounce';
-import { useComponentDidMount } from '../../utils/hooks/use-component-did-mount';
-import { useEventListener } from '../../utils/hooks/use-event-listener';
-import { useToggle } from '../../utils/hooks/use-toggle';
-import { isServer } from '../../utils/target';
-import { Box } from '../Box';
-import { Icon } from '../Icon';
-import { Labelled, LabelledProps } from '../Labelled';
-import { Text } from '../Text';
-import styles from './DropZone.module.scss';
-import { FileUpload } from './components';
-import { DropZoneContext } from './context';
-import {
-  DropZoneEvent,
-  defaultAllowMultiple,
-  fileAccepted,
-  getDataTransferFiles,
-} from './utils';
-import { IconAlertCircle, IconUpload } from '@tabler/icons-react';
-import cx from 'classnames';
 import React, {
   FunctionComponent,
   RefAttributes,
@@ -30,6 +9,27 @@ import React, {
   useRef,
   useState,
 } from 'react';
+import { IconAlertCircle, IconUpload } from '@tabler/icons-react';
+
+import { cn, variationName } from '../../utils/css';
+import { debounce } from '../../utils/debounce';
+import { useComponentDidMount } from '../../utils/hooks/use-component-did-mount';
+import { useEventListener } from '../../utils/hooks/use-event-listener';
+import { useToggle } from '../../utils/hooks/use-toggle';
+import { isServer } from '../../utils/target';
+import { Box } from '../Box';
+import { Icon } from '../Icon';
+import { Labelled, LabelledProps } from '../Labelled';
+import { Text } from '../Text';
+import { FileUpload } from './components';
+import { DropZoneContext } from './context';
+import styles from './DropZone.module.scss';
+import {
+  defaultAllowMultiple,
+  DropZoneEvent,
+  fileAccepted,
+  getDataTransferFiles,
+} from './utils';
 
 export type DropZoneFileType = 'file' | 'image' | 'video';
 
@@ -305,7 +305,7 @@ export const DropZone: React.ForwardRefExoticComponent<
   const labelValue = label;
   const labelHiddenValue = label ? labelHidden : true;
 
-  const classes = cx(
+  const classes = cn(
     styles.DropZone,
     outline && styles.hasOutline,
     focused && styles.focused,

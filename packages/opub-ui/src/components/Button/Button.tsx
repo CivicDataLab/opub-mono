@@ -4,10 +4,9 @@ import {
   IconChevronUp,
   IconSelector,
 } from '@tabler/icons-react';
-import cx from 'classnames';
 
 import { ConnectedDisclosure } from '../../types/button';
-import { variationName } from '../../utils/css';
+import { cn, variationName } from '../../utils/css';
 import { handleMouseUpByBlurring, MouseUpBlurHandler } from '../../utils/focus';
 import { Icon } from '../Icon';
 import { Menu } from '../Menu';
@@ -127,7 +126,7 @@ const Button = React.forwardRef(
     } = props;
     const isDisabled = disabled || loading;
 
-    const className = cx(
+    const className = cn(
       styles.Button,
       styles[variationName('kind', kind)],
       styles[variationName('variant', variant)],
@@ -146,7 +145,7 @@ const Button = React.forwardRef(
 
     const childMarkup = children ? (
       <span
-        className={cx(styles.Text, removeUnderline && styles.removeUnderline)}
+        className={cn(styles.Text, removeUnderline && styles.removeUnderline)}
         // Fixes Safari bug that doesn't re-render button text to correct color
         key={disabled ? 'text-disabled' : 'text'}
       >
@@ -165,12 +164,12 @@ const Button = React.forwardRef(
     ) : null;
 
     const iconMarkup = icon ? (
-      <span className={cx(styles.Icon, loading && styles.hidden)}>{icon}</span>
+      <span className={cn(styles.Icon, loading && styles.hidden)}>{icon}</span>
     ) : null;
 
     const disclosureMarkup = disclosure ? (
       <span className={styles.Icon}>
-        <div className={cx(styles.DisclosureIcon, loading && styles.hidden)}>
+        <div className={cn(styles.DisclosureIcon, loading && styles.hidden)}>
           {loading ? (
             <div className={styles.Placeholder} />
           ) : (
@@ -187,7 +186,7 @@ const Button = React.forwardRef(
 
     let connectedDisclosureMarkup;
     if (connectedDisclosure && connectedDisclosure.actions.length > 0) {
-      const connectedDisclosureClassName = cx(
+      const connectedDisclosureClassName = cn(
         styles.Button,
         styles[variationName('kind', kind)],
         styles[variationName('variant', variant)],

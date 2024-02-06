@@ -1,8 +1,7 @@
 import { IconProps } from '../../types';
-import { variationName } from '../../utils/css';
+import { cn, variationName } from '../../utils/css';
 import { Text } from '../Text';
 import styles from './Icon.module.scss';
-import cx from 'classnames';
 
 export function Icon({
   source,
@@ -14,7 +13,7 @@ export function Icon({
   className,
   noEvents,
 }: IconProps) {
-  const classes = cx(
+  const classes = cn(
     styles.Icon,
     color && styles[variationName('color', color)],
     backdrop && styles.hasBackdrop,

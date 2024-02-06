@@ -1,18 +1,19 @@
 'use client';
 
-import type { TableProps } from '../../types/datatable';
-import styles from './Table.module.scss';
-import { Cell, Footer, HeaderCell } from './components';
+import React from 'react';
 import {
-  SortingState,
   flexRender,
   getCoreRowModel,
   getPaginationRowModel,
   getSortedRowModel,
+  SortingState,
   useReactTable,
 } from '@tanstack/react-table';
-import cx from 'classnames';
-import React from 'react';
+
+import type { TableProps } from '../../types/datatable';
+import { cn } from '../../utils';
+import { Cell, Footer, HeaderCell } from './components';
+import styles from './Table.module.scss';
 
 const Table = (props: TableProps) => {
   const {
@@ -54,14 +55,14 @@ const Table = (props: TableProps) => {
   const footerVisible = !hideFooter && data.length > 0;
 
   const rowCountIsEven = data.length % 2 === 0;
-  const themeClass = cx(
+  const themeClass = cn(
     styles.DataTable,
     hasZebraStripingOnData && styles.ZebraStripingOnData,
     hasZebraStripingOnData && rowCountIsEven && styles.RowCountIsEven,
     increasedTableDensity && styles.IncreasedTableDensity
   );
 
-  const tableRowClassname = cx(styles.TableRow, hoverable && styles.Hoverable);
+  const tableRowClassname = cn(styles.TableRow, hoverable && styles.Hoverable);
 
   return (
     <div className={`opub-DataTable ${themeClass}`} {...others}>
@@ -70,7 +71,7 @@ const Table = (props: TableProps) => {
           <thead>
             {table.getHeaderGroups().map((headerGroup) => (
               <tr
-                className={cx(tableRowClassname, styles.TableHeaderRow)}
+                className={cn(tableRowClassname, styles.TableHeaderRow)}
                 key={headerGroup.id}
               >
                 {headerGroup.headers.map((header, index) => {
@@ -86,7 +87,7 @@ const Table = (props: TableProps) => {
 
                   return (
                     <HeaderCell
-                      className={cx(
+                      className={cn(
                         styles.Cell,
                         styles['Cell-header'],
                         columnTypes[index] === 'numeric' &&
@@ -109,7 +110,7 @@ const Table = (props: TableProps) => {
           <tbody>
             {table.getRowModel().rows.map((row) => (
               <tr
-                className={cx(tableRowClassname, styles.TableBodyRow)}
+                className={cn(tableRowClassname, styles.TableBodyRow)}
                 key={row.id}
               >
                 {row.getVisibleCells().map((cell, index) => {
@@ -119,7 +120,7 @@ const Table = (props: TableProps) => {
                   );
                   return (
                     <Cell
-                      className={cx(
+                      className={cn(
                         styles.Cell,
                         columnTypes[index] === 'numeric' &&
                           styles['Cell-numeric'],

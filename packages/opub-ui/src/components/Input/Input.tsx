@@ -1,18 +1,5 @@
 'use client';
 
-import { TextFieldProps } from '../../types/input';
-import { Key } from '../../types/shared/key';
-import { variationName } from '../../utils/css';
-import { useForwardRef } from '../../utils/helpers';
-import { useIsAfterInitialMount } from '../../utils/hooks';
-import { Connected } from '../Connected';
-import { Icon } from '../Icon';
-import { Labelled } from '../Labelled';
-import { Text } from '../Text';
-import styles from './Input.module.scss';
-import { Resizer, Spinner, SpinnerProps } from './components';
-import { IconX } from '@tabler/icons-react';
-import cx from 'classnames';
 import React, {
   createElement,
   useCallback,
@@ -21,6 +8,19 @@ import React, {
   useRef,
   useState,
 } from 'react';
+import { IconX } from '@tabler/icons-react';
+
+import { TextFieldProps } from '../../types/input';
+import { Key } from '../../types/shared/key';
+import { cn, variationName } from '../../utils/css';
+import { useForwardRef } from '../../utils/helpers';
+import { useIsAfterInitialMount } from '../../utils/hooks';
+import { Connected } from '../Connected';
+import { Icon } from '../Icon';
+import { Labelled } from '../Labelled';
+import { Text } from '../Text';
+import { Resizer, Spinner, SpinnerProps } from './components';
+import styles from './Input.module.scss';
 
 export const Input = React.forwardRef(
   (
@@ -121,7 +121,7 @@ export const Input = React.forwardRef(
     const normalizedMax = max != null ? max : Infinity;
     const normalizedMin = min != null ? min : -Infinity;
 
-    const className = cx(
+    const className = cn(
       styles.TextField,
       Boolean(normalizedValue) && styles.hasValue,
       disabled && styles.disabled,
@@ -152,7 +152,7 @@ export const Input = React.forwardRef(
         ? `${characterCount} of ${maxLength} characters used`
         : `${characterCount} characters`;
 
-      const characterCountClassName = cx(
+      const characterCountClassName = cn(
         styles.CharacterCount,
         multiline && styles.AlignFieldBottom
       );
@@ -306,7 +306,7 @@ export const Input = React.forwardRef(
 
     labelledBy.unshift(`${id}-label`);
 
-    const inputClassName = cx(
+    const inputClassName = cn(
       styles.Input,
       align && styles[variationName('Input-align', align)],
       suffix && styles['Input-suffixed'],
@@ -392,7 +392,7 @@ export const Input = React.forwardRef(
 
     const backdropMarkup = (
       <div
-        className={cx(
+        className={cn(
           styles.Backdrop,
           connectedLeft && styles['Backdrop-connectedLeft'],
           connectedRight && styles['Backdrop-connectedRight']

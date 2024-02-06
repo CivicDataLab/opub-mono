@@ -1,8 +1,8 @@
 import { BadgeProps } from '../../types/badge';
+import { cn } from '../../utils';
 import { Text } from '../Text';
 import styles from './Badge.module.scss';
 import { Pip } from './components/Pip';
-import cx from 'classnames';
 
 export const Badge = ({
   progress = 'default',
@@ -33,7 +33,7 @@ export const Badge = ({
     return `${name}${value.charAt(0).toUpperCase()}${value.slice(1)}`;
   }
 
-  const className = cx(
+  const className = cn(
     styles.Badge,
     status && styles[variationName('status', status)]
   );

@@ -1,9 +1,10 @@
-import { CalendarDate, isSameDay, isToday } from '@internationalized/date';
-import { Text } from '../../../Text';
-import cx from 'classnames';
 import React from 'react';
+import { CalendarDate, isSameDay, isToday } from '@internationalized/date';
 import { AriaCalendarCellProps, useCalendarCell } from 'react-aria';
 import { CalendarState, RangeCalendarState } from 'react-stately';
+
+import { cn } from '../../../../utils';
+import { Text } from '../../../Text';
 import styles from '../../Calendar.module.scss';
 
 interface CalendarCellProps extends AriaCalendarCellProps {
@@ -30,7 +31,7 @@ export function CalendarCell({ state, date }: CalendarCellProps) {
   let isSelectionEnd =
     isSelected && highlightedRange && isSameDay(date, highlightedRange.end);
 
-  const classname = cx(
+  const classname = cn(
     styles.Cell,
     isToday(date, state.timeZone) && styles.Today,
     isSelected && styles.Selected,

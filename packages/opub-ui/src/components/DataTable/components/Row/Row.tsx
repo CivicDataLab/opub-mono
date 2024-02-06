@@ -1,9 +1,8 @@
-import { Checkbox } from '../../../Checkbox';
-import { IconButton } from '../../../IconButton';
-import styles from '../../DataTable.module.scss';
-import { IconDotsVertical } from '@tabler/icons-react';
-import cx from 'classnames';
 import React from 'react';
+
+import { cn } from '../../../../utils';
+import { Checkbox } from '../../../Checkbox';
+import styles from '../../DataTable.module.scss';
 
 type Props = {
   children: React.ReactNode;
@@ -35,7 +34,7 @@ export const Row = ({ children, row, classname, hideSelection }: Props) => {
       className={classname}
     >
       {!hideSelection && (
-        <td className={cx(styles.Cell, styles.Checkbox)}>
+        <td className={cn(styles.Cell, styles.Checkbox)}>
           <Checkbox
             checked={selected}
             onCheckedChange={handleSelection}

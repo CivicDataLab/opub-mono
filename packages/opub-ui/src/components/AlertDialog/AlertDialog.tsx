@@ -1,9 +1,10 @@
-import styles from '../Dialog/Dialog.module.scss';
-import { Footer, FooterProps } from '../Dialog/components';
-import { Header } from './components';
-import * as AlertDialogRadix from '@radix-ui/react-alert-dialog';
-import cx from 'classnames';
 import React, { forwardRef, Ref } from 'react';
+import * as AlertDialogRadix from '@radix-ui/react-alert-dialog';
+
+import { cn } from '../../utils';
+import { Footer, FooterProps } from '../Dialog/components';
+import styles from '../Dialog/Dialog.module.scss';
+import { Header } from './components';
 
 interface DialogProps extends AlertDialogRadix.DialogProps {
   Trigger?: AlertDialogRadix.DialogTriggerProps;
@@ -74,7 +75,7 @@ const Content = forwardRef((props: ContentProps, ref: any) => {
   const rId = React.useId();
   const finalId = id || rId;
 
-  const classname = cx(
+  const classname = cn(
     styles.Dialog,
     small && styles.sizeSmall,
     large && styles.sizeLarge,

@@ -1,4 +1,4 @@
-import cx from 'classnames';
+import { cn } from '../../utils';
 import { SkeletonBodyText } from '../SkeletonBodyText';
 import styles from './SkeletonTabs.module.scss';
 
@@ -14,7 +14,7 @@ export function SkeletonTabs({ count = 2 }: SkeletonTabsProps) {
           key % 2 === 0 ? styles['Tab-short'] : styles['Tab-long'];
 
         return (
-          <div key={key} className={cx(styles.Tab, tabWidthClassName)}>
+          <div key={key} className={cn(styles.Tab, tabWidthClassName)}>
             <SkeletonBodyText lines={1} />
           </div>
         );

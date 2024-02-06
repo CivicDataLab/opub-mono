@@ -1,7 +1,8 @@
 import React from 'react';
-import styles from './Connected.module.scss';
-import cx from 'classnames';
+
+import { cn } from '../../utils';
 import { useToggle } from '../../utils/hooks/use-toggle';
+import styles from './Connected.module.scss';
 
 type ItemPosition = 'left' | 'right' | 'primary';
 
@@ -19,7 +20,7 @@ export function Item({ children, position }: ItemProps) {
     setFalse: forceFalseFocused,
   } = useToggle(false);
 
-  const className = cx(
+  const className = cn(
     styles.Item,
     focused && styles['Item-focused'],
     position === 'primary' ? styles['Item-primary'] : styles['Item-connection']

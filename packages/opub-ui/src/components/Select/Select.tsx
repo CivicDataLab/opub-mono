@@ -1,3 +1,6 @@
+import React, { forwardRef, LegacyRef, useId } from 'react';
+import { IconChevronDown } from '@tabler/icons-react';
+
 import {
   HideableStrictOption,
   SelectGroup,
@@ -6,14 +9,12 @@ import {
   StrictGroup,
   StrictOption,
 } from '../../types/select';
+import { cn } from '../../utils';
 import { Box } from '../Box';
 import { Icon } from '../Icon';
 import { helpTextID, Labelled } from '../Labelled';
 import { Text } from '../Text';
 import styles from './Select.module.scss';
-import { IconChevronDown } from '@tabler/icons-react';
-import cx from 'classnames';
-import React, { forwardRef, LegacyRef, useId } from 'react';
 
 const PLACEHOLDER_VALUE = '';
 
@@ -56,7 +57,7 @@ export const Select = forwardRef(
     const id = idProp || randomId;
     const labelHidden = labelInline ? true : labelHiddenProp;
 
-    const classes = cx(
+    const classes = cn(
       styles.Select,
       error && styles.error,
       disabled && styles.disabled
