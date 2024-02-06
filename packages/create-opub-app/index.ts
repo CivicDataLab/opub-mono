@@ -1,59 +1,26 @@
 #! /usr/bin/env node
 import fs from 'fs';
 import path from 'path';
-import * as p from '@clack/prompts';
-import { Command } from 'commander';
 import { cyan, green, red } from 'picocolors';
 
 import { createApp } from './create-app';
-import { isFolderEmpty } from './helpers/is-folder-empty';
 import packageJson from './package.json';
 import { examples } from './utils/constants';
+import { initCli } from './utils/initCli';
+import { isFolderEmpty } from './utils/is-folder-empty';
+import { prompts } from './utils/prompts';
 import { renderTitle } from './utils/renderTitle';
-import { validateAppName } from './utils/validateAppName';
 
-let projectPath: string;
-
+// terminate process on these signals
 const handleSigTerm = () => process.exit(0);
-
 process.on('SIGINT', handleSigTerm);
 process.on('SIGTERM', handleSigTerm);
 
-const program = new Command(packageJson.name);
+// initialize the CLI and get the options
+const initOptions = initCli(packageJson);
 
-program.version(packageJson.version).description(packageJson.description);
-
-program
-  .arguments('[project-directory]')
-  .usage(`${green('[project-directory]')} [options]`)
-  .action((name: string) => {
-    projectPath = name;
-  });
-
-program
-  .option(
-    '-m, --manager [npm | pnpm | yarn | bun]',
-    `
-
-  Explicitly tell the CLI to bootstrap the application using specific package manager
-`
-  )
-  .option(
-    '-e, --example [d4d | data-exchange]',
-    `
-
-  An example to bootstrap the app with. Currently supports ${green('d4d')} 
-  and ${green('data-exchange')}
-`
-  )
-  .allowUnknownOption();
-program.parse();
-
-const options: {
-  manager: string | boolean;
-  example: boolean | string;
-} = program.opts();
 async function run(): Promise<void> {
+  let projectPath = initOptions.path;
   if (typeof projectPath === 'string') {
     projectPath = projectPath.trim();
   }
@@ -61,15 +28,17 @@ async function run(): Promise<void> {
   /**
    * Get valid example
    */
-  if (options.example === true) {
+  // -e or --example
+  if (initOptions.example === true) {
     console.error(
       'Please provide an example name, otherwise remove the example option.'
     );
     process.exit(1);
   }
 
+  // -e d4d or --example d4d
   const example =
-    (typeof options.example === 'string' && options.example.trim()) || '';
+    typeof initOptions.example === 'string' ? initOptions.example.trim() : null;
 
   if (example && !Object.keys(examples).includes(example)) {
     console.error(
@@ -81,17 +50,19 @@ async function run(): Promise<void> {
   /**
    * Get valid package manager
    */
-  if (options.manager === true) {
+  // -m or --manager
+  if (initOptions.manager === true) {
     console.error(
       'Please provide an manager name, otherwise remove the manager option.'
     );
     process.exit(1);
   }
 
+  // -m npm or --manager npm
   const manager =
-    (typeof options.manager === 'string' &&
-      options.manager.toLowerCase().trim()) ||
-    '';
+    typeof initOptions.manager === 'string'
+      ? initOptions.manager.toLowerCase().trim()
+      : null;
 
   if (manager && !['npm', 'pnpm', 'yarn', 'bun'].includes(manager)) {
     console.error(
@@ -100,59 +71,16 @@ async function run(): Promise<void> {
     process.exit(1);
   }
 
-  /**
-   * Start the prompt
-   */
-
+  // UI only
   renderTitle();
 
-  const project = await p.group(
-    {
-      ...(!projectPath && {
-        projectPath: () => {
-          return p.text({
-            message: 'What will your project be called?',
-            defaultValue: 'my-opub-app',
-            validate: validateAppName,
-          });
-        },
-      }),
-      ...(!example && {
-        example: () => {
-          return p.select({
-            message: 'Which example will you use?',
-            options: Object.keys(examples).map((item) => ({
-              value: item,
-              label: examples[item].label,
-            })),
-            initialValue: 'd4d',
-          });
-        },
-      }),
-      ...(!manager && {
-        packageManager: () => {
-          return p.select({
-            message: 'Which package manager will you use?',
-            options: [
-              { value: 'npm', label: 'NPM' },
-              { value: 'pnpm', label: 'PNPM' },
-              { value: 'yarn', label: 'Yarn' },
-              { value: 'bun', label: 'Bun' },
-            ],
-            initialValue: 'npm',
-          });
-        },
-      }),
-    },
-    {
-      onCancel() {
-        process.exit(1);
-      },
-    }
-  );
+  const promptOptions = await prompts({
+    projectPath,
+    example,
+    manager,
+  });
 
-  projectPath = projectPath || (project.projectPath as string);
-  const resolvedProjectPath = path.resolve(projectPath);
+  const resolvedProjectPath = path.resolve(promptOptions.projectPath);
 
   /**
    * Verify the project dir is empty or doesn't exist
@@ -165,15 +93,13 @@ async function run(): Promise<void> {
     process.exit(1);
   }
 
-  const exampleKey = example || (project.example as string);
-
   /**
    * Create the app
    */
   createApp({
-    example: examples[exampleKey].link,
-    projectPath,
-    packageManager: manager || (project.packageManager as string),
+    example: examples[promptOptions.example].link,
+    projectPath: promptOptions.projectPath,
+    packageManager: promptOptions.manager,
   });
 }
 
