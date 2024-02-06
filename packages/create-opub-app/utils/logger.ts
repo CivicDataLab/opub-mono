@@ -17,15 +17,15 @@ export const logger = {
 
 export const colors = {
   error(args: string | number | null | undefined) {
-    red(args);
+    return red(args);
   },
   warn(args: string | number | null | undefined) {
-    yellow(args);
+    return yellow(args);
   },
   info(args: string | number | null | undefined) {
-    cyan(args);
+    return cyan(args);
   },
   success(args: string | number | null | undefined) {
-    green(args);
+    return green(args);
   },
 };

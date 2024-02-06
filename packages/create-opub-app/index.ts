@@ -70,6 +70,8 @@ async function run(): Promise<void> {
     );
     process.exit(1);
   }
+  const noGit = initOptions.noGit;
+  const noInstall = initOptions.noInstall;
 
   // UI only
   renderTitle();
@@ -78,6 +80,8 @@ async function run(): Promise<void> {
     projectPath,
     example,
     manager,
+    noGit,
+    noInstall,
   });
 
   const resolvedProjectPath = path.resolve(promptOptions.projectPath);
@@ -100,6 +104,8 @@ async function run(): Promise<void> {
     example: examples[promptOptions.example].link,
     projectPath: promptOptions.projectPath,
     packageManager: promptOptions.manager,
+    noGit: promptOptions.noGit,
+    noInstall: promptOptions.noInstall,
   });
 }
 

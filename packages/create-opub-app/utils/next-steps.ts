@@ -39,7 +39,7 @@ export function nextSteps({
   console.log();
 
   console.log(colors.info('  cd'), cdpath);
-  logger.info(`${packageManager} ${useNpm ? 'run ' : ''}dev`);
+  logger.info(`  ${packageManager} ${useNpm ? 'run ' : ''}dev`);
 
   console.log();
 }
