@@ -3,13 +3,13 @@ import fs from 'fs';
 import path from 'path';
 import * as p from '@clack/prompts';
 import { Command } from 'commander';
-import figlet from 'figlet';
 import { cyan, green, red } from 'picocolors';
 
 import { createApp } from './create-app';
 import { isFolderEmpty } from './helpers/is-folder-empty';
 import packageJson from './package.json';
 import { examples } from './utils/constants';
+import { renderTitle } from './utils/renderTitle';
 import { validateAppName } from './utils/validateAppName';
 
 let projectPath: string;
@@ -49,16 +49,6 @@ program
   .allowUnknownOption();
 program.parse();
 
-console.log(
-  figlet.textSync('OPub', {
-    font: 'Standard',
-    horizontalLayout: 'default',
-    verticalLayout: 'default',
-    width: 80,
-    whitespaceBreak: true,
-  })
-);
-
 const options: {
   manager: string | boolean;
   example: boolean | string;
@@ -69,7 +59,7 @@ async function run(): Promise<void> {
   }
 
   /**
-   * Get valid examples
+   * Get valid example
    */
   if (options.example === true) {
     console.error(
@@ -88,6 +78,9 @@ async function run(): Promise<void> {
     process.exit(1);
   }
 
+  /**
+   * Get valid package manager
+   */
   if (options.manager === true) {
     console.error(
       'Please provide an manager name, otherwise remove the manager option.'
@@ -106,6 +99,12 @@ async function run(): Promise<void> {
     );
     process.exit(1);
   }
+
+  /**
+   * Start the prompt
+   */
+
+  renderTitle();
 
   const project = await p.group(
     {
