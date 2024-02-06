@@ -3,6 +3,7 @@ import path from 'path';
 import retry from 'async-retry';
 import fse from 'fs-extra';
 
+import { initializeGit } from './utils/git';
 import { install } from './utils/install';
 import { isFolderEmpty } from './utils/is-folder-empty';
 import { isWriteable } from './utils/is-writeable';
@@ -22,18 +23,21 @@ function isErrorLike(err: unknown): err is { message: string } {
 
 export async function createApp({
   example,
-  projectPath,
+  noInstall,
+  noGit,
   packageManager,
+  projectPath,
 }: {
   example: string;
-  projectPath: string;
+  noInstall: boolean;
+  noGit: boolean;
   packageManager: string;
+  projectPath: string;
 }) {
   console.log();
   logger.info(
     `Using ${packageManager} as package manager. ${packageManager !== 'npm' ? 'Do make sure you have it installed locally.' : ''}`
   );
-
   console.log();
 
   const root = path.resolve(projectPath);
@@ -83,20 +87,31 @@ export async function createApp({
     );
     console.log();
 
-    // install all packages in the project
-    await install(packageManager);
-    console.log();
-
-    // update the project name in package json
+    // add changes to package.json
     const pkgJson = fse.readJSONSync(packageJsonPath);
+    // update the project name in package json
     pkgJson.name = appName;
+    // add opub-ui as a dependency
+    pkgJson.dependencies['opub-ui'] = 'latest';
     fse.writeJSONSync(packageJsonPath, pkgJson, {
       spaces: 2,
     });
 
+    // install all packages in the project
+    if (!noInstall) {
+      await install(packageManager);
+      console.log();
+    }
+
+    if (!noGit) {
+      await initializeGit(root);
+    }
+
+    console.log();
     console.log(
-      `${colors.info('Success!')} Created ${appName} at ${projectPath}`
+      `${colors.success('Success!')} Created ${colors.info(appName)} at ${root}`
     );
+    console.log();
 
     nextSteps({
       appName,

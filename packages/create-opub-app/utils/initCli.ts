@@ -33,6 +33,16 @@ export function initCli(packageJson: {
   and ${colors.success('data-exchange')}
 `
     )
+    .option(
+      '--noGit',
+      'Explicitly tell the CLI to not initialize a new git repo in the project',
+      false
+    )
+    .option(
+      '--noInstall',
+      "Explicitly tell the CLI to not run the package manager's install command",
+      false
+    )
     .allowUnknownOption();
   program.parse();
 
@@ -40,7 +50,10 @@ export function initCli(packageJson: {
     manager: string | boolean;
     example: boolean | string;
     path: string;
+    noGit: boolean;
+    noInstall: boolean;
   } = program.opts();
+
   options.path = projectPath;
 
   return options;

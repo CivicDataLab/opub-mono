@@ -7,10 +7,14 @@ export async function prompts({
   projectPath,
   example,
   manager,
+  noGit,
+  noInstall,
 }: {
   projectPath: string | null;
   example: string | null;
   manager: string | null;
+  noGit: boolean;
+  noInstall: boolean;
 }) {
   const project = await p.group(
     {
@@ -36,7 +40,7 @@ export async function prompts({
         },
       }),
       ...(!manager && {
-        packageManager: () => {
+        manager: () => {
           return p.select({
             message: 'Which package manager will you use?',
             options: [
@@ -46,6 +50,23 @@ export async function prompts({
               { value: 'bun', label: 'Bun' },
             ],
             initialValue: 'npm',
+          });
+        },
+      }),
+      ...(!noGit && {
+        git: () => {
+          return p.confirm({
+            message:
+              'Should we initialize a Git repository and stage the changes?',
+            initialValue: true,
+          });
+        },
+      }),
+      ...(!noInstall && {
+        install: () => {
+          return p.confirm({
+            message: `Should we install the dependencies for you?`,
+            initialValue: true,
           });
         },
       }),
@@ -60,7 +81,9 @@ export async function prompts({
   const options = {
     projectPath: projectPath || (project.projectPath as string),
     example: example || (project.example as string),
-    manager: manager || (project.packageManager as string),
+    manager: manager || (project.manager as string),
+    noGit: noGit || !project.git,
+    noInstall: noInstall || !project.install,
   };
 
   return options;
