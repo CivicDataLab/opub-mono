@@ -2,11 +2,12 @@ import fs from 'fs';
 import path from 'path';
 import retry from 'async-retry';
 import fse from 'fs-extra';
-import { cyan, green } from 'picocolors';
 
 import { install } from './utils/install';
 import { isFolderEmpty } from './utils/is-folder-empty';
 import { isWriteable } from './utils/is-writeable';
+import { colors, logger } from './utils/logger';
+import { nextSteps } from './utils/next-steps';
 import { downloadAndExtractRepo, verifyURL } from './utils/repo';
 
 export class DownloadError extends Error {}
@@ -29,11 +30,10 @@ export async function createApp({
   packageManager: string;
 }) {
   console.log();
-  console.log(
-    cyan(
-      `Using ${packageManager} as package manager. ${packageManager !== 'npm' ? 'Do make sure you have it installed locally.' : ''}`
-    )
+  logger.info(
+    `Using ${packageManager} as package manager. ${packageManager !== 'npm' ? 'Do make sure you have it installed locally.' : ''}`
   );
+
   console.log();
 
   const root = path.resolve(projectPath);
@@ -57,7 +57,7 @@ export async function createApp({
 
   const repoInfo = await verifyURL(example);
 
-  console.log(`Creating a new OPub app in ${green(root)}.`);
+  console.log(`Creating a new OPub app in ${colors.success(root)}.`);
   console.log();
 
   // change current directory to the project directory
@@ -65,7 +65,7 @@ export async function createApp({
 
   try {
     if (repoInfo) {
-      console.log(`Downloading files from repo ${cyan(example)}`);
+      console.log(`Downloading files from repo ${colors.info(example)}`);
       console.log();
       await retry(() => downloadAndExtractRepo(root, { ...repoInfo }), {
         retries: 3,
@@ -94,34 +94,14 @@ export async function createApp({
       spaces: 2,
     });
 
-    let cdpath: string;
-    const originalDirectory = process.cwd();
-    if (path.join(originalDirectory, appName) === projectPath) {
-      cdpath = appName;
-    } else {
-      cdpath = projectPath;
-    }
+    console.log(
+      `${colors.info('Success!')} Created ${appName} at ${projectPath}`
+    );
 
-    console.log(`${green('Success!')} Created ${appName} at ${projectPath}`);
-
-    // provide a guide for the user to get started
-    const useNpm = packageManager === 'npm';
-    console.log('Inside that directory, you can run several commands:');
-    console.log();
-    console.log(cyan(`  ${packageManager} ${useNpm ? 'run ' : ''}dev`));
-    console.log('    Starts the development server.');
-    console.log();
-    console.log(cyan(`  ${packageManager} ${useNpm ? 'run ' : ''}build`));
-    console.log('    Builds the app for production.');
-    console.log();
-    console.log(cyan(`  ${packageManager} start`));
-    console.log('    Runs the built app in production mode.');
-    console.log();
-    console.log('We suggest that you begin by typing:');
-    console.log();
-    console.log(cyan('  cd'), cdpath);
-    console.log(`  ${cyan(`${packageManager} ${useNpm ? 'run ' : ''}dev`)}`);
-
-    console.log();
+    nextSteps({
+      appName,
+      projectPath,
+      packageManager,
+    });
   }
 }

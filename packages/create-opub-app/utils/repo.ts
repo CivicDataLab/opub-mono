@@ -4,8 +4,9 @@ import { join } from 'path';
 import { Stream } from 'stream';
 import { promisify } from 'util';
 import got from 'got';
-import { red } from 'picocolors';
 import tar from 'tar';
+
+import { colors } from './logger';
 
 export type RepoInfo = {
   username: string;
@@ -108,7 +109,7 @@ export async function verifyURL(example: string) {
   if (repoUrl) {
     if (repoUrl.origin !== 'https://github.com') {
       console.error(
-        `Invalid URL: ${red(
+        `Invalid URL: ${colors.error(
           `"${example}"`
         )}. Only GitHub repositories are supported. Please use a GitHub URL and try again.`
       );
@@ -119,7 +120,7 @@ export async function verifyURL(example: string) {
 
     if (!repoInfo) {
       console.error(
-        `Found invalid GitHub URL: ${red(
+        `Found invalid GitHub URL: ${colors.error(
           `"${example}"`
         )}. Please fix the URL and try again.`
       );
@@ -130,7 +131,7 @@ export async function verifyURL(example: string) {
 
     if (!found) {
       console.error(
-        `Could not locate the repository for ${red(
+        `Could not locate the repository for ${colors.error(
           `"${example}"`
         )}. Please check that the repository exists and try again.`
       );
