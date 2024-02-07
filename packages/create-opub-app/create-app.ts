@@ -5,8 +5,6 @@ import fse from 'fs-extra';
 
 import { initializeGit } from './utils/git';
 import { install } from './utils/install';
-import { isFolderEmpty } from './utils/is-folder-empty';
-import { isWriteable } from './utils/is-writeable';
 import { colors, logger } from './utils/logger';
 import { nextSteps } from './utils/next-steps';
 import { downloadAndExtractRepo, verifyURL } from './utils/repo';
@@ -40,31 +38,15 @@ export async function createApp({
   );
   console.log();
 
-  const root = path.resolve(projectPath);
-
-  if (!(await isWriteable(path.dirname(root)))) {
-    console.error(
-      'The application path is not writable, please check folder permissions and try again.'
-    );
-    console.error(
-      'It is likely you do not have write permissions for this folder.'
-    );
-    process.exit(1);
-  }
-
-  const appName = path.basename(root);
-
-  await fs.promises.mkdir(root, { recursive: true });
-  if (!isFolderEmpty(root, appName)) {
-    process.exit(1);
-  }
-
   const repoInfo = await verifyURL(example);
 
+  const root = path.resolve(projectPath);
   console.log(`Creating a new OPub app in ${colors.success(root)}.`);
   console.log();
 
-  // change current directory to the project directory
+  // create the project directory
+  await fs.promises.mkdir(root, { recursive: true });
+  // change current directory to the project
   process.chdir(root);
 
   try {
@@ -82,14 +64,10 @@ export async function createApp({
   const packageJsonPath = path.join(root, 'package.json');
   let hasPackageJson = fs.existsSync(packageJsonPath);
   if (hasPackageJson) {
-    console.log(
-      `Installing packages using ${packageManager}. Grab a cup of chai, this might take a while.`
-    );
-    console.log();
-
     // add changes to package.json
     const pkgJson = fse.readJSONSync(packageJsonPath);
     // update the project name in package json
+    const appName = path.basename(root);
     pkgJson.name = appName;
     // add opub-ui as a dependency
     pkgJson.dependencies['opub-ui'] = 'latest';
@@ -99,6 +77,10 @@ export async function createApp({
 
     // install all packages in the project
     if (!noInstall) {
+      console.log(
+        `Installing packages using ${packageManager}. Grab a cup of chai, this might take a while.`
+      );
+      console.log();
       await install(packageManager);
       console.log();
     }
