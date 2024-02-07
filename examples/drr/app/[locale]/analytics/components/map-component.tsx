@@ -87,6 +87,7 @@ export const MapComponent = ({
 
       map.eachLayer((layer: any) => {
         const regionName = layer.feature?.properties.name;
+
         const popup = layer.getPopup();
         if (regionsArray.includes(regionName)) {
           if (popup) {
@@ -127,7 +128,7 @@ export const MapComponent = ({
       }
     }
   }, [regions]);
-  //   console.log("REVENUE DATA ->", revenueData);
+
   return !revenueDataloading ? (
     <MapChart
       features={revenueData?.features}

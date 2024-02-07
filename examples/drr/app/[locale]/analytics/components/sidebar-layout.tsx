@@ -110,7 +110,7 @@ export function SidebarLayout({ revenueData }: any) {
         <Text variant="headingMd">{DISTRICT} District</Text>
       </div>
 
-      {transformedData.map((obj, index) => {
+      {transformedData.map((obj: IndicatorProps, index: any) => {
         return <Indicators key={`indicator_${index}`} data={obj} />;
       })}
     </aside>

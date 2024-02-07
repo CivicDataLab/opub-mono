@@ -58,7 +58,7 @@ export function SidebarDefaultLayout({ chartData }: any) {
         {revenueData && (
           <div className="flex h-96 flex-col overflow-y-auto border-1 border-solid border-baseGraySlateSolid10 pt-3">
             {/* {Object.entries(revenueData).map(([district, value]) => ( */}
-            {chartData.map((item, index) => (
+            {chartData.map((item: any, index: React.Key | null | undefined) => (
               <DistrictBar
                 key={index}
                 district={item['revenue-circle']}
@@ -67,7 +67,6 @@ export function SidebarDefaultLayout({ chartData }: any) {
             ))}
           </div>
         )}
-
         <div className="mt-5">
           {list.map((indicator, index) => (
             <IndicatorDescription
@@ -92,7 +91,7 @@ export const DistrictBar = ({
 }) => {
   return (
     <div className="mb-1 flex items-center gap-2 pl-20">
-      <div className=" basis-1/4">
+      <div className="basis-1/4">
         <Text variant="bodySm" fontWeight="medium">
           {district}
         </Text>

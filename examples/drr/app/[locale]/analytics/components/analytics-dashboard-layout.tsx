@@ -16,7 +16,6 @@ import {
 import { GraphQL } from '@/lib/api';
 import { cn } from '@/lib/utils';
 import { SidebarLayout } from './sidebar-layout';
-import { SidebarDefaultLayout } from './SidebarDefaultLayout';
 import { useAddedRegions } from './store';
 import styles from './styles.module.scss';
 
@@ -80,7 +79,7 @@ export function AnalyticsDashboardLayout({ children }: DashboardLayoutProps) {
         indcFilter: { slug: 'composite-score' },
         dataFilter: { dataPeriod: '2023_08' },
         // geoFilter: { code: regions[0].value },
-        geoFilter: { code: '116' },
+        geoFilter: { code: ['116'] },
       }),
     {
       // enabled: regions.length ? true : false,
@@ -118,6 +117,7 @@ export function AnalyticsDashboardLayout({ children }: DashboardLayoutProps) {
   );
 
   console.log('REVENUE DATA ALL: ', revenueTableDataAll.data);
+  const REVENUE_CIRCLE = 'CHARIDUAR';
 
   return (
     <React.Fragment>
