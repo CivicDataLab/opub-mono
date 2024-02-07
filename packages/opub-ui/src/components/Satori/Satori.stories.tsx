@@ -116,17 +116,20 @@ export const Map: Story = {
 
     React.useEffect(() => {
       if (ref.current === null) return;
-      const { map } = initMap(ref.current);
+      const { map: mapInit } = initMap(ref.current);
+      setMap(mapInit);
 
-      setMap(map);
+      return () => {
+        mapInit.remove();
+      };
     }, []);
 
     async function generateImage(map?: any) {
       setIsLoading(true);
+
       const dataImgURL = await domToUrl(ref.current as HTMLElement, {
         width: map.getSize().x,
         height: map.getSize().y,
-        scale: 3,
       });
 
       setDataURL(dataImgURL);
@@ -135,7 +138,7 @@ export const Map: Story = {
 
     return (
       <>
-        <div ref={ref} className="h-[600px]" />
+        <div ref={ref} className="h-[600px] w-full max-w-[1200px]" />
         <ShareDialog
           loading={isLoading}
           alt=""
@@ -146,7 +149,7 @@ export const Map: Story = {
           onDownload={() => downloadFile(dataURL, 'Map Chart')}
           className="mt-4"
           props={{
-            height: 380,
+            height: 290,
           }}
         >
           Share
