@@ -50,34 +50,50 @@ const legendHeading = {
   subheading: 'Average Rainfall (mm)',
 };
 
-export function initMap(mapDom: HTMLElement, onTileLoad?: (map: any) => void) {
+export function initMap(
+  mapDom: HTMLElement,
+  props: {
+    center: any;
+    zoom: number;
+    zoomControl: boolean;
+    mapDataFn: (value: number) => string;
+    fillOpacity: number;
+    color: string;
+    weight: number;
+    features: any;
+    tile: string;
+    maxZoom: number;
+    code: string;
+  },
+  onTileLoad?: (map: any) => void
+) {
   const map = L.map(mapDom, {
-    center: L.latLng(26.193, 92.3),
-    zoom: 7.9,
-    zoomControl: false,
+    center: L.latLng(props.center),
+    zoom: props.zoom,
+    zoomControl: props.zoomControl,
   });
 
   // @ts-expect-error
   L.geoJSON(features, {
     style: function (feature: any) {
       return {
-        fillColor: mapDataFn(feature.properties.dt_code),
-        fillOpacity: 1,
-        color: 'black',
-        weight: 1,
+        fillColor: props.mapDataFn(feature.properties[props.code]),
+        fillOpacity: props.fillOpacity,
+        color: props.color,
+        weight: props.weight,
       };
     },
-    onEachFeature: function (feature, layer) {
-      layer.bindPopup(
-        `<b>${feature.properties.dt_name}</b><br/>${feature.properties.dt_code}`
-      );
-    },
+    // onEachFeature: function (feature, layer) {
+    //   layer.bindPopup(
+    //     `<b>${feature.properties.dt_name}</b><br/>${feature.properties.dt_code}`
+    //   );
+    // },
   }).addTo(map);
 
   let tiles = L.tileLayer
     // @ts-expect-error
-    .canvas(`https://tile.openstreetmap.org/{z}/{x}/{y}.png`, {
-      maxZoom: 19,
+    .canvas(props.tile, {
+      maxZoom: props.maxZoom,
     })
     .addTo(map);
 

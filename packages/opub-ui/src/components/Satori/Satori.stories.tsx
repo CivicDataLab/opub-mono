@@ -1,6 +1,7 @@
 import React from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 
+import { features } from '../../../assets/json/assam.json';
 import { ShareDialog } from '../ShareDialog';
 import Card from './Card';
 import { initChart } from './chart';
@@ -68,7 +69,7 @@ export const Chart: Story = {
     }, []);
 
     const [dataURL, setDataURL] = React.useState<string>('');
-    const { domToUrl, downloadFile, copyToClipboard } = useScreenshot();
+    const { domToUrl, downloadFile } = useScreenshot();
 
     const handleOpen = async () => {
       const SVG = ref.current?.querySelector('svg') as SVGElement;
@@ -106,17 +107,47 @@ export const Chart: Story = {
   },
 };
 
+const mapDataFn = (value: number) => {
+  return value >= 330
+    ? '#a50f15'
+    : value >= 325
+      ? '#de2d26'
+      : value >= 320
+        ? '#fb6a4a'
+        : value >= 315
+          ? '#fc9272'
+          : value >= 310
+            ? '#fcbba1'
+            : '#fee5d9';
+};
+
+const mapProps = {
+  center: [26.193, 92.3],
+  zoom: 7.9,
+  zoomControl: false,
+  mapDataFn,
+  fillOpacity: 1,
+  color: 'black',
+  weight: 1,
+  features,
+  tile: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+  maxZoom: 19,
+  code: 'dt_code',
+};
+
 export const Map: Story = {
   render: () => {
     const ref = React.useRef<HTMLDivElement>(null);
+    const mRef = React.useRef<HTMLDivElement>(null);
+
     const [map, setMap] = React.useState<any>(null);
     const [isLoading, setIsLoading] = React.useState<boolean>(false);
     const [dataURL, setDataURL] = React.useState<string>('');
-    const { domToUrl, downloadFile } = useScreenshot();
+    const { domToUrl, downloadFile, createSvg } = useScreenshot();
 
     React.useEffect(() => {
-      if (ref.current === null) return;
-      const { map: mapInit } = initMap(ref.current);
+      if (mRef.current === null) return;
+      const { map: mapInit } = initMap(mRef.current, mapProps);
       setMap(mapInit);
 
       return () => {
@@ -127,9 +158,11 @@ export const Map: Story = {
     async function generateImage(map?: any) {
       setIsLoading(true);
 
-      const dataImgURL = await domToUrl(ref.current as HTMLElement, {
+      const targetElm = ref.current;
+      const dataImgURL = await domToUrl(targetElm as HTMLElement, {
         width: map.getSize().x,
         height: map.getSize().y,
+        backgroundColor: 'white',
       });
 
       setDataURL(dataImgURL);
@@ -138,7 +171,18 @@ export const Map: Story = {
 
     return (
       <>
-        <div ref={ref} className="h-[600px] w-full max-w-[1200px]" />
+        <div
+          ref={ref}
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '8px',
+          }}
+          className="map-count"
+        >
+          <p>Template Text</p>
+          <div ref={mRef} className="h-[600px] w-full max-w-[1200px]" />
+        </div>
         <ShareDialog
           loading={isLoading}
           alt=""
@@ -157,4 +201,34 @@ export const Map: Story = {
       </>
     );
   },
+};
+
+const Template = ({ ref }: { ref: React.RefObject<HTMLDivElement> }) => {
+  // const ref = React.useRef<HTMLDivElement>(null);
+
+  // React.useEffect(() => {
+  //   if (ref.current === null) return;
+  //   const { map: mapInit } = initMap(ref.current, mapProps);
+
+  //   return () => {
+  //     mapInit.remove();
+  //   };
+  // }, []);
+
+  document.querySelector('map-count') &&
+    initMap(document.querySelector('map-count') as HTMLElement, mapProps);
+
+  return (
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '8px',
+      }}
+      className="map-count"
+    >
+      <p>Template Text</p>
+      <div ref={ref} className="sr-only h-[600px] w-full max-w-[1200px]" />
+    </div>
+  );
 };
