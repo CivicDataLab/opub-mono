@@ -14,7 +14,7 @@ npm create opub-app
 
 ## Arguments
 
-The CLI takes a single argument, the name of the project and options to choose a template and package manager.
+The CLI takes optinal arguments
 
 ```bash
 npm create opub-app [package-name] [options]
@@ -26,6 +26,8 @@ eg: npm create opub-app my-opub-app -e d4d -m pnpm
 
 - `-e, --example` - An example to bootstrap the app with. `[d4d | data-exchange]`
 - `-m, --manager` - Explicitly tell the CLI to bootstrap the application using specific package manager. `[npm | pnpm | yarn | bun]`
+- `--noGit` - Explicitly tell the CLI to not initialize a new git repo in the project
+- `--noInstall` - Explicitly tell the CLI to not run the package manager's install command
 
 ## Tech Stack
 
@@ -34,6 +36,12 @@ eg: npm create opub-app my-opub-app -e d4d -m pnpm
 - [got](https://github.com/sindresorhus/got) - HTML request library
 - [tar](https://github.com/isaacs/node-tar) - extract tar compressed file
 - [@vercel/ncc ](https://github.com/vercel/ncc)- compile Node.js modules into a single file
+
+## Design
+
+The CLI is designed to be as simple as possible. It asks for the project name, options and does some validations. It then fetches the template from the OPub GitHub repository and extracts it to the current working directory.
+
+![OPub CLI Design](./assets/cli-design.png)
 
 ## Next Steps
 
