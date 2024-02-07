@@ -92,7 +92,6 @@ const ShareDialog = React.forwardRef(
         onOpen();
       }
     }
-    console.log(props?.height);
 
     return (
       <div ref={ref} className={cn(className)}>
