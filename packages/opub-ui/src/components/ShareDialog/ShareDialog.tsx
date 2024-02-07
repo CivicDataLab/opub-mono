@@ -46,7 +46,7 @@ const ShareDialog = React.forwardRef(
   (
     {
       image,
-      alt,
+      alt = '',
       onDownload,
       title,
       onOpen,
@@ -66,7 +66,7 @@ const ShareDialog = React.forwardRef(
 
     const shareActions: any = ['copyToClipboard', 'shareImage']
       .map((action: string) => {
-        if (action === 'copyToClipboard' && isSupported['copyToClipboard']) {
+        if (action === 'copyToClipboard' && isSupported[action]) {
           return {
             content: 'Copy Image',
             onAction: () => {
@@ -74,7 +74,7 @@ const ShareDialog = React.forwardRef(
             },
           };
         }
-        if (action === 'shareImage' && isSupported['shareImage']) {
+        if (action === 'shareImage' && isSupported[action]) {
           return {
             content: 'Share',
             onAction: () => {
@@ -86,12 +86,13 @@ const ShareDialog = React.forwardRef(
       })
       .filter(Boolean);
 
-    function handleOpen() {
-      if (onOpen && !isOpen) {
+    function handleOpen(e: boolean) {
+      setIsOpen(e);
+      if (onOpen && e) {
         onOpen();
       }
-      setIsOpen(!isOpen);
     }
+    console.log(props?.height);
 
     return (
       <div ref={ref} className={cn(className)}>
@@ -120,13 +121,16 @@ const ShareDialog = React.forwardRef(
                 src={image}
                 alt={alt}
                 width={768}
-                height={384}
+                height={props?.height || 384}
                 {...props}
                 className="h-full w-full overflow-auto object-contain"
               />
             ) : (
               <div
-                className={`flex h-[300px] w-full items-center justify-center`}
+                style={{
+                  height: props?.height || 384,
+                }}
+                className={`flex w-full items-center justify-center`}
               >
                 Loading Image...
               </div>

@@ -1,5 +1,7 @@
 import L from 'leaflet';
 
+import 'tilelayer-canvas';
+
 import { features } from '../../../assets/json/assam.json';
 
 const legendData = [
@@ -72,9 +74,12 @@ export function initMap(mapDom: HTMLElement, onTileLoad?: (map: any) => void) {
     },
   }).addTo(map);
 
-  let tiles = L.tileLayer(`https://tile.openstreetmap.org/{z}/{x}/{y}.png`, {
-    maxZoom: 19,
-  }).addTo(map);
+  let tiles = L.tileLayer
+    // @ts-expect-error
+    .canvas(`https://tile.openstreetmap.org/{z}/{x}/{y}.png`, {
+      maxZoom: 19,
+    })
+    .addTo(map);
 
   return { map, tiles };
 }

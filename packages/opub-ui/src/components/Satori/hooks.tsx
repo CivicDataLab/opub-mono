@@ -1,5 +1,5 @@
 import React from 'react';
-import { domToPng } from 'modern-screenshot';
+import { domToDataUrl, domToPng } from 'modern-screenshot';
 import satori from 'satori';
 
 import { toast } from '../Toast';
@@ -76,13 +76,11 @@ export const useScreenshot = () => {
 
   const domToUrl = async (
     element: HTMLElement | string | SVGElement,
-    props: DomPngOptions = {
-      scale: 1,
-    }
+    props: DomPngOptions
   ) => {
     let elm =
       typeof element === 'string' ? svgStringtoElement(element) : element;
-    const { scale, ...rest } = props;
+    const { scale = 1, ...rest } = props;
     const dataImgURL = await domToPng(elm, {
       scale,
       ...rest,
