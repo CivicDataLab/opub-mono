@@ -4,12 +4,14 @@ import path from 'path';
 
 import { createApp } from './create-app';
 import packageJson from './package.json';
-import { examples } from './utils/constants';
+import { examples, managers } from './utils/constants';
 import { initCli } from './utils/initCli';
 import { isFolderEmpty } from './utils/is-folder-empty';
+import { isWriteable } from './utils/is-writeable';
 import { colors } from './utils/logger';
 import { prompts } from './utils/prompts';
 import { renderTitle } from './utils/renderTitle';
+import { validateAppName } from './utils/validateAppName';
 
 // terminate process on these signals
 const handleSigTerm = () => process.exit(0);
@@ -20,9 +22,18 @@ process.on('SIGTERM', handleSigTerm);
 const initOptions = initCli(packageJson);
 
 async function run(): Promise<void> {
+  /**
+   * Get valid project name
+   */
   let projectPath = initOptions.path;
   if (typeof projectPath === 'string') {
     projectPath = projectPath.trim();
+    if (validateAppName(projectPath)) {
+      console.error(
+        `The project name provided is not valid. Please provide a valid name.`
+      );
+      process.exit(1);
+    }
   }
 
   /**
@@ -64,7 +75,7 @@ async function run(): Promise<void> {
       ? initOptions.manager.toLowerCase().trim()
       : null;
 
-  if (manager && !['npm', 'pnpm', 'yarn', 'bun'].includes(manager)) {
+  if (manager && !Object.keys(managers).includes(manager)) {
     console.error(
       `The package manager provided is not supported. Please provide a valid manager. We support ${colors.success('d4d')} and ${colors.success('data-exchange')}`
     );
@@ -87,13 +98,23 @@ async function run(): Promise<void> {
   const resolvedProjectPath = path.resolve(promptOptions.projectPath);
 
   /**
-   * Verify the project dir is empty or doesn't exist
+   * Verify the project dir is empty or doesn't exist or is a writable folder
    */
   const root = path.resolve(resolvedProjectPath);
   const appName = path.basename(root);
-  const folderExists = fs.existsSync(root);
 
+  const folderExists = fs.existsSync(root);
   if (folderExists && !isFolderEmpty(root, appName)) {
+    process.exit(1);
+  }
+
+  if (!(await isWriteable(path.dirname(root)))) {
+    console.error(
+      'The application path is not writable, please check folder permissions and try again.'
+    );
+    console.error(
+      'It is likely you do not have write permissions for this folder.'
+    );
     process.exit(1);
   }
 

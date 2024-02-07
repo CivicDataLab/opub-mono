@@ -1,6 +1,6 @@
 import * as p from '@clack/prompts';
 
-import { examples } from './constants';
+import { examples, managers } from './constants';
 import { validateAppName } from './validateAppName';
 
 export async function prompts({
@@ -43,12 +43,10 @@ export async function prompts({
         manager: () => {
           return p.select({
             message: 'Which package manager will you use?',
-            options: [
-              { value: 'npm', label: 'NPM' },
-              { value: 'pnpm', label: 'PNPM' },
-              { value: 'yarn', label: 'Yarn' },
-              { value: 'bun', label: 'Bun' },
-            ],
+            options: Object.keys(managers).map((item) => ({
+              value: item,
+              label: managers[item],
+            })),
             initialValue: 'npm',
           });
         },
