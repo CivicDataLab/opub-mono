@@ -24,7 +24,7 @@ export const useScreenshot = () => {
   const downloadFile = async (
     url: string,
     name: string = 'File',
-    runOnFinish?: () => null
+    runOnFinish?: () => void
   ) => {
     try {
       const a = document.createElement('a');
@@ -48,7 +48,7 @@ export const useScreenshot = () => {
       scale: 2,
     },
     name: string = 'Image.png',
-    runOnFinish?: () => null
+    runOnFinish?: () => void
   ) => {
     const dataImgURL = await domToUrl(svg, props);
     downloadFile(dataImgURL, name, runOnFinish);

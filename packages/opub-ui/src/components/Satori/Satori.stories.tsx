@@ -183,6 +183,7 @@ export const Map: Story = {
           <p>Template Text</p>
           <div ref={mRef} className="h-[600px] w-full max-w-[1200px]" />
         </div>
+
         <ShareDialog
           loading={isLoading}
           alt=""
