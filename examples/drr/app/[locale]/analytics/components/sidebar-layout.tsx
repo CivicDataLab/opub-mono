@@ -1,10 +1,17 @@
 'use client';
 
 import React from 'react';
+import { useQuery } from '@tanstack/react-query';
 import { Divider, Icon, ProgressBar, Text } from 'opub-ui';
 
+import {
+  ANALYTICS_REVENUE_TABLE_DATA,
+  GEOGRAPHY,
+} from '@/config/graphql/analaytics-queries';
+import { GraphQL } from '@/lib/api';
 import { cn } from '@/lib/utils';
 import { Icons } from '@/components/icons';
+import { useAddedRegions } from './store';
 
 interface IndicatorProps {
   title: string;
@@ -13,41 +20,82 @@ interface IndicatorProps {
 }
 
 export function SidebarLayout({ revenueData }: any) {
+  // const transformData = (data: any) => {
+  //   return [
+  //     {
+  //       title: "Risk Score",
+  //       value: data[0]["composite-score"],
+  //       icon: Icons.info,
+  //     },
+  // {
+  //   title: "Hazard",
+  //   value: data[0]["flood-hazard"],
+  //   icon: Icons.link,
+  // },
+  // {
+  //   title: "Exposure",
+  //   value: data[0]["exposure"],
+  //   icon: Icons.overview,
+  // },
+  // {
+  //   title: "Vulnerability",
+  //   value: data[0]["vulnerability"],
+  //   icon: Icons.info,
+  // },
+  //   ];
+  // };
+
+  //----------------
+
+  console.log('*****', revenueData);
+  if (!revenueData || !Array.isArray(revenueData)) {
+    // If revenueData is not defined or not an array, return an empty array
+    revenueData = [];
+  }
   const transformData = (data: any) => {
-    return [
-      {
-        title: 'Risk Score',
-        value: data[0]['composite-score'],
-        icon: Icons.info,
-      },
-      {
-        title: 'Hazard',
-        value: data[0]['flood-hazard'],
-        icon: Icons.link,
-      },
-      {
-        title: 'Exposure',
-        value: data[0]['exposure'],
-        icon: Icons.overview,
-      },
-      {
-        title: 'Vulnerability',
-        value: data[0]['vulnerability'],
-        icon: Icons.info,
-      },
-    ];
+    // const count = 5;
+    // while(5>=1){
+
+    // }
+    return data.map((item: any) => ({
+      title: item['revenue-circle'],
+      value: item['exposure'],
+      icon: Icons.info,
+    }));
   };
 
+  //----------------
+
   const transformedData = transformData(revenueData);
-  const REVENUE_CIRCLE = 'CHARIDUAR'
-  const DISTRICT = 'SONITPUR'
+  console.log('tranformedDATA', transformedData);
+
+  const REVENUE_CIRCLE = 'ABC';
+  // const REVENUE_CIRCLE = revenueData[0]["revenue-circle"] || "ABC";
+  // console.log("REVENUE CIRCLE CODE", revenueData[0]["revenue-circle-code"]);
+
+  // const districtSelected = useQuery(
+  //   [`district_selected_${revenueData[0]["revenue-circle-code"]}`],
+  //   () =>
+  //     GraphQL("analytics", GEOGRAPHY, {
+  //       code: { code: [revenueData[0]["revenue-circle-code"]] },
+  //     }),
+  //   {
+  //     enabled: revenueData[0]["revenue-circle-code"] ? true : false,
+  //     refetchOnMount: false,
+  //     refetchOnWindowFocus: false,
+  //     refetchOnReconnect: false,
+  //   }
+  // );
+  // console.log("district equivalent code", districtSelected);
+  const DISTRICT = 'DHUBRI'; //???
+  // const DISTRICT = districtSelected || "DHUBRI"; //???
 
   return (
     <aside
       className={cn(
         'p-4',
         'overflow-hidden bg-surfaceDefault shadow-basicMd',
-        'hidden z-1 shadow-inset basis-[500px] shrink-0 md:block',
+        'shadow-inset z-1 hidden shrink-0 basis-[500px] md:block',
         'border-r-1 border-solid border-borderSubdued'
       )}
     >
@@ -55,7 +103,7 @@ export function SidebarLayout({ revenueData }: any) {
         DATA INSIGHTS
       </Text>
       <Divider className="mt-2" />
-      <div className=" flex flex-col mt-5">
+      <div className=" mt-5 flex flex-col">
         <Text fontWeight="bold" variant="headingLg">
           {REVENUE_CIRCLE} Revenue Circle
         </Text>
@@ -70,7 +118,6 @@ export function SidebarLayout({ revenueData }: any) {
 }
 
 export const Indicators = ({ data }: { data: IndicatorProps }) => {
-
   function getRiskLevel(value: number) {
     switch (value) {
       case 1:
@@ -89,7 +136,7 @@ export const Indicators = ({ data }: { data: IndicatorProps }) => {
 
   return (
     <div>
-      <div className="flex items-center mt-5 mb-2">
+      <div className="mb-2 mt-5 flex items-center">
         <Icon source={data.icon} color="default" size={6} />
         <Text fontWeight="bold" variant="headingMd" className=" pl-2">
           {data.title}
@@ -98,7 +145,7 @@ export const Indicators = ({ data }: { data: IndicatorProps }) => {
       <Text fontWeight="regular" variant="headingSm">
         This region carries damage due to flood related disasters
       </Text>
-      <div className="flex gap-4 mt-4 mb-3">
+      <div className="mb-3 mt-4 flex gap-4">
         <div className=" basis-2/3">
           <ProgressBar
             value={(data.value / 6) * 100}

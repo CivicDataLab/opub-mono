@@ -60,7 +60,7 @@ export type Department = {
 export type GeoFilter = {
   AND?: InputMaybe<GeoFilter>;
   OR?: InputMaybe<GeoFilter>;
-  code?: InputMaybe<Scalars['ID']>;
+  code?: InputMaybe<Array<Scalars['ID']>>;
   name?: InputMaybe<Scalars['String']>;
   type?: InputMaybe<Scalars['String']>;
 };
@@ -103,19 +103,17 @@ export type Indicators = {
 export type Query = {
   __typename?: 'Query';
   data: Array<Data>;
-  districtChartData: Scalars['JSON'];
   districtMapData: Scalars['JSON'];
+  districtViewChartData: Scalars['JSON'];
   districtViewTableData: Scalars['JSON'];
   geography: Array<Geography>;
   getDataTimePeriods: Array<CustomDataPeriodList>;
   getDistrictRevCircle: Scalars['JSON'];
   getFactors: Scalars['JSON'];
-  getDistrictRevCircle: Scalars['JSON'];
-  getFactors: Scalars['JSON'];
   indicators: Array<Indicators>;
   indicatorsByCategory: Scalars['JSON'];
-  revCircleChartData: Scalars['JSON'];
   revCircleMapData: Scalars['JSON'];
+  revCircleViewChartData: Scalars['JSON'];
   revCircleViewTableData: Scalars['JSON'];
   scheme: Array<Scheme>;
 };
@@ -124,13 +122,13 @@ export type QueryDataArgs = {
   filters?: InputMaybe<DataFilter>;
 };
 
-export type QueryDistrictChartDataArgs = {
+export type QueryDistrictMapDataArgs = {
   dataFilter: DataFilter;
   geoFilter?: InputMaybe<GeoFilter>;
   indcFilter: IndicatorFilter;
 };
 
-export type QueryDistrictMapDataArgs = {
+export type QueryDistrictViewChartDataArgs = {
   dataFilter: DataFilter;
   geoFilter?: InputMaybe<GeoFilter>;
   indcFilter: IndicatorFilter;
@@ -146,27 +144,17 @@ export type QueryGeographyArgs = {
   filters?: InputMaybe<GeoFilter>;
 };
 
-
 export type QueryGetDistrictRevCircleArgs = {
   geoFilter: GeoFilter;
 };
 
-
-export type QueryGetDistrictRevCircleArgs = {
-  geoFilter: GeoFilter;
-};
-
-export type QueryGetDistrictRevCircleArgs = {
-  geoFilter: GeoFilter;
-};
-
-export type QueryRevCircleChartDataArgs = {
+export type QueryRevCircleMapDataArgs = {
   dataFilter: DataFilter;
   geoFilter?: InputMaybe<GeoFilter>;
   indcFilter: IndicatorFilter;
 };
 
-export type QueryRevCircleMapDataArgs = {
+export type QueryRevCircleViewChartDataArgs = {
   dataFilter: DataFilter;
   geoFilter?: InputMaybe<GeoFilter>;
   indcFilter: IndicatorFilter;
@@ -197,13 +185,13 @@ export type Unit = {
   symbol?: Maybe<Scalars['String']>;
 };
 
-export type RevenueCircleTableQueryVariables = Exact<{
+export type RevCircleViewTableDataQueryVariables = Exact<{
   indcFilter: IndicatorFilter;
   dataFilter: DataFilter;
   geoFilter?: InputMaybe<GeoFilter>;
 }>;
 
-export type RevenueCircleTableQuery = {
+export type RevCircleViewTableDataQuery = {
   __typename?: 'Query';
   revCircleViewTableData: any;
 };
@@ -235,30 +223,77 @@ export type GetGeographyDataQueryVariables = Exact<{
   filters: GeoFilter;
 }>;
 
-
-export type GetGeographyDataQuery = { __typename?: 'Query', geography: Array<{ __typename?: 'Geography', name: string, code?: string | null }> };
 export type GetGeographyDataQuery = {
   __typename?: 'Query';
-  geography: Array<{ __typename?: 'Geography'; name: string }>;
+  geography: Array<{
+    __typename?: 'Geography';
+    name: string;
+    code?: string | null;
+  }>;
 };
 
-export type GetDistrictchartdataQueryVariables = Exact<{
+export type DistrictViewChartDataQueryVariables = Exact<{
   indcFilter: IndicatorFilter;
   dataFilter: DataFilter;
 }>;
 
-export type GetDistrictchartdataQuery = {
+export type DistrictViewChartDataQuery = {
   __typename?: 'Query';
-  districtChartData: any;
+  districtViewChartData: any;
 };
 
-export const RevenueCircleTableDocument = {
+export type RevenueCircleMapDataQueryVariables = Exact<{
+  indcFilter: IndicatorFilter;
+  dataFilter: DataFilter;
+}>;
+
+export type RevenueCircleMapDataQuery = {
+  __typename?: 'Query';
+  revCircleMapData: any;
+};
+
+export type FactorsQueryVariables = Exact<{ [key: string]: never }>;
+
+export type FactorsQuery = { __typename?: 'Query'; getFactors: any };
+
+export type RevenueCircleViewChartDataQueryVariables = Exact<{
+  indcFilter: IndicatorFilter;
+  dataFilter: DataFilter;
+  geoFilter: GeoFilter;
+}>;
+
+export type RevenueCircleViewChartDataQuery = {
+  __typename?: 'Query';
+  revCircleViewChartData: any;
+};
+
+export type GetGeographyQueryVariables = Exact<{
+  code?: InputMaybe<Array<Scalars['ID']> | Scalars['ID']>;
+}>;
+
+export type GetGeographyQuery = {
+  __typename?: 'Query';
+  geography: Array<{
+    __typename?: 'Geography';
+    name: string;
+    code?: string | null;
+    type: string;
+    parentId?: {
+      __typename?: 'Geography';
+      name: string;
+      code?: string | null;
+      type: string;
+    } | null;
+  }>;
+};
+
+export const RevCircleViewTableDataDocument = {
   kind: 'Document',
   definitions: [
     {
       kind: 'OperationDefinition',
       operation: 'query',
-      name: { kind: 'Name', value: 'revenueCircleTable' },
+      name: { kind: 'Name', value: 'revCircleViewTableData' },
       variableDefinitions: [
         {
           kind: 'VariableDefinition',
@@ -338,8 +373,8 @@ export const RevenueCircleTableDocument = {
     },
   ],
 } as unknown as DocumentNode<
-  RevenueCircleTableQuery,
-  RevenueCircleTableQueryVariables
+  RevCircleViewTableDataQuery,
+  RevCircleViewTableDataQueryVariables
 >;
 export const IndicatorsDocument = {
   kind: 'Document',
@@ -449,6 +484,7 @@ export const GetGeographyDataDocument = {
               kind: 'SelectionSet',
               selections: [
                 { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'code' } },
               ],
             },
           },
@@ -460,13 +496,13 @@ export const GetGeographyDataDocument = {
   GetGeographyDataQuery,
   GetGeographyDataQueryVariables
 >;
-export const GetDistrictchartdataDocument = {
+export const DistrictViewChartDataDocument = {
   kind: 'Document',
   definitions: [
     {
       kind: 'OperationDefinition',
       operation: 'query',
-      name: { kind: 'Name', value: 'getDistrictchartdata' },
+      name: { kind: 'Name', value: 'districtViewChartData' },
       variableDefinitions: [
         {
           kind: 'VariableDefinition',
@@ -502,7 +538,7 @@ export const GetDistrictchartdataDocument = {
         selections: [
           {
             kind: 'Field',
-            name: { kind: 'Name', value: 'districtChartData' },
+            name: { kind: 'Name', value: 'districtViewChartData' },
             arguments: [
               {
                 kind: 'Argument',
@@ -527,6 +563,255 @@ export const GetDistrictchartdataDocument = {
     },
   ],
 } as unknown as DocumentNode<
-  GetDistrictchartdataQuery,
-  GetDistrictchartdataQueryVariables
+  DistrictViewChartDataQuery,
+  DistrictViewChartDataQueryVariables
 >;
+export const RevenueCircleMapDataDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'revenueCircleMapData' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'indcFilter' },
+          },
+          type: {
+            kind: 'NonNullType',
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'IndicatorFilter' },
+            },
+          },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'dataFilter' },
+          },
+          type: {
+            kind: 'NonNullType',
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'DataFilter' },
+            },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'revCircleMapData' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'indcFilter' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'indcFilter' },
+                },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'dataFilter' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'dataFilter' },
+                },
+              },
+            ],
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  RevenueCircleMapDataQuery,
+  RevenueCircleMapDataQueryVariables
+>;
+export const FactorsDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'factors' },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          { kind: 'Field', name: { kind: 'Name', value: 'getFactors' } },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<FactorsQuery, FactorsQueryVariables>;
+export const RevenueCircleViewChartDataDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'revenueCircleViewChartData' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'indcFilter' },
+          },
+          type: {
+            kind: 'NonNullType',
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'IndicatorFilter' },
+            },
+          },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'dataFilter' },
+          },
+          type: {
+            kind: 'NonNullType',
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'DataFilter' },
+            },
+          },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'geoFilter' },
+          },
+          type: {
+            kind: 'NonNullType',
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'GeoFilter' },
+            },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'revCircleViewChartData' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'indcFilter' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'indcFilter' },
+                },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'dataFilter' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'dataFilter' },
+                },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'geoFilter' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'geoFilter' },
+                },
+              },
+            ],
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  RevenueCircleViewChartDataQuery,
+  RevenueCircleViewChartDataQueryVariables
+>;
+export const GetGeographyDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'GetGeography' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: { kind: 'Variable', name: { kind: 'Name', value: 'code' } },
+          type: {
+            kind: 'ListType',
+            type: {
+              kind: 'NonNullType',
+              type: { kind: 'NamedType', name: { kind: 'Name', value: 'ID' } },
+            },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'geography' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'filters' },
+                value: {
+                  kind: 'ObjectValue',
+                  fields: [
+                    {
+                      kind: 'ObjectField',
+                      name: { kind: 'Name', value: 'code' },
+                      value: {
+                        kind: 'Variable',
+                        name: { kind: 'Name', value: 'code' },
+                      },
+                    },
+                  ],
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'code' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'type' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'parentId' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'code' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'type' } },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<GetGeographyQuery, GetGeographyQueryVariables>;

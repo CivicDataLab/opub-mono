@@ -1,29 +1,30 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/router';
+import InfoCircle from '@/public/InfoCircle';
+import Vulnerability from '@/public/Vulnerability';
 import { useQuery } from '@tanstack/react-query';
 
 import {
-  ANALYTICS_REVENUE_TABLE_DATA,
   ANALYTICS_DISTRICT_CHART_DATA,
-  GET_FACTORS
+  ANALYTICS_REVENUE_TABLE_DATA,
+  GET_FACTORS,
 } from '@/config/graphql/analaytics-queries';
 import { GraphQL } from '@/lib/api';
 import { cn } from '@/lib/utils';
-import { SidebarDefaultLayout } from './SidebarDefaultLayout';
 import { SidebarLayout } from './sidebar-layout';
+import { SidebarDefaultLayout } from './SidebarDefaultLayout';
+import { useAddedRegions } from './store';
 import styles from './styles.module.scss';
-import { useSearchParams } from 'next/navigation';
-import InfoCircle from '@/public/InfoCircle';
-import Vulnerability from '@/public/Vulnerability';
-import Link from 'next/link';
 
 interface DashboardLayoutProps {
   children?: React.ReactNode;
 }
 
 export function AnalyticsDashboardLayout({ children }: DashboardLayoutProps) {
-
   if (typeof document !== 'undefined') {
     setTimeout(() => {
       document.body.style.cssText = 'overflow: hidden;';
@@ -32,25 +33,28 @@ export function AnalyticsDashboardLayout({ children }: DashboardLayoutProps) {
 
   const searchParams = useSearchParams();
 
-  const indicator = searchParams.get("indicator");
-  const time_period = searchParams.get("time-period");
-  
-  const revenueData = useQuery(
-    [`revenue_table_data`],
-    () =>
-      GraphQL('analytics', ANALYTICS_REVENUE_TABLE_DATA, {
-        indcFilter: { slug: 'composite-score' },
-        dataFilter: { dataPeriod: '2023_08' },
+  const indicator = searchParams.get('indicator');
+  const time_period = searchParams.get('time-period');
 
-        geoFilter: { code: '116' },
-      }),
-    {
-      refetchOnMount: false,
-      refetchOnWindowFocus: false,
-      refetchOnReconnect: false,
-    }
-  );
+  //---useRouter implementation-----
 
+  // const [selectedIndicator, setSelectedIndicator] = useState<string>("");
+
+  // const router = useRouter();
+
+  // const handleButtonClick = (indicator: string) => {
+  //   // Update URL query parameter 'indicator'
+  //   router.push({
+  //     pathname: router.pathname,
+  //     query: { ...router.query, indicator },
+  //   });
+
+  //   setSelectedIndicator(indicator);
+  // };
+
+  //---------
+
+  //----
   const chartData = useQuery(
     [`chart_data`],
     () =>
@@ -65,26 +69,64 @@ export function AnalyticsDashboardLayout({ children }: DashboardLayoutProps) {
     }
   );
 
-  const factorData = useQuery(
-    [`get_factors`],
-    () => GraphQL("analytics", GET_FACTORS ),
+  // console.log("CHAR DATA: ", chartData.data);
+
+  const regions = useAddedRegions((state) => state.regions);
+
+  const revenueData = useQuery(
+    [`revenue_table_data_${regions}`],
+    () =>
+      GraphQL('analytics', ANALYTICS_REVENUE_TABLE_DATA, {
+        indcFilter: { slug: 'composite-score' },
+        dataFilter: { dataPeriod: '2023_08' },
+        // geoFilter: { code: regions[0].value },
+        geoFilter: { code: '116' },
+      }),
     {
+      // enabled: regions.length ? true : false,
       refetchOnMount: false,
       refetchOnWindowFocus: false,
       refetchOnReconnect: false,
     }
   );
 
-  const REVENUE_CIRCLE = 'CHARIDUAR';
+  const revenueTableDataAll = useQuery(
+    [`revenue_table_data_All`],
+    () =>
+      GraphQL('analytics', ANALYTICS_REVENUE_TABLE_DATA, {
+        indcFilter: { slug: 'exposure' },
+        dataFilter: { dataPeriod: '2022_08' },
+        geoFilter: null,
+      }),
+    {
+      // enabled: regions.length ? true : false,
+      refetchOnMount: false,
+      refetchOnWindowFocus: false,
+      refetchOnReconnect: false,
+    }
+  );
+
+  const factorData = useQuery(
+    [`get_factors`],
+    () => GraphQL('analytics', GET_FACTORS),
+    {
+      // enabled: regions.length ? true : false,
+      refetchOnMount: false,
+      refetchOnWindowFocus: false,
+      refetchOnReconnect: false,
+    }
+  );
+
+  console.log('REVENUE DATA ALL: ', revenueTableDataAll.data);
 
   return (
     <React.Fragment>
       <div
         className={cn(
-          'md:flex relative gap-1 grow max-h-full min-h-[calc(100%_-_48px)] overflow-y-hidden'
+          'relative max-h-full min-h-[calc(100%_-_48px)] grow gap-1 overflow-y-hidden md:flex'
         )}
       >
-        <div className="absolute top-1/3 left-6 z-10 flex flex-col gap-3">
+        <div className="absolute left-6 top-1/3 z-10 flex flex-col gap-3">
           {factorData.isFetched &&
             factorData.data?.getFactors.map((item: any, index: number) => {
               const isActive = item.slug === indicator;
@@ -96,49 +138,51 @@ export function AnalyticsDashboardLayout({ children }: DashboardLayoutProps) {
                   <div
                     className={cn(
                       styles.IndicatorBtn,
-                      "group border-2 border-solid border-baseGraySlateSolid12 bg-[#050C17CC]",
-                      isActive && "border-[#71E57D]"
+                      'group border-2 border-solid border-baseGraySlateSolid12 bg-[#050C17CC]',
+                      isActive && 'border-[#71E57D]'
                     )}
                   >
-                    <Vulnerability color={isActive ? "#71E57D" : "#E2E2E2"} />
+                    <Vulnerability color={isActive ? '#71E57D' : '#E2E2E2'} />
                     <span
                       className={cn(
                         styles.IndicatorBtnText,
-                        "group-hover:max-w-[350px] text-[#E2E2E2]",
-                        isActive && "text-[#71E57D]"
+                        'text-[#E2E2E2] group-hover:max-w-[350px]',
+                        isActive && 'text-[#71E57D]'
                       )}
                     >
                       {item.name}
-                      <InfoCircle color={isActive ? "#71E57D" : "#E2E2E2"} />
+                      <InfoCircle color={isActive ? '#71E57D' : '#E2E2E2'} />
                     </span>
                   </div>
                 </Link>
               );
             })}
         </div>
-        <main
-          className={cn(
-            styles.Main,
-            'px-4',
-            'py-6',
-            'h-[80vh]'
-          )}
-        >
+        <main className={cn(styles.Main, 'px-4', 'py-6', 'h-[80vh]')}>
           {children}
         </main>
-        {REVENUE_CIRCLE
-          ? chartData.isFetched && (
-              <SidebarDefaultLayout
-                chartData={chartData?.data?.districtChartData}
-              />
-            )
-          : revenueData.isFetched && (
-              <SidebarLayout
-                revenueData={
-                  revenueData?.data?.revCircleViewTableData?.table_data
-                }
-              />
-            )}
+        {regions.length ? (
+          revenueData.isFetched && (
+            <SidebarLayout
+              revenueData={
+                revenueData?.data?.revCircleViewTableData?.table_data
+              }
+            />
+          )
+        ) : (
+          <SidebarLayout
+            revenueData={
+              revenueTableDataAll?.data?.revCircleViewTableData?.table_data
+            }
+          />
+        )}
+        {/* // revenueTableDataAll.isFetched && (
+            //   <SidebarDefaultLayout
+            //     chartData={
+            //       revenueTableDataAll?.data?.revCircleViewTableData?.table_data
+            //     }
+            //   />
+            // )} */}
       </div>
     </React.Fragment>
   );
