@@ -47,3 +47,9 @@ query revenueCircleMapData($indcFilter: IndicatorFilter! , $dataFilter: DataFilt
   revCircleMapData(indcFilter: $indcFilter , dataFilter:$dataFilter)
 }
 `)
+
+export const GET_FACTORS = graphql(`
+query factors{
+  getFactors
+}
+`)
