@@ -267,6 +267,16 @@ export type FactorsQueryVariables = Exact<{ [key: string]: never }>;
 
 export type FactorsQuery = { __typename?: 'Query'; getFactors: any };
 
+export type DistrictMapDataQueryVariables = Exact<{
+  indcFilter: IndicatorFilter;
+  dataFilter: DataFilter;
+}>;
+
+export type DistrictMapDataQuery = {
+  __typename?: 'Query';
+  districtMapData: any;
+};
+
 export const RevenueCircleTableDocument = {
   kind: 'Document',
   definitions: [
@@ -721,3 +731,73 @@ export const FactorsDocument = {
     },
   ],
 } as unknown as DocumentNode<FactorsQuery, FactorsQueryVariables>;
+export const DistrictMapDataDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'districtMapData' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'indcFilter' },
+          },
+          type: {
+            kind: 'NonNullType',
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'IndicatorFilter' },
+            },
+          },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'dataFilter' },
+          },
+          type: {
+            kind: 'NonNullType',
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'DataFilter' },
+            },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'districtMapData' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'indcFilter' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'indcFilter' },
+                },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'dataFilter' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'dataFilter' },
+                },
+              },
+            ],
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  DistrictMapDataQuery,
+  DistrictMapDataQueryVariables
+>;

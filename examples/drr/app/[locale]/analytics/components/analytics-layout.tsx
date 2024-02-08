@@ -1,12 +1,14 @@
 'use client';
 
 import React from 'react';
+import { type TypedDocumentNode } from '@graphql-typed-document-node/core';
 import { useQuery } from '@tanstack/react-query';
 import { parseAsString, useQueryState } from 'next-usequerystate';
 import { Select, Text } from 'opub-ui';
 import MultiSelect from 'react-select';
 
 import {
+  ANALYTICS_DISTRICT_MAP_DATA,
   ANALYTICS_GEOGRAPHY_DATA,
   ANALYTICS_REVENUE_MAP_DATA,
 } from '@/config/graphql/analaytics-queries';
@@ -31,10 +33,15 @@ export function Content({
     district: 'DISTRICT',
   };
 
-  const revenueMapData = useQuery(
-    [`revenue_map_data_${indicator}_${timePeriod}`],
+  const mapQuery: TypedDocumentNode<any, any> =
+    boundary === 'district'
+      ? ANALYTICS_DISTRICT_MAP_DATA
+      : ANALYTICS_REVENUE_MAP_DATA;
+
+  const mapData = useQuery(
+    [`mapQuery_${boundary}_${indicator}_${timePeriod}`],
     () =>
-      GraphQL('analytics', ANALYTICS_REVENUE_MAP_DATA, {
+      GraphQL('analytics', mapQuery, {
         indcFilter: { slug: indicator },
         dataFilter: { dataPeriod: timePeriod },
       }),
@@ -69,8 +76,6 @@ export function Content({
     });
   }
 
-  console.log("Region" , region)
-
   return (
     <React.Fragment>
       <div className="mb-4 flex items-center justify-between gap-4">
@@ -80,7 +85,7 @@ export function Content({
           value={boundary || 'district'}
           name="boundary-select"
           onChange={(e) => {
-            setBoundary(e , { shallow: false });
+            setBoundary(e, { shallow: false });
           }}
           options={[
             {
@@ -110,8 +115,12 @@ export function Content({
       <MapComponent
         indicator={indicator}
         regions={region}
-        revenueDataloading={revenueMapData?.isFetching}
-        revenueData={revenueMapData?.data?.revCircleMapData}
+        mapDataloading={mapData?.isFetching}
+        mapData={
+          boundary === 'district'
+            ? mapData?.data?.districtMapData
+            : mapData?.data?.revCircleMapData
+        }
       />
     </React.Fragment>
   );
