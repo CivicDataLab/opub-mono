@@ -85,18 +85,15 @@ export type QueryDistrictMapDataArgs = {
   scheme: Array<Scheme>;
 };
 
-
 export type QueryDataArgs = {
   filters?: InputMaybe<DataFilter>;
 };
-
 
 export type QueryDistrictMapDataArgs = {
   dataFilter: DataFilter;
   geoFilter?: InputMaybe<GeoFilter>;
   indcFilter: IndicatorFilter;
 };
-
 
 export type QueryDistrictViewChartDataArgs = {
 >>>>>>> aa077d1c (add boundary selection to url)
@@ -105,21 +102,29 @@ export type QueryDistrictViewChartDataArgs = {
   indcFilter: IndicatorFilter;
 };
 
+<<<<<<< HEAD
 export type QueryDistrictViewDataArgs = {
+=======
+export type QueryDistrictViewTableDataArgs = {
+>>>>>>> 9a5eed3f (add district default boundary)
   dataFilter: DataFilter;
   geoFilter?: InputMaybe<GeoFilter>;
   indcFilter: IndicatorFilter;
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 export type QueryGetDistrictRevCircleArgs = {
   geoFilter: GeoFilter;
 };
 =======
+=======
+>>>>>>> 9a5eed3f (add district default boundary)
 export type QueryGeographyArgs = {
   filters?: InputMaybe<GeoFilter>;
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 >>>>>>> c3f64ca2 (connect map data to map component)
 =======
@@ -153,8 +158,13 @@ export type QueryGetDistrictRevCircleArgs = {
 
 export type QueryRevCircleChartDataArgs = {
 =======
+=======
+export type QueryGetDistrictRevCircleArgs = {
+  geoFilter: GeoFilter;
+};
+
+>>>>>>> 9a5eed3f (add district default boundary)
 export type QueryRevCircleMapDataArgs = {
->>>>>>> 3c894e8 (add boundary selection to url)
   dataFilter: DataFilter;
   geoFilter?: InputMaybe<GeoFilter>;
   indcFilter: IndicatorFilter;
@@ -162,9 +172,12 @@ export type QueryRevCircleMapDataArgs = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 export type QueryRevCircleMapDataArgs = {
 =======
 
+=======
+>>>>>>> 9a5eed3f (add district default boundary)
 export type QueryRevCircleViewChartDataArgs = {
 >>>>>>> aa077d1c (add boundary selection to url)
   dataFilter: DataFilter;
@@ -172,7 +185,11 @@ export type QueryRevCircleViewChartDataArgs = {
   indcFilter: IndicatorFilter;
 };
 
+<<<<<<< HEAD
 export type QueryRevCircleViewDataArgs = {
+=======
+export type QueryRevCircleViewTableDataArgs = {
+>>>>>>> 9a5eed3f (add district default boundary)
   dataFilter: DataFilter;
   forMap?: Scalars['Boolean'];
   geoFilter?: InputMaybe<GeoFilter>;
@@ -185,6 +202,7 @@ export type RevCircleViewDataQueryVariables = Exact<{
   geoFilter?: InputMaybe<GeoFilter>;
 }>;
 
+<<<<<<< HEAD
 export type RevCircleViewDataQuery = {
   __typename?: 'Query';
   revCircleViewData: any;
@@ -195,6 +213,12 @@ export type DistrictViewDataQueryVariables = Exact<{
   dataFilter: DataFilter;
   geoFilter?: InputMaybe<GeoFilter>;
 }>;
+=======
+export type RevenueCircleTableQuery = {
+  __typename?: 'Query';
+  revCircleViewTableData: any;
+};
+>>>>>>> 9a5eed3f (add district default boundary)
 
 <<<<<<< HEAD
 export type DistrictViewDataQuery = {
@@ -208,9 +232,14 @@ export type DistrictViewTableDataQueryVariables = Exact<{
   geoFilter?: InputMaybe<GeoFilter>;
 }>;
 
+export type DistrictViewTableDataQuery = {
+  __typename?: 'Query';
+  districtViewTableData: any;
+};
 
-export type DistrictViewTableDataQuery = { __typename?: 'Query', districtViewTableData: any };
+export type IndicatorsQueryVariables = Exact<{ [key: string]: never }>;
 
+<<<<<<< HEAD
 export type IndicatorsQueryVariables = Exact<{ [key: string]: never; }>;
 >>>>>>> aa077d1c (add boundary selection to url)
 
@@ -222,6 +251,21 @@ export type IndicatorsQuery = { __typename?: 'Query'; indicators: any };
 
 export type DataTimePeriodsQueryVariables = Exact<{ [key: string]: never }>;
 
+=======
+export type IndicatorsQuery = {
+  __typename?: 'Query';
+  indicators: Array<{
+    __typename?: 'Indicators';
+    name: string;
+    slug?: string | null;
+    category?: string | null;
+    parent?: { __typename?: 'Indicators'; name: string } | null;
+  }>;
+};
+
+export type DataTimePeriodsQueryVariables = Exact<{ [key: string]: never }>;
+
+>>>>>>> 9a5eed3f (add district default boundary)
 export type DataTimePeriodsQuery = {
   __typename?: 'Query';
   getDataTimePeriods: Array<{
@@ -230,10 +274,16 @@ export type DataTimePeriodsQuery = {
   }>;
 };
 
+<<<<<<< HEAD
 export type GetDistrictRevCircleQueryVariables = Exact<{
   geoFilter: GeoFilter;
+=======
+export type GetGeographyDataQueryVariables = Exact<{
+  filters: GeoFilter;
+>>>>>>> 9a5eed3f (add district default boundary)
 }>;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -249,6 +299,8 @@ export type GetDistrictRevCircleQuery = {
 >>>>>>> d9aebf85 (fix www/ user and listing)
 =======
 >>>>>>> aa077d1c (add boundary selection to url)
+=======
+>>>>>>> 9a5eed3f (add district default boundary)
 <<<<<<< HEAD
 export type GetGeographyDataQuery = {
 >>>>>>> d9a8add0 (connect map data to map component)
@@ -269,10 +321,17 @@ export type GetGeographyDataQuery = { __typename?: 'Query', geography: Array<{ _
 
 export type GetGeographyDataQuery = { __typename?: 'Query', geography: Array<{ __typename?: 'Geography', name: string, code?: string | null }> };
 =======
+=======
+>>>>>>> 5c633b33 (add district default boundary)
 export type GetGeographyDataQuery = {
   __typename?: 'Query';
-  geography: Array<{ __typename?: 'Geography'; name: string }>;
+  geography: Array<{
+    __typename?: 'Geography';
+    name: string;
+    code?: string | null;
+  }>;
 };
+<<<<<<< HEAD
 >>>>>>> 2c5b0dd (fix www/ user and listing)
 <<<<<<< HEAD
 >>>>>>> 03a733f2 (fix www/ user and listing)
@@ -301,6 +360,8 @@ export type GetGeographyDataQuery = {
 export type RevenueCircleMapDataQueryVariables = Exact<{
 =======
 export type GetGeographyDataQuery = { __typename?: 'Query', geography: Array<{ __typename?: 'Geography', name: string, code?: string | null }> };
+=======
+>>>>>>> 5c633b33 (add district default boundary)
 
 export type DistrictViewChartDataQueryVariables = Exact<{
 >>>>>>> aa077d1c (add boundary selection to url)
@@ -308,6 +369,7 @@ export type DistrictViewChartDataQueryVariables = Exact<{
   dataFilter: DataFilter;
 }>;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 export type RevenueCircleMapDataQuery = {
@@ -325,6 +387,12 @@ export type DistrictMapDataQueryVariables = Exact<{
 =======
 
 export type DistrictViewChartDataQuery = { __typename?: 'Query', districtViewChartData: any };
+=======
+export type DistrictViewChartDataQuery = {
+  __typename?: 'Query';
+  districtViewChartData: any;
+};
+>>>>>>> 9a5eed3f (add district default boundary)
 
 export type RevenueCircleMapDataQueryVariables = Exact<{
 >>>>>>> aa077d1c (add boundary selection to url)
@@ -332,6 +400,7 @@ export type RevenueCircleMapDataQueryVariables = Exact<{
   dataFilter: DataFilter;
 }>;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 export type DistrictMapDataQuery = {
   __typename?: 'Query';
@@ -353,11 +422,18 @@ export const RevCircleViewDataDocument = {
 =======
 export type GetDistrictchartdataQuery = { __typename?: 'Query', districtChartData: any };
 =======
+=======
+export type RevenueCircleMapDataQuery = {
+  __typename?: 'Query';
+  revCircleMapData: any;
+};
+>>>>>>> 9a5eed3f (add district default boundary)
 
-export type RevenueCircleMapDataQuery = { __typename?: 'Query', revCircleMapData: any };
+export type FactorsQueryVariables = Exact<{ [key: string]: never }>;
 
-export type FactorsQueryVariables = Exact<{ [key: string]: never; }>;
+export type FactorsQuery = { __typename?: 'Query'; getFactors: any };
 
+<<<<<<< HEAD
 
 export type FactorsQuery = { __typename?: 'Query', getFactors: any };
 >>>>>>> aa077d1c (add boundary selection to url)
@@ -950,6 +1026,8 @@ export const RevenueCircleMapDataDocument = {"kind":"Document","definitions":[{"
 =======
 =======
 =======
+=======
+>>>>>>> 5c633b33 (add district default boundary)
 export const RevenueCircleTableDocument = {
   kind: 'Document',
   definitions: [
@@ -1038,6 +1116,95 @@ export const RevenueCircleTableDocument = {
 } as unknown as DocumentNode<
   RevenueCircleTableQuery,
   RevenueCircleTableQueryVariables
+>;
+export const DistrictViewTableDataDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'districtViewTableData' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'indcFilter' },
+          },
+          type: {
+            kind: 'NonNullType',
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'IndicatorFilter' },
+            },
+          },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'dataFilter' },
+          },
+          type: {
+            kind: 'NonNullType',
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'DataFilter' },
+            },
+          },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'geoFilter' },
+          },
+          type: {
+            kind: 'NamedType',
+            name: { kind: 'Name', value: 'GeoFilter' },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'districtViewTableData' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'indcFilter' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'indcFilter' },
+                },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'dataFilter' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'dataFilter' },
+                },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'geoFilter' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'geoFilter' },
+                },
+              },
+            ],
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  DistrictViewTableDataQuery,
+  DistrictViewTableDataQueryVariables
 >;
 export const IndicatorsDocument = {
   kind: 'Document',
@@ -1147,6 +1314,7 @@ export const GetGeographyDataDocument = {
               kind: 'SelectionSet',
               selections: [
                 { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'code' } },
               ],
             },
           },
@@ -1158,13 +1326,13 @@ export const GetGeographyDataDocument = {
   GetGeographyDataQuery,
   GetGeographyDataQueryVariables
 >;
-export const GetDistrictchartdataDocument = {
+export const DistrictViewChartDataDocument = {
   kind: 'Document',
   definitions: [
     {
       kind: 'OperationDefinition',
       operation: 'query',
-      name: { kind: 'Name', value: 'getDistrictchartdata' },
+      name: { kind: 'Name', value: 'districtViewChartData' },
       variableDefinitions: [
         {
           kind: 'VariableDefinition',
@@ -1200,7 +1368,7 @@ export const GetDistrictchartdataDocument = {
         selections: [
           {
             kind: 'Field',
-            name: { kind: 'Name', value: 'districtChartData' },
+            name: { kind: 'Name', value: 'districtViewChartData' },
             arguments: [
               {
                 kind: 'Argument',
@@ -1225,9 +1393,10 @@ export const GetDistrictchartdataDocument = {
     },
   ],
 } as unknown as DocumentNode<
-  GetDistrictchartdataQuery,
-  GetDistrictchartdataQueryVariables
+  DistrictViewChartDataQuery,
+  DistrictViewChartDataQueryVariables
 >;
+<<<<<<< HEAD
 >>>>>>> 2c5b0dd (fix www/ user and listing)
 <<<<<<< HEAD
 >>>>>>> 03a733f2 (fix www/ user and listing)
@@ -1261,4 +1430,95 @@ export const RevenueCircleMapDataDocument = {"kind":"Document","definitions":[{"
 export const FactorsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"factors"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getFactors"}}]}}]} as unknown as DocumentNode<FactorsQuery, FactorsQueryVariables>;
 >>>>>>> 3c894e8 (add boundary selection to url)
 >>>>>>> d90db598 (add boundary selection to url)
+<<<<<<< HEAD
 >>>>>>> aa077d1c (add boundary selection to url)
+=======
+=======
+export const RevenueCircleMapDataDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'revenueCircleMapData' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'indcFilter' },
+          },
+          type: {
+            kind: 'NonNullType',
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'IndicatorFilter' },
+            },
+          },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'dataFilter' },
+          },
+          type: {
+            kind: 'NonNullType',
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'DataFilter' },
+            },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'revCircleMapData' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'indcFilter' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'indcFilter' },
+                },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'dataFilter' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'dataFilter' },
+                },
+              },
+            ],
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  RevenueCircleMapDataQuery,
+  RevenueCircleMapDataQueryVariables
+>;
+export const FactorsDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'factors' },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          { kind: 'Field', name: { kind: 'Name', value: 'getFactors' } },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<FactorsQuery, FactorsQueryVariables>;
+>>>>>>> 5c633b33 (add district default boundary)
+>>>>>>> 9a5eed3f (add district default boundary)
