@@ -120,7 +120,7 @@ export const MapComponent = ({
 				map.removeLayer(lastLayer)
 			}
 		}
-	}, [regions])
+	}, [map, regions])
 
 	return !revenueDataloading ? (
 		<MapChart

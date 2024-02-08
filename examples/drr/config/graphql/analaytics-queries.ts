@@ -6,6 +6,13 @@ query revenueCircleTable($indcFilter: IndicatorFilter! , $dataFilter: DataFilter
 }
 `)
 
+export const ANALYTICS_DISTRICT_TABLE_DATA =  graphql(`
+query districtViewTableData($indcFilter: IndicatorFilter! , $dataFilter: DataFilter! , $geoFilter: GeoFilter){
+  districtViewTableData(indcFilter: $indcFilter , dataFilter:$dataFilter , geoFilter:$geoFilter)
+}
+`)
+
+
 export const ANALYTICS_INDICATORS = graphql(`
 query indicators{
     indicators {
@@ -37,8 +44,8 @@ export const ANALYTICS_GEOGRAPHY_DATA = graphql(`
 `);
 
 export const ANALYTICS_DISTRICT_CHART_DATA = graphql(`
-query getDistrictchartdata ($indcFilter: IndicatorFilter! , $dataFilter: DataFilter!) {
-  districtChartData(indcFilter: $indcFilter , dataFilter:$dataFilter) 
+query districtViewChartData ($indcFilter: IndicatorFilter! , $dataFilter: DataFilter!) {
+  districtViewChartData(indcFilter: $indcFilter , dataFilter:$dataFilter) 
 }
 `)
 
@@ -48,7 +55,7 @@ query revenueCircleMapData($indcFilter: IndicatorFilter! , $dataFilter: DataFilt
 }
 `)
 
-export const GET_FACTORS = graphql(`
+export const ANALYTICS_FACTORS = graphql(`
 query factors{
   getFactors
 }
