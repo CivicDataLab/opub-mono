@@ -434,6 +434,7 @@ export type FactorsQueryVariables = Exact<{ [key: string]: never }>;
 export type FactorsQuery = { __typename?: 'Query'; getFactors: any };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 export type FactorsQuery = { __typename?: 'Query', getFactors: any };
 >>>>>>> aa077d1c (add boundary selection to url)
@@ -999,10 +1000,14 @@ export type GetDistrictchartdataQuery = { __typename?: 'Query', districtChartDat
 =======
 >>>>>>> 6714281 (connect map data to map component)
 export type RevenueCircleMapDataQueryVariables = Exact<{
+=======
+export type DistrictMapDataQueryVariables = Exact<{
+>>>>>>> 82224180 (add mapcomponent boundary filter)
   indcFilter: IndicatorFilter;
   dataFilter: DataFilter;
 }>;
 
+<<<<<<< HEAD
 
 export type RevenueCircleMapDataQuery = { __typename?: 'Query', revCircleMapData: any };
 
@@ -1028,6 +1033,13 @@ export const RevenueCircleMapDataDocument = {"kind":"Document","definitions":[{"
 =======
 =======
 >>>>>>> 5c633b33 (add district default boundary)
+=======
+export type DistrictMapDataQuery = {
+  __typename?: 'Query';
+  districtMapData: any;
+};
+
+>>>>>>> 82224180 (add mapcomponent boundary filter)
 export const RevenueCircleTableDocument = {
   kind: 'Document',
   definitions: [
@@ -1520,5 +1532,81 @@ export const FactorsDocument = {
     },
   ],
 } as unknown as DocumentNode<FactorsQuery, FactorsQueryVariables>;
+<<<<<<< HEAD
 >>>>>>> 5c633b33 (add district default boundary)
+<<<<<<< HEAD
 >>>>>>> 9a5eed3f (add district default boundary)
+=======
+=======
+export const DistrictMapDataDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'districtMapData' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'indcFilter' },
+          },
+          type: {
+            kind: 'NonNullType',
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'IndicatorFilter' },
+            },
+          },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'dataFilter' },
+          },
+          type: {
+            kind: 'NonNullType',
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'DataFilter' },
+            },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'districtMapData' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'indcFilter' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'indcFilter' },
+                },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'dataFilter' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'dataFilter' },
+                },
+              },
+            ],
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  DistrictMapDataQuery,
+  DistrictMapDataQueryVariables
+>;
+>>>>>>> 82224180 (add mapcomponent boundary filter)
+>>>>>>> 3deda509 (add mapcomponent boundary filter)

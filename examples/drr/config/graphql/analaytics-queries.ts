@@ -34,6 +34,19 @@ query districtViewTableData($indcFilter: IndicatorFilter! , $dataFilter: DataFil
 }
 `)
 
+export const ANALYTICS_DISTRICT_TABLE_DATA = graphql(`
+  query districtViewTableData(
+    $indcFilter: IndicatorFilter!
+    $dataFilter: DataFilter!
+    $geoFilter: GeoFilter
+  ) {
+    districtViewTableData(
+      indcFilter: $indcFilter
+      dataFilter: $dataFilter
+      geoFilter: $geoFilter
+    )
+  }
+`);
 
 export const ANALYTICS_INDICATORS = graphql(`
   query indicators($indcFilter: IndicatorFilter) {

@@ -15,6 +15,7 @@ import * as types from './graphql';
  */
 const documents = {
 <<<<<<< HEAD
+<<<<<<< HEAD
   '\n  query revCircleViewData(\n    $indcFilter: IndicatorFilter!\n    $dataFilter: DataFilter!\n    $geoFilter: GeoFilter\n  ) {\n    revCircleViewData(\n      indcFilter: $indcFilter\n      dataFilter: $dataFilter\n      geoFilter: $geoFilter\n    )\n  }\n':
     types.RevCircleViewDataDocument,
   '\n  query districtViewData(\n    $indcFilter: IndicatorFilter!\n    $dataFilter: DataFilter!\n    $geoFilter: GeoFilter\n  ) {\n    districtViewData(\n      indcFilter: $indcFilter\n      dataFilter: $dataFilter\n      geoFilter: $geoFilter\n    )\n  }\n':
@@ -45,6 +46,25 @@ const documents = {
 =======
     "\nquery factors{\n  getFactors\n}\n": types.FactorsDocument,
 >>>>>>> aa077d1c (add boundary selection to url)
+=======
+  '\nquery revenueCircleTable($indcFilter: IndicatorFilter! , $dataFilter: DataFilter! , $geoFilter: GeoFilter){\n  revCircleViewTableData(indcFilter: $indcFilter , dataFilter:$dataFilter , geoFilter:$geoFilter)\n}\n':
+    types.RevenueCircleTableDocument,
+  '\nquery districtViewTableData($indcFilter: IndicatorFilter! , $dataFilter: DataFilter! , $geoFilter: GeoFilter){\n  districtViewTableData(indcFilter: $indcFilter , dataFilter:$dataFilter , geoFilter:$geoFilter)\n}\n':
+    types.DistrictViewTableDataDocument,
+  '\nquery indicators{\n    indicators {\n      name\n      slug\n      category\n      parent{\n        name\n      }\n  }\n}\n':
+    types.IndicatorsDocument,
+  '\nquery dataTimePeriods{\n  getDataTimePeriods {\n    value\n  }\n}\n':
+    types.DataTimePeriodsDocument,
+  '\n  query getGeographyData($filters: GeoFilter!) {\n    geography(filters: $filters) {\n      name\n      code\n    }\n  }\n':
+    types.GetGeographyDataDocument,
+  '\nquery districtViewChartData ($indcFilter: IndicatorFilter! , $dataFilter: DataFilter!) {\n  districtViewChartData(indcFilter: $indcFilter , dataFilter:$dataFilter) \n}\n':
+    types.DistrictViewChartDataDocument,
+  '\nquery revenueCircleMapData($indcFilter: IndicatorFilter! , $dataFilter: DataFilter!){\n  revCircleMapData(indcFilter: $indcFilter , dataFilter:$dataFilter)\n}\n':
+    types.RevenueCircleMapDataDocument,
+  '\nquery factors{\n  getFactors\n}\n': types.FactorsDocument,
+  '\nquery districtMapData($indcFilter: IndicatorFilter! , $dataFilter: DataFilter!){\n  districtMapData(indcFilter: $indcFilter , dataFilter:$dataFilter)\n}\n':
+    types.DistrictMapDataDocument,
+>>>>>>> 3deda509 (add mapcomponent boundary filter)
 };
 
 /**
@@ -65,6 +85,7 @@ export function graphql(source: string): unknown;
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(
+<<<<<<< HEAD
   source: '\n  query revCircleViewData(\n    $indcFilter: IndicatorFilter!\n    $dataFilter: DataFilter!\n    $geoFilter: GeoFilter\n  ) {\n    revCircleViewData(\n      indcFilter: $indcFilter\n      dataFilter: $dataFilter\n      geoFilter: $geoFilter\n    )\n  }\n'
 ): (typeof documents)['\n  query revCircleViewData(\n    $indcFilter: IndicatorFilter!\n    $dataFilter: DataFilter!\n    $geoFilter: GeoFilter\n  ) {\n    revCircleViewData(\n      indcFilter: $indcFilter\n      dataFilter: $dataFilter\n      geoFilter: $geoFilter\n    )\n  }\n'];
 /**
@@ -81,10 +102,27 @@ export function graphql(source: "\nquery districtViewTableData($indcFilter: Indi
  */
 export function graphql(source: "\nquery indicators{\n    indicators {\n      name\n      slug\n      category\n      parent{\n        name\n      }\n  }\n}\n"): (typeof documents)["\nquery indicators{\n    indicators {\n      name\n      slug\n      category\n      parent{\n        name\n      }\n  }\n}\n"];
 >>>>>>> aa077d1c (add boundary selection to url)
+=======
+  source: '\nquery revenueCircleTable($indcFilter: IndicatorFilter! , $dataFilter: DataFilter! , $geoFilter: GeoFilter){\n  revCircleViewTableData(indcFilter: $indcFilter , dataFilter:$dataFilter , geoFilter:$geoFilter)\n}\n'
+): (typeof documents)['\nquery revenueCircleTable($indcFilter: IndicatorFilter! , $dataFilter: DataFilter! , $geoFilter: GeoFilter){\n  revCircleViewTableData(indcFilter: $indcFilter , dataFilter:$dataFilter , geoFilter:$geoFilter)\n}\n'];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(
+  source: '\nquery districtViewTableData($indcFilter: IndicatorFilter! , $dataFilter: DataFilter! , $geoFilter: GeoFilter){\n  districtViewTableData(indcFilter: $indcFilter , dataFilter:$dataFilter , geoFilter:$geoFilter)\n}\n'
+): (typeof documents)['\nquery districtViewTableData($indcFilter: IndicatorFilter! , $dataFilter: DataFilter! , $geoFilter: GeoFilter){\n  districtViewTableData(indcFilter: $indcFilter , dataFilter:$dataFilter , geoFilter:$geoFilter)\n}\n'];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(
+  source: '\nquery indicators{\n    indicators {\n      name\n      slug\n      category\n      parent{\n        name\n      }\n  }\n}\n'
+): (typeof documents)['\nquery indicators{\n    indicators {\n      name\n      slug\n      category\n      parent{\n        name\n      }\n  }\n}\n'];
+>>>>>>> 3deda509 (add mapcomponent boundary filter)
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(
+<<<<<<< HEAD
   source: '\n  query indicators($indcFilter: IndicatorFilter) {\n    indicators(indcFilter: $indcFilter)\n  }\n'
 ): (typeof documents)['\n  query indicators($indcFilter: IndicatorFilter) {\n    indicators(indcFilter: $indcFilter)\n  }\n'];
 /**
@@ -126,13 +164,26 @@ export function graphql(
 ): (typeof documents)['\n  query getTimeTrends(\n    $indcFilter: IndicatorFilter!\n    $dataFilter: DataFilter!\n    $geoFilter: GeoFilter!\n  ) {\n    getTimeTrends(\n      indcFilter: $indcFilter\n      dataFilter: $dataFilter\n      geoFilter: $geoFilter\n    )\n  }\n'];
 =======
 export function graphql(source: "\n  query getGeographyData($filters: GeoFilter!) {\n    geography(filters: $filters) {\n      name\n      code\n    }\n  }\n"): (typeof documents)["\n  query getGeographyData($filters: GeoFilter!) {\n    geography(filters: $filters) {\n      name\n      code\n    }\n  }\n"];
+=======
+  source: '\nquery dataTimePeriods{\n  getDataTimePeriods {\n    value\n  }\n}\n'
+): (typeof documents)['\nquery dataTimePeriods{\n  getDataTimePeriods {\n    value\n  }\n}\n'];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\nquery districtViewChartData ($indcFilter: IndicatorFilter! , $dataFilter: DataFilter!) {\n  districtViewChartData(indcFilter: $indcFilter , dataFilter:$dataFilter) \n}\n"): (typeof documents)["\nquery districtViewChartData ($indcFilter: IndicatorFilter! , $dataFilter: DataFilter!) {\n  districtViewChartData(indcFilter: $indcFilter , dataFilter:$dataFilter) \n}\n"];
+export function graphql(
+  source: '\n  query getGeographyData($filters: GeoFilter!) {\n    geography(filters: $filters) {\n      name\n      code\n    }\n  }\n'
+): (typeof documents)['\n  query getGeographyData($filters: GeoFilter!) {\n    geography(filters: $filters) {\n      name\n      code\n    }\n  }\n'];
+>>>>>>> 3deda509 (add mapcomponent boundary filter)
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
+export function graphql(
+  source: '\nquery districtViewChartData ($indcFilter: IndicatorFilter! , $dataFilter: DataFilter!) {\n  districtViewChartData(indcFilter: $indcFilter , dataFilter:$dataFilter) \n}\n'
+): (typeof documents)['\nquery districtViewChartData ($indcFilter: IndicatorFilter! , $dataFilter: DataFilter!) {\n  districtViewChartData(indcFilter: $indcFilter , dataFilter:$dataFilter) \n}\n'];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+<<<<<<< HEAD
 export function graphql(source: "\nquery revenueCircleMapData($indcFilter: IndicatorFilter! , $dataFilter: DataFilter!){\n  revCircleMapData(indcFilter: $indcFilter , dataFilter:$dataFilter)\n}\n"): (typeof documents)["\nquery revenueCircleMapData($indcFilter: IndicatorFilter! , $dataFilter: DataFilter!){\n  revCircleMapData(indcFilter: $indcFilter , dataFilter:$dataFilter)\n}\n"];
 <<<<<<< HEAD
 >>>>>>> d9a8add0 (connect map data to map component)
@@ -142,6 +193,23 @@ export function graphql(source: "\nquery revenueCircleMapData($indcFilter: Indic
  */
 export function graphql(source: "\nquery factors{\n  getFactors\n}\n"): (typeof documents)["\nquery factors{\n  getFactors\n}\n"];
 >>>>>>> aa077d1c (add boundary selection to url)
+=======
+export function graphql(
+  source: '\nquery revenueCircleMapData($indcFilter: IndicatorFilter! , $dataFilter: DataFilter!){\n  revCircleMapData(indcFilter: $indcFilter , dataFilter:$dataFilter)\n}\n'
+): (typeof documents)['\nquery revenueCircleMapData($indcFilter: IndicatorFilter! , $dataFilter: DataFilter!){\n  revCircleMapData(indcFilter: $indcFilter , dataFilter:$dataFilter)\n}\n'];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(
+  source: '\nquery factors{\n  getFactors\n}\n'
+): (typeof documents)['\nquery factors{\n  getFactors\n}\n'];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(
+  source: '\nquery districtMapData($indcFilter: IndicatorFilter! , $dataFilter: DataFilter!){\n  districtMapData(indcFilter: $indcFilter , dataFilter:$dataFilter)\n}\n'
+): (typeof documents)['\nquery districtMapData($indcFilter: IndicatorFilter! , $dataFilter: DataFilter!){\n  districtMapData(indcFilter: $indcFilter , dataFilter:$dataFilter)\n}\n'];
+>>>>>>> 3deda509 (add mapcomponent boundary filter)
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};
