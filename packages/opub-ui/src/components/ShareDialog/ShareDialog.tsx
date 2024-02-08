@@ -1,5 +1,6 @@
 import React from 'react';
 import { IconShare } from '@tabler/icons-react';
+import { Controlled as Zoom } from 'react-medium-image-zoom';
 
 import { cn } from '../../utils';
 import { Button } from '../Button';
@@ -59,6 +60,9 @@ const ShareDialog = React.forwardRef(
     ref?: React.Ref<HTMLDivElement>
   ) => {
     const [isOpen, setIsOpen] = React.useState(false);
+    const [lockDialog, setLockDialog] = React.useState(false);
+    const [zoom, setZoom] = React.useState(false);
+
     const { copyToClipboard, shareImage, apiSupport } = useScreenshot();
     const isSupported = apiSupport();
 
@@ -93,7 +97,17 @@ const ShareDialog = React.forwardRef(
 
     return (
       <div ref={ref} className={cn(className)}>
-        <Dialog open={isOpen} onOpenChange={handleOpen}>
+        <Dialog
+          open={isOpen}
+          onOpenChange={(e) => {
+            if (lockDialog) {
+              setZoom(false);
+              setLockDialog(false);
+            } else {
+              handleOpen(e);
+            }
+          }}
+        >
           <Dialog.Trigger>
             <Button
               icon={
@@ -114,14 +128,24 @@ const ShareDialog = React.forwardRef(
           <Dialog.Content title={title} className="z-max mt-[-20px]">
             <Divider className="mb-2" />
             {image && !loading ? (
-              <img
-                src={image}
-                alt={alt}
-                width={768}
-                height={props?.height || 384}
-                {...props}
-                className="h-full w-full overflow-auto object-contain"
-              />
+              <Zoom
+                zoomMargin={40}
+                isZoomed={zoom}
+                onZoomChange={(e) => {
+                  setZoom(e);
+                  setLockDialog(e);
+                }}
+                classDialog="[&_img]:select-none"
+              >
+                <img
+                  src={image}
+                  alt={alt}
+                  width={768}
+                  height={props?.height || 384}
+                  {...props}
+                  className="h-full w-full  overflow-auto object-contain"
+                />
+              </Zoom>
             ) : (
               <div
                 style={{
