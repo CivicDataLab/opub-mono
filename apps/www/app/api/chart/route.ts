@@ -1,8 +1,39 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
 const echarts = require('echarts');
 
-export async function GET() {
+type Props = {
+  /* xAxis of the chart */
+  xAxis?: string[] | number[];
+  /* yAxis of the chart */
+  yAxis?: string[] | number[];
+  /* Data to be displayed on the chart */
+  series: {
+    name: string;
+    type: string;
+    data: number[];
+    smooth?: boolean;
+  }[];
+};
+
+export async function POST(request: NextRequest) {
+  const options: Props = await request.json();
+
+  const option = {
+    grid: {
+      containLabel: true,
+      left: '5%',
+    },
+    label: {
+      show: true,
+      position: 'inside',
+      color: '#fff',
+      fontWeight: 'bold',
+    },
+    animation: false,
+    ...options,
+  };
+
   const chart = echarts.init(null, null, {
     renderer: 'svg',
     ssr: true,
@@ -10,25 +41,8 @@ export async function GET() {
     height: 800,
   });
 
-  // setOption as normal
-  chart.setOption({
-    xAxis: {
-      type: 'category',
-      data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-    },
-    yAxis: {
-      type: 'value',
-    },
-    series: [
-      {
-        data: [120, 200, 150, 80, 70, 110, 130],
-        type: 'bar',
-      },
-    ],
-    animation: false,
-  });
+  chart.setOption(option);
 
-  // Output string
   const svgStr = chart.renderToSVGString();
   return NextResponse.json({ svg: svgStr }, { status: 200 });
 }

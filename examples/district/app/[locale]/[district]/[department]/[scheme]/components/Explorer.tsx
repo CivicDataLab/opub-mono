@@ -21,7 +21,7 @@ import { ErrorBoundary } from 'react-error-boundary';
 
 import { ckan } from '@/config/site';
 import { useFetch } from '@/lib/api';
-import { cn, copyURLToClipboard } from '@/lib/utils';
+import { cn, copyURLToClipboard, exportAsImage } from '@/lib/utils';
 import { BarView } from './BarView';
 import { Indicators } from './Indicators';
 import { IChartData } from './scheme-layout';
@@ -402,79 +402,19 @@ const Content = ({
         >
           Copy Link
         </Button>
-        {/* <Button
+        <Button
           kind="primary"
           variant="interactive"
           onClick={() => {
-            exportAsImage(contentRef.current, "explorer");
+            exportAsImage(contentRef.current, 'explorer');
           }}
         >
           Download
-        </Button> */}
-        <Share />
+        </Button>
       </div>
     </div>
   );
 };
-
-const image =
-  'http://localhost:3000/en/morigaon/panchayat-and-rural-development/mgnrega?tab=explorer&indicator=nhaoe';
-const alt = 'visualisation';
-
-function Share() {
-  const { createSvg, domToUrl, copyToClipboard, downloadFile } =
-    useScreenshot();
-
-  const [dataUri, setDataUri] = React.useState<string>('');
-
-  async function onOpen(image: string) {
-    await fetch(`/api?url=${image}`)
-      .then((res) => res.blob())
-      .then(async (res: Blob) => {
-        const base64 = await res.text();
-
-        function SatoriComp() {
-          return (
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-              }}
-            >
-              <Text variant="headingLg">Hello</Text>
-              <img src={base64} alt={alt} />
-            </div>
-          );
-        }
-
-        await createSvg(<SatoriComp />, {
-          width: 1024,
-          height: 768,
-        })
-          .then((res: any) => domToUrl(res))
-          .then((res: any) => {
-            setDataUri(res);
-            copyToClipboard(res, 'Chart has been copied to clipboard');
-          })
-          .catch((err: any) => console.log(err));
-      })
-      .catch((err) => console.log(err));
-  }
-
-  return (
-    <ShareDialog
-      image={dataUri}
-      alt={alt}
-      title="Share Chart"
-      onOpen={() => onOpen(image)}
-      onDownload={() => downloadFile(dataUri, 'test')}
-      size="medium"
-      variant="interactive"
-    >
-      Share
-    </ShareDialog>
-  );
-}
 
 const Filters = ({
   states,
