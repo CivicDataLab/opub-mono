@@ -1,14 +1,12 @@
 import React from 'react';
-import { IconShare, IconX } from '@tabler/icons-react';
+import { IconShare } from '@tabler/icons-react';
 
 import { cn } from '../../utils';
 import { Button } from '../Button';
 import { Dialog } from '../Dialog';
 import { Divider } from '../Divider';
 import { Icon } from '../Icon';
-import { IconButton } from '../IconButton';
 import { useScreenshot } from '../Satori';
-import { Text } from '../Text';
 
 type Props = {
   image?: string;

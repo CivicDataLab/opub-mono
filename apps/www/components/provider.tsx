@@ -23,7 +23,7 @@ export default function Provider({ children }: { children: React.ReactNode }) {
   return (
     <QueryClientProvider client={client}>
       <RouterEvents />
-      <NextTopLoader color="var(--decorative-icon-three)" />
+      <NextTopLoader color="var(--icon-success)" />
       <Tooltip.Provider>
         {children}
         <Toaster />

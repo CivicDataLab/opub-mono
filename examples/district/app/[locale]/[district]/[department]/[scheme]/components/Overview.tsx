@@ -1,10 +1,11 @@
-import Icons from '@/components/icons';
+import React from 'react';
 import Link from 'next/link';
 import { Icon, Text } from 'opub-ui';
-import React from 'react';
+import { BarChart } from 'opub-ui/viz';
+
+import Icons from '@/components/icons';
 import { ContentCard, ProgressCard } from '../../components/Card';
 import { IOverview } from './scheme-layout';
-import { BarChart } from 'opub-ui/viz';
 
 export const Overview = React.forwardRef(
   ({ data }: { data?: IOverview }, ref: any) => {
@@ -75,18 +76,29 @@ function SelectCard({ type, data, link }: any) {
       );
     case 'bar':
       return (
-        <div className="flex flex-col justify-between md:basis-1/3 grow p-4 bg-surfaceSubdued rounded-1 border-1 border-solid border-borderSubdued">
+        <div className="flex grow flex-col justify-between rounded-1 border-1 border-solid border-borderSubdued bg-surfaceSubdued p-4 md:basis-1/3">
           <Text variant="bodyLg" fontWeight="medium">
             {data.label}
           </Text>
           <>
-            <BarChart xAxis={data.data.xAxis} series={series} />
+            <BarChart
+              options={{
+                xAxis: {
+                  type: 'category',
+                  data: data.data.xAxis,
+                },
+                yAxis: {
+                  type: 'value',
+                },
+                series: series,
+              }}
+            />
           </>
           {/* <Text variant="bodyMd">{data.description}</Text> */}
           {link && (
             <Link
               href={`?tab=explorer`}
-              className="rounded-1 flex items-center justify-between text-textInteractive hover:underline"
+              className="flex items-center justify-between rounded-1 text-textInteractive hover:underline"
             >
               <Text variant="bodyMd" fontWeight="medium" color="inherit">
                 View on Explorer
@@ -109,11 +121,11 @@ const Card = ({
   children: React.ReactNode;
 }) => {
   return (
-    <section className="p-3 md:p-6 bg-surfaceDefault rounded-2 shadow-basicMd">
+    <section className="rounded-2 bg-surfaceDefault p-3 shadow-basicMd md:p-6">
       <Text variant="headingXl" as="h3">
         {heading}
       </Text>
-      <div className="mt-4 md:mt-6 flex flex-wrap gap-2 md:gap-4">
+      <div className="mt-4 flex flex-wrap gap-2 md:mt-6 md:gap-4">
         <>{children}</>
       </div>
     </section>
