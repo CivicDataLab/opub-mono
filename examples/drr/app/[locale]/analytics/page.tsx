@@ -1,6 +1,6 @@
 import React from 'react';
 import { type TypedDocumentNode } from '@graphql-typed-document-node/core';
-import { Hydrate, dehydrate } from '@tanstack/react-query';
+import { dehydrate, Hydrate } from '@tanstack/react-query';
 
 import {
   ANALYTICS_DISTRICT_TABLE_DATA,
@@ -8,7 +8,7 @@ import {
   ANALYTICS_REVENUE_TABLE_DATA,
   ANALYTICS_TIME_PERIODS,
 } from '@/config/graphql/analaytics-queries';
-import { GraphQL, getQueryClient } from '@/lib/api';
+import { getQueryClient, GraphQL } from '@/lib/api';
 import { Content } from './components/analytics-layout';
 
 export default async function Home({
@@ -24,7 +24,9 @@ export default async function Home({
       : ANALYTICS_REVENUE_TABLE_DATA;
 
   await queryClient.prefetchQuery(
-    [`sidePaneData__${searchParams?.indicator}_${searchParams?.region}_${searchParams?.boundary}`],
+    [
+      `sidePaneData_${searchParams?.indicator}_${searchParams?.region}_${searchParams?.boundary}`,
+    ],
     () =>
       GraphQL('analytics', sidePaneQuery, {
         indcFilter: { slug: searchParams?.indicator },

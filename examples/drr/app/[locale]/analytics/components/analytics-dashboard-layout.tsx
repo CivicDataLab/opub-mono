@@ -15,8 +15,8 @@ import {
 } from '@/config/graphql/analaytics-queries';
 import { GraphQL } from '@/lib/api';
 import { cn } from '@/lib/utils';
-import { SidebarDefaultLayout } from './SidebarDefaultLayout';
 import { SidebarLayout } from './sidebar-layout';
+import { SidebarDefaultLayout } from './SidebarDefaultLayout';
 import styles from './styles.module.scss';
 
 interface DashboardLayoutProps {
@@ -35,7 +35,7 @@ export function AnalyticsDashboardLayout({ children }: DashboardLayoutProps) {
   const indicator = searchParams.get('indicator');
   const time_period = searchParams.get('time-period');
   const region = searchParams.get('region');
-  const boundary = searchParams.get('boundary');
+  const boundary = searchParams.get('boundary') || 'district';
 
   const sidePaneQuery: TypedDocumentNode<any, any> =
     boundary === 'district'
@@ -83,7 +83,7 @@ export function AnalyticsDashboardLayout({ children }: DashboardLayoutProps) {
               return (
                 <Link
                   key={`indicator_${index}`}
-                  href={`?indicator=${item.slug}&time-period=${time_period}`}
+                  href={`?indicator=${item.slug}&time-period=${time_period}&boundary=${boundary}`}
                 >
                   <div
                     className={cn(
@@ -115,14 +115,22 @@ export function AnalyticsDashboardLayout({ children }: DashboardLayoutProps) {
           ? sidePaneData.isFetched && (
               <SidebarLayout
                 revenueData={
-                  sidePaneData?.data[boundary === 'district' ? 'districtViewTableData'  : 'revCircleViewTableData']?.table_data
+                  sidePaneData?.data[
+                    boundary === 'district'
+                      ? 'districtViewTableData'
+                      : 'revCircleViewTableData'
+                  ]?.table_data
                 }
               />
             )
           : sidePaneData.isFetched && (
               <SidebarDefaultLayout
                 chartData={
-                  sidePaneData?.data[boundary === 'district' ? 'districtViewTableData'  : 'revCircleViewTableData']?.table_data
+                  sidePaneData?.data[
+                    boundary === 'district'
+                      ? 'districtViewTableData'
+                      : 'revCircleViewTableData'
+                  ]?.table_data
                 }
               />
             )}
