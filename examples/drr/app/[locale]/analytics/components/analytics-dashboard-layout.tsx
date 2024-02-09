@@ -67,7 +67,7 @@ export function AnalyticsDashboardLayout({ children }: DashboardLayoutProps) {
     }
   );
 
-  const REVENUE_CIRCLE = null;
+  //const REVENUE_CIRCLE = null;
 
   return (
     <React.Fragment>
@@ -111,7 +111,7 @@ export function AnalyticsDashboardLayout({ children }: DashboardLayoutProps) {
         <main className={cn(styles.Main, 'px-4', 'py-6', 'h-[80vh]')}>
           {children}
         </main>
-        {REVENUE_CIRCLE
+        {region !== null && region.length > 0
           ? sidePaneData.isFetched && (
               <SidebarLayout
                 revenueData={
