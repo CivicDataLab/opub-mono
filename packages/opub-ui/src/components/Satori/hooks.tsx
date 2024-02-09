@@ -1,5 +1,5 @@
 import React from 'react';
-import { domToDataUrl, domToPng } from 'modern-screenshot';
+import { domToPng } from 'modern-screenshot';
 import satori from 'satori';
 
 import { toast } from '../Toast';
@@ -94,7 +94,11 @@ export const useScreenshot = () => {
     return doc.documentElement;
   }
 
-  async function copyToClipboard(url: string, toastMessage?: string) {
+  async function copyToClipboard(
+    url: string,
+    toastMessage?: string,
+    toastPosition?: 'bottom-right' | 'top-center'
+  ) {
     if (!('ClipboardItem' in window)) {
       console.error(
         "Your browser doesn't support copying images into the clipboard." +
@@ -111,6 +115,7 @@ export const useScreenshot = () => {
       navigator.clipboard.write([blob]);
       toastMessage &&
         toast(toastMessage, {
+          position: toastPosition || 'bottom-right',
           action: {
             label: 'cancel',
             onClick: () => {},

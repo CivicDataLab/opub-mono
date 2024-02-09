@@ -1,13 +1,10 @@
 import React from 'react';
-import { IconShare } from '@tabler/icons-react';
-import { Controlled as Zoom } from 'react-medium-image-zoom';
+import { useMediaQuery } from 'usehooks-ts';
 
 import { cn } from '../../utils';
-import { Button } from '../Button';
-import { Dialog } from '../Dialog';
-import { Divider } from '../Divider';
-import { Icon } from '../Icon';
 import { useScreenshot } from '../Satori';
+import { DesktopDialog } from './DesktopDialog';
+import { MobileDialog } from './MobileDialog';
 
 type Props = {
   image?: string;
@@ -59,9 +56,7 @@ const ShareDialog = React.forwardRef(
     }: Props,
     ref?: React.Ref<HTMLDivElement>
   ) => {
-    const [isOpen, setIsOpen] = React.useState(false);
-    const [lockDialog, setLockDialog] = React.useState(false);
-    const [zoom, setZoom] = React.useState(false);
+    const isDesktop = useMediaQuery('(min-width: 768px)');
 
     const { copyToClipboard, shareImage, apiSupport } = useScreenshot();
     const isSupported = apiSupport();
@@ -72,7 +67,11 @@ const ShareDialog = React.forwardRef(
           return {
             content: 'Copy Image',
             onAction: () => {
-              copyToClipboard(image as string, 'Image is copied to clipboard');
+              copyToClipboard(
+                image as string,
+                'Image is copied to clipboard',
+                isDesktop ? 'bottom-right' : 'top-center'
+              );
             },
           };
         }
@@ -88,90 +87,46 @@ const ShareDialog = React.forwardRef(
       })
       .filter(Boolean);
 
-    function handleOpen(e: boolean) {
-      setIsOpen(e);
-      if (onOpen && e) {
-        onOpen();
-      }
+    if (isDesktop) {
+      return (
+        <div ref={ref} className={cn(className)}>
+          <DesktopDialog
+            props={{
+              size,
+              image,
+              title,
+              alt,
+              loading,
+              onDownload,
+              shareActions,
+              children,
+              onOpen,
+              height: props?.height,
+              kind,
+              variant,
+            }}
+          />
+        </div>
+      );
     }
-
     return (
       <div ref={ref} className={cn(className)}>
-        <Dialog
-          open={isOpen}
-          onOpenChange={(e) => {
-            if (lockDialog) {
-              setZoom(false);
-              setLockDialog(false);
-            } else {
-              handleOpen(e);
-            }
+        <MobileDialog
+          props={{
+            size,
+            image,
+            title,
+            alt,
+            loading,
+            onDownload,
+            shareActions,
+            children,
+            onOpen,
+            height: props?.height,
+            kind,
+            variant,
           }}
-        >
-          <Dialog.Trigger>
-            <Button
-              icon={
-                <Icon
-                  source={IconShare}
-                  size={14}
-                  color={kind === 'primary' ? 'onBgDefault' : 'highlight'}
-                />
-              }
-              kind={kind}
-              variant={variant}
-              size={size}
-              onClick={() => setIsOpen(true)}
-            >
-              {children}
-            </Button>
-          </Dialog.Trigger>
-          <Dialog.Content title={title} className="z-max mt-[-20px]">
-            <Divider className="mb-2" />
-            {image && !loading ? (
-              <Zoom
-                zoomMargin={40}
-                isZoomed={zoom}
-                onZoomChange={(e) => {
-                  setZoom(e);
-                  setLockDialog(e);
-                }}
-                classDialog="[&_img]:select-none"
-              >
-                <img
-                  src={image}
-                  alt={alt}
-                  width={768}
-                  height={props?.height || 384}
-                  {...props}
-                  className="h-full w-full  overflow-auto object-contain"
-                />
-              </Zoom>
-            ) : (
-              <div
-                style={{
-                  height: props?.height || 384,
-                }}
-                className={`flex w-full items-center justify-center`}
-              >
-                Loading Image...
-              </div>
-            )}
-            <div className="mt-4 flex flex-wrap items-center justify-end gap-2">
-              <Button size="slim" kind="secondary" disabled>
-                Embed
-              </Button>
-              <Button
-                onClick={onDownload}
-                size="slim"
-                connectedDisclosure={{
-                  actions: shareActions,
-                }}
-              >
-                Download
-              </Button>
-            </div>
-          </Dialog.Content>
-        </Dialog>
+        />
       </div>
     );
   }
