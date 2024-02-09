@@ -4,6 +4,7 @@ import React from 'react';
 import { EChartsOption } from 'echarts-for-react';
 import { ShareDialog, useScreenshot } from 'opub-ui';
 import { BarChart } from 'opub-ui/viz';
+import { useMediaQuery } from 'usehooks-ts';
 
 import { navigateEnd } from '@/lib/navigation';
 
@@ -57,9 +58,10 @@ const Chart = ({
   };
 }) => {
   const [svgURL, setSvgURL] = React.useState<string>('');
-
   const base64SvgBar = btoa(svg);
   const dataUrlBar = `data:image/svg+xml;base64,${base64SvgBar}`;
+
+  const isDesktop = useMediaQuery('(min-width: 768px)');
 
   const { createSvg, svgToPngURL, downloadFile } = useScreenshot();
   const handleClick = async () => {
@@ -87,7 +89,7 @@ const Chart = ({
         alt="SVG"
         title="Share"
         props={{
-          height: 285,
+          height: isDesktop ? 285 : 175,
         }}
         onOpen={handleClick}
         onDownload={() => downloadFile(svgURL, 'Chart', () => navigateEnd())}

@@ -50,14 +50,11 @@ export const MobileDialog = ({
   const {
     size,
     image,
-    title,
     alt,
     loading,
     onDownload,
     shareActions,
-    children,
     onOpen,
-    height,
     kind,
     variant,
   } = props;
@@ -154,7 +151,7 @@ export const MobileDialog = ({
               alt={alt}
               width={768}
               height={props?.height || 384}
-              className="h-full max-h-[50svh] w-full overflow-auto object-contain"
+              className="max-h-[50svh] w-full overflow-auto object-contain"
             />
           ) : (
             <div
@@ -162,7 +159,7 @@ export const MobileDialog = ({
                 height: props?.height || 384,
                 maxHeight: '50svh',
               }}
-              className={`flex  w-full items-center justify-center`}
+              className={`flex w-full items-center justify-center`}
             >
               Loading Image...
             </div>
