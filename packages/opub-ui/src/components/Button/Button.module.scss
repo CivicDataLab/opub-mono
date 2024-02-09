@@ -140,14 +140,16 @@
   );
   --button-slim-vertical-padding: calc(
     (
-        var(--button-slim-min-height) - var(--font-line-height-2) -
-          var(--space-05)
+        var(--button-slim-min-height) - var(--font-line-height-2) - var(
+            --space-05
+          )
       ) / 2
   );
   --button-large-vertical-padding: calc(
     (
-        var(--button-large-min-height) - var(--font-line-height-2) -
-          var(--space-05)
+        var(--button-large-min-height) - var(--font-line-height-2) - var(
+            --space-05
+          )
       ) / 2
   );
   --button-spinner-size: 20px;
@@ -245,10 +247,6 @@
 
 .Icon {
   line-height: 0;
-
-  &:last-child {
-    margin-right: -2px;
-  }
 
   .fullWidth.textAlignLeft &:last-child:not(:only-child) {
     margin-left: auto;
