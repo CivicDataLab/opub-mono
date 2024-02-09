@@ -5,11 +5,10 @@ import { type TypedDocumentNode } from '@graphql-typed-document-node/core';
 import { useQuery } from '@tanstack/react-query';
 import {
   parseAsArrayOf,
-  parseAsInteger,
   parseAsString,
   useQueryState,
 } from 'next-usequerystate';
-import { Select, Text } from 'opub-ui';
+import { Checkbox, Select, Text } from 'opub-ui';
 import MultiSelect from 'react-select';
 
 import {
@@ -36,6 +35,8 @@ export function Content({
     'region',
     parseAsArrayOf(parseAsString)
   );
+
+  const [isChecked, setChecked] = React.useState(false);
 
   const geographyMap: any = {
     'revenue-circle': 'REVENUE CIRCLE',
@@ -94,6 +95,14 @@ export function Content({
     region?.includes(option.value)
   );
 
+  const handleCheckboxChange = () => {
+    setChecked(!isChecked);
+
+    if (!isChecked) {
+      setRegion([]);
+    }
+  };
+
   return (
     <React.Fragment>
       <div className="mb-4 flex items-center justify-between gap-4">
@@ -117,9 +126,16 @@ export function Content({
           ]}
         />
         <div className="flex flex-col gap-2">
-          <label>
+          <div className="flex items-center justify-between">
             <Text>Select one or more Region</Text>
-          </label>
+            <Checkbox
+              name="All Regions"
+              checked={isChecked}
+              onChange={handleCheckboxChange}
+            >
+              All Regions
+            </Checkbox>
+          </div>
           <MultiSelect
             className="z-max w-[450px]"
             name="select-1"
