@@ -9,7 +9,7 @@ import { type TypedDocumentNode } from '@graphql-typed-document-node/core';
 import { useQuery } from '@tanstack/react-query';
 
 import {
-  ANALYTICS_DISTRICT_TABLE_DATA,
+  ANALYTICS_DISTRICT_DATA,
   ANALYTICS_FACTORS,
   ANALYTICS_REVENUE_TABLE_DATA,
 } from '@/config/graphql/analaytics-queries';
@@ -39,7 +39,7 @@ export function AnalyticsDashboardLayout({ children }: DashboardLayoutProps) {
 
   const sidePaneQuery: TypedDocumentNode<any, any> =
     boundary === 'district'
-      ? ANALYTICS_DISTRICT_TABLE_DATA
+      ? ANALYTICS_DISTRICT_DATA
       : ANALYTICS_REVENUE_TABLE_DATA;
 
   const sidePaneData = useQuery(
@@ -117,7 +117,7 @@ export function AnalyticsDashboardLayout({ children }: DashboardLayoutProps) {
                 revenueData={
                   sidePaneData?.data[
                     boundary === 'district'
-                      ? 'districtViewTableData'
+                      ? 'districtViewData'
                       : 'revCircleViewTableData'
                   ]?.table_data
                 }
@@ -128,7 +128,7 @@ export function AnalyticsDashboardLayout({ children }: DashboardLayoutProps) {
                 chartData={
                   sidePaneData?.data[
                     boundary === 'district'
-                      ? 'districtViewTableData'
+                      ? 'districtViewData'
                       : 'revCircleViewTableData'
                   ]?.table_data
                 }

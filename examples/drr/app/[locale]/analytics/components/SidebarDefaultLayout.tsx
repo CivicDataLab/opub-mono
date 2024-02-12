@@ -10,7 +10,7 @@ import { Icons } from '@/components/icons';
 
 export function SidebarDefaultLayout({ chartData }: any) {
   const searchParams = useSearchParams();
-  const indicator = searchParams.get('indicator') || 'composite-score';
+  const indicator = searchParams.get('indicator') || 'risk-score';
   const boundary = searchParams.get('boundary') || 'district';
 
   const formattedIndicator = indicator && deSlugify(indicator).toUpperCase();

@@ -14,13 +14,13 @@ export const ANALYTICS_REVENUE_TABLE_DATA = graphql(`
   }
 `);
 
-export const ANALYTICS_DISTRICT_TABLE_DATA = graphql(`
-  query districtViewTableData(
+export const ANALYTICS_DISTRICT_DATA = graphql(`
+  query districtViewData(
     $indcFilter: IndicatorFilter!
     $dataFilter: DataFilter!
     $geoFilter: GeoFilter
   ) {
-    districtViewTableData(
+    districtViewData(
       indcFilter: $indcFilter
       dataFilter: $dataFilter
       geoFilter: $geoFilter

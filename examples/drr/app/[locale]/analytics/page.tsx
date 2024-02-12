@@ -3,7 +3,7 @@ import { type TypedDocumentNode } from '@graphql-typed-document-node/core';
 import { dehydrate, Hydrate } from '@tanstack/react-query';
 
 import {
-  ANALYTICS_DISTRICT_TABLE_DATA,
+  ANALYTICS_DISTRICT_DATA,
   ANALYTICS_FACTORS,
   ANALYTICS_REVENUE_TABLE_DATA,
   ANALYTICS_TIME_PERIODS,
@@ -20,7 +20,7 @@ export default async function Home({
 
   const sidePaneQuery: TypedDocumentNode<any, any> =
     searchParams.boundary === 'district'
-      ? ANALYTICS_DISTRICT_TABLE_DATA
+      ? ANALYTICS_DISTRICT_DATA
       : ANALYTICS_REVENUE_TABLE_DATA;
 
   await queryClient.prefetchQuery(
