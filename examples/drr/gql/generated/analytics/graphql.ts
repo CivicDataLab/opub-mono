@@ -72,7 +72,7 @@ export type QueryDistrictMapDataArgs = {
   data: Array<Data>;
   districtMapData: Scalars['JSON'];
   districtViewChartData: Scalars['JSON'];
-  districtViewTableData: Scalars['JSON'];
+  districtViewData: Scalars['JSON'];
   geography: Array<Geography>;
   getDataTimePeriods: Array<CustomDataPeriodList>;
   getDistrictRevCircle: Scalars['JSON'];
@@ -103,10 +103,14 @@ export type QueryDistrictViewChartDataArgs = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 export type QueryDistrictViewDataArgs = {
 =======
 export type QueryDistrictViewTableDataArgs = {
 >>>>>>> 9a5eed3f (add district default boundary)
+=======
+export type QueryDistrictViewDataArgs = {
+>>>>>>> 60249c4c (right pane with one district)
   dataFilter: DataFilter;
   geoFilter?: InputMaybe<GeoFilter>;
   indcFilter: IndicatorFilter;
@@ -221,20 +225,24 @@ export type RevenueCircleTableQuery = {
 >>>>>>> 9a5eed3f (add district default boundary)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 export type DistrictViewDataQuery = {
   __typename?: 'Query';
   districtViewData: any;
 };
 =======
 export type DistrictViewTableDataQueryVariables = Exact<{
+=======
+export type DistrictViewDataQueryVariables = Exact<{
+>>>>>>> 60249c4c (right pane with one district)
   indcFilter: IndicatorFilter;
   dataFilter: DataFilter;
   geoFilter?: InputMaybe<GeoFilter>;
 }>;
 
-export type DistrictViewTableDataQuery = {
+export type DistrictViewDataQuery = {
   __typename?: 'Query';
-  districtViewTableData: any;
+  districtViewData: any;
 };
 
 export type IndicatorsQueryVariables = Exact<{ [key: string]: never }>;
@@ -1129,13 +1137,13 @@ export const RevenueCircleTableDocument = {
   RevenueCircleTableQuery,
   RevenueCircleTableQueryVariables
 >;
-export const DistrictViewTableDataDocument = {
+export const DistrictViewDataDocument = {
   kind: 'Document',
   definitions: [
     {
       kind: 'OperationDefinition',
       operation: 'query',
-      name: { kind: 'Name', value: 'districtViewTableData' },
+      name: { kind: 'Name', value: 'districtViewData' },
       variableDefinitions: [
         {
           kind: 'VariableDefinition',
@@ -1182,7 +1190,7 @@ export const DistrictViewTableDataDocument = {
         selections: [
           {
             kind: 'Field',
-            name: { kind: 'Name', value: 'districtViewTableData' },
+            name: { kind: 'Name', value: 'districtViewData' },
             arguments: [
               {
                 kind: 'Argument',
@@ -1215,8 +1223,8 @@ export const DistrictViewTableDataDocument = {
     },
   ],
 } as unknown as DocumentNode<
-  DistrictViewTableDataQuery,
-  DistrictViewTableDataQueryVariables
+  DistrictViewDataQuery,
+  DistrictViewDataQueryVariables
 >;
 export const IndicatorsDocument = {
   kind: 'Document',
