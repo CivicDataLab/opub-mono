@@ -34,12 +34,6 @@ export const MapComponent = ({
         colorString = '#dbeaee';
         break;
       case 4:
-        colorString = '#fee090';
-        break;
-      case 5:
-        colorString = '#fc8d59';
-        break;
-      case 6:
         colorString = '#d73027';
         break;
       default:
@@ -51,16 +45,8 @@ export const MapComponent = ({
 
   const legendData = [
     {
-      label: '6 High Risk',
+      label: '4 High Risk',
       color: '#d73027',
-    },
-    {
-      label: '5',
-      color: '#fc8d59',
-    },
-    {
-      label: '4',
-      color: '#fee090',
     },
     {
       label: '3',

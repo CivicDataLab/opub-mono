@@ -64,7 +64,7 @@ export const mainConfig: MainConfig = {
   mainNav: [
     {
       title: 'Analytics',
-      href: `/analytics/?indicator=composite-score&time-period=2023_08&boundary=district`,
+      href: `/analytics/?indicator=risk-score&time-period=2023_08&boundary=district`,
     },
     {
       title: 'Datasets',

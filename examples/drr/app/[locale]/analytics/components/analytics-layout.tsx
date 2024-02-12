@@ -3,8 +3,12 @@
 import React from 'react';
 import { type TypedDocumentNode } from '@graphql-typed-document-node/core';
 import { useQuery } from '@tanstack/react-query';
-import { parseAsString, useQueryState } from 'next-usequerystate';
-import { Select, Text } from 'opub-ui';
+import {
+  parseAsArrayOf,
+  parseAsString,
+  useQueryState,
+} from 'next-usequerystate';
+import { Checkbox, Select, Text } from 'opub-ui';
 import MultiSelect from 'react-select';
 
 import {
@@ -22,11 +26,17 @@ export function Content({
   timePeriod: string;
   indicator: string;
 }) {
-  const [region, setRegion] = React.useState<any>([]);
   const [boundary, setBoundary] = useQueryState(
     'boundary',
     parseAsString.withDefault('district')
   );
+
+  const [region, setRegion] = useQueryState(
+    'region',
+    parseAsArrayOf(parseAsString)
+  );
+
+  const [isChecked, setChecked] = React.useState(false);
 
   const geographyMap: any = {
     'revenue-circle': 'REVENUE CIRCLE',
@@ -65,7 +75,12 @@ export function Content({
     }
   );
 
-  const DropdownOptions: { label: string; value: string }[] = [];
+  type DropdownOption = {
+    label: string;
+    value: string;
+  };
+
+  const DropdownOptions: DropdownOption[] = [];
 
   if (geographiesData) {
     geographiesData.data?.geography.forEach((geography) => {
@@ -75,6 +90,18 @@ export function Content({
       });
     });
   }
+
+  const filteredOptions: DropdownOption[] = DropdownOptions?.filter((option) =>
+    region?.includes(option.value)
+  );
+
+  const handleCheckboxChange = () => {
+    setChecked(!isChecked);
+
+    if (!isChecked) {
+      setRegion([]);
+    }
+  };
 
   return (
     <React.Fragment>
@@ -99,22 +126,34 @@ export function Content({
           ]}
         />
         <div className="flex flex-col gap-2">
-          <label>
+          <div className="flex items-center justify-between">
             <Text>Select one or more Region</Text>
-          </label>
+            <Checkbox
+              name="All Regions"
+              checked={isChecked}
+              onChange={handleCheckboxChange}
+            >
+              All Regions
+            </Checkbox>
+          </div>
           <MultiSelect
             className="z-max w-[450px]"
             name="select-1"
             isMulti
-            value={region}
-            onChange={setRegion}
+            value={filteredOptions}
+            onChange={(selectedOptions) => {
+              const selectedValues = selectedOptions.map(
+                (option) => option.value
+              );
+              setRegion(selectedValues, { shallow: false });
+            }}
             options={DropdownOptions}
           />
         </div>
       </div>
       <MapComponent
         indicator={indicator}
-        regions={region}
+        regions={filteredOptions}
         mapDataloading={mapData?.isFetching}
         mapData={
           boundary === 'district'
