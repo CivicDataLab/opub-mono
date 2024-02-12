@@ -37,7 +37,7 @@ export function AnalyticsDashboardLayout({ children }: DashboardLayoutProps) {
   const region = searchParams.get('region');
   const boundary = searchParams.get('boundary') || 'district';
 
-  const sidePaneQuery: TypedDocumentNode<any, any> =
+  const sidePaneQuery: any =
     boundary === 'district'
       ? ANALYTICS_DISTRICT_DATA
       : ANALYTICS_REVENUE_TABLE_DATA;
