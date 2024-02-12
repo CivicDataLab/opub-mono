@@ -42,7 +42,7 @@ export function AnalyticsDashboardLayout({ children }: DashboardLayoutProps) {
       ? ANALYTICS_DISTRICT_DATA
       : ANALYTICS_REVENUE_TABLE_DATA;
 
-  const sidePaneData = useQuery(
+  const sidePaneData: any = useQuery(
     [`sidePaneData_${indicator}_${region}_${boundary}`],
     () =>
       GraphQL('analytics', sidePaneQuery, {
