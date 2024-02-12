@@ -73,7 +73,7 @@ export function AnalyticsDashboardLayout({ children }: DashboardLayoutProps) {
     <React.Fragment>
       <div
         className={cn(
-          'relative max-h-full min-h-[calc(100%_-_48px)] grow gap-1 overflow-y-hidden md:flex'
+          'relative max-h-full min-h-[calc(100%_-_48px)] grow gap-1 md:flex'
         )}
       >
         <div className="absolute left-6 top-1/3 z-10 flex flex-col gap-3">
