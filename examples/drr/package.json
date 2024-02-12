@@ -44,7 +44,7 @@
     "@graphql-codegen/typescript": "^3.0.4",
     "@graphql-codegen/typescript-graphql-request": "^4.5.9",
     "@graphql-codegen/typescript-operations": "^3.0.4",
-    "@ianvs/prettier-plugin-sort-imports": "^3.7.2",
+    "@ianvs/prettier-plugin-sort-imports": "^4.1.1",
     "@types/dom-to-image": "^2.6.5",
     "autoprefixer": "^10.4.14",
     "color2k": "^2.0.2",
