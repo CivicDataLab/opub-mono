@@ -1,76 +1,86 @@
 'use client';
 
 import React from 'react';
-import { Divider, Icon, ProgressBar, Text } from 'opub-ui';
+import { useSearchParams } from 'next/navigation';
+import Hazard from '@/public/Hazard';
+import MinusSvg from '@/public/MinusSvg';
+import PlusSvg from '@/public/PlugSvg';
+import { Button, Divider, Icon, ProgressBar, Text } from 'opub-ui';
 
-import { cn } from '@/lib/utils';
+import { cn, deSlugify } from '@/lib/utils';
 import { Icons } from '@/components/icons';
+import styles from './styles.module.scss';
 
 interface IndicatorProps {
   title: string;
   value: number;
-  icon: any;
 }
 
 export function SidebarLayout({ revenueData }: any) {
-  const transformData = (data: any) => {
-    return [
-      {
-        title: 'Risk Score',
-        value: data[0]['composite-score'],
-        icon: Icons.info,
-      },
-      {
-        title: 'Hazard',
-        value: data[0]['flood-hazard'],
-        icon: Icons.link,
-      },
-      {
-        title: 'Exposure',
-        value: data[0]['exposure'],
-        icon: Icons.overview,
-      },
-      {
-        title: 'Vulnerability',
-        value: data[0]['vulnerability'],
-        icon: Icons.info,
-      },
-    ];
-  };
+  const searchParams = useSearchParams();
+  const indicator = searchParams.get('indicator') || 'risk-score';
 
-  const transformedData = transformData(revenueData);
-  const REVENUE_CIRCLE = 'CHARIDUAR'
-  const DISTRICT = 'SONITPUR'
+  const [open, setOpen] = React.useState(false);
+
+  const districtData = revenueData.filter((item: any) =>
+    Object.hasOwnProperty.call(item, 'district')
+  );
+  const revenueCircleData = revenueData.filter((item: any) =>
+    Object.hasOwnProperty.call(item, 'revenue circle')
+  );
 
   return (
     <aside
       className={cn(
         'p-4',
         'overflow-hidden bg-surfaceDefault shadow-basicMd',
-        'hidden z-1 shadow-inset basis-[500px] shrink-0 md:block',
+        'shadow-inset z-1 hidden shrink-0 basis-[500px] md:block',
         'border-r-1 border-solid border-borderSubdued'
       )}
     >
-      <Text variant="headingMd" fontWeight="bold">
-        DATA INSIGHTS
-      </Text>
-      <Divider className="mt-2" />
-      <div className=" flex flex-col mt-5">
-        <Text fontWeight="bold" variant="headingLg">
-          {REVENUE_CIRCLE} Revenue Circle
+      <header className="mb-5 mt-4 flex items-center justify-between">
+        <Text variant="heading2xl" fontWeight="regular">
+          Data Insights
         </Text>
-        <Text variant="headingMd">{DISTRICT} District</Text>
+        <Button variant="success" kind="secondary">
+          Download Report
+        </Button>
+      </header>
+      <Divider className="mt-2" />
+      <section className=" mt-5 flex flex-col">
+        <Text variant="heading2xl" fontWeight="regular">
+          {districtData[0]?.district.toUpperCase()} District
+        </Text>
+      </section>
+      <div className="mt-3 flex items-center gap-2">
+        <Hazard />
+        {deSlugify(indicator)}
       </div>
-
-      {transformedData.map((obj, index) => {
-        return <Indicators key={`indicator_${index}`} data={obj} />;
-      })}
+      <section className="mt-7">
+        <Text variant="bodyLg" fontWeight="bold">
+          DISTRICT SCORE
+        </Text>
+        <div className="mb-2 mt-2">
+          <Text variant="headingLg" fontWeight="regular">
+            {districtData[0]?.district}
+          </Text>
+        </div>
+        <div className="flex items-center ">
+          <div className=" mr-3 basis-2/4">
+            <ProgressBar
+              size="small"
+              color="critical"
+              value={(districtData[0]?.[indicator] / 6) * 100}
+            />
+          </div>
+          <Text variant="heading2xl">{districtData[0]?.[indicator]}</Text>/6
+        </div>
+      </section>
     </aside>
   );
 }
 
 export const Indicators = ({ data }: { data: IndicatorProps }) => {
-
   function getRiskLevel(value: number) {
     switch (value) {
       case 1:
@@ -89,8 +99,8 @@ export const Indicators = ({ data }: { data: IndicatorProps }) => {
 
   return (
     <div>
-      <div className="flex items-center mt-5 mb-2">
-        <Icon source={data.icon} color="default" size={6} />
+      <div className="mb-2 mt-5 flex items-center">
+        <Hazard />
         <Text fontWeight="bold" variant="headingMd" className=" pl-2">
           {data.title}
         </Text>
@@ -98,7 +108,7 @@ export const Indicators = ({ data }: { data: IndicatorProps }) => {
       <Text fontWeight="regular" variant="headingSm">
         This region carries damage due to flood related disasters
       </Text>
-      <div className="flex gap-4 mt-4 mb-3">
+      <div className="mb-3 mt-4 flex gap-4">
         <div className=" basis-2/3">
           <ProgressBar
             value={(data.value / 6) * 100}
