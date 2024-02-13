@@ -24,12 +24,6 @@ interface DashboardLayoutProps {
 }
 
 export function AnalyticsDashboardLayout({ children }: DashboardLayoutProps) {
-  if (typeof document !== 'undefined') {
-    setTimeout(() => {
-      document.body.style.cssText = 'overflow: hidden;';
-    }, 1000);
-  }
-
   const searchParams = useSearchParams();
 
   const indicator = searchParams.get('indicator');

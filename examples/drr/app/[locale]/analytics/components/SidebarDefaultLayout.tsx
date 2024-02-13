@@ -6,7 +6,6 @@ import Hazard from '@/public/Hazard';
 import { Button, Divider, Icon, ProgressBar, Text } from 'opub-ui';
 
 import { cn, deSlugify } from '@/lib/utils';
-import { Icons } from '@/components/icons';
 
 export function SidebarDefaultLayout({ chartData }: any) {
   const searchParams = useSearchParams();

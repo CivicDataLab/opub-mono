@@ -42,4 +42,8 @@
   justify-content: center;
   background-color: white;
   border: none !important;
+
+  &[data-state='open'] > .AccordionChevron {
+    transform: rotate(180deg);
+  }
 }
