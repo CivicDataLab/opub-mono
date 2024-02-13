@@ -5,6 +5,7 @@ import { useSearchParams } from 'next/navigation';
 import Hazard from '@/public/Hazard';
 import MinusSvg from '@/public/MinusSvg';
 import PlusSvg from '@/public/PlugSvg';
+import * as Accordion from '@radix-ui/react-accordion';
 import { Button, Divider, Icon, ProgressBar, Text } from 'opub-ui';
 
 import { cn, deSlugify } from '@/lib/utils';
@@ -75,6 +76,61 @@ export function SidebarLayout({ revenueData }: any) {
           </div>
           <Text variant="heading2xl">{districtData[0]?.[indicator]}</Text>/6
         </div>
+      </section>
+      <section className="mt-7">
+        <Text variant="bodyLg" fontWeight="bold">
+          REVENUE CIRCLE SCORE
+        </Text>
+        <Accordion.Root className="AccordionRoot" type="single" collapsible>
+          {revenueCircleData.map((item: any, index: string) => {
+            return (
+              <Accordion.Item
+                key={`revenue-circle-${index}`}
+                value={`revenue-circle-${index}`}
+              >
+                <div className="mb-2 mt-2">
+                  <Text variant="headingLg" fontWeight="regular">
+                    {item?.['revenue circle']}
+                  </Text>
+                </div>
+                <div className="flex items-center">
+                  <div className=" mr-3 basis-2/4">
+                    <ProgressBar
+                      size="small"
+                      color="critical"
+                      value={(item?.[indicator] / 6) * 100}
+                    />
+                  </div>
+                  <Text variant="heading2xl">{item?.[indicator]}</Text>
+                  /6
+                  <Accordion.Trigger
+                    className={cn(styles.AccordionItem, 'ml-auto')}
+                  >
+                    <PlusSvg />
+                  </Accordion.Trigger>
+                </div>
+                <Accordion.Content className="px-3 pb-4 md:px-6">
+                  <div className="mt-2">
+                    Flood Hazard Score :
+                    <strong className="pl-2">{item?.['flood-hazard']}/6</strong>
+                  </div>
+                  <div className="mt-2">
+                    Vulnerability Score :
+                    <strong className="pl-2">
+                      {item?.['vulnerability']}/6
+                    </strong>
+                  </div>
+                  <div className="mt-2">
+                    Government Response Score :
+                    <strong className="pl-2">
+                      {item?.['government-response']}/6
+                    </strong>
+                  </div>
+                </Accordion.Content>
+              </Accordion.Item>
+            );
+          })}
+        </Accordion.Root>
       </section>
     </aside>
   );
