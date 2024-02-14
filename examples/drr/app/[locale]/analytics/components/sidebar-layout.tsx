@@ -1,24 +1,18 @@
 'use client';
 
 import React from 'react';
-import { useSearchParams } from 'next/navigation';
 import Hazard from '@/public/Hazard';
 import { Button, Divider, Icon, ProgressBar, Text } from 'opub-ui';
 
 import { cn, deSlugify } from '@/lib/utils';
-import { Icons } from '@/components/icons';
 import { RevenueCircle } from './revenue-circle-accordion';
-import styles from './styles.module.scss';
 
 interface IndicatorProps {
   title: string;
   value: number;
 }
 
-export function SidebarLayout({ data }: any) {
-  const searchParams = useSearchParams();
-  const indicator = searchParams.get('indicator') || 'risk-score';
-  const boundary: string = searchParams.get('boundary') || 'district';
+export function SidebarLayout({ data , indicator , boundary }: any) {
 
   const districtData = data.filter((item: any) =>
     Object.hasOwnProperty.call(item, 'district')

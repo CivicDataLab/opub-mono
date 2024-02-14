@@ -1,16 +1,12 @@
 'use client';
 
 import React from 'react';
-import { useSearchParams } from 'next/navigation';
 import Hazard from '@/public/Hazard';
 import { Button, Divider, Icon, ProgressBar, Text } from 'opub-ui';
 
 import { cn, deSlugify } from '@/lib/utils';
 
-export function SidebarDefaultLayout({ chartData }: any) {
-  const searchParams = useSearchParams();
-  const indicator = searchParams.get('indicator') || 'risk-score';
-  const boundary = searchParams.get('boundary') || 'district';
+export function SidebarDefaultLayout({ chartData , indicator , boundary }: any) {
 
   const formattedIndicator = indicator && deSlugify(indicator).toUpperCase();
 
