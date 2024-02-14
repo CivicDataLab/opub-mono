@@ -15,16 +15,29 @@ interface IndicatorProps {
   value: number;
 }
 
-export function SidebarLayout({ revenueData }: any) {
+export function SidebarLayout({ data }: any) {
   const searchParams = useSearchParams();
   const indicator = searchParams.get('indicator') || 'risk-score';
+  const boundary: string = searchParams.get('boundary') || 'district';
 
-  const districtData = revenueData.filter((item: any) =>
+  const districtData = data.filter((item: any) =>
     Object.hasOwnProperty.call(item, 'district')
   );
-  const revenueCircleData = revenueData.filter((item: any) =>
+  // To filter out revenue circles from the district data boundary
+  const revenueCircleData = data.filter((item: any) =>
     Object.hasOwnProperty.call(item, 'revenue circle')
   );
+
+  const GeographyMap: { [key: string]: string } = {
+    district: 'District',
+    'revenue-circle': 'Revenue Circle',
+  };
+
+  const DataBasedOnBoundary = boundary === 'district' ? districtData : data;
+  const RegionName =
+    boundary === 'district'
+      ? districtData[0]?.district
+      : data[0]?.['revenue-circle'];
 
   return (
     <aside
@@ -44,39 +57,50 @@ export function SidebarLayout({ revenueData }: any) {
         </Button>
       </header>
       <Divider className="mt-2" />
-      <div className=" mt-5 flex flex-col">
-        <Text variant="heading2xl" fontWeight="regular">
-          {districtData[0]?.district.toUpperCase()} District
-        </Text>
-      </div>
+      {data.length === 1 ||
+        (districtData.length === 1 && (
+          <div className=" mt-5 flex flex-col">
+            <Text variant="heading2xl" fontWeight="regular">
+              {RegionName} {GeographyMap[boundary]}
+            </Text>
+          </div>
+        ))}
       <div className="mt-3 flex items-center gap-2">
         <Hazard />
         {deSlugify(indicator)}
       </div>
       <section className="mt-7">
-        <Text variant="bodyLg" fontWeight="bold">
-          DISTRICT SCORE
-        </Text>
-        <div className="mb-2 mt-2">
-          <Text variant="headingLg" fontWeight="regular">
-            {districtData[0]?.district}
+        {boundary === 'district' && (
+          <Text variant="bodyLg" fontWeight="bold">
+            DISTRICT SCORE
           </Text>
-        </div>
-        <div className="flex items-center ">
-          <div className=" mr-3 basis-2/4">
-            <ProgressBar
-              size="small"
-              color="critical"
-              value={(districtData[0]?.[indicator] / 6) * 100}
-            />
+        )}
+        {DataBasedOnBoundary.map((data: any) => (
+          <div>
+            <div className="mb-2 mt-2">
+              <Text variant="headingLg" fontWeight="regular">
+                {data[boundary]}
+              </Text>
+            </div>
+            <div className="flex items-center ">
+              <div className=" mr-3 basis-2/4">
+                <ProgressBar
+                  size="small"
+                  color="critical"
+                  value={(data[indicator] / 6) * 100}
+                />
+              </div>
+              <Text variant="heading2xl">{data?.[indicator]}</Text>/6
+            </div>
           </div>
-          <Text variant="heading2xl">{districtData[0]?.[indicator]}</Text>/6
-        </div>
+        ))}
       </section>
-      <RevenueCircle
-        revenueCircleData={revenueCircleData}
-        indicator={indicator}
-      />
+      {districtData.length === 1 && (
+        <RevenueCircle
+          revenueCircleData={revenueCircleData}
+          indicator={indicator}
+        />
+      )}
     </aside>
   );
 }

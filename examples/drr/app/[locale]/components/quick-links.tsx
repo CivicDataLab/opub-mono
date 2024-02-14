@@ -7,7 +7,7 @@ const content = [
   {
     district: 'Analytics Dashboard',
     scheme: 'Explore data model insight for all districts and revenue circles',
-    link: `/analytics/?indicator=composite-score&time-period=2023_08&boundary=district`,
+    link: `/analytics/?indicator=risk-score&time-period=2023_08&boundary=district`,
   },
   {
     district: 'Dataset Explorer',
@@ -24,7 +24,7 @@ const content = [
 
 export const QuickLinks = () => {
   return (
-    <section className="mt-6 w-[1860px] items-start md:mt-10">
+    <section className="mt-6 p-4 items-start md:mt-10">
       <Text variant="headingLg" fontWeight="semibold" color="subdued">
         Quick Links
       </Text>

@@ -5,8 +5,8 @@ import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import InfoCircle from '@/public/InfoCircle';
 import Vulnerability from '@/public/Vulnerability';
-import { type TypedDocumentNode } from '@graphql-typed-document-node/core';
 import { useQuery } from '@tanstack/react-query';
+import { Spinner, Text } from 'opub-ui';
 
 import {
   ANALYTICS_DISTRICT_DATA,
@@ -27,7 +27,7 @@ export function AnalyticsDashboardLayout({ children }: DashboardLayoutProps) {
   const searchParams = useSearchParams();
 
   const indicator = searchParams.get('indicator');
-  const time_period = searchParams.get('time-period');
+  const time_period = searchParams.get('time-period') || '2023_08';
   const region = searchParams.get('region');
   const boundary = searchParams.get('boundary') || 'district';
 
@@ -37,12 +37,14 @@ export function AnalyticsDashboardLayout({ children }: DashboardLayoutProps) {
       : ANALYTICS_REVENUE_TABLE_DATA;
 
   const sidePaneData: any = useQuery(
-    [`sidePaneData_${indicator}_${region}_${boundary}`],
+    [
+      `sidePaneData_${indicator}_${region?.split(',')}_${boundary}_${time_period}`,
+    ],
     () =>
       GraphQL('analytics', sidePaneQuery, {
         indcFilter: { slug: indicator },
         dataFilter: { dataPeriod: time_period },
-        ...(region && { geoFilter: { code: [region] } }),
+        ...(region && { geoFilter: { code: region?.split(',') } }),
       }),
     {
       refetchOnMount: false,
@@ -50,6 +52,10 @@ export function AnalyticsDashboardLayout({ children }: DashboardLayoutProps) {
       refetchOnReconnect: false,
     }
   );
+
+  React.useEffect(() => {
+    sidePaneData.refetch();
+  }, [region?.split(','), time_period]);
 
   const factorData = useQuery(
     [`factorScores`],
@@ -61,13 +67,11 @@ export function AnalyticsDashboardLayout({ children }: DashboardLayoutProps) {
     }
   );
 
-  //const REVENUE_CIRCLE = null;
-
   return (
     <React.Fragment>
       <div
         className={cn(
-          'relative max-h-full min-h-[calc(100%_-_48px)] grow gap-1 overflow-y-hidden md:flex'
+          'relative max-h-full min-h-[calc(100vh_-_48px)] grow gap-1 overflow-y-hidden md:flex'
         )}
       >
         <div className="absolute left-6 top-1/3 z-10 flex flex-col gap-3">
@@ -105,10 +109,16 @@ export function AnalyticsDashboardLayout({ children }: DashboardLayoutProps) {
         <main className={cn(styles.Main, 'px-4', 'py-6', 'h-[80vh]')}>
           {children}
         </main>
+        {!sidePaneData.isFetched && (
+          <div className="grid  basis-[500px] place-content-center border-solid border-borderSubdued bg-surfaceDefault shadow-basicMd">
+            <Spinner color="highlight" />
+            <Text>Loading...</Text>
+          </div>
+        )}
         {region !== null && region.length > 0
           ? sidePaneData.isFetched && (
               <SidebarLayout
-                revenueData={
+                data={
                   sidePaneData?.data[
                     boundary === 'district'
                       ? 'districtViewData'

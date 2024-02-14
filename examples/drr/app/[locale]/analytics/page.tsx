@@ -23,20 +23,6 @@ export default async function Home({
       ? ANALYTICS_DISTRICT_DATA
       : ANALYTICS_REVENUE_TABLE_DATA;
 
-  await queryClient.prefetchQuery(
-    [
-      `sidePaneData_${searchParams?.indicator}_${searchParams?.region}_${searchParams?.boundary}`,
-    ],
-    () =>
-      GraphQL('analytics', sidePaneQuery, {
-        indcFilter: { slug: searchParams?.indicator },
-        dataFilter: { dataPeriod: searchParams['time-period'] },
-        ...(searchParams?.region && {
-          geoFilter: { code: [searchParams?.region] },
-        }),
-      })
-  );
-
   await queryClient.prefetchQuery([`timePeriods`], () =>
     GraphQL('analytics', ANALYTICS_TIME_PERIODS)
   );

@@ -5,13 +5,27 @@ export function cn(...inputs: ClassNameValue[]) {
   return twMerge(inputs);
 }
 
-export function formatDate(input: string | number): string {
+export function formatDate(
+  input: string | number,
+  isHyphenated = false
+): string {
   const date = new Date(input);
-  return date.toLocaleDateString('en-US', {
-    month: 'long',
-    day: 'numeric',
-    year: 'numeric',
-  });
+  // If hyphendated it would return date in this format - 2023-01-01 else in April 1, 2021
+  return isHyphenated
+    ? new Date(
+        date.toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'numeric',
+          day: 'numeric',
+        })
+      )
+        .toISOString()
+        .split('T')[0]
+    : date.toLocaleDateString('en-US', {
+        month: 'long',
+        day: 'numeric',
+        year: 'numeric',
+      });
 }
 
 // util function to format data in the following format "2023_08"

@@ -51,7 +51,7 @@ export const RevenueCircle = ({
               </Accordion.Trigger>
             </div>
             <Accordion.Content className="px-3 pb-4 md:px-6">
-              {['flood-hazard', 'vulnerability', 'government-response'].map(
+              {['flood-hazard', 'vulnerability', 'exposure', 'government-response'].map(
                 (scoreType) =>
                   item?.[scoreType] !== undefined && (
                     <ScoreInfo

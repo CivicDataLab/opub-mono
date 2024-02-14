@@ -12,8 +12,6 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
-  /** Date with time (isoformat) */
-  DateTime: any;
   /** The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf). */
   JSON: any;
 };
@@ -24,29 +22,10 @@ export type CustomDataPeriodList = {
 };
 
 /** Data(id, value, added, modified, indicator, geography, scheme, data_period) */
-export type Data = {
-  __typename?: 'Data';
-  added: Scalars['DateTime'];
-  dataPeriod?: Maybe<Scalars['String']>;
-  geography: Geography;
-  indicator: Indicators;
-  scheme?: Maybe<Scheme>;
-  value?: Maybe<Scalars['Int']>;
-};
-
-/** Data(id, value, added, modified, indicator, geography, scheme, data_period) */
 export type DataFilter = {
   AND?: InputMaybe<DataFilter>;
   OR?: InputMaybe<DataFilter>;
   dataPeriod?: InputMaybe<Scalars['String']>;
-};
-
-/** Department(id, name, description, slug, geography) */
-export type Department = {
-  __typename?: 'Department';
-  description?: Maybe<Scalars['String']>;
-  geography: Geography;
-  name: Scalars['String'];
 };
 
 /** Geography(id, name, code, type, parentId, geom) */
@@ -58,15 +37,6 @@ export type GeoFilter = {
   type?: InputMaybe<Scalars['String']>;
 };
 
-/** Geography(id, name, code, type, parentId, geom) */
-export type Geography = {
-  __typename?: 'Geography';
-  code?: Maybe<Scalars['String']>;
-  name: Scalars['String'];
-  parentId?: Maybe<Geography>;
-  type: Scalars['String'];
-};
-
 /** Indicators(id, name, long_description, short_description, category, type, slug, unit, geography, department, data_source, scheme, parent, display_order, is_visible) */
 export type IndicatorFilter = {
   AND?: InputMaybe<IndicatorFilter>;
@@ -75,44 +45,18 @@ export type IndicatorFilter = {
   slug?: InputMaybe<Scalars['String']>;
 };
 
-/** Indicators(id, name, long_description, short_description, category, type, slug, unit, geography, department, data_source, scheme, parent, display_order, is_visible) */
-export type Indicators = {
-  __typename?: 'Indicators';
-  /** Describes the type sub-indicators */
-  category?: Maybe<Scalars['String']>;
-  department?: Maybe<Department>;
-  geography?: Maybe<Geography>;
-  longDescription?: Maybe<Scalars['String']>;
-  name: Scalars['String'];
-  parent?: Maybe<Indicators>;
-  scheme?: Maybe<Scheme>;
-  shortDescription?: Maybe<Scalars['String']>;
-  slug?: Maybe<Scalars['String']>;
-  /** Defines the type of indicator that is Raw, Derived, etc. */
-  type?: Maybe<Scalars['String']>;
-  unit: Unit;
-};
-
 export type Query = {
   __typename?: 'Query';
-  data: Array<Data>;
   districtMapData: Scalars['JSON'];
   districtViewChartData: Scalars['JSON'];
   districtViewData: Scalars['JSON'];
   getDataTimePeriods: Array<CustomDataPeriodList>;
   getDistrictRevCircle: Scalars['JSON'];
   getFactors: Scalars['JSON'];
-  indicators: Array<Indicators>;
-  indicatorsByCategory: Scalars['JSON'];
+  indicators: Scalars['JSON'];
   revCircleMapData: Scalars['JSON'];
   revCircleViewChartData: Scalars['JSON'];
   revCircleViewTableData: Scalars['JSON'];
-  scheme: Array<Scheme>;
-};
-
-
-export type QueryDataArgs = {
-  filters?: InputMaybe<DataFilter>;
 };
 
 
@@ -142,6 +86,11 @@ export type QueryGetDistrictRevCircleArgs = {
 };
 
 
+export type QueryIndicatorsArgs = {
+  indcFilter?: InputMaybe<IndicatorFilter>;
+};
+
+
 export type QueryRevCircleMapDataArgs = {
   dataFilter: DataFilter;
   geoFilter?: InputMaybe<GeoFilter>;
@@ -163,24 +112,6 @@ export type QueryRevCircleViewTableDataArgs = {
   indcFilter: IndicatorFilter;
 };
 
-/** Scheme(id, name, description, slug, department) */
-export type Scheme = {
-  __typename?: 'Scheme';
-  department?: Maybe<Department>;
-  description?: Maybe<Scalars['String']>;
-  name: Scalars['String'];
-  slug?: Maybe<Scalars['String']>;
-};
-
-/** Unit(id, name, description, symbol) */
-export type Unit = {
-  __typename?: 'Unit';
-  description?: Maybe<Scalars['String']>;
-  id: Scalars['ID'];
-  name: Scalars['String'];
-  symbol?: Maybe<Scalars['String']>;
-};
-
 export type RevenueCircleTableQueryVariables = Exact<{
   indcFilter: IndicatorFilter;
   dataFilter: DataFilter;
@@ -198,11 +129,6 @@ export type DistrictViewDataQueryVariables = Exact<{
 
 
 export type DistrictViewDataQuery = { __typename?: 'Query', districtViewData: any };
-
-export type IndicatorsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type IndicatorsQuery = { __typename?: 'Query', indicators: Array<{ __typename?: 'Indicators', name: string, slug?: string | null, category?: string | null, parent?: { __typename?: 'Indicators', name: string } | null }> };
 
 export type DataTimePeriodsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -248,7 +174,6 @@ export type DistrictMapDataQuery = { __typename?: 'Query', districtMapData: any 
 
 export const RevenueCircleTableDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"revenueCircleTable"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"indcFilter"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"IndicatorFilter"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"dataFilter"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"DataFilter"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"geoFilter"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"GeoFilter"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"revCircleViewTableData"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"indcFilter"},"value":{"kind":"Variable","name":{"kind":"Name","value":"indcFilter"}}},{"kind":"Argument","name":{"kind":"Name","value":"dataFilter"},"value":{"kind":"Variable","name":{"kind":"Name","value":"dataFilter"}}},{"kind":"Argument","name":{"kind":"Name","value":"geoFilter"},"value":{"kind":"Variable","name":{"kind":"Name","value":"geoFilter"}}}]}]}}]} as unknown as DocumentNode<RevenueCircleTableQuery, RevenueCircleTableQueryVariables>;
 export const DistrictViewDataDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"districtViewData"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"indcFilter"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"IndicatorFilter"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"dataFilter"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"DataFilter"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"geoFilter"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"GeoFilter"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"districtViewData"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"indcFilter"},"value":{"kind":"Variable","name":{"kind":"Name","value":"indcFilter"}}},{"kind":"Argument","name":{"kind":"Name","value":"dataFilter"},"value":{"kind":"Variable","name":{"kind":"Name","value":"dataFilter"}}},{"kind":"Argument","name":{"kind":"Name","value":"geoFilter"},"value":{"kind":"Variable","name":{"kind":"Name","value":"geoFilter"}}}]}]}}]} as unknown as DocumentNode<DistrictViewDataQuery, DistrictViewDataQueryVariables>;
-export const IndicatorsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"indicators"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"indicators"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"category"}},{"kind":"Field","name":{"kind":"Name","value":"parent"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]}}]} as unknown as DocumentNode<IndicatorsQuery, IndicatorsQueryVariables>;
 export const DataTimePeriodsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"dataTimePeriods"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getDataTimePeriods"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"value"}}]}}]}}]} as unknown as DocumentNode<DataTimePeriodsQuery, DataTimePeriodsQueryVariables>;
 export const GetDistrictRevCircleDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getDistrictRevCircle"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"geoFilter"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"GeoFilter"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getDistrictRevCircle"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"geoFilter"},"value":{"kind":"Variable","name":{"kind":"Name","value":"geoFilter"}}}]}]}}]} as unknown as DocumentNode<GetDistrictRevCircleQuery, GetDistrictRevCircleQueryVariables>;
 export const DistrictViewChartDataDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"districtViewChartData"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"indcFilter"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"IndicatorFilter"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"dataFilter"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"DataFilter"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"districtViewChartData"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"indcFilter"},"value":{"kind":"Variable","name":{"kind":"Name","value":"indcFilter"}}},{"kind":"Argument","name":{"kind":"Name","value":"dataFilter"},"value":{"kind":"Variable","name":{"kind":"Name","value":"dataFilter"}}}]}]}}]} as unknown as DocumentNode<DistrictViewChartDataQuery, DistrictViewChartDataQueryVariables>;

@@ -2,21 +2,24 @@
 
 import React from 'react';
 import { type TypedDocumentNode } from '@graphql-typed-document-node/core';
+import { parseDate } from '@internationalized/date';
 import { useQuery } from '@tanstack/react-query';
 import {
   parseAsArrayOf,
   parseAsString,
   useQueryState,
 } from 'next-usequerystate';
-import { Checkbox, Select, Text } from 'opub-ui';
+import { Checkbox, MonthPicker, Select, Text } from 'opub-ui';
 import MultiSelect from 'react-select';
 
 import {
   ANALYTICS_DISTRICT_MAP_DATA,
   ANALYTICS_GEOGRAPHY_DATA,
   ANALYTICS_REVENUE_MAP_DATA,
+  ANALYTICS_TIME_PERIODS,
 } from '@/config/graphql/analaytics-queries';
 import { GraphQL } from '@/lib/api';
+import { formatDate } from '@/lib/utils';
 import { MapComponent } from './map-component';
 
 export function Content({
@@ -26,9 +29,33 @@ export function Content({
   timePeriod: string;
   indicator: string;
 }) {
+
+  interface Option {
+    isDisabled?: boolean;
+    value: string;
+    label: string;
+    group?: string;
+  }
+
+  interface FormattedDataItem {
+    label: string;
+    options: Option[];
+  }
+
+  type DropdownOption = {
+    [x: string]: string;
+    label: string;
+    value: string;
+  };
+
   const [boundary, setBoundary] = useQueryState(
     'boundary',
     parseAsString.withDefault('district')
+  );
+
+  const [timePeriodSelected, setTimePeriod] = useQueryState(
+    'time-period',
+    parseAsString.withDefault(timePeriod)
   );
 
   const [region, setRegion] = useQueryState(
@@ -36,12 +63,10 @@ export function Content({
     parseAsArrayOf(parseAsString)
   );
 
-  const [isChecked, setChecked] = React.useState(false);
 
-  const geographyMap: any = {
-    'revenue-circle': 'REVENUE CIRCLE',
-    district: 'DISTRICT',
-  };
+
+  const [isChecked, setChecked] = React.useState(true);
+  const [selectedGroup, setSelectedGroup] = React.useState<string[]>([]);
 
   const mapQuery: TypedDocumentNode<any, any> =
     boundary === 'district'
@@ -49,11 +74,11 @@ export function Content({
       : ANALYTICS_REVENUE_MAP_DATA;
 
   const mapData = useQuery(
-    [`mapQuery_${boundary}_${indicator}_${timePeriod}`],
+    [`mapQuery_${boundary}_${indicator}_${timePeriodSelected}`],
     () =>
       GraphQL('analytics', mapQuery, {
         indcFilter: { slug: indicator },
-        dataFilter: { dataPeriod: timePeriod },
+        dataFilter: { dataPeriod: timePeriodSelected },
       }),
     {
       refetchOnMount: false,
@@ -66,7 +91,7 @@ export function Content({
     [`geographies_data_${boundary}`],
     () =>
       GraphQL('analytics', ANALYTICS_GEOGRAPHY_DATA, {
-        geoFilter: { type: geographyMap[boundary || 'district'] },
+        geoFilter: { type: boundary },
       }),
     {
       refetchOnMount: false,
@@ -75,25 +100,93 @@ export function Content({
     }
   );
 
-  type DropdownOption = {
-    label: string;
-    value: string;
-  };
-
-  const DropdownOptions: DropdownOption[] = [];
-
-  if (geographiesData) {
-    geographiesData.data?.getDistrictRevCircle.forEach((geography: { district: string; code: string; }) => {
-      DropdownOptions.push({
-        label: geography.district,
-        value: geography.code ? geography.code : 'NA',
-      });
+  const timePeriods = useQuery(
+    [`timePeriods`],
+    () => GraphQL('analytics', ANALYTICS_TIME_PERIODS),
+    {
+      refetchOnMount: false,
+      refetchOnWindowFocus: false,
+      refetchOnReconnect: false,
+    }
+  );
+  let minDate, maxDate;
+  if (timePeriods.data) {
+    const datesArray = timePeriods?.data?.getDataTimePeriods.map((date) => {
+      const [year, month] = date.value.split('_');
+      return new Date(parseInt(year), parseInt(month));
     });
+    const timestamps = datesArray.map((date) => date.getTime());
+    // Find the minimum and maximum timestamps
+    const minTimestamp = Math.min(...timestamps);
+    const maxTimestamp = Math.max(...timestamps);
+
+    // Convert the timestamps back to dates
+    minDate = formatDate(minTimestamp, true);
+    maxDate = formatDate(maxTimestamp, true);
   }
 
-  const filteredOptions: DropdownOption[] = DropdownOptions?.filter((option) =>
-    region?.includes(option.value)
-  );
+  const DistrictDropdownOptions: DropdownOption[] = [];
+  let RevCircleDropdownOptions: FormattedDataItem[] = [];
+
+  if (geographiesData.data && !geographiesData.isFetching) {
+    if (boundary === 'revenue-circle') {
+      RevCircleDropdownOptions = Object.keys(
+        geographiesData?.data?.getDistrictRevCircle
+      ).map((key) => {
+        return {
+          label: key,
+          options: geographiesData?.data?.getDistrictRevCircle[key].map(
+            (item: { [x: string]: string; code: string }) => {
+              return {
+                value: item.code,
+                label: item['revenue-circle'],
+                group: key,
+              };
+            }
+          ),
+        };
+      });
+    } else {
+      geographiesData.data?.getDistrictRevCircle?.forEach(
+        (geography: { district: string; code: string }) => {
+          DistrictDropdownOptions.push({
+            label: geography.district,
+            value: geography.code ? geography.code : 'NA',
+          });
+        }
+      );
+    }
+  }
+
+  const filteredOptions = (boundary: string) => {
+    if (boundary === 'revenue-circle') {
+      RevCircleDropdownOptions.forEach((item) => {
+        if (
+          !selectedGroup.includes(item?.label || '') &&
+          selectedGroup.length > 0
+        ) {
+          item.options.forEach((option) => {
+            option.isDisabled = true;
+          });
+        }
+      });
+
+      const filteredOptions = RevCircleDropdownOptions.flatMap(
+        (item: { options: Option[] }) =>
+          item.options.filter(
+            (option) =>
+              region?.includes(option.value) &&
+              (selectedGroup.length === 0 ||
+                selectedGroup.includes(option.group || ''))
+          )
+      );
+      return filteredOptions;
+    }
+    const filteredOptions = DistrictDropdownOptions?.filter((option) =>
+      region?.includes(option.value)
+    );
+    return filteredOptions;
+  };
 
   const handleCheckboxChange = () => {
     setChecked(!isChecked);
@@ -110,9 +203,11 @@ export function Content({
           defaultValue="revenue-circle"
           label="Select Boundary"
           value={boundary || 'district'}
+          className="self-end"
           name="boundary-select"
           onChange={(e) => {
             setBoundary(e, { shallow: false });
+            setRegion([]);
           }}
           options={[
             {
@@ -125,7 +220,7 @@ export function Content({
             },
           ]}
         />
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col">
           <div className="flex items-center justify-between">
             <Text>Select one or more Region</Text>
             <Checkbox
@@ -140,20 +235,39 @@ export function Content({
             className="z-max w-[450px]"
             name="select-1"
             isMulti
-            value={filteredOptions}
+            value={filteredOptions(boundary)}
             onChange={(selectedOptions) => {
               const selectedValues = selectedOptions.map(
                 (option) => option.value
               );
+              const selectedGroups = selectedOptions.map(
+                (option) => option?.group ?? ''
+              );
+              setSelectedGroup(selectedGroups);
               setRegion(selectedValues, { shallow: false });
             }}
-            options={DropdownOptions}
+            options={
+              boundary === 'revenue-circle'
+                ? RevCircleDropdownOptions
+                : DistrictDropdownOptions
+            }
+          />
+        </div>
+        <div className="self-end">
+          <MonthPicker
+            defaultValue={parseDate('2023-08-01')}
+            label="Month Picker"
+            minValue={parseDate(minDate || '2023-01-04')}
+            maxValue={parseDate(maxDate || '2023-01-04')}
+            onChange={(date) =>
+              setTimePeriod(`${date.year}_0${date.month}`, { shallow: false })
+            }
           />
         </div>
       </div>
       <MapComponent
         indicator={indicator}
-        regions={filteredOptions}
+        regions={filteredOptions(boundary)}
         mapDataloading={mapData?.isFetching}
         mapData={
           boundary === 'district'

@@ -2,6 +2,7 @@
 
 import React from 'react';
 import dynamic from 'next/dynamic';
+import { Spinner, Text } from 'opub-ui';
 
 const MapChart = dynamic(
   () => import('opub-ui/viz').then((mod) => mod.MapChart),
@@ -28,13 +29,16 @@ export const MapComponent = ({
         colorString = '#4575b4';
         break;
       case 2:
-        colorString = '#91bfdb';
+        colorString = '#65A4BD';
         break;
       case 3:
-        colorString = '#dbeaee';
+        colorString = '#FFED6E';
         break;
       case 4:
-        colorString = '#d73027';
+        colorString = '#FB8C35';
+        break;
+      case 5:
+        colorString = '#D41505';
         break;
       default:
         colorString = '#4575b4';
@@ -45,19 +49,23 @@ export const MapComponent = ({
 
   const legendData = [
     {
-      label: '4 High Risk',
-      color: '#d73027',
+      label: 'Very High Risk',
+      color: '#D41505',
     },
     {
-      label: '3',
-      color: '#dbeaee',
+      label: 'High Risk',
+      color: '#FB8C35',
     },
     {
-      label: '2',
-      color: '#91bfdb',
+      label: 'Medium Risk',
+      color: '#FFED6E',
     },
     {
-      label: '1 Low Risk',
+      label: 'Low Risk',
+      color: '#65A4BD',
+    },
+    {
+      label: 'Very Low Risk',
       color: '#4575b4',
     },
   ];
@@ -114,7 +122,15 @@ export const MapComponent = ({
     }
   }, [map, regions]);
 
-  return !mapDataloading ? (
+  if (mapDataloading)
+  return (
+    <div className="grid h-full place-content-center">
+      <Spinner color="highlight" />
+      <Text>Loading...</Text>
+    </div>
+  );
+
+  return (
     <MapChart
       features={mapData?.features}
       mapZoom={7}
@@ -126,7 +142,5 @@ export const MapComponent = ({
       className="h-full w-full"
       setMap={setMap}
     />
-  ) : (
-    <div className="flex items-center justify-center">Loading...</div>
   );
 };
