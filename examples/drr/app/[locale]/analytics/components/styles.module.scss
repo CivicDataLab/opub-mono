@@ -31,3 +31,19 @@
   white-space: nowrap;
   overflow: hidden;
 }
+
+.AccordionItem {
+  font-family: inherit;
+  cursor: pointer;
+  height: 25px;
+  width: 25px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  border: none !important;
+
+  &[data-state='open'] > .AccordionChevron {
+    transform: rotate(180deg);
+  }
+}

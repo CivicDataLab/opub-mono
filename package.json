@@ -39,5 +39,8 @@
 	},
 	"engines": {
 		"node": ">=14.0.0"
+	},
+	"dependencies": {
+		"@radix-ui/react-accordion": "^1.1.2"
 	}
 }

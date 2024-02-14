@@ -24,12 +24,6 @@ interface DashboardLayoutProps {
 }
 
 export function AnalyticsDashboardLayout({ children }: DashboardLayoutProps) {
-  if (typeof document !== 'undefined') {
-    setTimeout(() => {
-      document.body.style.cssText = 'overflow: hidden;';
-    }, 1000);
-  }
-
   const searchParams = useSearchParams();
 
   const indicator = searchParams.get('indicator');
@@ -73,7 +67,7 @@ export function AnalyticsDashboardLayout({ children }: DashboardLayoutProps) {
     <React.Fragment>
       <div
         className={cn(
-          'relative max-h-full min-h-[calc(100%_-_48px)] grow gap-1 md:flex'
+          'relative max-h-full min-h-[calc(100%_-_48px)] grow gap-1 overflow-y-hidden md:flex'
         )}
       >
         <div className="absolute left-6 top-1/3 z-10 flex flex-col gap-3">
