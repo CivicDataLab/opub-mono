@@ -50,11 +50,8 @@ export const ANALYTICS_TIME_PERIODS = graphql(`
 `);
 
 export const ANALYTICS_GEOGRAPHY_DATA = graphql(`
-  query getGeographyData($filters: GeoFilter!) {
-    geography(filters: $filters) {
-      name
-      code
-    }
+  query getDistrictRevCircle($geoFilter: GeoFilter!){
+    getDistrictRevCircle(geoFilter : $geoFilter)
   }
 `);
 

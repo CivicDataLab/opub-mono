@@ -66,7 +66,7 @@ export function Content({
     [`geographies_data_${boundary}`],
     () =>
       GraphQL('analytics', ANALYTICS_GEOGRAPHY_DATA, {
-        filters: { type: geographyMap[boundary || 'district'] },
+        geoFilter: { type: geographyMap[boundary || 'district'] },
       }),
     {
       refetchOnMount: false,
@@ -83,9 +83,9 @@ export function Content({
   const DropdownOptions: DropdownOption[] = [];
 
   if (geographiesData) {
-    geographiesData.data?.geography.forEach((geography) => {
+    geographiesData.data?.getDistrictRevCircle.forEach((geography: { district: string; code: string; }) => {
       DropdownOptions.push({
-        label: geography.name,
+        label: geography.district,
         value: geography.code ? geography.code : 'NA',
       });
     });
