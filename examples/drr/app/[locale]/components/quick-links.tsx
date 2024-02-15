@@ -1,19 +1,20 @@
 import Link from 'next/link';
 import { Icon, Text } from 'opub-ui';
 
+import { AnalyticsURL, DatasetsURL } from '@/config/consts';
 import Icons from '@/components/icons';
 
 const content = [
   {
     district: 'Analytics Dashboard',
     scheme: 'Explore data model insight for all districts and revenue circles',
-    link: `/analytics/?indicator=risk-score&time-period=2023_08&boundary=district`,
+    link: AnalyticsURL,
   },
   {
     district: 'Dataset Explorer',
     scheme:
       'Explore datasets on meteorological and demographic factors, and DRR tenders',
-    link: '/datasets',
+    link: DatasetsURL,
   },
   {
     district: 'Tender Data Dashboard',
@@ -24,7 +25,7 @@ const content = [
 
 export const QuickLinks = () => {
   return (
-    <section className="mt-6 p-4 items-start md:mt-10">
+    <section className="mt-6 items-start p-4 md:mt-10">
       <Text variant="headingLg" fontWeight="semibold" color="subdued">
         Quick Links
       </Text>
