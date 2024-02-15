@@ -84,7 +84,7 @@ interface ScoreProps {
   indicator: string;
 }
 
-const ScoreInfo = ({ label, value, indicator }: ScoreProps) => (
+export const ScoreInfo = ({ label, value, indicator }: ScoreProps) => (
   <div className="mt-2">
     {label} :{' '}
     {indicator === 'risk-score' ? (

@@ -208,6 +208,7 @@ export function Content({
           onChange={(e) => {
             setBoundary(e, { shallow: false });
             setRegion([]);
+            setSelectedGroup([]);
           }}
           options={[
             {

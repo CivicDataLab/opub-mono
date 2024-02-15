@@ -31,26 +31,40 @@ interface DashboardLayoutProps {
 }
 
 export function AnalyticsDashboardLayout({ children }: DashboardLayoutProps) {
+  const [isClient, setIsClient] = React.useState(false);
+
+  // To prevent a hydration mismatch fix:https://nextjs.org/docs/messages/react-hydration-error.
+  React.useEffect(() => {
+    setIsClient(true);
+  }, []);
+
   return (
     <React.Suspense
       fallback={
-        <div className="grid  h-full place-content-center border-solid border-borderSubdued bg-surfaceDefault shadow-basicMd">
+        <div className="grid  h-[100vh] place-content-center">
           <Spinner color="highlight" />
           <Text>Loading...</Text>
         </div>
       }
     >
-      <div
-        className={cn(
-          'relative max-h-full min-h-[calc(100vh_-_48px)] grow gap-1 overflow-y-hidden md:flex'
-        )}
-      >
-        <FactorList />
-        <main className={cn(styles.Main, 'px-4', 'py-6', 'h-[100vh]')}>
-          {children}
-        </main>
-        <SidePaneLayout />
-      </div>
+      {isClient ? (
+        <div
+          className={cn(
+            'relative max-h-full min-h-[calc(100vh_-_48px)] grow gap-1 overflow-y-hidden md:flex'
+          )}
+        >
+          <FactorList />
+          <main className={cn(styles.Main, 'px-4', 'py-6', 'h-[100vh]')}>
+            {children}
+          </main>
+          <SidePaneLayout />
+        </div>
+      ) : (
+        <div className="grid  h-[100vh] place-content-center">
+          <Spinner color="highlight" />
+          <Text>Loading...</Text>
+        </div>
+      )}
     </React.Suspense>
   );
 }

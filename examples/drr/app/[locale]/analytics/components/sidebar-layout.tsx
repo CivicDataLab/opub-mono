@@ -15,12 +15,7 @@ import { Button, Divider, ProgressBar, Text } from 'opub-ui';
 
 import { RiskMap } from '@/config/consts';
 import { cn, deSlugify, formatDateString } from '@/lib/utils';
-import { RevenueCircle } from './revenue-circle-accordion';
-
-interface IndicatorProps {
-  title: string;
-  value: number;
-}
+import { RevenueCircle, ScoreInfo } from './revenue-circle-accordion';
 
 export function SidebarLayout({ data, indicator, boundary }: any) {
   const searchParams = useSearchParams();
@@ -114,15 +109,22 @@ export function SidebarLayout({ data, indicator, boundary }: any) {
                 {data[boundary]}
               </Text>
             </div>
-            <div className="flex items-center ">
-              <div className=" mr-3 basis-2/4">
-                <ProgressBar
-                  size="small"
-                  customColor={RiskMap[data[indicator]]}
-                  value={(data[indicator] / 6) * 100}
-                />
+            <div className="flex flex-col gap-1">
+              <div className="flex items-center">
+                <div className=" mr-3 basis-2/4">
+                  <ProgressBar
+                    size="small"
+                    customColor={RiskMap[data[indicator]]}
+                    value={(data[indicator] / 6) * 100}
+                  />
+                </div>
+                <Text variant="heading2xl">{data?.[indicator]}</Text>/6
               </div>
-              <Text variant="heading2xl">{data?.[indicator]}</Text>/6
+              <OtherFactorScores
+                data={data}
+                boundary={boundary}
+                indicator={indicator}
+              />
             </div>
           </div>
         ))}
@@ -135,4 +137,24 @@ export function SidebarLayout({ data, indicator, boundary }: any) {
       )}
     </aside>
   );
+}
+
+export function OtherFactorScores({ data, boundary, indicator }: any) {
+  const clonedData = structuredClone(data);
+  delete clonedData[boundary];
+  delete clonedData[`${boundary}-code`];
+  delete clonedData[indicator];
+
+  const FactorVariables = Object.keys(clonedData);
+
+  return FactorVariables.map((scoreType) => (
+    <div className='ml-3'>
+      <ScoreInfo
+        key={scoreType}
+        indicator={indicator}
+        label={`${deSlugify(scoreType)} Score`}
+        value={data?.[scoreType]}
+      />
+    </div>
+  ));
 }
