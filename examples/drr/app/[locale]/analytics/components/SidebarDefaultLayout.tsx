@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Hazard from '@/public/Hazard';
-import { Button, Divider, Icon, ProgressBar, Text } from 'opub-ui';
+import { Button, Divider, ProgressBar, Text } from 'opub-ui';
 
 import { cn, deSlugify } from '@/lib/utils';
 

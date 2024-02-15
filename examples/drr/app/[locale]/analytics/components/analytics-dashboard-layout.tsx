@@ -79,7 +79,7 @@ function SidePaneLayout() {
 
   React.useEffect(() => {
     sidePaneData.refetch();
-  }, [region?.split(','), time_period]);
+  }, [region?.split(','), time_period , sidePaneData]);
 
   if (!sidePaneData.isFetched)
     return (

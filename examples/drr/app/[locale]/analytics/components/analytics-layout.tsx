@@ -172,7 +172,7 @@ export function Content({
       });
 
       const filteredOptions = RevCircleDropdownOptions.flatMap(
-        (item: { options: Option[] }) =>
+        (item: { options: any[] }) =>
           item.options.filter(
             (option) =>
               region?.includes(option.value) &&
@@ -182,10 +182,10 @@ export function Content({
       );
       return filteredOptions;
     }
-    const filteredOptions = DistrictDropdownOptions?.filter((option) =>
+    const filteredDistrictOptions = DistrictDropdownOptions?.filter((option) =>
       region?.includes(option.value)
     );
-    return filteredOptions;
+    return filteredDistrictOptions;
   };
 
   const handleCheckboxChange = () => {

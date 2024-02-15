@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Hazard from '@/public/Hazard';
-import { Button, Divider, Icon, ProgressBar, Text } from 'opub-ui';
+import { Button, Divider, ProgressBar, Text } from 'opub-ui';
 
 import { cn, deSlugify } from '@/lib/utils';
 import { RevenueCircle } from './revenue-circle-accordion';
@@ -69,8 +69,8 @@ export function SidebarLayout({ data , indicator , boundary }: any) {
             DISTRICT SCORE
           </Text>
         )}
-        {DataBasedOnBoundary.map((data: any) => (
-          <div>
+        {DataBasedOnBoundary.map((data: any , index : any) => (
+          <div key={index}>
             <div className="mb-2 mt-2">
               <Text variant="headingLg" fontWeight="regular">
                 {data[boundary]}
