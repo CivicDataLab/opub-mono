@@ -9,7 +9,6 @@ import {
   RiskScore,
   Vulnerability,
 } from '@/public/FactorIcons';
-import Hazard from '@/public/Hazard';
 import { InfoSquare } from '@/public/InfoCircle';
 import { Button, Divider, ProgressBar, Text } from 'opub-ui';
 
