@@ -2,7 +2,7 @@ interface InfoCircleProps {
   color: string;
 }
 
-export default function InfoCircle({ color,...props } :InfoCircleProps ) {
+export default function InfoCircle({ color, ...props }: InfoCircleProps) {
   return (
     <svg
       width="24"
@@ -41,6 +41,53 @@ export default function InfoCircle({ color,...props } :InfoCircleProps ) {
       <defs>
         <clipPath id="clip0_1110_4059">
           <rect width="24" height="24" fill="white" />
+        </clipPath>
+      </defs>
+    </svg>
+  );
+}
+
+export function InfoSquare({ color, ...props }: InfoCircleProps) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="20"
+      height="21"
+      viewBox="0 0 20 21"
+      fill="none"
+      {...props}
+    >
+      <g clip-path="url(#clip0_888_15524)">
+        <path
+          d="M10 8H10.0083"
+          stroke={color}
+          stroke-width="1.66667"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+        <path
+          d="M9.16675 10.5H10.0001V13.8333H10.8334"
+          stroke={color}
+          stroke-width="1.66667"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+        <path
+          d="M10 3C16 3 17.5 4.5 17.5 10.5C17.5 16.5 16 18 10 18C4 18 2.5 16.5 2.5 10.5C2.5 4.5 4 3 10 3Z"
+          stroke={color}
+          stroke-width="1.66667"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </g>
+      <defs>
+        <clipPath id="clip0_888_15524">
+          <rect
+            width="20"
+            height="20"
+            fill="white"
+            transform="translate(0 0.5)"
+          />
         </clipPath>
       </defs>
     </svg>

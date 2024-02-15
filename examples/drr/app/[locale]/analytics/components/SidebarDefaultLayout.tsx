@@ -1,11 +1,20 @@
 'use client';
 
 import React from 'react';
+import { useSearchParams } from 'next/navigation';
+import {
+  Exposure,
+  FloodHazard,
+  GovtResponse,
+  RiskScore,
+  Vulnerability,
+} from '@/public/FactorIcons';
 import Hazard from '@/public/Hazard';
+import { InfoSquare } from '@/public/InfoCircle';
 import { Button, Divider, ProgressBar, Text } from 'opub-ui';
 
 import { RiskMap } from '@/config/consts';
-import { cn, deSlugify } from '@/lib/utils';
+import { cn, deSlugify, formatDateString } from '@/lib/utils';
 
 export function SidebarDefaultLayout({
   chartData,
@@ -15,6 +24,20 @@ export function SidebarDefaultLayout({
 }: any) {
   const formattedIndicator = indicator && deSlugify(indicator).toUpperCase();
   const list: { title: string; description: string }[] = [];
+
+  const searchParams = useSearchParams();
+  const indicatorIcon = searchParams.get('indicator');
+  const timePeriod = searchParams.get('time-period') || '2023_08';
+  const formattedTimePeriod = formatDateString(timePeriod);
+  const color = '#000000';
+
+  const IconMap: { [key: string]: React.ReactNode } = {
+    'risk-score': <RiskScore color={color} />,
+    vulnerability: <Vulnerability color={color} />,
+    'flood-hazard': <FloodHazard color={color} />,
+    exposure: <Exposure color={color} />,
+    'government-response': <GovtResponse color={color} />,
+  };
 
   if (indicatorDescriptions) {
     indicatorDescriptions.map(
@@ -53,13 +76,25 @@ export function SidebarDefaultLayout({
 
       <Divider className="mt-2" />
       <div className="mb-5 mt-5 flex flex-col">
-        <Text
-          variant="headingMd"
-          fontWeight="bold"
-          className="mb-4 flex items-center gap-2"
-        >
-          <Hazard /> {formattedIndicator}
-        </Text>
+        <div className="flex items-center justify-between self-stretch">
+          <div className="mt-3 flex items-center gap-2">
+            <Text
+              variant="headingMd"
+              fontWeight="bold"
+              className="mb-4 flex items-center gap-2"
+            >
+              {IconMap[indicatorIcon || 'risk-score']}
+              {formattedIndicator}
+            </Text>
+          </div>
+          <div className="  flex items-center gap-4">
+            <Text variant="bodyMd" color="subdued" fontWeight="regular">
+              Cumulative till {formattedTimePeriod}
+            </Text>
+            <InfoSquare color="#6A6A6A" />
+          </div>
+        </div>
+
         <Text variant="headingMd" fontWeight="bold" className=" mt-3">
           HIGH RISK DISTRICTS
         </Text>

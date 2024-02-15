@@ -1,11 +1,20 @@
 'use client';
 
 import React from 'react';
+import { useSearchParams } from 'next/navigation';
+import {
+  Exposure,
+  FloodHazard,
+  GovtResponse,
+  RiskScore,
+  Vulnerability,
+} from '@/public/FactorIcons';
 import Hazard from '@/public/Hazard';
+import { InfoSquare } from '@/public/InfoCircle';
 import { Button, Divider, ProgressBar, Text } from 'opub-ui';
 
 import { RiskMap } from '@/config/consts';
-import { cn, deSlugify } from '@/lib/utils';
+import { cn, deSlugify, formatDateString } from '@/lib/utils';
 import { RevenueCircle } from './revenue-circle-accordion';
 
 interface IndicatorProps {
@@ -14,6 +23,20 @@ interface IndicatorProps {
 }
 
 export function SidebarLayout({ data, indicator, boundary }: any) {
+  const searchParams = useSearchParams();
+  const indicatorIcon = searchParams.get('indicator');
+  const timePeriod = searchParams.get('time-period') || '2023_08';
+  const formattedTimePeriod = formatDateString(timePeriod);
+  const color = '#000000';
+
+  const IconMap: { [key: string]: React.ReactNode } = {
+    'risk-score': <RiskScore color={color} />,
+    vulnerability: <Vulnerability color={color} />,
+    'flood-hazard': <FloodHazard color={color} />,
+    exposure: <Exposure color={color} />,
+    'government-response': <GovtResponse color={color} />,
+  };
+
   const districtData = data.filter((item: any) =>
     Object.hasOwnProperty.call(item, 'district')
   );
@@ -59,10 +82,25 @@ export function SidebarLayout({ data, indicator, boundary }: any) {
             </Text>
           </div>
         ))}
-      <div className="mt-3 flex items-center gap-2">
-        <Hazard />
-        {deSlugify(indicator)}
+      <div className="flex items-center justify-between self-stretch">
+        <div className="mt-3 flex items-center gap-2">
+          <Text
+            variant="headingMd"
+            fontWeight="bold"
+            className="mb-4 flex items-center gap-2"
+          >
+            {IconMap[indicatorIcon || 'risk-score']}
+            {deSlugify(indicator)}
+          </Text>
+        </div>
+        <div className="flex items-center gap-4">
+          <Text variant="bodyMd" color="subdued" fontWeight="regular">
+            Cumulative till {formattedTimePeriod}
+          </Text>
+          <InfoSquare color="#6A6A6A" />
+        </div>
       </div>
+
       <section className="mt-7">
         {boundary === 'district' && (
           <Text variant="bodyLg" fontWeight="bold">

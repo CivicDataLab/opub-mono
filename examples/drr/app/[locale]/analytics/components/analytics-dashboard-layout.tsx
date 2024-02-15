@@ -3,7 +3,13 @@
 import React from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
-import { RiskScore, Vulnerability } from '@/public/FactorIcons';
+import {
+  Exposure,
+  FloodHazard,
+  GovtResponse,
+  RiskScore,
+  Vulnerability,
+} from '@/public/FactorIcons';
 import InfoCircle from '@/public/InfoCircle';
 import { useQuery } from '@tanstack/react-query';
 import { Spinner, Text } from 'opub-ui';
@@ -155,6 +161,14 @@ function FactorList() {
             vulnerability: (
               <Vulnerability color={isActive ? '#71E57D' : '#E2E2E2'} />
             ),
+            'flood-hazard': (
+              <FloodHazard color={isActive ? '#71E57D' : '#E2E2E2'} />
+            ),
+            exposure: <Exposure color={isActive ? '#71E57D' : '#E2E2E2'} />,
+
+            'government-response': (
+              <GovtResponse color={isActive ? '#71E57D' : '#E2E2E2'} />
+            ),
           };
           return (
             <Link
@@ -168,7 +182,9 @@ function FactorList() {
                   isActive && 'border-[#71E57D]'
                 )}
               >
-                {IconMap[item?.slug] || <RiskScore color={isActive ? '#71E57D' : '#E2E2E2'} />}
+                {IconMap[item?.slug] || (
+                  <RiskScore color={isActive ? '#71E57D' : '#E2E2E2'} />
+                )}
                 <span
                   className={cn(
                     styles.IndicatorBtnText,
