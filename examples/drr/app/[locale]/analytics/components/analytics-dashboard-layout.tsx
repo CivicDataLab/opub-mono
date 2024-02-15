@@ -3,14 +3,15 @@
 import React from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
+import { RiskScore, Vulnerability } from '@/public/FactorIcons';
 import InfoCircle from '@/public/InfoCircle';
-import Vulnerability from '@/public/Vulnerability';
 import { useQuery } from '@tanstack/react-query';
 import { Spinner, Text } from 'opub-ui';
 
 import {
   ANALYTICS_DISTRICT_DATA,
   ANALYTICS_FACTORS,
+  ANALYTICS_INDICATORS,
   ANALYTICS_REVENUE_TABLE_DATA,
 } from '@/config/graphql/analaytics-queries';
 import { GraphQL } from '@/lib/api';
@@ -27,7 +28,7 @@ export function AnalyticsDashboardLayout({ children }: DashboardLayoutProps) {
   return (
     <React.Suspense
       fallback={
-        <div className="grid  basis-[500px] place-content-center border-solid border-borderSubdued bg-surfaceDefault shadow-basicMd">
+        <div className="grid  h-full place-content-center border-solid border-borderSubdued bg-surfaceDefault shadow-basicMd">
           <Spinner color="highlight" />
           <Text>Loading...</Text>
         </div>
@@ -59,7 +60,6 @@ function SidePaneLayout() {
     boundary === 'district'
       ? ANALYTICS_DISTRICT_DATA
       : ANALYTICS_REVENUE_TABLE_DATA;
-
   const sidePaneData: any = useQuery(
     [
       `sidePaneData_${indicator}_${region?.split(',')}_${boundary}_${time_period}`,
@@ -77,9 +77,18 @@ function SidePaneLayout() {
     }
   );
 
-  React.useEffect(() => {
-    sidePaneData.refetch();
-  }, [region?.split(','), time_period , sidePaneData]);
+  const indicatorDescriptions: any = useQuery(
+    [`indicators_${indicator}`],
+    () =>
+      GraphQL('analytics', ANALYTICS_INDICATORS, {
+        indcFilter: { slug: indicator },
+      }),
+    {
+      refetchOnMount: false,
+      refetchOnWindowFocus: false,
+      refetchOnReconnect: false,
+    }
+  );
 
   if (!sidePaneData.isFetched)
     return (
@@ -111,6 +120,7 @@ function SidePaneLayout() {
                 : 'revCircleViewTableData'
             ]?.table_data
           }
+          indicatorDescriptions={indicatorDescriptions?.data?.indicators}
           indicator={indicator}
           boundary={boundary}
         />
@@ -131,11 +141,21 @@ function FactorList() {
   const indicator = searchParams.get('indicator');
   const time_period = searchParams.get('time-period') || '2023_08';
   const boundary = searchParams.get('boundary') || 'district';
+
   return (
-    <div className="absolute left-6 top-1/3 z-10 flex flex-col gap-3">
+    <div className="absolute left-6 top-[40%] z-10 flex flex-col gap-3">
       {factorData.isFetched &&
         factorData.data?.getFactors.map((item: any, index: number) => {
           const isActive = item.slug === indicator;
+
+          const IconMap: { [key: string]: React.ReactNode } = {
+            'risk-score': (
+              <RiskScore color={isActive ? '#71E57D' : '#E2E2E2'} />
+            ),
+            vulnerability: (
+              <Vulnerability color={isActive ? '#71E57D' : '#E2E2E2'} />
+            ),
+          };
           return (
             <Link
               key={`indicator_${index}`}
@@ -148,7 +168,7 @@ function FactorList() {
                   isActive && 'border-[#71E57D]'
                 )}
               >
-                <Vulnerability color={isActive ? '#71E57D' : '#E2E2E2'} />
+                {IconMap[item?.slug] || <RiskScore color={isActive ? '#71E57D' : '#E2E2E2'} />}
                 <span
                   className={cn(
                     styles.IndicatorBtnText,

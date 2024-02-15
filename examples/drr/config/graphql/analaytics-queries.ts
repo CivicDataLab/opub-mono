@@ -28,18 +28,11 @@ export const ANALYTICS_DISTRICT_DATA = graphql(`
   }
 `);
 
-// export const ANALYTICS_INDICATORS = graphql(`
-//   query indicators {
-//     indicators {
-//       name
-//       slug
-//       category
-//       parent {
-//         name
-//       }
-//     }
-//   }
-// `);
+export const ANALYTICS_INDICATORS = graphql(`
+  query indicators( $indcFilter: IndicatorFilter) {
+    indicators(indcFilter: $indcFilter)
+  }
+`);
 
 export const ANALYTICS_TIME_PERIODS = graphql(`
   query dataTimePeriods {

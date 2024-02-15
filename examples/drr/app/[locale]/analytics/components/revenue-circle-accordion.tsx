@@ -15,6 +15,13 @@ export const RevenueCircle = ({
   revenueCircleData,
   indicator,
 }: RevenueProps) => {
+  const clonedRevenueCircleData = structuredClone(revenueCircleData[0]);
+  delete clonedRevenueCircleData['revenue circle'];
+  delete clonedRevenueCircleData['revenue-circle-code'];
+  delete clonedRevenueCircleData[indicator];
+
+  const FactorVariables = Object.keys(clonedRevenueCircleData);
+
   return (
     <section className="mt-7">
       <Text variant="bodyLg" fontWeight="bold">
@@ -51,11 +58,12 @@ export const RevenueCircle = ({
               </Accordion.Trigger>
             </div>
             <Accordion.Content className="px-3 pb-4 md:px-6">
-              {['flood-hazard', 'vulnerability', 'exposure', 'government-response'].map(
+              {FactorVariables.map(
                 (scoreType) =>
                   item?.[scoreType] !== undefined && (
                     <ScoreInfo
                       key={scoreType}
+                      indicator={indicator}
                       label={`${deSlugify(scoreType)} Score`}
                       value={item?.[scoreType]}
                     />
@@ -72,10 +80,16 @@ export const RevenueCircle = ({
 interface ScoreProps {
   label: string;
   value: string;
+  indicator: string;
 }
 
-const ScoreInfo = ({ label, value }: ScoreProps) => (
+const ScoreInfo = ({ label, value, indicator }: ScoreProps) => (
   <div className="mt-2">
-    {label} :<strong className="pl-2">{value}/6</strong>
+    {label} :{' '}
+    {indicator === 'risk-score' ? (
+      <strong className="pl-2">{value}/6</strong>
+    ) : (
+      <strong className="pl-2">{parseFloat(value).toFixed(2)}</strong>
+    )}
   </div>
 );

@@ -6,28 +6,30 @@ import { Button, Divider, ProgressBar, Text } from 'opub-ui';
 
 import { cn, deSlugify } from '@/lib/utils';
 
-export function SidebarDefaultLayout({ chartData , indicator , boundary }: any) {
-
+export function SidebarDefaultLayout({
+  chartData,
+  indicatorDescriptions,
+  indicator,
+  boundary,
+}: any) {
   const formattedIndicator = indicator && deSlugify(indicator).toUpperCase();
+  const list: { title: string; description: string }[] = [];
 
-  const list = [
-    {
-      title: 'Risk Score',
-      desc: 'One or two line description about the Risk score - what it means, how is it calculated.',
-    },
-    {
-      title: 'Hazard',
-      desc: 'One or two line description about the Risk score - what it means, how is it calculated.',
-    },
-    {
-      title: 'Exposure',
-      desc: 'One or two line description about the Risk score - what it means, how is it calculated.',
-    },
-    {
-      title: 'Vulnerability',
-      desc: 'One or two line description about the Risk score - what it means, how is it calculated.',
-    },
-  ];
+  if (indicatorDescriptions) {
+    indicatorDescriptions.map(
+      (item: {
+        name: string;
+        long_description?: string;
+        short_description: string;
+      }) => {
+        list.push({
+          title: item?.name,
+          description:
+            item?.short_description || item?.long_description || 'NA',
+        });
+      }
+    );
+  }
 
   return (
     <aside
@@ -86,7 +88,7 @@ export function SidebarDefaultLayout({ chartData , indicator , boundary }: any) 
             <IndicatorDescription
               key={index}
               title={indicator.title}
-              desc={indicator.desc}
+              desc={indicator.description}
             />
           ))}
         </div>
@@ -111,7 +113,7 @@ export const DistrictBar = ({
       </div>
 
       <div className=" basis-2/4">
-        <ProgressBar size="small" color="critical" value={(value / 6) * 100} />
+        <ProgressBar size="small" className="bg-baseIndigoSolid12"  value={(value / 6) * 100} />
       </div>
     </div>
   );
