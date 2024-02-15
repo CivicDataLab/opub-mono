@@ -148,9 +148,8 @@ export function OtherFactorScores({ data, boundary, indicator }: any) {
   const FactorVariables = Object.keys(clonedData);
 
   return FactorVariables.map((scoreType) => (
-    <div className='ml-3'>
+    <div key={scoreType} className="ml-3">
       <ScoreInfo
-        key={scoreType}
         indicator={indicator}
         label={`${deSlugify(scoreType)} Score`}
         value={data?.[scoreType]}
