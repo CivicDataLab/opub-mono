@@ -12,6 +12,7 @@ const ProgressBar = forwardRef(
       value,
       size = 'medium',
       color = 'highlight',
+      customColor,
       animated = true,
       ...others
     } = props;
@@ -24,7 +25,8 @@ const ProgressBar = forwardRef(
     const themeClass = cn(
       styles.Root,
       size && styles[variationName('size', size)],
-      color && styles[variationName('color', color)]
+      color && styles[variationName('color', color)],
+      customColor && styles[variationName('customColor', customColor)],
     );
 
     const progressBarDuration = animated

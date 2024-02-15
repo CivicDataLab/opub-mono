@@ -5,6 +5,7 @@ import { Button, Divider, Icon, ProgressBar, Text } from 'opub-ui';
 import { cn, deSlugify } from '@/lib/utils';
 import { Icons } from '@/components/icons';
 import styles from './styles.module.scss';
+import { RiskMap } from '@/config/consts';
 
 interface RevenueProps {
   revenueCircleData: any;
@@ -41,7 +42,7 @@ export const RevenueCircle = ({
               <div className=" mr-3 basis-2/4">
                 <ProgressBar
                   size="small"
-                  color="critical"
+                  customColor={RiskMap[item?.[indicator]]}
                   value={(item?.[indicator] / 6) * 100}
                 />
               </div>

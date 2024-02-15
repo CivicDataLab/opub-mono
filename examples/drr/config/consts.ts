@@ -1,5 +1,21 @@
 const platformName = 'Intelligent Data Solution';
 
+//General
+const RiskMap: {
+    [key: number]:
+      | 'veryhighrisk'
+      | 'highrisk'
+      | 'mediumrisk'
+      | 'lowrisk'
+      | 'verylowrisk';
+  } = {
+    5: 'veryhighrisk',
+    4: 'highrisk',
+    3: 'mediumrisk',
+    2: 'lowrisk',
+    1: 'verylowrisk',
+  };
+
 // Datasets page
 const DatasetSource = 'Source';
 const LastUpdated = 'Last Updated';
@@ -39,4 +55,5 @@ export {
   AboutTextContentTwo,
   AboutTextContentThree,
   HeroSectionText,
+  RiskMap
 };

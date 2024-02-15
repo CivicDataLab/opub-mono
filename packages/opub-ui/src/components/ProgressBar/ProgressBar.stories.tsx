@@ -1,6 +1,8 @@
+import { Meta, StoryObj } from '@storybook/react';
+
 import { PropsVariationSection } from '../../utils/helpers';
 import { ProgressBar } from './ProgressBar';
-import { Meta, StoryObj } from '@storybook/react';
+import styles from './ProgressBar.module.scss';
 
 /**
  * Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.
@@ -37,6 +39,33 @@ export const States: Story = {
           interactive: { color: 'interactive' },
           success: { color: 'success' },
           critical: { color: 'critical' },
+          'animated: false': { animated: false },
+        }}
+      />
+    );
+  },
+  args: {
+    value: 60,
+  },
+};
+
+export const RiskStates: Story = {
+  render: ({ ...args }) => {
+    return (
+      <PropsVariationSection
+        component={ProgressBar}
+        common={{ ...args }}
+        xAxis={{
+          small: { size: 'small' },
+          medium: {},
+          large: { size: 'large' },
+        }}
+        yAxis={{
+          veryhighrisk: {customColor : "veryhighrisk"},
+          highrisk: {customColor : "highrisk"},
+          mediumrisk: {customColor : "mediumrisk"},
+          lowrisk: {customColor : "lowrisk"},
+          verylowrisk: {customColor : "verylowrisk"},
           'animated: false': { animated: false },
         }}
       />

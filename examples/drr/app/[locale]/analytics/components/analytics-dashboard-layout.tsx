@@ -40,7 +40,7 @@ export function AnalyticsDashboardLayout({ children }: DashboardLayoutProps) {
         )}
       >
         <FactorList />
-        <main className={cn(styles.Main, 'px-4', 'py-6', 'h-[80vh]')}>
+        <main className={cn(styles.Main, 'px-4', 'py-6', 'h-[100vh]')}>
           {children}
         </main>
         <SidePaneLayout />
@@ -143,7 +143,7 @@ function FactorList() {
   const boundary = searchParams.get('boundary') || 'district';
 
   return (
-    <div className="absolute left-6 top-[40%] z-10 flex flex-col gap-3">
+    <div className="absolute left-6 top-1/3 z-10 flex flex-col gap-3">
       {factorData.isFetched &&
         factorData.data?.getFactors.map((item: any, index: number) => {
           const isActive = item.slug === indicator;

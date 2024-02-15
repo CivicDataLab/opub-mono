@@ -11,6 +11,12 @@
   @return map-get($data, $height);
 }
 
+$veryHighRisk: '#D41505';
+$highRisk: '#FB8C35';
+$mediumRisk: '#FFED6E';
+$lowRisk: '#65A4BD';
+$veryLowRisk: '#4575b4';
+
 .sizeSmall {
   height: progress-bar-height(small);
 }
@@ -41,6 +47,31 @@
 .colorCritical {
   --op-progress-bar-background: var(--surface-critical);
   --op-progress-bar-indicator: var(--action-primary-critical-default);
+}
+
+.customColorVeryhighrisk {
+  --op-progress-bar-background: #d416057a;
+  --op-progress-bar-indicator: #D41505;
+}
+
+.customColorHighrisk {
+  --op-progress-bar-background: #fb8b357a;
+  --op-progress-bar-indicator: #FB8C35;
+}
+
+.customColorMediumrisk {
+  --op-progress-bar-background: #ffee6e82;
+  --op-progress-bar-indicator: #FFED6E;
+}
+
+.customColorLowrisk {
+  --op-progress-bar-background: #65a4bd77;
+  --op-progress-bar-indicator: #65A4BD;
+}
+
+.customColorVerylowrisk {
+  --op-progress-bar-background: #4575b480;
+  --op-progress-bar-indicator: #4575b4;
 }
 
 .Root {

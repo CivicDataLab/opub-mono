@@ -256,7 +256,7 @@ export function Content({
         <div className="self-end">
           <MonthPicker
             defaultValue={parseDate('2023-08-01')}
-            label="Month Picker"
+            label="Select Month"
             minValue={parseDate(minDate || '2023-01-04')}
             maxValue={parseDate(maxDate || '2023-01-04')}
             onChange={(date) =>
@@ -269,6 +269,7 @@ export function Content({
         indicator={indicator}
         regions={filteredOptions(boundary)}
         mapDataloading={mapData?.isFetching}
+        setRegion={setRegion}
         mapData={
           boundary === 'district'
             ? mapData?.data?.districtMapData

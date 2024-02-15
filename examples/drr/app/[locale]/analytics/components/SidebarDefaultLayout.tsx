@@ -4,6 +4,7 @@ import React from 'react';
 import Hazard from '@/public/Hazard';
 import { Button, Divider, ProgressBar, Text } from 'opub-ui';
 
+import { RiskMap } from '@/config/consts';
 import { cn, deSlugify } from '@/lib/utils';
 
 export function SidebarDefaultLayout({
@@ -113,7 +114,11 @@ export const DistrictBar = ({
       </div>
 
       <div className=" basis-2/4">
-        <ProgressBar size="small" className="bg-baseIndigoSolid12"  value={(value / 6) * 100} />
+        <ProgressBar
+          size="small"
+          customColor={RiskMap[value]}
+          value={(value / 6) * 100}
+        />
       </div>
     </div>
   );

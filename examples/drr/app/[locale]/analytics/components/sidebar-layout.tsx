@@ -4,6 +4,7 @@ import React from 'react';
 import Hazard from '@/public/Hazard';
 import { Button, Divider, ProgressBar, Text } from 'opub-ui';
 
+import { RiskMap } from '@/config/consts';
 import { cn, deSlugify } from '@/lib/utils';
 import { RevenueCircle } from './revenue-circle-accordion';
 
@@ -12,8 +13,7 @@ interface IndicatorProps {
   value: number;
 }
 
-export function SidebarLayout({ data , indicator , boundary }: any) {
-
+export function SidebarLayout({ data, indicator, boundary }: any) {
   const districtData = data.filter((item: any) =>
     Object.hasOwnProperty.call(item, 'district')
   );
@@ -69,7 +69,7 @@ export function SidebarLayout({ data , indicator , boundary }: any) {
             DISTRICT SCORE
           </Text>
         )}
-        {DataBasedOnBoundary.map((data: any , index : any) => (
+        {DataBasedOnBoundary.map((data: any, index: any) => (
           <div key={index}>
             <div className="mb-2 mt-2">
               <Text variant="headingLg" fontWeight="regular">
@@ -80,7 +80,7 @@ export function SidebarLayout({ data , indicator , boundary }: any) {
               <div className=" mr-3 basis-2/4">
                 <ProgressBar
                   size="small"
-                  color="critical"
+                  customColor={RiskMap[data[indicator]]}
                   value={(data[indicator] / 6) * 100}
                 />
               </div>
@@ -98,54 +98,3 @@ export function SidebarLayout({ data , indicator , boundary }: any) {
     </aside>
   );
 }
-
-export const Indicators = ({ data }: { data: IndicatorProps }) => {
-  function getRiskLevel(value: number) {
-    switch (value) {
-      case 1:
-      case 2:
-        return 'LOW RISK';
-      case 3:
-      case 4:
-        return 'MED RISK';
-      case 5:
-      case 6:
-        return 'HIGH RISK';
-      default:
-        return 'UNKNOWN RISK';
-    }
-  }
-
-  return (
-    <div>
-      <div className="mb-2 mt-5 flex items-center">
-        <Hazard />
-        <Text fontWeight="bold" variant="headingMd" className=" pl-2">
-          {data.title}
-        </Text>
-      </div>
-      <Text fontWeight="regular" variant="headingSm">
-        This region carries damage due to flood related disasters
-      </Text>
-      <div className="mb-3 mt-4 flex gap-4">
-        <div className=" basis-2/3">
-          <ProgressBar
-            value={(data.value / 6) * 100}
-            color="critical"
-            size="medium"
-          />
-        </div>
-        <div className="flex flex-col">
-          <Text>
-            <strong className="text-400">{data.value}</strong>/6
-          </Text>
-          <Text variant="bodySm"> {getRiskLevel(data.value)} </Text>
-        </div>
-      </div>
-      <div className="flex gap-5">
-        <Text variant="bodySm">Calculated : May 2023</Text>
-        <Text variant="bodySm">Link to Source Datasets</Text>
-      </div>
-    </div>
-  );
-};

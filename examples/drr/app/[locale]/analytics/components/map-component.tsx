@@ -14,11 +14,13 @@ export const MapComponent = ({
   indicator,
   regions,
   mapDataloading,
+  setRegion,
   mapData,
 }: {
   indicator: string;
   regions: { label: string; value: string }[];
   mapDataloading: Boolean;
+  setRegion: any;
   mapData: any;
 }) => {
   const [map, setMap] = React.useState<any>(null);
@@ -123,12 +125,12 @@ export const MapComponent = ({
   }, [map, regions]);
 
   if (mapDataloading)
-  return (
-    <div className="grid h-full place-content-center">
-      <Spinner color="highlight" />
-      <Text>Loading...</Text>
-    </div>
-  );
+    return (
+      <div className="grid h-full place-content-center">
+        <Spinner color="highlight" />
+        <Text>Loading...</Text>
+      </div>
+    );
 
   return (
     <MapChart
@@ -138,8 +140,11 @@ export const MapComponent = ({
       zoomOnClick={false}
       legendData={legendData}
       mapDataFn={mapDataFn}
+      click={(layer) =>
+        setRegion([layer?.feature?.properties?.code], { shallow: false })
+      }
       fillOpacity={1}
-      className="h-full w-full"
+      className="h-[90%] w-full"
       setMap={setMap}
     />
   );
