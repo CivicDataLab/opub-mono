@@ -1,12 +1,12 @@
 import { graphql } from '@/gql/generated/analytics';
 
 export const ANALYTICS_REVENUE_TABLE_DATA = graphql(`
-  query revenueCircleTable(
+  query revCircleViewData(
     $indcFilter: IndicatorFilter!
     $dataFilter: DataFilter!
     $geoFilter: GeoFilter
   ) {
-    revCircleViewTableData(
+    revCircleViewData(
       indcFilter: $indcFilter
       dataFilter: $dataFilter
       geoFilter: $geoFilter
@@ -29,7 +29,7 @@ export const ANALYTICS_DISTRICT_DATA = graphql(`
 `);
 
 export const ANALYTICS_INDICATORS = graphql(`
-  query indicators( $indcFilter: IndicatorFilter) {
+  query indicators($indcFilter: IndicatorFilter) {
     indicators(indcFilter: $indcFilter)
   }
 `);
@@ -43,8 +43,8 @@ export const ANALYTICS_TIME_PERIODS = graphql(`
 `);
 
 export const ANALYTICS_GEOGRAPHY_DATA = graphql(`
-  query getDistrictRevCircle($geoFilter: GeoFilter!){
-    getDistrictRevCircle(geoFilter : $geoFilter)
+  query getDistrictRevCircle($geoFilter: GeoFilter!) {
+    getDistrictRevCircle(geoFilter: $geoFilter)
   }
 `);
 

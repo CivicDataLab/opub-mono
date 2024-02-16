@@ -51,6 +51,15 @@ export const States: Story = {
 
 export const RiskStates: Story = {
   render: ({ ...args }) => {
+    const ColorMap: {
+      [key: number]: { backgroundColor: string; indicatorColor: string };
+    } = {
+      5: { backgroundColor: '#d416057a', indicatorColor: '#D41505' },
+      4: { backgroundColor: '#fb8b357a', indicatorColor: '#FB8C35' },
+      3: { backgroundColor: '#ffee6e82', indicatorColor: '#FFED6E' },
+      2: { backgroundColor: '#65a4bd77', indicatorColor: '#65A4BD' },
+      1: { backgroundColor: '#4575b480', indicatorColor: '#4575b4' },
+    };
     return (
       <PropsVariationSection
         component={ProgressBar}
@@ -61,12 +70,11 @@ export const RiskStates: Story = {
           large: { size: 'large' },
         }}
         yAxis={{
-          veryhighrisk: {customColor : "veryhighrisk"},
-          highrisk: {customColor : "highrisk"},
-          mediumrisk: {customColor : "mediumrisk"},
-          lowrisk: {customColor : "lowrisk"},
-          verylowrisk: {customColor : "verylowrisk"},
-          'animated: false': { animated: false },
+          veryhighrisk: { customColor: ColorMap[5] },
+          highrisk: { customColor: ColorMap[4] },
+          mediumrisk: { customColor: ColorMap[3] },
+          lowrisk: { customColor: ColorMap[2] },
+          verylowrisk: { customColor: ColorMap[1] },
         }}
       />
     );

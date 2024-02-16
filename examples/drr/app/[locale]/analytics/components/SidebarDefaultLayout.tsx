@@ -13,7 +13,7 @@ import Hazard from '@/public/Hazard';
 import { InfoSquare } from '@/public/InfoCircle';
 import { Button, Divider, ProgressBar, Text } from 'opub-ui';
 
-import { RiskMap } from '@/config/consts';
+import { RiskColorMap } from '@/config/consts';
 import { cn, deSlugify, formatDateString } from '@/lib/utils';
 
 export function SidebarDefaultLayout({
@@ -151,7 +151,7 @@ export const DistrictBar = ({
       <div className=" basis-2/4">
         <ProgressBar
           size="small"
-          customColor={RiskMap[value]}
+          customColor={RiskColorMap[value]}
           value={(value / 6) * 100}
         />
       </div>

@@ -12,7 +12,7 @@ import {
 import { InfoSquare } from '@/public/InfoCircle';
 import { Button, Divider, ProgressBar, Text } from 'opub-ui';
 
-import { RiskMap } from '@/config/consts';
+import { RiskColorMap } from '@/config/consts';
 import { cn, deSlugify, formatDateString } from '@/lib/utils';
 import { RevenueCircle, ScoreInfo } from './revenue-circle-accordion';
 
@@ -113,7 +113,7 @@ export function SidebarLayout({ data, indicator, boundary }: any) {
                 <div className=" mr-3 basis-2/4">
                   <ProgressBar
                     size="small"
-                    customColor={RiskMap[data[indicator]]}
+                    customColor={RiskColorMap[data[indicator]]}
                     value={(data[indicator] / 6) * 100}
                   />
                 </div>

@@ -29,6 +29,5 @@ export type ProgressBarProps = {
   /**
    * To give custom color
    */
-  customColor?: 'veryhighrisk' | 'highrisk' | 'mediumrisk' | 'lowrisk' | 'verylowrisk';
-
+  customColor?: { backgroundColor: string; indicatorColor: string };
 } & Progress.ProgressProps;

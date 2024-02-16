@@ -29,7 +29,6 @@ export function Content({
   timePeriod: string;
   indicator: string;
 }) {
-
   interface Option {
     isDisabled?: boolean;
     value: string;
@@ -62,8 +61,6 @@ export function Content({
     'region',
     parseAsArrayOf(parseAsString)
   );
-
-
 
   const [isChecked, setChecked] = React.useState(true);
   const [selectedGroup, setSelectedGroup] = React.useState<string[]>([]);
@@ -203,7 +200,7 @@ export function Content({
           defaultValue="revenue-circle"
           label="Select Boundary"
           value={boundary || 'district'}
-          className="self-end"
+          className="basis-[200px] self-end"
           name="boundary-select"
           onChange={(e) => {
             setBoundary(e, { shallow: false });
@@ -221,7 +218,7 @@ export function Content({
             },
           ]}
         />
-        <div className="flex flex-col">
+        <div className="flex grow flex-col">
           <div className="flex items-center justify-between">
             <Text>Select one or more Region</Text>
             <Checkbox
@@ -233,7 +230,7 @@ export function Content({
             </Checkbox>
           </div>
           <MultiSelect
-            className="z-max w-[450px]"
+            className="z-max"
             name="select-1"
             isMulti
             value={filteredOptions(boundary)}

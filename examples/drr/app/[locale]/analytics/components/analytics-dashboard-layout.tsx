@@ -54,9 +54,7 @@ export function AnalyticsDashboardLayout({ children }: DashboardLayoutProps) {
           )}
         >
           <FactorList />
-          <main className={cn(styles.Main, 'px-4', 'py-6', 'h-[100vh]')}>
-            {children}
-          </main>
+          <main className={cn(styles.Main, 'px-4', 'py-6')}>{children}</main>
           <SidePaneLayout />
         </div>
       ) : (
@@ -122,9 +120,7 @@ function SidePaneLayout() {
         <SidebarLayout
           data={
             sidePaneData?.data[
-              boundary === 'district'
-                ? 'districtViewData'
-                : 'revCircleViewTableData'
+              boundary === 'district' ? 'districtViewData' : 'revCircleViewData'
             ]?.table_data
           }
           indicator={indicator}
@@ -135,9 +131,7 @@ function SidePaneLayout() {
         <SidebarDefaultLayout
           chartData={
             sidePaneData?.data[
-              boundary === 'district'
-                ? 'districtViewData'
-                : 'revCircleViewTableData'
+              boundary === 'district' ? 'districtViewData' : 'revCircleViewData'
             ]?.table_data
           }
           indicatorDescriptions={indicatorDescriptions?.data?.indicators}

@@ -1,11 +1,11 @@
 import React from 'react';
 import * as Accordion from '@radix-ui/react-accordion';
-import { Button, Divider, Icon, ProgressBar, Text } from 'opub-ui';
+import { Icon, ProgressBar, Text } from 'opub-ui';
 
+import { RiskColorMap } from '@/config/consts';
 import { cn, deSlugify } from '@/lib/utils';
 import { Icons } from '@/components/icons';
 import styles from './styles.module.scss';
-import { RiskMap } from '@/config/consts';
 
 interface RevenueProps {
   revenueCircleData: any;
@@ -42,7 +42,7 @@ export const RevenueCircle = ({
               <div className=" mr-3 basis-2/4">
                 <ProgressBar
                   size="small"
-                  customColor={RiskMap[item?.[indicator]]}
+                  customColor={RiskColorMap[item?.[indicator]]}
                   value={(item?.[indicator] / 6) * 100}
                 />
               </div>
