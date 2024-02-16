@@ -54,9 +54,9 @@ export function SidebarLayout({ data, indicator, boundary }: any) {
     <aside
       className={cn(
         'p-4',
-        'overflow-hidden bg-surfaceDefault shadow-basicMd',
+        'bg-surfaceDefault shadow-basicMd',
         'shadow-inset z-1 hidden shrink-0 basis-[500px] md:block',
-        'border-r-1 border-solid border-borderSubdued'
+        'overflow-y-auto border-r-1 border-solid border-borderSubdued'
       )}
     >
       <header className="mb-5 mt-4 flex items-center justify-between">

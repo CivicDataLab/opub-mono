@@ -59,7 +59,7 @@ export function SidebarDefaultLayout({
     <aside
       className={cn(
         'p-4 pr-8',
-        'overflow-hidden bg-surfaceDefault shadow-basicMd',
+        'bg-surfaceDefault shadow-basicMd',
         'shadow-inset z-1 hidden shrink-0 basis-[500px] md:block',
         'border-r-1 border-solid border-borderSubdued',
         'overflow-y-auto'

@@ -83,6 +83,7 @@ export const MapComponent = ({
 
       map.eachLayer((layer: any) => {
         const regionName = layer.feature?.properties.name;
+        const riskValue = layer.feature?.properties?.[indicator];
 
         if (regionsArray.includes(regionName)) {
           const popup = layer.getPopup();
@@ -92,7 +93,7 @@ export const MapComponent = ({
             layer
               .bindPopup(
                 () => {
-                  return `<span>${regionName}<br/></span>`;
+                  return `<span>${regionName}: ${riskValue}<br/></span>`;
                 },
                 {
                   maxWidth: 200,
@@ -108,7 +109,7 @@ export const MapComponent = ({
           }
         } else {
           layer.closePopup();
-          layer.unbindPopup(); // Corrected typo
+          layer.unbindPopup();
           // Remove the layer from the map
           if (layer.getPopup()) {
             map.removeLayer(layer);
@@ -122,7 +123,7 @@ export const MapComponent = ({
         map.removeLayer(lastLayer);
       }
     }
-  }, [map, regions]);
+  }, [indicator, map, regions]);
 
   if (mapDataloading)
     return (
@@ -144,7 +145,7 @@ export const MapComponent = ({
         setRegion([layer?.feature?.properties?.code], { shallow: false })
       }
       fillOpacity={1}
-      className="h-[90%] w-full"
+      className="h-[90%] w-full py-4"
       setMap={setMap}
     />
   );

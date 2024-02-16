@@ -50,7 +50,7 @@ export function AnalyticsDashboardLayout({ children }: DashboardLayoutProps) {
       {isClient ? (
         <div
           className={cn(
-            'relative max-h-full min-h-[calc(100vh_-_48px)] grow gap-1 overflow-y-hidden md:flex'
+            'relative max-h-[calc(100vh_-_160px)] min-h-[calc(100vh_-_160px)] grow gap-1 overflow-y-hidden md:flex'
           )}
         >
           <FactorList />
@@ -157,7 +157,7 @@ function FactorList() {
   const boundary = searchParams.get('boundary') || 'district';
 
   return (
-    <div className="absolute left-6 top-1/3 z-10 flex flex-col gap-3">
+    <div className="absolute left-6 top-[250px] z-10 flex flex-col gap-3">
       {factorData.isFetched &&
         factorData.data?.getFactors.map((item: any, index: number) => {
           const isActive = item.slug === indicator;

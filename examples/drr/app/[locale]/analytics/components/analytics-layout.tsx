@@ -195,7 +195,7 @@ export function Content({
 
   return (
     <React.Fragment>
-      <div className="mb-4 flex items-center justify-between gap-4">
+      <div className="mb-2 flex items-center justify-between gap-4">
         <Select
           defaultValue="revenue-circle"
           label="Select Boundary"
