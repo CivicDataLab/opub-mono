@@ -3534,6 +3534,7 @@ export const CreateDatasetMutationDocument = {
   CreateDatasetMutationMutation,
   CreateDatasetMutationMutationVariables
 <<<<<<< HEAD
+<<<<<<< HEAD
 >;
 <<<<<<< HEAD
 =======
@@ -3571,3 +3572,6 @@ export const AllDatasetsQueryDocument = {
 =======
 >;
 >>>>>>> 8b3b2e92 (fix www/ user and listing)
+=======
+>;
+>>>>>>> f33482c1 (add dynamicity to learn more icons)
