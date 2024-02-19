@@ -257,9 +257,12 @@ export function Content({
             label="Select Month"
             minValue={parseDate(minDate || '2023-01-04')}
             maxValue={parseDate(maxDate || '2023-01-04')}
-            onChange={(date) =>
-              setTimePeriod(`${date.year}_0${date.month}`, { shallow: false })
-            }
+            onChange={(date) => {
+              setTimePeriod(
+                `${date.year}_${date.month < 10 ? `0${date.month}` : `${date.month}`}`,
+                { shallow: false }
+              );
+            }}
           />
         </div>
       </div>
