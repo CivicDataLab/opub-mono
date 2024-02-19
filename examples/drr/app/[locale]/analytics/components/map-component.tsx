@@ -136,7 +136,7 @@ export const MapComponent = ({
   return (
     <MapChart
       features={mapData?.features}
-      mapZoom={7}
+      mapZoom={7.7}
       mapProperty={indicator}
       zoomOnClick={false}
       legendData={legendData}
@@ -147,6 +147,7 @@ export const MapComponent = ({
       fillOpacity={1}
       className="h-[90%] w-full py-4"
       setMap={setMap}
+      scroolWheelZoom={false}
     />
   );
 };
