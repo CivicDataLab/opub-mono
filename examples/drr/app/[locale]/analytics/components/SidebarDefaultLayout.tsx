@@ -3,6 +3,7 @@
 import React from 'react';
 import { useSearchParams } from 'next/navigation';
 import {
+  Ellipse,
   Exposure,
   FloodHazard,
   GovtResponse,
@@ -165,10 +166,20 @@ export const IndicatorDescription = ({
   title: string;
   desc: string;
 }) => {
+  const IconMap: { [key: string]: React.ReactNode } = {
+    'risk-score': <RiskScore color={'#000000'} />,
+    vulnerability: <Vulnerability color={'#000000'} />,
+    'flood-hazard': <FloodHazard color={'#000000'} />,
+    exposure: <Exposure color={'#000000'} />,
+    'government-response': <GovtResponse color={'#000000'} />,
+  };
   return (
     <div className="flex flex-col">
       <div className="mb-2 mt-3 flex items-center">
-        <Hazard />
+        {IconMap[title.toLowerCase().replace(/\s+/g, '-')] || (
+          <Ellipse color="#000000" />
+          // null
+        )}
         <Text fontWeight="bold" variant="headingMd" className="pl-2">
           {title}
         </Text>
