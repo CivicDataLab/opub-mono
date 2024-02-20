@@ -50,7 +50,7 @@ export function AnalyticsDashboardLayout({ children }: DashboardLayoutProps) {
       {isClient ? (
         <div
           className={cn(
-            'relative max-h-[calc(100vh_-_160px)] min-h-[calc(100vh_-_160px)] grow gap-1 overflow-y-hidden md:flex'
+            'relative max-h-[calc(100vh_-_60px)] min-h-[calc(100vh_-_60px)] grow gap-1 overflow-y-hidden md:flex'
           )}
         >
           <FactorList />
