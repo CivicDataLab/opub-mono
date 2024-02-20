@@ -138,6 +138,8 @@ const Map = ({
   selectedLayer,
   mapProperty = '',
   mapZoom = 7,
+  minZoom,
+  maxZoom,
   mapCenter = [26.193, 92.773],
   zoomOnClick = false,
   fillOpacity,
