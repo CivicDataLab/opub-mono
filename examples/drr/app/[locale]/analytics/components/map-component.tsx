@@ -80,6 +80,7 @@ export const MapComponent = ({
 
     if (map) {
       const openPopups: any[] = [];
+      map.options.maxZoon = 10;
 
       map.eachLayer((layer: any) => {
         const regionName = layer.feature?.properties.name;
@@ -136,10 +137,12 @@ export const MapComponent = ({
   return (
     <MapChart
       features={mapData?.features}
-      mapZoom={7.7}
+      mapZoom={7.2}
       mapProperty={indicator}
       zoomOnClick={false}
       legendData={legendData}
+      minZoom={6.5}
+      maxZoom={7.4}
       mapDataFn={mapDataFn}
       click={(layer) =>
         setRegion([layer?.feature?.properties?.code], { shallow: false })
