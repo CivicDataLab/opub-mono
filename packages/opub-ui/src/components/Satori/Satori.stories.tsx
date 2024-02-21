@@ -2,12 +2,9 @@ import React from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 import domtoimage from 'dom-to-image';
 
-import { features } from '../../../assets/json/assam.json';
 import { ShareDialog } from '../ShareDialog';
 import Card from './Card';
-import { initChart } from './chart';
 import { useScreenshot } from './hooks';
-import { initMap } from './map';
 
 /**
  * An utility to generate and download reports.
