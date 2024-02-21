@@ -150,6 +150,20 @@ const Map = ({
 }) => {
   const mapRef = React.useRef<any>(null);
 
+  if (!features)
+    return (
+      <div className="flex h-[300px] flex-col items-center justify-center">
+        <Text>Please provide GeoJSON</Text>
+      </div>
+    );
+
+  if (!mapDataFn)
+    return (
+      <div className="flex h-[300px] flex-col items-center justify-center">
+        <Text>Please provide mapDataFn</Text>
+      </div>
+    );
+
   const handleMouseOver = React.useCallback((e: { target: any }) => {
     var layer = e.target;
 
@@ -236,18 +250,18 @@ const Map = ({
       )}
       {fullScreen && <FullscreenControl />}
 
-      {features && (
-        <>
-          <GeoJSON
-            data={feature}
-            key={feature}
-            style={style}
-            onEachFeature={onEachFeature}
-          />
-        </>
-      )}
-      {!hideScale && <ScaleControl imperial={false} />}
-    </MapContainer>
+        {features && (
+          <>
+            <GeoJSON
+              data={feature}
+              key={feature}
+              style={style}
+              onEachFeature={onEachFeature}
+            />
+          </>
+        )}
+        {!hideScale && <ScaleControl imperial={false} />}
+      </MapContainer>
   );
 };
 

@@ -10,7 +10,7 @@ export const useScreenshot = () => {
   // use satori to create svg
   const createSvg = async (
     Component: React.ReactElement,
-    props: { width: number; height: number }
+    props: { width: number; height?: number }
   ) => {
     const fonts: any = await initFonts();
     const svg = await satori(Component, {

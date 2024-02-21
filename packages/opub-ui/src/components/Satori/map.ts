@@ -92,9 +92,9 @@ export function initMap(
 
   let tiles = L.tileLayer
     // @ts-expect-error
-    .canvas(props.tile, {
-      maxZoom: props.maxZoom,
-    })
+    // .canvas(props.tile, {
+    //   maxZoom: props.maxZoom,
+    // })
     .addTo(map);
 
   return { map, tiles };
