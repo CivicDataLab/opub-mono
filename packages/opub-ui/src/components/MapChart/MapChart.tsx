@@ -1,22 +1,25 @@
-"use client";
+'use client';
 
-import { IconStack } from "@tabler/icons-react";
-import React from "react";
-import { GeoJSON, MapContainer, ScaleControl, TileLayer } from "react-leaflet";
-import { FullscreenControl } from "react-leaflet-fullscreen";
-import "react-leaflet-fullscreen/styles.css";
-import { cn } from "../../utils";
-import { Popover } from "../Popover";
-import { RadioGroup, RadioItem } from "../RadioGroup";
-import { Text } from "../Text";
-import styles from "./MapChart.module.scss";
-import { LatLngExpression } from "leaflet";
+import React from 'react';
+import { IconStack } from '@tabler/icons-react';
+import { GeoJSON, MapContainer, ScaleControl, TileLayer } from 'react-leaflet';
+import { FullscreenControl } from 'react-leaflet-fullscreen';
+
+import 'react-leaflet-fullscreen/styles.css';
+
+import { LatLngExpression } from 'leaflet';
+
+import { cn } from '../../utils';
+import { Popover } from '../Popover';
+import { RadioGroup, RadioItem } from '../RadioGroup';
+import { Text } from '../Text';
+import styles from './MapChart.module.scss';
 
 const layers = {
-  light: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
-  dark: "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
+  light: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+  dark: 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
   satellite:
-    "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+    'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
 } as const;
 type layerOptions = keyof typeof layers;
 
@@ -37,7 +40,7 @@ type MapProps = {
   mapProperty?: string;
 
   /* function to map data to color */
-  mapDataFn: (value: any, type: "default" | "hover" | "selected") => string;
+  mapDataFn: (value: any, type: 'default' | 'hover' | 'selected') => string;
 
   /* theme of the map */
   defaultLayer?: layerOptions;
@@ -71,6 +74,12 @@ type MapProps = {
 
   /* disable zoom on scroll */
   scroolWheelZoom?: boolean;
+
+  /* min zoom */
+  minZoom?: number;
+
+  /* max zoom */
+  maxZoom?: number;
 };
 
 type LegendProps = {
@@ -84,7 +93,7 @@ type LegendProps = {
 type Props = MapProps & LegendProps;
 
 const MapChart = (props: Props) => {
-  const { defaultLayer = "light", className, ...others } = props;
+  const { defaultLayer = 'light', className, ...others } = props;
 
   //to prevent map re-initialization
   const [unmountMap, setUnmountMap] = React.useState(false);
@@ -98,7 +107,7 @@ const MapChart = (props: Props) => {
   const [selectedLayer, setSelectedLayer] =
     React.useState<layerOptions>(defaultLayer);
 
-  if (unmountMap) return <>{"loading map..."}</>;
+  if (unmountMap) return <>{'loading map...'}</>;
 
   return (
     <div className={cn(styles.Wrapper, className)}>
@@ -117,7 +126,7 @@ const Map = ({
   mouseout,
   click,
   selectedLayer,
-  mapProperty = "",
+  mapProperty = '',
   mapZoom = 7,
   mapCenter = [26.193, 92.773],
   zoomOnClick = false,
@@ -131,6 +140,8 @@ const Map = ({
   setMap,
   fullScreen = true,
   scroolWheelZoom = true,
+  minZoom,
+  maxZoom,
 }: MapProps & {
   selectedLayer: layerOptions;
   setLayer: any;
@@ -139,13 +150,27 @@ const Map = ({
 }) => {
   const mapRef = React.useRef<any>(null);
 
+  if (!features)
+    return (
+      <div className="flex h-[300px] flex-col items-center justify-center">
+        <Text>Please provide GeoJSON</Text>
+      </div>
+    );
+
+  if (!mapDataFn)
+    return (
+      <div className="flex h-[300px] flex-col items-center justify-center">
+        <Text>Please provide mapDataFn</Text>
+      </div>
+    );
+
   const handleMouseOver = React.useCallback((e: { target: any }) => {
     var layer = e.target;
 
     layer.setStyle({
       fillColor: mapDataFn(
         Number(layer.feature.properties[mapProperty]),
-        "hover"
+        'hover'
       ),
     });
 
@@ -165,7 +190,7 @@ const Map = ({
     layer.setStyle({
       fillColor: mapDataFn(
         Number(layer.feature.properties[mapProperty]),
-        "selected"
+        'selected'
       ),
     });
 
@@ -187,11 +212,11 @@ const Map = ({
 
   const style: any = (feature: { properties: { [x: string]: number } }) => {
     return {
-      fillColor: mapDataFn(Number(feature.properties[mapProperty]), "default"),
+      fillColor: mapDataFn(Number(feature.properties[mapProperty]), 'default'),
       weight: 1,
       opacity: 1,
       color:
-        selectedLayer === "dark" ? "#eee" : "var(--mapareadistrict-border)",
+        selectedLayer === 'dark' ? '#eee' : 'var(--mapareadistrict-border)',
       fillOpacity: fillOpacity ? fillOpacity : 0.9,
     };
   };
@@ -201,40 +226,47 @@ const Map = ({
   });
 
   return (
-    <MapContainer
-      center={mapCenter}
-      zoom={mapZoom}
-      ref={setMap}
-      zoomDelta={0.5}
-      zoomSnap={0.5}
-      scrollWheelZoom={scroolWheelZoom}
-    >
-      {!hideLayers && (
-        <>
-          <LayerSelector
-            selectedLayer={selectedLayer}
-            setSelectedLayer={setLayer}
-          />
-          <TileLayer url={layers[selectedLayer]} key={selectedLayer} />
-        </>
-      )}
-      {legendData && (
-        <Legend legendData={legendData} legendHeading={legendHeading} />
-      )}
-      {fullScreen && <FullscreenControl />}
+    <>
+      <MapContainer
+        center={mapCenter}
+        zoom={mapZoom}
+        ref={setMap}
+        zoomDelta={0.5}
+        zoomSnap={0.5}
+        scrollWheelZoom={scroolWheelZoom}
+      >
+        {!hideLayers && (
+          <>
+            <LayerSelector
+              selectedLayer={selectedLayer}
+              setSelectedLayer={setLayer}
+            />
+            <TileLayer
+              maxZoom={maxZoom}
+              minZoom={minZoom}
+              url={layers[selectedLayer]}
+              key={selectedLayer}
+            />
+          </>
+        )}
+        {legendData && (
+          <Legend legendData={legendData} legendHeading={legendHeading} />
+        )}
+        {fullScreen && <FullscreenControl />}
 
-      {features && (
-        <>
-          <GeoJSON
-            data={feature}
-            key={feature}
-            style={style}
-            onEachFeature={onEachFeature}
-          />
-        </>
-      )}
-      {!hideScale && <ScaleControl imperial={false} />}
-    </MapContainer>
+        {features && (
+          <>
+            <GeoJSON
+              data={feature}
+              key={feature}
+              style={style}
+              onEachFeature={onEachFeature}
+            />
+          </>
+        )}
+        {!hideScale && <ScaleControl imperial={false} />}
+      </MapContainer>
+    </>
   );
 };
 
@@ -259,7 +291,7 @@ const Legend = ({ legendData, legendHeading }: LegendProps) => {
           return (
             <div
               key={item.label}
-              style={{ "--color": item.color } as React.CSSProperties}
+              style={{ '--color': item.color } as React.CSSProperties}
               className={cn(styles.LegendItem)}
             >
               <Text variant="bodyMd">{item.label}</Text>
@@ -286,7 +318,7 @@ const LayerSelector = ({
         <Popover.Trigger>
           <button
             className={cn(
-              "p-1 rounded-1 border-solid border-borderHighlightSubdued bg-surfaceHighlightSubdued hover:bg-surfaceHighlightDefault leading-[0]"
+              'rounded-1 border-solid border-borderHighlightSubdued bg-surfaceHighlightSubdued p-1 leading-[0] hover:bg-surfaceHighlightDefault'
             )}
           >
             <span className="sr-only">Change Layer</span>
@@ -295,7 +327,7 @@ const LayerSelector = ({
             </span>
           </button>
         </Popover.Trigger>
-        <Popover.Content align="end" className="py-2 px-3">
+        <Popover.Content align="end" className="px-3 py-2">
           <RadioGroup
             onChange={(val: any) => {
               setSelectedLayer(val);

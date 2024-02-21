@@ -97,7 +97,6 @@
     "embla-carousel-react": "8.0.0-rc15",
     "intl-segmenter-polyfill": "^0.4.4",
     "leaflet": "^1.9.4",
-    "leaflet.bigimage": "^1.0.1",
     "match-sorter": "^6.3.3",
     "modern-screenshot": "^4.4.38",
     "react-aria": "^3.31.1",
