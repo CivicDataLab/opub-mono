@@ -4,6 +4,8 @@ import React from 'react';
 import dynamic from 'next/dynamic';
 import { Spinner, Text } from 'opub-ui';
 
+import { FactorList } from './factor-list';
+
 const MapChart = dynamic(
   () => import('opub-ui/viz').then((mod) => mod.MapChart),
   {
@@ -135,22 +137,24 @@ export const MapComponent = ({
     );
 
   return (
-    <MapChart
-      features={mapData?.features}
-      mapZoom={7.2}
-      mapProperty={indicator}
-      zoomOnClick={false}
-      legendData={legendData}
-      minZoom={6.5}
-      maxZoom={7.4}
-      mapDataFn={mapDataFn}
-      click={(layer) =>
-        setRegion([layer?.feature?.properties?.code], { shallow: false })
-      }
-      fillOpacity={1}
-      className="h-[90%] w-full py-4"
-      setMap={setMap}
-      scroolWheelZoom={false}
-    />
+    <div className=" relative h-[90%] w-full py-4">
+      <FactorList />
+      <MapChart
+        features={mapData?.features}
+        mapZoom={7.2}
+        mapProperty={indicator}
+        zoomOnClick={false}
+        legendData={legendData}
+        minZoom={6.5}
+        maxZoom={7.4}
+        mapDataFn={mapDataFn}
+        click={(layer) =>
+          setRegion([layer?.feature?.properties?.code], { shallow: false })
+        }
+        fillOpacity={1}
+        setMap={setMap}
+        scroolWheelZoom={false}
+      />
+    </div>
   );
 };

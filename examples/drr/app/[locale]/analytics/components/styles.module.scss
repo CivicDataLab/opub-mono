@@ -3,6 +3,16 @@
   transition: transform var(--duration-400) ease 0s;
 }
 
+.FactorList {
+  @media (max-width: 1280px) {
+    overflow: hidden;
+    height: 200px;
+    &:hover {
+      overflow-y: auto;
+    }
+  }
+}
+
 .IndicatorBtn {
   display: inline-flex;
   cursor: pointer;
