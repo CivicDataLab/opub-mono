@@ -29,7 +29,10 @@ export function formatDate(
 }
 
 // util function to format data in the following format "2023_08"
-export function formatDateString(dateString: string) {
+export function formatDateString(dateString: string, isHyphenated = false) {
+  if (isHyphenated) {
+    return dateString.replace('_', '-');
+  }
   // Split the string into year and month parts
   const [year, month] = dateString.split('_');
 
