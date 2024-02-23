@@ -10,18 +10,38 @@ import {
   Vulnerability,
 } from '@/public/FactorIcons';
 import { InfoSquare } from '@/public/InfoCircle';
+import { useQuery } from '@tanstack/react-query';
 import { Button, Divider, ProgressBar, Text } from 'opub-ui';
 
 import { RiskColorMap } from '@/config/consts';
+import { ANALYTICS_TIME_TRENDS } from '@/config/graphql/analaytics-queries';
+import { GraphQL } from '@/lib/api';
 import { cn, deSlugify, formatDateString } from '@/lib/utils';
 import { RevenueCircle, ScoreInfo } from './revenue-circle-accordion';
+import { TimeTrends } from './time-trends';
 
 export function SidebarLayout({ data, indicator, boundary }: any) {
   const searchParams = useSearchParams();
-  const indicatorIcon = searchParams.get('indicator');
+  const indicatorIcon = searchParams.get('indicator') || 'risk-score';
   const timePeriod = searchParams.get('time-period') || '2023_08';
   const formattedTimePeriod = formatDateString(timePeriod);
   const color = '#000000';
+  const region = searchParams.get('region') || '1';
+
+  const chartData = useQuery(
+    [`chartData_${boundary}_${indicator}_${timePeriod}_${region}`],
+    () =>
+      GraphQL('analytics', ANALYTICS_TIME_TRENDS, {
+        indcFilter: { slug: indicatorIcon },
+        dataFilter: { dataPeriod: timePeriod, period: '3M' },
+        geoFilter: { code: region?.split(',') },
+      }),
+    {
+      refetchOnMount: false,
+      refetchOnWindowFocus: false,
+      refetchOnReconnect: false,
+    }
+  );
 
   const IconMap: { [key: string]: React.ReactNode } = {
     'risk-score': <RiskScore color={color} />,
@@ -134,6 +154,17 @@ export function SidebarLayout({ data, indicator, boundary }: any) {
           indicator={indicator}
         />
       )}
+      <div className="mt-5">
+        <Text variant="heading2xl" fontWeight="regular">
+          Time Trends
+        </Text>
+        {chartData.isFetched ? (
+          <TimeTrends
+            chartData={chartData?.data?.getTimeTrends}
+            indicator={indicatorIcon}
+          />
+        ) : null}
+      </div>
     </aside>
   );
 }

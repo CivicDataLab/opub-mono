@@ -48,14 +48,14 @@ export const ANALYTICS_GEOGRAPHY_DATA = graphql(`
   }
 `);
 
-export const ANALYTICS_DISTRICT_CHART_DATA = graphql(`
-  query districtViewChartData(
-    $indcFilter: IndicatorFilter!
-    $dataFilter: DataFilter!
-  ) {
-    districtViewChartData(indcFilter: $indcFilter, dataFilter: $dataFilter)
-  }
-`);
+// export const ANALYTICS_DISTRICT_CHART_DATA = graphql(`
+//   query districtViewChartData(
+//     $indcFilter: IndicatorFilter!
+//     $dataFilter: DataFilter!
+//   ) {
+//     districtViewChartData(indcFilter: $indcFilter, dataFilter: $dataFilter)
+//   }
+// `);
 
 export const ANALYTICS_REVENUE_MAP_DATA = graphql(`
   query revenueCircleMapData(
@@ -78,5 +78,19 @@ export const ANALYTICS_DISTRICT_MAP_DATA = graphql(`
     $dataFilter: DataFilter!
   ) {
     districtMapData(indcFilter: $indcFilter, dataFilter: $dataFilter)
+  }
+`);
+
+export const ANALYTICS_TIME_TRENDS = graphql(`
+  query getTimeTrends(
+    $indcFilter: IndicatorFilter!
+    $dataFilter: DataFilter!
+    $geoFilter: GeoFilter!
+  ) {
+    getTimeTrends(
+      indcFilter: $indcFilter
+      dataFilter: $dataFilter
+      geoFilter: $geoFilter
+    )
   }
 `);
