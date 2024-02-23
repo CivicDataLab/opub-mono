@@ -479,7 +479,10 @@ export type GetDistrictRevCircleQuery = {
   __typename?: 'Query';
   getDistrictRevCircle: any;
 };
+<<<<<<< HEAD
 >>>>>>> f9bdfcc5 (add css changes and fix revcircle query)
+=======
+>>>>>>> 88c8bcfa (remove districtchart data query)
 
 <<<<<<< HEAD
 export type DistrictViewChartDataQueryVariables = Exact<{

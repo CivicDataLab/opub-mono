@@ -19,6 +19,7 @@ const documents = {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> 23414f70 (add css changes and fix revcircle query)
   '\n  query revCircleViewData(\n    $indcFilter: IndicatorFilter!\n    $dataFilter: DataFilter!\n    $geoFilter: GeoFilter\n  ) {\n    revCircleViewData(\n      indcFilter: $indcFilter\n      dataFilter: $dataFilter\n      geoFilter: $geoFilter\n    )\n  }\n':
@@ -99,6 +100,8 @@ const documents = {
 =======
 >>>>>>> 23414f70 (add css changes and fix revcircle query)
 =======
+=======
+>>>>>>> de489a80 (remove districtchart data query)
     "\n  query revCircleViewData(\n    $indcFilter: IndicatorFilter!\n    $dataFilter: DataFilter!\n    $geoFilter: GeoFilter\n  ) {\n    revCircleViewData(\n      indcFilter: $indcFilter\n      dataFilter: $dataFilter\n      geoFilter: $geoFilter\n    )\n  }\n": types.RevCircleViewDataDocument,
     "\n  query districtViewData(\n    $indcFilter: IndicatorFilter!\n    $dataFilter: DataFilter!\n    $geoFilter: GeoFilter\n  ) {\n    districtViewData(\n      indcFilter: $indcFilter\n      dataFilter: $dataFilter\n      geoFilter: $geoFilter\n    )\n  }\n": types.DistrictViewDataDocument,
     "\n  query indicators($indcFilter: IndicatorFilter) {\n    indicators(indcFilter: $indcFilter)\n  }\n": types.IndicatorsDocument,
@@ -108,7 +111,27 @@ const documents = {
     "\n  query factors {\n    getFactors\n  }\n": types.FactorsDocument,
     "\n  query districtMapData(\n    $indcFilter: IndicatorFilter!\n    $dataFilter: DataFilter!\n  ) {\n    districtMapData(indcFilter: $indcFilter, dataFilter: $dataFilter)\n  }\n": types.DistrictMapDataDocument,
     "\n  query getTimeTrends(\n    $indcFilter: IndicatorFilter!\n    $dataFilter: DataFilter!\n    $geoFilter: GeoFilter!\n  ) {\n    getTimeTrends(\n      indcFilter: $indcFilter\n      dataFilter: $dataFilter\n      geoFilter: $geoFilter\n    )\n  }\n": types.GetTimeTrendsDocument,
+<<<<<<< HEAD
 >>>>>>> 9feb229e (add ANALYTICS_TIME_TRENDS graphql query)
+=======
+=======
+  '\n  query revCircleViewData(\n    $indcFilter: IndicatorFilter!\n    $dataFilter: DataFilter!\n    $geoFilter: GeoFilter\n  ) {\n    revCircleViewData(\n      indcFilter: $indcFilter\n      dataFilter: $dataFilter\n      geoFilter: $geoFilter\n    )\n  }\n':
+    types.RevCircleViewDataDocument,
+  '\n  query districtViewData(\n    $indcFilter: IndicatorFilter!\n    $dataFilter: DataFilter!\n    $geoFilter: GeoFilter\n  ) {\n    districtViewData(\n      indcFilter: $indcFilter\n      dataFilter: $dataFilter\n      geoFilter: $geoFilter\n    )\n  }\n':
+    types.DistrictViewDataDocument,
+  '\n  query indicators($indcFilter: IndicatorFilter) {\n    indicators(indcFilter: $indcFilter)\n  }\n':
+    types.IndicatorsDocument,
+  '\n  query dataTimePeriods {\n    getDataTimePeriods {\n      value\n    }\n  }\n':
+    types.DataTimePeriodsDocument,
+  '\n  query getDistrictRevCircle($geoFilter: GeoFilter!) {\n    getDistrictRevCircle(geoFilter: $geoFilter)\n  }\n':
+    types.GetDistrictRevCircleDocument,
+  '\n  query revenueCircleMapData(\n    $indcFilter: IndicatorFilter!\n    $dataFilter: DataFilter!\n  ) {\n    revCircleMapData(indcFilter: $indcFilter, dataFilter: $dataFilter)\n  }\n':
+    types.RevenueCircleMapDataDocument,
+  '\n  query factors {\n    getFactors\n  }\n': types.FactorsDocument,
+  '\n  query districtMapData(\n    $indcFilter: IndicatorFilter!\n    $dataFilter: DataFilter!\n  ) {\n    districtMapData(indcFilter: $indcFilter, dataFilter: $dataFilter)\n  }\n':
+    types.DistrictMapDataDocument,
+>>>>>>> 88c8bcfa (remove districtchart data query)
+>>>>>>> de489a80 (remove districtchart data query)
 };
 
 /**
@@ -257,12 +280,18 @@ export function graphql(source: "\n  query getDistrictRevCircle($geoFilter: GeoF
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
+<<<<<<< HEAD
 export function graphql(source: "\n  query revenueCircleMapData(\n    $indcFilter: IndicatorFilter!\n    $dataFilter: DataFilter!\n  ) {\n    revCircleMapData(indcFilter: $indcFilter, dataFilter: $dataFilter)\n  }\n"): (typeof documents)["\n  query revenueCircleMapData(\n    $indcFilter: IndicatorFilter!\n    $dataFilter: DataFilter!\n  ) {\n    revCircleMapData(indcFilter: $indcFilter, dataFilter: $dataFilter)\n  }\n"];
 >>>>>>> 9feb229e (add ANALYTICS_TIME_TRENDS graphql query)
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  query factors {\n    getFactors\n  }\n"): (typeof documents)["\n  query factors {\n    getFactors\n  }\n"];
+=======
+export function graphql(
+  source: '\n  query revenueCircleMapData(\n    $indcFilter: IndicatorFilter!\n    $dataFilter: DataFilter!\n  ) {\n    revCircleMapData(indcFilter: $indcFilter, dataFilter: $dataFilter)\n  }\n'
+): (typeof documents)['\n  query revenueCircleMapData(\n    $indcFilter: IndicatorFilter!\n    $dataFilter: DataFilter!\n  ) {\n    revCircleMapData(indcFilter: $indcFilter, dataFilter: $dataFilter)\n  }\n'];
+>>>>>>> 88c8bcfa (remove districtchart data query)
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
