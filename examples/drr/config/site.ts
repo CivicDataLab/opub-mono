@@ -1,5 +1,5 @@
 import { MainConfig, SiteConfig } from 'types';
-import { AnalyticsURL, DatasetsURL } from './consts';
+import { AboutUsURL, AnalyticsURL, DatasetsURL } from './consts';
 
 export const siteConfig: SiteConfig = {
   name: 'OPub',
@@ -70,6 +70,14 @@ export const mainConfig: MainConfig = {
     {
       title: 'Datasets',
       href: DatasetsURL,
+    },
+    {
+      title: 'Resources',
+      href: '/',
+    },
+    {
+      title: 'About us',
+      href: AboutUsURL,
     },
   ],
 

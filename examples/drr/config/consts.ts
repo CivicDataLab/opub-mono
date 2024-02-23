@@ -24,17 +24,23 @@ const AnalyticsURL = `/analytics/?indicator=risk-score&time-period=2023_08&bound
 
 //home page
 const AboutText = 'About IDS DRR';
+const AboutUsURL = '/';
 const AboutTextContentOne =
-  'Intelligent Data Solution for Disaster Risk Reduction is an initiative to create data-driven solutions to address disaster related issues.';
+  'Intelligent Data Solution for Disaster Risk Reduction (IDS-DRR) is an open-source platform that helps state-level and district-level Disaster Management Authorities to make timely data-driven decisions, prioritise expenditure of public funds and conduct public procurement in a manner that strengthens long-term disaster risk reduction and protects the most vulnerable people from the adverse effects of extreme weather events and climate change. ';
 
 const AboutTextContentTwo =
-  'Under this initiative we at CivicDataLab have created data models to assess flood preparedness levels of different districts in Assam.';
+  'In this platform, we bring together diverse high-value datasets from satellite, environmental, social, economic, demographic, infrastructure, loss & damages to data regarding government response to derive timely insights.';
 
 const AboutTextContentThree =
-  'The data model outputs are now available on this easy-to-use dashboard for decision-makers to consume the insights on a near real-time basis. The insights from our data model can assist the Government authorities in identifying high risk regions within Assam, and in streamlining funds where they are needed the most.';
+  'This 4-year project led by CivicDataLab & Open Contracting Partnership is planned to improve disaster risk reduction processes & practices in the state of Assam. It is supported by the Rockefeller Foundation.';
 
 const HeroSectionText =
   'A dashboard for data-driven disaster risk reduction. Discover insights, assess risks, and empower action towards disaster resilience!';
+
+const AnalyticsQuickLinksText =
+  'Browse data analytics for a range of flood risk indicators and scores from our data model, to understand the disaster risk of your region.';
+
+const YouTubeLink = 'https://www.youtube.com/watch?v=gTqcyUQ7esg';
 
 export {
   platformName,
@@ -51,4 +57,7 @@ export {
   AboutTextContentThree,
   HeroSectionText,
   RiskColorMap,
+  AnalyticsQuickLinksText,
+  AboutUsURL,
+  YouTubeLink,
 };
