@@ -24,8 +24,6 @@ const documents = {
     types.DataTimePeriodsDocument,
   '\n  query getDistrictRevCircle($geoFilter: GeoFilter!) {\n    getDistrictRevCircle(geoFilter: $geoFilter)\n  }\n':
     types.GetDistrictRevCircleDocument,
-  '\n  query districtViewChartData(\n    $indcFilter: IndicatorFilter!\n    $dataFilter: DataFilter!\n  ) {\n    districtViewChartData(indcFilter: $indcFilter, dataFilter: $dataFilter)\n  }\n':
-    types.DistrictViewChartDataDocument,
   '\n  query revenueCircleMapData(\n    $indcFilter: IndicatorFilter!\n    $dataFilter: DataFilter!\n  ) {\n    revCircleMapData(indcFilter: $indcFilter, dataFilter: $dataFilter)\n  }\n':
     types.RevenueCircleMapDataDocument,
   '\n  query factors {\n    getFactors\n  }\n': types.FactorsDocument,
@@ -77,12 +75,6 @@ export function graphql(
 export function graphql(
   source: '\n  query getDistrictRevCircle($geoFilter: GeoFilter!) {\n    getDistrictRevCircle(geoFilter: $geoFilter)\n  }\n'
 ): (typeof documents)['\n  query getDistrictRevCircle($geoFilter: GeoFilter!) {\n    getDistrictRevCircle(geoFilter: $geoFilter)\n  }\n'];
-/**
- * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function graphql(
-  source: '\n  query districtViewChartData(\n    $indcFilter: IndicatorFilter!\n    $dataFilter: DataFilter!\n  ) {\n    districtViewChartData(indcFilter: $indcFilter, dataFilter: $dataFilter)\n  }\n'
-): (typeof documents)['\n  query districtViewChartData(\n    $indcFilter: IndicatorFilter!\n    $dataFilter: DataFilter!\n  ) {\n    districtViewChartData(indcFilter: $indcFilter, dataFilter: $dataFilter)\n  }\n'];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
