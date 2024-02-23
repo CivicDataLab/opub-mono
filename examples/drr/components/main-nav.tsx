@@ -1,18 +1,18 @@
 'use client';
 
-import { MainConfig } from '@/types';
+import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
+import { MainConfig } from '@/types';
 import { Text } from 'opub-ui';
-import React from 'react';
 
 export function MainNav({ data }: { data: MainConfig }) {
   const { district } = useParams();
 
   return (
-    <header className="hidden md:block relative bg-backgroundSolidDark text-baseIndigoSolid2 py-3 px-10 shadow-top-bar sm:py-3 z-2 ">
-      <div className="flex gap-1 items-center justify-between flex-wrap sm:justify-between">
+    <header className="shadow-top-bar relative z-2 hidden bg-backgroundSolidDark px-10 py-3 text-baseIndigoSolid2 sm:py-3 md:block ">
+      <div className="flex flex-wrap items-center justify-between gap-1 sm:justify-between">
         <Link href={data.homeUrl}>
           <div className="flex items-center gap-4">
             <Image src="/logo/logo-min.svg" alt="" width={24} height={24} />
