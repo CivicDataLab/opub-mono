@@ -48,6 +48,15 @@ export const ANALYTICS_GEOGRAPHY_DATA = graphql(`
   }
 `);
 
+// export const ANALYTICS_DISTRICT_CHART_DATA = graphql(`
+//   query districtViewChartData(
+//     $indcFilter: IndicatorFilter!
+//     $dataFilter: DataFilter!
+//   ) {
+//     districtViewChartData(indcFilter: $indcFilter, dataFilter: $dataFilter)
+//   }
+// `);
+
 export const ANALYTICS_REVENUE_MAP_DATA = graphql(`
   query revenueCircleMapData(
     $indcFilter: IndicatorFilter!
