@@ -74,14 +74,13 @@ export type QueryDistrictMapDataArgs = {
 =======
 >>>>>>> bc740d05 (update rev circle dropdown and rev circle side pane)
   districtMapData: Scalars['JSON'];
-  districtViewChartData: Scalars['JSON'];
   districtViewData: Scalars['JSON'];
   getDataTimePeriods: Array<CustomDataPeriodList>;
   getDistrictRevCircle: Scalars['JSON'];
   getFactors: Scalars['JSON'];
+  getTimeTrends: Scalars['JSON'];
   indicators: Scalars['JSON'];
   revCircleMapData: Scalars['JSON'];
-  revCircleViewChartData: Scalars['JSON'];
   revCircleViewData: Scalars['JSON'];
 };
 
@@ -91,6 +90,7 @@ export type QueryDistrictMapDataArgs = {
   indcFilter: IndicatorFilter;
 };
 
+<<<<<<< HEAD
 export type QueryDistrictViewChartDataArgs = {
 >>>>>>> aa077d1c (add boundary selection to url)
   dataFilter: DataFilter;
@@ -107,6 +107,8 @@ export type QueryDistrictViewChartDataArgs = {
 >>>>>>> 428be535 (update get geographies query)
 =======
 >>>>>>> 23414f70 (add css changes and fix revcircle query)
+=======
+>>>>>>> 9feb229e (add ANALYTICS_TIME_TRENDS graphql query)
 export type QueryDistrictViewDataArgs = {
 =======
 export type QueryDistrictViewTableDataArgs = {
@@ -168,6 +170,7 @@ export type QueryGetDistrictRevCircleArgs = {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> 6714281 (connect map data to map component)
 
@@ -186,6 +189,14 @@ export type QueryGetDistrictRevCircleArgs = {
 =======
 =======
 >>>>>>> 23414f70 (add css changes and fix revcircle query)
+=======
+export type QueryGetTimeTrendsArgs = {
+  dataFilter: DataFilter;
+  geoFilter: GeoFilter;
+  indcFilter: IndicatorFilter;
+};
+
+>>>>>>> 9feb229e (add ANALYTICS_TIME_TRENDS graphql query)
 export type QueryIndicatorsArgs = {
   indcFilter?: InputMaybe<IndicatorFilter>;
 };
@@ -202,6 +213,7 @@ export type QueryRevCircleMapDataArgs = {
 >>>>>>> c3f64ca2 (connect map data to map component)
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -226,6 +238,8 @@ export type QueryRevCircleViewChartDataArgs = {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+=======
+>>>>>>> 9feb229e (add ANALYTICS_TIME_TRENDS graphql query)
 export type QueryRevCircleViewDataArgs = {
 =======
 =======
@@ -467,6 +481,7 @@ export type GetDistrictRevCircleQuery = {
 };
 >>>>>>> f9bdfcc5 (add css changes and fix revcircle query)
 
+<<<<<<< HEAD
 export type DistrictViewChartDataQueryVariables = Exact<{
 >>>>>>> aa077d1c (add boundary selection to url)
   indcFilter: IndicatorFilter;
@@ -545,6 +560,8 @@ export type DistrictViewChartDataQuery = { __typename?: 'Query', districtViewCha
 =======
 >>>>>>> 23414f70 (add css changes and fix revcircle query)
 
+=======
+>>>>>>> 9feb229e (add ANALYTICS_TIME_TRENDS graphql query)
 export type RevenueCircleMapDataQueryVariables = Exact<{
   indcFilter: IndicatorFilter;
   dataFilter: DataFilter;
@@ -1767,6 +1784,14 @@ export const DistrictMapDataDocument = {"kind":"Document","definitions":[{"kind"
 =======
 =======
 
+export type GetTimeTrendsQueryVariables = Exact<{
+  indcFilter: IndicatorFilter;
+  dataFilter: DataFilter;
+  geoFilter: GeoFilter;
+}>;
+
+export type GetTimeTrendsQuery = { __typename?: 'Query'; getTimeTrends: any };
+
 export const RevCircleViewDataDocument = {
   kind: 'Document',
   definitions: [
@@ -2063,76 +2088,6 @@ export const GetDistrictRevCircleDocument = {
   GetDistrictRevCircleQuery,
   GetDistrictRevCircleQueryVariables
 >;
-export const DistrictViewChartDataDocument = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'OperationDefinition',
-      operation: 'query',
-      name: { kind: 'Name', value: 'districtViewChartData' },
-      variableDefinitions: [
-        {
-          kind: 'VariableDefinition',
-          variable: {
-            kind: 'Variable',
-            name: { kind: 'Name', value: 'indcFilter' },
-          },
-          type: {
-            kind: 'NonNullType',
-            type: {
-              kind: 'NamedType',
-              name: { kind: 'Name', value: 'IndicatorFilter' },
-            },
-          },
-        },
-        {
-          kind: 'VariableDefinition',
-          variable: {
-            kind: 'Variable',
-            name: { kind: 'Name', value: 'dataFilter' },
-          },
-          type: {
-            kind: 'NonNullType',
-            type: {
-              kind: 'NamedType',
-              name: { kind: 'Name', value: 'DataFilter' },
-            },
-          },
-        },
-      ],
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'districtViewChartData' },
-            arguments: [
-              {
-                kind: 'Argument',
-                name: { kind: 'Name', value: 'indcFilter' },
-                value: {
-                  kind: 'Variable',
-                  name: { kind: 'Name', value: 'indcFilter' },
-                },
-              },
-              {
-                kind: 'Argument',
-                name: { kind: 'Name', value: 'dataFilter' },
-                value: {
-                  kind: 'Variable',
-                  name: { kind: 'Name', value: 'dataFilter' },
-                },
-              },
-            ],
-          },
-        ],
-      },
-    },
-  ],
-} as unknown as DocumentNode<
-  DistrictViewChartDataQuery,
-  DistrictViewChartDataQueryVariables
->;
 export const RevenueCircleMapDataDocument = {
   kind: 'Document',
   definitions: [
@@ -2289,5 +2244,100 @@ export const DistrictMapDataDocument = {
   DistrictMapDataQuery,
   DistrictMapDataQueryVariables
 >;
+<<<<<<< HEAD
 >>>>>>> f9bdfcc5 (add css changes and fix revcircle query)
+<<<<<<< HEAD
 >>>>>>> 23414f70 (add css changes and fix revcircle query)
+=======
+=======
+export const GetTimeTrendsDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'getTimeTrends' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'indcFilter' },
+          },
+          type: {
+            kind: 'NonNullType',
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'IndicatorFilter' },
+            },
+          },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'dataFilter' },
+          },
+          type: {
+            kind: 'NonNullType',
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'DataFilter' },
+            },
+          },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'geoFilter' },
+          },
+          type: {
+            kind: 'NonNullType',
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'GeoFilter' },
+            },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'getTimeTrends' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'indcFilter' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'indcFilter' },
+                },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'dataFilter' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'dataFilter' },
+                },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'geoFilter' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'geoFilter' },
+                },
+              },
+            ],
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<GetTimeTrendsQuery, GetTimeTrendsQueryVariables>;
+>>>>>>> af4f5317 (add ANALYTICS_TIME_TRENDS graphql query)
+>>>>>>> 9feb229e (add ANALYTICS_TIME_TRENDS graphql query)
