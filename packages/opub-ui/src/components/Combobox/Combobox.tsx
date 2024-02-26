@@ -1,37 +1,41 @@
-import { ComboboxProps } from "../../types/combobox";
-import itemStyles from "../ActionList/ActionList.module.scss";
-import { Tag } from "../Tag";
-import { Text } from "../Text";
-import { Combobox as Component } from "./Atoms";
-import styles from "./Combobox.module.scss";
+import React, { useMemo, useState, useTransition } from 'react';
 import {
   ComboboxItem,
   ComboboxPopover,
   ComboboxProvider,
   useComboboxStore,
-} from "@ariakit/react";
-import { matchSorter } from "match-sorter";
-import React, { useMemo, useState, useTransition } from "react";
+} from '@ariakit/react';
+import { matchSorter } from 'match-sorter';
+
+import { ComboboxProps } from '../../types/combobox';
+import itemStyles from '../ActionList/ActionList.module.scss';
+import { Tag } from '../Tag';
+import { Text } from '../Text';
+import { Combobox as Component } from './Atoms';
+import styles from './Combobox.module.scss';
 
 export function Combobox(
   props: ComboboxProps & {
     /**
      * list of the combobox.
      */
-    list: string[];
+    list: {
+      value: string;
+      label: string;
+    }[];
   }
 ) {
   const [isPending, startTransition] = useTransition();
-  const [searchValue, setSearchValue] = useState("");
+  const [searchValue, setSearchValue] = useState('');
   const [selectedValues, setSelectedValues] = useState(props.selectedValue);
   const combobox = useComboboxStore();
 
   const matches = useMemo(() => {
-    return matchSorter(props.list, searchValue);
+    return matchSorter(props.list, searchValue, { keys: ['label', 'value'] });
   }, [searchValue]);
 
   function removeTag(value: string) {
-    if (selectedValues && typeof selectedValues !== "string") {
+    if (selectedValues && typeof selectedValues !== 'string') {
       const finalArr = selectedValues.filter((v: string) => v !== value);
       setSelectedValues(finalArr);
       props.onChange && props.onChange(finalArr);
@@ -40,9 +44,9 @@ export function Combobox(
 
   const tags = props.displaySelected ? (
     selectedValues &&
-    typeof selectedValues !== "string" &&
+    typeof selectedValues !== 'string' &&
     selectedValues.length > 0 ? (
-      <div className="flex gap-1 flex-wrap">
+      <div className="flex flex-wrap gap-1">
         {selectedValues.map((tag: string) => (
           <Tag onRemove={removeTag} value={tag} key={tag}>
             {tag}
@@ -79,7 +83,7 @@ export function Combobox(
         placeholder={props.placeholder}
         id={props.id}
         verticalContent={
-          props.displaySelected && typeof selectedValues !== "string" && tags
+          props.displaySelected && typeof selectedValues !== 'string' && tags
         }
       />
       <ComboboxPopover
@@ -87,16 +91,16 @@ export function Combobox(
         gutter={8}
         aria-busy={isPending}
         className={styles.Popover}
-        style={{ "--popover-padding": "var(--space-1)" } as React.CSSProperties}
+        style={{ '--popover-padding': 'var(--space-1)' } as React.CSSProperties}
       >
-        {matches.map((value) => (
+        {matches.map((item) => (
           <ComboboxItem
-            key={value}
-            value={value}
+            key={item.value}
+            value={item.value}
             focusOnHover
             className={itemStyles.Item}
           >
-            {value}
+            {item.label}
           </ComboboxItem>
         ))}
         {!matches.length && (
