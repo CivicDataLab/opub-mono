@@ -84,7 +84,12 @@ export const DisplaySelected: Story = {
     placeholder: 'e.g., Apple, Burger',
     list: options,
     displaySelected: true,
-    selectedValue: ['Apple'],
+    selectedValue: [
+      {
+        value: 'Apple',
+        label: 'Apple',
+      },
+    ],
   },
 };
 

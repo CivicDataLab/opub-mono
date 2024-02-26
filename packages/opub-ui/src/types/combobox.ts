@@ -1,10 +1,17 @@
-import React from "react";
+import React from 'react';
+
+export type TListItem = {
+  value: string;
+  label: string;
+  type?: string;
+  disabled?: boolean;
+};
 
 export type ComboboxProps = {
   /**
    * The callback function that is triggered when the value of the combobox changes.
    */
-  onChange?: (value: string | string[]) => void;
+  onChange?: (value: TListItem[] | string) => void;
 
   /**
    * The label of the combobox.
@@ -40,7 +47,7 @@ export type ComboboxProps = {
   /**
    * The value of the combobox.
    */
-  selectedValue?: string[] | string;
+  selectedValue?: TListItem[] | string;
 
   /**
    * The id of the combobox.

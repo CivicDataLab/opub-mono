@@ -8,7 +8,7 @@ import {
 } from '@ariakit/react';
 import { matchSorter } from 'match-sorter';
 
-import { ComboboxProps } from '../../types/combobox';
+import type { ComboboxProps, TListItem } from '../../types/combobox';
 import itemStyles from '../ActionList/ActionList.module.scss';
 import { Divider } from '../Divider';
 import { Tag } from '../Tag';
@@ -28,13 +28,6 @@ const groupBy = function (arr: any[], criteria: string) {
   }, {});
 };
 
-type TListItem = {
-  value: string;
-  label: string;
-  type?: string;
-  disabled?: boolean;
-};
-
 export function Combobox(
   props: ComboboxProps & {
     /**
@@ -51,7 +44,9 @@ export function Combobox(
   const [isPending, startTransition] = useTransition();
   const [searchValue, setSearchValue] = useState('');
   const deferredValue = React.useDeferredValue(searchValue);
-  const [selectedValues, setSelectedValues] = useState(props.selectedValue);
+  const [selectedValues, setSelectedValues] = useState<
+    TListItem[] | string | undefined
+  >(props.selectedValue);
   const combobox = useComboboxStore();
 
   const matches = useMemo(() => {
@@ -64,7 +59,9 @@ export function Combobox(
 
   function removeTag(value: string) {
     if (selectedValues && typeof selectedValues !== 'string') {
-      const finalArr = selectedValues.filter((v: string) => v !== value);
+      const finalArr = selectedValues.filter(
+        (v: { value: string; label: string }) => v.value !== value
+      );
       setSelectedValues(finalArr);
       props.onChange && props.onChange(finalArr);
     }
@@ -76,15 +73,15 @@ export function Combobox(
     selectedValues &&
     typeof selectedValues !== 'string'
   ) {
-    // To show labels and not values
-    const selectedTags = props.list.filter((item) => {
-      return selectedValues.includes(item.value);
-    });
     tags =
-      selectedTags.length > 0 ? (
+      selectedValues.length > 0 ? (
         <div className="flex flex-wrap gap-1">
-          {selectedTags.map((tag) => (
-            <Tag onRemove={removeTag} value={tag.value} key={tag.value}>
+          {selectedValues.map((tag) => (
+            <Tag
+              onRemove={() => removeTag(tag.value)}
+              value={tag.value}
+              key={tag.value}
+            >
               {tag.label}
             </Tag>
           ))}
@@ -98,12 +95,20 @@ export function Combobox(
       );
   }
 
+  let selected: any = selectedValues;
+  if (Array.isArray(selectedValues)) {
+    selected = selectedValues.map((value) => value.value);
+  }
+
   return (
     <ComboboxProvider
-      selectedValue={selectedValues}
+      selectedValue={selected}
       setSelectedValue={(e) => {
-        setSelectedValues(e);
-        props.onChange && props.onChange(e);
+        const selected = e.map((value: string) => {
+          return props.list.find((item) => item.value === value);
+        });
+        setSelectedValues(selected);
+        props.onChange && props.onChange(selected);
       }}
       setValue={(value) => {
         startTransition(() => {
@@ -129,7 +134,7 @@ export function Combobox(
         className={styles.Popover}
         style={{ '--popover-padding': 'var(--space-1)' } as React.CSSProperties}
       >
-        {matches.length && (
+        {matches.length > 0 ? (
           <div className={styles.List}>
             {props.group ? (
               <ListGroup matches={matches} />
@@ -137,8 +142,7 @@ export function Combobox(
               <List matches={matches} />
             )}
           </div>
-        )}
-        {!matches.length && (
+        ) : (
           <div className={styles.NoResult}>No results found</div>
         )}
       </ComboboxPopover>

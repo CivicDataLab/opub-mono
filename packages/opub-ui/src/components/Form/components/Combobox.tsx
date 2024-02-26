@@ -37,6 +37,8 @@ const Combobox = ({ required, error, ...props }: Props) => {
               error={fieldState.invalid ? error : undefined}
               selectedValue={field.value || props.selectedValue}
               onChange={(value: any) => {
+                console.log(value, 'form');
+
                 props.onChange && props.onChange(value, props.name);
                 field.onChange(value);
               }}
