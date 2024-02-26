@@ -152,7 +152,6 @@ export default function Page() {
               <DateField name="date" label="Choose Date" />
               <DatePicker name="date-picker" label="Choose Birthday" />
 
-              {/* TODO: Error: Text content does not match server-rendered HTML  */}
               <TimeField name="time" label="Choose Time" />
             </FormLayout.Group>
             <DateRangePicker name="date-range" label="Choose Range" />
