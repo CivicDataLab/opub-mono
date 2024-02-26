@@ -1,8 +1,9 @@
-"use client";
+'use client';
 
-import { ComboboxProps } from "../../../types";
-import { Combobox as ComboboxBase } from "../../Combobox";
-import { Controller, useFormContext } from "react-hook-form";
+import { Controller, useFormContext } from 'react-hook-form';
+
+import { ComboboxProps } from '../../../types';
+import { Combobox as ComboboxBase } from '../../Combobox';
 
 type Props = {
   name: string;
@@ -11,8 +12,13 @@ type Props = {
   /**
    * list of the combobox.
    */
-  list: string[];
-} & Omit<ComboboxProps, "onChange">;
+  list: {
+    value: string;
+    label: string;
+    type?: string;
+    disabled?: boolean;
+  }[];
+} & Omit<ComboboxProps, 'onChange'>;
 
 const Combobox = ({ required, error, ...props }: Props) => {
   const method = useFormContext();
