@@ -87,3 +87,19 @@ export const DisplaySelected: Story = {
     selectedValue: ['Apple'],
   },
 };
+
+export const Grouping: Story = {
+  args: {
+    label: 'Select an Item',
+    placeholder: 'e.g., Apple, Red',
+    list: [
+      { label: 'Apple', value: 'apple', type: 'Fruits' },
+      { label: 'Mango', value: 'mango', type: 'Fruits' },
+      { label: 'Red', value: 'red', type: 'Colours' },
+      { label: 'Black', value: 'black', type: 'Colours' },
+    ],
+    selectedValue: [],
+    group: true,
+    displaySelected: true,
+  },
+};
