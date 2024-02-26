@@ -89,7 +89,20 @@ export function EditMetadata({
                   label="Geography"
                   // helpText="Which geography does this data belong to?"
                   placeholder="Search Locations"
-                  list={['United States', 'Canada', 'Mexico', 'India']}
+                  list={[
+                    {
+                      label: 'India',
+                      value: 'india',
+                    },
+                    {
+                      label: 'USA',
+                      value: 'usa',
+                    },
+                    {
+                      label: 'UK',
+                      value: 'uk',
+                    },
+                  ]}
                   displaySelected
                   required
                   error="This field is required"
@@ -100,12 +113,18 @@ export function EditMetadata({
                   placeholder="Search Tags"
                   // helpText="Any other tags or keywords that can help people discover your dataset"
                   list={[
-                    'Health',
-                    'Education',
-                    'Transportation',
-                    'Economy',
-                    'Demographics',
-                    'Environment',
+                    {
+                      label: 'Health',
+                      value: 'health',
+                    },
+                    {
+                      label: 'Education',
+                      value: 'education',
+                    },
+                    {
+                      label: 'Agriculture',
+                      value: 'agriculture',
+                    },
                   ]}
                   displaySelected
                   required
