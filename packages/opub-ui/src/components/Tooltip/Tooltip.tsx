@@ -22,7 +22,7 @@ const Provider = forwardRef(
     const classname = cn(styles.Wrapper, hasUnderline && styles.HasUnderline);
 
     return (
-      <div className={`opub-Tooltip ${classname}`} ref={ref}>
+      <main className={`opub-Tooltip ${classname}`} ref={ref}>
         <TooltipRadix.Provider
           delayDuration={globalDelayDuration}
           skipDelayDuration={skipDelayDuration}
@@ -30,7 +30,7 @@ const Provider = forwardRef(
         >
           {children}
         </TooltipRadix.Provider>
-      </div>
+      </main>
     );
   }
 );
