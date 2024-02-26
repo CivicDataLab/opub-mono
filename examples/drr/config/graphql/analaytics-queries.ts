@@ -71,3 +71,17 @@ export const ANALYTICS_DISTRICT_MAP_DATA = graphql(`
     districtMapData(indcFilter: $indcFilter, dataFilter: $dataFilter)
   }
 `);
+
+export const ANALYTICS_TIME_TRENDS = graphql(`
+  query getTimeTrends(
+    $indcFilter: IndicatorFilter!
+    $dataFilter: DataFilter!
+    $geoFilter: GeoFilter!
+  ) {
+    getTimeTrends(
+      indcFilter: $indcFilter
+      dataFilter: $dataFilter
+      geoFilter: $geoFilter
+    )
+  }
+`);
