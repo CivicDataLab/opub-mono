@@ -4,6 +4,8 @@ import { useWindowSize } from '@/hooks/use-window-size';
 import { useQueryState } from 'next-usequerystate';
 import {
   Button,
+  Combobox,
+  Form,
   MultiSelect,
   Select,
   SelectorCard,
@@ -186,7 +188,12 @@ const Content = ({
     xAxis: string[];
     values: number[];
   }>();
-  const [selectedBlocks, setSelectedBlocks] = React.useState<string[]>([]);
+  const [selectedBlocks, setSelectedBlocks] = React.useState<
+    {
+      label: string;
+      value: string;
+    }[]
+  >([]);
   const { width } = useWindowSize();
 
   const { data: mapFile, isLoading: mapLoading } = useFetch(
@@ -244,9 +251,9 @@ const Content = ({
   }, [currentData, barDataObj]);
 
   React.useEffect(() => {
-    if (selectedBlocks) {
+    if (selectedBlocks.length > 0) {
       const filteredData: any = {};
-      const selectedBlockValues = selectedBlocks.map((e: string) => e.value);
+      const selectedBlockValues = selectedBlocks.map((e) => e.value);
       Object.keys(barDataObj).forEach((key) => {
         if (selectedBlockValues.includes(key)) {
           filteredData[key] = barDataObj[key];
@@ -438,7 +445,10 @@ const Filters = ({
   barOptions: any;
   setSelectedBlocks: any;
   tab: 'map' | 'bar';
-  selectedBlocks: string[];
+  selectedBlocks: {
+    label: string;
+    value: string;
+  }[];
   isMobile: boolean;
 }) => {
   const options = Object.keys(Object.values(chartData)[0].years).map(
@@ -451,17 +461,19 @@ const Filters = ({
   return (
     <div className="flex flex-col gap-2 px-4 md:gap-4">
       {tab === 'bar' && selectedBlocks.length > 0 && (
-        <MultiSelect
-          name="blocks"
-          list={barOptions}
-          selectedValue={selectedBlocks}
-          label="Select Blocks to Compare"
-          placeholder="Select Blocks"
-          onChange={(values: any) => {
-            setSelectedBlocks(values);
-          }}
-          displaySelected
-        />
+        <Form>
+          <Combobox
+            name="blocks"
+            list={barOptions}
+            selectedValue={selectedBlocks}
+            label="Select Blocks to Compare"
+            placeholder="Select Blocks"
+            onChange={(values: any) => {
+              setSelectedBlocks(values);
+            }}
+            displaySelected
+          />
+        </Form>
       )}
 
       <div className="flex">
