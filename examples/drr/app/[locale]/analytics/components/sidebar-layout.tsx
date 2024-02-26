@@ -202,6 +202,7 @@ export function SidebarLayout({ data, indicator, boundary }: any) {
           <TimeTrends
             chartData={chartData?.data?.getTimeTrends}
             indicator={indicatorIcon}
+            boundary={boundary}
           />
         ) : null}
       </div>
