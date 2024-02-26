@@ -5,8 +5,6 @@ import { useQueryState } from 'next-usequerystate';
 import {
   Button,
   Combobox,
-  Form,
-  MultiSelect,
   Select,
   SelectorCard,
   Tab,
@@ -461,19 +459,17 @@ const Filters = ({
   return (
     <div className="flex flex-col gap-2 px-4 md:gap-4">
       {tab === 'bar' && selectedBlocks.length > 0 && (
-        <Form>
-          <Combobox
-            name="blocks"
-            list={barOptions}
-            selectedValue={selectedBlocks}
-            label="Select Blocks to Compare"
-            placeholder="Select Blocks"
-            onChange={(values: any) => {
-              setSelectedBlocks(values);
-            }}
-            displaySelected
-          />
-        </Form>
+        <Combobox
+          name="blocks"
+          list={barOptions}
+          selectedValue={selectedBlocks}
+          label="Select Blocks to Compare"
+          placeholder="Select Blocks"
+          onChange={(values: any) => {
+            setSelectedBlocks(values);
+          }}
+          displaySelected
+        />
       )}
 
       <div className="flex">

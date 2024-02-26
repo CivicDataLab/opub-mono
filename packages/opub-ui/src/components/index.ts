@@ -10,7 +10,6 @@ export { Calendar, RangeCalendar } from './Calendar';
 export { Carousel } from './Carousel';
 export { Choice } from './Choice';
 export { Collapsible } from './Collapsible';
-export { Combobox as MultiSelect } from './Combobox';
 export * from './Command';
 export { Connected } from './Connected';
 export { DataTable } from './DataTable';

@@ -42,7 +42,7 @@ export type DatFieldProps = {
 } & DateTimeProps &
   (DateFieldStateOptions | AriaDateFieldProps<DateValue>);
 
-const DateField = (props: any) => {
+const DateField = React.forwardRef((props: any, _) => {
   const {
     trim,
     isRange,
@@ -53,6 +53,7 @@ const DateField = (props: any) => {
     requiredIndicator,
     errorMessage,
     isPicker,
+    autoCapitalize,
     ...others
   } = props;
   let { locale } = useLocale();
@@ -106,7 +107,7 @@ const DateField = (props: any) => {
       {inputMarkup}
     </Labelled>
   );
-};
+});
 
 interface DatePickerSegmentProps extends DatePickerBase<DateValue> {
   segment: DateSegment;
