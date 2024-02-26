@@ -1,12 +1,13 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useKeyDetect } from '@/hooks/use-key-detect';
 import { MainConfig } from '@/types';
-import { platformName } from '@/config/consts';
 import { Icon, Text } from 'opub-ui';
 
+import { platformName } from '@/config/consts';
 import { Icons } from '@/components/icons';
 
 export function MobileNav({ data }: { data: MainConfig }) {
@@ -20,30 +21,24 @@ export function MobileNav({ data }: { data: MainConfig }) {
   }, [key, metaKey]);
 
   return (
-    <header className="bg-backgroundSolidDark shadow-elementTopNav py-3 px-6 shadow-top-bar sm:py-3 z-2 relative">
-      <div className="flex gap-1 items-center justify-center flex-wrap sm:justify-between">
+    <header className="shadow-top-bar relative z-2 bg-backgroundSolidDark px-6 py-3 shadow-elementTopNav sm:py-3">
+      <div className="flex flex-wrap items-center justify-center gap-1 sm:justify-between">
         <div className="flex items-center gap-1">
           <Link href={data.homeUrl}>
             <div className="flex items-center gap-2">
-              <Icon source={Icons.logo} color="default" size={6}/>
-              <div className="flex flex-col gap-1">
-              <Text variant="headingLg" as="span">
-                <span className="text-textOnBGDefault capitalize">
-                  {platformName}{' '}
-                </span>
-              </Text>
-              <Text variant="bodySm" as="span" fontWeight="semibold" className="ml-16">
-                <span className="text-textOnBGDefault capitalize">
-                for Disaster Risk Reduction
-                </span>
-              </Text>
-              </div>
+              <Image
+                src="/logo/IDSLogo.png"
+                width={245}
+                height={24}
+                alt="Assam DRR Dashboard"
+              />
+              <div className="flex flex-col gap-1"></div>
             </div>
           </Link>
         </div>
 
         {data.mainNav.length > 0 && (
-          <div className="flex items-center shrink-0 gap-3 flex-wrap sm:gap-5">
+          <div className="flex shrink-0 flex-wrap items-center gap-3 sm:gap-5">
             {data.mainNav.map((link) => (
               <ExploreLink
                 key={link.title}
@@ -51,7 +46,7 @@ export function MobileNav({ data }: { data: MainConfig }) {
                 icon={link.icon || ''}
                 text={link.title || ''}
               />
-            ))} 
+            ))}
           </div>
         )}
       </div>
@@ -70,9 +65,13 @@ const ExploreLink = ({
 }) => {
   return (
     <Link href={href}>
-      <div className="flex gap-1 py-2 px-2 rounded-1 hover:bg-surfaceHovered sm:px-3">
+      <div className="hover:bg-surfaceHovered flex gap-1 rounded-1 px-2 py-2 sm:px-3">
         {Icons[icon] && <Icon color="default" source={Icons[icon]} />}
-        <Text variant="bodyMd" fontWeight="medium" className="text-textOnBGDefault">
+        <Text
+          variant="bodyMd"
+          fontWeight="medium"
+          className="text-textOnBGDefault"
+        >
           {text}
         </Text>
       </div>

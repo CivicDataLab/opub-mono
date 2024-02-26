@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { Text } from 'opub-ui';
 
 import {
@@ -9,12 +10,20 @@ import {
 
 export function About() {
   return (
-    <section className=" flex h-[570px] w-full flex-col items-center justify-center bg-backgroundSolidDark px-16 py-12 ">
-      <div className="flex gap-80 self-stretch text-surfaceDefault">
-        <div className="flex flex-col items-start gap-5 px-24">
+    <section className=" px-30 flex h-[649px] w-full items-center justify-center gap-3 bg-backgroundSolidDark py-14">
+      <div className="flex items-center justify-center gap-20 text-surfaceDefault">
+        <div>
+          <Image
+            src="/logo/climateAction.png"
+            height={537}
+            width={506}
+            alt="Assam DRR Dashboard"
+          />
+        </div>
+        <div className=" flex w-[661px] flex-grow flex-col items-start gap-5">
           <Text
-            className="text-surfaceDefault"
-            variant="headingXl"
+            className=" text-baseAmberSolid7"
+            variant="heading3xl"
             fontWeight="bold"
           >
             {AboutText}
@@ -43,7 +52,6 @@ export function About() {
             {AboutTextContentThree}
           </Text>
         </div>
-        <div>IMAGE</div>
       </div>
     </section>
   );
