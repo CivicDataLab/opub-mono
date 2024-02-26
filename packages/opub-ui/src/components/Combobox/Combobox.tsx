@@ -28,16 +28,19 @@ const groupBy = function (arr: any[], criteria: string) {
   }, {});
 };
 
+type TListItem = {
+  value: string;
+  label: string;
+  type?: string;
+  disabled?: boolean;
+};
+
 export function Combobox(
   props: ComboboxProps & {
     /**
      * list of the combobox.
      */
-    list: {
-      value: string;
-      label: string;
-      type?: string;
-    }[];
+    list: TListItem[];
 
     /**
      * Add grouping to the combobox.
@@ -143,18 +146,11 @@ export function Combobox(
   );
 }
 
-const List = ({ matches }: { matches: any; group?: boolean }) => {
+const List = ({ matches }: { matches: any }) => {
   return (
     <>
-      {matches.map((item: { label: string; value: string }) => (
-        <ComboboxItem
-          key={item.value}
-          value={item.value}
-          focusOnHover
-          className={itemStyles.Item}
-        >
-          {item.label}
-        </ComboboxItem>
+      {matches.map((item: TListItem) => (
+        <Item key={item.value} item={item} />
       ))}
     </>
   );
@@ -163,34 +159,35 @@ const List = ({ matches }: { matches: any; group?: boolean }) => {
 const ListGroup = ({ matches }: { matches: any }) => {
   return (
     <>
-      {matches.map(
-        (
-          [type, items]: [string, { label: string; value: string }[]],
-          i: number
-        ) => (
-          <React.Fragment key={type}>
-            {/* @ts-expect-error */}
-            <ComboboxGroup label={type}>
-              <div aria-hidden="true" className="pl-2">
-                <Text variant="bodySm" color="disabled" fontWeight="medium">
-                  {type}
-                </Text>
-              </div>
-              {items.map((item) => (
-                <ComboboxItem
-                  key={item.value}
-                  value={item.value}
-                  focusOnHover
-                  className={itemStyles.Item}
-                >
-                  {item.label}
-                </ComboboxItem>
-              ))}
-            </ComboboxGroup>
-            {i < matches.length - 1 && <Divider className="my-1" />}
-          </React.Fragment>
-        )
-      )}
+      {matches.map(([type, items]: [string, TListItem[]], i: number) => (
+        <React.Fragment key={type}>
+          {/* @ts-expect-error */}
+          <ComboboxGroup label={type}>
+            <div aria-hidden="true" className="pl-2">
+              <Text variant="bodySm" color="disabled" fontWeight="medium">
+                {type}
+              </Text>
+            </div>
+            {items.map((item) => (
+              <Item key={item.value} item={item} />
+            ))}
+          </ComboboxGroup>
+          {i < matches.length - 1 && <Divider className="my-1" />}
+        </React.Fragment>
+      ))}
     </>
+  );
+};
+
+const Item = ({ item }: { item: TListItem }) => {
+  return (
+    <ComboboxItem
+      value={item.value}
+      className={itemStyles.Item}
+      disabled={item.disabled}
+      focusOnHover
+    >
+      <Text color={item.disabled ? 'disabled' : 'default'}>{item.label}</Text>
+    </ComboboxItem>
   );
 };
