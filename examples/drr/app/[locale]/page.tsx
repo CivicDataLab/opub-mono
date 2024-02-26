@@ -1,10 +1,4 @@
-import {
-  About,
-  HeroSection,
-  Partnerships,
-  QuickLinks,
-  Video,
-} from './components';
+import { About, HeroSection, QuickLinks, Video } from './components';
 
 export default function Home() {
   return (
@@ -14,7 +8,6 @@ export default function Home() {
         <QuickLinks />
         <About />
         <Video />
-        {/* <Partnerships /> */}
       </div>
     </main>
   );
