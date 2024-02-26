@@ -103,3 +103,19 @@ export const Grouping: Story = {
     displaySelected: true,
   },
 };
+
+export const Disabled: Story = {
+  args: {
+    label: 'Select an Item',
+    placeholder: 'e.g., Apple, Red',
+    list: [
+      { label: 'Apple', value: 'apple', type: 'Fruits' },
+      { label: 'Mango', value: 'mango', type: 'Fruits' },
+      { label: 'Red', value: 'red', type: 'Colours', disabled: true },
+      { label: 'Black', value: 'black', type: 'Colours', disabled: true },
+    ],
+    selectedValue: [],
+    group: true,
+    displaySelected: true,
+  },
+};
