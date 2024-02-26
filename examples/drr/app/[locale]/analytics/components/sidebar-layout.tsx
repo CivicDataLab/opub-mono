@@ -18,6 +18,7 @@ import { ANALYTICS_TIME_TRENDS } from '@/config/graphql/analaytics-queries';
 import { GraphQL } from '@/lib/api';
 import { cn, deSlugify, formatDateString } from '@/lib/utils';
 import { RevenueCircle, ScoreInfo } from './revenue-circle-accordion';
+import styles from './styles.module.scss';
 import { TimeTrends } from './time-trends';
 
 export function SidebarLayout({ data, indicator, boundary }: any) {
@@ -28,12 +29,31 @@ export function SidebarLayout({ data, indicator, boundary }: any) {
   const color = '#000000';
   const region = searchParams.get('region') || '1';
 
+  const DEFAULT_PERIOD = '3M';
+
+  const items = [
+    {
+      value: '3M',
+      label: 'Past 3 months',
+    },
+    {
+      value: '1Y',
+      label: 'Past 1 year',
+    },
+    {
+      value: 'ALL',
+      label: 'All Data',
+    },
+  ];
+
+  const [period, setPeriod] = React.useState(items[0].value || DEFAULT_PERIOD);
+
   const chartData = useQuery(
-    [`chartData_${boundary}_${indicator}_${timePeriod}_${region}`],
+    [`chartData_${boundary}_${indicator}_${timePeriod}_${region}_${period}`],
     () =>
       GraphQL('analytics', ANALYTICS_TIME_TRENDS, {
         indcFilter: { slug: indicatorIcon },
-        dataFilter: { dataPeriod: timePeriod, period: '3M' },
+        dataFilter: { dataPeriod: timePeriod, period: period },
         geoFilter: { code: region?.split(',') },
       }),
     {
@@ -158,6 +178,26 @@ export function SidebarLayout({ data, indicator, boundary }: any) {
         <Text variant="heading2xl" fontWeight="regular">
           Time Trends
         </Text>
+        <div className="mt-4 flex items-center gap-2">
+          {items.map(({ label, value: itemValue }) => {
+            const isActiveValue = itemValue === period;
+            return (
+              <button
+                key={itemValue}
+                type="button"
+                className={cn(
+                  styles.TabItem,
+                  isActiveValue && styles.TabItemActive
+                )}
+                onClick={() => {
+                  setPeriod(itemValue);
+                }}
+              >
+                {label}
+              </button>
+            );
+          })}
+        </div>
         {chartData.isFetched ? (
           <TimeTrends
             chartData={chartData?.data?.getTimeTrends}
