@@ -14,6 +14,8 @@ export type TimeFieldProps = {} & DateTimeProps &
   (TimeFieldStateOptions | AriaTimeFieldProps<TimeValue>);
 
 const TimeField = React.forwardRef((props: TimeFieldProps, ref: any) => {
+  const [hydrated, setHydrated] = React.useState(false);
+
   const {
     helpText,
     label,
@@ -29,6 +31,14 @@ const TimeField = React.forwardRef((props: TimeFieldProps, ref: any) => {
   });
 
   let { labelProps, fieldProps } = useTimeField(props, state, ref);
+
+  React.useEffect(() => {
+    setHydrated(true);
+  }, []);
+  if (!hydrated) {
+    // Returns null on first render, so the client and server match
+    return null;
+  }
 
   return (
     <Labelled
