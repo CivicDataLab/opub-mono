@@ -1,5 +1,6 @@
 import React, { useMemo, useState, useTransition } from 'react';
 import {
+  ComboboxGroup,
   ComboboxItem,
   ComboboxPopover,
   ComboboxProvider,
@@ -9,10 +10,23 @@ import { matchSorter } from 'match-sorter';
 
 import { ComboboxProps } from '../../types/combobox';
 import itemStyles from '../ActionList/ActionList.module.scss';
+import { Divider } from '../Divider';
 import { Tag } from '../Tag';
 import { Text } from '../Text';
 import { Combobox as Component } from './Atoms';
 import styles from './Combobox.module.scss';
+
+const groupBy = function (arr: any[], criteria: string) {
+  return arr.reduce(function (obj, item) {
+    var key = item[criteria];
+    // If the key doesn't exist yet, create it
+    if (!Object.prototype.hasOwnProperty.call(obj, key)) obj[key] = [];
+    // Push the value to the object
+    obj[key].push(item);
+
+    return obj;
+  }, {});
+};
 
 export function Combobox(
   props: ComboboxProps & {
@@ -22,17 +36,28 @@ export function Combobox(
     list: {
       value: string;
       label: string;
+      type?: string;
     }[];
+
+    /**
+     * Add grouping to the combobox.
+     */
+    group?: boolean;
   }
 ) {
   const [isPending, startTransition] = useTransition();
   const [searchValue, setSearchValue] = useState('');
+  const deferredValue = React.useDeferredValue(searchValue);
   const [selectedValues, setSelectedValues] = useState(props.selectedValue);
   const combobox = useComboboxStore();
 
   const matches = useMemo(() => {
-    return matchSorter(props.list, searchValue, { keys: ['label', 'value'] });
-  }, [searchValue]);
+    const items = matchSorter(props.list, deferredValue, {
+      keys: ['label', 'value'],
+    });
+    if (props.group) return Object.entries(groupBy(items, 'type'));
+    return items;
+  }, [deferredValue]);
 
   function removeTag(value: string) {
     if (selectedValues && typeof selectedValues !== 'string') {
@@ -42,25 +67,33 @@ export function Combobox(
     }
   }
 
-  const tags = props.displaySelected ? (
+  let tags = null;
+  if (
+    props.displaySelected &&
     selectedValues &&
-    typeof selectedValues !== 'string' &&
-    selectedValues.length > 0 ? (
-      <div className="flex flex-wrap gap-1">
-        {selectedValues.map((tag: string) => (
-          <Tag onRemove={removeTag} value={tag} key={tag}>
-            {tag}
-          </Tag>
-        ))}
-      </div>
-    ) : (
-      <div className=" min-h-7">
-        <Text variant="bodySm" color="subdued">
-          No Tags selected
-        </Text>
-      </div>
-    )
-  ) : null;
+    typeof selectedValues !== 'string'
+  ) {
+    // To show labels and not values
+    const selectedTags = props.list.filter((item) => {
+      return selectedValues.includes(item.value);
+    });
+    tags =
+      selectedTags.length > 0 ? (
+        <div className="flex flex-wrap gap-1">
+          {selectedTags.map((tag) => (
+            <Tag onRemove={removeTag} value={tag.value} key={tag.value}>
+              {tag.label}
+            </Tag>
+          ))}
+        </div>
+      ) : (
+        <div className=" min-h-7">
+          <Text variant="bodySm" color="subdued">
+            No Tags selected
+          </Text>
+        </div>
+      );
+  }
 
   return (
     <ComboboxProvider
@@ -93,16 +126,15 @@ export function Combobox(
         className={styles.Popover}
         style={{ '--popover-padding': 'var(--space-1)' } as React.CSSProperties}
       >
-        {matches.map((item) => (
-          <ComboboxItem
-            key={item.value}
-            value={item.value}
-            focusOnHover
-            className={itemStyles.Item}
-          >
-            {item.label}
-          </ComboboxItem>
-        ))}
+        {matches.length && (
+          <div className={styles.List}>
+            {props.group ? (
+              <ListGroup matches={matches} />
+            ) : (
+              <List matches={matches} />
+            )}
+          </div>
+        )}
         {!matches.length && (
           <div className={styles.NoResult}>No results found</div>
         )}
@@ -110,3 +142,55 @@ export function Combobox(
     </ComboboxProvider>
   );
 }
+
+const List = ({ matches }: { matches: any; group?: boolean }) => {
+  return (
+    <>
+      {matches.map((item: { label: string; value: string }) => (
+        <ComboboxItem
+          key={item.value}
+          value={item.value}
+          focusOnHover
+          className={itemStyles.Item}
+        >
+          {item.label}
+        </ComboboxItem>
+      ))}
+    </>
+  );
+};
+
+const ListGroup = ({ matches }: { matches: any }) => {
+  return (
+    <>
+      {matches.map(
+        (
+          [type, items]: [string, { label: string; value: string }[]],
+          i: number
+        ) => (
+          <React.Fragment key={type}>
+            {/* @ts-expect-error */}
+            <ComboboxGroup label={type}>
+              <div aria-hidden="true" className="pl-2">
+                <Text variant="bodySm" color="disabled" fontWeight="medium">
+                  {type}
+                </Text>
+              </div>
+              {items.map((item) => (
+                <ComboboxItem
+                  key={item.value}
+                  value={item.value}
+                  focusOnHover
+                  className={itemStyles.Item}
+                >
+                  {item.label}
+                </ComboboxItem>
+              ))}
+            </ComboboxGroup>
+            {i < matches.length - 1 && <Divider className="my-1" />}
+          </React.Fragment>
+        )
+      )}
+    </>
+  );
+};
