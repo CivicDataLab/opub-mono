@@ -4,10 +4,9 @@ import { useWindowSize } from '@/hooks/use-window-size';
 import { useQueryState } from 'next-usequerystate';
 import {
   Button,
-  Combobox,
+  MultiSelect,
   Select,
   SelectorCard,
-  ShareDialog,
   Tab,
   TabList,
   TabPanel,
@@ -15,7 +14,6 @@ import {
   Text,
   toast,
   Tray,
-  useScreenshot,
 } from 'opub-ui';
 import { ErrorBoundary } from 'react-error-boundary';
 
@@ -237,14 +235,20 @@ const Content = ({
   React.useEffect(() => {
     if (!currentData) return;
 
-    setSelectedBlocks(Object.keys(barDataObj));
+    setSelectedBlocks(
+      Object.keys(barDataObj).map((e: string) => ({
+        label: e,
+        value: e,
+      }))
+    );
   }, [currentData, barDataObj]);
 
   React.useEffect(() => {
     if (selectedBlocks) {
       const filteredData: any = {};
+      const selectedBlockValues = selectedBlocks.map((e: string) => e.value);
       Object.keys(barDataObj).forEach((key) => {
-        if (selectedBlocks.includes(key)) {
+        if (selectedBlockValues.includes(key)) {
           filteredData[key] = barDataObj[key];
         }
       });
@@ -364,10 +368,15 @@ const Content = ({
           <Filters
             states={states}
             chartData={chartData}
-            barOptions={currentData.bardata.xAxis}
+            barOptions={Object.keys(barDataObj).map((e: string) => {
+              return {
+                value: e,
+                label: e,
+              };
+            })}
+            selectedBlocks={selectedBlocks}
             setSelectedBlocks={setSelectedBlocks}
             tab={states.selectedTab}
-            selectedBlocks={selectedBlocks}
             isMobile={isMobile}
           />
 
@@ -441,12 +450,11 @@ const Filters = ({
 
   return (
     <div className="flex flex-col gap-2 px-4 md:gap-4">
-      {tab === 'bar' && (
-        <Combobox
+      {tab === 'bar' && selectedBlocks.length > 0 && (
+        <MultiSelect
           name="blocks"
           list={barOptions}
           selectedValue={selectedBlocks}
-          key={selectedBlocks.toString()}
           label="Select Blocks to Compare"
           placeholder="Select Blocks"
           onChange={(values: any) => {

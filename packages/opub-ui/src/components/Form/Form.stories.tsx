@@ -76,7 +76,20 @@ const defaultValBase = {
   },
   time: '04:45',
   combobox: 'Apple',
-  comboboxMulti: ['Banana', 'Broccoli', 'Candy', 'Carrot'],
+  comboboxMulti: [
+    {
+      value: 'Apple',
+      label: 'Apple',
+    },
+    {
+      value: 'Banana',
+      label: 'Banana',
+    },
+    {
+      value: 'Burger',
+      label: 'Burger',
+    },
+  ],
   dropZone: [],
 };
 
