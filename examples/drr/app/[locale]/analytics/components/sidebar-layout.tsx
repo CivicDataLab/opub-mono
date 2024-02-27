@@ -10,13 +10,15 @@ import {
   Vulnerability,
 } from '@/public/FactorIcons';
 import { InfoSquare } from '@/public/InfoCircle';
+import * as Accordion from '@radix-ui/react-accordion';
 import { useQuery } from '@tanstack/react-query';
-import { Button, Divider, ProgressBar, Text } from 'opub-ui';
+import { Button, Divider, Icon, ProgressBar, Text } from 'opub-ui';
 
 import { RiskColorMap } from '@/config/consts';
 import { ANALYTICS_TIME_TRENDS } from '@/config/graphql/analaytics-queries';
 import { GraphQL } from '@/lib/api';
 import { cn, deSlugify, formatDateString } from '@/lib/utils';
+import { Icons } from '@/components/icons';
 import { RevenueCircle, ScoreInfo } from './revenue-circle-accordion';
 import styles from './styles.module.scss';
 import { TimeTrends } from './time-trends';
@@ -168,44 +170,84 @@ export function SidebarLayout({ data, indicator, boundary }: any) {
           </div>
         ))}
       </section>
-      {districtData.length === 1 && (
-        <RevenueCircle
-          revenueCircleData={revenueCircleData}
-          indicator={indicator}
-        />
-      )}
-      <div className="mt-5">
-        <Text variant="heading2xl" fontWeight="regular">
-          Time Trends
-        </Text>
-        <div className="mt-4 flex items-center gap-2">
-          {items.map(({ label, value: itemValue }) => {
-            const isActiveValue = itemValue === period;
-            return (
-              <button
-                key={itemValue}
-                type="button"
-                className={cn(
-                  styles.TabItem,
-                  isActiveValue && styles.TabItemActive
-                )}
-                onClick={() => {
-                  setPeriod(itemValue);
-                }}
+      <Accordion.Root type="single" defaultValue="revenue-circle" collapsible>
+        <Accordion.Item value="revenue-circle" className="mt-4">
+          {districtData.length === 1 && (
+            <div className="mt-7">
+              <div className={styles.SidebarAccordionTitle}>
+                <Text variant="bodyLg" fontWeight="bold">
+                  REVENUE CIRCLE SCORE
+                </Text>
+                <Accordion.Trigger
+                  className={cn(styles.SidebarAccordionIcon, 'ml-auto')}
+                >
+                  <Icon
+                    className={cn(styles.AccordionChevron)}
+                    source={Icons.down}
+                    size={70}
+                  />
+                </Accordion.Trigger>
+              </div>
+              <Accordion.Content
+                className={cn(styles.Box, 'px-2 pb-4 md:px-4 ')}
               >
-                {label}
-              </button>
-            );
-          })}
-        </div>
-        {chartData.isFetched ? (
-          <TimeTrends
-            chartData={chartData?.data?.getTimeTrends}
-            indicator={indicatorIcon}
-            boundary={boundary}
-          />
-        ) : null}
-      </div>
+                <RevenueCircle
+                  revenueCircleData={revenueCircleData}
+                  indicator={indicator}
+                />
+              </Accordion.Content>
+            </div>
+          )}
+        </Accordion.Item>
+        <Accordion.Item value="time-trends" className="mt-4">
+          <div className="mt-5">
+            <div className={styles.SidebarAccordionTitle}>
+              <Text variant="bodyLg" fontWeight="bold">
+                TIME TRENDS
+              </Text>
+              <Accordion.Trigger
+                className={cn(styles.SidebarAccordionIcon, 'ml-auto')}
+              >
+                <Icon
+                  className={cn(styles.AccordionChevron)}
+                  source={Icons.down}
+                  size={70}
+                />
+              </Accordion.Trigger>
+            </div>
+
+            <Accordion.Content className={cn(styles.Box, 'px-2 pb-4 md:px-4 ')}>
+              <div className="mt-4 flex items-center gap-2">
+                {items.map(({ label, value: itemValue }) => {
+                  const isActiveValue = itemValue === period;
+                  return (
+                    <button
+                      key={itemValue}
+                      type="button"
+                      className={cn(
+                        styles.TabItem,
+                        isActiveValue && styles.TabItemActive
+                      )}
+                      onClick={() => {
+                        setPeriod(itemValue);
+                      }}
+                    >
+                      {label}
+                    </button>
+                  );
+                })}
+              </div>
+              {chartData.isFetched ? (
+                <TimeTrends
+                  chartData={chartData?.data?.getTimeTrends}
+                  indicator={indicatorIcon}
+                  boundary={boundary}
+                />
+              ) : null}
+            </Accordion.Content>
+          </div>
+        </Accordion.Item>
+      </Accordion.Root>
     </aside>
   );
 }
