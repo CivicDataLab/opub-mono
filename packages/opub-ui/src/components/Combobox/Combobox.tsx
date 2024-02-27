@@ -49,6 +49,7 @@ export const Combobox = React.forwardRef(
     const [selectedValues, setSelectedValues] = useState<
       TListItem[] | string | undefined
     >(props.selectedValue);
+
     const combobox = useComboboxStore();
 
     const matches = useMemo(() => {
@@ -106,11 +107,19 @@ export const Combobox = React.forwardRef(
       <ComboboxProvider
         selectedValue={selected}
         setSelectedValue={(e) => {
-          const selected = e.map((value: string) => {
+          // for single select
+          if (typeof e === 'string') {
+            setSelectedValues(e);
+            props.onChange && props.onChange(e);
+            return;
+          }
+
+          // for multi select
+          const selectedArr = e.map((value: string) => {
             return props.list.find((item) => item.value === value);
           });
-          setSelectedValues(selected);
-          props.onChange && props.onChange(selected);
+          setSelectedValues(selectedArr);
+          props.onChange && props.onChange(selectedArr);
         }}
         setValue={(value) => {
           startTransition(() => {
