@@ -109,6 +109,23 @@ export const Grouping: Story = {
   },
 };
 
+export const GroupingMissingType: Story = {
+  args: {
+    label: 'Select an Item',
+    placeholder: 'e.g., Apple, Red',
+    list: [
+      { label: 'Mango', value: 'mango' },
+      { label: 'France', value: 'france' },
+      { label: 'Red', value: 'red', type: 'Colours' },
+      { label: 'Black', value: 'black', type: 'Colours' },
+      { label: 'Apple', value: 'apple', type: 'Fruits' },
+    ],
+    selectedValue: [],
+    group: true,
+    displaySelected: true,
+  },
+};
+
 export const Disabled: Story = {
   args: {
     label: 'Select an Item',

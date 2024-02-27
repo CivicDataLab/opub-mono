@@ -132,3 +132,15 @@ export const range = (len: number) => {
   }
   return arr;
 };
+
+export const groupBy = function (arr: any[], criteria: string) {
+  return arr.reduce(function (obj, item) {
+    var key = item[criteria];
+    // If the key doesn't exist yet, create it
+    if (!Object.prototype.hasOwnProperty.call(obj, key)) obj[key] = [];
+    // Push the value to the object
+    obj[key].push(item);
+
+    return obj;
+  }, {});
+};
