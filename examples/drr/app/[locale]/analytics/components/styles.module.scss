@@ -58,6 +58,41 @@
   }
 }
 
+.Box {
+  height: 280px;
+  overflow-y: scroll;
+
+  border-radius: 0px 0px 4px 4px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.SidebarAccordionTitle {
+  display: flex;
+  padding: 8px 4px;
+  align-items: center;
+  gap: 10px;
+  align-self: stretch;
+
+  border-radius: 4px 4px 0px 0px;
+  background: rgba(150, 231, 158, 0.2);
+}
+
+.SidebarAccordionIcon {
+  font-family: inherit;
+  cursor: pointer;
+  height: 25px;
+  width: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(150, 231, 158, 0.02);
+  border: none !important;
+
+  &[data-state='open'] > .AccordionChevron {
+    transform: rotate(180deg);
+  }
+}
+
 .TabItem {
   --active-color: rgba(150, 231, 158, 0.5);
   --active-border-color: #479c4f;

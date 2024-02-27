@@ -24,57 +24,50 @@ export const RevenueCircle = ({
   const FactorVariables = Object.keys(clonedRevenueCircleData);
 
   return (
-    <section className="mt-7">
-      <Text variant="bodyLg" fontWeight="bold">
-        REVENUE CIRCLE SCORE
-      </Text>
-      <Accordion.Root type="single" collapsible>
-        {revenueCircleData.map((item: any, index: number) => (
-          <Accordion.Item
-            key={`revenue-circle-${index}`}
-            value={`revenue-circle-${index}`}
-            className="mt-4"
-          >
-            <Text variant="headingLg" fontWeight="regular">
-              {item?.['revenue circle']}
-            </Text>
-            <div className="flex items-center">
-              <div className=" mr-3 basis-2/4">
-                <ProgressBar
-                  size="small"
-                  customColor={RiskColorMap[item?.[indicator]]}
-                  value={(item?.[indicator] / 6) * 100}
-                />
-              </div>
-              <Text variant="heading2xl">{item?.[indicator]}</Text>
-              /6
-              <Accordion.Trigger
-                className={cn(styles.AccordionItem, 'ml-auto')}
-              >
-                <Icon
-                  className={cn(styles.AccordionChevron)}
-                  source={Icons.down}
-                  size={80}
-                />
-              </Accordion.Trigger>
+    <Accordion.Root type="single" collapsible>
+      {revenueCircleData.map((item: any, index: number) => (
+        <Accordion.Item
+          key={`revenue-circle-${index}`}
+          value={`revenue-circle-${index}`}
+          className="mt-4"
+        >
+          <Text variant="headingLg" fontWeight="regular">
+            {item?.['revenue circle']}
+          </Text>
+          <div className="flex items-center">
+            <div className=" mr-3 basis-2/4">
+              <ProgressBar
+                size="small"
+                customColor={RiskColorMap[item?.[indicator]]}
+                value={(item?.[indicator] / 6) * 100}
+              />
             </div>
-            <Accordion.Content className="px-3 pb-4 md:px-6">
-              {FactorVariables.map(
-                (scoreType) =>
-                  item?.[scoreType] !== undefined && (
-                    <ScoreInfo
-                      key={scoreType}
-                      indicator={indicator}
-                      label={`${deSlugify(scoreType)} Score`}
-                      value={item?.[scoreType]}
-                    />
-                  )
-              )}
-            </Accordion.Content>
-          </Accordion.Item>
-        ))}
-      </Accordion.Root>
-    </section>
+            <Text variant="heading2xl">{item?.[indicator]}</Text>
+            /6
+            <Accordion.Trigger className={cn(styles.AccordionItem, 'ml-auto')}>
+              <Icon
+                className={cn(styles.AccordionChevron)}
+                source={Icons.down}
+                size={80}
+              />
+            </Accordion.Trigger>
+          </div>
+          <Accordion.Content className="px-3 pb-4 md:px-6">
+            {FactorVariables.map(
+              (scoreType) =>
+                item?.[scoreType] !== undefined && (
+                  <ScoreInfo
+                    key={scoreType}
+                    indicator={indicator}
+                    label={`${deSlugify(scoreType)} Score`}
+                    value={item?.[scoreType]}
+                  />
+                )
+            )}
+          </Accordion.Content>
+        </Accordion.Item>
+      ))}
+    </Accordion.Root>
   );
 };
 
