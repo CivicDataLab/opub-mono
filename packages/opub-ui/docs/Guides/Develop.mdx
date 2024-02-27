@@ -14,12 +14,6 @@ OPub UI is available as an npm package. You can install it using your favorite p
 npm install @opub/ui
 ```
 
-or
-
-```bash
-yarn add @opub/ui
-```
-
 ### Add base styles
 
 OPub UI comes with a set of base styles that you need to import into your project. The base styles are required for OPub UI to work correctly. Add them in the base css file of your project.
@@ -34,6 +28,12 @@ Once you complete the initial setup, you can import components into your project
 
 ```js
 import { Badge, Button, Menu } from 'opub-ui';
+```
+
+Chart components can be imported from `opub-ui/viz`:
+
+```js
+import { BarChart } from 'opub-ui/viz';
 ```
 
 ## Tools
@@ -74,13 +74,13 @@ OPub UI is available as an npm package. To publish a new version, follow these s
 To bundle the package, run:
 
 ```bash
-yarn build
+npm run build
 ```
 
 This will create a `dist` folder with the bundled files. Then from the root of the project, run:
 
 ```bash
-yarn changeset publish
+npm run publish
 ```
 
 Make sure to update the version number in the `package.json` file before publishing.
