@@ -9,24 +9,13 @@ import {
 import { matchSorter } from 'match-sorter';
 
 import type { ComboboxProps, TListItem } from '../../types/combobox';
+import { groupBy } from '../../utils';
 import itemStyles from '../ActionList/ActionList.module.scss';
 import { Divider } from '../Divider';
 import { Tag } from '../Tag';
 import { Text } from '../Text';
 import { Combobox as Component } from './Atoms';
 import styles from './Combobox.module.scss';
-
-const groupBy = function (arr: any[], criteria: string) {
-  return arr.reduce(function (obj, item) {
-    var key = item[criteria];
-    // If the key doesn't exist yet, create it
-    if (!Object.prototype.hasOwnProperty.call(obj, key)) obj[key] = [];
-    // Push the value to the object
-    obj[key].push(item);
-
-    return obj;
-  }, {});
-};
 
 export const Combobox = React.forwardRef(
   (
@@ -53,11 +42,17 @@ export const Combobox = React.forwardRef(
     const combobox = useComboboxStore();
 
     const matches = useMemo(() => {
-      const items = matchSorter(props.list, deferredValue, {
+      if (props.group) {
+        const items = matchSorter(props.list, deferredValue, {
+          keys: ['label', 'value', 'type'],
+        });
+
+        return Object.entries(groupBy(items, 'type'));
+      }
+
+      return matchSorter(props.list, deferredValue, {
         keys: ['label', 'value'],
       });
-      if (props.group) return Object.entries(groupBy(items, 'type'));
-      return items;
     }, [deferredValue]);
 
     function removeTag(value: string) {
@@ -175,6 +170,13 @@ const List = ({ matches }: { matches: any }) => {
 };
 
 const ListGroup = ({ matches }: { matches: any }) => {
+  // sorting items witout type first
+  matches.sort((a: any, b: any) => {
+    if (a[0] === 'undefined') return -1;
+    if (b[0] === 'undefined') return 1;
+    return 0;
+  });
+
   return (
     <>
       {matches.map(([type, items]: [string, TListItem[]], i: number) => (
@@ -182,7 +184,12 @@ const ListGroup = ({ matches }: { matches: any }) => {
           {/* @ts-expect-error */}
           <ComboboxGroup label={type}>
             <div aria-hidden="true" className="pl-2">
-              <Text variant="bodySm" color="disabled" fontWeight="medium">
+              <Text
+                variant="bodySm"
+                color="disabled"
+                visuallyHidden={type === 'undefined'}
+                fontWeight="medium"
+              >
                 {type}
               </Text>
             </div>
