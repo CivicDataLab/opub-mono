@@ -58,9 +58,16 @@
   }
 }
 
-.Box {
+.RevenueBox {
   height: 280px;
   overflow-y: scroll;
+
+  border-radius: 0px 0px 4px 4px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.TrendsBox {
+  height: 420px;
 
   border-radius: 0px 0px 4px 4px;
   border: 1px solid rgba(0, 0, 0, 0.1);
@@ -101,7 +108,9 @@
   border: 1px solid #000;
   border-radius: 4px;
   cursor: pointer;
-  padding: 6px 10px;
+  padding: 4px;
+
+  flex-basis: 40%;
 }
 
 .TabItem:hover {

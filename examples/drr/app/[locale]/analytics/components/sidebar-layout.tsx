@@ -102,8 +102,13 @@ export function SidebarLayout({ data, indicator, boundary }: any) {
       )}
     >
       <header className="mb-5 mt-4 flex items-center justify-between">
-        <Text variant="heading2xl" fontWeight="regular">
-          Data Insights
+        <Text
+          variant="heading2xl"
+          fontWeight="regular"
+          className="flex items-center gap-2"
+        >
+          {IconMap[indicatorIcon || 'risk-score']}
+          {deSlugify(indicatorIcon)}
         </Text>
         <Button variant="success" kind="secondary">
           Download Report
@@ -112,23 +117,13 @@ export function SidebarLayout({ data, indicator, boundary }: any) {
       <Divider className="mt-2" />
       {data.length === 1 ||
         (districtData.length === 1 && (
-          <div className=" mt-5 flex flex-col">
+          <div className=" mb-2 mt-5 flex flex-col">
             <Text variant="heading2xl" fontWeight="regular">
               {RegionName} {GeographyMap[boundary]}
             </Text>
           </div>
         ))}
       <div className="flex items-center justify-between self-stretch">
-        <div className="mt-3 flex items-center gap-2">
-          <Text
-            variant="headingMd"
-            fontWeight="bold"
-            className="mb-4 flex items-center gap-2"
-          >
-            {IconMap[indicatorIcon || 'risk-score']}
-            {deSlugify(indicator)}
-          </Text>
-        </div>
         <div className="flex items-center gap-4">
           <Text variant="bodyMd" color="subdued" fontWeight="regular">
             Cumulative till {formattedTimePeriod}
@@ -137,19 +132,9 @@ export function SidebarLayout({ data, indicator, boundary }: any) {
         </div>
       </div>
 
-      <section className="mt-7">
-        {boundary === 'district' && (
-          <Text variant="bodyLg" fontWeight="bold">
-            DISTRICT SCORE
-          </Text>
-        )}
+      <section className="mt-4">
         {DataBasedOnBoundary.map((data: any, index: any) => (
           <div key={index}>
-            <div className="mb-2 mt-2">
-              <Text variant="headingLg" fontWeight="regular">
-                {data[boundary]}
-              </Text>
-            </div>
             <div className="flex flex-col gap-1">
               <div className="flex items-center">
                 <div className=" mr-3 basis-2/4">
@@ -170,7 +155,7 @@ export function SidebarLayout({ data, indicator, boundary }: any) {
           </div>
         ))}
       </section>
-      <Accordion.Root type="single" defaultValue="revenue-circle" collapsible>
+      <Accordion.Root type="single" defaultValue="time-trends" collapsible>
         <Accordion.Item value="revenue-circle" className="mt-4">
           {districtData.length === 1 && (
             <div className="mt-7">
@@ -189,7 +174,7 @@ export function SidebarLayout({ data, indicator, boundary }: any) {
                 </Accordion.Trigger>
               </div>
               <Accordion.Content
-                className={cn(styles.Box, 'px-2 pb-4 md:px-4 ')}
+                className={cn(styles.RevenueBox, 'px-2 pb-4 md:px-4 ')}
               >
                 <RevenueCircle
                   revenueCircleData={revenueCircleData}
@@ -216,7 +201,9 @@ export function SidebarLayout({ data, indicator, boundary }: any) {
               </Accordion.Trigger>
             </div>
 
-            <Accordion.Content className={cn(styles.Box, 'px-2 pb-4 md:px-4 ')}>
+            <Accordion.Content
+              className={cn(styles.TrendsBox, 'px-2 pb-4 md:px-4 ')}
+            >
               <div className="mt-4 flex items-center gap-2">
                 {items.map(({ label, value: itemValue }) => {
                   const isActiveValue = itemValue === period;
