@@ -41,7 +41,7 @@ export function formatDateString(dateString: string, isHyphenated = false) {
 
   // Format the date as "Month Year"
   const formattedDate = new Intl.DateTimeFormat('en-US', {
-    month: 'long',
+    month: 'short',
     year: 'numeric',
   }).format(dateObject);
 

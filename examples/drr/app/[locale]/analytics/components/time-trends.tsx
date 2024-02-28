@@ -9,6 +9,7 @@ interface LineOptions {
   };
   yAxis: {
     type: string;
+    minInterval: number;
   };
   legend: {
     data: string[];
@@ -35,11 +36,12 @@ export function TimeTrends({
   let lineOptions: LineOptions = {
     xAxis: {
       data: Object.keys(chartData[indicator]).map((item) =>
-        formatDateString(item, true)
+        formatDateString(item)
       ),
     },
     yAxis: {
       type: 'value',
+      minInterval: 1,
     },
     legend: {
       data: [],
