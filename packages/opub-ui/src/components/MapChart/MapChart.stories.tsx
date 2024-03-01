@@ -151,7 +151,6 @@ export const OnlyMap: Story = {
   },
   args: {
     features,
-    legendData,
     mapDataFn,
     mapProperty: 'dt_code',
     mapZoom: 7.9,
@@ -159,5 +158,6 @@ export const OnlyMap: Story = {
     mapCenter: [26.193, 92.3],
     legendHeading,
     hideScale: true,
+    fullScreen: false,
   },
 };
