@@ -10,17 +10,16 @@ import {
 
 export function About() {
   return (
-    <section className=" px-30 flex h-[649px] w-full items-center justify-center gap-3 bg-backgroundSolidDark py-14">
-      <div className="flex items-center justify-center gap-20 text-surfaceDefault">
-        <div>
-          <Image
-            src="/logo/climateAction.png"
-            height={537}
-            width={506}
-            alt="Assam DRR Dashboard"
-          />
-        </div>
-        <div className=" flex w-[661px] flex-grow flex-col items-start gap-5">
+    <section className="flex h-[649px] w-full justify-center gap-3 bg-backgroundSolidDark">
+      <div className="flex items-center gap-20 text-surfaceDefault">
+        <Image
+          src="/logo/climateAction.png"
+          height={537}
+          width={506}
+          alt="Assam DRR Dashboard"
+        />
+
+        <div className="flex w-[661px] flex-col gap-5">
           <Text
             className=" text-baseAmberSolid7"
             variant="heading3xl"

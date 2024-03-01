@@ -4,7 +4,7 @@ import { Text } from 'opub-ui';
 
 export const Footer = () => {
   return (
-    <footer className="flex flex-col flex-wrap items-center justify-center gap-4 bg-backgroundSolidDark px-5 py-4 md:flex-row md:justify-between md:px-10 md:py-8">
+    <footer className="flex flex-col flex-wrap gap-4 bg-backgroundSolidDark px-5 py-4 md:flex-row md:justify-between md:px-10 md:py-8">
       <div className="flex flex-row items-center gap-3">
         <Image
           src="/logo/IDSLogo.png"
