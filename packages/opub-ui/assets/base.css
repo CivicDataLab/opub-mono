@@ -59,6 +59,15 @@ body {
   font-family: var(--primary-font);
 }
 
+.leaflet-touch .leaflet-bar {
+  border-color: var(--border-highlight-default);
+}
+
+.leaflet-control a {
+  color: var(--icon-highlight);
+  border-color: var(--border-highlight-default);
+}
+
 .opub-leaflet-popup .leaflet-popup-content-wrapper {
   border-radius: var(--border-radius-5);
   padding: var(--space-1) var(--space-4);
