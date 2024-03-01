@@ -108,7 +108,7 @@ export const Popup: Story = {
 									</span>`;
               },
               {
-                maxWidth: 200,
+                maxWidth: 300,
                 closeButton: false,
                 autoClose: false,
                 closeOnEscapeKey: false,
@@ -136,6 +136,30 @@ export const Popup: Story = {
     fillOpacity: 1,
     mapCenter: [26.193, 92.3],
     legendHeading,
+    fullScreen: true,
+  },
+};
+
+export const zoomReset: Story = {
+  render: (args) => {
+    if (!features) return <div>Loading...</div>;
+
+    return (
+      <div style={{ height: '600px' }}>
+        <MapChart {...args} />
+      </div>
+    );
+  },
+  args: {
+    features,
+    mapDataFn,
+    mapProperty: 'dt_code',
+    mapZoom: 7.9,
+    fillOpacity: 1,
+    mapCenter: [26.193, 92.3],
+    legendHeading,
+    legendData,
+    resetZoom: true,
   },
 };
 
@@ -156,8 +180,6 @@ export const OnlyMap: Story = {
     mapZoom: 7.9,
     fillOpacity: 1,
     mapCenter: [26.193, 92.3],
-    legendHeading,
     hideScale: true,
-    fullScreen: false,
   },
 };

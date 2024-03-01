@@ -1,8 +1,14 @@
 'use client';
 
 import React from 'react';
-import { IconStack } from '@tabler/icons-react';
-import { GeoJSON, MapContainer, ScaleControl, TileLayer } from 'react-leaflet';
+import { IconHome, IconStack } from '@tabler/icons-react';
+import {
+  GeoJSON,
+  MapContainer,
+  ScaleControl,
+  TileLayer,
+  useMap,
+} from 'react-leaflet';
 import { FullscreenControl } from 'react-leaflet-fullscreen';
 
 import 'react-leaflet-fullscreen/styles.css';
@@ -10,6 +16,7 @@ import 'react-leaflet-fullscreen/styles.css';
 import { LatLngExpression } from 'leaflet';
 
 import { cn } from '../../utils';
+import { Icon } from '../Icon';
 import { Popover } from '../Popover';
 import { RadioGroup, RadioItem } from '../RadioGroup';
 import { Text } from '../Text';
@@ -47,6 +54,9 @@ type MapProps = {
 
   /* zoom level of the map */
   mapZoom?: number;
+
+  // reset zoom
+  resetZoom?: boolean;
 
   /* center of the map */
   mapCenter?: LatLngExpression;
@@ -138,17 +148,31 @@ const Map = ({
   legendData,
   legendHeading,
   setMap,
-  fullScreen = true,
+  fullScreen = false,
   scroolWheelZoom = true,
   minZoom,
   maxZoom,
+  resetZoom = false,
 }: MapProps & {
   selectedLayer: layerOptions;
   setLayer: any;
   legendData?: { label: string; color: string }[];
   legendHeading?: { heading: string; subheading?: string };
 }) => {
-  const mapRef = React.useRef<any>(null);
+  const [mapRef, setMapRef] = React.useState<any>(null);
+
+  React.useEffect(() => {
+    if (mapRef && resetZoom) {
+      const controlElm = mapRef._container?.querySelector('.leaflet-control');
+      const button = mapRef._container.querySelector(
+        '[data-type="reset-zoom"]'
+      );
+      console.log(button, controlElm);
+
+      controlElm?.appendChild(button);
+      button.classList.remove('hidden');
+    }
+  }, [mapRef]);
 
   if (!features)
     return (
@@ -230,7 +254,10 @@ const Map = ({
       <MapContainer
         center={mapCenter}
         zoom={mapZoom}
-        ref={setMap}
+        ref={(e) => {
+          setMap && setMap(e);
+          setMapRef(e);
+        }}
         zoomDelta={0.5}
         zoomSnap={0.5}
         scrollWheelZoom={scroolWheelZoom}
@@ -265,6 +292,19 @@ const Map = ({
           </>
         )}
         {!hideScale && <ScaleControl imperial={false} />}
+
+        <button
+          onClick={() => {
+            mapRef.setView(mapCenter, mapZoom);
+          }}
+          data-type="reset-zoom"
+          className="hidden cursor-pointer rounded-b-0 border-none bg-surfaceDefault p-1 leading-[0] hover:bg-surfaceSubdued"
+        >
+          <span className="sr-only">Reset Zoom</span>
+          <span aria-hidden="true">
+            <Icon source={IconHome} color="highlight" size={22} />
+          </span>
+        </button>
       </MapContainer>
     </>
   );
