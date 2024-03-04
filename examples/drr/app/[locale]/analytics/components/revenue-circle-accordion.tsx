@@ -1,6 +1,6 @@
 import React from 'react';
 import * as Accordion from '@radix-ui/react-accordion';
-import { Icon, ProgressBar, Text } from 'opub-ui';
+import { Icon, ProgressBar, Text, Tooltip } from 'opub-ui';
 
 import { RiskColorMap } from '@/config/consts';
 import { cn, deSlugify } from '@/lib/utils';
@@ -31,27 +31,38 @@ export const RevenueCircle = ({
           value={`revenue-circle-${index}`}
           className="mt-4"
         >
-          <Text variant="headingLg" fontWeight="regular">
-            {item?.['revenue circle']}
-          </Text>
-          <div className="flex items-center">
-            <div className=" mr-3 basis-2/4">
-              <ProgressBar
-                size="small"
-                customColor={RiskColorMap[item?.[indicator]]}
-                value={(item?.[indicator] / 6) * 100}
-              />
-            </div>
-            <Text variant="heading2xl">{item?.[indicator]}</Text>
-            /6
+          <div className="flex items-center gap-3">
+            <Text
+              variant="headingMd"
+              fontWeight="regular"
+              className="basis-1/3"
+            >
+              {item?.['revenue circle']}
+            </Text>
+            <ProgressBar
+              size="small"
+              customColor={RiskColorMap[item?.[indicator]]}
+              value={(item?.[indicator] / 6) * 100}
+            />
+
             <Accordion.Trigger className={cn(styles.AccordionItem, 'ml-auto')}>
-              <Icon
-                className={cn(styles.AccordionChevron)}
-                source={Icons.down}
-                size={80}
-              />
+              <Tooltip
+                content={
+                  <div className="flex flex-col px-2 py-1">
+                    <Text variant="headingXl">{item?.[indicator]} / 6 </Text>
+                    <Text>HIGH RISK</Text>
+                  </div>
+                }
+              >
+                <Icon
+                  className={cn(styles.AccordionChevron)}
+                  source={Icons.down}
+                  size={20}
+                />
+              </Tooltip>
             </Accordion.Trigger>
           </div>
+
           <Accordion.Content className="px-3 pb-4 md:px-6">
             {FactorVariables.map(
               (scoreType) =>

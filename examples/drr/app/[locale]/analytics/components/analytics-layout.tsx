@@ -185,13 +185,13 @@ export function Content({
     return filteredDistrictOptions;
   };
 
-  const handleCheckboxChange = () => {
-    setChecked(!isChecked);
+  // const handleCheckboxChange = () => {
+  //   setChecked(!isChecked);
 
-    if (!isChecked) {
-      setRegion([]);
-    }
-  };
+  //   if (!isChecked) {
+  //     setRegion([]);
+  //   }
+  // };
 
   return (
     <React.Fragment>
@@ -223,8 +223,8 @@ export function Content({
             <Text>Select one or more Region</Text>
             <Checkbox
               name="All Regions"
-              checked={isChecked}
-              onChange={handleCheckboxChange}
+              checked={region && region.length > 0 ? false : true}
+              //onChange={handleCheckboxChange}
             >
               All Regions
             </Checkbox>
