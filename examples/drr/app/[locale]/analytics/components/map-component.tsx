@@ -153,6 +153,7 @@ export const MapComponent = ({
         }
         fillOpacity={1}
         setMap={setMap}
+        resetZoom
         scroolWheelZoom={false}
       />
     </div>

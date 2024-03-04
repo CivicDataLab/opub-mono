@@ -115,16 +115,15 @@ export function SidebarLayout({ data, indicator, boundary }: any) {
         </Button>
       </header>
       <Divider className="mt-2" />
-      {data.length === 1 ||
-        (districtData.length === 1 && (
-          <div className=" mb-2 mt-5 flex flex-col">
-            <Text variant="heading2xl" fontWeight="regular">
-              {RegionName} {GeographyMap[boundary]}
-            </Text>
-          </div>
-        ))}
+      {(data.length === 1 || districtData.length === 1) && (
+        <div className=" mb-2 mt-5 flex flex-col">
+          <Text variant="heading2xl" fontWeight="regular">
+            {RegionName} {GeographyMap[boundary]}
+          </Text>
+        </div>
+      )}
       <div className="flex items-center justify-between self-stretch">
-        <div className="flex items-center gap-4">
+        <div className="mt-4 flex items-center gap-4">
           <Text variant="bodyMd" color="subdued" fontWeight="regular">
             Cumulative till {formattedTimePeriod}
           </Text>
@@ -134,7 +133,10 @@ export function SidebarLayout({ data, indicator, boundary }: any) {
 
       <section className="mt-4">
         {DataBasedOnBoundary.map((data: any, index: any) => (
-          <div key={index}>
+          <div key={index} className="mb-4">
+            <Text variant="headingXl" fontWeight="regular">
+              {data[boundary]}
+            </Text>
             <div className="flex flex-col gap-1">
               <div className="flex items-center">
                 <div className=" mr-3 basis-2/4">

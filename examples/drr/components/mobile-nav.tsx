@@ -7,7 +7,6 @@ import { useKeyDetect } from '@/hooks/use-key-detect';
 import { MainConfig } from '@/types';
 import { Icon, Text } from 'opub-ui';
 
-import { platformName } from '@/config/consts';
 import { Icons } from '@/components/icons';
 
 export function MobileNav({ data }: { data: MainConfig }) {

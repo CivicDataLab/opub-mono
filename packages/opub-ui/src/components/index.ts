@@ -49,7 +49,4 @@ export { Thumbnail } from './Thumbnail';
 export { Toaster, toast } from './Toast';
 export { Tooltip } from './Tooltip';
 export { Tray } from './Tray';
-<<<<<<< HEAD
 export { Drawer } from './Drawer';
-=======
->>>>>>> d2a3e81e (update rev circle dropdown and rev circle side pane)
