@@ -66,8 +66,13 @@ export function SidebarDefaultLayout({
       )}
     >
       <div className="mb-5 mt-4 flex items-center justify-between">
-        <Text variant="heading2xl" fontWeight="regular">
-          Data Insights
+        <Text
+          variant="heading2xl"
+          fontWeight="regular"
+          className="flex items-center gap-2"
+        >
+          {IconMap[indicatorIcon || 'risk-score']}
+          {deSlugify(indicator)}
         </Text>
         <Button variant="success" kind="secondary">
           Download Report
@@ -76,25 +81,6 @@ export function SidebarDefaultLayout({
 
       <Divider className="mt-2" />
       <div className="mb-5 mt-5 flex flex-col">
-        <div className="flex items-center justify-between self-stretch">
-          <div className="mt-3 flex items-center gap-2">
-            <Text
-              variant="headingMd"
-              fontWeight="bold"
-              className="mb-4 flex items-center gap-2"
-            >
-              {IconMap[indicatorIcon || 'risk-score']}
-              {formattedIndicator}
-            </Text>
-          </div>
-          <div className="  flex items-center gap-4">
-            <Text variant="bodyMd" color="subdued" fontWeight="regular">
-              Cumulative till {formattedTimePeriod}
-            </Text>
-            <InfoSquare color="#6A6A6A" />
-          </div>
-        </div>
-
         <Text variant="headingMd" fontWeight="bold" className=" mt-3">
           HIGH RISK DISTRICTS
         </Text>

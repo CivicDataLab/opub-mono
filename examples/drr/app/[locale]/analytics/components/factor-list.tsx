@@ -82,7 +82,7 @@ export function FactorList() {
                     isActive && 'text-[#71E57D]'
                   )}
                 >
-                  {item.name}
+                  &nbsp; {item.name}
                   <InfoCircle color={isActive ? '#71E57D' : '#E2E2E2'} />
                 </span>
               </div>
