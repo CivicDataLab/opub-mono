@@ -75,10 +75,6 @@ body {
   color: var(--text-onbg-default);
 }
 
-.opub-leaflet-popup .leaflet-popup-tip-container {
-  left: 30%;
-}
-
 .opub-leaflet-popup .leaflet-popup-tip {
   background-color: var(--background-solid-dark);
 }
