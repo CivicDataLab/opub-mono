@@ -20,6 +20,9 @@ type Props = {
   onChartReady?: (echart: any) => void;
   /* Height of the chart */
   height?: string;
+
+  // show label inside the bar
+  showLabel?: boolean;
 };
 
 export const BarChart = ({
@@ -27,6 +30,7 @@ export const BarChart = ({
   theme = 'light',
   height = '300px',
   onChartReady,
+  showLabel = false,
 }: Props) => {
   const option = {
     tooltip: {
@@ -40,7 +44,7 @@ export const BarChart = ({
       left: '5%',
     },
     label: {
-      show: true,
+      show: showLabel,
       position: 'inside',
       color: '#fff',
       fontWeight: 'bold',
