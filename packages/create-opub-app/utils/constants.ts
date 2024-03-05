@@ -9,6 +9,10 @@ export const examples: {
     label: 'Data Exchange',
     link: 'https://github.com/CivicDataLab/opub-mono/tree/main/apps/www',
   },
+  drr: {
+    label: 'DRR',
+    link: 'https://github.com/CivicDataLab/opub-mono/tree/main/examples/drr',
+  },
 };
 
 export const managers: {
