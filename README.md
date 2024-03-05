@@ -12,7 +12,7 @@ This repository, built using [Turborepo](https://github.com/vercel/turbo), utili
 
 ### Apps and Packages
 
-- `apps/www`: web application built using the [Next.js framework](https://github.com/vercel/next.js/)
+- `examples`: web applications built using the [Next.js framework](https://github.com/vercel/next.js/) and OPub UI
 - `apps/docs`: documentation site built using [Nextra](https://github.com/shuding/nextra)
 - `packages/opub-ui`: a library of reusable React components used in both the web and docs applications
 - `packages/create-opub-app`: a CLI tool to quickly spin up a new OPub app in minutes
