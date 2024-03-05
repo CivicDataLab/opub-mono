@@ -1,9 +1,0 @@
-{
-  "ignorePatterns": ["**/generated/**/*.ts"],
-  "extends": ["eslint:recommended", "next"],
-  "rules": {
-    "no-unused-vars": "off",
-    "react/display-name": "off",
-    "@next/next/no-html-link-for-pages": "off"
-  }
-}
