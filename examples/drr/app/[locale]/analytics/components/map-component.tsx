@@ -141,12 +141,12 @@ export const MapComponent = ({
       <FactorList />
       <MapChart
         features={mapData?.features}
-        mapZoom={7.2}
+        mapZoom={7.7}
         mapProperty={indicator}
         zoomOnClick={false}
         legendData={legendData}
-        minZoom={6.5}
-        maxZoom={7.4}
+        minZoom={6}
+        maxZoom={8}
         mapDataFn={mapDataFn}
         click={(layer) =>
           setRegion([layer?.feature?.properties?.code], { shallow: false })
