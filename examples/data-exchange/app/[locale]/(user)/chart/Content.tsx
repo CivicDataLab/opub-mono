@@ -2,7 +2,6 @@
 
 import React from 'react';
 import dynamic from 'next/dynamic';
-import Image from 'next/image';
 import { EChartsOption } from 'echarts-for-react';
 import { ShareDialog, useScreenshot } from 'opub-ui';
 import { BarChart } from 'opub-ui/viz';
@@ -226,7 +225,7 @@ const Template = ({
         {title}
       </p>
       {data ? (
-        <Image src={data} {...props} className="w-full" alt="SVG" />
+        <img src={data} {...props} className="w-full" alt="SVG" />
       ) : (
         'Loading...'
       )}
