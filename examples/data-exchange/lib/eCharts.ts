@@ -1,5 +1,6 @@
-import echarts from 'echarts';
 import { EChartsOption } from 'echarts-for-react';
+
+let echarts = require('echarts');
 
 export function eCharts({ options }: { options: EChartsOption }) {
   const option = {
@@ -25,6 +26,7 @@ export function eCharts({ options }: { options: EChartsOption }) {
   });
 
   chart.setOption(option);
+  const dataUrlBar = `data:image/svg+xml;base64,${btoa(chart.renderToSVGString())}`;
 
-  return chart.renderToSVGString();
+  return dataUrlBar;
 }

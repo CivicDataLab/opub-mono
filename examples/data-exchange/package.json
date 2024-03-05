@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "style-dictionary:build": "style-dictionary build --config ./config/style-dictionary.js",
+    "build:tokens": "node ./config/tokens/generate.js",
     "generate": "graphql-codegen --config ./config/codegen.ts",
     "prestart": "npm run generate",
     "predev": "npm run generate",

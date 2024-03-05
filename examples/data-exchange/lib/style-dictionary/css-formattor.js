@@ -1,4 +1,4 @@
-const convertValue = require('./converter');
+let convertValue = require('./converter');
 
 module.exports = function ({ dictionary }) {
   let families = ':root { \n';
