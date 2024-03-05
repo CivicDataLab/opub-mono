@@ -5,17 +5,34 @@ export function cn(...inputs: ClassNameValue[]) {
   return twMerge(inputs);
 }
 
-export function formatDate(input: string | number): string {
+export function formatDate(
+  input: string | number,
+  isHyphenated = false
+): string {
   const date = new Date(input);
-  return date.toLocaleDateString('en-US', {
-    month: 'long',
-    day: 'numeric',
-    year: 'numeric',
-  });
+  // If hyphendated it would return date in this format - 2023-01-01 else in April 1, 2021
+  return isHyphenated
+    ? new Date(
+        date.toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'numeric',
+          day: 'numeric',
+        })
+      )
+        .toISOString()
+        .split('T')[0]
+    : date.toLocaleDateString('en-US', {
+        month: 'long',
+        day: 'numeric',
+        year: 'numeric',
+      });
 }
 
 // util function to format data in the following format "2023_08"
-export function formatDateString(dateString: string) {
+export function formatDateString(dateString: string, isHyphenated = false) {
+  if (isHyphenated) {
+    return dateString.replace('_', '-');
+  }
   // Split the string into year and month parts
   const [year, month] = dateString.split('_');
 
@@ -24,7 +41,7 @@ export function formatDateString(dateString: string) {
 
   // Format the date as "Month Year"
   const formattedDate = new Intl.DateTimeFormat('en-US', {
-    month: 'long',
+    month: 'short',
     year: 'numeric',
   }).format(dateObject);
 

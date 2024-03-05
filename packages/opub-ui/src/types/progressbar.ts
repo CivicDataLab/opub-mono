@@ -26,4 +26,8 @@ export type ProgressBarProps = {
    * Id (ids) of element (elements) that describes progressbar
    */
   ariaLabelledBy?: string;
+  /**
+   * To give custom color
+   */
+  customColor?: { backgroundColor: string; indicatorColor: string };
 } & Progress.ProgressProps;

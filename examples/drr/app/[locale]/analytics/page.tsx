@@ -1,11 +1,12 @@
 import React from 'react';
-import { Hydrate, dehydrate } from '@tanstack/react-query';
+import { dehydrate, Hydrate } from '@tanstack/react-query';
 
 import {
-  ANALYTICS_REVENUE_TABLE_DATA,
+  ANALYTICS_FACTORS,
   ANALYTICS_TIME_PERIODS,
+  ANALYTICS_INDICATORS
 } from '@/config/graphql/analaytics-queries';
-import { GraphQL, getQueryClient } from '@/lib/api';
+import { getQueryClient, GraphQL } from '@/lib/api';
 import { Content } from './components/analytics-layout';
 
 export default async function Home({
@@ -14,19 +15,18 @@ export default async function Home({
   searchParams: { [key: string]: string };
 }) {
   const queryClient = getQueryClient();
-  
-  await queryClient.prefetchQuery(
-    [`revenue_table_data_${searchParams?.indicator}_${searchParams['time-period']}`],
-    () =>
-      GraphQL('analytics', ANALYTICS_REVENUE_TABLE_DATA, {
-        indcFilter: { slug: searchParams?.indicator },
-        dataFilter: { dataPeriod: searchParams['time-period'] },
-      })
-  );
 
   await queryClient.prefetchQuery([`timePeriods`], () =>
     GraphQL('analytics', ANALYTICS_TIME_PERIODS)
   );
+
+  await queryClient.prefetchQuery([`factorScores`], () =>
+    GraphQL('analytics', ANALYTICS_FACTORS)
+  );
+
+  await queryClient.prefetchQuery([`indicators_${searchParams?.['indicator']}`], () =>
+  GraphQL('analytics', ANALYTICS_INDICATORS , {indcFilter : {slug : searchParams?.['indicator']}})
+);
 
   const dehydratedState = dehydrate(queryClient);
   return (

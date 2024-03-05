@@ -12,6 +12,7 @@ const ProgressBar = forwardRef(
       value,
       size = 'medium',
       color = 'highlight',
+      customColor,
       animated = true,
       ...others
     } = props;
@@ -36,6 +37,14 @@ const ProgressBar = forwardRef(
         className={`opub-ProgressBar ${themeClass}`}
         value={progress}
         ref={ref}
+        style={
+          customColor
+            ? ({
+                '--op-progress-bar-background': customColor?.backgroundColor,
+                '--op-progress-bar-indicator': customColor?.indicatorColor,
+              } as React.CSSProperties)
+            : {}
+        }
         {...others}
       >
         <Progress.Indicator

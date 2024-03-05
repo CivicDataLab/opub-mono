@@ -1,4 +1,5 @@
 import { MainConfig, SiteConfig } from 'types';
+import { AboutUsURL, AnalyticsURL, DatasetsURL } from './consts';
 
 export const siteConfig: SiteConfig = {
   name: 'OPub',
@@ -64,11 +65,19 @@ export const mainConfig: MainConfig = {
   mainNav: [
     {
       title: 'Analytics',
-      href: `/analytics/?indicator=composite-score&time-period=2023_08`,
+      href: AnalyticsURL,
     },
     {
       title: 'Datasets',
-      href: '/datasets',
+      href: '/',
+    },
+    {
+      title: 'Resources',
+      href: '/',
+    },
+    {
+      title: 'About us',
+      href: '/',
     },
   ],
 

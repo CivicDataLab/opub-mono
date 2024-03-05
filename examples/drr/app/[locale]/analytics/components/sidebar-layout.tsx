@@ -1,122 +1,261 @@
 'use client';
 
 import React from 'react';
-import { Divider, Icon, ProgressBar, Text } from 'opub-ui';
+import { useSearchParams } from 'next/navigation';
+import {
+  Exposure,
+  FloodHazard,
+  GovtResponse,
+  RiskScore,
+  Vulnerability,
+} from '@/public/FactorIcons';
+import { InfoSquare } from '@/public/InfoCircle';
+import * as Accordion from '@radix-ui/react-accordion';
+import { useQuery } from '@tanstack/react-query';
+import { Button, Divider, Icon, ProgressBar, Text } from 'opub-ui';
 
-import { cn } from '@/lib/utils';
+import { RiskColorMap } from '@/config/consts';
+import { ANALYTICS_TIME_TRENDS } from '@/config/graphql/analaytics-queries';
+import { GraphQL } from '@/lib/api';
+import { cn, deSlugify, formatDateString } from '@/lib/utils';
 import { Icons } from '@/components/icons';
+import { RevenueCircle, ScoreInfo } from './revenue-circle-accordion';
+import styles from './styles.module.scss';
+import { TimeTrends } from './time-trends';
 
-interface IndicatorProps {
-  title: string;
-  value: number;
-  icon: any;
-}
+export function SidebarLayout({ data, indicator, boundary }: any) {
+  const searchParams = useSearchParams();
+  const indicatorIcon = searchParams.get('indicator') || 'risk-score';
+  const timePeriod = searchParams.get('time-period') || '2023_08';
+  const formattedTimePeriod = formatDateString(timePeriod);
+  const color = '#000000';
+  const region = searchParams.get('region') || '1';
 
-export function SidebarLayout({ revenueData }: any) {
-  const transformData = (data: any) => {
-    return [
-      {
-        title: 'Risk Score',
-        value: data[0]['composite-score'],
-        icon: Icons.info,
-      },
-      {
-        title: 'Hazard',
-        value: data[0]['flood-hazard'],
-        icon: Icons.link,
-      },
-      {
-        title: 'Exposure',
-        value: data[0]['exposure'],
-        icon: Icons.overview,
-      },
-      {
-        title: 'Vulnerability',
-        value: data[0]['vulnerability'],
-        icon: Icons.info,
-      },
-    ];
+  const DEFAULT_PERIOD = '3M';
+
+  const items = [
+    {
+      value: '3M',
+      label: 'Past 3 months',
+    },
+    {
+      value: '1Y',
+      label: 'Past 1 year',
+    },
+    {
+      value: 'ALL',
+      label: 'All Data',
+    },
+  ];
+
+  const [period, setPeriod] = React.useState(items[0].value || DEFAULT_PERIOD);
+
+  const chartData = useQuery(
+    [`chartData_${boundary}_${indicator}_${timePeriod}_${region}_${period}`],
+    () =>
+      GraphQL('analytics', ANALYTICS_TIME_TRENDS, {
+        indcFilter: { slug: indicatorIcon },
+        dataFilter: { dataPeriod: timePeriod, period: period },
+        geoFilter: { code: region?.split(',') },
+      }),
+    {
+      refetchOnMount: false,
+      refetchOnWindowFocus: false,
+      refetchOnReconnect: false,
+    }
+  );
+
+  const IconMap: { [key: string]: React.ReactNode } = {
+    'risk-score': <RiskScore color={color} />,
+    vulnerability: <Vulnerability color={color} />,
+    'flood-hazard': <FloodHazard color={color} />,
+    exposure: <Exposure color={color} />,
+    'government-response': <GovtResponse color={color} />,
   };
 
-  const transformedData = transformData(revenueData);
-  const REVENUE_CIRCLE = 'CHARIDUAR'
-  const DISTRICT = 'SONITPUR'
+  const districtData = data.filter((item: any) =>
+    Object.hasOwnProperty.call(item, 'district')
+  );
+  // To filter out revenue circles from the district data boundary
+  const revenueCircleData = data.filter((item: any) =>
+    Object.hasOwnProperty.call(item, 'revenue circle')
+  );
+
+  const GeographyMap: { [key: string]: string } = {
+    district: 'District',
+    'revenue-circle': 'Revenue Circle',
+  };
+
+  const DataBasedOnBoundary = boundary === 'district' ? districtData : data;
+  const RegionName =
+    boundary === 'district'
+      ? districtData[0]?.district
+      : data[0]?.['revenue-circle'];
 
   return (
     <aside
       className={cn(
         'p-4',
-        'pr-0 overflow-hidden bg-surfaceDefault shadow-basicMd',
-        'hidden z-1 shadow-inset basis-[500px] shrink-0 md:block',
-        'border-r-1 border-solid border-borderSubdued'
+        'bg-surfaceDefault shadow-basicMd',
+        'shadow-inset z-1 hidden shrink-0 basis-[500px] md:block',
+        'overflow-y-auto border-r-1 border-solid border-borderSubdued'
       )}
     >
-      <Text variant="headingMd" fontWeight="bold">
-        DATA INSIGHTS
-      </Text>
-      <Divider className="mt-2" />
-      <div className=" flex flex-col mt-5">
-        <Text fontWeight="bold" variant="headingLg">
-          {REVENUE_CIRCLE} Revenue Circle
+      <header className="mb-5 mt-4 flex items-center justify-between">
+        <Text
+          variant="heading2xl"
+          fontWeight="regular"
+          className="flex items-center gap-2"
+        >
+          {IconMap[indicatorIcon || 'risk-score']}
+          {deSlugify(indicatorIcon)}
         </Text>
-        <Text variant="headingMd">{DISTRICT} District</Text>
+        <Button variant="success" kind="secondary">
+          Download Report
+        </Button>
+      </header>
+      <Divider className="mt-2" />
+      {(data.length === 1 || districtData.length === 1) && (
+        <div className=" mb-2 mt-5 flex flex-col">
+          <Text variant="heading2xl" fontWeight="regular">
+            {RegionName} {GeographyMap[boundary]}
+          </Text>
+        </div>
+      )}
+      <div className="flex items-center justify-between self-stretch">
+        <div className="mt-4 flex items-center gap-4">
+          <Text variant="bodyMd" color="subdued" fontWeight="regular">
+            Cumulative till {formattedTimePeriod}
+          </Text>
+          <InfoSquare color="#6A6A6A" />
+        </div>
       </div>
 
-      {transformedData.map((obj, index) => {
-        return <Indicators key={`indicator_${index}`} data={obj} />;
-      })}
+      <section className="mt-4">
+        {DataBasedOnBoundary.map((data: any, index: any) => (
+          <div key={index} className="mb-4">
+            <Text variant="headingXl" fontWeight="regular">
+              {data[boundary]}
+            </Text>
+            <div className="flex flex-col gap-1">
+              <div className="flex items-center">
+                <div className=" mr-3 basis-2/4">
+                  <ProgressBar
+                    size="small"
+                    customColor={RiskColorMap[data[indicator]]}
+                    value={(data[indicator] / 6) * 100}
+                  />
+                </div>
+                <Text variant="heading2xl">{data?.[indicator]}</Text>/6
+              </div>
+              <OtherFactorScores
+                data={data}
+                boundary={boundary}
+                indicator={indicator}
+              />
+            </div>
+          </div>
+        ))}
+      </section>
+      <Accordion.Root type="single" defaultValue="time-trends" collapsible>
+        <Accordion.Item value="revenue-circle" className="mt-4">
+          {districtData.length === 1 && (
+            <div className="mt-7">
+              <div className={styles.SidebarAccordionTitle}>
+                <Text variant="bodyLg" fontWeight="bold">
+                  REVENUE CIRCLE SCORE
+                </Text>
+                <Accordion.Trigger
+                  className={cn(styles.SidebarAccordionIcon, 'ml-auto')}
+                >
+                  <Icon
+                    className={cn(styles.AccordionChevron)}
+                    source={Icons.down}
+                    size={70}
+                  />
+                </Accordion.Trigger>
+              </div>
+              <Accordion.Content
+                className={cn(styles.RevenueBox, 'px-2 pb-4 md:px-4 ')}
+              >
+                <RevenueCircle
+                  revenueCircleData={revenueCircleData}
+                  indicator={indicator}
+                />
+              </Accordion.Content>
+            </div>
+          )}
+        </Accordion.Item>
+        <Accordion.Item value="time-trends" className="mt-4">
+          <div className="mt-5">
+            <div className={styles.SidebarAccordionTitle}>
+              <Text variant="bodyLg" fontWeight="bold">
+                TIME TRENDS
+              </Text>
+              <Accordion.Trigger
+                className={cn(styles.SidebarAccordionIcon, 'ml-auto')}
+              >
+                <Icon
+                  className={cn(styles.AccordionChevron)}
+                  source={Icons.down}
+                  size={70}
+                />
+              </Accordion.Trigger>
+            </div>
+
+            <Accordion.Content
+              className={cn(styles.TrendsBox, 'px-2 pb-4 md:px-4 ')}
+            >
+              <div className="mt-4 flex items-center gap-2">
+                {items.map(({ label, value: itemValue }) => {
+                  const isActiveValue = itemValue === period;
+                  return (
+                    <button
+                      key={itemValue}
+                      type="button"
+                      className={cn(
+                        styles.TabItem,
+                        isActiveValue && styles.TabItemActive
+                      )}
+                      onClick={() => {
+                        setPeriod(itemValue);
+                      }}
+                    >
+                      {label}
+                    </button>
+                  );
+                })}
+              </div>
+              {chartData.isFetched ? (
+                <TimeTrends
+                  chartData={chartData?.data?.getTimeTrends}
+                  indicator={indicatorIcon}
+                  boundary={boundary}
+                />
+              ) : null}
+            </Accordion.Content>
+          </div>
+        </Accordion.Item>
+      </Accordion.Root>
     </aside>
   );
 }
 
-export const Indicators = ({ data }: { data: IndicatorProps }) => {
+export function OtherFactorScores({ data, boundary, indicator }: any) {
+  const clonedData = structuredClone(data);
+  delete clonedData[boundary];
+  delete clonedData[`${boundary}-code`];
+  delete clonedData[indicator];
 
-  function getRiskLevel(value: number) {
-    switch (value) {
-      case 1:
-      case 2:
-        return 'LOW RISK';
-      case 3:
-      case 4:
-        return 'MED RISK';
-      case 5:
-      case 6:
-        return 'HIGH RISK';
-      default:
-        return 'UNKNOWN RISK';
-    }
-  }
+  const FactorVariables = Object.keys(clonedData);
 
-  return (
-    <div>
-      <div className="flex items-center mt-5 mb-2">
-        <Icon source={data.icon} color="default" size={6} />
-        <Text fontWeight="bold" variant="headingMd" className=" pl-2">
-          {data.title}
-        </Text>
-      </div>
-      <Text fontWeight="regular" variant="headingSm">
-        This region carries damage due to flood related disasters
-      </Text>
-      <div className="flex gap-4 mt-4 mb-3">
-        <div className=" basis-2/3">
-          <ProgressBar
-            value={(data.value / 6) * 100}
-            color="critical"
-            size="medium"
-          />
-        </div>
-        <div className="flex flex-col">
-          <Text>
-            <strong className="text-400">{data.value}</strong>/6
-          </Text>
-          <Text variant="bodySm"> {getRiskLevel(data.value)} </Text>
-        </div>
-      </div>
-      <div className="flex gap-5">
-        <Text variant="bodySm">Calculated : May 2023</Text>
-        <Text variant="bodySm">Link to Source Datasets</Text>
-      </div>
+  return FactorVariables.map((scoreType) => (
+    <div key={scoreType} className="ml-3">
+      <ScoreInfo
+        indicator={indicator}
+        label={`${deSlugify(scoreType)} Score`}
+        value={data?.[scoreType]}
+      />
     </div>
-  );
-};
+  ));
+}
