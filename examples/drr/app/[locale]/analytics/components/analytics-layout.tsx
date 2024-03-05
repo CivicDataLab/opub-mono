@@ -62,7 +62,6 @@ export function Content({
     parseAsArrayOf(parseAsString)
   );
 
-  const [isChecked, setChecked] = React.useState(true);
   const [selectedGroup, setSelectedGroup] = React.useState<string[]>([]);
 
   const mapQuery: TypedDocumentNode<any, any> =
@@ -184,14 +183,6 @@ export function Content({
     );
     return filteredDistrictOptions;
   };
-
-  // const handleCheckboxChange = () => {
-  //   setChecked(!isChecked);
-
-  //   if (!isChecked) {
-  //     setRegion([]);
-  //   }
-  // };
 
   return (
     <React.Fragment>

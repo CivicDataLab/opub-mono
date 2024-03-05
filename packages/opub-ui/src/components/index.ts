@@ -15,7 +15,6 @@ export { Connected } from './Connected';
 export { DataTable } from './DataTable';
 export { Dialog } from './Dialog';
 export { Divider } from './Divider';
-export { MonthPicker } from './DatePicker';
 export * from './Form';
 export { FormLayout } from './FormLayout';
 export * from './Icon';
