@@ -2861,21 +2861,6 @@ export type CreateDatasetMutationMutation = {
   } | null;
 };
 
-<<<<<<< HEAD
-=======
-export type AllDatasetsQueryQueryVariables = Exact<{ [key: string]: never }>;
-
-export type AllDatasetsQueryQuery = {
-  __typename?: 'Query';
-  all_datasets?: Array<{
-    __typename?: 'DatasetType';
-    id: string;
-    title: string;
-    description: string;
-  } | null> | null;
-};
-
->>>>>>> 03a733f2 (fix www/ user and listing)
 export const CreateResourceMutationDocument = {
   kind: 'Document',
   definitions: [
@@ -3533,45 +3518,4 @@ export const CreateDatasetMutationDocument = {
 } as unknown as DocumentNode<
   CreateDatasetMutationMutation,
   CreateDatasetMutationMutationVariables
-<<<<<<< HEAD
-<<<<<<< HEAD
 >;
-<<<<<<< HEAD
-=======
-export const AllDatasetsQueryDocument = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'OperationDefinition',
-      operation: 'query',
-      name: { kind: 'Name', value: 'allDatasetsQuery' },
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'all_datasets' },
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [
-                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'title' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'description' } },
-              ],
-            },
-          },
-        ],
-      },
-    },
-  ],
-} as unknown as DocumentNode<
-  AllDatasetsQueryQuery,
-  AllDatasetsQueryQueryVariables
->;
->>>>>>> 03a733f2 (fix www/ user and listing)
-=======
->;
->>>>>>> 8b3b2e92 (fix www/ user and listing)
-=======
->;
->>>>>>> f33482c1 (add dynamicity to learn more icons)

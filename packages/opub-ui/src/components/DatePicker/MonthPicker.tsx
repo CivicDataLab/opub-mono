@@ -28,6 +28,8 @@ export type DatePickerProps = {
   requiredIndicator?: boolean;
   /** Additional text to aide in use */
   helpText?: React.ReactNode;
+  /** Default Value  */
+  defaultValue?: DateValue | null;
 } & (DatePickerState | AriaDatePickerProps<DateValue>);
 
 const MonthPicker = React.forwardRef(

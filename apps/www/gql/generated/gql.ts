@@ -50,13 +50,8 @@ export function graphql(source: string): unknown;
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(
-<<<<<<< HEAD
   source: '\n  mutation createResourceMutation($resource_data: ResourceInput) {\n    create_resource(resource_data: $resource_data) {\n      success\n      errors\n      resource {\n        id\n        title\n        description\n        file_details {\n          resource {\n            id\n            title\n            description\n          }\n          format\n          file\n          remote_url\n          source_file_name\n        }\n      }\n    }\n  }\n'
 ): (typeof documents)['\n  mutation createResourceMutation($resource_data: ResourceInput) {\n    create_resource(resource_data: $resource_data) {\n      success\n      errors\n      resource {\n        id\n        title\n        description\n        file_details {\n          resource {\n            id\n            title\n            description\n          }\n          format\n          file\n          remote_url\n          source_file_name\n        }\n      }\n    }\n  }\n'];
-=======
-  source: '\n\tmutation createResourceMutation($resource_data: ResourceInput) {\n\t\tcreate_resource(resource_data: $resource_data) {\n\t\t\tsuccess\n\t\t\terrors\n\t\t\tresource {\n\t\t\t\tid\n\t\t\t\ttitle\n\t\t\t\tdescription\n\t\t\t\tfile_details {\n\t\t\t\t\tresource {\n\t\t\t\t\t\tid\n\t\t\t\t\t\ttitle\n\t\t\t\t\t\tdescription\n\t\t\t\t\t}\n\t\t\t\t\tformat\n\t\t\t\t\tfile\n\t\t\t\t\tremote_url\n\t\t\t\t\tsource_file_name\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n'
-): (typeof documents)['\n\tmutation createResourceMutation($resource_data: ResourceInput) {\n\t\tcreate_resource(resource_data: $resource_data) {\n\t\t\tsuccess\n\t\t\terrors\n\t\t\tresource {\n\t\t\t\tid\n\t\t\t\ttitle\n\t\t\t\tdescription\n\t\t\t\tfile_details {\n\t\t\t\t\tresource {\n\t\t\t\t\t\tid\n\t\t\t\t\t\ttitle\n\t\t\t\t\t\tdescription\n\t\t\t\t\t}\n\t\t\t\t\tformat\n\t\t\t\t\tfile\n\t\t\t\t\tremote_url\n\t\t\t\t\tsource_file_name\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n'];
->>>>>>> 03a733f2 (fix www/ user and listing)
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -99,15 +94,6 @@ export function graphql(
 export function graphql(
   source: '\n  mutation createDatasetMutation($dataset_data: CreateDatasetInput) {\n    create_dataset(dataset_data: $dataset_data) {\n      success\n      errors\n      dataset {\n        id\n        title\n        description\n        dataset_type\n      }\n    }\n  }\n'
 ): (typeof documents)['\n  mutation createDatasetMutation($dataset_data: CreateDatasetInput) {\n    create_dataset(dataset_data: $dataset_data) {\n      success\n      errors\n      dataset {\n        id\n        title\n        description\n        dataset_type\n      }\n    }\n  }\n'];
-<<<<<<< HEAD
-=======
-/**
- * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function graphql(
-  source: '\n  query allDatasetsQuery {\n    all_datasets {\n      id\n      title\n      description\n    }\n  }\n'
-): (typeof documents)['\n  query allDatasetsQuery {\n    all_datasets {\n      id\n      title\n      description\n    }\n  }\n'];
->>>>>>> 03a733f2 (fix www/ user and listing)
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};
