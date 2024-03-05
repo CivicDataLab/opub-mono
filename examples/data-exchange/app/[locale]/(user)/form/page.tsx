@@ -12,6 +12,7 @@ import {
   Form,
   FormLayout,
   Input,
+  MonthPicker,
   RadioGroup,
   RadioItem,
   RangeSlider,
@@ -102,6 +103,7 @@ const defaultValBase = {
     end: '2020-02-10',
   },
   time: '16:45:00',
+  month: '2020-02-01',
   combobox: 'Apple',
   comboboxMulti: [
     {
@@ -151,7 +153,7 @@ export default function Page() {
             <FormLayout.Group>
               <DateField name="date" label="Choose Date" />
               <DatePicker name="date-picker" label="Choose Birthday" />
-
+              <MonthPicker name="month" label="Choose Month" />
               <TimeField name="time" label="Choose Time" />
             </FormLayout.Group>
             <DateRangePicker name="date-range" label="Choose Range" />
