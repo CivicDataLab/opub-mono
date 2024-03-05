@@ -1,8 +1,3 @@
-import { graphql } from '@/gql';
-import { Hydrate } from '@/lib';
-import { dehydrate } from '@tanstack/react-query';
-
-import { getQueryClient, GraphQL } from '@/lib/api';
 import { Page } from './page-layout';
 
 // const allDatasetsQueryDoc = graphql(`

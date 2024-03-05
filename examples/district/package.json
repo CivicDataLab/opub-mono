@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "build:tokens": "node ./config/tokens/generate.mjs",
+    "build:tokens": "node ./config/tokens/generate.js",
     "postbuild:tokens": "node ./config/tokens/copy.js",
     "generate": "graphql-codegen --config ./config/codegen.ts",
     "clean": "rm -rf node_modules package-lock.json"

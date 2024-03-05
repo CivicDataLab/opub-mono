@@ -2,11 +2,13 @@
 
 import React from 'react';
 import dynamic from 'next/dynamic';
+import Image from 'next/image';
 import { EChartsOption } from 'echarts-for-react';
 import { ShareDialog, useScreenshot } from 'opub-ui';
 import { BarChart } from 'opub-ui/viz';
 import { useMediaQuery } from 'usehooks-ts';
 
+import { eCharts } from '@/lib/eCharts';
 import { navigateEnd } from '@/lib/navigation';
 
 const MapChart = dynamic(
@@ -17,7 +19,6 @@ const MapChart = dynamic(
 );
 
 type Props = {
-  svg: string;
   options: EChartsOption;
 };
 export function Content({
@@ -49,21 +50,18 @@ export function Content({
     <div className="mb-8 min-h-fit w-full">
       <Chart
         options={bar.options}
-        svg={bar.svg}
         props={{
           title: 'This title for bar chart is generated in the template',
         }}
       />
       <Chart
         options={line.options}
-        svg={line.svg}
         props={{
           title: 'This title for line chart is generated in the template',
         }}
       />
       <Chart
         options={stacked.options}
-        svg={stacked.svg}
         props={{
           title: 'This title for stack chart is generated in the template',
         }}
@@ -80,7 +78,6 @@ export function Content({
 
 const Chart = ({
   options,
-  svg,
   props,
 }: Props & {
   props: {
@@ -88,14 +85,14 @@ const Chart = ({
   };
 }) => {
   const [svgURL, setSvgURL] = React.useState<string>('');
-  const base64SvgBar = btoa(svg);
-  const dataUrlBar = `data:image/svg+xml;base64,${base64SvgBar}`;
 
   const isDesktop = useMediaQuery('(min-width: 768px)');
 
   const { createSvg, svgToPngURL, downloadFile } = useScreenshot();
 
   const generateImage = async () => {
+    const dataUrlBar = eCharts({ options: options });
+
     const svg = await createSvg(
       <Template data={dataUrlBar} title={props.title} />,
       {
@@ -229,7 +226,7 @@ const Template = ({
         {title}
       </p>
       {data ? (
-        <img src={data} {...props} className="w-full" alt="SVG" />
+        <Image src={data} {...props} className="w-full" alt="SVG" />
       ) : (
         'Loading...'
       )}
