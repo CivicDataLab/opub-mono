@@ -1,4 +1,4 @@
-import { navigateEnd } from "@/lib/navigation";
+import { navigateEnd } from '@/lib/navigation';
 
 declare global {
   interface Navigator {
@@ -13,16 +13,16 @@ export const schemes: {
   };
 } = {
   mgnrega: {
-    title: "Mahatma Gandhi National Rural Employment Guarantee Act (MGNREGA)",
-    logo: "/logo/mgnrega.webp",
+    title: 'Mahatma Gandhi National Rural Employment Guarantee Act (MGNREGA)',
+    logo: '/logo/mgnrega.webp',
   },
   nhm: {
-    title: "National Rural Health Mission (NHM)",
-    logo: "/logo/nhm.png",
+    title: 'National Rural Health Mission (NHM)',
+    logo: '/logo/nhm.png',
   },
   jjm: {
-    title: "Jal Jeevan Mission (JJM)",
-    logo: "/logo/jjm.svg",
+    title: 'Jal Jeevan Mission (JJM)',
+    logo: '/logo/jjm.svg',
   },
 };
 
@@ -43,18 +43,18 @@ export function indicatorFilter(
 }
 
 function convertToCSV(objArray: string) {
-  var array = typeof objArray != "object" ? JSON.parse(objArray) : objArray;
-  var str = "";
+  let array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
+  let str = '';
 
-  for (var i = 0; i < array.length; i++) {
-    var line = "";
-    for (var index in array[i]) {
-      if (line != "") line += ",";
+  for (let i = 0; i < array.length; i++) {
+    let line = '';
+    for (let index in array[i]) {
+      if (line != '') line += ',';
 
       line += `"${array[i][index]}"`;
     }
 
-    str += line + "\r\n";
+    str += line + '\r\n';
   }
 
   return str;
@@ -78,25 +78,25 @@ export function exportCSVFile(headers: any, items: any[], fileTitle: string) {
   }
 
   // Convert Object to JSON
-  var jsonObject = JSON.stringify(itemsFormatted);
+  let jsonObject = JSON.stringify(itemsFormatted);
 
-  var csv = convertToCSV(jsonObject);
+  let csv = convertToCSV(jsonObject);
 
-  var exportedFilenmae = fileTitle + ".csv" || "export.csv";
+  let exportedFilenmae = fileTitle + '.csv' || 'export.csv';
 
-  var blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+  let blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
   if (navigator.msSaveBlob) {
     // IE 10+
     navigator.msSaveBlob(blob, exportedFilenmae);
   } else {
-    var link = document.createElement("a");
+    let link = document.createElement('a');
     if (link.download !== undefined) {
       // feature detection
       // Browsers that support HTML5 download attribute
-      var url = URL.createObjectURL(blob);
-      link.setAttribute("href", url);
-      link.setAttribute("download", exportedFilenmae);
-      link.style.visibility = "hidden";
+      let url = URL.createObjectURL(blob);
+      link.setAttribute('href', url);
+      link.setAttribute('download', exportedFilenmae);
+      link.style.visibility = 'hidden';
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
@@ -128,9 +128,9 @@ export function downloadTable(
 
 export const downloadImage = (dataUri: string | undefined, name: string) => {
   if (!dataUri) {
-    throw new Error("href is undefined");
+    throw new Error('href is undefined');
   }
-  const a = document.createElement("a");
+  const a = document.createElement('a');
   a.href = dataUri;
   a.download = name;
   document.body.appendChild(a);

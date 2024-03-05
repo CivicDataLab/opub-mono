@@ -1,8 +1,9 @@
-import { twMerge } from 'tailwind-merge';
-import { ClassNameValue } from 'tailwind-merge/dist/lib/tw-join';
-import { navigateEnd, navigateStart } from './navigation';
 import domtoimage from 'dom-to-image';
 import { toast } from 'opub-ui';
+import { twMerge } from 'tailwind-merge';
+import { ClassNameValue } from 'tailwind-merge/dist/lib/tw-join';
+
+import { navigateEnd, navigateStart } from './navigation';
 
 export function cn(...inputs: ClassNameValue[]) {
   return twMerge(inputs);
@@ -40,10 +41,10 @@ export function convertValue(value: any, category: any) {
 }
 
 export const blobToBase64 = function (blob: Blob) {
-  var reader = new FileReader();
+  let reader = new FileReader();
   reader.onload = function () {
-    var dataUrl: any = reader.result;
-    var base64 = dataUrl?.split(',')[1];
+    let dataUrl: any = reader.result;
+    let base64 = dataUrl?.split(',')[1];
 
     return base64;
   };
@@ -79,7 +80,7 @@ export const exportAsImage = async (
   domtoimage.toJpeg(element, { quality: 0.95 }).then(function (
     dataUrl: string
   ) {
-    var link = document.createElement('a');
+    let link = document.createElement('a');
     link.download = imageFileName;
     link.href = dataUrl;
     link.click();
