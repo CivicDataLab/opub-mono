@@ -56,7 +56,7 @@ export function bytesToSize(bytes: number) {
 }
 
 export const range = (len: number) => {
-  const arr = [];
+  let arr: number[] = [];
   for (let i = 0; i < len; i++) {
     arr.push(i);
   }
