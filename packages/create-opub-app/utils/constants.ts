@@ -7,7 +7,7 @@ export const examples: {
   },
   'data-exchange': {
     label: 'Data Exchange',
-    link: 'https://github.com/CivicDataLab/opub-mono/tree/main/apps/www',
+    link: 'https://github.com/CivicDataLab/opub-mono/tree/main/examples/data-exchange',
   },
   drr: {
     label: 'DRR',

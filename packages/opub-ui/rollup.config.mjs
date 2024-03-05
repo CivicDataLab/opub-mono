@@ -35,6 +35,8 @@ const rollup = (_args) => {
       // Skip certain warnings
       if (warning.message.includes('"use client"')) return;
       if (warning.message.includes('.module.scss')) return;
+      if (warning.message.includes("Property '__resource' does not exist"))
+        return;
 
       // Use default for everything else
       warn(warning);
