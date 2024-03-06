@@ -1,59 +1,42 @@
-import { ComplexAction } from '../../../../types/button'
-import { Box } from '../../../Box'
-import { buttonsFrom } from '../../../Button/utils'
-import React from 'react'
+import React from 'react';
+
+import { ComplexAction } from '../../../../types/button';
+import { buttonsFrom } from '../../../Button/utils';
 
 export interface FooterProps {
-	/** Primary action */
-	primaryAction?: ComplexAction
-	/** Collection of secondary actions */
-	secondaryActions?: ComplexAction[]
-	/** The content to display inside modal */
-	children?: React.ReactNode
+  /** Primary action */
+  primaryAction?: ComplexAction;
+  /** Collection of secondary actions */
+  secondaryActions?: ComplexAction[];
+  /** The content to display inside modal */
+  children?: React.ReactNode;
 }
 
 export function Footer({
-	primaryAction,
-	secondaryActions,
-	children,
+  primaryAction,
+  secondaryActions,
+  children,
 }: FooterProps) {
-	const primaryActionButton =
-		(primaryAction && buttonsFrom(primaryAction)) || null
-	const secondaryActionButtons =
-		(secondaryActions && buttonsFrom(secondaryActions)) || null
-	const actions =
-		primaryActionButton || secondaryActionButtons ? (
-			<Box
-				flex
-				gap="2"
-				wrap="wrap"
-				alignItems="center"
-				justifyContent="space-between"
-			>
-				{secondaryActionButtons}
-				{primaryActionButton}
-			</Box>
-		) : null
+  const primaryActionButton =
+    (primaryAction && buttonsFrom(primaryAction)) || null;
+  const secondaryActionButtons =
+    (secondaryActions && buttonsFrom(secondaryActions)) || null;
+  const actions =
+    primaryActionButton || secondaryActionButtons ? (
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        {secondaryActionButtons}
+        {primaryActionButton}
+      </div>
+    ) : null;
 
-	return (
-		<Box flex gap="4" alignItems="center">
-			<Box
-				borderBlockStart="divider"
-				minHeight="var(--space-16)"
-				padding="4"
-				width="100%"
-			>
-				<Box
-					flex
-					wrap="wrap"
-					gap="4"
-					alignItems="center"
-					justifyContent="space-between"
-				>
-					<Box>{children}</Box>
-					{actions}
-				</Box>
-			</Box>
-		</Box>
-	)
+  return (
+    <div className="flex items-center gap-4">
+      <div className="border-gray-200 min-h-16 w-full border-t-1 border-solid border-borderDefault p-4">
+        <div className="flex flex-wrap items-center justify-between gap-4">
+          <div>{children}</div>
+          {actions}
+        </div>
+      </div>
+    </div>
+  );
 }

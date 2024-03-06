@@ -5,7 +5,6 @@ import {
 } from '@tabler/icons-react';
 
 import { cn } from '../../../../utils';
-import { Box } from '../../../Box';
 import { Icon } from '../../../Icon';
 import { Text } from '../../../Text';
 import { DropZoneContext } from '../../context';
@@ -53,25 +52,19 @@ export function FileUpload(props: FileUploadProps) {
   switch (size) {
     case 'large':
       viewMarkup = (
-        <Box
-          flex
-          gap="8"
-          direction="column"
-          alignItems="center"
-          color="text-subdued"
-        >
+        <div className="flex flex-col items-center gap-8 text-textSubdued">
           <Icon source={IconCloudUpload} size={48} />
           {actionMarkup}
           {actionHintMarkup}
-        </Box>
+        </div>
       );
       break;
     case 'medium':
       viewMarkup = (
-        <Box flex gap="2" direction="column" alignItems="center">
+        <div className="flex flex-col items-center gap-2">
           {actionMarkup}
           {actionHintMarkup}
-        </Box>
+        </div>
       );
       break;
     case 'small':

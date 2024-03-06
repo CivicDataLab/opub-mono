@@ -1,7 +1,6 @@
 import React, { Children } from 'react';
 
 import { cn, wrapWithComponent } from '../../../../utils';
-import { Box } from '../../../Box';
 import styles from '../../FormLayout.module.scss';
 import { Item } from '../Item';
 
@@ -25,16 +24,9 @@ export function Group({ children, condensed, title, helpText }: GroupProps) {
   if (helpText) {
     helpTextID = `${id}HelpText`;
     helpTextElement = (
-      <Box
-        id={helpTextID}
-        paddingBlockStart="2"
-        paddingInlineStart="5"
-        paddingBlockEnd="0"
-        paddingInlineEnd="5"
-        color="text-subdued"
-      >
+      <div id={helpTextID} className="pb-2 pl-5 pr-5 text-textSubdued">
         {helpText}
-      </Box>
+      </div>
     );
   }
 

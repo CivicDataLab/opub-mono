@@ -1,5 +1,7 @@
+import { IconCirclePlus } from '@tabler/icons-react';
+import { Column } from '@tanstack/react-table';
+
 import { Badge } from '../../../Badge';
-import { Box } from '../../../Box';
 import { Button } from '../../../Button';
 import { Checkbox } from '../../../Checkbox';
 import {
@@ -16,8 +18,6 @@ import { Popover } from '../../../Popover';
 import { ScrollArea } from '../../../ScrollArea';
 import { Text } from '../../../Text';
 import styles from '../../DataTable.module.scss';
-import { IconCirclePlus } from '@tabler/icons-react';
-import { Column } from '@tanstack/react-table';
 
 interface DataTableFacetedFilterProps<TData, TValue> {
   column?: Column<TData, TValue>;
@@ -41,7 +41,7 @@ export function DataTableFilter<TData, TValue>({
     <Popover>
       <Popover.Trigger asChild>
         <Button icon={<Icon source={IconCirclePlus} color="onBgDefault" />}>
-          <Box flex alignItems="center">
+          <div className="flex items-center">
             {title}
             {selectedValues?.size > 0 && (
               <>
@@ -65,7 +65,7 @@ export function DataTableFilter<TData, TValue>({
                 </div>
               </>
             )}
-          </Box>
+          </div>
         </Button>
       </Popover.Trigger>
       <Popover.Content align="start">
@@ -104,22 +104,17 @@ export function DataTableFilter<TData, TValue>({
                           {option.label}
                         </Checkbox>
 
-                        <Box
-                          flex
-                          alignItems="center"
-                          justifyContent="space-between"
-                          width="100%"
-                        >
+                        <div className="flex w-full items-center justify-between">
                           <span className={styles.FilterItemLabel}>
                             {option.icon && <Icon source={option.icon} />}
                             <Text>{option.label}</Text>
                           </span>
                           {facets?.get(option.value) && (
-                            <span className="ml-auto flex h-4 w-4 items-center justify-center font-mono text-xs">
+                            <span className="text-xs ml-auto flex h-4 w-4 items-center justify-center font-mono">
                               <Text>{facets.get(option.value)}</Text>
                             </span>
                           )}
-                        </Box>
+                        </div>
                       </CommandItem>
                     );
                   })}

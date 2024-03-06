@@ -17,7 +17,6 @@ import { useComponentDidMount } from '../../utils/hooks/use-component-did-mount'
 import { useEventListener } from '../../utils/hooks/use-event-listener';
 import { useToggle } from '../../utils/hooks/use-toggle';
 import { isServer } from '../../utils/target';
-import { Box } from '../Box';
 import { Icon } from '../Icon';
 import { Labelled, LabelledProps } from '../Labelled';
 import { Text } from '../Text';
@@ -358,14 +357,14 @@ export const DropZone: React.ForwardRefExoticComponent<
   ) {
     return (
       <div className={styles.Overlay}>
-        <Box flex gap="1" direction="column" alignItems="center">
+        <div className="flex flex-col items-center gap-1">
           {size === 'small' && <Icon source={icon} color={color} />}
           {(size === 'medium' || size === 'large') && (
             <Text variant="bodySm" as="p" fontWeight="bold">
               {text}
             </Text>
           )}
-        </Box>
+        </div>
       </div>
     );
   }
