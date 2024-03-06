@@ -85,7 +85,13 @@ const Tooltip = (props: TooltipProps) => {
           aria-label={ariaLabel}
         >
           <Text variant="bodyMd">{content}</Text>
-          {!hideArrow && <TooltipRadix.Arrow className={styles.Arrow} />}
+          {!hideArrow && (
+            <TooltipRadix.Arrow
+              stroke="var(--border-default)"
+              strokeWidth={2}
+              fill="var(--surface-default)"
+            />
+          )}
         </TooltipRadix.Content>
       </TooltipRadix.Portal>
     </TooltipRadix.Root>
