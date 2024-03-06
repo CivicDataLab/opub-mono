@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { useKeyDetect } from '@/hooks/use-key-detect';
-import { Avatar, Box, Icon, Text, TextField } from 'opub-ui';
+import { Avatar, Icon, Text, TextField } from 'opub-ui';
 
 import { Icons } from '@/components/icons';
 
@@ -19,14 +19,14 @@ export function MainNav() {
 
   return (
     <nav>
-      <Box flex justifyContent="space-between" gap="4" alignItems="center">
+      <div className="flex items-center justify-between gap-4">
         <Link href="/">
-          <Box flex alignItems="center" gap="2">
+          <div className="flex items-center gap-2">
             <Icon source={Icons.logo} size={24} color="success" />
             <Text variant="headingLg" as="h1">
               OPub
             </Text>
-          </Box>
+          </div>
         </Link>
         <div className="hidden w-full max-w-[578px] md:block">
           <TextField
@@ -44,7 +44,7 @@ export function MainNav() {
             <Avatar showInitials showLabel name="Helen Birjam" size="small" />
           </div>
         </div>
-      </Box>
+      </div>
     </nav>
   );
 }
