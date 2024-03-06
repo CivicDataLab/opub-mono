@@ -18,7 +18,6 @@ import {
 
 import type { DataTableProps } from '../../types/datatable';
 import { cn } from '../../utils';
-import { Box } from '../Box';
 import { Checkbox } from '../Checkbox/Checkbox';
 import { Footer } from '../Table';
 import { Text } from '../Text';
@@ -201,7 +200,7 @@ const DataTable = (props: DataTableProps) => {
                       styles.RowAction
                     )}
                   >
-                    <Box flex alignItems="center" position="relative">
+                    <div className="relative flex items-center justify-center">
                       {selectedCount ? (
                         <span className={styles.SelectCount}>
                           <Text variant="bodySm">{selectedCount}</Text>
@@ -211,7 +210,7 @@ const DataTable = (props: DataTableProps) => {
                         callbackContent={rowSelectionObj}
                         rowActions={rowActions}
                       />
-                    </Box>
+                    </div>
                   </th>
                 )}
               </tr>

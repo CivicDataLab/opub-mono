@@ -10,7 +10,6 @@ import {
   StrictOption,
 } from '../../types/select';
 import { cn } from '../../utils';
-import { Box } from '../Box';
 import { Icon } from '../Icon';
 import { helpTextID, Labelled } from '../Labelled';
 import { Text } from '../Text';
@@ -92,11 +91,11 @@ export const Select = forwardRef(
     }
 
     const inlineLabelMarkup = labelInline && (
-      <Box paddingInlineEnd="1">
+      <div className="pr-1">
         <Text as="span" color="subdued" truncate>
           {label}
         </Text>
-      </Box>
+      </div>
     );
 
     const selectedOption = getSelectedOption(normalizedOptions, selected);

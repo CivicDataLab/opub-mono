@@ -6,7 +6,6 @@ import * as Slider from '@radix-ui/react-slider';
 import type { Action } from '../../types/button';
 import type { Error } from '../../types/shared/form';
 import { cn } from '../../utils';
-import { Box } from '../Box';
 import { Labelled } from '../Labelled';
 import { Text } from '../Text';
 import styles from './RangeSlider.module.scss';
@@ -141,7 +140,7 @@ const RangeSlider = forwardRef((props: RangeSliderProps, ref: any) => {
         labelHidden={labelHidden}
         helpText={helpText}
       >
-        <Box flex alignItems="center">
+        <div className="flex items-center">
           {prefixMarkup}
           <Slider.Root
             className={styles.Root}
@@ -170,7 +169,7 @@ const RangeSlider = forwardRef((props: RangeSliderProps, ref: any) => {
             )}
           </Slider.Root>
           {suffixMarkup}
-        </Box>
+        </div>
       </Labelled>
     </div>
   );

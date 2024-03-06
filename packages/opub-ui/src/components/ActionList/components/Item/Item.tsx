@@ -4,7 +4,6 @@ import type { ActionListItemDescriptor } from '../../../../types/actionlist';
 import { Color } from '../../../../types/icon';
 import { cn } from '../../../../utils';
 import { handleMouseUpByBlurring } from '../../../../utils/focus';
-import { Box } from '../../../Box';
 import { UnstyledLink } from '../../../Button/BaseLink';
 import { Icon } from '../../../Icon';
 import { Text } from '../../../Text';
@@ -56,7 +55,7 @@ export function Item({
 
   const contentMarkup = helpText ? (
     <>
-      <Box>{contentText}</Box>
+      <div>{contentText}</div>
       <Text color="subdued" as="span">
         {helpText}
       </Text>
@@ -74,11 +73,11 @@ export function Item({
   const textMarkup = <span className={styles.Text}>{contentMarkup}</span>;
 
   const contentElement = (
-    <Box flex alignItems="center" gap="4">
+    <div className="flex items-center gap-4">
       {prefixMarkup}
       {textMarkup}
       {suffixMarkup}
-    </Box>
+    </div>
   );
 
   const control = url ? (
