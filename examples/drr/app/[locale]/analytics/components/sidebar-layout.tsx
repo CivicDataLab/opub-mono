@@ -143,10 +143,10 @@ export function SidebarLayout({ data, indicator, boundary }: any) {
                   <ProgressBar
                     size="small"
                     customColor={RiskColorMap[data[indicator]]}
-                    value={(data[indicator] / 6) * 100}
+                    value={(data[indicator] / 5) * 100}
                   />
                 </div>
-                <Text variant="heading2xl">{data?.[indicator]}</Text>/6
+                <Text variant="heading2xl">{data?.[indicator]}</Text>/5
               </div>
               <OtherFactorScores
                 data={data}

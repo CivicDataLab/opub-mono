@@ -42,14 +42,14 @@ export const RevenueCircle = ({
             <ProgressBar
               size="small"
               customColor={RiskColorMap[item?.[indicator]]}
-              value={(item?.[indicator] / 6) * 100}
+              value={(item?.[indicator] / 5) * 100}
             />
 
             <Accordion.Trigger className={cn(styles.AccordionItem, 'ml-auto')}>
               <Tooltip
                 content={
                   <div className="flex flex-col px-2 py-1">
-                    <Text variant="headingXl">{item?.[indicator]} / 6 </Text>
+                    <Text variant="headingXl">{item?.[indicator]} / 5 </Text>
                     <Text>HIGH RISK</Text>
                   </div>
                 }
@@ -92,7 +92,7 @@ export const ScoreInfo = ({ label, value, indicator }: ScoreProps) => (
   <div className="mt-2">
     {label} :{' '}
     {indicator === 'risk-score' ? (
-      <strong className="pl-2">{value}/6</strong>
+      <strong className="pl-2">{value}/5</strong>
     ) : (
       <strong className="pl-2">{parseFloat(value).toFixed(2)}</strong>
     )}

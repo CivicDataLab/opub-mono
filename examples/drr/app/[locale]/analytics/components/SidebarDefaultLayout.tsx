@@ -10,11 +10,10 @@ import {
   RiskScore,
   Vulnerability,
 } from '@/public/FactorIcons';
-import { InfoSquare } from '@/public/InfoCircle';
 import { Button, Divider, ProgressBar, Text } from 'opub-ui';
 
 import { RiskColorMap } from '@/config/consts';
-import { cn, deSlugify, formatDateString } from '@/lib/utils';
+import { cn, deSlugify } from '@/lib/utils';
 
 export function SidebarDefaultLayout({
   chartData,
@@ -22,13 +21,10 @@ export function SidebarDefaultLayout({
   indicator,
   boundary,
 }: any) {
-  const formattedIndicator = indicator && deSlugify(indicator).toUpperCase();
   const list: { title: string; description: string }[] = [];
 
   const searchParams = useSearchParams();
   const indicatorIcon = searchParams.get('indicator');
-  const timePeriod = searchParams.get('time-period') || '2023_08';
-  const formattedTimePeriod = formatDateString(timePeriod);
   const color = '#000000';
 
   const IconMap: { [key: string]: React.ReactNode } = {
@@ -49,7 +45,9 @@ export function SidebarDefaultLayout({
         list.push({
           title: item?.name,
           description:
-            item?.short_description || item?.long_description || 'NA',
+            item.name === 'Risk Score'
+              ? ' Risk of disasters which is a function of - hazard, vulnerability, exposure and coping capacity '
+              : item?.short_description || item?.long_description || 'NA',
         });
       }
     );
