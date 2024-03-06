@@ -1,9 +1,9 @@
-import { createWriteStream, promises as fs } from 'fs';
+import { promises as fs } from 'fs';
+import { createWriteStream } from 'node:fs';
+import { pipeline } from 'node:stream/promises';
 import { tmpdir } from 'os';
 import { join } from 'path';
-import { Stream } from 'stream';
-import { promisify } from 'util';
-import got from 'got';
+import ky from 'ky';
 import tar from 'tar';
 
 import { colors } from './logger';
@@ -15,14 +15,7 @@ export type RepoInfo = {
   filePath: string;
 };
 
-const pipeline = promisify(Stream.pipeline);
-
-export async function isUrlOk(url: string): Promise<boolean> {
-  const res = await got.head(url).catch((e) => e);
-  return res.statusCode === 200;
-}
-
-export async function getRepoInfo(url: URL): Promise<RepoInfo | undefined> {
+async function getRepoInfo(url: URL): Promise<RepoInfo | undefined> {
   const [, username, name, t, _branch, ...file] = url.pathname.split('/');
   const filePath = file.join('/');
 
@@ -35,9 +28,10 @@ export async function getRepoInfo(url: URL): Promise<RepoInfo | undefined> {
     // In this case "t" will be an empty string while the next part "_branch" will be undefined
     (t === '' && _branch === undefined)
   ) {
-    const infoResponse = await got(
+    const infoResponse = await ky(
       `https://api.github.com/repos/${username}/${name}`
     ).catch((e) => e);
+
     if (infoResponse.statusCode !== 200) {
       return;
     }
@@ -52,21 +46,11 @@ export async function getRepoInfo(url: URL): Promise<RepoInfo | undefined> {
   }
 }
 
-export function hasRepo({
-  username,
-  name,
-  branch,
-  filePath,
-}: RepoInfo): Promise<boolean> {
-  const contentsUrl = `https://api.github.com/repos/${username}/${name}/contents`;
-  const packagePath = `${filePath ? `/${filePath}` : ''}/package.json`;
-
-  return isUrlOk(contentsUrl + packagePath + `?ref=${branch}`);
-}
-
 async function downloadTar(url: string) {
   const tempFile = join(tmpdir(), `next.js-cna-example.temp-${Date.now()}`);
-  await pipeline(got.stream(url), createWriteStream(tempFile));
+  const response: any = await fetch(url);
+
+  await pipeline(response.body, createWriteStream(tempFile));
   return tempFile;
 }
 
@@ -123,17 +107,6 @@ export async function verifyURL(example: string) {
         `Found invalid GitHub URL: ${colors.error(
           `"${example}"`
         )}. Please fix the URL and try again.`
-      );
-      process.exit(1);
-    }
-
-    const found = await hasRepo(repoInfo);
-
-    if (!found) {
-      console.error(
-        `Could not locate the repository for ${colors.error(
-          `"${example}"`
-        )}. Please check that the repository exists and try again.`
       );
       process.exit(1);
     }
