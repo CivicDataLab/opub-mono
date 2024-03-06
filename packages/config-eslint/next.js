@@ -13,6 +13,7 @@ module.exports = {
     '@next/next/no-html-link-for-pages': 'off',
     'prefer-const': 'off',
     '@typescript-eslint/no-var-requires': 'off',
+    '@next/next/no-img-element': 'off',
   },
   ignorePatterns: ['**/generated/**/*.ts', 'node_modules/', 'dist/'],
 };
