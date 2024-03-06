@@ -1,7 +1,7 @@
 {
   "name": "opub-ui",
   "description": "OPub UI Library",
-  "version": "0.2.9",
+  "version": "0.3.0",
   "private": false,
   "license": "MIT",
   "author": "CivicDataLab <tech@civicdatalab.in>",
@@ -122,7 +122,6 @@
     "@storybook/addon-essentials": "^7.6.17",
     "@storybook/addon-interactions": "^7.6.17",
     "@storybook/addon-links": "^7.6.17",
-    "@storybook/addon-mdx-gfm": "^7.6.17",
     "@storybook/addons": "^7.6.17",
     "@storybook/react": "^7.6.17",
     "@storybook/react-vite": "^7.6.17",
