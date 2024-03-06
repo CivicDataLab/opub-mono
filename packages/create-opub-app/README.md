@@ -9,7 +9,7 @@ We need a way for anyone to start a new personalized OPub app as fast and easily
 ## Get Started
 
 ```bash
-npm create opub-app
+npm create opub-app@latest
 ```
 
 ## Arguments
@@ -17,9 +17,9 @@ npm create opub-app
 The CLI takes optinal arguments
 
 ```bash
-npm create opub-app [package-name] [options]
+npm create opub-app@latest [package-name] [options]
 
-eg: npm create opub-app my-opub-app -e d4d -m pnpm
+eg: npm create opub-app@latest my-opub-app -e d4d -m pnpm
 ```
 
 ### Options
