@@ -1,4 +1,7 @@
-import { Box } from '../Box';
+import React from 'react';
+import { Meta, StoryObj } from '@storybook/react';
+
+import { Button } from '../Button';
 import {
   Command,
   CommandDialog,
@@ -8,8 +11,6 @@ import {
   CommandItem,
   CommandList,
 } from './Command';
-import { Meta, StoryObj } from '@storybook/react';
-import React from 'react';
 
 /**
  * Command menu for quick actions
@@ -40,7 +41,13 @@ export const Default: Story = {
 
     return (
       <div>
-        <Box>CMD + K</Box>
+        <Button
+          kind="tertiary"
+          variant="interactive"
+          onClick={() => setOpen((e) => !e)}
+        >
+          CMD + K
+        </Button>
 
         <CommandDialog open={open} onOpenChange={setOpen}>
           <CommandInput placeholder="search..." />
