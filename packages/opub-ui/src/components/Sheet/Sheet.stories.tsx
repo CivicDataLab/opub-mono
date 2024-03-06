@@ -1,14 +1,14 @@
-import { Box } from "../Box";
-import { Button } from "../Button";
-import { Sheet } from "./Sheet";
-import { Meta, StoryObj } from "@storybook/react";
-import React from "react";
+import React from 'react';
+import { Meta, StoryObj } from '@storybook/react';
+
+import { Button } from '../Button';
+import { Sheet } from './Sheet';
 
 /**
  * Sheet is a panel that slides in from the side of the screen.
  */
 const meta = {
-  title: "Components/Sheet",
+  title: 'Components/Sheet',
   component: Sheet.Content,
 } satisfies Meta<typeof Sheet.Content>;
 
@@ -17,24 +17,15 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   render: () => {
-    const [open, setOpen] = React.useState(false);
-    console.log(open);
-
     return (
-      <Box
-        flex
-        width="90vw"
-        minHeight="90vh"
-        alignItems="center"
-        justifyContent="center"
-      >
+      <div className="flex h-full w-full items-center justify-center">
         <Sheet>
           <Sheet.Trigger>
             <Button>Open Sheet</Button>
           </Sheet.Trigger>
           <Sheet.Content>Sheet Content</Sheet.Content>
         </Sheet>
-      </Box>
+      </div>
     );
   },
   args: {},
@@ -42,44 +33,24 @@ export const Default: Story = {
 
 export const Sides: Story = {
   render: () => {
-    const [open, setOpen] = React.useState(false);
-    const [side, setSide] = React.useState<any>("");
-
-    // React.useEffect(() => {
-    //   if (side) setOpen((val) => !val);
-    // }, [side]);
+    const [side, setSide] = React.useState<any>('');
 
     function handleOpenChange(side: string) {
       setSide(side);
     }
 
     return (
-      <Box
-        flex
-        minHeight="90vh"
-        alignItems="center"
-        justifyContent="center"
-        gap="2"
-        direction="column"
-        wrap="wrap"
-      >
+      <div className="flex h-full w-full flex-col flex-wrap items-center justify-center gap-2">
         <Sheet>
           <Sheet.Trigger>
-            <Button onClick={() => handleOpenChange("top")}>From Top</Button>
+            <Button onClick={() => handleOpenChange('top')}>From Top</Button>
           </Sheet.Trigger>
           <Sheet.Content side={side}>Sheet Content</Sheet.Content>
         </Sheet>
-
-        <Box
-          flex
-          gap="2"
-          width="100%"
-          alignItems="center"
-          justifyContent="center"
-        >
+        <div className="flex w-full justify-center gap-2">
           <Sheet>
             <Sheet.Trigger>
-              <Button onClick={() => handleOpenChange("left")}>
+              <Button onClick={() => handleOpenChange('left')}>
                 From Left
               </Button>
             </Sheet.Trigger>
@@ -87,66 +58,52 @@ export const Sides: Story = {
           </Sheet>
           <Sheet>
             <Sheet.Trigger>
-              <Button onClick={() => handleOpenChange("right")}>
+              <Button onClick={() => handleOpenChange('right')}>
                 From Right
               </Button>
             </Sheet.Trigger>
             <Sheet.Content side={side}>Sheet Content</Sheet.Content>
           </Sheet>
-        </Box>
-
+        </div>
         <Sheet>
           <Sheet.Trigger>
-            <Button onClick={() => handleOpenChange("bottom")}>
+            <Button onClick={() => handleOpenChange('bottom')}>
               From Bottom
             </Button>
           </Sheet.Trigger>
           <Sheet.Content side={side}>Sheet Content</Sheet.Content>
         </Sheet>
-      </Box>
+      </div>
     );
   },
   args: {},
 };
 
-type sizes = "narrow" | "medium" | "wide" | "extended" | "full";
-const sizeArr = ["narrow", "medium", "wide", "extended", "full"];
+type sizes = 'narrow' | 'medium' | 'wide' | 'extended' | 'full';
+const sizeArr = ['narrow', 'medium', 'wide', 'extended', 'full'];
 export const Sizes: Story = {
   render: () => {
     const [size, setSize] = React.useState<sizes | undefined>(undefined);
 
     return (
-      <Box
-        flex
-        gap="2"
-        minHeight="90vh"
-        alignItems="center"
-        justifyContent="center"
-        direction="column"
-        wrap="wrap"
-      >
+      <div className="flex h-full w-full flex-col flex-wrap items-center justify-center">
         <Sheet>
           <Sheet.Trigger>
             <Button>Open Sheet</Button>
           </Sheet.Trigger>
           <Sheet.Content size={size}>
-            <Box
-              flex
-              gap="2"
-              wrap="wrap"
-              alignItems="center"
-              width="100%"
-              minHeight="100%"
-            >
-              {sizeArr.map((size: any) => (
-                <Button key={size} onClick={() => setSize(size)}>
-                  {size}
-                </Button>
-              ))}
-            </Box>
+            <div className="flex h-full w-full items-center px-2">
+              <div className="flex flex-wrap gap-2">
+                {sizeArr.map((size: any) => (
+                  <Button key={size} onClick={() => setSize(size)}>
+                    {size}
+                  </Button>
+                ))}
+              </div>
+            </div>
           </Sheet.Content>
         </Sheet>
-      </Box>
+      </div>
     );
   },
   args: {},

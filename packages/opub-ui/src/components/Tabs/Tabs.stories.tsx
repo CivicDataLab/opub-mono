@@ -1,6 +1,6 @@
-import { Box } from '../Box';
-import { Tab, TabList, TabPanel, Tabs } from './Tabs';
 import { Meta, StoryObj } from '@storybook/react';
+
+import { Tab, TabList, TabPanel, Tabs } from './Tabs';
 
 /**
  * A set of layered sections of content—known as tab panels—that are displayed one at a time.
@@ -26,13 +26,13 @@ export const Default: Story = {
             <Tab value="3">Tab Name 3</Tab>
           </TabList>
           <TabPanel value="1">
-            <Box padding="5">1</Box>
+            <div className="p-5">1</div>
           </TabPanel>
           <TabPanel value="2">
-            <Box padding="5">2</Box>
+            <div className="p-5">2</div>
           </TabPanel>
           <TabPanel value="3">
-            <Box padding="5">3</Box>
+            <div className="p-5">3</div>
           </TabPanel>
         </Tabs>
       </>
@@ -52,13 +52,13 @@ export const Fitted: Story = {
             <Tab value="3">Tab 3</Tab>
           </TabList>
           <TabPanel value="1">
-            <Box padding="5">1</Box>
+            <div className="p-5">1</div>
           </TabPanel>
           <TabPanel value="2">
-            <Box padding="5">2</Box>
+            <div className="p-5">2</div>
           </TabPanel>
           <TabPanel value="3">
-            <Box padding="5">3</Box>
+            <div className="p-5">3</div>
           </TabPanel>
         </Tabs>
       </>
@@ -84,13 +84,13 @@ export const WithoutBorder: Story = {
             </Tab>
           </TabList>
           <TabPanel value="1">
-            <Box padding="5">1</Box>
+            <div className="p-5">1</div>
           </TabPanel>
           <TabPanel value="2">
-            <Box padding="5">2</Box>
+            <div className="p-5">2</div>
           </TabPanel>
           <TabPanel value="3">
-            <Box padding="5">3</Box>
+            <div className="p-5">3</div>
           </TabPanel>
         </Tabs>
       </>

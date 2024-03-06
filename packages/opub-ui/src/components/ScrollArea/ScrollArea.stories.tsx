@@ -1,7 +1,7 @@
-import { Box } from '../Box';
+import { Meta, StoryObj } from '@storybook/react';
+
 import { Text } from '../Text';
 import { ScrollArea } from './ScrollArea';
-import { Meta, StoryObj } from '@storybook/react';
 
 /**
  * Augments native scroll functionality for custom, cross-browser styling.
@@ -26,11 +26,11 @@ export const Default: Story = {
       <div style={{ padding: '15px 20px', maxHeight: '400px' }}>
         <Text>Tags</Text>
         {TAGS.map((tag) => (
-          <Box borderBlockStart="base" padding="2">
+          <div className="border-l-1 border-solid border-borderDefault p-2">
             <Text as="p" key={tag}>
               {tag}
             </Text>
-          </Box>
+          </div>
         ))}
       </div>
     ),

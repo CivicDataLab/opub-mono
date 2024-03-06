@@ -1,8 +1,8 @@
-import { Box } from '../Box';
-import { Tooltip } from '../Tooltip';
-import { IconButton } from './IconButton';
 import { Meta, StoryObj } from '@storybook/react';
 import { IconMinus, IconPlus, IconSettings } from '@tabler/icons-react';
+
+import { Tooltip } from '../Tooltip';
+import { IconButton } from './IconButton';
 
 /**
  * Icon Button component
@@ -68,11 +68,11 @@ export const WithTooltip: Story = {
 
 export const Sizes: Story = {
   render: (args) => (
-    <Box flex alignItems="center" gap="4">
+    <div className="flex items-center gap-4">
       <IconButton {...args} size="slim" />
       <IconButton {...args} size="medium" />
       <IconButton {...args} size="large" />
-    </Box>
+    </div>
   ),
 
   args: {
