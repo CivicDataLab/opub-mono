@@ -1,8 +1,8 @@
-import { Box } from '../Box';
+import { Meta, StoryObj } from '@storybook/react';
+
 import { Button } from '../Button';
 import { Text } from '../Text';
 import { Tooltip } from './Tooltip';
-import { Meta, StoryObj } from '@storybook/react';
 
 /**
  * A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it
@@ -34,12 +34,25 @@ export const Default: Story = {
   },
 };
 
+export const Controlled: Story = {
+  render: ({ ...args }) => <Tooltip {...args} />,
+  args: {
+    children: (
+      <Text fontWeight="bold" as="span">
+        Trigger
+      </Text>
+    ),
+    content: 'Tooltip content',
+    open: true,
+  },
+};
+
 export const Multiple: Story = {
   render: ({ ...args }) => (
-    <Box flex gap="1">
-      <Tooltip {...args} />
-      <Tooltip {...args} />
-    </Box>
+    <div className="flex gap-1">
+      <Tooltip {...args} content="Trigger 1" />
+      <Tooltip {...args} content="Trigger 2" />
+    </div>
   ),
   args: {
     children: <Button size="slim">Trigger</Button>,

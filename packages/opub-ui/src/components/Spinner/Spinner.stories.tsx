@@ -1,6 +1,6 @@
-import { Box } from '../Box';
-import { Spinner } from './Spinner';
 import { Meta } from '@storybook/react';
+
+import { Spinner } from './Spinner';
 
 /**
  * Spinners are used to notify users that their action is being processed.
@@ -26,12 +26,12 @@ export const Default = {
 
 export const Colors = {
   render: () => (
-    <Box flex alignItems="center" gap="4">
+    <div className="flex items-center gap-4">
       <Spinner color="success" />
       <Spinner color="warning" />
       <Spinner color="critical" />
       <Spinner color="highlight" />
       <Spinner color="text" />
-    </Box>
+    </div>
   ),
 };

@@ -1,6 +1,6 @@
-import { Box } from '../Box';
-import { Text } from './Text';
 import { Meta } from '@storybook/react';
+
+import { Text } from './Text';
 
 /**
  * Typography helps establish hierarchy and communicate important content by creating clear visual patterns.
@@ -15,7 +15,7 @@ const meta = {
 export default meta;
 
 export const Variants = () => (
-  <Box flex direction="column" gap="2">
+  <div className="flex flex-col gap-2">
     <Text as="h1" variant="heading4xl">
       Text with Heading4xl variant
     </Text>
@@ -52,11 +52,11 @@ export const Variants = () => (
     <Text as="p" variant="bodySm">
       Text with BodySm variant
     </Text>
-  </Box>
+  </div>
 );
 
 export const WithAlignment = () => (
-  <Box flex direction="column">
+  <div className="flex flex-col">
     <Text as="p" variant="bodyLg" alignment="start">
       Manage your Shopify store on-the-go with real-time notifications, access
       to your dashboard, and order management, all from your smartphone.
@@ -73,11 +73,11 @@ export const WithAlignment = () => (
       Manage your Shopify store on-the-go with real-time notifications, access
       to your dashboard, and order management, all from your smartphone.
     </Text>
-  </Box>
+  </div>
 );
 
 export const WithFontWeight = () => (
-  <Box flex direction="column">
+  <div className="flex flex-col">
     <Text as="p" variant="bodyMd" fontWeight="bold">
       Sales this year
     </Text>
@@ -90,11 +90,11 @@ export const WithFontWeight = () => (
     <Text as="p" variant="bodyMd" fontWeight="regular">
       Sales this year
     </Text>
-  </Box>
+  </div>
 );
 
 export const WithColor = () => (
-  <Box flex direction="column" gap="1">
+  <div className="flex flex-col gap-1">
     <Text as="p" variant="bodyMd" color="default">
       Default Text is used to communicate the majority of information on the
     </Text>
@@ -141,7 +141,7 @@ export const WithColor = () => (
         This is the disabled version for dark background
       </Text>
     </div>
-  </Box>
+  </div>
 );
 
 export const WithTruncate = () => (

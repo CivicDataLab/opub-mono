@@ -1,9 +1,9 @@
-import { Box } from '../Box';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { Meta, StoryObj } from '@storybook/react';
+
 import { Button } from '../Button';
 import { Tag } from '../Tag';
 import { TextField } from './TextField';
-import { Meta, StoryObj } from '@storybook/react';
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
 /**
  * TextFields are text inputs that allow users to input custom text entries with a keyboard. Various decorations can be displayed around the field to communicate the entry requirements.
@@ -87,11 +87,11 @@ export const Prefix: Story = {
 const tags = ['Rustic', 'Antique', 'Vinyl', 'Refurbished'];
 const verticalContentMarkup =
   tags.length > 0 ? (
-    <Box flex gap="1">
+    <div className="flex gap-1">
       {tags.map((tag) => (
         <Tag key={tag}>{tag}</Tag>
       ))}
-    </Box>
+    </div>
   ) : null;
 
 export const VerticalContent: Story = {
