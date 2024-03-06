@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import { Box, Button, Text } from 'opub-ui';
+import { Button, Text } from 'opub-ui';
 
 import { LinkButton } from '@/components/Link';
 
@@ -40,15 +40,7 @@ export default function ErrorPage({
   const errorType = errorText[error.message] || errorText.OTHER;
 
   return (
-    <Box
-      width="100%"
-      minHeight="100%"
-      flex
-      justifyContent="center"
-      alignItems="center"
-      direction="column"
-      gap="4"
-    >
+    <div className="flex min-h-full w-full flex-col items-center justify-center gap-4">
       <div className="flex flex-col gap-1 text-center">
         <Text variant="headingLg" as="h2">
           {errorType.title}
@@ -64,6 +56,6 @@ export default function ErrorPage({
       ) : (
         <Button onClick={() => reset()}>{errorType.actionText}</Button>
       )}
-    </Box>
+    </div>
   );
 }

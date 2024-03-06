@@ -1,9 +1,8 @@
 'use client';
 
-import React from 'react';
 import Link, { LinkProps } from 'next/link';
 import { Size, useWindowSize } from '@/hooks/use-window-size';
-import { Box, Button, Icon, Text, Tooltip } from 'opub-ui';
+import { Button, Icon, Text, Tooltip } from 'opub-ui';
 import { twMerge } from 'tailwind-merge';
 
 import { useIsNavigating } from '@/config/store';
@@ -93,7 +92,7 @@ export function ActionBar(props: Props) {
         </Button>
       </div>
       <div className="hidden sm:block">
-        <Box flex alignItems="center" gap="3">
+        <div className="flex items-center gap-3">
           {props.secondaryAction && (
             <Button
               kind="tertiary"
@@ -109,7 +108,7 @@ export function ActionBar(props: Props) {
           >
             {props.primaryAction.content}
           </Button>
-        </Box>
+        </div>
       </div>
     </div>
   );
