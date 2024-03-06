@@ -37,7 +37,9 @@
     "lint:fix": "eslint . --fix"
   },
   "devDependencies": {
-    "eslint-config": "*",
+    "@repo/eslint-config": "*",
+    "@repo/prettier-config": "*",
+    "prettier-config": "*",
     "@clack/prompts": "^0.7.0",
     "@types/async-retry": "^1.4.5",
     "@types/gradient-string": "^1.1.5",

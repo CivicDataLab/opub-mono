@@ -113,6 +113,7 @@
   },
   "devDependencies": {
     "@repo/eslint-config": "*",
+    "@repo/prettier-config": "*",
     "@faker-js/faker": "^8.4.1",
     "@rollup/plugin-commonjs": "^25.0.1",
     "@rollup/plugin-node-resolve": "^15.2.3",
