@@ -1,9 +1,9 @@
 'use client';
 
-import { init, getInstanceByDom } from 'echarts';
-import type { EChartsOption, ECharts as EType, SetOptionOpts } from 'echarts';
-import { useRef, useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import type { CSSProperties } from 'react';
+import { getInstanceByDom, init } from 'echarts';
+import type { EChartsOption, ECharts as EType, SetOptionOpts } from 'echarts';
 
 export interface ReactEChartsProps {
   option: EChartsOption;
@@ -59,7 +59,6 @@ export function ECharts({
     // Update chart
     if (chartRef.current !== null) {
       const chart = getInstanceByDom(chartRef.current);
-      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
       loading === true ? chart?.showLoading() : chart?.hideLoading();
     }
   }, [loading, theme]);

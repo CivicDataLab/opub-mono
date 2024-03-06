@@ -21,7 +21,7 @@ export const MapComponent = ({
 }: {
   indicator: string;
   regions: { label: string; value: string }[];
-  mapDataloading: Boolean;
+  mapDataloading: boolean;
   setRegion: any;
   mapData: any;
 }) => {
