@@ -38,6 +38,7 @@
   },
   "devDependencies": {
     "@repo/eslint-config": "*",
+    "@repo/prettier-config": "*",
     "@graphql-codegen/cli": "3.3.1",
     "@graphql-codegen/client-preset": "3.0.1",
     "@graphql-codegen/typescript": "^3.0.4",
