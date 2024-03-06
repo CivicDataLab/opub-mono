@@ -1,13 +1,14 @@
-import { MobileNav } from '@/components/mobile-nav';
-import { Footer } from './components/footer';
-import locales from '../../config/locales';
-import Provider from '@/components/provider';
-import { siteConfig } from '@/config/site';
-import { NextIntlClientProvider } from 'next-intl';
+import React from 'react';
 import { Inter as FontSans } from 'next/font/google';
 import { notFound } from 'next/navigation';
-import React from 'react';
+import { NextIntlClientProvider } from 'next-intl';
 import { unstable_setRequestLocale } from 'next-intl/server';
+
+import { siteConfig } from '@/config/site';
+import { MobileNav } from '@/components/mobile-nav';
+import Provider from '@/components/provider';
+import locales from '../../config/locales';
+import { Footer } from './components/footer';
 
 const fontSans = FontSans({ subsets: ['latin'], display: 'swap' });
 

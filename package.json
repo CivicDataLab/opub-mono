@@ -11,9 +11,9 @@
     "build": "turbo run build",
     "postbuild": "turbo run postbuild",
     "dev": "turbo run dev",
-    "lint": "turbo run lint --filter opub-ui",
+    "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md,scss}\"",
-    "test": "turbo run test --filter opub-ui",
+    "test": "turbo run test",
     "test:watch": "turbo run test:watch",
     "prepare": "husky install",
     "clean": "npm run clean:packages; rm -rf package-lock.json",
@@ -25,7 +25,6 @@
   "devDependencies": {
     "@changesets/cli": "^2.26.1",
     "@typescript-eslint/parser": "^5.57.1",
-    "eslint-config-custom": "*",
     "husky": "^8.0.0",
     "lint-staged": "^13.2.0",
     "new-component-opub": "git+https://github.com/CivicDataLab/new-component.git",
@@ -37,6 +36,6 @@
     "typescript": "^5.0.4"
   },
   "engines": {
-    "node": ">=14.0.0"
+    "node": ">=18.0.0"
   }
 }

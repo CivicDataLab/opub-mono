@@ -1,14 +1,7 @@
 module.exports = {
-  root: true,
-  settings: {
-    next: {
-      rootDir: ['apps/*/'],
-    },
-  },
-  env: {
-    browser: true,
-    jest: true,
-    node: true,
+  globals: {
+    React: true,
+    JSX: true,
   },
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -23,9 +16,6 @@ module.exports = {
   ],
 
   rules: {
-    '@next/next/no-img-element': 'off',
-    '@next/next/no-html-link-for-pages': 'off',
-    'react/jsx-key': 'off',
     'react/display-name': 'off',
     'react/react-in-jsx-scope': 'off',
     'no-unused-vars': 'off',
@@ -33,4 +23,5 @@ module.exports = {
     'no-useless-escape': 'off',
     'no-redeclare': ['error', { builtinGlobals: false }],
   },
+  ignorePatterns: ['node_modules/', 'dist/'],
 };
