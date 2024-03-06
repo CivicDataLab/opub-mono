@@ -1,4 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react';
+import { Drawer as DrawerPrimitive } from 'vaul';
 
 import { Drawer } from './Drawer';
 
@@ -8,6 +9,7 @@ import { Drawer } from './Drawer';
  * Reference: #
  */
 const meta = {
+  title: 'Components/Drawer',
   component: Drawer,
 } satisfies Meta<typeof Drawer>;
 
