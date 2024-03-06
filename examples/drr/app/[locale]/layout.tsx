@@ -24,14 +24,7 @@ export async function generateMetadata() {
       template: `%s | ${siteConfig.name}`,
     },
     description: siteConfig.description,
-    keywords: [
-      'Next.js',
-      'React',
-      'Server Components',
-      'Radix UI',
-      'OPub',
-      'Open Publishing',
-    ],
+    keywords: ['Climate Actions', 'Assam', 'DRR', 'Disaster', 'Risk Score'],
     authors: [
       {
         name: 'CivicDataLab',
