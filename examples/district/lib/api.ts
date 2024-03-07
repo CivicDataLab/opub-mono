@@ -1,8 +1,9 @@
-import { gqlConfig } from '@/config/site';
+import React from 'react';
 import { type TypedDocumentNode } from '@graphql-typed-document-node/core';
 import { QueryClient, useQuery } from '@tanstack/react-query';
 import { request } from 'graphql-request';
-import React from 'react';
+
+import { gqlConfig } from '@/config/site';
 
 // create a wrapper function for graphql-request
 // that will be used by react-query

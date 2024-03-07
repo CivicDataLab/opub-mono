@@ -39,6 +39,7 @@
   },
   "devDependencies": {
     "opub-tokens": "*",
+    "@repo/config-ts": "*",
     "@repo/eslint-config": "*",
     "@repo/prettier-config": "*",
     "@graphql-codegen/cli": "3.3.1",
