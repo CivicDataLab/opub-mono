@@ -57,8 +57,8 @@
     "coverage": "vitest run --coverage",
     "lint": "eslint --ext=tsx src",
     "lint:fix": "eslint --ext=ts,tsx,js,jsx src --fix",
-    "chromatic": "npx chromatic --exit-once-uploaded --project-token=795f989bc619",
-    "clean": "rm -rf .turbo node_modules dist"
+    "clean": "rm -rf .turbo node_modules dist",
+    "style": "node ../opub-tokens/index.js"
   },
   "peerDependencies": {
     "react": "^16.14.0 || ^17.0.0 || ^18.0.0",
@@ -112,6 +112,7 @@
     "vaul": "^0.9.0"
   },
   "devDependencies": {
+    "opub-tokens": "*",
     "@repo/eslint-config": "*",
     "@repo/prettier-config": "*",
     "@faker-js/faker": "^8.4.1",

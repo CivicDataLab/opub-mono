@@ -7,9 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "build:tokens": "node ./config/tokens/generate.js",
-    "postbuild:tokens": "node ./config/tokens/copy.js",
-    "clean": "rm -rf node_modules package-lock.json"
+    "clean": "rm -rf node_modules package-lock.json",
+    "style": "opub-tokens"
   },
   "dependencies": {
     "@tabler/icons-react": "^2.17.0",
@@ -33,6 +32,7 @@
     "zustand": "^4.4.1"
   },
   "devDependencies": {
+    "opub-tokens": "*",
     "@ianvs/prettier-plugin-sort-imports": "^4.1.1",
     "@repo/eslint-config": "*",
     "@repo/prettier-config": "*",

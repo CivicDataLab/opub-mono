@@ -1,10 +1,27 @@
 {
 	"name": "opub-tokens",
-	"version": "0.0.0",
-	"main": "index.js",
-	"private": true,
+	"version": "0.0.7",
+	"description": "Convert Figma tokens to CSS Variables",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/civicdatalab/opub-mono",
+		"directory": "packages/create-opub-app"
+	},
+	"author": "CDL Team <tech@civicdatalab.in>",
 	"license": "MIT",
+	"main": "index.js",
+	"bin": {
+		"opub-tokens": "./index.js"
+	},
 	"type": "module",
+	"files": [
+		"index.js",
+		"helpers/*",
+		"sd-config.js"
+	],
+	"publishConfig": {
+		"access": "public"
+	},
 	"scripts": {
 		"build": "node ./index.js"
 	},

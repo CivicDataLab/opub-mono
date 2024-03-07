@@ -1,19 +1,15 @@
-import cssFormattor from './helpers/css-formattor.js'
-import twFormat from './helpers/tailwind-formattor.js'
 import fs from 'fs'
 import path from 'path'
-import { fileURLToPath } from 'url'
-import { dirname } from 'path'
+import cssFormattor from './helpers/css-formattor.js'
+import twFormat from './helpers/tailwind-formattor.js'
 
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = dirname(__filename)
-
-function loadJSON(path) {
-	return JSON.parse(fs.readFileSync(new URL(path, import.meta.url)))
+function loadJSON(input) {
+	const jsonPath = path.resolve(process.cwd(), input)
+	return JSON.parse(fs.readFileSync(new URL(jsonPath, import.meta.url)))
 }
 
 // load the config from root of the package
-const configPath = path.resolve(__dirname, 'opub.config.js')
+const configPath = path.resolve(process.cwd(), 'opub.config.js')
 
 async function getConfigAndJson() {
 	if (fs.existsSync(configPath)) {

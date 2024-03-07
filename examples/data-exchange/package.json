@@ -11,7 +11,8 @@
     "generate": "graphql-codegen --config ./config/codegen.ts",
     "prestart": "npm run generate",
     "predev": "npm run generate",
-    "clean": "rm -rf node_modules package-lock.json"
+    "clean": "rm -rf node_modules package-lock.json",
+    "style": "opub-tokens"
   },
   "dependencies": {
     "@tabler/icons-react": "^2.17.0",
@@ -37,6 +38,7 @@
     "zustand": "^4.3.8"
   },
   "devDependencies": {
+    "opub-tokens": "*",
     "@repo/eslint-config": "*",
     "@repo/prettier-config": "*",
     "@graphql-codegen/cli": "3.3.1",

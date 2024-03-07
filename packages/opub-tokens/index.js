@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import sd from 'style-dictionary'
 import initialize from './sd-config.js'
 
