@@ -23,7 +23,7 @@
 		"access": "public"
 	},
 	"scripts": {
-		"build": "node ./index.js"
+		"start": "node ./index.js"
 	},
 	"dependencies": {
 		"style-dictionary": "^3.8.0"
