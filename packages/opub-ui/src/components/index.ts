@@ -1,4 +1,9 @@
-export { Accordion } from './Accordion';
+export {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+} from './Accordion';
 export { ActionList } from './ActionList';
 export { AlertDialog } from './AlertDialog';
 export { Avatar } from './Avatar';
