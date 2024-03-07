@@ -1,22 +1,47 @@
 import cssFormattor from './helpers/css-formattor.js'
 import twFormat from './helpers/tailwind-formattor.js'
-import fs from 'fs-extra'
+import fs from 'fs'
+import path from 'path'
+import { fileURLToPath } from 'url'
+import { dirname } from 'path'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
 
 function loadJSON(path) {
 	return JSON.parse(fs.readFileSync(new URL(path, import.meta.url)))
 }
 
-const json = loadJSON('./tokens.json')
-export default {
+// load the config from root of the package
+const configPath = path.resolve(__dirname, 'opub.config.js')
+
+async function getConfigAndJson() {
+	if (fs.existsSync(configPath)) {
+		try {
+			const module = await import(configPath)
+			const config = module.default
+			const json = loadJSON(`./${config.tokens.input}`)
+			return { config, json }
+		} catch (err) {
+			console.error('Error loading config:', err)
+			process.exit(1)
+		}
+	} else {
+		console.error('No config found')
+		process.exit(1)
+	}
+}
+
+let exportObject = {
 	format: {
 		twFormat,
 		cssFormattor,
 	},
-	tokens: json.collections,
+	tokens: null,
 	platforms: {
 		css: {
 			transformGroup: 'css',
-			buildPath: 'dist/',
+			buildPath: null,
 			files: [
 				{
 					destination: '_variables.css',
@@ -26,7 +51,7 @@ export default {
 		},
 		tailwind: {
 			transformGroup: 'js',
-			buildPath: 'dist/tailwind/',
+			buildPath: null,
 			files: [
 				{
 					destination: 'space.js',
@@ -74,3 +99,15 @@ export default {
 		},
 	},
 }
+
+async function initialize() {
+	const { config, json } = await getConfigAndJson()
+
+	exportObject.tokens = json.collections
+	exportObject.platforms.css.buildPath = `${config.tokens.output}/`
+	exportObject.platforms.tailwind.buildPath = `${config.tokens.output}/tailwind/`
+
+	return exportObject
+}
+
+export default initialize

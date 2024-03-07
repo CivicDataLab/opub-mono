@@ -1,4 +1,9 @@
 import sd from 'style-dictionary'
-import config from './sd-config.js'
+import initialize from './sd-config.js'
 
-sd.extend(config).buildAllPlatforms()
+async function main() {
+	const config = await initialize()
+	sd.extend(config).buildAllPlatforms()
+}
+
+main()
