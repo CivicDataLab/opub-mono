@@ -1,6 +1,6 @@
 module.exports = {
   tokens: {
     input: 'styles/tokens.json',
-    output: 'styles',
+    output: 'styles/tokens',
   },
 };
