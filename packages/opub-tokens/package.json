@@ -1,0 +1,14 @@
+{
+	"name": "@repo/opub-tokens",
+	"version": "0.0.0",
+	"main": "index.js",
+	"private": true,
+	"license": "MIT",
+	"type": "module",
+	"scripts": {
+		"build": "node ./index.js"
+	},
+	"dependencies": {
+		"style-dictionary": "^3.8.0"
+	}
+}
