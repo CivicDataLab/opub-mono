@@ -24,11 +24,25 @@ export const managers: {
   bun: 'Bun',
 };
 
-const packagesToInstall = {
-  'create-opub-app': 'latest',
-  'opub-mono': 'latest',
-  'opub-mono-cli': 'latest',
+export const packagesToInstall: {
+  [key: string]: {
+    [key: string]: string;
+  };
+} = {
+  dependencies: {
+    'opub-ui': 'latest',
+  },
+  devDependencies: {
+    'opub-tokens': 'latest',
+    typescript: '^5.0.4',
+  },
 };
+
+export const packagesToRemove = [
+  '@repo/config-ts',
+  '@repo/eslint-config',
+  '@repo/prettier-config',
+];
 
 export const TITLE_TEXT = `   ____                _          ___  ____        _          _
   / ___|_ __ ___  __ _| |_ ___   / _ \\|  _ \\ _   _| |__      / \\   _ __  _ __

@@ -1,7 +1,7 @@
 {
   "name": "opub-ui",
   "description": "OPub UI Library",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "private": false,
   "license": "MIT",
   "author": "CivicDataLab <tech@civicdatalab.in>",
@@ -89,6 +89,7 @@
     "@react-types/shared": "^3.18.0",
     "@tabler/icons-react": "^2.17.0",
     "@tanstack/react-table": "^8.9.1",
+    "autoprefixer": "^10.4.18",
     "clsx": "^2.1.0",
     "cmdk": "^0.2.0",
     "echarts": "^5.4.3",
