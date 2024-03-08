@@ -20,7 +20,8 @@
 		"new-component": "new-component",
 		"build:packages": "turbo run build --filter=create-opub-app --filter=opub-ui",
 		"publish": "changeset publish",
-		"style": "turbo run style"
+		"style": "turbo run style",
+		"sync-config": "node ./utils/sync-config.js"
 	},
 	"devDependencies": {
 		"@changesets/cli": "^2.26.1",

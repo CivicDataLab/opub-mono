@@ -83,6 +83,7 @@ export async function createApp({
       delete pkgJson.devDependencies[pkg];
     });
 
+    // write the changes to package.json
     fse.writeJSONSync(packageJsonPath, pkgJson, {
       spaces: 2,
     });
