@@ -24,16 +24,13 @@
 	},
 	"devDependencies": {
 		"@changesets/cli": "^2.26.1",
-		"@typescript-eslint/parser": "^5.57.1",
+		"autoprefixer": "^10.4.14",
 		"husky": "^8.0.0",
 		"lint-staged": "^13.2.0",
 		"new-component-opub": "git+https://github.com/CivicDataLab/new-component.git",
-		"prettier": "^3.2.4",
-		"prettier-plugin-tailwindcss": "^0.5.11",
-		"sass": "^1.58.3",
+		"prettier-plugin-tailwindcss": "^0.5.12",
 		"tsup": "^6.7.0",
-		"turbo": "^1.9.1",
-		"typescript": "^5.0.4"
+		"turbo": "^1.9.1"
 	},
 	"engines": {
 		"node": ">=18.0.0"

@@ -52,7 +52,6 @@
     "gradient-string": "^2.0.2",
     "ky": "^1.2.2",
     "picocolors": "^1.0.0",
-    "prettier-config": "*",
     "tar": "^6.2.0",
     "validate-npm-package-name": "^5.0.0"
   }
