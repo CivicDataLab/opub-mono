@@ -36,7 +36,6 @@ export function CreateDataset({
   mutate?: (res: { dataset_data: CreateDatasetInput }) => void;
   mutatePatch?: (res: { dataset_data: PatchDatasetInput }) => void;
 }) {
-  // const [val, setVal] = React.useState<Props>();
   const defaultValue = defaultVal || defaultValBase;
 
   return (
@@ -83,9 +82,9 @@ export function CreateDataset({
             />
           </div>
         </RadioGroup>
-        <div className="max-w-[656px] pl-8">
+        <div className="max-w-[656px] pt-8">
           <Text variant="headingMd">Dataset Details</Text>
-          <div className="pl-3">
+          <div className="pt-3">
             <FormLayout>
               <Input
                 name="title"
@@ -113,9 +112,9 @@ export function CreateDataset({
             </FormLayout>
           </div>
 
-          <div className="pl-8">
+          <div className="pt-6">
             <Text variant="headingMd">Terms & Conditions</Text>
-            <div className="pl-2">
+            <div className="pt-2">
               <Checkbox
                 name="terms"
                 required

@@ -11,10 +11,10 @@
     "generate": "graphql-codegen --config ./config/codegen.ts",
     "prestart": "npm run generate",
     "predev": "npm run generate",
-    "clean": "rm -rf node_modules package-lock.json"
+    "clean": "rm -rf node_modules package-lock.json",
+    "style": "opub-tokens"
   },
   "dependencies": {
-    "@tabler/icons-react": "^2.17.0",
     "@tanstack/react-query": "^4.29.5",
     "@types/node": "^20.1.3",
     "@types/react": "^18.2.0",
@@ -31,31 +31,20 @@
     "react": "^18.2.0",
     "react-aria": "3.22.0",
     "react-dom": "^18.2.0",
-    "sass": "^1.70.0",
     "sharp": "^0.33.2",
     "usehooks-ts": "^2.13.0",
     "zustand": "^4.3.8"
   },
   "devDependencies": {
+    "opub-tokens": "*",
+    "@repo/config-ts": "*",
+    "@repo/eslint-config": "*",
+    "@repo/prettier-config": "*",
     "@graphql-codegen/cli": "3.3.1",
     "@graphql-codegen/client-preset": "3.0.1",
     "@graphql-codegen/typescript": "^3.0.4",
     "@graphql-codegen/typescript-graphql-request": "^4.5.9",
     "@graphql-codegen/typescript-operations": "^3.0.4",
-    "@ianvs/prettier-plugin-sort-imports": "^4.1.1",
-    "@types/dom-to-image": "^2.6.5",
-    "@typescript-eslint/eslint-plugin": "^6.21.0",
-    "autoprefixer": "^10.4.14",
-    "color2k": "^2.0.2",
-    "encoding": "^0.1.13",
-    "eslint": "^8.57.0",
-    "eslint-config-next": "^14.1.2",
-    "postcss": "^8.4.23",
-    "prettier": "^3.2.4",
-    "prettier-plugin-tailwindcss": "^0.5.11",
-    "style-dictionary": "^3.8.0",
-    "tailwind-merge": "^1.12.0",
-    "tailwindcss": "^3.3.2",
-    "typescript": "^5.0.4"
+    "@types/dom-to-image": "^2.6.5"
   }
 }

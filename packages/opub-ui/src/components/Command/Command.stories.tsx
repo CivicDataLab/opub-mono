@@ -31,8 +31,18 @@ export const Default: Story = {
 
     React.useEffect(() => {
       const down = (e: KeyboardEvent) => {
-        if (e.key === 'k' && e.metaKey) {
-          setOpen((open) => !open);
+        const isMac = navigator.userAgent.indexOf('Mac') !== -1;
+
+        if (isMac) {
+          if (e.key === 'k' && e.metaKey) {
+            e.preventDefault();
+            setOpen((open) => !open);
+          }
+        } else {
+          if (e.key === 'k' && e.ctrlKey) {
+            e.preventDefault();
+            setOpen((open) => !open);
+          }
         }
       };
       document.addEventListener('keydown', down);

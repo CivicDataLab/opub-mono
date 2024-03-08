@@ -1,5 +1,5 @@
 // import Link from 'next/link';
-import { Icon, Text } from 'opub-ui';
+import { Text } from 'opub-ui';
 
 // import Icons from '@/components/icons';
 

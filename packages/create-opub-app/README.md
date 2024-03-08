@@ -17,9 +17,9 @@ npm create opub-app@latest
 The CLI takes optinal arguments
 
 ```bash
-npm create opub-app@latest [package-name] [options]
+npm create opub-app@latest [package-name] -- [options]
 
-eg: npm create opub-app@latest my-opub-app -e d4d -m pnpm
+eg: npm create opub-app@latest my-opub-app -- -e d4d -m pnpm
 ```
 
 ### Options
