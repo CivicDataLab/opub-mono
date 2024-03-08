@@ -3,6 +3,7 @@ import path from 'path';
 import retry from 'async-retry';
 import fse from 'fs-extra';
 
+import { packagesToInstall, packagesToRemove } from './utils/constants';
 import { initializeGit } from './utils/git';
 import { install } from './utils/install';
 import { colors, logger } from './utils/logger';
@@ -69,8 +70,20 @@ export async function createApp({
     // update the project name in package json
     const appName = path.basename(root);
     pkgJson.name = appName;
-    // add opub-ui as a dependency
-    pkgJson.dependencies['opub-ui'] = 'latest';
+
+    // add the packages to install
+    Object.keys(packagesToInstall).forEach((type: any) => {
+      Object.keys(packagesToInstall[type]).forEach((pkg) => {
+        pkgJson[type][pkg] = packagesToInstall[type][pkg];
+      });
+    });
+
+    // remove the packages from devDependencies
+    packagesToRemove.forEach((pkg) => {
+      delete pkgJson.devDependencies[pkg];
+    });
+
+    // write the changes to package.json
     fse.writeJSONSync(packageJsonPath, pkgJson, {
       spaces: 2,
     });

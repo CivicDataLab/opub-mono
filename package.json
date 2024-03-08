@@ -20,11 +20,11 @@
 		"new-component": "new-component",
 		"build:packages": "turbo run build --filter=create-opub-app --filter=opub-ui",
 		"publish": "changeset publish",
-		"style": "turbo run style"
+		"style": "turbo run style",
+		"sync-config": "node ./utils/sync-config.js"
 	},
 	"devDependencies": {
 		"@changesets/cli": "^2.26.1",
-		"autoprefixer": "^10.4.14",
 		"husky": "^8.0.0",
 		"lint-staged": "^13.2.0",
 		"new-component-opub": "git+https://github.com/CivicDataLab/new-component.git",
