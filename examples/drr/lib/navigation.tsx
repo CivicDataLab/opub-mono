@@ -1,14 +1,13 @@
-import { useIsNavigating } from '@/config/store';
-import { usePathname, useSearchParams } from 'next/navigation';
-import NProgress from 'nprogress';
 import React from 'react';
+import { usePathname, useSearchParams } from 'next/navigation';
+
+import { useIsNavigating } from '@/config/store';
 
 export function navigateStart() {
-  NProgress.start();
+  useIsNavigating.getState().setIsNavigation(true);
 }
 
 export function navigateEnd() {
-  NProgress.done();
   useIsNavigating.getState().setIsNavigation(false);
 }
 
