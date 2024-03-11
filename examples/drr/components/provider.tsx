@@ -1,10 +1,11 @@
 'use client';
 
-import { RouterEvents } from '@/lib/navigation';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import NextTopLoader from 'nextjs-toploader';
-import { Toaster, Tooltip } from 'opub-ui';
 import React from 'react';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import HolyLoader from 'holy-loader';
+import { Toaster, Tooltip } from 'opub-ui';
+
+import { RouterEvents } from '@/lib/navigation';
 
 export default function Provider({ children }: { children: React.ReactNode }) {
   const [client] = React.useState(
@@ -15,7 +16,7 @@ export default function Provider({ children }: { children: React.ReactNode }) {
     <QueryClientProvider client={client}>
       <React.Fragment>
         <RouterEvents />
-        <NextTopLoader color="var(--action-primary-success-default)" />
+        <HolyLoader color="var(--action-primary-success-default)" />
         <Tooltip.Provider>
           {children}
           <Toaster />

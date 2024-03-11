@@ -1,5 +1,11 @@
-import { redirect } from 'next/navigation';
+'use client';
 
-export default async function DashboardPage() {
-  redirect('/dashboard/dataset');
+import { InProgress } from './components/in-progress';
+
+export default function DashboardPage() {
+  return (
+    <div className="h-full min-h-full">
+      <InProgress />
+    </div>
+  );
 }
