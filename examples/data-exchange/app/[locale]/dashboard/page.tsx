@@ -1,26 +1,11 @@
 'use client';
 
-import { signIn, useSession } from 'next-auth/react';
-
-import { Loading } from '@/components/loading';
 import { InProgress } from './components/in-progress';
 
 export default function DashboardPage() {
-  const { data: session, status } = useSession();
-
-  if (status === 'loading') {
-    return <Loading />;
-  }
-
-  if (!session) {
-    signIn('keycloak');
-  }
-
-  if (session) {
-    return (
-      <div className="h-full min-h-full">
-        <InProgress />
-      </div>
-    );
-  }
+  return (
+    <div className="h-full min-h-full">
+      <InProgress />
+    </div>
+  );
 }

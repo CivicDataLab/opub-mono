@@ -19,9 +19,7 @@ export function Content() {
         <Text variant="headingSm" color="subdued">
           You have not added any datasets yet.
         </Text>
-        <div className="pr-4">
-          <LinkButton href="/dashboard/dataset/new">Add New Dataset</LinkButton>
-        </div>
+        <LinkButton href="/dashboard/dataset/new">Add New Dataset</LinkButton>
       </div>
     </div>
   );

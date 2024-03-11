@@ -1,0 +1,7 @@
+KEYCLOAK_CLIENT_ID=
+KEYCLOAK_CLIENT_SECRET=
+AUTH_ISSUER=https://opub-kc.civicdatalab.in/auth/realms/{Add Realm Name Here}
+NEXTAUTH_URL=http://localhost:3000
+NEXTAUTH_SECRET=Some Random String
+END_SESSION_URL=https://opub-kc.civicdatalab.in/auth/realms/{Add Realm Name Here}/protocol/openid-connect/logout
+REFRESH_TOKEN_URL=https://opub-kc.civicdatalab.in/auth/realms/{Add Realm Name Here}/protocol/openid-connect/token
