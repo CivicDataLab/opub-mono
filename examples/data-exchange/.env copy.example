@@ -1,0 +1,7 @@
+KEYCLOAK_CLIENT_ID=data-exchange
+KEYCLOAK_CLIENT_SECRET=lm85BiiAjIzlpUPnSrzqBxH6n7ck9l17
+AUTH_ISSUER=https://opub-kc.civicdatalab.in/auth/realms/exchange
+NEXTAUTH_URL=http://localhost:3000
+NEXTAUTH_SECRET=d6f8d653f85d7621c894b14ade0bed1d
+END_SESSION_URL=https://opub-kc.civicdatalab.in/auth/realms/exchange/protocol/openid-connect/logout
+REFRESH_TOKEN_URL=https://opub-kc.civicdatalab.in/auth/realms/exchange/protocol/openid-connect/token
