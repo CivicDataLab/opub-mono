@@ -8,8 +8,8 @@ type Props = {
   showLabel?: boolean;
   size?: 'extraSmall' | 'small' | 'medium' | 'large';
   showInitials?: boolean;
-  image?: string;
-  name?: string;
+  image?: string | null;
+  name?: string | null;
 };
 
 interface StylesMap {

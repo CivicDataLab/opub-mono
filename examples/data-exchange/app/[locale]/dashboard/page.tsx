@@ -7,7 +7,6 @@ import { InProgress } from './components/in-progress';
 
 export default function DashboardPage() {
   const { data: session, status } = useSession();
-  console.log(session, status);
 
   if (status === 'loading') {
     return <Loading />;

@@ -3,7 +3,7 @@ import NextAuth, { Account, AuthOptions, Session } from 'next-auth';
 import { JWT } from 'next-auth/jwt';
 import KeycloakProvider from 'next-auth/providers/keycloak';
 
-// import { encrypt } from '@/lib/encryption';
+import { encrypt } from '@/lib/encryption';
 
 // this will refresh an expired access token, when needed
 async function refreshAccessToken(token: JWT) {
@@ -70,11 +70,15 @@ export const authOptions: AuthOptions = {
     },
     async session({ session, token }: { session: Session; token: JWT }) {
       // Send properties to the client
-      // session.access_token = encrypt(token.access_token); // see utils/sessionTokenAccessor.js
-      // session.id_token = encrypt(token.id_token); // see utils/sessionTokenAccessor.js
-      // session.roles = token.decoded.realm_access.roles;
-      // session.error = token.error as string;
-      console.log(token);
+      session.access_token = encrypt(token.access_token as string);
+      session.id_token = encrypt(token.id_token as string);
+      session.roles = (
+        token.decoded as {
+          realm_access: { roles: string[] };
+        }
+      ).realm_access.roles;
+      session.error = token.error as string;
+
       return session;
     },
   },

@@ -3,13 +3,32 @@
 import React from 'react';
 import Link from 'next/link';
 import { useKeyDetect } from '@/hooks/use-key-detect';
-import { Avatar, Icon, Text, TextField } from 'opub-ui';
+import { signIn, signOut, useSession } from 'next-auth/react';
+import {
+  Avatar,
+  Button,
+  Divider,
+  Icon,
+  IconButton,
+  Popover,
+  Text,
+  TextField,
+} from 'opub-ui';
 
 import { Icons } from '@/components/icons';
+
+async function keycloakSessionLogOut() {
+  try {
+    await fetch(`/api/auth/logout`, { method: 'GET' });
+  } catch (err) {
+    console.error(err);
+  }
+}
 
 export function MainNav() {
   const { key, metaKey } = useKeyDetect();
   const searchRef = React.useRef<HTMLInputElement>(null);
+  const { data: session, status } = useSession();
 
   React.useEffect(() => {
     if (key === 'k' && metaKey) {
@@ -38,12 +57,80 @@ export function MainNav() {
             ref={searchRef}
           />
         </div>
-        <div className="flex shrink-0 items-center gap-4">
-          <Icon source={Icons.notification} />
-          <div>
-            <Avatar showInitials showLabel name="Helen Birjam" size="small" />
+        {status === 'loading' ? (
+          <div className="min-w-[112px]" />
+        ) : (
+          <div className="flex min-w-[112px] shrink-0 items-center justify-end gap-4">
+            <Icon source={Icons.notification} />
+            {session?.user ? (
+              <Popover>
+                <Popover.Trigger>
+                  {session.user.image ? (
+                    <IconButton icon={session.user.image} size="slim">
+                      {session.user.name}
+                    </IconButton>
+                  ) : (
+                    <Button
+                      kind="tertiary"
+                      size="slim"
+                      className="rounded-full"
+                    >
+                      <Avatar
+                        showInitials
+                        name={session.user.name || 'User'}
+                        size="small"
+                      />
+                    </Button>
+                  )}
+                </Popover.Trigger>
+                <Popover.Content align="end">
+                  <div className="rounded-3 py-2 shadow-basicDeep">
+                    <div className="flex flex-col px-5 py-2">
+                      <Text variant="bodyMd" fontWeight="medium">
+                        {session.user.name}
+                      </Text>
+                      <Text variant="bodyMd">{session.user.email}</Text>
+                    </div>
+                    <div className="flex w-full flex-col">
+                      <Text variant="bodyMd">
+                        <Link
+                          href="/dashboard"
+                          className="block w-full px-5 py-2 transition-colors duration-100 ease-ease  hover:bg-actionSecondaryBasicHovered"
+                        >
+                          Dashboard
+                        </Link>
+                      </Text>
+                    </div>
+                    <Divider className="mx-3 my-3 w-auto" />
+                    <div className="px-3">
+                      <Button
+                        onClick={() => {
+                          keycloakSessionLogOut().then(() =>
+                            signOut({ callbackUrl: '/' })
+                          );
+                        }}
+                        kind="secondary"
+                        size="slim"
+                        fullWidth
+                      >
+                        Log Out
+                      </Button>
+                    </div>
+                  </div>
+                </Popover.Content>
+              </Popover>
+            ) : (
+              <Button
+                onClick={() => {
+                  signIn('keycloak');
+                }}
+                kind="secondary"
+              >
+                Log In
+              </Button>
+            )}
           </div>
-        </div>
+        )}
       </div>
     </nav>
   );
