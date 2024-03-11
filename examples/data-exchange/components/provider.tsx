@@ -2,8 +2,8 @@
 
 import React from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import HolyLoader from 'holy-loader';
 import { SessionProvider } from 'next-auth/react';
-import NextTopLoader from 'nextjs-toploader';
 import { Toaster, Tooltip } from 'opub-ui';
 
 import { RouterEvents } from '@/lib/navigation';
@@ -25,7 +25,7 @@ export default function Provider({ children }: { children: React.ReactNode }) {
     <SessionProvider>
       <QueryClientProvider client={client}>
         <RouterEvents />
-        <NextTopLoader color="var(--icon-success)" />
+        <HolyLoader color="var(--action-primary-success-default)" />
         <Tooltip.Provider>
           {children}
           <Toaster />
