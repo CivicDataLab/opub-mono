@@ -1,6 +1,6 @@
+import { authOptions } from '@/app/api/auth/[...nextauth]/options';
 import { getServerSession } from 'next-auth';
 
-import { authOptions } from '../app/api/auth/[...nextauth]/route';
 import { decrypt } from './encryption';
 
 export async function getAccessToken() {
