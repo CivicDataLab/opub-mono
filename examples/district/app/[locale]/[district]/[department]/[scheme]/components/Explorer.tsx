@@ -1,5 +1,4 @@
 import React from 'react';
-import dynamic from 'next/dynamic';
 import { useWindowSize } from '@/hooks/use-window-size';
 import { useQueryState } from 'next-usequerystate';
 import {
@@ -20,16 +19,10 @@ import { ErrorBoundary } from 'react-error-boundary';
 import { ckan } from '@/config/site';
 import { useFetch } from '@/lib/api';
 import { cn, copyURLToClipboard, exportAsImage } from '@/lib/utils';
+import MapChart from '@/components/MapChart';
 import { BarView } from './BarView';
 import { Indicators } from './Indicators';
 import { IChartData } from './scheme-layout';
-
-const MapChart = dynamic(
-  () => import('opub-ui/viz').then((mod) => mod.MapChart),
-  {
-    ssr: false,
-  }
-);
 
 export const Explorer = React.forwardRef(
   (

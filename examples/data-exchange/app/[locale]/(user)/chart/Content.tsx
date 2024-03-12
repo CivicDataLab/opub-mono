@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import dynamic from 'next/dynamic';
 import { EChartsOption } from 'echarts-for-react';
 import { ShareDialog, useScreenshot } from 'opub-ui';
 import { BarChart } from 'opub-ui/viz';
@@ -9,13 +8,7 @@ import { useMediaQuery } from 'usehooks-ts';
 
 import { eCharts } from '@/lib/eCharts';
 import { navigateEnd } from '@/lib/navigation';
-
-const MapChart = dynamic(
-  () => import('opub-ui/viz').then((mod) => mod.MapChart),
-  {
-    ssr: false,
-  }
-);
+import MapChart from '@/components/MapChart';
 
 type Props = {
   options: EChartsOption;
