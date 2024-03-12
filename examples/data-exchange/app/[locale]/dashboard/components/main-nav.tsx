@@ -178,12 +178,14 @@ const ProfileContent = ({
 const LogginOutPage = () => {
   return (
     <div className="h-screen w-screen overflow-hidden">
-      <div className="flex items-center gap-2 pt-[6px]">
-        <Icon source={Icons.logo} size={24} color="success" />
-        <Text variant="headingLg" as="h1">
-          OPub
-        </Text>
-      </div>
+      <Link href="/">
+        <div className="flex items-center gap-2 pt-[6px]">
+          <Icon source={Icons.logo} size={24} color="success" />
+          <Text variant="headingLg" as="h1">
+            OPub
+          </Text>
+        </div>
+      </Link>
       <div className="flex h-full w-full flex-col items-center justify-center gap-1">
         <Spinner size="small" />
         <Text variant="headingLg">Logging out</Text>

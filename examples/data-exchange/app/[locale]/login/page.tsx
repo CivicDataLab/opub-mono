@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { signIn, useSession } from 'next-auth/react';
 import { Icon, Spinner, Text } from 'opub-ui';
@@ -33,12 +34,14 @@ export default SignIn;
 const LogginInPage = () => {
   return (
     <div className="h-screen w-screen overflow-hidden bg-surfaceDefault">
-      <div className="flex items-center gap-2 pl-4 pt-[18px]">
-        <Icon source={Icons.logo} size={24} color="success" />
-        <Text variant="headingLg" as="h1">
-          OPub
-        </Text>
-      </div>
+      <Link href="/">
+        <div className="flex items-center gap-2 pl-4 pt-[18px]">
+          <Icon source={Icons.logo} size={24} color="success" />
+          <Text variant="headingLg" as="h1">
+            OPub
+          </Text>
+        </div>
+      </Link>
       <div className="flex h-full w-full flex-col items-center justify-center gap-1">
         <Spinner size="small" />
         <Text variant="headingLg">Logging In</Text>

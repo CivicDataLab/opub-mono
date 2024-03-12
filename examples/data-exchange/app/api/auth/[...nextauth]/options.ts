@@ -21,6 +21,7 @@ async function refreshAccessToken(token: JWT) {
     method: 'POST',
   });
   const refreshToken = await resp.json();
+
   if (!resp.ok) throw refreshToken;
 
   return {
