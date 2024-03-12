@@ -1,10 +1,9 @@
 import * as LabelRadix from '@radix-ui/react-label';
-import { LabelProps } from '@radix-ui/react-label/dist/index';
 
 import { cn } from '../../utils';
 import styles from './Label.module.scss';
 
-export interface LabelInterface extends LabelProps {
+export interface LabelInterface extends LabelRadix.LabelProps {
   disabled?: boolean;
   error?: boolean;
   /** Visual required indicator for the label */

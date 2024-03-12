@@ -1,3 +1,4 @@
+import { env } from '@/env';
 import { jwtDecode } from 'jwt-decode';
 import { Account, AuthOptions, Session } from 'next-auth';
 import { JWT } from 'next-auth/jwt';
@@ -8,13 +9,13 @@ import { encrypt } from '@/lib/encryption';
 // this will refresh an expired access token, when needed
 async function refreshAccessToken(token: JWT) {
   const urlObj: Record<string, any> = {
-    client_id: process.env.KEYCLOAK_CLIENT_ID,
-    client_secret: process.env.KEYCLOAK_CLIENT_SECRET,
+    client_id: env.KEYCLOAK_CLIENT_ID,
+    client_secret: env.KEYCLOAK_CLIENT_SECRET,
     grant_type: 'refresh_token',
     refresh_token: token.refresh_token,
   };
 
-  const resp = await fetch(`${process.env.REFRESH_TOKEN_URL}`, {
+  const resp = await fetch(`${env.REFRESH_TOKEN_URL}`, {
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     body: new URLSearchParams(urlObj),
     method: 'POST',
@@ -34,9 +35,9 @@ async function refreshAccessToken(token: JWT) {
 export const authOptions: AuthOptions = {
   providers: [
     KeycloakProvider({
-      clientId: `${process.env.KEYCLOAK_CLIENT_ID}`,
-      clientSecret: `${process.env.KEYCLOAK_CLIENT_SECRET}`,
-      issuer: `${process.env.AUTH_ISSUER}`,
+      clientId: `${env.KEYCLOAK_CLIENT_ID}`,
+      clientSecret: `${env.KEYCLOAK_CLIENT_SECRET}`,
+      issuer: `${env.AUTH_ISSUER}`,
       httpOptions: {
         timeout: 10000,
       },

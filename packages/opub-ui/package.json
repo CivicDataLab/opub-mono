@@ -24,8 +24,18 @@
   ],
   "sideEffects": false,
   "exports": {
-    ".": "./dist/index.js",
-    "./viz": "./dist/viz.js",
+    ".": {
+      "import": {
+        "types": "./dist/ts/index.d.ts",
+        "default": "./dist/index.js"
+      }
+    },
+    "./viz": {
+      "import": {
+        "types": "./dist/ts/viz.d.ts",
+        "default": "./dist/viz.js"
+      }
+    },
     "./dist/assets/styles.css": "./dist/assets/styles.css"
   },
   "typesVersions": {

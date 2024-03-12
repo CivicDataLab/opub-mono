@@ -1,6 +1,6 @@
+import { ClassNameValue, twMerge } from 'tailwind-merge';
+
 import { BreakpointsAlias } from '../tokens/breakpoints';
-import { twMerge } from 'tailwind-merge';
-import { ClassNameValue } from 'tailwind-merge/dist/lib/tw-join';
 
 export function variationName(name: string, value: string) {
   return `${name}${value.charAt(0).toUpperCase()}${value.slice(1)}`;
