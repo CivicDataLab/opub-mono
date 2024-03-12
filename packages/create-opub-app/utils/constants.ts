@@ -35,6 +35,13 @@ export const packagesToInstall: {
   devDependencies: {
     'opub-tokens': 'latest',
     typescript: '^5.0.4',
+    prettier: '^3.2.4',
+    '@ianvs/prettier-plugin-sort-imports': '^4.1.1',
+    'prettier-plugin-tailwindcss': '^0.5.11',
+    eslint: '^8.57.0',
+    '@typescript-eslint/eslint-plugin': '^6.21.0',
+    'eslint-config-next': '^14.1.2',
+    'eslint-config-prettier': '^9.1.0',
   },
 };
 
