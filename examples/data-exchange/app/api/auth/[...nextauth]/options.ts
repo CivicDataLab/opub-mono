@@ -37,6 +37,9 @@ export const authOptions: AuthOptions = {
       clientId: `${process.env.KEYCLOAK_CLIENT_ID}`,
       clientSecret: `${process.env.KEYCLOAK_CLIENT_SECRET}`,
       issuer: `${process.env.AUTH_ISSUER}`,
+      httpOptions: {
+        timeout: 10000,
+      },
     }),
   ],
 
