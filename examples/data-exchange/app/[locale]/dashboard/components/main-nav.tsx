@@ -12,19 +12,12 @@ import {
   Icon,
   IconButton,
   Popover,
+  Spinner,
   Text,
   TextField,
 } from 'opub-ui';
 
 import { Icons } from '@/components/icons';
-
-async function keycloakSessionLogOut() {
-  try {
-    await fetch(`/api/auth/logout`, { method: 'GET' });
-  } catch (err) {
-    console.error(err);
-  }
-}
 
 const profileLinks = [
   {
@@ -34,6 +27,7 @@ const profileLinks = [
 ];
 
 export function MainNav() {
+  const [isLoggingOut, setIsLoggingOut] = React.useState(false);
   const { key, metaKey } = useKeyDetect();
   const searchRef = React.useRef<HTMLInputElement>(null);
   const { data: session, status } = useSession();
@@ -43,6 +37,20 @@ export function MainNav() {
       searchRef.current?.focus();
     }
   }, [key, metaKey]);
+
+  async function keycloakSessionLogOut() {
+    try {
+      setIsLoggingOut(true);
+      await fetch(`/api/auth/logout`, { method: 'GET' });
+    } catch (err) {
+      setIsLoggingOut(false);
+      console.error(err);
+    }
+  }
+
+  if (isLoggingOut) {
+    return <LogginOutPage />;
+  }
 
   return (
     <nav>
@@ -73,7 +81,10 @@ export function MainNav() {
           <div className="flex min-w-[112px] shrink-0 items-center justify-end gap-4">
             <Icon source={Icons.notification} />
             {session?.user ? (
-              <ProfileContent session={session} />
+              <ProfileContent
+                session={session}
+                keycloakSessionLogOut={keycloakSessionLogOut}
+              />
             ) : (
               <Button
                 onClick={() => {
@@ -91,7 +102,13 @@ export function MainNav() {
   );
 }
 
-const ProfileContent = ({ session }: { session: Session }) => {
+const ProfileContent = ({
+  session,
+  keycloakSessionLogOut,
+}: {
+  session: Session;
+  keycloakSessionLogOut: () => Promise<void>;
+}) => {
   const [open, setOpen] = React.useState(false);
 
   return (
@@ -155,5 +172,22 @@ const ProfileContent = ({ session }: { session: Session }) => {
         </div>
       </Popover.Content>
     </Popover>
+  );
+};
+
+const LogginOutPage = () => {
+  return (
+    <div className="h-screen w-screen overflow-hidden">
+      <div className="flex items-center gap-2">
+        <Icon source={Icons.logo} size={24} color="success" />
+        <Text variant="headingLg" as="h1">
+          OPub
+        </Text>
+      </div>
+      <div className="flex h-full w-full flex-col items-center justify-center gap-1">
+        <Spinner size="small" />
+        <Text variant="headingLg">Logging out</Text>
+      </div>
+    </div>
   );
 };
