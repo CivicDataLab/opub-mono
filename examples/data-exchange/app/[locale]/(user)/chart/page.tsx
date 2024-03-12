@@ -13,13 +13,13 @@ export default async function Home() {
   };
 
   return (
-    <main className="flex w-full flex-col items-center justify-center gap-2">
+    <div className="flex w-full flex-col items-center justify-center gap-2">
       <Content
         bar={{ options: barOptions }}
         line={{ options: lineOptions }}
         stacked={{ options: stackedOptions }}
         mapOptions={mapOptions}
       />
-    </main>
+    </div>
   );
 }

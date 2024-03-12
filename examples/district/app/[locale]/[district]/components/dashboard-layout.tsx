@@ -46,7 +46,7 @@ export function DashboardLayout({
         </IconButton>
       </Tooltip>
 
-      <main className={cn(styles.Main, `grow pb-10`)}>{children}</main>
+      <div className={cn(styles.Main, `grow pb-10`)}>{children}</div>
     </div>
   );
 }

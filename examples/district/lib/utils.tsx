@@ -1,7 +1,6 @@
 import domtoimage from 'dom-to-image';
 import { toast } from 'opub-ui';
-import { twMerge } from 'tailwind-merge';
-import { ClassNameValue } from 'tailwind-merge/dist/lib/tw-join';
+import { twMerge, type ClassNameValue } from 'tailwind-merge';
 
 import { navigateEnd, navigateStart } from './navigation';
 

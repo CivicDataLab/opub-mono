@@ -1,14 +1,14 @@
 import {
   DistrictSelector,
+  DistrictSelectorMobile,
   Header,
   KeyHighlights,
   QuickLinks,
-  DistrictSelectorMobile,
 } from './components';
 
 export default function Home() {
   return (
-    <main className="bg-backgroundSolidDefault pb-10">
+    <div className="bg-backgroundSolidDefault pb-10">
       <div className="hidden md:block">
         <Header />
       </div>
@@ -18,6 +18,6 @@ export default function Home() {
         <DistrictSelectorMobile />
         <QuickLinks />
       </div>
-    </main>
+    </div>
   );
 }
