@@ -4,7 +4,7 @@ import createIntlMiddleware from 'next-intl/middleware';
 
 import locales from './config/locales';
 
-const publicPages = ['/'];
+const publicPages = ['/', '/login'];
 
 const intlMiddleware = createIntlMiddleware({
   locales: locales.all,
@@ -13,11 +13,13 @@ const intlMiddleware = createIntlMiddleware({
 });
 
 const authMiddleware = withAuth(
-  // Note that this callback is only invoked if
-  // the `authorized` callback has returned `true`
-  // and not for pages listed in `pages`.
   function onSuccess(req) {
     return intlMiddleware(req);
+  },
+  {
+    pages: {
+      signIn: '/login',
+    },
   }
 );
 

@@ -28,9 +28,9 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
           items={dashboardConfig.sidebarNav}
         />
       </div>
-      <main className={cn(styles.Main, isOpened && styles.MainOpened)}>
+      <div className={cn(styles.Main, isOpened && styles.MainOpened)}>
         {children}
-      </main>
+      </div>
     </div>
   );
 }
