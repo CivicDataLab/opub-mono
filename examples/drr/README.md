@@ -4,7 +4,7 @@ A WIP (work in progress) platform to speed up the development of Open Data Dashb
 
 [OPub UI](https://main--64004009fa0a900a3197549c.chromatic.com/)<br>
 [OPub Viz](https://main--64e5d546d7476f1d5b4cfa47.chromatic.com/?path=/story/components-barchart--default/)<br>
-[Dashboard](https://opub-www.vercel.app/dashboard)<br>
+[Dashboard](https://data-exchange.vercel.app/dashboard)<br>
 [Documentation](https://opub-docs.netlify.app)
 
 ## What's inside?

@@ -3,7 +3,7 @@
 A WIP (work in progress) platform to speed up the development of Open Data Dashboards, aimed at simplifying the process of creating and managing data visualizations, enabling users to easily analyze and present complex data in a user-friendly and accessible way.
 
 [Stroybook](https://main--64004009fa0a900a3197549c.chromatic.com/) <br>
-[Dashboard](https://opub-www.vercel.app/dashboard) <br>
+[Dashboard](https://data-exchange.vercel.app/dashboard) <br>
 [Documentation](https://opub-docs.netlify.app)
 
 ## What's inside?

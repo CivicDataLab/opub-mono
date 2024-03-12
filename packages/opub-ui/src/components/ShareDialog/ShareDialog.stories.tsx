@@ -1,20 +1,21 @@
-import { ShareDialog } from "./ShareDialog";
-import { Meta, StoryObj } from "@storybook/react";
-import React from "react";
+import React from 'react';
+import { Meta, StoryObj } from '@storybook/react';
+
+import { ShareDialog } from './ShareDialog';
 
 /**
  * ShareDialog component can be used to share/download/embed an image.
  */
 const meta = {
-  title: "Components/ShareDialog",
+  title: 'Components/ShareDialog',
   component: ShareDialog,
 } satisfies Meta<typeof ShareDialog>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const image = "https://opub-www.vercel.app/og.png";
-const alt = "visualisation";
+const image = 'https://data-exchange.vercel.app/og.png';
+const alt = 'visualisation';
 
 export const Default: Story = {
   render: (args) => {
@@ -31,7 +32,7 @@ export const Default: Story = {
               }),
             ])
             .then(() => {
-              console.log("Copied image to clipboard.");
+              console.log('Copied image to clipboard.');
             })
             .catch((error) => {
               console.log(error);
@@ -39,16 +40,16 @@ export const Default: Story = {
           setBlob(blob);
         })
         .catch(() => {
-          throw new Error("Error while generating Blob");
+          throw new Error('Error while generating Blob');
         });
     }
 
     const download = (blob: Blob | MediaSource | undefined, name: string) => {
       if (!blob) {
-        throw new Error("Blob is undefined");
+        throw new Error('Blob is undefined');
       }
       const blobURL = URL.createObjectURL(blob);
-      const a = document.createElement("a");
+      const a = document.createElement('a');
       a.href = blobURL;
       a.download = name;
       document.body.appendChild(a);
@@ -56,18 +57,18 @@ export const Default: Story = {
       a.remove();
     };
     return (
-      <div className="flex flex-col gap-2 items-center">
+      <div className="flex flex-col items-center gap-2">
         <img
           src={image}
           alt={alt}
           width={768}
           height={384}
-          className="object-contain w-full h-96"
+          className="h-96 w-full object-contain"
         />
         <ShareDialog
           {...args}
           onOpen={() => onOpen(image)}
-          onDownload={() => download(blob, "test")}
+          onDownload={() => download(blob, 'test')}
         />
       </div>
     );
@@ -75,7 +76,7 @@ export const Default: Story = {
   args: {
     image,
     alt,
-    title: "Share Visualization",
-    children: "Share",
+    title: 'Share Visualization',
+    children: 'Share',
   },
 };

@@ -4,7 +4,7 @@ export const siteConfig: SiteConfig = {
   name: 'OPub',
   description:
     'An open source platform to speed up the development of Open Data Dashboards.',
-  url: 'https://opub-www.vercel.app',
+  url: 'https://data-exchange.vercel.app',
 };
 
 export const ckan = {
