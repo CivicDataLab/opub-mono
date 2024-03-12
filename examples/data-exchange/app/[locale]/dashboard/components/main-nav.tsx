@@ -178,7 +178,7 @@ const ProfileContent = ({
 const LogginOutPage = () => {
   return (
     <div className="h-screen w-screen overflow-hidden">
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 pt-[6px]">
         <Icon source={Icons.logo} size={24} color="success" />
         <Text variant="headingLg" as="h1">
           OPub
