@@ -3,6 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useMetaKeyPress } from '@/hooks/use-meta-key-press';
 import { Button, Icon, Text, Tooltip } from 'opub-ui';
 
 import { SidebarNavItem } from 'types';
@@ -17,25 +18,7 @@ export function DashboardNav({ items }: DashboardNavProps) {
   const [isCollapsed, setIsCollapsed] = React.useState(false);
   const path = usePathname();
 
-  React.useEffect(() => {
-    const down = (e: KeyboardEvent) => {
-      const isMac = navigator.userAgent.indexOf('Mac') !== -1;
-
-      if (isMac) {
-        if (e.key === 'b' && e.metaKey) {
-          e.preventDefault();
-          setIsCollapsed((open) => !open);
-        }
-      } else {
-        if (e.key === 'b' && e.ctrlKey) {
-          e.preventDefault();
-          setIsCollapsed((open) => !open);
-        }
-      }
-    };
-    document.addEventListener('keydown', down);
-    return () => document.removeEventListener('keydown', down);
-  }, [isCollapsed]);
+  useMetaKeyPress('b', () => setIsCollapsed((e) => !e));
 
   if (items && !items.length) {
     return null;
