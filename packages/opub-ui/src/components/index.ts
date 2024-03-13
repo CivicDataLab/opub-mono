@@ -28,7 +28,18 @@ export { Connected } from './Connected';
 export { DataTable } from './DataTable';
 export { Dialog } from './Dialog';
 export { Divider } from './Divider';
-export { Drawer } from './Drawer';
+export {
+  Drawer,
+  DrawerPortal,
+  DrawerOverlay,
+  DrawerTrigger,
+  DrawerClose,
+  DrawerContent,
+  DrawerHeader,
+  DrawerFooter,
+  DrawerTitle,
+  DrawerDescription,
+} from './Drawer';
 export * from './Form';
 export { FormLayout } from './FormLayout';
 export * from './Icon';
