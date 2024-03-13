@@ -64,7 +64,8 @@ export const Default: Story = {
         >
           Command Menu
           <span className="ml-2 inline-flex gap-1">
-            <Kbd>{isMac ? 'CMD' : 'CTRL'} + K</Kbd>
+            <Kbd>{isMac ? 'cmd' : 'ctrl'}</Kbd>
+            <Kbd>K</Kbd>
           </span>
         </Button>
 
