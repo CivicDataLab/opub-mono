@@ -1,3 +1,5 @@
+import { typeFormat } from './css-formattor.js'
+
 function arrayToCamelCase(tokens) {
 	return tokens
 		.map((word, index) => {
@@ -61,11 +63,7 @@ export default function ({ dictionary, options }) {
 				})})"`
 			} else {
 				// if it's a fixed value
-				if (variable.type === 'number') {
-					value = `"${variable.value}px"`
-				} else {
-					value = `"${variable.value}"`
-				}
+				value = `'${typeFormat(variable.value, variable.type)}'`
 			}
 		}
 		families += `  "${name}": ${value},\n`
