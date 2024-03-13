@@ -8,7 +8,15 @@ export { ActionList } from './ActionList';
 export { AlertDialog } from './AlertDialog';
 export { Avatar } from './Avatar';
 export { Badge } from './Badge';
-export { Breadcrumbs } from './Breadcrumbs';
+export {
+  Breadcrumb,
+  BreadcrumbList,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+  BreadcrumbEllipsis,
+} from './Breadcrumb';
 export * from './Button';
 export { ButtonGroup } from './ButtonGroup';
 export { Calendar, RangeCalendar } from './Calendar';

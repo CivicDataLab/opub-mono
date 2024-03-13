@@ -1,6 +1,6 @@
 module.exports = {
-  Regular: 'var(--font-weight-regular)',
-  Medium: 'var(--font-weight-medium)',
-  Bold: 'var(--font-weight-bold)',
-  'Extra-Bold': 'var(--font-weight-extra-bold)',
+  regular: 'var(--font-weight-regular)',
+  medium: 'var(--font-weight-medium)',
+  'semi-bold': 'var(--font-weight-semi-bold)',
+  bold: 'var(--font-weight-bold)',
 };
