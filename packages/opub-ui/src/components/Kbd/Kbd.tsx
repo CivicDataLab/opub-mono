@@ -16,10 +16,11 @@ const Kbd = forwardRef(
         as="kbd"
         {...rest}
         ref={ref}
-        fontWeight="semibold"
+        fontWeight="medium"
         variant="bodySm"
+        color="inherit"
         className={cn(
-          'rounded-2 border-1 border-solid border-borderDefault px-1.5 py-1 text-75',
+          'user-select-none text-secondary mx-0.5 inline-flex h-7 min-w-7 items-center justify-center rounded-1 border-1 border-solid border-borderDefault bg-backgroundSolidDefault px-2 text-center font-primary',
           className
         )}
       >
