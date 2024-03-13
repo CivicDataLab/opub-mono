@@ -56,7 +56,7 @@ const IconButton = forwardRef((props: IconButtonProps, ref: any) => {
 
   const markup =
     (withTooltip && !disabled) || tooltipText ? (
-      <Tooltip content={tooltipText || children} side={tooltipSide}>
+      <Tooltip content={tooltipText || children} side={tooltipSide} hideArrow>
         {buttonMarkup}
       </Tooltip>
     ) : (

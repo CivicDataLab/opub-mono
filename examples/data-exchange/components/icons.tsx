@@ -14,6 +14,7 @@ import {
   IconLayoutSidebarLeftExpand,
   IconLink,
   IconSearch,
+  IconTerminal,
   IconTrash,
   IconUserCog,
   // TablerIconsProps,
@@ -38,4 +39,5 @@ export const Icons = {
   dropzone: IconCloudUpload,
   check: IconCircleCheckFilled,
   delete: IconTrash,
+  terminal: IconTerminal,
 };

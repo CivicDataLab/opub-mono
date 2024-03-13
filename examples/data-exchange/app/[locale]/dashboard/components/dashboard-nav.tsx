@@ -4,7 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useMetaKeyPress } from '@/hooks/use-meta-key-press';
-import { Button, Icon, Text, Tooltip } from 'opub-ui';
+import { Icon, IconButton, Text, Tooltip } from 'opub-ui';
 
 import { SidebarNavItem } from 'types';
 import { cn } from '@/lib/utils';
@@ -36,19 +36,15 @@ export function DashboardNav({ items }: DashboardNavProps) {
     >
       <nav className={cn('flex flex-col gap-2')}>
         <div className="w-fit self-end">
-          <Tooltip
-            side="right"
-            content={<p>{isCollapsed ? 'Expand' : 'Collapse'} Sidebar</p>}
+          <IconButton
+            size="slim"
+            icon={sidebarIcon}
+            withTooltip
+            tooltipSide="right"
+            onClick={() => setIsCollapsed((open) => !open)}
           >
-            <Button
-              icon={<Icon source={sidebarIcon} />}
-              accessibilityLabel={`${
-                isCollapsed ? 'Expand' : 'Collapse'
-              } Sidebar`}
-              kind="tertiary"
-              onClick={() => setIsCollapsed((open) => !open)}
-            />
-          </Tooltip>
+            {isCollapsed ? 'Expand' : 'Collapse'} Sidebar
+          </IconButton>
         </div>
 
         {items.map((item) => {
