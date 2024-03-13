@@ -1,13 +1,13 @@
-module.exports = { 
-  "0": "var(--duration-0)",
-  "100": "var(--duration-100)",
-  "150": "var(--duration-150)",
-  "200": "var(--duration-200)",
-  "250": "var(--duration-250)",
-  "300": "var(--duration-300)",
-  "350": "var(--duration-350)",
-  "400": "var(--duration-400)",
-  "450": "var(--duration-450)",
-  "500": "var(--duration-500)",
-  "5000": "var(--duration-5000)",
-}
+module.exports = {
+  duration0: '0ms',
+  duration100: '100ms',
+  duration150: '150ms',
+  duration200: '200ms',
+  duration250: '250ms',
+  duration300: '300ms',
+  duration350: '350ms',
+  duration400: '400ms',
+  duration450: '450ms',
+  duration500: '500ms',
+  duration5000: '5000ms',
+};

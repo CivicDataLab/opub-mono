@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "clean": "rm -rf node_modules package-lock.json",
-    "style": "opub-tokens"
+    "style": "opub-tokens; echo \"\\033[33mRunning Prettier\"; prettier --write **/tailwind/*.js **/_variables.css"
   },
   "dependencies": {
     "@tanstack/react-query": "^4.29.5",
