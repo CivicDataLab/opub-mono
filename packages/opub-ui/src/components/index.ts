@@ -1,8 +1,8 @@
 export {
   Accordion,
+  AccordionContent,
   AccordionItem,
   AccordionTrigger,
-  AccordionContent,
 } from './Accordion';
 export { ActionList } from './ActionList';
 export { AlertDialog } from './AlertDialog';
@@ -26,6 +26,7 @@ export { FormLayout } from './FormLayout';
 export * from './Icon';
 export { IconButton } from './IconButton';
 export { InlineMessage } from './InlineMessage';
+export { Kbd } from './Kbd';
 export { Label } from './Label';
 export { Labelled } from './Labelled';
 export { Menu } from './Menu';

@@ -4,21 +4,14 @@ import { Controller, useFormContext } from 'react-hook-form';
 
 import { ComboboxProps } from '../../../types';
 import { Combobox as ComboboxBase } from '../../Combobox';
+import { ComboProps } from '../../Combobox/Combobox';
 
 type Props = {
   name: string;
   onChange?: (val: string, name: string) => void;
   required?: boolean;
-  /**
-   * list of the combobox.
-   */
-  list: {
-    value: string;
-    label: string;
-    type?: string;
-    disabled?: boolean;
-  }[];
-} & Omit<ComboboxProps, 'onChange'>;
+} & ComboProps &
+  Omit<ComboboxProps, 'onChange'>;
 
 const Combobox = ({ required, error, ...props }: Props) => {
   const method = useFormContext();

@@ -1,10 +1,11 @@
+import React, { forwardRef } from 'react';
+import { IconSearch } from '@tabler/icons-react';
+
 import { cn } from '../../utils';
 import { Icon } from '../Icon';
 import { IconButton } from '../IconButton';
 import { Input } from '../Input';
 import styles from './SearchInput.module.scss';
-import { IconSearch } from '@tabler/icons-react';
-import React, { forwardRef } from 'react';
 
 type Props = {
   // Additional classname for wrapper
@@ -25,6 +26,8 @@ type Props = {
   label: string;
   // name
   name: string;
+
+  suffix?: React.ReactNode;
 };
 
 const SearchInput = forwardRef((props: Props, ref: any) => {
@@ -43,6 +46,7 @@ const SearchInput = forwardRef((props: Props, ref: any) => {
           setSearch(e);
           props.onChange && props.onChange(e);
         }}
+        suffix={props.suffix}
         ref={ref}
         prefix={!props.withButton && <Icon source={IconSearch} />}
         clearButton

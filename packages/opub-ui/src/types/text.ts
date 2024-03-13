@@ -9,7 +9,8 @@ type Element =
   | 'h6'
   | 'p'
   | 'span'
-  | 'legend';
+  | 'legend'
+  | 'kbd';
 
 type Variant =
   | 'headingXs'

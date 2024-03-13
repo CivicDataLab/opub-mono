@@ -17,21 +17,20 @@ import { Text } from '../Text';
 import { Combobox as Component } from './Atoms';
 import styles from './Combobox.module.scss';
 
-export const Combobox = React.forwardRef(
-  (
-    props: ComboboxProps & {
-      /**
-       * list of the combobox.
-       */
-      list: TListItem[];
+export type ComboProps = {
+  /**
+   * list of the combobox.
+   */
+  list: TListItem[];
 
-      /**
-       * Add grouping to the combobox.
-       */
-      group?: boolean;
-    },
-    _
-  ) => {
+  /**
+   * Add grouping to the combobox.
+   */
+  group?: boolean;
+};
+
+export const Combobox = React.forwardRef(
+  (props: ComboboxProps & ComboProps, _) => {
     const [isPending, startTransition] = useTransition();
     const [searchValue, setSearchValue] = useState('');
     const deferredValue = React.useDeferredValue(searchValue);

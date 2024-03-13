@@ -2,6 +2,7 @@ import React from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 
 import { Button } from '../Button';
+import { Kbd } from '../Kbd';
 import {
   Command,
   CommandDialog,
@@ -28,11 +29,15 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   render: () => {
     const [open, setOpen] = React.useState(false);
+    const [isMac, setIsMac] = React.useState<boolean | null>(null);
+
+    React.useEffect(() => {
+      const isMac = navigator.userAgent.indexOf('Mac') !== -1;
+      setIsMac(isMac);
+    }, []);
 
     React.useEffect(() => {
       const down = (e: KeyboardEvent) => {
-        const isMac = navigator.userAgent.indexOf('Mac') !== -1;
-
         if (isMac) {
           if (e.key === 'k' && e.metaKey) {
             e.preventDefault();
@@ -45,9 +50,9 @@ export const Default: Story = {
           }
         }
       };
-      document.addEventListener('keydown', down);
+      if (isMac !== null) document.addEventListener('keydown', down);
       return () => document.removeEventListener('keydown', down);
-    }, []);
+    }, [isMac]);
 
     return (
       <div>
@@ -55,8 +60,12 @@ export const Default: Story = {
           kind="tertiary"
           variant="interactive"
           onClick={() => setOpen((e) => !e)}
+          removeUnderline
         >
-          CMD + K
+          Command Menu
+          <span className="ml-2 inline-flex gap-1">
+            <Kbd>{isMac ? 'CMD' : 'CTRL'} + K</Kbd>
+          </span>
         </Button>
 
         <CommandDialog open={open} onOpenChange={setOpen}>
