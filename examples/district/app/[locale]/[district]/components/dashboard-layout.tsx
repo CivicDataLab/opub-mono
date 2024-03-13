@@ -21,7 +21,7 @@ export function DashboardLayout({
 
   return (
     <div
-      className={cn('relative min-h-[calc(100%_-_48px)] grow gap-1 md:flex')}
+      className={cn('relative min-h-[calc(100svh_-_176px)] grow gap-1 md:flex')}
     >
       <DashboardSidebar
         isCollapsed={isCollapsed}
@@ -32,15 +32,16 @@ export function DashboardLayout({
         className={cn(
           styles.CollapseBtn,
           isCollapsed && styles.Collapsed,
-          'absolute top-4 z-10 hidden h-fit rounded-full bg-basePureWhite p-2 shadow-insetBasic hover:bg-baseIndigoSolid3 md:block'
+          'absolute top-4 z-10 hidden h-fit rounded-full bg-basePureWhite p-1 shadow-insetBasic hover:bg-baseIndigoSolid3 md:block'
         )}
         side="right"
+        hideArrow
       >
         <IconButton
-          tooltipSide="right"
           color="highlight"
           icon={Icons.doubleLeft}
           onClick={() => setIsCollapsed((e) => !e)}
+          size="slim"
         >
           {isCollapsed ? 'Expand' : 'Collapse'} Sidebar
         </IconButton>

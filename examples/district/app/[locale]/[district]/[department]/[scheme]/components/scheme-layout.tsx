@@ -1,15 +1,9 @@
-"use client";
+'use client';
 
-import { BreadCrumb } from "../../../components";
-import { schemes } from "../scheme.config";
-import { Explorer } from "./Explorer";
-import { Overview } from "./Overview";
-import { SourceData } from "./SourceData";
-import Icons from "@/components/icons";
-import { useWindowSize } from "@/hooks/use-window-size";
-import { copyURLToClipboard, exportAsImage } from "@/lib/utils";
-import { parseAsString, useQueryState } from "next-usequerystate";
-import Image from "next/image";
+import React from 'react';
+import Image from 'next/image';
+import { useWindowSize } from '@/hooks/use-window-size';
+import { parseAsString, useQueryState } from 'next-usequerystate';
 import {
   Button,
   Icon,
@@ -19,8 +13,15 @@ import {
   Tabs,
   Text,
   toast,
-} from "opub-ui";
-import React from "react";
+} from 'opub-ui';
+
+import { copyURLToClipboard, exportAsImage } from '@/lib/utils';
+import Icons from '@/components/icons';
+import { BreadCrumb } from '../../../components';
+import { schemes } from '../scheme.config';
+import { Explorer } from './Explorer';
+import { Overview } from './Overview';
+import { SourceData } from './SourceData';
 
 export interface IOverview {
   schemeTitle: string;
@@ -96,7 +97,7 @@ export const Content = ({ data }: { data: IProps }) => {
   const breadcrumbs = [
     {
       label: <Icon source={Icons.home} />,
-      href: "/",
+      href: '/',
     },
     {
       label: data.districtName,
@@ -108,7 +109,6 @@ export const Content = ({ data }: { data: IProps }) => {
     },
     {
       label: schemeData.schemeTitle,
-      href: `/${data.district}/${data.department}/${data.scheme}`,
     },
   ];
 
@@ -119,8 +119,8 @@ export const Content = ({ data }: { data: IProps }) => {
         backUrl={`/${data.district}/${data.department}`}
       />
 
-      <div className="mt-4 px-2 md:container py-1 lg:py-2">
-        <div className="flex gap-4 flex-wrap justify-start md:flex-nowrap">
+      <div className="mt-4 px-2 py-1 md:container lg:py-2">
+        <div className="flex flex-wrap justify-start gap-4 md:flex-nowrap">
           <div className="hidden md:flex">
             <Image
               src={schemes[data.scheme].logo}
@@ -152,23 +152,23 @@ export const Content = ({ data }: { data: IProps }) => {
         <TabLayout
           tabs={[
             {
-              label: "Scheme Overview",
-              value: "overview",
-              icon: "overview",
+              label: 'Scheme Overview',
+              value: 'overview',
+              icon: 'overview',
               data: data.schemeData,
             },
             {
-              label: "Scheme Explorer",
-              value: "explorer",
-              icon: "explorer",
+              label: 'Scheme Explorer',
+              value: 'explorer',
+              icon: 'explorer',
               scheme: data.scheme,
               chartData: chartData,
               district: data.district,
             },
             {
-              label: "Source Data",
-              value: "source-data",
-              icon: "database-search",
+              label: 'Source Data',
+              value: 'source-data',
+              icon: 'database-search',
               scheme: data.scheme,
               tableData: tableData,
               chartData: chartData,
@@ -196,8 +196,8 @@ const TabLayout = ({
   }[];
 }) => {
   const [tabValue, setTabValue] = useQueryState(
-    "tab",
-    parseAsString.withDefault("overview")
+    'tab',
+    parseAsString.withDefault('overview')
   );
   const overviewRef: any = React.useRef(null);
 
@@ -212,7 +212,7 @@ const TabLayout = ({
     >
       <TabList
         fitted
-        className="rounded-05 shadow-elementCard bg-surfaceDefault"
+        className="rounded-05 bg-surfaceDefault shadow-elementCard"
       >
         {tabs.map((tab) => (
           <Tab value={tab.value} key={tab.value} activeBorder={false}>
@@ -220,14 +220,14 @@ const TabLayout = ({
               <Icon
                 source={Icons[tab.icon]}
                 size={isMobile ? 32 : 40}
-                color={tabValue === tab.value ? "highlight" : "subdued"}
+                color={tabValue === tab.value ? 'highlight' : 'subdued'}
                 stroke={1}
               />
               <Text
-                variant={isMobile ? "bodyMd" : "bodyLg"}
+                variant={isMobile ? 'bodyMd' : 'bodyLg'}
                 as="h2"
-                fontWeight={tabValue === tab.value ? "medium" : "regular"}
-                color={tabValue === tab.value ? "inherit" : "default"}
+                fontWeight={tabValue === tab.value ? 'medium' : 'regular'}
+                color={tabValue === tab.value ? 'inherit' : 'default'}
               >
                 {tab.label}
               </Text>
@@ -252,16 +252,16 @@ const TabLayout = ({
             tableData={tabs[2].tableData as ITable}
           />
         </TabPanel>
-        {tabValue === "overview" && (
-          <div className="mt-4 md:mt6 py-4 px-3 rounded-2 shadow-elementCard flex items-center justify-end gap-4 flex-wrap bg-surfaceDefault">
+        {tabValue === 'overview' && (
+          <div className="md:mt6 mt-4 flex flex-wrap items-center justify-end gap-4 rounded-2 bg-surfaceDefault px-3 py-4 shadow-elementCard">
             <Button
               kind="secondary"
               variant="interactive"
               onClick={() => {
                 copyURLToClipboard();
-                toast("Copied to clipboard", {
+                toast('Copied to clipboard', {
                   action: {
-                    label: "Dismiss",
+                    label: 'Dismiss',
                     onClick: () => {},
                   },
                 });
@@ -273,7 +273,7 @@ const TabLayout = ({
               kind="primary"
               variant="interactive"
               onClick={() => {
-                exportAsImage(overviewRef.current, "overview");
+                exportAsImage(overviewRef.current, 'overview');
               }}
             >
               Download

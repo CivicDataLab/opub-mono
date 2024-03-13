@@ -1,12 +1,15 @@
+import React from 'react';
+
 import { ActionList, type ActionListProps } from '../ActionList/ActionList';
 import { Popover } from '../Popover';
 import type { PopoverContentProps, PopoverProps } from '../Popover';
-import React from 'react';
 
 type Props = {
   trigger: React.ReactNode;
   /** Content to be passed to the callback function */
   callbackContent?: any;
+
+  closeOnSelect?: boolean;
 } & ActionListProps &
   PopoverContentProps &
   PopoverProps;
@@ -25,6 +28,7 @@ const Menu = (props: Props) => {
     actionRole = 'menuitem',
     onActionAnyItem,
     callbackContent,
+    closeOnSelect,
     ...others
   } = props;
 
@@ -45,7 +49,10 @@ const Menu = (props: Props) => {
             actionRole={actionRole}
             items={items}
             sections={sections}
-            onActionAnyItem={onActionAnyItem}
+            onActionAnyItem={(e) => {
+              onActionAnyItem && onActionAnyItem(e);
+              closeOnSelect && setIsOpen(false);
+            }}
           />
         </MenuContext.Provider>
       </Popover.Content>

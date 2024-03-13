@@ -39,6 +39,12 @@ export const extraVariables = `
   --font-size-600: 2rem;
   --font-size-700: 2.5rem;
 
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --font-line-height-0: 0px;
   --font-line-height-1: 16px;
   --font-line-height-2: 20px;
   --font-line-height-3: 24px;

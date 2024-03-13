@@ -1,4 +1,5 @@
 module.exports = {
+  0: 'var(--font-line-height-0)',
   1: 'var(--font-line-height-1)',
   2: 'var(--font-line-height-2)',
   3: 'var(--font-line-height-3)',

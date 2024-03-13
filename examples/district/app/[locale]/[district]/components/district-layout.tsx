@@ -1,16 +1,17 @@
 'use client';
 
-import { Icons } from '@/components/icons';
+import Link from 'next/link';
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
 } from '@radix-ui/react-collapsible';
-import { Icon, Divider, Text, SearchInput } from 'opub-ui';
+import { Divider, Icon, SearchInput, Text } from 'opub-ui';
+
+import { Icons } from '@/components/icons';
 import { BreadCrumb } from '.';
 import { ContentCard, DepartmentCard } from './Card';
 import styles from './Content.module.scss';
-import Link from 'next/link';
 
 export interface IProps {
   title: string;
@@ -43,7 +44,6 @@ export function Content({ data }: { data: IProps }) {
     },
     {
       label: data.title,
-      href: `/${data.href}`,
     },
   ];
 
@@ -55,7 +55,7 @@ export function Content({ data }: { data: IProps }) {
           {data.title} District
         </Text>
 
-        <div className="mt-6 bg-surfaceDefault rounded-05 shadow-elementCard">
+        <div className="mt-6 rounded-05 bg-surfaceDefault shadow-elementCard">
           <Collapsible defaultOpen>
             <CollapsibleTrigger className={styles.CollapseTrigger}>
               <Text variant="headingMd" as="h2">
@@ -64,9 +64,9 @@ export function Content({ data }: { data: IProps }) {
               <Icon source={Icons.down} />
             </CollapsibleTrigger>
 
-            <CollapsibleContent className="pb-4 px-3 md:px-6">
+            <CollapsibleContent className="px-3 pb-4 md:px-6">
               <Divider />
-              <div className="mt-4 grid lg:grid-cols-2 gap-7">
+              <div className="mt-4 grid gap-7 lg:grid-cols-2">
                 <div className="flex flex-col gap-4">
                   <Text variant="headingSm" as="h3" color="subdued">
                     Key Highlights
@@ -84,14 +84,14 @@ export function Content({ data }: { data: IProps }) {
                   </div>
                 </div>
                 <div className="flex flex-col gap-3 md:gap-4">
-                  <div className="flex flex-wrap items-center gap-2 justify-between">
+                  <div className="flex flex-wrap items-center justify-between gap-2">
                     <Text variant="headingSm" as="h3" color="subdued">
                       About {data.title}
                     </Text>
                     {data.link && (
                       <Text
                         variant="bodyMd"
-                        className="underline text-textInteractive"
+                        className="text-textInteractive underline"
                       >
                         <Link href={data.link} target="_blank">
                           <span className="flex items-center gap-2">
@@ -119,7 +119,7 @@ export function Content({ data }: { data: IProps }) {
         </div>
 
         <div className="mt-12 flex flex-col gap-4">
-          <div className="flex gap-5 items-center justify-between flex-wrap">
+          <div className="flex flex-wrap items-center justify-between gap-5">
             <Text variant="headingLg" as="h2">
               {data.listTitle}
             </Text>

@@ -8,7 +8,15 @@ export { ActionList } from './ActionList';
 export { AlertDialog } from './AlertDialog';
 export { Avatar } from './Avatar';
 export { Badge } from './Badge';
-export { Breadcrumbs } from './Breadcrumbs';
+export {
+  Breadcrumb,
+  BreadcrumbList,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+  BreadcrumbEllipsis,
+} from './Breadcrumb';
 export * from './Button';
 export { ButtonGroup } from './ButtonGroup';
 export { Calendar, RangeCalendar } from './Calendar';
@@ -20,7 +28,18 @@ export { Connected } from './Connected';
 export { DataTable } from './DataTable';
 export { Dialog } from './Dialog';
 export { Divider } from './Divider';
-export { Drawer } from './Drawer';
+export {
+  Drawer,
+  DrawerPortal,
+  DrawerOverlay,
+  DrawerTrigger,
+  DrawerClose,
+  DrawerContent,
+  DrawerHeader,
+  DrawerFooter,
+  DrawerTitle,
+  DrawerDescription,
+} from './Drawer';
 export * from './Form';
 export { FormLayout } from './FormLayout';
 export * from './Icon';
