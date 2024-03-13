@@ -7,10 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "build:tokens": "node ./config/tokens/generate.js",
     "generate": "graphql-codegen --config ./config/codegen.ts",
-    "prestart": "npm run generate",
-    "predev": "npm run generate",
     "clean": "rm -rf node_modules package-lock.json",
     "style": "opub-tokens"
   },

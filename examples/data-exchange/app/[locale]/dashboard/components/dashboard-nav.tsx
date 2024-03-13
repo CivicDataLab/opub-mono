@@ -3,7 +3,6 @@
 import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useKeyDetect } from '@/hooks/use-key-detect';
 import { Button, Icon, Text, Tooltip } from 'opub-ui';
 
 import { SidebarNavItem } from 'types';
@@ -16,14 +15,27 @@ interface DashboardNavProps {
 }
 export function DashboardNav({ items }: DashboardNavProps) {
   const [isCollapsed, setIsCollapsed] = React.useState(false);
-  const { key, metaKey } = useKeyDetect();
   const path = usePathname();
 
   React.useEffect(() => {
-    if (key === 'b' && metaKey) {
-      setIsCollapsed(!isCollapsed);
-    }
-  }, [key, metaKey]);
+    const down = (e: KeyboardEvent) => {
+      const isMac = navigator.userAgent.indexOf('Mac') !== -1;
+
+      if (isMac) {
+        if (e.key === 'b' && e.metaKey) {
+          e.preventDefault();
+          setIsCollapsed((open) => !open);
+        }
+      } else {
+        if (e.key === 'b' && e.ctrlKey) {
+          e.preventDefault();
+          setIsCollapsed((open) => !open);
+        }
+      }
+    };
+    document.addEventListener('keydown', down);
+    return () => document.removeEventListener('keydown', down);
+  }, [isCollapsed]);
 
   if (items && !items.length) {
     return null;
@@ -51,7 +63,7 @@ export function DashboardNav({ items }: DashboardNavProps) {
                 isCollapsed ? 'Expand' : 'Collapse'
               } Sidebar`}
               kind="tertiary"
-              onClick={() => setIsCollapsed(!isCollapsed)}
+              onClick={() => setIsCollapsed((open) => !open)}
             />
           </Tooltip>
         </div>

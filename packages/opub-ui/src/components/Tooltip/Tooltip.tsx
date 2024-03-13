@@ -86,26 +86,7 @@ const Tooltip = (props: TooltipProps) => {
         >
           <Text variant="bodyMd">{content}</Text>
           {!hideArrow && (
-            <TooltipRadix.Arrow asChild>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                stroke-width="1"
-                stroke="var(--border-default)"
-                fill="var(--surface-default)"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                style={{
-                  transform: 'rotate(180deg)',
-                }}
-                className="absolute left-0 top-[-10px] h-[28px] w-[22px]"
-              >
-                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                <path d="M6 15l6 -6l6 6" />
-              </svg>
-            </TooltipRadix.Arrow>
+            <TooltipRadix.Arrow fill="var(--surface-default)"></TooltipRadix.Arrow>
           )}
         </TooltipRadix.Content>
       </TooltipRadix.Portal>
