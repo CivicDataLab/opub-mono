@@ -1,6 +1,6 @@
 {
 	"name": "opub-tokens",
-	"version": "0.0.7",
+	"version": "0.0.8",
 	"description": "Convert Figma tokens to CSS Variables",
 	"repository": {
 		"type": "git",
