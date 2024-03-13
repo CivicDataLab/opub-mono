@@ -9,7 +9,7 @@
     "lint": "next lint",
     "generate": "graphql-codegen --watch --config ./config/codegen.ts",
     "clean": "rm -rf node_modules package-lock.json",
-    "style": "opub-tokens"
+    "style": "opub-tokens; echo \"\\033[33mRunning Prettier\"; prettier --write **/tailwind/*.js **/_variables.css"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.1.2",

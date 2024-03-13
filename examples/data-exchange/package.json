@@ -9,7 +9,7 @@
     "lint": "next lint",
     "generate": "graphql-codegen --config ./config/codegen.ts",
     "clean": "rm -rf node_modules package-lock.json",
-    "style": "opub-tokens"
+    "style": "opub-tokens; echo \"\\033[33mRunning Prettier\"; prettier --write **/tailwind/*.js **/_variables.css"
   },
   "dependencies": {
     "@t3-oss/env-nextjs": "^0.9.2",

@@ -2,6 +2,7 @@ import fs from 'fs'
 import path from 'path'
 import cssFormattor from './helpers/css-formattor.js'
 import twFormat from './helpers/tailwind-formattor.js'
+import { extraVariables } from './helpers/constants.js'
 
 function loadJSON(input) {
 	const jsonPath = path.resolve(process.cwd(), input)
@@ -30,8 +31,8 @@ async function getConfigAndJson() {
 
 let exportObject = {
 	format: {
-		twFormat,
 		cssFormattor,
+		twFormat,
 	},
 	tokens: null,
 	platforms: {
@@ -91,6 +92,48 @@ let exportObject = {
 						category: 'Colors',
 					},
 				},
+				{
+					destination: 'z-index.js',
+					format: 'twFormat',
+					options: {
+						category: 'Z Index',
+					},
+				},
+				{
+					destination: 'duration.js',
+					format: 'twFormat',
+					options: {
+						category: 'Duration',
+					},
+				},
+				{
+					destination: 'ease-function.js',
+					format: 'twFormat',
+					options: {
+						category: 'Ease',
+					},
+				},
+				{
+					destination: 'font-size.js',
+					format: 'twFormat',
+					options: {
+						category: 'Font Size',
+					},
+				},
+				{
+					destination: 'font-weight.js',
+					format: 'twFormat',
+					options: {
+						category: 'Font Weight',
+					},
+				},
+				{
+					destination: 'line-height.js',
+					format: 'twFormat',
+					options: {
+						category: 'Font Line Height',
+					},
+				},
 			],
 		},
 	},
@@ -99,7 +142,7 @@ let exportObject = {
 async function initialize() {
 	const { config, json } = await getConfigAndJson()
 
-	exportObject.tokens = json.collections
+	exportObject.tokens = [...json.collections, ...extraVariables]
 	exportObject.platforms.css.buildPath = `${config.tokens.output}/`
 	exportObject.platforms.tailwind.buildPath = `${config.tokens.output}/tailwind/`
 

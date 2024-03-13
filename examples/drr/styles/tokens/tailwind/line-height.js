@@ -1,10 +1,10 @@
 module.exports = {
-  0: 'var(--font-line-height-0)',
-  1: 'var(--font-line-height-1)',
-  2: 'var(--font-line-height-2)',
-  3: 'var(--font-line-height-3)',
-  4: 'var(--font-line-height-4)',
-  5: 'var(--font-line-height-5)',
-  6: 'var(--font-line-height-6)',
-  7: 'var(--font-line-height-7)',
+  fontLineHeight0: '0px',
+  fontLineHeight1: '16px',
+  fontLineHeight2: '20px',
+  fontLineHeight3: '24px',
+  fontLineHeight4: '28px',
+  fontLineHeight5: '32px',
+  fontLineHeight6: '40px',
+  fontLineHeight7: '48px',
 };

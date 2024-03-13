@@ -15,6 +15,7 @@ const formattor = function ({ dictionary }) {
 			let name = nameFormat(variable.name)
 			let value
 			if (variable.type === 'effect') {
+				// effect is a bit complex, so we need to convert it separately
 				value = effectConvert(variable.value.effects)
 			} else {
 				// if the value is based on another design token
@@ -22,12 +23,7 @@ const formattor = function ({ dictionary }) {
 					value = `var(${nameFormat(variable.value.name)})`
 				} else {
 					// if it's a fixed value
-					const val = variable.value
-					if (variable.type === 'number') {
-						value = `${val}px`
-					} else {
-						value = val
-					}
+					value = typeFormat(variable.value, variable.type)
 				}
 			}
 
@@ -35,10 +31,26 @@ const formattor = function ({ dictionary }) {
 		})
 		families += '\n'
 	})
-	families += extraVariables
 	families += '}\n'
 
 	return families
 }
 
 export default formattor
+
+export function typeFormat(val, type) {
+	switch (type) {
+		case 'number':
+			return `${val}px`
+		case 'index':
+			return val
+		case 'duration':
+			return `${val}ms`
+		case 'ease':
+			return `cubic-bezier(${val.join(', ')})`
+		case 'font':
+			return `${val}rem`
+		default:
+			return val
+	}
+}

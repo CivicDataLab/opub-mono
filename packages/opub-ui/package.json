@@ -68,7 +68,7 @@
     "lint": "eslint --ext=tsx src",
     "lint:fix": "eslint --ext=ts,tsx,js,jsx src --fix",
     "clean": "rm -rf .turbo node_modules dist",
-    "style": "opub-tokens"
+    "style": "opub-tokens; echo \"\\033[33mRunning Prettier\"; prettier --write **/tailwind/*.js **/_variables.css"
   },
   "peerDependencies": {
     "react": "^16.14.0 || ^17.0.0 || ^18.0.0",
