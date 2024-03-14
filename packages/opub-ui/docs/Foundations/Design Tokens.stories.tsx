@@ -1,5 +1,5 @@
 import tokens from '../../styles/tokens.json';
-import { TokenTable, convertToCssVariable } from './TokenTable';
+import { convertToCssVariable, TokenTable } from './TokenTable';
 
 const meta = {
   title: 'Foundations/Design Tokens',
@@ -7,8 +7,8 @@ const meta = {
 
 export default meta;
 
-const colorsRaw = { ...tokens.collections[0].modes[0].variables };
-const colors = Object.values(colorsRaw).map((color: any) => {
+const colorsRaw = tokens.collections[0].modes[0].variables;
+const colors = colorsRaw.map((color: any) => {
   const value =
     typeof color.value === 'string' ? color.value : color.value.name;
   return {
@@ -24,7 +24,7 @@ const colors = Object.values(colorsRaw).map((color: any) => {
 const exampleFormatColor = (info: any) => {
   return (
     <div
-      className="w-full h-12 rounded-1 border-1 border-solid border-borderDefault"
+      className="h-12 w-full rounded-1 border-1 border-solid border-borderDefault"
       style={{ backgroundColor: info.getValue() }}
       aria-hidden="true"
     />
@@ -37,8 +37,8 @@ export const Colors: any = {
   },
 };
 
-const spaceRaw = { ...tokens.collections[1].modes[0].variables };
-const space = Object.values(spaceRaw).map((space: any) => {
+const spaceRaw = tokens.collections[1].modes[0].variables;
+const space = spaceRaw.map((space: any) => {
   return {
     name: space.name,
     value: `${space.value}px`,
@@ -64,8 +64,8 @@ export const Space: any = {
   },
 };
 
-const borderRaw = { ...tokens.collections[2].modes[0].variables };
-const borders = Object.values(borderRaw).map((border: any) => {
+const borderRaw = tokens.collections[2].modes[0].variables;
+const borders = borderRaw.map((border: any) => {
   const value =
     typeof border.value === 'number' ? border.value : border.value.name;
 
@@ -85,7 +85,7 @@ const exampleFormatBorder = (info: any, type: 'radius' | 'width') => {
   if (isRadius) {
     return (
       <div
-        className="w-12 h-12 bg-borderHighlightDefault"
+        className="h-12 w-12 bg-borderHighlightDefault"
         style={{
           borderRadius: info.getValue(),
         }}
@@ -96,7 +96,7 @@ const exampleFormatBorder = (info: any, type: 'radius' | 'width') => {
 
   return (
     <div
-      className="w-12 h-12 border-solid border-borderDefault rounded-1"
+      className="h-12 w-12 rounded-1 border-solid border-borderDefault"
       style={{
         borderWidth: info.getValue(),
       }}
@@ -138,10 +138,11 @@ function effectObjToString(effect: any) {
   return value;
 }
 
-const elevationRaw = { ...tokens.collections[4].modes[0].variables };
+const elevationRaw = tokens.collections[3].modes[0].variables;
 
-const elevations = Object.values(elevationRaw).map((effect) => {
+const elevations = elevationRaw.map((effect) => {
   let value = '';
+  // @ts-ignore
   effect.value.effects.forEach((val: any) => {
     value += `${effectObjToString(val)}, `;
   });
@@ -156,7 +157,7 @@ const elevations = Object.values(elevationRaw).map((effect) => {
 const exampleFormatElevation = (info: any) => {
   return (
     <div
-      className="w-full min-w-24 h-12 rounded-1"
+      className="h-12 w-full min-w-24 rounded-1"
       style={{
         boxShadow: info.getValue(),
       }}

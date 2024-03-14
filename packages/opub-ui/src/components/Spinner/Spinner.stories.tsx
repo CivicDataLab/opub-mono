@@ -11,27 +11,21 @@ export default {
   component: Spinner,
 
   argTypes: {
-    children: {
-      control: 'text',
-      description: 'description text',
-    },
+    // children: {
+    //   control: 'text',
+    //   description: 'description text',
+    // },
   },
 } as Meta<typeof Spinner>;
 
-export const Default = {
-  args: {
-    label: 'Spinner',
-  },
-};
+export const Default = {};
 
-export const Colors = {
+export const Size = {
   render: () => (
-    <div className="flex items-center gap-4">
-      <Spinner color="success" />
-      <Spinner color="warning" />
-      <Spinner color="critical" />
-      <Spinner color="highlight" />
-      <Spinner color="text" />
+    <div className="flex flex-wrap items-center gap-8">
+      <Spinner />
+      <Spinner size={32} />
+      <Spinner size={64} />
     </div>
   ),
 };

@@ -1,25 +1,38 @@
-$small-size: 20px;
-$large-size: 44px;
-
-@mixin spinnerSize($size) {
-  height: $size;
-  width: $size;
-}
-
-@keyframes keyframes-spin {
-  to {
-    transform: rotate(1turn);
+@keyframes spinner {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.15;
   }
 }
 
-.Spinner svg {
-  animation: keyframes-spin var(--duration-500) linear infinite;
+.Spinner,
+.Spinner_Wrapper {
+  height: var(--spinner-size, 20px);
+  width: var(--spinner-size, 20px);
 }
 
-.sizeSmall svg {
-  @include spinnerSize($small-size);
+.Spinner {
+  position: relative;
+  top: 50%;
+  left: 50%;
 }
 
-.sizeLarge svg {
-  @include spinnerSize($large-size);
+.Spinner_Bar {
+  animation: spinner 1.2s linear infinite;
+  background: var(--icon-default);
+  border-radius: 5px;
+  height: 8%;
+  left: -10%;
+  position: absolute;
+  top: -3.9%;
+  width: 24%;
+
+  @for $i from 1 through 12 {
+    &:nth-child(#{$i}) {
+      animation-delay: #{-1.2 + 0.1 * ($i - 1)}s;
+      transform: rotate(#{30 * ($i - 1)}deg) translate(146%);
+    }
+  }
 }
