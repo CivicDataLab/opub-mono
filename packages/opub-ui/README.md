@@ -47,7 +47,6 @@ The source code is under the `src` directory. The structure is as follows:
 ```
 src/
 ┣ components/
-┣ tokens/
 ┣ types/
 ┣ utils/
 ┣ index.ts
@@ -70,9 +69,6 @@ We use [Vitest](https://github.com/vitest-dev/vitest/) for unit testing and [Sto
 
 As you notice in the directory, we use [Sass Modules](https://sass-lang.com/documentation/modules) for styling.
 
-### Tokens
-
-Although we have a `css` based token file at `assets/tokens.css` which relies on [CSS Variables](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties). This directory stores those tokens in objects. One use-case of its usage is the `Box` component.
 
 ### Types
 

@@ -183,7 +183,7 @@ export const extraVariables = [
 						value: [0, 0, 0.58, 1],
 					},
 					{
-						name: 'ease/in/out',
+						name: 'ease/in-out',
 						type: 'ease',
 						isAlias: false,
 						value: [0.42, 0, 0.58, 1],
@@ -269,7 +269,7 @@ export const extraVariables = [
 						value: 500,
 					},
 					{
-						name: 'font/weight/semi/bold',
+						name: 'font/weight/semi-bold',
 						type: 'index',
 						isAlias: false,
 						value: 600,

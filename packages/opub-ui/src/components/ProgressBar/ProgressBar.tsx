@@ -1,7 +1,6 @@
 import React, { forwardRef, Ref } from 'react';
 import * as Progress from '@radix-ui/react-progress';
 
-import { motion } from '../../tokens/motion';
 import { ProgressBarProps } from '../../types/progressbar';
 import { cn, variationName } from '../../utils/css';
 import styles from './ProgressBar.module.scss';
@@ -28,10 +27,6 @@ const ProgressBar = forwardRef(
       color && styles[variationName('color', color)]
     );
 
-    const progressBarDuration = animated
-      ? motion['duration-500'].value
-      : motion['duration-0'].value;
-
     return (
       <Progress.Root
         className={`opub-ProgressBar ${themeClass}`}
@@ -52,7 +47,7 @@ const ProgressBar = forwardRef(
           style={
             {
               transform: `translateX(-${100 - progress}%)`,
-              '--op-progress-bar-duration': progressBarDuration,
+              '--op-progress-bar-duration': animated ? '500ms' : '0ms',
             } as React.CSSProperties
           }
         />

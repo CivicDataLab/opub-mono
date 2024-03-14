@@ -1,6 +1,6 @@
 module.exports = {
-  fontWeightRegular: '400',
-  fontWeightMedium: '500',
-  fontWeightSemiBold: '600',
-  fontWeightBold: '700',
+  regular: '400',
+  medium: '500',
+  'semi-bold': '600',
+  bold: '700',
 };

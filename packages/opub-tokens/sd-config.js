@@ -97,6 +97,7 @@ let exportObject = {
 					format: 'twFormat',
 					options: {
 						category: 'Z Index',
+						trimName: true,
 					},
 				},
 				{
@@ -104,6 +105,7 @@ let exportObject = {
 					format: 'twFormat',
 					options: {
 						category: 'Duration',
+						trimName: true,
 					},
 				},
 				{
@@ -111,6 +113,7 @@ let exportObject = {
 					format: 'twFormat',
 					options: {
 						category: 'Ease',
+						trimName: true,
 					},
 				},
 				{
@@ -118,6 +121,7 @@ let exportObject = {
 					format: 'twFormat',
 					options: {
 						category: 'Font Size',
+						trimName: true,
 					},
 				},
 				{
@@ -125,6 +129,7 @@ let exportObject = {
 					format: 'twFormat',
 					options: {
 						category: 'Font Weight',
+						trimName: true,
 					},
 				},
 				{
@@ -132,6 +137,7 @@ let exportObject = {
 					format: 'twFormat',
 					options: {
 						category: 'Font Line Height',
+						trimName: true,
 					},
 				},
 			],
