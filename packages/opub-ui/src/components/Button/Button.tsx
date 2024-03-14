@@ -155,11 +155,7 @@ const Button = React.forwardRef(
 
     const spinnerSVGMarkup = loading ? (
       <span className={styles.Spinner}>
-        <Spinner
-          size="small"
-          accessibilityLabel={'Loading'}
-          color={'surface'}
-        />
+        <Spinner />
       </span>
     ) : null;
 

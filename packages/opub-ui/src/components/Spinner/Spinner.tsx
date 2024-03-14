@@ -6,9 +6,14 @@ export interface SpinnerProps {
    * @default '20'
    */
   size?: number;
+  /**
+   * Show Aria Live Region
+   * @default false
+   */
+  ariaLive?: boolean;
 }
 
-export function Spinner({ size = 20 }: SpinnerProps) {
+export function Spinner({ size = 20, ariaLive = false }: SpinnerProps) {
   return (
     <div
       className={styles.Spinner_Wrapper}
@@ -17,9 +22,8 @@ export function Spinner({ size = 20 }: SpinnerProps) {
           '--spinner-size': `${size}px`,
         } as React.CSSProperties
       }
-      aria-live="polite"
-      role="status"
     >
+      {ariaLive && <div aria-live="polite" role="status" />}
       <div className={styles.Spinner}>
         {Array.from({ length: 12 }).map((_, index) => (
           <div key={index} className={styles.Spinner_Bar} />

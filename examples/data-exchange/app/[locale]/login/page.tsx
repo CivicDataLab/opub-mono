@@ -43,7 +43,7 @@ const LogginInPage = () => {
         </div>
       </Link>
       <div className="flex h-full w-full flex-col items-center justify-center gap-1">
-        <Spinner size="small" />
+        <Spinner />
         <Text variant="headingLg">Logging In</Text>
       </div>
     </div>

@@ -32,7 +32,7 @@ export function AnalyticsDashboardLayout({ children }: DashboardLayoutProps) {
     <React.Suspense
       fallback={
         <div className="grid  h-[100vh] place-content-center">
-          <Spinner color="highlight" />
+          <Spinner />
           <Text>Loading...</Text>
         </div>
       }
@@ -48,7 +48,7 @@ export function AnalyticsDashboardLayout({ children }: DashboardLayoutProps) {
         </div>
       ) : (
         <div className="grid  h-[100vh] place-content-center">
-          <Spinner color="highlight" />
+          <Spinner />
           <Text>Loading...</Text>
         </div>
       )}
@@ -100,7 +100,7 @@ function SidePaneLayout() {
   if (!sidePaneData.isFetched)
     return (
       <div className="grid  basis-[500px] place-content-center border-solid border-borderSubdued bg-surfaceDefault shadow-basicMd">
-        <Spinner color="highlight" />
+        <Spinner />
         <Text>Loading...</Text>
       </div>
     );
