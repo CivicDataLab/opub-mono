@@ -1,3 +1,5 @@
+import { Color } from '../../types/icon';
+import { cn } from '../../utils';
 import styles from './Spinner.module.scss';
 
 export interface SpinnerProps {
@@ -11,15 +13,32 @@ export interface SpinnerProps {
    * @default false
    */
   ariaLive?: boolean;
+  /**
+   * Color of spinner
+   * @default default
+   */
+  color?:
+    | 'default'
+    | 'surface'
+    | 'success'
+    | 'warning'
+    | 'critical'
+    | 'interactive'
+    | 'highlight';
 }
 
-export function Spinner({ size = 20, ariaLive = false }: SpinnerProps) {
+export function Spinner({
+  size = 20,
+  ariaLive = false,
+  color = 'default',
+}: SpinnerProps) {
   return (
     <div
-      className={styles.Spinner_Wrapper}
+      className={cn(styles.Spinner_Wrapper)}
       style={
         {
           '--spinner-size': `${size}px`,
+          '--spinner-color': `var(--icon-${mapColorToIconColor(color)})`,
         } as React.CSSProperties
       }
     >
@@ -31,4 +50,13 @@ export function Spinner({ size = 20, ariaLive = false }: SpinnerProps) {
       </div>
     </div>
   );
+}
+
+function mapColorToIconColor(color: SpinnerProps['color']) {
+  switch (color) {
+    case 'surface':
+      return 'onbg-default';
+    default:
+      return color;
+  }
 }

@@ -111,7 +111,7 @@ const Button = React.forwardRef(
       onMouseEnter,
       onTouchStart,
       onPointerDown,
-      removeUnderline,
+      removeUnderline = true,
       size = DEFAULT_SIZE,
       textAlign,
       fullWidth,
@@ -153,9 +153,20 @@ const Button = React.forwardRef(
       </span>
     ) : null;
 
+    function getSpinnerColor() {
+      if (kind === 'primary') {
+        return 'surface';
+      }
+
+      if (kind === 'secondary') {
+        return variant === 'basic' ? 'highlight' : variant;
+      }
+
+      return 'default';
+    }
     const spinnerSVGMarkup = loading ? (
       <span className={styles.Spinner}>
-        <Spinner />
+        <Spinner color={getSpinnerColor()} />
       </span>
     ) : null;
 
