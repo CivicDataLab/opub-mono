@@ -14,7 +14,7 @@ import itemStyles from '../ActionList/ActionList.module.scss';
 import { Divider } from '../Divider';
 import { Tag } from '../Tag';
 import { Text } from '../Text';
-import { Combobox as Component } from './Atoms';
+import { Combobox as ComboboxComponent } from './Atoms';
 import styles from './Combobox.module.scss';
 
 export type ComboProps = {
@@ -122,7 +122,7 @@ export const Combobox = React.forwardRef(
         }}
         store={combobox}
       >
-        <Component
+        <ComboboxComponent
           label={props.label}
           labelHidden={props.labelHidden}
           error={props.error}

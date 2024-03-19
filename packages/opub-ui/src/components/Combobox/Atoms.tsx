@@ -1,5 +1,6 @@
 import React, { useId, useRef } from 'react';
 import { Combobox as ComboboxComponent } from '@ariakit/react';
+import { IconChevronDown } from '@tabler/icons-react';
 
 import { ComboboxProps } from '../../types/combobox';
 import { cn } from '../../utils';
@@ -22,12 +23,22 @@ export const Combobox = React.forwardRef<HTMLInputElement, Props>(
     const finalId = id || rId;
 
     const element = (
-      <ComboboxComponent
-        placeholder={props.placeholder}
-        id={finalId}
-        ref={ref}
-        className={cn(inputStyles.Input)}
-      />
+      <div className="relative flex w-full">
+        <ComboboxComponent
+          placeholder={props.placeholder}
+          id={finalId}
+          ref={ref}
+          className={cn(inputStyles.Input)}
+        />
+        <div
+          className={cn(
+            'pointer-events-none absolute right-1.5 top-1.5 z-1 flex',
+            inputStyles.icon
+          )}
+        >
+          <IconChevronDown />
+        </div>
+      </div>
     );
     const backdropMarkup = <div className={cn(inputStyles.Backdrop)} />;
 
