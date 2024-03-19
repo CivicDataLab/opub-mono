@@ -39,7 +39,6 @@ export const Combobox = React.forwardRef(
     >(props.selectedValue);
 
     const combobox = useComboboxStore();
-
     const matches = useMemo(() => {
       if (props.group) {
         const items = matchSorter(props.list, deferredValue, {
@@ -128,6 +127,7 @@ export const Combobox = React.forwardRef(
           error={props.error}
           placeholder={props.placeholder}
           id={props.id}
+          combobox={combobox}
           verticalContent={
             props.displaySelected && typeof selectedValues !== 'string' && tags
           }
