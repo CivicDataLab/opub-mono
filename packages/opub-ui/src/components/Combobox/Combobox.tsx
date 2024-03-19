@@ -38,8 +38,13 @@ export const Combobox = React.forwardRef(
     const [selectedValues, setSelectedValues] = useState(props.selectedValue);
 
     const combobox = useComboboxStore();
+    const ref = React.useRef(null);
 
     React.useEffect(() => {
+      if (ref.current) {
+        combobox.setAnchorElement(ref.current);
+      }
+
       combobox.getState().baseElement?.addEventListener('keydown', (e) => {
         if (e.key === 'Backspace' || e.key === 'Delete') {
           if (selectedValues && Array.isArray(selectedValues)) {
@@ -109,13 +114,12 @@ export const Combobox = React.forwardRef(
     return (
       <ComboboxProvider
         setOpen={(e) => {
+          setOpen(e);
           if (e) {
             setTimeout(() => {
               combobox.getState().baseElement?.focus();
             }, 10);
           }
-
-          setOpen(e);
         }}
         selectedValue={selected}
         setSelectedValue={(e) => {
@@ -148,6 +152,7 @@ export const Combobox = React.forwardRef(
           id={props.id}
           combobox={combobox}
           open={open}
+          ref={ref}
           verticalContent={
             props.displaySelected && typeof selectedValues !== 'string' && tags
           }

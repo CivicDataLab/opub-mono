@@ -25,7 +25,6 @@ export const Combobox = React.forwardRef<HTMLInputElement, Props>(
   (props: Props, ref) => {
     const { label, labelHidden, id, error, verticalContent, combobox, open } =
       props;
-    const verticalContentRef = useRef<HTMLDivElement>(null);
 
     const rId = useId();
     const finalId = id || rId;
@@ -34,14 +33,13 @@ export const Combobox = React.forwardRef<HTMLInputElement, Props>(
       <ComboboxComponent
         placeholder={props.placeholder}
         id={finalId}
-        ref={ref}
         className={cn(inputStyles.Input)}
       />
     );
     const backdropMarkup = <div className={cn(inputStyles.Backdrop)} />;
 
     const finalContent = verticalContent ? (
-      <div className={inputStyles.VerticalContent} ref={verticalContentRef}>
+      <div className={inputStyles.VerticalContent} ref={ref}>
         {verticalContent}
         {element}
       </div>
