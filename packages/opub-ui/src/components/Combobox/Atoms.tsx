@@ -18,45 +18,25 @@ type Props = {
   verticalContent?: React.ReactNode;
 
   combobox: ComboboxStore;
+  open: boolean;
 } & ComboboxProps;
 
 export const Combobox = React.forwardRef<HTMLInputElement, Props>(
   (props: Props, ref) => {
-    const { label, labelHidden, id, error, verticalContent, combobox } = props;
+    const { label, labelHidden, id, error, verticalContent, combobox, open } =
+      props;
     const verticalContentRef = useRef<HTMLDivElement>(null);
 
     const rId = useId();
     const finalId = id || rId;
 
     const element = (
-      <div className="relative flex w-full">
-        <ComboboxComponent
-          placeholder={props.placeholder}
-          id={finalId}
-          ref={ref}
-          className={cn(inputStyles.Input)}
-        />
-        <div
-          className={cn(
-            'pointer-events-none absolute right-1.5 top-1 z-1 flex items-center'
-          )}
-        >
-          <IconButton
-            onClick={() => {
-              if (!combobox.getState().value) {
-                combobox.setSelectedValue([]);
-              } else {
-                combobox.setValue('');
-              }
-            }}
-            icon={IconX}
-            size="slim"
-          >
-            clear selected
-          </IconButton>
-          <IconChevronDown size={24} className={inputStyles.chevronIcon} />
-        </div>
-      </div>
+      <ComboboxComponent
+        placeholder={props.placeholder}
+        id={finalId}
+        ref={ref}
+        className={cn(inputStyles.Input)}
+      />
     );
     const backdropMarkup = <div className={cn(inputStyles.Backdrop)} />;
 
@@ -73,6 +53,40 @@ export const Combobox = React.forwardRef<HTMLInputElement, Props>(
       <div className={cn(inputStyles.TextField, error && inputStyles.error)}>
         {finalContent}
         {backdropMarkup}
+        <div
+          className={cn(
+            'pointer-events-none absolute right-0.5 top-0 z-1 flex h-full transform items-center gap-1'
+          )}
+        >
+          <IconButton
+            onClick={() => {
+              if (!combobox.getState().value) {
+                combobox.setSelectedValue([]);
+              } else {
+                combobox.setValue('');
+              }
+            }}
+            icon={IconX}
+            className="hover:bg-actionSecondaryNeutralHovered"
+            size="slim"
+          >
+            clear selected
+          </IconButton>
+          <IconButton
+            onClick={() => {
+              combobox.toggle();
+            }}
+            icon={IconChevronDown}
+            className={cn(
+              inputStyles.chevronIcon,
+              'hover:bg-actionSecondaryNeutralHovered'
+            )}
+            data-opened={open}
+            size="slim"
+          >
+            {open ? 'close' : 'open'} combobox
+          </IconButton>
+        </div>
       </div>
     );
 

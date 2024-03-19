@@ -29,7 +29,8 @@ const IconButton = forwardRef((props: IconButtonProps, ref: any) => {
   const themeClass = cn(
     styles.IconButton,
     styles[size],
-    disabled && styles.disabled
+    disabled && styles.disabled,
+    className
   );
   const iconSize = iconSizes[size];
 

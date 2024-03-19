@@ -14,7 +14,6 @@ $spinner-icon-size: 12px;
   display: flex;
   align-items: center;
   color: var(--text-default);
-  cursor: text;
 
   svg {
     color: var(--icon-default);
@@ -78,7 +77,15 @@ $spinner-icon-size: 12px;
 }
 
 .chevronIcon {
-  transition: transform 150ms ease-in-out;
+  svg {
+    transition: transform 150ms ease-in-out;
+  }
+
+  &[data-opened='true'] {
+    svg {
+      transform: rotate(-180deg);
+    }
+  }
 }
 
 .Input {
@@ -91,8 +98,7 @@ $spinner-icon-size: 12px;
   position: relative;
   z-index: var(--opub-text-field-contents);
   display: block;
-  flex: 1 1 0%;
-  width: 100%;
+  flex: 1 1 auto;
   min-width: 0;
   min-height: 2.25rem;
   margin: 0;
@@ -103,14 +109,6 @@ $spinner-icon-size: 12px;
   appearance: none;
   caret-color: var(--text-default);
   color: var(--text-default);
-
-  &[aria-expanded='true'] {
-    & ~ div {
-      .chevronIcon {
-        transform: rotate(-180deg);
-      }
-    }
-  }
 
   @media #{$breakpoints-md-up} {
     font-size: var(--font-size-100);
@@ -225,26 +223,25 @@ $spinner-icon-size: 12px;
 }
 
 .VerticalContent {
+  -webkit-box-align: center;
+  align-items: center;
+  display: flex;
+  flex: 1 1 0%;
+  flex-wrap: wrap;
   position: relative;
+  overflow: hidden;
+
+  gap: var(--space-1);
+  padding-left: var(--space-1);
 
   z-index: var(--opub-text-field-contents);
   color: var(--text-subdued);
-  padding-top: var(--space-2);
-  max-height: 140px;
-  overflow: scroll;
   border: var(--border-width-1) solid transparent;
-  width: 100%;
 
   > .Input {
-    width: 100%;
-  }
-
-  > div {
-    padding-inline: var(--space-2);
-  }
-
-  @media #{$breakpoints-sm-up} {
-    max-height: 328px;
+    flex: 1 1 auto;
+    min-height: 34px;
+    margin-right: var(--space-16);
   }
 }
 

@@ -4,6 +4,7 @@ $height: 20px;
 
 .Tag {
   display: inline-flex;
+  min-width: 0px;
   max-width: 100%;
   align-items: center;
   min-height: 28px;

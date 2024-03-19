@@ -31,14 +31,30 @@ export type ComboProps = {
 
 export const Combobox = React.forwardRef(
   (props: ComboboxProps & ComboProps, _) => {
+    const [open, setOpen] = useState(false);
     const [isPending, startTransition] = useTransition();
     const [searchValue, setSearchValue] = useState('');
     const deferredValue = React.useDeferredValue(searchValue);
-    const [selectedValues, setSelectedValues] = useState<
-      TListItem[] | string | undefined
-    >(props.selectedValue);
+    const [selectedValues, setSelectedValues] = useState(props.selectedValue);
 
     const combobox = useComboboxStore();
+
+    React.useEffect(() => {
+      combobox.getState().baseElement?.addEventListener('keydown', (e) => {
+        if (e.key === 'Backspace' || e.key === 'Delete') {
+          if (selectedValues && Array.isArray(selectedValues)) {
+            const poppedValues = [...selectedValues].slice(0, -1);
+            setSelectedValues(poppedValues);
+            combobox.getState().baseElement?.focus();
+          }
+        }
+
+        if (e.key === 'Escape') {
+          combobox.hide();
+        }
+      });
+    }, [combobox.getState()]);
+
     const matches = useMemo(() => {
       if (props.group) {
         const items = matchSorter(props.list, deferredValue, {
@@ -71,7 +87,7 @@ export const Combobox = React.forwardRef(
     ) {
       tags =
         selectedValues.length > 0 ? (
-          <div className="flex flex-wrap gap-1">
+          <>
             {selectedValues.map((tag) => (
               <Tag
                 onRemove={() => removeTag(tag.value)}
@@ -81,14 +97,8 @@ export const Combobox = React.forwardRef(
                 {tag.label}
               </Tag>
             ))}
-          </div>
-        ) : (
-          <div className=" min-h-7">
-            <Text variant="bodySm" color="subdued">
-              No Tags selected
-            </Text>
-          </div>
-        );
+          </>
+        ) : null;
     }
 
     let selected: any = selectedValues;
@@ -98,6 +108,15 @@ export const Combobox = React.forwardRef(
 
     return (
       <ComboboxProvider
+        setOpen={(e) => {
+          if (e) {
+            setTimeout(() => {
+              combobox.getState().baseElement?.focus();
+            }, 10);
+          }
+
+          setOpen(e);
+        }}
         selectedValue={selected}
         setSelectedValue={(e) => {
           // for single select
@@ -128,6 +147,7 @@ export const Combobox = React.forwardRef(
           placeholder={props.placeholder}
           id={props.id}
           combobox={combobox}
+          open={open}
           verticalContent={
             props.displaySelected && typeof selectedValues !== 'string' && tags
           }
