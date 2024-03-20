@@ -53,7 +53,7 @@ interface NonMutuallyExclusiveProps {
   /** Text to display after value */
   suffix?: React.ReactNode;
   /** Content to vertically display above the input value */
-  verticalContent?: React.ReactNode;
+  tags?: React.ReactNode;
   /** Hint text to display */
   placeholder?: string;
   /** value for the input */

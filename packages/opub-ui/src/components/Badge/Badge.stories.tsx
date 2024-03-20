@@ -1,5 +1,6 @@
-import { Badge } from './Badge';
 import { Meta, StoryObj } from '@storybook/react';
+
+import { Badge } from './Badge';
 
 /**
  * Badges are used to inform user of the status of an object or of an action that’s been taken.

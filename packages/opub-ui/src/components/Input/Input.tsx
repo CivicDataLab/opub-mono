@@ -27,7 +27,7 @@ export const Input = React.forwardRef(
     {
       prefix,
       suffix,
-      verticalContent,
+      tags,
       placeholder,
       value = '',
       helpText,
@@ -90,7 +90,7 @@ export const Input = React.forwardRef(
     const textAreaRef = useRef<HTMLTextAreaElement>(null);
     const prefixRef = useRef<HTMLDivElement>(null);
     const suffixRef = useRef<HTMLDivElement>(null);
-    const verticalContentRef = useRef<HTMLDivElement>(null);
+    const tagsRef = useRef<HTMLDivElement>(null);
     const buttonPressTimer = useRef<number>();
     const spinnerRef = useRef<HTMLDivElement>(null);
 
@@ -98,7 +98,7 @@ export const Input = React.forwardRef(
       const input = multiline ? textAreaRef.current : inputRef?.current;
       if (!input || focused === undefined) return;
       focused ? input.focus() : input.blur();
-    }, [focused, verticalContent, multiline, inputRef]);
+    }, [focused, tags, multiline, inputRef]);
 
     useEffect(() => {
       const input = inputRef?.current;
@@ -300,8 +300,8 @@ export const Input = React.forwardRef(
       labelledBy.push(`${id}-Suffix`);
     }
 
-    if (verticalContent) {
-      labelledBy.push(`${id}-VerticalContent`);
+    if (tags) {
+      labelledBy.push(`${id}-tags`);
     }
 
     labelledBy.unshift(`${id}-label`);
@@ -374,21 +374,19 @@ export const Input = React.forwardRef(
       onInput: suggestion ? handleChange : undefined,
     });
 
-    const inputWithVerticalContentMarkup = verticalContent ? (
+    const inputWithTagsMarkup = tags ? (
       <div
-        className={styles.VerticalContent}
-        id={`${id}-VerticalContent`}
-        ref={verticalContentRef}
+        className={styles.tags}
+        id={`${id}-tags`}
+        ref={tagsRef}
         onClick={handleClickChild}
       >
-        {verticalContent}
+        {tags}
         {input}
       </div>
     ) : null;
 
-    const inputMarkup = verticalContent
-      ? inputWithVerticalContentMarkup
-      : input;
+    const inputMarkup = tags ? inputWithTagsMarkup : input;
 
     const backdropMarkup = (
       <div
@@ -522,9 +520,9 @@ export const Input = React.forwardRef(
     function isVerticalContent(target: Element | EventTarget) {
       return (
         target instanceof Element &&
-        verticalContentRef.current &&
-        (verticalContentRef.current.contains(target) ||
-          verticalContentRef.current.contains(document.activeElement))
+        tagsRef.current &&
+        (tagsRef.current.contains(target) ||
+          tagsRef.current.contains(document.activeElement))
       );
     }
   }

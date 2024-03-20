@@ -36,8 +36,7 @@ $spinner-icon-size: 12px;
   color: var(--text);
 }
 
-.focus > .Input,
-.focus > .VerticalContent,
+.tags:has(:focus-visible),
 .Input:focus-visible {
   outline: none;
 
@@ -222,7 +221,7 @@ $spinner-icon-size: 12px;
   margin-right: var(--space-05);
 }
 
-.VerticalContent {
+.tags {
   -webkit-box-align: center;
   align-items: center;
   display: flex;

@@ -1,5 +1,6 @@
-import { SkeletonThumbnail } from './SkeletonThumbnail';
 import { Meta, StoryObj } from '@storybook/react';
+
+import { SkeletonThumbnail } from './SkeletonThumbnail';
 
 /**
  * Skeleton thumbnail is used to provide a low fidelity representation of an image before it appears on the page

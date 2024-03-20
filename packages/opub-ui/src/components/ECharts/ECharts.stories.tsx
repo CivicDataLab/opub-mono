@@ -1,7 +1,8 @@
-import { ECharts } from './ECharts';
+import React from 'react';
 import { Meta } from '@storybook/react';
 import { IconLinkOff } from '@tabler/icons-react';
-import React from 'react';
+
+import { ECharts } from './ECharts';
 
 /**
  * ECharts component accepts props from OPub backend and renders the chart.
@@ -33,7 +34,7 @@ export const Default = {
 
     if (error) {
       return (
-        <div className="flex items-center justify-center min-h-[80vh]">
+        <div className="flex min-h-[80vh] items-center justify-center">
           <div className="flex flex-col items-center gap-4">
             <IconLinkOff size={32} />
             Error while fetching chart data

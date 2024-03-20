@@ -1,7 +1,8 @@
-import { Icon } from '../Icon';
-import { ActionList } from './ActionList';
 import { Meta, StoryObj } from '@storybook/react';
 import { IconCheck, IconFileExport, IconFileImport } from '@tabler/icons-react';
+
+import { Icon } from '../Icon';
+import { ActionList } from './ActionList';
 
 /**
  * Action lists render a list of actions or selectable options. This component is usually placed inside a popover container to create a dropdown menu

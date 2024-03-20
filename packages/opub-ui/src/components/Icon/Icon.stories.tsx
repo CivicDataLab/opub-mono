@@ -1,10 +1,11 @@
-import { PropsVariationSection } from '../../utils';
-import { Icon } from './Icon';
 import { Meta, StoryObj } from '@storybook/react';
 import {
   IconCode,
   IconSquareRoundedChevronLeftFilled,
 } from '@tabler/icons-react';
+
+import { PropsVariationSection } from '../../utils';
+import { Icon } from './Icon';
 
 /**
  * Icons are used to visually communicate core parts of the product and available actions.

@@ -85,7 +85,7 @@ export const Prefix: Story = {
 };
 
 const tags = ['Rustic', 'Antique', 'Vinyl', 'Refurbished'];
-const verticalContentMarkup =
+const tagsMarkup =
   tags.length > 0 ? (
     <div className="flex gap-1">
       {tags.map((tag) => (
@@ -94,11 +94,11 @@ const verticalContentMarkup =
     </div>
   ) : null;
 
-export const VerticalContent: Story = {
+export const Tags: Story = {
   args: {
     label: 'tags',
     placeholder: 'Search Tags',
-    verticalContent: verticalContentMarkup,
+    tags: tagsMarkup,
     name: 'vertical',
   },
 };

@@ -1,5 +1,6 @@
-import { SkeletonDisplayText } from './SkeletonDisplayText';
 import { Meta, StoryObj } from '@storybook/react';
+
+import { SkeletonDisplayText } from './SkeletonDisplayText';
 
 /**
  * Skeleton display text is used to provide a low fidelity representation of content before it appears on the page

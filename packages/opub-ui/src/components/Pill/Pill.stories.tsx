@@ -1,6 +1,7 @@
+import { Meta, StoryObj } from '@storybook/react';
+
 import { PropsVariationSection } from '../../utils/helpers';
 import { Pill } from './Pill';
-import { Meta, StoryObj } from '@storybook/react';
 
 /**
  * Pill is a component that displays a short string of text, which can removed.

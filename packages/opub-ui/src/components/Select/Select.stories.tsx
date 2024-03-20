@@ -1,8 +1,9 @@
-import { Select } from '../Form/components/Select';
-import { Icon } from '../Icon';
+import { useCallback, useState } from 'react';
 import { Meta } from '@storybook/react';
 import { IconChevronDown, IconChevronUp } from '@tabler/icons-react';
-import { useCallback, useState } from 'react';
+
+import { Select } from '../Form/components/Select';
+import { Icon } from '../Icon';
 
 /**
  * Select lets user choose one option from an options menu. Consider select when you have 4 or more options, to avoid cluttering the interface.

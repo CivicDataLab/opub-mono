@@ -1,6 +1,7 @@
+import { Meta, StoryObj } from '@storybook/react';
+
 import { Button } from '../Button';
 import { Dialog } from './Dialog';
-import { Meta, StoryObj } from '@storybook/react';
 
 /**
  * A window overlaid on either the primary window or another dialog window, rendering the content underneath inert.

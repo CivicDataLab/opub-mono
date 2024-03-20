@@ -1,5 +1,6 @@
-import { SkeletonTabs } from './SkeletonTabs';
 import { Meta, StoryObj } from '@storybook/react';
+
+import { SkeletonTabs } from './SkeletonTabs';
 
 /**
  * SkeletonTabs tabs are used to provide a low fidelity representation of content before it appears on the page

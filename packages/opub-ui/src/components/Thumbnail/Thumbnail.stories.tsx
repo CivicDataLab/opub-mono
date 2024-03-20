@@ -1,7 +1,8 @@
-import { Icon } from '../Icon';
-import { Thumbnail } from './Thumbnail';
 import { Meta, StoryObj } from '@storybook/react';
 import { IconCalendar } from '@tabler/icons-react';
+
+import { Icon } from '../Icon';
+import { Thumbnail } from './Thumbnail';
 
 /**
  * Thumbnail Description

@@ -1,5 +1,6 @@
-import { SkeletonBodyText } from './SkeletonBodyText';
 import { Meta, StoryObj } from '@storybook/react';
+
+import { SkeletonBodyText } from './SkeletonBodyText';
 
 /**
  * Skeleton body text is used to provide a low fidelity representation of content before it appears on the page

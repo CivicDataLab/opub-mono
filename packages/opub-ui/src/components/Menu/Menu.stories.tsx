@@ -1,5 +1,3 @@
-import { Button } from '../Button';
-import { Menu } from './Menu';
 import { Meta, StoryObj } from '@storybook/react';
 import {
   IconCheck,
@@ -8,6 +6,9 @@ import {
   IconFileImport,
   IconTrash,
 } from '@tabler/icons-react';
+
+import { Button } from '../Button';
+import { Menu } from './Menu';
 
 /**
  * A wrapper around Popover and ActionList Components

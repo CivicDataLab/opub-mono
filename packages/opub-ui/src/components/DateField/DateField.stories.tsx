@@ -1,6 +1,7 @@
-import { DateField } from './DateField';
-import { now, getLocalTimeZone } from '@internationalized/date';
+import { getLocalTimeZone, now } from '@internationalized/date';
 import { Meta, StoryObj } from '@storybook/react';
+
+import { DateField } from './DateField';
 
 /**
  * DateFields allow users to enter and edit date and time values using a keyboard

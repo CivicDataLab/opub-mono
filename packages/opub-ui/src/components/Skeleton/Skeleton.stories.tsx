@@ -1,5 +1,6 @@
-import { Skeleton } from './Skeleton';
 import { Meta, StoryObj } from '@storybook/react';
+
+import { Skeleton } from './Skeleton';
 
 /**
  * Skeleton primitive to show a placeholder while content is loading

@@ -1,7 +1,8 @@
-import { Table } from './Table';
-import { Person, makeTableData } from './utils';
 import { Meta, StoryObj } from '@storybook/react';
 import { createColumnHelper } from '@tanstack/react-table';
+
+import { Table } from './Table';
+import { makeTableData, Person } from './utils';
 
 const data = makeTableData(100);
 

@@ -1,5 +1,6 @@
-import { Divider } from './Divider';
 import { Meta, StoryObj } from '@storybook/react';
+
+import { Divider } from './Divider';
 
 /**
  * Use to separate or group content

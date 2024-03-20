@@ -1,6 +1,7 @@
-import { RangeSlider } from './RangeSlider';
-import { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
+import { Meta, StoryObj } from '@storybook/react';
+
+import { RangeSlider } from './RangeSlider';
 
 /**
  * An input where the user selects a value from within a given range

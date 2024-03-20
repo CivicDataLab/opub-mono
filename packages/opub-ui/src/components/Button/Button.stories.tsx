@@ -1,8 +1,9 @@
+import { Meta, StoryObj } from '@storybook/react';
+import { IconSelector } from '@tabler/icons-react';
+
 import { PropsVariationSection } from '../../utils/helpers';
 import { Icon } from '../Icon';
 import { Button } from './Button';
-import { Meta, StoryObj } from '@storybook/react';
-import { IconSelector } from '@tabler/icons-react';
 
 /**
  * Primary UI component for user interface

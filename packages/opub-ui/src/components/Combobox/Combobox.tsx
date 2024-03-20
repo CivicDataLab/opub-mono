@@ -31,7 +31,6 @@ export type ComboProps = {
 
 export const Combobox = React.forwardRef(
   (props: ComboboxProps & ComboProps, _) => {
-    const [open, setOpen] = useState(false);
     const [isPending, startTransition] = useTransition();
     const [searchValue, setSearchValue] = useState('');
     const deferredValue = React.useDeferredValue(searchValue);
@@ -41,24 +40,45 @@ export const Combobox = React.forwardRef(
     const ref = React.useRef(null);
 
     React.useEffect(() => {
+      // change the anchor element of the combobox to get proper width
+
       if (ref.current) {
         combobox.setAnchorElement(ref.current);
       }
+    }, [ref.current]);
 
-      combobox.getState().baseElement?.addEventListener('keydown', (e) => {
-        if (e.key === 'Backspace' || e.key === 'Delete') {
-          if (selectedValues && Array.isArray(selectedValues)) {
-            const poppedValues = [...selectedValues].slice(0, -1);
-            setSelectedValues(poppedValues);
-            combobox.getState().baseElement?.focus();
-          }
-        }
+    function keyHander(e: { key: string }) {
+      const { selectedValue, value } = combobox.getState();
 
-        if (e.key === 'Escape') {
-          combobox.hide();
+      if (e.key === 'Backspace' || e.key === 'Delete') {
+        if (
+          value === '' &&
+          selectedValue &&
+          Array.isArray(selectedValue) &&
+          selectedValue.length > 0
+        ) {
+          setSelectedValues((arr: any) => {
+            return [...arr].slice(0, -1);
+          });
+          combobox.getState().baseElement?.focus();
         }
-      });
-    }, [combobox.getState()]);
+      }
+
+      if (e.key === 'Escape') {
+        combobox.hide();
+      }
+    }
+
+    React.useEffect(() => {
+      const { baseElement } = combobox.getState();
+
+      // add keyboard event listener to remove the last tag
+      baseElement?.addEventListener('keydown', keyHander);
+
+      return () => {
+        baseElement?.removeEventListener('keydown', keyHander);
+      };
+    }, [combobox.getState().baseElement]);
 
     const matches = useMemo(() => {
       if (props.group) {
@@ -114,7 +134,6 @@ export const Combobox = React.forwardRef(
     return (
       <ComboboxProvider
         setOpen={(e) => {
-          setOpen(e);
           if (e) {
             setTimeout(() => {
               combobox.getState().baseElement?.focus();
@@ -134,6 +153,7 @@ export const Combobox = React.forwardRef(
           const selectedArr = e.map((value: string) => {
             return props.list.find((item) => item.value === value);
           });
+
           setSelectedValues(selectedArr);
           props.onChange && props.onChange(selectedArr);
         }}
@@ -151,9 +171,8 @@ export const Combobox = React.forwardRef(
           placeholder={props.placeholder}
           id={props.id}
           combobox={combobox}
-          open={open}
           ref={ref}
-          verticalContent={
+          tags={
             props.displaySelected && typeof selectedValues !== 'string' && tags
           }
         />
@@ -194,6 +213,8 @@ const List = ({ matches }: { matches: any }) => {
 };
 
 const ListGroup = ({ matches }: { matches: any }) => {
+  const id = React.useId();
+
   // sorting items witout type first
   matches.sort((a: any, b: any) => {
     if (a[0] === 'undefined') return -1;
@@ -205,9 +226,8 @@ const ListGroup = ({ matches }: { matches: any }) => {
     <>
       {matches.map(([type, items]: [string, TListItem[]], i: number) => (
         <React.Fragment key={type}>
-          {/* @ts-expect-error */}
-          <ComboboxGroup label={type}>
-            <div aria-hidden="true" className="pl-2">
+          <ComboboxGroup aria-labelledby={id}>
+            <div aria-hidden="true" id={id} className="pl-2">
               <Text
                 variant="bodySm"
                 color="disabled"

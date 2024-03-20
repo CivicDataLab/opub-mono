@@ -1,5 +1,6 @@
-import { Switch } from './Switch';
 import { Meta, StoryObj } from '@storybook/react';
+
+import { Switch } from './Switch';
 
 /**
  * A control that allows the user to toggle between checked and not checked.

@@ -1,4 +1,4 @@
-import React, { useId, useRef } from 'react';
+import React from 'react';
 import {
   Combobox as ComboboxComponent,
   type ComboboxStore,
@@ -15,19 +15,19 @@ type Props = {
   /**
    * Whether to display the selected values.
    */
-  verticalContent?: React.ReactNode;
+  tags?: React.ReactNode;
 
   combobox: ComboboxStore;
-  open: boolean;
 } & ComboboxProps;
 
 export const Combobox = React.forwardRef<HTMLInputElement, Props>(
   (props: Props, ref) => {
-    const { label, labelHidden, id, error, verticalContent, combobox, open } =
-      props;
+    const { label, labelHidden, id, error, tags, combobox } = props;
 
-    const rId = useId();
+    const rId = React.useId();
     const finalId = id || rId;
+
+    const { open, selectedValue } = combobox.useState();
 
     const element = (
       <ComboboxComponent
@@ -38,9 +38,9 @@ export const Combobox = React.forwardRef<HTMLInputElement, Props>(
     );
     const backdropMarkup = <div className={cn(inputStyles.Backdrop)} />;
 
-    const finalContent = verticalContent ? (
-      <div className={inputStyles.VerticalContent} ref={ref}>
-        {verticalContent}
+    const finalContent = tags ? (
+      <div className={inputStyles.tags} ref={ref}>
+        {tags}
         {element}
       </div>
     ) : (
@@ -58,11 +58,10 @@ export const Combobox = React.forwardRef<HTMLInputElement, Props>(
         >
           <IconButton
             onClick={() => {
-              if (!combobox.getState().value) {
-                combobox.setSelectedValue([]);
-              } else {
-                combobox.setValue('');
-              }
+              const isArray = Array.isArray(selectedValue);
+
+              combobox.setSelectedValue(isArray ? [] : '');
+              combobox.setValue('');
             }}
             icon={IconX}
             className="hover:bg-actionSecondaryNeutralHovered"
