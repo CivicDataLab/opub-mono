@@ -16,6 +16,8 @@ type Props = {
   onChange?: (value: string) => void;
   // onSubmit handler
   onSubmit?: (value: string) => void;
+  // onSubmit handler
+  onClear?: (value: string) => void;
   // Show button
   withButton?: boolean;
   // Disabled
@@ -52,7 +54,7 @@ const SearchInput = forwardRef((props: Props, ref: any) => {
         clearButton
         onClearButtonClick={() => {
           setSearch('');
-          props.onChange && props.onChange('');
+          props.onClear && props.onClear('');
           ref?.current && ref.current.focus();
         }}
         disabled={props.disabled}
