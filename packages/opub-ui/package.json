@@ -62,7 +62,7 @@
     "build:types": "tsc -b ./tsconfig.node.json",
     "build:js": "rollup -c",
     "storybook": "storybook preview",
-    "storybook:build": "storybook build",
+    "build-storybook": "storybook build",
     "test": "vitest",
     "coverage": "vitest run --coverage",
     "lint": "eslint --ext=tsx src",
