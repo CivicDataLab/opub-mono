@@ -31,6 +31,7 @@ export const Combobox = React.forwardRef<HTMLInputElement, Props>(
 
     const element = (
       <ComboboxComponent
+        store={combobox}
         placeholder={props.placeholder}
         id={finalId}
         className={cn(inputStyles.Input)}
@@ -39,7 +40,7 @@ export const Combobox = React.forwardRef<HTMLInputElement, Props>(
     const backdropMarkup = <div className={cn(inputStyles.Backdrop)} />;
 
     const finalContent = tags ? (
-      <div className={inputStyles.tags} ref={ref}>
+      <div className={inputStyles.tags}>
         {tags}
         {element}
       </div>
@@ -48,7 +49,10 @@ export const Combobox = React.forwardRef<HTMLInputElement, Props>(
     );
 
     const textField = (
-      <div className={cn(inputStyles.TextField, error && inputStyles.error)}>
+      <div
+        ref={ref}
+        className={cn(inputStyles.TextField, error && inputStyles.error)}
+      >
         {finalContent}
         {backdropMarkup}
         <div

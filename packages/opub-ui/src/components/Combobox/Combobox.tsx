@@ -4,6 +4,7 @@ import {
   ComboboxItem,
   ComboboxPopover,
   ComboboxProvider,
+  PopoverAnchor,
   useComboboxStore,
 } from '@ariakit/react';
 import { matchSorter } from 'match-sorter';
@@ -41,11 +42,10 @@ export const Combobox = React.forwardRef(
 
     React.useEffect(() => {
       // change the anchor element of the combobox to get proper width
-
       if (ref?.current) {
         combobox.setAnchorElement(ref.current);
       }
-    }, [ref?.current]);
+    }, [ref?.current, combobox.getState().selectedValue]);
 
     function keyHander(e: { key: string }) {
       const { selectedValue, value } = combobox.getState();
@@ -165,19 +165,20 @@ export const Combobox = React.forwardRef(
         store={combobox}
       >
         <ComboboxComponent
+          ref={ref}
           label={props.label}
           labelHidden={props.labelHidden}
           error={props.error}
           placeholder={props.placeholder}
           id={props.id}
           combobox={combobox}
-          ref={ref}
           tags={
             props.displaySelected && typeof selectedValues !== 'string' && tags
           }
         />
         <ComboboxPopover
           sameWidth
+          store={combobox}
           gutter={8}
           aria-busy={isPending}
           className={styles.Popover}
