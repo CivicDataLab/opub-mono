@@ -42,10 +42,10 @@ export const Combobox = React.forwardRef(
     React.useEffect(() => {
       // change the anchor element of the combobox to get proper width
 
-      if (ref.current) {
+      if (ref?.current) {
         combobox.setAnchorElement(ref.current);
       }
-    }, [ref.current]);
+    }, [ref?.current]);
 
     function keyHander(e: { key: string }) {
       const { selectedValue, value } = combobox.getState();
