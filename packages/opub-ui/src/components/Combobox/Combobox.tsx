@@ -58,7 +58,9 @@ export const Combobox = React.forwardRef(
           selectedValue.length > 0
         ) {
           setSelectedValues((arr: any) => {
-            return [...arr].slice(0, -1);
+            const newArr = [...arr].slice(0, -1);
+            props.onChange && props.onChange(newArr);
+            return newArr;
           });
           combobox.getState().baseElement?.focus();
         }
@@ -92,7 +94,7 @@ export const Combobox = React.forwardRef(
       return matchSorter(props.list, deferredValue, {
         keys: ['label', 'value'],
       });
-    }, [deferredValue]);
+    }, [deferredValue, props.list]);
 
     function removeTag(value: string) {
       if (selectedValues && typeof selectedValues !== 'string') {

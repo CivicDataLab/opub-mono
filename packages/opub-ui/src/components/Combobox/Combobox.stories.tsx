@@ -1,5 +1,7 @@
+import React from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 
+import { TListItem } from '../../types/combobox';
 import { Combobox } from './Combobox';
 
 /**
@@ -106,8 +108,8 @@ export const Grouping: Story = {
     list: [
       { label: 'Apple', value: 'apple', type: 'Fruits' },
       { label: 'Mango', value: 'mango', type: 'Fruits' },
-      { label: 'Red', value: 'red', type: 'Colours' },
-      { label: 'Black', value: 'black', type: 'Colours' },
+      { label: 'Red', value: 'red', type: 'Colors' },
+      { label: 'Black', value: 'black', type: 'Colors' },
     ],
     selectedValue: [],
     group: true,
@@ -122,8 +124,8 @@ export const GroupingMissingType: Story = {
     list: [
       { label: 'Mango', value: 'mango' },
       { label: 'France', value: 'france' },
-      { label: 'Red', value: 'red', type: 'Colours' },
-      { label: 'Black', value: 'black', type: 'Colours' },
+      { label: 'Red', value: 'red', type: 'Colors' },
+      { label: 'Black', value: 'black', type: 'Colors' },
       { label: 'Apple', value: 'apple', type: 'Fruits' },
     ],
     selectedValue: [],
@@ -139,8 +141,50 @@ export const Disabled: Story = {
     list: [
       { label: 'Apple', value: 'apple', type: 'Fruits' },
       { label: 'Mango', value: 'mango', type: 'Fruits' },
-      { label: 'Red', value: 'red', type: 'Colours', disabled: true },
-      { label: 'Black', value: 'black', type: 'Colours', disabled: true },
+      { label: 'Red', value: 'red', type: 'Colors', disabled: true },
+      { label: 'Black', value: 'black', type: 'Colors', disabled: true },
+    ],
+    selectedValue: [],
+    group: true,
+    displaySelected: true,
+  },
+};
+
+export const DisableOnSelect: Story = {
+  render: (args) => {
+    const { list, ...rest } = args;
+    const [items, setItems] = React.useState(list);
+
+    return (
+      <Combobox
+        {...rest}
+        onChange={(e) => {
+          const finalArr = items.map((item) => {
+            if (Array.isArray(e) && e.length > 0) {
+              if (item.type !== e[0].type) {
+                return { ...item, disabled: true };
+              }
+            } else {
+              return { ...item, disabled: false };
+            }
+
+            return item;
+          });
+
+          setItems(finalArr);
+        }}
+        list={items}
+      />
+    );
+  },
+  args: {
+    label: 'Select an Item',
+    placeholder: 'e.g., Apple, Red',
+    list: [
+      { label: 'Apple', value: 'apple', type: 'Fruits' },
+      { label: 'Mango', value: 'mango', type: 'Fruits' },
+      { label: 'Red', value: 'red', type: 'Colors' },
+      { label: 'Black', value: 'black', type: 'Colors' },
     ],
     selectedValue: [],
     group: true,
