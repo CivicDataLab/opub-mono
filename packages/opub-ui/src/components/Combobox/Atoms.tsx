@@ -56,19 +56,21 @@ export const Combobox = React.forwardRef<HTMLInputElement, Props>(
             'pointer-events-none absolute right-0.5 top-0 z-1 flex h-full transform items-center gap-1'
           )}
         >
-          <IconButton
-            onClick={() => {
-              const isArray = Array.isArray(selectedValue);
+          {Array.isArray(selectedValue) && selectedValue.length > 0 ? (
+            <IconButton
+              onClick={() => {
+                const isArray = Array.isArray(selectedValue);
 
-              combobox.setSelectedValue(isArray ? [] : '');
-              combobox.setValue('');
-            }}
-            icon={IconX}
-            className="hover:bg-actionSecondaryNeutralHovered"
-            size="slim"
-          >
-            clear selected
-          </IconButton>
+                combobox.setSelectedValue(isArray ? [] : '');
+                combobox.setValue('');
+              }}
+              icon={IconX}
+              className="hover:bg-actionSecondaryNeutralHovered"
+              size="slim"
+            >
+              clear selected
+            </IconButton>
+          ) : null}
           <IconButton
             onClick={() => {
               combobox.toggle();

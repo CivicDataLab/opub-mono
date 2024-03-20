@@ -66,6 +66,9 @@ export const Default: Story = {
     label: 'Your favorite food',
     placeholder: 'e.g., Apple, Burger',
     list: options,
+    onChange: (e: any) => {
+      console.log(e);
+    },
   },
 };
 
@@ -78,12 +81,15 @@ export const MultiSelect: Story = {
   },
 };
 
-export const DisplaySelected: Story = {
+export const Tags: Story = {
   args: {
     label: 'Your favorite food',
     placeholder: 'e.g., Apple, Burger',
     list: options,
     displaySelected: true,
+    onChange: (e: any) => {
+      console.log(e);
+    },
     selectedValue: [
       {
         value: 'Apple',
