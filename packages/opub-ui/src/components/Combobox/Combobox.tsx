@@ -4,7 +4,6 @@ import {
   ComboboxItem,
   ComboboxPopover,
   ComboboxProvider,
-  PopoverAnchor,
   useComboboxStore,
 } from '@ariakit/react';
 import { matchSorter } from 'match-sorter';
@@ -39,6 +38,10 @@ export const Combobox = React.forwardRef(
 
     const combobox = useComboboxStore();
     const ref = React.useRef(null);
+
+    React.useEffect(() => {
+      setSelectedValues(props.selectedValue);
+    }, [props.selectedValue]);
 
     React.useEffect(() => {
       // change the anchor element of the combobox to get proper width
@@ -94,7 +97,7 @@ export const Combobox = React.forwardRef(
       return matchSorter(props.list, deferredValue, {
         keys: ['label', 'value'],
       });
-    }, [deferredValue, props.list]);
+    }, [deferredValue, props.list, props.selectedValue]);
 
     function removeTag(value: string) {
       if (selectedValues && typeof selectedValues !== 'string') {
@@ -136,9 +139,19 @@ export const Combobox = React.forwardRef(
     return (
       <ComboboxProvider
         setOpen={(e) => {
+          console.log();
+
           if (e) {
             setTimeout(() => {
               combobox.getState().baseElement?.focus();
+
+              if (ref.current) {
+                const buttonElm: any = (
+                  ref.current as HTMLDivElement
+                ).querySelector('[data-opened]');
+
+                combobox.setDisclosureElement(buttonElm);
+              }
             }, 10);
           }
         }}

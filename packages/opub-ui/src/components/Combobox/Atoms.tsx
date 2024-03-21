@@ -57,7 +57,7 @@ export const Combobox = React.forwardRef<HTMLInputElement, Props>(
         {backdropMarkup}
         <div
           className={cn(
-            'pointer-events-none absolute right-0.5 top-0 z-1 flex h-full transform items-center gap-1'
+            'absolute right-0.5 top-0 z-10 flex h-full transform items-center gap-1'
           )}
         >
           {Array.isArray(selectedValue) && selectedValue.length > 0 ? (
@@ -77,6 +77,8 @@ export const Combobox = React.forwardRef<HTMLInputElement, Props>(
           ) : null}
           <IconButton
             onClick={() => {
+              console.log('toggle', open);
+
               combobox.toggle();
             }}
             icon={IconChevronDown}
