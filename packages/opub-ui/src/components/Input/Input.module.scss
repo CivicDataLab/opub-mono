@@ -236,11 +236,11 @@ $spinner-icon-size: 12px;
   z-index: var(--opub-text-field-contents);
   color: var(--text-subdued);
   border: var(--border-width-1) solid transparent;
+  margin-right: var(--space-16);
 
   > .Input {
     flex: 1 1 auto;
     min-height: 34px;
-    margin-right: var(--space-16);
   }
 }
 
