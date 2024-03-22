@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { IconSelector } from '@tabler/icons-react';
 
-import { PropsVariationSection } from '../../utils/helpers';
+import { PropsVariationSection } from '../../utils/storybook';
 import { Icon } from '../Icon';
 import { Button } from './Button';
 

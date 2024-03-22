@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
 
-import { PropsVariationSection } from '../../utils/helpers';
+import { PropsVariationSection } from '../../utils/storybook';
 import { Checkbox } from './Checkbox';
 
 /**

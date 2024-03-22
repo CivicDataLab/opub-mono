@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
 
-import { PropsVariationSection } from '../../utils/helpers';
+import { PropsVariationSection } from '../../utils/storybook';
 import { ProgressBar } from './ProgressBar';
 import styles from './ProgressBar.module.scss';
 

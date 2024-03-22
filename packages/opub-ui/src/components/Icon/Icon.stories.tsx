@@ -4,7 +4,7 @@ import {
   IconSquareRoundedChevronLeftFilled,
 } from '@tabler/icons-react';
 
-import { PropsVariationSection } from '../../utils';
+import { PropsVariationSection } from '../../utils/storybook';
 import { Icon } from './Icon';
 
 /**
