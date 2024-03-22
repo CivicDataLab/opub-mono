@@ -11,7 +11,7 @@ import React from 'react';
 export const useForwardRef = <T>(
   ref: React.ForwardedRef<T>,
   initialValue: any = null
-) => {
+): React.MutableRefObject<T> => {
   const targetRef = React.useRef<T>(initialValue);
 
   React.useEffect(() => {

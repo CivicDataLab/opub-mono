@@ -11,5 +11,5 @@
  * // returns false in a browser environment
  * const serverCheck = isServer;
  */
-export const isServer =
+export const isServer: boolean =
   typeof window === 'undefined' || typeof document === 'undefined';

@@ -30,7 +30,7 @@ export function mergeRefs<T = any>(
  * @param {number} max - The upper boundary.
  * @return {number} The clamped number.
  */
-export function clamp(number: number, min: number, max: number) {
+export function clamp(number: number, min: number, max: number): number {
   if (number < min) return min;
   if (number > max) return max;
   return number;
@@ -50,7 +50,7 @@ export function clamp(number: number, min: number, max: number) {
  * // returns "World"
  * capitalize("WORLD");
  */
-export function capitalize(word = '') {
+export function capitalize(word: string = ''): string {
   const wordLower = word.toLowerCase();
   return wordLower.charAt(0).toUpperCase() + wordLower.slice(1);
 }
@@ -65,7 +65,7 @@ export function capitalize(word = '') {
  * // returns [0, 1, 2, 3, 4]
  * range(5);
  */
-export const range = (len: number) => {
+export const range = (len: number): number[] => {
   const arr = [];
   for (let i = 0; i < len; i++) {
     arr.push(i);
@@ -84,7 +84,7 @@ export const range = (len: number) => {
  * groupBy([{ 'group': 'group1', 'value': 1 }, { 'group': 'group2', 'value': 2 }], 'group');
  * // returns { 'group1': [{ 'group': 'group1', 'value': 1 }], 'group2': [{ 'group': 'group2', 'value': 2 }] }
  */
-export const groupBy = function (arr: any[], criteria: string) {
+export const groupBy = function (arr: any[], criteria: string): object {
   return arr.reduce(function (obj, item) {
     var key = item[criteria];
     // If the key doesn't exist yet, create it

@@ -2,7 +2,6 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { useMetaKeyPress } from '@/hooks/use-meta-key-press';
 import { Session } from 'next-auth';
 import { signIn, signOut, useSession } from 'next-auth/react';
 import {
@@ -22,6 +21,7 @@ import {
   Spinner,
   Text,
 } from 'opub-ui';
+import { useMetaKeyPress } from 'opub-ui/utils';
 
 import { Icons } from '@/components/icons';
 
