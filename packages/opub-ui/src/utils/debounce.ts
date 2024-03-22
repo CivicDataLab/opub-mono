@@ -4,11 +4,31 @@ interface DebounceSettings {
   trailing?: boolean;
 }
 
+/**
+ * Creates a debounced function that delays invoking `func` until after `wait` milliseconds have elapsed since the last time the debounced function was invoked.
+ * The debounced function comes with a `cancel` method to cancel delayed `func` invocations and a `flush` method to immediately invoke them.
+ * Provide options to indicate whether `func` should be invoked on the leading and/or trailing edge of the `wait` timeout.
+ * The `func` is invoked with the last arguments provided to the debounced function. Subsequent calls to the debounced function return the result of the last `func` invocation.
+ *
+ * @param {T} func - The function to debounce.
+ * @param {number} [waitArg=0] - The number of milliseconds to delay.
+ * @param {DebounceSettings} [options={}] - The options object.
+ * @return {DebouncedFunction<T>} Returns the new debounced function.
+ *
+ * @example
+ * // Avoid costly calculations while the window size is in flux.
+ * window.addEventListener('resize', debounce(calculateLayout, 150));
+ */
 export function debounce<T extends (this: unknown, ...args: any[]) => any>(
   func: T,
   waitArg?: number,
   options?: DebounceSettings
-) {
+): {
+  (this: unknown, ...args: any[]): any;
+  cancel: () => void;
+  flush: () => any;
+  pending: () => boolean;
+} {
   let lastArgs: any;
   let lastThis: any;
   let maxWait: number | undefined;
