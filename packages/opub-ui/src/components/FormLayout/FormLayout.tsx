@@ -1,8 +1,9 @@
-import { isElementOfType, wrapWithComponent } from '../../utils';
-import styles from './FormLayout.module.scss';
-import { Group, Item } from './components';
-import React, { memo, Children } from 'react';
+import React, { Children, memo } from 'react';
 import type { NamedExoticComponent } from 'react';
+
+import { Group, Item } from './components';
+import styles from './FormLayout.module.scss';
+import { isElementOfType, wrapWithComponent } from './utils';
 
 export interface FormLayoutProps {
   /** The content to display inside the layout. */

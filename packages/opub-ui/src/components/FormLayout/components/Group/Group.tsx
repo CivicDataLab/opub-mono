@@ -1,7 +1,8 @@
 import React, { Children } from 'react';
 
-import { cn, wrapWithComponent } from '../../../../utils';
+import { cn } from '../../../../utils';
 import styles from '../../FormLayout.module.scss';
+import { wrapWithComponent } from '../../utils';
 import { Item } from '../Item';
 
 export interface GroupProps {

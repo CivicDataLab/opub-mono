@@ -4,4 +4,3 @@ export * from './focus';
 export * from './helpers';
 export * from './target';
 export * from './hooks';
-export * from './component';

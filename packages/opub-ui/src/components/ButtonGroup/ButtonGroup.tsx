@@ -1,8 +1,9 @@
 import React from 'react';
 
-import { cn, elementChildren } from '../../utils';
+import { cn } from '../../utils';
 import styles from './ButtonGroup.module.scss';
 import { Item } from './components';
+import { elementChildren } from './utils';
 
 type Spacing = 'extraTight' | 'tight' | 'loose';
 

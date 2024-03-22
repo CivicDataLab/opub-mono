@@ -12,9 +12,12 @@ import { IconX } from '@tabler/icons-react';
 
 import { TextFieldProps } from '../../types/input';
 import { Key } from '../../types/shared/key';
-import { cn, variationName } from '../../utils/css';
-import { useForwardRef } from '../../utils/helpers';
-import { useIsAfterInitialMount } from '../../utils/hooks';
+import {
+  cn,
+  useForwardRef,
+  useIsAfterInitialMount,
+  variationName,
+} from '../../utils';
 import { Connected } from '../Connected';
 import { Icon } from '../Icon';
 import { Labelled } from '../Labelled';
