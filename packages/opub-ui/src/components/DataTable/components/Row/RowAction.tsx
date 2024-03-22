@@ -11,8 +11,6 @@ export function RowAction({
   rowActions: ActionListProps['items'];
   callbackContent: any;
 }) {
-  console.log(rowActions, 'rowActions');
-
   return (
     <>
       <Menu

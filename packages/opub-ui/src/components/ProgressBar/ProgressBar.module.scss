@@ -61,5 +61,5 @@
   background: var(--op-progress-bar-indicator);
   width: 100%;
   height: 100%;
-  transition: transform var(--op-progress-bar-duration) var(--ease);
+  transition: transform var(--op-progress-bar-duration) var(--ease-in-out);
 }

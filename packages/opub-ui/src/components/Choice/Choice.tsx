@@ -29,7 +29,7 @@ export interface ChoiceProps {
   className?: string;
 }
 
-export const Choice = ({
+export const Choice: React.FC<ChoiceProps> = ({
   children,
   label,
   id,

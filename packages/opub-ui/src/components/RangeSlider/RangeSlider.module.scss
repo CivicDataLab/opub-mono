@@ -80,14 +80,11 @@
   background: linear-gradient(var(--text-interactive), var(--text-interactive));
   box-shadow: 0 0 0 0 var(--text-interactive);
   appearance: none;
-  transition: box-shadow var(--duration-100) var(--ease);
-  transition-property: border-color, box-shadow, transform;
-  transition-duration: var(--duration-200);
-  transition-timing-function: var(--ease);
+  transition: transform var(--duration-150) var(--ease);
+  outline: var(--border-width-2) solid var(--text-interactive);
 
   &:focus-visible {
-    transform: scale(1.2);
-    outline: var(--border-width-2) solid var(--text-interactive);
+    transform: scale(0.9);
   }
 
   &[data-disabled] {
@@ -121,11 +118,12 @@ $range-output-translate-x: calc(
   position: absolute;
   opacity: 0;
   pointer-events: none;
-  transition-property: opacity, visibility, bottom;
-  transition-duration: var(--duration-200);
-  transition-timing-function: var(--ease);
+  transition:
+    opacity var(--duration-150) var(--ease-out),
+    bottom var(--duration-150) var(--ease-out),
+    left 10ms var(--ease-in-out);
 
-  .Root:hover & {
+  .Root:has(.Thumb:focus-visible) & {
     $range-thumb-size-difference: 24px - 16px;
     opacity: 1;
 
@@ -144,22 +142,6 @@ $range-output-translate-x: calc(
   height: $range-output-size;
   background-color: var(--surface-default);
   border-radius: var(--border-radius-1);
-  transition-property: transform;
-  transition-duration: var(--duration-200);
-  transition-timing-function: var(--ease);
-  outline: var(--border-width-1) solid transparent;
-
-  .Input:hover + .Output &,
-  .Input:active + .Output &,
-  .Input:focus + .Output & {
-    transform: translateY(calc(-1 * var(--op-range-slider-output-spacing)));
-
-    @media #{$breakpoints-md-up} {
-      transform: translateY(
-        calc(-1 * (var(--op-range-slider-output-spacing) * 0.4))
-      );
-    }
-  }
 
   > :first-of-type {
     display: block;

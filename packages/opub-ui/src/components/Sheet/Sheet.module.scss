@@ -38,10 +38,10 @@ $vertical-spacing: 60px;
   height: var(--blockHeight);
 
   &[data-state='open'] {
-    animation: slideIn var(--duration-200) var(--ease);
+    animation: slideIn var(--duration-200) var(--ease-out);
   }
   &[data-state='closed'] {
-    animation: slideOut var(--duration-200) var(--ease);
+    animation: slideOut var(--duration-200) var(--ease-out);
   }
 
   &.left {

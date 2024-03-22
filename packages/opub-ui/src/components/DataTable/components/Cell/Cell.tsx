@@ -1,5 +1,9 @@
 import React from 'react';
-import { IconSortAscending, IconSortDescending } from '@tabler/icons-react';
+import {
+  IconArrowNarrowDown,
+  IconArrowNarrowUp,
+  IconArrowsSort,
+} from '@tabler/icons-react';
 
 import { SortDirection } from '../../../../types/datatable';
 import { cn } from '../../../../utils';
@@ -29,7 +33,9 @@ function SortButton({
   const iconClassName = cn(sortable && styles.Icon);
   const sortDirection = column.getIsSorted() as string;
   const direction = sortDirection ? sortDirection : defaultSortDirection;
-  const source = direction === 'desc' ? IconSortDescending : IconSortAscending;
+  let source = IconArrowsSort;
+  if (sortDirection)
+    source = direction === 'desc' ? IconArrowNarrowDown : IconArrowNarrowUp;
 
   const a11ylabel = `Sorted in ${
     direction === 'desc' ? 'descending' : 'ascending'
@@ -37,7 +43,12 @@ function SortButton({
 
   const iconMarkup = (
     <span className={iconClassName}>
-      <Icon source={source} accessibilityLabel={a11ylabel} />
+      <Icon
+        source={source}
+        color={sortDirection ? 'default' : 'disabled'}
+        size={18}
+        accessibilityLabel={a11ylabel}
+      />
     </span>
   );
 

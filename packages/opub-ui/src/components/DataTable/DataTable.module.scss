@@ -171,10 +171,11 @@
   justify-content: flex-end;
   align-items: baseline;
   color: var(--text-default);
-  transition: color var(--duration-200) var(--ease);
+  transition: color var(--duration-150) var(--ease);
   cursor: pointer;
   padding: var(--space-2);
   margin: var(--space-2);
+  gap: var(--space-1);
 
   svg {
     color: var(--icon-disabled);
@@ -242,7 +243,7 @@
   display: flex;
   align-self: flex-end;
   opacity: 0;
-  transition: opacity var(--duration-200) var(--ease);
+  transition: opacity var(--duration-200) var(--ease-out);
 }
 
 .ZebraStripingOnData {
@@ -390,7 +391,7 @@
   width: var(--space-4);
   border-radius: var(--border-radius-05);
   border: 1px solid var(--border-subdued);
-  transition: border-color var(--duration-200) var(--ease);
+  transition: border-color var(--duration-150) var(--ease);
 }
 
 .FilterContentWrapper {

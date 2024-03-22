@@ -71,11 +71,11 @@ $large-width: 980px;
   z-index: var(--z-max);
 
   &[data-state='open'] {
-    animation: overlayShow var(--duration-100) var(--ease);
+    animation: overlayShow var(--duration-250) var(--ease-in-out);
   }
 
   &[data-state='closed'] {
-    animation: overlayHide var(--duration-100) var(--ease);
+    animation: overlayHide var(--duration-250) var(--ease-in-out);
   }
 }
 
@@ -99,7 +99,7 @@ $large-width: 980px;
   will-change: transform, opacity;
 
   &[data-state='open'] {
-    animation: contentShow var(--duration-200) var(--ease);
+    animation: contentShow var(--duration-200) var(--ease-out);
     &.Instant {
       animation-duration: 0;
     }
@@ -110,7 +110,7 @@ $large-width: 980px;
   }
 
   &[data-state='closed'] {
-    animation: contentHide var(--duration-200) var(--ease);
+    animation: contentHide var(--duration-200) var(--ease-out);
     &.Instant {
       animation-duration: 0;
     }
