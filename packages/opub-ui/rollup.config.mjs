@@ -21,7 +21,7 @@ const rollup = (_args) => {
   ];
 
   return {
-    input: ['./src/index.ts', './src/viz.ts'],
+    input: ['./src/index.ts', './src/viz.ts', './src/util.ts'],
     output: {
       dir: 'dist',
       format: 'esm',
@@ -53,7 +53,7 @@ const getPlugins = () => {
       'node_modules',
       'build',
       'dist',
-      '/docs',
+      'docs',
       'scripts',
       '.storybook',
       '**/*.stories.tsx',

@@ -3,22 +3,12 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useKeyDetect } from '@/hooks/use-key-detect';
 import { MainConfig } from '@/types';
 import { Icon, Text } from 'opub-ui';
 
 import { Icons } from '@/components/icons';
 
 export function MobileNav({ data }: { data: MainConfig }) {
-  const { key, metaKey } = useKeyDetect();
-  const searchRef = React.useRef<HTMLInputElement>(null);
-
-  React.useEffect(() => {
-    if (key === 'k' && metaKey) {
-      searchRef.current?.focus();
-    }
-  }, [key, metaKey]);
-
   return (
     <header className="shadow-top-bar relative z-2 bg-backgroundSolidDark px-6 py-3 shadow-elementTopNav sm:py-3">
       <div className="flex flex-wrap items-center justify-center gap-1 sm:justify-between">

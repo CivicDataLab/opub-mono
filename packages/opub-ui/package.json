@@ -36,6 +36,12 @@
         "default": "./dist/viz.js"
       }
     },
+    "./utils": {
+      "import": {
+        "types": "./dist/ts/util.d.ts",
+        "default": "./dist/util.js"
+      }
+    },
     "./dist/assets/styles.css": "./dist/assets/styles.css"
   },
   "typesVersions": {
@@ -45,6 +51,9 @@
       ],
       "viz": [
         "dist/ts/viz.d.ts"
+      ],
+      "utils": [
+        "dist/ts/util.d.ts"
       ]
     }
   },
