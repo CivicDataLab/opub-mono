@@ -3,8 +3,7 @@
 A WIP (work in progress) platform to speed up the development of Open Data Dashboards, aimed at simplifying the process of creating and managing data visualizations, enabling users to easily analyze and present complex data in a user-friendly and accessible way.
 
 [Stroybook](https://main--64004009fa0a900a3197549c.chromatic.com/) <br>
-[Dashboard](https://data-exchange.vercel.app/dashboard) <br>
-[Documentation](https://opub-docs.netlify.app)
+[Dashboard](https://data-exchange.vercel.app/dashboard)
 
 ## What's inside?
 
@@ -13,9 +12,9 @@ This repository, built using [Turborepo](https://github.com/vercel/turbo), utili
 ### Apps and Packages
 
 - `examples`: web applications built using the [Next.js framework](https://github.com/vercel/next.js/) and OPub UI
-- `apps/docs`: documentation site built using [Nextra](https://github.com/shuding/nextra)
-- `packages/opub-ui`: a library of reusable React components used in both the web and docs applications
+- `packages/opub-ui`: a library of reusable React components and utility functions
 - `packages/create-opub-app`: a CLI tool to quickly spin up a new OPub app in minutes
+- `packages/opub-tokens`: a tool to convert Figma variables to Design Tokens
 
 ### Build
 
