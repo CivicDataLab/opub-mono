@@ -1,35 +1,43 @@
 # OPub UI
 
-Welcome to our OPub UI. This component library is based on a [React](https://react.dev/), designed to provide a collection of reusable UI components for Open Data Platforms.
+OPub UI component library based on a [React](https://react.dev/), designed to provide a collection of reusable UI components for Open Data Platforms.
 
 ## Getting Started
 
 To get started with the component library, install the package via [npm](https://www.npmjs.com/):
 
 ```bash
-npm install opub-ui --save
-```
-
-If you prefer [Yarn](https://yarnpkg.com/en/):
-
-```bash
-yarn add opub-ui
+npm install opub-ui@latest
 ```
 
 ### Usage
 
 The following steps are required before you can start using components:
 
-1. Import the CSS into the project. In the case of Nextjs, it's `_app.tsx` file.
+1. Import the CSS in the global stylesheet of the project.
 
-```js
-import 'opub-ui/dist/assets/styles.css';
+```css
+@import url('opub-ui/dist/assets/styles.css');
 ```
 
 2. Once you complete the initial setup, you can import components into your project as needed:
 
 ```js
 import { Badge, Button, Menu } from 'opub-ui';
+```
+
+3. To use visualisation components, you can import them from the `opub-ui/viz` package:
+
+```js
+import { BarChart } from 'opub-ui/viz';
+```
+
+For MapChart, you will need to lazy load the component. Example on [Data Exchange](../../examples/data-exchange/components/MapChart/index.ts)
+
+4. There are helpful utilities and hooks that you can import from the `opub-ui/utils` package:
+
+```js
+import { copyToClipboard, downloadFile } from 'opub-ui/utils';
 ```
 
 > When using with NextJs you will need to transpile the packages [More Info](https://nextjs.org/docs/advanced-features/compiler#module-transpilation), add this inside `next.config.js` :
@@ -61,14 +69,10 @@ Checkbox/
 ┣ Checkbox.tsx/
 ┣ Checkbox.module.scss/
 ┣ Checkbox.stories.tsx/
-┣ Checkbox.test.tsx/
 ┣ index.ts
 ```
 
-We use [Vitest](https://github.com/vitest-dev/vitest/) for unit testing and [Storybook](https://github.com/storybookjs/storybook) for developing components in isolation.
-
-As you notice in the directory, we use [Sass Modules](https://sass-lang.com/documentation/modules) for styling.
-
+We rely on [Sass Modules](https://sass-lang.com/documentation/modules) and [Tailwind](https://tailwindcss.com/) for styling and [Storybook](https://github.com/storybookjs/storybook) for developing components in isolation.
 
 ### Types
 
@@ -76,7 +80,7 @@ In this directory, we store the type files of components that aid in type checki
 
 ### Utils
 
-This directory stores helpers, custom hooks, and other utility functions to aid development.
+This directory stores helpers, custom hooks, and other utility functions to aid development. These functions are also exposed to the end-user.
 
 ## Bundling
 
