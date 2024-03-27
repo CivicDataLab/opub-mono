@@ -1,69 +1,31 @@
-# OPub Mono
+# District Risk Reduction Exchange
 
-A WIP (work in progress) platform to speed up the development of Open Data Dashboards, aimed at simplifying the process of creating and managing data visualizations, enabling users to easily analyze and present complex data in a user-friendly and accessible way.
+A dashboard for data-driven disaster risk reduction.
 
-[OPub UI](https://main--64004009fa0a900a3197549c.chromatic.com/)<br>
-[OPub Viz](https://main--64e5d546d7476f1d5b4cfa47.chromatic.com/?path=/story/components-barchart--default/)<br>
-[Dashboard](https://data-exchange.vercel.app/dashboard)<br>
-[Documentation](https://opub-docs.netlify.app)
+## Example
 
-## What's inside?
+- [DRR Open Contracting](https://drr.open-contracting.in)
 
-This repository, built using [Turborepo](https://github.com/vercel/turbo), utilizes [NPM](https://www.npmjs.com/) as its package manager and contains the following packages and applications:
+## Features
 
-### Apps and Packages
+- **Analytics Dashbord**: View insights about disaster risk reduction data.
+- **Filters**: Filter data by boundary, regions, and other parameters.
+- **Map View**: To easily select a region and visualize data.
+- **Dataset Page**: View detailed information about datasets through listing and exploration.
 
-- `apps/www`: web application built using the [Next.js framework](https://github.com/vercel/next.js/)
-- `apps/docs`: documentation site built using [Nextra](https://github.com/shuding/nextra)
-- `packages/opub-ui`: a library of reusable React components used in both the web and docs applications.
-- `packages/eslint-config`: `eslint` configurations for the eslint tool, including `eslint-config-next` and `eslint-config-prettier`.
-- `packages/tsconfig`: configuration files for [TypeScript](https://github.com/microsoft/TypeScript/) used throughout the repository.
+## Getting Started
 
-### Build
+You can use the `create-opub-app` CLI to create a new OPub app with the drr example.
 
-To build all apps and packages, run the following command:
-
-```
-cd opub-mono
-npm run build
+```bash
+npm create opub-app@latest my-drr-app -- -e drr
 ```
 
-### Develop
+## Running the Example
 
-To develop all apps and packages, run the following command:
+To run the example, navigate to the app directory and start the development server.
 
-```
-cd opub-mono
+```bash
+cd my-drr-app
 npm run dev
-```
-
-### Develop Only Specific Package
-
-To develop only package, let's say UI, run the following command:
-
-```
-cd opub-mono
-npm run dev --filter opub-ui
-```
-
-### New Component
-
-> Currently this might not working for Linux distros
-
-This repo includes a `npm run new-component` module to help create boilerplate for component creation.
-
-```
-npm run new-component Button
-```
-
-This will create a new component directory in `packages/opub-ui/src` with required files and also export the component in the index.ts
-
-```
-components/
-┣ Button/
-┃ ┣ Button.module.scss/
-┃ ┣ Button.stories.tsx/
-┃ ┣ Button.test.tsx/
-┃ ┣ Button.tsx/
-┃ ┣ index.ts/
 ```
