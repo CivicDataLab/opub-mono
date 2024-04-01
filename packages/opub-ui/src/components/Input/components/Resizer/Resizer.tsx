@@ -1,6 +1,5 @@
-import { useEventListener } from '../../../../utils/hooks/use-event-listener';
-import { useIsomorphicLayoutEffect } from '../../../../utils/hooks/use-isomorphic-layout-effect';
 import { useCallback, useEffect, useRef } from 'react';
+import { useEventListener, useIsomorphicLayoutEffect } from 'usehooks-ts';
 
 import styles from '../../Input.module.scss';
 

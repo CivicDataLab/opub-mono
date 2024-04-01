@@ -3,11 +3,11 @@
 import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useOnClickOutside } from '@/hooks/use-on-click-outside';
 import { SidebarNavItem } from '@/types';
 import { IconMenu, IconX } from '@tabler/icons-react';
 import { Icon, Text } from 'opub-ui';
 import { twMerge } from 'tailwind-merge';
+import { useOnClickOutside } from 'usehooks-ts';
 
 import { cn } from '@/lib/utils';
 import { Icons } from '@/components/icons';

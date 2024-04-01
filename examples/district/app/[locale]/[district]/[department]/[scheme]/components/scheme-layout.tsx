@@ -2,7 +2,6 @@
 
 import React from 'react';
 import Image from 'next/image';
-import { useWindowSize } from '@/hooks/use-window-size';
 import { parseAsString, useQueryState } from 'next-usequerystate';
 import {
   Button,
@@ -14,6 +13,7 @@ import {
   Text,
   toast,
 } from 'opub-ui';
+import { useWindowSize } from 'usehooks-ts';
 
 import { copyURLToClipboard, exportAsImage } from '@/lib/utils';
 import Icons from '@/components/icons';

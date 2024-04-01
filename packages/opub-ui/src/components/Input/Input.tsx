@@ -9,15 +9,11 @@ import React, {
   useState,
 } from 'react';
 import { IconX } from '@tabler/icons-react';
+import { useIsMounted } from 'usehooks-ts';
 
 import { TextFieldProps } from '../../types/input';
 import { Key } from '../../types/shared/key';
-import {
-  cn,
-  useForwardRef,
-  useIsAfterInitialMount,
-  variationName,
-} from '../../utils';
+import { cn, useForwardRef, variationName } from '../../utils';
 import { Connected } from '../Connected';
 import { Icon } from '../Icon';
 import { Labelled } from '../Labelled';
@@ -84,7 +80,7 @@ export const Input = React.forwardRef(
       Number(multiline) ? Number(multiline) * 26 : null // assuming 1 line = 26px for textarea
     );
     const [focus, setFocus] = useState(Boolean(focused));
-    const isAfterInitial = useIsAfterInitialMount();
+    const isAfterInitial = useIsMounted();
 
     const randomId = useId();
     const id = idProp || randomId;
@@ -273,7 +269,7 @@ export const Input = React.forwardRef(
     }, []);
 
     const resizer =
-      multiline && isAfterInitial ? (
+      multiline && isAfterInitial() ? (
         <Resizer
           contents={normalizedValue || placeholder}
           currentHeight={height}

@@ -1,6 +1,7 @@
-import type { Key } from '../../types/shared/key';
-import { useIsomorphicLayoutEffect } from '../../utils/hooks/use-isomorphic-layout-effect';
 import { useCallback, useEffect, useRef } from 'react';
+import { useIsomorphicLayoutEffect } from 'usehooks-ts';
+
+import type { Key } from '../../types/shared/key';
 
 export interface NonMutuallyExclusiveProps {
   keyCode: Key;

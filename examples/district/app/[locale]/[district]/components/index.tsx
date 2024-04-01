@@ -1,7 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useWindowSize } from '@/hooks/use-window-size';
 import { IconDots } from '@tabler/icons-react';
 import {
   Breadcrumb,
@@ -24,6 +23,7 @@ import {
   Menu,
   Text,
 } from 'opub-ui';
+import { useWindowSize } from 'usehooks-ts';
 
 import Icons from '@/components/icons';
 
@@ -40,8 +40,8 @@ export function BreadCrumb({
   backUrl: string;
 }) {
   const [open, setOpen] = React.useState(false);
-  const windowSize = useWindowSize();
-  const isDesktop = windowSize.width && windowSize.width > 768;
+  const { width } = useWindowSize();
+  const isDesktop = width && width > 768;
   const router = useRouter();
 
   return (

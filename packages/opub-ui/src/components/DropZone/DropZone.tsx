@@ -10,12 +10,11 @@ import React, {
   useState,
 } from 'react';
 import { IconAlertCircle, IconUpload } from '@tabler/icons-react';
+import { useEventListener, useToggle } from 'usehooks-ts';
 
 import { cn, variationName } from '../../utils/css';
 import { debounce } from '../../utils/debounce';
 import { useComponentDidMount } from '../../utils/hooks/use-component-did-mount';
-import { useEventListener } from '../../utils/hooks/use-event-listener';
-import { useToggle } from '../../utils/hooks/use-toggle';
 import { isServer } from '../../utils/target';
 import { Icon } from '../Icon';
 import { Labelled, LabelledProps } from '../Labelled';
@@ -174,11 +173,8 @@ export const DropZone: React.ForwardRefExoticComponent<
 
   const [dragging, setDragging] = useState(false);
   const [internalError, setInternalError] = useState(false);
-  const {
-    value: focused,
-    setTrue: handleFocus,
-    setFalse: handleBlur,
-  } = useToggle(false);
+  const [focused, _, setFocus] = useToggle(false);
+
   const [size, setSize] = useState('large');
   const [measuring, setMeasuring] = useState(true);
 
@@ -284,13 +280,14 @@ export const DropZone: React.ForwardRefExoticComponent<
     [dropOnPage, disabled, onDragLeave]
   );
 
-  const dropNode = dropOnPage && !isServer ? document : node.current;
+  const dropNode: any = dropOnPage && !isServer ? document : node.current;
+  const dropRef = React.useRef<HTMLDivElement>(dropNode);
 
-  useEventListener('drop', handleDrop, dropNode);
-  useEventListener('dragover', handleDragOver, dropNode);
-  useEventListener('dragenter', handleDragEnter, dropNode);
-  useEventListener('dragleave', handleDragLeave, dropNode);
-  useEventListener('resize', adjustSize, isServer ? null : window);
+  useEventListener('drop', handleDrop, dropRef);
+  useEventListener('dragover', handleDragOver, dropRef);
+  useEventListener('dragenter', handleDragEnter, dropRef);
+  useEventListener('dragleave', handleDragLeave, dropRef);
+  useEventListener('resize', adjustSize);
 
   useComponentDidMount(() => {
     adjustSize();
@@ -404,8 +401,8 @@ export const DropZone: React.ForwardRefExoticComponent<
               disabled={disabled}
               multiple={allowMultiple}
               onChange={handleDrop}
-              onFocus={handleFocus}
-              onBlur={handleBlur}
+              onFocus={() => setFocus(true)}
+              onBlur={() => setFocus(false)}
               type="file"
               ref={inputRef}
               autoComplete="off"

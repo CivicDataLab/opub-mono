@@ -1,9 +1,9 @@
 'use client';
 
 import Link, { LinkProps } from 'next/link';
-import { Size, useWindowSize } from '@/hooks/use-window-size';
 import { Button, Icon, Text, Tooltip } from 'opub-ui';
 import { twMerge } from 'tailwind-merge';
+import { useWindowSize } from 'usehooks-ts';
 
 import { useIsNavigating } from '@/config/store';
 import { Icons } from '@/components/icons';
@@ -31,7 +31,7 @@ interface Props {
 export function ActionBar(props: Props) {
   const isNavigating = useIsNavigating().isNavigating;
 
-  const { width }: Size = useWindowSize();
+  const { width } = useWindowSize();
   const iconSize = width && width < 480 ? 20 : 32;
 
   const backButton = props.previousPage && props.previousPage?.link && (

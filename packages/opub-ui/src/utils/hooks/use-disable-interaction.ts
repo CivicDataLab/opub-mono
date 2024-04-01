@@ -3,7 +3,7 @@
 import { useCallback } from 'react';
 
 /**
- * useDisableInteraction provides the original event handler but disables interaction
+ * useDisableClick provides the original event handler but disables interaction
  * if the boolean passed is true.
  * @param disabled - A boolean value that determines if the button should
  * be disabled

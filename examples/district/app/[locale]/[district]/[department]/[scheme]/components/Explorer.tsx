@@ -1,5 +1,4 @@
 import React from 'react';
-import { useWindowSize } from '@/hooks/use-window-size';
 import { useQueryState } from 'next-usequerystate';
 import {
   Button,
@@ -15,6 +14,7 @@ import {
   Tray,
 } from 'opub-ui';
 import { ErrorBoundary } from 'react-error-boundary';
+import { useWindowSize } from 'usehooks-ts';
 
 import { ckan } from '@/config/site';
 import { useFetch } from '@/lib/api';

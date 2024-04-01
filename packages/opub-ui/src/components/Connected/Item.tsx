@@ -1,7 +1,7 @@
 import React from 'react';
+import { useToggle } from 'usehooks-ts';
 
 import { cn } from '../../utils';
-import { useToggle } from '../../utils/hooks/use-toggle';
 import styles from './Connected.module.scss';
 
 type ItemPosition = 'left' | 'right' | 'primary';
@@ -14,11 +14,7 @@ export interface ItemProps {
 }
 
 export function Item({ children, position }: ItemProps) {
-  const {
-    value: focused,
-    setTrue: forceTrueFocused,
-    setFalse: forceFalseFocused,
-  } = useToggle(false);
+  const [focused, _, setFocus] = useToggle(false);
 
   const className = cn(
     styles.Item,
@@ -28,9 +24,9 @@ export function Item({ children, position }: ItemProps) {
 
   return (
     <div
-      onBlur={forceFalseFocused}
-      onFocus={forceTrueFocused}
       className={className}
+      onFocus={() => setFocus(true)}
+      onBlur={() => setFocus(false)}
     >
       {children}
     </div>

@@ -1,7 +1,7 @@
 'use client';
 
-import { useIsAfterInitialMount } from './use-is-after-initial-mount';
 import { useRef } from 'react';
+import { useIsMounted } from 'usehooks-ts';
 
 /**
  * Similarly to the life-cycle method componentDidMount, useComponentDidMount
@@ -20,10 +20,10 @@ import { useRef } from 'react';
  * }
  */
 export function useComponentDidMount(callback: () => void) {
-  const isAfterInitialMount = useIsAfterInitialMount();
+  const isAfterInitialMount = useIsMounted();
   const hasInvokedLifeCycle = useRef(false);
 
-  if (isAfterInitialMount && !hasInvokedLifeCycle.current) {
+  if (isAfterInitialMount() && !hasInvokedLifeCycle.current) {
     hasInvokedLifeCycle.current = true;
     return callback();
   }

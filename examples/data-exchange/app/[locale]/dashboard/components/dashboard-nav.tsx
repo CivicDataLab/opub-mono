@@ -3,8 +3,8 @@
 import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useMetaKeyPress } from '@/hooks/use-meta-key-press';
 import { Icon, IconButton, Text, Tooltip } from 'opub-ui';
+import { useMetaKeyPress } from 'opub-ui/utils';
 
 import { SidebarNavItem } from 'types';
 import { cn } from '@/lib/utils';

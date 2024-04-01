@@ -1,6 +1,7 @@
 import React from 'react';
+import { useToggle } from 'usehooks-ts';
 
-import { cn, useToggle } from '../../../../utils';
+import { cn } from '../../../../utils';
 import styles from '../../ButtonGroup.module.scss';
 
 export interface ItemProps {
@@ -8,11 +9,7 @@ export interface ItemProps {
 }
 
 export function Item({ button }: ItemProps) {
-  const {
-    value: focused,
-    setTrue: forceTrueFocused,
-    setFalse: forceFalseFocused,
-  } = useToggle(false);
+  const [focused, _, setFocus] = useToggle(false);
 
   const className = cn(
     styles.Item,
@@ -23,8 +20,8 @@ export function Item({ button }: ItemProps) {
   return (
     <div
       className={className}
-      onFocus={forceTrueFocused}
-      onBlur={forceFalseFocused}
+      onFocus={() => setFocus(true)}
+      onBlur={() => setFocus(false)}
     >
       {button}
     </div>
