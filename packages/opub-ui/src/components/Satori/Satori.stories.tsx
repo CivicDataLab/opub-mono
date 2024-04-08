@@ -1,9 +1,9 @@
 import React from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 
+import { downloadFile, svgToPngURI, useScreenshot } from '../../utils';
 import { ShareDialog } from '../ShareDialog';
 import Card from './Card';
-import { useScreenshot } from './hooks';
 
 /**
  * An utility to generate and download reports.
@@ -22,16 +22,15 @@ const height = 800;
 export const Default: Story = {
   render: () => {
     const [dataURL, setDataURL] = React.useState<string>('');
-    const { createSvg, svgToPngURL, downloadFile, copyToClipboard } =
-      useScreenshot();
+    const { reactToSVG } = useScreenshot({});
 
     const handleClick = async () => {
-      const svg = await createSvg(<Card width={width} height={height} />, {
+      const svg = await reactToSVG(<Card width={width} height={height} />, {
         width,
         height,
       });
 
-      const dataURL = await svgToPngURL(svg);
+      const dataURL = await svgToPngURI(svg);
       setDataURL(dataURL);
     };
 

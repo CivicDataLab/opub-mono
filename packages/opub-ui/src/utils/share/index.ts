@@ -37,7 +37,12 @@ export const useScreenshot = ({
     style: string;
     weight: number;
   };
-}): object => {
+}): {
+  reactToSVG: (
+    Component: React.ReactElement,
+    props: { width: number; height?: number }
+  ) => Promise<string>;
+} => {
   /**
    * Converts a React component to SVG.
    *
