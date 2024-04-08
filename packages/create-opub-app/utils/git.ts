@@ -2,7 +2,7 @@ import { execSync } from 'child_process';
 import path from 'path';
 import * as p from '@clack/prompts';
 import chalk from 'chalk';
-import { execa } from 'execa';
+import execa from 'execa';
 import fs from 'fs-extra';
 import ora from 'ora';
 

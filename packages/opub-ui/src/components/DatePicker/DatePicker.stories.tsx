@@ -1,6 +1,14 @@
-import { getLocalTimeZone, parseDate, today } from '@internationalized/date';
+import React from 'react';
+import {
+  DateValue,
+  getLocalTimeZone,
+  parseDate,
+  today,
+} from '@internationalized/date';
 import { Meta, StoryObj } from '@storybook/react';
+import * as chrono from 'chrono-node';
 
+import { TextField } from '../TextField';
 import { DatePicker } from './DatePicker';
 import { DateRangePicker } from './DateRangePicker';
 import { MonthPicker } from './MonthPicker';
@@ -24,6 +32,9 @@ const metaRange = {
 type StoryRange = StoryObj<typeof metaRange>;
 
 export const Default: Story = {
+  render: ({ ...args }) => {
+    return <DatePicker {...args} />;
+  },
   args: {
     label: 'Date Picker',
   },
@@ -58,3 +69,37 @@ export const DisabledDates: StoryRange = {
     errorMessage: 'Date must be in the future',
   },
 };
+
+export const Experiment: Story = {
+  render: ({ ...args }) => {
+    const [date, setDate] = React.useState<DateValue | null>(null);
+
+    return (
+      <div>
+        <DatePicker value={date} onChange={(e) => setDate(e)} {...args} />
+        <div className="mt-4 max-w-20">
+          <TextField
+            label="write date"
+            name="date"
+            onChange={(e) => {
+              if (chrono.parse(e).length) {
+                const chronoDate = chrono.parse(e)[0].start;
+
+                const formattedDate = `${chronoDate.get('year')}-${minTwoDigits(chronoDate.get('month'))}-${minTwoDigits(chronoDate.get('day'))}`;
+                setDate(parseDate(formattedDate));
+              }
+            }}
+          />
+        </div>
+      </div>
+    );
+  },
+  args: {
+    label: 'Date Picker with Chrono',
+  },
+};
+
+function minTwoDigits(n: number | null) {
+  if (n === null) return '00';
+  return (n < 10 ? '0' : '') + n;
+}

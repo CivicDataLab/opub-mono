@@ -44,11 +44,14 @@ function RangeCalendar(props: Props) {
   const {
     onPress: onPressPrev,
     isDisabled: disabledPrev,
+    onFocusChange,
+
     ...othersPrev
   } = prevButtonProps;
   const {
     onPress: onPressNext,
     isDisabled: disabledNext,
+    onFocusChange: _,
     ...othersNext
   } = nextButtonProps;
 
