@@ -20,7 +20,7 @@ export {
 export * from './Button';
 export { ButtonGroup } from './ButtonGroup';
 export { Calendar, RangeCalendar } from './Calendar';
-export { Carousel } from './Carousel';
+export * from './Carousel';
 export { Choice } from './Choice';
 export { Collapsible } from './Collapsible';
 export * from './Command';
