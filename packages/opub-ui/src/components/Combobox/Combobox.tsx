@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useTransition } from 'react';
+import React, { SetStateAction, useMemo, useState, useTransition } from 'react';
 import {
   ComboboxGroup,
   ComboboxItem,
@@ -41,6 +41,8 @@ export const Combobox = React.forwardRef(
 
     React.useEffect(() => {
       setSelectedValues(props.selectedValue);
+      if (typeof props.selectedValue === 'string')
+        combobox.setValue(props.selectedValue as SetStateAction<string>);
     }, [props.selectedValue]);
 
     React.useEffect(() => {

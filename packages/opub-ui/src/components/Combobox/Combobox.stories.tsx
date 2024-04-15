@@ -68,6 +68,7 @@ export const Default: Story = {
     label: 'Your favorite food',
     placeholder: 'e.g., Apple, Burger',
     list: options,
+    selectedValue: 'Banana',
     onChange: (e: any) => {
       console.log(e);
     },
