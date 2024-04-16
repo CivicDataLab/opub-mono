@@ -240,6 +240,9 @@ export const ResetOnSubmit = () => {
         'checkbox-group': [],
         radio: '',
         date: '',
+        comboboxMulti: [],
+        combobox: '',
+        dropZone: [],
       }}
     />
   );

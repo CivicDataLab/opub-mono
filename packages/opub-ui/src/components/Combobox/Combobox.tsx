@@ -41,8 +41,15 @@ export const Combobox = React.forwardRef(
 
     React.useEffect(() => {
       setSelectedValues(props.selectedValue);
-      if (typeof props.selectedValue === 'string')
-        combobox.setValue(props.selectedValue as SetStateAction<string>);
+
+      if (
+        typeof props.selectedValue === 'string' ||
+        props.selectedValue === undefined
+      ) {
+        combobox.setValue(
+          props.selectedValue || ('' as SetStateAction<string>)
+        );
+      }
     }, [props.selectedValue]);
 
     React.useEffect(() => {
