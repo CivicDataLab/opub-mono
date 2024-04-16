@@ -24,6 +24,7 @@ const IconButton = forwardRef((props: IconButtonProps, ref: any) => {
     disabled,
     color,
     className,
+    type = 'button',
     ...others
   } = props;
   const themeClass = cn(
@@ -41,6 +42,7 @@ const IconButton = forwardRef((props: IconButtonProps, ref: any) => {
         className={`opub-IconButton ${themeClass}`}
         ref={ref}
         aria-disabled={disabled}
+        type={type}
         onClick={(e) => {
           if (disabled) {
             e.preventDefault();

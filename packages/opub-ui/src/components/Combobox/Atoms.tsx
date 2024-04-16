@@ -77,8 +77,6 @@ export const Combobox = React.forwardRef<HTMLInputElement, Props>(
           ) : null}
           <IconButton
             onClick={() => {
-              console.log('toggle', open);
-
               combobox.toggle();
             }}
             icon={IconChevronDown}
