@@ -1,4 +1,5 @@
 import React from 'react';
+import { getLocalTimeZone, today } from '@internationalized/date';
 import { Meta } from '@storybook/react';
 import { IconFile } from '@tabler/icons-react';
 
@@ -239,7 +240,14 @@ export const ResetOnSubmit = () => {
         switch: false,
         'checkbox-group': [],
         radio: '',
-        date: '',
+        date: dateParser(today(getLocalTimeZone())),
+        'date-picker': dateParser(today(getLocalTimeZone())),
+        'date-range': {
+          start: dateParser(today(getLocalTimeZone())),
+          end: dateParser(today(getLocalTimeZone())),
+        },
+        time: '00:00',
+        month: dateParser(today(getLocalTimeZone())),
         comboboxMulti: [],
         combobox: '',
         dropZone: [],
@@ -247,6 +255,14 @@ export const ResetOnSubmit = () => {
     />
   );
 };
+
+function dateParser(date: { day: number; month: number; year: number }) {
+  function pad(n: number) {
+    return n < 10 ? `0${n}` : n;
+  }
+
+  return `${date.year}-${pad(date.month)}-${pad(date.day)}`;
+}
 
 const DropFile = () => {
   const [files, setFiles] = React.useState<File[]>([]);

@@ -1,11 +1,12 @@
-"use client";
+'use client';
 
-import { DropZone as DZ } from "../../DropZone";
-import { DropZoneProps } from "../../DropZone/DropZone";
-import { FileUpload } from "../../DropZone/components";
-import { Controller, useFormContext } from "react-hook-form";
+import { Controller, useFormContext } from 'react-hook-form';
 
-type Props = Omit<DropZoneProps, "onDrop"> & {
+import { DropZone as DZ } from '../../DropZone';
+import { FileUpload } from '../../DropZone/components';
+import { DropZoneProps } from '../../DropZone/DropZone';
+
+type Props = Omit<DropZoneProps, 'onDrop'> & {
   required?: boolean;
   error?: string;
   name: string;
@@ -28,22 +29,31 @@ const DropZone: React.FunctionComponent<Props> & {
         {...props}
         control={method.control}
         rules={{ required: required }}
-        render={({ field, fieldState }) => (
-          <DZ
-            {...field}
-            {...props}
-            errorOverlayText={fieldState.invalid ? errorOverlayText : undefined}
-            onDrop={(
-              files: File[],
-              acceptedFiles: File[],
-              rejectedFiles: File[]
-            ) => {
-              props.onChange &&
-                props.onChange(files, acceptedFiles, rejectedFiles, props.name);
-              acceptedFiles && field.onChange(acceptedFiles);
-            }}
-          />
-        )}
+        render={({ field, fieldState }) => {
+          return (
+            <DZ
+              {...field}
+              {...props}
+              errorOverlayText={
+                fieldState.invalid ? errorOverlayText : undefined
+              }
+              onDrop={(
+                files: File[],
+                acceptedFiles: File[],
+                rejectedFiles: File[]
+              ) => {
+                props.onChange &&
+                  props.onChange(
+                    files,
+                    acceptedFiles,
+                    rejectedFiles,
+                    props.name
+                  );
+                acceptedFiles && field.onChange(acceptedFiles);
+              }}
+            />
+          );
+        }}
       />
     );
   }
