@@ -1,15 +1,16 @@
 'use client';
 
+import { Controller, useFormContext } from 'react-hook-form';
+
 import { SelectProps } from '../../../types';
 import { Select as SelectWrapper } from '../../Select';
-import { Controller, useFormContext } from 'react-hook-form';
 
 type Props = {
   name: string;
   required?: boolean;
 } & Omit<SelectProps, 'name'>;
 
-const Select = ({ required, ...props }: Props) => {
+const Select = ({ required, error, ...props }: Props) => {
   const method = useFormContext();
 
   if (method) {
@@ -18,12 +19,13 @@ const Select = ({ required, ...props }: Props) => {
         {...props}
         control={method.control}
         rules={{ required: required }}
-        render={({ field }) => (
+        render={({ field, fieldState }) => (
           <SelectWrapper
             placeholder="Select an Option"
             {...field}
             {...props}
             value={field.value}
+            error={fieldState.invalid && error}
             onChange={(val, name) => {
               props.onChange && props.onChange(val, name);
               field.onChange(val);
