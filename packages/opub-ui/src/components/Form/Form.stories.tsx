@@ -20,6 +20,7 @@ import {
   RadioItem,
   RangeSlider,
   Select,
+  Switch,
   TimeField,
 } from './components';
 import { Form } from './Form';
@@ -67,6 +68,7 @@ const defaultValBase = {
   select: 'yesterday',
   range: [6],
   checkbox: true,
+  switch: true,
   'checkbox-group': ['angular', 'vue'],
   radio: '1',
   date: '2020-02-06',
@@ -159,6 +161,7 @@ export const FormBase = ({ ...args }) => {
           <Select name="select" label="Select Period" options={options} />
           <RangeSlider name="range" label="Budget" prefix={<p>$</p>} />
           <Checkbox name="checkbox"> I agree to T&C</Checkbox>
+          <Switch name="switch" label="Enable Notifications" />
           <CheckboxGroup
             name="checkbox-group"
             title="Pick your Poison"
@@ -233,6 +236,7 @@ export const ResetOnSubmit = () => {
         select: '',
         range: [0],
         checkbox: false,
+        switch: false,
         'checkbox-group': [],
         radio: '',
         date: '',

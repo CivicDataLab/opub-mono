@@ -11,7 +11,7 @@
 
   width: 40px;
   height: 24px;
-  background-color: var(--action-primary-interactive-default);
+  background-color: var(--border-interactive-focused);
   border-radius: 9999px;
   position: relative;
 
@@ -34,7 +34,7 @@
   height: 16px;
   background-color: var(--surface-default);
   border-radius: 9999px;
-  transition: transform var(--ease-in) var(--duration-100);
+  transition: transform var(--ease-in-out) var(--duration-100);
   transform: translateX(4px);
   will-change: transform;
 

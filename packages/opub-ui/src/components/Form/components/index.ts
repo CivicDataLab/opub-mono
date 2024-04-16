@@ -9,3 +9,4 @@ export * from './RadioGroup';
 export { RangeSlider } from './RangeSlider';
 export { Select } from './Select';
 export { TimeField } from './TimeField';
+export { Switch } from './Switch';
