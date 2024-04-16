@@ -2,6 +2,7 @@ import { TablerIconsProps } from '@tabler/icons-react';
 
 export type Color =
   | 'default'
+  | 'inherit'
   | 'subdued'
   | 'disabled'
   | 'critical'
@@ -23,7 +24,7 @@ export type IconSource =
 
 export interface IconProps {
   /** The SVG contents to display in the icon (icons should fit in a 20 × 20 pixel viewBox) */
-  source: IconSource;
+  source: any;
   /** Set the color for the SVG fill */
   color?: Color;
   /** Show a backdrop behind the icon */

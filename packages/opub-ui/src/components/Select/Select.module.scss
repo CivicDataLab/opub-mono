@@ -94,10 +94,15 @@
   opacity: 0;
   appearance: none;
   border: none;
+  padding-inline: var(--space-2);
 
   @media #{$breakpoints-md-up} {
     font-size: var(--font-size-100);
     line-height: var(--font-line-height-2);
+  }
+
+  option {
+    padding-inline: var(--space-3);
   }
 }
 
