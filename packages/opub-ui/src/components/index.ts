@@ -64,7 +64,6 @@ export { SkeletonDisplayText } from './SkeletonDisplayText';
 export { SkeletonTabs } from './SkeletonTabs';
 export { SkeletonThumbnail } from './SkeletonThumbnail';
 export { Spinner } from './Spinner';
-export { Switch } from './Switch';
 export { Table } from './Table';
 export { Tab, TabList, TabPanel, Tabs } from './Tabs';
 export { Tag } from './Tag';
