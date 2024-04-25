@@ -9,6 +9,7 @@ interface DropZoneContextType {
   allowMultiple: boolean;
   size: string;
   type: string;
+  className?: string;
 }
 
 export const DropZoneContext = createContext<DropZoneContextType>({
@@ -18,4 +19,5 @@ export const DropZoneContext = createContext<DropZoneContextType>({
   type: 'file',
   measuring: false,
   allowMultiple: defaultAllowMultiple,
+  className: undefined,
 });

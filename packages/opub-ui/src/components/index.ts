@@ -19,7 +19,7 @@ export {
 } from './Breadcrumb';
 export * from './Button';
 export { ButtonGroup } from './ButtonGroup';
-export { Calendar, RangeCalendar } from './Calendar';
+export * from './Calendar';
 export * from './Carousel';
 export { Choice } from './Choice';
 export { Collapsible } from './Collapsible';

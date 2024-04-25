@@ -100,6 +100,8 @@ export interface DropZoneProps {
   onFileDialogClose?(): void;
   /** Whether the field is required */
   required?: boolean;
+
+  className?: string;
 }
 
 // @ts-ignore
@@ -135,6 +137,7 @@ export const DropZone: React.ForwardRefExoticComponent<
     onDragEnter,
     onDragOver,
     onDragLeave,
+    className,
   }: DropZoneProps,
   ref: React.Ref<HTMLDivElement>
 ) {
@@ -333,6 +336,7 @@ export const DropZone: React.ForwardRefExoticComponent<
       type: type || 'file',
       measuring,
       allowMultiple,
+      className,
     }),
     [disabled, focused, measuring, size, type, allowMultiple]
   );

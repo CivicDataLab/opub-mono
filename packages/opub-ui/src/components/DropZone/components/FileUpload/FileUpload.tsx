@@ -22,6 +22,7 @@ export function FileUpload(props: FileUploadProps) {
     type = 'file',
     disabled,
     allowMultiple,
+    className,
   } = useContext(DropZoneContext);
 
   const {
@@ -35,7 +36,8 @@ export function FileUpload(props: FileUploadProps) {
     styles.FileUpload,
     measuring && styles.measuring,
     size === 'large' && styles.large,
-    size === 'small' && styles.small
+    size === 'small' && styles.small,
+    className
   );
 
   const actionHintMarkup =
