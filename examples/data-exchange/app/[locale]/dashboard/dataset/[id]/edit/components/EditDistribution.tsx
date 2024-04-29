@@ -250,7 +250,7 @@ const FileUpload = ({
       errorOverlayText={error}
       allowMultiple={false}
       label="Upload"
-      onChange={handleDropZoneDrop}
+      onDrop={handleDropZoneDrop}
       disabled={disabled}
       labelHidden
     >
