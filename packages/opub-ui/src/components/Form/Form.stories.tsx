@@ -305,11 +305,7 @@ const DropFile = () => {
   );
 
   return (
-    <DropZone
-      name="dropZone"
-      onChange={handleDropZoneDrop}
-      label="Upload files"
-    >
+    <DropZone name="dropZone" onDrop={handleDropZoneDrop} label="Upload files">
       {uploadedFiles}
       {fileUpload}
     </DropZone>

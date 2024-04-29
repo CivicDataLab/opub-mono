@@ -10,7 +10,7 @@ type Props = Omit<DropZoneProps, 'onDrop'> & {
   required?: boolean;
   error?: string;
   name: string;
-  onChange?: (
+  onDrop?: (
     val: File[],
     acceptedFiles: File[],
     rejectedFiles: File[],
@@ -42,13 +42,8 @@ const DropZone: React.FunctionComponent<Props> & {
                 acceptedFiles: File[],
                 rejectedFiles: File[]
               ) => {
-                props.onChange &&
-                  props.onChange(
-                    files,
-                    acceptedFiles,
-                    rejectedFiles,
-                    props.name
-                  );
+                props.onDrop &&
+                  props.onDrop(files, acceptedFiles, rejectedFiles, props.name);
                 acceptedFiles && field.onChange(acceptedFiles);
               }}
             />
