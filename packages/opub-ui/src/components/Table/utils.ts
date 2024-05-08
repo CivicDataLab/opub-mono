@@ -1,5 +1,6 @@
-import { range } from '../../utils';
 import { faker } from '@faker-js/faker';
+
+import { range } from '../../utils';
 
 export type Person = {
   firstName: any;
@@ -8,6 +9,7 @@ export type Person = {
   visits: number;
   status: string;
   progress: number;
+  action?: any;
 };
 
 const newPerson = (): Person => {

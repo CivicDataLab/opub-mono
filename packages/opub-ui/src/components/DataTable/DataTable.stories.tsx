@@ -2,6 +2,7 @@ import { Meta, StoryObj } from '@storybook/react';
 import { IconCopy, IconPencil, IconTrash } from '@tabler/icons-react';
 import { createColumnHelper } from '@tanstack/react-table';
 
+import { Button } from '../Button';
 import { makeTableData, Person } from '../Table/utils';
 import { DataTable } from './DataTable';
 
@@ -195,6 +196,7 @@ const truncateData: Person[] = [
     visits: 20,
     status: 'Complicated',
     progress: 10,
+    action: 'Action',
   },
 ];
 
@@ -203,6 +205,55 @@ export const Truncate: Story = {
     columnContentTypes: columnContentTypes,
     rows: truncateData,
     columns: columns,
+    truncate: true,
+  },
+};
+
+const actionColumn = [
+  columnHelper.accessor('firstName', {
+    cell: (info) => info.getValue(),
+    header: () => 'First Name',
+  }),
+  columnHelper.accessor((row) => row.lastName, {
+    id: 'lastName',
+    header: 'Last Name',
+  }),
+  columnHelper.accessor('age', {
+    header: () => 'Age',
+    cell: (info) => info.renderValue(),
+  }),
+  columnHelper.accessor('visits', {
+    header: 'Visits',
+  }),
+  columnHelper.accessor('progress', {
+    header: 'Profile Progress',
+  }),
+  columnHelper.accessor('status', {
+    header: 'Status',
+    filterFn: 'columnFilter',
+  }),
+  columnHelper.accessor('action', {
+    header: 'Action',
+    cell: ({ row }) => (
+      <Button
+        size="slim"
+        kind="secondary"
+        onClick={(e) => {
+          e.stopPropagation();
+          console.log(row.original);
+        }}
+      >
+        Delete
+      </Button>
+    ),
+  }),
+];
+
+export const customAction: Story = {
+  args: {
+    columnContentTypes: columnContentTypes,
+    rows: truncateData,
+    columns: actionColumn,
     truncate: true,
   },
 };

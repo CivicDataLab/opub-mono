@@ -1,5 +1,6 @@
-import { ActionListItemDescriptor } from './actionlist';
 import React, { FocusEvent } from 'react';
+
+import { ActionListItemDescriptor } from './actionlist';
 
 export interface BaseButtonProps {
   /** A unique identifier for the button */
@@ -31,7 +32,7 @@ export interface BaseButtonProps {
   /** Indicates the current checked state of the button when acting as a toggle or switch */
   ariaChecked?: 'false' | 'true';
   /** Callback when clicked */
-  onClick?(e?: React.MouseEvent<any>): void;
+  onClick?(e: React.MouseEvent<any>): void;
   /** Callback when button becomes focussed */
   onFocus?(e: FocusEvent<Element, Element>): void;
   /** Callback when focus leaves button */
