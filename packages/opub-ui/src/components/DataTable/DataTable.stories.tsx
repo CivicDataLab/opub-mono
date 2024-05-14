@@ -4,6 +4,7 @@ import { createColumnHelper } from '@tanstack/react-table';
 
 import { Button } from '../Button';
 import { makeTableData, Person } from '../Table/utils';
+import { TextField } from '../TextField';
 import { DataTable } from './DataTable';
 
 /**
@@ -255,5 +256,59 @@ export const customAction: Story = {
     rows: truncateData,
     columns: actionColumn,
     truncate: true,
+  },
+};
+
+const editableColumn = [
+  columnHelper.accessor('firstName', {
+    cell: (info) => {
+      return (
+        <TextField
+          label="First Name"
+          labelHidden
+          name="firstName"
+          type="text"
+          defaultValue={info.getValue()}
+        />
+      );
+    },
+    header: () => 'First Name',
+  }),
+  columnHelper.accessor((row) => row.lastName, {
+    id: 'lastName',
+    header: 'Last Name',
+    cell: (info) => {
+      return (
+        <TextField
+          label="Last Name"
+          labelHidden
+          name="lastName"
+          type="text"
+          defaultValue={info.getValue()}
+        />
+      );
+    },
+  }),
+  columnHelper.accessor('age', {
+    header: () => 'Age',
+    cell: (info) => {
+      return (
+        <TextField
+          label="Age"
+          labelHidden
+          name="age"
+          type="number"
+          defaultValue={String(info.getValue())}
+        />
+      );
+    },
+  }),
+];
+
+export const EditableFields: Story = {
+  args: {
+    columnContentTypes: columnContentTypes,
+    rows: makeTableData(30),
+    columns: editableColumn,
   },
 };

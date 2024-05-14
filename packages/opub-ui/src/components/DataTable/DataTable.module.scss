@@ -1,7 +1,7 @@
 @import '../../../styles/common';
 
 .DataTable {
-  --op-data-table-first-column-width: 145px;
+  --op-data-table-column-width: 145px;
   max-width: 100vw;
   background-color: var(--surface-default);
   border-radius: var(--border-radius-2);
@@ -160,7 +160,7 @@
   white-space: nowrap;
   overflow-x: hidden;
   text-overflow: ellipsis;
-  max-width: var(--op-data-table-first-column-width);
+  max-width: var(--op-data-table-column-width);
 }
 
 .Heading {
