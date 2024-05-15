@@ -105,7 +105,7 @@ export const Cell = ({
 }: CellProps) => {
   return (
     <td className={className} key={cell.id} {...rest}>
-      {truncate && index === 0 ? (
+      {truncate ? (
         <TruncatedText className={styles.TooltipContent}>{text}</TruncatedText>
       ) : (
         text

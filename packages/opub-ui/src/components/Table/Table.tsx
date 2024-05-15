@@ -29,7 +29,6 @@ const Table = (props: TableProps) => {
     initialSortColumnIndex: sortedColumnIndex,
     onSort,
     hideFooter = false,
-
     ...others
   } = props;
   const [data, setData] = React.useState(() => [...rows]);
@@ -125,7 +124,7 @@ const Table = (props: TableProps) => {
                         columnTypes[index] === 'numeric' &&
                           styles['Cell-numeric'],
                         index === 0 && styles['Cell-firstColumn'],
-                        index === 0 && truncate && styles['Cell-truncated']
+                        truncate && styles['Cell-truncated']
                       )}
                       key={cell.id}
                       text={text}

@@ -104,7 +104,8 @@ const truncateData: Person[] = [
   {
     firstName:
       'This is a super long name to trigger the truncation of the table cell',
-    lastName: 'Dirte',
+    lastName:
+      'This is a super long name to trigger the truncation of the table cell',
     age: 45,
     visits: 20,
     status: 'Complicated',
