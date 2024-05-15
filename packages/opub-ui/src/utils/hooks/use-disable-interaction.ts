@@ -20,7 +20,10 @@ import { useCallback } from 'react';
  * }
  */
 
-export function useDisableClick(disabled?: boolean, handleClick?: () => void) {
+export function useDisableClick(
+  disabled?: boolean,
+  handleClick?: (e: React.MouseEvent<HTMLButtonElement>) => void
+) {
   const handleClickWrapper = useCallback(
     (event: React.MouseEvent<HTMLButtonElement>) => {
       if (disabled) {

@@ -10,6 +10,7 @@ export interface LinkLikeComponentProps
   external?: boolean;
   /** Makes the browser download the url instead of opening it. Provides a hint for the downloaded filename if it is a string value. */
   download?: string | boolean;
+  onClick?(event: React.MouseEvent<any>): void;
   [key: string]: any;
 }
 
