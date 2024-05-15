@@ -311,3 +311,108 @@ const DropFile = () => {
     </DropZone>
   );
 };
+
+export const DynamicElements = () => {
+  const metadata = [
+    {
+      id: '1',
+      label: 'Source',
+      dataStandard: 'DCATV3',
+      urn: '', // since this is empty, it will be ignored in the submit data
+      dataType: 'STRING',
+      options: '',
+      validator: '',
+      type: 'REQUIRED',
+      model: 'DATASET',
+      enabled: true,
+    },
+    {
+      id: '2',
+      label: 'source',
+      dataStandard: '',
+      urn: 'dataset:source',
+      dataType: 'STRING',
+      options: '',
+      validator: '',
+      type: 'REQUIRED',
+      model: 'DATASET',
+      enabled: false,
+    },
+    {
+      id: '3',
+      label: 'source',
+      dataStandard: '',
+      urn: 'dcatv2:source',
+      dataType: 'STRING',
+      options: '',
+      validator: '',
+      type: 'REQUIRED',
+      model: 'DATASET',
+      enabled: true,
+    },
+    {
+      id: '4',
+      label: 'location',
+      dataStandard: '',
+      urn: 'dataset:location',
+      dataType: 'STRING',
+      options: '',
+      validator: '',
+      type: 'REQUIRED',
+      model: 'DATASET',
+      enabled: true,
+    },
+    {
+      id: '5',
+      label: 'Update',
+      dataStandard: '',
+      urn: 'dataset:update',
+      dataType: 'STRING',
+      options: '',
+      validator: '',
+      type: 'REQUIRED',
+      model: 'DATASET',
+      enabled: true,
+    },
+    {
+      id: '6',
+      label: 'Licence',
+      dataStandard: '',
+      urn: 'dataset:licence',
+      dataType: 'STRING',
+      options: '',
+      validator: '',
+      type: 'REQUIRED',
+      model: 'DATASET',
+      enabled: true,
+    },
+  ];
+
+  return (
+    <Form
+      onSubmit={(e) => {
+        console.log(e);
+      }}
+    >
+      <FormLayout>
+        {metadata.map((field) => {
+          if (field.dataType === 'STRING') {
+            return (
+              <Input
+                key={field.id}
+                name={field.urn}
+                label={field.label}
+                required={field.type === 'REQUIRED'}
+                disabled={!field.enabled}
+              />
+            );
+          }
+          return null;
+        })}
+        <Button submit size="slim">
+          Submit
+        </Button>
+      </FormLayout>
+    </Form>
+  );
+};
