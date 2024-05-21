@@ -147,6 +147,7 @@ interface NonMutuallyExclusiveProps {
   /** Whether the input is required */
   required?: boolean;
   isRequired?: boolean;
+  onEnter?: () => void;
 }
 
 export type MutuallyExclusiveSelectionProps =

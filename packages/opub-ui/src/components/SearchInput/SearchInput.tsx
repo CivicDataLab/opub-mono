@@ -57,6 +57,7 @@ const SearchInput = forwardRef((props: Props, ref: any) => {
           props.onClear && props.onClear('');
           ref?.current && ref.current.focus();
         }}
+        onEnter={() => props.onSubmit && props.onSubmit(search)}
         disabled={props.disabled}
       />
       {props.withButton && (

@@ -71,6 +71,7 @@ export const Input = React.forwardRef(
       onChange,
       onFocus,
       onBlur,
+      onEnter,
       required,
       isRequired,
     }: TextFieldProps,
@@ -475,8 +476,13 @@ export const Input = React.forwardRef(
 
     function handleKeyPress(event: React.KeyboardEvent) {
       const { key, code } = event;
+
+      if (code === Key.Enter) {
+        onEnter && onEnter();
+        return;
+      }
       const numbersSpec = /[\d.eE+-]$/;
-      if (type !== 'number' || code === Key.Enter || numbersSpec.test(key)) {
+      if (type !== 'number' || numbersSpec.test(key)) {
         return;
       }
 
