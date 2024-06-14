@@ -1,3 +1,4 @@
+import React from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 
 import { Button } from '../Button';
@@ -25,6 +26,40 @@ export const Default: Story = {
         </Dialog.Trigger>
         <Dialog.Content {...args} />
       </Dialog>
+    );
+  },
+  args: {
+    title: 'Dialog Title',
+    children: 'Make changes to your profile here. Click save when youre done.',
+    primaryAction: {
+      content: 'Add Instagram',
+      onAction: () => console.log('Add Instagram'),
+    },
+    secondaryActions: [
+      {
+        content: 'Learn more',
+        onAction: () => console.log('Learn more'),
+      },
+    ],
+  },
+};
+
+export const Controlled: Story = {
+  render: ({ ...args }) => {
+    const [open, setOpen] = React.useState(false);
+    return (
+      <div>
+        <Button
+          onClick={() => {
+            setOpen(true);
+          }}
+        >
+          Open Dialog
+        </Button>
+        <Dialog open={open} onOpenChange={setOpen}>
+          <Dialog.Content {...args} />
+        </Dialog>
+      </div>
     );
   },
   args: {

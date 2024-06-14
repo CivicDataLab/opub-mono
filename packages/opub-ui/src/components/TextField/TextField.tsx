@@ -1,6 +1,7 @@
+import React from 'react';
+
 import { TextFieldProps } from '../../types/input';
 import { Input } from '../Input/Input';
-import React from 'react';
 
 export type Props = TextFieldProps & {
   name: string;
