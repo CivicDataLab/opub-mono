@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { IconHome, IconStack } from '@tabler/icons-react';
+import { IconHome, IconStack, IconZoomReset } from '@tabler/icons-react';
 import {
   GeoJSON,
   MapContainer,
@@ -302,7 +302,7 @@ const Map = ({
         >
           <span className="sr-only">Reset Zoom</span>
           <span aria-hidden="true">
-            <Icon source={IconHome} color="highlight" size={22} />
+            <Icon source={IconZoomReset} color="highlight" size={22} />
           </span>
         </button>
       </MapContainer>
