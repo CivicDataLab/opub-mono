@@ -21,9 +21,10 @@ import { Popover } from '../Popover';
 import { RadioGroup, RadioItem } from '../RadioGroup';
 import { Text } from '../Text';
 import styles from './MapChart.module.scss';
+import { color } from 'echarts';
 
 const layers = {
-  light: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+  light: 'https://api.mapbox.com/styles/v1/tech-civicdatalab/cm16if6hx020101qyeijacngt/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoidGVjaC1jaXZpY2RhdGFsYWIiLCJhIjoiY20xNmk2Z2MyMGpldjJxcXY0NjlmcnZkZCJ9.8jTki9brBl78_VIHImdLow',
   dark: 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
   satellite:
     'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
@@ -90,6 +91,9 @@ type MapProps = {
 
   /* max zoom */
   maxZoom?: number;
+
+  /* horizontal legend */
+  horizontalLegend?:boolean
 };
 
 type LegendProps = {
@@ -98,6 +102,9 @@ type LegendProps = {
 
   /* heading for legend */
   legendHeading?: { heading: string; subheading?: string };
+
+  /* set horizontal legend */
+  horizontalLegend?: boolean
 };
 
 type Props = MapProps & LegendProps;
@@ -152,6 +159,7 @@ const Map = ({
   scroolWheelZoom = true,
   minZoom,
   maxZoom,
+  horizontalLegend=false,
   resetZoom = false,
 }: MapProps & {
   selectedLayer: layerOptions;
@@ -194,8 +202,9 @@ const Map = ({
     layer.setStyle({
       fillColor: mapDataFn(
         Number(layer.feature.properties[mapProperty]),
-        'hover'
+        'hover',
       ),
+      weight: 2,
     });
 
     mouseover && mouseover(layer);
@@ -204,13 +213,20 @@ const Map = ({
   const handleMouseOut = React.useCallback((e: { target: any }) => {
     var layer = e.target;
 
-    layer.setStyle(style(layer.feature));
+    // layer.setStyle(style(layer.feature));
+    layer.setStyle({
+      fillColor: mapDataFn(
+        Number(layer.feature.properties[mapProperty]),
+        'hover',
+      ),
+      weight: 1,
+      color: '#000',
+    });
     mouseout && mouseout(layer);
   }, []);
 
   function handleClick(e: { target: any }) {
     var layer = e.target;
-
     layer.setStyle({
       fillColor: mapDataFn(
         Number(layer.feature.properties[mapProperty]),
@@ -240,7 +256,7 @@ const Map = ({
       weight: 1,
       opacity: 1,
       color:
-        selectedLayer === 'dark' ? '#eee' : 'var(--mapareadistrict-border)',
+        selectedLayer === 'dark' ? '#eee' : "#000",
       fillOpacity: fillOpacity ? fillOpacity : 0.9,
     };
   };
@@ -277,7 +293,7 @@ const Map = ({
           </>
         )}
         {legendData && (
-          <Legend legendData={legendData} legendHeading={legendHeading} />
+          <Legend legendData={legendData} legendHeading={legendHeading} horizontalLegend={horizontalLegend}/>
         )}
         {fullScreen && <FullscreenControl />}
 
@@ -310,7 +326,7 @@ const Map = ({
   );
 };
 
-const Legend = ({ legendData, legendHeading }: LegendProps) => {
+const Legend = ({ legendData, legendHeading , horizontalLegend }: LegendProps) => {
   if (!legendData) return null;
 
   const className = cn(styles.Legend);
@@ -326,13 +342,13 @@ const Legend = ({ legendData, legendHeading }: LegendProps) => {
           )}
         </div>
       )}
-      <div className="flex flex-col gap-1">
+      <div className={cn("flex gap-1" , !horizontalLegend && "flex-col")}>
         {legendData.map((item) => {
           return (
             <div
               key={item.label}
               style={{ '--color': item.color } as React.CSSProperties}
-              className={cn(styles.LegendItem)}
+              className={cn(styles.LegendItem , horizontalLegend && "flex-col")}
             >
               <Text variant="bodyMd">{item.label}</Text>
             </div>

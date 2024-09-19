@@ -86,6 +86,7 @@
   "dependencies": {
     "@ariakit/react": "^0.3.14",
     "@hookform/resolvers": "^3.3.4",
+    "@ianvs/prettier-plugin-sort-imports": "^4.3.1",
     "@internationalized/date": "^3.2.0",
     "@radix-ui/react-accordion": "^1.1.2",
     "@radix-ui/react-alert-dialog": "^1.0.3",

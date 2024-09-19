@@ -70,11 +70,14 @@ const legendHeading = {
 
 export const Default: Story = {
   render: (args) => {
+
     if (!features) return <div>Loading...</div>;
 
     return (
       <div style={{ height: '600px' }}>
-        <MapChart {...args} />
+       <MapChart 
+          {...args} 
+        />
       </div>
     );
   },
@@ -87,6 +90,8 @@ export const Default: Story = {
     fillOpacity: 1,
     mapCenter: [26.193, 92.3],
     legendHeading,
+    horizontalLegend:true
+
   },
 };
 
