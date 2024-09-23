@@ -13,6 +13,9 @@ import { FullscreenControl } from 'react-leaflet-fullscreen';
 
 import 'react-leaflet-fullscreen/styles.css';
 
+// @ts-ignore
+import classyBrew from 'classybrew';
+import { color } from 'echarts';
 import { LatLngExpression } from 'leaflet';
 
 import { cn } from '../../utils';
@@ -21,10 +24,10 @@ import { Popover } from '../Popover';
 import { RadioGroup, RadioItem } from '../RadioGroup';
 import { Text } from '../Text';
 import styles from './MapChart.module.scss';
-import { color } from 'echarts';
 
 const layers = {
-  light: 'https://api.mapbox.com/styles/v1/tech-civicdatalab/cm16if6hx020101qyeijacngt/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoidGVjaC1jaXZpY2RhdGFsYWIiLCJhIjoiY20xNmk2Z2MyMGpldjJxcXY0NjlmcnZkZCJ9.8jTki9brBl78_VIHImdLow',
+  light:
+    'https://api.mapbox.com/styles/v1/tech-civicdatalab/cm16if6hx020101qyeijacngt/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoidGVjaC1jaXZpY2RhdGFsYWIiLCJhIjoiY20xNmk2Z2MyMGpldjJxcXY0NjlmcnZkZCJ9.8jTki9brBl78_VIHImdLow',
   dark: 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
   satellite:
     'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
@@ -93,7 +96,10 @@ type MapProps = {
   maxZoom?: number;
 
   /* horizontal legend */
-  horizontalLegend?:boolean
+  horizontalLegend?: boolean;
+
+  /* show sequential colors */
+  isSequentialLegend?: boolean;
 };
 
 type LegendProps = {
@@ -104,7 +110,7 @@ type LegendProps = {
   legendHeading?: { heading: string; subheading?: string };
 
   /* set horizontal legend */
-  horizontalLegend?: boolean
+  horizontalLegend?: boolean;
 };
 
 type Props = MapProps & LegendProps;
@@ -159,7 +165,8 @@ const Map = ({
   scroolWheelZoom = true,
   minZoom,
   maxZoom,
-  horizontalLegend=false,
+  horizontalLegend = false,
+  isSequentialLegend = false,
   resetZoom = false,
 }: MapProps & {
   selectedLayer: layerOptions;
@@ -167,7 +174,21 @@ const Map = ({
   legendData?: { label: string; color: string }[];
   legendHeading?: { heading: string; subheading?: string };
 }) => {
+  var brew = new classyBrew();
+
   const [mapRef, setMapRef] = React.useState<any>(null);
+
+  const values = [];
+  for (var i = 0; i < features.length; i++) {
+    if (features[i].properties[mapProperty] == null) continue;
+    values.push(features[i].properties[mapProperty]);
+  }
+
+  // Set the brew properties
+  brew.setSeries(values);
+  brew.setNumClasses(5);
+  brew.setColorCode('PuBu');
+  brew.classify('equal_interval');
 
   React.useEffect(() => {
     if (mapRef && resetZoom) {
@@ -200,10 +221,9 @@ const Map = ({
     var layer = e.target;
 
     layer.setStyle({
-      fillColor: mapDataFn(
-        Number(layer.feature.properties[mapProperty]),
-        'hover',
-      ),
+      fillColor: isSequentialLegend
+        ? brew.getColorInRange(layer.feature.properties[mapProperty])
+        : mapDataFn(Number(layer.feature.properties[mapProperty]), 'hover'),
       weight: 2,
     });
 
@@ -215,10 +235,9 @@ const Map = ({
 
     // layer.setStyle(style(layer.feature));
     layer.setStyle({
-      fillColor: mapDataFn(
-        Number(layer.feature.properties[mapProperty]),
-        'hover',
-      ),
+      fillColor: isSequentialLegend
+        ? brew.getColorInRange(layer.feature.properties[mapProperty])
+        : mapDataFn(Number(layer.feature.properties[mapProperty]), 'hover'),
       weight: 1,
       color: '#000',
     });
@@ -228,10 +247,9 @@ const Map = ({
   function handleClick(e: { target: any }) {
     var layer = e.target;
     layer.setStyle({
-      fillColor: mapDataFn(
-        Number(layer.feature.properties[mapProperty]),
-        'selected'
-      ),
+      fillColor: isSequentialLegend
+        ? brew.getColorInRange(layer.feature.properties[mapProperty])
+        : mapDataFn(Number(layer.feature.properties[mapProperty]), 'selected'),
     });
 
     if (zoomOnClick) {
@@ -252,11 +270,12 @@ const Map = ({
 
   const style: any = (feature: { properties: { [x: string]: number } }) => {
     return {
-      fillColor: mapDataFn(Number(feature.properties[mapProperty]), 'default'),
+      fillColor: isSequentialLegend
+        ? brew.getColorInRange(feature.properties[mapProperty])
+        : mapDataFn(Number(feature.properties[mapProperty]), 'default'),
       weight: 1,
       opacity: 1,
-      color:
-        selectedLayer === 'dark' ? '#eee' : "#000",
+      color: selectedLayer === 'dark' ? '#eee' : '#000',
       fillOpacity: fillOpacity ? fillOpacity : 0.9,
     };
   };
@@ -293,7 +312,11 @@ const Map = ({
           </>
         )}
         {legendData && (
-          <Legend legendData={legendData} legendHeading={legendHeading} horizontalLegend={horizontalLegend}/>
+          <Legend
+            legendData={legendData}
+            legendHeading={legendHeading}
+            horizontalLegend={horizontalLegend}
+          />
         )}
         {fullScreen && <FullscreenControl />}
 
@@ -326,7 +349,11 @@ const Map = ({
   );
 };
 
-const Legend = ({ legendData, legendHeading , horizontalLegend }: LegendProps) => {
+const Legend = ({
+  legendData,
+  legendHeading,
+  horizontalLegend,
+}: LegendProps) => {
   if (!legendData) return null;
 
   const className = cn(styles.Legend);
@@ -342,13 +369,13 @@ const Legend = ({ legendData, legendHeading , horizontalLegend }: LegendProps) =
           )}
         </div>
       )}
-      <div className={cn("flex gap-1" , !horizontalLegend && "flex-col")}>
+      <div className={cn('flex gap-1', !horizontalLegend && 'flex-col')}>
         {legendData.map((item) => {
           return (
             <div
               key={item.label}
               style={{ '--color': item.color } as React.CSSProperties}
-              className={cn(styles.LegendItem , horizontalLegend && "flex-col")}
+              className={cn(styles.LegendItem, horizontalLegend && 'flex-col')}
             >
               <Text variant="bodyMd">{item.label}</Text>
             </div>
