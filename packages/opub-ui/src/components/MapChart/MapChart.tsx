@@ -14,7 +14,8 @@ import { FullscreenControl } from 'react-leaflet-fullscreen';
 import 'react-leaflet-fullscreen/styles.css';
 
 // @ts-ignore
-import classyBrew from 'classybrew';
+import * as d3 from 'd3-scale';
+import { interpolateBlues } from 'd3-scale-chromatic';
 import { color } from 'echarts';
 import { LatLngExpression } from 'leaflet';
 
@@ -174,21 +175,40 @@ const Map = ({
   legendData?: { label: string; color: string }[];
   legendHeading?: { heading: string; subheading?: string };
 }) => {
-  var brew = new classyBrew();
-
   const [mapRef, setMapRef] = React.useState<any>(null);
 
   const values = [];
-  for (var i = 0; i < features.length; i++) {
+  const labels = [];
+  for (let i = 0; i < features.length; i++) {
     if (features[i].properties[mapProperty] == null) continue;
     values.push(features[i].properties[mapProperty]);
   }
 
-  // Set the brew properties
-  brew.setSeries(values);
-  brew.setNumClasses(5);
-  brew.setColorCode('PuBu');
-  brew.classify('equal_interval');
+  // console.log('values', values);
+
+  // Set the sequential scale properties
+  const colorScale = d3
+    .scaleSequential()
+    .domain([Math.min(...values), Math.max(...values)])
+    .interpolator(interpolateBlues);
+
+  if (isSequentialLegend) {
+    const min = Math.min(...values);
+    const max = Math.max(...values);
+    const step = (max - min) / 5; // Calculate step size
+    const grades = Array.from({ length: 5 + 1 }, (_, i) => min + step * i); // Create ranges
+
+    // Loop through intervals and generate a label with a color square for each
+    for (let i = 0; i < grades.length; i++) {
+      const from = grades[i];
+      const to = grades[i + 1] || Math.max(...values);
+
+      labels.push({
+        color: colorScale(from),
+        label: `${Math.round(from)}${to ? `- ${Math.round(to)}` : '+'}`,
+      });
+    }
+  }
 
   React.useEffect(() => {
     if (mapRef && resetZoom) {
@@ -222,7 +242,7 @@ const Map = ({
 
     layer.setStyle({
       fillColor: isSequentialLegend
-        ? brew.getColorInRange(layer.feature.properties[mapProperty])
+        ? colorScale(Number(layer.feature.properties[mapProperty]))
         : mapDataFn(Number(layer.feature.properties[mapProperty]), 'hover'),
       weight: 2,
     });
@@ -236,7 +256,7 @@ const Map = ({
     // layer.setStyle(style(layer.feature));
     layer.setStyle({
       fillColor: isSequentialLegend
-        ? brew.getColorInRange(layer.feature.properties[mapProperty])
+        ? colorScale(Number(layer.feature.properties[mapProperty]))
         : mapDataFn(Number(layer.feature.properties[mapProperty]), 'hover'),
       weight: 1,
       color: '#000',
@@ -248,7 +268,7 @@ const Map = ({
     var layer = e.target;
     layer.setStyle({
       fillColor: isSequentialLegend
-        ? brew.getColorInRange(layer.feature.properties[mapProperty])
+        ? colorScale(Number(layer.feature.properties[mapProperty]))
         : mapDataFn(Number(layer.feature.properties[mapProperty]), 'selected'),
     });
 
@@ -271,7 +291,7 @@ const Map = ({
   const style: any = (feature: { properties: { [x: string]: number } }) => {
     return {
       fillColor: isSequentialLegend
-        ? brew.getColorInRange(feature.properties[mapProperty])
+        ? colorScale(Number(feature.properties[mapProperty]))
         : mapDataFn(Number(feature.properties[mapProperty]), 'default'),
       weight: 1,
       opacity: 1,
@@ -311,13 +331,14 @@ const Map = ({
             />
           </>
         )}
-        {legendData && (
-          <Legend
-            legendData={legendData}
-            legendHeading={legendHeading}
-            horizontalLegend={horizontalLegend}
-          />
-        )}
+        {legendData ||
+          (isSequentialLegend && (
+            <Legend
+              legendData={legendData || labels}
+              legendHeading={legendHeading}
+              horizontalLegend={horizontalLegend}
+            />
+          ))}
         {fullScreen && <FullscreenControl />}
 
         {features && (

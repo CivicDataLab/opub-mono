@@ -70,28 +70,46 @@ const legendHeading = {
 
 export const Default: Story = {
   render: (args) => {
-
     if (!features) return <div>Loading...</div>;
 
     return (
       <div style={{ height: '600px' }}>
-       <MapChart 
-          {...args} 
-        />
+        <MapChart {...args} />
       </div>
     );
   },
   args: {
     features,
-    legendData,
     mapDataFn,
     mapProperty: 'dt_code',
     mapZoom: 7.9,
     fillOpacity: 1,
     mapCenter: [26.193, 92.3],
     legendHeading,
-    horizontalLegend:true
+    horizontalLegend: true,
+  },
+};
 
+export const SequentialScale: Story = {
+  render: (args) => {
+    if (!features) return <div>Loading...</div>;
+
+    return (
+      <div style={{ height: '600px' }}>
+        <MapChart {...args} />
+      </div>
+    );
+  },
+  args: {
+    features,
+    isSequentialLegend: true,
+    mapDataFn,
+    mapProperty: 'dt_code',
+    mapZoom: 7.9,
+    fillOpacity: 1,
+    mapCenter: [26.193, 92.3],
+    legendHeading,
+    horizontalLegend: true,
   },
 };
 
