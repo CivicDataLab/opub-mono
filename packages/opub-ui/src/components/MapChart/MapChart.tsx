@@ -323,6 +323,13 @@ const Map = ({
               setSelectedLayer={setLayer}
             />
             <TileLayer
+              attribution='&copy;<a href="https://www.mapbox.com/about/maps/">Mapbox</a> &copy;
+            <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>
+            <strong
+              ><a href="https://labs.mapbox.com/contribute/" target="_blank"
+                >Improve this map</a
+              ></strong
+            >'
               maxZoom={maxZoom}
               minZoom={minZoom}
               url={layers[selectedLayer]}
