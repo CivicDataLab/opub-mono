@@ -225,11 +225,6 @@ const Map = ({
 
   function handleClick(e: { target: any }) {
     var layer = e.target;
-    layer.setStyle({
-      fillColor: isCustomColor
-        ? customColor?.(Number(layer.feature.properties[mapProperty]))
-        : mapDataFn(Number(layer.feature.properties[mapProperty]), 'selected'),
-    });
 
     if (zoomOnClick) {
       const map = mapRef.current;
