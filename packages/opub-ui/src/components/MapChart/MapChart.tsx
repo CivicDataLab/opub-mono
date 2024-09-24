@@ -184,30 +184,11 @@ const Map = ({
     values.push(features[i].properties[mapProperty]);
   }
 
-  // console.log('values', values);
-
   // Set the sequential scale properties
   const colorScale = d3
     .scaleSequential()
     .domain([Math.min(...values), Math.max(...values)])
     .interpolator(interpolateBlues);
-
-  if (isSequentialLegend) {
-    const min = Math.min(...values);
-    const max = Math.max(...values);
-    const step = (max - min) / 3;
-    const grades = Array.from({ length: 3 + 1 }, (_, i) => min + step * i);
-
-    for (let i = 0; i < grades.length; i++) {
-      const from = grades[i];
-      const to = grades[i + 1] || Math.max(...values);
-
-      labels.push({
-        color: colorScale(from),
-        label: `${Math.round(from)} - ${to ? `${Math.round(to)}` : '+'}`,
-      });
-    }
-  }
 
   React.useEffect(() => {
     if (mapRef && resetZoom) {
@@ -215,7 +196,6 @@ const Map = ({
       const button = mapRef._container.querySelector(
         '[data-type="reset-zoom"]'
       );
-      console.log(button, controlElm);
 
       controlElm?.appendChild(button);
       button.classList.remove('hidden');
@@ -252,6 +232,7 @@ const Map = ({
   const handleMouseOut = React.useCallback((e: { target: any }) => {
     var layer = e.target;
 
+    console.log('mouseout', layer.feature.properties[mapProperty]);
     // layer.setStyle(style(layer.feature));
     layer.setStyle({
       fillColor: isSequentialLegend
@@ -337,9 +318,9 @@ const Map = ({
             />
           </>
         )}
-        {(legendData || isSequentialLegend) && (
+        {legendData && (
           <Legend
-            legendData={legendData || labels}
+            legendData={legendData}
             legendHeading={legendHeading}
             horizontalLegend={horizontalLegend}
           />
