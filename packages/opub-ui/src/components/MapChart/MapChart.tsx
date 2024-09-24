@@ -13,10 +13,6 @@ import { FullscreenControl } from 'react-leaflet-fullscreen';
 
 import 'react-leaflet-fullscreen/styles.css';
 
-// @ts-ignore
-import * as d3 from 'd3-scale';
-import { interpolateBlues } from 'd3-scale-chromatic';
-import { color } from 'echarts';
 import { LatLngExpression } from 'leaflet';
 
 import { cn } from '../../utils';
@@ -100,7 +96,10 @@ type MapProps = {
   horizontalLegend?: boolean;
 
   /* show sequential colors */
-  isSequentialLegend?: boolean;
+  isCustomColor?: boolean;
+
+  /* set sequential colors */
+  customColor?: (value: number) => string;
 };
 
 type LegendProps = {
@@ -167,8 +166,9 @@ const Map = ({
   minZoom,
   maxZoom,
   horizontalLegend = false,
-  isSequentialLegend = false,
+  isCustomColor = false,
   resetZoom = false,
+  customColor,
 }: MapProps & {
   selectedLayer: layerOptions;
   setLayer: any;
@@ -176,19 +176,6 @@ const Map = ({
   legendHeading?: { heading: string; subheading?: string };
 }) => {
   const [mapRef, setMapRef] = React.useState<any>(null);
-
-  const values = [];
-  const labels = [];
-  for (let i = 0; i < features.length; i++) {
-    if (features[i].properties[mapProperty] == null) continue;
-    values.push(features[i].properties[mapProperty]);
-  }
-
-  // Set the sequential scale properties
-  const colorScale = d3
-    .scaleSequential()
-    .domain([Math.min(...values), Math.max(...values)])
-    .interpolator(interpolateBlues);
 
   React.useEffect(() => {
     if (mapRef && resetZoom) {
@@ -220,8 +207,8 @@ const Map = ({
     var layer = e.target;
 
     layer.setStyle({
-      fillColor: isSequentialLegend
-        ? colorScale(Number(layer.feature.properties[mapProperty]))
+      fillColor: isCustomColor
+        ? customColor?.(Number(layer.feature.properties[mapProperty]))
         : mapDataFn(Number(layer.feature.properties[mapProperty]), 'hover'),
       weight: 2,
     });
@@ -235,8 +222,8 @@ const Map = ({
     console.log('mouseout', layer.feature.properties[mapProperty]);
     // layer.setStyle(style(layer.feature));
     layer.setStyle({
-      fillColor: isSequentialLegend
-        ? colorScale(Number(layer.feature.properties[mapProperty]))
+      fillColor: isCustomColor
+        ? customColor?.(Number(layer.feature.properties[mapProperty]))
         : mapDataFn(Number(layer.feature.properties[mapProperty]), 'hover'),
       weight: 1,
       color: '#000',
@@ -247,8 +234,8 @@ const Map = ({
   function handleClick(e: { target: any }) {
     var layer = e.target;
     layer.setStyle({
-      fillColor: isSequentialLegend
-        ? colorScale(Number(layer.feature.properties[mapProperty]))
+      fillColor: isCustomColor
+        ? customColor?.(Number(layer.feature.properties[mapProperty]))
         : mapDataFn(Number(layer.feature.properties[mapProperty]), 'selected'),
     });
 
@@ -270,8 +257,8 @@ const Map = ({
 
   const style: any = (feature: { properties: { [x: string]: number } }) => {
     return {
-      fillColor: isSequentialLegend
-        ? colorScale(Number(feature.properties[mapProperty]))
+      fillColor: isCustomColor
+        ? customColor?.(Number(feature.properties[mapProperty]))
         : mapDataFn(Number(feature.properties[mapProperty]), 'default'),
       weight: 1,
       opacity: 1,

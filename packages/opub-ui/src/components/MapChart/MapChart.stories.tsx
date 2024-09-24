@@ -1,5 +1,7 @@
 import React from 'react';
 import { Meta, StoryObj } from '@storybook/react';
+import * as d3 from 'd3-scale';
+import { interpolateBlues } from 'd3-scale-chromatic';
 
 import { features } from '../../../assets/json/assam.json';
 import MapChart from './MapChart';
@@ -68,6 +70,34 @@ const legendHeading = {
   subheading: 'Average Rainfall (mm)',
 };
 
+const values: number[] = [];
+const customLegendData = [];
+for (let i = 0; i < features.length; i++) {
+  if (features[i].properties['dt_code'] == null) continue;
+  values.push(Number(features[i].properties['dt_code']));
+}
+
+// Set the sequential scale properties
+const colorScale = d3
+  .scaleSequential()
+  .domain([Math.min(...values), Math.max(...values)])
+  .interpolator(interpolateBlues);
+
+const min = Math.min(...values);
+const max = Math.max(...values);
+const step = (max - min) / 3;
+const grades = Array.from({ length: 3 + 1 }, (_, i) => min + step * i);
+
+for (let i = 0; i < grades.length; i++) {
+  const from = grades[i];
+  const to = grades[i + 1] || Math.max(...values);
+
+  customLegendData.push({
+    color: colorScale(from),
+    label: `${Math.round(from)} - ${to ? `${Math.round(to)}` : '+'}`,
+  });
+}
+
 export const Default: Story = {
   render: (args) => {
     if (!features) return <div>Loading...</div>;
@@ -103,7 +133,9 @@ export const SequentialScale: Story = {
   },
   args: {
     features,
-    isSequentialLegend: true,
+    isCustomColor: true,
+    customColor: colorScale,
+    legendData: customLegendData,
     mapDataFn,
     mapProperty: 'dt_code',
     mapZoom: 7.9,
