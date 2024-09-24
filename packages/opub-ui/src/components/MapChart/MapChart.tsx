@@ -195,17 +195,16 @@ const Map = ({
   if (isSequentialLegend) {
     const min = Math.min(...values);
     const max = Math.max(...values);
-    const step = (max - min) / 5; // Calculate step size
-    const grades = Array.from({ length: 5 + 1 }, (_, i) => min + step * i); // Create ranges
+    const step = (max - min) / 3;
+    const grades = Array.from({ length: 3 + 1 }, (_, i) => min + step * i);
 
-    // Loop through intervals and generate a label with a color square for each
     for (let i = 0; i < grades.length; i++) {
       const from = grades[i];
       const to = grades[i + 1] || Math.max(...values);
 
       labels.push({
         color: colorScale(from),
-        label: `${Math.round(from)}${to ? `- ${Math.round(to)}` : '+'}`,
+        label: `${Math.round(from)} - ${to ? `${Math.round(to)}` : '+'}`,
       });
     }
   }
