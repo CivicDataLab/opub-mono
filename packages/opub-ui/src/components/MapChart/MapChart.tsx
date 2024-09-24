@@ -331,14 +331,13 @@ const Map = ({
             />
           </>
         )}
-        {legendData ||
-          (isSequentialLegend && (
-            <Legend
-              legendData={legendData || labels}
-              legendHeading={legendHeading}
-              horizontalLegend={horizontalLegend}
-            />
-          ))}
+        {(legendData || isSequentialLegend) && (
+          <Legend
+            legendData={legendData || labels}
+            legendHeading={legendHeading}
+            horizontalLegend={horizontalLegend}
+          />
+        )}
         {fullScreen && <FullscreenControl />}
 
         {features && (
