@@ -207,9 +207,6 @@ const Map = ({
     var layer = e.target;
 
     layer.setStyle({
-      fillColor: isCustomColor
-        ? customColor?.(Number(layer.feature.properties[mapProperty]))
-        : mapDataFn(Number(layer.feature.properties[mapProperty]), 'hover'),
       weight: 2,
     });
 
@@ -219,14 +216,9 @@ const Map = ({
   const handleMouseOut = React.useCallback((e: { target: any }) => {
     var layer = e.target;
 
-    console.log('mouseout', layer.feature.properties[mapProperty]);
     // layer.setStyle(style(layer.feature));
     layer.setStyle({
-      fillColor: isCustomColor
-        ? customColor?.(Number(layer.feature.properties[mapProperty]))
-        : mapDataFn(Number(layer.feature.properties[mapProperty]), 'hover'),
       weight: 1,
-      color: '#000',
     });
     mouseout && mouseout(layer);
   }, []);
