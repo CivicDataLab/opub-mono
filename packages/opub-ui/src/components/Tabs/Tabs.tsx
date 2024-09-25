@@ -35,11 +35,12 @@ const TabList = forwardRef((props: ListProps, ref: any) => {
 
 type TabProps = {
   activeBorder?: boolean;
+  theme?: 'climate' | 'default';
 } & TabsRadix.TabsTriggerProps;
 
 const Tab = forwardRef(
   (
-    { children, className, activeBorder = true, ...props }: TabProps,
+    { children, className, activeBorder = true, theme, ...props }: TabProps,
     ref: any
   ) => {
     return (
@@ -48,10 +49,16 @@ const Tab = forwardRef(
           className={cn(
             styles.Tab,
             activeBorder && styles.ActiveBorder,
+            theme === 'climate' && styles.ActiveBorderClimateTheme,
             className
           )}
         >
-          <Text className={styles.Title} variant="bodyMd">
+          <Text
+            className={cn(
+              theme === 'climate' ? styles.TitleClimateTheme : styles.Title
+            )}
+            variant="bodyMd"
+          >
             {children}
           </Text>
         </button>

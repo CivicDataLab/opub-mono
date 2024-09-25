@@ -77,6 +77,11 @@ $item-min-width: 50px;
       font-weight: 500;
     }
 
+    .TitleClimateTheme {
+      color: var(--text-subdued, #484b51);
+      font-weight: 500;
+    }
+
     svg {
       color: var(--icon-highlight);
     }
@@ -91,6 +96,19 @@ $item-min-width: 50px;
 
       &::before {
         background: var(--action-primary-basic-default, #6e56cf);
+      }
+    }
+
+    &.ActiveBorderClimateTheme {
+      background-color: #e0f8e2;
+      font-weight: 400;
+      color: var(--text-subdued, #484b51);
+      border: 1px solid var(--border-subdued, #d7dbdf);
+      border-bottom: none;
+      box-shadow: var(--shadow-element-popover);
+
+      &::before {
+        background: #71e57d;
       }
     }
   }

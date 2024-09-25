@@ -41,6 +41,38 @@ export const Default: Story = {
   args: {},
 };
 
+export const GreenTheme: Story = {
+  render: ({ ...args }) => {
+    return (
+      <>
+        <Tabs defaultValue="1" {...args}>
+          <TabList fitted>
+            <Tab theme="climate" value="1">
+              Tab Name 1
+            </Tab>
+            <Tab theme="climate" value="2">
+              Tab Name 2
+            </Tab>
+            <Tab theme="climate" value="3">
+              Tab Name 3
+            </Tab>
+          </TabList>
+          <TabPanel value="1">
+            <div className="p-5">1</div>
+          </TabPanel>
+          <TabPanel value="2">
+            <div className="p-5">2</div>
+          </TabPanel>
+          <TabPanel value="3">
+            <div className="p-5">3</div>
+          </TabPanel>
+        </Tabs>
+      </>
+    );
+  },
+  args: {},
+};
+
 export const Fitted: Story = {
   render: () => {
     return (
