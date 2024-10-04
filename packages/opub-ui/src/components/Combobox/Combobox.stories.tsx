@@ -84,6 +84,20 @@ export const MultiSelect: Story = {
   },
 };
 
+export const CreatableSelect: Story = {
+  args: {
+    label: 'Your favorite food',
+    placeholder: 'e.g., Apple, Burger',
+    list: options,
+    displaySelected: true,
+    selectedValue: [],
+    creatable: true,
+    onChange: (e: any) => {
+      console.log(e);
+    },
+  },
+};
+
 export const Tags: Story = {
   args: {
     label: 'Your favorite food',

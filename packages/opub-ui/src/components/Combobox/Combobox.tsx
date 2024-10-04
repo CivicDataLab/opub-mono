@@ -27,6 +27,11 @@ export type ComboProps = {
    * Add grouping to the combobox.
    */
   group?: boolean;
+
+  /**
+   * Add creatable to the combobox.
+   */
+  creatable?: boolean;
 };
 
 export const Combobox = React.forwardRef(
@@ -35,6 +40,7 @@ export const Combobox = React.forwardRef(
     const [searchValue, setSearchValue] = useState('');
     const deferredValue = React.useDeferredValue(searchValue);
     const [selectedValues, setSelectedValues] = useState(props.selectedValue);
+    const [comboboxList, setComboboxList] = useState(props.list);
 
     const combobox = useComboboxStore();
     const ref = React.useRef(null);
@@ -96,17 +102,17 @@ export const Combobox = React.forwardRef(
 
     const matches = useMemo(() => {
       if (props.group) {
-        const items = matchSorter(props.list, deferredValue, {
+        const items = matchSorter(comboboxList, deferredValue, {
           keys: ['label', 'value', 'type'],
         });
 
         return Object.entries(groupBy(items, 'type'));
       }
 
-      return matchSorter(props.list, deferredValue, {
+      return matchSorter(comboboxList, deferredValue, {
         keys: ['label', 'value'],
       });
-    }, [deferredValue, props.list, props.selectedValue]);
+    }, [deferredValue, comboboxList, props.selectedValue]);
 
     function removeTag(value: string) {
       if (selectedValues && typeof selectedValues !== 'string') {
@@ -148,8 +154,6 @@ export const Combobox = React.forwardRef(
     return (
       <ComboboxProvider
         setOpen={(e) => {
-          console.log();
-
           if (e) {
             setTimeout(() => {
               combobox.getState().baseElement?.focus();
@@ -168,14 +172,40 @@ export const Combobox = React.forwardRef(
         setSelectedValue={(e) => {
           // for single select
           if (typeof e === 'string') {
-            setSelectedValues(e);
+            if (comboboxList.findIndex((it) => it.value === e) < 0) {
+              setSelectedValues(e);
+              setComboboxList([
+                ...comboboxList,
+                {
+                  label: e,
+                  value: e,
+                },
+              ]);
+            } else {
+              setSelectedValues(e);
+            }
             props.onChange && props.onChange(e);
             return;
           }
 
           // for multi select
           const selectedArr = e.map((value: string) => {
-            return props.list.find((item) => item.value === value);
+            if (comboboxList.findIndex((item) => item.value === value) > 0) {
+              return comboboxList.find((item) => item.value === value);
+            } else {
+              setComboboxList([
+                ...comboboxList,
+                {
+                  label: value,
+                  value: value,
+                },
+              ]);
+
+              return {
+                label: value,
+                value: value,
+              };
+            }
           });
 
           setSelectedValues(selectedArr);
@@ -210,6 +240,16 @@ export const Combobox = React.forwardRef(
             { '--popover-padding': 'var(--space-1)' } as React.CSSProperties
           }
         >
+          {matches.length === 0 && (
+            <>
+              <Item
+                item={{
+                  value: searchValue,
+                  label: `Create ${searchValue}`,
+                }}
+              />
+            </>
+          )}
           {matches.length > 0 ? (
             <div className={styles.List}>
               {props.group ? (
