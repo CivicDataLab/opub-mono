@@ -240,7 +240,7 @@ export const Combobox = React.forwardRef(
             { '--popover-padding': 'var(--space-1)' } as React.CSSProperties
           }
         >
-          {matches.length === 0 && (
+          {props.creatable === true && searchValue.trim().length > 0 && (
             <>
               <Item
                 item={{
