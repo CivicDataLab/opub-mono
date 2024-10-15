@@ -190,22 +190,12 @@ export const Combobox = React.forwardRef(
 
           // for multi select
           const selectedArr = e.map((value: string) => {
-            if (comboboxList.findIndex((item) => item.value === value) > 0) {
-              return comboboxList.find((item) => item.value === value);
-            } else {
-              setComboboxList([
-                ...comboboxList,
-                {
-                  label: value,
-                  value: value,
-                },
-              ]);
-
-              return {
+            return (
+              comboboxList.find((item) => item.value === value) || {
                 label: value,
                 value: value,
-              };
-            }
+              }
+            );
           });
 
           setSelectedValues(selectedArr);
