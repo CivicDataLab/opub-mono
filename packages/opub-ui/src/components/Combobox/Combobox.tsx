@@ -184,6 +184,11 @@ export const Combobox = React.forwardRef(
             } else {
               setSelectedValues(e);
             }
+
+            // Clear inputbox
+            combobox.setValue('');
+            setSearchValue('');
+
             props.onChange && props.onChange(e);
             return;
           }
@@ -197,8 +202,12 @@ export const Combobox = React.forwardRef(
               }
             );
           });
-
           setSelectedValues(selectedArr);
+
+          // Clear inputbox
+          combobox.setValue('');
+          setSearchValue('');
+
           props.onChange && props.onChange(selectedArr);
         }}
         setValue={(value) => {
