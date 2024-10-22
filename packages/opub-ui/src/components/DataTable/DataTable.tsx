@@ -44,7 +44,7 @@ const DataTable = (props: DataTableProps) => {
     initialSortColumnIndex: sortedColumnIndex,
     onSort,
     onRowSelectionChange,
-    defaultSelectedRows,
+    defaultSelectedRows = [],
     hideFooter = false,
     rowActions,
     addToolbar,
@@ -57,6 +57,7 @@ const DataTable = (props: DataTableProps) => {
   } = props;
 
   const [rowSelection, setRowSelection] = React.useState({});
+
   const [rowSelectionObj, setRowSelectionObj] = React.useState([]);
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
@@ -75,6 +76,26 @@ const DataTable = (props: DataTableProps) => {
     }
     setRowSelectionObj(selected);
   }, [rowSelection]);
+
+  React.useEffect(() => {
+    const newSelection: any = {};
+
+    rows.forEach((row, index) => {
+      const isRowSelected = defaultSelectedRows.some(
+        (selectedRow: any) =>
+          JSON.stringify(selectedRow) === JSON.stringify(row)
+      );
+
+      if (isRowSelected) {
+        newSelection[index] = true; // Select this row if it matches
+      }
+    });
+
+    // Only update state if newSelection differs from current state
+    if (JSON.stringify(newSelection) !== JSON.stringify(rowSelection)) {
+      setRowSelection(newSelection);
+    }
+  }, []); // Watch for changes in these dependencies
 
   const footerVisible = !hideFooter && rows.length > 0;
   const tableData = React.useMemo(() => rows, [rows]);
