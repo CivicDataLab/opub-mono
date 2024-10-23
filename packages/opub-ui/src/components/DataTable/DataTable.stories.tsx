@@ -111,6 +111,7 @@ export const AllFeatures: Story = {
     columns: columns,
     addToolbar: true,
     rowActions: rowActions,
+    hideSelection: true,
     sortColumns: ['firstName', 'lastName', 'visits', 'progress', 'status'],
     filters: [
       {

@@ -1,3 +1,10 @@
+import {
+  IconAdjustmentsHorizontal,
+  IconSearch,
+  IconX,
+} from '@tabler/icons-react';
+import { Table } from '@tanstack/react-table';
+
 import { TableFilterProps } from '../../../../types/datatable';
 import { Button } from '../../../Button';
 import { Icon } from '../../../Icon';
@@ -6,22 +13,18 @@ import { TextField } from '../../../TextField';
 import styles from '../../DataTable.module.scss';
 import { DataTableFilter } from './DataTableFilter';
 import { DataTableView } from './DataTableView';
-import {
-  IconAdjustmentsHorizontal,
-  IconSearch,
-  IconX,
-} from '@tabler/icons-react';
-import { Table } from '@tanstack/react-table';
 
 interface DataTableViewOptionsProps<TData> extends TableFilterProps {
   table: Table<TData>;
   hideViewSelector?: boolean;
+  placeholder?: string;
 }
 
 export function Toolbar<TData>({
   table,
   filters,
   hideViewSelector,
+  placeholder,
 }: DataTableViewOptionsProps<TData>) {
   const isFiltered = table.getState().columnFilters.length > 0;
 
@@ -32,7 +35,7 @@ export function Toolbar<TData>({
           name="filter-table"
           label="Filter"
           labelHidden
-          placeholder="Global Filter"
+          placeholder={placeholder}
           prefix={<Icon source={IconSearch} />}
           onChange={(text) => table.setGlobalFilter(text)}
         />

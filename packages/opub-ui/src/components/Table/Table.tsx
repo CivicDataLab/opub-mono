@@ -29,6 +29,7 @@ const Table = (props: TableProps) => {
     initialSortColumnIndex: sortedColumnIndex,
     onSort,
     hideFooter = false,
+    theme = 'default',
     ...others
   } = props;
   const [data, setData] = React.useState(() => [...rows]);
@@ -70,7 +71,12 @@ const Table = (props: TableProps) => {
           <thead>
             {table.getHeaderGroups().map((headerGroup) => (
               <tr
-                className={cn(tableRowClassname, styles.TableHeaderRow)}
+                className={cn(
+                  tableRowClassname,
+                  theme === 'climate'
+                    ? styles.TableHeaderRowClimate
+                    : styles.TableHeaderRow
+                )}
                 key={headerGroup.id}
               >
                 {headerGroup.headers.map((header, index) => {

@@ -44,6 +44,21 @@
   }
 }
 
+.TableHeaderRowClimate {
+  border-radius: var(--border-radius-1) var(--border-radius-1) 0 0;
+
+  .Cell {
+    background-color: #e0f8e2;
+
+    &:first-of-type {
+      border-top-left-radius: var(--border-radius-1);
+    }
+    &:last-of-type {
+      border-top-right-radius: var(--border-radius-1);
+    }
+  }
+}
+
 .TableRow {
   &.Hoverable {
     transition: background-color var(--duration-200) var(--ease-in-out);

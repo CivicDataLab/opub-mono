@@ -62,6 +62,15 @@ export const Default: Story = {
   },
 };
 
+export const DefaultWithClimateTheme: Story = {
+  args: {
+    columnContentTypes: columnContentTypes,
+    rows: data,
+    columns: columns,
+    theme: 'climate',
+  },
+};
+
 export const WithoutFooter: Story = {
   args: {
     ...Default.args,

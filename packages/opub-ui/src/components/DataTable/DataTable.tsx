@@ -52,6 +52,7 @@ const DataTable = (props: DataTableProps) => {
     sortColumns,
     hideSelection = false,
     hideViewSelector = false,
+    placeholder = 'Global Filter',
     defaultRowCount = 10,
     ...others
   } = props;
@@ -149,6 +150,7 @@ const DataTable = (props: DataTableProps) => {
           filters={filters}
           table={table}
           hideViewSelector={hideViewSelector}
+          placeholder={placeholder}
         />
       )}
       <div

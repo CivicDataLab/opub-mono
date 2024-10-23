@@ -45,6 +45,7 @@ export interface TableProps {
   hideResultsInFooter?: boolean;
   /** specify columns to be sorted  */
   sortColumns?: string[];
+  theme?: 'climate' | 'default';
 }
 
 export type TableFilterProps = {
@@ -73,6 +74,7 @@ export type DataTableProps = TableProps &
     hideSelection?: boolean;
 
     hideViewSelector?: boolean;
+    placeholder?: string;
 
     defaultRowCount?: 10 | 25 | 50 | 100;
   };
