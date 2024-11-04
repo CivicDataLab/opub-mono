@@ -313,3 +313,20 @@ export const EditableFields: Story = {
     columns: editableColumn,
   },
 };
+
+const paginationControls = {
+  goToFirstPage: () => console.log('Going to the first page!'),
+  goToPreviousPage: () => console.log('Going to the previous page!'),
+  goToNextPage: () => console.log('Going to the next page!'),
+  goToLastPage: () => console.log('Going to the last page!'),
+};
+
+export const WithCustomPagination: Story = {
+  args: {
+    columnContentTypes: columnContentTypes,
+    rows: makeTableData(30),
+    columns: columns,
+    showPagination: true, 
+    paginationControls: paginationControls,
+  },
+};

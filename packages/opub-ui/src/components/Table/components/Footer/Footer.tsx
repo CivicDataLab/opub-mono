@@ -13,7 +13,13 @@ import { Table } from '@tanstack/react-table';
 
 const pageSizeOptions = [10, 25, 50, 100];
 
-export const Footer = ({ table }: { table: Table<any> }) => {
+export const Footer = ({
+  table,
+  paginationControls,
+} : {
+    table: Table<any>;
+    paginationControls?: any; 
+  }) => {
   const {
     getPageOptions,
     setPageIndex,
@@ -28,14 +34,14 @@ export const Footer = ({ table }: { table: Table<any> }) => {
   const paginationMarkup = (
     <div className={styles.Pagination}>
       <IconButton
-        onClick={() => setPageIndex(0)}
+        onClick={() => paginationControls?.goToFirstPage() || setPageIndex(0)}
         disabled={!getCanPreviousPage()}
         icon={IconChevronsLeft}
       >
         First Page
       </IconButton>
       <IconButton
-        onClick={() => previousPage()}
+        onClick={() => paginationControls?.goToPreviousPage() || previousPage()}
         disabled={!getCanPreviousPage()}
         icon={IconChevronLeft}
       >
@@ -43,14 +49,14 @@ export const Footer = ({ table }: { table: Table<any> }) => {
       </IconButton>
 
       <IconButton
-        onClick={() => nextPage()}
+        onClick={() => paginationControls?.goToNextPage() || nextPage()}
         disabled={!getCanNextPage()}
         icon={IconChevronRight}
       >
         Next Page
       </IconButton>
       <IconButton
-        onClick={() => setPageIndex(getPageOptions().length - 1)}
+        onClick={() => paginationControls?.goToLastPage() || setPageIndex(getPageOptions().length - 1)}
         disabled={!getCanNextPage()}
         icon={IconChevronsRight}
       >
@@ -94,7 +100,7 @@ export const Footer = ({ table }: { table: Table<any> }) => {
       {pageSizeMarkup}
       <div className={styles.FooterRight}>
         {pageIndexMarkup}
-        {paginationMarkup}
+        {paginationMarkup}     
       </div>
     </div>
   );

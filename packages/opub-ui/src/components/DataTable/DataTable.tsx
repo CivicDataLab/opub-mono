@@ -54,6 +54,8 @@ const DataTable = (props: DataTableProps) => {
     hideViewSelector = false,
     placeholder = 'Global Filter',
     defaultRowCount = 10,
+    showPagination = true,
+    paginationControls,
     ...others
   } = props;
 
@@ -262,8 +264,8 @@ const DataTable = (props: DataTableProps) => {
                       className={cn(
                         styles.Cell,
                         columnTypes &&
-                          columnTypes[index] === 'numeric' &&
-                          styles['Cell-numeric'],
+                        columnTypes[index] === 'numeric' &&
+                        styles['Cell-numeric'],
                         index === 0 && styles['Cell-firstColumn'],
                         truncate && styles['Cell-truncated']
                       )}
@@ -287,8 +289,9 @@ const DataTable = (props: DataTableProps) => {
             ))}
           </tbody>
         </table>
+        {showPagination && (<Footer table={table}  paginationControls={paginationControls} /> )}
       </div>
-      {footerVisible && <Footer table={table} />}
+      {!showPagination && footerVisible && <Footer table={table} paginationControls={paginationControls} />}
     </div>
   );
 };
