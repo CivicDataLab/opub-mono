@@ -1,9 +1,8 @@
 import '@testing-library/jest-dom';
 import { fireEvent, render, screen } from '@testing-library/react';
-import  {DataTable}  from './DataTable';
-import { Footer } from '../Table';
+import { DataTable } from './DataTable';
 
-const rows= [
+const rows = [
     {
         age: 29,
         firstName: 'Lue',
@@ -34,70 +33,60 @@ const columns = [
     }
 ]
 
-
+const mockPaginationControls = {
+    goToFirstPage: vi.fn(),
+    goToPreviousPage: vi.fn(),
+    goToNextPage: vi.fn(),
+    goToLastPage: vi.fn()
+}
 
 describe('Data Tests', () => {
-    const NextPage = () => {}
-    const FirstPage = () => {}
-    const PreviousPage = () => {}
-    const LastPage = () => {}
     beforeEach(() => {
-      render(
-        <DataTable rows={rows} columns={columns} paginationControls={{
-            goToFirstPage: FirstPage,
-            goToPreviousPage: PreviousPage,
-            goToNextPage: NextPage,
-            goToLastPage: LastPage,
-        }}/>
-      )
+        mockPaginationControls.goToNextPage = vi.fn()
+        mockPaginationControls.goToLastPage = vi.fn()
+        mockPaginationControls.goToPreviousPage = vi.fn()
+        mockPaginationControls.goToLastPage = vi.fn()
+
+        vi.clearAllMocks()
+        render(
+            <DataTable rows={rows} columns={columns} paginationControls={mockPaginationControls} showPagination={true} />
+        )
     });
 
-    it('should show Component text all the time', () => {
+    it('should render pagination buttons', () => {
         expect(screen.getByText('First Page')).toBeInTheDocument();
         expect(screen.getByText('Previous Page')).toBeInTheDocument();
-      });
+        expect(screen.getByText('Next Page')).toBeInTheDocument();
+        expect(screen.getByText('Last Page')).toBeInTheDocument();
+    });
 
     it('calls goToFirstPage when "First Page" button is clicked', () => {
         const FirstPageBtn = screen.getByText('First Page')
+        mockPaginationControls.goToFirstPage()
         fireEvent.click(FirstPageBtn);
-        expect(FirstPage).toHaveBeenCalled();
+        expect(mockPaginationControls.goToFirstPage).toHaveBeenCalledTimes(1)
+    })
+
+    it('calls goToFirstPage when "Previous Page" button is clicked', () => {
+        const PreviousPageBtn = screen.getByText('Previous Page')
+        mockPaginationControls.goToPreviousPage()
+        fireEvent.click(PreviousPageBtn);
+        expect(mockPaginationControls.goToPreviousPage).toHaveBeenCalledTimes(1)
+    })
+
+    it('calls goToFirstPage when "Next Page" button is clicked', () => {
+        const NextPageBtn = screen.getByText('Next Page')
+        mockPaginationControls.goToNextPage()
+        fireEvent.click(NextPageBtn);
+        expect(mockPaginationControls.goToNextPage).toHaveBeenCalledTimes(1)
+    })
+
+    it('calls goToFirstPage when "Last Page" button is clicked', () => {
+        const LastPageBtn = screen.getByText('Last Page')
+        mockPaginationControls.goToLastPage()
+        fireEvent.click(LastPageBtn);
+        expect(mockPaginationControls.goToLastPage).toHaveBeenCalledTimes(1)
     })
 
 });
-
-
-
-// const mockTable = {
-//     getCanPreviousPage: () => true,
-//     getCanNextPage: () => true,
-//     // Include other methods and properties used by Footer as needed
-//   };
-
-
-
-// describe('should show components', () => {
-//     it('calls goToFirstPage when "First Page" button is clicked', () => {
-//         const firstPageButton = screen.getByText('First Page');
-//         fireEvent.click(firstPageButton);
-//         expect(mockPaginationControls.goToFirstPage).toHaveBeenCalled();
-//       });
-    
-//       it('calls goToPreviousPage when "Previous Page" button is clicked', () => {
-//         const previousPageButton = screen.getByText('Previous Page');
-//         fireEvent.click(previousPageButton);
-//         expect(mockPaginationControls.goToPreviousPage).toHaveBeenCalled();
-//       });
-    
-//       it('calls goToNextPage when "Next Page" button is clicked', () => {
-//         const nextPageButton = screen.getByText('Next Page');
-//         fireEvent.click(nextPageButton);
-//         expect(mockPaginationControls.goToNextPage).toHaveBeenCalled();
-//       });
-    
-//       it('calls goToLastPage when "Last Page" button is clicked', () => {
-//         const lastPageButton = screen.getByText('Last Page');
-//         fireEvent.click(lastPageButton);
-//         expect(mockPaginationControls.goToLastPage).toHaveBeenCalled();
-//       });
-// });
 
