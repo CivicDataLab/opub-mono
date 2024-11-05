@@ -326,7 +326,8 @@ export const WithCustomPagination: Story = {
     columnContentTypes: columnContentTypes,
     rows: makeTableData(30),
     columns: columns,
-    showPagination: true, 
+    showPagination: true,
+    isCutomization: true,
     paginationControls: paginationControls,
   },
 };

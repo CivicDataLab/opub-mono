@@ -56,6 +56,7 @@ const DataTable = (props: DataTableProps) => {
     defaultRowCount = 10,
     showPagination = true,
     paginationControls,
+    isCutomization = true,
     ...others
   } = props;
 
@@ -203,8 +204,8 @@ const DataTable = (props: DataTableProps) => {
                         styles.Cell,
                         styles['Cell-header'],
                         columnTypes &&
-                          columnTypes[index] === 'numeric' &&
-                          styles['Cell-numeric'],
+                        columnTypes[index] === 'numeric' &&
+                        styles['Cell-numeric'],
                         isSortable && isSorted && styles['Cell-sorted'],
                         isSortable && styles['Cell-sortable']
                       )}
@@ -289,9 +290,9 @@ const DataTable = (props: DataTableProps) => {
             ))}
           </tbody>
         </table>
-        {showPagination && (<Footer table={table}  paginationControls={paginationControls} /> )}
+        {showPagination && (<Footer table={table} paginationControls={paginationControls} isCutomization={true} />)}
       </div>
-      {!showPagination && footerVisible && <Footer table={table} paginationControls={paginationControls} />}
+      {!showPagination && footerVisible && <Footer table={table} paginationControls={paginationControls} isCutomization={false} />}
     </div>
   );
 };

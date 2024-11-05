@@ -16,10 +16,12 @@ const pageSizeOptions = [10, 25, 50, 100];
 export const Footer = ({
   table,
   paginationControls,
-} : {
-    table: Table<any>;
-    paginationControls?: any; 
-  }) => {
+  isCutomization
+}: {
+  table: Table<any>;
+  paginationControls?: any;
+  isCutomization: boolean;
+}) => {
   const {
     getPageOptions,
     setPageIndex,
@@ -34,14 +36,14 @@ export const Footer = ({
   const paginationMarkup = (
     <div className={styles.Pagination}>
       <IconButton
-        onClick={() => paginationControls?.goToFirstPage() || setPageIndex(0)}
+        onClick={() => { isCutomization ? handleFirstPage() : setPageIndex(0) }}
         disabled={!getCanPreviousPage()}
         icon={IconChevronsLeft}
       >
         First Page
       </IconButton>
       <IconButton
-        onClick={() => paginationControls?.goToPreviousPage() || previousPage()}
+        onClick={() => isCutomization ? handlePreviousPage() : previousPage()}
         disabled={!getCanPreviousPage()}
         icon={IconChevronLeft}
       >
@@ -49,14 +51,14 @@ export const Footer = ({
       </IconButton>
 
       <IconButton
-        onClick={() => paginationControls?.goToNextPage() || nextPage()}
+        onClick={() => isCutomization ? handleNextPage() : nextPage()}
         disabled={!getCanNextPage()}
         icon={IconChevronRight}
       >
         Next Page
       </IconButton>
       <IconButton
-        onClick={() => paginationControls?.goToLastPage() || setPageIndex(getPageOptions().length - 1)}
+        onClick={() => isCutomization ? handleLastPage() : setPageIndex(getPageOptions().length - 1)}
         disabled={!getCanNextPage()}
         icon={IconChevronsRight}
       >
@@ -65,17 +67,35 @@ export const Footer = ({
     </div>
   );
 
+  function handleFirstPage() {
+    paginationControls.goToFirstPage();
+    setPageIndex(0);
+  }
+
+  function handlePreviousPage() {
+    paginationControls.goToPreviousPage();
+    previousPage();
+  }
+
+  function handleNextPage() {
+    paginationControls.goToNextPage();
+    nextPage();
+  }
+
+  function handleLastPage() {
+    paginationControls.goToLastPage();
+    setPageIndex(getPageOptions().length - 1);
+  }
+
   const pageIndexMarkup = (
     <div>
       <div className={styles.desktopText}>
-        <Text noBreak variant="bodyMd">{`Page ${
-          getState().pagination.pageIndex + 1
-        } of ${getPageCount()}`}</Text>
+        <Text noBreak variant="bodyMd">{`Page ${getState().pagination.pageIndex + 1
+          } of ${getPageCount()}`}</Text>
       </div>
       <div className={styles.mobileText}>
-        <Text noBreak variant="bodyMd">{`${
-          getState().pagination.pageIndex + 1
-        } / ${getPageCount()}`}</Text>
+        <Text noBreak variant="bodyMd">{`${getState().pagination.pageIndex + 1
+          } / ${getPageCount()}`}</Text>
       </div>
     </div>
   );
@@ -100,7 +120,7 @@ export const Footer = ({
       {pageSizeMarkup}
       <div className={styles.FooterRight}>
         {pageIndexMarkup}
-        {paginationMarkup}     
+        {paginationMarkup}
       </div>
     </div>
   );

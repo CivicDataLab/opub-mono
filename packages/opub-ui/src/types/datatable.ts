@@ -78,8 +78,9 @@ export type DataTableProps = TableProps &
 
     defaultRowCount?: 10 | 25 | 50 | 100;
 
-    showPagination ?: boolean;
-    paginationControls ?: {
+    showPagination?: boolean;
+    isCutomization?: boolean;
+    paginationControls?: {
       goToFirstPage: () => void;
       goToPreviousPage: () => void;
       goToNextPage: () => void;
