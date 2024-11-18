@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { cn } from '../../../../utils';
 import { IconButton } from '../../../IconButton';
 import { Select } from '../../../Select';
@@ -16,11 +17,21 @@ const pageSizeOptions = [10, 25, 50, 100];
 export const Footer = ({
   table,
   paginationControls,
-  isCutomization
+  isCustomization,
+  handlePageSizeChange,
+  pageSize,
+  pageIdx,
+  totalPages,
+  // args,
 }: {
   table: Table<any>;
   paginationControls?: any;
-  isCutomization: boolean;
+  isCustomization: boolean;
+  handlePageSizeChange?: any;
+  pageIdx: number;
+  pageSize: number;
+  totalPages: number;
+  // args: any;
 }) => {
   const {
     getPageOptions,
@@ -33,33 +44,37 @@ export const Footer = ({
     nextPage,
   } = table;
 
+  // useEffect(() => {
+  //   console.log(pageSize, pageIdx, isCustomization, 'cntrl');
+  // });
+
   const paginationMarkup = (
     <div className={styles.Pagination}>
       <IconButton
-        onClick={() => { isCutomization ? handleFirstPage() : setPageIndex(0) }}
-        disabled={!getCanPreviousPage()}
+        onClick={() => isCustomization ? handleFirstPage() : setPageIndex(0)}
+        disabled={isCustomization ? (pageIdx === 0) : !getCanPreviousPage()}
         icon={IconChevronsLeft}
       >
         First Page
       </IconButton>
       <IconButton
-        onClick={() => isCutomization ? handlePreviousPage() : previousPage()}
-        disabled={!getCanPreviousPage()}
+        onClick={() => isCustomization ? handlePreviousPage() : previousPage()}
+        disabled={isCustomization ? (pageIdx === 0) : !getCanPreviousPage()}
         icon={IconChevronLeft}
       >
         Previous Page
       </IconButton>
 
       <IconButton
-        onClick={() => isCutomization ? handleNextPage() : nextPage()}
-        disabled={!getCanNextPage()}
+        onClick={() => isCustomization ? handleNextPage() : nextPage()}
+        disabled={isCustomization ? (pageIdx === Math.ceil(totalPages / pageSize) - 1) : !getCanNextPage()}
         icon={IconChevronRight}
       >
         Next Page
       </IconButton>
       <IconButton
-        onClick={() => isCutomization ? handleLastPage() : setPageIndex(getPageOptions().length - 1)}
-        disabled={!getCanNextPage()}
+        onClick={() => isCustomization ? handleLastPage() : setPageIndex(getPageOptions().length - 1)}
+        disabled={isCustomization ? (pageIdx === Math.ceil(totalPages / pageSize) - 1) : !getCanNextPage()}
         icon={IconChevronsRight}
       >
         Last Page
@@ -69,33 +84,29 @@ export const Footer = ({
 
   function handleFirstPage() {
     paginationControls.goToFirstPage();
-    setPageIndex(0);
   }
 
   function handlePreviousPage() {
     paginationControls.goToPreviousPage();
-    previousPage();
   }
 
   function handleNextPage() {
     paginationControls.goToNextPage();
-    nextPage();
   }
 
   function handleLastPage() {
     paginationControls.goToLastPage();
-    setPageIndex(getPageOptions().length - 1);
   }
+
+  const pageCount = Math.ceil(totalPages / pageSize);
 
   const pageIndexMarkup = (
     <div>
       <div className={styles.desktopText}>
-        <Text noBreak variant="bodyMd">{`Page ${getState().pagination.pageIndex + 1
-          } of ${getPageCount()}`}</Text>
+        <Text noBreak variant="bodyMd">{`Page ${isCustomization ? pageIdx : getState().pagination.pageIndex + 1} of ${isCustomization ? pageCount : getPageCount()}`}</Text>
       </div>
       <div className={styles.mobileText}>
-        <Text noBreak variant="bodyMd">{`${getState().pagination.pageIndex + 1
-          } / ${getPageCount()}`}</Text>
+        <Text noBreak variant="bodyMd">{`${isCustomization ? pageIdx : getState().pagination.pageIndex + 1} / ${isCustomization ? pageCount : getPageCount()}`}</Text>
       </div>
     </div>
   );
@@ -111,6 +122,7 @@ export const Footer = ({
       value={String(getState().pagination.pageSize)}
       onChange={(e) => {
         table.setPageSize(Number(e));
+        handlePageSizeChange(Number(e));
       }}
     />
   );

@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import {
   ColumnFiltersState,
   FilterFn,
@@ -54,9 +54,14 @@ const DataTable = (props: DataTableProps) => {
     hideViewSelector = false,
     placeholder = 'Global Filter',
     defaultRowCount = 10,
-    showPagination = true,
+    // showPagination = false,
     paginationControls,
-    isCutomization = true,
+    isCustomization,
+    handlePageSizeChange,
+    args,
+    totalPages,
+    pageIdx,
+    pageSize,
     ...others
   } = props;
 
@@ -290,9 +295,8 @@ const DataTable = (props: DataTableProps) => {
             ))}
           </tbody>
         </table>
-        {showPagination && (<Footer table={table} paginationControls={paginationControls} isCutomization={true} />)}
       </div>
-      {!showPagination && footerVisible && <Footer table={table} paginationControls={paginationControls} isCutomization={false} />}
+      {footerVisible && <Footer {...args} handlePageSizeChange={handlePageSizeChange} pageIdx={pageIdx} pageSize={pageSize} totalPages={totalPages} table={table} paginationControls={paginationControls} isCustomization={isCustomization} />}
     </div>
   );
 };
