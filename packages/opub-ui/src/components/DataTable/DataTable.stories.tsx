@@ -1,14 +1,12 @@
+import { useState } from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 import { IconCopy, IconPencil, IconTrash } from '@tabler/icons-react';
 import { createColumnHelper } from '@tanstack/react-table';
 
 import { Button } from '../Button';
-import { makeTableData, Person, apiData } from '../Table/utils';
+import { makeTableData, Person } from '../Table/utils';
 import { TextField } from '../TextField';
 import { DataTable } from './DataTable';
-// import { useState, useEffect } from 'react';
-// import { useArgs } from '@storybook/preview-api';
-import { useArgs, useState, useEffect } from "@storybook/client-api";
 
 /**
  * Data tables are used to organize and display all information from a dataset.
@@ -317,115 +315,134 @@ export const EditableFields: Story = {
   },
 };
 
-
-const columnsapi = [
-  {
-    header: 'category',
-    accessorKey: 'category'
-  },
-  {
-    header: 'brand',
-    accessorKey: 'brand'
-  },
-  {
-    header: 'price',
-    accessorKey: 'price'
-  },
-  {
-    header: 'stock',
-    accessorKey: 'stock'
-  },
-]
-
 const fetchApiData = async (pageSize: number, pageIndex: number) => {
   console.log('in api call');
+
   try {
-    const response = await fetch(`https://dummyjson.com/products?limit=${pageSize}&skip=${pageIndex}`)
-    console.log(`https://dummyjson.com/products?limit=${pageSize}&skip=${pageIndex}`, 'api call');
-    const result = await response.json();
-    console.log(result.products, 'res');
+    const result = await fetch(
+      `https://dummyjson.com/products?limit=${pageSize}&skip=${pageIndex}`
+    ).then((res) => res.json());
+
     return result.products;
   } catch (error) {
     console.error('Failed to fetch data:', error);
   }
 };
-const rowData = await fetchApiData(10, 0);
-const [rows, setRows] = useState(rowData);
+
+const ApiColumnContentTypes: Array<'text' | 'numeric'> = [
+  'text',
+  'text',
+  'numeric',
+  'numeric',
+];
+
+const ApiColumns = [
+  {
+    header: 'title',
+    accessorKey: 'title',
+  },
+  {
+    header: 'category',
+    accessorKey: 'category',
+  },
+  {
+    header: 'price',
+    accessorKey: 'price',
+  },
+  {
+    header: 'stock',
+    accessorKey: 'stock',
+  },
+];
 
 export const WithCustomPagination: Story = {
   args: {
-    columnContentTypes: columnContentTypes,
-    rows: rows,
-    columns: columnsapi,
-    // showPagination: true,
-    isCustomization: true,
+    columnContentTypes: ApiColumnContentTypes,
+    rows: [],
+    columns: ApiColumns,
   },
+  parameters: {
+    pagination: {
+      pageSize: 10,
+      pageIdx: 0,
+    },
+  },
+  loaders: [
+    async (context: any) => {
+      const { pageIdx, pageSize } = context.parameters.pagination;
+      const rowsData = await fetchApiData(pageSize, pageIdx);
+      return { rowsData };
+    },
+  ],
+  render: (args: any, context: any) => {
+    const { rowsData } = context.loaded;
 
-  render: (args) => {
-    console.log(args.rows, 'args-rows');
-    const [pageIdx, setPageIdx] = useState(0);
-    const [pageSize, setPageSize] = useState(10);
+    const [pageData, setPageData] = useState(rowsData);
+    const [pageIdx, setPageIdx] = useState(
+      context.parameters.pagination.pageIdx
+    );
+    const [pageSize, setPageSize] = useState(
+      context.parameters.pagination.pageSize
+    );
     const totalPages = 197;
-    const [, updateArgs] = useArgs();
-    console.log(updateArgs, 'updateargs');
-
-    useEffect(() => {
-      console.log('apicall');
-      fetchData(pageSize, pageIdx);
-    }, [pageSize, pageIdx, args]);
-
-    const fetchData = async (pageSize: number, pageIdx: number) => {
-      const fetchedData = await fetchApiData(pageSize, pageIdx);
-      // updateArgs({ rows: fetchedData });
-      setRows(fetchedData);
-      console.log(args.rows, fetchedData, 'data');
-    };
-    //   console.log('in api call');
-    //   try {
-    //     const response = await fetch(`https://dummyjson.com/products?limit=${pageSize}&skip=${pageIndex}`)
-    //     console.log(`https://dummyjson.com/products?limit=${pageSize}&skip=${pageIndex}`, 'api call');
-    //     const result = await response.json();
-    //     console.log(result.products, 'res');
-    //     return result.products;
-    //   } catch (error) {
-    //     console.error('Failed to fetch data:', error);
-    //   }
-    // };
-
-    const handlePageSizeChange = (newPageSize: number) => {
-      setPageSize(newPageSize);
-      setPageIdx(1);
-      fetchData(pageSize, pageIdx);
-    };
 
     const paginationControls = {
       goToFirstPage: () => {
         console.log('first page');
-        fetchData(pageSize, 1);
+
+        // fetchData(pageSize, 1);
         // fetchApiData(pageSize, 1);
-        setPageIdx(0);
+        // setPageIdx(0);
       },
       goToPreviousPage: () => {
-        const prevPageIndex = Math.max(pageIdx - 1, 0);
-        fetchData(pageSize, prevPageIndex);
+        // const prevPageIndex = Math.max(pageIdx - 1, 0);
+        // fetchData(pageSize, prevPageIndex);
         // fetchApiData(pageSize, prevPageIndex);
-        setPageIdx(prevPageIndex);
+        // setPageIdx(prevPageIndex);
         console.log('previous page');
       },
-      goToNextPage: () => {
-        const nextPageIndex = pageIdx + pageSize;
-        fetchData(pageSize, nextPageIndex);
-        setPageIdx(nextPageIndex);
-        console.log('next page');
+      goToNextPage: async () => {
+        const rowsData = await fetchApiData(pageSize, pageIdx + pageSize);
+
+        setPageData(rowsData);
+        setPageIdx(pageIdx + pageSize);
+
+        // const nextPageIndex = pageIdx + pageSize;
+        // fetchData(pageSize, nextPageIndex);
+        // setPageIdx(nextPageIndex);
+        console.log('next page', pageData);
       },
       goToLastPage: () => {
         console.log('last page');
-        const lastPageIndex = Math.ceil(totalPages / pageSize) - 1;
-        fetchData(pageSize, lastPageIndex);
-        fetchApiData(pageSize, lastPageIndex);
-        setPageIdx(lastPageIndex);
-      }
+        // const lastPageIndex = Math.ceil(totalPages / pageSize) - 1;
+        // fetchData(pageSize, lastPageIndex);
+        // fetchApiData(pageSize, lastPageIndex);
+        // setPageIdx(lastPageIndex);
+      },
     };
-    return <DataTable {...args} handlePageSizeChange={handlePageSizeChange} pageIdx={pageIdx} pageSize={pageSize} totalPages={totalPages} paginationControls={paginationControls} />;
-  }
+
+    const handlePageSizeChange = (newPageSize: number) => {
+      setPageSize(newPageSize);
+      setPageIdx(1);
+
+      // fetchApiData(pageSize, pageIdx);
+    };
+
+    console.log('Loaded the row data', pageData);
+
+    return pageData ? (
+      <DataTable
+        {...args}
+        rows={pageData}
+        handlePageSizeChange={handlePageSizeChange}
+        pageIdx={pageIdx}
+        pageSize={pageSize}
+        totalPages={totalPages}
+        isCustomization={true}
+        paginationControls={paginationControls}
+      />
+    ) : (
+      <div>Loading...</div>
+    );
+  },
 };
