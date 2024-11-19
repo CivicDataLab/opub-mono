@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { number } from 'echarts';
 import { cn } from '../../../../utils';
 import { IconButton } from '../../../IconButton';
 import { Select } from '../../../Select';
@@ -22,7 +22,6 @@ export const Footer = ({
   pageSize,
   pageIdx,
   totalPages,
-  // args,
 }: {
   table: Table<any>;
   paginationControls?: any;
@@ -31,7 +30,6 @@ export const Footer = ({
   pageIdx: number;
   pageSize: number;
   totalPages: number;
-  // args: any;
 }) => {
   const {
     getPageOptions,
@@ -43,10 +41,6 @@ export const Footer = ({
     previousPage,
     nextPage,
   } = table;
-
-  // useEffect(() => {
-  //   console.log(pageSize, pageIdx, isCustomization, 'cntrl');
-  // });
 
   const paginationMarkup = (
     <div className={styles.Pagination}>
@@ -67,14 +61,14 @@ export const Footer = ({
 
       <IconButton
         onClick={() => isCustomization ? handleNextPage() : nextPage()}
-        disabled={isCustomization ? (pageIdx === Math.ceil(totalPages / pageSize) - 1) : !getCanNextPage()}
+        disabled={isCustomization ? (pageIdx === (Math.ceil(totalPages / pageSize) - 1) * pageSize) : !getCanNextPage()}
         icon={IconChevronRight}
       >
         Next Page
       </IconButton>
       <IconButton
         onClick={() => isCustomization ? handleLastPage() : setPageIndex(getPageOptions().length - 1)}
-        disabled={isCustomization ? (pageIdx === Math.ceil(totalPages / pageSize) - 1) : !getCanNextPage()}
+        disabled={isCustomization ? (pageIdx === (Math.ceil(totalPages / pageSize) - 1) * pageSize) : !getCanNextPage()}
         icon={IconChevronsRight}
       >
         Last Page
@@ -99,14 +93,15 @@ export const Footer = ({
   }
 
   const pageCount = Math.ceil(totalPages / pageSize);
+  const indexCount = Math.floor(pageIdx / pageSize);
 
   const pageIndexMarkup = (
     <div>
       <div className={styles.desktopText}>
-        <Text noBreak variant="bodyMd">{`Page ${isCustomization ? pageIdx : getState().pagination.pageIndex + 1} of ${isCustomization ? pageCount : getPageCount()}`}</Text>
+        <Text noBreak variant="bodyMd">{`Page ${isCustomization ? indexCount + 1 : getState().pagination.pageIndex + 1} of ${isCustomization ? pageCount : getPageCount()}`}</Text>
       </div>
       <div className={styles.mobileText}>
-        <Text noBreak variant="bodyMd">{`${isCustomization ? pageIdx : getState().pagination.pageIndex + 1} / ${isCustomization ? pageCount : getPageCount()}`}</Text>
+        <Text noBreak variant="bodyMd">{`${isCustomization ? indexCount + 1 : getState().pagination.pageIndex + 1} / ${isCustomization ? pageCount : getPageCount()}`}</Text>
       </div>
     </div>
   );

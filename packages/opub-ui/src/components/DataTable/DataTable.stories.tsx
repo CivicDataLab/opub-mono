@@ -315,9 +315,8 @@ export const EditableFields: Story = {
   },
 };
 
+// fetching a dummy api here
 const fetchApiData = async (pageSize: number, pageIndex: number) => {
-  console.log('in api call');
-
   try {
     const result = await fetch(
       `https://dummyjson.com/products?limit=${pageSize}&skip=${pageIndex}`
@@ -387,48 +386,41 @@ export const WithCustomPagination: Story = {
     const totalPages = 197;
 
     const paginationControls = {
-      goToFirstPage: () => {
+      goToFirstPage: async () => {
         console.log('first page');
-
-        // fetchData(pageSize, 1);
-        // fetchApiData(pageSize, 1);
-        // setPageIdx(0);
+        const rowsData = await fetchApiData(pageSize, 1);
+        setPageData(rowsData);
+        setPageIdx(0);
       },
-      goToPreviousPage: () => {
-        // const prevPageIndex = Math.max(pageIdx - 1, 0);
-        // fetchData(pageSize, prevPageIndex);
-        // fetchApiData(pageSize, prevPageIndex);
-        // setPageIdx(prevPageIndex);
+      goToPreviousPage: async () => {
+        const prevPageIndex = Math.max(pageIdx - pageSize, 0);
+        const rowsData = await fetchApiData(pageSize, prevPageIndex);
+        setPageData(rowsData);
+        setPageIdx(prevPageIndex);
         console.log('previous page');
       },
       goToNextPage: async () => {
-        const rowsData = await fetchApiData(pageSize, pageIdx + pageSize);
-
+        const nextPageIndex = Math.min(pageIdx + 1 * pageSize)
+        const rowsData = await fetchApiData(pageSize, nextPageIndex);
         setPageData(rowsData);
-        setPageIdx(pageIdx + pageSize);
-
-        // const nextPageIndex = pageIdx + pageSize;
-        // fetchData(pageSize, nextPageIndex);
-        // setPageIdx(nextPageIndex);
-        console.log('next page', pageData);
+        setPageIdx(nextPageIndex);
+        console.log('next page');
       },
-      goToLastPage: () => {
+      goToLastPage: async () => {
         console.log('last page');
-        // const lastPageIndex = Math.ceil(totalPages / pageSize) - 1;
-        // fetchData(pageSize, lastPageIndex);
-        // fetchApiData(pageSize, lastPageIndex);
-        // setPageIdx(lastPageIndex);
+        const lastPageIndex = Math.floor(totalPages / pageSize) * pageSize;
+        const rowsData = await fetchApiData(pageSize, lastPageIndex);
+        setPageData(rowsData);
+        setPageIdx(lastPageIndex);
       },
     };
 
-    const handlePageSizeChange = (newPageSize: number) => {
+    const handlePageSizeChange = async (newPageSize: number) => {
       setPageSize(newPageSize);
       setPageIdx(1);
-
-      // fetchApiData(pageSize, pageIdx);
+      const rowsData = await fetchApiData(newPageSize, pageIdx);
+      setPageData(rowsData);
     };
-
-    console.log('Loaded the row data', pageData);
 
     return pageData ? (
       <DataTable
