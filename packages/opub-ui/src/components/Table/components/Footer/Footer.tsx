@@ -25,11 +25,11 @@ export const Footer = ({
 }: {
   table: Table<any>;
   paginationControls?: any;
-  isCustomization: boolean;
+  isCustomization?: boolean;
   handlePageSizeChange?: any;
-  pageIdx: number;
-  pageSize: number;
-  totalPages: number;
+  pageIdx?: number;
+  pageSize?: number;
+  totalPages?: number;
 }) => {
   const {
     getPageOptions,
@@ -61,14 +61,14 @@ export const Footer = ({
 
       <IconButton
         onClick={() => isCustomization ? handleNextPage() : nextPage()}
-        disabled={isCustomization ? (pageIdx === (Math.ceil(totalPages / pageSize) - 1) * pageSize) : !getCanNextPage()}
+        disabled={isCustomization ? ((pageIdx ?? 0) === (Math.ceil((totalPages ?? 1) / (pageSize ?? 0)) - 1) * (pageSize ?? 0)) : !getCanNextPage()}
         icon={IconChevronRight}
       >
         Next Page
       </IconButton>
       <IconButton
         onClick={() => isCustomization ? handleLastPage() : setPageIndex(getPageOptions().length - 1)}
-        disabled={isCustomization ? (pageIdx === (Math.ceil(totalPages / pageSize) - 1) * pageSize) : !getCanNextPage()}
+        disabled={isCustomization ? ((pageIdx ?? 0) === (Math.ceil((totalPages ?? 1) / (pageSize ?? 0)) - 1) * (pageSize ?? 0)) : !getCanNextPage()}
         icon={IconChevronsRight}
       >
         Last Page
@@ -92,8 +92,8 @@ export const Footer = ({
     paginationControls.goToLastPage();
   }
 
-  const pageCount = Math.ceil(totalPages / pageSize);
-  const indexCount = Math.floor(pageIdx / pageSize);
+  const pageCount = Math.ceil((totalPages ?? 1) / (pageSize ?? 0));
+  const indexCount = Math.floor((pageIdx ?? 0) / (pageSize ?? 0));
 
   const pageIndexMarkup = (
     <div>

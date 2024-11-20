@@ -54,7 +54,6 @@ const DataTable = (props: DataTableProps) => {
     hideViewSelector = false,
     placeholder = 'Global Filter',
     defaultRowCount = 10,
-    // showPagination = false,
     paginationControls,
     isCustomization,
     handlePageSizeChange,
