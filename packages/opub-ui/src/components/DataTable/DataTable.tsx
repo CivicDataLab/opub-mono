@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import {
   ColumnFiltersState,
   FilterFn,
@@ -54,6 +54,13 @@ const DataTable = (props: DataTableProps) => {
     hideViewSelector = false,
     placeholder = 'Global Filter',
     defaultRowCount = 10,
+    paginationControls,
+    isCustomization,
+    handlePageSizeChange,
+    args,
+    totalPages,
+    pageIdx,
+    pageSize,
     ...others
   } = props;
 
@@ -201,8 +208,8 @@ const DataTable = (props: DataTableProps) => {
                         styles.Cell,
                         styles['Cell-header'],
                         columnTypes &&
-                          columnTypes[index] === 'numeric' &&
-                          styles['Cell-numeric'],
+                        columnTypes[index] === 'numeric' &&
+                        styles['Cell-numeric'],
                         isSortable && isSorted && styles['Cell-sorted'],
                         isSortable && styles['Cell-sortable']
                       )}
@@ -262,8 +269,8 @@ const DataTable = (props: DataTableProps) => {
                       className={cn(
                         styles.Cell,
                         columnTypes &&
-                          columnTypes[index] === 'numeric' &&
-                          styles['Cell-numeric'],
+                        columnTypes[index] === 'numeric' &&
+                        styles['Cell-numeric'],
                         index === 0 && styles['Cell-firstColumn'],
                         truncate && styles['Cell-truncated']
                       )}
@@ -288,7 +295,7 @@ const DataTable = (props: DataTableProps) => {
           </tbody>
         </table>
       </div>
-      {footerVisible && <Footer table={table} />}
+      {footerVisible && <Footer {...args} handlePageSizeChange={handlePageSizeChange} pageIdx={pageIdx} pageSize={pageSize} totalPages={totalPages} table={table} paginationControls={paginationControls} isCustomization={isCustomization} />}
     </div>
   );
 };
