@@ -178,6 +178,16 @@ const Map = ({
   const [mapRef, setMapRef] = React.useState<any>(null);
 
   React.useEffect(() => {
+    const attributionLinks = document?.querySelectorAll(
+      '.leaflet-control-attribution a'
+    );
+    attributionLinks.forEach((link) => {
+      link.setAttribute('target', '_blank');
+      link.setAttribute('rel', 'noopener noreferrer');
+    });
+  }, []);
+
+  React.useEffect(() => {
     if (mapRef && resetZoom) {
       const controlElm = mapRef._container?.querySelector('.leaflet-control');
       const button = mapRef._container.querySelector(
@@ -278,13 +288,15 @@ const Map = ({
               setSelectedLayer={setLayer}
             />
             <TileLayer
-              attribution='&copy;<a href="https://www.mapbox.com/about/maps/">Mapbox</a> &copy;
-            <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>
-            <strong
-              ><a href="https://labs.mapbox.com/contribute/" target="_blank"
-                >Improve this map</a
-              ></strong
-            >'
+              attribution='
+              &copy;
+              <a href="https://www.mapbox.com/about/maps/">Mapbox</a>
+              <span aria-hidden="true">|</span>
+              &copy;
+              <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>
+              <span aria-hidden="true">|</span>
+              <a href="https://labs.mapbox.com/contribute/">Improve this map</a>
+              '
               maxZoom={maxZoom}
               minZoom={minZoom}
               url={layers[selectedLayer]}
