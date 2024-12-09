@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 import { IconCopy, IconPencil, IconTrash } from '@tabler/icons-react';
 import { createColumnHelper } from '@tanstack/react-table';
@@ -311,5 +312,129 @@ export const EditableFields: Story = {
     columnContentTypes: columnContentTypes,
     rows: makeTableData(30),
     columns: editableColumn,
+  },
+};
+
+// fetching a dummy api here
+const fetchApiData = async (pageSize: number, pageIndex: number) => {
+  try {
+    const result = await fetch(
+      `https://dummyjson.com/products?limit=${pageSize}&skip=${pageIndex}`
+    ).then((res) => res.json());
+
+    return result.products;
+  } catch (error) {
+    console.error('Failed to fetch data:', error);
+  }
+};
+
+const ApiColumnContentTypes: Array<'text' | 'numeric'> = [
+  'text',
+  'text',
+  'numeric',
+  'numeric',
+];
+
+const ApiColumns = [
+  {
+    header: 'title',
+    accessorKey: 'title',
+  },
+  {
+    header: 'category',
+    accessorKey: 'category',
+  },
+  {
+    header: 'price',
+    accessorKey: 'price',
+  },
+  {
+    header: 'stock',
+    accessorKey: 'stock',
+  },
+];
+
+export const WithCustomPagination: Story = {
+  args: {
+    columnContentTypes: ApiColumnContentTypes,
+    rows: [],
+    columns: ApiColumns,
+  },
+  parameters: {
+    pagination: {
+      pageSize: 10,
+      pageIdx: 0,
+    },
+  },
+  loaders: [
+    async (context: any) => {
+      const { pageIdx, pageSize } = context.parameters.pagination;
+      const rowsData = await fetchApiData(pageSize, pageIdx);
+      return { rowsData };
+    },
+  ],
+  render: (args: any, context: any) => {
+    const { rowsData } = context.loaded;
+
+    const [pageData, setPageData] = useState(rowsData);
+    const [pageIdx, setPageIdx] = useState(
+      context.parameters.pagination.pageIdx
+    );
+    const [pageSize, setPageSize] = useState(
+      context.parameters.pagination.pageSize
+    );
+    const totalPages = 197;
+
+    const paginationControls = {
+      goToFirstPage: async () => {
+        console.log('first page');
+        const rowsData = await fetchApiData(pageSize, 1);
+        setPageData(rowsData);
+        setPageIdx(0);
+      },
+      goToPreviousPage: async () => {
+        const prevPageIndex = Math.max(pageIdx - pageSize, 0);
+        const rowsData = await fetchApiData(pageSize, prevPageIndex);
+        setPageData(rowsData);
+        setPageIdx(prevPageIndex);
+        console.log('previous page');
+      },
+      goToNextPage: async () => {
+        const nextPageIndex = Math.min(pageIdx + 1 * pageSize)
+        const rowsData = await fetchApiData(pageSize, nextPageIndex);
+        setPageData(rowsData);
+        setPageIdx(nextPageIndex);
+        console.log('next page');
+      },
+      goToLastPage: async () => {
+        console.log('last page');
+        const lastPageIndex = Math.floor(totalPages / pageSize) * pageSize;
+        const rowsData = await fetchApiData(pageSize, lastPageIndex);
+        setPageData(rowsData);
+        setPageIdx(lastPageIndex);
+      },
+    };
+
+    const handlePageSizeChange = async (newPageSize: number) => {
+      setPageSize(newPageSize);
+      setPageIdx(1);
+      const rowsData = await fetchApiData(newPageSize, pageIdx);
+      setPageData(rowsData);
+    };
+
+    return pageData ? (
+      <DataTable
+        {...args}
+        rows={pageData}
+        handlePageSizeChange={handlePageSizeChange}
+        pageIdx={pageIdx}
+        pageSize={pageSize}
+        totalPages={totalPages}
+        isCustomization={true}
+        paginationControls={paginationControls}
+      />
+    ) : (
+      <div>Loading...</div>
+    );
   },
 };

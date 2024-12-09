@@ -96,7 +96,7 @@ const Table = (props: TableProps) => {
                         styles.Cell,
                         styles['Cell-header'],
                         columnTypes[index] === 'numeric' &&
-                          styles['Cell-numeric'],
+                        styles['Cell-numeric'],
                         isSortable && isSorted && styles['Cell-sorted'],
                         isSortable && styles['Cell-sortable']
                       )}
@@ -128,7 +128,7 @@ const Table = (props: TableProps) => {
                       className={cn(
                         styles.Cell,
                         columnTypes[index] === 'numeric' &&
-                          styles['Cell-numeric'],
+                        styles['Cell-numeric'],
                         index === 0 && styles['Cell-firstColumn'],
                         truncate && styles['Cell-truncated']
                       )}
