@@ -35,6 +35,10 @@ type MapProps = {
   /* Map file to be used */
   features: any;
 
+  /* Additional map files to be displayed */
+  addlFeaturesArray?: Array<any>;
+  addlFeaturesStyleArray?: Array<any>;
+
   /* callback function on mouseover */
   mouseover?: (e: any) => void;
 
@@ -145,6 +149,8 @@ const MapChart = (props: Props) => {
 
 const Map = ({
   features,
+  addlFeaturesArray,
+  addlFeaturesStyleArray,
   mouseover,
   mouseout,
   click,
@@ -264,7 +270,7 @@ const Map = ({
     };
   };
 
-  const feature: any = features.map((feature: any) => {
+  const mapPrimaryFeature: any = features.map((feature: any) => {
     return feature;
   });
 
@@ -316,13 +322,45 @@ const Map = ({
         {features && (
           <>
             <GeoJSON
-              data={feature}
-              key={feature}
+              data={mapPrimaryFeature}
+              key={mapPrimaryFeature}
               style={style}
               onEachFeature={onEachFeature}
             />
+
+            {addlFeaturesArray &&
+              addlFeaturesArray?.map((addlItem, indx) => (
+                <GeoJSON
+                  data={addlItem.features}
+                  key={indx}
+                  style={
+                    addlFeaturesStyleArray
+                      ? addlFeaturesStyleArray[indx]
+                      : {
+                          fillColor: isCustomColor
+                            ? customColor?.(
+                                Number(
+                                  mapPrimaryFeature?.properties?.[mapProperty]
+                                )
+                              )
+                            : mapDataFn(
+                                Number(
+                                  mapPrimaryFeature?.properties?.[mapProperty]
+                                ),
+                                'default'
+                              ),
+                          weight: 1,
+                          opacity: 1,
+                          color: selectedLayer === 'dark' ? '#eee' : '#000',
+                          fillOpacity: fillOpacity ? fillOpacity : 0.9,
+                        }
+                  }
+                  // onEachFeature={onEachFeature}
+                />
+              ))}
           </>
         )}
+
         {!hideScale && <ScaleControl imperial={false} />}
 
         <button
