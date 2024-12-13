@@ -3,7 +3,9 @@ import { Meta, StoryObj } from '@storybook/react';
 import * as d3 from 'd3-scale';
 import { interpolateBlues } from 'd3-scale-chromatic';
 
-import { features } from '../../../assets/json/assam.json';
+import { features as assamFeatures } from '../../../assets/json/assam.json';
+import himachalRiverFeatures from '../../../assets/json/hp_rivers.json';
+import { features as himachalFeatures } from '../../../assets/json/hp.json';
 import MapChart from './MapChart';
 
 /**
@@ -65,6 +67,30 @@ const mapDataFn = (value: number) => {
             : '#fee5d9';
 };
 
+const hpMapDataFn = (value: number) => {
+  return value >= 3
+    ? '#a50f15'
+    : value >= 3
+      ? '#de2d26'
+      : value >= 2
+        ? '#fb6a4a'
+        : value >= 1
+          ? '#fc9272'
+          : value >= 0
+            ? '#fcbba1'
+            : '#fee5d9';
+};
+
+const addlFeaturesStyleArray = [
+  {
+    // Style for addl layer
+    weight: 1.5,
+    opacity: 1,
+    color: '#7bd4ef',
+    fillOpacity: 1,
+  },
+];
+
 const legendHeading = {
   heading: 'Districts',
   subheading: 'Average Rainfall (mm)',
@@ -72,9 +98,9 @@ const legendHeading = {
 
 const values: number[] = [];
 const customLegendData = [];
-for (let i = 0; i < features.length; i++) {
-  if (features[i].properties['dt_code'] == null) continue;
-  values.push(Number(features[i].properties['dt_code']));
+for (let i = 0; i < assamFeatures.length; i++) {
+  if (assamFeatures[i].properties['dt_code'] == null) continue;
+  values.push(Number(assamFeatures[i].properties['dt_code']));
 }
 
 // Set the sequential scale properties
@@ -100,7 +126,7 @@ for (let i = 0; i < grades.length; i++) {
 
 export const Default: Story = {
   render: (args) => {
-    if (!features) return <div>Loading...</div>;
+    if (!assamFeatures) return <div>Loading...</div>;
 
     return (
       <div style={{ height: '600px' }}>
@@ -109,7 +135,7 @@ export const Default: Story = {
     );
   },
   args: {
-    features,
+    features: assamFeatures,
     mapDataFn,
     mapProperty: 'dt_code',
     legendData,
@@ -123,7 +149,7 @@ export const Default: Story = {
 
 export const SequentialScale: Story = {
   render: (args) => {
-    if (!features) return <div>Loading...</div>;
+    if (!assamFeatures) return <div>Loading...</div>;
 
     return (
       <div style={{ height: '600px' }}>
@@ -132,7 +158,7 @@ export const SequentialScale: Story = {
     );
   },
   args: {
-    features,
+    features: assamFeatures,
     isCustomColor: true,
     customColor: colorScale,
     legendData: customLegendData,
@@ -150,7 +176,7 @@ export const Popup: Story = {
   render: (args) => {
     const [map, setMap] = React.useState<any>(null);
 
-    if (!features) return <div>Loading...</div>;
+    if (!assamFeatures) return <div>Loading...</div>;
     if (map) {
       map.eachLayer((layer: any) => {
         const district = layer.feature?.properties.district;
@@ -184,7 +210,7 @@ export const Popup: Story = {
     );
   },
   args: {
-    features,
+    features: assamFeatures,
     legendData,
     mapDataFn,
     mapProperty: 'dt_code',
@@ -198,7 +224,7 @@ export const Popup: Story = {
 
 export const zoomReset: Story = {
   render: (args) => {
-    if (!features) return <div>Loading...</div>;
+    if (!assamFeatures) return <div>Loading...</div>;
 
     return (
       <div style={{ height: '600px' }}>
@@ -207,7 +233,7 @@ export const zoomReset: Story = {
     );
   },
   args: {
-    features,
+    features: assamFeatures,
     mapDataFn,
     mapProperty: 'dt_code',
     mapZoom: 7.9,
@@ -221,7 +247,7 @@ export const zoomReset: Story = {
 
 export const OnlyMap: Story = {
   render: (args) => {
-    if (!features) return <div>Loading...</div>;
+    if (!assamFeatures) return <div>Loading...</div>;
 
     return (
       <div style={{ height: '600px' }}>
@@ -230,12 +256,38 @@ export const OnlyMap: Story = {
     );
   },
   args: {
-    features,
+    features: assamFeatures,
     mapDataFn,
     mapProperty: 'dt_code',
     mapZoom: 7.9,
     fillOpacity: 1,
     mapCenter: [26.193, 92.3],
     hideScale: true,
+  },
+};
+
+export const AdditionalMapData: Story = {
+  render: (args) => {
+    if (!himachalFeatures) return <div>Loading...</div>;
+
+    return (
+      <div style={{ height: '600px' }}>
+        <MapChart {...args} />
+      </div>
+    );
+  },
+  args: {
+    features: himachalFeatures,
+    addlFeaturesArray: himachalRiverFeatures,
+    addlFeaturesStyleArray,
+    mapDataFn: hpMapDataFn,
+    mapProperty: 'risk-score',
+    mapZoom: 7.5,
+    fillOpacity: 0.8,
+    mapCenter: [31.925, 77.248],
+    // hideScale: true,
+    legendHeading,
+    legendData,
+    resetZoom: true,
   },
 };
