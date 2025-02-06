@@ -12,6 +12,7 @@ import { TextField } from '../TextField';
 import { DatePicker } from './DatePicker';
 import { DateRangePicker } from './DateRangePicker';
 import { MonthPicker } from './MonthPicker';
+import { MultiMonthPicker } from './MultiMonthPicker';
 
 /**
  * A date picker combines a DateField and a Calendar popover to allow users to enter or select a date and time value.
@@ -53,7 +54,21 @@ export const Month: Story = {
   args: {
     label: 'Month Picker',
     onChange: (val) => console.log(val),
-    defaultValue: parseDate('2023-02-04'),
+    defaultValue: parseDate('2023-03-04'),
+  },
+};
+
+export const MultipleMonths: Story = {
+  render: ({ ...args }) => (
+    <MultiMonthPicker
+      {...args}
+      selectedValues={[parseDate('2023-02-01'), parseDate('2024-05-01')]}
+      // defaultValues={[]}
+      onChange={(val) => console.log(val)}
+    />
+  ),
+  args: {
+    label: 'Multiple Month Picker',
   },
 };
 
