@@ -1,10 +1,10 @@
 export { Checkbox, CheckboxGroup } from './Checkbox';
 export { Combobox } from './Combobox';
 export { DateField } from './DateField';
-export { DatePicker, DateRangePicker } from './DatePicker';
+export { DatePicker as FormDatePicker, DateRangePicker as FormDateRangePicker } from './DatePicker';
 export { DropZone } from './DropZone';
 export { Input } from './Input';
-export { MonthPicker } from './MonthPicker';
+export { MonthPicker as FormMonthPicker } from './MonthPicker';
 export * from './RadioGroup';
 export { RangeSlider } from './RangeSlider';
 export { Select } from './Select';

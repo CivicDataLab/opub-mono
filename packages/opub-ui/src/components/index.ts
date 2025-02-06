@@ -26,6 +26,7 @@ export { Collapsible } from './Collapsible';
 export * from './Command';
 export { Connected } from './Connected';
 export { DataTable } from './DataTable';
+export * from './DatePicker';
 export { Dialog } from './Dialog';
 export { Divider } from './Divider';
 export {
