@@ -184,9 +184,15 @@ const Map = ({
   const [mapRef, setMapRef] = React.useState<any>(null);
 
   React.useEffect(() => {
+    // Remove the flag appearing before Leaflet
+    const attrMap = document.querySelector('.leaflet-attribution-flag');
+    attrMap?.setAttribute('style', 'display: none !important;');
+
+    // Replace the target and rel attributes from the attribution links
     const attributionLinks = document?.querySelectorAll(
       '.leaflet-control-attribution a'
     );
+
     attributionLinks.forEach((link) => {
       link.setAttribute('target', '_blank');
       link.setAttribute('rel', 'noopener noreferrer');
