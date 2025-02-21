@@ -1,11 +1,10 @@
 'use client';
 
 import React from 'react';
-import { createCalendar } from '@internationalized/date';
 import { DateValue } from '@react-types/calendar';
 import { IconCalendar } from '@tabler/icons-react';
-import { AriaDatePickerProps, useDatePicker } from 'react-aria';
-import { DatePickerState, useDatePickerState } from 'react-stately';
+import { useDatePicker } from 'react-aria';
+import { useDatePickerState } from 'react-stately';
 
 import { cn } from '../../utils';
 import { MultiSelectYearCalendar } from '../Calendar';
@@ -13,7 +12,6 @@ import { IconButton } from '../IconButton';
 import inputStyles from '../Input/Input.module.scss';
 import { Labelled, LabelledProps } from '../Labelled';
 import { Popover } from '../Popover';
-import { Tag } from '../Tag';
 import { TextField } from '../TextField';
 import styles from './DatePicker.module.scss';
 
@@ -36,6 +34,10 @@ export type MultiMonthDatePickerProps = {
   selectedValues: DateValue[] | null;
   /* Callback function */
   onChange?: (dates: DateValue[]) => void;
+  /* Minimum date before which calendar is disabled*/
+  minValue?: DateValue;
+  /* Maximum date after which calendar is disabled*/
+  maxValue?: DateValue;
 };
 
 const MultiMonthPicker = React.forwardRef(
@@ -79,38 +81,6 @@ const MultiMonthPicker = React.forwardRef(
           requiredIndicator={requiredIndicator}
         >
           <div ref={ref} className={styles.Wrapper}>
-            <TextField
-              label=""
-              error={error}
-              name="vertical"
-              disabled
-              placeholder={selectedValues?.length > 0 ? '' : 'select months'}
-              tags={
-                <div className="flex flex-wrap gap-1">
-                  {selectedValues?.map((tag) => (
-                    <Tag
-                      onRemove={() => {
-                        if (onChange && selectedValues) {
-                          const newValues = selectedValues.filter(
-                            (t) => t.toString() !== tag.toString()
-                          );
-                          setSelectedValues(newValues);
-                          onChange(newValues);
-                        }
-                      }}
-                      value={tag.toString()}
-                      key={tag.toString()}
-                    >
-                      {new Intl.DateTimeFormat('en-US', {
-                        month: 'short',
-                        year: 'numeric',
-                      }).format(new Date(tag.toString()))}
-                    </Tag>
-                  ))}
-                </div>
-              }
-            />
-
             <Popover
               onOpenChange={() =>
                 !state.isOpen ? state.open() : state.close()
@@ -119,13 +89,35 @@ const MultiMonthPicker = React.forwardRef(
               {...dialogProps}
             >
               <Popover.Trigger>
-                <IconButton
-                  {...othersProps}
-                  icon={IconCalendar}
-                  withTooltip={false}
-                >
-                  trigger calendar
-                </IconButton>
+                <div className={styles.TriggerMultiMonth}>
+                  <TextField
+                    error={error}
+                    name=""
+                    label={''}
+                    placeholder={
+                      selectedValues?.length > 0 ? '' : 'select months'
+                    }
+                    value={
+                      selectedValues?.length > 0
+                        ? selectedValues
+                            .map((date) =>
+                              new Intl.DateTimeFormat('en-US', {
+                                month: 'short',
+                                year: 'numeric',
+                              }).format(new Date(date.toString()))
+                            )
+                            .join(', ')
+                        : ''
+                    }
+                  />
+                  <IconButton
+                    {...othersProps}
+                    icon={IconCalendar}
+                    withTooltip={false}
+                  >
+                    trigger calendar
+                  </IconButton>
+                </div>
               </Popover.Trigger>
               <Popover.Content>
                 <MultiSelectYearCalendar
