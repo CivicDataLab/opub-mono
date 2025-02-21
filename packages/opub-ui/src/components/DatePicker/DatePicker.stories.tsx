@@ -54,7 +54,9 @@ export const Month: Story = {
   args: {
     label: 'Month Picker',
     onChange: (val) => console.log(val),
-    defaultValue: parseDate('2023-03-04'),
+    defaultValue: parseDate('2023-03-01'),
+    minValue: parseDate('2023-02-01'),
+    maxValue: parseDate('2024-04-01'),
   },
 };
 
@@ -65,6 +67,8 @@ export const MultipleMonths: Story = {
       selectedValues={[parseDate('2023-02-01'), parseDate('2024-05-01')]}
       // defaultValues={[]}
       onChange={(val) => console.log(val)}
+      minValue={parseDate('2024-01-01')}
+      maxValue={parseDate('2024-06-01')}
     />
   ),
   args: {
