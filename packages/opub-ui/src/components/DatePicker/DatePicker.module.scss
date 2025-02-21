@@ -29,3 +29,32 @@
     border-color: var(--border-critical);
   }
 }
+
+.TriggerMultiMonth{
+  display: inline-flex;
+  // gap: var(--space-1);
+  width: fit-content;
+  justify-content: center;
+  position: relative;
+
+  label {
+    width: fit-content;
+  }
+
+  > button {
+    z-index: 1;
+    margin-right: var(--space-1);
+  }
+
+
+  input{
+    border: none;
+  }
+
+  div{
+    border-right: none;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    outline: none;
+  }
+}
