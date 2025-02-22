@@ -74,3 +74,4 @@ export { Thumbnail } from './Thumbnail';
 export { Toaster, toast } from './Toast';
 export { Tooltip } from './Tooltip';
 export { Tray } from './Tray';
+export { MultiMonthPicker } from './DatePicker';
