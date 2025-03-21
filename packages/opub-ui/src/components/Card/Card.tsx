@@ -18,9 +18,9 @@ export interface CardProps {
   tag?: string[];
   title: string;
   description?: string;
-  date: string;
-  views: string;
-  geography: string;
+  date?: string;
+  views?: string;
+  geography?: string;
   sectorLogo?: string;
   publisherLogo?: string;
   variation: 'Collapsed' | 'Expanded';
@@ -85,18 +85,24 @@ const Card: React.FC<CardProps> = ({
           </Text>
         )}
         <div className="flex items-center gap-4">
-          <span className="flex items-center gap-1">
-            <Icon source={IconCalendarEvent} color={iconColor} size={24} />
-            <Text variant="bodySm">{date}</Text>
-          </span>
-          <span className="flex items-center gap-1">
-            <Icon source={IconDownload} color={iconColor} size={24} />
-            <Text variant="bodySm">{views} Views</Text>
-          </span>
-          <span className="flex items-center gap-1">
-            <Icon source={IconWorld} color={iconColor} size={24} />
-            <Text variant="bodySm">{geography}</Text>
-          </span>
+          {date && (
+            <span className="flex items-center gap-1">
+              <Icon source={IconCalendarEvent} color={iconColor} size={24} />
+              <Text variant="bodySm">{date}</Text>
+            </span>
+          )}
+          {views && (
+            <span className="flex items-center gap-1">
+              <Icon source={IconDownload} color={iconColor} size={24} />
+              <Text variant="bodySm">{views} Views</Text>
+            </span>
+          )}
+          {geography && (
+            <span className="flex items-center gap-1">
+              <Icon source={IconWorld} color={iconColor} size={24} />
+              <Text variant="bodySm">{geography}</Text>
+            </span>
+          )}
         </div>
       </div>
       {(sectorLogo || publisherLogo) && <Divider />}
