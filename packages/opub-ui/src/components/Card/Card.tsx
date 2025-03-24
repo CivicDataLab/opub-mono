@@ -4,6 +4,7 @@ import {
   IconCalendarEvent,
   IconDownload,
   IconWorld,
+  TablerIconsProps,
 } from '@tabler/icons-react';
 
 import { Color } from '../../types/icon';
@@ -14,19 +15,25 @@ import { Icon } from '../Icon';
 import { Tag } from '../Tag';
 import { Text } from '../Text';
 
+interface MetadataContent {
+  icon: React.ComponentType<TablerIconsProps>; // This allows any Tabler icon component
+  label: string;
+  value: string;
+}
+interface FooterInfo {
+  icon: string;
+  label: string;
+}
 export interface CardProps {
   imageUrl?: string;
   tag?: string[];
   title: string;
   description?: string;
-  date?: string;
-  downloads?: string;
-  geography?: string;
-  sectorLogo?: string;
-  publisherLogo?: string;
   variation: 'Collapsed' | 'Expanded';
   iconColor: Color;
   formats?: string[];
+  metadataContent?: MetadataContent[];
+  footerContent?: FooterInfo[];
 }
 
 const Card: React.FC<CardProps> = ({
@@ -34,14 +41,11 @@ const Card: React.FC<CardProps> = ({
   tag,
   title,
   description,
-  date,
-  downloads,
-  geography,
-  sectorLogo,
-  publisherLogo,
   variation,
   iconColor,
   formats,
+  metadataContent,
+  footerContent,
 }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const toggleDescription = () => setIsExpanded(!isExpanded);
@@ -111,76 +115,43 @@ const Card: React.FC<CardProps> = ({
         )}
 
         <div className="flex flex-wrap items-center gap-4">
-          {date && (
-            <span className="flex items-center gap-1">
-              <Icon source={IconCalendarEvent} color={iconColor} size={24} />
-              {variation !== 'Collapsed' && (
-                <Text variant="bodySm" className=" pr-1">
-                  Last Updated :
-                </Text>
-              )}
-              <Text variant="bodySm">{date}</Text>
-            </span>
-          )}
-          {downloads && (
-            <span className="flex items-center gap-1">
-              <Icon source={IconDownload} color={iconColor} size={24} />
-              {variation !== 'Collapsed' && (
-                <Text variant="bodySm" className=" pr-1">
-                  Downloads :
-                </Text>
-              )}
-              <Text variant="bodySm">{downloads}</Text>
-            </span>
-          )}
-          {geography && (
-            <span className="flex items-center gap-1">
-              <Icon source={IconWorld} color={iconColor} size={24} />
-              {variation !== 'Collapsed' && (
-                <Text variant="bodySm" className=" pr-1">
-                  Geography :
-                </Text>
-              )}
-              <Text variant="bodySm">{geography}</Text>
-            </span>
-          )}
+          {metadataContent &&
+            metadataContent.map((item, index) => (
+              <span className="flex items-center gap-1" key={index}>
+                <Icon source={item.icon} color={iconColor} size={24} />
+                {variation !== 'Collapsed' && (
+                  <Text variant="bodySm" className=" pr-1">
+                    {item.label}:
+                  </Text>
+                )}
+                <Text variant="bodySm">{item.value}</Text>
+              </span>
+            ))}
         </div>
       </div>
-      {(sectorLogo || publisherLogo) && variation === 'Collapsed' && (
-        <Divider />
-      )}
+      {footerContent && variation === 'Collapsed' && <Divider />}
       <div className=" flex flex-col  gap-3">
         <div
           className={` flex flex-wrap  items-center  ${variation === 'Collapsed' ? 'justify-between' : ' justify-normal'}`}
         >
-          {sectorLogo && (
-            <div
-              className={`flex ${variation === 'Collapsed' ? '' : 'basis-1/2'}  items-center gap-2`}
-            >
-              <>
-                {variation !== 'Collapsed' && (
-                  <Text variant="bodySm">Sectors:</Text>
-                )}
-                <img
-                  src={sectorLogo}
-                  alt="Publisher Logo"
-                  className="h-9 w-9 rounded-6 border-1 border-solid border-baseGraySlateSolid8 p-2 "
-                />
-              </>
-            </div>
-          )}
-          {publisherLogo && (
-            <div className="flex items-center gap-2">
-              <>
-                <Text variant="bodySm">Published by:</Text>
-                <img
-                  src={publisherLogo}
-                  alt="Publisher Logo"
-                  className="h-9 w-9 rounded-6 border-1 border-solid border-baseGraySlateSolid8 p-2"
-                />
-              </>
-            </div>
-          )}
+          {footerContent &&
+            footerContent.map((item, index) => (
+              <div
+                className={`flex ${variation !== 'Collapsed' && 'basis-1/2'}  items-center  gap-2`}
+                key={index}
+              >
+                <>
+                  {variation !== 'Collapsed' && (
+                    <Text variant="bodySm">{item.label}:</Text>
+                  )}
+                  <img
+                    src={item.icon}
+                    alt="Publisher Logo"
+                    className="h-9 w-9 rounded-6 border-1 border-solid border-baseGraySlateSolid8 p-2"
+                  />
+                </>
+              </div>
+            ))}
         </div>
         {variation === 'Expanded' && (
           <div className={` flex flex-wrap  items-center`}>

@@ -1,4 +1,9 @@
 import type { Meta, StoryFn } from '@storybook/react';
+import {
+  IconCalendarEvent,
+  IconDownload,
+  IconWorld,
+} from '@tabler/icons-react';
 
 import Card, { CardProps } from './Card';
 
@@ -24,11 +29,34 @@ Default.args = {
     'Green Tagged Public Procurement Data related to Climate Action in Assam, India',
   description:
     'Natural and man-made environmental resources – fresh water, clean air, forests, grasslands, marine resources, and agro-ecosystems – provide sustenance and a foundation for social and economic development. The need to safeguard these resources crosses all borders.',
-  date: '19 July 2024',
-  downloads: '500+',
-  geography: 'India',
-  sectorLogo: 'https://cdn-icons-png.flaticon.com/512/9286/9286057.png',
-  publisherLogo: 'https://civicdatalab.in/cdl_logo.png',
+  metadataContent: [
+    {
+      icon: IconCalendarEvent,
+      label: 'Date',
+      value: '19 July 2024',
+    },
+    {
+      icon: IconDownload,
+      label: 'Download',
+      value: '500',
+    },
+    {
+      icon: IconWorld,
+      label: 'Geography',
+      value: 'India',
+    },
+  ],
+  footerContent: [
+    {
+      icon: 'https://cdn-icons-png.flaticon.com/512/9286/9286057.png',
+      label: 'Sectors',
+    },
+    {
+      icon: 'https://civicdatalab.in/cdl_logo.png',
+      label: 'Published by',
+    },
+  ],
+
   variation: 'Collapsed',
   tag: ['UseCase', 'Bio diversity'],
   iconColor: 'warning',
@@ -43,11 +71,34 @@ export const MultipleCollapsedCards = () => {
       title: 'Climate Action in Assam, India',
       description:
         'Climate initiatives are crucial for sustainable development.',
-      date: '19 July 2024',
-      downloads: '500+',
-      geography: 'India',
-      sectorLogo: 'https://cdn-icons-png.flaticon.com/512/9286/9286057.png',
-      publisherLogo: 'https://civicdatalab.in/cdl_logo.png',
+      metadataContent: [
+        {
+          icon: IconCalendarEvent,
+          label: 'Date',
+          value: '19 July 2024',
+        },
+        {
+          icon: IconDownload,
+          label: 'Download',
+          value: '500',
+        },
+        {
+          icon: IconWorld,
+          label: 'Geography',
+          value: 'India',
+        },
+      ],
+
+      footerContent: [
+        {
+          icon: 'https://cdn-icons-png.flaticon.com/512/9286/9286057.png',
+          label: 'Sectors',
+        },
+        {
+          icon: 'https://civicdatalab.in/cdl_logo.png',
+          label: 'Published by',
+        },
+      ],
       variation: 'Collapsed',
       tag: ['Climate', 'Policy'],
       iconColor: 'warning',
@@ -58,11 +109,33 @@ export const MultipleCollapsedCards = () => {
       title: 'Biodiversity Conservation Strategies',
       description:
         'Preserving biodiversity is essential for ecological balance.',
-      date: '10 June 2023',
-      downloads: '300+',
-      geography: 'Global',
-      sectorLogo: 'https://cdn-icons-png.flaticon.com/512/9286/9286057.png',
-      publisherLogo: 'https://civicdatalab.in/cdl_logo.png',
+      metadataContent: [
+        {
+          icon: IconCalendarEvent,
+          label: 'Date',
+          value: '19 July 2024',
+        },
+        {
+          icon: IconDownload,
+          label: 'Download',
+          value: '500',
+        },
+        {
+          icon: IconWorld,
+          label: 'Geography',
+          value: 'India',
+        },
+      ],
+      footerContent: [
+        {
+          icon: 'https://cdn-icons-png.flaticon.com/512/9286/9286057.png',
+          label: 'Sectors',
+        },
+        {
+          icon: 'https://civicdatalab.in/cdl_logo.png',
+          label: 'Published by',
+        },
+      ],
       variation: 'Collapsed',
       tag: ['Environment', 'Wildlife'],
       iconColor: 'success',
@@ -73,11 +146,33 @@ export const MultipleCollapsedCards = () => {
       title: 'Public Procurement in Renewable Energy',
       description:
         'Investments in renewable energy help reduce carbon footprints.',
-      date: '5 March 2022',
-      downloads: '800+',
-      geography: 'Europe',
-      sectorLogo: 'https://cdn-icons-png.flaticon.com/512/9286/9286057.png',
-      publisherLogo: 'https://civicdatalab.in/cdl_logo.png',
+      metadataContent: [
+        {
+          icon: IconCalendarEvent,
+          label: 'Date',
+          value: '19 July 2024',
+        },
+        {
+          icon: IconDownload,
+          label: 'Download',
+          value: '500',
+        },
+        {
+          icon: IconWorld,
+          label: 'Geography',
+          value: 'India',
+        },
+      ],
+      footerContent: [
+        {
+          icon: 'https://cdn-icons-png.flaticon.com/512/9286/9286057.png',
+          label: 'Sectors',
+        },
+        {
+          icon: 'https://civicdatalab.in/cdl_logo.png',
+          label: 'Published by',
+        },
+      ],
       variation: 'Collapsed',
       tag: ['Renewable', 'Economy'],
       iconColor: 'interactive',
@@ -101,11 +196,33 @@ export const MultipleExpandedCards = () => {
       title: 'Climate Action in Assam, India',
       description:
         'Climate initiatives are crucial for sustainable development.Investments in renewable energy help reduce carbon footprints. Investments in renewable energy help reduce carbon footprints. Investments in renewable energy help reduce carbon footprints. Investments in renewable energy help reduce carbon footprints.',
-      date: '19 July 2024',
-      downloads: '500+',
-      geography: 'India',
-      sectorLogo: 'https://cdn-icons-png.flaticon.com/512/9286/9286057.png',
-      publisherLogo: 'https://civicdatalab.in/cdl_logo.png',
+      metadataContent: [
+        {
+          icon: IconCalendarEvent,
+          label: 'Date',
+          value: '19 July 2024',
+        },
+        {
+          icon: IconDownload,
+          label: 'Download',
+          value: '500',
+        },
+        {
+          icon: IconWorld,
+          label: 'Geography',
+          value: 'India',
+        },
+      ],
+      footerContent: [
+        {
+          icon: 'https://cdn-icons-png.flaticon.com/512/9286/9286057.png',
+          label: 'Sectors',
+        },
+        {
+          icon: 'https://civicdatalab.in/cdl_logo.png',
+          label: 'Published by',
+        },
+      ],
       variation: 'Expanded',
       tag: ['Climate', 'Policy'],
       iconColor: 'warning',
@@ -116,11 +233,33 @@ export const MultipleExpandedCards = () => {
       title: 'Biodiversity Conservation Strategies',
       description:
         'Preserving biodiversity is essential for ecological balance. Investments in renewable energy help reduce carbon footprints. Investments in renewable energy help reduce carbon footprints.',
-      date: '10 June 2023',
-      downloads: '300+',
-      geography: 'Global',
-      sectorLogo: 'https://cdn-icons-png.flaticon.com/512/9286/9286057.png',
-      publisherLogo: 'https://civicdatalab.in/cdl_logo.png',
+      metadataContent: [
+        {
+          icon: IconCalendarEvent,
+          label: 'Date',
+          value: '19 July 2024',
+        },
+        {
+          icon: IconDownload,
+          label: 'Download',
+          value: '500',
+        },
+        {
+          icon: IconWorld,
+          label: 'Geography',
+          value: 'India',
+        },
+      ],
+      footerContent: [
+        {
+          icon: 'https://cdn-icons-png.flaticon.com/512/9286/9286057.png',
+          label: 'Sectors',
+        },
+        {
+          icon: 'https://civicdatalab.in/cdl_logo.png',
+          label: 'Published by',
+        },
+      ],
       variation: 'Expanded',
       tag: ['Environment', 'Wildlife'],
       iconColor: 'success',
@@ -131,11 +270,33 @@ export const MultipleExpandedCards = () => {
       title: 'Public Procurement in Renewable Energy',
       description:
         'Investments in renewable energy help reduce carbon footprints. Investments in renewable energy help reduce carbon footprints.',
-      date: '5 March 2022',
-      downloads: '800+',
-      geography: 'Europe',
-      sectorLogo: 'https://cdn-icons-png.flaticon.com/512/9286/9286057.png',
-      publisherLogo: 'https://civicdatalab.in/cdl_logo.png',
+      metadataContent: [
+        {
+          icon: IconCalendarEvent,
+          label: 'Date',
+          value: '19 July 2024',
+        },
+        {
+          icon: IconDownload,
+          label: 'Download',
+          value: '500',
+        },
+        {
+          icon: IconWorld,
+          label: 'Geography',
+          value: 'India',
+        },
+      ],
+      footerContent: [
+        {
+          icon: 'https://cdn-icons-png.flaticon.com/512/9286/9286057.png',
+          label: 'Sectors',
+        },
+        {
+          icon: 'https://civicdatalab.in/cdl_logo.png',
+          label: 'Published by',
+        },
+      ],
       variation: 'Expanded',
       tag: ['Renewable', 'Economy'],
       iconColor: 'interactive',
