@@ -13,7 +13,7 @@ describe('Card Component', () => {
     description:
       'This is a sample description that exceeds 100 characters. It is used to test the see more and see less functionality of the Card component.',
 
-    variation: 'Collapsed' as 'Collapsed',
+    variation: 'collapsed' as 'collapsed',
     iconColor: 'warning' as Color,
   };
 

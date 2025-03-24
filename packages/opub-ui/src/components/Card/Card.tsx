@@ -29,7 +29,7 @@ export interface CardProps {
   tag?: string[];
   title: string;
   description?: string;
-  variation: 'Collapsed' | 'Expanded';
+  variation: 'collapsed' | 'expanded';
   iconColor: Color;
   formats?: string[];
   metadataContent?: MetadataContent[];
@@ -47,16 +47,16 @@ const Card: React.FC<CardProps> = ({
   metadataContent,
   footerContent,
 }) => {
-  const [isExpanded, setIsExpanded] = useState(false);
-  const toggleDescription = () => setIsExpanded(!isExpanded);
+  const [isexpanded, setIsexpanded] = useState(false);
+  const toggleDescription = () => setIsexpanded(!isexpanded);
 
   return (
     <div
       className={`bg-white border border-gray-200 shadow-md flex flex-col  rounded-4 p-5 shadow-basicLg ${
-        variation === 'Collapsed' ? 'max-w-sm gap-4' : 'w-full gap-6'
+        variation === 'collapsed' ? 'max-w-sm gap-4' : 'w-full gap-6'
       }`}
     >
-      {imageUrl && variation === 'Collapsed' && (
+      {imageUrl && variation === 'collapsed' && (
         <img
           src={imageUrl}
           alt="Card banner"
@@ -65,7 +65,7 @@ const Card: React.FC<CardProps> = ({
       )}
       <div className=" flex flex-col gap-4">
         <div>
-          {tag && variation === 'Collapsed' && (
+          {tag && variation === 'collapsed' && (
             <div className="mb-2 flex gap-2">
               {tag.map((item) => (
                 <Tag
@@ -87,27 +87,27 @@ const Card: React.FC<CardProps> = ({
           <>
             <Text
               variant="bodySm"
-              className={variation !== 'Collapsed' ? 'line-clamp-2 inline' : ''}
+              className={variation !== 'collapsed' ? 'line-clamp-2 inline' : ''}
             >
-              {variation === 'Collapsed'
+              {variation === 'collapsed'
                 ? description.length > 100
-                  ? isExpanded
+                  ? isexpanded
                     ? description
                     : `${description.slice(0, 100)}...`
                   : description
                 : description.length > 300
-                  ? isExpanded
+                  ? isexpanded
                     ? description
                     : `${description.slice(0, 300)}...`
                   : description}
-              {description.length > (variation === 'Collapsed' ? 100 : 300) && (
+              {description.length > (variation === 'collapsed' ? 100 : 300) && (
                 <Button
                   kind="tertiary"
                   size="slim"
                   onClick={toggleDescription}
                   className="text-blue-600 w-fit"
                 >
-                  {isExpanded ? 'See Less' : 'See More'}
+                  {isexpanded ? 'See Less' : 'See More'}
                 </Button>
               )}
             </Text>
@@ -119,7 +119,7 @@ const Card: React.FC<CardProps> = ({
             metadataContent.map((item, index) => (
               <span className="flex items-center gap-1" key={index}>
                 <Icon source={item.icon} color={iconColor} size={24} />
-                {variation !== 'Collapsed' && (
+                {variation !== 'collapsed' && (
                   <Text variant="bodySm" className=" pr-1">
                     {item.label}:
                   </Text>
@@ -129,19 +129,19 @@ const Card: React.FC<CardProps> = ({
             ))}
         </div>
       </div>
-      {footerContent && variation === 'Collapsed' && <Divider />}
+      {footerContent && variation === 'collapsed' && <Divider />}
       <div className=" flex flex-col  gap-3">
         <div
-          className={` flex flex-wrap  items-center  ${variation === 'Collapsed' ? 'justify-between' : ' justify-normal'}`}
+          className={` flex flex-wrap  items-center  ${variation === 'collapsed' ? 'justify-between' : ' justify-normal'}`}
         >
           {footerContent &&
             footerContent.map((item, index) => (
               <div
-                className={`flex ${variation !== 'Collapsed' && 'basis-1/2'}  items-center  gap-2`}
+                className={`flex ${variation !== 'collapsed' && 'basis-1/2'}  items-center  gap-2`}
                 key={index}
               >
                 <>
-                  {variation !== 'Collapsed' && (
+                  {variation !== 'collapsed' && (
                     <Text variant="bodySm">{item.label}:</Text>
                   )}
                   <img
@@ -153,7 +153,7 @@ const Card: React.FC<CardProps> = ({
               </div>
             ))}
         </div>
-        {variation === 'Expanded' && (
+        {variation === 'expanded' && (
           <div className={` flex flex-wrap  items-center`}>
             {tag && tag.length > 0 && (
               <div className="mb-2 flex basis-1/2 items-center gap-2">
