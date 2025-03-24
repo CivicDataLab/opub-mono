@@ -1,0 +1,55 @@
+@import '../../../styles/common';
+
+.Format {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.IconWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.FileType {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 8px;
+  color: var(--base-pure-white);
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+.FileIcon {
+    color: var(--icon-disabled); // default color
+  }
+  
+  // File type specific colors with higher specificity
+  :global(svg).FileIcon {
+    &.csv {
+      color: #FFC453;
+    }
+  
+    &.pdf {
+      color: #D82C0D;
+    }
+  
+    &.xls,
+    &.xlsx,
+    &.xml {
+      color: #008060;
+    }
+  
+    &.json {
+      color: #84DCCF;
+    }
+  
+    &.doc,
+    &.docx {
+      color: #2b579a;
+    }
+  }
