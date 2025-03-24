@@ -9,6 +9,7 @@ import {
 import { Color } from '../../types/icon';
 import { Button } from '../Button';
 import { Divider } from '../Divider';
+import { Format } from '../Format/Format';
 import { Icon } from '../Icon';
 import { Tag } from '../Tag';
 import { Text } from '../Text';
@@ -201,13 +202,7 @@ const Card: React.FC<CardProps> = ({
               <div className="mb-2 flex basis-1/2 items-center gap-2">
                 <Text variant="bodySm">Formats:</Text>
                 {formats.map((item) => (
-                  <Tag
-                    variation="outlined"
-                    textColor="#0066CC"
-                    borderColor="#FF6B00"
-                  >
-                    {item}
-                  </Tag>
+                  <Format fileType={item} width={32} />
                 ))}
               </div>
             )}
