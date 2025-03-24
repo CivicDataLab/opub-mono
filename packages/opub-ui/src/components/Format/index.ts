@@ -1,1 +1,1 @@
-export { Format } from './Format';
+export { default as Format } from './Format';

@@ -11,7 +11,7 @@ export interface FormatProps {
   width?: number;
 }
 
-export const Format = ({ fileType, width = 38 }: FormatProps) => {
+const Format = ({ fileType, width = 38 }: FormatProps) => {
   const type = fileType.toUpperCase();
 
   return (
@@ -32,3 +32,5 @@ export const Format = ({ fileType, width = 38 }: FormatProps) => {
     </div>
   );
 };
+
+export default Format;
