@@ -15,6 +15,10 @@ interface NonMutuallyExclusiveProps {
   color?: 'standard' | 'one' | 'two' | 'three' | 'four' | 'five';
   tabIndex?: number;
   value?: string;
+  variation?: 'filled' | 'outlined';
+  textColor?: string;
+  borderColor?: string;
+  fillColor?: string
 }
 
 export type TagProps = NonMutuallyExclusiveProps &
