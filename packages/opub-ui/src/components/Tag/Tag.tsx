@@ -7,7 +7,7 @@ import { handleMouseUpByBlurring } from '../../utils/focus';
 import { Icon } from '../Icon';
 import styles from './Tag.module.scss';
 
-export const Tag = React.forwardRef(
+const Tag = React.forwardRef(
   (
     {
       children,
@@ -101,3 +101,5 @@ export const Tag = React.forwardRef(
     );
   }
 );
+
+export default Tag;
