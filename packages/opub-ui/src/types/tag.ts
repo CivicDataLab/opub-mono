@@ -18,6 +18,7 @@ interface NonMutuallyExclusiveProps {
   variation?: 'filled' | 'outlined';
   textColor?: string;
   borderColor?: string;
+  fillColor?: string
 }
 
 export type TagProps = NonMutuallyExclusiveProps &

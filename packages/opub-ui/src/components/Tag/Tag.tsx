@@ -20,6 +20,7 @@ export const Tag = React.forwardRef(
       variation = 'filled',
       textColor,
       borderColor,
+      fillColor,
       ...other
     }: TagProps,
     ref: React.LegacyRef<HTMLSpanElement>
@@ -38,6 +39,8 @@ export const Tag = React.forwardRef(
     const style = {
       ...(textColor && { color: textColor }),
       ...(borderColor && { borderColor: borderColor }),
+      ...(fillColor &&
+        variation === 'filled' && { backgroundColor: fillColor }),
     };
 
     if (onClick && onClick.name) {

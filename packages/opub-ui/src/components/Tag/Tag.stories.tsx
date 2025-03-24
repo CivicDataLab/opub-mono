@@ -53,8 +53,17 @@ export const TagVariations = () => (
     <Tag variation="outlined" textColor="#0066CC" borderColor="#FF6B00">
       Custom Colors
     </Tag>
+    <Tag
+      variation="filled"
+      fillColor="#002a7f"
+      textColor="#ffffff"
+      borderColor="#f18100"
+    >
+      Custom Tag
+    </Tag>
   </div>
 );
+
 export const States = () => (
   <PropsVariationSection
     component={Tag}
