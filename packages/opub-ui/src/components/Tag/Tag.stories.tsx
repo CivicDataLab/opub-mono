@@ -13,6 +13,18 @@ import { Tag } from './Tag';
 const meta = {
   title: 'Components/Tag',
   component: Tag,
+  argTypes: {
+    variation: {
+      options: ['filled', 'outlined'],
+      control: { type: 'radio' },
+    },
+    textColor: {
+      control: 'color',
+    },
+    borderColor: {
+      control: 'color',
+    },
+  },
 } satisfies Meta<typeof Tag>;
 
 export default meta;
@@ -34,6 +46,15 @@ export const Long: Story = {
   },
 };
 
+export const TagVariations = () => (
+  <div className="flex gap-2">
+    <Tag variation="filled">Filled Tag</Tag>
+    <Tag variation="outlined">Outlined Tag</Tag>
+    <Tag variation="outlined" textColor="#0066CC" borderColor="#FF6B00">
+      Custom Colors
+    </Tag>
+  </div>
+);
 export const States = () => (
   <PropsVariationSection
     component={Tag}

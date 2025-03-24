@@ -17,6 +17,9 @@ export const Tag = React.forwardRef(
       accessibilityLabel,
       url,
       value = '',
+      variation = 'filled',
+      textColor,
+      borderColor,
       ...other
     }: TagProps,
     ref: React.LegacyRef<HTMLSpanElement>
@@ -24,12 +27,18 @@ export const Tag = React.forwardRef(
     const segmented = onRemove && url && !disabled;
     const className = cn(
       styles.Tag,
+      styles[variation],
       disabled && styles.disabled,
       onClick && onClick.name && styles.clickable,
       onRemove && styles.removable,
       url && !disabled && styles.linkable,
       segmented && styles.segmented
     );
+
+    const style = {
+      ...(textColor && { color: textColor }),
+      ...(borderColor && { borderColor: borderColor }),
+    };
 
     if (onClick && onClick.name) {
       return (
@@ -82,7 +91,7 @@ export const Tag = React.forwardRef(
       );
 
     return (
-      <span {...other} className={className} ref={ref}>
+      <span {...other} className={className} style={style} ref={ref}>
         {tagContent}
         {removeButton}
       </span>

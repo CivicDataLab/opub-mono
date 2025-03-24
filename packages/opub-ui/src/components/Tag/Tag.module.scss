@@ -64,6 +64,16 @@ $height: 20px;
   @media #{$breakpoints-xl-up} {
     min-height: 24px;
   }
+
+  &.filled {
+    background-color: var(--surface-highlight-default);
+    border: 1px solid transparent;
+  }
+
+  &.outlined {
+    background-color: transparent;
+    border: 1px solid var(--border-default);
+  }
 }
 
 .TagText {
