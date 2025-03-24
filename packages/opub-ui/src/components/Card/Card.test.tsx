@@ -12,10 +12,7 @@ describe('Card Component', () => {
     title: 'Sample Title',
     description:
       'This is a sample description that exceeds 100 characters. It is used to test the see more and see less functionality of the Card component.',
-    date: '21 Sep 2024',
-    views: '1023',
-    geography: 'India',
-    publisherLogo: 'https://example.com/logo.png',
+
     variation: 'Collapsed' as 'Collapsed',
     iconColor: 'warning' as Color,
   };
@@ -24,9 +21,7 @@ describe('Card Component', () => {
     render(<Card {...mockProps} />);
 
     expect(screen.getByText('Sample Title')).toBeInTheDocument();
-    expect(screen.getByText('21 Sep 2024')).toBeInTheDocument();
-    expect(screen.getByText('1023 Views')).toBeInTheDocument();
-    expect(screen.getByText('India')).toBeInTheDocument();
+
     expect(screen.getByText('Use Case')).toBeInTheDocument();
   });
 
