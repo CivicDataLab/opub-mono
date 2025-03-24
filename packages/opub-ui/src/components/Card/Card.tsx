@@ -63,7 +63,13 @@ const Card: React.FC<CardProps> = ({
           {tag && variation === 'Collapsed' && (
             <div className="mb-2 flex gap-2">
               {tag.map((item) => (
-                <Tag>{item}</Tag>
+                <Tag
+                  variation="outlined"
+                  textColor="#0066CC"
+                  borderColor="#FF6B00"
+                >
+                  {item}
+                </Tag>
               ))}
             </div>
           )}
@@ -181,7 +187,13 @@ const Card: React.FC<CardProps> = ({
               <div className="mb-2 flex basis-1/2 items-center gap-2">
                 <Text variant="bodySm">Tags:</Text>
                 {tag.map((item) => (
-                  <Tag color="four">{item}</Tag>
+                  <Tag
+                    variation="outlined"
+                    textColor="#0066CC"
+                    borderColor="#FF6B00"
+                  >
+                    {item}
+                  </Tag>
                 ))}
               </div>
             )}
@@ -189,7 +201,13 @@ const Card: React.FC<CardProps> = ({
               <div className="mb-2 flex basis-1/2 items-center gap-2">
                 <Text variant="bodySm">Formats:</Text>
                 {formats.map((item) => (
-                  <Tag color="four">{item}</Tag>
+                  <Tag
+                    variation="outlined"
+                    textColor="#0066CC"
+                    borderColor="#FF6B00"
+                  >
+                    {item}
+                  </Tag>
                 ))}
               </div>
             )}
