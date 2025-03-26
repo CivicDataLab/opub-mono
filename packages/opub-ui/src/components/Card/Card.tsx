@@ -52,15 +52,15 @@ const Card: React.FC<CardProps> = ({
 
   return (
     <div
-      className={`bg-white border border-gray-200 shadow-md flex flex-col  rounded-4 p-5 shadow-basicLg ${
-        variation === 'collapsed' ? 'max-w-sm gap-4' : 'w-full gap-6'
+      className={` border border-gray-200 shadow-md flex flex-col justify-between rounded-4  bg-basePureWhite p-5 shadow-basicLg ${
+        variation === 'collapsed' ? 'gap-4' : 'w-full gap-6'
       }`}
     >
       {imageUrl && variation === 'collapsed' && (
         <img
           src={imageUrl}
           alt="Card banner"
-          className="h-40 w-full rounded-2"
+          className=" min-w-sm m-auto h-44 rounded-2"
         />
       )}
       <div className=" flex flex-col gap-4">
@@ -129,56 +129,58 @@ const Card: React.FC<CardProps> = ({
             ))}
         </div>
       </div>
-      {footerContent && variation === 'collapsed' && <Divider />}
-      <div className=" flex flex-col  gap-3">
-        <div
-          className={` flex flex-wrap  items-center  ${variation === 'collapsed' ? 'justify-between' : ' justify-normal'}`}
-        >
-          {footerContent &&
-            footerContent.map((item, index) => (
-              <div
-                className={`flex ${variation !== 'collapsed' && 'basis-1/2'}  items-center  gap-2`}
-                key={index}
-              >
-                <>
-                  {variation !== 'collapsed' && (
-                    <Text variant="bodySm">{item.label}:</Text>
-                  )}
-                  <img
-                    src={item.icon}
-                    alt="Publisher Logo"
-                    className="h-9 w-9 rounded-6 border-1 border-solid border-baseGraySlateSolid8 p-2"
-                  />
-                </>
-              </div>
-            ))}
-        </div>
-        {variation === 'expanded' && (
-          <div className={` flex flex-wrap  items-center`}>
-            {tag && tag.length > 0 && (
-              <div className="mb-2 flex basis-1/2 items-center gap-2">
-                <Text variant="bodySm">Tags:</Text>
-                {tag.map((item) => (
-                  <Tag
-                    variation="outlined"
-                    textColor="#0066CC"
-                    borderColor="#FF6B00"
-                  >
-                    {item}
-                  </Tag>
-                ))}
-              </div>
-            )}
-            {formats && formats.length > 0 && (
-              <div className="mb-2 flex basis-1/2 items-center gap-2">
-                <Text variant="bodySm">Formats:</Text>
-                {formats.map((item) => (
-                  <Format fileType={item} width={32} />
-                ))}
-              </div>
-            )}
+      <div className="flex flex-col gap-4">
+        {footerContent && variation === 'collapsed' && <Divider />}
+        <div className=" flex flex-col  gap-3">
+          <div
+            className={` flex flex-wrap  items-center  ${variation === 'collapsed' ? 'justify-between' : ' justify-normal'}`}
+          >
+            {footerContent &&
+              footerContent.map((item, index) => (
+                <div
+                  className={`flex ${variation !== 'collapsed' && 'basis-1/2'}  items-center  gap-2`}
+                  key={index}
+                >
+                  <>
+                    {variation !== 'collapsed' && (
+                      <Text variant="bodySm">{item.label}:</Text>
+                    )}
+                    <img
+                      src={item.icon}
+                      alt="Publisher Logo"
+                      className="h-9 w-9 rounded-6 border-1 border-solid border-baseGraySlateSolid8 p-2"
+                    />
+                  </>
+                </div>
+              ))}
           </div>
-        )}
+          {variation === 'expanded' && (
+            <div className={` flex flex-wrap  items-center`}>
+              {tag && tag.length > 0 && (
+                <div className="mb-2 flex basis-1/2 items-center gap-2">
+                  <Text variant="bodySm">Tags:</Text>
+                  {tag.map((item) => (
+                    <Tag
+                      variation="outlined"
+                      textColor="#0066CC"
+                      borderColor="#FF6B00"
+                    >
+                      {item}
+                    </Tag>
+                  ))}
+                </div>
+              )}
+              {formats && formats.length > 0 && (
+                <div className="mb-2 flex basis-1/2 items-center gap-2">
+                  <Text variant="bodySm">Formats:</Text>
+                  {formats.map((item) => (
+                    <Format fileType={item} width={32} />
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

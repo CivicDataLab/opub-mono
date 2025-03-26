@@ -67,7 +67,6 @@ Default.args = {
 export const MultipleCollapsedCards = () => {
   const cardsData: CardProps[] = [
     {
-      imageUrl: 'https://justicehub.in/assets/khoj1.png',
       title: 'Climate Action in Assam, India',
       description:
         'Climate initiatives are crucial for sustainable development.',
@@ -105,7 +104,6 @@ export const MultipleCollapsedCards = () => {
       formats: ['CSV', 'PDF'],
     },
     {
-      imageUrl: 'https://justicehub.in/assets/khoj1.png',
       title: 'Biodiversity Conservation Strategies',
       description:
         'Preserving biodiversity is essential for ecological balance.',
@@ -142,10 +140,10 @@ export const MultipleCollapsedCards = () => {
       formats: ['XLSX', 'JSON'],
     },
     {
-      imageUrl: 'https://justicehub.in/assets/khoj1.png',
-      title: 'Public Procurement in Renewable Energy',
+      title:
+        'Public Procurement in Renewable Energy  Procurement in Renewable Energy',
       description:
-        'Investments in renewable energy help reduce carbon footprints.',
+        'Investments in renewable energy help reduce carbon footprints.renewable energy help reduce carbon footprints renewable energy help reduce carbon footprints',
       metadataContent: [
         {
           icon: IconCalendarEvent,
