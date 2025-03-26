@@ -28,7 +28,7 @@ Default.args = {
   title:
     'Green Tagged Public Procurement Data related to Climate Action in Assam, India',
   description:
-    'Natural and man-made environmental resources – fresh water, clean air, forests, grasslands, marine resources, and agro-ecosystems – provide sustenance and a foundation for social and economic development. The need to safeguard these resources crosses all borders.',
+    'Natural and man-made environmental resources – fresh water, clean air, forests, grasslands, marine resources, and agro-ecosystems – provide sustenance and a foundation for social and economic development. The need to safeguard these resources crosses all borders. Natural and man-made environmental resources – fresh water, clean air, forests, grasslands, marine resources, and agro-ecosystems – provide sustenance and a foundation for social and economic development. The need to safeguard these resources crosses all borders.',
   metadataContent: [
     {
       icon: IconCalendarEvent,
@@ -61,6 +61,13 @@ Default.args = {
   tag: ['UseCase', 'Bio diversity'],
   iconColor: 'warning',
   formats: ['CSV', 'PDF'],
+  type: [
+    {
+      label: 'Dataset',
+      fillColor: '#219EBC26',
+      borderColor: '#FDB557',
+    },
+  ],
 };
 
 // Multiple variations as a grid
@@ -193,7 +200,7 @@ export const MultipleExpandedCards = () => {
       imageUrl: 'https://justicehub.in/assets/khoj1.png',
       title: 'Climate Action in Assam, India',
       description:
-        'Climate initiatives are crucial for sustainable development.Investments in renewable energy help reduce carbon footprints. Investments in renewable energy help reduce carbon footprints. Investments in renewable energy help reduce carbon footprints. Investments in renewable energy help reduce carbon footprints.',
+        'Climate change is expected to hit developing countries the hardest. Its effects—higher temperatures, changes in precipitation patterns, rising sea levels, and more frequent weather-related disasters—pose risks for agriculture, food, and water supplies. At stake are recent gains in the fight against poverty, hunger and disease, and the lives and livelihoods of billions of people in developing countries. Addressing climate change requires unprecedented global cooperation across borders. The World Bank Group is helping support developing countries and contributing to a global solution, while tailoring our approach to the differing needs of developing country partners. Data here cover climate systems, exposure to climate impacts, resilience, greenhouse gas emissions, and energy use. Other indicators relevant to climate change are found under other data pages, particularly Environment, Agriculture & Rural Development, Energy & Mining, Health, Infrastructure, Poverty, and Urban Development.',
       metadataContent: [
         {
           icon: IconCalendarEvent,
