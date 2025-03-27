@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { HTMLAttributeAnchorTarget } from 'react';
 import { TablerIconsProps } from '@tabler/icons-react';
 
 import { Color } from '../../types/icon';
@@ -35,6 +35,8 @@ export interface CardProps {
   metadataContent?: MetadataContent[];
   footerContent?: FooterInfo[];
   type?: typeInfo[];
+  href?: string;
+  target?: HTMLAttributeAnchorTarget;
 }
 
 const Card: React.FC<CardProps> = ({
@@ -48,12 +50,16 @@ const Card: React.FC<CardProps> = ({
   metadataContent,
   footerContent,
   type,
+  href,
+  target = '_self',
 }) => {
   return (
-    <div
-      className={` border border-gray-200 shadow-md flex flex-col justify-between rounded-4  bg-basePureWhite p-5 shadow-basicLg ${
+    <a
+      className={` border border-gray-200 flex flex-col justify-between rounded-4 bg-basePureWhite  p-5 shadow-card ${
         variation === 'collapsed' ? 'gap-4' : 'w-full gap-6'
       }`}
+      href={href}
+      target={target}
     >
       {imageUrl && variation === 'collapsed' && (
         <img
@@ -171,7 +177,7 @@ const Card: React.FC<CardProps> = ({
           </div>
         )}
       </div>
-    </div>
+    </a>
   );
 };
 

@@ -94,7 +94,8 @@ export const MultipleCollapsedCards = () => {
           value: 'India',
         },
       ],
-
+      href: '/tags',
+      target: '_blank',
       footerContent: [
         {
           icon: 'https://cdn-icons-png.flaticon.com/512/9286/9286057.png',
@@ -131,6 +132,7 @@ export const MultipleCollapsedCards = () => {
           value: 'India',
         },
       ],
+      href: 'https://www.google.com',
       footerContent: [
         {
           icon: 'https://cdn-icons-png.flaticon.com/512/9286/9286057.png',
@@ -168,6 +170,7 @@ export const MultipleCollapsedCards = () => {
           value: 'India',
         },
       ],
+      href: 'google.com',
       footerContent: [
         {
           icon: 'https://cdn-icons-png.flaticon.com/512/9286/9286057.png',
@@ -218,6 +221,8 @@ export const MultipleExpandedCards = () => {
           value: 'India',
         },
       ],
+      href: 'https://google.com',
+      target: '_self',
       footerContent: [
         {
           icon: 'https://cdn-icons-png.flaticon.com/512/9286/9286057.png',
@@ -255,6 +260,7 @@ export const MultipleExpandedCards = () => {
           value: 'India',
         },
       ],
+      href: 'google.com',
       footerContent: [
         {
           icon: 'https://cdn-icons-png.flaticon.com/512/9286/9286057.png',
@@ -292,6 +298,8 @@ export const MultipleExpandedCards = () => {
           value: 'India',
         },
       ],
+      href: '/tags',
+      target: '_blank',
       footerContent: [
         {
           icon: 'https://cdn-icons-png.flaticon.com/512/9286/9286057.png',

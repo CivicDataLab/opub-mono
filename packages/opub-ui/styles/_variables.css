@@ -332,6 +332,7 @@
     0px 0px 5px 0px rgba(23, 24, 24, 0.05);
   --shadow-element-topnav: 0px 2px 2px -1px rgba(0, 0, 0, 0.15);
   --shadow-element-focus: 0px 0px 0px 2px rgba(0, 145, 255, 1);
+  --shadow-element-card: 0px 0px 12px 0px rgba(0, 0, 0, 0.16);
 
   --z-1: 100;
   --z-2: 400;
