@@ -72,6 +72,9 @@ export const Default: Story = {
     onChange: (e: any) => {
       console.log(e);
     },
+    onInput: (e: any) => {
+      console.log(e);
+    },
   },
 };
 

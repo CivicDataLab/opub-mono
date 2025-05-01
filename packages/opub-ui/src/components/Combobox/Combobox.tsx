@@ -32,6 +32,8 @@ export type ComboProps = {
    * Add creatable to the combobox.
    */
   creatable?: boolean;
+
+  onInput?: (value: string) => void; // Add this line
 };
 
 export const Combobox = React.forwardRef(
@@ -213,6 +215,9 @@ export const Combobox = React.forwardRef(
         setValue={(value) => {
           startTransition(() => {
             setSearchValue(value);
+            if (props.onInput) {
+              props.onInput(value);
+            }
           });
         }}
         store={combobox}
