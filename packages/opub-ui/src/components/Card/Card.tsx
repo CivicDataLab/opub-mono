@@ -65,7 +65,7 @@ const Card: React.FC<CardProps> = ({
         <img
           src={imageUrl}
           alt="Card banner"
-          className=" min-w-sm m-auto h-44 rounded-2"
+          className=" h-full w-full rounded-2"
         />
       )}
       <div className=" flex flex-col gap-4">
