@@ -111,6 +111,19 @@ $item-min-width: 50px;
         background: #71e57d;
       }
     }
+
+    &.ActiveBorderDataSpaceTheme {
+      background-color: #EEE;
+      font-weight: 400;
+      color: var(--text-subdued, #484b51);
+      border-bottom: none;
+      box-shadow: var(--shadow-element-popover);
+      border-radius: 16px 16px 0px 0px;
+
+      &::before {
+        background: #FDB557;
+      }
+    }
   }
 }
 
@@ -130,4 +143,10 @@ $item-min-width: 50px;
   .Title {
     width: 100%;
   }
+}
+
+
+.border {
+  border: 2px solid #eee;
+  border-radius: 16px 16px 0px 0px;
 }

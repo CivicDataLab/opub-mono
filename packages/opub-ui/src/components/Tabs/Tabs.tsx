@@ -24,18 +24,24 @@ type ListProps = {
   fitted?: boolean;
   /** Text to replace disclosures horizontal dots */
   disclosureText?: string;
+  border?: boolean;
 } & TabsRadix.TabsListProps;
 
 const TabList = forwardRef((props: ListProps, ref: any) => {
-  const { fitted, disclosureText, className, ...others } = props;
-  const classname = cn(styles.TabList, fitted && styles.fitted, className);
+  const { fitted, disclosureText, border, className, ...others } = props;
+  const classname = cn(
+    styles.TabList,
+    fitted && styles.fitted,
+    border && styles.border,
+    className
+  );
 
   return <TabsRadix.List className={classname} {...others} ref={ref} />;
 });
 
 type TabProps = {
   activeBorder?: boolean;
-  theme?: 'climate' | 'default';
+  theme?: 'climate' | 'default' | 'dataSpace';
 } & TabsRadix.TabsTriggerProps;
 
 const Tab = forwardRef(
@@ -50,12 +56,17 @@ const Tab = forwardRef(
             styles.Tab,
             activeBorder && styles.ActiveBorder,
             theme === 'climate' && styles.ActiveBorderClimateTheme,
+            theme === 'dataSpace' && styles.ActiveBorderDataSpaceTheme,
             className
           )}
         >
           <Text
             className={cn(
-              theme === 'climate' ? styles.TitleClimateTheme : styles.Title
+              theme === 'climate'
+                ? styles.TitleClimateTheme
+                : theme === 'dataSpace'
+                  ? styles.TitleDataSpaceTheme
+                  : styles.Title
             )}
             variant="bodyMd"
           >
