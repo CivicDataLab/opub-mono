@@ -20,14 +20,15 @@
   --op-tooltip-overlay-offset: var(--space-3);
   --op-tooltip-border-radius: var(--border-radius-1, 4px);
 
-  max-height: var(--radix-tooltip-content-available-height);
+  max-height: 200px; // Set a fixed max height
+  overflow-y: auto; // Make content scrollable
   box-shadow: var(--shadow-element-popover);
   border-radius: var(--op-tooltip-border-radius);
   border: 1px solid var(--border-subdued);
   background-color: var(--surface-default);
   word-break: break-word;
   padding: var(--space-1) var(--space-2);
-  pointer-events: none;
+  pointer-events: auto;
 
   @media screen and (-ms-high-contrast: active) {
     border: var(--border-width-2) solid windowText;
