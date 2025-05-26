@@ -65,7 +65,7 @@ const Card: React.FC<CardProps> = ({
         <img
           src={imageUrl}
           alt="Card banner"
-          className=" h-full w-full rounded-2"
+          className=" h-40 w-full rounded-2 object-cover"
         />
       )}
       <div className=" flex flex-col gap-4">
@@ -83,9 +83,18 @@ const Card: React.FC<CardProps> = ({
               ))}
             </div>
           )}
-          <Text color="highlight" variant="headingMd">
-            {title}
-          </Text>
+
+          {variation === 'collapsed' && title.length > 60 ? (
+            <Tooltip content={description} align="end" width="wide">
+              <Text color="highlight" variant="headingMd">
+                {title.slice(0, 60)}...
+              </Text>
+            </Tooltip>
+          ) : (
+            <Text color="highlight" variant="headingMd">
+              {title}
+            </Text>
+          )}
         </div>
 
         <div className="flex flex-wrap items-center gap-4">
@@ -132,23 +141,28 @@ const Card: React.FC<CardProps> = ({
           className={` flex flex-wrap  items-center  ${variation === 'collapsed' ? 'justify-between' : ' justify-normal'}`}
         >
           {footerContent &&
-            footerContent.map((item, index) => (
-              <div
-                className={`flex ${variation !== 'collapsed' && 'basis-1/2'}  items-center  gap-2`}
-                key={index}
-              >
-                <>
-                  {variation !== 'collapsed' && (
-                    <Text variant="bodySm">{item.label}:</Text>
-                  )}
-                  <img
-                    src={item.icon}
-                    alt="Logo"
-                    className="h-9 w-9 rounded-6 border-1 border-solid border-baseGraySlateSolid8 p-2"
-                  />
-                </>
-              </div>
-            ))}
+            footerContent.map((item, index) => {
+              const isLastItem = index === footerContent.length - 1;
+              return (
+                <div
+                  className={`flex ${variation !== 'collapsed' && 'basis-1/2'} items-center gap-2`}
+                  key={index}
+                >
+                  <>
+                    {variation !== 'collapsed' && (
+                      <Text variant="bodySm">{item.label}:</Text>
+                    )}
+                    <img
+                      src={item.icon}
+                      alt="Logo"
+                      className={`h-9 w-9 rounded-6 border-1 border-solid border-baseGraySlateSolid8 ${
+                        isLastItem ? 'object-contain p-[2px]' : 'p-2'
+                      }`}
+                    />
+                  </>
+                </div>
+              );
+            })}
         </div>
         {variation === 'expanded' && (
           <div className={` flex flex-wrap  items-center`}>
