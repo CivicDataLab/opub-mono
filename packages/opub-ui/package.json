@@ -1,7 +1,7 @@
 {
   "name": "opub-ui",
   "description": "OPub UI Library",
-  "version": "0.3.85",
+  "version": "0.3.86",
   "private": false,
   "license": "MIT",
   "author": "CivicDataLab <tech@civicdatalab.in>",

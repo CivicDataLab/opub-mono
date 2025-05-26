@@ -85,7 +85,7 @@ const Card: React.FC<CardProps> = ({
           )}
 
           {variation === 'collapsed' && title.length > 60 ? (
-            <Tooltip content={description} align="end" width="wide">
+            <Tooltip content={title} align="end" width="wide">
               <Text color="highlight" variant="headingMd">
                 {title.slice(0, 60)}...
               </Text>
