@@ -153,7 +153,6 @@ export const MultipleCollapsedCards = () => {
     },
     {
       imageUrl: 'https://justicehub.in/assets/khoj1.png',
-
       title:
         'Public Procurement in Renewable Energy  Procurement in Renewable Energy',
       description:
@@ -163,16 +162,19 @@ export const MultipleCollapsedCards = () => {
           icon: IconCalendarEvent,
           label: 'Date',
           value: '19 July 2024',
+          tooltip: 'Date',
         },
         {
           icon: IconDownload,
           label: 'Download',
           value: '500',
+          tooltip: 'Download',
         },
         {
           icon: IconWorld,
-          label: 'Geography',
+          label: '',
           value: 'India',
+          tooltip: 'Geography',
         },
       ],
       href: 'google.com',
@@ -180,10 +182,12 @@ export const MultipleCollapsedCards = () => {
         {
           icon: 'https://cdn-icons-png.flaticon.com/512/9286/9286057.png',
           label: 'Sectors',
+          tooltip: 'Sectors Title',
         },
         {
           icon: 'https://civicdatalab.in/cdl_logo.png',
           label: 'Published by',
+          tooltip: 'Published by Title',
         },
       ],
       variation: 'collapsed',
@@ -222,7 +226,7 @@ export const MultipleExpandedCards = () => {
         },
         {
           icon: IconWorld,
-          label: 'Geography',
+          label: '',
           value: 'India',
         },
       ],
