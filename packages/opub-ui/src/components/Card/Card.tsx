@@ -86,10 +86,10 @@ const Card: React.FC<CardProps> = ({
             </div>
           )}
 
-          {variation === 'collapsed' && title.length > 60 ? (
+          {variation === 'collapsed' && title.length > 55 ? (
             <Tooltip content={title} align="end" width="wide">
               <Text color="highlight" variant="headingMd">
-                {title.slice(0, 60)}...
+                {title.slice(0, 55)}...
               </Text>
             </Tooltip>
           ) : (
@@ -124,18 +124,18 @@ const Card: React.FC<CardProps> = ({
           <>
             {variation === 'collapsed' && description.length > 180 ? (
               <Tooltip content={description} align="end" width="wide">
-                <Text variant="bodySm" as="p" color="default">
+                <Text variant="bodyMd" as="p" color="default">
                   {description.slice(0, 180)}...
                 </Text>
               </Tooltip>
             ) : variation === 'expanded' && description.length > 320 ? (
               <Tooltip content={description} align="end" width="wide">
-                <Text variant="bodySm" as="p" color="default">
+                <Text variant="bodyMd" as="p" color="default">
                   {description.slice(0, 320)}...
                 </Text>
               </Tooltip>
             ) : (
-              <Text variant="bodySm" as="p" color="default">
+              <Text variant="bodyMd" as="p" color="default">
                 {description}
               </Text>
             )}
