@@ -77,10 +77,10 @@ $height: 20px;
 }
 
 .TagText {
-  font-size: 13px;
+  font-size: 14px;
   line-height: var(--font-line-height-2);
   min-height: $height;
-  padding: var(--space-1) 0;
+  padding: var(--space-1);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -88,8 +88,8 @@ $height: 20px;
   display: inline-block;
 
   @media #{$breakpoints-sm-up} {
-    font-size: var(--font-size-75);
-    padding: var(--space-05) 0;
+    font-size: var(--font-size-100);
+    padding: var(--space-1);
   }
 }
 
