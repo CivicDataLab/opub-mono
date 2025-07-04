@@ -3,7 +3,7 @@ import { IconSun } from '@tabler/icons-react';
 
 import { PropsVariationSection } from '../../utils/storybook';
 import { Icon } from '../Icon';
-import { Tag } from './Tag';
+import Tag from './Tag';
 
 /**
  * Tag represent a set of interactive keywords that help label, organize, and categorize objects

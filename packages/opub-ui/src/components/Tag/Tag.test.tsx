@@ -1,6 +1,8 @@
 import '@testing-library/jest-dom';
+
 import { render, screen } from '@testing-library/react';
-import { Tag } from './Tag';
+
+import Tag from './Tag';
 
 describe('Tag Tests', () => {
   beforeEach(() => {
