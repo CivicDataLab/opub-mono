@@ -1,3 +1,14 @@
+/**
+ * ==============================
+ * ✅ Card.tsx – UI Component
+ * ==============================
+ *
+ * A reusable Card component that supports two layout variations:
+ * - 'collapsed' – Compact preview card with image, title, and limited details.
+ * - 'expanded' – Full-width view with additional metadata, tags, and formats.
+ *
+ */
+
 import React, { HTMLAttributeAnchorTarget } from 'react';
 import { TablerIconsProps } from '@tabler/icons-react';
 
@@ -9,23 +20,33 @@ import { Tag } from '../Tag';
 import { Text } from '../Text';
 import { Tooltip } from '../Tooltip';
 
+/** Metadata displayed in the card with an icon and value. */
 interface MetadataContent {
-  icon: React.ComponentType<TablerIconsProps>; // This allows any Tabler icon component
+  icon: React.ComponentType<TablerIconsProps>; // Tabler icon component
   label: string;
   value: string;
   tooltip?: string;
 }
+
+/** Footer logos with optional tooltip text. */
 interface FooterInfo {
   icon: string;
   label: string;
   tooltip?: string;
 }
 
+/**
+ * Label badge with color customization.
+ */
 interface typeInfo {
   label: string;
   fillColor: string;
   borderColor: string;
 }
+
+/**
+ * Main props for the Card component.
+ */
 export interface CardProps {
   imageUrl?: string;
   tag?: string[];
@@ -41,6 +62,9 @@ export interface CardProps {
   target?: HTMLAttributeAnchorTarget;
 }
 
+/**
+ * Card component – displays dataset or content previews with multiple customization options.
+ */
 const Card: React.FC<CardProps> = ({
   imageUrl,
   tag,
@@ -57,21 +81,25 @@ const Card: React.FC<CardProps> = ({
 }) => {
   return (
     <a
-      className={` border border-gray-200 flex flex-col justify-between rounded-4 bg-basePureWhite  p-5 shadow-card ${
+      className={`border border-gray-200 flex flex-col justify-between rounded-4 bg-basePureWhite p-5 shadow-card ${
         variation === 'collapsed' ? 'gap-4' : 'w-full gap-6'
       }`}
       href={href}
       target={target}
     >
+      {/* Display image only in collapsed mode */}
       {imageUrl && variation === 'collapsed' && (
         <img
           src={imageUrl}
           alt="Card banner"
-          className=" h-40 w-full rounded-2 object-cover"
+          className="h-40 w-full rounded-2 object-cover"
         />
       )}
-      <div className=" flex flex-col gap-4">
+
+      {/* Card body */}
+      <div className="flex flex-col gap-4">
         <div>
+          {/* Display type badges only in collapsed view */}
           {type && variation === 'collapsed' && (
             <div className="mb-2 flex gap-2">
               {type.map((item) => (
@@ -86,6 +114,7 @@ const Card: React.FC<CardProps> = ({
             </div>
           )}
 
+          {/* Truncate long titles in collapsed view */}
           {variation === 'collapsed' && title.length > 55 ? (
             <Tooltip content={title} align="end" width="wide">
               <Text color="highlight" variant="headingMd">
@@ -99,27 +128,31 @@ const Card: React.FC<CardProps> = ({
           )}
         </div>
 
+        {/* Metadata section */}
         <div className="flex flex-wrap items-center gap-4">
-          {metadataContent &&
-            metadataContent.map((item, index) => (
-              <span
-                className="flex items-center gap-1"
-                key={index}
-                title={item.tooltip}
-              >
-                <Icon source={item.icon} color={iconColor} size={24} />
-                {variation !== 'collapsed' && item.label.length > 0 && (
-                  <Text variant="bodySm" className=" pr-1">
-                    {item.label}:
-                  </Text>
-                )}
-                <Text variant="bodySm">{item.value}</Text>
-              </span>
-            ))}
+          {metadataContent?.map((item, index) => (
+            <span
+              className="flex items-center gap-1"
+              key={index}
+              title={item.tooltip}
+            >
+              <Icon source={item.icon} color={iconColor} size={24} />
+              {variation !== 'collapsed' && item.label && (
+                <Text variant="bodySm" className="pr-1">
+                  {item.label}:
+                </Text>
+              )}
+              <Text variant="bodySm">{item.value}</Text>
+            </span>
+          ))}
         </div>
+
+        {/* Divider between metadata and footer */}
         {(footerContent || description) && variation === 'collapsed' && (
           <Divider />
         )}
+
+        {/* Description truncation based on variation */}
         {description && (
           <>
             {variation === 'collapsed' && description.length > 180 ? (
@@ -142,10 +175,15 @@ const Card: React.FC<CardProps> = ({
           </>
         )}
       </div>
+
+      {/* Footer section – logos or icon badges */}
       <div className="flex flex-col gap-4">
         <div
-          className={` flex flex-wrap  items-center  ${variation === 'collapsed' ? 'justify-between' : ' justify-normal'}`}
+          className={`flex flex-wrap items-center ${
+            variation === 'collapsed' ? 'justify-between' : 'justify-normal'
+          }`}
         >
+          {/* Render first 3 logos with special layout */}
           {footerContent &&
           variation === 'collapsed' &&
           footerContent.length > 2 ? (
@@ -161,21 +199,21 @@ const Card: React.FC<CardProps> = ({
                   />
                 ))}
               </div>
-              <div>
-                <img
-                  title={footerContent[2]?.tooltip}
-                  src={footerContent[2]?.icon}
-                  alt="Logo"
-                  className="h-9 w-9 rounded-6 border-1 border-solid border-baseGraySlateSolid8 object-contain p-[2px]"
-                />
-              </div>
+              <img
+                title={footerContent[2]?.tooltip}
+                src={footerContent[2]?.icon}
+                alt="Logo"
+                className="h-9 w-9 rounded-6 border-1 border-solid border-baseGraySlateSolid8 object-contain p-[2px]"
+              />
             </div>
           ) : (
             footerContent?.map((item, index) => {
               const isLastItem = index === footerContent.length - 1;
               return (
                 <div
-                  className={`flex ${variation !== 'collapsed' && 'basis-1/2'} items-center gap-2`}
+                  className={`flex ${
+                    variation !== 'collapsed' && 'basis-1/2'
+                  } items-center gap-2`}
                   key={index}
                 >
                   {variation !== 'collapsed' && (
@@ -194,8 +232,10 @@ const Card: React.FC<CardProps> = ({
             })
           )}
         </div>
+
+        {/* Tags and formats only shown in expanded view */}
         {variation === 'expanded' && (
-          <div className={` flex flex-wrap  items-center`}>
+          <div className="flex flex-wrap items-center">
             {tag && tag.length > 0 && (
               <div className="mb-2 flex basis-1/2 items-center gap-2">
                 <Text variant="bodySm">Tags:</Text>
