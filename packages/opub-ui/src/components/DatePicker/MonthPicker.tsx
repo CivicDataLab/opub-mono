@@ -30,6 +30,8 @@ export type DatePickerProps = {
   helpText?: React.ReactNode;
   /** Default Value  */
   defaultValue?: DateValue | null;
+  /** onChange callback */
+  onChange?: (value: DateValue | null) => void;
 } & (DatePickerState | AriaDatePickerProps<DateValue>);
 
 const MonthPicker = React.forwardRef(
@@ -44,10 +46,15 @@ const MonthPicker = React.forwardRef(
     }: DatePickerProps,
     ref: any
   ) => {
-    let state = useDatePickerState(props);
+    const processedProps = {
+      ...props,
+      validationState: props.validationState === null ? undefined : props.validationState,
+    };
+
+    let state = useDatePickerState(processedProps);
 
     let { labelProps, fieldProps, buttonProps, dialogProps, calendarProps } =
-      useDatePicker(props, state, ref);
+      useDatePicker(processedProps, state, ref);
     const themeClass = cn(styles.DatePicker);
 
     const {

@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, ReactNode } from 'react';
 
 import { cn } from '../../utils';
 import { ScrollArea } from '../ScrollArea';
@@ -8,7 +8,7 @@ import styles from './Tray.module.scss';
 
 type Props = {
   // content for the tray
-  children: React.ReactNode;
+  children: ReactNode;
   // whether the tray is open
   open?: boolean;
   // called when the tray should be closed
@@ -18,7 +18,7 @@ type Props = {
   // size of the tray
   size?: 'narrow' | 'medium' | 'extended';
   // trigger for the tray
-  trigger?: React.ReactNode;
+  trigger?: ReactNode;
 };
 
 const Tray = forwardRef((props: Props, ref: any) => {
@@ -51,7 +51,7 @@ const Tray = forwardRef((props: Props, ref: any) => {
         }
       }}
     >
-      <Sheet.Trigger>{trigger}</Sheet.Trigger>
+      <Sheet.Trigger>{trigger as any}</Sheet.Trigger>
       <Sheet.Content
         side="bottom"
         ref={finalRef}
@@ -70,7 +70,7 @@ const Tray = forwardRef((props: Props, ref: any) => {
           <Text visuallyHidden>close tray</Text>
           <div />
         </button>
-        <ScrollArea>{children}</ScrollArea>
+        <ScrollArea>{children as any}</ScrollArea>
       </Sheet.Content>
     </Sheet>
   );

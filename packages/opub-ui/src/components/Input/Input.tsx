@@ -91,7 +91,7 @@ export const Input = React.forwardRef(
     const prefixRef = useRef<HTMLDivElement>(null);
     const suffixRef = useRef<HTMLDivElement>(null);
     const tagsRef = useRef<HTMLDivElement>(null);
-    const buttonPressTimer = useRef<number>();
+    const buttonPressTimer = useRef<number | undefined>(undefined);
     const spinnerRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -124,11 +124,11 @@ export const Input = React.forwardRef(
     const className = cn(
       styles.TextField,
       Boolean(normalizedValue) && styles.hasValue,
-      disabled && styles.disabled,
-      readOnly && styles.readOnly,
-      error && styles.error,
-      multiline && styles.multiline,
-      focus && styles.focus
+      Boolean(disabled) && styles.disabled,
+      Boolean(readOnly) && styles.readOnly,
+      Boolean(error) && styles.error,
+      Boolean(multiline) && styles.multiline,
+      Boolean(focus) && styles.focus
     );
 
     const inputType = type === 'currency' ? 'text' : type;
@@ -309,10 +309,10 @@ export const Input = React.forwardRef(
     const inputClassName = cn(
       styles.Input,
       align && styles[variationName('Input-align', align)],
-      suffix && styles['Input-suffixed'],
-      clearButton && styles['Input-hasClearButton'],
-      monospaced && styles.monospaced,
-      suggestion && styles.suggestion
+      Boolean(suffix) && styles['Input-suffixed'],
+      Boolean(clearButton) && styles['Input-hasClearButton'],
+      Boolean(monospaced) && styles.monospaced,
+      Boolean(suggestion) && styles.suggestion
     );
 
     const handleOnFocus = (
@@ -392,8 +392,8 @@ export const Input = React.forwardRef(
       <div
         className={cn(
           styles.Backdrop,
-          connectedLeft && styles['Backdrop-connectedLeft'],
-          connectedRight && styles['Backdrop-connectedRight']
+          Boolean(connectedLeft) && styles['Backdrop-connectedLeft'],
+          Boolean(connectedRight) && styles['Backdrop-connectedRight']
         )}
       />
     );
