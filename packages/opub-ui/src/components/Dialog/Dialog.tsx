@@ -98,7 +98,7 @@ const Content = forwardRef((props: ContentProps, ref: any) => {
           <Header id={finalId} titleHidden={titleHidden} children={title} />
         )}
         <div className={cn(styles.Content, className)}>{children}</div>
-        {footer && (
+        {Boolean(footer) && (
           <Footer
             children={footer}
             primaryAction={primaryAction}

@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { DateValue } from '@react-types/calendar';
+import { RangeValue } from '@react-types/shared';
 import { IconCalendar } from '@tabler/icons-react';
 import { AriaDateRangePickerProps, useDateRangePicker } from 'react-aria';
 import { DateRangePickerState, useDateRangePickerState } from 'react-stately';
@@ -18,8 +19,12 @@ import styles from './DatePicker.module.scss';
 
 export type RangePickerProps = {
   label: string;
-} & Omit<DateTimeProps, 'label'> &
-  (DateRangePickerState | AriaDateRangePickerProps<DateValue>);
+  /** Callback fired when value changes */
+  onChange?: (value: RangeValue<DateValue> | null) => void;
+} & Omit<DateTimeProps, 'label'> & 
+  Omit<AriaDateRangePickerProps<DateValue>, 'validationState' | 'onChange'> & {
+  validationState?: 'valid' | 'invalid' | undefined;
+};
 
 const DateRangePicker = React.forwardRef(
   (props: RangePickerProps, ref: any) => {
@@ -32,7 +37,12 @@ const DateRangePicker = React.forwardRef(
       errorMessage,
     } = props;
 
-    let state = useDateRangePickerState(props);
+    const stateProps = {
+      ...props,
+      validationState: props.validationState === null ? undefined : props.validationState
+    };
+    
+    let state = useDateRangePickerState(stateProps);
 
     let {
       labelProps,
@@ -41,7 +51,7 @@ const DateRangePicker = React.forwardRef(
       buttonProps,
       dialogProps,
       calendarProps,
-    } = useDateRangePicker(props, state, ref);
+    } = useDateRangePicker(stateProps, state, ref);
     const themeClass = cn(styles.DatePicker);
 
     const {

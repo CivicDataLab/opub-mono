@@ -3,10 +3,10 @@
 import { cn } from '../../utils';
 import styles from './Popover.module.scss';
 import * as Radix from '@radix-ui/react-popover';
-import React from 'react';
+import React, { ReactNode } from 'react';
 
-export interface PopoverContentProps extends Radix.PopoverContentProps {
-  children?: React.ReactNode;
+export interface PopoverContentProps extends Omit<Radix.PopoverContentProps, 'children'> {
+  children?: ReactNode;
   open?: boolean;
   defaultOpen?: boolean;
   onOpenChange?: (open: boolean) => void;
@@ -54,7 +54,7 @@ const Content = React.forwardRef(
           {...props}
           ref={forwardedRef}
         >
-          {children}
+          {children as any}
           {isArrow && <Radix.Arrow />}
         </Radix.Content>
       </PortalDom>

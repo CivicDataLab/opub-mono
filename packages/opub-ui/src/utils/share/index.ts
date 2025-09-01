@@ -61,7 +61,7 @@ export const useScreenshot = ({
       fontPath,
       fontObj,
     });
-    const svg = await satori(Component, {
+    const svg = await satori(Component as any, {
       width: props.width,
       height: props.height,
       fonts,
