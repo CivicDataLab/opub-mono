@@ -1,7 +1,7 @@
 {
   "name": "opub-ui",
   "description": "OPub UI Library",
-  "version": "0.3.89",
+  "version": "0.3.62",
   "private": false,
   "license": "MIT",
   "author": "CivicDataLab <tech@civicdatalab.in>",
@@ -80,8 +80,8 @@
     "style": "opub-tokens; echo \"\\033[33mRunning Prettier\"; prettier --write **/tailwind/*.js **/_variables.css"
   },
   "peerDependencies": {
-    "react": "^16.14.0 || ^17.0.0 || ^18.0.0",
-    "react-dom": "^16.14.0 || ^17.0.0 || ^18.0.0"
+    "react": "^16.14.0 || ^17.0.0 || ^18.0.0 || ^19.0.0",
+    "react-dom": "^16.14.0 || ^17.0.0 || ^18.0.0 || ^19.0.0"
   },
   "dependencies": {
     "@ariakit/react": "^0.3.14",
