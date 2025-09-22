@@ -1,4 +1,4 @@
-@import '../../../styles/common';
+@use '../../../styles/common' as *;
 
 .Thumbnail {
   --op-thumbnail-extra-small-size: 24px;

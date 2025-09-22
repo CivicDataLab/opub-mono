@@ -13,6 +13,8 @@ import { FullscreenControl } from 'react-leaflet-fullscreen';
 
 import 'react-leaflet-fullscreen/styles.css';
 
+// import 'leaflet/dist/leaflet.css';
+
 import { LatLngExpression } from 'leaflet';
 
 import { cn } from '../../utils';
@@ -104,6 +106,9 @@ type MapProps = {
 
   /* set sequential colors */
   customColor?: (value: number) => string;
+
+  /* height of the map */
+  height?: number;
 };
 
 type LegendProps = {
@@ -137,7 +142,10 @@ const MapChart = (props: Props) => {
   if (unmountMap) return <>{'loading map...'}</>;
 
   return (
-    <div className={cn(styles.Wrapper, className)}>
+    <div
+      className={cn(styles.Wrapper, className)}
+      style={{ height: props?.height }}
+    >
       <Map
         selectedLayer={selectedLayer}
         setLayer={setSelectedLayer}
@@ -289,6 +297,7 @@ const Map = ({
           setMap && setMap(e);
           setMapRef(e);
         }}
+        // key={new Date().getTime()}
         zoomDelta={0.5}
         zoomSnap={0.5}
         scrollWheelZoom={scroolWheelZoom}

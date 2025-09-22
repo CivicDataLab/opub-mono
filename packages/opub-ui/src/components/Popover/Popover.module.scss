@@ -1,4 +1,4 @@
-@import '../../../styles/common';
+@use '../../../styles/common' as *;
 
 $visible-portion-of-arrow: 5px;
 $content-max-height: 500px;

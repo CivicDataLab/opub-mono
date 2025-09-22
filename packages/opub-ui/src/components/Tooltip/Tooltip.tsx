@@ -1,6 +1,6 @@
 'use client';
 
-import { forwardRef, LegacyRef } from 'react';
+import { LegacyRef } from 'react';
 import * as TooltipRadix from '@radix-ui/react-tooltip';
 
 import { TooltipProps, TooltipProviderProps } from '../../types/tooltip';
@@ -8,32 +8,28 @@ import { cn } from '../../utils';
 import { Text } from '../Text';
 import styles from './Tooltip.module.scss';
 
-const Provider = forwardRef(
-  (
-    {
-      globalDelayDuration,
-      skipDelayDuration = 200,
-      globalDisableHoverableContent = false,
-      children,
-      hasUnderline,
-    }: TooltipProviderProps,
-    ref: LegacyRef<HTMLDivElement>
-  ) => {
-    const classname = cn(styles.Wrapper, hasUnderline && styles.HasUnderline);
+const Provider = ({
+  globalDelayDuration,
+  skipDelayDuration = 200,
+  globalDisableHoverableContent = false,
+  children,
+  hasUnderline,
+  ref,
+}: TooltipProviderProps & { ref?: any }) => {
+  const classname = cn(styles.Wrapper, hasUnderline && styles.HasUnderline);
 
-    return (
-      <main className={`opub-Tooltip ${classname}`} ref={ref}>
-        <TooltipRadix.Provider
-          delayDuration={globalDelayDuration}
-          skipDelayDuration={skipDelayDuration}
-          disableHoverableContent={globalDisableHoverableContent}
-        >
-          {children as any}
-        </TooltipRadix.Provider>
-      </main>
-    );
-  }
-);
+  return (
+    <main className={`opub-Tooltip ${classname}`} ref={ref}>
+      <TooltipRadix.Provider
+        delayDuration={globalDelayDuration}
+        skipDelayDuration={skipDelayDuration}
+        disableHoverableContent={globalDisableHoverableContent}
+      >
+        {children as any}
+      </TooltipRadix.Provider>
+    </main>
+  );
+};
 
 const Tooltip = (props: TooltipProps) => {
   const {
@@ -70,7 +66,7 @@ const Tooltip = (props: TooltipProps) => {
       disableHoverableContent={disableHoverableContent}
     >
       <TooltipRadix.Trigger className={cn(styles.Trigger, className)} asChild>
-        <span>{children}</span>
+        {children as any}
       </TooltipRadix.Trigger>
 
       <TooltipRadix.Portal>

@@ -1,4 +1,4 @@
-@import '../../../styles/common';
+@use '../../../styles/common' as *;
 
 .DataTable {
   --op-data-table-first-column-width: 145px;

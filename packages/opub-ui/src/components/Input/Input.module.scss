@@ -1,4 +1,4 @@
-@import '../../../styles/common';
+@use '../../../styles/common' as *;
 
 $textfield-backdrop-offset: calc(-1 * var(--space-05));
 $spinner-icon-size: 12px;

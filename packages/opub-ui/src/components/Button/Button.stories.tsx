@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react-vite';
 import { IconSelector } from '@tabler/icons-react';
 
 import { PropsVariationSection } from '../../utils/storybook';
