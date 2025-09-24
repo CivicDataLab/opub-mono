@@ -4,18 +4,15 @@ import turbosnap from 'vite-plugin-turbosnap';
 
 const config = {
   stories: ['../src', '../docs'],
+
   addons: [
     getAbsolutePath('@storybook/addon-links'),
-    getAbsolutePath('@storybook/addon-essentials'),
-    getAbsolutePath('@storybook/addon-interactions'),
-    getAbsolutePath('@storybook/addon-mdx-gfm'),
+    getAbsolutePath('@storybook/addon-docs'),
   ],
+
   framework: {
     name: getAbsolutePath('@storybook/react-vite'),
     options: {},
-  },
-  docs: {
-    autodocs: true,
   },
   typescript: {
     reactDocgen: 'react-docgen',

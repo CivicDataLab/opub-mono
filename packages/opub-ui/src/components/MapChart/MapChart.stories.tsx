@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, StoryObj } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react-vite';
 import * as d3 from 'd3-scale';
 import { interpolateBlues } from 'd3-scale-chromatic';
 
@@ -144,6 +144,7 @@ export const Default: Story = {
     mapCenter: [26.193, 92.3],
     legendHeading,
     horizontalLegend: true,
+    // height: 200,
   },
 };
 
