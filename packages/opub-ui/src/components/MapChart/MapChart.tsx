@@ -108,7 +108,7 @@ type MapProps = {
   customColor?: (value: number) => string;
 
   /* height of the map */
-  height?: number;
+  height?: string;
 };
 
 type LegendProps = {
