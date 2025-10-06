@@ -76,4 +76,5 @@ export { Tooltip } from './Tooltip';
 export { Tray } from './Tray';
 export { MultiMonthPicker } from './DatePicker';
 export { Format } from './Format';
+export { ShimmerWrapper } from './ShimmerWrapper';
 export { Card } from './Card'
