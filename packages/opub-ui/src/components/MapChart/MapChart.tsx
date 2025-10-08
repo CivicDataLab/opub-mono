@@ -2,6 +2,13 @@
 
 import React from 'react';
 import { IconHome, IconStack, IconZoomReset } from '@tabler/icons-react';
+// import { FullscreenControl } from 'react-leaflet-fullscreen';
+
+// import 'react-leaflet-fullscreen/styles.css';
+
+// import 'leaflet/dist/leaflet.css';
+
+import { LatLngExpression } from 'leaflet';
 import {
   GeoJSON,
   MapContainer,
@@ -9,15 +16,9 @@ import {
   TileLayer,
   useMap,
 } from 'react-leaflet';
-import { FullscreenControl } from 'react-leaflet-fullscreen';
-
-import 'react-leaflet-fullscreen/styles.css';
-
-// import 'leaflet/dist/leaflet.css';
-
-import { LatLngExpression } from 'leaflet';
 
 import { cn } from '../../utils';
+import FullscreenControl from '../../utils/FullscreenControl';
 import { Icon } from '../Icon';
 import { Popover } from '../Popover';
 import { RadioGroup, RadioItem } from '../RadioGroup';

@@ -81,7 +81,8 @@
   },
   "peerDependencies": {
     "react": "^16.14.0 || ^17.0.0 || ^18.0.0 || ^19.0.0",
-    "react-dom": "^16.14.0 || ^17.0.0 || ^18.0.0 || ^19.0.0"
+    "react-dom": "^16.14.0 || ^17.0.0 || ^18.0.0 || ^19.0.0",
+    "react-leaflet": "^4.0.0 || ^5.0.0"
   },
   "dependencies": {
     "@ariakit/react": "^0.4.18",
@@ -121,13 +122,13 @@
     "esbuild": "^0.24.0",
     "intl-segmenter-polyfill": "^0.4.4",
     "leaflet": "^1.9.4",
+    "leaflet.fullscreen": "^4.0.0",
     "match-sorter": "^6.3.3",
     "modern-screenshot": "^4.4.38",
     "postcss": "^8.4.35",
     "react-aria": "^3.43.1",
     "react-hook-form": "^7.49.3",
-    "react-leaflet": "^5.0.0",
-    "react-leaflet-fullscreen": "^4.1.1",
+    "react-leaflet": "^4.0.0 || ^5.0.0",
     "react-medium-image-zoom": "^5.1.10",
     "react-stately": "^3.35.0",
     "sass": "^1.71.1",
@@ -150,6 +151,7 @@
     "@rollup/plugin-terser": "^0.4.1",
     "@rollup/plugin-typescript": "^11.1.6",
     "@storybook/addon-console": "^2.0.0",
+    "@storybook/addon-docs": "^9.1.7",
     "@storybook/addon-links": "^9.1.7",
     "@storybook/react-vite": "^9.1.7",
     "@svgr/rollup": "^8.1.0",
@@ -167,6 +169,7 @@
     "@vitejs/plugin-react": "^5.0.0",
     "babel-loader": "^8.3.0",
     "chromatic": "^6.17.1",
+    "eslint-plugin-storybook": "9.1.7",
     "happy-dom": "^15.0.0",
     "npm-run-all": "^4.1.5",
     "opub-tokens": "*",
@@ -184,8 +187,6 @@
     "vite": "^5.0.0",
     "vite-plugin-turbosnap": "^1.0.1",
     "vite-tsconfig-paths": "^5.0.0",
-    "vitest": "^2.0.0",
-    "eslint-plugin-storybook": "9.1.7",
-    "@storybook/addon-docs": "^9.1.7"
+    "vitest": "^2.0.0"
   }
 }
