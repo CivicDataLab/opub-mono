@@ -15,7 +15,7 @@ export default defineConfig(async () => {
     },
     optimizeDeps: {
       exclude: ['@resvg/resvg-js'],
-      // include: ['react-leaflet', 'leaflet'],
+      include: ['react-leaflet', 'leaflet'],
     },
     build: {
       rollupOptions: {
