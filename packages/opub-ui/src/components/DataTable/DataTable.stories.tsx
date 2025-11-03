@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Meta, StoryObj } from '@storybook/react-vite';
+import { Meta, StoryObj } from '@storybook/react';
 import { IconCopy, IconPencil, IconTrash } from '@tabler/icons-react';
 import { createColumnHelper } from '@tanstack/react-table';
 

@@ -1,7 +1,6 @@
 'use client';
 
-import * as React from 'react';
-import { isValidElement } from 'react';
+import React, { isValidElement } from 'react';
 
 // Wraps `element` in `Component`, if it is not already an instance of
 // `Component`. If `props` is passed, those will be added as props on the
@@ -9,7 +8,7 @@ import { isValidElement } from 'react';
 export function wrapWithComponent<TProps extends React.PropsWithChildren>(
   element: React.ReactNode | null | undefined,
   Component: React.ComponentType<TProps>,
-  props: TProps
+  props: TProps & JSX.IntrinsicAttributes
 ): React.ReactNode {
   if (element == null) {
     return null;

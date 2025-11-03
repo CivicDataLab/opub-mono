@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, StoryObj } from '@storybook/react-vite';
+import { Meta, StoryObj } from '@storybook/react';
 
 import { TListItem } from '../../types/combobox';
 import { Combobox } from './Combobox';

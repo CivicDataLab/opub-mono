@@ -6,26 +6,28 @@ import { Footer, FooterProps } from '../Dialog/components';
 import styles from '../Dialog/Dialog.module.scss';
 import { Header } from './components';
 
-interface DialogProps extends AlertDialogRadix.AlertDialogProps {
-  Trigger?: AlertDialogRadix.AlertDialogTriggerProps;
+interface DialogProps extends AlertDialogRadix.DialogProps {
+  Trigger?: AlertDialogRadix.DialogTriggerProps;
   Content?: ContentProps;
-  children?: React.ReactNode;
 }
 
 const AlertDialog = ({ children, ...props }: DialogProps) => {
   return <AlertDialogRadix.Root {...props}>{children}</AlertDialogRadix.Root>;
 };
 
-interface TriggerProps extends AlertDialogRadix.AlertDialogTriggerProps {
-  children?: React.ReactNode;
-}
-const Trigger = ({ children, ref, ...props }: TriggerProps & { ref?: any }) => {
-  return (
-    <AlertDialogRadix.Trigger {...props} asChild ref={ref}>
-      {children}
-    </AlertDialogRadix.Trigger>
-  );
-};
+interface TriggerProps extends AlertDialogRadix.DialogTriggerProps {}
+const Trigger = forwardRef(
+  (
+    { children, ...props }: TriggerProps,
+    ref: Ref<HTMLButtonElement> | undefined
+  ) => {
+    return (
+      <AlertDialogRadix.Trigger {...props} asChild ref={ref}>
+        {children}
+      </AlertDialogRadix.Trigger>
+    );
+  }
+);
 
 export type ContentProps = {
   /** The content to display inside modal */
@@ -51,10 +53,10 @@ export type ContentProps = {
   limitHeight?: boolean;
   /** Sets modal to the height of the viewport on small screens */
   fullScreen?: boolean;
-} & AlertDialogRadix.AlertDialogContentProps &
+} & AlertDialogRadix.DialogContentProps &
   FooterProps;
 
-const Content = ({ ref, ...props }: ContentProps & { ref?: any }) => {
+const Content = forwardRef((props: ContentProps, ref: any) => {
   const {
     children,
     title,
@@ -99,7 +101,7 @@ const Content = ({ ref, ...props }: ContentProps & { ref?: any }) => {
       </AlertDialogRadix.Content>
     </AlertDialogRadix.Portal>
   );
-};
+});
 
 AlertDialog.Trigger = Trigger;
 AlertDialog.Content = Content;

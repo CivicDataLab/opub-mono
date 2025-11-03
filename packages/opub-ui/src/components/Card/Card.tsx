@@ -81,9 +81,9 @@ const Card: React.FC<CardProps> = ({
 }) => {
   return (
     <a
-      className={`border border-gray-200 flex flex-col rounded-4 bg-basePureWhite p-5 shadow-card ${
-        variation === 'collapsed' ? 'h-full gap-4' : 'w-full gap-6'
-      } hover:shadow-lg transition-transform duration-300 ease-in-out hover:scale-105`}
+      className={`border border-gray-200 flex flex-col justify-between rounded-4 bg-basePureWhite p-5 shadow-card ${
+        variation === 'collapsed' ? 'gap-4' : 'w-full gap-6'
+      }`}
       href={href}
       target={target}
     >
@@ -115,14 +115,10 @@ const Card: React.FC<CardProps> = ({
           )}
 
           {/* Truncate long titles in collapsed view */}
-          {variation === 'collapsed' ? (
+          {variation === 'collapsed' && title.length > 55 ? (
             <Tooltip content={title} align="end" width="wide">
-              <Text
-                color="highlight"
-                variant="headingMd"
-                className="line-clamp-1 overflow-hidden"
-              >
-                {title}
+              <Text color="highlight" variant="headingMd">
+                {title.slice(0, 55)}...
               </Text>
             </Tooltip>
           ) : (
@@ -133,32 +129,20 @@ const Card: React.FC<CardProps> = ({
         </div>
 
         {/* Metadata section */}
-        <div className="flex flex-wrap items-center gap-4 overflow-hidden">
+        <div className="flex flex-wrap items-center gap-4">
           {metadataContent?.map((item, index) => (
             <span
-              className="flex min-w-0 flex-shrink-0 items-center gap-2"
+              className="flex items-center gap-1"
               key={index}
               title={item.tooltip}
             >
               <Icon source={item.icon} color={iconColor} size={24} />
               {variation !== 'collapsed' && item.label && (
-                <Text variant="bodySm" className="flex-shrink-0 pr-1">
+                <Text variant="bodySm" className="pr-1">
                   {item.label}:
                 </Text>
               )}
-              {variation === 'collapsed' ? (
-                <Tooltip content={item.value} align="end" width="wide">
-                  <Text
-                    variant="bodySm"
-                    truncate
-                    className="min-w-0 max-w-[120px] truncate"
-                  >
-                    {item.value}
-                  </Text>
-                </Tooltip>
-              ) : (
-                <Text variant="bodySm">{item.value}</Text>
-              )}
+              <Text variant="bodySm">{item.value}</Text>
             </span>
           ))}
         </div>

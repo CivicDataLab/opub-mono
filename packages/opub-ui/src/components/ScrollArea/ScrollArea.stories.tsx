@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/react-vite';
+import { Meta, StoryObj } from '@storybook/react';
 
 import { Text } from '../Text';
 import { ScrollArea } from './ScrollArea';

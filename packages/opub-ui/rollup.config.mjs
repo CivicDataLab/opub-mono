@@ -1,6 +1,5 @@
 import { readFileSync } from 'fs';
 import path from 'path';
-import { fileURLToPath } from 'url';
 import commonjs from '@rollup/plugin-commonjs';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 import terser from '@rollup/plugin-terser';
@@ -12,10 +11,7 @@ import { externals } from 'rollup-plugin-node-externals';
 import postcss from 'rollup-plugin-postcss';
 
 const pkg = JSON.parse(
-  readFileSync(
-    fileURLToPath(new URL('./package.json', import.meta.url)),
-    'utf-8'
-  )
+  readFileSync(new URL('./package.json', import.meta.url).pathname)
 );
 
 const rollup = (_args) => {

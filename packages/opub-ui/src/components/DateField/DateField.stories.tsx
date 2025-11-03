@@ -1,5 +1,5 @@
 import { getLocalTimeZone, now } from '@internationalized/date';
-import { Meta, StoryObj } from '@storybook/react-vite';
+import { Meta, StoryObj } from '@storybook/react';
 
 import { DateField } from './DateField';
 

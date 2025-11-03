@@ -3,7 +3,6 @@ import React from 'react';
 import { ActionList, type ActionListProps } from '../ActionList/ActionList';
 import { Popover } from '../Popover';
 import type { PopoverContentProps, PopoverProps } from '../Popover';
-import { MenuContext } from './MenuContext';
 
 type Props = {
   trigger: React.ReactNode;
@@ -14,6 +13,8 @@ type Props = {
 } & ActionListProps &
   PopoverContentProps &
   PopoverProps;
+
+export const MenuContext = React.createContext(null);
 
 const Menu = (props: Props) => {
   const [isOpen, setIsOpen] = React.useState<boolean>(false);

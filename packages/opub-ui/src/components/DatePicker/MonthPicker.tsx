@@ -34,74 +34,79 @@ export type DatePickerProps = {
   onChange?: (value: DateValue | null) => void;
 } & (DatePickerState | AriaDatePickerProps<DateValue>);
 
-const MonthPicker = ({
-  error,
-  labelAction,
-  labelHidden,
-  helpText,
-  requiredIndicator,
-  ref,
-  ...props
-}: DatePickerProps & { ref?: any }) => {
-  const processedProps = {
-    ...props,
-    validationState:
-      props.validationState === null ? undefined : props.validationState,
-  };
+const MonthPicker = React.forwardRef(
+  (
+    {
+      error,
+      labelAction,
+      labelHidden,
+      helpText,
+      requiredIndicator,
+      ...props
+    }: DatePickerProps,
+    ref: any
+  ) => {
+    const processedProps = {
+      ...props,
+      validationState: props.validationState === null ? undefined : props.validationState,
+    };
 
-  let state = useDatePickerState(processedProps);
+    let state = useDatePickerState(processedProps);
 
-  let { labelProps, fieldProps, buttonProps, dialogProps, calendarProps } =
-    useDatePicker(processedProps, state, ref);
-  const themeClass = cn(styles.DatePicker);
+    let { labelProps, fieldProps, buttonProps, dialogProps, calendarProps } =
+      useDatePicker(processedProps, state, ref);
+    const themeClass = cn(styles.DatePicker);
 
-  const {
-    onPress: onPressPrev,
-    isDisabled: disabledPrev,
-    ...othersProps
-  } = buttonProps;
+    const {
+      onPress: onPressPrev,
+      isDisabled: disabledPrev,
+      ...othersProps
+    } = buttonProps;
 
-  return (
-    <div className={`opub-MonthPicker ${themeClass}`}>
-      <Labelled
-        label={props.label}
-        {...labelProps}
-        error={error}
-        action={labelAction}
-        labelHidden={labelHidden}
-        helpText={helpText}
-        requiredIndicator={requiredIndicator}
-      >
-        <div ref={ref} className={styles.Wrapper}>
-          <DateField
-            {...fieldProps}
-            errorMessage={error}
-            isPicker
-            granularity="month"
-          />
-          <Popover
-            onOpenChange={() => (!state.isOpen ? state.open() : state.close())}
-            open={state.isOpen}
-            {...dialogProps}
-          >
-            <Popover.Trigger>
-              <IconButton
-                {...othersProps}
-                icon={IconCalendar}
-                withTooltip={false}
-              >
-                trigger calendar
-              </IconButton>
-            </Popover.Trigger>
-            <Popover.Content>
-              <YearCalendar {...calendarProps} />
-            </Popover.Content>
-          </Popover>
-          <div className={inputStyles.Backdrop} />
-        </div>
-      </Labelled>
-    </div>
-  );
-};
+    return (
+      <div className={`opub-MonthPicker ${themeClass}`}>
+        <Labelled
+          label={props.label}
+          {...labelProps}
+          error={error}
+          action={labelAction}
+          labelHidden={labelHidden}
+          helpText={helpText}
+          requiredIndicator={requiredIndicator}
+        >
+          <div ref={ref} className={styles.Wrapper}>
+            <DateField
+              {...fieldProps}
+              errorMessage={error}
+              isPicker
+              granularity="month"
+            />
+            <Popover
+              onOpenChange={() =>
+                !state.isOpen ? state.open() : state.close()
+              }
+              open={state.isOpen}
+              {...dialogProps}
+            >
+              <Popover.Trigger>
+                <IconButton
+                  {...othersProps}
+                  icon={IconCalendar}
+                  withTooltip={false}
+                >
+                  trigger calendar
+                </IconButton>
+              </Popover.Trigger>
+              <Popover.Content>
+                <YearCalendar {...calendarProps} />
+              </Popover.Content>
+            </Popover>
+            <div className={inputStyles.Backdrop} />
+          </div>
+        </Labelled>
+      </div>
+    );
+  }
+);
 
 export { MonthPicker };

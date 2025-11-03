@@ -1,8 +1,8 @@
-name: "OPub UI"
+name: 'OPub UI'
 on:
   push:
     paths:
-      - "packages/opub-ui/**"
+      - 'packages/opub-ui/**'
     branches:
       - main
 jobs:
@@ -16,7 +16,7 @@ jobs:
       - name: Setup Node.js environment
         uses: actions/setup-node@v3
         with:
-          node-version: 20
+          node-version: 18
       - name: Install dependencies
         run: npm ci
       - name: Publish Library to Chromatic

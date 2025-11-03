@@ -1,7 +1,6 @@
 {
   "extends": "@repo/config-ts/library.json",
   "compilerOptions": {
-    "jsx": "react-jsx",
     "outDir": "dist",
     "declarationDir": "dist/ts"
   },

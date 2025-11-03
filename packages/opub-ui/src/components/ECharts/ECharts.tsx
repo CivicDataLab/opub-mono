@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import type { CSSProperties } from 'react';
 import { getInstanceByDom, init } from 'echarts';
 import type { EChartsOption, ECharts as EType, SetOptionOpts } from 'echarts';
@@ -23,7 +23,7 @@ export function ECharts({
   theme,
   width = '1000px',
   height = '600px',
-}: ReactEChartsProps) {
+}: ReactEChartsProps): JSX.Element {
   const chartRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {

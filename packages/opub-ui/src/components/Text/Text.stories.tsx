@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/react-vite';
+import { Meta } from '@storybook/react';
 
 import { Text } from './Text';
 

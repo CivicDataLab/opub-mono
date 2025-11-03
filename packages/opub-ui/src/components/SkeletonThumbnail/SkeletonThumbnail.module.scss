@@ -1,4 +1,4 @@
-@use '../../../styles/common' as *;
+@import '../../../styles/common';
 
 .SkeletonThumbnail {
   --op-skeleton-thumbnail-extra-small-size: 24px;

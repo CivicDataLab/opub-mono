@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta } from '@storybook/react-vite';
+import { Meta } from '@storybook/react';
 import { IconLinkOff } from '@tabler/icons-react';
 
 import { ECharts } from './ECharts';
