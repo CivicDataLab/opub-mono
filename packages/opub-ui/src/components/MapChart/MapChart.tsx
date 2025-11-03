@@ -104,6 +104,9 @@ type MapProps = {
 
   /* set sequential colors */
   customColor?: (value: number) => string;
+
+  /* set height of map */
+  height?: string;
 };
 
 type LegendProps = {
@@ -137,7 +140,10 @@ const MapChart = (props: Props) => {
   if (unmountMap) return <>{'loading map...'}</>;
 
   return (
-    <div className={cn(styles.Wrapper, className)}>
+    <div
+      className={cn(styles.Wrapper, className)}
+      style={props.height ? { height: props.height } : undefined}
+    >
       <Map
         selectedLayer={selectedLayer}
         setLayer={setSelectedLayer}
