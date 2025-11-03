@@ -52,7 +52,7 @@ export const Choice: React.FC<ChoiceProps> = ({
 
       <div className={labelClassName}>
         <Label disabled={!!props.disabled} htmlFor={id}>
-          {label as any}
+          {label}
         </Label>
       </div>
     </div>

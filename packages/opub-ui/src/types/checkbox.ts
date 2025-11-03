@@ -1,16 +1,16 @@
 import type { CheckboxProps as Props } from '@radix-ui/react-checkbox';
-import React, { ReactNode } from 'react';
+import React from 'react';
 import type { Error } from './shared/form';
 
-export interface CheckboxProps extends Omit<Props, 'onChange' | 'children'> {
+export interface CheckboxProps extends Omit<Props, 'onChange'> {
   /** Name for form input */
   name: string;
   /** Display an error message */
   error?: Error | boolean;
   /** Additional text to aide in use */
-  helpText?: ReactNode;
+  helpText?: React.ReactNode;
   // Content that acts as label for checkbox
-  children?: ReactNode;
+  children?: React.ReactNode;
   // Should the label be hidden
   labelHidden?: boolean;
   // id for aria description

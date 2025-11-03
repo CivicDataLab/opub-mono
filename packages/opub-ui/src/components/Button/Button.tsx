@@ -133,7 +133,7 @@ const Button = React.forwardRef(
       size && size !== DEFAULT_SIZE && styles[variationName('size', size)],
       textAlign && styles[variationName('textAlign', textAlign)],
       fullWidth && styles.fullWidth,
-      Boolean(icon && children == null) && styles.iconOnly,
+      icon && children == null && styles.iconOnly,
       removeUnderline && styles.removeUnderline,
       pressed && !disabled && !url && styles.pressed,
       isDisabled && styles.disabled,
