@@ -115,6 +115,9 @@ type LegendProps = {
 
   /* set horizontal legend */
   horizontalLegend?: boolean;
+
+  /* set height of map*/
+  height?: string;
 };
 
 type Props = MapProps & LegendProps;
@@ -137,7 +140,10 @@ const MapChart = (props: Props) => {
   if (unmountMap) return <>{'loading map...'}</>;
 
   return (
-    <div className={cn(styles.Wrapper, className)}>
+    <div
+      className={cn(styles.Wrapper, className)}
+      style={props?.height ? { height: props?.height } : undefined}
+    >
       <Map
         selectedLayer={selectedLayer}
         setLayer={setSelectedLayer}
