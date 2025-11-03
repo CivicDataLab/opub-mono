@@ -28,7 +28,7 @@ const Provider = forwardRef(
           skipDelayDuration={skipDelayDuration}
           disableHoverableContent={globalDisableHoverableContent}
         >
-          {children as any}
+          {children}
         </TooltipRadix.Provider>
       </main>
     );

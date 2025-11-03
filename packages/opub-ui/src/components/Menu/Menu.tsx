@@ -41,7 +41,7 @@ const Menu = (props: Props) => {
       <Popover.Trigger
         onKeyDown={(e) => e.code === 'ArrowDown' && setIsOpen(true)}
       >
-        {trigger as any}
+        {trigger}
       </Popover.Trigger>
       <Popover.Content {...others}>
         <MenuContext.Provider value={callbackContent}>

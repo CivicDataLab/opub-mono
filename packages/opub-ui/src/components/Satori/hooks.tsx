@@ -9,7 +9,7 @@ import { initFonts } from './utils';
 export const useScreenshot = () => {
   // use satori to create svg
   const createSvg = async (
-    Component: React.ReactElement<any, any>,
+    Component: React.ReactElement,
     props: { width: number; height?: number }
   ) => {
     const fonts: any = await initFonts();
