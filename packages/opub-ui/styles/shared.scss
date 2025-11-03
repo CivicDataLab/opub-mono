@@ -1,12 +1,8 @@
-@use 'sass:math';
-@use 'sass:map';
-@use 'sass:meta';
-
 $default-browser-font-size: 16px;
 $base-font-size: 16px;
 
 @function rem($value) {
-  $unit: math.unit($value);
+  $unit: unit($value);
 
   @if $value == 0 {
     @return 0;
@@ -58,9 +54,9 @@ $border-width-data: (
 /// @return {Number} The width for the border.
 
 @function border-width($variant: base) {
-  $fetched-value: map.get($border-width-data, $variant);
+  $fetched-value: map-get($border-width-data, $variant);
 
-  @if meta.type-of($fetched-value) == number {
+  @if type-of($fetched-value) == number {
     @return $fetched-value;
   } @else {
     @error 'Border width variant `#{$variant}` not found. Available variants: #{available-names($border-width-data)}';

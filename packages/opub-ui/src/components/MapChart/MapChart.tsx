@@ -2,13 +2,6 @@
 
 import React from 'react';
 import { IconHome, IconStack, IconZoomReset } from '@tabler/icons-react';
-// import { FullscreenControl } from 'react-leaflet-fullscreen';
-
-// import 'react-leaflet-fullscreen/styles.css';
-
-// import 'leaflet/dist/leaflet.css';
-
-import { LatLngExpression } from 'leaflet';
 import {
   GeoJSON,
   MapContainer,
@@ -16,9 +9,13 @@ import {
   TileLayer,
   useMap,
 } from 'react-leaflet';
+import { FullscreenControl } from 'react-leaflet-fullscreen';
+
+import 'react-leaflet-fullscreen/styles.css';
+
+import { LatLngExpression } from 'leaflet';
 
 import { cn } from '../../utils';
-import FullscreenControl from '../../utils/FullscreenControl';
 import { Icon } from '../Icon';
 import { Popover } from '../Popover';
 import { RadioGroup, RadioItem } from '../RadioGroup';
@@ -107,9 +104,6 @@ type MapProps = {
 
   /* set sequential colors */
   customColor?: (value: number) => string;
-
-  /* height of the map */
-  height?: string;
 };
 
 type LegendProps = {
@@ -143,10 +137,7 @@ const MapChart = (props: Props) => {
   if (unmountMap) return <>{'loading map...'}</>;
 
   return (
-    <div
-      className={cn(styles.Wrapper, className)}
-      style={{ height: props?.height }}
-    >
+    <div className={cn(styles.Wrapper, className)}>
       <Map
         selectedLayer={selectedLayer}
         setLayer={setSelectedLayer}
@@ -298,7 +289,6 @@ const Map = ({
           setMap && setMap(e);
           setMapRef(e);
         }}
-        // key={new Date().getTime()}
         zoomDelta={0.5}
         zoomSnap={0.5}
         scrollWheelZoom={scroolWheelZoom}

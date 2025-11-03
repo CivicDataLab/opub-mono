@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import { Meta, StoryObj } from '@storybook/react-vite';
+import { Meta, StoryObj } from '@storybook/react';
 import { IconFile } from '@tabler/icons-react';
 
 import { Button } from '../Button';

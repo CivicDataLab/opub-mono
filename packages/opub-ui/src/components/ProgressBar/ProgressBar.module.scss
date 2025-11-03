@@ -1,5 +1,4 @@
-@use '../../../styles/common' as *;
-@use 'sass:map';
+@import '../../../styles/common';
 
 @function progress-bar-height($height: base) {
   $base: 24px;
@@ -9,7 +8,7 @@
     large: $base * 1.5,
   );
 
-  @return map.get($data, $height);
+  @return map-get($data, $height);
 }
 
 .sizeSmall {

@@ -1,12 +1,11 @@
-import React from 'react';
-
 import type {
   ActionListItemDescriptor,
   ActionListSection,
 } from '../../../../types/actionlist';
-import { MenuContext } from '../../../Menu/MenuContext';
+import { MenuContext } from '../../../Menu/Menu';
 import { Text } from '../../../Text';
 import { Item } from '../Item';
+import React from 'react';
 
 export interface SectionProps {
   /** Section of action items */

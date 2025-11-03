@@ -1,4 +1,4 @@
-@use '../../../styles/common' as *;
+@import '../../../styles/common';
 
 @mixin button-base {
   $vertical-padding: calc(

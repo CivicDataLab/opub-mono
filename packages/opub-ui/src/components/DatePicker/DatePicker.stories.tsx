@@ -5,7 +5,7 @@ import {
   parseDate,
   today,
 } from '@internationalized/date';
-import { Meta, StoryObj } from '@storybook/react-vite';
+import { Meta, StoryObj } from '@storybook/react';
 import * as chrono from 'chrono-node';
 
 import { TextField } from '../TextField';

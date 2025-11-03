@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/react-vite';
+import { Meta, StoryObj } from '@storybook/react';
 import { Drawer as DrawerPrimitive } from 'vaul';
 
 import { Button } from '../Button';

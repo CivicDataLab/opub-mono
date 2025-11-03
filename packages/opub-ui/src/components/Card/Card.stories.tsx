@@ -1,4 +1,4 @@
-import type { Meta, StoryFn } from '@storybook/react-vite';
+import type { Meta, StoryFn } from '@storybook/react';
 import {
   IconCalendarEvent,
   IconDownload,

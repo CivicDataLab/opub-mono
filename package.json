@@ -1,38 +1,38 @@
 {
-  "name": "turbo",
-  "version": "1.0.2",
-  "private": true,
-  "workspaces": [
-    "examples/*",
-    "packages/*"
-  ],
-  "scripts": {
-    "build": "turbo run build",
-    "postbuild": "turbo run postbuild",
-    "dev": "turbo run dev",
-    "lint": "turbo run lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md,scss}\"",
-    "test": "turbo run test",
-    "test:watch": "turbo run test:watch",
-    "prepare": "husky install",
-    "clean": "npm run clean:packages; rm -rf package-lock.json",
-    "clean:packages": "find . -name 'node_modules' -type d -prune -exec rm -rf '{}' +",
-    "new-component": "new-component",
-    "build:packages": "turbo run build --filter=create-opub-app --filter=opub-ui",
-    "publish": "changeset publish",
-    "style": "turbo run style",
-    "sync-config": "node ./utils/sync-config.js"
-  },
-  "devDependencies": {
-    "@changesets/cli": "^2.26.1",
-    "husky": "^8.0.0",
-    "lint-staged": "^13.2.0",
-    "new-component-opub": "git+https://github.com/CivicDataLab/new-component.git",
-    "prettier-plugin-tailwindcss": "^0.5.12",
-    "tsup": "^6.7.0",
-    "turbo": "^1.9.1"
-  },
-  "engines": {
-    "node": ">=18.0.0"
-  }
+	"name": "turbo",
+	"version": "1.0.2",
+	"private": true,
+	"workspaces": [
+		"examples/*",
+		"packages/*"
+	],
+	"scripts": {
+		"build": "turbo run build",
+		"postbuild": "turbo run postbuild",
+		"dev": "turbo run dev",
+		"lint": "turbo run lint",
+		"format": "prettier --write \"**/*.{ts,tsx,md,scss}\"",
+		"test": "turbo run test",
+		"test:watch": "turbo run test:watch",
+		"prepare": "husky install",
+		"clean": "npm run clean:packages; rm -rf package-lock.json",
+		"clean:packages": "find . -name 'node_modules' -type d -prune -exec rm -rf '{}' +",
+		"new-component": "new-component",
+		"build:packages": "turbo run build --filter=create-opub-app --filter=opub-ui",
+		"publish": "changeset publish",
+		"style": "turbo run style",
+		"sync-config": "node ./utils/sync-config.js"
+	},
+	"devDependencies": {
+		"@changesets/cli": "^2.26.1",
+		"husky": "^8.0.0",
+		"lint-staged": "^13.2.0",
+		"new-component-opub": "git+https://github.com/CivicDataLab/new-component.git",
+		"prettier-plugin-tailwindcss": "^0.5.12",
+		"tsup": "^6.7.0",
+		"turbo": "^1.9.1"
+	},
+	"engines": {
+		"node": ">=18.0.0"
+	}
 }

@@ -1,4 +1,4 @@
-import { themes } from 'storybook/theming';
+import { themes } from '@storybook/theming';
 import '../assets/styles.css';
 import '../styles/_variables.css';
 import { Toaster } from '../src/components/Toast';
@@ -26,7 +26,6 @@ export const parameters = {
 
 const preview = {
   parameters,
-
   decorators: [
     (Story) => {
       return (
@@ -37,7 +36,5 @@ const preview = {
       );
     },
   ],
-
-  tags: ['autodocs']
 };
 export default preview;

@@ -1,4 +1,4 @@
-@use '../../../styles/common' as *;
+@import '../../../styles/common';
 
 .Tray {
   border-radius: var(--border-radius-2, 8px) var(--border-radius-2, 8px)
