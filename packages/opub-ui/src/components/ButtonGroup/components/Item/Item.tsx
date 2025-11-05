@@ -14,7 +14,7 @@ export function Item({ button }: ItemProps) {
   const className = cn(
     styles.Item,
     focused && styles['Item-focused'],
-    button.props.plain && styles['Item-plain']
+    (button.props as any)?.plain && styles['Item-plain']
   );
 
   return (

@@ -65,6 +65,8 @@ const getPlugins = () => {
   };
 
   return [
+    // Externalize deps/peerDeps BEFORE resolving to avoid bundling/rewriting paths
+    externals({ deps: true, packagePath: './package.json' }),
     postcss({
       config: {
         path: './postcss.config.js',
@@ -81,7 +83,6 @@ const getPlugins = () => {
     svgr(),
     nodeResolve({ extensions }),
     commonjs(),
-    externals({ deps: true, packagePath: './package.json' }),
     copy({
       targets: [{ src: 'assets', dest: 'dist' }],
     }),

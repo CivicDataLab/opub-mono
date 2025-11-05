@@ -44,17 +44,22 @@ const MonthPicker = React.forwardRef(
     }: DatePickerProps,
     ref: any
   ) => {
-    let state = useDatePickerState(props);
+    const normalizedProps = {
+      ...props,
+      validationState:
+        props.validationState === null ? undefined : props.validationState,
+    };
+    let state = useDatePickerState(normalizedProps);
 
     let { labelProps, fieldProps, buttonProps, dialogProps, calendarProps } =
-      useDatePicker(props, state, ref);
+      useDatePicker(normalizedProps, state, ref);
     const themeClass = cn(styles.DatePicker);
 
     const {
-      onPress: onPressPrev,
-      isDisabled: disabledPrev,
+      onPress: _onPress,
+      isDisabled: _isDisabled,
       ...othersProps
-    } = buttonProps;
+    } = buttonProps as any;
 
     return (
       <div className={`opub-MonthPicker ${themeClass}`}>
@@ -79,7 +84,7 @@ const MonthPicker = React.forwardRef(
                 !state.isOpen ? state.open() : state.close()
               }
               open={state.isOpen}
-              {...dialogProps}
+              {...(dialogProps as any)}
             >
               <Popover.Trigger>
                 <IconButton
