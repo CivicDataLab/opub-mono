@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { Format } from './Format';
+import Format from './Format';
 
 const meta = {
   title: 'Components/Format',

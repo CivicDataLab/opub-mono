@@ -1,11 +1,13 @@
 'use client';
 
+import React from 'react';
+import * as Radix from '@radix-ui/react-popover';
+
 import { cn } from '../../utils';
 import styles from './Popover.module.scss';
-import * as Radix from '@radix-ui/react-popover';
-import React from 'react';
 
-export interface PopoverContentProps extends Radix.PopoverContentProps {
+export interface PopoverContentProps
+  extends Omit<Radix.PopoverContentProps, 'children'> {
   children?: React.ReactNode;
   open?: boolean;
   defaultOpen?: boolean;
@@ -54,7 +56,7 @@ const Content = React.forwardRef(
           {...props}
           ref={forwardedRef}
         >
-          {children}
+          {children as any}
           {isArrow && <Radix.Arrow />}
         </Radix.Content>
       </PortalDom>

@@ -72,7 +72,7 @@ export function Labelled({
         {...rest}
         hidden={false}
       >
-        {label}
+        {label as any}
       </Label>
 
       {actionMarkup}

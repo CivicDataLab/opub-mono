@@ -130,17 +130,19 @@ const Button = React.forwardRef(
       styles.Button,
       styles[variationName('kind', kind)],
       styles[variationName('variant', variant)],
-      size && size !== DEFAULT_SIZE && styles[variationName('size', size)],
-      textAlign && styles[variationName('textAlign', textAlign)],
+      size && size !== DEFAULT_SIZE
+        ? styles[variationName('size', size)]
+        : undefined,
+      textAlign ? styles[variationName('textAlign', textAlign)] : undefined,
       fullWidth && styles.fullWidth,
-      icon && children == null && styles.iconOnly,
+      icon && children == null ? styles.iconOnly : undefined,
       removeUnderline && styles.removeUnderline,
-      pressed && !disabled && !url && styles.pressed,
+      pressed && !disabled && !url ? styles.pressed : undefined,
       isDisabled && styles.disabled,
       loading && styles.loading,
-      textAlign && styles[variationName('textAlign', textAlign)],
+      textAlign ? styles[variationName('textAlign', textAlign)] : undefined,
       connectedDisclosure && styles.connectedDisclosure,
-      classes && classes
+      classes || undefined
     );
 
     const childMarkup = children ? (

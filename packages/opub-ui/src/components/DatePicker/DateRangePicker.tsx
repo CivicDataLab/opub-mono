@@ -32,7 +32,27 @@ const DateRangePicker = React.forwardRef(
       errorMessage,
     } = props;
 
-    let state = useDateRangePickerState(props);
+    const normalizedProps: any = {
+      ...props,
+      validationState:
+        props.validationState === null ? undefined : props.validationState,
+      errorMessage: props.errorMessage
+        ? typeof props.errorMessage === 'string'
+          ? props.errorMessage
+          : undefined
+        : undefined,
+      value:
+        props.value &&
+        typeof props.value === 'object' &&
+        'start' in props.value &&
+        'end' in props.value
+          ? {
+              start: props.value.start || undefined,
+              end: props.value.end || undefined,
+            }
+          : props.value,
+    };
+    let state = useDateRangePickerState(normalizedProps);
 
     let {
       labelProps,
@@ -41,7 +61,7 @@ const DateRangePicker = React.forwardRef(
       buttonProps,
       dialogProps,
       calendarProps,
-    } = useDateRangePicker(props, state, ref);
+    } = useDateRangePicker(normalizedProps, state, ref);
     const themeClass = cn(styles.DatePicker);
 
     const {

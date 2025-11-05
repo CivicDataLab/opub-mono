@@ -1,8 +1,9 @@
-import type { CheckboxProps as Props } from '@radix-ui/react-checkbox';
 import React from 'react';
+import type { CheckboxProps as Props } from '@radix-ui/react-checkbox';
+
 import type { Error } from './shared/form';
 
-export interface CheckboxProps extends Omit<Props, 'onChange'> {
+export interface CheckboxProps extends Omit<Props, 'onChange' | 'children'> {
   /** Name for form input */
   name: string;
   /** Display an error message */

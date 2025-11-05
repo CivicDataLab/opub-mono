@@ -51,7 +51,7 @@ const Tray = forwardRef((props: Props, ref: any) => {
         }
       }}
     >
-      <Sheet.Trigger>{trigger}</Sheet.Trigger>
+      <Sheet.Trigger>{trigger as any}</Sheet.Trigger>
       <Sheet.Content
         side="bottom"
         ref={finalRef}
@@ -70,7 +70,7 @@ const Tray = forwardRef((props: Props, ref: any) => {
           <Text visuallyHidden>close tray</Text>
           <div />
         </button>
-        <ScrollArea>{children}</ScrollArea>
+        <ScrollArea>{children as any}</ScrollArea>
       </Sheet.Content>
     </Sheet>
   );

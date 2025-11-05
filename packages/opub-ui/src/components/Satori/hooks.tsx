@@ -13,7 +13,7 @@ export const useScreenshot = () => {
     props: { width: number; height?: number }
   ) => {
     const fonts: any = await initFonts();
-    const svg = await satori(Component, {
+    const svg = await satori(Component as any, {
       width: props.width,
       height: props.height,
       fonts,

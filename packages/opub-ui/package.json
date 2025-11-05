@@ -81,7 +81,8 @@
   },
   "peerDependencies": {
     "react": "^16.14.0 || ^17.0.0 || ^18.0.0",
-    "react-dom": "^16.14.0 || ^17.0.0 || ^18.0.0"
+    "react-dom": "^16.14.0 || ^17.0.0 || ^18.0.0",
+    "@radix-ui/react-slot": "^1.0.0"
   },
   "dependencies": {
     "@ariakit/react": "^0.3.14",
@@ -104,7 +105,6 @@
     "@radix-ui/react-switch": "^1.0.2",
     "@radix-ui/react-tabs": "^1.0.3",
     "@radix-ui/react-tooltip": "^1.0.5",
-    "@react-types/calendar": "^3.2.0",
     "@react-types/datepicker": "^3.3.0",
     "@react-types/shared": "^3.18.0",
     "@storybook/test": "^8.0.2",
@@ -143,6 +143,8 @@
   },
   "devDependencies": {
     "@faker-js/faker": "^8.4.1",
+    "@react-types/calendar": "^3.8.0",
+    "@radix-ui/react-slot": "^1.0.0",
     "@repo/config-ts": "*",
     "@repo/eslint-config": "*",
     "@repo/prettier-config": "*",

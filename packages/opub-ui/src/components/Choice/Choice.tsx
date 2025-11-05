@@ -1,3 +1,5 @@
+import React from 'react';
+
 import { cn } from '../../utils';
 import { InlineMessage } from '../InlineMessage';
 import { Label } from '../Label';
@@ -52,7 +54,7 @@ export const Choice: React.FC<ChoiceProps> = ({
 
       <div className={labelClassName}>
         <Label disabled={!!props.disabled} htmlFor={id}>
-          {label}
+          {label as any}
         </Label>
       </div>
     </div>
