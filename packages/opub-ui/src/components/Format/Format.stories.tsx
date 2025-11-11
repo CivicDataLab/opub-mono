@@ -1,6 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 
-import Format from './Format';
+import { Format } from './index';
 
 const meta = {
   title: 'Components/Format',

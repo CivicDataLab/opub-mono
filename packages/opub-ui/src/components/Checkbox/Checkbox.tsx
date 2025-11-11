@@ -20,8 +20,8 @@ const Checkbox = forwardRef(
 
     const inputClassName = cn(
       styles.Input,
-      error ? styles.Error : undefined,
-      props.disabled ? styles.Disabled : undefined
+      Boolean(error) && styles.Error,
+      Boolean(props.disabled) && styles.Disabled
     );
 
     const iconSource = isIndeterminate ? IconMinus : IconCheck;

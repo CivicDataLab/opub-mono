@@ -1,4 +1,4 @@
-import type { Meta, StoryFn } from '@storybook/react';
+import type { Meta, StoryFn } from '@storybook/react-vite';
 import {
   IconCalendarEvent,
   IconDownload,
@@ -26,7 +26,7 @@ export const Default = Template.bind({});
 Default.args = {
   imageUrl: 'https://justicehub.in/assets/khoj1.png',
   title:
-    'Green Tagged Public Procurement Data related to Climate Action in Assam, India ',
+    'Green Tagged Public Procurement Data related to Climate Action in Assam, India',
   description:
     'Natural and man-made environmental resources – fresh water, clean air, forests, grasslands, marine resources, and agro-ecosystems – provide sustenance and a foundation for social and economic development. The need to safeguard these resources crosses all borders. Natural and man-made environmental resources – fresh water, clean air, forests, grasslands, marine resources, and agro-ecosystems – provide sustenance and a foundation for social and economic development. The need to safeguard these resources crosses all borders.',
   metadataContent: [

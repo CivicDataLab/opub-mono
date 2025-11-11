@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { createCalendar as createCalendarBase } from '@internationalized/date';
+import { createCalendar } from '@internationalized/date';
 import { DateValue } from '@react-types/calendar';
 import { IconArrowLeft, IconArrowRight } from '@tabler/icons-react';
 import {
@@ -71,10 +71,6 @@ export const MultiSelectYearCalendar = (
   const [selectedDates, setSelectedDates] = React.useState<DateValue[]>(
     props.value || []
   );
-
-  function createCalendar(name: string) {
-    return createCalendarBase(name as any);
-  }
 
   const state = useCalendarState({
     ...props,

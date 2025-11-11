@@ -1,5 +1,6 @@
 import { readFileSync } from 'fs';
 import path from 'path';
+import { fileURLToPath } from 'url';
 import commonjs from '@rollup/plugin-commonjs';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 import terser from '@rollup/plugin-terser';
@@ -11,7 +12,10 @@ import { externals } from 'rollup-plugin-node-externals';
 import postcss from 'rollup-plugin-postcss';
 
 const pkg = JSON.parse(
-  readFileSync(new URL('./package.json', import.meta.url).pathname)
+  readFileSync(
+    fileURLToPath(new URL('./package.json', import.meta.url)),
+    'utf-8'
+  )
 );
 
 const rollup = (_args) => {
@@ -65,8 +69,6 @@ const getPlugins = () => {
   };
 
   return [
-    // Externalize deps/peerDeps BEFORE resolving to avoid bundling/rewriting paths
-    externals({ deps: true, packagePath: './package.json' }),
     postcss({
       config: {
         path: './postcss.config.js',
@@ -83,6 +85,7 @@ const getPlugins = () => {
     svgr(),
     nodeResolve({ extensions }),
     commonjs(),
+    externals({ deps: true, packagePath: './package.json' }),
     copy({
       targets: [{ src: 'assets', dest: 'dist' }],
     }),

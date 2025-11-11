@@ -28,29 +28,24 @@ const DatePicker = ({ required, error, ...props }: PickerProps) => {
         {...props}
         control={method.control}
         rules={{ required: required }}
-        render={({ field, fieldState }) => {
-          const { onChange: fieldOnChange, ...fieldProps } = field;
-          const dateValue =
-            (field.value && parseDate(field.value)) ||
-            props.value ||
-            props.defaultValue;
-          return (
-            <DatePickerBase
-              {...(props as any)}
-              {...fieldProps}
-              error={fieldState.invalid && error}
-              value={dateValue || undefined}
-              onChange={(val: DateValue | null) => {
-                if (val) {
-                  props.onChange && props.onChange(val.toString(), props.name);
-                  fieldOnChange(val.toString());
-                } else {
-                  fieldOnChange(null);
-                }
-              }}
-            />
-          );
-        }}
+        render={({ field, fieldState }) => (
+          <DatePickerBase
+            {...field}
+            {...props}
+            error={fieldState.invalid && error}
+            value={
+              (field.value && parseDate(field.value)) ||
+              props.value ||
+              props.defaultValue
+            }
+            onChange={(val) => {
+              if (val) {
+                props.onChange && props.onChange(val.toString(), props.name);
+                field.onChange(val.toString());
+              }
+            }}
+          />
+        )}
       />
     );
   }
@@ -60,7 +55,7 @@ const DatePicker = ({ required, error, ...props }: PickerProps) => {
 
 type RangeProps = {
   name: string;
-  onChange?: (val: { start: string; end: string }, name: string) => void;
+  onChange?: (val: RangeValue<DateValue>, name: string) => void;
   defaultValue?: RangeValue<DateValue>;
   value?: RangeValue<DateValue>;
 } & RangePickerProps;
@@ -73,49 +68,41 @@ const DateRangePicker = ({ ...props }: RangeProps) => {
       <Controller
         {...props}
         control={method.control}
-        render={({ field }) => {
-          const { onChange: fieldOnChange, ...fieldProps } = field;
-          const rangeValue = field.value
-            ? {
-                start: parseDate(field.value.start),
-                end: parseDate(field.value.end),
-              }
-            : props.defaultValue || props.value || undefined;
-          return (
-            <DateRangePickerBase
-              {...(props as any)}
-              {...fieldProps}
-              value={rangeValue}
-              onChange={(val: RangeValue<DateValue> | null) => {
-                if (val) {
-                  const formatted = {
-                    start: val.start.toString(),
-                    end: val.end.toString(),
-                  };
-                  props.onChange && props.onChange(formatted, props.name);
-                  fieldOnChange(formatted);
-                } else {
-                  fieldOnChange(null);
-                }
-              }}
-            />
-          );
-        }}
+        render={({ field }) => (
+          <DateRangePickerBase
+            {...field}
+            {...props}
+            value={
+              field.value
+                ? {
+                    start: parseDate(field.value.start),
+                    end: parseDate(field.value.end),
+                  }
+                : props.defaultValue || props.value
+            }
+            onChange={(val: any) => {
+              const formatted = {
+                start: val.start.toString(),
+                end: val.end.toString(),
+              };
+              props.onChange && props.onChange(formatted, props.name);
+              field.onChange(formatted);
+            }}
+          />
+        )}
       />
     );
   }
 
   return (
     <DateRangePickerBase
-      {...(props as any)}
-      onChange={(val: RangeValue<DateValue> | null) => {
-        if (val) {
-          const formatted = {
-            start: val.start.toString(),
-            end: val.end.toString(),
-          };
-          props.onChange && props.onChange(formatted, props.name);
-        }
+      {...props}
+      onChange={(val: any) => {
+        const formatted = {
+          start: val.start.toString(),
+          end: val.end.toString(),
+        };
+        props.onChange && props.onChange(formatted, props.name);
       }}
     />
   );

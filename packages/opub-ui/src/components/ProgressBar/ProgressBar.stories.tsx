@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react-vite';
 
 import { PropsVariationSection } from '../../utils/storybook';
 import { ProgressBar } from './ProgressBar';
