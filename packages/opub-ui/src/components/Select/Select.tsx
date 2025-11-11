@@ -58,8 +58,8 @@ export const Select = forwardRef(
 
     const classes = cn(
       styles.Select,
-      error ? styles.error : undefined,
-      disabled ? styles.disabled : undefined
+      Boolean(error) && styles.error,
+      Boolean(disabled) && styles.disabled
     );
 
     const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {

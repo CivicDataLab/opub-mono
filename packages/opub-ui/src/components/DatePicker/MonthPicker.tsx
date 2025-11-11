@@ -30,81 +30,78 @@ export type DatePickerProps = {
   helpText?: React.ReactNode;
   /** Default Value  */
   defaultValue?: DateValue | null;
+  /** onChange callback */
+  onChange?: (value: DateValue | null) => void;
 } & (DatePickerState | AriaDatePickerProps<DateValue>);
 
-const MonthPicker = React.forwardRef(
-  (
-    {
-      error,
-      labelAction,
-      labelHidden,
-      helpText,
-      requiredIndicator,
-      ...props
-    }: DatePickerProps,
-    ref: any
-  ) => {
-    const normalizedProps = {
-      ...props,
-      validationState:
-        props.validationState === null ? undefined : props.validationState,
-    };
-    let state = useDatePickerState(normalizedProps);
+const MonthPicker = ({
+  error,
+  labelAction,
+  labelHidden,
+  helpText,
+  requiredIndicator,
+  ref,
+  ...props
+}: DatePickerProps & { ref?: any }) => {
+  const processedProps = {
+    ...props,
+    validationState:
+      props.validationState === null ? undefined : props.validationState,
+  };
 
-    let { labelProps, fieldProps, buttonProps, dialogProps, calendarProps } =
-      useDatePicker(normalizedProps, state, ref);
-    const themeClass = cn(styles.DatePicker);
+  let state = useDatePickerState(processedProps);
 
-    const {
-      onPress: _onPress,
-      isDisabled: _isDisabled,
-      ...othersProps
-    } = buttonProps as any;
+  let { labelProps, fieldProps, buttonProps, dialogProps, calendarProps } =
+    useDatePicker(processedProps, state, ref);
+  const themeClass = cn(styles.DatePicker);
 
-    return (
-      <div className={`opub-MonthPicker ${themeClass}`}>
-        <Labelled
-          label={props.label}
-          {...labelProps}
-          error={error}
-          action={labelAction}
-          labelHidden={labelHidden}
-          helpText={helpText}
-          requiredIndicator={requiredIndicator}
-        >
-          <div ref={ref} className={styles.Wrapper}>
-            <DateField
-              {...fieldProps}
-              errorMessage={error}
-              isPicker
-              granularity="month"
-            />
-            <Popover
-              onOpenChange={() =>
-                !state.isOpen ? state.open() : state.close()
-              }
-              open={state.isOpen}
-              {...(dialogProps as any)}
-            >
-              <Popover.Trigger>
-                <IconButton
-                  {...othersProps}
-                  icon={IconCalendar}
-                  withTooltip={false}
-                >
-                  trigger calendar
-                </IconButton>
-              </Popover.Trigger>
-              <Popover.Content>
-                <YearCalendar {...calendarProps} />
-              </Popover.Content>
-            </Popover>
-            <div className={inputStyles.Backdrop} />
-          </div>
-        </Labelled>
-      </div>
-    );
-  }
-);
+  const {
+    onPress: onPressPrev,
+    isDisabled: disabledPrev,
+    ...othersProps
+  } = buttonProps;
+
+  return (
+    <div className={`opub-MonthPicker ${themeClass}`}>
+      <Labelled
+        label={props.label}
+        {...labelProps}
+        error={error}
+        action={labelAction}
+        labelHidden={labelHidden}
+        helpText={helpText}
+        requiredIndicator={requiredIndicator}
+      >
+        <div ref={ref} className={styles.Wrapper}>
+          <DateField
+            {...fieldProps}
+            errorMessage={error}
+            isPicker
+            granularity="month"
+          />
+          <Popover
+            onOpenChange={() => (!state.isOpen ? state.open() : state.close())}
+            open={state.isOpen}
+            {...dialogProps}
+          >
+            <Popover.Trigger>
+              <IconButton
+                {...othersProps}
+                icon={IconCalendar}
+                withTooltip={false}
+              >
+                trigger calendar
+              </IconButton>
+            </Popover.Trigger>
+            <Popover.Content>
+              <YearCalendar {...calendarProps} />
+            </Popover.Content>
+          </Popover>
+          <div className={inputStyles.Backdrop} />
+        </div>
+      </Labelled>
+    </div>
+  );
+};
 
 export { MonthPicker };

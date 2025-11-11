@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { createCalendar as createCalendarBase } from '@internationalized/date';
+import { createCalendar } from '@internationalized/date';
 import { DateValue } from '@react-types/calendar';
 import { IconArrowLeft, IconArrowRight } from '@tabler/icons-react';
 import {
@@ -42,10 +42,6 @@ const monthsObj: {
     { month: 'Dec', value: 12, label: 'December' },
   ],
 };
-
-function createCalendar(name: string) {
-  return createCalendarBase(name as any);
-}
 
 export const YearCalendar = (
   props: CalendarStateOptions<DateValue> | AriaCalendarProps<DateValue>

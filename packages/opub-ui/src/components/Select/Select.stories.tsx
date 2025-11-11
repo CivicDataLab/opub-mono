@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import { Meta } from '@storybook/react';
+import { Meta } from '@storybook/react-vite';
 import { IconChevronDown, IconChevronUp } from '@tabler/icons-react';
 
 import { Select } from '../Form/components/Select';

@@ -123,12 +123,12 @@ export const Input = React.forwardRef(
 
     const className = cn(
       styles.TextField,
-      Boolean(normalizedValue) ? styles.hasValue : undefined,
-      disabled ? styles.disabled : undefined,
-      readOnly ? styles.readOnly : undefined,
-      error ? styles.error : undefined,
-      multiline ? styles.multiline : undefined,
-      focus ? styles.focus : undefined
+      Boolean(normalizedValue) && styles.hasValue,
+      Boolean(disabled) && styles.disabled,
+      Boolean(readOnly) && styles.readOnly,
+      Boolean(error) && styles.error,
+      Boolean(multiline) && styles.multiline,
+      Boolean(focus) && styles.focus
     );
 
     const inputType = type === 'currency' ? 'text' : type;
@@ -308,11 +308,11 @@ export const Input = React.forwardRef(
 
     const inputClassName = cn(
       styles.Input,
-      align ? styles[variationName('Input-align', align)] : undefined,
-      suffix ? styles['Input-suffixed'] : undefined,
-      clearButton ? styles['Input-hasClearButton'] : undefined,
-      monospaced ? styles.monospaced : undefined,
-      suggestion ? styles.suggestion : undefined
+      align && styles[variationName('Input-align', align)],
+      Boolean(suffix) && styles['Input-suffixed'],
+      Boolean(clearButton) && styles['Input-hasClearButton'],
+      Boolean(monospaced) && styles.monospaced,
+      Boolean(suggestion) && styles.suggestion
     );
 
     const handleOnFocus = (
@@ -392,8 +392,8 @@ export const Input = React.forwardRef(
       <div
         className={cn(
           styles.Backdrop,
-          connectedLeft ? styles['Backdrop-connectedLeft'] : undefined,
-          connectedRight ? styles['Backdrop-connectedRight'] : undefined
+          Boolean(connectedLeft) && styles['Backdrop-connectedLeft'],
+          Boolean(connectedRight) && styles['Backdrop-connectedRight']
         )}
       />
     );

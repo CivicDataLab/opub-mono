@@ -28,7 +28,11 @@ export type DatePickerProps = {
   requiredIndicator?: boolean;
   /** Additional text to aide in use */
   helpText?: React.ReactNode;
-} & (DatePickerState | AriaDatePickerProps<DateValue>);
+  /** Callback fired when value changes */
+  onChange?: (value: DateValue | null) => void;
+} & Omit<AriaDatePickerProps<DateValue>, 'validationState' | 'onChange'> & {
+  validationState?: 'valid' | 'invalid' | undefined;
+};
 
 const DatePicker = React.forwardRef(
   (
@@ -42,22 +46,22 @@ const DatePicker = React.forwardRef(
     }: DatePickerProps,
     ref: any
   ) => {
-    const normalizedProps = {
+    const stateProps = {
       ...props,
-      validationState:
-        props.validationState === null ? undefined : props.validationState,
+      validationState: props.validationState === null ? undefined : props.validationState
     };
-    let state = useDatePickerState(normalizedProps);
+    
+    let state = useDatePickerState(stateProps);
 
     let { labelProps, fieldProps, buttonProps, dialogProps, calendarProps } =
-      useDatePicker(normalizedProps, state, ref);
+      useDatePicker(stateProps, state, ref);
     const themeClass = cn(styles.DatePicker);
 
     const {
-      onPress: _onPress,
-      isDisabled: _isDisabled,
+      onPress: onPressPrev,
+      isDisabled: disabledPrev,
       ...othersProps
-    } = buttonProps as any;
+    } = buttonProps;
 
     return (
       <div className={`opub-DatePicker ${themeClass}`}>
@@ -77,7 +81,7 @@ const DatePicker = React.forwardRef(
                 !state.isOpen ? state.open() : state.close()
               }
               open={state.isOpen}
-              {...(dialogProps as any)}
+              {...dialogProps}
             >
               <Popover.Trigger>
                 <IconButton

@@ -1,4 +1,4 @@
-@import '../../../styles/common';
+@use '../../../styles/common' as *;
 
 .HasUnderline {
   border-bottom: var(--border-width-2) dotted var(--border-subdued);

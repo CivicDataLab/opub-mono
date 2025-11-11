@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { cn } from '../../utils';
 import { InlineMessage } from '../InlineMessage';
 import { Label } from '../Label';

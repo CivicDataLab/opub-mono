@@ -5,7 +5,7 @@ import {
   parseTime,
   today,
 } from '@internationalized/date';
-import { Meta, StoryObj } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react-vite';
 import { useDateFormatter, useLocale } from 'react-aria';
 
 import { Calendar } from './Calendar';

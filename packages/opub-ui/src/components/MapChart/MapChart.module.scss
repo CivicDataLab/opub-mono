@@ -1,7 +1,7 @@
 .Wrapper {
   height: 100%;
   position: relative;
-
+  // height: 1000px;
   > div {
     background-color: var(--surface-interactive);
   }
@@ -47,3 +47,22 @@
     cursor: pointer;
   }
 }
+
+// .leaflet-control-fullscreen {
+//   background: white;
+//   width: 30px;
+//   height: 30px;
+//   text-align: center;
+//   line-height: 30px;
+//   cursor: pointer;
+//   font-size: 16px;
+//   border: 1px solid #ccc;
+//   border-radius: 4px;
+// }
+
+// .leaflet-control-fullscreen:after {
+//   content: '⛶'; /* fullscreen icon */
+//   display: block;
+//   text-align: center;
+//   font-size: 16px;
+// }

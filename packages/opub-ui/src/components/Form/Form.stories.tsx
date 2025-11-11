@@ -1,6 +1,6 @@
 import React from 'react';
 import { getLocalTimeZone, today } from '@internationalized/date';
-import { Meta } from '@storybook/react';
+import { Meta } from '@storybook/react-vite';
 import { IconFile } from '@tabler/icons-react';
 
 import { Button } from '../Button';
