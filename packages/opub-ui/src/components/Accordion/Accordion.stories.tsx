@@ -43,11 +43,7 @@ export const Default: Story = {
       </AccordionItem>
     </Accordion>
   ),
-  args: {
-    type: 'single',
-    collapsible: true,
-    className: 'w-full',
-  },
+  args: { type: 'single', collapsible: true, className: 'w-full' },
 };
 
 export const Multiple: Story = {
@@ -75,8 +71,5 @@ export const Multiple: Story = {
       </AccordionItem>
     </Accordion>
   ),
-  args: {
-    type: 'multiple',
-    className: 'w-full',
-  },
+  args: { type: 'multiple', className: 'w-full' },
 };
