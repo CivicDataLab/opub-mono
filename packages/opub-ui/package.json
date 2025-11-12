@@ -1,7 +1,7 @@
 {
   "name": "opub-ui",
   "description": "OPub UI Library",
-  "version": "0.4.18",
+  "version": "0.4.20",
   "private": false,
   "license": "MIT",
   "author": "CivicDataLab <tech@civicdatalab.in>",
@@ -108,6 +108,7 @@
     "@react-types/calendar": "^3.2.0",
     "@react-types/datepicker": "^3.3.0",
     "@react-types/shared": "^3.18.0",
+    "@radix-ui/react-slot": "^1.0.0",
     "@tabler/icons-react": "^2.17.0",
     "@tanstack/react-table": "^8.9.1",
     "autoprefixer": "^10.4.18",
