@@ -21,10 +21,16 @@ jobs:
           fetch-depth: 0
 
       - name: Setup Node.js environment
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 20
           registry-url: 'https://registry.npmjs.org'
+
+      - name: Update npm to latest
+        run: npm install -g npm@latest
+
+      - name: Verify npm version
+        run: npm --version
 
       - name: Validate version format
         run: |
@@ -41,12 +47,10 @@ jobs:
         run: npm version ${{ inputs.version }} --no-git-tag-version
 
       - name: Build package
-        working-directory: packages/opub-ui
-        run: npm run build
+        run: npm run build --workspace=packages/opub-ui
 
       - name: Publish to npm
-        working-directory: packages/opub-ui
-        run: npm publish --provenance --access public
+        run: npm publish --workspace=packages/opub-ui --provenance --access public
 
       - name: Create Git tag
         run: |
