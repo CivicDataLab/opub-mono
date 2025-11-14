@@ -95,15 +95,15 @@ const Card: React.FC<CardProps> = ({
           className="h-40 w-full rounded-2 object-cover"
         />
       )}
-
       {/* Card body */}
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-1 flex-col gap-4">
         <div>
           {/* Display type badges only in collapsed view */}
           {type && variation === 'collapsed' && (
             <div className="mb-2 flex gap-2">
-              {type.map((item) => (
+              {type.map((item, index) => (
                 <Tag
+                  key={index}
                   variation="filled"
                   fillColor={item.fillColor}
                   borderColor={item.borderColor}
@@ -191,9 +191,8 @@ const Card: React.FC<CardProps> = ({
           </>
         )}
       </div>
-
       {/* Footer section – logos or icon badges */}
-      <div className="flex flex-col gap-4">
+      <div className="mt-auto flex flex-col gap-4">
         <div
           className={`flex flex-wrap items-center ${
             variation === 'collapsed' ? 'justify-between' : 'justify-normal'
@@ -255,8 +254,9 @@ const Card: React.FC<CardProps> = ({
             {tag && tag.length > 0 && (
               <div className="mb-2 flex basis-1/2 items-center gap-2">
                 <Text variant="bodySm">Tags:</Text>
-                {tag.map((item) => (
+                {tag.map((item, index) => (
                   <Tag
+                    key={index}
                     variation="outlined"
                     textColor="#0066CC"
                     borderColor="#FF6B00"
@@ -269,8 +269,8 @@ const Card: React.FC<CardProps> = ({
             {formats && formats.length > 0 && (
               <div className="mb-2 flex basis-1/2 items-center gap-2">
                 <Text variant="bodySm">Formats:</Text>
-                {formats.map((item) => (
-                  <Format fileType={item} width={32} />
+                {formats.map((item, index) => (
+                  <Format key={index} fileType={item} width={32} />
                 ))}
               </div>
             )}
