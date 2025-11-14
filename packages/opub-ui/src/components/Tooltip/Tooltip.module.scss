@@ -6,9 +6,6 @@
 }
 
 .Trigger {
-  all: unset;
-  line-height: 0;
-
   @include focus-ring;
 
   &:focus-visible {
