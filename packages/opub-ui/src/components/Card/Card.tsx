@@ -95,7 +95,6 @@ const Card: React.FC<CardProps> = ({
           className="h-40 w-full rounded-2 object-cover"
         />
       )}
-
       {/* Card body */}
       <div className="flex flex-1 flex-col gap-4">
         <div>
@@ -192,7 +191,6 @@ const Card: React.FC<CardProps> = ({
           </>
         )}
       </div>
-
       {/* Footer section – logos or icon badges */}
       <div className="mt-auto flex flex-col gap-4">
         <div
