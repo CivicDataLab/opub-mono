@@ -1,6 +1,8 @@
 import '@testing-library/jest-dom';
-import { Skeleton } from './Skeleton';
+
 import { render, screen } from '@testing-library/react';
+
+import { Skeleton } from './Skeleton';
 
 describe('Skeleton Tests', () => {
   beforeEach(() => {
