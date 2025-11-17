@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { isValidElement } from 'react';
 
-// Wraps `element` in `Component`, if it is not already an instance of
+// Wraps `element`  in `Component`, if it is not already an instance of
 // `Component`. If `props` is passed, those will be added as props on the
 // wrapped component. If `element` is null, the component is not wrapped.
 export function wrapWithComponent<TProps extends React.PropsWithChildren>(
