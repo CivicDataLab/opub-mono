@@ -212,6 +212,67 @@ export const Truncate: Story = {
   },
 };
 
+const longTextData: Person[] = [
+  {
+    firstName:
+      'This is an extremely long first name that should definitely trigger truncation and show a tooltip when you hover over it',
+    lastName:
+      'This is also a very long last name that will overflow the cell boundaries and require truncation with ellipsis',
+    age: 24,
+    visits: 100,
+    status:
+      'This status text is way too long to fit in a normal table cell and should be truncated with a tooltip showing the full text on hover',
+    progress: 50,
+  },
+  {
+    firstName: 'John',
+    lastName: 'Doe',
+    age: 30,
+    visits: 250,
+    status:
+      'Another super long status message that contains a lot of information and will definitely overflow the cell width and need truncation',
+    progress: 75,
+  },
+  {
+    firstName:
+      'Mary Jane Watson Parker Thompson Anderson Williams Johnson Smith',
+    lastName:
+      'A very long compound last name that combines multiple family names together',
+    age: 45,
+    visits: 500,
+    status: 'Single',
+    progress: 90,
+  },
+  {
+    firstName: 'Short',
+    lastName: 'Name',
+    age: 20,
+    visits: 50,
+    status:
+      'This is a complicated relationship status with lots of additional details that explain the current situation in great detail',
+    progress: 25,
+  },
+  {
+    firstName:
+      'Alexander The Great Conqueror Of Many Lands And Territories Throughout The Known World',
+    lastName: 'Macedon',
+    age: 32,
+    visits: 1000,
+    status: 'In Relationship',
+    progress: 100,
+  },
+];
+
+export const TruncateWithLongText: Story = {
+  args: {
+    columnContentTypes: columnContentTypes,
+    rows: longTextData,
+    columns: columns,
+    truncate: true,
+    hoverable: true,
+  },
+};
+
 const actionColumn = [
   columnHelper.accessor('firstName', {
     cell: (info) => info.getValue(),
@@ -400,7 +461,7 @@ export const WithCustomPagination: Story = {
         console.log('previous page');
       },
       goToNextPage: async () => {
-        const nextPageIndex = Math.min(pageIdx + 1 * pageSize)
+        const nextPageIndex = Math.min(pageIdx + 1 * pageSize);
         const rowsData = await fetchApiData(pageSize, nextPageIndex);
         setPageData(rowsData);
         setPageIdx(nextPageIndex);
