@@ -208,8 +208,8 @@ const DataTable = (props: DataTableProps) => {
                         styles.Cell,
                         styles['Cell-header'],
                         columnTypes &&
-                        columnTypes[index] === 'numeric' &&
-                        styles['Cell-numeric'],
+                          columnTypes[index] === 'numeric' &&
+                          styles['Cell-numeric'],
                         isSortable && isSorted && styles['Cell-sorted'],
                         isSortable && styles['Cell-sortable']
                       )}
@@ -269,8 +269,8 @@ const DataTable = (props: DataTableProps) => {
                       className={cn(
                         styles.Cell,
                         columnTypes &&
-                        columnTypes[index] === 'numeric' &&
-                        styles['Cell-numeric'],
+                          columnTypes[index] === 'numeric' &&
+                          styles['Cell-numeric'],
                         index === 0 && styles['Cell-firstColumn'],
                         truncate && styles['Cell-truncated']
                       )}
@@ -295,7 +295,18 @@ const DataTable = (props: DataTableProps) => {
           </tbody>
         </table>
       </div>
-      {footerVisible && <Footer {...args} handlePageSizeChange={handlePageSizeChange} pageIdx={pageIdx} pageSize={pageSize} totalPages={totalPages} table={table} paginationControls={paginationControls} isCustomization={isCustomization} />}
+      {footerVisible && (
+        <Footer
+          {...args}
+          handlePageSizeChange={handlePageSizeChange}
+          pageIdx={pageIdx}
+          pageSize={pageSize}
+          totalPages={totalPages}
+          table={table}
+          paginationControls={paginationControls}
+          isCustomization={isCustomization}
+        />
+      )}
     </div>
   );
 };
