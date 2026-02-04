@@ -44,8 +44,15 @@ interface typeInfo {
   borderColor: string;
 }
 
-export type Shadow = 'light' | 'dark';
-export type Hover = 'scale' | 'shadowHighlight';
+enum Shadow {
+  LIGHT = 'light',
+  DARK = 'dark',
+}
+
+enum Hover {
+  SCALE = 'scale',
+  SHADOW_HIGHLIGHT = 'shadowHighlight',
+}
 
 /**
  * Main props for the Card component.
@@ -85,17 +92,17 @@ const Card: React.FC<CardProps> = ({
   type,
   href,
   target = '_self',
-  hover = 'scale',
-  shadow = 'dark',
+  hover = Hover.SHADOW_HIGHLIGHT,
+  shadow = Shadow.DARK,
 }) => {
   const hoverClasses =
-    hover === 'shadowHighlight'
-      ? shadow === 'dark'
+    hover === Hover.SHADOW_HIGHLIGHT
+      ? shadow === Shadow.DARK
         ? 'transition-all duration-300 ease-in-out hover:shadow-basicXl'
         : 'transition-all duration-300 ease-in-out hover:shadow-basicLg'
       : 'transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-lg';
 
-  const shadowClass = shadow === 'dark' ? 'shadow-card' : 'shadow-basicMd';
+  const shadowClass = shadow === Shadow.DARK ? 'shadow-card' : 'shadow-basicMd';
 
   return (
     <a
