@@ -4,12 +4,23 @@ import { cn } from '../../utils';
 import { Text } from '../Text';
 import styles from './Avatar.module.scss';
 
+type AvatarTone = 'highlight' | 'critical' | 'success' | 'neutral';
+
 type Props = {
   showLabel?: boolean;
   size?: 'extraSmall' | 'small' | 'medium' | 'large';
   showInitials?: boolean;
   image?: string | null;
   name?: string | null;
+  /**
+   * Semantic background tone mapped to design tokens.
+   * Ignored if `hexColor` is provided.
+   */
+  tone?: AvatarTone;
+  /**
+   * Explicit background color (e.g. hex). Takes precedence over `tone`.
+   */
+  hexColor?: string;
 };
 
 interface StylesMap {
@@ -22,6 +33,16 @@ const variantStyles: StylesMap = {
   extraSmall: styles.AvatarExtraSmall,
 };
 
+const toneBackgroundMap: Record<AvatarTone, string> = {
+  // Same family as the current default avatar background
+  highlight: 'var(--base-violet-solid-3)',
+  // Use primary success / critical tokens for semantic states
+  success: 'var(--base-yellow-solid-4)',
+  critical: 'var(--base-red-solid-3)',
+  // Neutral gray tone
+  neutral: 'var(--base-gray-slate-solid-3)',
+};
+
 const DEFAULT_SIZE = 'small';
 
 const Avatar = ({
@@ -30,6 +51,8 @@ const Avatar = ({
   showInitials,
   image,
   name,
+  tone,
+  hexColor,
 }: Props) => {
   const ProfileName =
     name &&
@@ -47,9 +70,16 @@ const Avatar = ({
     size === 'extraSmall' && showInitials && styles.AvatarProfileExtraSmall
   );
 
+  const backgroundStyle =
+    hexColor != null
+      ? { backgroundColor: hexColor }
+      : tone
+        ? { backgroundColor: toneBackgroundMap[tone] }
+        : undefined;
+
   return (
     <div className={styles.Wrapper}>
-      <AvatarRadix.Root className={className}>
+      <AvatarRadix.Root className={className} style={backgroundStyle}>
         {image ? (
           <AvatarRadix.Image src={image} />
         ) : (
