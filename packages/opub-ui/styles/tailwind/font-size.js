@@ -1,5 +1,4 @@
 module.exports = {
-  // Numeric scale (design tokens)
   75: '0.75rem',
   100: '0.875rem',
   200: '1rem',
@@ -8,18 +7,4 @@ module.exports = {
   500: '1.75rem',
   600: '2rem',
   700: '2.5rem',
-  // Named sizes so text-xs, text-sm, text-base, text-lg, text-xl, text-5xl, etc. work
-  xs: '0.75rem',
-  sm: '0.875rem',
-  base: '1rem',
-  lg: '1.125rem',
-  xl: '1.25rem',
-  '2xl': '1.5rem',
-  '3xl': '1.875rem',
-  '4xl': '2.25rem',
-  '5xl': '3rem',
-  '6xl': '3.75rem',
-  '7xl': '4.5rem',
-  '8xl': '6rem',
-  '9xl': '8rem',
 };
