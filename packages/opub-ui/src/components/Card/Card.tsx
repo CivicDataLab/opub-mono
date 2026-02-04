@@ -44,6 +44,16 @@ interface typeInfo {
   borderColor: string;
 }
 
+enum Shadow {
+  LIGHT = 'light',
+  DARK = 'dark',
+}
+
+enum Hover {
+  SCALE = 'scale',
+  SHADOW_HIGHLIGHT = 'shadowHighlight',
+}
+
 /**
  * Main props for the Card component.
  */
@@ -60,7 +70,10 @@ export interface CardProps {
   type?: typeInfo[];
   href?: string;
   target?: HTMLAttributeAnchorTarget;
-  isShadow?: boolean;
+  /** Hover style: "scale" (default) scales and adds shadow, "borderHighlight" highlights the border. */
+  hover?: Hover;
+  /** Shadow intensity: "light" (default) or "dark". */
+  shadow?: Shadow;
 }
 
 /**
@@ -79,15 +92,23 @@ const Card: React.FC<CardProps> = ({
   type,
   href,
   target = '_self',
-  isShadow = false,
+  hover = Hover.SHADOW_HIGHLIGHT,
+  shadow = Shadow.DARK,
 }) => {
+  const hoverClasses =
+    hover === Hover.SHADOW_HIGHLIGHT
+      ? shadow === Shadow.DARK
+        ? 'transition-all duration-300 ease-in-out hover:shadow-basicXl'
+        : 'transition-all duration-300 ease-in-out hover:shadow-basicLg'
+      : 'transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-lg';
+
+  const shadowClass = shadow === Shadow.DARK ? 'shadow-card' : 'shadow-basicMd';
+
   return (
     <a
-      className={`flex flex-col overflow-hidden rounded-4 border-2 border-solid border-gray-200${
-        isShadow ? 'shadow-card' : ''
-      } ${
+      className={`border flex flex-col rounded-4 border-borderDefault bg-basePureWhite p-5 ${shadowClass} ${
         variation === 'collapsed' ? 'h-full gap-4' : 'w-full gap-6'
-      } hover:shadow-lg transition-transform duration-300 ease-in-out hover:scale-105`}
+      } ${hoverClasses}`}
       href={href}
       target={target}
     >
