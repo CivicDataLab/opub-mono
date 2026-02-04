@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+const path = require('path');
 const borderRadius = require('./styles/tailwind/border-radius');
 const borderWidth = require('./styles/tailwind/border-width');
 const boxShadow = require('./styles/tailwind/box-shadow');
@@ -18,6 +19,12 @@ module.exports = {
   },
   darkMode: ['class', '[data-mode="dark"]'],
   content: ['./docs/**/*.{ts,tsx}', './src/**/*.{ts,tsx}'],
+  // Resolve content relative to this config so Tailwind scans this package's files
+  // even when the build runs from another cwd (e.g. monorepo root).
+  // content: [
+  //   path.join(__dirname, 'docs/**/*.{ts,tsx}'),
+  //   path.join(__dirname, 'src/**/*.{ts,tsx}'),
+  // ],
   theme: {
     colors,
     space,
@@ -67,6 +74,12 @@ module.exports = {
         to: { height: '0' },
       },
     },
+    // extend: {
+    //   // Default 1px border so class "border" shows a visible border (preflight is disabled)
+    //   borderWidth: {
+    //     DEFAULT: '1px',
+    //   },
+    // },
   },
   plugins: [],
 };

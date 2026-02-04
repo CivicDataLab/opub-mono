@@ -60,6 +60,7 @@ export interface CardProps {
   type?: typeInfo[];
   href?: string;
   target?: HTMLAttributeAnchorTarget;
+  isShadow?: boolean;
 }
 
 /**
@@ -70,7 +71,7 @@ const Card: React.FC<CardProps> = ({
   tag,
   title,
   description,
-  variation,
+  variation = 'expanded',
   iconColor,
   formats,
   metadataContent,
@@ -78,10 +79,13 @@ const Card: React.FC<CardProps> = ({
   type,
   href,
   target = '_self',
+  isShadow = false,
 }) => {
   return (
     <a
-      className={`border border-gray-200 flex flex-col rounded-4 bg-basePureWhite p-5 shadow-card ${
+      className={`flex flex-col overflow-hidden rounded-4 border-2 border-solid border-gray-200${
+        isShadow ? 'shadow-card' : ''
+      } ${
         variation === 'collapsed' ? 'h-full gap-4' : 'w-full gap-6'
       } hover:shadow-lg transition-transform duration-300 ease-in-out hover:scale-105`}
       href={href}
@@ -90,13 +94,14 @@ const Card: React.FC<CardProps> = ({
       {/* Display image only in collapsed mode */}
       {imageUrl && variation === 'collapsed' && (
         <img
-          src={imageUrl}
+          src={'https://picsum.photos/200/300'}
+          // src={imageUrl}
           alt="Card banner"
-          className="h-40 w-full rounded-2 object-cover"
+          className="h-40 w-full rounded-t-2 object-cover"
         />
       )}
       {/* Card body */}
-      <div className="flex flex-1 flex-col gap-4">
+      <div className="flex flex-1 flex-col gap-4 p-5">
         <div>
           {/* Display type badges only in collapsed view */}
           {type && variation === 'collapsed' && (
@@ -192,7 +197,7 @@ const Card: React.FC<CardProps> = ({
         )}
       </div>
       {/* Footer section – logos or icon badges */}
-      <div className="mt-auto flex flex-col gap-4">
+      <div className="mt-auto flex flex-col gap-4 p-5">
         <div
           className={`flex flex-wrap items-center ${
             variation === 'collapsed' ? 'justify-between' : 'justify-normal'
