@@ -99,10 +99,9 @@ $dropzone-stacking-order: (
       @include reset-after;
       @include set-border-radius;
       border-color: var(--border-subdued);
-
-      &.error {
-        border-color: var(--border-critical-default);
-      }
+    }
+    &.error::after {
+      border-color: var(--border-critical-default);
     }
   }
 }
