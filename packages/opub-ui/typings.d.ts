@@ -1,6 +1,6 @@
 export {};
 
-declare module "*.scss";
+declare module '*.scss';
 
 declare global {
   interface Window {

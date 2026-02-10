@@ -19,6 +19,7 @@ const Tag = React.forwardRef(
       value = '',
       variation = 'filled',
       textColor,
+      borderRadius,
       borderColor,
       fillColor,
       ...other
@@ -41,6 +42,7 @@ const Tag = React.forwardRef(
       ...(borderColor && { borderColor: borderColor }),
       ...(fillColor &&
         variation === 'filled' && { backgroundColor: fillColor }),
+      ...(borderRadius && { borderRadius }),
     };
 
     if (onClick && onClick.name) {

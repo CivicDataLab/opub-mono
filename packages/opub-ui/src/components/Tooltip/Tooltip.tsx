@@ -80,7 +80,11 @@ const Tooltip = (props: TooltipProps) => {
           alignOffset={alignOffset}
           aria-label={ariaLabel}
         >
-          <Text variant="bodyMd">{content}</Text>
+          {typeof content === 'string' ? (
+            <Text variant="bodyMd">{content}</Text>
+          ) : (
+            content
+          )}
           {!hideArrow && (
             <TooltipRadix.Arrow fill="var(--surface-default)"></TooltipRadix.Arrow>
           )}
