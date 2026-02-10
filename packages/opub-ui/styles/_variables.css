@@ -140,6 +140,7 @@
   --action-secondary-critical-depressed: var(--base-red-solid-6);
   --action-secondary-critical-default: var(--base-red-solid-3);
   --action-primary-interactive-default: var(--base-blue-solid-9);
+  --action-primary-view-button-default: var(--base-blue-solid-13);
   --action-primary-interactive-hovered: var(--base-blue-solid-10);
   --action-primary-interactive-pressed: var(--base-blue-solid-11);
   --action-primary-interactive-depressed: var(--base-blue-solid-12);
