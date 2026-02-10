@@ -38,6 +38,7 @@ type Color =
   | 'critical'
   | 'warning'
   | 'success'
+  | 'metadata'
   | 'highlight'
   | 'interactive'
   | 'onBgDefault'

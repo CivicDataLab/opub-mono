@@ -69,6 +69,12 @@
   }
 }
 
+.colorMetadata {
+  &::before {
+    background-color: #4a7d7526;
+  }
+}
+
 .colorOnBgDefault {
   &::before {
     background-color: var(--surface-success);

@@ -23,6 +23,7 @@
   --base-blue-solid-10: #0081f1;
   --base-blue-solid-11: #006adc;
   --base-blue-solid-12: #00254d;
+  --base-blue-solid-13: #0b3865;
   --base-violet-solid-1: #fdfcfe;
   --base-violet-solid-2: #fbfaff;
   --base-violet-solid-3: #f5f2ff;
@@ -93,6 +94,7 @@
   --text-critical: var(--base-red-solid-11);
   --text-warning: var(--base-amber-solid-11);
   --text-success: var(--base-green-solid-11);
+  --text-metadata: #4a7d75;
   --text-highlight: var(--base-violet-solid-11);
   --text-interactive: var(--base-blue-solid-11);
   --text-onbg-default: var(--base-gray-slate-solid-1);
@@ -121,6 +123,7 @@
   --icon-warning: var(--base-amber-solid-10);
   --action-primary-basic-hovered: var(--base-violet-solid-10);
   --icon-success: var(--base-green-solid-10);
+  --icon-metadata: #4a7d75;
   --icon-highlight: var(--base-violet-solid-10);
   --action-primary-basic-pressed: var(--base-violet-solid-11);
   --action-primary-basic-depressed: var(--base-violet-solid-12);

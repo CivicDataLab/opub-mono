@@ -18,7 +18,9 @@ interface NonMutuallyExclusiveProps {
   variation?: 'filled' | 'outlined';
   textColor?: string;
   borderColor?: string;
-  fillColor?: string
+  fillColor?: string;
+  /** Optional border radius for the tag (e.g. '999px' or '4px'). */
+  borderRadius?: string;
 }
 
 export type TagProps = NonMutuallyExclusiveProps &

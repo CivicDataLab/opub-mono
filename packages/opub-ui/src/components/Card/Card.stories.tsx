@@ -55,16 +55,33 @@ Default.args = {
       icon: 'https://civicdatalab.in/cdl_logo.png',
       label: 'Published by',
     },
+    {
+      icon: 'https://civicdatalab.in/cdl_logo.png',
+      label: 'Published by',
+    },
+    {
+      icon: 'https://civicdatalab.in/cdl_logo.png',
+      label: 'Published by',
+    },
+    {
+      icon: 'https://civicdatalab.in/cdl_logo.png',
+      label: 'Published by',
+    },
+    {
+      icon: 'https://civicdatalab.in/cdl_logo.png',
+      label: 'Published by',
+    },
   ],
-
   variation: 'collapsed',
   tag: ['UseCase', 'Bio diversity'],
-  iconColor: 'warning',
+  iconColor: 'metadata',
   formats: ['CSV', 'PDF'],
   type: [
     {
       label: 'Dataset',
-      fillColor: '#219EBC26',
+      // fillColor: '#219EBC26',
+      iconType: 'dataset',
+      fillColor: '#fff',
       borderColor: '#FDB557',
     },
   ],
