@@ -137,7 +137,8 @@ module.exports = {
   actionSecondaryCriticalHovered: 'var(--base-red-solid-4)',
   actionSecondaryCriticalDepressed: 'var(--base-red-solid-6)',
   actionSecondaryCriticalDefault: 'var(--base-red-solid-3)',
-  actionPrimaryViewButtonDefault: 'var(--base-blue-solid-13)',
+  actionPrimaryViewButtonDefault:
+    'var(--action-primary-view-button-default, var(--base-blue-solid-13, #0B3865))',
   actionPrimaryInteractiveDefault: 'var(--base-blue-solid-9)',
   actionPrimaryInteractiveHovered: 'var(--base-blue-solid-10)',
   actionPrimaryInteractivePressed: 'var(--base-blue-solid-11)',

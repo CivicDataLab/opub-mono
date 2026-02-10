@@ -124,8 +124,7 @@ const Card: React.FC<CardProps> = ({
       {variation === 'collapsed' && imageUrl && (
         <div className="relative w-full">
           <img
-            // src={imageUrl}
-            src="https://plus.unsplash.com/premium_photo-1664272436483-51e3b64e85ab?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            src={imageUrl}
             alt="Card banner"
             className="h-40 w-full rounded-t-4 object-cover"
           />
