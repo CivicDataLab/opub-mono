@@ -22,7 +22,15 @@ type Props = {
 
 export const Combobox = React.forwardRef<HTMLInputElement, Props>(
   (props: Props, ref) => {
-    const { label, labelHidden, id, error, tags, combobox } = props;
+    const {
+      label,
+      labelHidden,
+      id,
+      error,
+      tags,
+      combobox,
+      requiredIndicator,
+    } = props;
 
     const rId = React.useId();
     const finalId = id || rId;
@@ -99,6 +107,7 @@ export const Combobox = React.forwardRef<HTMLInputElement, Props>(
         id={finalId}
         label={label}
         labelHidden={labelHidden}
+        requiredIndicator={requiredIndicator}
         helpText={props.helpText}
       >
         {textField}
