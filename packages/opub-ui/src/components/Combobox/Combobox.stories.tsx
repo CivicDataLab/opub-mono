@@ -75,6 +75,7 @@ export const Default: Story = {
     onInput: (e: any) => {
       console.log(e);
     },
+    // requiredIndicator: true,
   },
 };
 
