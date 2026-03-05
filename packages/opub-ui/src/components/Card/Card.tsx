@@ -192,36 +192,18 @@ const Card: React.FC<CardProps> = ({
           )}
         </div>
 
-        {/* Description truncation based on variation */}
+        {/* Description is always clamped to exactly 2 lines */}
         {description && (
-          <>
-            {variation === 'collapsed' && description.length > 180 ? (
-              <Tooltip content={description} align="end" width="wide">
-                <Text
-                  variant="bodyMd"
-                  as="p"
-                  color="default"
-                  // className="text-textMedium"
-                >
-                  <span className="text-textMedium">
-                    {description.slice(0, 180)}...
-                  </span>
-                </Text>
-              </Tooltip>
-            ) : variation === 'expanded' && description.length > 320 ? (
-              <Tooltip content={description} align="end" width="wide">
-                <Text variant="bodyMd" as="p" color="disabled">
-                  <span className="text-textMedium">
-                    {description.slice(0, 320)}...
-                  </span>
-                </Text>
-              </Tooltip>
-            ) : (
-              <Text variant="bodyMd" as="p" color="default">
-                {description}
-              </Text>
-            )}
-          </>
+          <Tooltip content={description} align="end" width="wide">
+            <Text
+              variant="bodyMd"
+              as="p"
+              color="default"
+              className="line-clamp-2 overflow-hidden text-textMedium"
+            >
+              {description}
+            </Text>
+          </Tooltip>
         )}
         {/* Metadata section - pinned near footer in collapsed cards */}
         <div
@@ -351,7 +333,7 @@ const Card: React.FC<CardProps> = ({
               <a
                 href={href}
                 target={target}
-                className="bg-actionPrimaryViewButtonDefault flex w-full items-center justify-center gap-2 rounded-2 px-4 py-3"
+                className="flex w-full items-center justify-center gap-2 rounded-2 bg-actionPrimaryViewButtonDefault px-4 py-3"
               >
                 <Icon source={IconExternalLink} color="onBgDefault" size={24} />
                 <Text variant="headingMd" color="onBgDefault">
@@ -361,7 +343,7 @@ const Card: React.FC<CardProps> = ({
             ) : (
               <button
                 type="button"
-                className="bg-actionPrimaryViewButtonDefault flex w-full items-center justify-center gap-2 rounded-2 px-4 py-3"
+                className="flex w-full items-center justify-center gap-2 rounded-2 bg-actionPrimaryViewButtonDefault px-4 py-3"
                 aria-disabled="true"
               >
                 <Icon source={IconExternalLink} color="onBgDefault" size={24} />
