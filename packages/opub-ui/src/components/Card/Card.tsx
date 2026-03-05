@@ -112,8 +112,6 @@ const Card: React.FC<CardProps> = ({
 
   const shadowClass = shadow === 'dark' ? 'shadow-card' : 'shadow-basicMd';
 
-  console.log('metadataContent', metadataContent);
-
   return (
     <div
       className={`border flex flex-col overflow-hidden rounded-4 border-solid border-borderDefault bg-basePureWhite p-0 ${shadowClass} ${
