@@ -114,7 +114,7 @@
     "autoprefixer": "^10.4.18",
     "chrono-node": "^2.7.5",
     "clsx": "^2.1.0",
-    "cmdk": "^0.2.0",
+    "cmdk": "^1.0.0",
     "d3-scale": "^4.0.2",
     "d3-scale-chromatic": "^3.1.0",
     "echarts": "^5.4.3",
