@@ -51,32 +51,6 @@ Default.args = {
       stroke: 1.2,
     },
   ],
-  // footerContent: [
-  //   {
-  //     icon: 'https://cdn-icons-png.flaticon.com/512/9286/9286057.png',
-  //     label: 'Sectors',
-  //   },
-  //   {
-  //     icon: 'https://civicdatalab.in/cdl_logo.png',
-  //     label: 'Published by',
-  //   },
-  //   {
-  //     icon: 'https://civicdatalab.in/cdl_logo.png',
-  //     label: 'Published by',
-  //   },
-  //   {
-  //     icon: 'https://civicdatalab.in/cdl_logo.png',
-  //     label: 'Published by',
-  //   },
-  //   {
-  //     icon: 'https://civicdatalab.in/cdl_logo.png',
-  //     label: 'Published by',
-  //   },
-  //   {
-  //     icon: 'https://civicdatalab.in/cdl_logo.png',
-  //     label: 'Published by',
-  //   },
-  // ],
   variation: 'collapsed',
   tag: ['UseCase', 'Bio diversity'],
   iconColor: 'metadata',
