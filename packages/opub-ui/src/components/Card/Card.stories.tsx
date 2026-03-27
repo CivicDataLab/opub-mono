@@ -116,8 +116,8 @@ export const MultipleCollapsedCards = () => {
     {
       imageUrl: 'https://justicehub.in/assets/khoj1.png',
       title: 'Climate Action in Assam, India',
-      description:
-        'Climate initiatives are crucial for sustainable development.',
+      // description:
+      //   'Climate initiatives are crucial for sustainable development.',
       metadataContent: [
         {
           icon: IconCalendarEvent,
@@ -156,8 +156,8 @@ export const MultipleCollapsedCards = () => {
       imageUrl: 'https://justicehub.in/assets/khoj1.png',
 
       title: 'Biodiversity Conservation Strategies',
-      description:
-        'Preserving biodiversity is essential for ecological balance.',
+      // description:
+      //   'Preserving biodiversity is essential for ecological balance.',
       metadataContent: [
         {
           icon: IconCalendarEvent,
@@ -190,13 +190,14 @@ export const MultipleCollapsedCards = () => {
       tag: ['Environment', 'Wildlife'],
       iconColor: 'success',
       formats: ['XLSX', 'JSON'],
+      reserveDescriptionSpace: false,
     },
     {
       imageUrl: 'none',
       title:
         'Public Procurement in Renewable Energy  Procurement in Renewable Energy',
-      description:
-        'Investments in renewable energy help reduce carbon footprints.renewable energy help reduce carbon footprints renewable energy help reduce carbon footprints',
+      // description:
+      //   'Investments in renewable energy help reduce carbon footprints.renewable energy help reduce carbon footprints renewable energy help reduce carbon footprints',
       metadataContent: [
         {
           icon: IconCalendarEvent,
@@ -234,6 +235,7 @@ export const MultipleCollapsedCards = () => {
       tag: ['Renewable', 'Economy'],
       iconColor: 'interactive',
       formats: ['CSV', 'XML'],
+      reserveDescriptionSpace: false,
     },
   ];
 

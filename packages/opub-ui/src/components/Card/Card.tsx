@@ -110,6 +110,11 @@ export interface CardProps {
   leftFooterChips?: FooterInfo[];
   rightFooterChips?: FooterInfo[];
   withDivider?: boolean;
+  /**
+   * Reserve collapsed description space (2 body lines) even when description is missing.
+   * Useful when mixing cards with and without descriptions in the same row.
+   */
+  reserveDescriptionSpace?: boolean;
 }
 
 /**
@@ -146,6 +151,7 @@ const CardDesign: React.FC<CardProps> = ({
   leftFooterChips,
   rightFooterChips,
   withDivider = true,
+  reserveDescriptionSpace = false,
 }) => {
   const hoverClasses =
     hover === 'shadowHighlight'
@@ -225,8 +231,16 @@ const CardDesign: React.FC<CardProps> = ({
               </div>
             )}
 
-            {/* This is the height of the title and description in collapsed view headingmd has a line height of 24px and bodymd has a line height of 20px */}
-            <div className="min-h-[calc(2*var(--font-line-height-3)+2*var(--font-line-height-2))]">
+            {/* Collapse unused description space when description is missing. */}
+            <div
+              className={
+                variation === 'collapsed'
+                  ? description || reserveDescriptionSpace
+                    ? 'min-h-[calc(2*var(--font-line-height-3)+2*var(--font-line-height-2))]'
+                    : 'min-h-[calc(2*var(--font-line-height-3))]'
+                  : undefined
+              }
+            >
               {/* Truncate long titles in collapsed view */}
               {variation === 'collapsed' ? (
                 <Tooltip content={title} align="end" width="wide">
