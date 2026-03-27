@@ -62,6 +62,7 @@ export const Input = React.forwardRef(
       ariaActiveDescendant,
       ariaAutocomplete,
       showCharacterCount,
+      showLineNumbers,
       align,
       requiredIndicator,
       monospaced,
@@ -91,6 +92,7 @@ export const Input = React.forwardRef(
     const prefixRef = useRef<HTMLDivElement>(null);
     const suffixRef = useRef<HTMLDivElement>(null);
     const tagsRef = useRef<HTMLDivElement>(null);
+    const lineNumberRef = useRef<HTMLDivElement>(null);
     const buttonPressTimer = useRef<number | undefined>(undefined);
     const spinnerRef = useRef<HTMLDivElement>(null);
 
@@ -120,6 +122,12 @@ export const Input = React.forwardRef(
     const normalizedStep = step != null ? step : 1;
     const normalizedMax = max != null ? max : Infinity;
     const normalizedMin = min != null ? min : -Infinity;
+    const shouldShowLineNumbers = Boolean(multiline && showLineNumbers);
+    const lineNumbers = React.useMemo(() => {
+      const lineCount = Math.max(1, normalizedValue.split('\n').length);
+
+      return Array.from({ length: lineCount }, (_, index) => index + 1);
+    }, [normalizedValue]);
 
     const className = cn(
       styles.TextField,
@@ -330,6 +338,14 @@ export const Input = React.forwardRef(
       }
     };
 
+    const handleTextareaScroll = (
+      event: React.UIEvent<HTMLInputElement | HTMLTextAreaElement>
+    ) => {
+      if (lineNumberRef.current) {
+        lineNumberRef.current.scrollTop = event.currentTarget.scrollTop;
+      }
+    };
+
     const input = createElement(multiline ? 'textarea' : 'input', {
       name,
       id,
@@ -372,6 +388,7 @@ export const Input = React.forwardRef(
       onKeyPress: handleKeyPress,
       onChange: !suggestion ? handleChange : undefined,
       onInput: suggestion ? handleChange : undefined,
+      onScroll: shouldShowLineNumbers ? handleTextareaScroll : undefined,
     });
 
     const inputWithTagsMarkup = tags ? (
@@ -386,7 +403,28 @@ export const Input = React.forwardRef(
       </div>
     ) : null;
 
-    const inputMarkup = tags ? inputWithTagsMarkup : input;
+    const inputWithLineNumbersMarkup = shouldShowLineNumbers ? (
+      <div className={styles.MultilineWithGutter}>
+        <div
+          className={styles.LineNumberGutter}
+          ref={lineNumberRef}
+          aria-hidden="true"
+        >
+          {lineNumbers.map((lineNumber) => (
+            <div className={styles.LineNumber} key={lineNumber}>
+              {lineNumber}
+            </div>
+          ))}
+        </div>
+        {input}
+      </div>
+    ) : null;
+
+    const inputMarkup = tags
+      ? inputWithTagsMarkup
+      : shouldShowLineNumbers
+        ? inputWithLineNumbersMarkup
+        : input;
 
     const backdropMarkup = (
       <div

@@ -24,12 +24,49 @@ $spinner-icon-size: 12px;
   padding: 0;
   flex-wrap: wrap;
 
-  > .Input {
+  > .Input,
+  > .MultilineWithGutter > .Input {
     overflow: auto;
     padding-left: var(--space-3);
     padding-right: var(--space-3);
     resize: none;
   }
+}
+
+.MultilineWithGutter {
+  display: flex;
+  width: 100%;
+  align-items: stretch;
+  z-index: var(--opub-text-field-contents);
+}
+
+.LineNumberGutter {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: 2rem;
+  flex: 0 0 2rem;
+  padding-top: calc((2.25rem - var(--font-line-height-3) - var(--space-05)) / 2);
+  padding-right: var(--space-1);
+  overflow: hidden;
+  user-select: none;
+  color: var(--text-subdued);
+  font-size: var(--font-size-200);
+  line-height: var(--font-line-height-2);
+  font-variant-numeric: tabular-nums;
+
+  @media #{$breakpoints-md-up} {
+    font-size: var(--font-size-100);
+  }
+}
+
+.LineNumber {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  width: 100%;
+  line-height: var(--font-line-height-2);
+  min-height: var(--font-line-height-2);
 }
 
 .hasValue {
