@@ -60,6 +60,11 @@ function formatCountCompactIndian(value: number): string {
   return formatUnit(1000, 'k');
 }
 
+function formatNumberWithIndianCommas(value: number): string {
+  if (!Number.isFinite(value)) return String(value);
+  return value.toLocaleString('en-IN');
+}
+
 /**
  * Label badge with color customization.
  */
@@ -294,7 +299,7 @@ const CardDesign: React.FC<CardProps> = ({
                         : 'min-w-0 flex-shrink-0'
                     }`}
                     key={index}
-                    title={item.tooltip}
+                    // title={item.tooltip}
                   >
                     <Icon
                       source={item.icon}
@@ -308,7 +313,15 @@ const CardDesign: React.FC<CardProps> = ({
                       </Text>
                     )}
                     {variation === 'collapsed' ? (
-                      <Tooltip content={item.value} align="end" width="wide">
+                      <Tooltip
+                        content={
+                          typeof item.value === 'number'
+                            ? formatNumberWithIndianCommas(item.value)
+                            : item.value
+                        }
+                        align={index === (metadataContent?.length ?? 0) - 1 ? 'start' : 'end'}
+                        width="wide"
+                      >
                         <Text
                           variant="bodySm"
                           color="metadata"
