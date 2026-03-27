@@ -2,7 +2,9 @@ import type { Meta, StoryFn } from '@storybook/react-vite';
 import {
   IconCalendarEvent,
   IconDownload,
+  IconFileDownload,
   IconWorld,
+  IconWorldPin,
 } from '@tabler/icons-react';
 
 import Card, { CardProps } from './Card';
@@ -34,55 +36,76 @@ Default.args = {
       icon: IconCalendarEvent,
       label: 'Date',
       value: '19 July 2024',
+      stroke: 1.2,
     },
     {
-      icon: IconDownload,
+      icon: IconFileDownload,
       label: 'Download',
-      value: '500',
+      value: 8598890,
+      stroke: 1.2,
     },
     {
-      icon: IconWorld,
+      icon: IconWorldPin,
       label: 'Geography',
       value: 'India',
-    },
-  ],
-  footerContent: [
-    {
-      icon: 'https://cdn-icons-png.flaticon.com/512/9286/9286057.png',
-      label: 'Sectors',
-    },
-    {
-      icon: 'https://civicdatalab.in/cdl_logo.png',
-      label: 'Published by',
-    },
-    {
-      icon: 'https://civicdatalab.in/cdl_logo.png',
-      label: 'Published by',
-    },
-    {
-      icon: 'https://civicdatalab.in/cdl_logo.png',
-      label: 'Published by',
-    },
-    {
-      icon: 'https://civicdatalab.in/cdl_logo.png',
-      label: 'Published by',
-    },
-    {
-      icon: 'https://civicdatalab.in/cdl_logo.png',
-      label: 'Published by',
+      stroke: 1.2,
     },
   ],
   variation: 'collapsed',
   tag: ['UseCase', 'Bio diversity'],
   iconColor: 'metadata',
   formats: ['CSV', 'PDF'],
-  type: [
+  // type: [
+  //   {
+  //     label: 'Dataset',
+  //     // fillColor: '#219EBC26',
+  //     iconType: 'dataset',
+  //     fillColor: '#fff',
+  //     borderColor: '#FDB557',
+  //   },
+  // ],
+  leftFooterChips: [
     {
-      label: 'Dataset',
-      // fillColor: '#219EBC26',
-      iconType: 'dataset',
-      fillColor: '#fff',
-      borderColor: '#FDB557',
+      icon: 'https://cdn-icons-png.flaticon.com/512/9286/9286057.png',
+      label: 'Sectors',
+    },
+    {
+      icon: 'https://cdn-icons-png.flaticon.com/512/9286/9286057.png',
+      label: 'Sectors',
+    },
+    {
+      icon: 'https://cdn-icons-png.flaticon.com/512/9286/9286057.png',
+      label: 'Sectors',
+    },
+    {
+      icon: 'https://cdn-icons-png.flaticon.com/512/9286/9286057.png',
+      label: 'Sectors',
+    },
+  ],
+  rightFooterChips: [
+    {
+      icon: 'https://civicdatalab.in/cdl_logo.png',
+      label: 'Published by',
+    },
+    {
+      icon: 'https://civicdatalab.in/cdl_logo.png',
+      label: 'Published by',
+    },
+    {
+      icon: 'https://civicdatalab.in/cdl_logo.png',
+      label: 'Published by',
+    },
+    {
+      icon: 'https://civicdatalab.in/cdl_logo.png',
+      label: 'Published by',
+    },
+    {
+      icon: 'https://civicdatalab.in/cdl_logo.png',
+      label: 'Published by',
+    },
+    {
+      icon: 'https://civicdatalab.in/cdl_logo.png',
+      label: 'Published by',
     },
   ],
 };
@@ -93,8 +116,8 @@ export const MultipleCollapsedCards = () => {
     {
       imageUrl: 'https://justicehub.in/assets/khoj1.png',
       title: 'Climate Action in Assam, India',
-      description:
-        'Climate initiatives are crucial for sustainable development.',
+      // description:
+      //   'Climate initiatives are crucial for sustainable development.',
       metadataContent: [
         {
           icon: IconCalendarEvent,
@@ -104,7 +127,7 @@ export const MultipleCollapsedCards = () => {
         {
           icon: IconDownload,
           label: 'Download',
-          value: '500',
+          value: 210459,
         },
         {
           icon: IconWorld,
@@ -133,8 +156,8 @@ export const MultipleCollapsedCards = () => {
       imageUrl: 'https://justicehub.in/assets/khoj1.png',
 
       title: 'Biodiversity Conservation Strategies',
-      description:
-        'Preserving biodiversity is essential for ecological balance.',
+      // description:
+      //   'Preserving biodiversity is essential for ecological balance.',
       metadataContent: [
         {
           icon: IconCalendarEvent,
@@ -167,13 +190,14 @@ export const MultipleCollapsedCards = () => {
       tag: ['Environment', 'Wildlife'],
       iconColor: 'success',
       formats: ['XLSX', 'JSON'],
+      reserveDescriptionSpace: false,
     },
     {
-      imageUrl: 'https://justicehub.in/assets/khoj1.png',
+      imageUrl: 'none',
       title:
         'Public Procurement in Renewable Energy  Procurement in Renewable Energy',
-      description:
-        'Investments in renewable energy help reduce carbon footprints.renewable energy help reduce carbon footprints renewable energy help reduce carbon footprints',
+      // description:
+      //   'Investments in renewable energy help reduce carbon footprints.renewable energy help reduce carbon footprints renewable energy help reduce carbon footprints',
       metadataContent: [
         {
           icon: IconCalendarEvent,
@@ -190,7 +214,7 @@ export const MultipleCollapsedCards = () => {
         {
           icon: IconWorld,
           label: '',
-          value: 'India',
+          value: 'Delhi, India',
           tooltip: 'Geography',
         },
       ],
@@ -211,6 +235,7 @@ export const MultipleCollapsedCards = () => {
       tag: ['Renewable', 'Economy'],
       iconColor: 'interactive',
       formats: ['CSV', 'XML'],
+      reserveDescriptionSpace: false,
     },
   ];
 
