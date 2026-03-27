@@ -37,23 +37,26 @@ $spinner-icon-size: 12px;
   display: flex;
   width: 100%;
   align-items: stretch;
+  position: relative;
   z-index: var(--opub-text-field-contents);
 }
 
 .LineNumberGutter {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  width: 2rem;
-  flex: 0 0 2rem;
-  padding-top: calc((2.25rem - var(--font-line-height-3) - var(--space-05)) / 2);
+  width: 2.5rem;
+  flex: 0 0 2.5rem;
+  padding-top: calc(
+    ((2.25rem - var(--font-line-height-3) - var(--space-05)) / 2) + 1px
+  );
   padding-right: var(--space-1);
   overflow: hidden;
   user-select: none;
-  color: var(--text-subdued);
+  text-align: right;
   font-size: var(--font-size-200);
   line-height: var(--font-line-height-2);
+  font-weight: 400;
+  color: inherit;
   font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum' 1;
 
   @media #{$breakpoints-md-up} {
     font-size: var(--font-size-100);
@@ -61,12 +64,10 @@ $spinner-icon-size: 12px;
 }
 
 .LineNumber {
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-end;
+  display: block;
   width: 100%;
+  text-align: right;
   line-height: var(--font-line-height-2);
-  min-height: var(--font-line-height-2);
 }
 
 .hasValue {
