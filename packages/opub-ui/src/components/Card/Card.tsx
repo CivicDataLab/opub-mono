@@ -93,11 +93,11 @@ export interface CardProps {
   variation: 'collapsed' | 'expanded';
   iconColor: Color;
   formats?: string[];
-  metadataContent?: readonly [
-    MetadataContent,
-    MetadataContent,
-    MetadataContent,
-  ];
+  metadataContent?:
+    | readonly []
+    | readonly [MetadataContent]
+    | readonly [MetadataContent, MetadataContent]
+    | readonly [MetadataContent, MetadataContent, MetadataContent];
   footerContent?: FooterInfo[];
   type?: typeInfo[];
   href?: string;
@@ -265,51 +265,57 @@ const CardDesign: React.FC<CardProps> = ({
               variation === 'collapsed' ? 'mt-auto flex-nowrap' : 'flex-wrap'
             }`}
           >
-            {metadataContent?.map((item, index) => (
-              <span
-                className={`flex items-center gap-2 ${
-                  variation === 'collapsed'
-                    ? index === 2
-                      ? 'min-w-[6ch] flex-[1_1_0] overflow-hidden'
-                      : 'min-w-0 flex-[0_1_auto] overflow-hidden'
-                    : 'min-w-0 flex-shrink-0'
-                }`}
-                key={index}
-                title={item.tooltip}
-              >
-                <Icon
-                  source={item.icon}
-                  color={iconColor}
-                  size={24}
-                  stroke={item?.stroke || 2}
-                />
-                {variation !== 'collapsed' && item.label && (
-                  <Text variant="bodySm" className="flex-shrink-0 pr-1">
-                    {item.label}:
-                  </Text>
-                )}
-                {variation === 'collapsed' ? (
-                  <Tooltip content={item.value} align="end" width="wide">
-                    <Text
-                      variant="bodySm"
-                      color="metadata"
-                      truncate
-                      className="min-w-0 flex-1 truncate"
-                    >
-                      {typeof item.value === 'number'
-                        ? formatCountCompactIndian(item.value)
-                        : item.value}
-                    </Text>
-                  </Tooltip>
-                ) : (
-                  <Text variant="bodySm" color="metadata">
-                    {typeof item.value === 'number'
-                      ? formatCountCompactIndian(item.value)
-                      : item.value}
-                  </Text>
-                )}
-              </span>
-            ))}
+            {metadataContent?.map(
+              (item, index) =>
+                ((typeof item.value === 'string' &&
+                  item.value &&
+                  item.value !== '') ||
+                  typeof item.value === 'number') && (
+                  <span
+                    className={`flex items-center gap-2 ${
+                      variation === 'collapsed'
+                        ? index === 2
+                          ? 'min-w-[6ch] flex-[1_1_0] overflow-hidden'
+                          : 'min-w-0 flex-[0_1_auto] overflow-hidden'
+                        : 'min-w-0 flex-shrink-0'
+                    }`}
+                    key={index}
+                    title={item.tooltip}
+                  >
+                    <Icon
+                      source={item.icon}
+                      color={iconColor}
+                      size={24}
+                      stroke={item?.stroke || 2}
+                    />
+                    {variation !== 'collapsed' && item.label && (
+                      <Text variant="bodySm" className="flex-shrink-0 pr-1">
+                        {item.label}:
+                      </Text>
+                    )}
+                    {variation === 'collapsed' ? (
+                      <Tooltip content={item.value} align="end" width="wide">
+                        <Text
+                          variant="bodySm"
+                          color="metadata"
+                          truncate
+                          className="min-w-0 flex-1 truncate"
+                        >
+                          {typeof item.value === 'number'
+                            ? formatCountCompactIndian(item.value)
+                            : item.value}
+                        </Text>
+                      </Tooltip>
+                    ) : (
+                      <Text variant="bodySm" color="metadata">
+                        {typeof item.value === 'number'
+                          ? formatCountCompactIndian(item.value)
+                          : item.value}
+                      </Text>
+                    )}
+                  </span>
+                )
+            )}
           </div>
 
           {/* Divider between metadata and footer in collapsed cards */}
