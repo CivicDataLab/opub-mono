@@ -31,7 +31,7 @@ const rollup = (_args) => {
       format: 'esm',
       preserveModules: true,
       preserveModulesRoot: 'src',
-      sourcemap: true,
+      sourcemap: false,
     },
     plugins: getPlugins(),
     external,
@@ -65,6 +65,7 @@ const getPlugins = () => {
     ],
     compilerOptions: {
       rootDir: 'src',
+      sourceMap: false,
     },
   };
 
