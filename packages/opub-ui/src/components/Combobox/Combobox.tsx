@@ -174,7 +174,7 @@ export const Combobox = React.forwardRef(
         setSelectedValue={(e) => {
           // for single select
           if (typeof e === 'string') {
-            if (comboboxList.findIndex((it) => it.value === e) < 0) {
+            if (e !== '' && comboboxList.findIndex((it) => it.value === e) < 0) {
               setSelectedValues(e);
               setComboboxList([
                 ...comboboxList,
