@@ -68,7 +68,9 @@ export const Combobox = React.forwardRef<HTMLInputElement, Props>(
             'absolute right-0.5 top-0 z-10 flex h-full transform items-center gap-1'
           )}
         >
-          {Array.isArray(selectedValue) && selectedValue.length > 0 ? (
+          {(Array.isArray(selectedValue)
+            ? selectedValue.length > 0
+            : Boolean(selectedValue)) ? (
             <IconButton
               onClick={() => {
                 const isArray = Array.isArray(selectedValue);
