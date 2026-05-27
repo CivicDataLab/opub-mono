@@ -8,7 +8,7 @@ import { IconHome, IconStack, IconZoomReset } from '@tabler/icons-react';
 
 // import 'leaflet/dist/leaflet.css';
 
-import { LatLngExpression } from 'leaflet';
+import type { GeoJSON as LeafletGeoJSON, LatLngExpression } from 'leaflet';
 import {
   GeoJSON,
   MapContainer,
@@ -191,6 +191,7 @@ const Map = ({
   legendHeading?: { heading: string; subheading?: string };
 }) => {
   const [mapRef, setMapRef] = React.useState<any>(null);
+  const geoJsonRef = React.useRef<LeafletGeoJSON | null>(null);
 
   React.useEffect(() => {
     // Remove the flag appearing before Leaflet
@@ -234,6 +235,23 @@ const Map = ({
       </div>
     );
 
+  // The per-feature callbacks (`mouseover`, `mouseout`, `click`) are captured
+  // by `onEachFeature` at the time a Leaflet sub-layer is constructed (via
+  // either initial mount or `addData`). With the layer staying mounted
+  // across consumer re-renders, capturing the latest callback values
+  // directly would freeze them at construction time; popups, hovers, etc.
+  // would invoke stale callbacks referencing the original prop closures.
+  // Route each through a ref that's refreshed on every render so handlers
+  // always invoke the latest consumer-provided callback.
+  const mouseoverRef = React.useRef(mouseover);
+  const mouseoutRef = React.useRef(mouseout);
+  const clickRef = React.useRef(click);
+  React.useEffect(() => {
+    mouseoverRef.current = mouseover;
+    mouseoutRef.current = mouseout;
+    clickRef.current = click;
+  });
+
   const handleMouseOver = React.useCallback((e: { target: any }) => {
     var layer = e.target;
 
@@ -241,7 +259,7 @@ const Map = ({
       weight: 2,
     });
 
-    mouseover && mouseover(layer);
+    mouseoverRef.current?.(layer);
   }, []);
 
   const handleMouseOut = React.useCallback((e: { target: any }) => {
@@ -251,7 +269,7 @@ const Map = ({
     layer.setStyle({
       weight: 1,
     });
-    mouseout && mouseout(layer);
+    mouseoutRef.current?.(layer);
   }, []);
 
   function handleClick(e: { target: any }) {
@@ -262,7 +280,7 @@ const Map = ({
       map.fitBounds(layer.getBounds());
     }
 
-    click && click(layer);
+    clickRef.current?.(layer);
   }
 
   const onEachFeature = (_: any, layer: any) => {
@@ -285,9 +303,26 @@ const Map = ({
     };
   };
 
-  const mapPrimaryFeature: any = features.map((feature: any) => {
-    return feature;
-  });
+  // React-leaflet's <GeoJSON> only consumes its `data` and `style` props at
+  // mount. Without a remount, neither propagates to the underlying Leaflet
+  // layer on prop changes. Push them through manually:
+  //   - data changes  → clearLayers + addData (replace child paths).
+  //   - style changes → setStyle (mutate fill/stroke on existing paths).
+  React.useEffect(() => {
+    const layer = geoJsonRef.current;
+    if (!layer) return;
+    layer.clearLayers();
+    layer.addData(features);
+    layer.setStyle(style);
+  }, [
+    features,
+    customColor,
+    fillOpacity,
+    isCustomColor,
+    mapDataFn,
+    mapProperty,
+    selectedLayer,
+  ]);
 
   return (
     <>
@@ -338,8 +373,8 @@ const Map = ({
         {features && (
           <>
             <GeoJSON
-              data={mapPrimaryFeature}
-              key={mapPrimaryFeature}
+              ref={geoJsonRef}
+              data={features}
               style={style}
               onEachFeature={onEachFeature}
             />
@@ -356,12 +391,12 @@ const Map = ({
                           fillColor: isCustomColor
                             ? customColor?.(
                                 Number(
-                                  mapPrimaryFeature?.properties?.[mapProperty]
+                                  features?.properties?.[mapProperty]
                                 )
                               )
                             : mapDataFn(
                                 Number(
-                                  mapPrimaryFeature?.properties?.[mapProperty]
+                                  features?.properties?.[mapProperty]
                                 ),
                                 'default'
                               ),
