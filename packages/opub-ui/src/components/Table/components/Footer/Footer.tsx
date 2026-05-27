@@ -11,6 +11,7 @@ import {
   IconChevronsRight,
 } from '@tabler/icons-react';
 import { Table } from '@tanstack/react-table';
+import type { TableLabels } from '../../../../types/datatable';
 
 const pageSizeOptions = [10, 25, 50, 100];
 
@@ -22,6 +23,7 @@ export const Footer = ({
   pageSize,
   pageIdx,
   totalPages,
+  labels,
 }: {
   table: Table<any>;
   paginationControls?: any;
@@ -30,7 +32,19 @@ export const Footer = ({
   pageIdx?: number;
   pageSize?: number;
   totalPages?: number;
+  labels?: TableLabels;
 }) => {
+  const {
+    rows = 'Rows: ',
+    pageIndex = (current: number, total: number) =>
+      `Page ${current} of ${total}`,
+    pageIndexMobile = (current: number, total: number) =>
+      `${current} / ${total}`,
+    firstPage = 'First Page',
+    previousPage: previousPageLabel = 'Previous Page',
+    nextPage: nextPageLabel = 'Next Page',
+    lastPage = 'Last Page',
+  } = labels ?? {};
   const {
     getPageOptions,
     setPageIndex,
@@ -49,14 +63,14 @@ export const Footer = ({
         disabled={isCustomization ? (pageIdx === 0) : !getCanPreviousPage()}
         icon={IconChevronsLeft}
       >
-        First Page
+        {firstPage}
       </IconButton>
       <IconButton
         onClick={() => isCustomization ? handlePreviousPage() : previousPage()}
         disabled={isCustomization ? (pageIdx === 0) : !getCanPreviousPage()}
         icon={IconChevronLeft}
       >
-        Previous Page
+        {previousPageLabel}
       </IconButton>
 
       <IconButton
@@ -64,14 +78,14 @@ export const Footer = ({
         disabled={isCustomization ? ((pageIdx ?? 0) === (Math.ceil((totalPages ?? 1) / (pageSize ?? 0)) - 1) * (pageSize ?? 0)) : !getCanNextPage()}
         icon={IconChevronRight}
       >
-        Next Page
+        {nextPageLabel}
       </IconButton>
       <IconButton
         onClick={() => isCustomization ? handleLastPage() : setPageIndex(getPageOptions().length - 1)}
         disabled={isCustomization ? ((pageIdx ?? 0) === (Math.ceil((totalPages ?? 1) / (pageSize ?? 0)) - 1) * (pageSize ?? 0)) : !getCanNextPage()}
         icon={IconChevronsRight}
       >
-        Last Page
+        {lastPage}
       </IconButton>
     </div>
   );
@@ -98,10 +112,10 @@ export const Footer = ({
   const pageIndexMarkup = (
     <div>
       <div className={styles.desktopText}>
-        <Text noBreak variant="bodyMd">{`Page ${isCustomization ? indexCount + 1 : getState().pagination.pageIndex + 1} of ${isCustomization ? pageCount : getPageCount()}`}</Text>
+        <Text noBreak variant="bodyMd">{pageIndex(isCustomization ? indexCount + 1 : getState().pagination.pageIndex + 1, isCustomization ? pageCount : getPageCount())}</Text>
       </div>
       <div className={styles.mobileText}>
-        <Text noBreak variant="bodyMd">{`${isCustomization ? indexCount + 1 : getState().pagination.pageIndex + 1} / ${isCustomization ? pageCount : getPageCount()}`}</Text>
+        <Text noBreak variant="bodyMd">{pageIndexMobile(isCustomization ? indexCount + 1 : getState().pagination.pageIndex + 1, isCustomization ? pageCount : getPageCount())}</Text>
       </div>
     </div>
   );
@@ -109,7 +123,7 @@ export const Footer = ({
   const pageSizeMarkup = (
     <Select
       labelInline
-      label="Rows: "
+      label={rows}
       options={pageSizeOptions.map((value) => ({
         value: String(value),
         label: String(value),

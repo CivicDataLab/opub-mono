@@ -30,6 +30,7 @@ const Table = (props: TableProps) => {
     onSort,
     hideFooter = false,
     theme = 'default',
+    labels,
     ...others
   } = props;
   const [data, setData] = React.useState(() => [...rows]);
@@ -145,7 +146,7 @@ const Table = (props: TableProps) => {
           </tbody>
         </table>
       </div>
-      {footerVisible && <Footer table={table} />}
+      {footerVisible && <Footer table={table} labels={labels} />}
     </div>
   );
 };

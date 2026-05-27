@@ -182,3 +182,23 @@ export const Sortable: Story = {
     sortColumns: ['firstName', 'lastName', 'visits', 'progress', 'status'],
   },
 };
+
+/**
+ * The footer strings are localizable via the `labels` prop. `pageIndex` and
+ * `pageIndexMobile` are functions so consumers can plug in any i18n library.
+ * Here the labels are translated to French.
+ */
+export const LocalizedFooter: Story = {
+  args: {
+    ...Default.args,
+    labels: {
+      rows: 'Lignes : ',
+      pageIndex: (current, total) => `Page ${current} sur ${total}`,
+      pageIndexMobile: (current, total) => `${current} / ${total}`,
+      firstPage: 'Première page',
+      previousPage: 'Page précédente',
+      nextPage: 'Page suivante',
+      lastPage: 'Dernière page',
+    },
+  },
+};

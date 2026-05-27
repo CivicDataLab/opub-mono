@@ -61,6 +61,7 @@ const DataTable = (props: DataTableProps) => {
     totalPages,
     pageIdx,
     pageSize,
+    labels,
     ...others
   } = props;
 
@@ -305,6 +306,7 @@ const DataTable = (props: DataTableProps) => {
           table={table}
           paginationControls={paginationControls}
           isCustomization={isCustomization}
+          labels={labels}
         />
       )}
     </div>
