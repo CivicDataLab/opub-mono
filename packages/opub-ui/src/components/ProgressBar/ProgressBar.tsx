@@ -15,11 +15,10 @@ const ProgressBar = forwardRef(
       animated = true,
       ...others
     } = props;
-    const [progress, setProgress] = React.useState(0);
+    const [progress, setProgress] = React.useState(value);
     React.useEffect(() => {
-      const timer = setTimeout(() => setProgress(value), 500);
-      return () => clearTimeout(timer);
-    }, []);
+      setProgress(value);
+    }, [value]);
 
     const themeClass = cn(
       styles.Root,
