@@ -25,14 +25,26 @@ import { RadioGroup, RadioItem } from '../RadioGroup';
 import { Text } from '../Text';
 import styles from './MapChart.module.scss';
 
-const layers = {
-  light:
-    'https://api.mapbox.com/styles/v1/tech-civicdatalab/cm16if6hx020101qyeijacngt/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoidGVjaC1jaXZpY2RhdGFsYWIiLCJhIjoiY20xNmk2Z2MyMGpldjJxcXY0NjlmcnZkZCJ9.8jTki9brBl78_VIHImdLow',
-  dark: 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
-  satellite:
-    'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
-} as const;
-type layerOptions = keyof typeof layers;
+/* A tile layer's URL template and the attribution required by its provider. */
+export type TileLayerConfig = {
+  url: string;
+  attribution: string;
+};
+
+const OSM_ATTRIBUTION =
+  '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
+
+/**
+ * Default tile layers. Only open data sources are used, so the component has no
+ * built-in dependency on proprietary tile providers.  Consumers can supply their
+ * own layers (e.g. satellite imagery) via the `tileLayers` prop.
+ */
+const defaultLayers: Record<string, TileLayerConfig> = {
+  light: {
+    url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+    attribution: OSM_ATTRIBUTION,
+  },
+};
 
 type MapProps = {
   /* Map file to be used */
@@ -57,8 +69,12 @@ type MapProps = {
   /* function to map data to color */
   mapDataFn: (value: any, type: 'default' | 'hover' | 'selected') => string;
 
-  /* theme of the map */
-  defaultLayer?: layerOptions;
+  /* tile layers to make selectable, keyed by display name; defaults to an
+   * OpenStreetMap layer. Override to add custom layers (e.g. satellite). */
+  tileLayers?: Record<string, TileLayerConfig>;
+
+  /* key of the tile layer to show first (must exist in `tileLayers`) */
+  defaultLayer?: string;
 
   /* zoom level of the map */
   mapZoom?: number;
@@ -126,7 +142,18 @@ type LegendProps = {
 type Props = MapProps & LegendProps;
 
 const MapChart = (props: Props) => {
-  const { defaultLayer = 'light', className, ...others } = props;
+  const {
+    defaultLayer,
+    tileLayers = defaultLayers,
+    className,
+    ...others
+  } = props;
+
+  // Fall back to the first available layer if the requested one is missing.
+  const initialLayer =
+    defaultLayer && tileLayers[defaultLayer]
+      ? defaultLayer
+      : Object.keys(tileLayers)[0];
 
   //to prevent map re-initialization
   const [unmountMap, setUnmountMap] = React.useState(false);
@@ -138,7 +165,7 @@ const MapChart = (props: Props) => {
   }, []);
 
   const [selectedLayer, setSelectedLayer] =
-    React.useState<layerOptions>(defaultLayer);
+    React.useState<string>(initialLayer);
 
   if (unmountMap) return <>{'loading map...'}</>;
 
@@ -148,6 +175,7 @@ const MapChart = (props: Props) => {
       style={{ height: props?.height }}
     >
       <Map
+        layers={tileLayers}
         selectedLayer={selectedLayer}
         setLayer={setSelectedLayer}
         {...others}
@@ -163,6 +191,7 @@ const Map = ({
   mouseover,
   mouseout,
   click,
+  layers,
   selectedLayer,
   mapProperty = '',
   mapZoom = 7,
@@ -185,7 +214,8 @@ const Map = ({
   resetZoom = false,
   customColor,
 }: MapProps & {
-  selectedLayer: layerOptions;
+  layers: Record<string, TileLayerConfig>;
+  selectedLayer: string;
   setLayer: any;
   legendData?: { label: string; color: string }[];
   legendHeading?: { heading: string; subheading?: string };
@@ -341,22 +371,15 @@ const Map = ({
         {!hideLayers && (
           <>
             <LayerSelector
+              layers={layers}
               selectedLayer={selectedLayer}
               setSelectedLayer={setLayer}
             />
             <TileLayer
-              attribution='
-              &copy;
-              <a href="https://www.mapbox.com/about/maps/">Mapbox</a>
-              <span aria-hidden="true">|</span>
-              &copy;
-              <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>
-              <span aria-hidden="true">|</span>
-              <a href="https://labs.mapbox.com/contribute/">Improve this map</a>
-              '
+              attribution={layers[selectedLayer].attribution}
               maxZoom={maxZoom}
               minZoom={minZoom}
-              url={layers[selectedLayer]}
+              url={layers[selectedLayer].url}
               key={selectedLayer}
             />
           </>
@@ -469,13 +492,18 @@ const Legend = ({
 };
 
 const LayerSelector = ({
+  layers,
   selectedLayer,
   setSelectedLayer,
 }: {
-  selectedLayer: layerOptions;
-  setSelectedLayer: (selectedLayer: layerOptions) => void;
+  layers: Record<string, TileLayerConfig>;
+  selectedLayer: string;
+  setSelectedLayer: (selectedLayer: string) => void;
 }) => {
   const className = cn(styles.LayerSelector);
+
+  // Nothing to switch between with a single layer.
+  if (Object.keys(layers).length < 2) return null;
 
   return (
     <div className={className}>
@@ -501,7 +529,7 @@ const LayerSelector = ({
             value={selectedLayer}
             title="Change Layer"
           >
-            {Object.keys(layers).map((layer: any) => {
+            {Object.keys(layers).map((layer: string) => {
               return (
                 <RadioItem key={layer} value={layer}>
                   {layer}
