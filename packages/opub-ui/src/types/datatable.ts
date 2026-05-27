@@ -4,6 +4,24 @@ export type SortDirection = 'asc' | 'desc' | 'none';
 export type VerticalAlign = 'top' | 'bottom' | 'middle' | 'baseline';
 export type ColumnContentType = 'text' | 'numeric' | 'node';
 
+/** Localizable strings for the table footer. All keys are optional and fall back to English defaults. */
+export type TableLabels = {
+  /** Label for the rows-per-page selector. Default "Rows: " */
+  rows?: string;
+  /** Page indicator shown on desktop. Default `Page ${current} of ${total}` */
+  pageIndex?: (current: number, total: number) => string;
+  /** Page indicator shown on mobile. Default `${current} / ${total}` */
+  pageIndexMobile?: (current: number, total: number) => string;
+  /** First-page button label. Default "First Page" */
+  firstPage?: string;
+  /** Previous-page button label. Default "Previous Page" */
+  previousPage?: string;
+  /** Next-page button label. Default "Next Page" */
+  nextPage?: string;
+  /** Last-page button label. Default "Last Page" */
+  lastPage?: string;
+};
+
 export interface ColumnVisibilityData {
   leftEdge: number;
   rightEdge: number;
@@ -46,6 +64,8 @@ export interface TableProps {
   /** specify columns to be sorted  */
   sortColumns?: string[];
   theme?: 'climate' | 'default';
+  /** Localizable strings for the footer. Defaults to English. */
+  labels?: TableLabels;
 }
 
 export type TableFilterProps = {
