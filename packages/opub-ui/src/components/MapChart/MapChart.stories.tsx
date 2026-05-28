@@ -16,9 +16,9 @@ const meta = {
   component: MapChart,
   argTypes: {
     defaultLayer: {
-      control: 'select',
-      options: ['satellite', 'light', 'dark'],
-      description: 'theme of the map',
+      control: 'text',
+      description:
+        'key of the tile layer to show first (must exist in tileLayers)',
     },
   },
 } satisfies Meta<typeof MapChart>;
@@ -290,5 +290,45 @@ export const AdditionalMapData: Story = {
     legendHeading,
     legendData,
     resetZoom: true,
+  },
+};
+
+/**
+ * By default the map uses OpenStreetMap tiles. Pass `tileLayers` to make
+ * additional layers selectable; consumers are responsible for the keys and
+ * access tokens of any non-open providers they add.
+ */
+export const CustomTileLayers: Story = {
+  render: (args) => {
+    if (!assamFeatures) return <div>Loading...</div>;
+
+    return (
+      <div style={{ height: '600px' }}>
+        <MapChart {...args} />
+      </div>
+    );
+  },
+  args: {
+    features: assamFeatures,
+    mapDataFn,
+    mapProperty: 'dt_code',
+    mapZoom: 7.9,
+    fillOpacity: 1,
+    mapCenter: [26.193, 92.3],
+    legendHeading,
+    legendData,
+    tileLayers: {
+      light: {
+        url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+        attribution:
+          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      },
+      topo: {
+        url: 'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',
+        attribution:
+          'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="https://opentopomap.org">OpenTopoMap</a> (CC-BY-SA)',
+      },
+    },
+    defaultLayer: 'light',
   },
 };
