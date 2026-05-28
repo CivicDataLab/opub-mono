@@ -3,7 +3,7 @@
 import React from 'react';
 import { DateValue } from '@react-types/calendar';
 import { IconCalendar } from '@tabler/icons-react';
-import { useDatePicker } from 'react-aria';
+import { useDateFormatter, useDatePicker } from 'react-aria';
 import { useDatePickerState } from 'react-stately';
 
 import { cn } from '../../utils';
@@ -63,6 +63,11 @@ const MultiMonthPicker = React.forwardRef(
       useDatePicker(props, state, ref);
     const themeClass = cn(styles.DatePicker);
 
+    const monthFormatter = useDateFormatter({
+      month: 'short',
+      year: 'numeric',
+    });
+
     const {
       onPress: onPressPrev,
       isDisabled: disabledPrev,
@@ -101,10 +106,9 @@ const MultiMonthPicker = React.forwardRef(
                       selectedValues?.length > 0
                         ? selectedValues
                             .map((date) =>
-                              new Intl.DateTimeFormat('en-US', {
-                                month: 'short',
-                                year: 'numeric',
-                              }).format(new Date(date.toString()))
+                              monthFormatter.format(
+                                new Date(date.year, date.month - 1, date.day)
+                              )
                             )
                             .join(', ')
                         : ''
