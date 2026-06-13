@@ -41,7 +41,7 @@ const OSM_ATTRIBUTION =
  */
 const defaultLayers: Record<string, TileLayerConfig> = {
   light: {
-    url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+    url: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
     attribution: OSM_ATTRIBUTION,
   },
 };
