@@ -115,6 +115,26 @@ export function Disabled({ ...props }) {
 //   );
 // }
 
+export function WithDescribedBy({ ...props }) {
+  const options = [
+    { label: 'Block A', value: 'a' },
+    { label: 'Block B', value: 'b' },
+  ];
+
+  return (
+    <>
+      <p id="block-dependency-hint">Select a district first to enable this field.</p>
+      <Select
+        label="Block"
+        name="select-1"
+        describedBy="block-dependency-hint"
+        options={options}
+        {...props}
+      />
+    </>
+  );
+}
+
 export function Error({ ...props }) {
   const [selected, setSelected] = useState('Bangaluru');
 
