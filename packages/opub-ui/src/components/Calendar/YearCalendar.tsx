@@ -198,7 +198,6 @@ const Cell = ({
 
     const value = Number((e.target as HTMLElement).getAttribute('value'));
     let date = state.focusedDate.set({ month: value });
-    console.log(date.toDate('UTC'));
 
     state.setFocusedDate(date);
     state.setValue(date);
