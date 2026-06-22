@@ -21,27 +21,12 @@ import { Icon } from '../Icon';
 import { Text } from '../Text';
 import styles from './Calendar.module.scss';
 
-const monthsObj: {
-  [key: number]: { month: string; value: number; label: string }[];
-} = {
-  0: [
-    { month: 'Jan', value: 1, label: 'January' },
-    { month: 'Feb', value: 2, label: 'February' },
-    { month: 'Mar', value: 3, label: 'March' },
-    { month: 'Apr', value: 4, label: 'April' },
-  ],
-  1: [
-    { month: 'May', value: 5, label: 'May' },
-    { month: 'Jun', value: 6, label: 'June' },
-    { month: 'Jul', value: 7, label: 'July' },
-    { month: 'Aug', value: 8, label: 'August' },
-  ],
-  2: [
-    { month: 'Sep', value: 9, label: 'September' },
-    { month: 'Oct', value: 10, label: 'October' },
-    { month: 'Nov', value: 11, label: 'November' },
-    { month: 'Dec', value: 12, label: 'December' },
-  ],
+// Month numbers laid out as the 3x4 grid. Names are formatted per locale at
+// render time (see Cell), so no month strings are hardcoded here.
+const monthsObj: { [key: number]: { value: number }[] } = {
+  0: [{ value: 1 }, { value: 2 }, { value: 3 }, { value: 4 }],
+  1: [{ value: 5 }, { value: 6 }, { value: 7 }, { value: 8 }],
+  2: [{ value: 9 }, { value: 10 }, { value: 11 }, { value: 12 }],
 };
 
 interface MultiSelectYearCalendarProps {
@@ -258,13 +243,22 @@ const Cell = ({
   defaultValue,
   labels,
 }: {
-  mon: { month: string; value: number; label: string };
+  mon: { value: number };
   state: CalendarState;
   selectedDates: DateValue[];
   defaultValue?: DateValue[];
   labels?: YearCalendarLabels;
 }) => {
   let date = state.focusedDate.set({ month: mon.value });
+
+  // Localized month names from the active locale (via the nearest
+  // <I18nProvider>, falling back to the runtime locale). The day is fixed to
+  // the 1st in local time to avoid the UTC-midnight off-by-one.
+  const monthShortFormatter = useDateFormatter({ month: 'short' });
+  const monthLongFormatter = useDateFormatter({ month: 'long' });
+  const nameDate = new Date(state.focusedDate.year, mon.value - 1, 1);
+  const monthShort = monthShortFormatter.format(nameDate);
+  const monthLong = monthLongFormatter.format(nameDate);
 
   const { minValue, maxValue } = state;
   const isDisabled =
@@ -293,7 +287,7 @@ const Cell = ({
     state.setFocusedDate(date);
   };
 
-  const ariaLabel = `${mon.label}, ${state.focusedDate.year}${
+  const ariaLabel = `${monthLong}, ${state.focusedDate.year}${
     isSelected ? `, ${labels?.selected ?? 'selected'}` : ''
   }`;
 
@@ -307,7 +301,7 @@ const Cell = ({
         aria-label={ariaLabel}
         data-label={`${mon.value}, ${state.focusedDate.year}`}
       >
-        <Text color="subdued">{mon.month}</Text>
+        <Text color="subdued">{monthShort}</Text>
       </button>
     </td>
   );

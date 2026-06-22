@@ -6,7 +6,7 @@ import {
   today,
 } from '@internationalized/date';
 import { Meta, StoryObj } from '@storybook/react-vite';
-import { useDateFormatter, useLocale } from 'react-aria';
+import { I18nProvider, useDateFormatter, useLocale } from 'react-aria';
 
 import { Calendar } from './Calendar';
 import { MultiSelectYearCalendar } from './MultiSelectYearCalendar';
@@ -136,6 +136,27 @@ export const YearLocalizedLabels: any = {
           console.log(date);
         }}
       />
+    );
+  },
+  args: {},
+};
+
+/**
+ * Month names are formatted from the active locale (via `useDateFormatter`),
+ * so wrapping the calendar in an `<I18nProvider>` localizes them with no
+ * consumer-supplied strings. Here the months render in French.
+ */
+export const YearLocalizedMonths: any = {
+  render: ({ ...args }) => {
+    return (
+      <I18nProvider locale="fr-FR">
+        <YearCalendar
+          {...args}
+          onChange={(date: any) => {
+            console.log(date);
+          }}
+        />
+      </I18nProvider>
     );
   },
   args: {},
