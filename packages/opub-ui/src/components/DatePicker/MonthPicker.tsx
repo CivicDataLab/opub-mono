@@ -14,6 +14,7 @@ import inputStyles from '../Input/Input.module.scss';
 import { Labelled, LabelledProps } from '../Labelled';
 import { Popover } from '../Popover';
 import styles from './DatePicker.module.scss';
+import { resolveDateError } from './validation';
 
 export type DatePickerProps = {
   /** Label for the field */
@@ -51,9 +52,18 @@ const MonthPicker = ({
 
   let state = useDatePickerState(processedProps);
 
-  let { labelProps, fieldProps, buttonProps, dialogProps, calendarProps } =
-    useDatePicker(processedProps, state, ref);
+  let {
+    labelProps,
+    fieldProps,
+    buttonProps,
+    dialogProps,
+    calendarProps,
+    isInvalid,
+    validationErrors,
+  } = useDatePicker(processedProps, state, ref);
   const themeClass = cn(styles.DatePicker);
+
+  const displayedError = resolveDateError(error, isInvalid, validationErrors);
 
   const {
     onPress: onPressPrev,
@@ -66,7 +76,7 @@ const MonthPicker = ({
       <Labelled
         label={props.label}
         {...labelProps}
-        error={error}
+        error={displayedError}
         action={labelAction}
         labelHidden={labelHidden}
         helpText={helpText}
@@ -75,7 +85,7 @@ const MonthPicker = ({
         <div ref={ref} className={styles.Wrapper}>
           <DateField
             {...fieldProps}
-            errorMessage={error}
+            errorMessage={displayedError}
             isPicker
             granularity="month"
           />

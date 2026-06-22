@@ -76,6 +76,21 @@ export const MultipleMonths: Story = {
   },
 };
 
+/**
+ * An out-of-range value surfaces react-aria's validation as an error and sets
+ * `aria-invalid` on the field segments — even though no `error` prop is passed.
+ * Here the default (Jan 2025) is past `maxValue` (Apr 2024).
+ */
+export const MonthOutOfRange: Story = {
+  render: ({ ...args }) => <MonthPicker {...args} />,
+  args: {
+    label: 'Month Picker',
+    defaultValue: parseDate('2025-01-01'),
+    minValue: parseDate('2023-02-01'),
+    maxValue: parseDate('2024-04-01'),
+  },
+};
+
 export const DisabledDates: StoryRange = {
   ...Range,
   args: {
