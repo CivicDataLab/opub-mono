@@ -1,6 +1,12 @@
 import { LabelledProps } from '../components/Labelled';
 import React from 'react';
 
+/** Localizable strings for the year calendars. All keys are optional and fall back to English defaults. */
+export type YearCalendarLabels = {
+  /** Appended to a month's aria-label when it is the selected value. Default "selected" */
+  selected?: string;
+};
+
 export interface DateTimeProps {
   /** Additional hint text to display */
   helpText?: React.ReactNode;

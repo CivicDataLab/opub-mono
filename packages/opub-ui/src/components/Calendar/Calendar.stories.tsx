@@ -9,6 +9,7 @@ import { Meta, StoryObj } from '@storybook/react-vite';
 import { useDateFormatter, useLocale } from 'react-aria';
 
 import { Calendar } from './Calendar';
+import { MultiSelectYearCalendar } from './MultiSelectYearCalendar';
 import { RangeCalendar } from './RangeCalendar';
 import { YearCalendar } from './YearCalendar';
 
@@ -83,6 +84,56 @@ export const YearDisabled: any = {
         onChange={(date: any) => {
           const formatted = formatter.format(date.toDate(getLocalTimeZone()));
           console.log(formatted);
+        }}
+      />
+    );
+  },
+  args: {},
+};
+
+export const MultiSelectYear: any = {
+  render: ({ ...args }) => {
+    return (
+      <MultiSelectYearCalendar
+        {...args}
+        onChange={(dates: any) => {
+          console.log(dates);
+        }}
+      />
+    );
+  },
+  args: {},
+};
+
+export const MultiSelectYearDisabled: any = {
+  render: ({ ...args }) => {
+    return (
+      <MultiSelectYearCalendar
+        minValue={parseDate('2021-01-01')}
+        maxValue={today(getLocalTimeZone())}
+        {...args}
+        onChange={(dates: any) => {
+          console.log(dates);
+        }}
+      />
+    );
+  },
+  args: {},
+};
+
+/**
+ * Consumers translate the calendar's aria-label strings by passing `labels`,
+ * the same way the Table footer accepts localized labels. Inspect a selected
+ * month's aria-label to see the localized "selected" suffix.
+ */
+export const YearLocalizedLabels: any = {
+  render: ({ ...args }) => {
+    return (
+      <YearCalendar
+        labels={{ selected: 'sélectionné' }}
+        {...args}
+        onChange={(date: any) => {
+          console.log(date);
         }}
       />
     );

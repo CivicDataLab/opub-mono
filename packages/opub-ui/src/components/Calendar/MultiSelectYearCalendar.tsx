@@ -15,6 +15,7 @@ import {
   useCalendarState,
 } from 'react-stately';
 
+import { YearCalendarLabels } from '../../types/datetime';
 import { cn } from '../../utils';
 import { Icon } from '../Icon';
 import { Text } from '../Text';
@@ -48,6 +49,11 @@ interface MultiSelectYearCalendarProps {
   disabledMonths?: DateValue[];
   yearRange?: { start: number; end: number };
 
+  /** Earliest selectable month; earlier months render disabled */
+  minValue?: DateValue | null;
+  /** Latest selectable month; later months render disabled */
+  maxValue?: DateValue | null;
+
   // onSelectionChange: (
   //   selections: {
   //     year: number;
@@ -61,6 +67,9 @@ interface MultiSelectYearCalendarProps {
   defaultValues?: DateValue[];
 
   onChange?: (dates: DateValue[]) => void;
+
+  /** Localizable strings. Falls back to English defaults. */
+  labels?: YearCalendarLabels;
 }
 
 export const MultiSelectYearCalendar = (
@@ -147,6 +156,7 @@ export const MultiSelectYearCalendar = (
         state={state}
         selectedDates={selectedDates}
         defaultValue={props.defaultValues}
+        labels={props.labels}
       />
     </div>
   );
@@ -170,10 +180,12 @@ function MonthSelector({
   state,
   selectedDates,
   defaultValue,
+  labels,
 }: {
   state: CalendarState;
   selectedDates: DateValue[];
   defaultValue?: DateValue[];
+  labels?: YearCalendarLabels;
 }) {
   React.useEffect(() => {
     const nextFocusElm = document.querySelector(
@@ -224,6 +236,7 @@ function MonthSelector({
               state={state}
               selectedDates={selectedDates}
               defaultValue={defaultValue}
+              labels={labels}
             />
           );
         })}
@@ -243,11 +256,13 @@ const Cell = ({
   state,
   selectedDates,
   defaultValue,
+  labels,
 }: {
   mon: { month: string; value: number; label: string };
   state: CalendarState;
   selectedDates: DateValue[];
   defaultValue?: DateValue[];
+  labels?: YearCalendarLabels;
 }) => {
   let date = state.focusedDate.set({ month: mon.value });
 
@@ -278,13 +293,18 @@ const Cell = ({
     state.setFocusedDate(date);
   };
 
+  const ariaLabel = `${mon.label}, ${state.focusedDate.year}${
+    isSelected ? `, ${labels?.selected ?? 'selected'}` : ''
+  }`;
+
   return (
     <td aria-selected={isSelected} role="gridcell">
       <button
         onClick={handleClick}
         className={classname}
         value={mon.value}
-        aria-label={`${mon.label}, ${state.focusedDate.year}`}
+        aria-disabled={isDisabled ? true : undefined}
+        aria-label={ariaLabel}
         data-label={`${mon.value}, ${state.focusedDate.year}`}
       >
         <Text color="subdued">{mon.month}</Text>

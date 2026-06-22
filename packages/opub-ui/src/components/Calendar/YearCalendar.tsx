@@ -15,6 +15,7 @@ import {
   useCalendarState,
 } from 'react-stately';
 
+import { YearCalendarLabels } from '../../types/datetime';
 import { cn } from '../../utils';
 import { Icon } from '../Icon';
 import { Text } from '../Text';
@@ -44,7 +45,10 @@ const monthsObj: {
 };
 
 export const YearCalendar = (
-  props: CalendarStateOptions<DateValue> | AriaCalendarProps<DateValue>
+  props: (CalendarStateOptions<DateValue> | AriaCalendarProps<DateValue>) & {
+    /** Localizable strings. Falls back to English defaults. */
+    labels?: YearCalendarLabels;
+  }
 ) => {
   let { locale } = useLocale();
   let state = useCalendarState({
@@ -98,7 +102,7 @@ export const YearCalendar = (
         <NextButton />
       </div>
 
-      <MonthSelector state={state} />
+      <MonthSelector state={state} labels={props.labels} />
     </div>
   );
 };
@@ -117,7 +121,13 @@ function YearDropdown({ state }: { state: CalendarState }) {
   );
 }
 
-function MonthSelector({ state }: { state: CalendarState }) {
+function MonthSelector({
+  state,
+  labels,
+}: {
+  state: CalendarState;
+  labels?: YearCalendarLabels;
+}) {
   React.useEffect(() => {
     const nextFocusElm = document.querySelector(
       `[data-label="${state.focusedDate.month}, ${state.focusedDate.year}"]`
@@ -155,7 +165,9 @@ function MonthSelector({ state }: { state: CalendarState }) {
     return (
       <tr key={i}>
         {monthsObj[i].map((mon) => {
-          return <Cell key={mon.value} mon={mon} state={state} />;
+          return (
+            <Cell key={mon.value} mon={mon} state={state} labels={labels} />
+          );
         })}
       </tr>
     );
@@ -171,9 +183,11 @@ function MonthSelector({ state }: { state: CalendarState }) {
 const Cell = ({
   mon,
   state,
+  labels,
 }: {
   mon: { month: string; value: number; label: string };
   state: CalendarState;
+  labels?: YearCalendarLabels;
 }) => {
   let date = state.focusedDate.set({ month: mon.value });
 
@@ -203,13 +217,18 @@ const Cell = ({
     state.setValue(date);
   };
 
+  const ariaLabel = `${mon.label}, ${state.focusedDate.year}${
+    isSelected ? `, ${labels?.selected ?? 'selected'}` : ''
+  }`;
+
   return (
     <td aria-selected={isSelected} role="gridcell">
       <button
         onClick={handleClick}
         className={classname}
         value={mon.value}
-        aria-label={`${mon.label}, ${state.focusedDate.year}`}
+        aria-disabled={isDisabled ? true : undefined}
+        aria-label={ariaLabel}
         data-label={`${mon.value}, ${state.focusedDate.year}`}
       >
         <Text color="subdued">{mon.month}</Text>
