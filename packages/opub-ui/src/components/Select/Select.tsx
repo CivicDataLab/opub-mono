@@ -27,6 +27,7 @@ export const Select = forwardRef(
       labelInline,
       disabled,
       helpText,
+      describedBy: describedByProp,
       placeholder,
       id: idProp,
       name,
@@ -74,6 +75,10 @@ export const Select = forwardRef(
 
     if (error) {
       describedBy.push(`${id}Error`);
+    }
+
+    if (describedByProp) {
+      describedBy.push(describedByProp);
     }
 
     const options = optionsProp || [];

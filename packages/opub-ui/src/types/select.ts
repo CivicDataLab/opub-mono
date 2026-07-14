@@ -45,6 +45,8 @@ export interface SelectProps {
   disabled?: boolean;
   /** Additional text to aide in use */
   helpText?: React.ReactNode;
+  /** ID(s) forwarded to the native select as `aria-describedby`, merged with the `helpText`/`error` ids */
+  describedBy?: string;
   /** Example text to display as placeholder */
   placeholder?: string;
   /** ID for form input */
