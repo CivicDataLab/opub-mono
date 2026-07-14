@@ -91,19 +91,19 @@ export const Footer = ({
   );
 
   function handleFirstPage() {
-    paginationControls.goToFirstPage();
+    paginationControls?.goToFirstPage();
   }
 
   function handlePreviousPage() {
-    paginationControls.goToPreviousPage();
+    paginationControls?.goToPreviousPage();
   }
 
   function handleNextPage() {
-    paginationControls.goToNextPage();
+    paginationControls?.goToNextPage();
   }
 
   function handleLastPage() {
-    paginationControls.goToLastPage();
+    paginationControls?.goToLastPage();
   }
 
   const pageCount = Math.ceil((totalPages ?? 1) / (pageSize ?? 0));
@@ -131,7 +131,7 @@ export const Footer = ({
       value={String(getState().pagination.pageSize)}
       onChange={(e) => {
         table.setPageSize(Number(e));
-        handlePageSizeChange(Number(e));
+        handlePageSizeChange?.(Number(e));
       }}
     />
   );

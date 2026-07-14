@@ -62,6 +62,20 @@ export const Default: Story = {
   },
 };
 
+export const WithPageSizeChange: Story = {
+  render: (args) => (
+    <Table
+      {...args}
+      handlePageSizeChange={(size) => console.log('rows per page:', size)}
+    />
+  ),
+  args: {
+    columnContentTypes: columnContentTypes,
+    rows: data,
+    columns: columns,
+  },
+};
+
 export const DefaultWithClimateTheme: Story = {
   args: {
     columnContentTypes: columnContentTypes,

@@ -31,6 +31,7 @@ const Table = (props: TableProps) => {
     hideFooter = false,
     theme = 'default',
     labels,
+    handlePageSizeChange,
     ...others
   } = props;
   const [data, setData] = React.useState(() => [...rows]);
@@ -146,7 +147,13 @@ const Table = (props: TableProps) => {
           </tbody>
         </table>
       </div>
-      {footerVisible && <Footer table={table} labels={labels} />}
+      {footerVisible && (
+        <Footer
+          table={table}
+          labels={labels}
+          handlePageSizeChange={handlePageSizeChange}
+        />
+      )}
     </div>
   );
 };

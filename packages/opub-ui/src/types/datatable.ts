@@ -66,6 +66,8 @@ export interface TableProps {
   theme?: 'climate' | 'default';
   /** Localizable strings for the footer. Defaults to English. */
   labels?: TableLabels;
+  /** Callback fired when the rows-per-page selection changes. */
+  handlePageSizeChange?: (pageSize: number) => void;
 }
 
 export type TableFilterProps = {
@@ -105,7 +107,6 @@ export type DataTableProps = TableProps &
       goToNextPage: () => void;
       goToLastPage: () => void;
     };
-    handlePageSizeChange?: any;
     totalPages?: number;
     args?: any;
     pageIdx?: number;
