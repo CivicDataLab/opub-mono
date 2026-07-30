@@ -14,12 +14,22 @@ export type { CollapsibleProps } from './collapsible';
 export type { ComboboxProps } from './combobox';
 export type {
   ColumnContentType,
+  ColumnFilterConfig,
+  ColumnFilterType,
   ColumnVisibilityData,
   DataTableProps,
+  FilterCondition,
+  FilterField,
   SortDirection,
+  SortDirectionValue,
+  SortField,
+  TableFiltersState,
+  TablePaginationState,
   TableProps,
+  TableSortingState,
   VerticalAlign,
 } from './datatable';
+export { FILTER_CONDITIONS } from './datatable';
 export type { DateTimeProps } from './datetime';
 export type { DividerProps } from './divider';
 export type { IconProps } from './icon';

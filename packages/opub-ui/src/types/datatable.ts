@@ -1,3 +1,5 @@
+import type { ReactNode } from 'react';
+
 import { ActionListProps } from '../components/ActionList';
 
 export type SortDirection = 'asc' | 'desc' | 'none';
@@ -20,6 +22,8 @@ export type TableLabels = {
   nextPage?: string;
   /** Last-page button label. Default "Last Page" */
   lastPage?: string;
+  /** Empty table message. Default "No data" */
+  empty?: string;
 };
 
 export interface ColumnVisibilityData {
@@ -70,14 +74,82 @@ export interface TableProps {
   handlePageSizeChange?: (pageSize: number) => void;
 }
 
+export const FILTER_CONDITIONS = {
+  exact: 'exact',
+  iexact: 'iexact',
+  contains: 'contains',
+  icontains: 'icontains',
+  startswith: 'startswith',
+  endswith: 'endswith',
+  gt: 'gt',
+  gte: 'gte',
+  lt: 'lt',
+  lte: 'lte',
+  in: 'in',
+} as const;
+
+export type FilterCondition =
+  (typeof FILTER_CONDITIONS)[keyof typeof FILTER_CONDITIONS];
+
+/** Server/client filter field shape */
+export type FilterField = {
+  field: string;
+  condition: FilterCondition;
+  value: string;
+};
+
+export type ColumnFilterType =
+  | 'text'
+  | 'numeric'
+  | 'date'
+  | 'boolean'
+  | 'select'
+  | 'multiSelect';
+
+export type ColumnFilterOption = {
+  label: string;
+  value: string;
+};
+
+export type ColumnFilterConfig = {
+  /**
+   * Must match the TanStack column `id` / `accessorKey`.
+   * - With `type`: renders a header filter button.
+   * - Without `type` (options only): toolbar faceted filter only (legacy).
+   */
+  columnId: string;
+  /**
+   * Filter UI type. Required for header filter buttons.
+   * Conditions are chosen automatically from this type (see DataTable docs).
+   */
+  type?: ColumnFilterType;
+  options?: ColumnFilterOption[] | string[];
+  /** Show min/max (or from/to) inputs; emits separate gte + lte FilterField objects */
+  isRange?: boolean;
+};
+
+/** Active filters as a list of field/condition/value objects */
+export type TableFiltersState = FilterField[];
+
+export type SortDirectionValue = 'asc' | 'desc';
+
+/** Sort field shape for server/client sorting */
+export type SortField = {
+  field: string;
+  direction: SortDirectionValue;
+};
+
+/** Active sorts as a list of field/direction objects */
+export type TableSortingState = SortField[];
+
+/** Server pagination using limit / offset */
+export type TablePaginationState = {
+  limit: number;
+  offset: number;
+};
+
 export type TableFilterProps = {
-  filters?: {
-    columnId: string;
-    options: {
-      label: string;
-      value: string;
-    }[];
-  }[];
+  filters?: ColumnFilterConfig[];
 };
 
 export type DataTableProps = TableProps &
@@ -92,11 +164,18 @@ export type DataTableProps = TableProps &
     rowActions?: ActionListProps['items'];
     /** Add Toolbar  */
     addToolbar?: boolean;
+    /**
+     * When true, shows applied filters as removable chips above the table.
+     * Each chip has an × to clear that field; "Clear all" clears every filter.
+     */
+    showFilterChips?: boolean;
     /** Hide Checkbox  */
     hideSelection?: boolean;
 
     hideViewSelector?: boolean;
     placeholder?: string;
+    /** Custom empty-state content when there are no rows. Defaults to labels.empty / "No data" */
+    emptyState?: ReactNode;
 
     defaultRowCount?: 10 | 25 | 50 | 100;
 
@@ -107,6 +186,30 @@ export type DataTableProps = TableProps &
       goToNextPage: () => void;
       goToLastPage: () => void;
     };
+    /**
+     * When true, filtering / sorting / pagination are treated as server-driven.
+     * TanStack Table runs in manual mode and `onFiltersChange` / `onSortingChange` /
+     * `onPaginationChange` are called so the parent can refetch.
+     */
+    withServer?: boolean;
+    /** Initial / controlled filters when `withServer` is true */
+    filterState?: TableFiltersState;
+    /** Initial / controlled sorting when `withServer` is true */
+    sortingState?: TableSortingState;
+    /** Initial / controlled pagination when `withServer` is true */
+    paginationState?: TablePaginationState;
+    /** Fired when filters change (client or server) — always `FilterField[]` */
+    onFiltersChange?(filters: TableFiltersState): void;
+    /** Fired when sorting changes in server mode */
+    onSortingChange?(sorting: TableSortingState): void;
+    /** Fired when limit/offset pagination changes in server mode */
+    onPaginationChange?(pagination: TablePaginationState): void;
+    /** Total row count from the server (preferred for `withServer` page math) */
+    totalRows?: number;
+    /**
+     * Legacy total **row** count used by customized / server footers
+     * (`Math.ceil(totalPages / pageSize)`). Prefer `totalRows`.
+     */
     totalPages?: number;
     args?: any;
     pageIdx?: number;

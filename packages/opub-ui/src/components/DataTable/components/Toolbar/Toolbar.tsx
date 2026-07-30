@@ -11,6 +11,7 @@ import { Icon } from '../../../Icon';
 import { Menu } from '../../../Menu';
 import { TextField } from '../../../TextField';
 import styles from '../../DataTable.module.scss';
+import { normalizeFilterOptions } from '../../filterUtils';
 import { DataTableFilter } from './DataTableFilter';
 import { DataTableView } from './DataTableView';
 
@@ -43,9 +44,9 @@ export function Toolbar<TData>({
           {filters?.map((filter) => (
             <DataTableFilter
               key={filter.columnId}
-              column={table.getColumn('status')}
-              title="Status"
-              options={filter.options}
+              column={table.getColumn(filter.columnId)}
+              title={filter.columnId}
+              options={normalizeFilterOptions(filter.options)}
             />
           ))}
           {isFiltered && (

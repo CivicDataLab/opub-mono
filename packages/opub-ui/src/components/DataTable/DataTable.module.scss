@@ -220,7 +220,7 @@
 }
 
 .Cell-sorted {
-  .Icon {
+  .Heading .Icon {
     opacity: 1;
 
     svg {
@@ -228,7 +228,8 @@
     }
   }
 
-  &:hover svg {
+  // Only the sort heading icon — not the filter button SVG
+  .Heading:hover svg {
     fill: var(--icon-interactive);
   }
 
@@ -354,6 +355,148 @@
       }
     }
   }
+}
+
+.FilterChips {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+  padding: var(--space-3) var(--space-4);
+  border-bottom: var(--border-default);
+  background-color: var(--surface-default);
+}
+
+.FilterChipsList {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  min-width: 0;
+  flex: 1;
+}
+
+.EmptyCell {
+  text-align: center;
+  white-space: normal;
+}
+
+.EmptyState {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 120px;
+  padding: var(--space-8) var(--space-4);
+  width: 100%;
+}
+
+.HeaderCellContent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-1);
+  width: 100%;
+}
+
+.FilterIconButton {
+  @include unstyled-button;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: var(--border-radius-1);
+  padding: var(--space-1);
+  color: var(--icon-subdued);
+  transition: background-color var(--duration-100) var(--ease),
+    color var(--duration-100) var(--ease);
+
+  svg {
+    display: block;
+    flex-shrink: 0;
+    // Keep outline icon outline even if a parent th sets svg { fill: ... }
+    fill: none;
+  }
+
+  &:hover {
+    background-color: var(--surface-hovered);
+    color: var(--icon-interactive);
+  }
+
+  &[data-active] {
+    color: var(--icon-highlight);
+    background-color: var(--surface-selected);
+
+    svg {
+      fill: currentColor;
+    }
+  }
+
+  &[data-active]:hover {
+    color: var(--icon-interactive);
+  }
+}
+
+.ColumnFilterPopover {
+  padding: var(--space-3);
+  width: min(280px, calc(100vw - var(--space-8)));
+  max-width: min(280px, calc(100vw - var(--space-8)));
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.ColumnFilterContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  min-width: 0;
+  width: 100%;
+}
+
+.ColumnFilterRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2);
+  min-width: 0;
+  width: 100%;
+
+  > * {
+    min-width: 0;
+  }
+}
+
+.ColumnFilterRange {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  min-width: 0;
+  width: 100%;
+}
+
+.ColumnFilterRangeDivider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-subdued);
+  font-size: var(--font-size-75);
+  line-height: 1;
+  margin-block: calc(var(--space-1) * -1);
+}
+
+.ColumnFilterOptions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  max-height: 200px;
+  overflow-y: auto;
+  min-width: 0;
+}
+
+.ColumnFilterActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-2);
+  width: 100%;
 }
 
 .FilterSeparator {
