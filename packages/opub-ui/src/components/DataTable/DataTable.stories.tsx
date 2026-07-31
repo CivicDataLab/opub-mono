@@ -1,12 +1,23 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Meta, StoryObj } from '@storybook/react-vite';
-import { IconCopy, IconPencil, IconTrash } from '@tabler/icons-react';
+import {
+  IconCopy,
+  IconInfoCircle,
+  IconPencil,
+  IconTrash,
+} from '@tabler/icons-react';
 import { createColumnHelper } from '@tanstack/react-table';
 
+import type {
+  FilterField,
+  SortField,
+  TablePaginationState,
+} from '../../types/datatable';
 import { Button } from '../Button';
 import { makeTableData, Person } from '../Table/utils';
 import { TextField } from '../TextField';
 import { DataTable } from './DataTable';
+import { applyCondition } from './filterUtils';
 
 /**
  * Data tables are used to organize and display all information from a dataset.
@@ -117,7 +128,12 @@ export const AllFeatures: Story = {
     filters: [
       {
         columnId: 'status',
+        type: 'multiSelect',
         options: statusFilter,
+      },
+      {
+        columnId: 'firstName',
+        type: 'text',
       },
     ],
   },
@@ -141,6 +157,40 @@ export const WithFilter: Story = {
     filters: [
       {
         columnId: 'status',
+        options: statusFilter,
+      },
+    ],
+  },
+};
+
+export const WithColumnFilters: Story = {
+  args: {
+    columnContentTypes: columnContentTypes,
+    rows: makeTableData(40),
+    columns: columns,
+    hideSelection: true,
+    showFilterChips: true,
+    sortColumns: [
+      'firstName',
+      'lastName',
+      'age',
+      'visits',
+      'progress',
+      'status',
+    ],
+    filters: [
+      {
+        columnId: 'firstName',
+        type: 'text',
+      },
+      {
+        columnId: 'age',
+        type: 'numeric',
+        isRange: true,
+      },
+      {
+        columnId: 'status',
+        type: 'multiSelect',
         options: statusFilter,
       },
     ],
@@ -398,19 +448,19 @@ const ApiColumnContentTypes: Array<'text' | 'numeric'> = [
 
 const ApiColumns = [
   {
-    header: 'title',
+    header: 'Title',
     accessorKey: 'title',
   },
   {
-    header: 'category',
+    header: 'Category',
     accessorKey: 'category',
   },
   {
-    header: 'price',
+    header: 'Price',
     accessorKey: 'price',
   },
   {
-    header: 'stock',
+    header: 'Stock',
     accessorKey: 'stock',
   },
 ];
@@ -499,3 +549,172 @@ export const WithCustomPagination: Story = {
     );
   },
 };
+
+export const WithServer: Story = {
+  args: {
+    columnContentTypes: columnContentTypes,
+    rows: [],
+    columns: columns,
+    withServer: true,
+    hideSelection: true,
+    showFilterChips: true,
+    sortColumns: [
+      'firstName',
+      'lastName',
+      'age',
+      'visits',
+      'progress',
+      'status',
+    ],
+    filters: [
+      { columnId: 'firstName', type: 'text' },
+      { columnId: 'age', type: 'numeric', isRange: true },
+      {
+        columnId: 'status',
+        type: 'multiSelect',
+        options: statusFilter,
+      },
+    ],
+  },
+  render: (args) => {
+    const [rows, setRows] = useState<Person[]>([]);
+    const [totalRows, setTotalRows] = useState(0);
+    const [filters, setFilters] = useState<FilterField[]>([]);
+    const [sorting, setSorting] = useState<SortField[]>([]);
+    const [pagination, setPagination] = useState<TablePaginationState>({
+      limit: 10,
+      offset: 0,
+    });
+    const [loading, setLoading] = useState(true);
+
+    React.useEffect(() => {
+      let cancelled = false;
+
+      const load = async () => {
+        setLoading(true);
+        try {
+          const result = await fetchPeoplePage({
+            filters,
+            sorting,
+            pagination,
+          });
+          if (cancelled) return;
+          setRows(result.data);
+          setTotalRows(result.totalRows);
+        } finally {
+          if (!cancelled) setLoading(false);
+        }
+      };
+
+      load();
+      return () => {
+        cancelled = true;
+      };
+    }, [filters, sorting, pagination]);
+
+    return (
+      <div>
+        {/* {loading && <div style={{ marginBottom: 8 }}>Loading…</div>} */}
+        {/* <pre style={{ fontSize: 12, marginBottom: 8 }}>
+          {JSON.stringify({ filters, sorting, pagination }, null, 2)}
+        </pre> */}
+        <DataTable
+          {...args}
+          rows={rows}
+          totalRows={totalRows}
+          filterState={filters}
+          sortingState={sorting}
+          paginationState={pagination}
+          onFiltersChange={setFilters}
+          onSortingChange={setSorting}
+          onPaginationChange={setPagination}
+          emptyState={
+            <div className="flex items-center gap-2 text-center">
+              <IconInfoCircle />
+              No data found for the current filters
+            </div>
+          }
+        />
+      </div>
+    );
+  },
+};
+
+export const EmptyState: Story = {
+  args: {
+    columnContentTypes: columnContentTypes,
+    rows: [],
+    columns: columns,
+    hideSelection: true,
+    labels: { empty: 'No records match your filters' },
+    showFilterChips: true,
+    sortColumns: ['firstName', 'status'],
+    filters: [
+      { columnId: 'firstName', type: 'text' },
+      {
+        columnId: 'status',
+        type: 'multiSelect',
+        options: statusFilter,
+      },
+    ],
+  },
+};
+
+/** Fake dataset for the server story — regenerated once per Storybook session. */
+const SERVER_DATASET: Person[] = makeTableData(87);
+
+function getPersonField(row: Person, field: string): unknown {
+  return row[field as keyof Person];
+}
+
+/**
+ * Simulates a server: filter → sort → paginate with a small delay.
+ * Uses the same condition helpers as client-side filtering.
+ */
+async function fetchPeoplePage({
+  filters,
+  sorting,
+  pagination,
+}: {
+  filters: FilterField[];
+  sorting: SortField[];
+  pagination: TablePaginationState;
+}): Promise<{ data: Person[]; totalRows: number }> {
+  await new Promise((resolve) => setTimeout(resolve, 250));
+
+  let next = [...SERVER_DATASET];
+
+  if (filters.length) {
+    next = next.filter((row) =>
+      filters.every((filter) =>
+        applyCondition(
+          getPersonField(row, filter.field),
+          filter.condition,
+          filter.value
+        )
+      )
+    );
+  }
+
+  if (sorting.length) {
+    const [{ field, direction }] = sorting;
+    next.sort((a, b) => {
+      const left = getPersonField(a, field);
+      const right = getPersonField(b, field);
+      if (left == null && right == null) return 0;
+      if (left == null) return 1;
+      if (right == null) return -1;
+      if (typeof left === 'number' && typeof right === 'number') {
+        return direction === 'asc' ? left - right : right - left;
+      }
+      const cmp = String(left).localeCompare(String(right));
+      return direction === 'asc' ? cmp : -cmp;
+    });
+  }
+
+  const { limit, offset } = pagination;
+  return {
+    data: next.slice(offset, offset + limit),
+    totalRows: next.length,
+  };
+}

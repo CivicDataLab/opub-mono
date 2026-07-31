@@ -5,12 +5,17 @@ import {
   IconArrowsSort,
 } from '@tabler/icons-react';
 
-import { SortDirection } from '../../../../types/datatable';
+import type {
+  ColumnFilterConfig,
+  FilterField,
+  SortDirection,
+} from '../../../../types/datatable';
 import { cn } from '../../../../utils';
 import { Icon } from '../../../Icon';
 import { Text } from '../../../Text';
 import { Tooltip } from '../../../Tooltip';
 import styles from '../../DataTable.module.scss';
+import { FilterButton } from './FilterButton';
 
 function SortButton({
   column,
@@ -72,6 +77,12 @@ type HeaderProps = {
   text: React.ReactNode;
   columnType?: string;
   defaultSortDirection: SortDirection;
+  filter?: ColumnFilterConfig;
+  filterFields?: FilterField[];
+  onFilterChange?: (
+    columnId: string,
+    fields: FilterField[] | undefined
+  ) => void;
 };
 
 export const HeaderCell = ({
@@ -81,23 +92,39 @@ export const HeaderCell = ({
   text,
   columnType,
   defaultSortDirection,
+  filter,
+  filterFields = [],
+  onFilterChange,
   ...rest
 }: HeaderProps) => {
+  const heading =
+    !header.isPlaceholder && header.column.getCanSort() && sortable ? (
+      <SortButton
+        columnType={columnType}
+        text={text}
+        column={header.column}
+        sortable={sortable}
+        defaultSortDirection={defaultSortDirection}
+      />
+    ) : (
+      <Text variant="bodySm" color="subdued" fontWeight="medium">
+        {text}
+      </Text>
+    );
+
   return (
     <th className={className} {...rest}>
-      {header.isPlaceholder ? null : header.column.getCanSort() && sortable ? (
-        <SortButton
-          columnType={columnType}
-          text={text}
-          column={header.column}
-          sortable={sortable}
-          defaultSortDirection={defaultSortDirection}
-        />
-      ) : (
-        <Text variant="bodySm" color="subdued" fontWeight="medium">
-          {text}
-        </Text>
-      )}
+      <div className={styles.HeaderCellContent}>
+        {header.isPlaceholder ? null : heading}
+        {filter && onFilterChange && (
+          <FilterButton
+            config={filter}
+            fields={filterFields}
+            label={text}
+            onFilterChange={onFilterChange}
+          />
+        )}
+      </div>
     </th>
   );
 };

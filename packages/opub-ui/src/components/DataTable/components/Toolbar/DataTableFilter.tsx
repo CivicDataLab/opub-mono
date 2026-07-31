@@ -18,6 +18,7 @@ import { Popover } from '../../../Popover';
 import { ScrollArea } from '../../../ScrollArea';
 import { Text } from '../../../Text';
 import styles from '../../DataTable.module.scss';
+import { getSelectedFilterValues } from '../../filterUtils';
 
 interface DataTableFacetedFilterProps<TData, TValue> {
   column?: Column<TData, TValue>;
@@ -35,7 +36,7 @@ export function DataTableFilter<TData, TValue>({
   options,
 }: DataTableFacetedFilterProps<TData, TValue>) {
   const facets = column?.getFacetedUniqueValues();
-  const selectedValues = new Set(column?.getFilterValue() as string[]);
+  const selectedValues = getSelectedFilterValues(column?.getFilterValue());
 
   return (
     <Popover>
@@ -85,12 +86,13 @@ export function DataTableFilter<TData, TValue>({
                       <CommandItem
                         key={option.value}
                         onSelect={() => {
+                          const next = new Set(selectedValues);
                           if (isSelected) {
-                            selectedValues.delete(option.value);
+                            next.delete(option.value);
                           } else {
-                            selectedValues.add(option.value);
+                            next.add(option.value);
                           }
-                          const filterValues = Array.from(selectedValues);
+                          const filterValues = Array.from(next);
                           column?.setFilterValue(
                             filterValues.length ? filterValues : undefined
                           );
