@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: 'Version number (e.g., 0.4.21, 1.0.0)'
+        description: "Version number (e.g., 0.4.21, 1.0.0)"
         required: true
         type: string
 
@@ -24,8 +24,8 @@ jobs:
       - name: Setup Node.js environment
         uses: actions/setup-node@v4
         with:
-          node-version: 20
-          registry-url: 'https://registry.npmjs.org'
+          node-version: 22
+          registry-url: "https://registry.npmjs.org"
 
       - name: Update npm to latest
         run: npm install -g npm@latest
