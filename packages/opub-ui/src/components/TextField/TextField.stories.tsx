@@ -20,9 +20,48 @@ export const Default: Story = {
   args: {
     name: 'name',
     label: 'Text Field',
+    placeholder: 'e.g. Maternal Health Monitoring',
     onChange: (text, name) => console.log(text, name),
   },
 };
+
+export const States = () => (
+  <div
+    style={{
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 'var(--space-5)',
+      maxWidth: 480,
+      padding: 'var(--space-5)',
+      background: 'var(--surface-default)',
+      border: 'var(--border-width-1) solid var(--border-subdued)',
+      borderRadius: 'var(--border-radius-3)',
+    }}
+  >
+    <TextField
+      name="empty"
+      label="Empty — try focusing"
+      placeholder="e.g. Maternal Health Monitoring"
+      focused
+    />
+    <TextField
+      name="filled"
+      label="Filled"
+      defaultValue="District Health Infrastructure"
+    />
+    <TextField
+      name="disabled"
+      label="Disabled"
+      defaultValue="Locked value"
+      disabled
+    />
+    <TextField
+      name="invalid"
+      label="Invalid"
+      error="Enter a use case title."
+    />
+  </div>
+);
 
 export const Number: Story = {
   args: {
@@ -113,15 +152,16 @@ export const ConnectedFields: Story = {
 
 export const Error: Story = {
   args: {
-    label: 'Name',
-    error: 'Name is required',
+    label: 'Invalid',
+    error: 'Enter a use case title.',
     name: 'error',
   },
 };
 
 export const Disabled: Story = {
   args: {
-    label: 'Name',
+    label: 'Disabled',
+    defaultValue: 'Locked value',
     disabled: true,
     name: 'disabled',
   },

@@ -23,6 +23,7 @@ const IconButton = forwardRef((props: IconButtonProps, ref: any) => {
     tooltipSide = 'bottom',
     disabled,
     color,
+    stroke,
     className,
     type = 'button',
     ...others
@@ -36,30 +37,38 @@ const IconButton = forwardRef((props: IconButtonProps, ref: any) => {
   const iconSize = iconSizes[size];
 
   const buttonMarkup = (
-    <>
-      <button
-        {...others}
-        className={`opub-IconButton ${themeClass}`}
-        ref={ref}
-        aria-disabled={disabled}
-        type={type}
-        onClick={(e) => {
-          if (disabled) {
-            e.preventDefault();
-            return;
-          }
-          props.onClick?.(e);
-        }}
-      >
-        <Text visuallyHidden>{children}</Text>
-        <Icon source={icon} size={iconSize} color={color ? color : 'default'} />
-      </button>
-    </>
+    <button
+      {...others}
+      className={`opub-IconButton ${themeClass}`}
+      ref={ref}
+      aria-disabled={disabled}
+      type={type}
+      onClick={(e) => {
+        if (disabled) {
+          e.preventDefault();
+          return;
+        }
+        props.onClick?.(e);
+      }}
+    >
+      <Text visuallyHidden>{children}</Text>
+      <Icon
+        source={icon}
+        size={iconSize}
+        color={color ? color : 'default'}
+        stroke={stroke}
+      />
+    </button>
   );
 
   const markup =
     (withTooltip && !disabled) || tooltipText ? (
-      <Tooltip content={tooltipText || children} side={tooltipSide} hideArrow>
+      <Tooltip
+        content={tooltipText || children}
+        side={tooltipSide}
+        hideArrow
+        solo
+      >
         {buttonMarkup}
       </Tooltip>
     ) : (

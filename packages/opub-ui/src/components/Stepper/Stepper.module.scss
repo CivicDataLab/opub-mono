@@ -1,0 +1,157 @@
+@use '../../../styles/common' as *;
+
+.Root {
+  --op-stepper-indicator-size: 44px;
+
+  display: flex;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  align-items: flex-start;
+}
+
+.isCompact {
+  --op-stepper-indicator-size: 24px;
+
+  align-items: center;
+}
+
+.Item {
+  display: flex;
+  align-items: center;
+}
+
+.Root:not(.isCompact) .Item {
+  align-items: flex-start;
+}
+
+.grow {
+  flex: 1;
+}
+
+.Step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  text-align: center;
+}
+
+.isCompact .Step {
+  flex-direction: row;
+  text-align: start;
+}
+
+.StepButton {
+  @include unstyled-button;
+  @include focus-ring;
+
+  border-radius: var(--border-radius-2);
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+
+  &:focus-visible:not(:active) {
+    @include focus-ring($style: 'focused');
+  }
+}
+
+.Indicator {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: var(--op-stepper-indicator-size);
+  height: var(--op-stepper-indicator-size);
+  border-radius: var(--border-radius-full);
+  font-size: var(--font-size-100);
+  font-weight: var(--font-weight-semi-bold);
+  line-height: 1;
+  transition:
+    background-color var(--duration-200) var(--ease-in-out),
+    color var(--duration-200) var(--ease-in-out);
+}
+
+.isCompact .Indicator {
+  font-size: var(--font-size-75);
+}
+
+.active {
+  background-color: var(--action-primary-basic-default);
+  color: var(--text-onbg-default);
+}
+
+.upcoming {
+  background-color: var(--base-gray-slate-solid-5);
+  color: var(--text-disabled);
+}
+
+.incomplete {
+  background-color: var(--action-primary-critical-default);
+  color: var(--text-onbg-default);
+}
+
+.Body {
+  margin-top: var(--space-6);
+}
+
+.Actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-top: var(--space-4);
+  width: 100%;
+}
+
+.buttonPrevious,
+.buttonNext {
+  border-radius: var(--border-radius-2);
+
+  &::after {
+    border-radius: var(--border-radius-2);
+  }
+}
+
+.Content {
+  max-width: 8.5rem;
+}
+
+.isCompact .Content {
+  max-width: none;
+}
+
+.Label {
+  margin: 0;
+}
+
+.Description {
+  margin: var(--space-1) 0 0;
+}
+
+.isCompact .Label {
+  white-space: nowrap;
+}
+
+.Connector {
+  flex: 1;
+  height: 2px;
+  margin-inline: var(--space-2);
+  margin-top: calc((var(--op-stepper-indicator-size) - 2px) / 2);
+  border-radius: var(--border-radius-full);
+  background-color: var(--base-gray-slate-solid-5);
+  transition: background-color var(--duration-200) var(--ease-in-out);
+}
+
+.isCompact .Connector {
+  margin-top: 0;
+}
+
+.completed {
+  background-color: var(--action-primary-basic-default);
+}
+
+.Connector.incomplete {
+  background-color: var(--action-primary-critical-default);
+}

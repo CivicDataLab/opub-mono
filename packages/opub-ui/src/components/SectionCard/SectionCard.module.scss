@@ -1,0 +1,161 @@
+@use '../../../styles/common' as *;
+
+.Root {
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  border: var(--border-width-1) solid var(--border-disabled);
+  border-radius: var(--border-radius-4);
+  background-color: var(--surface-default);
+}
+
+.Collapsible {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  width: 100%;
+  min-width: 0;
+}
+
+.Header {
+  display: flex;
+  width: 100%;
+  box-sizing: border-box;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-5);
+}
+
+.isSingleLine {
+  align-items: center;
+}
+
+.hasOpenPanel .Header {
+  border-bottom: var(--border-width-1) solid var(--border-disabled);
+}
+
+.Start {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-1);
+}
+
+.TitleRow {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.TitleHeading {
+  margin: 0;
+  min-width: 0;
+  width: 100%;
+}
+
+.TitleTrigger {
+  @include unstyled-button;
+  @include focus-ring;
+
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  align-items: center;
+  gap: var(--space-1);
+  text-align: start;
+  cursor: pointer;
+  border-radius: var(--border-radius-1);
+
+  &:focus-visible:not(:active) {
+    @include focus-ring($style: 'focused');
+  }
+}
+
+.Title {
+  margin: 0;
+}
+
+.DescriptionIndented {
+  margin-inline-start: calc(var(--space-6) + var(--space-1));
+}
+
+.Actions {
+  display: flex;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-2);
+}
+
+.ChevronIcon {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: var(--space-6);
+  height: var(--space-6);
+  transition: transform var(--duration-200) var(--ease-in-out);
+}
+
+.TitleTrigger[data-state='open'] .ChevronIcon {
+  transform: rotate(90deg);
+}
+
+.Collapse {
+  overflow: hidden;
+  width: 100%;
+}
+
+.Collapse[data-state='open'] {
+  animation: section-card-down var(--duration-200) var(--ease-out);
+}
+
+.Collapse[data-state='closed'],
+.Collapse[hidden] {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ChevronIcon {
+    transition: none;
+  }
+
+  .Collapse[data-state='open'] {
+    animation: none;
+  }
+}
+
+.Body {
+  width: 100%;
+  box-sizing: border-box;
+  padding: var(--space-5);
+}
+
+.Footer {
+  display: flex;
+  width: 100%;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-2);
+  padding: var(--space-4) var(--space-5);
+  border-top: var(--border-width-1) solid var(--border-disabled);
+}
+
+@keyframes section-card-down {
+  from {
+    height: 0;
+  }
+
+  to {
+    height: var(--radix-collapsible-content-height);
+  }
+}
