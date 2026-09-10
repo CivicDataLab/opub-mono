@@ -31,6 +31,7 @@ const meta = {
     children: { control: false },
     footer: { control: false },
     actions: { control: false },
+    successText: { control: 'text' },
     expanded: { control: false },
     onExpandedChange: { control: false },
     expandAccessibilityLabel: { control: false },
@@ -202,6 +203,21 @@ export const WithActions: Story = {
           onChange={() => {}}
         />
       </FormLayout>
+    </SectionCard>
+  ),
+};
+
+export const WithSuccessText: Story = {
+  args: {
+    title: 'Uploaded Files (2)',
+    description: undefined,
+    successText: '2 Files Ready',
+  },
+  render: (args) => (
+    <SectionCard {...args}>
+      <Text as="p" variant="bodyMd" color="subdued">
+        Files are processed and ready to use.
+      </Text>
     </SectionCard>
   ),
 };

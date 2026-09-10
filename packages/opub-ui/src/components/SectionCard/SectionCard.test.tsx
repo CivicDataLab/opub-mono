@@ -52,6 +52,31 @@ describe('SectionCard', () => {
     expect(screen.getByTestId('pencil-icon')).toBeInTheDocument();
   });
 
+  test('renders success text when there are no actions', () => {
+    render(
+      <SectionCard title="Uploaded Files (2)" successText="2 Files Ready">
+        Files
+      </SectionCard>
+    );
+
+    expect(screen.getByText('2 Files Ready')).toBeInTheDocument();
+  });
+
+  test('prefers header actions over success text', () => {
+    render(
+      <SectionCard
+        title="Uploaded Files (2)"
+        successText="2 Files Ready"
+        actions={[{ content: 'Edit', onAction: () => {} }]}
+      >
+        Files
+      </SectionCard>
+    );
+
+    expect(screen.queryByText('2 Files Ready')).not.toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Edit' })).toBeInTheDocument();
+  });
+
   test('renders the footer', () => {
     render(
       <SectionCard title="Contact details" footer={<button>Save</button>}>

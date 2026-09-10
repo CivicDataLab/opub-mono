@@ -1,6 +1,6 @@
 import React, { forwardRef, useId, useState } from 'react';
 import * as Collapsible from '@radix-ui/react-collapsible';
-import { IconChevronRight } from '@tabler/icons-react';
+import { IconChevronRight, IconCircleCheckFilled } from '@tabler/icons-react';
 
 import { DestructableAction, DisableableAction } from '../../types/button';
 import { Color, IconProps } from '../../types/icon';
@@ -39,6 +39,11 @@ export interface SectionCardProps {
   footer?: React.ReactNode;
   /** Buttons rendered to the right of the title and description */
   actions?: SectionCardAction[];
+  /**
+   * Success status shown on the right of the header when there are no `actions`.
+   * Rendered with a check icon, e.g. "2 Files Ready".
+   */
+  successText?: React.ReactNode;
   /** Shows a chevron and lets the body and footer collapse */
   expandable?: boolean;
   /**
@@ -63,6 +68,7 @@ const SectionCard = forwardRef<HTMLElement, SectionCardProps>(
       children,
       footer,
       actions = [],
+      successText,
       expandable = false,
       defaultExpanded = true,
       expanded,
@@ -153,6 +159,13 @@ const SectionCard = forwardRef<HTMLElement, SectionCardProps>(
               />
             ))}
           </div>
+        ) : successText ? (
+          <span className={styles.SuccessText}>
+            <Icon source={IconCircleCheckFilled} size={16} color="success" />
+            <Text as="span" variant="bodySm" color="success">
+              {successText}
+            </Text>
+          </span>
         ) : null}
       </div>
     );
