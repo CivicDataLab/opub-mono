@@ -20,6 +20,8 @@ export type IconButtonProps = {
   disabled?: boolean;
   /** Color of the icon */
   color?: Color;
+  /** Stroke width of the icon */
+  stroke?: number;
 
   tooltipSide?: 'top' | 'right' | 'bottom' | 'left';
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;

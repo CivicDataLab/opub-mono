@@ -1,4 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react-vite';
+import { IconFileSpreadsheet, IconLink, IconWorld } from '@tabler/icons-react';
 
 import { Tab, TabList, TabPanel, Tabs } from './Tabs';
 
@@ -126,6 +127,36 @@ export const Fitted: Story = {
           </TabPanel>
         </Tabs>
       </>
+    );
+  },
+  args: {},
+};
+
+export const Boxed: Story = {
+  render: ({ ...args }) => {
+    return (
+      <Tabs defaultValue="upload" {...args}>
+        <TabList boxed>
+          <Tab value="upload" icon={IconFileSpreadsheet}>
+            File Upload
+          </Tab>
+          <Tab value="api" icon={IconWorld}>
+            API
+          </Tab>
+          <Tab value="link" icon={IconLink}>
+            Link
+          </Tab>
+        </TabList>
+        <TabPanel value="upload">
+          <div className="p-5">File Upload</div>
+        </TabPanel>
+        <TabPanel value="api">
+          <div className="p-5">API</div>
+        </TabPanel>
+        <TabPanel value="link">
+          <div className="p-5">Link</div>
+        </TabPanel>
+      </Tabs>
     );
   },
   args: {},

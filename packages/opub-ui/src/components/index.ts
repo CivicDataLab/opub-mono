@@ -41,6 +41,8 @@ export {
   DrawerTitle,
   DrawerDescription,
 } from './Drawer';
+export { FileCard } from './FileCard';
+export type { FileCardProps, FileCardStatus } from './FileCard';
 export * from './Form';
 export { FormLayout } from './FormLayout';
 export * from './Icon';
@@ -56,6 +58,8 @@ export { ProgressBar } from './ProgressBar';
 export * from './Satori';
 export { ScrollArea } from './ScrollArea';
 export { SearchInput } from './SearchInput';
+export { SectionCard } from './SectionCard';
+export type { SectionCardAction, SectionCardProps } from './SectionCard';
 export { SelectorCard } from './SelectorCard';
 export { ShareDialog } from './ShareDialog';
 export { Sheet } from './Sheet';
@@ -65,6 +69,12 @@ export { SkeletonDisplayText } from './SkeletonDisplayText';
 export { SkeletonTabs } from './SkeletonTabs';
 export { SkeletonThumbnail } from './SkeletonThumbnail';
 export { Spinner } from './Spinner';
+export { Stepper, useStepperStep } from './Stepper';
+export type {
+  StepperItem,
+  StepperProps,
+  StepperStepContextValue,
+} from './Stepper';
 export { Table } from './Table';
 export { Tab, TabList, TabPanel, Tabs } from './Tabs';
 export { Tag } from './Tag';

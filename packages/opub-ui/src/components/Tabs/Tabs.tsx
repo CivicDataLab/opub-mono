@@ -1,7 +1,9 @@
 import { forwardRef } from 'react';
 import * as TabsRadix from '@radix-ui/react-tabs';
 
+import { IconProps } from '../../types';
 import { cn } from '../../utils';
+import { Icon } from '../Icon';
 import { Text } from '../Text';
 import styles from './Tabs.module.scss';
 
@@ -12,7 +14,7 @@ const Tabs = forwardRef((props: Props, ref: any) => {
 
   return (
     <TabsRadix.Root
-      className={`opub-Tabs ${className}`}
+      className={cn('opub-Tabs', className)}
       ref={ref}
       {...others}
     />
@@ -25,14 +27,18 @@ type ListProps = {
   /** Text to replace disclosures horizontal dots */
   disclosureText?: string;
   border?: boolean;
+  /** Grey track with a white selected chip. Optional icons on Tab. */
+  boxed?: boolean;
 } & TabsRadix.TabsListProps;
 
 const TabList = forwardRef((props: ListProps, ref: any) => {
-  const { fitted, disclosureText, border, className, ...others } = props;
+  const { fitted, disclosureText, border, boxed, className, ...others } =
+    props;
   const classname = cn(
     styles.TabList,
     fitted && styles.fitted,
     border && styles.border,
+    boxed && styles.boxed,
     className
   );
 
@@ -42,11 +48,20 @@ const TabList = forwardRef((props: ListProps, ref: any) => {
 type TabProps = {
   activeBorder?: boolean;
   theme?: 'climate' | 'default' | 'dataSpace';
+  /** Icon shown before the label. Intended for boxed TabList. */
+  icon?: IconProps['source'];
 } & TabsRadix.TabsTriggerProps;
 
 const Tab = forwardRef(
   (
-    { children, className, activeBorder = true, theme, ...props }: TabProps,
+    {
+      children,
+      className,
+      activeBorder = true,
+      theme,
+      icon,
+      ...props
+    }: TabProps,
     ref: any
   ) => {
     return (
@@ -60,6 +75,11 @@ const Tab = forwardRef(
             className
           )}
         >
+          {icon ? (
+            <span className={styles.TabIcon}>
+              <Icon source={icon} size={20} stroke={1.5} />
+            </span>
+          ) : null}
           <Text
             className={cn(
               theme === 'climate'

@@ -6,14 +6,17 @@ $spinner-icon-size: 12px;
 .TextField {
   --opub-text-field-contents: 20;
   --opub-text-field-backdrop: 10;
-  --focused: var(--text-interactive);
+  --input-focus-border: var(--base-gray-slate-alpha-9);
+  --input-focus-ring: var(--base-gray-slate-alpha-5);
 
   @include text-style-input;
 
   position: relative;
   display: flex;
   align-items: center;
+  width: 100%;
   color: var(--text-default);
+  transition: color var(--duration-150) var(--ease);
 
   svg {
     color: var(--icon-default);
@@ -45,7 +48,7 @@ $spinner-icon-size: 12px;
   width: 2.5rem;
   flex: 0 0 2.5rem;
   padding-top: calc(
-    ((2.25rem - var(--font-line-height-3) - var(--space-05)) / 2) + 1px
+    ((2.5rem - var(--font-line-height-3) - var(--space-05)) / 2) + 1px
   );
   padding-right: var(--space-1);
   overflow: hidden;
@@ -79,19 +82,45 @@ $spinner-icon-size: 12px;
   outline: none;
 
   ~ .Backdrop {
-    @include focus-ring($style: 'focused');
+    border-color: var(--input-focus-border);
+    box-shadow: 0 0 0 var(--space-1) var(--input-focus-ring);
+
+    &::after {
+      box-shadow: none;
+    }
+  }
+}
+
+.focus > .Backdrop {
+  border-color: var(--input-focus-border);
+  box-shadow: 0 0 0 var(--space-1) var(--input-focus-ring);
+
+  &::after {
+    box-shadow: none;
   }
 }
 
 .error {
   > .Backdrop {
-    background-color: var(--surface-critical);
-    border-color: var(--border-critical-default);
+    background-color: var(--surface-default);
+    border-color: var(--base-red-solid-9);
+    box-shadow: 0 0 0 var(--space-1) var(--base-red-alpha-4);
 
     &::after {
-      border-color: var(--focused);
+      box-shadow: none;
     }
   }
+
+  .Input:focus-visible ~ .Backdrop,
+  .tags:has(:focus-visible) ~ .Backdrop {
+    border-color: var(--base-red-solid-9);
+    box-shadow: 0 0 0 var(--space-1) var(--base-red-alpha-5);
+  }
+}
+
+.error.focus > .Backdrop {
+  border-color: var(--base-red-solid-9);
+  box-shadow: 0 0 0 var(--space-1) var(--base-red-alpha-5);
 }
 
 .readOnly > .Backdrop {
@@ -100,12 +129,11 @@ $spinner-icon-size: 12px;
 
 .disabled {
   color: var(--text-disabled);
-  cursor: initial;
+  cursor: not-allowed;
 
   > .Backdrop {
     background-color: var(--surface-subdued);
-    border-color: var(--border-subdued);
-    border-top-color: var(--border-disabled);
+    border-color: var(--border-disabled);
   }
 
   svg {
@@ -137,15 +165,18 @@ $spinner-icon-size: 12px;
   display: block;
   flex: 1 1 auto;
   min-width: 0;
-  min-height: 2.25rem;
+  min-height: 2.5rem;
   margin: 0;
-  padding: calc((2.25rem - var(--font-line-height-3) - var(--space-05)) / 2)
+  padding: calc((2.5rem - var(--font-line-height-3) - var(--space-05)) / 2)
     var(--space-3);
   background: none;
   border: var(--border-width-1) solid transparent;
   appearance: none;
   caret-color: var(--text-default);
   color: var(--text-default);
+  transition:
+    color var(--duration-150) var(--ease),
+    caret-color var(--duration-150) var(--ease);
 
   @media #{$breakpoints-md-up} {
     font-size: var(--font-size-100);
@@ -157,18 +188,34 @@ $spinner-icon-size: 12px;
   }
 
   &:disabled {
+    cursor: not-allowed;
     opacity: 1;
     background: none;
     color: var(--text-disabled);
     -webkit-text-fill-color: var(--text-disabled);
   }
 
-  &:invalid {
+  &:invalid,
+  &[aria-invalid='true'] {
     box-shadow: none;
   }
 
+  &[aria-invalid='true'] ~ .Backdrop {
+    border-color: var(--base-red-solid-9);
+    box-shadow: 0 0 0 var(--space-1) var(--base-red-alpha-4);
+
+    &::after {
+      box-shadow: none;
+    }
+  }
+
+  &[aria-invalid='true']:focus-visible ~ .Backdrop {
+    border-color: var(--base-red-solid-9);
+    box-shadow: 0 0 0 var(--space-1) var(--base-red-alpha-5);
+  }
+
   &::placeholder {
-    color: var(--text-subdued);
+    color: var(--text-disabled);
   }
 
   &[type='number'] {
@@ -182,10 +229,8 @@ $spinner-icon-size: 12px;
   }
 
   &:-webkit-autofill {
-    border-radius: var(--border-radius-1);
+    border-radius: var(--border-radius-2);
     border: var(--border-width-1) solid var(--border-subdued);
-    border-top-color: #898f94;
-    border-right-color: transparent;
   }
 
   &.suggestion {
@@ -234,8 +279,10 @@ $spinner-icon-size: 12px;
 
   background-color: var(--surface-default);
   border: var(--border-width-1) solid var(--border-subdued);
-  border-top-color: #898f94;
-  border-radius: var(--border-radius-1);
+  border-radius: var(--border-radius-2);
+  transition:
+    border-color var(--duration-150) var(--ease),
+    box-shadow var(--duration-150) var(--ease);
 }
 
 .Prefix,

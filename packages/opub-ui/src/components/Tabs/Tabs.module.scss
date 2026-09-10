@@ -19,6 +19,9 @@ $item-min-width: 50px;
 .Tab {
   @include unstyled-button;
 
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
   color: var(--text-highlight);
   position: relative;
   justify-content: center;
@@ -149,4 +152,96 @@ $item-min-width: 50px;
 .border {
   border: 2px solid #eee;
   border-radius: 16px 16px 0px 0px;
+}
+
+.TabIcon {
+  --icon-default: currentColor;
+  display: flex;
+  flex-shrink: 0;
+}
+
+.boxed {
+  align-items: center;
+  width: 100%;
+  gap: var(--space-1);
+  padding: var(--space-1);
+  background-color: var(--surface-subdued);
+  border-radius: var(--border-radius-2);
+
+  .Tab {
+    flex: 1 1 0;
+    min-width: 0;
+    box-shadow: none;
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--border-radius-2);
+    color: var(--text-medium);
+    background: transparent;
+
+    @media #{$breakpoints-md-down} {
+      padding: var(--space-2) var(--space-3);
+    }
+
+    &::before {
+      content: none;
+      display: none;
+    }
+
+    &.ActiveBorder {
+      border-radius: var(--border-radius-2);
+      box-shadow: none;
+    }
+
+    .Title,
+    .TitleClimateTheme,
+    .TitleDataSpaceTheme {
+      color: inherit;
+      min-width: 0;
+    }
+
+    &:hover.ActiveBorder .Title::before {
+      background-color: transparent;
+    }
+
+    &:focus-visible:not(:active) {
+      .Title::after {
+        box-shadow: none;
+      }
+
+      outline: 2px solid var(--text-interactive);
+      outline-offset: 2px;
+    }
+
+    &[data-state='active'] {
+      background: var(--surface-default);
+      color: var(--text-default);
+      box-shadow: var(--shadow-basic-sm);
+
+      .Title,
+      .TitleClimateTheme,
+      .TitleDataSpaceTheme {
+        color: var(--text-default);
+        font-weight: 500;
+      }
+
+      svg {
+        color: currentColor;
+      }
+
+      &.ActiveBorder,
+      &.ActiveBorderClimateTheme,
+      &.ActiveBorderDataSpaceTheme {
+        background-color: var(--surface-default);
+        font-weight: 500;
+        color: var(--text-default);
+        border: none;
+        box-shadow: var(--shadow-basic-sm);
+        border-radius: var(--border-radius-2);
+
+        &::before {
+          display: none;
+          background: none;
+        }
+      }
+    }
+  }
 }
