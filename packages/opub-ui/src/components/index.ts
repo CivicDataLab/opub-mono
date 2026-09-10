@@ -41,6 +41,8 @@ export {
   DrawerTitle,
   DrawerDescription,
 } from './Drawer';
+export { FileCard } from './FileCard';
+export type { FileCardProps, FileCardStatus } from './FileCard';
 export * from './Form';
 export { FormLayout } from './FormLayout';
 export * from './Icon';

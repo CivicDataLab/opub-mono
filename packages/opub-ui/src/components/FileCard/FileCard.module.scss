@@ -1,0 +1,128 @@
+@use '../../../styles/common' as *;
+
+.Root {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  padding: var(--space-3) var(--space-4);
+  border: var(--border-width-1) solid var(--border-disabled);
+  border-radius: var(--border-radius-4);
+  background-color: var(--surface-default);
+}
+
+.StatusIcon {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+}
+
+.Body {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.TitleRow {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.NameWrap {
+  position: relative;
+  display: flex;
+  min-width: 0;
+  max-width: 100%;
+  align-items: center;
+  align-self: stretch;
+}
+
+.Name {
+  min-width: 0;
+  margin: 0;
+}
+
+.NameSizer {
+  visibility: hidden;
+}
+
+.RenameHidden {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.NameField {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: calc(-1 * var(--space-2));
+  width: max(100%, 16rem);
+  min-width: 16rem;
+  display: flex;
+  align-items: stretch;
+
+  > div,
+  > div > div,
+  > div > div > div {
+    width: 100%;
+    height: 100%;
+  }
+
+  input {
+    box-sizing: border-box;
+    min-height: 0;
+    height: 100%;
+    padding-block: 0;
+    padding-inline: var(--space-1);
+    padding-top: var(--space-1);
+    padding-bottom: var(--space-1);
+    font-size: var(--font-size-100);
+    font-weight: 500;
+    line-height: var(--font-line-height-2);
+  }
+}
+
+.MetaRow {
+  display: flex;
+  min-width: 0;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-1) var(--space-2);
+}
+
+.FileType {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  padding: 0 var(--space-2);
+  border: var(--border-width-1) solid var(--border-disabled);
+  border-radius: var(--border-radius-1);
+  background-color: var(--surface-subdued);
+  color: var(--text-subdued);
+}
+
+.Meta {
+  min-width: 0;
+  margin: 0;
+}
+
+.Actions {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.ActionButtons {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: var(--space-1);
+}
