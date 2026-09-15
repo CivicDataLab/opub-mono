@@ -18,6 +18,7 @@ $dropzone-stacking-order: (
   opacity: 1;
   transform: scale(1);
   border: var(--border-width-1) $dropzone-border-style transparent;
+  border-width: 2px !important;
 }
 
 @mixin set-border-radius {
@@ -44,6 +45,7 @@ $dropzone-stacking-order: (
     bottom: 0;
     left: 0;
     border: var(--border-width-1) $dropzone-border-style transparent;
+    border-width: 2px !important;
     border-radius: var(--border-radius-1);
     pointer-events: none;
   }
@@ -165,6 +167,7 @@ $dropzone-stacking-order: (
   pointer-events: none;
 
   .hasError & {
+    border-color: var(--border-critical-default);
     border-color: var(--border-critical-default);
     color: var(--text-critical);
     background-color: var(--surface-critical);

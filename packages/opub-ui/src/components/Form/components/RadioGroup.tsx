@@ -5,6 +5,7 @@ import {
   RadioProps,
   RadioItemProps,
   RadioItem,
+  RadioGroupVariant,
 } from '../../RadioGroup';
 import { Controller, useFormContext } from 'react-hook-form';
 
@@ -38,4 +39,4 @@ const RadioGroup = ({ ...props }: Props) => {
 };
 
 export { RadioGroup, RadioItem };
-export type { RadioProps, RadioItemProps };
+export type { RadioProps, RadioItemProps, RadioGroupVariant };

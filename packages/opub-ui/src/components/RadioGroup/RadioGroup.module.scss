@@ -10,6 +10,91 @@
       padding-block-end: var(--space-1);
     }
   }
+
+  &.Card {
+    legend {
+      padding-block-end: var(--space-2);
+    }
+
+    @media #{$breakpoints-md-up} {
+      legend {
+        padding-block-end: var(--space-2);
+      }
+    }
+  }
+}
+
+.RequiredIndicator::after {
+  content: '*';
+  color: var(--text-critical);
+  margin-left: var(--space-1);
+}
+
+.RadioCardGroup {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-3);
+  width: 100%;
+
+  @media #{$breakpoints-md-up} {
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  }
+}
+
+.RadioCard {
+  all: unset;
+  box-sizing: border-box;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  width: 100%;
+  height: 100%;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--border-radius-2);
+  border: var(--border-width-1) solid var(--border-default);
+  background-color: var(--surface-default);
+  cursor: pointer;
+  text-align: start;
+  transition: background-color var(--duration-150) var(--ease),
+    border-color var(--duration-150) var(--ease);
+
+  &:hover:not([data-disabled]) {
+    border-color: var(--border-subdued);
+  }
+
+  &[data-state='checked'] {
+    border-color: var(--border-interactive-default);
+    background-color: var(--surface-interactive);
+
+    .RadioItem {
+      border-color: var(--icon-interactive);
+    }
+  }
+
+  &:focus-visible {
+    outline: var(--border-width-2) solid var(--text-interactive);
+    outline-offset: 2px;
+  }
+}
+
+.RadioCardDisabled {
+  cursor: not-allowed;
+  border-color: var(--border-subdued);
+  background-color: var(--surface-subdued);
+}
+
+.RadioCard .RadioItem {
+  display: flex;
+  flex-shrink: 0;
+  margin-block-start: var(--space-05);
+  pointer-events: none;
+}
+
+.RadioCardContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-05);
+  min-width: 0;
 }
 
 .RadioItem {
