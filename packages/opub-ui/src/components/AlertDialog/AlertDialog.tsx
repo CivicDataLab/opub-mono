@@ -1,10 +1,12 @@
-import React, { forwardRef, Ref } from 'react';
+import React from 'react';
 import * as AlertDialogRadix from '@radix-ui/react-alert-dialog';
 
 import { cn } from '../../utils';
-import { Footer, FooterProps } from '../Dialog/components';
-import styles from '../Dialog/Dialog.module.scss';
-import { Header } from './components';
+import { Text } from '../Text';
+import styles from './AlertDialog.module.scss';
+import dialogStyles from '../Dialog/Dialog.module.scss';
+import { Footer, Header } from './components';
+import type { FooterProps } from './components';
 
 interface DialogProps extends AlertDialogRadix.AlertDialogProps {
   Trigger?: AlertDialogRadix.AlertDialogTriggerProps;
@@ -47,10 +49,6 @@ export type ContentProps = {
   large?: boolean;
   /** Decreases the modal width */
   small?: boolean;
-  /** Limits modal height on large sceens with scrolling */
-  limitHeight?: boolean;
-  /** Sets modal to the height of the viewport on small screens */
-  fullScreen?: boolean;
 } & AlertDialogRadix.AlertDialogContentProps &
   FooterProps;
 
@@ -63,8 +61,6 @@ const Content = ({ ref, ...props }: ContentProps & { ref?: any }) => {
     instant,
     large,
     small,
-    limitHeight,
-    fullScreen,
     footer,
     primaryAction,
     secondaryActions,
@@ -74,23 +70,31 @@ const Content = ({ ref, ...props }: ContentProps & { ref?: any }) => {
   const finalId = id || rId;
 
   const classname = cn(
-    styles.Dialog,
+    styles.AlertDialog,
     small && styles.sizeSmall,
     large && styles.sizeLarge,
-    limitHeight && styles.limitHeight,
-    fullScreen && styles.fullScreen,
     instant && styles.Instant
   );
 
+  const bodyMarkup =
+    typeof children === 'string' || typeof children === 'number' ? (
+      <Text as="p" variant="bodyMd" color="subdued">
+        {children}
+      </Text>
+    ) : (
+      children
+    );
+
   return (
     <AlertDialogRadix.Portal>
-      <AlertDialogRadix.Overlay className={styles.Overlay} />
+      <AlertDialogRadix.Overlay className={dialogStyles.Overlay} />
       <AlertDialogRadix.Content ref={ref} className={classname} {...others}>
-        <div className="sr-only">
-          <AlertDialogRadix.Title>{title}</AlertDialogRadix.Title>
-        </div>
-        <Header id={finalId} titleHidden={titleHidden} children={title} />
-        <div className={styles.Content}>{children}</div>
+        <Header id={finalId} titleHidden={titleHidden}>
+          {title}
+        </Header>
+        <AlertDialogRadix.Description asChild>
+          <div className={styles.Body}>{bodyMarkup}</div>
+        </AlertDialogRadix.Description>
         <Footer
           children={footer}
           primaryAction={primaryAction}

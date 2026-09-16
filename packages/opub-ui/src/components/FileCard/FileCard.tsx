@@ -52,10 +52,7 @@ const STATUS_LABEL: Record<FileCardStatus, string> = {
   error: 'Error',
 };
 
-const STATUS_BADGE: Record<
-  FileCardStatus,
-  'success' | 'info' | 'critical'
-> = {
+const STATUS_BADGE: Record<FileCardStatus, 'success' | 'info' | 'critical'> = {
   ready: 'success',
   processing: 'info',
   error: 'critical',
@@ -242,6 +239,7 @@ const FileCard = forwardRef<HTMLElement, FileCardProps>(
                   withTooltip
                   tooltipText="View"
                   onClick={onView}
+                  className={styles.ViewButton}
                 >
                   View
                 </IconButton>
@@ -254,6 +252,7 @@ const FileCard = forwardRef<HTMLElement, FileCardProps>(
                   color="critical"
                   withTooltip
                   tooltipText="Delete"
+                  className={styles.DeleteButton}
                   onClick={onDelete}
                 >
                   Delete

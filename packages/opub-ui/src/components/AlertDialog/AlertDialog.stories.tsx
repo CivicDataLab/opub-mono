@@ -21,6 +21,32 @@ export const Default: Story = {
     return (
       <AlertDialog>
         <AlertDialog.Trigger>
+          <Button>Delete dataset</Button>
+        </AlertDialog.Trigger>
+        <AlertDialog.Content {...args} />
+      </AlertDialog>
+    );
+  },
+  args: {
+    title: 'Delete dataset?',
+    children:
+      'Deleting "State Climate Risk & Vulnerability Indicators (2025)" will permanently remove it from My Workspace. This action cannot be undone.',
+    primaryAction: {
+      content: 'Delete Dataset',
+      onAction: () => console.log('delete'),
+      destructive: true,
+    },
+    secondaryActions: [
+      { content: 'Cancel', onAction: () => console.log('cancel') },
+    ],
+  },
+};
+
+export const Confirm: Story = {
+  render: ({ ...args }) => {
+    return (
+      <AlertDialog>
+        <AlertDialog.Trigger>
           <Button>Discard Changes</Button>
         </AlertDialog.Trigger>
         <AlertDialog.Content {...args} />
@@ -28,15 +54,15 @@ export const Default: Story = {
     );
   },
   args: {
-    title: 'Dialog Title',
+    title: 'Discard changes?',
     children: 'Are you sure you want to discard all of your notes?',
     primaryAction: {
-      content: 'Yes, discard',
+      content: 'Discard',
       onAction: () => console.log('discard'),
       destructive: true,
     },
     secondaryActions: [
-      { content: 'No, keep changes', onAction: () => console.log('no') },
+      { content: 'Keep editing', onAction: () => console.log('keep') },
     ],
   },
 };
