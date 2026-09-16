@@ -1,5 +1,7 @@
 @use '../../../styles/common' as *;
 
+$color-critical-subtle: #fdf2f2;
+
 .Root {
   display: flex;
   align-items: center;
@@ -125,4 +127,16 @@
   flex-shrink: 0;
   align-items: center;
   gap: var(--space-1);
+}
+
+.DeleteButton {
+  &:hover {
+    background-color: $color-critical-subtle;
+  }
+}
+
+.ViewButton {
+  &:hover {
+    background-color: var(--surface-subdued);
+  }
 }

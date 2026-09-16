@@ -1,5 +1,126 @@
 @use '../../../styles/common' as *;
 
+$alert-width: 440px;
+$alert-width-small: 380px;
+$alert-width-large: 620px;
+
+@keyframes contentShow {
+  from {
+    opacity: 0;
+    transform: translate(-50%, calc(-50% + var(--space-4)));
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+@keyframes contentHide {
+  from {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+
+  to {
+    opacity: 0;
+    transform: translate(-50%, calc(-50% + var(--space-4)));
+  }
+}
+
 .AlertDialog {
-  border: 1px solid black;
+  --content-bg: var(--surface-default);
+
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: var(--z-max);
+  display: flex;
+  flex-direction: column;
+  width: calc(100% - var(--space-8));
+  max-width: $alert-width;
+  max-height: calc(100vh - var(--space-16));
+  overflow: hidden;
+  background-color: var(--content-bg);
+  border-radius: var(--border-radius-3);
+  box-shadow: var(--shadow-basic-2xl);
+  transform: translate(-50%, -50%);
+  will-change: transform, opacity;
+
+  &[data-state='open'] {
+    animation: contentShow var(--duration-200) var(--ease-out);
+
+    &.Instant {
+      animation-duration: 0;
+    }
+  }
+
+  &[data-state='closed'] {
+    animation: contentHide var(--duration-200) var(--ease-out);
+
+    &.Instant {
+      animation-duration: 0;
+    }
+  }
+
+  @media (forced-colors: active) {
+    border: var(--border-width-1) solid transparent;
+  }
+}
+
+.sizeSmall {
+  max-width: $alert-width-small;
+}
+
+.sizeLarge {
+  max-width: $alert-width-large;
+}
+
+.Header {
+  padding: var(--space-5) var(--space-5) 0;
+}
+
+.titleHidden {
+  @include visually-hidden;
+}
+
+.Body {
+  padding: var(--space-2) var(--space-5) var(--space-5);
+  overflow: auto;
+}
+
+.Footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  // gap: var(--space-4);
+  padding: var(--space-3) var(--space-5);
+  border-top: var(--border-width-1) solid var(--border-default);
+}
+
+.FooterContent {
+  margin-right: auto;
+}
+
+.Actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-3);
+
+  button {
+    border-radius: var(--border-radius-2);
+  }
+}
+
+.Cancel {
+  color: var(--text-default);
+  margin-right: var(--space-2);
+
+  &:hover,
+  &:focus:not(:disabled) {
+    color: var(--text-default);
+  }
 }

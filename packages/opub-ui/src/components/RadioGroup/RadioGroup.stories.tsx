@@ -57,3 +57,44 @@ export const Error = () => (
     </RadioItem>
   </RadioGroup>
 );
+
+export const Cards = () => (
+  <RadioGroup
+    name="access-type"
+    title="Access type"
+    requiredIndicator
+    variant="card"
+    defaultValue="open"
+    onChange={(val, name) => {
+      console.log(val, name);
+    }}
+  >
+    <RadioItem value="open" helpText="Anyone can browse and download">
+      Open Access
+    </RadioItem>
+    <RadioItem value="restricted" helpText="Requires approval to access">
+      Restricted Access
+    </RadioItem>
+  </RadioGroup>
+);
+
+export const CardsDisabled = () => (
+  <RadioGroup
+    name="access-type-disabled"
+    title="Access type"
+    requiredIndicator
+    variant="card"
+    defaultValue="open"
+  >
+    <RadioItem value="open" helpText="Anyone can browse and download">
+      Open Access
+    </RadioItem>
+    <RadioItem
+      value="restricted"
+      helpText="Requires approval to access"
+      disabled
+    >
+      Restricted Access
+    </RadioItem>
+  </RadioGroup>
+);

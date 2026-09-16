@@ -12,12 +12,31 @@ import { InlineMessage } from '../InlineMessage';
 import { Text } from '../Text';
 import styles from './RadioGroup.module.scss';
 
-export type RadioProps = Omit<RadioGroupProps, 'onChange'> & {
+export type RadioGroupVariant = 'default' | 'card';
+
+type RadioGroupContextValue = {
+  variant: RadioGroupVariant;
+};
+
+const RadioGroupContext = React.createContext<RadioGroupContextValue>({
+  variant: 'default',
+});
+
+export type RadioProps = Omit<RadioGroupProps, 'onChange' | 'title'> & {
   name: string;
   /** Display an error message */
   error?: Error;
+  /** Title of the radio group */
+  title?: React.ReactNode;
   /** Toggles display of the title */
   titleHidden?: boolean;
+  /** Visual required indicator for the title */
+  requiredIndicator?: boolean;
+  /**
+   * Layout of the radio items.
+   * `card` renders each option as a selectable card with the radio, label, and help text.
+   */
+  variant?: RadioGroupVariant;
   /** Callback when the selected choices change */
   onChange?(selected: string, name: string | undefined): void;
 };
@@ -38,15 +57,27 @@ const RadioGroup = React.forwardRef(
       titleHidden,
       title,
       onChange,
+      variant = 'default',
+      requiredIndicator,
+      required,
+      orientation,
       ...otherProps
     }: RadioProps,
     ref: React.Ref<HTMLDivElement>
   ) => {
     const randomId = React.useId();
     const finalId = otherProps.id || randomId;
+    const showRequired = requiredIndicator || required;
+    const isCard = variant === 'card';
 
     const titleMarkup = title ? (
-      <Text variant="bodyMd" as="legend" visuallyHidden={titleHidden}>
+      <Text
+        variant="bodyMd"
+        as="legend"
+        visuallyHidden={titleHidden}
+        fontWeight={isCard ? 'medium' : undefined}
+        className={showRequired ? styles.RequiredIndicator : undefined}
+      >
         {title}
       </Text>
     ) : null;
@@ -56,24 +87,38 @@ const RadioGroup = React.forwardRef(
         <InlineMessage message={error} fieldID={finalId} />
       </div>
     );
+
+    const itemsMarkup = isCard ? (
+      <div className={styles.RadioCardGroup}>{children}</div>
+    ) : (
+      children
+    );
+
     return (
-      <RadioRadix.Root
-        onValueChange={(value) => onChange && onChange(value, name)}
-        ref={ref}
-        {...otherProps}
-        asChild
-      >
-        <fieldset className={styles.RadioGroupRoot}>
-          {titleMarkup}
-          {children}
-          {errorMarkup}
-        </fieldset>
-      </RadioRadix.Root>
+      <RadioGroupContext.Provider value={{ variant }}>
+        <RadioRadix.Root
+          onValueChange={(value) => onChange && onChange(value, name)}
+          ref={ref}
+          required={required}
+          orientation={orientation ?? (isCard ? 'horizontal' : 'vertical')}
+          {...otherProps}
+          asChild
+        >
+          <fieldset
+            className={cn(styles.RadioGroupRoot, isCard && styles.Card)}
+          >
+            {titleMarkup}
+            {itemsMarkup}
+            {errorMarkup}
+          </fieldset>
+        </RadioRadix.Root>
+      </RadioGroupContext.Provider>
     );
   }
 );
 
 const RadioItem = ({ children, className, ...props }: RadioItemProps) => {
+  const { variant } = React.useContext(RadioGroupContext);
   const { helpText, value, disabled, required } = props;
   const id = React.useId();
 
@@ -82,7 +127,49 @@ const RadioItem = ({ children, className, ...props }: RadioItemProps) => {
     props.disabled && styles.Disabled
   );
 
-  const checkboxMarkup = (
+  if (variant === 'card') {
+    return (
+      <RadioRadix.Item
+        id={id}
+        value={value}
+        disabled={disabled}
+        required={required}
+        className={cn(
+          styles.RadioCard,
+          disabled && styles.RadioCardDisabled,
+          className
+        )}
+      >
+        <span className={inputClassName} aria-hidden>
+          <RadioRadix.Indicator
+            forceMount
+            className={styles.RadioIndicator}
+          />
+        </span>
+        <span className={styles.RadioCardContent}>
+          <Text
+            as="span"
+            variant="bodyMd"
+            fontWeight="semibold"
+            color={disabled ? 'disabled' : undefined}
+          >
+            {children}
+          </Text>
+          {helpText ? (
+            <Text
+              as="span"
+              variant="bodyMd"
+              color={disabled ? 'disabled' : 'subdued'}
+            >
+              {helpText}
+            </Text>
+          ) : null}
+        </span>
+      </RadioRadix.Item>
+    );
+  }
+
+  return (
     <Choice
       label={children}
       helpText={helpText}
@@ -101,8 +188,6 @@ const RadioItem = ({ children, className, ...props }: RadioItemProps) => {
       </RadioRadix.Item>
     </Choice>
   );
-
-  return checkboxMarkup;
 };
 
 export { RadioItem, RadioGroup };
