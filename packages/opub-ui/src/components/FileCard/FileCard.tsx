@@ -9,6 +9,7 @@ import {
 
 import { Key } from '../../types/shared/key';
 import { cn } from '../../utils';
+import { AlertDialog } from '../AlertDialog';
 import { Badge } from '../Badge';
 import { Icon } from '../Icon';
 import { IconButton } from '../IconButton';
@@ -43,6 +44,11 @@ export interface FileCardProps {
   onView?: () => void;
   /** Called when the delete control is activated */
   onDelete?: () => void;
+  /**
+   * Opens a confirmation alert before calling `onDelete`.
+   * @default false
+   */
+  confirmDelete?: boolean;
   className?: string;
 }
 
@@ -71,6 +77,7 @@ const FileCard = forwardRef<HTMLElement, FileCardProps>(
       onRename,
       onView,
       onDelete,
+      confirmDelete = false,
       className,
     },
     ref
@@ -79,6 +86,7 @@ const FileCard = forwardRef<HTMLElement, FileCardProps>(
     const didCommitRef = useRef(false);
     const [editing, setEditing] = useState(false);
     const [draft, setDraft] = useState(name);
+    const [deleteOpen, setDeleteOpen] = useState(false);
 
     useEffect(() => {
       if (!editing) {
@@ -245,18 +253,39 @@ const FileCard = forwardRef<HTMLElement, FileCardProps>(
                 </IconButton>
               ) : null}
               {onDelete ? (
-                <IconButton
-                  icon={IconTrash}
-                  size="slim"
-                  stroke={1.5}
-                  color="critical"
-                  withTooltip
-                  tooltipText="Delete"
-                  className={styles.DeleteButton}
-                  onClick={onDelete}
-                >
-                  Delete
-                </IconButton>
+                <>
+                  <IconButton
+                    icon={IconTrash}
+                    size="slim"
+                    stroke={1.5}
+                    color="critical"
+                    withTooltip
+                    tooltipText="Delete"
+                    className={styles.DeleteButton}
+                    onClick={
+                      confirmDelete
+                        ? () => setDeleteOpen(true)
+                        : onDelete
+                    }
+                  >
+                    Delete
+                  </IconButton>
+                  {confirmDelete ? (
+                    <AlertDialog open={deleteOpen} onOpenChange={setDeleteOpen}>
+                      <AlertDialog.Content
+                        title="Delete file?"
+                        primaryAction={{
+                          content: 'Delete File',
+                          destructive: true,
+                          onAction: onDelete,
+                        }}
+                        secondaryActions={[{ content: 'Cancel' }]}
+                      >
+                        {`Deleting "${name}" will permanently remove it. This action cannot be undone.`}
+                      </AlertDialog.Content>
+                    </AlertDialog>
+                  ) : null}
+                </>
               ) : null}
             </div>
           ) : null}

@@ -72,6 +72,22 @@ export const Default: Story = {
   },
 };
 
+export const WithDeleteConfirmation: Story = {
+  render: (args) => {
+    const [name, setName] = useState(args.name);
+
+    return (
+      <FileCard
+        {...args}
+        name={name}
+        onRename={setName}
+        onDelete={() => toast('File deleted')}
+        confirmDelete
+      />
+    );
+  },
+};
+
 export const ReadOnly: Story = {};
 
 export const Statuses: Story = {

@@ -60,6 +60,27 @@ describe('FileCard', () => {
 
     expect(onView).toHaveBeenCalledTimes(1);
     expect(onDelete).toHaveBeenCalledTimes(1);
+    expect(
+      screen.queryByRole('heading', { name: 'Delete file?' })
+    ).not.toBeInTheDocument();
+  });
+
+  test('confirms delete when confirmDelete is set', () => {
+    const onDelete = vi.fn();
+    renderFileCard({ onDelete, confirmDelete: true });
+
+    fireEvent.click(screen.getByRole('button', { name: 'Delete' }));
+    expect(onDelete).not.toHaveBeenCalled();
+    expect(
+      screen.getByRole('heading', { name: 'Delete file?' })
+    ).toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole('button', { name: 'Cancel' }));
+    expect(onDelete).not.toHaveBeenCalled();
+
+    fireEvent.click(screen.getByRole('button', { name: 'Delete' }));
+    fireEvent.click(screen.getByRole('button', { name: 'Delete File' }));
+    expect(onDelete).toHaveBeenCalledTimes(1);
   });
 
   test('commits a renamed value on Enter', () => {
