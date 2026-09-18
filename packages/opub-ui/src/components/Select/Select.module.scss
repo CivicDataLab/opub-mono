@@ -3,28 +3,17 @@
 .Select {
   --op-select-backdrop: 10;
   --op-select-content: 20;
-  --op-select-input: 30;
+  --input-focus-border: var(--base-gray-slate-alpha-9);
+  --input-focus-ring: var(--base-gray-slate-alpha-5);
   position: relative;
   color: var(--text-default);
-
-  // IE 11 fix to remove default dropdown arrow
-  select::-ms-expand {
-    display: none;
-  }
-
-  &:focus-within .Backdrop {
-    @include focus-ring($style: 'focused');
-    outline: var(--border-width-2) solid transparent;
-  }
 }
 
 .disabled {
-  .Content {
+  .Trigger {
     color: var(--text-disabled);
-  }
-
-  .InlineLabel {
-    color: inherit;
+    // border-radius: var(--space-3);
+    cursor: default;
   }
 
   .Icon svg {
@@ -32,11 +21,8 @@
   }
 
   .Backdrop {
+    background-color: var(--surface-subdued);
     border-color: var(--border-disabled);
-
-    &::before {
-      background-color: var(--action-secondary-disabled);
-    }
 
     &:hover {
       cursor: default;
@@ -44,7 +30,8 @@
   }
 }
 
-.Content {
+.Trigger {
+  @include unstyled-button;
   @include text-style-input;
   position: relative;
   z-index: var(--op-select-content);
@@ -56,6 +43,15 @@
   box-sizing: border-box;
   padding: calc(control-vertical-padding()) var(--space-2)
     calc(control-vertical-padding()) var(--space-3);
+  text-align: left;
+
+  &:focus {
+    outline: none;
+  }
+
+  &:disabled {
+    cursor: default;
+  }
 }
 
 .SelectedOption {
@@ -63,6 +59,10 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.Placeholder {
+  color: var(--text-subdued);
 }
 
 .Prefix {
@@ -76,85 +76,175 @@
   margin-left: var(--space-2);
 }
 
-.Input {
-  // Even though the input is invisible, text styles apply to the options menu
-  font-size: var(--font-size-200);
-  font-weight: 400;
-  line-height: var(--font-line-height-2);
-  text-transform: initial;
-  letter-spacing: initial;
-  position: absolute;
-  text-rendering: auto;
-  top: 0;
-  left: 0;
-  z-index: var(--op-select-input);
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  opacity: 0;
-  appearance: none;
-  border: none;
-  padding-inline: var(--space-2);
-
-  @media #{$breakpoints-md-up} {
-    font-size: var(--font-size-100);
-    line-height: var(--font-line-height-2);
-  }
-
-  option {
-    padding-inline: var(--space-3);
-  }
-}
-
 .Backdrop {
   z-index: var(--op-select-backdrop);
+  pointer-events: none;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
-  border: var(--border-width-1) solid var(--border-default);
-  border-radius: var(--border-radius-1);
+  border: var(--border-width-1) solid var(--border-subdued);
+  border-radius: var(--border-radius-2);
   background-color: var(--surface-default);
-  box-shadow: var(--shadow-basic-sm);
-  @include focus-ring($border-width: 1px);
   position: absolute;
+  transition:
+    border-color var(--duration-150) var(--ease),
+    box-shadow var(--duration-150) var(--ease);
+}
+
+.Trigger:focus,
+.Trigger[aria-expanded='true'] {
+  outline: none;
+
+  ~ .Backdrop {
+    border-color: var(--input-focus-border);
+    box-shadow: 0 0 0 var(--space-1) var(--input-focus-ring);
+  }
+}
+
+.disabled {
+  .Trigger:focus ~ .Backdrop,
+  .Trigger[aria-expanded='true'] ~ .Backdrop {
+    border-color: var(--border-disabled);
+    box-shadow: none;
+  }
 }
 
 .error {
   .Backdrop {
-    border-color: var(--border-critical-default);
-    background-color: var(--surface-critical);
-    &.hover,
-    &:hover {
-      border-color: var(--border-critical-subdued);
-    }
+    background-color: var(--surface-default);
+    border-color: var(--base-red-solid-9);
+    box-shadow: 0 0 0 var(--space-1) var(--base-red-alpha-4);
   }
 
-  // Need to override the higher specificity of the sibling selector
-  // so that errors still have red borders.
-  .Input:focus-visible ~ .Backdrop {
-    @include focus-ring($style: 'focused');
+  .Trigger:focus ~ .Backdrop,
+  .Trigger[aria-expanded='true'] ~ .Backdrop {
+    border-color: var(--base-red-solid-9);
+    box-shadow: 0 0 0 var(--space-1) var(--base-red-alpha-5);
   }
 }
 
-.Input:focus-visible {
-  ~ .Backdrop {
-    @include focus-ring($style: 'focused');
+.Popover {
+  z-index: 50;
+  display: flex;
+  max-height: min(var(--popover-available-height, 320px), 320px);
+  flex-direction: column;
+  overflow: hidden;
+  padding: var(--space-1);
+  max-width: calc(100vw - var(--space-8));
+  box-shadow: var(--shadow-basic-xl);
+  border-radius: var(--space-2);
+  background-color: var(--surface-default);
+  color: var(--text-default);
+}
+
+.Search {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin: var(--space-1);
+  padding: var(--space-1) var(--space-2);
+  border: var(--border-width-1) solid var(--border-default);
+  border-radius: var(--space-2);
+  background-color: var(--surface-default);
+}
+
+.SearchIcon {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  color: var(--icon-subdued);
+}
+
+.SearchInput {
+  @include unstyled-button;
+  width: 100%;
+  min-height: var(--space-8);
+  padding: var(--space-1) 0;
+  background: transparent;
+  font-size: var(--font-size-100);
+  color: var(--text-default);
+  cursor: text;
+
+  &::placeholder {
+    color: var(--text-subdued);
   }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.List {
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: var(--space-1);
+}
+
+.NoResult {
+  padding: var(--space-3);
+  text-align: center;
+  color: var(--text-subdued);
+  font-size: var(--font-size-100);
+}
+
+.Group {
+  display: flex;
+  flex-direction: column;
+}
+
+.GroupLabel {
+  padding: var(--space-1) var(--space-2);
+  font-size: var(--font-size-75);
+  color: var(--text-subdued);
+  font-weight: 500;
+}
+
+.Item {
+  @include unstyled-button;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  width: 100%;
+  min-height: var(--space-10);
+  padding: var(--space-2);
+  border-radius: var(--space-2);
+  text-align: left;
+  font-size: var(--font-size-100);
+  color: var(--text-default);
+
+  &:hover,
+  &[data-active-item] {
+    background-color: var(--action-secondary-neutral-hovered);
+  }
+
+  &[aria-selected='true'] {
+    background-color: var(--surface-selected);
+  }
+
+  &[aria-disabled='true'] {
+    color: var(--text-disabled);
+    cursor: default;
+  }
+}
+
+.ItemLabel {
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.Check {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  margin-inline-start: auto;
 }
 
 @media (-ms-high-contrast: active) {
-  .Content {
+  .Trigger {
     color: windowText;
     -ms-high-contrast-adjust: none;
-  }
-
-  .InlineLabel {
-    color: inherit;
-
-    &::after {
-      content: ':';
-    }
   }
 
   .SelectedOption {
@@ -167,25 +257,18 @@
 
   .Backdrop {
     &::after {
-      // Remove the dotted focus outline from the control-backdrop mixin.
       display: none;
     }
   }
 
-  .Input:focus {
-    ~ .Content {
-      color: highlightText;
-    }
-
+  .Trigger:focus {
     ~ .Backdrop {
-      // Align with the native styling for this element, which differs from
-      // what the control-backdrop mixin provides.
       background-color: highlight;
     }
   }
 
   .disabled {
-    .Content {
+    .Trigger {
       color: grayText;
     }
 
