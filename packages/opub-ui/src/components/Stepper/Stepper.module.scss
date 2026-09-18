@@ -79,8 +79,15 @@
 }
 
 .active {
-  background-color: var(--action-primary-basic-default);
-  color: var(--text-onbg-default);
+  background-color: var(
+    --stepper-indicator-active-bg,
+    var(--action-primary-basic-default)
+  );
+  color: var(--stepper-indicator-active-color, var(--text-onbg-default));
+
+  :global(svg) {
+    color: var(--stepper-indicator-active-color, var(--text-onbg-default));
+  }
 }
 
 .upcoming {
@@ -124,6 +131,15 @@
 
 .Label {
   margin: 0;
+  color: var(--stepper-label-color, var(--text-highlight));
+}
+
+.LabelUpcoming {
+  color: var(--stepper-label-color, var(--text-disabled));
+}
+
+.LabelCritical {
+  color: var(--text-critical);
 }
 
 .Description {
@@ -149,7 +165,10 @@
 }
 
 .completed {
-  background-color: var(--action-primary-basic-default);
+  background-color: var(
+    --stepper-connector-completed,
+    var(--action-primary-basic-default)
+  );
 }
 
 .Connector.incomplete {

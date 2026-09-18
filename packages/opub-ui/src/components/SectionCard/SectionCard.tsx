@@ -108,7 +108,6 @@ const SectionCard = forwardRef<HTMLElement, SectionCardProps>(
         as={expandable ? 'span' : 'h3'}
         id={expandable ? undefined : titleId}
         variant="headingMd"
-        color="highlight"
         className={styles.Title}
       >
         {title}

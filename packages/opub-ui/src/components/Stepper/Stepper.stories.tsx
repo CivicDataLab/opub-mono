@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { CSSProperties, useEffect, useState } from 'react';
 import { Meta, StoryObj } from '@storybook/react-vite';
 import {
   IconCircleCheck,
@@ -8,7 +8,10 @@ import {
 } from '@tabler/icons-react';
 
 import { Checkbox } from '../Checkbox';
+import { Combobox } from '../Combobox';
+import { DropZone } from '../DropZone';
 import { FormLayout } from '../FormLayout';
+import { Select } from '../Select';
 import { Text } from '../Text';
 import { TextField } from '../TextField';
 import { Stepper, StepperItem, useStepperStep } from './Stepper';
@@ -106,6 +109,28 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {};
 
+export const CssVariables: Story = {
+  render: (args) => (
+    <div
+      style={
+        {
+          '--stepper-indicator-active-bg': 'var(--icon-interactive)',
+          '--stepper-indicator-active-color': 'var(--text-onbg-default)',
+          '--stepper-label-color': 'var(--text-interactive)',
+          '--stepper-connector-completed': 'var(--icon-interactive)',
+          '--section-card-title-color': 'var(--text-interactive)',
+        } as CSSProperties
+      }
+    >
+      <Stepper
+        {...args}
+        nextKind="primary"
+        nextVariant="interactive"
+      />
+    </div>
+  ),
+};
+
 export const Compact: Story = {
   args: {
     compact: true,
@@ -127,6 +152,46 @@ export const Controlled: Story = {
         {...args}
         currentStep={currentStep}
         onStepClick={setCurrentStep}
+      />
+    );
+  },
+};
+
+/**
+ * Continue does not submit a Form. Use primitive fields and pass `error`
+ * only when `useStepperStep().showErrors` is true — same pattern as TextField.
+ */
+export const WizardFieldErrors: Story = {
+  render: () => {
+    const [datasetCompleted, setDatasetCompleted] = useState(false);
+
+    return (
+      <Stepper
+        defaultStep={1}
+        restrictNavigation
+        steps={[
+          {
+            step: 1,
+            label: 'Dataset',
+            description: 'Required fields',
+            isCompleted: datasetCompleted,
+            content: (
+              <DatasetFields onCompletedChange={setDatasetCompleted} />
+            ),
+          },
+          {
+            step: 2,
+            label: 'Done',
+            description: 'All fields valid',
+            isCompleted: true,
+            content: (
+              <Text as="p" variant="bodyMd">
+                Continue stayed enabled. Errors appeared without submitting a
+                form.
+              </Text>
+            ),
+          },
+        ]}
       />
     );
   },
@@ -179,6 +244,81 @@ export const FormWizard: Story = {
     );
   },
 };
+
+const sectorOptions = [
+  { label: 'Agriculture', value: 'agriculture' },
+  { label: 'Education', value: 'education' },
+  { label: 'Health', value: 'health' },
+];
+
+function DatasetFields({
+  onCompletedChange,
+}: {
+  onCompletedChange: (isCompleted: boolean) => void;
+}) {
+  const { showErrors } = useStepperStep();
+  const [title, setTitle] = useState('');
+  const [sector, setSector] = useState('');
+  const [access, setAccess] = useState('');
+  const [files, setFiles] = useState<File[]>([]);
+
+  const valid =
+    title.trim().length > 0 &&
+    sector.length > 0 &&
+    access.length > 0 &&
+    files.length > 0;
+
+  useReportCompletion(valid, onCompletedChange);
+
+  return (
+    <FormLayout>
+      <TextField
+        name="title"
+        label="Title"
+        required
+        requiredIndicator
+        value={title}
+        error={showErrors && !title.trim() ? 'Title is required' : undefined}
+        onChange={setTitle}
+      />
+      <Combobox
+        label="Sector"
+        requiredIndicator
+        list={sectorOptions}
+        placeholder="Select a sector"
+        selectedValue={sector}
+        error={showErrors && !sector ? 'Sector is required' : undefined}
+        onChange={(value) => setSector(typeof value === 'string' ? value : '')}
+      />
+      <Select
+        name="access"
+        label="Access type"
+        requiredIndicator
+        placeholder="Select access type"
+        options={[
+          { label: 'Open', value: 'open' },
+          { label: 'Restricted', value: 'restricted' },
+        ]}
+        value={access}
+        error={showErrors && !access ? 'Access type is required' : undefined}
+        onChange={setAccess}
+      />
+      <DropZone
+        label="Files"
+        error={
+          showErrors && files.length === 0
+            ? 'Add at least one file'
+            : undefined
+        }
+        onDrop={(_dropped, accepted) => {
+          setFiles((current) => [...current, ...accepted]);
+        }}
+      >
+        <DropZone.FileUpload />
+      </DropZone>
+    </FormLayout>
+  );
+}
 
 function useReportCompletion(
   valid: boolean,

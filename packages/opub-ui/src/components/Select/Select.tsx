@@ -204,9 +204,11 @@ export const Select = forwardRef<HTMLButtonElement, SelectProps>(
           </div>
         </Labelled>
         <SelectPopover
+          portal
           gutter={4}
           sameWidth
           className={styles.Popover}
+          wrapperProps={{ className: styles.PopoverWrapper }}
           aria-label={typeof label === 'string' ? label : 'Options'}
         >
           {searchable ? (

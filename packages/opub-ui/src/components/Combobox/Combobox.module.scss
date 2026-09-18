@@ -11,11 +11,15 @@
   }
 }
 
+.PopoverWrapper {
+  z-index: var(--z-6);
+}
+
 .Popover {
   --combobox-popover-height: 300px;
   --popover-padding: var(--space-2);
   position: relative;
-  z-index: 50;
+  z-index: var(--z-6);
   display: flex;
   gap: var(--space-05);
   max-height: min(

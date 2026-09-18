@@ -27,7 +27,11 @@ const Combobox = ({ required, error, ...props }: Props) => {
             <ComboboxBase
               {...field}
               {...props}
-              error={fieldState.invalid ? error : undefined}
+              error={
+                fieldState.invalid
+                  ? (error ?? fieldState.error?.message)
+                  : undefined
+              }
               selectedValue={field.value || props.selectedValue}
               onChange={(value: any) => {
                 props.onChange && props.onChange(value, props.name);
@@ -43,6 +47,7 @@ const Combobox = ({ required, error, ...props }: Props) => {
   return (
     <ComboboxBase
       {...props}
+      error={error}
       onChange={(value: any) => {
         props.onChange && props.onChange(value, props.name);
       }}

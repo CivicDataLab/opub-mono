@@ -149,6 +149,21 @@ describe('Stepper', () => {
     expect(screen.getByText('Review form')).not.toBeVisible();
   });
 
+  test('uses nextKind and nextVariant on the Continue button', () => {
+    render(
+      <Stepper
+        steps={steps}
+        currentStep={2}
+        nextKind="secondary"
+        nextVariant="interactive"
+      />
+    );
+
+    expect(screen.getByRole('button', { name: 'Continue' }).className).toMatch(
+      /kindSecondary/
+    );
+  });
+
   test('shows Previous and Continue by default', () => {
     render(<Stepper steps={steps} currentStep={2} />);
 

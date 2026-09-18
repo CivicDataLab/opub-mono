@@ -124,8 +124,12 @@
   }
 }
 
+.PopoverWrapper {
+  z-index: var(--z-6);
+}
+
 .Popover {
-  z-index: 50;
+  z-index: var(--z-6);
   display: flex;
   max-height: min(var(--popover-available-height, 320px), 320px);
   flex-direction: column;

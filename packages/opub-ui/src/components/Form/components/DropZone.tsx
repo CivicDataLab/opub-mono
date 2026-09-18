@@ -8,7 +8,6 @@ import { DropZoneProps } from '../../DropZone/DropZone';
 
 type Props = Omit<DropZoneProps, 'onDrop'> & {
   required?: boolean;
-  error?: string;
   name: string;
   onDrop?: (
     val: File[],
@@ -20,7 +19,7 @@ type Props = Omit<DropZoneProps, 'onDrop'> & {
 
 const DropZone: React.FunctionComponent<Props> & {
   FileUpload: typeof FileUpload;
-} = function DropZone({ required, errorOverlayText, ...props }: Props) {
+} = function DropZone({ required, error, errorOverlayText, ...props }: Props) {
   const method = useFormContext();
 
   if (method) {
@@ -34,6 +33,11 @@ const DropZone: React.FunctionComponent<Props> & {
             <DZ
               {...field}
               {...props}
+              error={
+                fieldState.invalid
+                  ? (error ?? fieldState.error?.message)
+                  : undefined
+              }
               errorOverlayText={
                 fieldState.invalid ? errorOverlayText : undefined
               }
@@ -53,7 +57,9 @@ const DropZone: React.FunctionComponent<Props> & {
     );
   }
 
-  return <DZ {...props} />;
+  return (
+    <DZ {...props} error={error} errorOverlayText={errorOverlayText} />
+  );
 };
 DropZone.FileUpload = FileUpload;
 
