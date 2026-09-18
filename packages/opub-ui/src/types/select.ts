@@ -45,10 +45,14 @@ export interface SelectProps {
   disabled?: boolean;
   /** Additional text to aide in use */
   helpText?: React.ReactNode;
-  /** ID(s) forwarded to the native select as `aria-describedby`, merged with the `helpText`/`error` ids */
+  /** ID(s) forwarded to the trigger as `aria-describedby`, merged with the `helpText`/`error` ids */
   describedBy?: string;
   /** Example text to display as placeholder */
   placeholder?: string;
+  /** Show a search field inside the dropdown. Defaults to true. */
+  searchable?: boolean;
+  /** Placeholder for the search field inside the dropdown */
+  searchPlaceholder?: string;
   /** ID for form input */
   id?: string;
   /** Name for form input */

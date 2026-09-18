@@ -6,12 +6,14 @@ import {
   ComboboxProvider,
   useComboboxStore,
 } from '@ariakit/react';
+import { IconCheck } from '@tabler/icons-react';
 import { matchSorter } from 'match-sorter';
 
 import type { ComboboxProps, TListItem } from '../../types/combobox';
-import { groupBy } from '../../utils';
+import { cn, groupBy } from '../../utils';
 import itemStyles from '../ActionList/ActionList.module.scss';
 import { Divider } from '../Divider';
+import { Icon } from '../Icon';
 import { Tag } from '../Tag';
 import { Text } from '../Text';
 import { Combobox as ComboboxComponent } from './Atoms';
@@ -174,7 +176,10 @@ export const Combobox = React.forwardRef(
         setSelectedValue={(e) => {
           // for single select
           if (typeof e === 'string') {
-            if (e !== '' && comboboxList.findIndex((it) => it.value === e) < 0) {
+            if (
+              e !== '' &&
+              comboboxList.findIndex((it) => it.value === e) < 0
+            ) {
               setSelectedValues(e);
               setComboboxList([
                 ...comboboxList,
@@ -253,15 +258,16 @@ export const Combobox = React.forwardRef(
                   value: searchValue,
                   label: `Create ${searchValue}`,
                 }}
+                selected={selected}
               />
             </>
           )}
           {matches.length > 0 ? (
             <div className={styles.List}>
               {props.group ? (
-                <ListGroup matches={matches} />
+                <ListGroup matches={matches} selected={selected} />
               ) : (
-                <List matches={matches} />
+                <List matches={matches} selected={selected} />
               )}
             </div>
           ) : (
@@ -273,17 +279,29 @@ export const Combobox = React.forwardRef(
   }
 );
 
-const List = ({ matches }: { matches: any }) => {
+const List = ({
+  matches,
+  selected,
+}: {
+  matches: any;
+  selected?: string | string[];
+}) => {
   return (
     <>
       {matches.map((item: TListItem) => (
-        <Item key={item.value} item={item} />
+        <Item key={item.value} item={item} selected={selected} />
       ))}
     </>
   );
 };
 
-const ListGroup = ({ matches }: { matches: any }) => {
+const ListGroup = ({
+  matches,
+  selected,
+}: {
+  matches: any;
+  selected?: string | string[];
+}) => {
   const id = React.useId();
 
   // sorting items witout type first
@@ -309,7 +327,7 @@ const ListGroup = ({ matches }: { matches: any }) => {
               </Text>
             </div>
             {items.map((item) => (
-              <Item key={item.value} item={item} />
+              <Item key={item.value} item={item} selected={selected} />
             ))}
           </ComboboxGroup>
           {i < matches.length - 1 && <Divider className="my-1" />}
@@ -319,15 +337,32 @@ const ListGroup = ({ matches }: { matches: any }) => {
   );
 };
 
-const Item = ({ item }: { item: TListItem }) => {
+const Item = ({
+  item,
+  selected,
+}: {
+  item: TListItem;
+  selected?: string | string[];
+}) => {
+  const isSelected = Array.isArray(selected)
+    ? selected.includes(item.value)
+    : selected === item.value;
+
   return (
     <ComboboxItem
       value={item.value}
-      className={itemStyles.Item}
+      className={cn(itemStyles.Item, styles.Item)}
       disabled={item.disabled}
       focusOnHover
     >
-      <Text color={item.disabled ? 'disabled' : 'default'}>{item.label}</Text>
+      <span className={itemStyles.Text}>
+        <Text color={item.disabled ? 'disabled' : 'default'}>{item.label}</Text>
+      </span>
+      {isSelected ? (
+        <span className={styles.Check} aria-hidden="true">
+          <Icon source={IconCheck} color="interactive" />
+        </span>
+      ) : null}
     </ComboboxItem>
   );
 };

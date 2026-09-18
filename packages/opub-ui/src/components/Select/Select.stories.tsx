@@ -19,6 +19,38 @@ export default meta;
 
 export function Default({ ...props }) {
   const options = [
+    { label: 'Agriculture', value: 'agriculture' },
+    { label: 'Education', value: 'education' },
+    { label: 'Energy', value: 'energy' },
+    { label: 'Environment', value: 'environment' },
+    { label: 'Finance', value: 'finance' },
+    { label: 'Health', value: 'health' },
+    { label: 'Housing', value: 'housing' },
+    { label: 'Infrastructure', value: 'infrastructure' },
+    { label: 'Justice', value: 'justice' },
+    { label: 'Labour', value: 'labour' },
+    { label: 'Rural Development', value: 'rural' },
+    { label: 'Social Welfare', value: 'social' },
+    { label: 'Transport', value: 'transport' },
+    { label: 'Water', value: 'water' },
+  ];
+
+  return (
+    <Select
+      label="Sector"
+      requiredIndicator
+      options={options}
+      defaultValue="environment"
+      searchPlaceholder="Search and select a sector..."
+      onChange={(val, name) => console.log(val, name)}
+      name="select-1"
+      {...props}
+    />
+  );
+}
+
+export function WithoutSearch({ ...props }) {
+  const options = [
     { label: 'Today', value: 'today' },
     { label: 'Yesterday', value: 'yesterday' },
     { label: 'Last 7 days', value: 'lastWeek' },
@@ -28,7 +60,8 @@ export function Default({ ...props }) {
     <Select
       label="Date range"
       options={options}
-      defaultValue={'yesterday'}
+      defaultValue="yesterday"
+      searchable={false}
       onChange={(val, name) => console.log(val, name)}
       name="select-1"
       {...props}
@@ -123,7 +156,9 @@ export function WithDescribedBy({ ...props }) {
 
   return (
     <>
-      <p id="block-dependency-hint">Select a district first to enable this field.</p>
+      <p id="block-dependency-hint">
+        Select a district first to enable this field.
+      </p>
       <Select
         label="Block"
         name="select-1"

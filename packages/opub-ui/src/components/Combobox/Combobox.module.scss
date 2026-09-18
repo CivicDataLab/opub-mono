@@ -43,3 +43,15 @@
   text-align: center;
   width: 100%;
 }
+
+.Item {
+  justify-content: space-between;
+  gap: var(--space-2);
+
+  .Check {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    margin-inline-start: auto;
+  }
+}
