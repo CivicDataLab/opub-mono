@@ -32,7 +32,11 @@ const DatePicker = ({ required, error, ...props }: PickerProps) => {
           <DatePickerBase
             {...field}
             {...props}
-            error={fieldState.invalid && error}
+            error={
+              fieldState.invalid
+                ? (error ?? fieldState.error?.message)
+                : undefined
+            }
             value={
               (field.value && parseDate(field.value)) ||
               props.value ||
@@ -50,7 +54,7 @@ const DatePicker = ({ required, error, ...props }: PickerProps) => {
     );
   }
 
-  return <DatePickerBase {...props} />;
+  return <DatePickerBase {...props} error={error} />;
 };
 
 type RangeProps = {

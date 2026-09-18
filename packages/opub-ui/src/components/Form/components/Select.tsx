@@ -25,7 +25,11 @@ const Select = ({ required, error, ...props }: Props) => {
             {...field}
             {...props}
             value={field.value}
-            error={fieldState.invalid && error}
+            error={
+              fieldState.invalid
+                ? (error ?? fieldState.error?.message)
+                : undefined
+            }
             onChange={(val, name) => {
               props.onChange && props.onChange(val, name);
               field.onChange(val);
@@ -36,7 +40,7 @@ const Select = ({ required, error, ...props }: Props) => {
     );
   }
 
-  return <SelectWrapper {...props} />;
+  return <SelectWrapper {...props} error={error} />;
 };
 
 export { Select };

@@ -256,6 +256,32 @@ export const ResetOnSubmit = () => {
   );
 };
 
+export const StaticErrorOnSubmit = () => {
+  return (
+    <Form formOptions={{ defaultValues: { title: '', files: undefined } }}>
+      <FormLayout>
+        <Input
+          name="title"
+          label="Name"
+          required
+          error="This field is required"
+        />
+        <DropZone
+          name="files"
+          required
+          label="Files"
+          errorOverlayText="Add at least one file"
+        >
+          <DropZone.FileUpload />
+        </DropZone>
+        <Button submit size="slim">
+          Submit
+        </Button>
+      </FormLayout>
+    </Form>
+  );
+};
+
 function dateParser(date: { day: number; month: number; year: number }) {
   function pad(n: number) {
     return n < 10 ? `0${n}` : n;

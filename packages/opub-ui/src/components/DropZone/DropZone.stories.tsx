@@ -151,6 +151,18 @@ export const Small: Story = {
   },
 };
 
+export const StringError: Story = {
+  render: ({ ...args }) => (
+    <DropZone {...args}>
+      <DropZone.FileUpload />
+    </DropZone>
+  ),
+  args: {
+    label: 'Files',
+    error: 'Add at least one file',
+  },
+};
+
 export const CustomHint: Story = {
   render: ({ ...args }) => {
     const [files, setFiles] = useState<File[]>([]);

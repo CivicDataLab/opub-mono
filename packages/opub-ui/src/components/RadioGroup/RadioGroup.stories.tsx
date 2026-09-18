@@ -93,6 +93,7 @@ export const CardsDisabled = () => (
       value="restricted"
       helpText="Requires approval to access"
       disabled
+      title="Coming Soon"
     >
       Restricted Access
     </RadioItem>

@@ -11,7 +11,7 @@ import {
 } from '@tabler/icons-react';
 
 import { cn } from '../../utils';
-import { Button } from '../Button';
+import { Button, ButtonProps } from '../Button';
 import { Icon } from '../Icon';
 import { Text } from '../Text';
 import styles from './Stepper.module.scss';
@@ -57,6 +57,14 @@ export interface StepperProps {
   previousLabel?: string;
   /** Label for the next-step button */
   nextLabel?: string;
+  /** Visual style of the previous-step button */
+  previousKind?: ButtonProps['kind'];
+  /** Color treatment of the previous-step button */
+  previousVariant?: ButtonProps['variant'];
+  /** Visual style of the next-step button */
+  nextKind?: ButtonProps['kind'];
+  /** Color treatment of the next-step button */
+  nextVariant?: ButtonProps['variant'];
   /** Accessible name for the progress navigation */
   accessibilityLabel?: string;
   className?: string;
@@ -100,12 +108,6 @@ function getStepStatus(
   return 'incomplete';
 }
 
-function labelColor(status: StepStatus) {
-  if (status === 'incomplete') return 'critical' as const;
-  if (status === 'upcoming') return 'disabled' as const;
-  return 'highlight' as const;
-}
-
 const Stepper = forwardRef<HTMLDivElement, StepperProps>(
   (
     {
@@ -118,6 +120,10 @@ const Stepper = forwardRef<HTMLDivElement, StepperProps>(
       restrictNavigation = false,
       previousLabel = 'Previous',
       nextLabel = 'Continue',
+      previousKind = 'secondary',
+      previousVariant = 'basic',
+      nextKind = 'primary',
+      nextVariant = 'basic',
       accessibilityLabel = 'Progress',
       className,
     },
@@ -225,8 +231,14 @@ const Stepper = forwardRef<HTMLDivElement, StepperProps>(
                     as="p"
                     variant={compact ? 'bodySm' : 'bodyMd'}
                     fontWeight={compact ? 'medium' : 'semibold'}
-                    color={labelColor(status)}
-                    className={styles.Label}
+                    color={
+                      status === 'incomplete' ? 'critical' : undefined
+                    }
+                    className={cn(
+                      styles.Label,
+                      status === 'incomplete' && styles.LabelCritical,
+                      status === 'upcoming' && styles.LabelUpcoming
+                    )}
                   >
                     {item.label}
                   </Text>
@@ -317,7 +329,8 @@ const Stepper = forwardRef<HTMLDivElement, StepperProps>(
         {navigation && (
           <div className={styles.Actions}>
             <Button
-              kind="secondary"
+              kind={previousKind}
+              variant={previousVariant}
               className={styles.buttonPrevious}
               disabled={previousStep === undefined}
               onClick={() => {
@@ -327,6 +340,8 @@ const Stepper = forwardRef<HTMLDivElement, StepperProps>(
               {previousLabel}
             </Button>
             <Button
+              kind={nextKind}
+              variant={nextVariant}
               disabled={nextStep === undefined}
               className={styles.buttonNext}
               onClick={() => {

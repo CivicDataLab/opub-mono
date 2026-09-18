@@ -242,11 +242,13 @@ export const Combobox = React.forwardRef(
           }
         />
         <ComboboxPopover
+          portal
           sameWidth
           store={combobox}
           gutter={8}
           aria-busy={isPending}
           className={styles.Popover}
+          wrapperProps={{ className: styles.PopoverWrapper }}
           style={
             { '--popover-padding': 'var(--space-1)' } as React.CSSProperties
           }

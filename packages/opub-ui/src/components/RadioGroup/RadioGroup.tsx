@@ -117,10 +117,15 @@ const RadioGroup = React.forwardRef(
   }
 );
 
-const RadioItem = ({ children, className, ...props }: RadioItemProps) => {
+const RadioItem = ({
+  children,
+  className,
+  helpText,
+  ...props
+}: RadioItemProps) => {
   const { variant } = React.useContext(RadioGroupContext);
-  const { helpText, value, disabled, required } = props;
   const id = React.useId();
+  const { disabled } = props;
 
   const inputClassName = cn(
     styles.RadioItem,
@@ -130,10 +135,8 @@ const RadioItem = ({ children, className, ...props }: RadioItemProps) => {
   if (variant === 'card') {
     return (
       <RadioRadix.Item
+        {...props}
         id={id}
-        value={value}
-        disabled={disabled}
-        required={required}
         className={cn(
           styles.RadioCard,
           disabled && styles.RadioCardDisabled,
@@ -178,11 +181,9 @@ const RadioItem = ({ children, className, ...props }: RadioItemProps) => {
       className={className}
     >
       <RadioRadix.Item
+        {...props}
         id={id}
-        value={value}
         className={inputClassName}
-        disabled={disabled}
-        required={required}
       >
         <RadioRadix.Indicator forceMount className={styles.RadioIndicator} />
       </RadioRadix.Item>

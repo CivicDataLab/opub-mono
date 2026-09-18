@@ -49,8 +49,11 @@ export interface DropZoneProps {
   type?: DropZoneFileType;
   /** Sets an active state */
   active?: boolean;
-  /** Sets an error state */
-  error?: boolean;
+  /**
+   * Error state. A string shows the message and critical outline;
+   * `true` shows the critical outline only.
+   */
+  error?: boolean | string;
   /**
    * Displays an outline border
    * @default true
@@ -300,6 +303,12 @@ export const DropZone: React.ForwardRefExoticComponent<
 
   const overlayTextWithDefault = overlayText || 'Add files';
   const errorOverlayTextWithDefault = errorOverlayText || '';
+  const hasErrorProp = Boolean(error);
+  const hasCriticalOutline = hasErrorProp || Boolean(errorOverlayText);
+  const errorMessage =
+    typeof error === 'string' && error.length > 0
+      ? error
+      : errorOverlayText || undefined;
 
   const labelValue = label;
   const labelHiddenValue = label ? labelHidden : true;
@@ -310,10 +319,10 @@ export const DropZone: React.ForwardRefExoticComponent<
     focused && styles.focused,
     (active || dragging) && styles.isDragging,
     disabled && styles.isDisabled,
-    (internalError || error) && styles.hasError,
+    (internalError || hasErrorProp) && styles.hasError,
     !variableHeight && styles[variationName('size', size)],
     measuring && styles.measuring,
-    errorOverlayText && styles.error
+    hasCriticalOutline && styles.error
   );
 
   const dragOverlay =
@@ -386,7 +395,7 @@ export const DropZone: React.ForwardRefExoticComponent<
         id={id}
         label={labelValue}
         action={labelAction}
-        error={errorOverlayText}
+        error={errorMessage}
         labelHidden={labelHiddenValue}
       >
         <div

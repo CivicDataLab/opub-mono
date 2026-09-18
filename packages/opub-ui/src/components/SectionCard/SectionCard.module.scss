@@ -80,6 +80,7 @@
 
 .Title {
   margin: 0;
+  color: var(--section-card-title-color, var(--text-highlight));
 }
 
 .DescriptionIndented {

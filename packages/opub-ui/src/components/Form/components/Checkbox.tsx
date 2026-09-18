@@ -18,7 +18,11 @@ const Checkbox = ({ required, error, ...props }: CheckboxProps) => {
           <CheckboxBase
             {...field}
             {...props}
-            error={fieldState.invalid && error}
+            error={
+              fieldState.invalid
+                ? (error ?? fieldState.error?.message)
+                : undefined
+            }
             checked={props.checked || field.value}
             onChange={(checked, name) => {
               props.onChange && props.onChange(checked, name);
@@ -33,7 +37,7 @@ const Checkbox = ({ required, error, ...props }: CheckboxProps) => {
     );
   }
 
-  return <CheckboxBase {...props} />;
+  return <CheckboxBase {...props} error={error} />;
 };
 
 type GroupProps = {

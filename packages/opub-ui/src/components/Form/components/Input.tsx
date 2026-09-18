@@ -16,7 +16,11 @@ const Input = ({ required, error, ...props }: TextfieldProps) => {
           <TextField
             {...field}
             {...props}
-            error={fieldState.invalid && error}
+            error={
+              fieldState.invalid
+                ? (error ?? fieldState.error?.message)
+                : undefined
+            }
             isRequired={required}
             onChange={(val, name) => {
               props.onChange && props.onChange(val, name);
@@ -28,7 +32,7 @@ const Input = ({ required, error, ...props }: TextfieldProps) => {
     );
   }
 
-  return <TextField {...props} />;
+  return <TextField {...props} error={error} />;
 };
 
 export { Input };
