@@ -20,7 +20,7 @@
   padding: $vertical-padding var(--space-4);
   background: var(--background-solid-default);
   box-shadow: var(--shadow-button-default);
-  border-radius: var(--border-radius-1);
+  border-radius: var(--border-radius-3);
   color: var(--text);
   border: var(--border-width-1) solid var(--border-subdued);
   border-top-color: var(--border-subdued);
@@ -143,14 +143,16 @@
         var(--button-slim-min-height) - var(--font-line-height-2) - var(
             --space-05
           )
-      ) / 2
+      ) /
+      2
   );
   --button-large-vertical-padding: calc(
     (
         var(--button-large-min-height) - var(--font-line-height-2) - var(
             --space-05
           )
-      ) / 2
+      ) /
+      2
   );
   --button-spinner-size: 20px;
   --button-segment: 10;
@@ -431,6 +433,85 @@
   &.disabled {
     background: transparent;
     box-shadow: none;
+  }
+}
+
+.kindNeutral {
+  &,
+  &.variantBasic,
+  &.variantInteractive,
+  &.variantCritical,
+  &.variantSuccess,
+  &.pressed {
+    @include recolor-icon(var(--text-default));
+  }
+
+  border-radius: var(--border-radius-3);
+  background: var(--action-secondary-neutral-default);
+  border: var(--border-width-1) solid var(--border-default);
+  box-shadow: none;
+  color: var(--text-default);
+  padding-inline: var(--space-4);
+
+  .Content {
+    gap: var(--space-1);
+
+    .Icon {
+      display: flex;
+      align-items: center;
+      margin-bottom: 0;
+    }
+  }
+
+  svg {
+    stroke: var(--text-default);
+  }
+
+  .Icon + *:not(.Icon) {
+    margin-left: 0;
+  }
+
+  &::after {
+    border-radius: var(--border-radius-1);
+  }
+
+  &:hover {
+    background: var(--action-secondary-neutral-hovered);
+    border-color: var(--border-default);
+  }
+
+  &:focus-visible {
+    box-shadow: none;
+  }
+
+  &:active {
+    background: var(--action-secondary-neutral-pressed);
+    box-shadow: none;
+    color: var(--text-default);
+  }
+
+  &.pressed {
+    background: var(--action-secondary-neutral-depressed);
+    color: var(--text-default);
+  }
+
+  &.disabled {
+    background: var(--action-secondary-disabled);
+    border-color: var(--border-disabled);
+    box-shadow: none;
+    color: var(--text-disabled);
+
+    @include recolor-icon(var(--icon-disabled));
+
+    svg {
+      stroke: var(--icon-disabled);
+    }
+
+    &.loading {
+      background: var(--action-secondary-disabled);
+      color: transparent;
+      --button-icon: var(--icon-default);
+    }
   }
 }
 

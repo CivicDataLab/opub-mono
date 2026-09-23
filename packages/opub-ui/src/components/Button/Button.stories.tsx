@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react-vite';
-import { IconSelector } from '@tabler/icons-react';
+import { IconPlus, IconSelector } from '@tabler/icons-react';
 
 import { PropsVariationSection } from '../../utils/storybook';
 import { Icon } from '../Icon';
@@ -21,6 +21,14 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     children: 'Button',
+  },
+};
+
+export const Neutral: Story = {
+  args: {
+    children: 'Add Content',
+    kind: 'neutral',
+    icon: <Icon source={IconPlus} size={16} />,
   },
 };
 
@@ -233,6 +241,30 @@ export const SecondarySuccess = () => (
       'large + full width': { size: 'large', fullWidth: true },
       'medium + full width': { fullWidth: true },
       'slim + full width': { size: 'slim', fullWidth: true },
+      loading: { loading: true },
+    }}
+  />
+);
+
+export const NeutralVariations = () => (
+  <PropsVariationSection
+    component={Button}
+    common={{
+      onChange: () => {},
+      children: 'Add Content',
+      kind: 'neutral',
+      icon: <Icon source={IconPlus} size={16} />,
+    }}
+    xAxis={{
+      default: {},
+      disabled: { disabled: true },
+      pressed: { pressed: true },
+    }}
+    yAxis={{
+      large: { size: 'large' },
+      medium: {},
+      slim: { size: 'slim' },
+      'medium + full width': { fullWidth: true },
       loading: { loading: true },
     }}
   />
