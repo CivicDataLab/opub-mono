@@ -15,7 +15,12 @@ import { UnstyledButton, UnstyledButtonProps } from './BaseButton';
 import styles from './Button.module.scss';
 
 export interface NonMutualButtonProps {
-  kind?: 'primary' | 'secondary' | 'tertiary';
+  /**
+   * Visual weight of the button.
+   * `neutral` is a pill-shaped outline with a subdued border, for low-emphasis actions such as adding content.
+   * @default 'primary'
+   */
+  kind?: 'primary' | 'secondary' | 'tertiary' | 'neutral';
 
   variant?: 'basic' | 'interactive' | 'critical' | 'success';
 
@@ -184,7 +189,7 @@ const Button = React.forwardRef(
               source={
                 loading ? 'placeholder' : getDisclosureIconSource(disclosure)
               }
-              color={kind === 'primary' ? 'onBgDefault' : 'highlight'}
+              color={disclosureIconColor(kind)}
             />
           )}
         </div>
@@ -222,7 +227,7 @@ const Button = React.forwardRef(
           tabIndex={disclosureDisabled ? -1 : undefined}
         >
           <span className={styles.Icon}>
-            <Icon source={IconChevronDown} color="onBgDefault" />
+            <Icon source={IconChevronDown} color={disclosureIconColor(kind)} />
           </span>
         </button>
       );
@@ -306,4 +311,10 @@ function getDisclosureIconSource(
   }
 
   return disclosure === 'up' ? IconChevronUp : IconChevronDown;
+}
+
+function disclosureIconColor(kind: NonNullable<ButtonProps['kind']>) {
+  if (kind === 'primary') return 'onBgDefault';
+  if (kind === 'neutral') return 'default';
+  return 'highlight';
 }
