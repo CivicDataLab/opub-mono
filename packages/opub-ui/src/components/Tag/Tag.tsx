@@ -22,6 +22,7 @@ const Tag = React.forwardRef(
       borderRadius,
       borderColor,
       fillColor,
+      className: classNameProp,
       ...other
     }: TagProps,
     ref: React.LegacyRef<HTMLSpanElement>
@@ -34,7 +35,8 @@ const Tag = React.forwardRef(
       onClick && onClick.name && styles.clickable,
       onRemove && styles.removable,
       url && !disabled && styles.linkable,
-      segmented && styles.segmented
+      segmented && styles.segmented,
+      classNameProp
     );
 
     const style = {

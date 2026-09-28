@@ -11,6 +11,21 @@
   }
 }
 
+.Field {
+  isolation: isolate;
+}
+
+.Actions {
+  position: absolute;
+  top: 0;
+  right: var(--space-05);
+  z-index: calc(var(--opub-text-field-contents) + 1);
+  display: flex;
+  align-items: center;
+  height: 100%;
+  gap: var(--space-1);
+}
+
 .PopoverWrapper {
   z-index: var(--z-6);
 }
@@ -39,6 +54,18 @@
 
   transform-origin: 50% 0px;
   animation: scaleIn 100ms ease-out;
+}
+
+.VariantTag {
+  button {
+    svg {
+      color: var(--text-default);
+    }
+
+    &:hover {
+      background-color: rgb(17 24 28 / 8%);
+    }
+  }
 }
 
 .NoResult {

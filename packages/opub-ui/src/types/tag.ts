@@ -21,6 +21,7 @@ interface NonMutuallyExclusiveProps {
   fillColor?: string;
   /** Optional border radius for the tag (e.g. '999px' or '4px'). */
   borderRadius?: string;
+  className?: string;
 }
 
 export type TagProps = NonMutuallyExclusiveProps &

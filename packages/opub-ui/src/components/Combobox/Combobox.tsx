@@ -10,6 +10,7 @@ import { IconCheck } from '@tabler/icons-react';
 import { matchSorter } from 'match-sorter';
 
 import type { ComboboxProps, TListItem } from '../../types/combobox';
+import type { TagProps } from '../../types/tag';
 import { cn, groupBy } from '../../utils';
 import itemStyles from '../ActionList/ActionList.module.scss';
 import { Divider } from '../Divider';
@@ -18,6 +19,30 @@ import { Tag } from '../Tag';
 import { Text } from '../Text';
 import { Combobox as ComboboxComponent } from './Atoms';
 import styles from './Combobox.module.scss';
+
+const tagVariantProps = (
+  variant: ComboboxProps['variant']
+): Pick<TagProps, 'fillColor' | 'borderColor' | 'borderRadius'> => {
+  const borderRadius = 'var(--border-radius-full)';
+
+  if (variant === 'bright') {
+    return { fillColor: '#fdb557', borderRadius };
+  }
+
+  if (variant === 'neutral') {
+    return {
+      fillColor: '#fff',
+      borderColor: 'var(--border-subdued)',
+      borderRadius,
+    };
+  }
+
+  if (variant === 'default') {
+    return { fillColor: '#eee', borderRadius };
+  }
+
+  return {};
+};
 
 export type ComboProps = {
   /**
@@ -142,6 +167,8 @@ export const Combobox = React.forwardRef(
                 onRemove={() => removeTag(tag.value)}
                 value={tag.value}
                 key={tag.value}
+                {...tagVariantProps(props.variant)}
+                className={props.variant ? styles.VariantTag : undefined}
               >
                 {tag.label}
               </Tag>

@@ -10,6 +10,7 @@ import { cn } from '../../utils';
 import { IconButton } from '../IconButton';
 import inputStyles from '../Input/Input.module.scss';
 import { Labelled } from '../Labelled';
+import styles from './Combobox.module.scss';
 
 type Props = {
   /**
@@ -59,15 +60,15 @@ export const Combobox = React.forwardRef<HTMLInputElement, Props>(
     const textField = (
       <div
         ref={ref}
-        className={cn(inputStyles.TextField, error && inputStyles.error)}
+        className={cn(
+          inputStyles.TextField,
+          styles.Field,
+          error && inputStyles.error
+        )}
       >
         {finalContent}
         {backdropMarkup}
-        <div
-          className={cn(
-            'absolute right-0.5 top-0 z-10 flex h-full transform items-center gap-1'
-          )}
-        >
+        <div className={styles.Actions}>
           {(Array.isArray(selectedValue)
             ? selectedValue.length > 0
             : Boolean(selectedValue)) ? (
