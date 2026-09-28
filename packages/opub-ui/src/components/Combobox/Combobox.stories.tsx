@@ -79,6 +79,29 @@ export const Default: Story = {
   },
 };
 
+const selectedTags = [
+  { value: 'Apple', label: 'Apple' },
+  { value: 'Banana', label: 'Banana' },
+];
+
+export const Variants: Story = {
+  render: (args) => (
+    <div style={{ display: 'grid', gap: 16, maxWidth: 420 }}>
+      <Combobox {...args} label="Current" />
+      <Combobox {...args} label="Default" variant="default" />
+      <Combobox {...args} label="Bright" variant="bright" />
+      <Combobox {...args} label="Neutral" variant="neutral" />
+    </div>
+  ),
+  args: {
+    label: 'Your favorite food',
+    placeholder: 'e.g., Apple, Burger',
+    list: options,
+    displaySelected: true,
+    selectedValue: selectedTags,
+  },
+};
+
 export const MultiSelect: Story = {
   args: {
     label: 'Your favorite food',

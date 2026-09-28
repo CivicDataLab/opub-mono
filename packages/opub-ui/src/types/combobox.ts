@@ -53,4 +53,11 @@ export type ComboboxProps = {
    * The id of the combobox.
    */
   id?: string;
+
+  /**
+   * Visual style of selected tags. Omit to keep the current tag appearance.
+   * `default` is a gray fill, `bright` is amber, and `neutral` is white with a border.
+   * Each variant uses a fully rounded tag. Has no effect when tags are not shown.
+   */
+  variant?: 'bright' | 'neutral' | 'default';
 };
