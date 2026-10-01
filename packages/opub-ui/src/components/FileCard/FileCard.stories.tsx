@@ -7,9 +7,9 @@ import { Tray } from '../Tray';
 import { FileCard } from './FileCard';
 
 /**
- * A compact card for an uploaded file: name, type, metadata, status,
- * and optional rename / preview / delete actions. Preview is a callback
- * so the parent can open a tray, dialog, or any other surface.
+ * A compact card for an uploaded file: name, type, metadata, usage tags,
+ * status, and optional rename / preview / delete actions. Preview is a
+ * callback so the parent can open a tray, dialog, or any other surface.
  */
 const meta = {
   title: 'Components/FileCard',
@@ -83,6 +83,29 @@ export const WithDeleteConfirmation: Story = {
         onRename={setName}
         onDelete={() => toast('File deleted')}
         confirmDelete
+      />
+    );
+  },
+};
+
+export const WithTags: Story = {
+  args: {
+    name: 'Assam Report (6)',
+    format: 'PDF',
+    size: '385.9KB',
+    uploadedAt: '01/10/2026 15:02:46',
+    originalName: 'Assam-Report (6).pdf',
+    tags: ['Chat', 'System prompt', 'Example responses'],
+  },
+  render: (args) => {
+    const [name, setName] = useState(args.name);
+
+    return (
+      <FileCard
+        {...args}
+        name={name}
+        onRename={setName}
+        onDelete={() => toast('File deleted')}
       />
     );
   },
