@@ -31,6 +31,8 @@ export interface FileCardProps {
   uploadedAt: string;
   /** Original filename, shown after the meta details */
   originalName?: string;
+  /** Usage labels shown as pills under the file metadata */
+  tags?: string[];
   /**
    * Processing state. Drives the leading icon and status badge.
    * @default 'ready'
@@ -72,6 +74,7 @@ const FileCard = forwardRef<HTMLElement, FileCardProps>(
       size,
       uploadedAt,
       originalName,
+      tags,
       status = 'ready',
       statusLabel,
       onRename,
@@ -134,7 +137,8 @@ const FileCard = forwardRef<HTMLElement, FileCardProps>(
 
     const badgeLabel = statusLabel ?? STATUS_LABEL[status];
     const canRename = Boolean(onRename);
-    const hasActions = Boolean(onView || onDelete);
+    const hasActions = Boolean(canRename || onView || onDelete);
+    const visibleTags = tags?.filter((tag) => tag.trim()) ?? [];
 
     const statusIcon = (
       <span className={styles.StatusIcon}>
@@ -197,25 +201,7 @@ const FileCard = forwardRef<HTMLElement, FileCardProps>(
       >
         {statusIcon}
         <div className={styles.Body}>
-          <div className={styles.TitleRow}>
-            {nameMarkup}
-            {canRename ? (
-              <IconButton
-                icon={IconPencil}
-                size="slim"
-                stroke={1.5}
-                color="subdued"
-                withTooltip={!editing}
-                tooltipText="Rename"
-                tabIndex={editing ? -1 : undefined}
-                aria-hidden={editing}
-                className={cn(editing && styles.RenameHidden)}
-                onClick={startEditing}
-              >
-                Rename
-              </IconButton>
-            ) : null}
-          </div>
+          <div className={styles.TitleRow}>{nameMarkup}</div>
           <div className={styles.MetaRow}>
             {format ? (
               <span className={styles.FileType}>
@@ -233,11 +219,38 @@ const FileCard = forwardRef<HTMLElement, FileCardProps>(
               {metaParts.join('  •  ')}
             </Text>
           </div>
+          {visibleTags.length > 0 ? (
+            <ul className={styles.Tags}>
+              {visibleTags.map((tag, index) => (
+                <li key={`${tag}-${index}`} className={styles.Tag}>
+                  <Text variant="bodySm" as="span" truncate>
+                    {tag}
+                  </Text>
+                </li>
+              ))}
+            </ul>
+          ) : null}
         </div>
         <div className={styles.Actions}>
           <Badge status={STATUS_BADGE[status]}>{badgeLabel}</Badge>
           {hasActions ? (
             <div className={styles.ActionButtons}>
+              {canRename ? (
+                <IconButton
+                  icon={IconPencil}
+                  size="slim"
+                  stroke={1.5}
+                  color="default"
+                  withTooltip={!editing}
+                  tooltipText="Rename"
+                  tabIndex={editing ? -1 : undefined}
+                  aria-hidden={editing}
+                  className={cn(editing && styles.RenameHidden)}
+                  onClick={startEditing}
+                >
+                  Rename
+                </IconButton>
+              ) : null}
               {onView ? (
                 <IconButton
                   icon={IconEye}

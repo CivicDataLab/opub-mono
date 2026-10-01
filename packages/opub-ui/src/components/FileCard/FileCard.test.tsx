@@ -108,6 +108,17 @@ describe('FileCard', () => {
     expect(screen.getByText(file.name)).toBeInTheDocument();
   });
 
+  test('renders usage tags under the metadata', () => {
+    renderFileCard({
+      tags: ['Chat', 'System prompt', 'Example responses', '  '],
+    });
+
+    expect(screen.getByText('Chat')).toBeInTheDocument();
+    expect(screen.getByText('System prompt')).toBeInTheDocument();
+    expect(screen.getByText('Example responses')).toBeInTheDocument();
+    expect(screen.getAllByRole('listitem')).toHaveLength(3);
+  });
+
   test('shows processing and error status labels', () => {
     const { rerender } = renderFileCard({ status: 'processing' });
     expect(screen.getByText('Processing')).toBeInTheDocument();

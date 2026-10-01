@@ -115,6 +115,28 @@ $color-critical-subtle: #fdf2f2;
   margin: 0;
 }
 
+.Tags {
+  display: flex;
+  min-width: 0;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-1);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.Tag {
+  display: inline-flex;
+  max-width: 100%;
+  align-items: center;
+  padding: 0 var(--space-2);
+  border-radius: var(--border-radius-full);
+  background-color: var(--surface-subdued);
+  color: var(--text-subdued);
+  border: var(--border-width-1) solid var(--border-disabled);
+}
+
 .Actions {
   display: flex;
   flex-shrink: 0;
