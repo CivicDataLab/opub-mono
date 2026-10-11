@@ -16,6 +16,7 @@ import inputStyles from '../Input/Input.module.scss';
 import { Labelled } from '../Labelled';
 import { Popover } from '../Popover';
 import styles from './DatePicker.module.scss';
+import { resolveDateError } from './validation';
 
 export type RangePickerProps = {
   label: string;
@@ -51,8 +52,16 @@ const DateRangePicker = React.forwardRef(
       buttonProps,
       dialogProps,
       calendarProps,
+      isInvalid,
+      validationErrors,
     } = useDateRangePicker(stateProps, state, ref);
     const themeClass = cn(styles.DatePicker);
+
+    const displayedError = resolveDateError(
+      errorMessage,
+      isInvalid,
+      validationErrors
+    );
 
     const {
       onPress: onPressPrev,
@@ -63,7 +72,7 @@ const DateRangePicker = React.forwardRef(
     return (
       <div className={`opub-DatePicker ${themeClass}`}>
         <Labelled
-          error={state.isInvalid && errorMessage}
+          error={displayedError}
           label={label}
           helpText={helpText}
           labelHidden={labelHidden}
@@ -75,6 +84,7 @@ const DateRangePicker = React.forwardRef(
             <DateRangeField
               startFieldProps={startFieldProps}
               endFieldProps={endFieldProps}
+              errorMessage={displayedError}
             />
 
             <Popover

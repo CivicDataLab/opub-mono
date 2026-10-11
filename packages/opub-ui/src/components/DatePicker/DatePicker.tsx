@@ -14,6 +14,7 @@ import inputStyles from '../Input/Input.module.scss';
 import { Labelled, LabelledProps } from '../Labelled';
 import { Popover } from '../Popover';
 import styles from './DatePicker.module.scss';
+import { resolveDateError } from './validation';
 
 export type DatePickerProps = {
   /** Label for the field */
@@ -53,9 +54,18 @@ const DatePicker = React.forwardRef(
     
     let state = useDatePickerState(stateProps);
 
-    let { labelProps, fieldProps, buttonProps, dialogProps, calendarProps } =
-      useDatePicker(stateProps, state, ref);
+    let {
+      labelProps,
+      fieldProps,
+      buttonProps,
+      dialogProps,
+      calendarProps,
+      isInvalid,
+      validationErrors,
+    } = useDatePicker(stateProps, state, ref);
     const themeClass = cn(styles.DatePicker);
+
+    const displayedError = resolveDateError(error, isInvalid, validationErrors);
 
     const {
       onPress: onPressPrev,
@@ -68,14 +78,14 @@ const DatePicker = React.forwardRef(
         <Labelled
           label={props.label}
           {...labelProps}
-          error={error}
+          error={displayedError}
           action={labelAction}
           labelHidden={labelHidden}
           helpText={helpText}
           requiredIndicator={requiredIndicator}
         >
           <div ref={ref} className={styles.Wrapper}>
-            <DateField errorMessage={error} isPicker {...fieldProps} />
+            <DateField isPicker {...fieldProps} errorMessage={displayedError} />
             <Popover
               onOpenChange={() =>
                 !state.isOpen ? state.open() : state.close()

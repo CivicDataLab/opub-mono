@@ -132,11 +132,22 @@ export function DateFieldSegment({ segment, state }: DatePickerSegmentProps) {
 type RangeProps = {
   startFieldProps: AriaDatePickerProps<DateValue>;
   endFieldProps: AriaDatePickerProps<DateValue>;
+  errorMessage?: React.ReactNode;
 };
 
-const DateRangeField = ({ startFieldProps, endFieldProps }: RangeProps) => {
+const DateRangeField = ({
+  startFieldProps,
+  endFieldProps,
+  errorMessage,
+}: RangeProps) => {
   return (
-    <div className={cn(styles.RangeField, inputStyles.TextField)}>
+    <div
+      className={cn(
+        styles.RangeField,
+        inputStyles.TextField,
+        Boolean(errorMessage) && inputStyles.error
+      )}
+    >
       <DateField isPicker trim isRange {...startFieldProps} />
       <span>{'-'}</span>
       <DateField isPicker trim isRange {...endFieldProps} />
