@@ -622,3 +622,26 @@ describe('column sizes', () => {
   });
 });
 
+describe('DataTable loading and height', () => {
+  it('renders one skeleton row per page row inside a fixed height', () => {
+    const { container } = render(
+      <DataTable
+        loading
+        hideSelection
+        hideFooter
+        height={480}
+        defaultRowCount={10}
+        rows={[]}
+        columns={[{ accessorKey: 'title', header: 'Dataset' }]}
+      />
+    );
+
+    const table = container.querySelector('.opub-DataTable') as HTMLElement;
+    expect(table.style.getPropertyValue('--op-data-table-height')).toBe(
+      '480px'
+    );
+    expect(screen.getAllByRole('row')).toHaveLength(11);
+    expect(screen.getByText('Loading')).toBeInTheDocument();
+  });
+});
+

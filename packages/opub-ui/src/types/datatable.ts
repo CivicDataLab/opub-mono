@@ -314,8 +314,13 @@ export type DataTableProps = TableProps &
      * instead of the shared `rowActions` kebab.
      */
     getRowActions?(row: any): DataTableRowAction[];
-    /** Replaces the body with a loading skeleton. */
+    /** Replaces the body with one shimmering skeleton row per page row. */
     loading?: boolean;
+    /**
+     * Height of the table, including the header and footer.
+     * The body scrolls inside it. Defaults to the screen height.
+     */
+    height?: number | string;
     /** Replaces the body with an error message and retry action. */
     loadError?: boolean;
     /** Called from the error row retry button. */

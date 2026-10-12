@@ -722,10 +722,19 @@ export const WithServer: Story = {
     }, [filters, sorting, pagination]);
 
     return (
-      <div>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          height: '100vh',
+          minHeight: 0,
+        }}
+      >
         <ServerQueryPreview filters={filters} sorting={sorting} />
         <DataTable
           {...args}
+          height="auto"
+          style={{ flex: 1, minHeight: 0 }}
           rows={rows}
           totalRows={totalRows}
           loading={loading}
@@ -971,10 +980,19 @@ export const WithServerDatasets: Story = {
     }, [search, filters, sorting, pagination]);
 
     return (
-      <div>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          height: '100vh',
+          minHeight: 0,
+        }}
+      >
         <ServerQueryPreview filters={filters} sorting={sorting} />
         <DataTable
           {...args}
+          height="auto"
+          style={{ flex: 1, minHeight: 0 }}
           rows={rows}
           totalRows={totalRows}
           loading={loading}
@@ -1035,6 +1053,25 @@ export const WithServerDatasets: Story = {
         />
       </div>
     );
+  },
+};
+
+export const Loading: Story = {
+  args: {
+    columnContentTypes: columnContentTypes,
+    rows: [],
+    columns: columns,
+    loading: true,
+    withServer: true,
+    totalRows: 48,
+    defaultRowCount: 10,
+    hideSelection: true,
+    height: '100vh',
+    title: 'Datasets',
+    subtitle: 'Search datasets on CivicDataSpace.',
+    placeholder: 'Search datasets...',
+    onSearchChange: () => undefined,
+    getRowActions: () => [],
   },
 };
 
