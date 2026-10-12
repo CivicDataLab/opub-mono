@@ -162,6 +162,30 @@ export const Boxed: Story = {
   args: {},
 };
 
+export const Neutral: Story = {
+  render: ({ ...args }) => {
+    return (
+      <Tabs defaultValue="published" {...args}>
+        <TabList neutral>
+          <Tab value="all">All 9</Tab>
+          <Tab value="draft">Draft 3</Tab>
+          <Tab value="published">Published 6</Tab>
+        </TabList>
+        <TabPanel value="all">
+          <div className="p-5">All</div>
+        </TabPanel>
+        <TabPanel value="draft">
+          <div className="p-5">Draft</div>
+        </TabPanel>
+        <TabPanel value="published">
+          <div className="p-5">Published</div>
+        </TabPanel>
+      </Tabs>
+    );
+  },
+  args: {},
+};
+
 export const WithoutBorder: Story = {
   render: ({ ...args }) => {
     return (

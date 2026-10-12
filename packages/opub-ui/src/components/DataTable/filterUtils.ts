@@ -125,6 +125,30 @@ export function getSelectedFilterValues(filterValue: unknown): Set<string> {
   return new Set();
 }
 
+/**
+ * Numbers compare numerically. ISO dates and other text compare as strings,
+ * so `YYYY-MM-DD` ranges stay in calendar order.
+ */
+function compareOrdered(cellValue: unknown, filterValue: string): number {
+  const left = String(cellValue ?? '').trim();
+  const right = filterValue.trim();
+  const leftNum = Number(left);
+  const rightNum = Number(right);
+
+  if (
+    left !== '' &&
+    right !== '' &&
+    Number.isFinite(leftNum) &&
+    Number.isFinite(rightNum)
+  ) {
+    return leftNum - rightNum;
+  }
+
+  if (left < right) return -1;
+  if (left > right) return 1;
+  return 0;
+}
+
 export function applyCondition(
   cellValue: unknown,
   condition: FilterCondition | string,
@@ -133,8 +157,6 @@ export function applyCondition(
   const str = String(cellValue ?? '');
   const lower = str.toLowerCase();
   const filterLower = filterValue.toLowerCase();
-  const num = Number(cellValue);
-  const filterNum = Number(filterValue);
 
   switch (condition) {
     case FILTER_CONDITIONS.exact:
@@ -150,13 +172,13 @@ export function applyCondition(
     case FILTER_CONDITIONS.endswith:
       return str.endsWith(filterValue);
     case FILTER_CONDITIONS.gt:
-      return !Number.isNaN(num) && num > filterNum;
+      return compareOrdered(cellValue, filterValue) > 0;
     case FILTER_CONDITIONS.gte:
-      return !Number.isNaN(num) && num >= filterNum;
+      return compareOrdered(cellValue, filterValue) >= 0;
     case FILTER_CONDITIONS.lt:
-      return !Number.isNaN(num) && num < filterNum;
+      return compareOrdered(cellValue, filterValue) < 0;
     case FILTER_CONDITIONS.lte:
-      return !Number.isNaN(num) && num <= filterNum;
+      return compareOrdered(cellValue, filterValue) <= 0;
     case FILTER_CONDITIONS.in: {
       const set = filterValue
         .split(',')
