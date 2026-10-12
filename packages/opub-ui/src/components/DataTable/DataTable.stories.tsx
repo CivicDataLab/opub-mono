@@ -883,6 +883,8 @@ export const WithServerDatasets: Story = {
     hideSelection: true,
     title: 'Datasets',
     subtitle: () => 'Search datasets on CivicDataSpace.',
+    addLabel: 'Create dataset',
+    onAdd: () => undefined,
     placeholder: 'Search datasets...',
     sortColumns: ['title', 'modified'],
     filters: [
