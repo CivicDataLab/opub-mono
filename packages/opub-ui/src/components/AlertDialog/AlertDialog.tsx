@@ -49,7 +49,7 @@ export type ContentProps = {
   large?: boolean;
   /** Decreases the modal width */
   small?: boolean;
-} & AlertDialogRadix.AlertDialogContentProps &
+} & Omit<AlertDialogRadix.AlertDialogContentProps, 'title'> &
   FooterProps;
 
 const Content = ({ ref, ...props }: ContentProps & { ref?: any }) => {
