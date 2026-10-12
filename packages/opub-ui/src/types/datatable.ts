@@ -1,6 +1,18 @@
 import type { ReactNode } from 'react';
+import type { RowData } from '@tanstack/table-core';
 
 import { ActionListProps } from '../components/ActionList';
+import type { ComplexAction } from './button';
+import type { IconProps } from './icon';
+
+declare module '@tanstack/table-core' {
+  interface ColumnMeta<TData extends RowData, TValue> {
+    /** Listed in the Columns menu and can be hidden. Hiding does not refetch. */
+    optional?: boolean;
+    /** Hide this column below the breakpoint while it stays visible in the menu. */
+    responsive?: 'md' | 'lg';
+  }
+}
 
 export type SortDirection = 'asc' | 'desc' | 'none';
 export type VerticalAlign = 'top' | 'bottom' | 'middle' | 'baseline';
@@ -37,7 +49,14 @@ export interface ColumnVisibilityData {
 export interface TableProps {
   /** List of data types, which determines content alignment for each column. Data types are "text," which aligns left, or "numeric," which aligns right. */
   columnContentTypes?: ColumnContentType[];
-  /** List of column headers. */
+  /**
+   * Column definitions.
+   * Optional `size`, `minSize`, and `maxSize` are pixel widths.
+   * `size` fixes that column. `minSize` alone is a floor and the column still grows with its content. `maxSize` alone is a ceiling.
+   * Columns that omit these fields stay sized to their content.
+   * `searchable` marks the column the toolbar search writes to. Only the first searchable column is used.
+   * Search emits `{ field, condition: "icontains", value }`, the same shape as a text filter.
+   */
   columns: any[];
   /** List of data rows. */
   rows: any[];
@@ -119,8 +138,10 @@ export type ColumnFilterConfig = {
    */
   columnId: string;
   /**
-   * Filter UI type. Required for header filter buttons.
-   * Conditions are chosen automatically from this type (see DataTable docs).
+   * Filter UI type.
+   * Without the management chrome, a typed filter renders a header filter button.
+   * With the management chrome, every typed filter is edited from the toolbar Filter button.
+   * Conditions are chosen automatically from this type.
    */
   type?: ColumnFilterType;
   options?: ColumnFilterOption[] | string[];
@@ -150,6 +171,54 @@ export type TablePaginationState = {
 
 export type TableFilterProps = {
   filters?: ColumnFilterConfig[];
+};
+
+/** Column `meta` fields read by the management chrome. */
+export type DataTableColumnMeta = {
+  optional?: boolean;
+  responsive?: 'md' | 'lg';
+  /** Keep this column on one line and ellipsize overflow. */
+  truncate?: boolean;
+};
+
+/** Status tab shown beside the automatic All tab. */
+export type DataTableStatusOption = {
+  key: string;
+  label: string;
+};
+
+/**
+ * Confirmation shown before a row action runs.
+ * Same content and buttons as `AlertDialog`.
+ * Omit `primaryAction` to confirm with the action label and its `destructive` flag.
+ */
+export type DataTableRowActionAlert = {
+  title: ReactNode;
+  children?: ReactNode;
+  primaryAction?: ComplexAction;
+  secondaryActions?: ComplexAction[];
+  footer?: ReactNode;
+};
+
+/** Icon button rendered for one row. Replaces the shared `rowActions` kebab when set. */
+export type DataTableRowAction = {
+  key: string;
+  /**
+   * Icon component, or a React node when the icon needs its own color and stroke.
+   * A node is rendered as given.
+   */
+  icon: IconProps['source'] | ReactNode;
+  /** Icon color used when `icon` is a component. Defaults to critical when `destructive` is set. */
+  color?: IconProps['color'];
+  /** Stroke width used when `icon` is a component. Defaults to 2. */
+  stroke?: IconProps['stroke'];
+  /** Accessible name. A function is read on each render. */
+  label: string | (() => string);
+  onClick: () => void;
+  /** Colors the icon red. Also makes the default confirm button critical. */
+  destructive?: boolean;
+  /** When set, the icon opens this alert instead of running `onClick` immediately. */
+  alert?: DataTableRowActionAlert;
 };
 
 export type DataTableProps = TableProps &
@@ -204,6 +273,53 @@ export type DataTableProps = TableProps &
     onSortingChange?(sorting: TableSortingState): void;
     /** Fired when limit/offset pagination changes in server mode */
     onPaginationChange?(pagination: TablePaginationState): void;
+    /** Page title. Together with `statuses` or `onSearchChange`, shows the management chrome. */
+    title?: string;
+    /** Subtitle under the title. A function is called on each render. */
+    subtitle?: string | (() => string);
+    /** Label for the primary add button in the management header. */
+    addLabel?: string;
+    /** Called when the add button is pressed. */
+    onAdd?: () => void;
+    /**
+     * Controlled search query.
+     * When a column sets `searchable`, the query is also stored as that column's `icontains` filter.
+     * Changing it in `withServer` mode resets pagination offset to 0.
+     */
+    searchState?: string;
+    /**
+     * Fired when the search query changes.
+     * Waits 300ms after the last keystroke before the query and its filter are committed.
+     */
+    onSearchChange?(query: string): void;
+    /**
+     * Status tabs. An All tab is added automatically.
+     * `'all'` is reserved and should not be used as a status key.
+     */
+    statuses?: DataTableStatusOption[];
+    /** Active status tab. `'all'` or one of `statuses[].key`. */
+    statusState?: string;
+    /**
+     * Fired when the status tab changes.
+     * Changing it in `withServer` mode resets pagination offset to 0.
+     */
+    onStatusChange?(status: string): void;
+    /**
+     * Counts supplied by the server, including `all`.
+     * The table only has the current page, so it cannot derive these.
+     */
+    statusCounts?: Record<string, number>;
+    /**
+     * Per-row icon actions. When set, the actions cell renders these buttons
+     * instead of the shared `rowActions` kebab.
+     */
+    getRowActions?(row: any): DataTableRowAction[];
+    /** Replaces the body with a loading skeleton. */
+    loading?: boolean;
+    /** Replaces the body with an error message and retry action. */
+    loadError?: boolean;
+    /** Called from the error row retry button. */
+    onRetry?: () => void;
     /** Total row count from the server (preferred for `withServer` page math) */
     totalRows?: number;
     /**

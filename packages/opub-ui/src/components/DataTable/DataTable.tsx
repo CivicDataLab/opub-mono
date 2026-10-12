@@ -18,17 +18,28 @@ import {
 } from '@tanstack/react-table';
 
 import type {
+  DataTableColumnMeta,
   DataTableProps,
+  DataTableRowAction,
   FilterField,
   TableFiltersState,
   TablePaginationState,
   TableSortingState,
 } from '../../types/datatable';
-import { cn } from '../../utils';
+import { FILTER_CONDITIONS } from '../../types/datatable';
+import { cn, debounce } from '../../utils';
+import { AlertDialog } from '../AlertDialog';
+import { Button } from '../Button';
 import { Checkbox } from '../Checkbox/Checkbox';
+import { IconButton } from '../IconButton';
+import { Skeleton } from '../Skeleton';
 import { Footer } from '../Table';
 import { Text } from '../Text';
 import { Cell, FilterChips, HeaderCell, Row, Toolbar } from './components';
+import {
+  isPopoverFilter,
+  ManagementChrome,
+} from './components/ManagementChrome/ManagementChrome';
 import { RowAction } from './components/Row';
 import styles from './DataTable.module.scss';
 import {
@@ -56,6 +67,110 @@ function fromTanStackSorting(sorting: SortingState): TableSortingState {
     field: sort.id,
     direction: sort.desc ? 'desc' : 'asc',
   }));
+}
+
+function columnResponsiveClass(meta?: DataTableColumnMeta) {
+  if (meta?.responsive === 'md') return styles.ResponsiveMd;
+  if (meta?.responsive === 'lg') return styles.ResponsiveLg;
+  return undefined;
+}
+
+const SEARCH_DEBOUNCE_MS = 300;
+
+function actionLabel(action: DataTableRowAction) {
+  return typeof action.label === 'function' ? action.label() : action.label;
+}
+
+type ExplicitColumnSize = {
+  size?: number;
+  minSize?: number;
+  maxSize?: number;
+};
+
+/** Pixel widths written on the column def. TanStack later fills a missing size with 150. */
+function collectColumnSizes(columns: any[]) {
+  const sizes = new Map<string, ExplicitColumnSize>();
+
+  const walk = (defs: any[]) => {
+    defs.forEach((column) => {
+      const id = column?.id ?? column?.accessorKey;
+      const size = column?.size;
+      const minSize = column?.minSize;
+      const maxSize = column?.maxSize;
+      if (id && (size != null || minSize != null || maxSize != null)) {
+        sizes.set(id, {
+          ...(size != null ? { size } : {}),
+          ...(minSize != null ? { minSize } : {}),
+          ...(maxSize != null ? { maxSize } : {}),
+        });
+      }
+      if (Array.isArray(column?.columns)) walk(column.columns);
+    });
+  };
+
+  walk(columns ?? []);
+  return sizes;
+}
+
+/** First column with `searchable`. Later searchable columns are ignored. */
+function findSearchableColumnId(columns: any[]): string | undefined {
+  let found: string | undefined;
+
+  const walk = (defs: any[]) => {
+    defs.forEach((column) => {
+      if (found) return;
+      const id = column?.id ?? column?.accessorKey;
+      if (id && column?.searchable) found = String(id);
+      if (!found && Array.isArray(column?.columns)) walk(column.columns);
+    });
+  };
+
+  walk(columns ?? []);
+  return found;
+}
+
+function withSearchFilter(
+  filters: TableFiltersState,
+  columnId: string,
+  query: string
+): TableFiltersState {
+  const rest = filters.filter(
+    (filter) =>
+      !(
+        filter.field === columnId &&
+        filter.condition === FILTER_CONDITIONS.icontains
+      )
+  );
+  const value = query.trim();
+  if (!value) return rest;
+  return [
+    ...rest,
+    {
+      field: columnId,
+      condition: FILTER_CONDITIONS.icontains,
+      value,
+    },
+  ];
+}
+
+function columnSizeStyle(
+  sizing?: ExplicitColumnSize
+): React.CSSProperties | undefined {
+  if (!sizing) return undefined;
+  const { size, minSize, maxSize } = sizing;
+  const style: React.CSSProperties = {};
+
+  if (size != null) {
+    style.width = size;
+    style.minWidth = minSize ?? size;
+    style.maxWidth = maxSize ?? size;
+  } else {
+    if (minSize != null) style.minWidth = minSize;
+    if (maxSize != null) style.maxWidth = maxSize;
+  }
+
+  if (style.maxWidth != null) style.overflow = 'hidden';
+  return style;
 }
 
 const DataTable = (props: DataTableProps) => {
@@ -99,6 +214,20 @@ const DataTable = (props: DataTableProps) => {
     onFiltersChange,
     onSortingChange: onServerSortingChange,
     onPaginationChange,
+    title,
+    subtitle,
+    addLabel,
+    onAdd,
+    searchState: searchStateProp,
+    onSearchChange,
+    statuses,
+    statusState: statusStateProp,
+    onStatusChange,
+    statusCounts,
+    getRowActions,
+    loading = false,
+    loadError = false,
+    onRetry,
     ...others
   } = props;
 
@@ -121,6 +250,25 @@ const DataTable = (props: DataTableProps) => {
           offset: 0,
         }
     );
+  const [searchValue, setSearchValue] = React.useState(searchStateProp ?? '');
+  const [pendingAction, setPendingAction] =
+    React.useState<DataTableRowAction | null>(null);
+  const committedSearchRef = React.useRef(searchStateProp ?? '');
+  const commitSearchRef = React.useRef<(query: string) => void>(() => undefined);
+  const debouncedCommitSearch = React.useMemo(
+    () =>
+      debounce((query: string) => {
+        commitSearchRef.current(query);
+      }, SEARCH_DEBOUNCE_MS),
+    []
+  );
+  const [activeStatus, setActiveStatus] = React.useState(
+    statusStateProp ?? 'all'
+  );
+
+  const showManagementChrome = Boolean(
+    title || statuses?.length || onSearchChange
+  );
 
   const columnFilters = React.useMemo(
     () => filtersToColumnFilters(filtersState),
@@ -151,6 +299,22 @@ const DataTable = (props: DataTableProps) => {
     }
   }, [paginationStateProp]);
 
+  React.useEffect(() => () => debouncedCommitSearch.cancel(), [debouncedCommitSearch]);
+
+  React.useEffect(() => {
+    if (searchStateProp === undefined) return;
+    if (searchStateProp === committedSearchRef.current) return;
+    debouncedCommitSearch.cancel();
+    committedSearchRef.current = searchStateProp;
+    setSearchValue(searchStateProp);
+  }, [searchStateProp, debouncedCommitSearch]);
+
+  React.useEffect(() => {
+    if (statusStateProp !== undefined) {
+      setActiveStatus(statusStateProp);
+    }
+  }, [statusStateProp]);
+
   const updatePagination = React.useCallback(
     (patch: Partial<TablePaginationState>) => {
       setServerPagination((prev) => {
@@ -162,8 +326,24 @@ const DataTable = (props: DataTableProps) => {
     [onPaginationChange]
   );
 
+  const searchableColumnId = React.useMemo(
+    () => findSearchableColumnId(columns),
+    [columns]
+  );
+
   const updateFilters = React.useCallback(
     (columnId: string, fields: FilterField[] | undefined) => {
+      if (searchableColumnId && columnId === searchableColumnId) {
+        const text =
+          fields?.find(
+            (field) => field.condition === FILTER_CONDITIONS.icontains
+          )?.value ?? '';
+        debouncedCommitSearch.cancel();
+        committedSearchRef.current = text;
+        setSearchValue(text);
+        onSearchChange?.(text);
+      }
+
       setFiltersState((prev) => {
         const withoutColumn = prev.filter(
           (filter) => filter.field !== columnId
@@ -179,16 +359,85 @@ const DataTable = (props: DataTableProps) => {
         updatePagination({ offset: 0 });
       }
     },
-    [onFiltersChange, withServer, updatePagination]
+    [
+      debouncedCommitSearch,
+      onFiltersChange,
+      onSearchChange,
+      searchableColumnId,
+      withServer,
+      updatePagination,
+    ]
   );
 
   const clearAllFilters = React.useCallback(() => {
     setFiltersState([]);
     onFiltersChange?.([]);
+    if (searchableColumnId) {
+      debouncedCommitSearch.cancel();
+      committedSearchRef.current = '';
+      setSearchValue('');
+      onSearchChange?.('');
+    }
     if (withServer) {
       updatePagination({ offset: 0 });
     }
-  }, [onFiltersChange, withServer, updatePagination]);
+  }, [
+    debouncedCommitSearch,
+    onFiltersChange,
+    onSearchChange,
+    searchableColumnId,
+    withServer,
+    updatePagination,
+  ]);
+
+  const applyMenuFilters = React.useCallback(
+    (next: TableFiltersState) => {
+      setFiltersState(next);
+      onFiltersChange?.(next);
+      if (withServer) {
+        updatePagination({ offset: 0 });
+      }
+    },
+    [onFiltersChange, withServer, updatePagination]
+  );
+
+  const commitSearch = React.useCallback(
+    (query: string) => {
+      committedSearchRef.current = query;
+      onSearchChange?.(query);
+      if (searchableColumnId) {
+        setFiltersState((prev) => {
+          const next = withSearchFilter(prev, searchableColumnId, query);
+          onFiltersChange?.(next);
+          return next;
+        });
+      }
+      if (withServer) {
+        updatePagination({ offset: 0 });
+      }
+    },
+    [onFiltersChange, onSearchChange, searchableColumnId, withServer, updatePagination]
+  );
+  commitSearchRef.current = commitSearch;
+
+  const updateSearch = React.useCallback(
+    (query: string) => {
+      setSearchValue(query);
+      debouncedCommitSearch(query);
+    },
+    [debouncedCommitSearch]
+  );
+
+  const updateStatus = React.useCallback(
+    (status: string) => {
+      setActiveStatus(status);
+      onStatusChange?.(status);
+      if (withServer) {
+        updatePagination({ offset: 0 });
+      }
+    },
+    [onStatusChange, withServer, updatePagination]
+  );
 
   const updateSorts = React.useCallback(
     (next: TableSortingState) => {
@@ -262,22 +511,36 @@ const DataTable = (props: DataTableProps) => {
     (withServer ? (totalRows ?? totalPages ?? 0) > 0 : rows.length > 0);
   const tableData = React.useMemo(() => rows, [rows]);
 
-  const enhancedColumns = React.useMemo(() => {
-    if (!filters?.length) return columns;
-    const filterIds = new Set(filters.map((filter) => filter.columnId));
+  const columnSizes = React.useMemo(
+    () => collectColumnSizes(columns),
+    [columns]
+  );
 
-    return columns.map((column: any) => {
-      const columnId = column.id ?? column.accessorKey;
-      if (columnId && filterIds.has(columnId)) {
-        return {
-          ...column,
-          enableColumnFilter: true,
-          filterFn: column.filterFn ?? 'columnFilter',
-        };
-      }
-      return column;
-    });
-  }, [columns, filters]);
+  const enhancedColumns = React.useMemo(() => {
+    const filterIds = new Set((filters ?? []).map((filter) => filter.columnId));
+    if (!filterIds.size && !searchableColumnId) return columns;
+
+    const enable = (defs: any[]): any[] =>
+      defs.map((column) => {
+        const columnId = column.id ?? column.accessorKey;
+        const next = Array.isArray(column.columns)
+          ? { ...column, columns: enable(column.columns) }
+          : column;
+        if (
+          columnId &&
+          (filterIds.has(columnId) || columnId === searchableColumnId)
+        ) {
+          return {
+            ...next,
+            enableColumnFilter: true,
+            filterFn: column.filterFn ?? 'columnFilter',
+          };
+        }
+        return next;
+      });
+
+    return enable(columns);
+  }, [columns, filters, searchableColumnId]);
 
   const filterFieldsByColumn = React.useMemo(
     () => groupFiltersByField(filtersState),
@@ -364,10 +627,16 @@ const DataTable = (props: DataTableProps) => {
   const visibleRows = table.getRowModel().rows;
   const isEmpty = visibleRows.length === 0;
   const emptyMessage = emptyState ?? labels?.empty ?? 'No data';
+  const showActionsColumn = Boolean(rowActions || getRowActions);
   const emptyColSpan =
     table.getVisibleLeafColumns().length +
     (hideSelection ? 0 : 1) +
-    (rowActions ? 1 : 0);
+    (showActionsColumn ? 1 : 0);
+  const popoverFilterIds = new Set(
+    showManagementChrome
+      ? (filters ?? []).filter(isPopoverFilter).map((filter) => filter.columnId)
+      : []
+  );
 
   const serverPaginationControls = React.useMemo(() => {
     if (!withServer) return paginationControls;
@@ -417,7 +686,26 @@ const DataTable = (props: DataTableProps) => {
         />
       )}
       <div className={`opub-DataTable ${themeClass}`} {...others}>
-        {addToolbar && !withServer && (
+        {showManagementChrome && (
+          <ManagementChrome
+            title={title}
+            subtitle={subtitle}
+            addLabel={addLabel}
+            onAdd={onAdd}
+            searchValue={searchValue}
+            onSearchChange={updateSearch}
+            placeholder={placeholder}
+            filters={filters}
+            filtersState={filtersState}
+            onApplyFilters={applyMenuFilters}
+            table={table}
+            statuses={statuses}
+            statusState={activeStatus}
+            onStatusChange={updateStatus}
+            statusCounts={statusCounts}
+          />
+        )}
+        {addToolbar && !withServer && !showManagementChrome && (
           <Toolbar
             filters={filters}
             table={table}
@@ -429,7 +717,9 @@ const DataTable = (props: DataTableProps) => {
         <div
           className={cn(
             styles.ScrollContainer,
-            (addToolbar || showFilterChips) && styles.withFilter
+            showManagementChrome && styles.withManagement,
+            (addToolbar || showFilterChips || showManagementChrome) &&
+              styles.withFilter
           )}
         >
           <table className={styles.Table}>
@@ -472,9 +762,12 @@ const DataTable = (props: DataTableProps) => {
                     const isSorted = header.column.getIsSorted();
                     // Header filter buttons require an explicit `type` so
                     // legacy toolbar-only configs ({ columnId, options }) stay unchanged.
+                    // Select filters listed in the management Filter menu are not repeated here.
                     const columnFilter = filters?.find(
                       (filter) =>
-                        filter.columnId === header.id && filter.type != null
+                        filter.columnId === header.id &&
+                        filter.type != null &&
+                        !popoverFilterIds.has(header.id)
                     );
 
                     return (
@@ -482,6 +775,11 @@ const DataTable = (props: DataTableProps) => {
                         className={cn(
                           styles.Cell,
                           styles['Cell-header'],
+                          columnResponsiveClass(
+                            header.column.columnDef.meta as
+                              | DataTableColumnMeta
+                              | undefined
+                          ),
                           columnTypes &&
                             columnTypes[index] === 'numeric' &&
                             styles['Cell-numeric'],
@@ -497,10 +795,11 @@ const DataTable = (props: DataTableProps) => {
                         filter={columnFilter}
                         filterFields={filterFieldsByColumn.get(header.id) ?? []}
                         onFilterChange={updateFilters}
+                        style={columnSizeStyle(columnSizes.get(header.column.id))}
                       />
                     );
                   })}
-                  {rowActions && (
+                  {showActionsColumn && (
                     <th
                       className={cn(
                         styles.Cell,
@@ -508,24 +807,64 @@ const DataTable = (props: DataTableProps) => {
                         styles.RowAction
                       )}
                     >
-                      <div className="relative flex items-center justify-center">
-                        {selectedCount ? (
-                          <span className={styles.SelectCount}>
-                            <Text variant="bodySm">{selectedCount}</Text>
-                          </span>
-                        ) : null}
-                        <RowAction
-                          callbackContent={rowSelectionObj}
-                          rowActions={rowActions}
-                        />
-                      </div>
+                      {getRowActions ? (
+                        <Text variant="bodySm" fontWeight="medium">
+                          Actions
+                        </Text>
+                      ) : (
+                        <div className="relative flex items-center justify-center">
+                          {selectedCount ? (
+                            <span className={styles.SelectCount}>
+                              <Text variant="bodySm">{selectedCount}</Text>
+                            </span>
+                          ) : null}
+                          <RowAction
+                            callbackContent={rowSelectionObj}
+                            rowActions={rowActions}
+                          />
+                        </div>
+                      )}
                     </th>
                   )}
                 </tr>
               ))}
             </thead>
             <tbody>
-              {isEmpty ? (
+              {loadError ? (
+                <tr className={cn(tableRowClassname, styles.TableBodyRow)}>
+                  <td
+                    className={cn(styles.Cell, styles.EmptyCell)}
+                    colSpan={Math.max(emptyColSpan, 1)}
+                  >
+                    <div className={styles.EmptyState}>
+                      <div className={styles.ErrorState}>
+                        <Text variant="bodyMd" color="subdued">
+                          Couldn&apos;t load data.
+                        </Text>
+                        {onRetry ? (
+                          <Button kind="tertiary" onClick={onRetry}>
+                            Retry
+                          </Button>
+                        ) : null}
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              ) : loading ? (
+                <tr className={cn(tableRowClassname, styles.TableBodyRow)}>
+                  <td
+                    className={cn(styles.Cell, styles.EmptyCell)}
+                    colSpan={Math.max(emptyColSpan, 1)}
+                  >
+                    <div className={styles.LoadingState} aria-busy="true">
+                      <Text visuallyHidden>Loading</Text>
+                      <Skeleton className={styles.LoadingBar} />
+                      <Skeleton className={styles.LoadingBar} />
+                      <Skeleton className={styles.LoadingBar} />
+                    </div>
+                  </td>
+                </tr>
+              ) : isEmpty ? (
                 <tr className={cn(tableRowClassname, styles.TableBodyRow)}>
                   <td
                     className={cn(styles.Cell, styles.EmptyCell)}
@@ -560,32 +899,70 @@ const DataTable = (props: DataTableProps) => {
                         cell.column.columnDef.cell,
                         cell.getContext()
                       );
+                      const columnMeta = cell.column.columnDef.meta as
+                        | DataTableColumnMeta
+                        | undefined;
+                      const truncateColumn = truncate || Boolean(columnMeta?.truncate);
                       return (
                         <Cell
                           className={cn(
                             styles.Cell,
+                            columnResponsiveClass(columnMeta),
                             columnTypes &&
                               columnTypes[index] === 'numeric' &&
                               styles['Cell-numeric'],
                             index === 0 && styles['Cell-firstColumn'],
-                            truncate && styles['Cell-truncated']
+                            truncate && styles['Cell-truncated'],
+                            columnMeta?.truncate && styles['Cell-truncateColumn']
                           )}
                           key={cell.id}
                           text={text}
                           cell={cell}
                           index={index}
-                          truncate={truncate}
+                          truncate={truncateColumn}
+                          style={columnSizeStyle(columnSizes.get(cell.column.id))}
                         />
                       );
                     })}
-                    {rowActions && (
+                    {getRowActions ? (
+                      <td className={cn(styles.Cell, styles.RowAction)}>
+                        <div className={styles.RowActions}>
+                          {getRowActions(row.original).map((action) => (
+                            <IconButton
+                              key={action.key}
+                              className={cn(
+                                styles.RowActionButton,
+                                action.destructive && styles.RowActionCritical
+                              )}
+                              icon={action.icon}
+                              size="slim"
+                              color={
+                                action.color ??
+                                (action.destructive ? 'critical' : 'default')
+                              }
+                              stroke={action.stroke}
+                              onClick={(event) => {
+                                event.stopPropagation();
+                                if (action.alert) {
+                                  setPendingAction(action);
+                                  return;
+                                }
+                                action.onClick();
+                              }}
+                            >
+                              {actionLabel(action)}
+                            </IconButton>
+                          ))}
+                        </div>
+                      </td>
+                    ) : rowActions ? (
                       <td className={cn(styles.Cell, styles.RowAction)}>
                         <RowAction
                           callbackContent={row.original}
                           rowActions={rowActions}
                         />
                       </td>
-                    )}
+                    ) : null}
                   </Row>
                 ))
               )}
@@ -606,6 +983,31 @@ const DataTable = (props: DataTableProps) => {
           />
         )}
       </div>
+      <AlertDialog
+        open={Boolean(pendingAction?.alert)}
+        onOpenChange={(open) => {
+          if (!open) setPendingAction(null);
+        }}
+      >
+        {pendingAction?.alert ? (
+          <AlertDialog.Content
+            title={pendingAction.alert.title}
+            footer={pendingAction.alert.footer}
+            primaryAction={
+              pendingAction.alert.primaryAction ?? {
+                content: actionLabel(pendingAction),
+                destructive: pendingAction.destructive,
+                onAction: () => pendingAction.onClick(),
+              }
+            }
+            secondaryActions={
+              pendingAction.alert.secondaryActions ?? [{ content: 'Cancel' }]
+            }
+          >
+            {pendingAction.alert.children}
+          </AlertDialog.Content>
+        ) : null}
+      </AlertDialog>
     </>
   );
 };

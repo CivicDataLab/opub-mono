@@ -152,6 +152,17 @@
   white-space: normal;
 }
 
+.Cell-truncateColumn {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 20rem;
+
+  .TooltipContent {
+    max-width: 20rem;
+  }
+}
+
 .Cell-numeric {
   text-align: right;
 }
@@ -560,5 +571,244 @@
     flex-direction: column;
     gap: var(--space-1);
     max-height: 200px;
+  }
+}
+
+.Management {
+  display: flex;
+  flex-direction: column;
+}
+
+.ManagementHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  border-bottom: var(--border-width-1) solid var(--border-subdued);
+}
+
+.ManagementHeading {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-width: 0;
+}
+
+.ManagementToolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border-bottom: var(--border-width-1) solid var(--border-subdued);
+}
+
+.ManagementSearch {
+  flex: 1 1 16rem;
+  max-width: 22rem;
+  min-width: 12rem;
+}
+
+.ManagementToolbarActions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-left: auto;
+}
+
+.ManagementPopover {
+  padding: var(--space-3);
+  width: min(17.5rem, calc(100vw - var(--space-8)));
+  max-height: min(32rem, calc(100vh - 6rem));
+  overflow: auto;
+}
+
+.ManagementFilterPopover {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  overflow: hidden;
+  max-height: min(22rem, calc(100vh - 8rem));
+}
+
+.ManagementFilters {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.ManagementColumns {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.ManagementFilterBody {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: var(--space-3);
+  min-height: 0;
+  overflow-y: auto;
+  padding: var(--space-3);
+}
+
+.ManagementFilterSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-width: 0;
+}
+
+.ManagementSelect {
+  width: 100%;
+}
+
+.ManagementFilterActions {
+  display: flex;
+  flex-shrink: 0;
+  justify-content: flex-end;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  border-top: var(--border-width-1) solid var(--border-subdued);
+  background-color: var(--surface-default);
+}
+
+.ManagementOptionMenu {
+  padding: var(--space-1);
+  max-height: 16rem;
+  overflow: auto;
+  /* Popover enter animation keeps a closed menu mounted and clickable. */
+  animation: none;
+}
+
+.ManagementRange {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  min-width: 0;
+  padding: var(--space-2);
+  border: var(--border-width-1) solid var(--border-subdued);
+  border-radius: var(--border-radius-2);
+
+  input {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+  }
+}
+
+.ManagementRange[data-kind='number'] {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: end;
+  column-gap: var(--space-2);
+
+  // Steppers crowd the two bounds. A range is typed, not stepped.
+  [class*='Spinner'] {
+    display: none;
+  }
+}
+
+.ManagementRangeBridge {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--text-subdued);
+  font-size: var(--font-size-75);
+  line-height: 1;
+}
+
+.ManagementRangeBridgeLine {
+  flex: 1;
+  height: 1px;
+  background: var(--border-subdued);
+}
+
+.ManagementRange[data-kind='number'] .ManagementRangeBridge {
+  height: 2.25rem;
+  padding-bottom: 0;
+}
+
+.ManagementRange[data-kind='number'] .ManagementRangeBridgeLine {
+  display: none;
+}
+
+.ManagementRangeBridgeLabel {
+  text-transform: lowercase;
+}
+
+.ManagementTabs {
+  padding-inline: var(--space-2);
+  border-bottom: var(--border-width-1) solid var(--border-subdued);
+}
+
+.TabCount {
+  margin-left: var(--space-1);
+  color: var(--text-subdued);
+  font-weight: 500;
+}
+
+.withManagement {
+  .TableRow .Cell {
+    border-top: 0;
+    border-bottom: var(--border-width-1) solid var(--border-subdued);
+  }
+}
+
+.RowActions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-2);
+}
+
+.RowActionButton {
+  border-radius: var(--border-radius-1);
+
+  &:hover {
+    background: var(--surface-hovered);
+  }
+}
+
+.RowActionCritical {
+  &:hover {
+    background: var(--surface-critical);
+  }
+}
+
+.LoadingState {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  width: 100%;
+  padding: var(--space-2) 0;
+}
+
+.LoadingBar {
+  height: var(--space-3);
+  width: 100%;
+}
+
+.ErrorState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.ResponsiveMd {
+  @media #{$breakpoints-md-down} {
+    display: none;
+  }
+}
+
+.ResponsiveLg {
+  @media (max-width: 64.9975em) {
+    display: none;
   }
 }

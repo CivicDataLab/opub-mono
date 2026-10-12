@@ -32,4 +32,21 @@ describe('Tabs Tests', () => {
     ).toBeInTheDocument();
     expect(screen.getByText('Upload panel')).toBeVisible();
   });
+
+  test('applies the neutral class on TabList when neutral is set', () => {
+    render(
+      <Tabs defaultValue="published">
+        <TabList neutral>
+          <Tab value="all">All 9</Tab>
+          <Tab value="published">Published 6</Tab>
+        </TabList>
+      </Tabs>
+    );
+
+    expect(screen.getByRole('tablist')).toHaveClass(styles.neutral);
+    expect(screen.getByRole('tab', { name: 'Published 6' })).toHaveAttribute(
+      'data-state',
+      'active'
+    );
+  });
 });

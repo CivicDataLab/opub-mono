@@ -29,16 +29,19 @@ type ListProps = {
   border?: boolean;
   /** Grey track with a white selected chip. Optional icons on Tab. */
   boxed?: boolean;
+  /** Plain text tabs with a dark underline on the selected tab. */
+  neutral?: boolean;
 } & TabsRadix.TabsListProps;
 
 const TabList = forwardRef((props: ListProps, ref: any) => {
-  const { fitted, disclosureText, border, boxed, className, ...others } =
+  const { fitted, disclosureText, border, boxed, neutral, className, ...others } =
     props;
   const classname = cn(
     styles.TabList,
     fitted && styles.fitted,
     border && styles.border,
     boxed && styles.boxed,
+    neutral && styles.neutral,
     className
   );
 

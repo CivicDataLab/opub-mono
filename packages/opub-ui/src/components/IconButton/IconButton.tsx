@@ -1,4 +1,4 @@
-import { forwardRef } from 'react';
+import { forwardRef, isValidElement } from 'react';
 
 import { IconButtonProps } from '../../types';
 import { cn } from '../../utils';
@@ -52,12 +52,16 @@ const IconButton = forwardRef((props: IconButtonProps, ref: any) => {
       }}
     >
       <Text visuallyHidden>{children}</Text>
-      <Icon
-        source={icon}
-        size={iconSize}
-        color={color ? color : 'default'}
-        stroke={stroke}
-      />
+      {isValidElement(icon) ? (
+        icon
+      ) : (
+        <Icon
+          source={icon}
+          size={iconSize}
+          color={color ? color : 'default'}
+          stroke={stroke}
+        />
+      )}
     </button>
   );
 

@@ -83,6 +83,7 @@ type HeaderProps = {
     columnId: string,
     fields: FilterField[] | undefined
   ) => void;
+  style?: React.CSSProperties;
 };
 
 export const HeaderCell = ({
@@ -135,6 +136,7 @@ type CellProps = {
   text: React.ReactNode;
   truncate: boolean;
   index: number;
+  style?: React.CSSProperties;
 };
 
 export const Cell = ({
