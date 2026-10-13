@@ -676,11 +676,6 @@ const DataTable = (props: DataTableProps) => {
     ? (size: number) => updatePagination({ limit: size, offset: 0 })
     : handlePageSizeChange;
 
-  const pageRows =
-    Number(table.getState().pagination.pageSize) ||
-    Number(resolvedPageSize) ||
-    defaultRowCount;
-
   return (
     <>
       {showFilterChips && (
@@ -699,7 +694,7 @@ const DataTable = (props: DataTableProps) => {
         {...others}
         style={{
           ...style,
-          ['--op-data-table-page-rows' as string]: String(pageRows),
+          ['--op-data-table-page-rows' as string]: String(defaultRowCount),
           ...(height != null
             ? {
                 ['--op-data-table-height' as string]:

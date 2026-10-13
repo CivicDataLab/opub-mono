@@ -646,5 +646,27 @@ describe('DataTable loading and height', () => {
     expect(screen.getAllByRole('row')).toHaveLength(11);
     expect(screen.getByText('Loading')).toBeInTheDocument();
   });
+
+  it('keeps the viewport at the default row count when the page is longer', () => {
+    const { container } = render(
+      <DataTable
+        hideSelection
+        withServer
+        defaultRowCount={10}
+        totalRows={25}
+        paginationState={{ limit: 25, offset: 0 }}
+        rows={Array.from({ length: 25 }, (_, index) => ({
+          title: `Dataset ${index}`,
+        }))}
+        columns={[{ accessorKey: 'title', header: 'Dataset' }]}
+      />
+    );
+
+    const table = container.querySelector('.opub-DataTable') as HTMLElement;
+    expect(table.style.getPropertyValue('--op-data-table-page-rows')).toBe(
+      '10'
+    );
+    expect(screen.getAllByRole('row')).toHaveLength(26);
+  });
 });
 

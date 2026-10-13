@@ -22,6 +22,7 @@
 
   .ScrollContainer {
     flex: 1 1 auto;
+    height: auto;
     min-height: 0;
   }
 }
@@ -34,9 +35,8 @@
   width: 100%;
   overflow: auto;
   position: relative;
-  // Reserve a full page under the rows. A min-height on the table itself
-  // stretches the only body row when the page is not full.
-  min-height: calc(
+  // Stay the default page tall. A longer page length scrolls inside this area.
+  height: calc(
     (var(--op-data-table-page-rows) + 1) * var(--op-data-table-row-height)
   );
 
