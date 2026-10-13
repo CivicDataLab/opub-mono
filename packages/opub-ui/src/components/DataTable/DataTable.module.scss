@@ -811,18 +811,18 @@
   }
 }
 
-.LoadingCell,
-.LoadingCellShort {
-  background-color: var(--base-gray-slate-solid-2);
+.Cell .LoadingCell,
+.Cell .LoadingCellShort {
+  background-color: #eceef0;
 }
 
 .Cell [data-shimmer] {
   background: linear-gradient(
     90deg,
     transparent 0%,
-    color-mix(in srgb, var(--base-gray-slate-solid-1) 70%, transparent) 40%,
-    var(--base-gray-slate-solid-1) 50%,
-    color-mix(in srgb, var(--base-gray-slate-solid-1) 70%, transparent) 60%,
+    rgba(255, 255, 255, 0.35) 40%,
+    rgba(255, 255, 255, 0.8) 50%,
+    rgba(255, 255, 255, 0.35) 60%,
     transparent 100%
   );
 }
