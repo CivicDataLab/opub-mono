@@ -229,6 +229,7 @@ const DataTable = (props: DataTableProps) => {
     loadError = false,
     onRetry,
     height,
+    style,
     ...others
   } = props;
 
@@ -697,7 +698,7 @@ const DataTable = (props: DataTableProps) => {
         }`}
         {...others}
         style={{
-          ...(others.style as React.CSSProperties | undefined),
+          ...style,
           ['--op-data-table-page-rows' as string]: String(pageRows),
           ...(height != null
             ? {
