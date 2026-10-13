@@ -1006,7 +1006,12 @@ export const WithServerDatasets: Story = {
             {
               key: 'publish',
               icon: (
-                <Icon source={IconUpload} color="success" stroke={1.5} size={20} />
+                <Icon
+                  source={IconUpload}
+                  color="success"
+                  stroke={1.5}
+                  size={20}
+                />
               ),
               label: `Publish ${row.title}`,
               onClick: () => undefined,
@@ -1032,6 +1037,12 @@ export const WithServerDatasets: Story = {
               },
             },
           ]}
+          emptyState={
+            <div className="flex h-full items-center justify-center gap-2 text-center">
+              <IconInfoCircle />
+              No data found for the current filters
+            </div>
+          }
         />
       </div>
     );
