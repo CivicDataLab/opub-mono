@@ -24,10 +24,6 @@
     flex: 1 1 auto;
     min-height: 0;
   }
-
-  .Table {
-    min-height: 0;
-  }
 }
 
 .ScrollContainer {
@@ -38,6 +34,11 @@
   width: 100%;
   overflow: auto;
   position: relative;
+  // Reserve a full page under the rows. A min-height on the table itself
+  // stretches the only body row when the page is not full.
+  min-height: calc(
+    (var(--op-data-table-page-rows) + 1) * var(--op-data-table-row-height)
+  );
 
   &.withFilter {
     border-radius: 0;
@@ -52,9 +53,6 @@
 
   border-radius: var(--border-radius-2) var(--border-radius-2) 0 0;
   background-color: var(--surface-default);
-  min-height: calc(
-    (var(--op-data-table-page-rows) + 1) * var(--op-data-table-row-height)
-  );
 
   thead {
     &.ItemsSelected {
@@ -62,6 +60,10 @@
       opacity: 0;
     }
   }
+}
+
+.TableBodyRow:not(:has(.EmptyCell)) {
+  height: var(--op-data-table-row-height);
 }
 
 .TableHeaderRow {
@@ -88,6 +90,10 @@
 
     &:hover {
       background-color: var(--surface-subdued);
+    }
+
+    &:has(.EmptyCell):hover {
+      background-color: transparent;
     }
 
     &.TableRow-selected {
@@ -422,6 +428,25 @@
   white-space: normal;
 }
 
+.ScrollContainer:has(.EmptyCell) {
+  .Table {
+    height: calc(
+      (var(--op-data-table-page-rows) + 1) * var(--op-data-table-row-height)
+    );
+  }
+
+  .EmptyCell {
+    position: relative;
+    height: 100%;
+    padding: 0;
+    border-bottom: 0;
+  }
+}
+
+.FixedHeight .ScrollContainer:has(.EmptyCell) .Table {
+  height: 100%;
+}
+
 .EmptyState {
   display: flex;
   align-items: center;
@@ -429,6 +454,13 @@
   min-height: 120px;
   padding: var(--space-8) var(--space-4);
   width: 100%;
+
+  .ScrollContainer:has(.EmptyCell) & {
+    position: absolute;
+    inset: 0;
+    min-height: 0;
+    height: auto;
+  }
 }
 
 .HeaderCellContent {
@@ -787,6 +819,10 @@
   .TableRow .Cell {
     border-top: 0;
     border-bottom: var(--border-width-1) solid var(--border-subdued);
+  }
+
+  .TableRow .EmptyCell {
+    border-bottom: 0;
   }
 }
 
