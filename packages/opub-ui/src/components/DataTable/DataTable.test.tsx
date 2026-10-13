@@ -640,6 +640,9 @@ describe('DataTable loading and height', () => {
     expect(table.style.getPropertyValue('--op-data-table-height')).toBe(
       '480px'
     );
+    expect(table.style.getPropertyValue('--op-data-table-page-rows')).toBe(
+      '10'
+    );
     expect(screen.getAllByRole('row')).toHaveLength(11);
     expect(screen.getByText('Loading')).toBeInTheDocument();
   });

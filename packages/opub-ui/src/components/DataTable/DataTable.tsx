@@ -228,7 +228,7 @@ const DataTable = (props: DataTableProps) => {
     loading = false,
     loadError = false,
     onRetry,
-    height = '100vh',
+    height,
     ...others
   } = props;
 
@@ -675,6 +675,11 @@ const DataTable = (props: DataTableProps) => {
     ? (size: number) => updatePagination({ limit: size, offset: 0 })
     : handlePageSizeChange;
 
+  const pageRows =
+    Number(table.getState().pagination.pageSize) ||
+    Number(resolvedPageSize) ||
+    defaultRowCount;
+
   return (
     <>
       {showFilterChips && (
@@ -687,12 +692,19 @@ const DataTable = (props: DataTableProps) => {
         />
       )}
       <div
-        className={`opub-DataTable ${themeClass}`}
+        className={`opub-DataTable ${themeClass}${
+          height != null ? ` ${styles.FixedHeight}` : ''
+        }`}
         {...others}
         style={{
           ...(others.style as React.CSSProperties | undefined),
-          ['--op-data-table-height' as string]:
-            typeof height === 'number' ? `${height}px` : height,
+          ['--op-data-table-page-rows' as string]: String(pageRows),
+          ...(height != null
+            ? {
+                ['--op-data-table-height' as string]:
+                  typeof height === 'number' ? `${height}px` : height,
+              }
+            : null),
         }}
       >
         {showManagementChrome && (

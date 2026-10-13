@@ -318,7 +318,8 @@ export type DataTableProps = TableProps &
     loading?: boolean;
     /**
      * Height of the table, including the header and footer.
-     * The body scrolls inside it. Defaults to the screen height.
+     * The body scrolls inside it. When omitted, the body stays at least
+     * as tall as one page of rows (10 by default).
      */
     height?: number | string;
     /** Replaces the body with an error message and retry action. */
