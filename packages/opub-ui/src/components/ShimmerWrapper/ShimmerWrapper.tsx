@@ -13,11 +13,23 @@ export interface ShimmerWrapperProps {
    * @default true
    */
   enabled?: boolean;
+  /**
+   * Seconds for one pass of the highlight.
+   * @default 1.5
+   */
+  duration?: number;
+  /**
+   * How the highlight eases across the bar.
+   * @default 'easeInOut'
+   */
+  ease?: 'linear' | 'easeIn' | 'easeOut' | 'easeInOut';
 }
 
 export function ShimmerWrapper({
   children,
   enabled = true,
+  duration = 1.5,
+  ease = 'easeInOut',
 }: ShimmerWrapperProps) {
   if (!enabled) {
     return <>{children}</>;
@@ -27,13 +39,14 @@ export function ShimmerWrapper({
     <div className={styles.ShimmerContainer}>
       {children}
       <motion.div
+        data-shimmer=""
         className={styles.ShimmerOverlay}
         initial={{ x: '-100%' }}
         animate={{ x: '100%' }}
         transition={{
           repeat: Infinity,
-          duration: 1.5,
-          ease: 'easeInOut',
+          duration,
+          ease,
         }}
       />
     </div>

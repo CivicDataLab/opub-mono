@@ -228,6 +228,7 @@ const DataTable = (props: DataTableProps) => {
     loading = false,
     loadError = false,
     onRetry,
+    height,
     ...others
   } = props;
 
@@ -674,6 +675,11 @@ const DataTable = (props: DataTableProps) => {
     ? (size: number) => updatePagination({ limit: size, offset: 0 })
     : handlePageSizeChange;
 
+  const pageRows =
+    Number(table.getState().pagination.pageSize) ||
+    Number(resolvedPageSize) ||
+    defaultRowCount;
+
   return (
     <>
       {showFilterChips && (
@@ -685,7 +691,22 @@ const DataTable = (props: DataTableProps) => {
           onClearAll={clearAllFilters}
         />
       )}
-      <div className={`opub-DataTable ${themeClass}`} {...others}>
+      <div
+        className={`opub-DataTable ${themeClass}${
+          height != null ? ` ${styles.FixedHeight}` : ''
+        }`}
+        {...others}
+        style={{
+          ...(others.style as React.CSSProperties | undefined),
+          ['--op-data-table-page-rows' as string]: String(pageRows),
+          ...(height != null
+            ? {
+                ['--op-data-table-height' as string]:
+                  typeof height === 'number' ? `${height}px` : height,
+              }
+            : null),
+        }}
+      >
         {showManagementChrome && (
           <ManagementChrome
             title={title}
@@ -851,19 +872,37 @@ const DataTable = (props: DataTableProps) => {
                   </td>
                 </tr>
               ) : loading ? (
-                <tr className={cn(tableRowClassname, styles.TableBodyRow)}>
-                  <td
-                    className={cn(styles.Cell, styles.EmptyCell)}
-                    colSpan={Math.max(emptyColSpan, 1)}
+                Array.from({
+                  length: Number(resolvedPageSize || defaultRowCount) || 10,
+                }).map((_, rowIndex) => (
+                  <tr
+                    key={`loading-${rowIndex}`}
+                    className={cn(styles.TableRow, styles.TableBodyRow)}
+                    aria-busy={rowIndex === 0 ? true : undefined}
                   >
-                    <div className={styles.LoadingState} aria-busy="true">
-                      <Text visuallyHidden>Loading</Text>
-                      <Skeleton className={styles.LoadingBar} />
-                      <Skeleton className={styles.LoadingBar} />
-                      <Skeleton className={styles.LoadingBar} />
-                    </div>
-                  </td>
-                </tr>
+                    {!hideSelection ? (
+                      <td className={cn(styles.Cell, styles.Checkbox)}>
+                        <Skeleton className={styles.LoadingCellShort} />
+                      </td>
+                    ) : null}
+                    {table.getVisibleLeafColumns().map((column, index) => (
+                      <td key={column.id} className={cn(styles.Cell)}>
+                        {rowIndex === 0 && index === 0 ? (
+                          <Text visuallyHidden>Loading</Text>
+                        ) : null}
+                        <Skeleton
+                          className={styles.LoadingCell}
+                          style={{ width: `${48 + ((index * 17) % 40)}%` }}
+                        />
+                      </td>
+                    ))}
+                    {showActionsColumn ? (
+                      <td className={cn(styles.Cell, styles.RowAction)}>
+                        <Skeleton className={styles.LoadingCellShort} />
+                      </td>
+                    ) : null}
+                  </tr>
+                ))
               ) : isEmpty ? (
                 <tr className={cn(tableRowClassname, styles.TableBodyRow)}>
                   <td

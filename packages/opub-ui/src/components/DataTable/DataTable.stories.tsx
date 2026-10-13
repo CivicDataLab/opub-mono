@@ -1038,6 +1038,24 @@ export const WithServerDatasets: Story = {
   },
 };
 
+export const Loading: Story = {
+  args: {
+    columnContentTypes: columnContentTypes,
+    rows: [],
+    columns: columns,
+    loading: true,
+    withServer: true,
+    totalRows: 48,
+    defaultRowCount: 10,
+    hideSelection: true,
+    title: 'Datasets',
+    subtitle: 'Search datasets on CivicDataSpace.',
+    placeholder: 'Search datasets...',
+    onSearchChange: () => undefined,
+    getRowActions: () => [],
+  },
+};
+
 export const EmptyState: Story = {
   args: {
     columnContentTypes: columnContentTypes,

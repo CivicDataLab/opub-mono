@@ -2,10 +2,32 @@
 
 .DataTable {
   --op-data-table-column-width: 145px;
+  --op-data-table-page-rows: 10;
+  --op-data-table-row-height: 3.5rem;
+  display: flex;
+  flex-direction: column;
   max-width: 100vw;
+  min-height: 0;
   background-color: var(--surface-default);
   border-radius: var(--border-radius-2);
   box-shadow: var(--shadow-element-card);
+}
+
+.DataTable.IncreasedTableDensity {
+  --op-data-table-row-height: 2.8125rem;
+}
+
+.FixedHeight {
+  height: var(--op-data-table-height);
+
+  .ScrollContainer {
+    flex: 1 1 auto;
+    min-height: 0;
+  }
+
+  .Table {
+    min-height: 0;
+  }
 }
 
 .ScrollContainer {
@@ -14,7 +36,7 @@
   background-color: inherit;
   border-radius: var(--border-radius-2);
   width: 100%;
-  overflow-x: auto;
+  overflow: auto;
   position: relative;
 
   &.withFilter {
@@ -30,6 +52,9 @@
 
   border-radius: var(--border-radius-2) var(--border-radius-2) 0 0;
   background-color: var(--surface-default);
+  min-height: calc(
+    (var(--op-data-table-page-rows) + 1) * var(--op-data-table-row-height)
+  );
 
   thead {
     &.ItemsSelected {
@@ -112,6 +137,10 @@
   }
 
   &.Cell-header {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: var(--surface-subdued);
     font-weight: 400;
     color: var(--text-default);
     border-top: 0;
@@ -419,7 +448,8 @@
   border-radius: var(--border-radius-1);
   padding: var(--space-1);
   color: var(--icon-subdued);
-  transition: background-color var(--duration-100) var(--ease),
+  transition:
+    background-color var(--duration-100) var(--ease),
     color var(--duration-100) var(--ease);
 
   svg {
@@ -781,17 +811,29 @@
   }
 }
 
-.LoadingState {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
-  width: 100%;
-  padding: var(--space-2) 0;
+.LoadingCell,
+.LoadingCellShort {
+  background-color: var(--base-gray-slate-solid-2);
 }
 
-.LoadingBar {
-  height: var(--space-3);
-  width: 100%;
+.Cell [data-shimmer] {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    color-mix(in srgb, var(--base-gray-slate-solid-1) 70%, transparent) 40%,
+    var(--base-gray-slate-solid-1) 50%,
+    color-mix(in srgb, var(--base-gray-slate-solid-1) 70%, transparent) 60%,
+    transparent 100%
+  );
+}
+
+.LoadingCell {
+  height: 1.8125rem;
+  width: 72%;
+}
+
+.LoadingCellShort {
+  width: 2.5rem;
 }
 
 .ErrorState {
