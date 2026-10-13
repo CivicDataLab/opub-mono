@@ -22,6 +22,11 @@
 
   .ScrollContainer {
     flex: 1 1 auto;
+    min-height: 0;
+  }
+
+  .ScrollBody {
+    flex: 1 1 auto;
     height: auto;
     min-height: 0;
   }
@@ -33,16 +38,28 @@
   background-color: inherit;
   border-radius: var(--border-radius-2);
   width: 100%;
-  overflow: auto;
+  // Horizontal scroll sits outside the row viewport, so a full page of the
+  // default row count does not also grow a vertical scrollbar.
+  overflow-x: auto;
+  overflow-y: hidden;
   position: relative;
-  // Stay the default page tall. A longer page length scrolls inside this area.
-  height: calc(
-    (var(--op-data-table-page-rows) + 1) * var(--op-data-table-row-height)
-  );
+  display: flex;
+  flex-direction: column;
 
   &.withFilter {
     border-radius: 0;
   }
+}
+
+.ScrollBody {
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: calc(
+    (var(--op-data-table-page-rows) + 1) * var(--op-data-table-row-height)
+  );
+  width: max-content;
+  min-width: 100%;
+  flex: none;
 }
 
 .Table {

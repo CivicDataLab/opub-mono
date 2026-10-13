@@ -739,6 +739,7 @@ const DataTable = (props: DataTableProps) => {
               styles.withFilter
           )}
         >
+          <div className={styles.ScrollBody}>
           <table className={styles.Table}>
             <thead>
               {table.getHeaderGroups().map((headerGroup) => (
@@ -1003,6 +1004,7 @@ const DataTable = (props: DataTableProps) => {
               )}
             </tbody>
           </table>
+          </div>
         </div>
         {footerVisible && (
           <Footer
