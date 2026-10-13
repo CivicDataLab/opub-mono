@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import type { CSSProperties, ReactNode } from 'react';
 import type { RowData } from '@tanstack/table-core';
 
 import { ActionListProps } from '../components/ActionList';
@@ -322,6 +322,8 @@ export type DataTableProps = TableProps &
      * as tall as one page of rows (10 by default).
      */
     height?: number | string;
+    /** Styles merged onto the table element. */
+    style?: CSSProperties;
     /** Replaces the body with an error message and retry action. */
     loadError?: boolean;
     /** Called from the error row retry button. */
