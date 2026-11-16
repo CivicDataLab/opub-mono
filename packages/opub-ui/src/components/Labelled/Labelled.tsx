@@ -90,7 +90,7 @@ export function Labelled({
 }
 
 export function errorID(id: string) {
-  return `${id}Error`;
+  return `${id}-error`;
 }
 
 export function helpTextID(id: string) {

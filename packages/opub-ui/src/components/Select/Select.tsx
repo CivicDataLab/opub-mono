@@ -36,7 +36,7 @@ import {
 } from '../../types/select';
 import { cn } from '../../utils';
 import { Icon } from '../Icon';
-import { helpTextID, Labelled } from '../Labelled';
+import { errorID, helpTextID, Labelled } from '../Labelled';
 import { Text } from '../Text';
 import styles from './Select.module.scss';
 
@@ -110,8 +110,8 @@ export const Select = forwardRef<HTMLButtonElement, SelectProps>(
       describedBy.push(helpTextID(id));
     }
 
-    if (error) {
-      describedBy.push(`${id}Error`);
+    if (error && typeof error !== 'boolean') {
+      describedBy.push(errorID(id));
     }
 
     if (describedByProp) {

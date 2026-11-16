@@ -9,7 +9,7 @@ import { ComboboxProps } from '../../types/combobox';
 import { cn } from '../../utils';
 import { IconButton } from '../IconButton';
 import inputStyles from '../Input/Input.module.scss';
-import { Labelled } from '../Labelled';
+import { errorID, helpTextID, Labelled } from '../Labelled';
 import styles from './Combobox.module.scss';
 
 type Props = {
@@ -38,12 +38,24 @@ export const Combobox = React.forwardRef<HTMLInputElement, Props>(
 
     const { open, selectedValue } = combobox.useState();
 
+    const describedBy: string[] = [];
+    if (error) {
+      describedBy.push(errorID(finalId));
+    }
+    if (props.helpText) {
+      describedBy.push(helpTextID(finalId));
+    }
+
     const element = (
       <ComboboxComponent
         store={combobox}
         placeholder={props.placeholder}
         id={finalId}
         className={cn(inputStyles.Input)}
+        aria-invalid={error ? true : undefined}
+        aria-describedby={
+          describedBy.length ? describedBy.join(' ') : undefined
+        }
       />
     );
     const backdropMarkup = <div className={cn(inputStyles.Backdrop)} />;
