@@ -16,7 +16,7 @@ import { Key } from '../../types/shared/key';
 import { cn, useForwardRef, variationName } from '../../utils';
 import { Connected } from '../Connected';
 import { Icon } from '../Icon';
-import { Labelled } from '../Labelled';
+import { errorID, helpTextID, Labelled } from '../Labelled';
 import { Text } from '../Text';
 import { Resizer, Spinner, SpinnerProps } from './components';
 import styles from './Input.module.scss';
@@ -288,11 +288,11 @@ export const Input = React.forwardRef(
       ) : null;
 
     const describedBy: string[] = [];
-    if (error) {
-      describedBy.push(`${id}Error`);
+    if (error && typeof error !== 'boolean') {
+      describedBy.push(errorID(id));
     }
     if (helpText) {
-      describedBy.push(`${id}-help`);
+      describedBy.push(helpTextID(id));
     }
     if (showCharacterCount) {
       describedBy.push(`${id}-CharacterCounter`);
